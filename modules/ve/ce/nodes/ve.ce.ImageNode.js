@@ -31,7 +31,6 @@ ve.ce.ImageNode = function VeCeImageNode( model, config ) {
 	this.$image = this.$element;
 
 	// Events
-	this.$element.on( 'click', ve.bind( this.onClick, this ) );
 	this.model.connect( this, { 'attributeChange': 'onAttributeChange' } );
 
 	// Initialization
@@ -80,26 +79,6 @@ ve.ce.ImageNode.prototype.onAttributeChange = function ( key, from, to ) {
 			this.$image.css( key, to );
 		}
 	}
-};
-
-/**
- * Handle the mouse click.
- *
- * @method
- * @param {jQuery.Event} e Click event
- */
-ve.ce.ImageNode.prototype.onClick = function ( e ) {
-	var surfaceModel = this.getRoot().getSurface().getModel(),
-		selectionRange = surfaceModel.getSelection(),
-		nodeRange = this.model.getOuterRange();
-
-	surfaceModel.getFragment(
-		e.shiftKey ?
-			ve.Range.newCoveringRange(
-				[ selectionRange, nodeRange ], selectionRange.from > nodeRange.from
-			) :
-			nodeRange
-	).select();
 };
 
 /* Registration */
