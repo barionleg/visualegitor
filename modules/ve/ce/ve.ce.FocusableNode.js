@@ -78,8 +78,10 @@ ve.ce.FocusableNode.prototype.onFocusableLive = function () {
 
 	if ( this.live ) {
 		surfaceModel.connect( this, { 'history': 'onFocusableHistory' } );
+		this.$focusable.on( 'mousedown.ve-ce-focusableNode', ve.bind( this.onFocusableMouseDown, this ) );
 	} else {
 		surfaceModel.disconnect( this, { 'history': 'onFocusableHistory' } );
+		this.$focusable.off( '.ve-ce-focusableNode' );
 	}
 };
 
@@ -127,6 +129,28 @@ ve.ce.FocusableNode.prototype.onFocusableRerender = function () {
 		// reposition menu
 		this.surface.getSurface().getContext().update( true, true );
 	}
+};
+
+/**
+ * On mouse down, select the node.
+ *
+ * @method
+ * @param {jQuery.Event} e Mouse down event
+ */
+ve.ce.FocusableNode.prototype.onFocusableMouseDown = function ( e ) {
+	var surfaceModel = this.getRoot().getSurface().getModel(),
+		selectionRange = surfaceModel.getSelection(),
+		nodeRange = this.model.getOuterRange();
+
+	surfaceModel.getFragment(
+		e.shiftKey ?
+			ve.Range.newCoveringRange(
+				[ selectionRange, nodeRange ], selectionRange.from > nodeRange.from
+			) :
+			nodeRange
+	).select();
+
+	e.preventDefault();
 };
 
 /**

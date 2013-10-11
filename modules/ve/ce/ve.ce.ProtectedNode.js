@@ -136,25 +136,18 @@ ve.ce.ProtectedNode.prototype.onProtectedTeardown = function () {
 };
 
 /**
- * Handle phantom mouse down events.
+ * Prevent mousedown. If FocusableNode is mixed in, relay the mousedown event to FocusableNode's
+ * onMouseDown handler.
  *
  * @method
  * @param {jQuery.Event} e Mouse down event
  */
 ve.ce.ProtectedNode.prototype.onPhantomMouseDown = function ( e ) {
-	var surfaceModel = this.getRoot().getSurface().getModel(),
-		selectionRange = surfaceModel.getSelection(),
-		nodeRange = this.model.getOuterRange();
-
-	surfaceModel.getFragment(
-		e.shiftKey ?
-			ve.Range.newCoveringRange(
-				[ selectionRange, nodeRange ], selectionRange.from > nodeRange.from
-			) :
-			nodeRange
-	).select();
-
-	e.preventDefault();
+	if ( this.isFocusable() ) {
+		return this.onFocusableMouseDown( e );
+	} else {
+		e.preventDefault();
+	}
 };
 
 /**
