@@ -37,7 +37,7 @@ ve.ce.Surface = function VeCeSurface( model, surface, options ) {
 	this.$document = this.$( this.getElementDocument() );
 	this.eventSequencer = new ve.EventSequencer( [
 		'keydown', 'keypress', 'keyup', 'mousedown', 'mouseup',
-		'mousemove', 'compositionstart', 'compositionend'
+		'mousemove', 'compositionstart', 'compositionend', 'input'
 	] );
 	this.clipboard = [];
 	this.clipboardId = String( Math.random() );
