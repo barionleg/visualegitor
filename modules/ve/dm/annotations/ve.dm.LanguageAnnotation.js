@@ -34,7 +34,7 @@ ve.dm.LanguageAnnotation.static.matchFunction = function ( domElement ) {
 	return ( domElement.getAttribute( 'lang' ) || domElement.getAttribute( 'dir' ) );
 };
 
-ve.dm.LanguageAnnotation.static.applyToAppendedContent = false;
+ve.dm.LanguageAnnotation.static.applyToAppendedContent = true;
 
 ve.dm.LanguageAnnotation.static.toDataElement = function ( domElements ) {
 	return {
