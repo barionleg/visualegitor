@@ -85,8 +85,9 @@ ve.dm.TransactionProcessor.prototype.advanceCursor = function ( increment ) {
  * When all operations are done being processed, the document will be synchronized.
  *
  * @method
+ * @param {boolean} incomplete True if another call to process is pending
  */
-ve.dm.TransactionProcessor.prototype.process = function () {
+ve.dm.TransactionProcessor.prototype.process = function ( incomplete ) {
 	var op;
 
 	// This loop is factored this way to allow operations to be skipped over or executed
@@ -95,7 +96,7 @@ ve.dm.TransactionProcessor.prototype.process = function () {
 	while ( ( op = this.nextOperation() ) ) {
 		this.executeOperation( op );
 	}
-	this.synchronizer.synchronize();
+	this.synchronizer.synchronize( incomplete );
 
 	// Mark the transaction as committed or rolled back, as appropriate
 	this.transaction.markAsApplied();

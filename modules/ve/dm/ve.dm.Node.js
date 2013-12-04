@@ -472,11 +472,12 @@ ve.dm.Node.prototype.getOuterRange = function () {
  *
  * @method
  * @param {number} length Length of content
+ * @param {boolean} incomplete True if a subsequent synchronization is pending
  * @fires lengthChange
  * @fires update
  * @throws {Error} Invalid content length error if length is less than 0
  */
-ve.dm.Node.prototype.setLength = function ( length ) {
+ve.dm.Node.prototype.setLength = function ( length, incomplete ) {
 	if ( length < 0 ) {
 		throw new Error( 'Length cannot be negative' );
 	}
@@ -490,7 +491,9 @@ ve.dm.Node.prototype.setLength = function ( length ) {
 	}
 	// Emit events
 	this.emit( 'lengthChange', diff );
-	this.emit( 'update' );
+	if ( !incomplete ) {
+		this.emit( 'update' );
+	}
 };
 
 /**
@@ -501,12 +504,13 @@ ve.dm.Node.prototype.setLength = function ( length ) {
  *
  * @method
  * @param {number} adjustment Amount to adjust length by
+ * @param {boolean} incomplete True if a subsequent synchronization is pending
  * @fires lengthChange
  * @fires update
  * @throws {Error} Invalid adjustment error if resulting length is less than 0
  */
-ve.dm.Node.prototype.adjustLength = function ( adjustment ) {
-	this.setLength( this.length + adjustment );
+ve.dm.Node.prototype.adjustLength = function ( adjustment, incomplete ) {
+	this.setLength( this.length + adjustment, incomplete );
 };
 
 /**

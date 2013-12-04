@@ -449,8 +449,8 @@ ve.dm.Surface.prototype.setSelection = function ( selection ) {
  * @param {ve.Range} [selection] Selection to apply
  * @fires contextChange
  */
-ve.dm.Surface.prototype.change = function ( transactions, selection ) {
-	this.changeInternal( transactions, selection, false );
+ve.dm.Surface.prototype.change = function ( transactions, selection, incomplete ) {
+	this.changeInternal( transactions, selection, false, incomplete );
 };
 
 /**
@@ -463,7 +463,8 @@ ve.dm.Surface.prototype.change = function ( transactions, selection ) {
  * @param {boolean} [skipUndoStack=false] If true, do not modify the undo stack. Used by undo/redo
  * @fires contextChange
  */
-ve.dm.Surface.prototype.changeInternal = function ( transactions, selection, skipUndoStack ) {
+ve.dm.Surface.prototype.changeInternal = function ( transactions, selection, skipUndoStack,
+		incomplete ) {
 	var i, len, selectionAfter, selectionBefore = this.selection, contextChange = false;
 
 	if ( !this.enabled ) {
@@ -485,7 +486,7 @@ ve.dm.Surface.prototype.changeInternal = function ( transactions, selection, ski
 					this.newTransactions.push( transactions[i] );
 				}
 				// The .commit() call below indirectly invokes setSelection()
-				this.documentModel.commit( transactions[i] );
+				this.documentModel.commit( transactions[i], incomplete );
 				if ( transactions[i].hasElementAttributeOperations() ) {
 					contextChange = true;
 				}

@@ -7,6 +7,117 @@
 /*global rangy */
 
 /**
+ * Keyboard manager for ContentEditable surface.
+ *
+ * This implements the prepare-observe-fixup pattern, whereby native actions (e.g. cursoring) occur
+ * and then are corrected if necessary.
+ *
+ * @class
+ * @constructor
+ * @param {ve.ce.Surface} surface ContentEditable surface
+ */
+ve.ce.KeyboardManager = function VeCeKeyStateManager( surface ) {
+	this.surface = surface;
+	this.postponements = [];
+	this.surface.eventSequencer.on( {
+		'keydown': ve.bind( this.onKeyDown, this ),
+		'keyup': ve.bind( this.onKeyUp, this ),
+		'keypress': ve.bind( this.onKeyPress, this ),
+		//'mousedown': ve.bind( this.onMouseDown, this ),
+		//'mouseup': ve.bind( this.onMouseUp, this ),
+		//'mousemove': ve.bind( this.onMouseMove, this ),
+		'compositionstart': ve.bind( this.onCompositionStart, this ),
+		'compositionend': ve.bind( this.onCompositionEnd, this )
+	} );
+	this.surface.eventSequencer.onLoop( [ ve.bind( this.onLoop, this ) ] );
+	this.surface.eventSequencer.afterLoop( [ ve.bind( this.afterLoop, this ) ] );
+};
+
+ve.ce.KeyboardManager.prototype.onLoop = function () {
+	this.clear();
+};
+
+ve.ce.KeyboardManager.prototype.onKeyDown = function ( ev ) {
+	// TODO: ev.which === 229 special case?
+	this.fixup();
+	var handled = this.surface.handleKeyDown( ev );
+	if ( !handled ) {
+		this.postpone( 'fixKeyDown', ev );
+	}
+};
+
+ve.ce.KeyboardManager.prototype.onKeyPress = function ( ev ) {
+	this.surface.handleKeyPress( ev );
+};
+
+ve.ce.KeyboardManager.prototype.onKeyUp = function ( ev ) {
+	// TODO: ev.which === 229 special case?
+	this.fixup();
+	this.surface.handleKeyUp( ev );
+};
+
+ve.ce.KeyboardManager.prototype.onInput = function () {
+	this.fixup();
+};
+
+ve.ce.KeyboardManager.prototype.onCompositionStart = function ( ev ) {
+	this.fixup();
+	this.postpone( 'fixCompositionStart', ev );
+};
+
+ve.ce.KeyboardManager.prototype.onCompositionUpdate = function ( ev ) {
+	this.postpone( 'fixCompositionUpdate', ev );
+};
+
+ve.ce.KeyboardManager.prototype.onCompositionEnd = function () {
+	this.fixup();
+};
+
+ve.ce.KeyboardManager.prototype.clear = function () {
+	this.postponements.length = 0;
+};
+
+ve.ce.KeyboardManager.prototype.postpone = function ( methodName, ev ) {
+	this.postponements.push( {
+		// TODO: store the old content too, not just the selection
+		'methodName': methodName,
+		'ev': ev,
+		'oldSelection': rangy.getSelection( this.surface.$document[0] )
+	} );
+	if ( this.postponeEvent === null ) {
+		this.postponeEvent = ev;
+	}
+};
+
+ve.ce.KeyboardManager.prototype.fixup = function () {
+	var i, len, postponement, postponements, method, needPoll;
+
+	// Empty this.postponements into local copy and run elements in turn
+	postponements = this.postponements.splice( 0, this.postponements.length );
+	needPoll = false;
+	for( i = 0, len = postponements.length; i < len; i++ ) {
+		postponement = postponements[i];
+		method = this.surface[postponement.methodName];
+		needPoll = needPoll || method.call(
+			this.surface,
+			postponement.ev,
+			postponement.oldSelection
+		);
+	}
+	// Synchronize once at the end of everything
+	if ( needPoll ) {
+		this.surface.surfaceObserver.pollOnce();
+	} else {
+		// TODO: stop handleKeyPress etc using the model, then we won't need to sync
+		this.surface.surfaceObserver.pollOnce();
+	}
+};
+
+ve.ce.KeyboardManager.prototype.afterLoop = function () {
+	this.surface.surfaceObserver.pollOnce();
+};
+
+/**
  * ContentEditable surface.
  *
  * @class
@@ -29,7 +140,6 @@ ve.ce.Surface = function VeCeSurface( model, surface, options ) {
 
 	// Properties
 	this.surface = surface;
-	this.inIme = false;
 	this.model = model;
 	this.documentView = new ve.ce.Document( model.getDocument(), this );
 	this.surfaceObserver = new ve.ce.SurfaceObserver( this.documentView );
@@ -96,20 +206,14 @@ ve.ce.Surface = function VeCeSurface( model, surface, options ) {
 		'drop': ve.bind( this.onDocumentDrop, this )
 	} );
 
+	this.keyboardManager = new ve.ce.KeyboardManager( this );
+
 	// Add listeners to the eventSequencer. They won't get called until
 	// eventSequencer.attach(node) has been called.
 	this.eventSequencer.on( {
-		'keydown': ve.bind( this.onDocumentKeyDown, this ),
-		'keyup': ve.bind( this.onDocumentKeyUp, this ),
-		'keypress': ve.bind( this.onDocumentKeyPress, this ),
 		'mousedown': ve.bind( this.onDocumentMouseDown, this ),
 		'mouseup': ve.bind( this.onDocumentMouseUp, this ),
-		'mousemove': ve.bind( this.onDocumentMouseMove, this ),
-		'compositionstart': ve.bind( this.onDocumentCompositionStart, this ),
-		'compositionend': ve.bind( this.onDocumentCompositionEnd, this )
-	} );
-	this.eventSequencer.after( {
-		'keypress': ve.bind( this.afterDocumentKeyPress, this )
+		'mousemove': ve.bind( this.onDocumentMouseMove, this )
 	} );
 
 	// Initialization
@@ -528,90 +632,112 @@ ve.ce.Surface.prototype.onDocumentDrop = function ( e ) {
 };
 
 /**
- * Handle document key down events.
+ * @returns {boolean} Whether the event was preventDefaulted
+ */
+ve.ce.Surface.prototype.handleKeyDown = function ( e ) {
+	var trigger;
+	// TODO: Handle IE backward selections
+	if ( e.keyCode === OO.ui.Keys.BACKSPACE && this.atContentBoundary( 'backward' ) ) {
+		e.preventDefault();
+		this.handleDelete( e, true );
+		return true;
+	}
+	if ( e.keyCode === OO.ui.Keys.DELETE && this.atContentBoundary( 'forward' ) ) {
+		e.preventDefault();
+		this.handleDelete( e, false );
+		return true;
+	}
+	if ( e.keyCode === OO.ui.Keys.ENTER ) {
+		e.preventDefault();
+		this.handleEnter( e );
+		return true;
+	}
+	trigger = new ve.ui.Trigger( e );
+	if ( trigger.isComplete() && this.surface.execute( trigger ) ) {
+		e.preventDefault();
+		return true;
+	}
+	return false;
+};
+
+/**
+ * Tests whether the cursor is at the edge of a content node in the specified direction.
+ *
+ * TODO: what would be a better name for this method?
+ * Care must be taken because some browsers create adjacent text nodes.
  *
  * @method
- * @param {jQuery.Event} e Key down event
- * @fires selectionStart
+ * @param {string} direction Direction of edge; 'forward' or 'backward'
+ * @returns {boolean} Whether the cursor is at a content boundary
  */
-ve.ce.Surface.prototype.onDocumentKeyDown = function ( e ) {
-	var trigger,
-		updateFromModel = false;
+ve.ce.Surface.prototype.atContentBoundary = function ( direction ) {
+	var range, node,
+		backward = direction === 'backward',
+		sel = rangy.getSelection( this.getElementDocument() );
 
-	// Ignore keydowns while in IME mode but do not preventDefault them (so text actually appear on
-	// the screen).
-	if ( this.inIme === true ) {
-		return;
+	if ( sel.rangeCount === 0 ) {
+		return true;
 	}
 
-	// When entering IME mode IE first keydown (e.which = 229) before it fires compositionstart, so
-	// IME detection have to happen here instead of onDocumentCompositionStart.
-	// TODO: This code and code in onDocumentCompositionStart are very similar, consider moving them
-	// to one method.
-	if ( $.browser.msie === true && e.which === 229 ) {
-		this.inIme = true;
-		this.handleInsertion();
-		return;
+	// If moving backwards, get first range start; else get last range end
+	if ( backward ) {
+		range = sel.getRangeAt( 0 );
+		node = range.startContainer;
+	} else {
+		range = sel.getRangeAt( sel.rangeCount - 1 );
+		node = range.endContainer;
 	}
 
-	this.surfaceObserver.stopTimerLoop();
-	this.incRenderLock();
-	try {
-		// TODO: is this correct?
-		this.surfaceObserver.pollOnce();
-	} finally {
-		this.decRenderLock();
+	if ( node.nodeType !== node.TEXT_NODE ) {
+		return true;
 	}
-	switch ( e.keyCode ) {
+
+	// Kludge: in Chrome, cursoring can split text nodes in two, so check carefully. Note
+	// we can't just normalize() the parent node, because that changes the selection state.
+	if (
+		range.startOffset === 0 &&
+		node.previousSibling !== null &&
+		node.previousSibling.nodeType === node.TEXT_NODE
+	) {
+		return false;
+	}
+	if (
+		range.endOffset === node.nodeValue.length &&
+		node.nextSibling !== null &&
+		node.nextSibling.nodeType === node.TEXT_NODE
+	) {
+		return false;
+	}
+
+	if ( backward ) {
+		return range.startOffset === 0;
+	} else {
+		return range.endOffset === node.nodeValue.length;
+	}
+};
+
+ve.ce.Surface.prototype.fixKeyDown = function ( oldEvent, oldSelection ) {
+	switch ( oldEvent.keyCode ) {
 		case OO.ui.Keys.LEFT:
 		case OO.ui.Keys.RIGHT:
 		case OO.ui.Keys.UP:
 		case OO.ui.Keys.DOWN:
-			if ( !this.dragging && !this.selecting && e.shiftKey ) {
-				this.selecting = true;
-				this.emit( 'selectionStart' );
-			}
-			if ( ve.ce.isLeftOrRightArrowKey( e.keyCode ) ) {
-				this.handleLeftOrRightArrowKey( e );
-			} else {
-				this.handleUpOrDownArrowKey( e );
-				updateFromModel = true;
+			if ( this.badSelection() ) {
+				this.fixSelection( oldSelection );
 			}
 			break;
-		case OO.ui.Keys.ENTER:
-			e.preventDefault();
-			this.handleEnter( e );
-			updateFromModel = true;
-			break;
-		case OO.ui.Keys.BACKSPACE:
-			e.preventDefault();
-			this.handleDelete( e, true );
-			updateFromModel = true;
-			break;
-		case OO.ui.Keys.DELETE:
-			e.preventDefault();
-			this.handleDelete( e, false );
-			updateFromModel = true;
-			break;
-		default:
-			trigger = new ve.ui.Trigger( e );
-			if ( trigger.isComplete() && this.surface.execute( trigger ) ) {
-				e.preventDefault();
-				updateFromModel = true;
-			}
-			break;
+		// Bad deletion should be impossible by design
 	}
-	if ( !updateFromModel ) {
-		this.incRenderLock();
-	}
-	try {
-		this.surfaceObserver.pollOnce();
-	} finally {
-		if ( !updateFromModel ) {
-			this.decRenderLock();
-		}
-	}
-	this.surfaceObserver.startTimerLoop();
+};
+
+ve.ce.Surface.prototype.fixCompositionStart = function () {
+};
+
+ve.ce.Surface.prototype.fixCompositionUpdate = function () {
+};
+
+ve.ce.Surface.prototype.badSelection = function () {
+	return false;
 };
 
 /**
@@ -620,8 +746,12 @@ ve.ce.Surface.prototype.onDocumentKeyDown = function ( e ) {
  * @method
  * @param {jQuery.Event} e Key press event
  */
-ve.ce.Surface.prototype.onDocumentKeyPress = function ( e ) {
-	var selection, prevNode, documentModel = this.model.getDocument();
+ve.ce.Surface.prototype.handleKeyPress = function ( e ) {
+	return;
+	var selection, prevNode,
+		documentModel = this.model.getDocument();
+
+	// TODO: this assumes the model is in sync. Do a surface version instead.
 
 	// Prevent IE from editing Aliens/Entities
 	// This is for cases like <p><div>alien</div></p>, to put the cursor outside
@@ -652,21 +782,13 @@ ve.ce.Surface.prototype.onDocumentKeyPress = function ( e ) {
 };
 
 /**
- * Poll again after the native key press
- * @param {jQuery.Event} ev
- */
-ve.ce.Surface.prototype.afterDocumentKeyPress = function () {
-	this.surfaceObserver.pollOnce();
-};
-
-/**
  * Handle document key up events.
  *
  * @method
  * @param {jQuery.Event} e Key up event
  * @fires selectionEnd
  */
-ve.ce.Surface.prototype.onDocumentKeyUp = function ( e ) {
+ve.ce.Surface.prototype.handleKeyUp = function ( e ) {
 	// Detect end of selecting by letting go of shift
 	if ( !this.dragging && this.selecting && e.keyCode === OO.ui.Keys.SHIFT ) {
 		this.selecting = false;
@@ -1162,37 +1284,6 @@ ve.ce.Surface.prototype.afterPaste = function () {
 	this.model.setSelection( new ve.Range( selection.end ) );
 };
 
-/**
- * Handle document composition start events.
- *
- * @method
- * @param {jQuery.Event} e Composition start event
- */
-ve.ce.Surface.prototype.onDocumentCompositionStart = function () {
-	if ( $.browser.msie === true ) {
-		return;
-	}
-	this.inIme = true;
-	this.handleInsertion();
-};
-
-/**
- * Handle document composition end events.
- *
- * @method
- * @param {jQuery.Event} e Composition end event
- */
-ve.ce.Surface.prototype.onDocumentCompositionEnd = function () {
-	this.inIme = false;
-	this.incRenderLock();
-	try {
-		this.surfaceObserver.pollOnce();
-	} finally {
-		this.decRenderLock();
-	}
-	this.surfaceObserver.startTimerLoop();
-};
-
 /*! Custom Events */
 
 /**
@@ -1326,7 +1417,7 @@ ve.ce.Surface.prototype.onContentChange = function ( node, previous, next ) {
 		previousStart, nextStart, newRange,
 		previousData, nextData,
 		i, length, annotation, annotationIndex, dataString,
-		annotationsLeft, annotationsRight,
+		annotationsLeft, annotationsRight, incomplete,
 		fromLeft = 0,
 		fromRight = 0,
 		nodeOffset = node.getModel().getOffset();
@@ -1453,13 +1544,14 @@ ve.ce.Surface.prototype.onContentChange = function ( node, previous, next ) {
 	}
 
 	if ( data.length > 0 ) {
-			this.changeModel(
-				ve.dm.Transaction.newFromInsertion(
-					this.documentView.model, nodeOffset + 1 + fromLeft,
-					data
-				),
-				newRange
-			);
+		this.changeModel(
+			ve.dm.Transaction.newFromInsertion(
+				this.documentView.model, nodeOffset + 1 + fromLeft,
+				data
+			),
+			newRange,
+			{'incomplete': fromLeft + fromRight < previousData.length}
+		);
 	}
 	if ( fromLeft + fromRight < previousData.length ) {
 		this.changeModel(
@@ -1507,108 +1599,6 @@ ve.ce.Surface.prototype.endRelocation = function () {
 /*! Utilities */
 
 /**
- * @method
- */
-ve.ce.Surface.prototype.handleLeftOrRightArrowKey = function ( e ) {
-	var selection, range, direction;
-	// On Mac OS pressing Command (metaKey) + Left/Right is same as pressing Home/End.
-	// As we are not able to handle it programmatically (because we don't know at which offsets
-	// lines starts and ends) let it happen natively.
-	if ( e.metaKey ) {
-		return;
-	}
-
-	// Selection is going to be displayed programmatically so prevent default browser behaviour
-	e.preventDefault();
-	// TODO: onDocumentKeyDown did this already
-	this.surfaceObserver.stopTimerLoop();
-	this.incRenderLock();
-	try {
-		// TODO: onDocumentKeyDown did this already
-		this.surfaceObserver.pollOnce();
-	} finally {
-		this.decRenderLock();
-	}
-	selection = this.model.getSelection();
-	if ( this.$( e.target ).css( 'direction' ) === 'rtl' ) {
-		// If the language direction is RTL, switch left/right directions:
-		direction = e.keyCode === OO.ui.Keys.LEFT ? 1 : -1;
-	} else {
-		direction = e.keyCode === OO.ui.Keys.LEFT ? -1 : 1;
-	}
-
-	range = this.getDocument().getRelativeRange(
-		selection,
-		direction,
-		( e.altKey === true || e.ctrlKey === true ) ? 'word' : 'character',
-		e.shiftKey
-	);
-	this.model.setSelection( range );
-	// TODO: onDocumentKeyDown does this anyway
-	this.surfaceObserver.startTimerLoop();
-	this.surfaceObserver.pollOnce();
-};
-
-/**
- * @method
- */
-ve.ce.Surface.prototype.handleUpOrDownArrowKey = function ( e ) {
-	var selection, rangySelection, rangyRange, range, $element, nativeSel;
-	if ( !$.browser.msie ) {
-		// Firefox doesn't update its internal reference of the appropriate cursor position
-		// on the next or previous lines when the cursor is moved programmatically.
-		// By wiggling the selection, Firefox scraps its internal reference.
-		nativeSel = window.getSelection();
-		nativeSel.modify( 'extend', 'right', 'character' );
-		nativeSel.modify( 'extend', 'left', 'character' );
-		return;
-	}
-	// TODO: onDocumentKeyDown did this already
-	this.surfaceObserver.stopTimerLoop();
-	// TODO: onDocumentKeyDown did this already
-	this.surfaceObserver.pollOnce();
-
-	selection = this.model.getSelection();
-	rangySelection = rangy.getSelection( this.$document[0] );
-	// Perform programatic handling only for selection that is expanded and backwards according to
-	// model data but not according to browser data.
-	if ( !selection.isCollapsed() && selection.isBackwards() && !rangySelection.isBackwards() ) {
-		$element = this.$( this.documentView.getSlugAtOffset( selection.to ) );
-		if ( !$element ) {
-			$element = this.$( '<span>' )
-				.html( ' ' )
-				.css( { 'width': '0px', 'display': 'none' } );
-			rangySelection.anchorNode.splitText( rangySelection.anchorOffset );
-			rangySelection.anchorNode.parentNode.insertBefore(
-				$element[0],
-				rangySelection.anchorNode.nextSibling
-			);
-		}
-		rangyRange = rangy.createRange( this.$document[0] );
-		rangyRange.selectNode( $element[0] );
-		rangySelection.setSingleRange( rangyRange );
-		setTimeout( ve.bind( function () {
-			if ( !$element.hasClass( 've-ce-branchNode-slug' ) ) {
-				$element.remove();
-			}
-			this.surfaceObserver.pollOnce();
-			if ( e.shiftKey === true ) { // expanded range
-				range = new ve.Range( selection.from, this.model.getSelection().to );
-			} else { // collapsed range (just a cursor)
-				range = new ve.Range( this.model.getSelection().to );
-			}
-			this.model.setSelection( range );
-			this.surfaceObserver.pollOnce();
-		}, this ), 0 );
-	} else {
-		// TODO: onDocumentKeyDown does this anyway
-		this.surfaceObserver.startTimerLoop();
-
-		this.surfaceObserver.pollOnce();
-	}
-};
-
-/**
  * Handle insertion of content.
  *
  * @method
@@ -1616,6 +1606,7 @@ ve.ce.Surface.prototype.handleUpOrDownArrowKey = function ( e ) {
 ve.ce.Surface.prototype.handleInsertion = function () {
 	var slug, data, range, annotations, insertionAnnotations, placeholder,
 		selection = this.model.getSelection(), documentModel = this.model.getDocument();
+	return; // TODO: Do slugging and annotation in the CE level
 
 	// Handles removing expanded selection before inserting new text
 	if ( !selection.isCollapsed() ) {
@@ -1659,9 +1650,6 @@ ve.ce.Surface.prototype.handleInsertion = function () {
 			);
 		}
 	}
-
-	this.surfaceObserver.stopTimerLoop();
-	this.surfaceObserver.pollOnce();
 };
 
 /**
@@ -1809,6 +1797,7 @@ ve.ce.Surface.prototype.handleEnter = function ( e ) {
  * @param {boolean} backspace Key was a backspace
  */
 ve.ce.Surface.prototype.handleDelete = function ( e, backspace ) {
+	throw new Error("programmatic delete");
 	var rangeToRemove = this.model.getSelection(),
 		offset = 0,
 		docLength, tx, startNode, endNode, endNodeData, nodeToDelete;
@@ -2188,15 +2177,18 @@ ve.ce.Surface.prototype.getDir = function () {
  * @param {ve.dm.Transaction|ve.dm.Transaction[]|null} transactions One or more transactions to
  * process, or null to process none
  * @param {ve.Range} new selection
+ * @param {object} options
+ * @param {boolean} options.incomplete True if a following change is pending
  * @throws {Error} If calls to this method are nested
  */
-ve.ce.Surface.prototype.changeModel = function ( transaction, range ) {
+ve.ce.Surface.prototype.changeModel = function ( transaction, range, options ) {
+	var incomplete = !!options && options.incomplete;
 	if ( this.newModelSelection !== null ) {
 		throw new Error( 'Nested change of newModelSelection' );
 	}
 	this.newModelSelection = range;
 	try {
-		this.model.change( transaction, range );
+		this.model.change( transaction, range, incomplete );
 	} finally {
 		this.newModelSelection = null;
 	}
