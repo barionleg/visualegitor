@@ -96,6 +96,9 @@ ve.ce.SurfaceObserver.prototype.detach = function () {
  */
 ve.ce.SurfaceObserver.prototype.startTimerLoop = function () {
 	this.domDocument = this.documentView.getDocumentNode().getElementDocument();
+	if ( true ) {
+		return;
+	}
 	this.polling = true;
 	this.timerLoop( true ); // will not sync immediately, because timeoutId should be null
 };
