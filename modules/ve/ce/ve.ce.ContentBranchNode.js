@@ -172,6 +172,25 @@ ve.ce.ContentBranchNode.prototype.renderContents = function () {
 		this.root.getSurface().setContentBranchNodeChanged( true );
 	}
 
+	// Test for changes before wiping
+	var kid, oldContent = [], newContent = [];
+	for ( i = 0, len = this.$element.length; i < len; i++ ) {
+		node = this.$element[i];
+		var kid = node.firstChild;
+		while ( kid ) {
+			oldContent.push( kid.textContent );
+			kid = kid.nextSibling;
+		}
+	}
+	rendered = this.getRenderedContents();
+	for ( i = 0, len = rendered.length; i < len; i++ ) {
+		node = rendered[i];
+		newContent.push( node.textContent );
+	}
+	if ( oldContent.join( '' ) === newContent.join( '' ) ) {
+		return;
+	}
+
 	// Detach all child nodes from this.$element
 	for ( i = 0, len = this.$element.length; i < len; i++ ) {
 		node = this.$element[i];
@@ -181,7 +200,6 @@ ve.ce.ContentBranchNode.prototype.renderContents = function () {
 	}
 
 	// Reattach child nodes with the right annotations
-	rendered = this.getRenderedContents();
 	for ( i = 0, len = rendered.length; i < len; i++ ) {
 		this.$element[0].appendChild( rendered[i] );
 	}

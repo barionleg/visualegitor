@@ -290,14 +290,15 @@ ve.dm.Document.prototype.buildNodeTree = function () {
  *
  * @method
  * @param {ve.dm.Transaction} transaction Transaction to apply
+ * @param {incomplete} True if a subsequent commit is pending
  * @fires transact
  * @throws {Error} Cannot commit a transaction that has already been committed
  */
-ve.dm.Document.prototype.commit = function ( transaction ) {
+ve.dm.Document.prototype.commit = function ( transaction, incomplete ) {
 	if ( transaction.hasBeenApplied() ) {
 		throw new Error( 'Cannot commit a transaction that has already been committed' );
 	}
-	new ve.dm.TransactionProcessor( this, transaction ).process();
+	new ve.dm.TransactionProcessor( this, transaction ).process( incomplete );
 	this.completeHistory.push( transaction );
 	this.emit( 'transact', transaction );
 };

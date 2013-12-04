@@ -93,8 +93,9 @@ ve.dm.DocumentSynchronizer.synchronizers.attributeChange = function ( action ) {
  * @static
  * @method
  * @param {Object} action
+ * @param {boolean} incomplete True if another synchronization is pending
  */
-ve.dm.DocumentSynchronizer.synchronizers.resize = function ( action ) {
+ve.dm.DocumentSynchronizer.synchronizers.resize = function ( action, incomplete ) {
 	var node = action.node,
 		parent = node.getParent();
 
@@ -105,7 +106,7 @@ ve.dm.DocumentSynchronizer.synchronizers.resize = function ( action ) {
 		// Apply length change to tree
 		// No update event needed, adjustLength causes an update event on its own
 		// FIXME however, any queued update event will still be emitted, resulting in a duplicate
-		node.adjustLength( action.adjustment );
+		node.adjustLength( action.adjustment, incomplete );
 	}
 	// Update adjustment
 	this.adjustment += action.adjustment;
@@ -264,7 +265,7 @@ ve.dm.DocumentSynchronizer.prototype.queueEvent = function ( node ) {
 };
 
 /**
- * Synchronize node tree using queued actions.
+ @* Synchronize node tree using queued actions.
  *
  * This method uses the static methods defined in {ve.dm.DocumentSynchronizer.synchronizers} and
  * calls them in the context of {this}.
@@ -275,8 +276,9 @@ ve.dm.DocumentSynchronizer.prototype.queueEvent = function ( node ) {
  * This method also clears both action and event queues.
  *
  * @method
+ * @param {boolean} incomplete True if another call to synchronize is pending
  */
-ve.dm.DocumentSynchronizer.prototype.synchronize = function () {
+ve.dm.DocumentSynchronizer.prototype.synchronize = function ( incomplete ) {
 	var action,
 		event,
 		i;
@@ -284,7 +286,8 @@ ve.dm.DocumentSynchronizer.prototype.synchronize = function () {
 	for ( i = 0; i < this.actionQueue.length; i++ ) {
 		action = this.actionQueue[i];
 		if ( action.type in ve.dm.DocumentSynchronizer.synchronizers ) {
-			ve.dm.DocumentSynchronizer.synchronizers[action.type].call( this, action );
+			ve.dm.DocumentSynchronizer.synchronizers[action.type].call( this,
+				action, incomplete );
 		} else {
 			throw new Error( 'Invalid action type ' + action.type );
 		}
