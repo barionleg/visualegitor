@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eeebdf60_6a820bcf",
+        "filename": "README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2013-12-18T20:45:39Z",
+      "side": 1,
+      "message": "s/VisualEdito/VisualEditor/g",
+      "revId": "1384dfd2c8f9c30cbbbabbdd26523f4942bbac20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
