@@ -28,8 +28,8 @@ module.exports = function ( grunt ) {
 				indent: '\t\t'
 			},
 			test: {
-				src: 'modules/ve/test/index.html.template',
-				dest: 'modules/ve/test/index.html',
+				src: 'modules/ve/test/index.php.template',
+				dest: 'modules/ve/test/index.php',
 				modules: modules,
 				pathPrefix: '../../../',
 				indent: '\t\t'
