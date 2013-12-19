@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "eeebdf60_99b7e6d3",
+        "filename": "README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2013-12-19T22:29:49Z",
+      "side": 1,
+      "message": "Yeah, I wasn\u0027t sure what to put here so I left it alone. Feel free to fix if there\u0027s a better URL available.",
+      "parentUuid": "eeebdf60_99912655",
+      "revId": "3a3a62b4172ead895f5c83f70e0ab09fcadaf719",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eeebdf60_7986621a",
         "filename": "README.md",
         "patchSetId": 4
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "eeebdf60_39c69a4f",
+        "filename": "README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2013-12-19T22:29:49Z",
+      "side": 1,
+      "message": "Whoops, missed that one",
+      "parentUuid": "eeebdf60_7986621a",
+      "revId": "3a3a62b4172ead895f5c83f70e0ab09fcadaf719",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eeebdf60_99900648",
         "filename": "README.md",
         "patchSetId": 4
@@ -47,6 +83,24 @@
       "writtenOn": "2013-12-19T22:28:06Z",
       "side": 1,
       "message": "Do we need to change the config for output for doc so that VE-core and VE-MW don\u0027t over-write each other?",
+      "revId": "3a3a62b4172ead895f5c83f70e0ab09fcadaf719",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eeebdf60_d9bc4eb4",
+        "filename": "README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2013-12-19T22:29:49Z",
+      "side": 1,
+      "message": "We should discuss that, but I think there\u0027s little doubt that that URL is where the VE docs should be visible. We may also want to have docs for the entire VE universe in one place.",
+      "parentUuid": "eeebdf60_99900648",
       "revId": "3a3a62b4172ead895f5c83f70e0ab09fcadaf719",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
