@@ -68,7 +68,6 @@ module.exports = function ( grunt ) {
 		jscs: {
 			src: [
 				'<%= jshint.all %>',
-				'!modules/syntaxhighlight/**/*.js',
 				'!modules/ve/test/ce/imetests/*.js'
 			]
 		},
