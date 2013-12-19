@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "eeebdf60_b4ed1125",
+        "filename": "README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2013-12-19T23:22:36Z",
+      "side": 1,
+      "message": "I\u0027ll make https://www.mediawiki.org/wiki/VisualEditor/Setup have some content, then.",
+      "parentUuid": "eeebdf60_99b7e6d3",
+      "revId": "3a3a62b4172ead895f5c83f70e0ab09fcadaf719",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eeebdf60_7986621a",
         "filename": "README.md",
         "patchSetId": 4
