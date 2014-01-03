@@ -161,7 +161,7 @@ ve.ce.ContentBranchNode.prototype.getRenderedContents = function () {
  * @method
  */
 ve.ce.ContentBranchNode.prototype.renderContents = function () {
-	var i, len, node, rendered;
+	var i, len, node, rendered, oldContent, newContent;
 	if (
 		this.root instanceof ve.ce.DocumentNode &&
 		this.root.getSurface().isRenderingLocked()
@@ -173,6 +173,22 @@ ve.ce.ContentBranchNode.prototype.renderContents = function () {
 		this.root.getSurface().setContentBranchNodeChanged( true );
 	}
 
+	// Test for changes before wiping
+	oldContent = [];
+	newContent = [];
+	for ( i = 0, len = this.$element.length; i < len; i++ ) {
+		node = this.$element[i];
+		oldContent.push( node.innerHTML );
+	}
+	rendered = this.getRenderedContents();
+	for ( i = 0, len = rendered.length; i < len; i++ ) {
+		node = rendered[i];
+		newContent.push( node.innerHTML );
+	}
+	if ( oldContent.join( '' ) === newContent.join( '' ) ) {
+		return;
+	}
+
 	// Detach all child nodes from this.$element
 	for ( i = 0, len = this.$element.length; i < len; i++ ) {
 		node = this.$element[i];
@@ -182,7 +198,6 @@ ve.ce.ContentBranchNode.prototype.renderContents = function () {
 	}
 
 	// Reattach child nodes with the right annotations
-	rendered = this.getRenderedContents();
 	for ( i = 0, len = rendered.length; i < len; i++ ) {
 		this.$element[0].appendChild( rendered[i] );
 	}
