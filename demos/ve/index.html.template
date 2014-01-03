@@ -45,6 +45,7 @@
 		<!-- SCRIPTS -->
 
 		<!-- demo scripts -->
+		<script src="../../modules/ve/ve.debug.js"></script>
 		<script src="demo.js"></script>
 	</body>
 </html>
