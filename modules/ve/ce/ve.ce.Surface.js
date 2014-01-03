@@ -1389,28 +1389,41 @@ ve.ce.Surface.prototype.onContentChange = function ( node, previous, next ) {
 		newRange = new ve.Range( this.getNearestCorrectOffset( newRange.start, 1 ) );
 	}
 
-	if ( data.length > 0 ) {
-			this.changeModel(
-				ve.dm.Transaction.newFromInsertion(
-					this.documentView.model, nodeOffset + 1 + fromLeft,
-					data
-				),
-				newRange
-			);
-	}
-	if ( fromLeft + fromRight < previousData.length ) {
-		this.changeModel(
-			ve.dm.Transaction.newFromRemoval(
-				this.documentView.model,
-				new ve.Range(
-					data.length + nodeOffset + 1 + fromLeft,
-					data.length + nodeOffset + 1 +
-						previousData.length - fromRight
-				)
+	this.changeModel(
+		ve.dm.Transaction.newFromReplacement(
+			this.documentView.model,
+			new ve.Range(
+				nodeOffset + 1 + fromLeft,
+				nodeOffset + 1 + previousData.length - fromRight
 			),
-			newRange
-		);
-	}
+			data
+		),
+		newRange
+	);
+
+//	if ( data.length > 0 ) {
+//		this.changeModel(
+//			ve.dm.Transaction.newFromInsertion(
+//				this.documentView.model, nodeOffset + 1 + fromLeft,
+//				data
+//			),
+//			newRange,
+//			{'incomplete': fromLeft + fromRight < previousData.length}
+//		);
+//	}
+//	if ( fromLeft + fromRight < previousData.length ) {
+//		this.changeModel(
+//			ve.dm.Transaction.newFromRemoval(
+//				this.documentView.model,
+//				new ve.Range(
+//					data.length + nodeOffset + 1 + fromLeft,
+//					data.length + nodeOffset + 1 +
+//						previousData.length - fromRight
+//				)
+//			),
+//			newRange
+//		);
+//	}
 };
 
 /*! Relocation */
@@ -1552,20 +1565,27 @@ ve.ce.Surface.prototype.handleUpOrDownArrowKey = function ( e ) {
  */
 ve.ce.Surface.prototype.handleInsertion = function () {
 	var slug, data, range, annotations, insertionAnnotations, placeholder,
+		hasChanged = false,
 		selection = this.model.getSelection(), documentModel = this.model.getDocument();
 
 	// Handles removing expanded selection before inserting new text
 	if ( !selection.isCollapsed() ) {
-		// Pull annotations from the first character in the selection
-		annotations = documentModel.data.getAnnotationsFromRange(
-			new ve.Range( selection.start, selection.start + 1 )
-		);
-		this.model.change(
-			ve.dm.Transaction.newFromRemoval( this.documentView.model, selection ),
-			new ve.Range( selection.start )
-		);
-		this.surfaceObserver.clear();
-		selection = this.model.getSelection();
+		if ( !this.selectionInsideOneBranchNode( selection ) ) {
+			// Pull annotations from the first character in the selection
+			annotations = documentModel.data.getAnnotationsFromRange(
+				new ve.Range( selection.start, selection.start + 1 )
+			);
+			this.model.change(
+				ve.dm.Transaction.newFromRemoval(
+					this.documentView.model,
+					selection
+				),
+				new ve.Range( selection.start )
+			);
+			hasChanged = true;
+			this.surfaceObserver.clear();
+			selection = this.model.getSelection();
+		}
 		this.model.setInsertionAnnotations( annotations );
 	}
 
@@ -1594,11 +1614,26 @@ ve.ce.Surface.prototype.handleInsertion = function () {
 				),
 				range
 			);
+			hasChanged = true;
 		}
 	}
 
-	this.surfaceObserver.stopTimerLoop();
-	this.surfaceObserver.pollOnce();
+	if ( hasChanged ) {
+		this.surfaceObserver.stopTimerLoop();
+		this.surfaceObserver.pollOnce();
+	}
+};
+
+/**
+ * Test whether selection lies within a single branch node
+ * @param {ve.Range} selection The selection to test
+ * @returns {boolean} Whether the selection lies within a single branch node
+ */
+ve.ce.Surface.prototype.selectionInsideOneBranchNode = function ( selection ) {
+	var startNode, endNode;
+	startNode = this.documentView.getDocumentNode().getNodeFromOffset( selection.start );
+	endNode = this.documentView.getDocumentNode().getNodeFromOffset( selection.end );
+	return startNode === endNode;
 };
 
 /**
