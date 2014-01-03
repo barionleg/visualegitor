@@ -1376,28 +1376,41 @@ ve.ce.Surface.prototype.onContentChange = function ( node, previous, next ) {
 		newRange = new ve.Range( this.getNearestCorrectOffset( newRange.start, 1 ) );
 	}
 
-	if ( data.length > 0 ) {
-			this.changeModel(
-				ve.dm.Transaction.newFromInsertion(
-					this.documentView.model, nodeOffset + 1 + fromLeft,
-					data
-				),
-				newRange
-			);
-	}
-	if ( fromLeft + fromRight < previousData.length ) {
-		this.changeModel(
-			ve.dm.Transaction.newFromRemoval(
-				this.documentView.model,
-				new ve.Range(
-					data.length + nodeOffset + 1 + fromLeft,
-					data.length + nodeOffset + 1 +
-						previousData.length - fromRight
-				)
+	this.changeModel(
+		ve.dm.Transaction.newFromReplacement(
+			this.documentView.model,
+			new ve.Range(
+				nodeOffset + 1 + fromLeft,
+				nodeOffset + 1 + previousData.length - fromRight
 			),
-			newRange
-		);
-	}
+			data
+		),
+		newRange
+	);
+
+//	if ( data.length > 0 ) {
+//		this.changeModel(
+//			ve.dm.Transaction.newFromInsertion(
+//				this.documentView.model, nodeOffset + 1 + fromLeft,
+//				data
+//			),
+//			newRange,
+//			{'incomplete': fromLeft + fromRight < previousData.length}
+//		);
+//	}
+//	if ( fromLeft + fromRight < previousData.length ) {
+//		this.changeModel(
+//			ve.dm.Transaction.newFromRemoval(
+//				this.documentView.model,
+//				new ve.Range(
+//					data.length + nodeOffset + 1 + fromLeft,
+//					data.length + nodeOffset + 1 +
+//						previousData.length - fromRight
+//				)
+//			),
+//			newRange
+//		);
+//	}
 };
 
 /*! Relocation */
@@ -1538,6 +1551,9 @@ ve.ce.Surface.prototype.handleUpOrDownArrowKey = function ( e ) {
  * @method
  */
 ve.ce.Surface.prototype.handleInsertion = function () {
+	if ( true ) {
+		return; // TODO: Return only in non-slug, non-branch node circumstances
+	}
 	var slug, data, range, annotations, insertionAnnotations, placeholder,
 		selection = this.model.getSelection(), documentModel = this.model.getDocument();
 
