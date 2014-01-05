@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eeebdf60_bc0a4f27",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-05T09:35:31Z",
+      "side": 1,
+      "message": "That\u0027s not true. See MWAlienExtensionInspector, MWMathInspector, MWHieroInspector",
+      "revId": "229215419aee6134211faec0beeaa88569e5045e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eeebdf60_5009e72d",
+        "filename": "modules/ve/ce/ve.ce.ClickableNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-05T09:35:31Z",
+      "side": 1,
+      "message": "You should document that the node this is being mixed into is required to emit a dblclick event.\n\nI thought we were gonna have one overlay to rule them all, and ClickableNode to manage it? What happened to that idea?",
+      "revId": "229215419aee6134211faec0beeaa88569e5045e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eeebdf60_9c054b19",
+        "filename": "modules/ve/ce/ve.ce.ClickableNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-05T09:35:31Z",
+      "side": 1,
+      "message": "You need to protect against getRoot() returning null, or getSurface() returning null. Alternatively, you could connect the event on setup and disconnect it on teardown.",
+      "revId": "229215419aee6134211faec0beeaa88569e5045e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eeebdf60_b0fcb309",
+        "filename": "modules/ve/ce/ve.ce.ClickableNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-05T09:35:31Z",
+      "side": 1,
+      "message": "This is a uiSurface, actually. Although the code you started with may predate the ve.Surface -\u003e ve.ui.Surface move, I suppose",
+      "revId": "229215419aee6134211faec0beeaa88569e5045e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eeebdf60_90ff6ffc",
+        "filename": "modules/ve/ce/ve.ce.ClickableNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-05T09:35:31Z",
+      "side": 1,
+      "message": "You should protect against name being undefined: getToolForNode returns undefined if there is no tool matching the selected node.\n\nYou also should not assume that the tool name will equal the dialog name. You can get it easily using ve.ui.toolFactory.lookup( name ).static.dialog .\n\nTo add support for inspectors, you could do something like:\n\n    toolClass \u003d ve.ui.toolFactory.lookup( name );\n    if ( toolClass.constructor instanceof ve.ui.DialogTool ) {\n        open dialog toolClass.static.dialog\n    } else if ( toolClass.constructor instanceof ve.ui.InspectorTool ) {\n        open inspector toolClass.static.inspector\n    }\n\nIt would be nice if it were possible to just invoke the .onSelect() method on the tool and have it take its native action, but since you need a ToolGroup to construct a Tool (and a Toolbar to construct a ToolGroup), that\u0027s not really doable right now. At some point we should refactor OO.ui.Tool to make that possible.",
+      "revId": "229215419aee6134211faec0beeaa88569e5045e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eeebdf60_3010a352",
+        "filename": "modules/ve/ce/ve.ce.ProtectedNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-05T09:35:31Z",
+      "side": 1,
+      "message": "You can chain this onto the previous line",
+      "revId": "229215419aee6134211faec0beeaa88569e5045e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
