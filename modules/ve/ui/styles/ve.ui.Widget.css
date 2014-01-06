@@ -114,3 +114,8 @@
 .ve-ui-groupButtonWidget {
 	white-space: normal;
 }
+
+/* ve.ui.MediaSizeWidget */
+.ve-ui-MediaSizeWidget-input-hasError input[type="text"] {
+	background: #ffc2c2;
+}
