@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cef0db4e_a958255a",
+        "filename": "modules/ve/ui/ve.ui.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2014-01-10T18:03:18Z",
+      "side": 1,
+      "message": "Why getView/getModel instead of .view and .model? It should be uncontroversial to access the properties directly from a Surface method, right?",
+      "revId": "9ebea3a9dbabf151ce7d423cfc02e23f8d6759dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
