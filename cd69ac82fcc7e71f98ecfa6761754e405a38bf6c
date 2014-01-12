@@ -71,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "aef5673e_bf2f3785",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-12T20:34:00Z",
+      "side": 1,
+      "message": "The problem is you\u0027ve separated the code for create the buttons from the event initialisation below as well. In fact there\u0027s very little left in the constructor that shouldn\u0027t be considered \"buildGUI\" so they might as well be merged.",
+      "parentUuid": "cef0db4e_7d9650f5",
+      "revId": "cd69ac82fcc7e71f98ecfa6761754e405a38bf6c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cef0db4e_bd2058f3",
         "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
         "patchSetId": 1
@@ -100,6 +118,24 @@
       "side": 1,
       "message": "There\u0027s an issue using \u0027change\u0027 in the case of these inputs:\n\nWhen one input is updated, the other is updated accordingly. If I use on \"change\" event, this will result in a looped event:\n\n1. User types \"1\" in height\n2. Since height changed, width is now adjusting value\n3. But now width changed, hence it fires the event again, and now height will be changed again.\n\nThis won\u0027t run endlessly because at some point the updated values are the same and won\u0027t change the input box - but that struck me as completely unnecessary and has potential danger of falling into worse loops.\n\nIn this particular case, all we need is keyup changes. Would it not be safer to use them, in light of the way the input boxes are tied to one another?",
       "parentUuid": "cef0db4e_bd2058f3",
+      "revId": "cd69ac82fcc7e71f98ecfa6761754e405a38bf6c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_5f4eeb73",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-12T20:34:00Z",
+      "side": 1,
+      "message": "Yes, the infinite loop problem is an issue, however we should still use the correct event (otherwise we\u0027ll miss copy/paste changes, undo chagnes etc.) See the \u0027abondoned\u0027 changset for how I worked around this, but basically just set a state property of \u0027changing\u0027. We use state properties like this elsewhere in the code.",
+      "parentUuid": "cef0db4e_7dbd3063",
       "revId": "cd69ac82fcc7e71f98ecfa6761754e405a38bf6c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -220,6 +256,24 @@
       "side": 1,
       "message": "Since they\u0027re used in the calculations, I thought it would be less \"expensive\" to take them from a cached value rather than continuously call .val() ?",
       "parentUuid": "cef0db4e_fd26e010",
+      "revId": "cd69ac82fcc7e71f98ecfa6761754e405a38bf6c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_df39dbcc",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-12T20:34:00Z",
+      "side": 1,
+      "message": "They\u0027re only accessed once each in setDimensions, and the cost of doing this is that you have to make sure they stay in sync with the input any time it is changed.",
+      "parentUuid": "cef0db4e_5d9b8c1b",
       "revId": "cd69ac82fcc7e71f98ecfa6761754e405a38bf6c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -484,6 +538,24 @@
     },
     {
       "key": {
+        "uuid": "aef5673e_7f708fa3",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-12T20:34:00Z",
+      "side": 1,
+      "message": "1. I\u0027m not sure we need to disable it because we have fallback values.\n2. If we do then it should initialise as disabled, and only become enabled when the originalDimensions are set, in which case it can be merged with setOriginalDimensions.",
+      "parentUuid": "cef0db4e_bd8bb8c3",
+      "revId": "cd69ac82fcc7e71f98ecfa6761754e405a38bf6c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cef0db4e_7d82d0ce",
         "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
         "patchSetId": 1
@@ -513,6 +585,24 @@
       "side": 1,
       "message": "The media edit dialog will show a different error (\"API not available\" or \"Cannot retrieve original values from API\" etc) -- instead of adding another error label, I thought it would be better to let the widget\u0027s error label be changed and have a default value.",
       "parentUuid": "cef0db4e_7d82d0ce",
+      "revId": "cd69ac82fcc7e71f98ecfa6761754e405a38bf6c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_9f435343",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-12T20:34:00Z",
+      "side": 1,
+      "message": "An API error is very different from an input error so it would confusing to render it the same. An API error shouldn\u0027t block the user from editing the dimensions, in fact it should probably be completely transparent to the user as we have fallback values.",
+      "parentUuid": "cef0db4e_9db8f475",
       "revId": "cd69ac82fcc7e71f98ecfa6761754e405a38bf6c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
