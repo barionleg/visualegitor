@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "aef5673e_ffd6dfc7",
+        "filename": "modules/ve/ui/styles/ve.ui.Widget.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 798
+      },
+      "writtenOn": "2014-01-12T21:56:37Z",
+      "side": 1,
+      "message": "Here\u0027s the weird thing: If you remove the [type\u003d\u0027text\u0027] then the style is implemented on non-focused textbox -- which means that while I type in either of the inputs, it seems like only the other input gets the error class. However, if I keep the type\u003d\u0027text\u0027 in, both inputs have the class, including the one that is focused.\n\nI\u0027m not entirely sure why this happens, but it looks better when both inputs get the error class rather than only having the input you are not actively typing in get it.",
+      "parentUuid": "aef5673e_1f6f43c2",
+      "revId": "11fff67d3ecd762f74a0c8d762cdc6a276c52d13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aef5673e_5fdeeb15",
         "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2014-01-12T21:08:26Z",
       "side": 1,
       "message": "Why wouldn\u0027t they be? How does this help?\n\nAlso at the top you say originalDimensions can be undefined (and the defaulted to an empty object). In which case this.originalDimensions.width and height would both be undefined, which is not \u003c\u003d 0, so the code would proceed without \u0027fixing\u0027 them (and getAspectRatio would fail).\n\nSurely if you don\u0027t have sane original dimensions then we should just skip past the aspect ratio code, and move straight on to validation.",
+      "revId": "11fff67d3ecd762f74a0c8d762cdc6a276c52d13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_1fd2a3d5",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 798
+      },
+      "writtenOn": "2014-01-12T21:56:37Z",
+      "side": 1,
+      "message": "I wanted to let the widget be instantiated \"empty\" and then filled up - and when I got to this stage, I was worried about cases where whoever uses this widget may ask to setDimensions before setting originalDimensions (or cases where \u0027originalDimensions\u0027 aren\u0027t needed or set at all)\n\nSo, the idea was that if \u0027originalDimensions\u0027 were not explicitly set (from API or from wherever) -- the originalDimensions would take the value of the initial width/height values, and the aspect ratio be calculated from that to preserve sane values. \n\nI\u0027ll have to rethink the strategy on that, though.",
+      "parentUuid": "aef5673e_5fdeeb15",
       "revId": "11fff67d3ecd762f74a0c8d762cdc6a276c52d13",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "aef5673e_3fcd6735",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 798
+      },
+      "writtenOn": "2014-01-12T21:56:37Z",
+      "side": 1,
+      "message": "I want to be able to set them from outside the widget -- or set a single value from outside the widget. For example, some images only have height\u003d\"xxx\" set up - so setting setDimensions( \u0027height\u0027: xxx ) will automatically calculate and fill the width value as well.",
+      "parentUuid": "aef5673e_3f87a7de",
+      "revId": "11fff67d3ecd762f74a0c8d762cdc6a276c52d13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aef5673e_df267b11",
         "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
         "patchSetId": 2
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "aef5673e_bfe05794",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 798
+      },
+      "writtenOn": "2014-01-12T21:56:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aef5673e_df267b11",
+      "revId": "11fff67d3ecd762f74a0c8d762cdc6a276c52d13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aef5673e_5f5f0be9",
         "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
         "patchSetId": 2
@@ -81,6 +153,24 @@
       "writtenOn": "2014-01-12T21:08:26Z",
       "side": 1,
       "message": "element.toggleClass( className, boolean ) saves you a few lines of code (where boolean is !this.valid)",
+      "revId": "11fff67d3ecd762f74a0c8d762cdc6a276c52d13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_9fdd93e4",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 798
+      },
+      "writtenOn": "2014-01-12T21:56:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aef5673e_5f5f0be9",
       "revId": "11fff67d3ecd762f74a0c8d762cdc6a276c52d13",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
