@@ -1,0 +1,429 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cef0db4e_dded5cb6",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-12T15:54:21Z",
+      "side": 1,
+      "message": "You\u0027d only need this.inputs \u003d {}, but I don\u0027t think we need this namespacing, just widthInput/heightInput.",
+      "revId": "cd69ac82fcc7e71f98ecfa6761754e405a38bf6c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cef0db4e_bdea989a",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-12T15:54:21Z",
+      "side": 1,
+      "message": "this.labels.[height|width] are never accessed after they\u0027ve been created so there don\u0027t need to be properties. See below.",
+      "revId": "cd69ac82fcc7e71f98ecfa6761754e405a38bf6c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cef0db4e_9d7d94e7",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-12T15:54:21Z",
+      "side": 1,
+      "message": "not sure this needs to be separated out",
+      "revId": "cd69ac82fcc7e71f98ecfa6761754e405a38bf6c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cef0db4e_bd2058f3",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-12T15:54:21Z",
+      "side": 1,
+      "message": "As per comments on other change, use \u0027change\u0027 event.\n\nAlso per previous comments just bind to two different functions (onWidthChange/onHeightChange)",
+      "revId": "cd69ac82fcc7e71f98ecfa6761754e405a38bf6c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cef0db4e_3d3e8827",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-12T15:54:21Z",
+      "side": 1,
+      "message": "keep width before height for consistency",
+      "revId": "cd69ac82fcc7e71f98ecfa6761754e405a38bf6c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cef0db4e_9d2fd4f3",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-12T15:54:21Z",
+      "side": 1,
+      "message": "var heightLabel\nis sufficient as it\u0027s never accessed again.",
+      "revId": "cd69ac82fcc7e71f98ecfa6761754e405a38bf6c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cef0db4e_1d43c4b7",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-12T15:54:21Z",
+      "side": 1,
+      "message": "keep width before height for consistency",
+      "revId": "cd69ac82fcc7e71f98ecfa6761754e405a38bf6c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cef0db4e_7d341047",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-12T15:54:21Z",
+      "side": 1,
+      "message": "as per unnecessary namespacing, this can just be this.errorLabel",
+      "revId": "cd69ac82fcc7e71f98ecfa6761754e405a38bf6c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cef0db4e_fd3f001f",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-12T15:54:21Z",
+      "side": 1,
+      "message": "keep width before height for consistency",
+      "revId": "cd69ac82fcc7e71f98ecfa6761754e405a38bf6c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cef0db4e_fd26e010",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-12T15:54:21Z",
+      "side": 1,
+      "message": "why store width/height as properties? Can\u0027t we just get them from the inputs when needed?",
+      "revId": "cd69ac82fcc7e71f98ecfa6761754e405a38bf6c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cef0db4e_dd4c3ce7",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-12T15:54:21Z",
+      "side": 1,
+      "message": "keep width before height for consistency",
+      "revId": "cd69ac82fcc7e71f98ecfa6761754e405a38bf6c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cef0db4e_7d1bf0d4",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-12T15:54:21Z",
+      "side": 1,
+      "message": "keep width before height for consistency",
+      "revId": "cd69ac82fcc7e71f98ecfa6761754e405a38bf6c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cef0db4e_5d102cad",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-12T15:54:21Z",
+      "side": 1,
+      "message": "keep width before height for consistency",
+      "revId": "cd69ac82fcc7e71f98ecfa6761754e405a38bf6c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cef0db4e_5dcdcc33",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-12T15:54:21Z",
+      "side": 1,
+      "message": "why would you call setDimensions with a falsey argument?",
+      "revId": "cd69ac82fcc7e71f98ecfa6761754e405a38bf6c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cef0db4e_3d15689d",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-12T15:54:21Z",
+      "side": 1,
+      "message": "keep width before height for consistency",
+      "revId": "cd69ac82fcc7e71f98ecfa6761754e405a38bf6c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cef0db4e_1d2aa4d7",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-12T15:54:21Z",
+      "side": 1,
+      "message": "keep width before height for consistency",
+      "revId": "cd69ac82fcc7e71f98ecfa6761754e405a38bf6c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cef0db4e_7dc89025",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-12T15:54:21Z",
+      "side": 1,
+      "message": "or just\n return this.original\n\nalso suggest rename to this.originalDimensions",
+      "revId": "cd69ac82fcc7e71f98ecfa6761754e405a38bf6c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cef0db4e_9dc3540a",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-12T15:54:21Z",
+      "side": 1,
+      "message": "width before height",
+      "revId": "cd69ac82fcc7e71f98ecfa6761754e405a38bf6c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cef0db4e_bd4e18c3",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-12T15:54:21Z",
+      "side": 1,
+      "message": "You don\u0027t want to Math.round this!",
+      "revId": "cd69ac82fcc7e71f98ecfa6761754e405a38bf6c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cef0db4e_3d8c48ff",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-12T15:54:21Z",
+      "side": 1,
+      "message": "keep width before height for consistency",
+      "revId": "cd69ac82fcc7e71f98ecfa6761754e405a38bf6c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cef0db4e_1d71840b",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-12T15:54:21Z",
+      "side": 1,
+      "message": "keep width before height for consistency",
+      "revId": "cd69ac82fcc7e71f98ecfa6761754e405a38bf6c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cef0db4e_dd51dc66",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-12T15:54:21Z",
+      "side": 1,
+      "message": "can this be put into setOriginalDimensions and triggered if the value provided is \u0027null\u0027 (i.e. we don\u0027t know what they are)",
+      "revId": "cd69ac82fcc7e71f98ecfa6761754e405a38bf6c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cef0db4e_7d82d0ce",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-12T15:54:21Z",
+      "side": 1,
+      "message": "why would this be called by anything other than the internal validation? Suggest displayError/hideError be moved inline.",
+      "revId": "cd69ac82fcc7e71f98ecfa6761754e405a38bf6c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cef0db4e_7d69b01c",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-12T15:54:21Z",
+      "side": 1,
+      "message": "\u0027True if\u0027/\u0027false otherwise\u0027 are implied by the {Boolean}\n\n{Boolean} The values aren\u0027t valid\n\n(or \"are valid\" if you make the change below)",
+      "revId": "cd69ac82fcc7e71f98ecfa6761754e405a38bf6c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cef0db4e_fd6dc02e",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-12T15:54:21Z",
+      "side": 1,
+      "message": "to avoid your grammatical problems here, can I suggest \u0027valid\u0027 as the property, and \u0027isValid\u0027 as the getter?",
+      "revId": "cd69ac82fcc7e71f98ecfa6761754e405a38bf6c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
