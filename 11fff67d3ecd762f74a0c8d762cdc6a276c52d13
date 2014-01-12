@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aef5673e_1f6f43c2",
+        "filename": "modules/ve/ui/styles/ve.ui.Widget.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-12T21:08:26Z",
+      "side": 1,
+      "message": "the oojs stylesheet just uses .oo-ui-textInputWidget input, so we should mirror that (i.e. input[type\u003d\u0027text\u0027] -\u003e input)",
+      "revId": "11fff67d3ecd762f74a0c8d762cdc6a276c52d13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_5fdeeb15",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-12T21:08:26Z",
+      "side": 1,
+      "message": "Why wouldn\u0027t they be? How does this help?\n\nAlso at the top you say originalDimensions can be undefined (and the defaulted to an empty object). In which case this.originalDimensions.width and height would both be undefined, which is not \u003c\u003d 0, so the code would proceed without \u0027fixing\u0027 them (and getAspectRatio would fail).\n\nSurely if you don\u0027t have sane original dimensions then we should just skip past the aspect ratio code, and move straight on to validation.",
+      "revId": "11fff67d3ecd762f74a0c8d762cdc6a276c52d13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_3f87a7de",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-12T21:08:26Z",
+      "side": 1,
+      "message": "Why not just put the aspect ratio code in the onWidth/HeightChange listener, then you don\u0027t need this three way if statement.",
+      "revId": "11fff67d3ecd762f74a0c8d762cdc6a276c52d13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_df267b11",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-12T21:08:26Z",
+      "side": 1,
+      "message": "This /can/ be optimised by only calculating on setOriginalDimensions and caching as a property.",
+      "revId": "11fff67d3ecd762f74a0c8d762cdc6a276c52d13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_5f5f0be9",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-12T21:08:26Z",
+      "side": 1,
+      "message": "element.toggleClass( className, boolean ) saves you a few lines of code (where boolean is !this.valid)",
+      "revId": "11fff67d3ecd762f74a0c8d762cdc6a276c52d13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
