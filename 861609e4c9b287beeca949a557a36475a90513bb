@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aef5673e_33592002",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-13T19:19:08Z",
+      "side": 1,
+      "message": "this.$()",
+      "revId": "861609e4c9b287beeca949a557a36475a90513bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_136e1c94",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-13T19:19:08Z",
+      "side": 1,
+      "message": "this.$()",
+      "revId": "861609e4c9b287beeca949a557a36475a90513bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_f36a987d",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-13T19:19:08Z",
+      "side": 1,
+      "message": "this.$()",
+      "revId": "861609e4c9b287beeca949a557a36475a90513bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_d36794b3",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-13T19:19:08Z",
+      "side": 1,
+      "message": "this.$()",
+      "revId": "861609e4c9b287beeca949a557a36475a90513bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_b36410b0",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-13T19:19:08Z",
+      "side": 1,
+      "message": "Remove this block once it\u0027s known to no longer be needed",
+      "revId": "861609e4c9b287beeca949a557a36475a90513bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_730688d3",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-13T19:19:08Z",
+      "side": 1,
+      "message": "We tend to use lowerCamelCase in class names: ve-ui-mediaSizeWidget",
+      "revId": "861609e4c9b287beeca949a557a36475a90513bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_33100004",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-13T19:19:08Z",
+      "side": 1,
+      "message": "string and number are lowercase",
+      "revId": "861609e4c9b287beeca949a557a36475a90513bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_13f5fcc7",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-13T19:19:08Z",
+      "side": 1,
+      "message": "Doesn\u0027t actually respond to keyup any more",
+      "revId": "861609e4c9b287beeca949a557a36475a90513bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
