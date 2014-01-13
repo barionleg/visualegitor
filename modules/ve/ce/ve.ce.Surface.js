@@ -1739,9 +1739,9 @@ ve.ce.Surface.prototype.handleEnter = function ( e ) {
  * @param {boolean} backspace Key was a backspace
  */
 ve.ce.Surface.prototype.handleDelete = function ( e, backspace ) {
-	var rangeToRemove = this.model.getSelection(),
-		offset = 0,
-		docLength, tx, startNode, endNode, endNodeData, nodeToDelete;
+	var docLength, tx, startNode, endNode, endNodeData, nodeToDelete,
+		nodeRange, offset,
+		rangeToRemove = this.model.getSelection();
 
 	if ( rangeToRemove.isCollapsed() ) {
 		// In case when the range is collapsed use the same logic that is used for cursor left and
@@ -1753,9 +1753,9 @@ ve.ce.Surface.prototype.handleDelete = function ( e, backspace ) {
 			true
 		);
 		offset = rangeToRemove.start;
-		docLength = this.model.getDocument().data.getLength();
-		if ( offset < docLength ) {
-			while ( offset < docLength && this.model.getDocument().data.isCloseElementData( offset ) ) {
+		docLength = this.model.getDocument().getInternalList().getListNode().getOuterRange().start;
+		if ( offset < docLength - 1 ) {
+			while ( offset < docLength - 1 && this.model.getDocument().data.isCloseElementData( offset ) ) {
 				offset++;
 			}
 			// If the user tries to delete a focusable node from a collapsed selection,
@@ -1767,8 +1767,17 @@ ve.ce.Surface.prototype.handleDelete = function ( e, backspace ) {
 			}
 		}
 		if ( rangeToRemove.isCollapsed() ) {
-			// For instance beginning or end of the document.
-			return;
+			startNode = this.documentView.getDocumentNode().getNodeFromOffset( offset );
+			nodeRange = startNode.getModel().getOuterRange();
+			if (
+				startNode.canContainContent() &&
+				( nodeRange.start === 0 || nodeRange.end === docLength )
+			) {
+				// Content node at start or end of document, do nothing.
+				return;
+			} else {
+				rangeToRemove = new ve.Range( nodeRange.start, rangeToRemove.start - 1 );
+			}
 		}
 	}
 	tx = ve.dm.Transaction.newFromRemoval( this.documentView.model, rangeToRemove );
@@ -1836,10 +1845,10 @@ ve.ce.Surface.prototype.showSelection = function ( range ) {
 		rangySel = rangy.getSelection( this.$document[0] ),
 		rangyRange = rangy.createRange( this.$document[0] );
 
-		range = new ve.Range(
-			this.getNearestCorrectOffset( range.from, -1 ),
-			this.getNearestCorrectOffset( range.to, 1 )
-		);
+	range = new ve.Range(
+		this.getNearestCorrectOffset( range.from, -1 ),
+		this.getNearestCorrectOffset( range.to, 1 )
+	);
 
 	if ( !range.isCollapsed() ) {
 		start = this.documentView.getNodeAndOffset( range.start );
