@@ -2041,6 +2041,7 @@ ve.ce.Surface.prototype.handleEnter = function ( e ) {
  * @param {boolean} backspace Key was a backspace
  */
 ve.ce.Surface.prototype.handleDelete = function ( e, backspace ) {
+<<<<<<< HEAD:src/ce/ve.ce.Surface.js
 	var rangeAfterRemove, internalListRange,
 		offset = 0,
 		direction = backspace ? -1 : 1,
@@ -2050,6 +2051,11 @@ ve.ce.Surface.prototype.handleDelete = function ( e, backspace ) {
 		data = documentModel.data,
 		rangeToRemove = model.getSelection(),
 		docLength, tx, startNode, endNode, endNodeData, nodeToDelete;
+=======
+	var docLength, tx, startNode, endNode, endNodeData, nodeToDelete,
+		nodeRange, offset,
+		rangeToRemove = this.model.getSelection();
+>>>>>>> WIP Fix deletion inside a structural node at start/end of document:modules/ve/ce/ve.ce.Surface.js
 
 	if ( rangeToRemove.isCollapsed() ) {
 		// In case when the range is collapsed use the same logic that is used for cursor left and
@@ -2061,9 +2067,15 @@ ve.ce.Surface.prototype.handleDelete = function ( e, backspace ) {
 			true
 		);
 		offset = rangeToRemove.start;
+<<<<<<< HEAD:src/ce/ve.ce.Surface.js
 		docLength = data.getLength();
 		if ( offset < docLength ) {
 			while ( offset < docLength && data.isCloseElementData( offset ) ) {
+=======
+		docLength = this.model.getDocument().getInternalList().getListNode().getOuterRange().start;
+		if ( offset < docLength - 1 ) {
+			while ( offset < docLength - 1 && this.model.getDocument().data.isCloseElementData( offset ) ) {
+>>>>>>> WIP Fix deletion inside a structural node at start/end of document:modules/ve/ce/ve.ce.Surface.js
 				offset++;
 			}
 			// If the user tries to delete a focusable node from a collapsed selection,
@@ -2075,8 +2087,17 @@ ve.ce.Surface.prototype.handleDelete = function ( e, backspace ) {
 			}
 		}
 		if ( rangeToRemove.isCollapsed() ) {
-			// For instance beginning or end of the document.
-			return;
+			startNode = this.documentView.getDocumentNode().getNodeFromOffset( offset );
+			nodeRange = startNode.getModel().getOuterRange();
+			if (
+				startNode.canContainContent() &&
+				( nodeRange.start === 0 || nodeRange.end === docLength )
+			) {
+				// Content node at start or end of document, do nothing.
+				return;
+			} else {
+				rangeToRemove = new ve.Range( nodeRange.start, rangeToRemove.start - 1 );
+			}
 		}
 	}
 	// If selection spans entire document (e.g. CTRL+A in Firefox) then
@@ -2166,9 +2187,22 @@ ve.ce.Surface.prototype.showSelection = function ( range ) {
 		rangySel = rangy.getSelection( this.$document[0] ),
 		rangyRange = rangy.createRange( this.$document[0] );
 
+<<<<<<< HEAD:src/ce/ve.ce.Surface.js
 	if ( selection.end ) {
 		rangyRange.setStart( selection.start.node, selection.start.offset );
 		rangyRange.setEnd( selection.end.node, selection.end.offset );
+=======
+	range = new ve.Range(
+		this.getNearestCorrectOffset( range.from, -1 ),
+		this.getNearestCorrectOffset( range.to, 1 )
+	);
+
+	if ( !range.isCollapsed() ) {
+		start = this.documentView.getNodeAndOffset( range.start );
+		end = this.documentView.getNodeAndOffset( range.end );
+		rangyRange.setStart( start.node, start.offset );
+		rangyRange.setEnd( end.node, end.offset );
+>>>>>>> WIP Fix deletion inside a structural node at start/end of document:modules/ve/ce/ve.ce.Surface.js
 		rangySel.removeAllRanges();
 		rangySel.addRange( rangyRange, selection.isBackwards );
 	} else {
