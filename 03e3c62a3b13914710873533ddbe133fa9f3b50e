@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aef5673e_3385a05b",
+        "filename": "modules/ve/ui/tools/ve.ui.InspectorTool.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-13T18:58:49Z",
+      "side": 1,
+      "message": "Trailing whitespace",
+      "revId": "03e3c62a3b13914710873533ddbe133fa9f3b50e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_d39314a5",
+        "filename": "modules/ve/ui/tools/ve.ui.InspectorTool.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-13T18:58:49Z",
+      "side": 1,
+      "message": "this.constructor.static",
+      "revId": "03e3c62a3b13914710873533ddbe133fa9f3b50e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
