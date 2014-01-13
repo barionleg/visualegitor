@@ -34,6 +34,7 @@
     "visualeditor-dialog-action-apply": "Label text for button to apply changes made in dialog.\n\nSee also:\n* {{msg-mw|Visualeditor-dialog-action-cancel}}\n* {{msg-mw|Visualeditor-dialog-action-goback}}\n{{Identical|Apply change}}",
     "visualeditor-dialog-action-cancel": "Label text for button to exit from dialog without making changes.\n\nSee also:\n* {{msg-mw|Visualeditor-dialog-action-apply}}\n* {{msg-mw|Visualeditor-dialog-action-goback}}\n{{Identical|Cancel}}",
     "visualeditor-dialog-action-goback": "Label text for button to go back in a dialog.\n\nSee also:\n* {{msg-mw|Visualeditor-dialog-action-apply}}\n* {{msg-mw|Visualeditor-dialog-action-cancel}}\n{{Identical|Go back}}",
+    "visualeditor-dialog-command-help-title": "Title for keyboard shortcuts help dialog",
     "visualeditor-formatdropdown-format-heading1": "Item in the generic formatting dropdown for a level 1 heading.\n{{Identical|Heading}}",
     "visualeditor-formatdropdown-format-heading2": "Item in the generic formatting dropdown for a level 2 heading.\n{{Identical|Heading}}",
     "visualeditor-formatdropdown-format-heading3": "Item in the generic formatting dropdown for a level 3 heading.\n{{Identical|Heading}}",
