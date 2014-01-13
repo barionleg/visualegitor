@@ -124,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "aef5673e_22b430e4",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-13T09:29:12Z",
+      "side": 1,
+      "message": "Setting only the width will trigger the change event so that\u0027s not a problem. Also if the aspect ratio is locked it doesn\u0027t make sense to let someone set both.",
+      "parentUuid": "aef5673e_3fcd6735",
+      "revId": "11fff67d3ecd762f74a0c8d762cdc6a276c52d13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aef5673e_df267b11",
         "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
         "patchSetId": 2
