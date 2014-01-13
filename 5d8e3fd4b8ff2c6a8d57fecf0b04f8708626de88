@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aef5673e_a58baac3",
+        "filename": "LICENSE.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-01-13T15:16:22Z",
+      "side": 1,
+      "message": "This should be a – not a - (which is why it didn\u0027t get found in the search \u0026 replace).",
+      "revId": "5d8e3fd4b8ff2c6a8d57fecf0b04f8708626de88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_85b8a675",
+        "filename": "modules/ve/ui/styles/ve.ui.Inspector.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-01-13T15:16:22Z",
+      "side": 1,
+      "message": "This should be a – not a - (which is why it didn\u0027t get found in the search \u0026 replace).",
+      "revId": "5d8e3fd4b8ff2c6a8d57fecf0b04f8708626de88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_45b29e93",
+        "filename": "modules/ve/ve.EventSequencer.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-01-13T15:16:22Z",
+      "side": 1,
+      "message": "This should be a – not a -; thanks for converting it to a date range!",
+      "revId": "5d8e3fd4b8ff2c6a8d57fecf0b04f8708626de88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
