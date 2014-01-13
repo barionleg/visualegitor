@@ -1,0 +1,20 @@
+/*!
+ * VisualEditor UserInterface Dialog styles.
+ *
+ * @copyright 2011-2013 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+/* ve.ui.CommandHelpDialog */
+
+.ve-ui-commandHelpDialog-list {
+	-moz-column-count: 2;
+	-webkit-column-count: 2;
+	column-count: 2;
+	margin-top: 2em;
+}
+
+.ve-ui-commandHelpDialog-list li {
+	list-style-type: none;
+	line-height: 200%;
+}
