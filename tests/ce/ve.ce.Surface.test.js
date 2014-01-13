@@ -50,6 +50,7 @@ ve.test.utils.runSurfaceHandleSpecialKeyTest = function ( assert, html, range, o
 
 QUnit.test( 'handleLinearDelete', function ( assert ) {
 	var i,
+		emptyList = '<ul><li><p></p></li></ul>',
 		cases = [
 			{
 				range: new ve.Range( 1, 4 ),
@@ -250,6 +251,28 @@ QUnit.test( 'handleLinearDelete', function ( assert ) {
 					range: new ve.Range( 1 )
 				},
 				msg: 'Backspace after select all spanning entire document creates empty paragraph'
+			},
+			{
+				html: emptyList + '<p>foo</p>',
+				range: new ve.Range( 3 ),
+				operations: [ 'backspace' ],
+				expectedData: function ( data ) {
+					data.splice( 0, 2 );
+					data.splice( 2, 2 );
+				},
+				expectedRange: new ve.Range( 0 ),
+				msg: 'List at start of document unwrapped by backspace'
+			},
+			{
+				html: '<p>foo</p>' + emptyList,
+				range: new ve.Range( 8 ),
+				operations: [ 'delete' ],
+				expectedData: function ( data ) {
+					data.splice( 5, 2 );
+					data.splice( 7, 2 );
+				},
+				expectedRange: new ve.Range( 5 ),
+				msg: 'List at end of document unwrapped by delete'
 			}
 		];
 
