@@ -280,6 +280,24 @@
     },
     {
       "key": {
+        "uuid": "aef5673e_0e85d3b1",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 798
+      },
+      "writtenOn": "2014-01-13T22:25:08Z",
+      "side": 1,
+      "message": "They\u0027re being used to store the \u0027raw\u0027 value of the numbers before any rounding -- and then used to compare to new calculation results to see if there\u0027s a need to fire \u0027change\u0027 event at all.",
+      "parentUuid": "aef5673e_df39dbcc",
+      "revId": "cd69ac82fcc7e71f98ecfa6761754e405a38bf6c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cef0db4e_dd4c3ce7",
         "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
         "patchSetId": 1
@@ -603,6 +621,24 @@
       "side": 1,
       "message": "An API error is very different from an input error so it would confusing to render it the same. An API error shouldn\u0027t block the user from editing the dimensions, in fact it should probably be completely transparent to the user as we have fallback values.",
       "parentUuid": "cef0db4e_9db8f475",
+      "revId": "cd69ac82fcc7e71f98ecfa6761754e405a38bf6c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_ae814794",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 798
+      },
+      "writtenOn": "2014-01-13T22:25:08Z",
+      "side": 1,
+      "message": "Fair enough. I thought about allowing for more than just the \u0027default\u0027 error, but you make a good point.",
+      "parentUuid": "aef5673e_9f435343",
       "revId": "cd69ac82fcc7e71f98ecfa6761754e405a38bf6c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
