@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aef5673e_0b7820be",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-14T14:41:59Z",
+      "side": 1,
+      "message": "we usually name as:\non[Porperty][Event]\n\ne.g. onButtonClick, onWidthChange",
+      "revId": "439ec8740e7b938db8945946beca4b199326acd8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
