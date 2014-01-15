@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aef5673e_52b135db",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 12
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-15T00:26:40Z",
+      "side": 1,
+      "message": "should use nameType for consistency: widthLabel",
+      "revId": "872f365eb6a5de3de9d736a4dd97b47b139ef8c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_72ac3985",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 12
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-15T00:26:40Z",
+      "side": 1,
+      "message": "nameType: originalDimensionsButton",
+      "revId": "872f365eb6a5de3de9d736a4dd97b47b139ef8c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_d2c8a579",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 12
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-15T00:26:40Z",
+      "side": 1,
+      "message": "using null? undefined?",
+      "revId": "872f365eb6a5de3de9d736a4dd97b47b139ef8c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_12960d50",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 12
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-15T00:26:40Z",
+      "side": 1,
+      "message": "this.maxDimensions \u003d ve.copy( dimensions );",
+      "revId": "872f365eb6a5de3de9d736a4dd97b47b139ef8c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_f2a289a3",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 12
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-15T00:26:40Z",
+      "side": 1,
+      "message": "this.originalDimensions \u003d ve.copy( dimensions );",
+      "revId": "872f365eb6a5de3de9d736a4dd97b47b139ef8c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_528b7520",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 12
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-15T00:26:40Z",
+      "side": 1,
+      "message": "brackets unnecessary",
+      "revId": "872f365eb6a5de3de9d736a4dd97b47b139ef8c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_3280f1f8",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 12
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-15T00:26:40Z",
+      "side": 1,
+      "message": "as this only every has one value now, it can be moved to the constructor",
+      "revId": "872f365eb6a5de3de9d736a4dd97b47b139ef8c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_127ded17",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 12
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-15T00:26:40Z",
+      "side": 1,
+      "message": "this function is only ever called here, so just inline it",
+      "revId": "872f365eb6a5de3de9d736a4dd97b47b139ef8c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_529a5567",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 12
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-15T00:26:40Z",
+      "side": 1,
+      "message": "why not just add the class to this.$element?",
+      "revId": "872f365eb6a5de3de9d736a4dd97b47b139ef8c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_f2a84976",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 12
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-15T00:26:40Z",
+      "side": 1,
+      "message": "\u0027width\u0027: val",
+      "revId": "872f365eb6a5de3de9d736a4dd97b47b139ef8c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_d2a5459c",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 12
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-15T00:26:40Z",
+      "side": 1,
+      "message": "\u0027height\u0027: val",
+      "revId": "872f365eb6a5de3de9d736a4dd97b47b139ef8c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
