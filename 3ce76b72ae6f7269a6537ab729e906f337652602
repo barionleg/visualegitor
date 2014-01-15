@@ -2,6 +2,57 @@
   "comments": [
     {
       "key": {
+        "uuid": "aef5673e_fa493bd4",
+        "filename": "modules/ve/ui/dialogs/ve.ui.CommandHelpDialog.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-15T21:04:07Z",
+      "side": 1,
+      "message": "this.$()",
+      "revId": "3ce76b72ae6f7269a6537ab729e906f337652602",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_da1677ac",
+        "filename": "modules/ve/ui/dialogs/ve.ui.CommandHelpDialog.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-15T21:04:07Z",
+      "side": 1,
+      "message": "this.$()",
+      "revId": "3ce76b72ae6f7269a6537ab729e906f337652602",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_fa4edbc3",
+        "filename": "modules/ve/ui/styles/ve.ui.Dialog.css",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-15T21:04:07Z",
+      "side": 1,
+      "message": "Takes up to warpp speed!",
+      "revId": "3ce76b72ae6f7269a6537ab729e906f337652602",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aef5673e_973d6a8d",
         "filename": "modules/ve/ui/tools/ve.ui.DialogTool.js",
         "patchSetId": 4
