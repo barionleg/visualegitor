@@ -36,6 +36,40 @@
     },
     {
       "key": {
+        "uuid": "aef5673e_94e328d4",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 12
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-15T15:32:38Z",
+      "side": 1,
+      "message": "I think this is confusing. If the user wants original dimensions to be set, then they should call setOriginalDimensions explicitly. What if they don\u0027t want to use original dimensions at all?",
+      "revId": "872f365eb6a5de3de9d736a4dd97b47b139ef8c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_34ca1c4b",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 12
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-15T15:32:38Z",
+      "side": 1,
+      "message": "Why not just leave the other input as null / empty string? It won\u0027t pass validation anyway.\n\nIf I wanted to use the widget without a fixed AR, this would lead to a confusing UX.",
+      "revId": "872f365eb6a5de3de9d736a4dd97b47b139ef8c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aef5673e_d2c8a579",
         "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
         "patchSetId": 12
