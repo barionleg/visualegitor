@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aef5673e_973d6a8d",
+        "filename": "modules/ve/ui/tools/ve.ui.DialogTool.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2014-01-15T17:40:27Z",
+      "side": 1,
+      "message": "bug 51650, omit class description if there is none.",
+      "revId": "3ce76b72ae6f7269a6537ab729e906f337652602",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
