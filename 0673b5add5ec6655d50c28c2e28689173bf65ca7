@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aef5673e_97a9eade",
+        "filename": "modules/ve/ce/ve.ce.ResizableNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2014-01-15T17:28:21Z",
+      "side": 1,
+      "message": "Could maybe use config.showSizeLabel !\u003d\u003d false instead.",
+      "revId": "0673b5add5ec6655d50c28c2e28689173bf65ca7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
