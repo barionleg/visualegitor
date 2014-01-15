@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aef5673e_f7b9562a",
+        "filename": "modules/ve/ce/ve.ce.ResizableNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2014-01-15T17:29:42Z",
+      "side": 1,
+      "message": "Can you elaborate briefly on this change in the commit message?",
+      "revId": "97daad6b1d24caa26dcf5aa80114edf6aa8d4dd8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
