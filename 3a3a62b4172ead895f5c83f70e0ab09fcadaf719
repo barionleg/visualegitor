@@ -122,6 +122,24 @@
       "revId": "3a3a62b4172ead895f5c83f70e0ab09fcadaf719",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_3030dfe4",
+        "filename": "README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2014-01-16T17:13:06Z",
+      "side": 1,
+      "message": "They don\u0027t overwrite each other, the new repo simply doesn\u0027t have doc-publish set up right now.\n\nWe\u0027ll likely change the target dir of mwext-VisualEditor and then re-use /VisualEditor for the new repo.\n\nThis url is fine and should not be blocking this commit.",
+      "parentUuid": "eeebdf60_d9bc4eb4",
+      "revId": "3a3a62b4172ead895f5c83f70e0ab09fcadaf719",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
