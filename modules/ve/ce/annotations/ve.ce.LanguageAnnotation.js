@@ -16,20 +16,23 @@
  * @param {Object} [config] Configuration options
  */
 ve.ce.LanguageAnnotation = function VeCeLanguageAnnotation( model, parentNode, config ) {
+	var lang;
+
 	// Parent constructor
 	ve.ce.Annotation.call( this, model, parentNode, config );
 
 	// DOM changes
-	this.$element.addClass( 've-ce-LanguageAnnotation' );
-
-	this.$element.attr( 'lang', model.getAttribute( 'lang' ) );
-	this.$element.attr( 'dir', model.getAttribute( 'dir' ) );
-
-	// TODO:
-	// When ULS is active, use $.uls.getAutonym(lang) to get the full
-	// language name in the tooltip
-	// (eg 'he' will be 'Hebrew' and 'en' will be 'English')
-	this.$element.attr( 'title', ve.msg( 'visualeditor-languageinspector-block-tooltip', model.getAttribute( 'lang' ) ) );
+	lang = model.getAttribute( 'lang' );
+	this.$element
+		.addClass( 've-ce-LanguageAnnotation' )
+		.attr( {
+			'lang': model.getAttribute( 'lang' ),
+			'dir': model.getAttribute( 'dir' ),
+			'title': ve.msg(
+				'visualeditor-languageinspector-block-tooltip',
+				$.uls ? $.uls.data.getAutonym( lang ) : lang
+			)
+		} );
 };
 
 /* Inheritance */
