@@ -37,38 +37,39 @@ ve.ui.LinkInspector.static.titleMessage = 'visualeditor-linkinspector-title';
 
 ve.ui.LinkInspector.static.linkTargetInputWidget = ve.ui.LinkTargetInputWidget;
 
-/**
- * Models this inspector can edit.
- *
- * These models may be either annotations or nodes. When nodes are inspected, #getNodeChanges
- * is used instead of #getAnnotation to determine what changes to save when the inspector is
- * closed.
- *
- * @static
- * @property {Function[]}
- */
 ve.ui.LinkInspector.static.modelClasses = [ ve.dm.LinkAnnotation ];
 
 /* Methods */
 
 /**
- * Get the annotation from the input.
- *
- * This override allows AnnotationInspector to request the value from the inspector rather
- * than the widget.
- *
- * @method
- * @returns {ve.dm.LinkAnnotation} Link annotation
+ * @inheritdoc
  */
-ve.ui.LinkInspector.prototype.getAnnotation = function () {
-	return this.targetInput.annotation;
+ve.ui.LinkInspector.prototype.shouldRemoveAnnotation = function () {
+	return !this.targetInput.getValue().length;
 };
 
 /**
  * @inheritdoc
  */
-ve.ui.LinkInspector.prototype.getAnnotationFromText = function ( text ) {
-	return new ve.dm.LinkAnnotation( { 'type': 'link', 'attributes': { 'href': text } } );
+ve.ui.LinkInspector.prototype.getInsertionText = function () {
+	return this.targetInput.getValue();
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ui.LinkInspector.prototype.getAnnotation = function () {
+	return this.targetInput.getAnnotation();
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ui.LinkInspector.prototype.getAnnotationFromFragment = function ( fragment ) {
+	return new ve.dm.LinkAnnotation( {
+		'type': 'link',
+		'attributes': { 'href': fragment.getText() }
+	} );
 };
 
 /**
@@ -130,17 +131,7 @@ ve.ui.LinkInspector.prototype.ready = function () {
 
 	// Note: Focus input prior to setting target annotation
 	this.targetInput.$input.focus();
-	// Setup targetInput contents
-	if ( this.linkNode ) {
-		// FIXME this assumes the linkNode will always have an href attribute
-		this.targetInput.setValue( this.linkNode.getAttribute( 'href' ) );
-	} else if ( this.initialAnnotation ) {
-		this.targetInput.setAnnotation( this.initialAnnotation );
-	} else {
-		// If an initial annotation couldn't be created (e.g. the text was invalid),
-		// just populate the text we tried to create the annotation from
-		this.targetInput.setValue( this.initialText );
-	}
+	this.targetInput.setAnnotation( this.initialAnnotation );
 	this.targetInput.$input.select();
 	this.surface.enable();
 };

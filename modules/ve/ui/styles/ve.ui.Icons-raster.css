@@ -195,6 +195,16 @@
 	background-image: url(images/icons/superscript.png);
 }
 
+.oo-ui-icon-text-dir-ltr {
+	/* @embed */
+	background-image: url(images/icons/text-dir-ltr.png);
+}
+
+.oo-ui-icon-text-dir-rtl {
+	/* @embed */
+	background-image: url(images/icons/text-dir-rtl.png);
+}
+
 .oo-ui-icon-text-style {
 	/* @embed */
 	background-image: url(images/icons/text-style.png);
