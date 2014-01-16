@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aef5673e_f049576b",
+        "filename": "README.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-01-16T17:14:13Z",
+      "side": 1,
+      "message": "As discussed on PS4, this URL should probably be the VE-core one, and there be another URL for the docs for VE-core + VE-MW (+VE-MW-WMF) so that it\u0027s clear.",
+      "revId": "0bce7f6eb9e603583e065bb4f34e5a1cb9ab66ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
