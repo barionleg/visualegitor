@@ -13,150 +13,174 @@
  *
  * @constructor
  * @param {Object} [config] Configuration options
+ * @cfg {string} [language] Language code
+ * @cfg {string} [direction] Direction, either `ltr` or `rtl`
  */
 ve.ui.LanguageInputWidget = function VeUiLanguageInputWidget( config ) {
-	var ulsParams, langInpObj;
+	// Configuration initialization
+	config = config || {};
 
 	// Parent constructor
 	OO.ui.Widget.call( this, config );
 
-	// Visual Properties
-	this.$langCodeDisp = this.getDisplayElement( config ); // language code
-	this.$langNameDisp = this.getDisplayElement( config ); // human-readable language name
-	this.$dirDisp = this.getDisplayElement( config );
-
-	// Placeholders for attribute values
-	this.lang = '';
-	this.dir = '';
-
-	// Create the informational table:
-	this.$element.append(
-		this.$( '<table>' ).css( { 'width': '100%' } )
-			.addClass( 've-LanguageInspector-information' )
-			.append( this.$( '<tr>' )
-				.append( this.$( '<td>' )
-					.addClass( 've-ui-LanguageInspector-info-title' )
-					.text( ve.msg( 'visualeditor-languageinspector-widget-label-language' ) ) )
-				.append( this.$( '<td>' )
-					.addClass( 've-ui-LanguageInspector-info-langname' )
-				.append( this.$langNameDisp ) ) )
-			.append( this.$( '<tr>' )
-				.append( this.$( '<td>' )
-					.addClass( 've-ui-LanguageInspector-info-title' )
-					.text( ve.msg( 'visualeditor-languageinspector-widget-label-langcode' ) ) )
-				.append( this.$( '<td>' )
-					.addClass( 've-ui-LanguageInspector-info-langcode' )
-				.append( this.$langCodeDisp ) ) )
-			.append( this.$( '<tr>' )
-				.append( this.$( '<td>' )
-					.addClass( 've-ui-LanguageInspector-info-title' )
-					.text( ve.msg( 'visualeditor-languageinspector-widget-label-direction' ) ) )
-				.append( this.$( '<td>' )
-					.addClass( 've-ui-LanguageInspector-info-dir' )
-				.append( this.$dirDisp ) ) )
-	 );
-
-	// Use a different reference than 'this' to avoid scope problems
-	// inside the $.ULS callback:
-	langInpObj = this;
+	// Properties
+	this.annotation = null;
+	this.onEditTimeout = null;
+	this.onAfterEditHandler = ve.bind( this.onAfterEdit, this );
 
 	// Initialization
-	this.$element.addClass( 've-ui-LangInputWidget' );
-
-	ulsParams = {
-		onSelect: function ( language ) {
-			// Save the attributes:
-			langInpObj.setAttributes( language, $.uls.data.getDir( language ) );
-		},
-		compact: true,
-		// Temporary Quicklist for the Prototype:
-		// (This will likely change once we find a better list)
-		quickList: [ 'en', 'hi', 'he', 'ml', 'ta', 'fr' ]
-	};
-
-	// Create a 'change language' Button:
-	this.$button = new OO.ui.PushButtonWidget({
-		'label': ve.msg( 'visualeditor-languageinspector-widget-changelang' ),
-		// Add 'href' so the button returns true on click and triggers ULS
-		'href': '#',
-		'flags': ['primary']
-	});
-
-	// Attach ULS event call
-	this.$button.$element.uls( ulsParams );
-
-	this.$element.append( this.$button.$element );
+	this.initialize();
+	this.setValue( { 'lang': config.language, 'dir': config.direction } );
 };
 
 /* Inheritance */
 
 OO.inheritClass( ve.ui.LanguageInputWidget, OO.ui.Widget );
 
-/* Static properties */
+/* Events */
+
+/**
+ * @event change
+ * @param {Object} value
+ * @param {string} [value.lang] Language code
+ * @param {string} [value.dir] Direction
+ */
 
 /* Methods */
 
 /**
- * Get display element. This replaces the 'getInputElement'
- * of the InputWidget
+ * Handle value-changing events.
  *
- * @method
- * @param {Object} [config] Configuration options
- * @returns {jQuery} span element
+ * Change events are debounced so that changing the lang and dir consecutively will only chang the
+ * value one time. This might occur when using a utility to find a language, but won't happen if the
+ * user manally sets the language and direction through the user interface.
  */
-ve.ui.LanguageInputWidget.prototype.getDisplayElement = function () {
-	return this.$( '<span>' );
+ve.ui.LanguageInputWidget.prototype.onEdit = function () {
+	if ( !this.disabled ) {
+		if ( !this.onEditTimeout ) {
+			this.onEditTimeout = setTimeout( this.onAfterEditHandler );
+		}
+	}
 };
 
 /**
- * Return the current language attributes
- *
+ * Handle debounced edit events.
  */
-ve.ui.LanguageInputWidget.prototype.getAttributes = function () {
-	return {
-		'lang': this.lang,
-		'dir': this.dir
-	};
+ve.ui.LanguageInputWidget.prototype.onAfterEdit = function () {
+	var selectedItem = this.directionSelect.getSelectedItem();
+
+	this.setValue( {
+		'lang': this.languageTextInput.getValue(),
+		'dir': selectedItem ? selectedItem.getData() : null
+	} );
+	this.onEditTimeout = null;
 };
 
 /**
- * Set the current language attributes
+ * Set language and direction values.
  *
+ * @param {Object.<string,string>} values Map of values
+ * @param {string} [values.lang] Language code
+ * @param {string} [values.dir] Direction
  */
-ve.ui.LanguageInputWidget.prototype.setAttributes = function ( lang, dir ) {
-	this.lang = lang;
-	this.dir = dir;
-	// Update the view:
-	this.updateLanguageTable();
+ve.ui.LanguageInputWidget.prototype.setValue = function ( values ) {
+	var prev = this.annotation ? this.annotation.getAttributes() : {},
+		next = { 'lang': values.lang, 'dir': values.dir || null };
+
+	if ( prev.lang !== next.lang || prev.dir !== next.dir ) {
+		if ( !next.lang && !next.dir ) {
+			this.annotation = null;
+		} else {
+			this.setAnnotation( new ve.dm.LanguageAnnotation( {
+				'type': 'meta/language',
+				'attributes': next
+			} ) );
+		}
+		this.languageTextInput.setValue( next.lang );
+		this.directionSelect.selectItem( this.directionSelect.getItemFromData( next.dir ) );
+		this.emit( 'change', next );
+	}
 };
 
 /**
- * Get the language value of the current annotation
- * This is required by the AnnotationInspector onClose method
+ * Get language and direction values.
+ *
+ * @param {Object.<string,string>} Map of values, containing `lang` and `dir` if present
  */
 ve.ui.LanguageInputWidget.prototype.getValue = function () {
-	// Specifically to be displayed
-	return this.$langNameDisp.text();
+	var attr = this.annotation.getAttributes();
+	return { 'lang': attr.lang, 'dir': attr.dir };
 };
 
 /**
- * Updates the language value in the display table
+ * Set the annotation.
  *
- * This shouldn't be used directly. It is called from the
- * setAttributes method after receiving annotation details
- * to make sure the annotation and the table are synchronized.
+ * The inputs value will automatically be updated.
  *
- * @method
+ * @param {ve.dm.LinkAnnotation} annotation Link annotation
+ * @chainable
  */
-ve.ui.LanguageInputWidget.prototype.updateLanguageTable = function () {
-	var langNameDisp = '';
+ve.ui.LanguageInputWidget.prototype.setAnnotation = function ( annotation ) {
+	this.annotation = annotation;
+	this.languageTextInput.setValue( annotation.getAttribute( 'lang' ) );
+	this.directionSelect.selectItem(
+		this.directionSelect.getItemFromData( annotation.getAttribute( 'dir' ) || null )
+	);
+	return this;
+};
 
-	if ( this.lang ) {
-		langNameDisp = $.uls.data.getAutonym( this.lang );
-	}
+/**
+ * Get the annotation value.
+ *
+ * @returns {ve.dm.LinkAnnotation} Link annotation
+ */
+ve.ui.LanguageInputWidget.prototype.getAnnotation = function () {
+	return this.annotation;
+};
 
-	// Display the information in the table:
-	this.$langCodeDisp.html( this.lang );
-	this.$langNameDisp.html( langNameDisp );
-	this.$dirDisp.html( this.dir );
+/**
+ * Initialize contents.
+ */
+ve.ui.LanguageInputWidget.prototype.initialize = function () {
+	// Properties
+	this.languageTextInput = new OO.ui.TextInputWidget( {
+		'$': this.$,
+		'classes': [ 've-ui-langInputWidget-languageTextInput' ]
+	} );
+	this.directionSelect = new OO.ui.ButtonSelectWidget( {
+		 '$': this.$,
+		 'classes': [ 've-ui-langInputWidget-directionSelect' ],
+	} );
+	this.directionSelect.addItems( [
+		new OO.ui.ButtonOptionWidget( 'rtl', { '$': this.$, 'icon': 'text-dir-rtl' } ),
+		new OO.ui.ButtonOptionWidget( null, { '$': this.$, 'label': 'Auto' } ),
+		new OO.ui.ButtonOptionWidget( 'ltr', { '$': this.$, 'icon': 'text-dir-ltr' } )
+	] );
+
+	this.languageTextInputLabel = new OO.ui.InputLabelWidget( {
+		'$': this.$,
+		'label': ve.msg( 'visualeditor-languageinspector-widget-label-langcode' ),
+		'input': this.languageTextInput
+	} );
+	this.directionSelectLabel = new OO.ui.InputLabelWidget( {
+		'$': this.$,
+		'label': ve.msg( 'visualeditor-languageinspector-widget-label-direction' )
+	} );
+	this.$languageField = this.$( '<div>' );
+	this.$directionField = this.$( '<div>' );
+
+	// Initialization
+	this.$languageField
+		.addClass( 've-ui-langInputWidget-field' )
+		.append( this.languageTextInputLabel.$element, this.languageTextInput.$element );
+	this.$directionField
+		.addClass( 've-ui-langInputWidget-field' )
+		.append( this.directionSelectLabel.$element, this.directionSelect.$element );
+	this.$element
+		.addClass( 've-ui-langInputWidget' )
+		.append( this.$languageField, this.$directionField );
+
+	// Events
+	this.languageTextInput.connect( this, { 'change': 'onEdit' } );
+	this.directionSelect.connect( this, { 'select': 'onEdit' } );
 };
