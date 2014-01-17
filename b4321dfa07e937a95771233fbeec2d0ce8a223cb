@@ -50,6 +50,142 @@
       "revId": "b4321dfa07e937a95771233fbeec2d0ce8a223cb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_61c2168a",
+        "filename": "modules/ve/ui/inspectors/ve.ui.LinkInspector.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-17T20:45:15Z",
+      "side": 1,
+      "message": "Please also update this to use shouldRemoveAnnotation()",
+      "revId": "b4321dfa07e937a95771233fbeec2d0ce8a223cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_617a1621",
+        "filename": "modules/ve/ui/styles/ve.ui.Icons-raster.css",
+        "patchSetId": 8
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-17T20:45:15Z",
+      "side": 1,
+      "message": "You need to noflip these rules. Right now things get very very confusing when using uselang\u003dhe :)",
+      "revId": "b4321dfa07e937a95771233fbeec2d0ce8a223cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_61a9f677",
+        "filename": "modules/ve/ui/widgets/ve.ui.LanguageInputWidget.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-17T20:45:15Z",
+      "side": 1,
+      "message": "I think you meant the word for \"alter\" as opposed to the Chinese surname",
+      "revId": "b4321dfa07e937a95771233fbeec2d0ce8a223cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_21b3eee9",
+        "filename": "modules/ve/ui/widgets/ve.ui.LanguageInputWidget.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-17T20:45:15Z",
+      "side": 1,
+      "message": "So just use if ( !this.disabled \u0026\u0026 !this.onEditTimeout ) rather than a nested if?",
+      "revId": "b4321dfa07e937a95771233fbeec2d0ce8a223cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_61c0d62f",
+        "filename": "modules/ve/ui/widgets/ve.ui.LanguageInputWidget.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-17T20:45:15Z",
+      "side": 1,
+      "message": "Do you have a separate code path here because this.setAnnotation( null ); doesn\u0027t work and crashes? Maybe you should just fix setAnnotation() to accept null then?",
+      "revId": "b4321dfa07e937a95771233fbeec2d0ce8a223cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_41bdd2ac",
+        "filename": "modules/ve/ui/widgets/ve.ui.LanguageInputWidget.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-17T20:45:15Z",
+      "side": 1,
+      "message": "setAnnotation() has already done this",
+      "revId": "b4321dfa07e937a95771233fbeec2d0ce8a223cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_21dace21",
+        "filename": "modules/ve/ui/widgets/ve.ui.LanguageInputWidget.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-17T20:45:15Z",
+      "side": 1,
+      "message": "setAnnotation() has already done this",
+      "revId": "b4321dfa07e937a95771233fbeec2d0ce8a223cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_41d4b2ec",
+        "filename": "modules/ve/ui/widgets/ve.ui.LanguageInputWidget.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-17T20:45:15Z",
+      "side": 1,
+      "message": "@returns, not @param",
+      "revId": "b4321dfa07e937a95771233fbeec2d0ce8a223cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
