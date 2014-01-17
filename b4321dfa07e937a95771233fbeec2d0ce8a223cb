@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aef5673e_c121e29b",
+        "filename": "modules/ve/ce/annotations/ve.ce.LanguageAnnotation.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-17T19:35:10Z",
+      "side": 1,
+      "message": "Use local variable lang",
+      "revId": "b4321dfa07e937a95771233fbeec2d0ce8a223cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_8133daf2",
+        "filename": "modules/ve/ui/inspectors/ve.ui.AnnotationInspector.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-17T19:35:10Z",
+      "side": 1,
+      "message": "Should the rest of this code path be bypassed if insertion is empty?",
+      "revId": "b4321dfa07e937a95771233fbeec2d0ce8a223cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_014fca6f",
+        "filename": "modules/ve/ui/inspectors/ve.ui.LanguageInspector.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-17T19:35:10Z",
+      "side": 1,
+      "message": "I  still think this needs to be figured out properly. For instance, consider\n\n\u003cdiv lang\u003d\"he\" dir\u003d\"rtl\"\u003e....\u003cspan lang\u003d\"en\"\u003e..$node..\u003c/span\u003e\u003c/div\u003e\n\nThen .closest( \u0027[lang]\u0027 ) and .closest( \u0027[dir]\u0027 ) are different nodes, which very probably means something is wrong.",
+      "revId": "b4321dfa07e937a95771233fbeec2d0ce8a223cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
