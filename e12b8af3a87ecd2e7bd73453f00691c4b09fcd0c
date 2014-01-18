@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aef5673e_ca59f702",
+        "filename": "bin/update-oojs-ui.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-01-18T03:05:27Z",
+      "side": 1,
+      "message": "\"Usage: update-oojs-ui.sh repo/for/oojs-ui\"",
+      "revId": "e12b8af3a87ecd2e7bd73453f00691c4b09fcd0c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_6a68ab84",
+        "filename": "bin/update-oojs-ui.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-01-18T03:05:27Z",
+      "side": 1,
+      "message": "If there are no changes, we should exit (0) here with a nice message.",
+      "revId": "e12b8af3a87ecd2e7bd73453f00691c4b09fcd0c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
