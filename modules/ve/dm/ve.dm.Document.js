@@ -381,6 +381,18 @@ ve.dm.Document.prototype.cloneSliceFromRange = function ( range ) {
 		contextOpenings = [],
 		contextClosings = [];
 
+	// Fix up selection to remove empty items
+	// TODO: fix selectNodes
+	while ( selection[0] && selection[0].range && selection[0].range.isCollapsed() ) {
+		selection.shift();
+	}
+
+	i = selection.length - 1;
+	while ( selection[i] && selection[i].range && selection[i].range.isCollapsed() ) {
+		selection.pop();
+		i--;
+	}
+
 	if ( selection.length === 0 ) {
 		// Nothing selected
 		data = new ve.dm.ElementLinearData( this.getStore(), [] );
