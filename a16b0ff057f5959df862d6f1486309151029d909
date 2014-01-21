@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aef5673e_d0de3c70",
+        "filename": "modules/ve/ce/ve.ce.ContentBranchNode.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-21T18:52:43Z",
+      "side": 1,
+      "message": "slightly faster test (bails at first sight of a difference):\n\nif(a.length !\u003d\u003d b.length) return\nforeach(a) {\n  if(a[i].innerHTML !\u003d\u003d b[i].innerHTML) return\n}",
+      "revId": "a16b0ff057f5959df862d6f1486309151029d909",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_705bf0fd",
+        "filename": "modules/ve/dm/ve.dm.Transaction.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-21T18:52:43Z",
+      "side": 1,
+      "message": "This will need tests galore.",
+      "revId": "a16b0ff057f5959df862d6f1486309151029d909",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef5673e_b0685885",
+        "filename": "modules/ve/test/ce/ve.ce.Surface.test.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-21T18:52:43Z",
+      "side": 1,
+      "message": "I like this diff",
+      "revId": "a16b0ff057f5959df862d6f1486309151029d909",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
