@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8efa632e_818bfc1a",
+        "filename": "modules/ve/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 737,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-22T19:47:53Z",
+      "side": 1,
+      "message": "yes, should be length - 1\n\nbackwards saves us an extra variable init (len\u003d)\n\n\u0027for\u0027 over \u0027while\u0027 just keeps it on one line",
+      "parentUuid": "8efa632e_c179042c",
+      "revId": "9ac15b0cc1d2934590cb8b0132f7af829d54244d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aef5673e_2dce3332",
         "filename": "modules/ve/ce/ve.ce.Surface.js",
         "patchSetId": 1
@@ -90,6 +108,24 @@
     },
     {
       "key": {
+        "uuid": "8efa632e_a1a5d89c",
+        "filename": "modules/ve/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 744,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-22T19:47:53Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "8efa632e_a19f1862",
+      "revId": "9ac15b0cc1d2934590cb8b0132f7af829d54244d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8efa632e_3e16895b",
         "filename": "modules/ve/ce/ve.ce.Surface.js",
         "patchSetId": 1
@@ -101,6 +137,24 @@
       "writtenOn": "2014-01-22T18:52:16Z",
       "side": 1,
       "message": "JSON.parse() unhelpfully throws an exception if data-ve-attribute is not valid JSON. You should catch that exception so bad paste data doesn\u0027t crash the editor.",
+      "revId": "9ac15b0cc1d2934590cb8b0132f7af829d54244d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_41acd484",
+        "filename": "modules/ve/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 948,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-22T19:47:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8efa632e_3e16895b",
       "revId": "9ac15b0cc1d2934590cb8b0132f7af829d54244d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
