@@ -691,6 +691,7 @@ ve.ce.Surface.prototype.onCopy = function ( e ) {
 		scrollTop,
 		view = this,
 		slice = this.model.documentModel.cloneSliceFromRange( this.model.getSelection() ),
+		htmlDoc = this.getModel().getDocument().getHtmlDocument(),
 		clipboardData = e.originalEvent.clipboardData,
 		$window = this.$( OO.ui.Element.getWindow( this.$.context ) );
 
@@ -708,6 +709,14 @@ ve.ce.Surface.prototype.onCopy = function ( e ) {
 	// by adding a dummy class, which we can remove after paste.
 	this.$pasteTarget.find( 'span' ).addClass( 've-pasteProtect' );
 
+	// href absolutization either doesn't occur (because we copy HTML to the clipboard
+	// directly with clipboardData#setData) or it resolves against the wrong document
+	// (window.document instead of ve.dm.Document#getHtmlDocument) so do it manually
+	// with ve#resolveUrl
+	this.$pasteTarget.find( 'a' ).attr( 'href', function ( i, href ) {
+		return ve.resolveUrl( href, htmlDoc );
+	} );
+
 	clipboardItem = { 'slice': slice, 'hash': null };
 	clipboardIndex = this.clipboard.push( clipboardItem ) - 1;
 
@@ -720,10 +729,6 @@ ve.ce.Surface.prototype.onCopy = function ( e ) {
 		// Webkit allows us to directly edit the clipboard
 		// Disable the default event so we can override the data
 		e.preventDefault();
-
-		// Because we have to write HTML to the clipboard directly (clipboardData.setData)
-		// href absolutization doesn't occur, so do it manually.
-		this.$pasteTarget.find( 'a' ).attr( 'href', function () { return this.href; } );
 
 		clipboardData.setData( 'text/xcustom', this.clipboardId + '-' + clipboardIndex );
 		// As we've disabled the default event we need to set the normal clipboard data
@@ -1019,7 +1024,7 @@ ve.ce.Surface.prototype.afterPaste = function () {
 			htmlDoc = ve.createDocumentFromHtml( this.$pasteTarget.html() );
 		}
 		// External paste
-		doc = ve.dm.converter.getModelFromDom( htmlDoc );
+		doc = ve.dm.converter.getModelFromDom( htmlDoc, this.getModel().getDocument().getHtmlDocument() );
 		data = doc.data;
 		// Clear metadata
 		doc.metadata = new ve.dm.MetaLinearData( doc.getStore(), new Array( 1 + data.getLength() ) );
