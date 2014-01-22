@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8efa632e_81641c47",
+        "filename": "modules/ve/ce/ve.ce.ContentBranchNode.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-22T20:21:07Z",
+      "side": 1,
+      "message": "The test in David\u0027s code is also broken, whereas Ed\u0027s will probably work with a bit more tweaking.\n\nFirst off, oldContent is generated from this.$element , whereas newContent is generated from what would be this.$element\u0027s children, so that\u0027s wrong. Note that the this.$element[i] stuff is a red herring because only this.$element[0] is used in practice by this class.\n\nSecondly, David\u0027s logic would fail to tell the difference between \"Foobar\" and \"Foo\u003cb\u003eb\u003c/b\u003ear\".",
+      "parentUuid": "aef5673e_d0de3c70",
+      "revId": "a16b0ff057f5959df862d6f1486309151029d909",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aef5673e_705bf0fd",
         "filename": "modules/ve/dm/ve.dm.Transaction.js",
         "patchSetId": 4
