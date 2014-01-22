@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "8efa632e_c179042c",
+        "filename": "modules/ve/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 737,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2014-01-22T19:37:17Z",
+      "side": 1,
+      "message": "Hm.. that\u0027s an odd for loop. Why not a basic:\n\n for ( i \u003d 0, len \u003d ; i \u003c len; i++) {}\n\nOr (this one is common in jQuery core for backward loops):\n\n var i \u003d ua.length;\n while ( i-- ) {}\n\nI\u0027ve looked it over 3 times, but I\u0027m still not sure I get it. The first iteration length, wouldn\u0027t ua[i] be undefined there?",
+      "revId": "9ac15b0cc1d2934590cb8b0132f7af829d54244d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aef5673e_2dce3332",
         "filename": "modules/ve/ce/ve.ce.Surface.js",
         "patchSetId": 1
@@ -49,6 +66,24 @@
       "side": 1,
       "message": "I could have Timo look at this if you like, but I\u0027d say there probably isn\u0027t a faster way to do what this is doing.\n\nTo test if this is slow, what you\u0027d really need is content with lots of nodes with about/typeof attributes, so a big infobox or a large collection of flag templates",
       "parentUuid": "aef5673e_10594439",
+      "revId": "9ac15b0cc1d2934590cb8b0132f7af829d54244d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_a19f1862",
+        "filename": "modules/ve/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 744,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2014-01-22T19:37:17Z",
+      "side": 1,
+      "message": "To speed this up you could switch from a .attr( , Function) to an .each() loop.\n\nThe .attr() with callback using the built-in loop does a bunch of extra things (including trying to retrieve the current attribute and pass its value as the first argument to the callback and lots of other normalisation stuff).\n\nSo the following would be a bit faster:\n\n .each( function () {\n   $( this ).attr( \u0027data-ve-attributes\u0027, JSON.stringify( attrs ) );\n } );\n\nOr, since we don\u0027t need anything special I think:\n\n .each( function () {\n   this.setAttribute( \u0027data-ve-attributes\u0027, JSON.stringify( attrs ) );\n } );",
+      "parentUuid": "8efa632e_013dacb8",
       "revId": "9ac15b0cc1d2934590cb8b0132f7af829d54244d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
