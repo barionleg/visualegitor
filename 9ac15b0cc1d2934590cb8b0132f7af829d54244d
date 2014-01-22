@@ -37,6 +37,41 @@
     },
     {
       "key": {
+        "uuid": "8efa632e_013dacb8",
+        "filename": "modules/ve/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 744,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-22T18:52:16Z",
+      "side": 1,
+      "message": "I could have Timo look at this if you like, but I\u0027d say there probably isn\u0027t a faster way to do what this is doing.\n\nTo test if this is slow, what you\u0027d really need is content with lots of nodes with about/typeof attributes, so a big infobox or a large collection of flag templates",
+      "parentUuid": "aef5673e_10594439",
+      "revId": "9ac15b0cc1d2934590cb8b0132f7af829d54244d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_3e16895b",
+        "filename": "modules/ve/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 948,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-22T18:52:16Z",
+      "side": 1,
+      "message": "JSON.parse() unhelpfully throws an exception if data-ve-attribute is not valid JSON. You should catch that exception so bad paste data doesn\u0027t crash the editor.",
+      "revId": "9ac15b0cc1d2934590cb8b0132f7af829d54244d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aef5673e_ade12399",
         "filename": "modules/ve/ce/ve.ce.Surface.js",
         "patchSetId": 1
