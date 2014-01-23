@@ -1,0 +1,344 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8efa632e_b2bc08b3",
+        "filename": "modules/ve/i18n/en.json",
+        "patchSetId": 14
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-23T02:25:41Z",
+      "side": 1,
+      "message": "We don\u0027t use camelCase in message keys, only lowercase letters and dashes",
+      "revId": "cd0b8d4bba391de45774303116d726fcdddf172d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_2d21b99a",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-23T02:25:41Z",
+      "side": 1,
+      "message": "Write real documentation",
+      "revId": "cd0b8d4bba391de45774303116d726fcdddf172d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_6d27c1b2",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-23T02:25:41Z",
+      "side": 1,
+      "message": "Lies",
+      "revId": "cd0b8d4bba391de45774303116d726fcdddf172d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_d28434a6",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-23T02:25:41Z",
+      "side": 1,
+      "message": "Document config options",
+      "revId": "cd0b8d4bba391de45774303116d726fcdddf172d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_92d90c2f",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-23T02:25:41Z",
+      "side": 1,
+      "message": "What media edit dialog? You can\u0027t refer to VE-MW things in VE core code.",
+      "revId": "cd0b8d4bba391de45774303116d726fcdddf172d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_924eac9a",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-23T02:25:41Z",
+      "side": 1,
+      "message": "If config.originalDimensions is set, the aspect ratio should also be computed. Basically setOriginalDimensions() should just be called in this case. Same for maxDimensions below.",
+      "revId": "cd0b8d4bba391de45774303116d726fcdddf172d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_32e8f8ae",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-23T02:25:41Z",
+      "side": 1,
+      "message": "@returns {Object} Dimensions\n@returns {number} return.width Width\n@returns {number} return.height Height",
+      "revId": "cd0b8d4bba391de45774303116d726fcdddf172d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_3215989d",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-23T02:25:41Z",
+      "side": 1,
+      "message": "cached",
+      "revId": "cd0b8d4bba391de45774303116d726fcdddf172d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_52fa6474",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-23T02:25:41Z",
+      "side": 1,
+      "message": "@param {number} [dimensions.width] Width\n@param {number} [dimensions.height] Height",
+      "revId": "cd0b8d4bba391de45774303116d726fcdddf172d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_12717c0b",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-23T02:25:41Z",
+      "side": 1,
+      "message": "Same @returns as for getDimensions()",
+      "revId": "cd0b8d4bba391de45774303116d726fcdddf172d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_d251d466",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-23T02:25:41Z",
+      "side": 1,
+      "message": "\"Set maximum width and height\"",
+      "revId": "cd0b8d4bba391de45774303116d726fcdddf172d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_52cdc433",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-23T02:25:41Z",
+      "side": 1,
+      "message": "Remove \"by defining the other as null\", let people just set to undefined, document properties as optional with @param {number} [dimensions.width]",
+      "revId": "cd0b8d4bba391de45774303116d726fcdddf172d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_32d238d6",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-23T02:25:41Z",
+      "side": 1,
+      "message": "Same @returns as getDimensions()",
+      "revId": "cd0b8d4bba391de45774303116d726fcdddf172d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_f2d3b0d5",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-23T02:25:41Z",
+      "side": 1,
+      "message": "Same @param as other places but with width and height required.",
+      "revId": "cd0b8d4bba391de45774303116d726fcdddf172d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_d2e0b495",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-23T02:25:41Z",
+      "side": 1,
+      "message": "Lowercase number. Specify that this is width/height",
+      "revId": "cd0b8d4bba391de45774303116d726fcdddf172d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_b2dd28e4",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-23T02:25:41Z",
+      "side": 1,
+      "message": "Lowercase number",
+      "revId": "cd0b8d4bba391de45774303116d726fcdddf172d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_92ea2c72",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-23T02:25:41Z",
+      "side": 1,
+      "message": "Lies. Only if *maxDimensions* are set",
+      "revId": "cd0b8d4bba391de45774303116d726fcdddf172d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_72efa083",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-23T02:25:41Z",
+      "side": 1,
+      "message": "Parenthesize and indent these subexpressions for clarity",
+      "revId": "cd0b8d4bba391de45774303116d726fcdddf172d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_f2a8501f",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-23T02:25:41Z",
+      "side": 1,
+      "message": "Future TODO: have a separate error message when the user tries to set the dimensions to something greater than the maximum dimensions, and include the maximum dimensions in this error message.",
+      "revId": "cd0b8d4bba391de45774303116d726fcdddf172d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_f2fa903f",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-23T02:25:41Z",
+      "side": 1,
+      "message": "Lowercase boolean",
+      "revId": "cd0b8d4bba391de45774303116d726fcdddf172d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
