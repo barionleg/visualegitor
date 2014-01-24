@@ -196,8 +196,34 @@
 
 /* ve.ce.BranchNode */
 
-.ve-ce-branchNode-blockSlug {
-	display: block;
+.ve-ce-branchNode-blockSlugWrapper {
+	font-size: 0.4em;
+	/* Force wrapper to wrap above for hover area */
+	padding-top: 0.1px;
+}
+
+.ve-ce-branchNode-blockSlugWrapper:hover,
+.ve-ce-branchNode-blockSlugWrapper-focussed {
+	font-size: 1em;
+	-webkit-transition: font-size 100ms;
+	-moz-transition: font-size 100ms;
+	-o-transition: font-size 100ms;
+	transition: font-size 100ms;
+	/* Offset border */
+	margin-top: -2px;
+}
+
+.ve-ce-branchNode-blockSlugWrapper:hover .ve-ce-branchNode-blockSlug {
+	border: 1px dashed #bbb;
+}
+
+.ve-ce-branchNode-blockSlugWrapper-focussed .ve-ce-branchNode-blockSlug,
+.ve-ce-branchNode-blockSlugWrapper-focussed:hover .ve-ce-branchNode-blockSlug {
+	border: 1px dashed #fff;
+	-webkit-transition: border-color 200ms;
+	-moz-transition: border-color 200ms;
+	-o-transition: border-color 200ms;
+	transition: border-color 200ms;
 }
 
 /* ve.ce.PreformattedNode */
