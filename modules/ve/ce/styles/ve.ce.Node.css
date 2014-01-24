@@ -211,8 +211,49 @@
 
 /* ve.ce.BranchNode */
 
-.ve-ce-branchNode-blockSlug {
-	display: block;
+.ve-ce-branchNode-blockSlugWrapper {
+	margin: -0.2em 0;
+	padding: 0.25em 0;
+}
+
+.ve-ce-branchNode-blockSlugWrapper {
+	margin-top: 1px;
+	background-color: transparent;
+	outline: transparent dashed 1px;
+	-webkit-transition: outline-color 300ms, background-color 300ms;
+	-moz-transition: outline-color 300ms, background-color 300ms;
+	-o-transition: outline-color 300ms, background-color 300ms;
+	transition: outline-color 300ms, background-color 300ms;
+}
+
+.ve-ce-branchNode-blockSlugWrapper:hover {
+	outline-color: #bbb;
+	background-color: rgba(0,0,0,0.025);
+}
+
+.ve-ce-branchNode-blockSlugWrapper-focussed,
+.ve-ce-branchNode-blockSlugWrapper-focussed:hover {
+	outline-color: transparent;
+	background-color: transparent;
+}
+
+.ve-ce-branchNode-blockSlugWrapper .ve-ce-branchNode-blockSlug {
+	padding: 0.2em 0;
+	margin: 0.2em 0;
+	font-size: 0.1em;
+	height: 0.1em;
+	overflow: hidden;
+	-webkit-transition: height 100ms, font-size 100ms, padding 100ms, margin 100ms;
+	-moz-transition: height 100ms, font-size 100ms, padding 100ms, margin 100ms;
+	-o-transition: height 100ms, font-size 100ms, padding 100ms, margin 100ms;
+	transition: height 100ms, font-size 100ms, padding 100ms, margin 100ms;
+}
+
+.ve-ce-branchNode-blockSlugWrapper-focussed .ve-ce-branchNode-blockSlug {
+	height: 1.5em;
+	font-size: 1em;
+	padding: 0;
+	margin: 0.5em 0 1px 0;
 }
 
 /* ve.ce.PreformattedNode */
