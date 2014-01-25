@@ -13,7 +13,7 @@
  * @mixins OO.EventEmitter
  *
  * @constructor
- * @param {jQuery} $container Conainter to render target into
+ * @param {jQuery} $container Conainter to render target into, must be attached to the DOM
  */
 ve.init.Target = function VeInitTarget( $container ) {
 	// Mixin constructors
