@@ -46,6 +46,11 @@ ve.ui.CommandHelpDialog.prototype.initialize = function () {
 
 	var i, iLen, j, jLen, shortcut, commands,
 		$list,
+		contentLayout = new OO.ui.PanelLayout( {
+			'$': this.$,
+			'scrollable': true,
+			'padded': true
+		} ),
 		commandGroups = [
 			{
 				'title': 'visualeditor-shortcuts-text-style',
@@ -115,7 +120,8 @@ ve.ui.CommandHelpDialog.prototype.initialize = function () {
 		);
 	}
 
-	this.$body.append( $container );
+	contentLayout.$element.append( $container );
+	this.$body.append( contentLayout.$element );
 };
 
 /* Registration */

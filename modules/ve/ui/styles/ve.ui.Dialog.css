@@ -12,14 +12,20 @@
 	-moz-column-count: 2;
 	-webkit-column-count: 2;
 	column-count: 2;
-	margin-top: 2em;
-	margin: 2em 5em;
+	margin: 0 3em;
 }
 
 .ve-ui-commandHelpDialog-section {
-	/* Prevent column wrapping within a section */
-	display: inline-block;
+	-webkit-column-break-inside: avoid;
+	column-break-inside: avoid;
 	width: 100%;
+}
+
+/* -moz-column-break-inside is not supported yet, so use the inline-block hack */
+@-moz-document url-prefix() {
+	.ve-ui-commandHelpDialog-section {
+		display: inline-block;
+	}
 }
 
 .ve-ui-commandHelpDialog-section h3 {
