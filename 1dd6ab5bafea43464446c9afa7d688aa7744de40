@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "8efa632e_8958ac36",
+        "filename": "modules/ve/ui/styles/ve.ui.Dialog.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-27T23:07:22Z",
+      "side": 1,
+      "message": "For me it\u0027s worse with inline-block. Break-inside is the only one which doesn\u0027t generated scroll bars. *sigh*",
+      "parentUuid": "8efa632e_569c835f",
+      "revId": "1dd6ab5bafea43464446c9afa7d688aa7744de40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8efa632e_d638939d",
         "filename": "modules/ve/ui/styles/ve.ui.Dialog.css",
         "patchSetId": 1
