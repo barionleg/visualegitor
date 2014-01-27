@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8efa632e_b60bc7d8",
+        "filename": "modules/ve/ui/styles/ve.ui.Dialog.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-27T22:02:58Z",
+      "side": 1,
+      "message": "Allegedly the \"standard\" property name is break-inside, see http://www.w3.org/TR/css3-multicol/#break-inside . It claims to be in CSS2.1, but Chrome doesn\u0027t recognize the property.\n\nTimo looked over my shoulder and said that, since these properties are so poorly standardized and the effect of -webkit-column-break-inside: avoid; seems to be the same as display: inline-block; , we should just use inline-block for now unless there\u0027s added value in using the column-break rule.",
+      "revId": "1dd6ab5bafea43464446c9afa7d688aa7744de40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_d638939d",
+        "filename": "modules/ve/ui/styles/ve.ui.Dialog.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-27T22:02:58Z",
+      "side": 1,
+      "message": "supportED",
+      "revId": "1dd6ab5bafea43464446c9afa7d688aa7744de40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
