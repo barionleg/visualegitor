@@ -1671,29 +1671,39 @@ ve.ce.Surface.prototype.handleInsertion = function () {
  * @param {jQuery.Event} e Enter key down event
  */
 ve.ce.Surface.prototype.handleEnter = function ( e ) {
-	var tx, outerParent, outerChildrenCount, list,
+	var txRemove, txInsert, outerParent, outerChildrenCount, list, prevContentOffset,
 		selection = this.model.getSelection(),
 		documentModel = this.model.getDocument(),
 		emptyParagraph = [{ 'type': 'paragraph' }, { 'type': '/paragraph' }],
 		advanceCursor = true,
-		node = this.documentView.getNodeFromOffset( selection.from ),
-		nodeModel = node.getModel(),
 		cursor = selection.from,
-		contentBranchModel = nodeModel.isContent() ? nodeModel.getParent() : nodeModel,
-		contentBranchModelRange = contentBranchModel.getRange(),
 		stack = [],
-		outermostNode = null;
+		outermostNode = null,
+		node = this.documentView.getNodeFromOffset( selection.from ),
+		nodeModel = null,
+		contentBranchModel = null,
+		contentBranchModelRange = null;
+
+	if ( node !== null ) {
+		nodeModel = node.getModel();
+		contentBranchModel = nodeModel.isContent() ? nodeModel.getParent() : nodeModel;
+		// TODO: does this work in all cases?
+		contentBranchModelRange = contentBranchModel.getRange();
+	}
 
 	// Handle removal first
 	if ( selection.from !== selection.to ) {
-		tx = ve.dm.Transaction.newFromRemoval( documentModel, selection );
-		selection = tx.translateRange( selection );
+		txRemove = ve.dm.Transaction.newFromRemoval( documentModel, selection );
+		selection = txRemove.translateRange( selection );
 		// We do want this to propagate to the surface
-		this.model.change( tx, selection );
+		this.model.change( txRemove, selection );
 	}
 
 	// Handle insertion
-	if (
+	if ( node === null ) {
+		// TODO: handle properly above. When exactly does this happen?
+		throw new Error( 'node === null' );
+	} else if (
 		contentBranchModel.getType() !== 'paragraph' &&
 		(
 			cursor === contentBranchModelRange.from ||
@@ -1703,22 +1713,53 @@ ve.ce.Surface.prototype.handleEnter = function ( e ) {
 		// If we're at the start/end of something that's not a paragraph, insert a paragraph
 		// before/after
 		if ( cursor === contentBranchModelRange.from ) {
-			tx = ve.dm.Transaction.newFromInsertion(
+			txInsert = ve.dm.Transaction.newFromInsertion(
 				documentModel, contentBranchModel.getOuterRange().from, emptyParagraph
 			);
 			advanceCursor = false;
 		} else if ( cursor === contentBranchModelRange.to ) {
-			tx = ve.dm.Transaction.newFromInsertion(
+			txInsert = ve.dm.Transaction.newFromInsertion(
 				documentModel, contentBranchModel.getOuterRange().to, emptyParagraph
 			);
 		}
 	} else if ( e.shiftKey && contentBranchModel.hasSignificantWhitespace() ) {
 		// Insert newline
-		tx = ve.dm.Transaction.newFromInsertion( documentModel, selection.from, '\n' );
-	} else {
-		// Split
+		txInsert = ve.dm.Transaction.newFromInsertion( documentModel, selection.from, '\n' );
+	} else if ( !node.splitOnEnter() ) {
+		// Cannot split, so insert some appropriate node
+		if (
+			// has a slug
+			this.hasSlugAtOffset( selection.from ) ||
+			// cannot move to a previous content offset
+			( prevContentOffset = this.documentView.model.data.getNearestContentOffset(
+				cursor,
+				-1
+			) ) === -1
+
+		) {
+			// Insert an empty paragraph
+			txInsert = ve.dm.Transaction.newFromInsertion(
+				documentModel, cursor, emptyParagraph
+			);
+		} else {
+			// Act as if cursor were at previous content offset
+			cursor = prevContentOffset;
+			node = this.documentView.getNodeFromOffset( cursor );
+			txInsert = null;
+			// Continue to traverseUpstream below. That will succeed because all
+			// ContentBranchNodes have splitOnEnter === true.
+		}
+	}
+
+	// Assertion: if txInsert === null then node.splitOnEnter() === true
+
+	if ( txInsert === null ) {
+		// This node has splitOnEnter = true. Traverse upstream until the first node
+		// that has splitOnEnter = false, splitting each node as it is reached. Set
+		// outermostNode to the last splittable node.
+
 		node.traverseUpstream( function ( node ) {
-			if ( !node.canBeSplit() ) {
+			if ( !node.splitOnEnter() ) {
 				return false;
 			}
 			stack.splice(
@@ -1753,32 +1794,31 @@ ve.ce.Surface.prototype.handleEnter = function ( e ) {
 			if ( list.getChildren().length === 1 ) {
 				// The list item we're about to remove is the only child of the list
 				// Remove the list
-				tx = ve.dm.Transaction.newFromRemoval(
+				txInsert = ve.dm.Transaction.newFromRemoval(
 					documentModel, list.getOuterRange()
 				);
 			} else {
 				// Remove the list item
-				tx = ve.dm.Transaction.newFromRemoval(
+				txInsert = ve.dm.Transaction.newFromRemoval(
 					documentModel, outermostNode.getModel().getOuterRange()
 				);
-				this.model.change( tx );
+				this.model.change( txInsert );
 				selection = tx.translateRange( selection );
 				// Insert a paragraph
-				tx = ve.dm.Transaction.newFromInsertion(
+				txInsert = ve.dm.Transaction.newFromInsertion(
 					documentModel, list.getOuterRange().to, emptyParagraph
 				);
 			}
 			advanceCursor = false;
 		} else {
-			// We must process the transaction first because getRelativeContentOffset can't help us
-			// yet
-			tx = ve.dm.Transaction.newFromInsertion( documentModel, selection.from, stack );
+			// We must process the transaction first because getRelativeContentOffset can't help us yet
+			txInsert = ve.dm.Transaction.newFromInsertion( documentModel, selection.from, stack );
 		}
 	}
 
 	// Commit the transaction
-	this.model.change( tx );
-	selection = tx.translateRange( selection );
+	this.model.change( txInsert );
+	selection = txInsert.translateRange( selection );
 
 	// Now we can move the cursor forward
 	if ( advanceCursor ) {
