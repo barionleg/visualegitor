@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8efa632e_f3d9612d",
+        "filename": "modules/ve/dm/ve.dm.Model.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2014-01-27T20:26:22Z",
+      "side": 0,
+      "message": "Hm.. we should remove these comments, and methods like these should be indexed as @abstract so it\u0027s easier to see which methods need to be implemented by subclasses.",
+      "revId": "774f5661982973e172385f750423f4ce08fdaa4a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
