@@ -1664,7 +1664,7 @@ ve.ce.Surface.prototype.handleInsertion = function () {
  * @param {jQuery.Event} e Enter key down event
  */
 ve.ce.Surface.prototype.handleEnter = function ( e ) {
-	var tx, outerParent, outerChildrenCount, list,
+	var tx, outerParent, outerChildrenCount, list, didSplit,
 		selection = this.model.getSelection(),
 		documentModel = this.model.getDocument(),
 		emptyParagraph = [{ 'type': 'paragraph' }, { 'type': '/paragraph' }],
@@ -1728,10 +1728,15 @@ ve.ce.Surface.prototype.handleEnter = function ( e ) {
 			}
 		} );
 
-		outerParent = outermostNode.getModel().getParent();
-		outerChildrenCount = outerParent.getChildren().length;
+		didSplit = ( outermostNode !== null );
+		if ( didSplit ) {
+			outerParent = outermostNode.getModel().getParent();
+			outerChildrenCount = outerParent.getChildren().length;
+		}
 
-		if (
+		if ( !didSplit ) {
+			advanceCursor = false;
+		} else if (
 			// This is a list item
 			outermostNode.type === 'listItem' &&
 			// This is the last list item
@@ -1763,15 +1768,16 @@ ve.ce.Surface.prototype.handleEnter = function ( e ) {
 			}
 			advanceCursor = false;
 		} else {
-			// We must process the transaction first because getRelativeContentOffset can't help us
-			// yet
+			// We must process the transaction first because getRelativeContentOffset can't help us yet
 			tx = ve.dm.Transaction.newFromInsertion( documentModel, selection.from, stack );
 		}
 	}
 
 	// Commit the transaction
-	this.model.change( tx );
-	selection = tx.translateRange( selection );
+	if ( didSplit ) {
+		this.model.change( tx );
+		selection = tx.translateRange( selection );
+	}
 
 	// Now we can move the cursor forward
 	if ( advanceCursor ) {
