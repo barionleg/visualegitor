@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8efa632e_09213cf6",
+        "filename": "modules/ve/ce/ve.ce.ResizableNode.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2014-01-28T00:53:51Z",
+      "side": 1,
+      "message": "This line seems slightly odd since there wouldn\u0027t be anything to clear if these are both false. Though that itself would just be an optimisation / code brevity, it looks like this would actually break since the $sizeText property is conditionally defined in the constructor:\n\n\n if ( this.showSizeLabel || this.showScaleLabel ) {\n     this.$sizeText \u003d this.$( \u0027\u003cspan\u003e\u0027 );\n     this.$sizeLabel \u003d this.$( \u0027\u003cdiv\u003e\u0027 ).append( this.$sizeText );\n }\n\nThough it seems this would already break considering this.$sizeLabel is also being accessed unconditionally.\n\nIs it reasonable for a subclass to disable both options?",
+      "revId": "2ea4ca9274df011174b353d672768c14e008a5e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
