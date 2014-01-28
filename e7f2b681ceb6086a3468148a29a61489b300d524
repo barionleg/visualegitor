@@ -16,6 +16,24 @@
       "revId": "e7f2b681ceb6086a3468148a29a61489b300d524",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_89278c5f",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-28T00:11:52Z",
+      "side": 1,
+      "message": "Agreed, but this doc gets nuked in the great rewrite, so no point going through rebase hell for it.",
+      "parentUuid": "8efa632e_696e8095",
+      "revId": "e7f2b681ceb6086a3468148a29a61489b300d524",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
