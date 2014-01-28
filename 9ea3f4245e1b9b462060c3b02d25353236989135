@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8efa632e_8942ec11",
+        "filename": "modules/ve/init/ve.init.Target.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-28T00:02:04Z",
+      "side": 1,
+      "message": "You can\u0027t do this check with the global document, there might be iframe games going on. It would be better to use $container[0].ownerDocument instead of the global document.",
+      "revId": "9ea3f4245e1b9b462060c3b02d25353236989135",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
