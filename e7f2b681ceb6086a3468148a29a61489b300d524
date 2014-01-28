@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8efa632e_696e8095",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-28T00:06:01Z",
+      "side": 1,
+      "message": "If you\u0027re assuming both width and height are provided, then update the docs for this function",
+      "revId": "e7f2b681ceb6086a3468148a29a61489b300d524",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
