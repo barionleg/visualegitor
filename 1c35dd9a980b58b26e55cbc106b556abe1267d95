@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6ef7ef47_a058345a",
+        "filename": "modules/ve/ve.Scalable.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-28T10:43:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8efa632e_294d18e1",
+      "revId": "1c35dd9a980b58b26e55cbc106b556abe1267d95",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8efa632e_094a5cc8",
         "filename": "modules/ve/ve.Scalable.js",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2014-01-28T01:21:53Z",
       "side": 1,
       "message": "orig*i*nal",
+      "revId": "1c35dd9a980b58b26e55cbc106b556abe1267d95",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ef7ef47_606c6c06",
+        "filename": "modules/ve/ve.Scalable.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-28T10:43:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8efa632e_094a5cc8",
       "revId": "1c35dd9a980b58b26e55cbc106b556abe1267d95",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6ef7ef47_e0775cce",
+        "filename": "modules/ve/ve.Scalable.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-28T10:43:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8efa632e_e91610ac",
+      "revId": "1c35dd9a980b58b26e55cbc106b556abe1267d95",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8efa632e_a91008ae",
         "filename": "modules/ve/ve.Scalable.js",
         "patchSetId": 3
@@ -64,6 +118,24 @@
       "writtenOn": "2014-01-28T01:21:53Z",
       "side": 1,
       "message": "OptionAL",
+      "revId": "1c35dd9a980b58b26e55cbc106b556abe1267d95",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ef7ef47_c08460a6",
+        "filename": "modules/ve/ve.Scalable.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-28T10:43:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8efa632e_a91008ae",
       "revId": "1c35dd9a980b58b26e55cbc106b556abe1267d95",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "6ef7ef47_204d449c",
+        "filename": "modules/ve/ve.Scalable.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-28T10:43:16Z",
+      "side": 1,
+      "message": "Just as a quick test I did a fixed AR resize in Inkscape (hold down Ctrl) and it behaves the same way (resize within bounding box defined by cursor). Might be worth investigating what is normal.",
+      "parentUuid": "8efa632e_cc4ec272",
+      "revId": "1c35dd9a980b58b26e55cbc106b556abe1267d95",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8efa632e_094ffcc1",
         "filename": "modules/ve/ve.Scalable.js",
         "patchSetId": 3
@@ -98,6 +188,24 @@
       "writtenOn": "2014-01-28T01:21:53Z",
       "side": 1,
       "message": "*are*CurrentDimensionsValid maybe?",
+      "revId": "1c35dd9a980b58b26e55cbc106b556abe1267d95",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ef7ef47_00624806",
+        "filename": "modules/ve/ve.Scalable.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-28T10:43:16Z",
+      "side": 1,
+      "message": "Yeah, I know the grammar isn\u0027t English, but .are for a boolean getter feels even more wrong. If you think of CurrentDimensions as a single object then it kind of makes sense too.",
+      "parentUuid": "8efa632e_094ffcc1",
       "revId": "1c35dd9a980b58b26e55cbc106b556abe1267d95",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
