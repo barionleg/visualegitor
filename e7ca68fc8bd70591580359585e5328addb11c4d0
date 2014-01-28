@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ef7ef47_511024ad",
+        "filename": "modules/ve/ve.Scalable.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-28T17:47:24Z",
+      "side": 1,
+      "message": "The syntax is @cfg {boolean} [fixedRatio\u003dtrue] , without the config. part",
+      "revId": "e7ca68fc8bd70591580359585e5328addb11c4d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
