@@ -16,6 +16,24 @@
       "revId": "9ea3f4245e1b9b462060c3b02d25353236989135",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ef7ef47_0085a8b1",
+        "filename": "modules/ve/init/ve.init.Target.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-28T10:30:46Z",
+      "side": 1,
+      "message": "Fixed in I0e7afa563b1180270",
+      "parentUuid": "8efa632e_8942ec11",
+      "revId": "9ea3f4245e1b9b462060c3b02d25353236989135",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
