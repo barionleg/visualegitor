@@ -16,6 +16,24 @@
       "revId": "2ea4ca9274df011174b353d672768c14e008a5e0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ef7ef47_a04ef4c2",
+        "filename": "modules/ve/ce/ve.ce.ResizableNode.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-28T10:22:27Z",
+      "side": 1,
+      "message": "If they\u0027re both false the function returns at the top, which also solves your concern about this.$sizeLabel.\n\nIt may or may not be reasonable to show neither stat, that\u0027s for the user of this class to decide. Note that if they chose only scale and original dimensions were loaded async, then we would want to show nothing until those were loaded.",
+      "parentUuid": "8efa632e_09213cf6",
+      "revId": "2ea4ca9274df011174b353d672768c14e008a5e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
