@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8efa632e_e90170ba",
+        "filename": "modules/ve/ce/ve.ce.ResizableNode.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-28T00:07:40Z",
+      "side": 1,
+      "message": "Misspells original",
+      "revId": "f7d823ebcaf460c4176e70a1058459f59c8e86f8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_c906b4d1",
+        "filename": "modules/ve/ce/ve.ce.ResizableNode.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-28T00:07:40Z",
+      "side": 1,
+      "message": "this.$()",
+      "revId": "f7d823ebcaf460c4176e70a1058459f59c8e86f8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8efa632e_a90b68d8",
+        "filename": "modules/ve/ce/ve.ce.ResizableNode.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-01-28T00:07:40Z",
+      "side": 1,
+      "message": "this.$()",
+      "revId": "f7d823ebcaf460c4176e70a1058459f59c8e86f8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
