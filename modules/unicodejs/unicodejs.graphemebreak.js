@@ -55,9 +55,7 @@
 		'(?:' + patterns.T + ')+',
 
 		// GB8a
-		/*jshint camelcase:false */
-		'(?:' + patterns.Regional_Indicator + ')+',
-		/*jshint camelcase:true */
+		'(?:' + patterns.RegionalIndicator + ')+',
 
 		// GB9, GB9a
 		// (GB9b: As of Unicode 6.2, no characters are "Prepend")

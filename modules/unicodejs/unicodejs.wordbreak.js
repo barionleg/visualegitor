@@ -220,7 +220,7 @@
 
 			// Do not break between regional indicator symbols.
 			// WB13c: Regional_Indicator × Regional_Indicator
-			case lft[0] === 'Regional_Indicator' && rgt[0] === 'Regional_Indicator':
+			case lft[0] === 'RegionalIndicator' && rgt[0] === 'RegionalIndicator':
 				return false;
 		}
 		// Otherwise, break everywhere (including around ideographs).

@@ -40,7 +40,7 @@ for breaktype in ['Grapheme', 'Word']:
 				rangeStrings.append( "0x" + start )
 			else:
 				rangeStrings.append( "[0x" + start + ", 0x" + end + "]" )
-		fragments.append( "'" + prop + "': [" + ", ".join( rangeStrings ) + "]" )
+		fragments.append( "'" + prop.replace("_", "") + "': [" + ", ".join( rangeStrings ) + "]" )
 
 	# Write js file
 	js = "unicodeJS." + breaktype.lower() + "breakproperties = {\n\t"
