@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ef7ef47_e55ab821",
+        "filename": "modules/unicodejs/tools/unicodejs-properties.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-01-30T16:28:58Z",
+      "side": 1,
+      "message": "spaces around function call brackets",
+      "revId": "db7f281aaabbcb3c61b80726a13d3dcaae82bef9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
