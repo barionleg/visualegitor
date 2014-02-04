@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ef7ef47_5876d7a0",
+        "filename": "modules/ve/ce/ve.ce.Surface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 1688,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-02-04T18:20:57Z",
+      "side": 1,
+      "message": "might be more readable to just use a fresh variable (e.g. txRemove txInsert) instead of reusing one all the way through",
+      "revId": "e0bbfefd9393fea8bd76cbbde4e03789bedbd04f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ef7ef47_38aaebd1",
+        "filename": "modules/ve/ce/ve.ce.Surface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 1720,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-02-04T18:20:57Z",
+      "side": 1,
+      "message": "indentation",
+      "revId": "e0bbfefd9393fea8bd76cbbde4e03789bedbd04f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
