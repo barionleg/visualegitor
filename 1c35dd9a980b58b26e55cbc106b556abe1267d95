@@ -177,6 +177,24 @@
     },
     {
       "key": {
+        "uuid": "6ef7ef47_b12088f3",
+        "filename": "modules/ve/ve.Scalable.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-02-05T18:43:28Z",
+      "side": 1,
+      "message": "Timo brought up the same bounding box argument, and didn\u0027t think it was unnatural. I never use image manipulation software like Inkscape, so maybe this behavior is perfectly normal.",
+      "parentUuid": "6ef7ef47_204d449c",
+      "revId": "1c35dd9a980b58b26e55cbc106b556abe1267d95",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8efa632e_094ffcc1",
         "filename": "modules/ve/ve.Scalable.js",
         "patchSetId": 3
