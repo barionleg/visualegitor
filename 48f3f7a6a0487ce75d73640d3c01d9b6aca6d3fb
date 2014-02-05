@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ef7ef47_d1c63d4e",
+        "filename": "modules/ve/ve.Scalable.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-02-05T18:49:21Z",
+      "side": 1,
+      "message": "Lowercase boolean",
+      "revId": "48f3f7a6a0487ce75d73640d3c01d9b6aca6d3fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ef7ef47_f1b139dd",
+        "filename": "modules/ve/ve.Scalable.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-02-05T18:49:21Z",
+      "side": 1,
+      "message": "Lowercase boolean",
+      "revId": "48f3f7a6a0487ce75d73640d3c01d9b6aca6d3fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
