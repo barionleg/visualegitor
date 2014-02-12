@@ -1,12 +1,12 @@
 /*!
- * OOjs UI v0.1.0-pre-svg (11632fcada)
+ * OOjs UI v0.1.0-pre-svg (3b61a8d77c)
  * https://www.mediawiki.org/wiki/OOjs_UI
  *
  * Copyright 2011–2014 OOjs Team and other contributors.
  * Released under the MIT license
  * http://oojs.mit-license.org
  *
- * Date: Fri Jan 17 2014 18:17:27 GMT-0800 (PST)
+ * Date: Wed Feb 12 2014 10:55:47 GMT-0800 (PST)
  */
 /*csslint vendor-prefix:false */
 
@@ -1620,6 +1620,11 @@ a.oo-ui-buttonedElement-button {
 	background-image: url(images/icons/add-item.png);
 }
 
+.oo-ui-icon-advanced {
+	/* @embed */
+	background-image: url(images/icons/advanced.png);
+}
+
 .oo-ui-icon-alert {
 	/* @embed */
 	background-image: url(images/icons/alert.png);
@@ -1746,6 +1751,11 @@ a.oo-ui-buttonedElement-button {
 .oo-ui-icon-add-item {
 	/* @embed */
 	background-image: url(images/icons/add-item.svg);
+}
+
+.oo-ui-icon-advanced {
+	/* @embed */
+	background-image: url(images/icons/advanced.svg);
 }
 
 .oo-ui-icon-alert {
