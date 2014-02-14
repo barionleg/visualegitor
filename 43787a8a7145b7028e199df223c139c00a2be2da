@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_abe480a4",
+        "filename": "modules/ve/ui/styles/ve.ui.Toolbar.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-02-14T17:43:22Z",
+      "side": 0,
+      "message": "You removed this comment, does that mean you know what this rule does?",
+      "revId": "43787a8a7145b7028e199df223c139c00a2be2da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
