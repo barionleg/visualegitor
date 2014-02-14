@@ -88,6 +88,7 @@ ve.ui.CommandHelpDialog.prototype.initialize = function () {
 			{
 				'title': 'visualeditor-shortcuts-other',
 				'commands': [
+					{ 'shortcut': 'ALT+S', 'msg': 'visualeditor-savedialog-savechanges' },
 					{ 'name': 'commandHelp', 'msg': 'visualeditor-dialog-command-help-title' }
 				]
 			},

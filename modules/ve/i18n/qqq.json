@@ -69,6 +69,7 @@
     "visualeditor-mediasizewidget-label-width": "Label for the width input.\n{{Identical|Width}}",
     "visualeditor-listbutton-bullet-tooltip": "Tooltip text for the bullet list button",
     "visualeditor-listbutton-number-tooltip": "Tooltip text for the numbered list button",
+    "visualeditor-savedialog-savechanges": "Text used on the shortcuts dialog for the save key shortcut",
     "visualeditor-shortcuts-clipboard": "Heading for clipboard shortcuts",
     "visualeditor-shortcuts-formatting": "Heading for paragraph formatting shortcuts",
     "visualeditor-shortcuts-history": "Heading for history shortcuts.\n\nSee also:\n* {{msg-mw|Visualeditor-historybutton-redo-tooltip}}\n* {{msg-mw|Visualeditor-historybutton-undo-tooltip}}\n{{Identical|History}}",
