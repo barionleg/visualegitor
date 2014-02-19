@@ -53,6 +53,7 @@ QUnit.test( 'newFromInsertion', function ( assert ) {
 		isolationDoc = ve.dm.example.createExampleDocument( 'isolationData' ),
 		complexTableDoc = ve.dm.example.createExampleDocument( 'complexTable' ),
 		listWithMetaDoc = ve.dm.example.createExampleDocument( 'listWithMeta' ),
+		simpleDoc = ve.dm.example.createExampleDocument( 'withMetaPlainData' ),
 		doc2 = new ve.dm.Document(
 			ve.dm.example.preprocessAnnotations( [ { type: 'paragraph' }, { type: '/paragraph' }, { type: 'internalList' }, { type: '/internalList' } ] )
 		),
@@ -400,6 +401,54 @@ QUnit.test( 'newFromInsertion', function ( assert ) {
 						insertedDataLength: 1
 					},
 					{ type: 'retain', length: 10 }
+				]
+			},
+			'listItem between paragraphs inserted into a table cell gets wrapped in a list': {
+				args: [complexTableDoc, 4, [
+					{ type: '/paragraph' },
+					{ type: 'listItem' }, { type: 'paragraph' }, 'F', 'O', 'O', { type: '/paragraph' }, { type: '/listItem' },
+					{ type: 'listItem' }, { type: 'paragraph' }, 'B', 'A', 'R', { type: '/paragraph' }, { type: '/listItem' },
+					{ type: 'paragraph' }
+				]],
+				ops: [
+					{ type: 'retain', length: 4 },
+					{
+						type: 'replace',
+						remove: [],
+						insert: [
+							{ type: '/paragraph' },
+							{ type: 'list', attributes: { style: 'bullet' } },
+							{ type: 'listItem' }, { type: 'paragraph' }, 'F', 'O', 'O', { type: '/paragraph' }, { type: '/listItem' },
+							{ type: 'listItem' }, { type: 'paragraph' }, 'B', 'A', 'R', { type: '/paragraph' }, { type: '/listItem' },
+							{ type: 'listItem' },
+							{ type: 'paragraph' }
+						]
+					},
+					{ type: 'retain', length: 49 }
+				]
+			},
+			'listItem between paragraphs inserted into a paragraph gets wrapped in a list': {
+				args: [simpleDoc, 4, [
+					{ type: '/paragraph' },
+					{ type: 'listItem' }, { type: 'paragraph' }, 'F', 'O', 'O', { type: '/paragraph' }, { type: '/listItem' },
+					{ type: 'listItem' }, { type: 'paragraph' }, 'B', 'A', 'R', { type: '/paragraph' }, { type: '/listItem' },
+					{ type: 'paragraph' }
+				]],
+				ops: [
+					{ type: 'retain', length: 4 },
+					{
+						type: 'replace',
+						remove: [],
+						insert: [
+							{ type: '/paragraph' },
+							{ type: 'list', attributes: { style: 'bullet' } },
+							{ type: 'listItem' }, { type: 'paragraph' }, 'F', 'O', 'O', { type: '/paragraph' }, { type: '/listItem' },
+							{ type: 'listItem' }, { type: 'paragraph' }, 'B', 'A', 'R', { type: '/paragraph' }, { type: '/listItem' },
+							{ type: 'listItem' },
+							{ type: 'paragraph' }
+						]
+					},
+					{ type: 'retain', length: 8 }
 				]
 			}
 			// TODO test cases for unclosed openings
