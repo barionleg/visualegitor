@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_01433a18",
+        "filename": "modules/ve/dm/lineardata/ve.dm.ElementLinearData.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 723,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-02-19T23:39:30Z",
+      "side": 1,
+      "message": "Yes, in this case you\u0027d just be wasting time counting them twice. If this function was adapted to work over ranges, then you might have to reconsider.",
+      "parentUuid": "4e04eb01_2154f600",
+      "revId": "706d3077539415a6f0ead1afb974542300418aa0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_414f026f",
         "filename": "modules/ve/dm/lineardata/ve.dm.ElementLinearData.js",
         "patchSetId": 1
