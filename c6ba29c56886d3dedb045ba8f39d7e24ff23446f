@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_4c1cd9cb",
+        "filename": "modules/ve/ui/styles/ve.ui.Dialog.css",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2014-02-20T02:35:49Z",
+      "side": 1,
+      "message": "/** is for doc comments (e.g. to index variables or logical groups, not so much the case in css, but definitely in less).\n\nUse /* or /! for non-doc comments. In this case /* seems appropriate.\n\nWe currently don\u0027t run jsduck-test on this, but this will fail (correction: has failed) when updating in ve.",
+      "revId": "c6ba29c56886d3dedb045ba8f39d7e24ff23446f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
