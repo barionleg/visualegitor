@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_c358af8e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 53
+      },
+      "writtenOn": "2014-02-20T23:57:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eeebdf60_bc0a4f27",
+      "revId": "229215419aee6134211faec0beeaa88569e5045e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eeebdf60_5009e72d",
         "filename": "modules/ve/ce/ve.ce.ClickableNode.js",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2014-01-05T09:35:31Z",
       "side": 1,
       "message": "You should document that the node this is being mixed into is required to emit a dblclick event.\n\nI thought we were gonna have one overlay to rule them all, and ClickableNode to manage it? What happened to that idea?",
+      "revId": "229215419aee6134211faec0beeaa88569e5045e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_63f55b4c",
+        "filename": "modules/ve/ce/ve.ce.ClickableNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 53
+      },
+      "writtenOn": "2014-02-20T23:57:59Z",
+      "side": 1,
+      "message": "The idea belly flopped when I got to testing it with relocatable node as it has to be an image.  Also, I remember there was an issue with the resizable node handles when they were mixed in. (Done)",
+      "parentUuid": "eeebdf60_5009e72d",
       "revId": "229215419aee6134211faec0beeaa88569e5045e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_a38243a7",
+        "filename": "modules/ve/ce/ve.ce.ClickableNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 53
+      },
+      "writtenOn": "2014-02-20T23:57:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eeebdf60_9c054b19",
+      "revId": "229215419aee6134211faec0beeaa88569e5045e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eeebdf60_b0fcb309",
         "filename": "modules/ve/ce/ve.ce.ClickableNode.js",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2014-01-05T09:35:31Z",
       "side": 1,
       "message": "This is a uiSurface, actually. Although the code you started with may predate the ve.Surface -\u003e ve.ui.Surface move, I suppose",
+      "revId": "229215419aee6134211faec0beeaa88569e5045e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_c3854fb3",
+        "filename": "modules/ve/ce/ve.ce.ClickableNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 53
+      },
+      "writtenOn": "2014-02-20T23:57:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eeebdf60_b0fcb309",
       "revId": "229215419aee6134211faec0beeaa88569e5045e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_e3760bd5",
+        "filename": "modules/ve/ce/ve.ce.ClickableNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 53
+      },
+      "writtenOn": "2014-02-20T23:57:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eeebdf60_90ff6ffc",
+      "revId": "229215419aee6134211faec0beeaa88569e5045e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eeebdf60_3010a352",
         "filename": "modules/ve/ce/ve.ce.ProtectedNode.js",
         "patchSetId": 1
@@ -98,6 +188,24 @@
       "writtenOn": "2014-01-05T09:35:31Z",
       "side": 1,
       "message": "You can chain this onto the previous line",
+      "revId": "229215419aee6134211faec0beeaa88569e5045e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_0349f78f",
+        "filename": "modules/ve/ce/ve.ce.ProtectedNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 53
+      },
+      "writtenOn": "2014-02-20T23:57:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eeebdf60_3010a352",
       "revId": "229215419aee6134211faec0beeaa88569e5045e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
