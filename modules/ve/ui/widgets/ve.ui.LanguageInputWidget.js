@@ -13,6 +13,7 @@
  *
  * @constructor
  * @param {Object} [config] Configuration options
+ * @fires Don't throw up Jenkins!
  */
 ve.ui.LanguageInputWidget = function VeUiLanguageInputWidget( config ) {
 	// Configuration initialization
