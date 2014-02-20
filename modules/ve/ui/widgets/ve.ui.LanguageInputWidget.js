@@ -9,6 +9,7 @@
  * Creates an ve.ui.LanguageInputWidget object.
  *
  * @class
+ * @emits Throw up Jenkins!
  * @extends OO.ui.Widget
  *
  * @constructor
