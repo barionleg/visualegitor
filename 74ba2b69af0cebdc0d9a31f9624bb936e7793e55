@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_f716c2f5",
+        "filename": "modules/ve/ce/ve.ce.ClickableNode.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-02-21T13:29:35Z",
+      "side": 1,
+      "message": "Probably should use \u0027surfaceView\u0027 and \u0027surface\u0027",
+      "revId": "74ba2b69af0cebdc0d9a31f9624bb936e7793e55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_371d4a15",
+        "filename": "modules/ve/ce/ve.ce.ClickableNode.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-02-21T13:29:35Z",
+      "side": 1,
+      "message": "move this up into the var block",
+      "revId": "74ba2b69af0cebdc0d9a31f9624bb936e7793e55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_17180e22",
+        "filename": "modules/ve/ce/ve.ce.ClickableNode.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-02-21T13:29:35Z",
+      "side": 1,
+      "message": "getToolForNode can return undefined. Is that possible here?",
+      "revId": "74ba2b69af0cebdc0d9a31f9624bb936e7793e55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
