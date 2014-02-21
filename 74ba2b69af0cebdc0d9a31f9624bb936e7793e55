@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_3a2bf1dc",
+        "filename": "modules/ve/ce/ve.ce.ClickableNode.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 53
+      },
+      "writtenOn": "2014-02-21T19:35:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e04eb01_f716c2f5",
+      "revId": "74ba2b69af0cebdc0d9a31f9624bb936e7793e55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_371d4a15",
         "filename": "modules/ve/ce/ve.ce.ClickableNode.js",
         "patchSetId": 6
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_5a147da0",
+        "filename": "modules/ve/ce/ve.ce.ClickableNode.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 53
+      },
+      "writtenOn": "2014-02-21T19:35:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e04eb01_371d4a15",
+      "revId": "74ba2b69af0cebdc0d9a31f9624bb936e7793e55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_17180e22",
         "filename": "modules/ve/ce/ve.ce.ClickableNode.js",
         "patchSetId": 6
@@ -47,6 +83,24 @@
       "writtenOn": "2014-02-21T13:29:35Z",
       "side": 1,
       "message": "getToolForNode can return undefined. Is that possible here?",
+      "revId": "74ba2b69af0cebdc0d9a31f9624bb936e7793e55",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_7a1179b0",
+        "filename": "modules/ve/ce/ve.ce.ClickableNode.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 53
+      },
+      "writtenOn": "2014-02-21T19:35:46Z",
+      "side": 1,
+      "message": "I suppose the getToolForNode could return undefined. I know nothing happens if you try to lookup a undefined tool.",
+      "parentUuid": "4e04eb01_17180e22",
       "revId": "74ba2b69af0cebdc0d9a31f9624bb936e7793e55",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
