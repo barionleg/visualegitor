@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_7723d254",
+        "filename": "modules/ve/dm/ve.dm.MetaList.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-02-21T13:24:36Z",
+      "side": 1,
+      "message": "fix to number",
+      "revId": "6835731f83f4bd28d23a3fd8bd58099842fc64c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
