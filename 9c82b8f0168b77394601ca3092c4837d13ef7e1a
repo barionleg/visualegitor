@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_a675a02e",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-02-24T23:21:16Z",
+      "side": 1,
+      "message": "no longer takes a param",
+      "revId": "9c82b8f0168b77394601ca3092c4837d13ef7e1a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_668f9827",
+        "filename": "modules/ve/ve.Scalable.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-02-24T23:21:16Z",
+      "side": 1,
+      "message": "while you\u0027re here, put min before max for consistency",
+      "revId": "9c82b8f0168b77394601ca3092c4837d13ef7e1a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
