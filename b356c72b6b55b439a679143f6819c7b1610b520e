@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_06b45432",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-02-24T22:15:40Z",
+      "side": 1,
+      "message": "First line alone should describe what the function does, long description on subsequent lines.",
+      "revId": "b356c72b6b55b439a679143f6819c7b1610b520e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_a6b80026",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-02-24T22:15:40Z",
+      "side": 1,
+      "message": "\u0027force\u0027",
+      "revId": "b356c72b6b55b439a679143f6819c7b1610b520e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_c65e6c17",
+        "filename": "modules/ve/ve.Scalable.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-02-24T22:15:40Z",
+      "side": 1,
+      "message": "Give the name of the param.\n\nAlso rename to enforceMax to match the property",
+      "revId": "b356c72b6b55b439a679143f6819c7b1610b520e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_66a318fe",
+        "filename": "modules/ve/ve.Scalable.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-02-24T22:15:40Z",
+      "side": 1,
+      "message": "rename to \u0027force\u0027. past tense suggest that some forcing has already taken place.",
+      "revId": "b356c72b6b55b439a679143f6819c7b1610b520e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_466b7cb5",
+        "filename": "modules/ve/ve.Scalable.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-02-24T22:15:40Z",
+      "side": 1,
+      "message": "Why does this need to be changed? If we\u0027ve got to this point maxDimensions is truthful, and therefore equal to this.getMaxDimensions()",
+      "revId": "b356c72b6b55b439a679143f6819c7b1610b520e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
