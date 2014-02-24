@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_460c9cf0",
+        "filename": "modules/ve/ce/ve.ce.Surface.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 1690,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-02-24T22:58:52Z",
+      "side": 1,
+      "message": "Does what work in all cases? If you\u0027re wondering whether contentBranchModel will always be a CBN, well, if you look at the implementation of getNodeFromOffset in ve.ce.Document , it already goes up to the ContentBranchNode, except that it uses .canHaveChildren() instead of .isContent() which is slightly misguided but fine for these purposes. So your .getParent() ternary is unnecessary.",
+      "revId": "691eded1a5aef654cb8870f38434f7b08b6c3f8f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_66db1855",
+        "filename": "modules/ve/ce/ve.ce.Surface.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 1704,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-02-24T22:58:52Z",
+      "side": 1,
+      "message": "I think only if selection.from is out of bounds?",
+      "revId": "691eded1a5aef654cb8870f38434f7b08b6c3f8f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_06ec54f1",
+        "filename": "modules/ve/ce/ve.ce.Surface.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 1734,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-02-24T22:58:52Z",
+      "side": 1,
+      "message": "Please don\u0027t do an assignment in an if conditional, especially here. I am reasonably convinced that prevContentOffset will be set in the else case (because it\u0027s an OR), but I had to do a double-take to make sure.",
+      "revId": "691eded1a5aef654cb8870f38434f7b08b6c3f8f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
