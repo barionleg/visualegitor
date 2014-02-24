@@ -137,10 +137,27 @@ ve.ui.MediaSizeWidget.prototype.setCurrentDimensions = function ( dimensions ) {
 	this.widthInput.setValue( this.getCurrentDimensions().width );
 	this.heightInput.setValue( this.getCurrentDimensions().height );
 
-	this.errorLabel.$element.toggle( !this.isCurrentDimensionsValid() );
-	this.$element.toggleClass( 've-ui-mediaSizeWidget-input-hasError', !this.isCurrentDimensionsValid() );
+	this.validateDimensions( false );
 
 	this.preventChangeRecursion = false;
+};
+
+/**
+ * Explicitly call for validating the current dimensions. This is especially
+ * useful if we've changed conditions for the widget, like limiting image
+ * dimensions for thumbnails when the image type changes. Triggers the error
+ * class if needed.
+ *
+ * @param {boolean} isForced Force a re-evaluation even if this.valid is
+ * already set.
+ * @returns {boolean} Current dimensions are valid
+ */
+ve.ui.MediaSizeWidget.prototype.validateDimensions = function ( isForced ) {
+	var isValid = this.isCurrentDimensionsValid( isForced );
+	this.errorLabel.$element.toggle( !isValid );
+	this.$element.toggleClass( 've-ui-mediaSizeWidget-input-hasError', !isValid );
+
+	return isValid;
 };
 
 /** */

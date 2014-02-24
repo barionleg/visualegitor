@@ -193,6 +193,14 @@ ve.Scalable.prototype.isEnforcedMin = function () {
 ve.Scalable.prototype.isEnforcedMax = function () {
 	return this.enforceMax;
 };
+/**
+ * Set enforcement of maximum dimensions
+ *
+ * @param {boolean} Enforces the maximum dimensions
+ */
+ve.Scalable.prototype.setEnforcedMax = function ( isEnforcedMax ) {
+	this.enforceMax = isEnforcedMax;
+};
 
 /**
  * Get the fixed aspect ratio (width/height)
@@ -310,10 +318,12 @@ ve.Scalable.prototype.getBoundedDimensions = function ( dimensions, grid ) {
 /**
  * Checks whether the current dimensions are numeric and within range
  *
+ * @param {boolean} isForced Force a re-evaluation even if this.valid is
+ * already set.
  * @returns {boolean} Current dimensions are valid
  */
-ve.Scalable.prototype.isCurrentDimensionsValid = function () {
-	if ( this.valid === null ) {
+ve.Scalable.prototype.isCurrentDimensionsValid = function ( isForced ) {
+	if ( this.valid === null || isForced ) {
 		var dimensions = this.getCurrentDimensions(),
 			minDimensions = this.isEnforcedMin() && this.getMinDimensions(),
 			maxDimensions = this.isEnforcedMax() && this.getMaxDimensions();
@@ -323,14 +333,14 @@ ve.Scalable.prototype.isCurrentDimensionsValid = function () {
 			$.isNumeric( dimensions.height ) &&
 			(
 				!minDimensions || (
-					dimensions.width >= minDimensions.width &&
-					dimensions.height >= minDimensions.height
+					dimensions.width >= this.getMinDimensions().width &&
+					dimensions.height >= this.getMinDimensions().height
 				)
 			) &&
 			(
 				!maxDimensions || (
-					dimensions.width <= maxDimensions.width &&
-					dimensions.height <= maxDimensions.height
+					dimensions.width <= this.getMaxDimensions().width &&
+					dimensions.height <= this.getMaxDimensions().height
 				)
 			)
 		);
