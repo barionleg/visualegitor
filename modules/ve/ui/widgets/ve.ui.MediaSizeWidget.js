@@ -110,6 +110,12 @@ OO.inheritClass( ve.ui.MediaSizeWidget, OO.ui.Widget );
 
 OO.mixinClass( ve.ui.MediaSizeWidget, ve.Scalable );
 
+/* Events */
+
+/**
+ * @event event
+ */
+
 /* Methods */
 
 /**
@@ -152,6 +158,8 @@ ve.ui.MediaSizeWidget.prototype.isEmpty = function () {
 /**
  * Overridden from ve.Scalable to allow one dimension to be set
  * at a time, write values back to inputs and show any errors.
+ *
+ * @fires change
  */
 ve.ui.MediaSizeWidget.prototype.setCurrentDimensions = function ( dimensions ) {
 	// Recursion protection
@@ -188,6 +196,8 @@ ve.ui.MediaSizeWidget.prototype.setCurrentDimensions = function ( dimensions ) {
 	this.errorLabel.$element.toggle( !this.isCurrentDimensionsValid() );
 	this.$element.toggleClass( 've-ui-mediaSizeWidget-input-hasError', !this.isCurrentDimensionsValid() );
 
+	// Emit change event
+	this.emit( 'change' );
 	this.preventChangeRecursion = false;
 };
 
