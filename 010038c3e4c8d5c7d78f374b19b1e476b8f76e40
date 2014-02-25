@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_1b570507",
+        "filename": "modules/ve/ui/ve.ui.Dialog.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2014-02-25T21:01:55Z",
+      "side": 1,
+      "message": "Sweet, so the VE subclasses don\u0027t need any updates per se. Nice workaround.",
+      "revId": "010038c3e4c8d5c7d78f374b19b1e476b8f76e40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
