@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "4e04eb01_ef313beb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-02-25T10:56:27Z",
+      "side": 1,
+      "message": "this needs updating",
+      "revId": "9c82b8f0168b77394601ca3092c4837d13ef7e1a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_a675a02e",
         "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
         "patchSetId": 2
