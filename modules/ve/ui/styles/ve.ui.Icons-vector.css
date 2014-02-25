@@ -115,6 +115,11 @@
 	background-image: url(images/icons/italic-e.svg);
 }
 
+.oo-ui-icon-italic-s {
+	/* @embed */
+	background-image: url(images/icons/italic-s.svg);
+}
+
 .oo-ui-icon-italic-geor-kan {
 	/* @embed */
 	background-image: url(images/icons/italic-geor-kan.svg);
