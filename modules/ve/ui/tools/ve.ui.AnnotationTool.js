@@ -86,6 +86,7 @@ ve.ui.BoldAnnotationTool.static.icon = {
 	'en': 'bold-b',
 	'es': 'bold-n',
 	'eu': 'bold-l',
+	'fi': 'bold-l',
 	'fr': 'bold-g',
 	'gl': 'bold-n',
 	'he': 'bold-b',
@@ -132,6 +133,7 @@ ve.ui.ItalicAnnotationTool.static.icon = {
 	'en': 'italic-i',
 	'es': 'italic-c',
 	'eu': 'italic-e',
+	'fi': 'italic-k',
 	'fr': 'italic-i',
 	'gl': 'italic-c',
 	'he': 'italic-i',
@@ -192,7 +194,8 @@ ve.ui.StrikethroughAnnotationTool.static.name = 'strikethrough';
 ve.ui.StrikethroughAnnotationTool.static.group = 'textStyle';
 ve.ui.StrikethroughAnnotationTool.static.icon = {
 	'default': 'strikethrough-a',
-	'en': 'strikethrough-s'
+	'en': 'strikethrough-s',
+	'fi': 'strikethrough-y'
 };
 ve.ui.StrikethroughAnnotationTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-annotationbutton-strikethrough-tooltip' );
