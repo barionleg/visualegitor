@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_7c05dcc3",
+        "filename": "modules/ve/ui/tools/ve.ui.AnnotationTool.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 88
+      },
+      "writtenOn": "2014-02-26T21:18:58Z",
+      "side": 1,
+      "message": "Why are you registering this?",
+      "revId": "6c41cadbd5468cb315c25332c2d685cd5c4ca91e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
