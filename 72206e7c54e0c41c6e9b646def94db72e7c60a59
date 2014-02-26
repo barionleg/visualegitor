@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_698acb6f",
+        "filename": "modules/ve/dm/ve.dm.Annotation.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-02-26T20:10:27Z",
+      "side": 1,
+      "message": "Just initialize this to an empty array? That way you follow your own documentation, the code to deal with this setting will be simpler, and writing subclasses that append to their parent class\u0027s .removes property will be easier.",
+      "revId": "72206e7c54e0c41c6e9b646def94db72e7c60a59",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_49814f4e",
+        "filename": "modules/ve/ui/actions/ve.ui.AnnotationAction.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-02-26T20:10:27Z",
+      "side": 1,
+      "message": "This seems wasteful, since you\u0027re not using the annotation object for anything other than its .static.removes property. You can also do:\n\n    annotationClass \u003d ve.dm.annotationFactory.lookup( name ),\n    removes \u003d annotationClass.static.removes;",
+      "revId": "72206e7c54e0c41c6e9b646def94db72e7c60a59",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
