@@ -16,6 +16,24 @@
       "revId": "010038c3e4c8d5c7d78f374b19b1e476b8f76e40",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_e67a7d1e",
+        "filename": "modules/ve/ui/ve.ui.Dialog.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-02-26T17:45:15Z",
+      "side": 1,
+      "message": "Yes. \"Workaround\" being the key word here. As I said in my email, having a specialized subclass of WindowSet and passing it around solely as a vehicle for the reference to the Surface looks kind of stupid now, so we should redesign that.",
+      "parentUuid": "4e04eb01_1b570507",
+      "revId": "010038c3e4c8d5c7d78f374b19b1e476b8f76e40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
