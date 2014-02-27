@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_41911451",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2014-02-27T14:06:46Z",
+      "side": 1,
+      "message": "Boolean -\u003e boolean (unless you expect an instance of Boolean, which exists in javascript, instead of a primitive value).",
+      "revId": "d787eb708f2299ebd2db9e2993bd343ce76d93ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_21884823",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2014-02-27T14:06:46Z",
+      "side": 1,
+      "message": "\"boolean\"",
+      "revId": "d787eb708f2299ebd2db9e2993bd343ce76d93ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
