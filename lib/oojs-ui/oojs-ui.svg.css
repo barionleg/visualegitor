@@ -1,12 +1,12 @@
 /*!
- * OOjs UI v0.1.0-pre (96ae071da9)
+ * OOjs UI v0.1.0-pre (0198123819)
  * https://www.mediawiki.org/wiki/OOjs_UI
  *
  * Copyright 2011–2014 OOjs Team and other contributors.
  * Released under the MIT license
  * http://oojs.mit-license.org
  *
- * Date: Thu Feb 27 2014 18:00:59 GMT-0800 (PST)
+ * Date: Thu Feb 27 2014 18:12:01 GMT-0800 (PST)
  */
 
 /* Textures */
@@ -1132,7 +1132,11 @@
 }
 
 .oo-ui-outlineItemWidget.oo-ui-flaggableElement-empty .oo-ui-labeledElement-label {
-  color: #698AA0;
+  color: #777;
+}
+
+.oo-ui-outlineItemWidget.oo-ui-indicatedElement .oo-ui-labeledElement-label {
+  padding-right: 1.5em;
 }
 
 .oo-ui-outlineItemWidget-level-0 {
@@ -1169,25 +1173,31 @@
 .oo-ui-outlineControlsWidget-adders,
 .oo-ui-outlineControlsWidget-movers {
   float: left;
-  height: 3em;
-  padding: 0.5em;
+  height: 2em;
+  padding: 0;
+  margin: 0.5em;
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
           box-sizing: border-box;
 }
 
+.oo-ui-outlineControlsWidget > .oo-ui-iconedElement-icon {
+  float: left;
+  width: 1.5em;
+  height: 2em;
+  margin: 0.5em 0 0.5em 0.5em;
+  background-position: right center;
+  background-repeat: no-repeat;
+  opacity: 0.2;
+}
+
 .oo-ui-outlineControlsWidget-adders {
   float: left;
+  margin-left: 0;
 }
 
 .oo-ui-outlineControlsWidget-adders .oo-ui-buttonWidget {
   float: left;
-}
-
-.oo-ui-outlineControlsWidget-adders .oo-ui-buttonWidget:first-child,
-.oo-ui-outlineControlsWidget-adders .oo-ui-buttonWidget:first-child:hover {
-  cursor: default;
-  opacity: 0.25;
 }
 
 .oo-ui-outlineControlsWidget-movers {
