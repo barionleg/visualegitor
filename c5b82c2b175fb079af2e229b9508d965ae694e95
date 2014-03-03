@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_67facb41",
+        "filename": "modules/ve/ce/ve.ce.Surface.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 1404,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-03-03T23:57:05Z",
+      "side": 1,
+      "message": "Commented-out code should be removed for non-WIP version",
+      "revId": "c5b82c2b175fb079af2e229b9508d965ae694e95",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e04eb01_67540b57",
         "filename": "modules/ve/ce/ve.ce.Surface.js",
         "patchSetId": 5
@@ -30,6 +47,91 @@
       "writtenOn": "2014-03-03T23:44:41Z",
       "side": 1,
       "message": "As discussed earlier, this line needs to be unconditional because annotations is used on line 1589. You were actually the one that pointed this out originally :)",
+      "revId": "c5b82c2b175fb079af2e229b9508d965ae694e95",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_278ba3c5",
+        "filename": "modules/ve/dm/ve.dm.Transaction.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-03-03T23:57:05Z",
+      "side": 1,
+      "message": "This is a new transaction builder, so it should have unit tests.",
+      "revId": "c5b82c2b175fb079af2e229b9508d965ae694e95",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_8786f7bc",
+        "filename": "modules/ve/dm/ve.dm.Transaction.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-03-03T23:57:05Z",
+      "side": 1,
+      "message": "The following 70 or so lines are duplicated from newFromRemoval. This shared code should be factored out into a private helper function.",
+      "revId": "c5b82c2b175fb079af2e229b9508d965ae694e95",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_47f90f49",
+        "filename": "modules/ve/dm/ve.dm.Transaction.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-03-03T23:57:05Z",
+      "side": 1,
+      "message": "Commented-out code",
+      "revId": "c5b82c2b175fb079af2e229b9508d965ae694e95",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_27f4c34f",
+        "filename": "modules/ve/dm/ve.dm.Transaction.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-03-03T23:57:05Z",
+      "side": 1,
+      "message": "Commented-out code",
+      "revId": "c5b82c2b175fb079af2e229b9508d965ae694e95",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_6781aba3",
+        "filename": "modules/ve/dm/ve.dm.Transaction.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-03-03T23:57:05Z",
+      "side": 1,
+      "message": "And similarly, this is duplicated from newFromInsertion and needs factoring out.",
       "revId": "c5b82c2b175fb079af2e229b9508d965ae694e95",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
