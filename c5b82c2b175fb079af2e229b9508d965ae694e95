@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_673f6b21",
+        "filename": "modules/ve/ce/ve.ce.ContentBranchNode.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-03-03T23:39:22Z",
+      "side": 1,
+      "message": "Hmm, how about the following for comparing the old DOM to the new one:\n\n    var newWrapper \u003d this.$element[0].cloneNode();\n    for ( i \u003d 0, len \u003d rendered.length; i \u003c len; i++) {\n        newWrapper.appendChild( rendered[i] );\n    }\n    if ( newWrapper.isEqualDomNode( this.$element[0] ) ) {\n        return;\n    }",
+      "revId": "c5b82c2b175fb079af2e229b9508d965ae694e95",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
