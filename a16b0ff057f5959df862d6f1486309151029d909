@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "4e04eb01_a0b907e8",
+        "filename": "modules/ve/ce/ve.ce.ContentBranchNode.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-03-03T23:33:25Z",
+      "side": 1,
+      "message": "Do you know about the .normalize() operation on a DOM node? It combines adjacent text nodes and eliminates empty ones. So if you wanted length comparison etc to work, you could normalize the DOMs before you compare them (or normalize clones of them, if modifying the DOM nodes is a problem).",
+      "parentUuid": "8efa632e_270af824",
+      "revId": "a16b0ff057f5959df862d6f1486309151029d909",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aef5673e_705bf0fd",
         "filename": "modules/ve/dm/ve.dm.Transaction.js",
         "patchSetId": 4
