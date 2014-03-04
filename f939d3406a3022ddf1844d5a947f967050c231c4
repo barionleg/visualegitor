@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_6f45fdb8",
+        "filename": "modules/ve/ui/ve.ui.WindowSet.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2014-03-04T22:47:31Z",
+      "side": 1,
+      "message": "ve?",
+      "revId": "f939d3406a3022ddf1844d5a947f967050c231c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
