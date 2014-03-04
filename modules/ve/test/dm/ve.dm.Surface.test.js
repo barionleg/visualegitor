@@ -72,7 +72,8 @@ QUnit.test( 'breakpoint', 7, function ( assert ) {
 
 	assert.deepEqual( surface.undoStack, [ {
 			'transactions': [tx],
-			'selection': selection
+			'selection': selection,
+			'selectionBefore': selection
 		} ],
 		'Undo stack data matches after breakpoint'
 	);
