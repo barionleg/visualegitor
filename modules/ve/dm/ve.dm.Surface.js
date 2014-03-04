@@ -131,7 +131,7 @@ ve.dm.Surface.prototype.purgeHistory = function () {
 	if ( !this.enabled ) {
 		return;
 	}
-	this.selection = new ve.Range( 0, 0 );
+	this.selection = new ve.Range( 1, 1 );
 	this.newTransactions = [];
 	this.undoStack = [];
 	this.undoIndex = 0;
@@ -521,18 +521,17 @@ ve.dm.Surface.prototype.changeInternal = function ( transactions, selection, ski
  * Set a history state breakpoint.
  *
  * @method
- * @param {ve.Range} selection New selection range
  * @fires history
  * @returns {boolean} A breakpoint was added
  */
-ve.dm.Surface.prototype.breakpoint = function ( selection ) {
+ve.dm.Surface.prototype.breakpoint = function () {
 	if ( !this.enabled ) {
 		return false;
 	}
 	if ( this.newTransactions.length > 0 ) {
 		this.undoStack.push( {
 			'transactions': this.newTransactions,
-			'selection': selection || this.selection.clone()
+			'selection': this.selection.clone()
 		} );
 		this.newTransactions = [];
 		this.emit( 'history' );
@@ -548,7 +547,7 @@ ve.dm.Surface.prototype.breakpoint = function ( selection ) {
  * @fires history
  */
 ve.dm.Surface.prototype.undo = function () {
-	var i, item, selection, transaction, transactions = [];
+	var i, item, prevItem, prevSelection, transaction, transactions = [];
 	if ( !this.enabled || !this.hasPastState() ) {
 		return;
 	}
@@ -558,14 +557,15 @@ ve.dm.Surface.prototype.undo = function () {
 
 	item = this.undoStack[this.undoStack.length - this.undoIndex];
 	if ( item ) {
-		// Apply reversed transactions in reversed order, and translate the selection accordingly
-		selection = item.selection;
+		// Apply reversed transactions in reversed order
 		for ( i = item.transactions.length - 1; i >= 0; i-- ) {
 			transaction = item.transactions[i].reversed();
-			selection = transaction.translateRange( selection );
 			transactions.push( transaction );
 		}
-		this.changeInternal( transactions, selection, true );
+		// Get selection from previous item in stack
+		prevItem = this.undoStack[this.undoStack.length - this.undoIndex - 1];
+		prevSelection = prevItem ? prevItem.selection : new ve.Range( 1, 1 );
+		this.changeInternal( transactions, prevSelection, true );
 		this.emit( 'history' );
 	}
 };
