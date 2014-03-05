@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_fbfd4b05",
+        "filename": "modules/ve/ce/styles/ve.ce.Node.css",
+        "patchSetId": 7
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2014-03-05T15:18:08Z",
+      "side": 1,
+      "message": "Spaces.",
+      "revId": "573bf7f2eab957d5098248292ce9b9e38fd7bb8e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
