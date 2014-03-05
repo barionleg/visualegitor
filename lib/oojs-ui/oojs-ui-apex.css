@@ -42,6 +42,8 @@
   box-shadow: 0 0 0.66em rgba(0, 0, 0, 0.25);
 }
 
+/* OO.ui.Toolbar */
+
 .oo-ui-toolbar-bar {
   background: #f8fbfd;
   background-image: -webkit-gradient(linear, right top, right bottom, color-stop(0%, #ffffff), color-stop(100%, #f1f7fb));
@@ -71,6 +73,8 @@
           transition: opacity 500ms ease-in-out;
 }
 
+/* OO.ui.ToolGroup */
+
 .oo-ui-toolGroup {
   border: solid 1px transparent;
   border-radius: 0.25em;
@@ -89,6 +93,8 @@
   color: #000;
 }
 
+/* OO.ui.Window */
+
 .oo-ui-window-title {
   color: #333;
 }
@@ -98,6 +104,8 @@
   font-size: 1em;
   line-height: 1.5em;
 }
+
+/* OO.ui.ButtonedElement */
 
 .oo-ui-buttonedElement .oo-ui-buttonedElement-button {
   color: #333;
@@ -260,6 +268,16 @@
   box-shadow: none;
 }
 
+/* OO.ui.BookletLayout */
+
+.oo-ui-bookletLayout > .oo-ui-gridLayout > .oo-ui-panelLayout {
+  -webkit-transition: width 250ms ease-in-out, height 250ms ease-in-out, top 250ms ease-in-out, left 250ms ease-in-out;
+     -moz-transition: width 250ms ease-in-out, height 250ms ease-in-out, top 250ms ease-in-out, left 250ms ease-in-out;
+      -ms-transition: width 250ms ease-in-out, height 250ms ease-in-out, top 250ms ease-in-out, left 250ms ease-in-out;
+       -o-transition: width 250ms ease-in-out, height 250ms ease-in-out, top 250ms ease-in-out, left 250ms ease-in-out;
+          transition: width 250ms ease-in-out, height 250ms ease-in-out, top 250ms ease-in-out, left 250ms ease-in-out;
+}
+
 .oo-ui-bookletLayout-outlinePanel {
   border-right: solid 1px #ddd;
 }
@@ -268,6 +286,8 @@
   box-shadow: 0 0 0.25em rgba(0, 0, 0, 0.25);
 }
 
+/* OO.ui.FieldsetLayout */
+
 .oo-ui-fieldsetLayout {
   border: none;
 }
@@ -275,6 +295,8 @@
 .oo-ui-fieldsetLayout > legend.oo-ui-labeledElement-label {
   font-size: 1.5em;
 }
+
+/* OO.ui.BarToolGroup */
 
 .oo-ui-barToolGroup .oo-ui-tool {
   margin: -1px 0 -1px -1px;
@@ -329,6 +351,8 @@
   opacity: 1;
 }
 
+/* OO.ui.ListToolGroup */
+
 .oo-ui-listToolGroup.oo-ui-popupToolGroup-active {
   border-color: rgba(0, 0, 0, 0.2);
 }
@@ -379,6 +403,8 @@
   opacity: 0.2;
 }
 
+/* OO.ui.MenuToolGroup */
+
 .oo-ui-menuToolGroup {
   border-color: rgba(0, 0, 0, 0.1);
 }
@@ -394,6 +420,8 @@
 .oo-ui-menuToolGroup .oo-ui-tool:hover {
   background-color: #e1f3ff;
 }
+
+/* OO.ui.PopupToolGroup */
 
 .oo-ui-popupToolGroup-handle .oo-ui-indicatedElement-indicator,
 .oo-ui-popupToolGroup-handle .oo-ui-iconedElement-icon {
@@ -420,6 +448,8 @@
   box-shadow: inset 0 0.07em 0.07em 0 rgba(0, 0, 0, 0.07);
 }
 
+/* OO.ui.OptionWidget */
+
 .oo-ui-optionWidget-highlighted {
   background-color: #e1f3ff;
 }
@@ -428,6 +458,8 @@
   background-color: #a7dcff;
 }
 
+/* OO.ui.MenuWidget */
+
 .oo-ui-menuWidget {
   margin-top: -1px;
   background: #fff;
@@ -435,6 +467,8 @@
   border-radius: 0 0 0.25em 0.25em;
   box-shadow: 0 0.15em 1em 0 rgba(0, 0, 0, 0.2);
 }
+
+/* OO.ui.PopupWidget */
 
 .oo-ui-popupWidget-popup {
   background-color: #fff;
@@ -462,15 +496,14 @@
   box-shadow: 0 0 0.66em rgba(0, 0, 0, 0.25);
 }
 
+/* OO.ui.ButtonGroupWidget */
+
 .oo-ui-buttonGroupWidget {
   display: inline-block;
   white-space: nowrap;
 }
 
-.oo-ui-buttonOptionWidget.oo-ui-optionWidget-selected,
-.oo-ui-buttonOptionWidget.oo-ui-optionWidget-highlighted {
-  background-color: transparent;
-}
+/* OO.ui.ButtonSelectWidget */
 
 .oo-ui-buttonSelectWidget {
   border-radius: 0.3em;
@@ -492,6 +525,8 @@
   border-bottom-right-radius: 0.3em;
 }
 
+/* OO.ui.InlineMenuWidget */
+
 .oo-ui-inlineMenuWidget-handle {
   border: solid 1px rgba(0, 0, 0, 0.1);
   border-radius: 0.25em;
@@ -506,9 +541,13 @@
   opacity: 0.8;
 }
 
+/* OO.ui.MenuItemWidget */
+
 .oo-ui-menuItemWidget.oo-ui-optionWidget-highlighted {
   background-color: #e1f3ff;
 }
+
+/* OO.ui.OutlineControlsWidget */
 
 .oo-ui-outlineControlsWidget {
   background-color: #fff;
@@ -517,6 +556,8 @@
 .oo-ui-outlineControlsWidget > .oo-ui-iconedElement-icon {
   opacity: 0.2;
 }
+
+/* OO.ui.OutlineItemWidget */
 
 .oo-ui-outlineItemWidget {
   font-size: 1.1em;
@@ -544,9 +585,13 @@
   color: #777;
 }
 
+/* OO.ui.SearchWidget */
+
 .oo-ui-searchWidget-query {
   box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.2);
 }
+
+/* OO.ui.TextInputWidget */
 
 .oo-ui-textInputWidget input,
 .oo-ui-textInputWidget textarea {
@@ -590,6 +635,8 @@
   background-color: #f3f3f3;
   border-color: #ddd;
 }
+
+/* OO.ui.ToggleSwitchWidget */
 
 .oo-ui-toggleSwitchWidget {
   background: #eeeeee;
