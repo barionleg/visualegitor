@@ -118,7 +118,16 @@ ve.ui.triggerRegistry.register(
 	'outdent', new ve.ui.Trigger( 'shift+tab' )
 );
 ve.ui.triggerRegistry.register(
-	'commandHelp', { 'mac': new ve.ui.Trigger( 'cmd+/' ), 'pc': new ve.ui.Trigger( 'ctrl+/' ) }
+	'commandHelp', {
+		'mac': [
+			new ve.ui.Trigger( 'cmd+/' ),
+			new ve.ui.Trigger( 'cmd+?' )
+		],
+		'pc': [
+			new ve.ui.Trigger( 'ctrl+/' ),
+			new ve.ui.Trigger( 'ctrl+?' )
+		]
+	}
 );
 // Ctrl+0-7 below are not mapped to Cmd+0-7 on Mac because Chrome reserves those for switching tabs
 ve.ui.triggerRegistry.register(
