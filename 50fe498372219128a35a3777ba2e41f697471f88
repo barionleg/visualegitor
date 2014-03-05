@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_e677f299",
+        "filename": "modules/ve/dm/ve.dm.Surface.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-03-05T17:50:45Z",
+      "side": 1,
+      "message": "It seems like this should actually use the real logic for setting the initial selection, rather than 0,0 or 1,1? (Per commit msg, this function isn\u0027t actually used so this doesn\u0027t block merge.)",
+      "revId": "50fe498372219128a35a3777ba2e41f697471f88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
