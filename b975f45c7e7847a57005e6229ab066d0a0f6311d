@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_81aed829",
+        "filename": "modules/ve/ui/ve.ui.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-03-05T20:20:35Z",
+      "side": 1,
+      "message": "command singular, surely?",
+      "revId": "b975f45c7e7847a57005e6229ab066d0a0f6311d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_21a14436",
+        "filename": "modules/ve/ui/ve.ui.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-03-05T20:20:35Z",
+      "side": 1,
+      "message": "command singular, right?",
+      "revId": "b975f45c7e7847a57005e6229ab066d0a0f6311d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_2180248d",
+        "filename": "modules/ve/ui/ve.ui.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-03-05T20:20:35Z",
+      "side": 1,
+      "message": "This emits the event with a single trigger as the third param, rather than an array. This violates the event documentation. You also emit one event per trigger, then another event for the whole array, which seems wasteful.",
+      "revId": "b975f45c7e7847a57005e6229ab066d0a0f6311d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
