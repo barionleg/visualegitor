@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_1651e93a",
+        "filename": "modules/ve/ui/inspectors/ve.ui.SpecialCharacterInspector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-03-05T22:19:53Z",
+      "side": 1,
+      "message": "Not blocking merge, but: why is this in setup rather than initialize?",
+      "revId": "c0fa88a132ef2debe721d648ef1c8c1c40267377",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
