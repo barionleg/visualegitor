@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_e108fcde",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-03-05T19:29:20Z",
+      "side": 1,
+      "message": "What is this event used for? It\u0027s undocumented as well.",
+      "revId": "d83419c07e744ce8519e4f7207cfff7c981624c1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
