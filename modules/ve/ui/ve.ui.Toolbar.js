@@ -71,6 +71,7 @@ OO.inheritClass( ve.ui.Toolbar, OO.ui.Toolbar );
  * @param {ve.dm.Node[]} nodes List of nodes covered by the current selection
  * @param {ve.dm.AnnotationSet} full Annotations that cover all of the current selection
  * @param {ve.dm.AnnotationSet} partial Annotations that cover some or all of the current selection
+ * @param {boolean} isFocused The surface is focused
  */
 
 /**
@@ -157,6 +158,7 @@ ve.ui.Toolbar.prototype.onSurfaceViewKeyUp = function () {
 ve.ui.Toolbar.prototype.onContextChange = function () {
 	var i, len, leafNodes, dirInline, dirBlock, fragmentAnnotation,
 		fragment = this.surface.getModel().getFragment( null, false ),
+		isFocused = this.surface.getView().isFocused(),
 		nodes = [];
 
 	leafNodes = fragment.getLeafNodes();
@@ -187,7 +189,7 @@ ve.ui.Toolbar.prototype.onContextChange = function () {
 		this.$element.addClass( 've-ui-dir-block-' + dirBlock );
 		this.contextDirection.block = dirBlock;
 	}
-	this.emit( 'updateState', nodes, fragment.getAnnotations(), fragment.getAnnotations( true ) );
+	this.emit( 'updateState', nodes, fragment.getAnnotations(), fragment.getAnnotations( true ), isFocused );
 };
 
 /**
