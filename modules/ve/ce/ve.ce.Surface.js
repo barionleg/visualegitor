@@ -391,6 +391,7 @@ ve.ce.Surface.prototype.documentOnFocus = function () {
 	this.surfaceObserver.startTimerLoop();
 	this.focused = true;
 	this.emit( 'focus' );
+	this.model.emit( 'contextChange' );
 };
 
 /**
@@ -407,6 +408,7 @@ ve.ce.Surface.prototype.documentOnBlur = function () {
 	this.focused = false;
 	this.model.setSelection( null );
 	this.emit( 'blur' );
+	this.model.emit( 'contextChange' );
 };
 
 /**
