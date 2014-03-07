@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_c79bc677",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2014-03-07T00:10:24Z",
+      "side": 1,
+      "message": "Doesn\u0027t depend on (at least I hope not, \u0027cause that\u0027s a downstream repository from here). Should probably not be mentioned here (maybe in a comment), or at least point in the other direction (e.g. To be used by I6b45018bdb7).",
+      "revId": "30c1cf3f658fcac9d7244276e1cd4bc2b5ff2316",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
