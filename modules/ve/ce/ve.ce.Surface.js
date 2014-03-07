@@ -46,6 +46,7 @@ ve.ce.Surface = function VeCeSurface( model, surface, options ) {
 	this.relocating = false;
 	this.selecting = false;
 	this.resizing = false;
+	this.focused = false;
 	this.contentBranchNodeChanged = false;
 	this.$phantoms = this.$( '<div>' );
 	this.$highlights = this.$( '<div>' );
@@ -374,7 +375,9 @@ ve.ce.Surface.prototype.documentOnFocus = function ( e ) {
 	}
 	this.eventSequencer.attach( this.$element );
 	this.surfaceObserver.startTimerLoop();
+	this.focused = true;
 	this.emit( 'focus' );
+	this.model.emit( 'contextChange' );
 };
 
 /**
@@ -389,7 +392,18 @@ ve.ce.Surface.prototype.documentOnBlur = function () {
 	this.surfaceObserver.stopTimerLoop();
 	this.surfaceObserver.pollOnce();
 	this.dragging = false;
+	this.focused = false;
 	this.emit( 'blur' );
+	this.model.emit( 'contextChange' );
+};
+
+/**
+ * Check if surface is focused.
+ *
+ * @returns {boolean} Surface is focused
+ */
+ve.ce.Surface.prototype.isFocused = function () {
+	return this.focused;
 };
 
 /**
