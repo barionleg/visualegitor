@@ -10,19 +10,19 @@
  *
  * @abstract
  * @class
- * @extends OO.ui.Tool
+ * @extends ve.ui.Tool
  * @constructor
  * @param {OO.ui.ToolGroup} toolGroup
  * @param {Object} [config] Configuration options
  */
 ve.ui.DialogTool = function VeUiDialogTool( toolGroup, config ) {
 	// Parent constructor
-	OO.ui.Tool.call( this, toolGroup, config );
+	ve.ui.Tool.call( this, toolGroup, config );
 };
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.DialogTool, OO.ui.Tool );
+OO.inheritClass( ve.ui.DialogTool, ve.ui.Tool );
 
 /* Static Properties */
 
@@ -81,15 +81,11 @@ ve.ui.DialogTool.prototype.onSelect = function () {
 	this.setActive( false );
 };
 
-/**
- * Handle the toolbar state being updated.
- *
- * @method
- * @param {ve.dm.Node[]} nodes List of nodes covered by the current selection
- * @param {ve.dm.AnnotationSet} full Annotations that cover all of the current selection
- * @param {ve.dm.AnnotationSet} partial Annotations that cover some or all of the current selection
- */
+/** */
 ve.ui.DialogTool.prototype.onUpdateState = function ( nodes ) {
+	// Parent method
+	ve.ui.Tool.prototype.onUpdateState.apply( this, arguments );
+
 	if ( nodes.length ) {
 		this.setActive(
 			this.toolbar.getToolFactory().getToolForNode( nodes[0] ) === this.constructor

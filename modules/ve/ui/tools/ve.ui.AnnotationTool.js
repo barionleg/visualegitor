@@ -10,20 +10,19 @@
  *
  * @class
  * @abstract
- * @extends OO.ui.Tool
- *
+ * @extends ve.ui.Tool
  * @constructor
  * @param {OO.ui.ToolGroup} toolGroup
  * @param {Object} [config] Configuration options
  */
 ve.ui.AnnotationTool = function VeUiAnnotationTool( toolGroup, config ) {
 	// Parent constructor
-	OO.ui.Tool.call( this, toolGroup, config );
+	ve.ui.Tool.call( this, toolGroup, config );
 };
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.AnnotationTool, OO.ui.Tool );
+OO.inheritClass( ve.ui.AnnotationTool, ve.ui.Tool );
 
 /* Static Properties */
 
@@ -36,6 +35,8 @@ OO.inheritClass( ve.ui.AnnotationTool, OO.ui.Tool );
  * @inheritable
  */
 ve.ui.AnnotationTool.static.annotation = { 'name': '' };
+
+ve.ui.AnnotationTool.static.requiresFocus = true;
 
 /* Methods */
 
@@ -50,15 +51,11 @@ ve.ui.AnnotationTool.prototype.onSelect = function () {
 	);
 };
 
-/**
- * Handle the toolbar state being updated.
- *
- * @method
- * @param {ve.dm.Node[]} nodes List of nodes covered by the current selection
- * @param {ve.dm.AnnotationSet} full Annotations that cover all of the current selection
- * @param {ve.dm.AnnotationSet} partial Annotations that cover some or all of the current selection
- */
+/** */
 ve.ui.AnnotationTool.prototype.onUpdateState = function ( nodes, full ) {
+	// Parent method
+	ve.ui.Tool.prototype.onUpdateState.apply( this, arguments );
+
 	this.setActive( full.hasAnnotationWithName( this.constructor.static.annotation.name ) );
 };
 

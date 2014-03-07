@@ -10,19 +10,19 @@
  *
  * @abstract
  * @class
- * @extends OO.ui.Tool
+ * @extends ve.ui.Tool
  * @constructor
  * @param {OO.ui.ToolGroup} toolGroup
  * @param {Object} [config] Configuration options
  */
 ve.ui.IndentationTool = function VeUiIndentationTool( toolGroup, config ) {
 	// Parent constructor
-	OO.ui.Tool.call( this, toolGroup, config );
+	ve.ui.Tool.call( this, toolGroup, config );
 };
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.IndentationTool, OO.ui.Tool );
+OO.inheritClass( ve.ui.IndentationTool, ve.ui.Tool );
 
 /* Static Properties */
 
@@ -36,6 +36,8 @@ OO.inheritClass( ve.ui.IndentationTool, OO.ui.Tool );
  */
 ve.ui.IndentationTool.static.method = '';
 
+ve.ui.IndentationTool.static.requiresFocus = true;
+
 /* Methods */
 
 /**
@@ -47,24 +49,22 @@ ve.ui.IndentationTool.prototype.onSelect = function () {
 	this.toolbar.getSurface().execute( 'indentation', this.constructor.static.method );
 };
 
-/**
- * Handle the toolbar state being updated.
- *
- * @method
- * @param {ve.dm.Node[]} nodes List of nodes covered by the current selection
- * @param {ve.dm.AnnotationSet} full Annotations that cover all of the current selection
- * @param {ve.dm.AnnotationSet} partial Annotations that cover some or all of the current selection
- */
+/** */
 ve.ui.IndentationTool.prototype.onUpdateState = function ( nodes ) {
-	var i, len,
-		any = false;
-	for ( i = 0, len = nodes.length; i < len; i++ ) {
-		if ( nodes[i].hasMatchingAncestor( 'listItem' ) ) {
-			any = true;
-			break;
+	// Parent method
+	ve.ui.Tool.prototype.onUpdateState.apply( this, arguments );
+
+	if ( !this.isDisabled() ) {
+		var i, len,
+			any = false;
+		for ( i = 0, len = nodes.length; i < len; i++ ) {
+			if ( nodes[i].hasMatchingAncestor( 'listItem' ) ) {
+				any = true;
+				break;
+			}
 		}
+		this.setDisabled( !any );
 	}
-	this.setDisabled( !any );
 };
 
 /**

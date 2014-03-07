@@ -10,14 +10,14 @@
  *
  * @abstract
  * @class
- * @extends OO.ui.Tool
+ * @extends ve.ui.Tool
  * @constructor
  * @param {OO.ui.ToolGroup} toolGroup
  * @param {Object} [config] Configuration options
  */
 ve.ui.ListTool = function VeUiListTool( toolGroup, config ) {
 	// Parent constructor
-	OO.ui.Tool.call( this, toolGroup, config );
+	ve.ui.Tool.call( this, toolGroup, config );
 
 	// Properties
 	this.method = null;
@@ -25,7 +25,7 @@ ve.ui.ListTool = function VeUiListTool( toolGroup, config ) {
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.ListTool, OO.ui.Tool );
+OO.inheritClass( ve.ui.ListTool, ve.ui.Tool );
 
 /**
  * List style the tool applies.
@@ -52,15 +52,15 @@ ve.ui.ListTool.prototype.onSelect = function () {
 	}
 };
 
-/**
- * Handle the toolbar state being updated.
- *
- * @method
- * @param {ve.dm.Node[]} nodes List of nodes covered by the current selection
- * @param {ve.dm.AnnotationSet} full Annotations that cover all of the current selection
- * @param {ve.dm.AnnotationSet} partial Annotations that cover some or all of the current selection
- */
+/* Static Properties */
+
+ve.ui.ListTool.static.requiresFocus = true;
+
+/** */
 ve.ui.ListTool.prototype.onUpdateState = function ( nodes ) {
+	// Parent method
+	ve.ui.Tool.prototype.onUpdateState.apply( this, arguments );
+
 	var i, len,
 		style = this.constructor.static.style,
 		all = !!nodes.length;

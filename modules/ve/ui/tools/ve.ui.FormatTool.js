@@ -10,14 +10,14 @@
  *
  * @abstract
  * @class
- * @extends OO.ui.Tool
+ * @extends ve.ui.Tool
  * @constructor
  * @param {OO.ui.ToolGroup} toolGroup
  * @param {Object} [config] Configuration options
  */
 ve.ui.FormatTool = function VeUiFormatTool( toolGroup, config ) {
 	// Parent constructor
-	OO.ui.Tool.call( this, toolGroup, config );
+	ve.ui.Tool.call( this, toolGroup, config );
 
 	// Properties
 	this.convertible = false;
@@ -25,7 +25,9 @@ ve.ui.FormatTool = function VeUiFormatTool( toolGroup, config ) {
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.FormatTool, OO.ui.Tool );
+OO.inheritClass( ve.ui.FormatTool, ve.ui.Tool );
+
+/* Static Properties */
 
 /**
  * Format the tool applies.
@@ -38,6 +40,8 @@ OO.inheritClass( ve.ui.FormatTool, OO.ui.Tool );
  * @inheritable
  */
 ve.ui.FormatTool.static.format = null;
+
+ve.ui.FormatTool.static.requiresFocus = true;
 
 /* Methods */
 
@@ -54,15 +58,11 @@ ve.ui.FormatTool.prototype.onSelect = function () {
 	}
 };
 
-/**
- * Handle the toolbar state being updated.
- *
- * @method
- * @param {ve.dm.Node[]} nodes Format of nodes covered by the current selection
- * @param {ve.dm.AnnotationSet} full Annotations that cover all of the current selection
- * @param {ve.dm.AnnotationSet} partial Annotations that cover some or all of the current selection
- */
+/** */
 ve.ui.FormatTool.prototype.onUpdateState = function ( nodes ) {
+	// Parent method
+	ve.ui.Tool.prototype.onUpdateState.apply( this, arguments );
+
 	var i, len,
 		format = this.constructor.static.format,
 		all = !!nodes.length;

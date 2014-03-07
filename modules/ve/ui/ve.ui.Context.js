@@ -55,7 +55,8 @@ ve.ui.Context = function VeUiContext( surface, config ) {
 		'selectionEnd': 'onSelectionEnd',
 		'relocationStart': 'onRelocationStart',
 		'relocationEnd': 'onRelocationEnd',
-		'focus': 'onSurfaceFocus'
+		'focus': 'onSurfaceFocus',
+		'blur': 'onSurfaceBlur'
 	} );
 	this.inspectors.connect( this, {
 		'opening': 'onInspectorOpening',
@@ -140,6 +141,12 @@ ve.ui.Context.prototype.afterModelSelect = function () {
  */
 ve.ui.Context.prototype.onSurfaceFocus = function () {
 	if ( this.inspectors.getCurrentWindow() ) {
+		this.hide();
+	}
+};
+
+ve.ui.Context.prototype.onSurfaceBlur = function () {
+	if ( !this.inspectors.getCurrentWindow() ) {
 		this.hide();
 	}
 };
