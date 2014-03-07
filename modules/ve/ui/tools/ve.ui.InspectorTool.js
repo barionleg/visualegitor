@@ -10,19 +10,19 @@
  *
  * @abstract
  * @class
- * @extends OO.ui.Tool
+ * @extends ve.ui.Tool
  * @constructor
  * @param {OO.ui.ToolGroup} toolGroup
  * @param {Object} [config] Configuration options
  */
 ve.ui.InspectorTool = function VeUiInspectorTool( toolGroup, config ) {
 	// Parent constructor
-	OO.ui.Tool.call( this, toolGroup, config );
+	ve.ui.Tool.call( this, toolGroup, config );
 };
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.InspectorTool, OO.ui.Tool );
+OO.inheritClass( ve.ui.InspectorTool, ve.ui.Tool );
 
 /* Static Properties */
 
@@ -66,6 +66,8 @@ ve.ui.InspectorTool.static.inspectorData = {};
  */
 ve.ui.InspectorTool.static.modelClasses = [];
 
+ve.ui.InspectorTool.static.requiresFocus = true;
+
 /**
  * @inheritdoc
  */
@@ -92,6 +94,9 @@ ve.ui.InspectorTool.prototype.onSelect = function () {
  * @inheritdoc
  */
 ve.ui.InspectorTool.prototype.onUpdateState = function ( nodes, full ) {
+	// Parent method
+	ve.ui.Tool.prototype.onUpdateState.apply( this, arguments );
+
 	var toolFactory = this.toolbar.getToolFactory(),
 		tools = toolFactory.getToolsForAnnotations( full );
 
