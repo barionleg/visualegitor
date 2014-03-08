@@ -1,0 +1,38 @@
+/*!
+ * VisualEditor UserInterface MobileSurface class.
+ *
+ * @copyright 2011-2014 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+/**
+ * A surface is a top-level object which contains both a surface model and a surface view.
+ * This is the mobile version of the surface.
+ *
+ * @class
+ * @extends ve.ui.Surface
+ *
+ * @constructor
+ * @param {HTMLDocument|Array|ve.dm.LinearData|ve.dm.Document} dataOrDoc Document data to edit
+ * @param {Object} [config] Configuration options
+ */
+ve.ui.MobileSurface = function VeUiMobileSurface() {
+	// Parent constructor
+	ve.ui.Surface.apply( this, arguments );
+};
+
+/* Inheritance */
+
+OO.inheritClass( ve.ui.MobileSurface, ve.ui.Surface );
+
+/* Methods */
+
+/**
+ * Create a context.
+ *
+ * @method
+ * @returns {ve.ui.Context} Context instance
+ */
+ve.ui.MobileSurface.prototype.createContext = function () {
+	return new ve.ui.Context( this, { '$': this.$ } );
+};
