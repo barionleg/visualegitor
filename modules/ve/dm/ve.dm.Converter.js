@@ -639,7 +639,11 @@ ve.dm.Converter.prototype.getDataFromDomSubtree = function ( domElement, wrapper
 		childDomElement = domElement.childNodes[i];
 		switch ( childDomElement.nodeType ) {
 			case Node.ELEMENT_NODE:
-				if ( childDomElement.getAttribute( 'data-ve-ignore' ) ) {
+			case Node.COMMENT_NODE:
+				if (
+					childDomElement.getAttribute &&
+					childDomElement.getAttribute( 'data-ve-ignore' )
+				) {
 					continue;
 				}
 				aboutGroup = getAboutGroup( childDomElement );
@@ -938,32 +942,6 @@ ve.dm.Converter.prototype.getDataFromDomSubtree = function ( domElement, wrapper
 					ve.dm.Converter.getDataContentFromText( text, context.annotations )
 				);
 				break;
-			case Node.COMMENT_NODE:
-				// TODO treat this as a node with nodeName #comment, removes code duplication
-				childDataElements = this.createDataElements( ve.dm.AlienMetaItem, [ childDomElement ] );
-				childDataElements.push( { 'type': '/' + childDataElements[0].type } );
-
-				// Annotate
-				if ( !context.annotations.isEmpty() ) {
-					childDataElements[0].annotations = context.annotations.getIndexes().slice();
-				}
-
-				// Queue wrapped meta items only if it's actually possible for us to move them out
-				// of the wrapper
-				if ( context.inWrapper && context.canCloseWrapper ) {
-					wrappedMetaItems = wrappedMetaItems.concat( childDataElements );
-					if ( wrappedWhitespace !== '' ) {
-						data.splice( wrappedWhitespaceIndex, wrappedWhitespace.length );
-						addWhitespace( childDataElements[0], 0, wrappedWhitespace );
-						nextWhitespace = wrappedWhitespace;
-						wrappedWhitespace = '';
-					}
-				} else {
-					data = data.concat( childDataElements );
-					processNextWhitespace( childDataElements[0] );
-					prevElement = childDataElements[0];
-				}
-				break;
 		}
 	}
 	// End auto-wrapping of bare content
@@ -1059,6 +1037,7 @@ ve.dm.Converter.prototype.isDomAllMetaOrWhitespace = function ( domElements, exc
 		childDomElement = domElements[i];
 		switch ( childDomElement.nodeType ) {
 			case Node.ELEMENT_NODE:
+			case Node.COMMENT_NODE:
 				modelName = this.modelRegistry.matchElement( childDomElement, false, excludeTypes );
 				modelClass = this.modelRegistry.lookup( modelName ) || ve.dm.AlienNode;
 				if (
@@ -1082,9 +1061,6 @@ ve.dm.Converter.prototype.isDomAllMetaOrWhitespace = function ( domElements, exc
 					continue;
 				}
 				break;
-			case Node.COMMENT_NODE:
-				// Comments are always meta
-				continue;
 		}
 		return false;
 	}
