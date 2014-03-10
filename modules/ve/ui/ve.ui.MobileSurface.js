@@ -31,8 +31,8 @@ OO.inheritClass( ve.ui.MobileSurface, ve.ui.Surface );
  * Create a context.
  *
  * @method
- * @returns {ve.ui.Context} Context instance
+ * @returns {ve.ui.MobileContext} Context instance
  */
 ve.ui.MobileSurface.prototype.createContext = function () {
-	return new ve.ui.Context( this, { '$': this.$ } );
+	return new ve.ui.MobileContext( this, { '$': this.$ } );
 };

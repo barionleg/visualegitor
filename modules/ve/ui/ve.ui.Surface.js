@@ -118,10 +118,10 @@ ve.ui.Surface.prototype.initialize = function () {
  * Create a context.
  *
  * @method
- * @returns {ve.ui.Context} Context instance
+ * @returns {ve.ui.DesktopContext} Context instance
  */
 ve.ui.Surface.prototype.createContext = function () {
-	return new ve.ui.Context( this, { '$': this.$ } );
+	return new ve.ui.DesktopContext( this, { '$': this.$ } );
 };
 
 /**
