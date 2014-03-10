@@ -187,6 +187,8 @@
 			"modules/ve/ce/annotations/ve.ce.TextStyleAnnotation.js",
 			"modules/ve/ui/ve.ui.js",
 			"modules/ve/ui/ve.ui.Surface.js",
+			"modules/ve/ui/ve.ui.DesktopSurface.js",
+			"modules/ve/ui/ve.ui.MobileSurface.js",
 			"modules/ve/ui/ve.ui.Context.js",
 			"modules/ve/ui/ve.ui.Dialog.js",
 			"modules/ve/ui/ve.ui.Inspector.js",
