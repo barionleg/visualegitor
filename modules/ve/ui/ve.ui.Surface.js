@@ -42,7 +42,7 @@ ve.ui.Surface = function VeUiSurface( dataOrDoc, config ) {
 	}
 	this.model = new ve.dm.Surface( documentModel );
 	this.view = new ve.ce.Surface( this.model, this, { '$': this.$ } );
-	this.context = new ve.ui.Context( this, { '$': this.$ } );
+	this.context = this.createContext();
 	this.dialogs = new ve.ui.WindowSet( this, ve.ui.dialogFactory, { '$': this.$ } );
 	this.commands = {};
 	this.triggers = {};
@@ -112,6 +112,16 @@ ve.ui.Surface.prototype.initialize = function () {
 		new ve.Range( firstOffset !== -1 ? firstOffset : 1 )
 	);
 	this.getModel().startHistoryTracking();
+};
+
+/**
+ * Create a context.
+ *
+ * @method
+ * @returns {ve.ui.Context} Context instance
+ */
+ve.ui.Surface.prototype.createContext = function () {
+	return new ve.ui.Context( this, { '$': this.$ } );
 };
 
 /**
