@@ -328,14 +328,16 @@ ve.dm.ModelRegistry.prototype.matchElement = function ( element, forceAboutGroup
 	}
 
 	types = [];
-	if ( element.getAttribute( 'rel' ) ) {
-		types = types.concat( element.getAttribute( 'rel' ).split( ' ' ) );
-	}
-	if ( element.getAttribute( 'typeof' ) ) {
-		types = types.concat( element.getAttribute( 'typeof' ).split( ' ' ) );
-	}
-	if ( element.getAttribute( 'property' ) ) {
-		types = types.concat( element.getAttribute( 'property' ).split( ' ' ) );
+	if ( element.getAttribute ) {
+		if ( element.getAttribute( 'rel' ) ) {
+			types = types.concat( element.getAttribute( 'rel' ).split( ' ' ) );
+		}
+		if ( element.getAttribute( 'typeof' ) ) {
+			types = types.concat( element.getAttribute( 'typeof' ).split( ' ' ) );
+		}
+		if ( element.getAttribute( 'property' ) ) {
+			types = types.concat( element.getAttribute( 'property' ).split( ' ' ) );
+		}
 	}
 	elementExtSpecificTypes = types.filter( ve.bind( this.isExtensionSpecificType, this ) );
 	hasExtSpecificTypes = elementExtSpecificTypes.length !== 0;
