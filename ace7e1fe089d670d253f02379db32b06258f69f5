@@ -16,6 +16,23 @@
       "revId": "ace7e1fe089d670d253f02379db32b06258f69f5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_978957cd",
+        "filename": "modules/ve/dm/ve.dm.ModelRegistry.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2014-03-10T22:32:26Z",
+      "side": 1,
+      "message": "Did this one actually fail? Does this method get only dm nodes (like from toDomElement), or any arbitrary child node in the document?\n\nIf the latter, the signature should be updated accordingly (HTMLElement element -\u003e Node node). As with the other, this wouldn\u0027t clash with the naming of toDomElement because this method would in that case not be restricted to receiving elements but also any arbitrary node, many of which wouldn\u0027t have a corresponding data element coming via toDomElement anyway.\n\nIf the former, this check shouldn\u0027t be needed.",
+      "revId": "ace7e1fe089d670d253f02379db32b06258f69f5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
