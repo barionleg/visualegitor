@@ -109,6 +109,8 @@
 					"ve.ui.Surface",
 					"ve.ui.MobileSurface",
 					"ve.ui.Context",
+					"ve.ui.DesktopContext",
+					"ve.ui.MobileContext",
 					"ve.ui.Toolbar",
 					"ve.ui.TargetToolbar",
 					"ve.ui.WindowSet",
