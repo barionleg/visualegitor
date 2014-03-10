@@ -33,6 +33,24 @@
       "revId": "ace7e1fe089d670d253f02379db32b06258f69f5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e04eb01_17b54778",
+        "filename": "modules/ve/dm/ve.dm.ModelRegistry.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-03-10T22:35:04Z",
+      "side": 1,
+      "message": "It can now get comment nodes. So yes the docs should be updated, good catch.",
+      "parentUuid": "4e04eb01_978957cd",
+      "revId": "ace7e1fe089d670d253f02379db32b06258f69f5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
