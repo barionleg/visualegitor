@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e04eb01_77d6cb55",
+        "filename": "modules/ve/dm/ve.dm.Converter.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 640,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2014-03-10T21:36:25Z",
+      "side": 1,
+      "message": "Should probably be called childNode. Especially considering the DOM exposes child elements (Element#children) separately from child nodes (Node#childNodes).\n\nFixed in Ie224aff469ccaec.",
+      "revId": "ace7e1fe089d670d253f02379db32b06258f69f5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
