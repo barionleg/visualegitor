@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e0177f3_9067c222",
+        "filename": "modules/ve/dm/metaitems/ve.dm.CommentMetaItem.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2014-03-11T22:34:08Z",
+      "side": 1,
+      "message": "Using .data is relatively uncommon, but actually better than using .nodeValue imho (it\u0027s also marginally faster in latest versions of Chrome/Safari/Firefox/Opera by my testing via jsperf.com, as expected since there is abstraction logic involved in their implementation).\n\nHowever we should use .data for text nodes as well in that case.\n\n\"data\" property is implemented by the CharacterData interface, which both Text and Comment node extend.\n\n\"nodeValue\" is a generic properly by the Node abstract interface for all nodes, and then abstracted via Text, Comment and all other node classes to return something appropriate (this.data in case of the CharacterData interface).",
+      "revId": "037dddad3328986c612653f9f6742b3fbadef832",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
