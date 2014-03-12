@@ -19,8 +19,13 @@ ve.ui.MobileContext = function VeUiMobileContext( surface, config ) {
 	// Parent constructor
 	ve.ui.Context.call( this, surface, config );
 
+	// Events
+	this.inspectors.connect( this, {
+		'open': 'show',
+		'close': 'hide'
+	} );
+
 	// Initialization
-	// TODO: do something more fancy, PanelLayout or a new drawer OOUI widget
 	this.$element
 		.addClass( 've-ui-mobileContext' )
 		.append( this.inspectors.$element );
@@ -29,3 +34,25 @@ ve.ui.MobileContext = function VeUiMobileContext( surface, config ) {
 /* Inheritance */
 
 OO.inheritClass( ve.ui.MobileContext, ve.ui.Context );
+
+/* Methods */
+
+/**
+ * Shows the context.
+ *
+ * @method
+ * @chainable
+ */
+ve.ui.MobileContext.prototype.show = function () {
+	this.$element.addClass( 'visible' );
+};
+
+/**
+ * Hides the context.
+ *
+ * @method
+ * @chainable
+ */
+ve.ui.MobileContext.prototype.hide = function () {
+	this.$element.removeClass( 'visible' );
+};

@@ -233,6 +233,7 @@
 			"modules/ve/ce/styles/ve.ce.Node.css",
 			"modules/ve/ce/styles/ve.ce.Surface.css",
 			"modules/ve/ui/styles/ve.ui.DesktopContext.css",
+			"modules/ve/ui/styles/ve.ui.MobileContext.css",
 			"modules/ve/ui/styles/ve.ui.Dialog.css",
 			"modules/ve/ui/styles/ve.ui.Inspector.css",
 			"modules/ve/ui/styles/ve.ui.Surface.css",
