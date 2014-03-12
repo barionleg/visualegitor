@@ -1683,15 +1683,9 @@ ve.ce.Surface.prototype.handleEnter = function ( e ) {
 		cursor = selection.from,
 		stack = [],
 		outermostNode = null,
-		node = this.documentView.getNodeFromOffset( selection.from ),
+		node = null,
 		nodeModel = null,
 		nodeModelRange = null;
-
-	if ( node !== null ) {
-		// assertion: node is certainly a contentBranchNode
-		nodeModel = node.getModel();
-		nodeModelRange = nodeModel.getRange();
-	}
 
 	// Handle removal first
 	if ( selection.from !== selection.to ) {
@@ -1699,6 +1693,13 @@ ve.ce.Surface.prototype.handleEnter = function ( e ) {
 		selection = txRemove.translateRange( selection );
 		// We do want this to propagate to the surface
 		this.model.change( txRemove, selection );
+	}
+
+	node = this.documentView.getNodeFromOffset( selection.from );
+	if ( node !== null ) {
+		// assertion: node is certainly a contentBranchNode
+		nodeModel = node.getModel();
+		nodeModelRange = nodeModel.getRange();
 	}
 
 	// Handle insertion
