@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e0177f3_cdfb6b10",
+        "filename": "modules/ve/dm/ve.dm.Transaction.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 1247,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2014-03-12T22:27:18Z",
+      "side": 1,
+      "message": "@throws {Error} If range is empty or starts before currentOffset",
+      "revId": "dba60fa8e08772c6549251d6c42fdf52567efecc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
