@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e0177f3_f3bf2ba6",
+        "filename": "modules/ve/ce/ve.ce.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-03-12T18:29:11Z",
+      "side": 1,
+      "message": "Hmm, why don\u0027t we just use a switch-case with the actual symbolic constants here, like we do in dm.Converter?",
+      "revId": "e34631527ac644e3ad1aaa8c3c500fb758f9315f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
