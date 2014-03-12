@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "2e0177f3_ae649a46",
+        "filename": "modules/ve/ce/ve.ce.Surface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 1686,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2014-03-12T20:11:10Z",
+      "side": 1,
+      "message": "In case of unconditional assignment, it\u0027s best to just initialise this to no value up near 1677, no need to assign \u0027null\u0027 first.",
+      "revId": "1289ea7f4c9ade19fac6bceaaaf7f97c51bb34d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e0177f3_ee23c2fe",
         "filename": "modules/ve/ce/ve.ce.Surface.js",
         "patchSetId": 2
