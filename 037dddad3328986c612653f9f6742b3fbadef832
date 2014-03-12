@@ -16,6 +16,24 @@
       "revId": "037dddad3328986c612653f9f6742b3fbadef832",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e0177f3_f3fe0bab",
+        "filename": "modules/ve/dm/metaitems/ve.dm.CommentMetaItem.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-03-12T18:15:05Z",
+      "side": 1,
+      "message": "We do use .data for text nodes. Go check the Converter code ;) . There\u0027s exactly one occurrence of .nodeValue in all of VE, in ve.ce.js; I didn\u0027t write that one, and we should fix it.\n\nConverter also extensively uses insertData()/appendData(), rather than modifying the .data property directly.",
+      "parentUuid": "2e0177f3_9067c222",
+      "revId": "037dddad3328986c612653f9f6742b3fbadef832",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
