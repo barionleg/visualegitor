@@ -16,6 +16,24 @@
       "revId": "e34631527ac644e3ad1aaa8c3c500fb758f9315f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e0177f3_d3eaef9b",
+        "filename": "modules/ve/ce/ve.ce.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2014-03-12T18:31:06Z",
+      "side": 1,
+      "message": "Because this was written for older browsers (the Node class and its constants not exposed in javascript yet) by jQuery and Sizzle which we based this on originally. The why not switch case, probably because it squeezed out a few bytes for jQuery.",
+      "parentUuid": "2e0177f3_f3bf2ba6",
+      "revId": "e34631527ac644e3ad1aaa8c3c500fb758f9315f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
