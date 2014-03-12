@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e0177f3_cebec6fa",
+        "filename": "modules/ve/dm/ve.dm.ModelRegistry.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2014-03-12T19:22:58Z",
+      "side": 1,
+      "message": "Rename element to node? Only a few occurrences here.",
+      "revId": "b66d482021b8b2c3ea59540464594ec38f94da40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e0177f3_eec18284",
+        "filename": "modules/ve/test/dm/ve.dm.ModelRegistry.test.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2014-03-12T19:22:58Z",
+      "side": 1,
+      "message": "Rename element to node?",
+      "revId": "b66d482021b8b2c3ea59540464594ec38f94da40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
