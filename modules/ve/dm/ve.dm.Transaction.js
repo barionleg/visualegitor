@@ -20,7 +20,8 @@ ve.dm.Transaction = function VeDmTransaction() {
 /* Static Methods */
 
 /**
- * Generate a transaction that replaces data in a range.
+ * Generate a transaction that replaces data in a range. This function may only be used
+ * for content-only replacements.
  *
  * @method
  * @param {ve.dm.Document} doc Document to create transaction for
@@ -28,10 +29,18 @@ ve.dm.Transaction = function VeDmTransaction() {
  * @param {Array} data Data to insert
  * @param {boolean} [removeMetadata=false] Remove metadata instead of collapsing it
  * @returns {ve.dm.Transaction} Transaction that replaces data
- * @throws {Error} Invalid range
+ * @throws {Error} If the insertion or removal contains non-content data
  */
 ve.dm.Transaction.newFromReplacement = function ( doc, range, data, removeMetadata ) {
-	var endOffset, tx = new ve.dm.Transaction();
+	var endOffset, tx, insertLd, removeLd;
+	// Verify that the replacement is content-only
+	insertLd = new ve.dm.ElementLinearData( doc.getStore(), data );
+	removeLd = doc.data.sliceObject( range.start, range.end );
+	if ( !insertLd.isContentData() || !removeLd.isContentData() ) {
+		throw new Error( 'newFromReplacement can only be used for content replacements' );
+	}
+
+	tx = new ve.dm.Transaction();
 	endOffset = tx.pushRemoval( doc, 0, range, removeMetadata );
 	endOffset = tx.pushInsertion( doc, endOffset, endOffset, data );
 	tx.pushFinalRetain( doc, endOffset );
@@ -1211,10 +1220,14 @@ ve.dm.Transaction.prototype.pushStopAnnotating = function ( method, annotation )
  * @param {number} insertOffset Offset to insert at
  * @param {Array} data Linear model data to insert
  * @returns {number} End offset of the insertion
+ * @throws {Error} If the corrected value of insertOffset is less than currentOffset
  */
 ve.dm.Transaction.prototype.pushInsertion = function ( doc, currentOffset, insertOffset, data ) {
 	// Fix up the insertion
 	var insertion = doc.fixupInsertion( data, insertOffset );
+	if ( insertion.offset < currentOffset ) {
+		throw new Error( 'currentOffset is past requested insertion' );
+	}
 	// Retain up to insertion point, if needed
 	this.pushRetain( insertion.offset - currentOffset );
 	// Insert data
@@ -1229,7 +1242,7 @@ ve.dm.Transaction.prototype.pushInsertion = function ( doc, currentOffset, inser
  * @private
  * @param {ve.dm.Document} doc Document to create transaction for
  * @param {number} currentOffset Offset up to which the transaction has gone already
- * @param {ve.Range} range Range to remove
+ * @param {ve.Range} range Range to remove; range.start may not be less than currentOffset
  * @param {boolean} [removeMetadata=false] Remove metadata instead of collapsing it
  * @returns {number} End offset of the removal
  */
@@ -1242,6 +1255,10 @@ ve.dm.Transaction.prototype.pushRemoval = function ( doc, currentOffset, range, 
 	if ( range.isCollapsed() ) {
 		// Empty range, nothing to remove
 		return currentOffset;
+	}
+	if ( range.start < currentOffset ) {
+		// We can't touch anything before currentOffset
+		throw new Error( 'currentOffset is past requested removal' );
 	}
 	// Select nodes and validate selection
 	selection = doc.selectNodes( range, 'covered' );
