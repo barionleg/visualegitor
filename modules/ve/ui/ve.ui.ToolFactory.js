@@ -27,12 +27,7 @@ OO.inheritClass( ve.ui.ToolFactory, OO.ui.ToolFactory );
 /**
  * Get a list of tools from a set of annotations.
  *
- * The most specific tool will be chosen based on inheritance - mostly. The order of being added
- * also matters if the candidate classes aren't all in the same inheritance chain, and since object
- * properties aren't necessarily ordered it's not predictable what the effect of ordering will be.
- *
- * TODO: Add tracking of order of registration using an array and prioritize the most recently
- * registered candidate.
+ * The lowest compatible item in each inheritance chain will be used.
  *
  * @method
  * @param {ve.dm.AnnotationSet} annotations Annotations to be inspected
@@ -43,60 +38,75 @@ ve.ui.ToolFactory.prototype.getToolsForAnnotations = function ( annotations ) {
 		return [];
 	}
 
-	var i, len, annotation, name, tool, candidateTool, candidateToolName,
+	var i, len,
 		arr = annotations.get(),
+		tools = [],
 		matches = [];
 
 	for ( i = 0, len = arr.length; i < len; i++ ) {
-		annotation = arr[i];
-		candidateTool = null;
-		for ( name in this.registry ) {
-			tool = this.registry[name];
-			if ( tool.static.isCompatibleWith( annotation ) ) {
-				if ( !candidateTool || tool.prototype instanceof candidateTool ) {
-					candidateTool = tool;
-					candidateToolName = name;
-				}
-			}
-		}
-		if ( candidateTool ) {
-			matches.push( candidateToolName );
-		}
+		tools = tools.concat( this.collectCompatibleTools( arr[i] ) );
 	}
+	for ( i = 0, len = tools.length; i < len; i++ ) {
+		matches.push( tools[i].static.name );
+	}
+
 	return matches;
 };
 
 /**
  * Get a tool for a node.
  *
- * The most specific tool will be chosen based on inheritance - mostly. The order of being added
- * also matters if the candidate classes aren't all in the same inheritance chain, and since object
- * properties aren't necessarily ordered it's not predictable what the effect of ordering will be.
- *
- * TODO: Add tracking of order of registration using an array and prioritize the most recently
- * registered candidate.
+ * The lowest compatible item in each inheritance chain will be used.
  *
  * @method
  * @param {ve.dm.Node} node Node to be edited
- * @returns {string|undefined} Symbolic name of tool that can be used to edit node
+ * @returns {string[]} Symbolic name of tool that can be used to edit node
  */
-ve.ui.ToolFactory.prototype.getToolForNode = function ( node ) {
-	var name, tool, candidateTool, candidateToolName;
-
+ve.ui.ToolFactory.prototype.getToolsForNode = function ( node ) {
 	if ( !node.isInspectable() ) {
-		return undefined;
+		return [];
 	}
 
+	var i, len, tools,
+		matches = [];
+
+	tools = this.collectCompatibleTools( node );
+	for ( i = 0, len = tools.length; i < len; i++ ) {
+		matches.push( tools[i].static.name );
+	}
+
+	return matches;
+};
+
+/**
+ * Collect the most specific compatible tools for an annotation or node.
+ *
+ * @param {ve.dm.Annotation|ve.dm.Node} subject Annotation or node
+ * @returns {Function[]} List of comptible tools
+ */
+ve.ui.ToolFactory.prototype.collectCompatibleTools = function ( subject ) {
+	var i, len, name, candidate,
+		candidates = [];
+
 	for ( name in this.registry ) {
-		tool = this.registry[name];
-		if ( tool.static.isCompatibleWith( node ) ) {
-			if ( !candidateTool || tool.prototype instanceof candidateTool ) {
-				candidateTool = tool;
-				candidateToolName = name;
+		candidate = this.registry[name];
+		if ( candidate.static.isCompatibleWith( subject ) ) {
+			for ( i = 0, len = candidates.length; i < len; i++ ) {
+				if ( candidate.prototype instanceof candidates[i] ) {
+					// Candidate is a subclass of existing candidate, replace existing candidate
+					candidates.splice( i, 1, candidate );
+				} else if ( !( candidates[i].prototype instanceof candidate ) ) {
+					// Candidate is of a new inheritance chain, add candidate
+					candidates.push( candidate );
+				}
+			}
+			if ( candidates.length === 0 ) {
+				candidates.push( candidate );
 			}
 		}
 	}
-	return candidateToolName;
+
+	return candidates;
 };
 
 /* Initialization */
