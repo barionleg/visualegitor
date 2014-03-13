@@ -34,6 +34,24 @@
       "revId": "2ea4ca9274df011174b353d672768c14e008a5e0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_99493bd6",
+        "filename": "modules/ve/ce/ve.ce.ResizableNode.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2014-03-13T17:58:36Z",
+      "side": 1,
+      "message": "Cool, overlooked that early return statement.",
+      "parentUuid": "6ef7ef47_a04ef4c2",
+      "revId": "2ea4ca9274df011174b353d672768c14e008a5e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
