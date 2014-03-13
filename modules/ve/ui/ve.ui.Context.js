@@ -274,7 +274,7 @@ ve.ui.Context.prototype.destroy = function () {
  * @chainable
  */
 ve.ui.Context.prototype.update = function ( transition, repositionOnly ) {
-	var i, nodes, tools, tool,
+	var i, nodes, tools,
 		fragment = this.surface.getModel().getFragment( null, false ),
 		selection = fragment.getRange(),
 		inspector = this.inspectors.getCurrentWindow();
@@ -293,10 +293,7 @@ ve.ui.Context.prototype.update = function ( transition, repositionOnly ) {
 			}
 		}
 		if ( nodes.length === 1 ) {
-			tool = ve.ui.toolFactory.getToolForNode( nodes[0].node );
-			if ( tool ) {
-				tools.push( tool );
-			}
+			tools = tools.concat( ve.ui.toolFactory.getToolsForNode( nodes[0].node ) );
 		}
 		if ( tools.length ) {
 			// There's at least one inspectable annotation, build a menu and show it
