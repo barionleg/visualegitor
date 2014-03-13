@@ -5,6 +5,8 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
+/*global mw */
+
 /**
  * Special character inspector.
  *
@@ -133,8 +135,8 @@ ve.ui.SpecialCharacterInspector.prototype.setup = function ( data ) {
 ve.ui.SpecialCharacterInspector.prototype.fetchCharList = function () {
 	var charsList, charsObj;
 
-	// Get the character list
-	charsList = ve.msg( 'visualeditor-specialcharinspector-characterlist-insert' );
+	// Get the character list, must use mw.message to avoid JSON being parsed as Wikitext
+	charsList = mw.message( 'visualeditor-specialcharinspector-characterlist-insert' ).plain();
 	try {
 		charsObj = $.parseJSON( charsList );
 	} catch ( err ) {
