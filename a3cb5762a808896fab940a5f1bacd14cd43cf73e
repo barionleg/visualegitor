@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee14bf34_18107c5a",
+        "filename": "modules/ve/ce/ve.ce.ContentBranchNode.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-03-15T01:37:08Z",
+      "side": 1,
+      "message": "We should delete the property when we\u0027re done with it at least, that\u0027s what we do everywhere we have temporary DOM node properties.\n\nI don\u0027t think garbage collection is a problem though. There are no circular references involved so we\u0027d only have a problem if a caller retains a reference to the output for a long time without resolving it. Which seems silly and already would already be a waste of memory, this just makes it waste (up to) twice as much.",
+      "parentUuid": "ee14bf34_f854a858",
+      "revId": "a3cb5762a808896fab940a5f1bacd14cd43cf73e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_581034ad",
         "filename": "modules/ve/ce/ve.ce.ContentBranchNode.js",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2014-03-15T00:29:03Z",
       "side": 1,
       "message": "Nicer",
+      "revId": "a3cb5762a808896fab940a5f1bacd14cd43cf73e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_f80ca847",
+        "filename": "modules/ve/ce/ve.ce.ContentBranchNode.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-03-15T01:37:08Z",
+      "side": 1,
+      "message": "Yeah. I needed a wrapper node for the resolution function anyway. I mean I could\u0027ve written that one to also work with an array but that would have been awkward.\n\nAlso, fun fact: loops like for ( i \u003d 0 ... ) don\u0027t work here because attaching a node in one place detaches it in the other, so incrementing i skips a node and depending on whether you have an odd or even number might even go out of bounds at the end. Despite having figured this out years ago, I still make this mistake all the time, including when writing this commit.",
+      "parentUuid": "ee14bf34_581034ad",
       "revId": "a3cb5762a808896fab940a5f1bacd14cd43cf73e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -64,6 +100,24 @@
       "writtenOn": "2014-03-15T00:29:03Z",
       "side": 1,
       "message": "This change means the appended contents are now normalized. I can\u0027t think of a problem with that though - is there any danger from attribute reordering, say?",
+      "revId": "a3cb5762a808896fab940a5f1bacd14cd43cf73e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_d809e435",
+        "filename": "modules/ve/ce/ve.ce.ContentBranchNode.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-03-15T01:37:08Z",
+      "side": 1,
+      "message": "No, the documentation of .normalize() is pretty clear that it only messes with text nodes. https://developer.mozilla.org/en-US/docs/Web/API/Node.normalize",
+      "parentUuid": "ee14bf34_7882d8ce",
       "revId": "a3cb5762a808896fab940a5f1bacd14cd43cf73e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
