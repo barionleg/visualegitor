@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_f854a858",
+        "filename": "modules/ve/ce/ve.ce.ContentBranchNode.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2014-03-15T00:29:03Z",
+      "side": 1,
+      "message": "Do we need to worry about garbage collection, in a hypothetical case where the return value is retained by the caller for some reason? It so, it would probably be an issue with the old version too, but a subtler one now perhaps ... should getRenderedContents / appendRenderedContents be private?",
+      "revId": "a3cb5762a808896fab940a5f1bacd14cd43cf73e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_581034ad",
+        "filename": "modules/ve/ce/ve.ce.ContentBranchNode.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2014-03-15T00:29:03Z",
+      "side": 1,
+      "message": "Nicer",
+      "revId": "a3cb5762a808896fab940a5f1bacd14cd43cf73e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_d82324ff",
+        "filename": "modules/ve/ce/ve.ce.ContentBranchNode.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2014-03-15T00:29:03Z",
+      "side": 1,
+      "message": "At first, I wondered whether getRenderedContents should normalize, since the only issue we\u0027re encountering here is non-normal text node splitting (and not, say, attribute reordering). But on reflection, I think keeping the two .normalize() statements together is clearer.",
+      "revId": "a3cb5762a808896fab940a5f1bacd14cd43cf73e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_7882d8ce",
+        "filename": "modules/ve/ce/ve.ce.ContentBranchNode.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2014-03-15T00:29:03Z",
+      "side": 1,
+      "message": "This change means the appended contents are now normalized. I can\u0027t think of a problem with that though - is there any danger from attribute reordering, say?",
+      "revId": "a3cb5762a808896fab940a5f1bacd14cd43cf73e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
