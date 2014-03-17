@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_503da4b7",
+        "filename": "modules/ve/ui/ve.ui.ToolFactory.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-03-17T18:35:11Z",
+      "side": 1,
+      "message": "This function is called in other places too. You should grep for callers and update them. See the Jenkins output for a selection of things that are now exploding because this function was renamed.",
+      "revId": "dcb330c452a76ca86536131cf5ee9f9145a13813",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
