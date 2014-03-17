@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_edbcdfb3",
+        "filename": "modules/ve/ui/ve.ui.ToolFactory.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-03-17T17:46:54Z",
+      "side": 1,
+      "message": "This doesn\u0027t filter duplicates in case there is a tool that is compatible with multiple annotations, and two or more of those annotations are passed in.",
+      "revId": "beeadaddebb2203fa41514a7ca8c48ae0e1dcd98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_8de323d4",
+        "filename": "modules/ve/ui/ve.ui.ToolFactory.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-03-17T17:46:54Z",
+      "side": 1,
+      "message": "Comptible? List of tools that can be compted? ;)",
+      "revId": "beeadaddebb2203fa41514a7ca8c48ae0e1dcd98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_0dd713f4",
+        "filename": "modules/ve/ui/ve.ui.ToolFactory.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-03-17T17:46:54Z",
+      "side": 1,
+      "message": "This is wrong. If there are multiple entries in candidates that aren\u0027t subclasses or superclasses of candidate, candidate will be added multiple times. If there are some entries in candidates that are subclasses of candidate, then candidate shouldn\u0027t be added, but if there are also some entries that aren\u0027t super- or subclasses, candidate will be added anyway, possibly multiple times.\n\nInstead, you should go through the entire array, then only if you reach the end without seeing anything, add candidate. This also allows you to get rid of the length \u003d\u003d\u003d 0 special case.",
+      "revId": "beeadaddebb2203fa41514a7ca8c48ae0e1dcd98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
