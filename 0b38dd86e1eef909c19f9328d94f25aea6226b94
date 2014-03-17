@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_4d9f4b56",
+        "filename": "modules/ve/ui/tools/ve.ui.DialogTool.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-03-17T17:37:49Z",
+      "side": 1,
+      "message": "Why false? Also, surely all subclasses are required to implement this? Why not leave the exception-throwing version from OO.ui.Tool in place?",
+      "revId": "0b38dd86e1eef909c19f9328d94f25aea6226b94",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
