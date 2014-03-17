@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_bb2f41f3",
+        "filename": "modules/ve/ce/ve.ce.ClickableNode.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 88
+      },
+      "writtenOn": "2014-03-17T21:07:47Z",
+      "side": 1,
+      "message": "We really should be using the command registry for this. Nodes should have a static property that defines their primary command, which is used when they are double clicked. I think most but not all the rigging for this is in place, but it\u0027s the way the system really aught to be setup.\n\nSomething like this:\n\nvar command \u003d ve.ui.commandRegistry.getCommandForNode( node );\nif ( command ) {\n    this.surface.execute( command );\n}\n\nThat way we can fully abstract what executing the command does and which nodes use which commands.",
+      "revId": "5d522ebc9253e9c153bb052baa4c26025d65346b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
