@@ -1,5 +1,5 @@
 /*!
- * VisualEditor Scalable class.
+ * VisualEditor DataModel Scalable class.
  *
  * @copyright 2011-2014 VisualEditor Team and others; see AUTHORS.txt
  * @license The MIT License (MIT); see LICENSE.txt
@@ -21,15 +21,21 @@
  * @cfg {boolean} [enforceMin=true] Enforce the minimum dimensions
  * @cfg {boolean} [enforceMax=true] Enforce the maximum dimensions
  */
-ve.Scalable = function VeScalable( config ) {
+ve.dm.Scalable = function VeDmScalable( config ) {
 	config = ve.extendObject( {
 		'fixedRatio': true
 	}, config );
 
 	// Properties
 	this.fixedRatio = config.fixedRatio;
-	this.currentDimensions = config.currentDimensions || null;
-	this.originalDimensions = config.originalDimensions || null;
+	if ( config.originalDimensions ) {
+		this.setOriginalDimensions( config.originalDimensions );
+	}
+	if ( config.currentDimensions ) {
+		this.setCurrentDimensions( config.currentDimensions );
+	}
+
+
 	this.minDimensions = config.minDimensions || null;
 	this.maxDimensions = config.maxDimensions || null;
 	this.enforceMin = config.enforceMin !== false;
@@ -45,7 +51,7 @@ ve.Scalable = function VeScalable( config ) {
 /**
  * Call setters with current values so computed values are updated
  */
-ve.Scalable.prototype.init = function () {
+ve.dm.Scalable.prototype.init = function () {
 	if ( this.currentDimensions ) {
 		this.setCurrentDimensions( this.currentDimensions );
 	}
@@ -63,9 +69,9 @@ ve.Scalable.prototype.init = function () {
 /**
  * Set properties from another scalable object
  *
- * @param {ve.Scalable} scalable Scalable object
- */
-ve.Scalable.prototype.setPropertiesFromScalable = function ( scalable ) {
+ * @param {ve.dm.Scalable} scalable Scalable object
+ *
+ve.dm.Scalable.prototype.setPropertiesFromScalable = function ( scalable ) {
 	// Properties
 	this.fixedRatio = scalable.fixedRatio;
 	this.currentDimensions = scalable.currentDimensions;
@@ -87,18 +93,18 @@ ve.Scalable.prototype.setPropertiesFromScalable = function ( scalable ) {
  *
  * @param {Object} dimensions Dimensions object with width & height
  */
-ve.Scalable.prototype.setRatioFromDimensions = function ( dimensions ) {
+ve.dm.Scalable.prototype.setRatioFromDimensions = function ( dimensions ) {
 	if ( dimensions.width && dimensions.height ) {
 		this.ratio = dimensions.width / dimensions.height;
 	}
 };
 
 /**
- * Set the original dimensions of an image
+ * Set the current dimensions of an image
  *
  * @param {Object} dimensions Dimensions object with width & height
  */
-ve.Scalable.prototype.setCurrentDimensions = function ( dimensions ) {
+ve.dm.Scalable.prototype.setCurrentDimensions = function ( dimensions ) {
 	this.currentDimensions = ve.copy( dimensions );
 	// Only use current dimensions for ratio if it isn't set
 	if ( this.fixedRatio && !this.ratio ) {
@@ -112,7 +118,7 @@ ve.Scalable.prototype.setCurrentDimensions = function ( dimensions ) {
  *
  * @param {Object} dimensions Dimensions object with width & height
  */
-ve.Scalable.prototype.setOriginalDimensions = function ( dimensions ) {
+ve.dm.Scalable.prototype.setOriginalDimensions = function ( dimensions ) {
 	this.originalDimensions = ve.copy( dimensions );
 	// Always overwrite ratio
 	if ( this.fixedRatio ) {
@@ -125,7 +131,7 @@ ve.Scalable.prototype.setOriginalDimensions = function ( dimensions ) {
  *
  * @param {Object} dimensions Dimensions object with width & height
  */
-ve.Scalable.prototype.setMinDimensions = function ( dimensions ) {
+ve.dm.Scalable.prototype.setMinDimensions = function ( dimensions ) {
 	this.minDimensions = ve.copy( dimensions );
 	this.valid = null;
 };
@@ -135,7 +141,7 @@ ve.Scalable.prototype.setMinDimensions = function ( dimensions ) {
  *
  * @param {Object} dimensions Dimensions object with width & height
  */
-ve.Scalable.prototype.setMaxDimensions = function ( dimensions ) {
+ve.dm.Scalable.prototype.setMaxDimensions = function ( dimensions ) {
 	this.maxDimensions = ve.copy( dimensions );
 	this.valid = null;
 };
@@ -145,7 +151,7 @@ ve.Scalable.prototype.setMaxDimensions = function ( dimensions ) {
  *
  * @returns {Object} Dimensions object with width & height
  */
-ve.Scalable.prototype.getCurrentDimensions = function () {
+ve.dm.Scalable.prototype.getCurrentDimensions = function () {
 	return this.currentDimensions;
 };
 
@@ -154,7 +160,7 @@ ve.Scalable.prototype.getCurrentDimensions = function () {
  *
  * @returns {Object} Dimensions object with width & height
  */
-ve.Scalable.prototype.getOriginalDimensions = function () {
+ve.dm.Scalable.prototype.getOriginalDimensions = function () {
 	return this.originalDimensions;
 };
 
@@ -163,7 +169,7 @@ ve.Scalable.prototype.getOriginalDimensions = function () {
  *
  * @returns {Object} Dimensions object with width & height
  */
-ve.Scalable.prototype.getMinDimensions = function () {
+ve.dm.Scalable.prototype.getMinDimensions = function () {
 	return this.minDimensions;
 };
 
@@ -172,7 +178,7 @@ ve.Scalable.prototype.getMinDimensions = function () {
  *
  * @returns {Object} Dimensions object with width & height
  */
-ve.Scalable.prototype.getMaxDimensions = function () {
+ve.dm.Scalable.prototype.getMaxDimensions = function () {
 	return this.maxDimensions;
 };
 
@@ -181,7 +187,7 @@ ve.Scalable.prototype.getMaxDimensions = function () {
  *
  * @returns {boolean} Enforces the minimum dimensions
  */
-ve.Scalable.prototype.isEnforcedMin = function () {
+ve.dm.Scalable.prototype.isEnforcedMin = function () {
 	return this.enforceMin;
 };
 
@@ -190,7 +196,7 @@ ve.Scalable.prototype.isEnforcedMin = function () {
  *
  * @returns {boolean} Enforces the maximum dimensions
  */
-ve.Scalable.prototype.isEnforcedMax = function () {
+ve.dm.Scalable.prototype.isEnforcedMax = function () {
 	return this.enforceMax;
 };
 
@@ -199,7 +205,7 @@ ve.Scalable.prototype.isEnforcedMax = function () {
  *
  * @param {boolean} enforceMin Enforces the minimum dimensions
  */
-ve.Scalable.prototype.setEnforcedMin = function ( enforceMin ) {
+ve.dm.Scalable.prototype.setEnforcedMin = function ( enforceMin ) {
 	this.valid = null;
 	this.enforceMin = enforceMin;
 };
@@ -209,7 +215,7 @@ ve.Scalable.prototype.setEnforcedMin = function ( enforceMin ) {
  *
  * @param {boolean} enforceMax Enforces the maximum dimensions
  */
-ve.Scalable.prototype.setEnforcedMax = function ( enforceMax ) {
+ve.dm.Scalable.prototype.setEnforcedMax = function ( enforceMax ) {
 	this.valid = null;
 	this.enforceMax = enforceMax;
 };
@@ -219,7 +225,7 @@ ve.Scalable.prototype.setEnforcedMax = function ( enforceMax ) {
  *
  * @returns {number} Aspect ratio
  */
-ve.Scalable.prototype.getRatio = function () {
+ve.dm.Scalable.prototype.getRatio = function () {
 	return this.ratio;
 };
 
@@ -228,7 +234,7 @@ ve.Scalable.prototype.getRatio = function () {
  *
  * @returns {boolean} The object has a fixed ratio
  */
-ve.Scalable.prototype.isFixedRatio = function () {
+ve.dm.Scalable.prototype.isFixedRatio = function () {
 	return this.fixedRatio;
 };
 
@@ -237,7 +243,7 @@ ve.Scalable.prototype.isFixedRatio = function () {
  *
  * @returns {number|null} A scale (1=100%), or null if not applicable
  */
-ve.Scalable.prototype.getCurrentScale = function () {
+ve.dm.Scalable.prototype.getCurrentScale = function () {
 	if ( !this.isFixedRatio() || !this.getCurrentDimensions() || !this.getOriginalDimensions() ) {
 		return null;
 	}
@@ -251,7 +257,7 @@ ve.Scalable.prototype.getCurrentScale = function () {
  *
  * @returns {boolean} Current dimensions are greater than maximum dimensions
  */
-ve.Scalable.prototype.isTooSmall = function () {
+ve.dm.Scalable.prototype.isTooSmall = function () {
 	return !!( this.getCurrentDimensions() && this.getMinDimensions() && (
 			this.getCurrentDimensions().width < this.getMinDimensions().width ||
 			this.getCurrentDimensions().height < this.getMinDimensions().height
@@ -265,11 +271,34 @@ ve.Scalable.prototype.isTooSmall = function () {
  *
  * @returns {boolean} Current dimensions are greater than maximum dimensions
  */
-ve.Scalable.prototype.isTooLarge = function () {
+ve.dm.Scalable.prototype.isTooLarge = function () {
 	return !!( this.getCurrentDimensions() && this.getMaxDimensions() && (
 			this.getCurrentDimensions().width > this.getMaxDimensions().width ||
 			this.getCurrentDimensions().height > this.getMaxDimensions().height
 		) );
+};
+
+/**
+ * Calculate the dimensions from a given value of either width or height.
+ * This method doesn't take into account any restrictions of minimum or maximum,
+ * it simply calculates the new dimensions according to the aspect ratio in case
+ * it exists.
+ *
+ * @param {Object} dimensions Dimensions object with either width or height
+ * 	if both are given, the object will be returned as-is.
+ * @returns {Object} Dimensions object with width and height
+ */
+ve.dm.Scalable.prototype.getDimensionsFromValue = function ( dimensions ) {
+	dimensions = dimensions || {};
+
+	if ( !dimensions.height && this.getRatio() !== null && $.isNumeric( dimensions.width ) ) {
+		dimensions.height = Math.round( dimensions.width / this.getRatio() );
+	}
+	if ( !dimensions.width && this.getRatio() !== null && $.isNumeric( dimensions.height ) ) {
+		dimensions.width = Math.round( dimensions.height * this.getRatio() );
+	}
+
+	return dimensions;
 };
 
 /**
@@ -279,7 +308,7 @@ ve.Scalable.prototype.isTooLarge = function () {
  * @param {number} [grid] Optional grid size to snap to
  * @returns {Object} Dimensions object with width & height
  */
-ve.Scalable.prototype.getBoundedDimensions = function ( dimensions, grid ) {
+ve.dm.Scalable.prototype.getBoundedDimensions = function ( dimensions, grid ) {
 	var ratio, snap, snapMin, snapMax,
 		minDimensions = this.isEnforcedMin() && this.getMinDimensions(),
 		maxDimensions = this.isEnforcedMax() && this.getMaxDimensions();
@@ -332,7 +361,7 @@ ve.Scalable.prototype.getBoundedDimensions = function ( dimensions, grid ) {
  *
  * @returns {boolean} Current dimensions are valid
  */
-ve.Scalable.prototype.isCurrentDimensionsValid = function () {
+ve.dm.Scalable.prototype.isCurrentDimensionsValid = function () {
 	if ( this.valid === null ) {
 		var dimensions = this.getCurrentDimensions(),
 			minDimensions = this.isEnforcedMin() && this.getMinDimensions(),

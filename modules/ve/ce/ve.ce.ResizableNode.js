@@ -23,9 +23,6 @@
 ve.ce.ResizableNode = function VeCeResizableNode( $resizable, config ) {
 	config = config || {};
 
-	// Mixin constructors
-	ve.Scalable.call( this, config );
-
 	// Properties
 	this.$resizable = $resizable || this.$element;
 	this.resizing = false;
@@ -68,15 +65,15 @@ ve.ce.ResizableNode = function VeCeResizableNode( $resizable, config ) {
 			.addClass( 've-ce-resizableNode-swHandle ve-ui-icon-resize-ne-sw' )
 			.data( 'handle', 'sw' ) );
 
-	this.setCurrentDimensions( {
-		'width': this.model.getAttribute( 'width' ),
-		'height': this.model.getAttribute( 'height' )
-	} );
+	// Scalable object ftw
+	this.scalable = this.model.getScalable();
+//	this.setCurrentDimensions( {
+//		'width': this.model.getAttribute( 'width' ),
+//		'height': this.model.getAttribute( 'height' )
+//	} );
 };
 
 /* Inheritance */
-
-OO.mixinClass( ve.ce.ResizableNode, ve.Scalable );
 
 /* Events */
 
@@ -115,12 +112,12 @@ ve.ce.ResizableNode.prototype.getResizableOffset = function () {
 
 /** */
 ve.ce.ResizableNode.prototype.setOriginalDimensions = function ( dimensions ) {
-	// Parent method
-	ve.Scalable.prototype.setOriginalDimensions.call( this, dimensions );
+	this.scalable.setOriginalDimensions( dimensions );
+//	ve.Scalable.prototype.setOriginalDimensions.call( this, dimensions );
 	// If dimensions are valid and the scale label is desired, enable it
 	this.canShowScaleLabel = this.showScaleLabel &&
-		this.getOriginalDimensions().width &&
-		this.getOriginalDimensions().height;
+		this.scalable.getOriginalDimensions().width &&
+		this.scalable.getOriginalDimensions().height;
 };
 
 /**
