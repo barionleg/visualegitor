@@ -16,6 +16,24 @@
       "revId": "5d522ebc9253e9c153bb052baa4c26025d65346b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee14bf34_0416c54d",
+        "filename": "modules/ve/ce/ve.ce.ClickableNode.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 53
+      },
+      "writtenOn": "2014-03-18T20:18:02Z",
+      "side": 1,
+      "message": "I can make a static property for the command in the node just fine, however i cannot create the ui command upon the creation of the node because ve.ui doesn\u0027t exist quite yet.  However, I can provide a static command configuration as an array like [\u0027MwImageNode\u0027, \u0027dialog\u0027, \u0027open\u0027, \u0027mediaEdit\u0027].  \n\nThen in getCommandForNode, I can pull the constructor.static.property of the node to get that command\u0027s configuration.  From there, create the command.  At this point I can register it but this doesn\u0027t seem necessary as it works either way. \n\nAll so it can finally be executed wherever ( in this case the double click event ).   This allows the nodes to be a little more configurable.  Though it makes me wonder, why not just skip the registry keep the node configuration and then just execute that from the surface which seems to be taking place anyway.  \n\nPerhaps it makes sense to register the commands in the command registry by name and then just have the name be in the static property... I think I may have just answered my own question.  I\u0027ll give that a go and see what you think.",
+      "parentUuid": "ee14bf34_bb2f41f3",
+      "revId": "5d522ebc9253e9c153bb052baa4c26025d65346b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
