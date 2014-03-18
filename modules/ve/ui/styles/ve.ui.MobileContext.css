@@ -40,3 +40,68 @@
 	height: 100%;
 	overflow: hidden;
 }
+
+/* link inspector and ooui styles */
+
+.ve-ui-mobileContext .ve-ui-inspector .oo-ui-frame {
+	width: 100%;
+	height: auto; /* XXX should not be necessary */
+}
+
+.oo-ui-window-head {
+	height: 3em;
+	border-bottom: 1px solid #ccc;
+}
+
+.oo-ui-window-body {
+	padding: 2em 3em; /* XXX override */
+}
+
+.oo-ui-frame-content {
+	font-size: 100% /* XXX should not be necessary */
+}
+
+.oo-ui-textInputWidget {
+	width: auto; /* XXX override */
+}
+
+.oo-ui-textInputWidget input,
+.oo-ui-textInputWidget textarea {
+	padding: .8em 1em; /* XXX override */
+}
+
+.oo-ui-window-icon,
+.oo-ui-buttonedElement.oo-ui-indicatedElement .oo-ui-buttonedElement-button > .oo-ui-indicatedElement-indicator,
+.oo-ui-buttonedElement.oo-ui-iconedElement .oo-ui-buttonedElement-button > .oo-ui-iconedElement-icon {
+	width: 3em; /* XXX override */
+	height: 3em; /* XXX override */
+	background-position: 50% 50%; /* XXX override */
+	background-size: 2em auto;
+}
+
+.oo-ui-window-icon {
+	border-left: 1px solid #ccc;
+	margin-right: 0; /* XXX should not be necessary */
+}
+
+.oo-ui-window-title {
+	line-height: 3em;
+}
+
+.oo-ui-optionWidget {
+	padding: .8em 1em .8em 3em; /* XXX override */
+	font-weight: bold;
+	border-bottom: 1px solid #eee;
+}
+
+.oo-ui-menuSectionItemWidget {
+	padding: 1.5em 1em .5em 3em; /* XXX should not be necessary */
+	font-weight: normal;
+	color: #777;
+	border: none;
+}
+
+.oo-ui-menuItemWidget.oo-ui-optionWidget-selected {
+	background: #2f81f0;
+	color: #fff;
+}
