@@ -40,7 +40,25 @@
 	border-bottom-width: 0;
 }
 
+/* ve.ui.DimensionsWidget */
+.ve-ui-dimensionsWidget,
+.ve-ui-dimensionsWidget .oo-ui-textInputWidget {
+	display: inline-block;
+}
+
+.ve-ui-dimensionsWidget .oo-ui-textInputWidget {
+	width: 5em;
+}
+
+.ve-ui-dimensionsWidget .oo-ui-labelWidget {
+	padding: 0.5em;
+}
+
 /* ve.ui.MediaSizeWidget */
 .ve-ui-mediaSizeWidget-input-hasError input[type="text"] {
 	background: #ffc2c2;
+}
+
+.ve-ui-mediaSizeWidget .oo-ui-fieldLayout > .oo-ui-labeledElement-label {
+	width: 6em;
 }

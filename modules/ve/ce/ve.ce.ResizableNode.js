@@ -23,9 +23,6 @@
 ve.ce.ResizableNode = function VeCeResizableNode( $resizable, config ) {
 	config = config || {};
 
-	// Mixin constructors
-	ve.Scalable.call( this, config );
-
 	// Properties
 	this.$resizable = $resizable || this.$element;
 	this.resizing = false;
@@ -41,6 +38,7 @@ ve.ce.ResizableNode = function VeCeResizableNode( $resizable, config ) {
 		this.$sizeLabel = this.$( '<div>' ).addClass( 've-ce-resizableNode-sizeLabel' ).append( this.$sizeText );
 	}
 	this.resizableOffset = null;
+	this.scalable = null;
 
 	// Events
 	this.connect( this, {
@@ -67,16 +65,9 @@ ve.ce.ResizableNode = function VeCeResizableNode( $resizable, config ) {
 		.append( this.$( '<div>' )
 			.addClass( 've-ce-resizableNode-swHandle ve-ui-icon-resize-ne-sw' )
 			.data( 'handle', 'sw' ) );
-
-	this.setCurrentDimensions( {
-		'width': this.model.getAttribute( 'width' ),
-		'height': this.model.getAttribute( 'height' )
-	} );
 };
 
 /* Inheritance */
-
-OO.mixinClass( ve.ce.ResizableNode, ve.Scalable );
 
 /* Events */
 
@@ -115,12 +106,11 @@ ve.ce.ResizableNode.prototype.getResizableOffset = function () {
 
 /** */
 ve.ce.ResizableNode.prototype.setOriginalDimensions = function ( dimensions ) {
-	// Parent method
-	ve.Scalable.prototype.setOriginalDimensions.call( this, dimensions );
+	this.scalable.setOriginalDimensions( dimensions );
 	// If dimensions are valid and the scale label is desired, enable it
 	this.canShowScaleLabel = this.showScaleLabel &&
-		this.getOriginalDimensions().width &&
-		this.getOriginalDimensions().height;
+		this.scalable.getOriginalDimensions().width &&
+		this.scalable.getOriginalDimensions().height;
 };
 
 /**
@@ -148,7 +138,7 @@ ve.ce.ResizableNode.prototype.updateSizeLabel = function () {
 	}
 
 	var top, height,
-		dimensions = this.getCurrentDimensions(),
+		dimensions = this.scalable.getCurrentDimensions(),
 		offset = this.getResizableOffset(),
 		minWidth = ( this.showSizeLabel ? 100 : 0 ) + ( this.showScaleLabel ? 30 : 0 );
 
@@ -183,7 +173,7 @@ ve.ce.ResizableNode.prototype.updateSizeLabel = function () {
 			.text( Math.round( 100 * this.getCurrentScale() ) + '%' )
 		);
 	}
-	this.$sizeText.toggleClass( 've-ce-resizableNode-sizeText-warning', this.isTooSmall() || this.isTooLarge() );
+	this.$sizeText.toggleClass( 've-ce-resizableNode-sizeText-warning', this.scalable.isTooSmall() || this.scalable.isTooLarge() );
 };
 
 /**
@@ -215,6 +205,16 @@ ve.ce.ResizableNode.prototype.onResizableFocus = function () {
 		this.$sizeLabel.appendTo( this.root.getSurface().getSurface().$localOverlayControls );
 	}
 	this.$resizeHandles.appendTo( this.root.getSurface().getSurface().$localOverlayControls );
+
+	// Get the scalable object for calculations. We will first
+	// ask and deal with the basic synchronous scalable object
+	// and then, once original dimensions are filled in from
+	// the asynchronous call, we will update the scalable object
+	// to reflect the update
+	this.scalable = this.getModel().getBasicScalable();
+	this.getModel().getScalable().done( ve.bind( function( dimensions ) {
+		this.scalable = dimensions;
+	} ) );
 
 	this.setResizableHandlesSizeAndPosition();
 
@@ -276,9 +276,9 @@ ve.ce.ResizableNode.prototype.onResizableLive = function () {
 ve.ce.ResizableNode.prototype.onResizableResizing = function ( dimensions ) {
 	// Clear cached resizable offset position as it may have changed
 	this.resizableOffset = null;
-	this.setCurrentDimensions( dimensions );
+	this.scalable.setCurrentDimensions( dimensions );
 	if ( !this.outline ) {
-		this.$resizable.css( this.getCurrentDimensions() );
+		this.$resizable.css( this.scalable.getCurrentDimensions() );
 		this.setResizableHandlesPosition();
 	}
 	this.updateSizeLabel();
@@ -321,7 +321,8 @@ ve.ce.ResizableNode.prototype.onResizeHandlesCornerMouseDown = function ( e ) {
 	// Bind resize events
 	this.resizing = true;
 	this.root.getSurface().resizing = true;
-	this.setCurrentDimensions( {
+
+	this.scalable.setCurrentDimensions( {
 		'width': this.resizeInfo.width,
 		'height': this.resizeInfo.height
 	} );
@@ -418,7 +419,7 @@ ve.ce.ResizableNode.prototype.onDocumentMouseMove = function ( e ) {
 				break;
 		}
 
-		dimensions = this.getBoundedDimensions( {
+		dimensions = this.scalable.getBoundedDimensions( {
 			'width': this.resizeInfo.width + diff.x,
 			'height': this.resizeInfo.height + diff.y
 		}, e.shiftKey && this.snapToGrid );
