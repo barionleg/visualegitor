@@ -17,12 +17,14 @@
 	height: 3em;
 }
 
-.ve-ui-inspector-content .oo-ui-window-head {
+/* FIXME: should this be moved to ve.ui.DesktopContext.css? */
+.ve-ui-desktopContext .ve-ui-inspector-content .oo-ui-window-head {
 	height: 2em;
 	padding: 0.5em;
 }
 
-.ve-ui-inspector-content .oo-ui-window-icon {
+/* FIXME: should this be moved to ve.ui.DesktopContext.css? */
+.ve-ui-desktopContext .ve-ui-inspector-content .oo-ui-window-icon {
 	padding-left: 0.5em;
 	margin-left: 0.25em;
 	border-left: solid 1px #eee;
