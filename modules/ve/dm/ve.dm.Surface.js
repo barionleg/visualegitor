@@ -462,6 +462,8 @@ ve.dm.Surface.prototype.change = function ( transactions, selection ) {
  * @param {ve.dm.Transaction|ve.dm.Transaction[]|null} transactions
  * @param {ve.Range} [selection] [selection]
  * @param {boolean} [skipUndoStack=false] If true, do not modify the undo stack. Used by undo/redo
+ * @fires transact
+ * @fires select
  * @fires contextChange
  */
 ve.dm.Surface.prototype.changeInternal = function ( transactions, selection, skipUndoStack ) {
@@ -498,6 +500,9 @@ ve.dm.Surface.prototype.changeInternal = function ( transactions, selection, ski
 		this.transacting = false;
 	}
 	selectionAfter = this.selection;
+	if ( transactions ) {
+		this.emit( 'transact', transactions );
+	}
 
 	// Apply selection change
 	if ( selection ) {
