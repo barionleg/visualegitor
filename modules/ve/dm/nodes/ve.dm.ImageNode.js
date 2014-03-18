@@ -17,11 +17,16 @@
 ve.dm.ImageNode = function VeDmImageNode( length, element ) {
 	// Parent constructor
 	ve.dm.LeafNode.call( this, 0, element );
+	// Mixin constructor
+	ve.dm.ResizableNode.call( this );
+
+	this.scalable = null;
 };
 
 /* Inheritance */
 
 OO.inheritClass( ve.dm.ImageNode, ve.dm.LeafNode );
+OO.mixinClass( ve.dm.ImageNode, ve.dm.ResizableNode );
 
 /* Static Properties */
 
@@ -52,6 +57,51 @@ ve.dm.ImageNode.static.toDomElements = function ( dataElement, doc ) {
 	var domElement = doc.createElement( 'img' );
 	ve.setDomAttributes( domElement, dataElement.attributes, [ 'alt', 'src', 'width', 'height' ] );
 	return [ domElement ];
+};
+
+/**
+ * @inheritdoc
+ */
+ve.dm.ImageNode.prototype.getScalable = function () {
+	var width, height,
+		deferred = $.Deferred();
+
+	width = this.getAttribute( 'width' );
+	height = this.getAttribute( 'height' );
+
+	this.scalable = new ve.dm.Scalable( {
+		'currentDimensions': {
+			'width': width,
+			'height': height
+		}
+	} );
+	deferred.resolve( this.scalable );
+
+	return deferred.promise();
+};
+
+/**
+ * @inheritdoc
+ */
+ve.dm.ImageNode.prototype.getBasicScalable = function () {
+	var width = this.getAttribute( 'width' ),
+		height = this.getAttribute( 'height' );
+
+	if ( !this.scalable ) {
+		// Build a basic, non asynchronous scalable object
+		this.scalable = new ve.dm.Scalable( {
+			'width': width,
+			'height': height,
+		} );
+	} else {
+		// We already have a scalable object, just update it
+		// with the current dimensions
+		this.scalable.setCurrentDimensions( {
+			'width': width,
+			'height': height,
+		} );
+	}
+	return this.scalable;
 };
 
 /* Registration */
