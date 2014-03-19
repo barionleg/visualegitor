@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_4f784ded",
+        "filename": "modules/ve/ui/ve.ui.CommandRegistry.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-03-19T22:30:41Z",
+      "side": 1,
+      "message": "\u0027gallery\u0027 does not exist in VE core, only in VE-MW, so it shouldn\u0027t be defined here. Same forall the other ones you added.",
+      "revId": "6469a0bca2a5271c9bb2c306d715e3735a753aa0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
