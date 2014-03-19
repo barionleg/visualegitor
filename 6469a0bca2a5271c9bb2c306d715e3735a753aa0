@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "ee14bf34_af58098d",
+        "filename": "modules/ve/ui/ve.ui.CommandRegistry.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-03-19T22:33:31Z",
+      "side": 1,
+      "message": "Document this. What is node? A ve.ce.Node I take it?\n\nAlso, .static.primaryCommandName should be defined as a property (defaulting to null) by ve.ce.Node in that case.",
+      "revId": "6469a0bca2a5271c9bb2c306d715e3735a753aa0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14bf34_4f784ded",
         "filename": "modules/ve/ui/ve.ui.CommandRegistry.js",
         "patchSetId": 14
