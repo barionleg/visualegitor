@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee14bf34_2aef26af",
+        "filename": "modules/ve/i18n/en.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2014-03-24T19:42:25Z",
+      "side": 1,
+      "message": "I think the tooltip should be \"Block quotation\" per https://en.wikipedia.org/wiki/Block_quotation, no?",
+      "revId": "201d60d36b5f2906724e0666081a2e70f033db5d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
