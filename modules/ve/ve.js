@@ -713,16 +713,23 @@
 	 * @returns {HTMLDocument} Document constructed from the HTML string
 	 */
 	ve.createDocumentFromHtml = function ( html ) {
-		// Here's how this function should look:
+		// Try using DOMParser if available. This only works in Firefox 12+ and very modern
+		// versions of other browsers (Chrome 30+, Opera 17+, IE10+)
+		var newDocument, $iframe, iframe, parser;
+		try {
+			newDocument = new DOMParser().parseFromString( html, 'text/html' );
+			if ( newDocument ) {
+				return newDocument;
+			}
+		} catch ( e ) { }
+
+		// Here's what this fallback code should look like:
 		//
 		//     var newDocument = document.implementation.createHtmlDocument( '' );
 		//     newDocument.open();
 		//     newDocument.write( html );
 		//     newDocument.close();
 		//     return newDocument;
-		//
-		// (Or possibly something involving DOMParser.prototype.parseFromString, but that's Firefox-only
-		// for now.)
 		//
 		// Sadly, it's impossible:
 		// * On IE 9, calling open()/write() on such a document throws an "Unspecified error" (sic).
