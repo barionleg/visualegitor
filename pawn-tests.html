@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Image slug tests</title>
+<script src="lib/jquery/jquery.js"></script>
+<script src="lib/rangy/rangy-core-1.3.js"></script>
+<script src="lib/rangy/rangy-position-1.3.js"></script>
+<script src="js-pawn-tests.js"></script>
+<script>
+function onloadbody () {
+	window.ce = $( '#pt-content' )[0];
+	setup( {
+		html: $( '#pt-html' )[0],
+		content: $( '#pt-content' )[0],
+		before: $( '#pt-before' )[0],
+		inside: $( '#pt-inside' )[0],
+		after: $( '#pt-after' )[0],
+		boldButton: $( '#pt-bold-button' )[0]
+	} );
+}
+</script>
+
+
+<style>
+#pt-html, #pt-content { border: solid black 1px; min-height: 2em; position: relative }
+#pt-before, #pt-inside, #pt-after { min-height: 2em; border: dotted black 1px }
+
+#pt-content b:before { content: '{' }
+#pt-content b:after { content: '}' }
+#pt-content img {
+	min-width: 0.5em; min-height: 0.5em; border: solid red 1px;
+	content: url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7);
+}
+</style>
+</head>
+<body onload="onloadbody()">
+<h3>HTML:</h3>
+<div contenteditable id="pt-html" spellcheck="false"></div>
+<h3>ContentEditable: <input type="button" value="Insert bold" id="pt-bold-button"></h3>
+<div contenteditable id="pt-content" spellcheck="false">abcdef</div>
+<h3>Selection:</h3>
+<table style="width: 100%">
+<tr><td>Before</td><td style="width: 100%"><div id="pt-before"></div></td></tr>
+<tr><td>Inside</td><td><div id="pt-inside"></div></td></tr>
+<tr><td>After</td><td><div id="pt-after"></div></td></tr>
+</table>
+</body>
+</html>
