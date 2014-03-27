@@ -37,14 +37,9 @@ ve.ui.ClearAnnotationTool.static.icon = 'clear';
 ve.ui.ClearAnnotationTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-clearbutton-tooltip' );
 
-/* Methods */
+ve.ui.ClearAnnotationTool.static.commandName = 'clear';
 
-/**
- * @inheritdoc
- */
-ve.ui.ClearAnnotationTool.prototype.onSelect = function () {
-	this.toolbar.getSurface().execute( 'annotation', 'clearAll' );
-};
+/* Methods */
 
 /**
  * @inheritdoc

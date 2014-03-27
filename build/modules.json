@@ -194,6 +194,7 @@
 			"modules/ve/ui/ve.ui.Dialog.js",
 			"modules/ve/ui/ve.ui.Inspector.js",
 			"modules/ve/ui/ve.ui.WindowSet.js",
+			"modules/ve/ui/ve.ui.Tool.js",
 			"modules/ve/ui/ve.ui.Toolbar.js",
 			"modules/ve/ui/ve.ui.TargetToolbar.js",
 			"modules/ve/ui/ve.ui.ToolFactory.js",
