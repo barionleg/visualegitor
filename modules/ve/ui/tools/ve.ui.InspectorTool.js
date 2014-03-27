@@ -10,50 +10,21 @@
  *
  * @abstract
  * @class
- * @extends OO.ui.Tool
+ * @extends ve.ui.Tool
  * @constructor
  * @param {OO.ui.ToolGroup} toolGroup
  * @param {Object} [config] Configuration options
  */
 ve.ui.InspectorTool = function VeUiInspectorTool( toolGroup, config ) {
 	// Parent constructor
-	OO.ui.Tool.call( this, toolGroup, config );
+	ve.ui.Tool.call( this, toolGroup, config );
 };
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.InspectorTool, OO.ui.Tool );
+OO.inheritClass( ve.ui.InspectorTool, ve.ui.Tool );
 
 /* Static Properties */
-
-/**
- * Symbolic name of inspector the tool opens.
- *
- * @abstract
- * @static
- * @property {string}
- * @inheritable
- */
-ve.ui.InspectorTool.static.inspector = '';
-
-/**
- * Tool remains pressed when selected.
- *
- * @static
- * @property {boolean}
- * @inheritable
- */
-ve.ui.InspectorTool.static.isSticky = true;
-
-/**
- * Configuration options for setting up inspector.
- *
- * @abstract
- * @static
- * @property {Object}
- * @inheritable
- */
-ve.ui.InspectorTool.static.inspectorData = {};
 
 /**
  * Annotation or node models this tool is related to.
@@ -66,6 +37,8 @@ ve.ui.InspectorTool.static.inspectorData = {};
  */
 ve.ui.InspectorTool.static.modelClasses = [];
 
+ve.ui.InspectorTool.static.deactivateOnSelect = false;
+
 /**
  * @inheritdoc
  */
@@ -74,19 +47,6 @@ ve.ui.InspectorTool.static.isCompatibleWith = function ( model ) {
 };
 
 /* Methods */
-
-/**
- * @inheritdoc
- */
-ve.ui.InspectorTool.prototype.onSelect = function () {
-	this.toolbar.getSurface().execute(
-		'inspector',
-		'open',
-		this.constructor.static.inspector,
-		this.constructor.static.inspectorData
-	);
-	this.setActive( this.constructor.static.isSticky );
-};
 
 /**
  * @inheritdoc
@@ -119,8 +79,8 @@ ve.ui.LinkInspectorTool.static.group = 'meta';
 ve.ui.LinkInspectorTool.static.icon = 'link';
 ve.ui.LinkInspectorTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-annotationbutton-link-tooltip' );
-ve.ui.LinkInspectorTool.static.inspector = 'link';
 ve.ui.LinkInspectorTool.static.modelClasses = [ ve.dm.LinkAnnotation ];
+ve.ui.LinkInspectorTool.static.commandName = 'link';
 ve.ui.toolFactory.register( ve.ui.LinkInspectorTool );
 
 /**
@@ -141,6 +101,6 @@ ve.ui.InsertCharacterInspectorTool.static.group = 'insert';
 ve.ui.InsertCharacterInspectorTool.static.icon = 'special-character';
 ve.ui.InsertCharacterInspectorTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-specialcharacter-button-tooltip' );
-ve.ui.InsertCharacterInspectorTool.static.inspector = 'specialcharacter';
-ve.ui.InsertCharacterInspectorTool.static.isSticky = false;
+ve.ui.InsertCharacterInspectorTool.static.commandName = 'specialcharacter';
+ve.ui.InsertCharacterInspectorTool.static.deactivateOnSelect = true;
 ve.ui.toolFactory.register( ve.ui.InsertCharacterInspectorTool );

@@ -10,41 +10,21 @@
  *
  * @abstract
  * @class
- * @extends OO.ui.Tool
+ * @extends ve.ui.Tool
  * @constructor
  * @param {OO.ui.ToolGroup} toolGroup
  * @param {Object} [config] Configuration options
  */
 ve.ui.DialogTool = function VeUiDialogTool( toolGroup, config ) {
 	// Parent constructor
-	OO.ui.Tool.call( this, toolGroup, config );
+	ve.ui.Tool.call( this, toolGroup, config );
 };
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.DialogTool, OO.ui.Tool );
+OO.inheritClass( ve.ui.DialogTool, ve.ui.Tool );
 
 /* Static Properties */
-
-/**
- * Symbolic name of dialog the tool opens.
- *
- * @abstract
- * @static
- * @property {string}
- * @inheritable
- */
-ve.ui.DialogTool.static.dialog = '';
-
-/**
- * Configuration options for setting up dialog.
- *
- * @abstract
- * @static
- * @property {Object}
- * @inheritable
- */
-ve.ui.DialogTool.static.dialogData = {};
 
 /**
  * Annotation or node models this tool is related to.
@@ -65,19 +45,6 @@ ve.ui.DialogTool.static.isCompatibleWith = function ( model ) {
 };
 
 /* Methods */
-
-/**
- * @inheritdoc
- */
-ve.ui.DialogTool.prototype.onSelect = function () {
-	this.toolbar.getSurface().execute(
-		'dialog',
-		'open',
-		this.constructor.static.dialog,
-		this.constructor.static.dialogData
-	);
-	this.setActive( false );
-};
 
 /**
  * @inheritdoc
@@ -103,7 +70,7 @@ ve.ui.CommandHelpDialogTool.static.group = 'dialog';
 ve.ui.CommandHelpDialogTool.static.icon = 'help';
 ve.ui.CommandHelpDialogTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-dialogbutton-command-help-tooltip' );
-ve.ui.CommandHelpDialogTool.static.dialog = 'commandHelp';
 ve.ui.CommandHelpDialogTool.static.autoAddToCatchall = false;
 ve.ui.CommandHelpDialogTool.static.autoAddToGroup = false;
+ve.ui.CommandHelpDialogTool.static.commandName = 'commandHelp';
 ve.ui.toolFactory.register( ve.ui.CommandHelpDialogTool );
