@@ -24,26 +24,7 @@ ve.ui.IndentationTool = function VeUiIndentationTool( toolGroup, config ) {
 
 OO.inheritClass( ve.ui.IndentationTool, ve.ui.Tool );
 
-/* Static Properties */
-
-/**
- * Indentation method the tool applies.
- *
- * @abstract
- * @static
- * @property {string}
- * @inheritable
- */
-ve.ui.IndentationTool.static.method = '';
-
 /* Methods */
-
-/**
- * @inheritdoc
- */
-ve.ui.IndentationTool.prototype.onSelect = function () {
-	this.toolbar.getSurface().execute( 'indentation', this.constructor.static.method );
-};
 
 /**
  * @inheritdoc
@@ -78,7 +59,7 @@ ve.ui.IncreaseIndentationTool.static.group = 'structure';
 ve.ui.IncreaseIndentationTool.static.icon = 'indent-list';
 ve.ui.IncreaseIndentationTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-indentationbutton-indent-tooltip' );
-ve.ui.IncreaseIndentationTool.static.method = 'increase';
+ve.ui.IncreaseIndentationTool.static.commandName = 'indent';
 ve.ui.toolFactory.register( ve.ui.IncreaseIndentationTool );
 
 /**
@@ -101,5 +82,5 @@ ve.ui.DecreaseIndentationTool.static.group = 'structure';
 ve.ui.DecreaseIndentationTool.static.icon = 'outdent-list';
 ve.ui.DecreaseIndentationTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-indentationbutton-outdent-tooltip' );
-ve.ui.DecreaseIndentationTool.static.method = 'decrease';
+ve.ui.DecreaseIndentationTool.static.commandName = 'outdent';
 ve.ui.toolFactory.register( ve.ui.DecreaseIndentationTool );
