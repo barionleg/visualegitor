@@ -709,7 +709,6 @@ ve.ce.Surface.prototype.onCut = function ( e ) {
 		this.documentView.getDocumentNode().$element[0].focus();
 
 		this.model.change( tx, new ve.Range( selection.start ) );
-		this.surfaceObserver.clear();
 		this.surfaceObserver.startTimerLoop();
 		this.surfaceObserver.pollOnce();
 	}, this ) );
@@ -1633,7 +1632,6 @@ ve.ce.Surface.prototype.handleInsertion = function () {
 				new ve.Range( selection.start )
 			);
 			hasChanged = true;
-			this.surfaceObserver.clear();
 			selection = this.model.getSelection();
 		}
 		this.model.setInsertionAnnotations( annotations );
@@ -1860,8 +1858,6 @@ ve.ce.Surface.prototype.handleEnter = function ( e ) {
 	} else {
 		this.model.setSelection( new ve.Range( cursor ) );
 	}
-	// Reset and resume polling
-	this.surfaceObserver.clear();
 };
 
 /**
@@ -1955,7 +1951,6 @@ ve.ce.Surface.prototype.handleDelete = function ( e, backspace ) {
 		}
 	}
 	this.model.setSelection( new ve.Range( rangeToRemove.start ) );
-	this.surfaceObserver.clear();
 };
 
 /**
