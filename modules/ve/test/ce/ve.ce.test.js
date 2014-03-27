@@ -265,3 +265,51 @@ QUnit.test( 'fakeImes', function ( assert ) {
 		surface.destroy();
 	}
 } );
+
+function testImeSynchronous ( assert, $ceDiv, ime ) {
+	var i, len, f, keys, code, imeSelector;
+	imeSelector = $ceDiv.data( 'imeselector' );
+	imeSelector.selectIM( 'ml-transliteration' );
+	ime.enable();
+
+	keys = 'thOttingngal';
+	i = 0;
+	len = keys.length;
+	f = function () {
+		if ( i >= len ) {
+			assert.equal( $ceDiv[0].innerHTML, 'fake_expected' );
+			QUnit.start();
+			return;
+		}
+		code = keys.charCodeAt( i );
+		$ceDiv.trigger( new jQuery.Event(
+			'keypress',
+			{ keyCode: code, which: code, charCode: code, altKey: 0 }
+		) );
+		i++;
+		// TODO: poll the surface
+		setTimeout( f, 500 );
+	};
+	setTimeout( f, 500 );
+}
+
+QUnit.test( 'jquery-ime', function ( assert ) {
+	var dom, target, uiSurface, $ceDiv, ime, documentModel, documentView;
+	QUnit.expect( 1 );
+
+	dom = ve.createDocumentFromHtml( '<p>hello, world</p>' );
+	target = new ve.init.sa.Target( $( '#qunit-fixture' ), dom );
+	uiSurface = target.surface;
+	documentModel = uiSurface.getModel().getDocument();
+	documentView = uiSurface.getView().getDocument();
+	$ceDiv = documentView.getDocumentNode().$;
+
+	// activate jQuery.ime
+	$ceDiv.ime( { 'imePath': '../../jquery.ime/' } );
+	$ceDiv.focus();
+	ime = $ceDiv.data( 'ime' );
+	QUnit.stop();
+	ime.load( 'ml-transliteration' ).done( function () {
+		testImeSynchronous( assert, $ceDiv, ime );
+	} );
+} );
