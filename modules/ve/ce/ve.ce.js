@@ -118,142 +118,99 @@ ve.ce.getDomHash = function ( element ) {
  * @returns {number} Linear model offset
  */
 ve.ce.getOffset = function ( domNode, domOffset ) {
-	if ( domNode.nodeType === Node.TEXT_NODE ) {
-		return ve.ce.getOffsetFromTextNode( domNode, domOffset );
-	} else {
-		return ve.ce.getOffsetFromElementNode( domNode, domOffset );
-	}
-};
+	// TODO think about slugs and shields
+	var node, view, offset, startNode, lengthSum = 0;
 
-/**
- * Gets the linear offset from a given text node and offset within it.
- *
- * @method
- * @param {HTMLElement} domNode DOM node
- * @param {number} domOffset DOM offset within the DOM Element
- * @returns {number} Linear model offset
- */
-ve.ce.getOffsetFromTextNode = function ( domNode, domOffset ) {
-	var $node, nodeModel, current, stack, item, offset, $item;
-
-	$node = $( domNode ).closest(
-		'.ve-ce-branchNode, .ve-ce-leafNode'
-	);
-	nodeModel = $node.data( 'view' ).getModel();
-
-	// IE sometimes puts the cursor in a text node inside ce="false". BAD!
-	if ( $node[0].contentEditable === 'false' ) {
-		return nodeModel.getOffset() + nodeModel.getOuterLength();
-	}
-
-	if ( !$node.hasClass( 've-ce-branchNode' ) ) {
-		return nodeModel.getOffset();
-	}
-
-	current = [$node.contents(), 0];
-	stack = [current];
-	offset = 0;
-
-	while ( stack.length > 0 ) {
-		if ( current[1] >= current[0].length ) {
-			stack.pop();
-			current = stack[ stack.length - 1 ];
-			continue;
-		}
-		item = current[0][current[1]];
-		if ( item.nodeType === Node.TEXT_NODE ) {
-			if ( item === domNode ) {
-				offset += domOffset;
-				break;
-			} else {
-				offset += item.textContent.length;
-			}
-		} else if ( item.nodeType === Node.ELEMENT_NODE ) {
-			$item = current[0].eq( current[1] );
-			if ( $item.hasClass( 've-ce-branchNode-slug' ) ) {
-				if ( $item.contents()[0] === domNode ) {
-					break;
-				}
-			} else if ( $item.hasClass( 've-ce-leafNode' ) ) {
-				offset += 2;
-			} else if ( $item.hasClass( 've-ce-branchNode' ) ) {
-				offset += $item.data( 'view' ).getOuterLength();
-			} else {
-				stack.push( [ $item.contents(), 0 ] );
-				current[1]++;
-				current = stack[ stack.length - 1 ];
-				continue;
+	function traverse( n ) {
+		while ( !n.previousSibling ) {
+			n = n.parentNode;
+			if ( $( n ).data( 'view' ) instanceof ve.ce.Node ) {
+				return n;
 			}
 		}
-		current[1]++;
-	}
-	return offset + nodeModel.getOffset() + ( nodeModel.isWrapped() ? 1 : 0 );
-};
-
-/**
- * Gets the linear offset from a given element node and offset within it.
- *
- * @method
- * @param {HTMLElement} domNode DOM node
- * @param {number} domOffset DOM offset within the DOM Element
- * @param {number} [direction] Which direction we are searching in (+/-1), not changed by recursive calls
- * @returns {number} Linear model offset
- */
-ve.ce.getOffsetFromElementNode = function ( domNode, domOffset, direction ) {
-	var nodeModel, node,
-		$domNode = $( domNode );
-
-	if ( $domNode.hasClass( 've-ce-branchNode-slug' ) ) {
-		if ( $domNode.prev().length ) {
-			nodeModel = $domNode.prev().data( 'view' ).getModel();
-			return nodeModel.getOffset() + nodeModel.getOuterLength();
+		n = n.previousSibling;
+		if ( $( n ).data( 'view' ) instanceof ve.ce.Node ) {
+			return n;
 		}
-		if ( $domNode.next().length ) {
-			nodeModel = $domNode.next().data( 'view' ).getModel();
-			return nodeModel.getOffset();
+		while ( n.lastChild ) {
+			n = n.lastChild;
+			if ( $( n ).data( 'view' ) instanceof ve.ce.Node ) {
+				return n;
+			}
 		}
+		return n;
 	}
 
-	// IE sometimes puts the cursor in a text node inside ce="false". BAD!
-	if ( !direction && !domNode.isContentEditable ) {
-		nodeModel = $domNode.closest( '.ve-ce-branchNode, .ve-ce-leafNode' ).data( 'view' ).getModel();
-		return nodeModel.getOffset() + nodeModel.getOuterLength();
-	}
+	if ( domNode.nodeType === Node.ELEMENT_NODE ) {
+		if ( domNode.childNodes.length === 0 ) {
+			startNode = domNode;
+			view = $( startNode ).data( 'view' );
+			if ( view instanceof ve.ce.Node ) {
+				return view.getOffset() + ( view.isWrapped() ? 1 : 0 );
+			}
+			node = startNode;
+		} else if ( domOffset === domNode.childNodes.length ) {
+			startNode = domNode.childNodes[domNode.childNodes.length - 1];
 
-	if ( domOffset === 0 || domOffset === domNode.childNodes.length ) {
-		node = $domNode.data( 'view' );
-		if ( node && node instanceof ve.ce.Node ) {
-			nodeModel = $domNode.data( 'view' ).getModel();
-			if ( direction === -1 ) {
-				return nodeModel.getOffset() + nodeModel.getOuterLength();
-			} else if ( direction === 1 ) {
-				return nodeModel.getOffset();
-			} else {
-				if ( domOffset === 0 ) {
-					return nodeModel.getOffset() + ( nodeModel.isWrapped() ? 1 : 0 );
-				} else {
-					return nodeModel.getOffset() + nodeModel.getOuterLength() - ( nodeModel.isWrapped() ? 1 : 0 );
+			view = $( startNode ).data( 'view' );
+			if ( view instanceof ve.ce.Node ) {
+				return view.getOffset() + view.getOuterLength();
+			}
+			while ( startNode.lastChild ) {
+				startNode = startNode.lastChild;
+				view = $( startNode ).data( 'view' );
+				if ( view instanceof ve.ce.Node ) {
+					return view.getOffset() + view.getOuterLength();
 				}
 			}
+			node = startNode;
 		} else {
-			if ( domOffset === 0 ) {
-				node = $domNode.contents().first()[0];
-				direction = direction || 1;
-			} else {
-				node = $domNode.contents().last()[0];
-				direction = direction || -1;
-			}
+			startNode = domNode.childNodes[domOffset];
+			node = traverse( startNode );
 		}
 	} else {
-		node = $domNode.contents()[ domOffset - 1 ];
-		direction = direction || -1;
+		lengthSum += domOffset;
+		startNode = domNode;
+		node = traverse( startNode );
 	}
 
-	if ( node.nodeType === Node.TEXT_NODE ) {
-		return ve.ce.getOffsetFromTextNode( node, direction > 0 ? 0 : node.length );
-	} else {
-		return ve.ce.getOffsetFromElementNode( node, direction > 0 ? 0 : node.childNodes.length, direction );
+	// Traverse (left || up) until we encounter a node that has a CE node
+	// Populate path with nodes we encounter while moving left (but not while moving up)
+	while ( true ) {
+		// First node that has a ve.ce.Node, stop
+		// Note that annotations have a .data( 'view' ) too, but that's a ve.ce.Annotation,
+		// not a ve.ce.Node
+		view = $( node ).data( 'view' );
+		if ( view instanceof ve.ce.Node ) {
+			break;
+		}
+
+		if ( node.nodeType === Node.TEXT_NODE ) {
+			lengthSum += node.data.length;
+		}
+		// else: non-text nodes that don't have a .data( 'view' ) don't exist in the DM
+		node = traverse( node );
 	}
+
+	offset = view.getOffset();
+
+	if ( $.contains( node, startNode ) ) {
+		// node is an ancestor of startNode
+		// Add 1 to take the opening into account
+		offset += view.getModel().isWrapped ? 1 : 0;
+		if ( view.getModel().canContainContent() ) {
+			offset += lengthSum;
+		}
+	} else {
+		// node is not an ancestor of startNode
+		// startNode comes after node, so add node's length
+		offset += view.getOuterLength();
+		if ( view.isContent() ) {
+			offset += lengthSum;
+		}
+	}
+
+	return offset;
 };
 
 /**
