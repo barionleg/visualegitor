@@ -152,6 +152,24 @@
       "revId": "54ed49123e2597e03568f86f7145bdd2cb6e97bf",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_d2c3f35f",
+        "filename": "modules/ve/ce/ve.ce.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-03-28T19:09:11Z",
+      "side": 1,
+      "message": "Add comment: view is a leaf node inside of a CBN, so we started inside of a CBN (otherwise we would have hit the CBN when entering it), so the text we summed up needs to be counted.",
+      "parentUuid": "ae0e4726_3216aff7",
+      "revId": "54ed49123e2597e03568f86f7145bdd2cb6e97bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
