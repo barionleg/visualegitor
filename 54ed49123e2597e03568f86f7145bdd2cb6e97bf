@@ -37,6 +37,23 @@
     },
     {
       "key": {
+        "uuid": "ae0e4726_487854bf",
+        "filename": "modules/ve/ce/ve.ce.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-03-28T20:57:12Z",
+      "side": 1,
+      "message": "unless it\u0027s a counter, single letter vars are evil. \u0027node\u0027",
+      "revId": "54ed49123e2597e03568f86f7145bdd2cb6e97bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae0e4726_726e6795",
         "filename": "modules/ve/ce/ve.ce.js",
         "patchSetId": 3
