@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae0e4726_86bd3dd4",
+        "filename": "modules/ve/ui/ve.ui.DesktopContext.js",
+        "patchSetId": 12
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 148
+      },
+      "writtenOn": "2014-03-28T22:46:35Z",
+      "side": 1,
+      "message": "Not doing \"@method\" annotation anymore?",
+      "revId": "1c49846c62702cb1b3de6d9c02185b5295335254",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
