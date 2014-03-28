@@ -118,12 +118,110 @@ ve.ce.getDomHash = function ( element ) {
  * @returns {number} Linear model offset
  */
 ve.ce.getOffset = function ( domNode, domOffset ) {
-	if ( domNode.nodeType === Node.TEXT_NODE ) {
-		return ve.ce.getOffsetFromTextNode( domNode, domOffset );
-	} else {
-		return ve.ce.getOffsetFromElementNode( domNode, domOffset );
+	// TODO think about slugs and shields
+	var i, node, view, offset, startNode, atStart = false, lengthSum = 0, path = [];
+
+	function traverse( n ) {
+		while ( !n.previousSibling ) {
+			n = n.parentNode;
+			if ( $( n ).data( 'view' ) instanceof ve.ce.Node ) {
+				return n;
+			}
+		}
+		n = n.previousSibling;
+		if ( $( n ).data( 'view' ) instanceof ve.ce.Node ) {
+			return n;
+		}
+		while ( n.lastChild ) {
+			n = n.lastChild;
+			if ( $( n ).data( 'view' ) instanceof ve.ce.Node ) {
+				return n;
+			}
+		}
+		return n;
 	}
+
+	if ( domNode.nodeType === Node.ELEMENT_NODE ) {
+		if ( domOffset === domNode.childNodes.length ) {
+			startNode = domNode.childNodes[domNode.childNodes.length - 1];
+
+			if ( $( startNode ).data( 'view' ) instanceof ve.ce.Node ) {
+				return startNode.getOffset() + startNode.getOuterLength();
+			}
+			while ( startNode.lastChild ) {
+				startNode = startNode.lastChild;
+				if ( $( startNode ).data( 'view' ) instanceof ve.ce.Node ) {
+					return startNode.getOffset() + startNode.getOuterLength();
+				}
+			}
+			node = startNode;
+		} else {
+			startNode = domNode.childNodes[domOffset];
+			node = traverse( startNode );
+		}
+	} else {
+		lengthSum += domOffset;
+		startNode = domNode;
+		node = traverse( startNode );
+	}
+
+	// Traverse (left || up) until we encounter a node that has a CE node
+	// Populate path with nodes we encounter while moving left (but not while moving up)
+	while ( true ) {
+		// First node that has a ve.ce.Node, stop
+		// Note that annotations have a .data( 'view' ) too, but that's a ve.ce.Annotation,
+		// not a ve.ce.Node
+		view = $( node ).data( 'view' );
+		if ( view instanceof ve.ce.Node ) {
+			break;
+		}
+
+		if ( node.nodeType === Node.TEXT_NODE ) {
+			lengthSum += node.data.length;
+		}
+		// else: non-text nodes that don't have a .data( 'view' ) don't exist in the DM
+		node = traverse( node );
+	}
+
+	offset = view.getOffset();
+
+	if ( $.contains( node, startNode ) ) {
+		// node is an ancestor of startNode
+		// Add 1 to take the opening into account
+		offset += 1; // TODO isWrapped?
+		if ( node.canContainContent() ) {
+			offset += lengthSum;
+		}
+	} else {
+		// node is not an ancestor of startNode
+		// startNode comes after node, so add node's length
+		offset += node.getOuterLength();
+		if ( node.isContent() ) {
+			offset += lengthSum;
+		}
+	}
+
+	return offset;
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /**
  * Gets the linear offset from a given text node and offset within it.
