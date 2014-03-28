@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae0e4726_124e0b3d",
+        "filename": "modules/ve/ce/ve.ce.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2014-03-28T19:04:44Z",
+      "side": 1,
+      "message": "Add comment:\nMove to the previous \"traversal node\" in \"traversal sequence\".\n\n* A node is a \"traversal node\" is either a leaf node or a \"view node\".\n* A \"view node\" is one that has $( n ).data( \u0027view\u0027 ) instanceof ve.ce.Node .\n* \"Traversal sequence\" is defined on every node (not just traversal nodes). It is like document order, except that each parent node appears * in the sequence both immediately before and immediately after its child nodes.\n\nImportant properties:\n* Non-traversal nodes don\u0027t have any width in DM (e.g. bold).\n* Certain traversal nodes also have no width (namely, those within an alienated node).\n* Both the start and end of a (non-alienated) parent traversal node has width (which is one reason why traversal sequence is important).\n* In VE-normalized HTML, a text node cannot be a sibling of a non-leaf view node (because all text nodes are inside a ContentBranchNode).\n* Traversal-consecutive non-view nodes are either all alienated or all not alienated.",
+      "revId": "54ed49123e2597e03568f86f7145bdd2cb6e97bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_726e6795",
+        "filename": "modules/ve/ce/ve.ce.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2014-03-28T19:04:44Z",
+      "side": 1,
+      "message": "Add comment:\nIf domOffset \u003d\u003d\u003d 0, the offset position is immediately after the open tag. Else the offset position is immediately after the node childNodes[domOffset].",
+      "revId": "54ed49123e2597e03568f86f7145bdd2cb6e97bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_1265ebaa",
+        "filename": "modules/ve/ce/ve.ce.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2014-03-28T19:04:44Z",
+      "side": 1,
+      "message": "Add comment:\nOffset is at the end of the lastChild. Set startNode to the traversal node immediately before the offset position in traversal order. Then the end offset of startNode will be the correct return value (because non-traversal nodes don\u0027t have a DM width).",
+      "revId": "54ed49123e2597e03568f86f7145bdd2cb6e97bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_d20653d1",
+        "filename": "modules/ve/ce/ve.ce.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2014-03-28T19:04:44Z",
+      "side": 1,
+      "message": "Add comment:\nOffset is at the end of the lastChild. Set startNode to the traversal node immediately before the offset position in traversal order. Then the end offset of startNode will be the correct return value (because non-traversal nodes don\u0027t have a DM width).",
+      "revId": "54ed49123e2597e03568f86f7145bdd2cb6e97bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_9210db05",
+        "filename": "modules/ve/ce/ve.ce.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2014-03-28T19:04:44Z",
+      "side": 1,
+      "message": "Can this be merged with the previous branch (with some tweaking for domOffset \u003d\u003d\u003d 0)?\n\nAlternatively, add comment:\nSet startNode to the childNode immediately *after* the cursor, then go to the previous traversal node.",
+      "revId": "54ed49123e2597e03568f86f7145bdd2cb6e97bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_52f243e0",
+        "filename": "modules/ve/ce/ve.ce.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2014-03-28T19:04:44Z",
+      "side": 1,
+      "message": "Add comment:\nText node. The offset position is domOffset characters from the start of the text.\nAdd the domOffset, then go to the previous traversal node.",
+      "revId": "54ed49123e2597e03568f86f7145bdd2cb6e97bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_f2283734",
+        "filename": "modules/ve/ce/ve.ce.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2014-03-28T19:04:44Z",
+      "side": 1,
+      "message": "Delete comment entirely, then add comment:\nWalk the traversal nodes in reverse traversal sequence, until we find a view node. Add the width of each text node we meet. (Non-text node non-view nodes can only be widthless).\n\nLater, if it transpires that we\u0027re inside an alienated node, then we will throw away all the text node lengths, because the template content has no DM width.",
+      "revId": "54ed49123e2597e03568f86f7145bdd2cb6e97bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_721c2719",
+        "filename": "modules/ve/ce/ve.ce.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2014-03-28T19:04:44Z",
+      "side": 1,
+      "message": "Add comment:\nElse were inside an alienated node: throw away all the text node lengths, because the template content has no DM width.",
+      "revId": "54ed49123e2597e03568f86f7145bdd2cb6e97bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_3216aff7",
+        "filename": "modules/ve/ce/ve.ce.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2014-03-28T19:04:44Z",
+      "side": 1,
+      "message": "Shurely we want to check startNode, not node? We want to add lengthSum iff all the textNodes were not inside an alienated node",
+      "revId": "54ed49123e2597e03568f86f7145bdd2cb6e97bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
