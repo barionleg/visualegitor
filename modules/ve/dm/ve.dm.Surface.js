@@ -63,6 +63,10 @@ OO.mixinClass( ve.dm.Surface, OO.EventEmitter );
  */
 
 /**
+ * @event insertionAnnotationsChange
+ */
+
+/**
  * @event history
  */
 
@@ -171,6 +175,7 @@ ve.dm.Surface.prototype.setInsertionAnnotations = function ( annotations ) {
 		annotations.clone() :
 		new ve.dm.AnnotationSet( this.documentModel.getStore() );
 
+	this.emit( 'insertionAnnotationsChange', this.insertionAnnotations );
 	this.emit( 'contextChange' );
 };
 
@@ -192,6 +197,8 @@ ve.dm.Surface.prototype.addInsertionAnnotations = function ( annotations ) {
 	} else {
 		throw new Error( 'Invalid annotations' );
 	}
+
+	this.emit( 'insertionAnnotationsChange', this.insertionAnnotations );
 	this.emit( 'contextChange' );
 };
 
@@ -213,6 +220,8 @@ ve.dm.Surface.prototype.removeInsertionAnnotations = function ( annotations ) {
 	} else {
 		throw new Error( 'Invalid annotations' );
 	}
+
+	this.emit( 'insertionAnnotationsChange', this.insertionAnnotations );
 	this.emit( 'contextChange' );
 };
 
