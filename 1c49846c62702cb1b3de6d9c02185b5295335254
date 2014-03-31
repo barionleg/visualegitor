@@ -16,6 +16,24 @@
       "revId": "1c49846c62702cb1b3de6d9c02185b5295335254",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_559c5b5f",
+        "filename": "modules/ve/ui/ve.ui.DesktopContext.js",
+        "patchSetId": 12
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 88
+      },
+      "writtenOn": "2014-03-31T18:08:44Z",
+      "side": 1,
+      "message": "According to Timo, it\u0027s not needed, but according to me we shouldn\u0027t introduce inconsistency. Not worth preventing a merge over.",
+      "parentUuid": "ae0e4726_86bd3dd4",
+      "revId": "1c49846c62702cb1b3de6d9c02185b5295335254",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
