@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae0e4726_87a63b4f",
+        "filename": "modules/ve/init/styles/ve.init.DebugBar.css",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2014-04-01T22:45:16Z",
+      "side": 1,
+      "message": "Not new in this commit (moved from demo.css), but border shorthand should be \u003cborder-width\u003e \u003cborder-style\u003e \u003ccolor\u003e;",
+      "revId": "823fd6ead4b31e64db6756ff57e105a31b026411",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_276d2f02",
+        "filename": "modules/ve/init/ve.init.DebugBar.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2014-04-01T22:45:16Z",
+      "side": 1,
+      "message": "@type -\u003e @property",
+      "revId": "823fd6ead4b31e64db6756ff57e105a31b026411",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
