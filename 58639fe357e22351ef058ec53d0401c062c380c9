@@ -16,6 +16,24 @@
       "revId": "58639fe357e22351ef058ec53d0401c062c380c9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_5a4a3b60",
+        "filename": "modules/ve/ui/ve.ui.MobileContext.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 542
+      },
+      "writtenOn": "2014-04-01T17:47:58Z",
+      "side": 1,
+      "message": "I know it\u0027s hacky. Trevor told me that you do it that way and frankly I can\u0027t see a better way. I\u0027ll add a comment though.",
+      "parentUuid": "ae0e4726_bfa94923",
+      "revId": "58639fe357e22351ef058ec53d0401c062c380c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
