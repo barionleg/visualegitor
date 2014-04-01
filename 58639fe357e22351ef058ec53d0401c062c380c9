@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae0e4726_bfa94923",
+        "filename": "modules/ve/ui/ve.ui.MobileContext.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-04-01T17:30:43Z",
+      "side": 1,
+      "message": "setTimeout 300 looks hacky. Is there a nicer way to do this, and if not can you comment inline why this is necessary?",
+      "revId": "58639fe357e22351ef058ec53d0401c062c380c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
