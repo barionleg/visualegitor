@@ -2,6 +2,57 @@
   "comments": [
     {
       "key": {
+        "uuid": "ae0e4726_ce5b23fc",
+        "filename": "build/modules.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-04-02T19:44:12Z",
+      "side": 1,
+      "message": "This file was already added to modules.json by the previous commit, though to your credit you actually added it in the right place.",
+      "revId": "65a4f65d04ad7765e826a5cd59e0208376dcc85d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_eefa67b5",
+        "filename": "modules/ve/ui/tools/ve.ui.DialogTool.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-04-02T19:44:12Z",
+      "side": 1,
+      "message": "Future TODO: DialogTool is now no longer dialog-specific, instead it\u0027s \"invoke a command based on modelClasses\"",
+      "revId": "65a4f65d04ad7765e826a5cd59e0208376dcc85d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_0e00fbad",
+        "filename": "modules/ve/ui/tools/ve.ui.DialogTool.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-04-02T19:44:12Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be replaced with deactivateOnSelect?",
+      "revId": "65a4f65d04ad7765e826a5cd59e0208376dcc85d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae0e4726_4ec953ad",
         "filename": "modules/ve/ui/tools/ve.ui.IndentationTool.js",
         "patchSetId": 4
@@ -13,6 +64,23 @@
       "writtenOn": "2014-04-02T19:24:16Z",
       "side": 1,
       "message": "22:27:29 Error: Error while parsing /srv/ssd/jenkins-slave/workspace/VisualEditor-jsduck/modules/ve/ui/tools/ve.ui.IndentationTool.js: Error: Line 26: Unexpected token \u003c\u003c",
+      "revId": "65a4f65d04ad7765e826a5cd59e0208376dcc85d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0e4726_0e17dbf3",
+        "filename": "modules/ve/ui/tools/ve.ui.InspectorTool.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-04-02T19:44:12Z",
+      "side": 1,
+      "message": "AIUI InspectorTool is now the same as DialogTool, so in the future the two should be merged.",
       "revId": "65a4f65d04ad7765e826a5cd59e0208376dcc85d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
