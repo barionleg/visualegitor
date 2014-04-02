@@ -2238,14 +2238,6 @@ ve.ce.Surface.prototype.decRenderLock = function () {
 };
 
 /**
- * Surface 'dir' property (Content-Level Direction)
- * @returns {string} 'ltr' or 'rtl'
- */
-ve.ce.Surface.prototype.getDir = function () {
-	return this.$element.css( 'direction' );
-};
-
-/**
  * Change the model only, not the CE surface
  *
  * This avoids event storms when the CE surface is already correct
