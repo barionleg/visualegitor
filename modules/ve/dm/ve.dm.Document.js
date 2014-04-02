@@ -35,6 +35,9 @@ ve.dm.Document = function VeDmDocument( data, htmlDocument, parentDocument, inte
 		doc = parentDocument || this,
 		root = this.documentNode;
 
+	this.lang = null;
+	this.dir = 'ltr';
+
 	this.documentNode.setRoot( root );
 	this.documentNode.setDocument( doc );
 	this.internalList = internalList ? internalList.clone( this ) : new ve.dm.InternalList( this );
@@ -1033,4 +1036,30 @@ ve.dm.Document.prototype.getCompleteHistoryLength = function () {
  */
 ve.dm.Document.prototype.getCompleteHistorySince = function ( pointer ) {
 	return this.completeHistory.slice( pointer );
+};
+
+/**
+ * Set content language and directionality
+ * @param {string} lang Language code
+ * @param {string} dir Directionality (ltr/rtl)
+ */
+ve.dm.Document.prototype.setLangDir = function ( lang, dir ) {
+	this.lang = lang;
+	this.dir = dir;
+};
+
+/**
+ * Get the content language
+ * @returns {string} Language code
+ */
+ve.dm.Document.prototype.getLang = function () {
+	return this.lang;
+};
+
+/**
+ * Get the content directionality
+ * @returns {string} Directionality (ltr/rtl)
+ */
+ve.dm.Document.prototype.getDir = function () {
+	return this.dir;
 };
