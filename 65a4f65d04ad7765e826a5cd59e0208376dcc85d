@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae0e4726_4ec953ad",
+        "filename": "modules/ve/ui/tools/ve.ui.IndentationTool.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-04-02T19:24:16Z",
+      "side": 1,
+      "message": "22:27:29 Error: Error while parsing /srv/ssd/jenkins-slave/workspace/VisualEditor-jsduck/modules/ve/ui/tools/ve.ui.IndentationTool.js: Error: Line 26: Unexpected token \u003c\u003c",
+      "revId": "65a4f65d04ad7765e826a5cd59e0208376dcc85d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
