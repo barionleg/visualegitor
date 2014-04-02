@@ -58,5 +58,5 @@ ve.ui.WindowSet.prototype.getSurface = function () {
  * @inheritdoc
  */
 ve.ui.WindowSet.prototype.createWindow = function ( name ) {
-	return this.factory.create( name, this.surface, { '$': this.$ } );
+	return this.factory.create( name, this.surface.getModel().getFragment(), { '$': this.$ } );
 };

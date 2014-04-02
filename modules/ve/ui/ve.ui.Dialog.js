@@ -6,24 +6,32 @@
  */
 
 /**
- * Dialog with an associated surface.
+ * Dialog with an associated surface fragment.
  *
  * @class
  * @abstract
  * @extends OO.ui.Dialog
  *
  * @constructor
- * @param {ve.ui.Surface} surface Surface inspector is for
+ * @param {ve.dm.SurfaceFragment} fragment Surface fragment the dialog is for
  * @param {Object} [config] Configuration options
  */
-ve.ui.Dialog = function VeUiDialog( surface, config ) {
+ve.ui.Dialog = function VeUiDialog( fragment, config ) {
 	// Parent constructor
 	OO.ui.Dialog.call( this, config );
 
 	// Properties
-	this.surface = surface;
+	this.fragment = fragment;
 };
 
 /* Inheritance */
 
 OO.inheritClass( ve.ui.Dialog, OO.ui.Dialog );
+
+/**
+ * Get the surface fragment the inspector is for
+ * @returns {ve.dm.SurfaceFragment} Surface fragment the inspector is for
+ */
+ve.ui.Dialog.prototype.getFragment = function () {
+	return this.fragment;
+};
