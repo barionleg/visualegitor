@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_c02faf9b",
+        "filename": "modules/ve/ce/ve.ce.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-04-03T20:43:58Z",
+      "side": 1,
+      "message": "I already have a var node in the outer scope though, and shadowing is also evil.",
+      "parentUuid": "ae0e4726_487854bf",
+      "revId": "54ed49123e2597e03568f86f7145bdd2cb6e97bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae0e4726_726e6795",
         "filename": "modules/ve/ce/ve.ce.js",
         "patchSetId": 3
