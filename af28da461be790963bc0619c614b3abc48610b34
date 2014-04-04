@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_67e34dd5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 14
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-04-04T16:24:21Z",
+      "side": 1,
+      "message": "WIP? What doesn\u0027t work?",
+      "revId": "af28da461be790963bc0619c614b3abc48610b34",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_87de6913",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 14
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-04-04T16:24:21Z",
+      "side": 1,
+      "message": "MediaWiki depends on core, not the other way around. This is a breaking change, fixed in MW by I017a...",
+      "revId": "af28da461be790963bc0619c614b3abc48610b34",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_47e851af",
+        "filename": "modules/ve/ui/styles/ve.ui.SurfaceWidget.css",
+        "patchSetId": 14
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-04-04T16:24:21Z",
+      "side": 1,
+      "message": "remove conflict markers",
+      "revId": "af28da461be790963bc0619c614b3abc48610b34",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
