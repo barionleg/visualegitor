@@ -842,7 +842,7 @@ ve.dm.SurfaceFragment.prototype.isolateAndUnwrap = function ( isolateForType ) {
 		fragment = this;
 
 	function createSplits( splitNodes, insertBefore ) {
-		var i, length, tx,
+		var i, length, tx, newRange,
 			adjustment = 0, data = [];
 		for ( i = 0, length = splitNodes.length; i < length; i++ ) {
 			data.unshift( { 'type': '/' + splitNodes[i].type } );
@@ -853,8 +853,16 @@ ve.dm.SurfaceFragment.prototype.isolateAndUnwrap = function ( isolateForType ) {
 			}
 		}
 
+		// We can't let tx.translateRange() happen here, because it'll grow the range to include
+		// any data inserted immediately before or after the range, and we don't want that to happen.
+		newRange = ve.Range.newFromTranslatedRange( fragment.getRange( true ), adjustment );
 		tx = ve.dm.Transaction.newFromInsertion( fragment.getDocument(), insertBefore ? startOffset : endOffset, data );
-		fragment.surface.change( tx, !fragment.noAutoSelect && tx.translateRange( fragment.getRange() ) );
+		fragment.surface.change( tx, !fragment.noAutoSelect && newRange );
+
+		// HACK: First cause the SurfaceFragment to update, then set its range
+		// FIXME: Really what we need is a setRange() method
+		fragment.getRange( true );
+		fragment.range = newRange;
 
 		startOffset += adjustment;
 		endOffset += adjustment;
