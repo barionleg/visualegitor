@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_2a2639ca",
+        "filename": "modules/ve/ui/actions/ve.ui.DialogAction.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2014-04-05T00:21:12Z",
+      "side": 1,
+      "message": "Hm.. magic parameters.",
+      "revId": "b4cef09a8116d664c54a5b0b5ca2045004b4788a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
