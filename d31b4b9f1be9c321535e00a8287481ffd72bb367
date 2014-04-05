@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_4aacd532",
+        "filename": "modules/ve/dm/ve.dm.SurfaceFragment.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 856,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-04-05T00:02:39Z",
+      "side": 1,
+      "message": "so give translateRange a different mode",
+      "revId": "d31b4b9f1be9c321535e00a8287481ffd72bb367",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
