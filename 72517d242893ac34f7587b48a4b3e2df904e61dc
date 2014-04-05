@@ -138,6 +138,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_87fae671",
+        "filename": "modules/ve/dm/ve.dm.Scalable.js",
+        "patchSetId": 15
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 798
+      },
+      "writtenOn": "2014-04-05T02:31:11Z",
+      "side": 1,
+      "message": "Get bounded dimensions gives you the size an image should be based on the bounding rules and grid, etc. The \u0027getDimensionsFromValue\u0027 is strictly a normalization method (i\u0027m thinking of renaming it to \u0027normalizeDimensions\u0027) that takes no rules into account except for aspect ratio and makes sure dimensions are normalized.\n\nThis is especially relevant to cases where the user inserts or updates the size (like in the MediaSizeWidget) or where we accept size that has only one dimensions set, or when we want to calculate the size based on a single dimensions regardless of other limitations. The system passes user-given (or partial) dimensions through this normalization method to get proper 2d values it can then work with.\n\nWe may then indicate to the user in the UI that the sizing is too big/small, but it will still receive the proper normalized values.\n\nI hope this explanation makes sense.",
+      "parentUuid": "8e23439c_e2fe2bab",
+      "revId": "72517d242893ac34f7587b48a4b3e2df904e61dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_221c2318",
         "filename": "modules/ve/i18n/qqq.json",
         "patchSetId": 15
@@ -223,6 +241,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_a71ba2d3",
+        "filename": "modules/ve/ui/widgets/ve.ui.DimensionsWidget.js",
+        "patchSetId": 15
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 798
+      },
+      "writtenOn": "2014-04-05T02:31:11Z",
+      "side": 1,
+      "message": "This is a test for when you apply the values; so, if the widget is empty, then the value is actually \"default\" (and we switch to the \u0027default\u0027 button, apply the default size, etc) so the check is to see if the placeholders are visible so we can apply their value rather than 0x0. \n\nThe reason I added it in is that there can be cases where only one of those inputs are empty (say, just after the user deleted one of the input values, and just before the second input is updated) so the test of whether both inputs are empty is useful for external application.",
+      "parentUuid": "8e23439c_02cfe783",
+      "revId": "72517d242893ac34f7587b48a4b3e2df904e61dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_e2cbcb73",
         "filename": "modules/ve/ui/widgets/ve.ui.DimensionsWidget.js",
         "patchSetId": 15
@@ -240,6 +276,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_a78282cb",
+        "filename": "modules/ve/ui/widgets/ve.ui.DimensionsWidget.js",
+        "patchSetId": 15
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 798
+      },
+      "writtenOn": "2014-04-05T02:31:11Z",
+      "side": 1,
+      "message": "I was going by \u0027is/set\u0027 pairs, but that makes sense. Changed.",
+      "parentUuid": "8e23439c_e2cbcb73",
+      "revId": "72517d242893ac34f7587b48a4b3e2df904e61dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_a2a5d3b3",
         "filename": "modules/ve/ui/widgets/ve.ui.DimensionsWidget.js",
         "patchSetId": 15
@@ -251,6 +305,24 @@
       "writtenOn": "2014-04-04T19:29:38Z",
       "side": 1,
       "message": "If we\u0027re actually using the placeholders as real values, then they aren\u0027t placeholders, they\u0027re defaults, so rename, and rename \u0027setValuesToDefaults\u0027 to \u0027reset\u0027.",
+      "revId": "72517d242893ac34f7587b48a4b3e2df904e61dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_e74e3ac4",
+        "filename": "modules/ve/ui/widgets/ve.ui.DimensionsWidget.js",
+        "patchSetId": 15
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 798
+      },
+      "writtenOn": "2014-04-05T02:31:11Z",
+      "side": 1,
+      "message": "I semi-agree. I think there\u0027s value in the clarity of making sure we understand we are working with placeholders; the placeholders can change (and do)\n\nI thought it makes more logical sense to always remember it\u0027s the placeholder values, and we can change them... I can change it to default and reset, but I think it makes the code less obvious, especially since we\u0027re dealing with UI elements and \u003cinput\u003es that actually take placeholders. This makes sense?",
+      "parentUuid": "8e23439c_a2a5d3b3",
       "revId": "72517d242893ac34f7587b48a4b3e2df904e61dc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -285,6 +357,24 @@
       "writtenOn": "2014-04-04T19:29:38Z",
       "side": 1,
       "message": "Where? Why?",
+      "revId": "72517d242893ac34f7587b48a4b3e2df904e61dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_c7ea1e73",
+        "filename": "modules/ve/ui/widgets/ve.ui.DimensionsWidget.js",
+        "patchSetId": 15
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 798
+      },
+      "writtenOn": "2014-04-05T02:31:11Z",
+      "side": 1,
+      "message": "EEEVVEERRRYWHERE.\n\nSeriously, though -- There seemed to have been either a bug (or a feature) in OO.ui that called .setDisabled() before the inputs were initialized, so I had to add the \"if ( this.widthInput ) ...\" conditions. It may have been a bug that was fixed, I\u0027m not sure, but things broke without this with a \"can\u0027t setDisabled on null values\" errors, before the UI was even properly set up (I spoke to Trevor about this)",
+      "parentUuid": "8e23439c_42b4bfe4",
       "revId": "72517d242893ac34f7587b48a4b3e2df904e61dc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
