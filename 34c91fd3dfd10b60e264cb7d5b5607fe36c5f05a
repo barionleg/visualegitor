@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_4b4054a8",
+        "filename": "modules/ve/dm/ve.dm.Document.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 88
+      },
+      "writtenOn": "2014-04-06T19:03:35Z",
+      "side": 1,
+      "message": "We have ve.init.platform.getContentLanguage or something, right? Could be used as a default.",
+      "revId": "34c91fd3dfd10b60e264cb7d5b5607fe36c5f05a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
