@@ -24,12 +24,13 @@ ve.dm.SurfaceFragment = function VeDmSurfaceFragment( surface, range, noAutoSele
 	// Properties
 	this.surface = surface;
 	this.range = range && range instanceof ve.Range ? range : surface.getSelection();
+	this.document = surface.getDocument();
+	this.noAutoSelect = !!noAutoSelect;
+
 	// Short-circuit for invalid range null fragment
 	if ( !this.range ) {
 		return this;
 	}
-	this.document = surface.getDocument();
-	this.noAutoSelect = !!noAutoSelect;
 
 	// Initialization
 	var length = this.document.data.getLength();
@@ -95,7 +96,7 @@ ve.dm.SurfaceFragment.prototype.getDocument = function () {
  */
 ve.dm.SurfaceFragment.prototype.getRange = function ( noCopy ) {
 	this.update();
-	return noCopy ? this.range : this.range.clone();
+	return noCopy ? this.range : this.range && this.range.clone();
 };
 
 /**
@@ -105,7 +106,7 @@ ve.dm.SurfaceFragment.prototype.getRange = function ( noCopy ) {
  * @returns {boolean} Fragment is a null fragment
  */
 ve.dm.SurfaceFragment.prototype.isNull = function () {
-	return this.surface === undefined;
+	return this.surface === undefined || this.range === null;
 };
 
 /**
@@ -118,7 +119,7 @@ ve.dm.SurfaceFragment.prototype.isNull = function () {
  */
 ve.dm.SurfaceFragment.prototype.adjustRange = function ( start, end ) {
 	// Handle null fragment
-	if ( !this.surface ) {
+	if ( this.isNull() ) {
 		return this;
 	}
 	return new ve.dm.SurfaceFragment(
@@ -137,7 +138,7 @@ ve.dm.SurfaceFragment.prototype.adjustRange = function ( start, end ) {
  */
 ve.dm.SurfaceFragment.prototype.truncateRange = function ( limit ) {
 	// Handle null fragment
-	if ( !this.surface ) {
+	if ( this.isNull() ) {
 		return this;
 	}
 	return new ve.dm.SurfaceFragment(
@@ -155,7 +156,7 @@ ve.dm.SurfaceFragment.prototype.truncateRange = function ( limit ) {
  */
 ve.dm.SurfaceFragment.prototype.collapseRangeToStart = function () {
 	// Handle null fragment
-	if ( !this.surface ) {
+	if ( this.isNull() ) {
 		return this;
 	}
 	return new ve.dm.SurfaceFragment(
@@ -171,7 +172,7 @@ ve.dm.SurfaceFragment.prototype.collapseRangeToStart = function () {
  */
 ve.dm.SurfaceFragment.prototype.collapseRangeToEnd = function () {
 	// Handle null fragment
-	if ( !this.surface ) {
+	if ( this.isNull() ) {
 		return this;
 	}
 	return new ve.dm.SurfaceFragment(
@@ -187,7 +188,7 @@ ve.dm.SurfaceFragment.prototype.collapseRangeToEnd = function () {
  */
 ve.dm.SurfaceFragment.prototype.trimRange = function () {
 	// Handle null fragment
-	if ( !this.surface ) {
+	if ( this.isNull() ) {
 		return this;
 	}
 	// If range is only whitespace
@@ -218,7 +219,7 @@ ve.dm.SurfaceFragment.prototype.trimRange = function () {
  */
 ve.dm.SurfaceFragment.prototype.expandRange = function ( scope, type ) {
 	// Handle null fragment
-	if ( !this.surface ) {
+	if ( this.isNull() ) {
 		return this;
 	}
 	var range, node, nodes, parent;
@@ -312,7 +313,7 @@ ve.dm.SurfaceFragment.prototype.willAutoSelect = function () {
  */
 ve.dm.SurfaceFragment.prototype.getData = function ( deep ) {
 	// Handle null fragment
-	if ( !this.surface ) {
+	if ( this.isNull() ) {
 		return [];
 	}
 	return this.document.getData( this.getRange(), deep );
@@ -326,7 +327,7 @@ ve.dm.SurfaceFragment.prototype.getData = function ( deep ) {
  */
 ve.dm.SurfaceFragment.prototype.getText = function () {
 	// Handle null fragment
-	if ( !this.surface ) {
+	if ( this.isNull() ) {
 		return '';
 	}
 	var i, length,
@@ -353,7 +354,7 @@ ve.dm.SurfaceFragment.prototype.getText = function () {
  */
 ve.dm.SurfaceFragment.prototype.getAnnotations = function ( all ) {
 	// Handle null fragment
-	if ( !this.surface ) {
+	if ( this.isNull() ) {
 		return new ve.dm.AnnotationSet( this.getDocument().getStore() );
 	}
 	if ( this.getRange( true ).getLength() ) {
@@ -373,7 +374,7 @@ ve.dm.SurfaceFragment.prototype.getAnnotations = function ( all ) {
  */
 ve.dm.SurfaceFragment.prototype.getLeafNodes = function () {
 	// Handle null fragment
-	if ( !this.surface ) {
+	if ( this.isNull() ) {
 		return [];
 	}
 	return this.document.selectNodes( this.getRange(), 'leaves' );
@@ -406,7 +407,7 @@ ve.dm.SurfaceFragment.prototype.getSelectedNode = function () {
  */
 ve.dm.SurfaceFragment.prototype.getCoveredNodes = function () {
 	// Handle null fragment
-	if ( !this.surface ) {
+	if ( this.isNull() ) {
 		return [];
 	}
 	return this.document.selectNodes( this.getRange(), 'covered' );
@@ -424,7 +425,7 @@ ve.dm.SurfaceFragment.prototype.getCoveredNodes = function () {
  */
 ve.dm.SurfaceFragment.prototype.getSiblingNodes = function () {
 	// Handle null fragment
-	if ( !this.surface ) {
+	if ( this.isNull() ) {
 		return [];
 	}
 	return this.document.selectNodes( this.getRange(), 'siblings' );
@@ -450,7 +451,7 @@ ve.dm.SurfaceFragment.prototype.setAutoSelect = function ( value ) {
  */
 ve.dm.SurfaceFragment.prototype.select = function () {
 	// Handle null fragment
-	if ( !this.surface ) {
+	if ( this.isNull() ) {
 		return this;
 	}
 	this.surface.setSelection( this.getRange() );
@@ -467,7 +468,7 @@ ve.dm.SurfaceFragment.prototype.select = function () {
  */
 ve.dm.SurfaceFragment.prototype.changeAttributes = function ( attr, type ) {
 	// Handle null fragment
-	if ( !this.surface ) {
+	if ( this.isNull() ) {
 		return this;
 	}
 
@@ -516,7 +517,7 @@ ve.dm.SurfaceFragment.prototype.changeAttributes = function ( attr, type ) {
  */
 ve.dm.SurfaceFragment.prototype.annotateContent = function ( method, nameOrAnnotation, data ) {
 	// Handle null fragment
-	if ( !this.surface ) {
+	if ( this.isNull() ) {
 		return this;
 	}
 	var annotation, annotations, i, ilen, tx, txs = [], newRange = this.getRange();
@@ -567,7 +568,7 @@ ve.dm.SurfaceFragment.prototype.annotateContent = function ( method, nameOrAnnot
  */
 ve.dm.SurfaceFragment.prototype.insertContent = function ( content, annotate ) {
 	// Handle null fragment
-	if ( !this.surface ) {
+	if ( this.isNull() ) {
 		return this;
 	}
 	var tx, annotations;
@@ -599,7 +600,7 @@ ve.dm.SurfaceFragment.prototype.insertContent = function ( content, annotate ) {
  */
 ve.dm.SurfaceFragment.prototype.removeContent = function () {
 	// Handle null fragment
-	if ( !this.surface ) {
+	if ( this.isNull() ) {
 		return this;
 	}
 	var tx;
@@ -620,7 +621,7 @@ ve.dm.SurfaceFragment.prototype.removeContent = function () {
  */
 ve.dm.SurfaceFragment.prototype.convertNodes = function ( type, attr ) {
 	// Handle null fragment
-	if ( !this.surface ) {
+	if ( this.isNull() ) {
 		return this;
 	}
 	var tx = ve.dm.Transaction.newFromContentBranchConversion(
@@ -651,7 +652,7 @@ ve.dm.SurfaceFragment.prototype.convertNodes = function ( type, attr ) {
  */
 ve.dm.SurfaceFragment.prototype.wrapNodes = function ( wrapper ) {
 	// Handle null fragment
-	if ( !this.surface ) {
+	if ( this.isNull() ) {
 		return this;
 	}
 	if ( !ve.isArray( wrapper ) ) {
@@ -677,7 +678,7 @@ ve.dm.SurfaceFragment.prototype.wrapNodes = function ( wrapper ) {
  */
 ve.dm.SurfaceFragment.prototype.unwrapNodes = function ( outerDepth, innerDepth ) {
 	// Handle null fragment
-	if ( !this.surface ) {
+	if ( this.isNull() ) {
 		return this;
 	}
 	var i, tx, innerUnwrapper = [], outerUnwrapper = [];
@@ -722,7 +723,7 @@ ve.dm.SurfaceFragment.prototype.unwrapNodes = function ( outerDepth, innerDepth 
  */
 ve.dm.SurfaceFragment.prototype.rewrapNodes = function ( depth, wrapper ) {
 	// Handle null fragment
-	if ( !this.surface ) {
+	if ( this.isNull() ) {
 		return this;
 	}
 	var i, tx, unwrapper = [];
@@ -766,7 +767,7 @@ ve.dm.SurfaceFragment.prototype.rewrapNodes = function ( depth, wrapper ) {
  */
 ve.dm.SurfaceFragment.prototype.wrapAllNodes = function ( wrapper ) {
 	// Handle null fragment
-	if ( !this.surface ) {
+	if ( this.isNull() ) {
 		return this;
 	}
 
@@ -802,7 +803,7 @@ ve.dm.SurfaceFragment.prototype.wrapAllNodes = function ( wrapper ) {
  */
 ve.dm.SurfaceFragment.prototype.rewrapAllNodes = function ( depth, wrapper ) {
 	// Handle null fragment
-	if ( !this.surface ) {
+	if ( this.isNull() ) {
 		return this;
 	}
 	var i, tx, unwrapper = [],
@@ -840,7 +841,7 @@ ve.dm.SurfaceFragment.prototype.rewrapAllNodes = function ( depth, wrapper ) {
  */
 ve.dm.SurfaceFragment.prototype.isolateAndUnwrap = function ( isolateForType ) {
 	// Handle null fragment
-	if ( !this.surface ) {
+	if ( this.isNull() ) {
 		return this;
 	}
 	var nodes, startSplitNode, endSplitNode, tx,
