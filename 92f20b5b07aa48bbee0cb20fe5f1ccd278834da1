@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_207e4ae2",
+        "filename": "modules/ve/ui/actions/ve.ui.InspectorAction.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 88
+      },
+      "writtenOn": "2014-04-07T22:25:50Z",
+      "side": 1,
+      "message": "I know this is stilly, but within ve, use ve.extendObject()",
+      "revId": "92f20b5b07aa48bbee0cb20fe5f1ccd278834da1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
