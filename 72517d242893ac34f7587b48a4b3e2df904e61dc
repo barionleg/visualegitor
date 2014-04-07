@@ -329,6 +329,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_c310c006",
+        "filename": "modules/ve/ui/widgets/ve.ui.DimensionsWidget.js",
+        "patchSetId": 15
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-04-07T23:22:17Z",
+      "side": 1,
+      "message": "In HTML \u0027placeholder\u0027 has a specific meaning of an overlaid input label which doesn\u0027t interfere with the value. It is considered a component of the view, whereas here we are writing the value to the model. What we really have are (changeable) default values that we are using to (a) write the model when we reset and (b) use as the placeholders in the view.",
+      "parentUuid": "8e23439c_e74e3ac4",
+      "revId": "72517d242893ac34f7587b48a4b3e2df904e61dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_82aad780",
         "filename": "modules/ve/ui/widgets/ve.ui.DimensionsWidget.js",
         "patchSetId": 15
