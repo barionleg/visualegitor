@@ -16,6 +16,24 @@
       "revId": "34c91fd3dfd10b60e264cb7d5b5607fe36c5f05a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_d033ebbe",
+        "filename": "modules/ve/dm/ve.dm.Document.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-04-07T18:10:18Z",
+      "side": 1,
+      "message": "Roan \u0026 I think it\u0027s better for the platform to send lang/dir to the document, than for the document to reach back out to the platform for data. If used platform lang, then we should use $(\u0027body\u0027).css(\u0027direction\u0027) for the default dir and it starts to get ugly.",
+      "parentUuid": "8e23439c_4b4054a8",
+      "revId": "34c91fd3dfd10b60e264cb7d5b5607fe36c5f05a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
