@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_83fbe843",
+        "filename": "modules/ve/dm/ve.dm.SurfaceFragment.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-04-07T23:48:46Z",
+      "side": 1,
+      "message": "this.willExcludeInsertions()",
+      "revId": "06255540705a96368f41c153c6fd1b6e2ab2dc80",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
