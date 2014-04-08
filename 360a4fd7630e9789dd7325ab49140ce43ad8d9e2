@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_41a94577",
+        "filename": "modules/ve/dm/nodes/ve.dm.ImageNode.js",
+        "patchSetId": 18
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 798
+      },
+      "writtenOn": "2014-04-08T15:31:42Z",
+      "side": 1,
+      "message": "Where did the async call to original dimensions go?",
+      "revId": "360a4fd7630e9789dd7325ab49140ce43ad8d9e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
