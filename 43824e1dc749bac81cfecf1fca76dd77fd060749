@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_97ff94a7",
+        "filename": "modules/ve/init/sa/ve.init.sa.Platform.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2014-04-09T19:38:54Z",
+      "side": 1,
+      "message": "Add comment:\n\"Lower-case the language code for the filename. Note that jQuery.i18n does not case-fold language codes, so we should not case-fold the second argument here.\"",
+      "revId": "43824e1dc749bac81cfecf1fca76dd77fd060749",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_17238455",
+        "filename": "modules/ve/init/sa/ve.init.sa.Platform.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2014-04-09T19:38:54Z",
+      "side": 1,
+      "message": "Add comment:\n\"Case folding: see above\"",
+      "revId": "43824e1dc749bac81cfecf1fca76dd77fd060749",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
