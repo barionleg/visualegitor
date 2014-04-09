@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_42ab7886",
+        "filename": "modules/ve/dm/ve.dm.Scalable.js",
+        "patchSetId": 24
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-04-09T21:56:54Z",
+      "side": 1,
+      "message": "Lowercase b boolean",
+      "revId": "d23b7dc5b26cb210e46b1d9c32995ad37a80be79",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_c296684f",
+        "filename": "modules/ve/dm/ve.dm.Scalable.js",
+        "patchSetId": 24
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-04-09T21:56:54Z",
+      "side": 1,
+      "message": "Surely this should use ve.copy()? Otherwise we modify the object passed in as well as returning it",
+      "revId": "d23b7dc5b26cb210e46b1d9c32995ad37a80be79",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_bd3391f2",
+        "filename": "modules/ve/ui/widgets/ve.ui.DimensionsWidget.js",
+        "patchSetId": 24
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-04-09T21:56:54Z",
+      "side": 1,
+      "message": "propAgate",
+      "revId": "d23b7dc5b26cb210e46b1d9c32995ad37a80be79",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_9d30d5e6",
+        "filename": "modules/ve/ui/widgets/ve.ui.DimensionsWidget.js",
+        "patchSetId": 24
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-04-09T21:56:54Z",
+      "side": 1,
+      "message": "propAgate",
+      "revId": "d23b7dc5b26cb210e46b1d9c32995ad37a80be79",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_7d2df98a",
+        "filename": "modules/ve/ui/widgets/ve.ui.DimensionsWidget.js",
+        "patchSetId": 24
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-04-09T21:56:54Z",
+      "side": 1,
+      "message": "ve.copy() ?",
+      "revId": "d23b7dc5b26cb210e46b1d9c32995ad37a80be79",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_fd58e936",
+        "filename": "modules/ve/ui/widgets/ve.ui.DimensionsWidget.js",
+        "patchSetId": 24
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-04-09T21:56:54Z",
+      "side": 1,
+      "message": "Lowercase s string",
+      "revId": "d23b7dc5b26cb210e46b1d9c32995ad37a80be79",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_dd3d2dba",
+        "filename": "modules/ve/ui/widgets/ve.ui.DimensionsWidget.js",
+        "patchSetId": 24
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-04-09T21:56:54Z",
+      "side": 1,
+      "message": "Lowercase s string",
+      "revId": "d23b7dc5b26cb210e46b1d9c32995ad37a80be79",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_bd3a71be",
+        "filename": "modules/ve/ui/widgets/ve.ui.DimensionsWidget.js",
+        "patchSetId": 24
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-04-09T21:56:54Z",
+      "side": 1,
+      "message": "Lowercase s string",
+      "revId": "d23b7dc5b26cb210e46b1d9c32995ad37a80be79",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_5d711da6",
+        "filename": "modules/ve/ui/widgets/ve.ui.DimensionsWidget.js",
+        "patchSetId": 24
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-04-09T21:56:54Z",
+      "side": 1,
+      "message": "Lowercase s string",
+      "revId": "d23b7dc5b26cb210e46b1d9c32995ad37a80be79",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
