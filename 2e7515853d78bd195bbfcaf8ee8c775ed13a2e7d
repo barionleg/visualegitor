@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_176b84b6",
+        "filename": "modules/ve/dm/ve.dm.ResizableNode.js",
+        "patchSetId": 23
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-04-09T19:45:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_dc58938e",
+      "revId": "2e7515853d78bd195bbfcaf8ee8c775ed13a2e7d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_dcd773c3",
         "filename": "modules/ve/dm/ve.dm.Scalable.js",
         "patchSetId": 23
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_424ff86e",
+        "filename": "modules/ve/dm/ve.dm.Scalable.js",
+        "patchSetId": 23
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-04-09T19:45:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_1c9ccb11",
+      "revId": "2e7515853d78bd195bbfcaf8ee8c775ed13a2e7d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_1ce5eb9f",
         "filename": "modules/ve/dm/ve.dm.Scalable.js",
         "patchSetId": 23
@@ -64,6 +100,24 @@
       "writtenOn": "2014-04-09T19:26:27Z",
       "side": 1,
       "message": "Ideally the word \"image\" should not be used in ve.dm.Scalable, which is supposed to be a generic class for things that have dimensions.",
+      "revId": "2e7515853d78bd195bbfcaf8ee8c775ed13a2e7d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_2254fc00",
+        "filename": "modules/ve/dm/ve.dm.Scalable.js",
+        "patchSetId": 23
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-04-09T19:45:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_1ce5eb9f",
       "revId": "2e7515853d78bd195bbfcaf8ee8c775ed13a2e7d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_02590039",
+        "filename": "modules/ve/dm/ve.dm.Scalable.js",
+        "patchSetId": 23
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-04-09T19:45:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_5c924301",
+      "revId": "2e7515853d78bd195bbfcaf8ee8c775ed13a2e7d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_dcfe5335",
         "filename": "modules/ve/dm/ve.dm.Scalable.js",
         "patchSetId": 23
@@ -98,6 +170,24 @@
       "writtenOn": "2014-04-09T19:26:27Z",
       "side": 1,
       "message": "-image",
+      "revId": "2e7515853d78bd195bbfcaf8ee8c775ed13a2e7d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_e23de4b9",
+        "filename": "modules/ve/dm/ve.dm.Scalable.js",
+        "patchSetId": 23
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-04-09T19:45:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_dcfe5335",
       "revId": "2e7515853d78bd195bbfcaf8ee8c775ed13a2e7d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +211,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_c23ae8bf",
+        "filename": "modules/ve/dm/ve.dm.Scalable.js",
+        "patchSetId": 23
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-04-09T19:45:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_9cf8db47",
+      "revId": "2e7515853d78bd195bbfcaf8ee8c775ed13a2e7d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_5cb92377",
         "filename": "modules/ve/dm/ve.dm.Scalable.js",
         "patchSetId": 23
@@ -132,6 +240,24 @@
       "writtenOn": "2014-04-09T19:26:27Z",
       "side": 1,
       "message": "-image",
+      "revId": "2e7515853d78bd195bbfcaf8ee8c775ed13a2e7d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_a247ec4f",
+        "filename": "modules/ve/dm/ve.dm.Scalable.js",
+        "patchSetId": 23
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-04-09T19:45:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_5cb92377",
       "revId": "2e7515853d78bd195bbfcaf8ee8c775ed13a2e7d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -155,6 +281,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_6271d4a6",
+        "filename": "modules/ve/dm/ve.dm.Scalable.js",
+        "patchSetId": 23
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-04-09T19:45:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_dc8533b3",
+      "revId": "2e7515853d78bd195bbfcaf8ee8c775ed13a2e7d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_1c172b58",
         "filename": "modules/ve/dm/ve.dm.Scalable.js",
         "patchSetId": 23
@@ -166,6 +310,24 @@
       "writtenOn": "2014-04-09T19:26:27Z",
       "side": 1,
       "message": "Given that this function is named \u0027toggle$FOO\u0027, it should be possible to not pass isDefault (i.e. undefined) and have it flip the value.",
+      "revId": "2e7515853d78bd195bbfcaf8ee8c775ed13a2e7d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_4276d8a0",
+        "filename": "modules/ve/dm/ve.dm.Scalable.js",
+        "patchSetId": 23
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-04-09T19:45:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_1c172b58",
       "revId": "2e7515853d78bd195bbfcaf8ee8c775ed13a2e7d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -189,6 +351,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_226bdcb6",
+        "filename": "modules/ve/dm/ve.dm.Scalable.js",
+        "patchSetId": 23
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-04-09T19:45:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_bc0dd743",
+      "revId": "2e7515853d78bd195bbfcaf8ee8c775ed13a2e7d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_bc8277a7",
         "filename": "modules/ve/dm/ve.dm.Scalable.js",
         "patchSetId": 23
@@ -200,6 +380,24 @@
       "writtenOn": "2014-04-09T19:26:27Z",
       "side": 1,
       "message": "Should this be emitted if the change wasn\u0027t a real change?",
+      "revId": "2e7515853d78bd195bbfcaf8ee8c775ed13a2e7d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_0270e09e",
+        "filename": "modules/ve/dm/ve.dm.Scalable.js",
+        "patchSetId": 23
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-04-09T19:45:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_bc8277a7",
       "revId": "2e7515853d78bd195bbfcaf8ee8c775ed13a2e7d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -223,6 +421,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_e264c4e3",
+        "filename": "modules/ve/dm/ve.dm.Scalable.js",
+        "patchSetId": 23
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-04-09T19:45:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_7c073f20",
+      "revId": "2e7515853d78bd195bbfcaf8ee8c775ed13a2e7d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_9c8fbbd1",
         "filename": "modules/ve/dm/ve.dm.Scalable.js",
         "patchSetId": 23
@@ -234,6 +450,24 @@
       "writtenOn": "2014-04-09T19:26:27Z",
       "side": 1,
       "message": "Should this be emitted if the change wasn\u0027t a real change?",
+      "revId": "2e7515853d78bd195bbfcaf8ee8c775ed13a2e7d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_c261c8d1",
+        "filename": "modules/ve/dm/ve.dm.Scalable.js",
+        "patchSetId": 23
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-04-09T19:45:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_9c8fbbd1",
       "revId": "2e7515853d78bd195bbfcaf8ee8c775ed13a2e7d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -257,6 +491,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_a25ecc15",
+        "filename": "modules/ve/dm/ve.dm.Scalable.js",
+        "patchSetId": 23
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-04-09T19:45:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_57fc5c08",
+      "revId": "2e7515853d78bd195bbfcaf8ee8c775ed13a2e7d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_1706e420",
         "filename": "modules/ve/dm/ve.dm.Scalable.js",
         "patchSetId": 23
@@ -268,6 +520,24 @@
       "writtenOn": "2014-04-09T19:26:27Z",
       "side": 1,
       "message": "Should this be emitted if this.minDimensions is already null?",
+      "revId": "2e7515853d78bd195bbfcaf8ee8c775ed13a2e7d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_825bd025",
+        "filename": "modules/ve/dm/ve.dm.Scalable.js",
+        "patchSetId": 23
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-04-09T19:45:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_1706e420",
       "revId": "2e7515853d78bd195bbfcaf8ee8c775ed13a2e7d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
