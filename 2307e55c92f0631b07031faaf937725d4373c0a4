@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_dd71ad0c",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 26
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-04-09T23:17:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_5d291d35",
+      "revId": "2307e55c92f0631b07031faaf937725d4373c0a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_fd27c95d",
         "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
         "patchSetId": 26
@@ -30,6 +48,24 @@
       "writtenOn": "2014-04-09T22:35:05Z",
       "side": 1,
       "message": "You can do this by passing \u0027classes\u0027: \u0027ve-ui-blah\u0027 as a config option to the FieldLayout constructor (or the constructor of any OO.ui.Element subclass for that matter)",
+      "revId": "2307e55c92f0631b07031faaf937725d4373c0a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_bd6ef128",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 26
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-04-09T23:17:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_fd27c95d",
       "revId": "2307e55c92f0631b07031faaf937725d4373c0a4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_9d7b35eb",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 26
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-04-09T23:17:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_dd1c0d1b",
+      "revId": "2307e55c92f0631b07031faaf937725d4373c0a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_3d2e613f",
         "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
         "patchSetId": 26
@@ -64,6 +118,24 @@
       "writtenOn": "2014-04-09T22:35:05Z",
       "side": 1,
       "message": "You can combine these two lines into a single connect call",
+      "revId": "2307e55c92f0631b07031faaf937725d4373c0a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_7d7859ed",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 26
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-04-09T23:17:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_3d2e613f",
       "revId": "2307e55c92f0631b07031faaf937725d4373c0a4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_5d659d40",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 26
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-04-09T23:17:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_7d13b905",
+      "revId": "2307e55c92f0631b07031faaf937725d4373c0a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_5dd8fd57",
         "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
         "patchSetId": 26
@@ -98,6 +188,24 @@
       "writtenOn": "2014-04-09T22:35:05Z",
       "side": 1,
       "message": "Lowercase s string",
+      "revId": "2307e55c92f0631b07031faaf937725d4373c0a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_3d6ae112",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 26
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-04-09T23:17:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_5dd8fd57",
       "revId": "2307e55c92f0631b07031faaf937725d4373c0a4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_bd55d154",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 26
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-04-09T23:17:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_ddebedd9",
+      "revId": "2307e55c92f0631b07031faaf937725d4373c0a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_fde6a912",
         "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
         "patchSetId": 26
@@ -132,6 +258,24 @@
       "writtenOn": "2014-04-09T22:35:05Z",
       "side": 1,
       "message": "Missing ()",
+      "revId": "2307e55c92f0631b07031faaf937725d4373c0a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_9d521569",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 26
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-04-09T23:17:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_fde6a912",
       "revId": "2307e55c92f0631b07031faaf937725d4373c0a4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_7d4f39c1",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 26
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-04-09T23:17:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_5dbfddcd",
+      "revId": "2307e55c92f0631b07031faaf937725d4373c0a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_3dc42168",
         "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
         "patchSetId": 26
@@ -166,6 +328,24 @@
       "writtenOn": "2014-04-09T22:35:05Z",
       "side": 1,
       "message": "Lowercase b boolean",
+      "revId": "2307e55c92f0631b07031faaf937725d4373c0a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_3dc9c129",
+        "filename": "modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 26
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-04-09T23:17:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_3dc42168",
       "revId": "2307e55c92f0631b07031faaf937725d4373c0a4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
