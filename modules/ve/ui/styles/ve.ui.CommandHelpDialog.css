@@ -42,6 +42,11 @@
 	margin: 0;
 }
 
+.ve-ui-commandHelpDialog-list dd kbd {
+	display: block;
+	clear: right;
+}
+
 .ve-ui-commandHelpDialog-list dt {
 	float: left;
 	clear: left;
