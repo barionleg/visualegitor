@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_52c46711",
+        "filename": "modules/ve/dm/ve.dm.SurfaceFragment.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-04-10T04:35:51Z",
+      "side": 1,
+      "message": "what if this.range is null?",
+      "revId": "37697aa066e534aeb0c73fbe0509ea636dcd8b0e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_32c9eb29",
+        "filename": "modules/ve/dm/ve.dm.SurfaceFragment.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-04-10T04:35:51Z",
+      "side": 1,
+      "message": "value is usually a bad variable name",
+      "revId": "37697aa066e534aeb0c73fbe0509ea636dcd8b0e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_12ceef31",
+        "filename": "modules/ve/dm/ve.dm.SurfaceFragment.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-04-10T04:35:51Z",
+      "side": 1,
+      "message": "{string}",
+      "revId": "37697aa066e534aeb0c73fbe0509ea636dcd8b0e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
