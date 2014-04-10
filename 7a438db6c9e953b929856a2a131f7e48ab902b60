@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_125f0f79",
+        "filename": "modules/ve/dm/ve.dm.Transaction.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 921,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-04-10T04:24:40Z",
+      "side": 1,
+      "message": "Of course \"if true\", it\u0027s a boolean",
+      "revId": "7a438db6c9e953b929856a2a131f7e48ab902b60",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
