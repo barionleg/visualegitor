@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_134ee6dd",
+        "filename": "modules/ve/dm/ve.dm.Scalable.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-04-11T17:53:18Z",
+      "side": 1,
+      "message": "This bans zeros too, which is probably not intended, right?",
+      "revId": "119003c903f7df9b2de91d8aa7a39a21907ac8c1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
