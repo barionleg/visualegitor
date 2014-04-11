@@ -146,6 +146,20 @@ OO.inheritClass( ve.ui.MediaSizeWidget, OO.ui.Widget );
 
 /* Methods */
 
+/**
+ * Respond to change in original dimensions in the scalable object.
+ * Specifically, enable or disable to 'set full size' button.
+ *
+ * @param {Object} dimensions Original dimensions
+ */
+ve.ui.MediaSizeWidget.prototype.onScalableOriginalSizeChange = function ( dimensions ) {
+	this.fullSizeButton.setDisabled( ( !dimensions || $.isEmptyObject( dimensions ) ) );
+};
+
+/**
+ * Respond to default size or status change in the scalable object.
+ * @param {Boolean} isDefault Current default state
+ */
 ve.ui.MediaSizeWidget.prototype.onScalableDefaultSizeChange = function ( isDefault ) {
 	// Update the default size into the dimensions widget
 	this.updateDefaultDimensions();
@@ -277,6 +291,8 @@ ve.ui.MediaSizeWidget.prototype.setScalable = function ( scalable ) {
 	this.scalable = scalable;
 	// Events
 	this.scalable.connect( this, { 'defaultSizeChange': 'onScalableDefaultSizeChange' } );
+	this.scalable.connect( this, { 'originalSizeChange': 'onScalableOriginalSizeChange' } );
+
 	// Reset current dimensions to new scalable object
 	this.setCurrentDimensions( this.scalable.getCurrentDimensions() );
 	this.updateDefaultDimensions();
