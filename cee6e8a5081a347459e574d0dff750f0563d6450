@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_fec7ae65",
+        "filename": "modules/ve/ve.EventSequencer.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-04-12T00:25:55Z",
+      "side": 1,
+      "message": "ve.isArray",
+      "revId": "cee6e8a5081a347459e574d0dff750f0563d6450",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_dea632be",
+        "filename": "modules/ve/ve.EventSequencer.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-04-12T00:25:55Z",
+      "side": 1,
+      "message": "ve.isArray",
+      "revId": "cee6e8a5081a347459e574d0dff750f0563d6450",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
