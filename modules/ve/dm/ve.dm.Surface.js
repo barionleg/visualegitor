@@ -21,9 +21,10 @@ ve.dm.Surface = function VeDmSurface( doc ) {
 	// Properties
 	this.documentModel = doc;
 	this.metaList = new ve.dm.MetaList( this );
-	this.selection = new ve.Range( 1, 1 );
+	this.selection = new ve.Range( 1 );
 	this.selectedNodes = {};
 	this.newTransactions = [];
+	this.stagingStack = [];
 	this.undoStack = [];
 	this.undoIndex = 0;
 	this.historyTrackingInterval = null;
@@ -77,20 +78,24 @@ OO.mixinClass( ve.dm.Surface, OO.EventEmitter );
  * Disable changes.
  *
  * @method
+ * @fires history
  */
 ve.dm.Surface.prototype.disable = function () {
 	this.stopHistoryTracking();
 	this.enabled = false;
+	this.emit( 'history' );
 };
 
 /**
  * Enable changes.
  *
  * @method
+ * @fires history
  */
 ve.dm.Surface.prototype.enable = function () {
 	this.enabled = true;
 	this.startHistoryTracking();
+	this.emit( 'history' );
 };
 
 /**
@@ -148,6 +153,125 @@ ve.dm.Surface.prototype.getHistory = function () {
 		return this.undoStack.slice( 0 ).concat( [{ 'transactions': this.newTransactions.slice( 0 ) }] );
 	} else {
 		return this.undoStack.slice( 0 );
+	}
+};
+
+/**
+ * If the surface in staging mode.
+ *
+ * @returns {boolean} The surface in staging mode
+ */
+ve.dm.Surface.prototype.isStaging = function () {
+	return this.stagingStack.length > 0;
+};
+
+/**
+ * Get the staging transactions at the current staging stack depth
+ *
+ * The array is returned by reference so it can be pushed to.
+ *
+ * @returns {ve.dm.Transaction[]|undefined} Staging transactions, or undefined if not staging
+ */
+ve.dm.Surface.prototype.getStagingTransactions = function () {
+	return this.stagingStack[this.stagingStack.length - 1];
+};
+
+/**
+ * Push another level of staging to the staging stack
+ *
+ * @fires history
+ */
+ve.dm.Surface.prototype.pushStaging = function () {
+	// If we're starting staging stop history tracking
+	if ( !this.isStaging() ) {
+		// Set a breakpoint to make sure newTransactions is clear
+		this.breakpoint();
+		this.stopHistoryTracking();
+		this.emit( 'history' );
+	}
+	this.stagingStack.push( [] );
+};
+
+/**
+ * Pop a level of staging from the staging stack
+ *
+ * @fires history
+ * @returns {ve.dm.Transaction[]|undefined} Staging transactions, or undefined if not staging
+ */
+ve.dm.Surface.prototype.popStaging = function () {
+	if ( !this.isStaging() ) {
+		return;
+	}
+
+	var i, transaction,
+		reverseTransactions = [],
+		transactions = this.stagingStack.pop();
+
+	// Not applying, so rollback transactions
+	for ( i = transactions.length - 1; i >= 0; i-- ) {
+		transaction = transactions[i].reversed();
+		reverseTransactions.push( transaction );
+	}
+	this.changeInternal( reverseTransactions, undefined, true );
+
+	if ( !this.isStaging() ) {
+		this.startHistoryTracking();
+		this.emit( 'history' );
+	}
+
+	return transactions;
+};
+
+/**
+ * Apply a level of staging from the staging stack
+ *
+ * @fires history
+ */
+ve.dm.Surface.prototype.applyStaging = function () {
+	if ( !this.isStaging() ) {
+		return;
+	}
+
+	var transactions = this.stagingStack.pop();
+
+	if ( this.isStaging() ) {
+		// Move transactions to the next item down in the staging stack
+		Array.prototype.push.apply( this.getStagingTransactions(), transactions );
+	} else {
+		// Move transactions to the undo stack
+		this.newTransactions = transactions;
+		this.breakpoint();
+	}
+
+	if ( !this.isStaging() ) {
+		this.startHistoryTracking();
+		this.emit( 'history' );
+	}
+};
+
+/**
+ * Pop the staging stack until empty
+ *
+ * @returns {ve.dm.Transaction[]|undefined} Staging transactions, or undefined if not staging
+ */
+ve.dm.Surface.prototype.popAllStaging = function () {
+	if ( !this.isStaging() ) {
+		return;
+	}
+
+	var transactions = [];
+	while ( this.isStaging() ) {
+		ve.batchSplice( transactions, 0, 0, this.popStaging() );
+	}
+	return transactions;
+};
+
+/**
+ * Apply the staging stack until empty
+ */
+ve.dm.Surface.prototype.applyAllStaging = function () {
+	while ( this.isStaging() ) {
+		this.applyStaging();
 	}
 };
 
@@ -230,13 +354,23 @@ ve.dm.Surface.prototype.removeInsertionAnnotations = function ( annotations ) {
 };
 
 /**
- * Check if there is a state to redo.
+ * Check if redo is allowed in the current state.
  *
  * @method
- * @returns {boolean} Has a future state
+ * @returns {boolean} Can redo
  */
-ve.dm.Surface.prototype.hasFutureState = function () {
-	return this.undoIndex > 0;
+ve.dm.Surface.prototype.canRedo = function () {
+	return this.undoIndex > 0 && this.enabled && !this.isStaging();
+};
+
+/**
+ * Check if undo is allowed in the current state.
+ *
+ * @method
+ * @returns {boolean} Can undo
+ */
+ve.dm.Surface.prototype.canUndo = function () {
+	return this.hasBeenModified() && this.enabled && !this.isStaging();
 };
 
 /**
@@ -245,7 +379,7 @@ ve.dm.Surface.prototype.hasFutureState = function () {
  * @method
  * @returns {boolean} Has a past state
  */
-ve.dm.Surface.prototype.hasPastState = function () {
+ve.dm.Surface.prototype.hasBeenModified = function () {
 	return this.undoStack.length - this.undoIndex > 0 || !!this.newTransactions.length;
 };
 
@@ -493,11 +627,15 @@ ve.dm.Surface.prototype.changeInternal = function ( transactions, selection, ski
 		for ( i = 0, len = transactions.length; i < len; i++ ) {
 			if ( !transactions[i].isNoOp() ) {
 				if ( !skipUndoStack ) {
-					this.truncateUndoStack();
-					if ( !this.newTransactions.length ) {
-						this.selectionBefore = selectionBefore;
+					if ( this.isStaging() ) {
+						this.getStagingTransactions().push( transactions[i] );
+					} else {
+						this.truncateUndoStack();
+						if ( !this.newTransactions.length ) {
+							this.selectionBefore = selectionBefore;
+						}
+						this.newTransactions.push( transactions[i] );
 					}
-					this.newTransactions.push( transactions[i] );
 				}
 				// The .commit() call below indirectly invokes setSelection()
 				this.documentModel.commit( transactions[i] );
@@ -567,7 +705,7 @@ ve.dm.Surface.prototype.breakpoint = function () {
  */
 ve.dm.Surface.prototype.undo = function () {
 	var i, item, transaction, transactions = [];
-	if ( !this.enabled || !this.hasPastState() ) {
+	if ( !this.canUndo() ) {
 		return;
 	}
 
@@ -594,7 +732,7 @@ ve.dm.Surface.prototype.undo = function () {
  */
 ve.dm.Surface.prototype.redo = function () {
 	var item;
-	if ( !this.enabled || !this.hasFutureState() ) {
+	if ( !this.canRedo() ) {
 		return;
 	}
 
