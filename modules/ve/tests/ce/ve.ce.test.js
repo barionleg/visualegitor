@@ -234,6 +234,41 @@ QUnit.test( 'isShortcutKey', 3, function ( assert ) {
 	assert.equal( ve.ce.isShortcutKey( {} ), false, 'Not set' );
 } );
 
+QUnit.test( 'nextCursorOffset', function ( assert ) {
+	var i, len, tests, elt, test, img, nextOffset;
+
+	function dumpnode( node ) {
+		if ( node.nodeType === 3 ) {
+			return '#' + node.data;
+		} else {
+			return node.nodeName.toLowerCase();
+		}
+	}
+
+	tests = [
+		{ html: '<p>foo<img>bar</p>', expected: ['#bar', 0] },
+		{ html: '<p>foo<b><i><img></i></b></p>', expected: ['i', 1] },
+		{ html: '<p><b>foo</b><img>bar</p>', expected: ['#bar', 0] },
+		{ html: '<p>foo<b><i><img></i></b></p>', expected: ['i', 1] },
+		{ html: '<p><b>foo</b><img></p>', expected: ['p', 2] },
+		{ html: '<p><img><b>foo</b></p>', expected: ['p', 1] },
+		{ html: '<p><b>foo</b><img><b>bar</b></p>', expected: ['p', 2] }
+	];
+	QUnit.expect( assert );
+	elt = ve.createDocumentFromHtml( '' ).createElement( 'div' );
+	for ( i = 0, len = tests.length; i < len; i++ ) {
+		test = tests[i];
+		elt.innerHTML = test.html;
+		img = elt.getElementsByTagName( 'img' )[0];
+		nextOffset = ve.ce.nextCursorOffset( img );
+		assert.deepEqual(
+			[dumpnode( nextOffset.node ), nextOffset.offset],
+			test.expected,
+			test.html
+		);
+	}
+} );
+
 QUnit.test( 'resolveTestOffset', function ( assert ) {
 	var i, ilen, j, jlen, tests, test, testOffset, elt, pre, post, count, dom;
 	tests = [
