@@ -63,8 +63,13 @@ ve.ce.Surface = function VeCeSurface( model, surface, options ) {
 	this.surfaceObserver.connect(
 		this, { 'contentChange': 'onContentChange', 'selectionChange': 'onSelectionChange' }
 	);
-	this.model.connect( this,
-		{ 'select': 'onModelSelect', 'documentUpdate': 'onModelDocumentUpdate' }
+	this.model.connect(
+		this,
+		{
+			'select': 'onModelSelect',
+			'documentUpdate': 'onModelDocumentUpdate',
+			'insertionAnnotationsChange': 'onInsertionAnnotationsChange'
+		}
 	);
 
 	$documentNode = this.documentView.getDocumentNode().$element;
@@ -1365,6 +1370,30 @@ ve.ce.Surface.prototype.onModelDocumentUpdate = function () {
 	this.surfaceObserver.pollOnceNoEmit();
 };
 
+ve.ce.Surface.prototype.onInsertionAnnotationsChange = function ( insertionAnnotations ) {
+	this.renderSelectedContentBranchNode();
+	// Must re-apply the selection after re-rendering
+	this.showSelection( this.surface.getModel().getSelection() );
+	this.surfaceObserver.pollOnceNoEmit();
+};
+
+ve.ce.Surface.prototype.renderSelectedContentBranchNode = function () {
+	var dmRange, ceNode;
+	dmRange = this.model.getSelection();
+	if ( dmRange === null ) {
+		return;
+	}
+	ceNode = this.documentView.getNodeFromOffset( dmRange.start );
+	if ( ceNode === null ) {
+		return;
+	}
+	if ( !ceNode instanceof ve.ce.ContentBranchNode ) {
+		// not a content branch node
+		return;
+	}
+	ceNode.renderContents();
+};
+
 /**
  * Handle selection change events.
  *
@@ -1583,6 +1612,7 @@ ve.ce.Surface.prototype.endRelocation = function () {
  * @method
  */
 ve.ce.Surface.prototype.handleLeftOrRightArrowKey = function ( e ) {
+	return; // XXX Do it natively
 	var selection, range, direction;
 	// On Mac OS pressing Command (metaKey) + Left/Right is same as pressing Home/End.
 	// As we are not able to handle it programmatically (because we don't know at which offsets
@@ -1710,7 +1740,8 @@ ve.ce.Surface.prototype.handleInsertion = function () {
 	if ( selection.isCollapsed() ) {
 		slug = this.documentView.getSlugAtOffset( selection.start );
 		// Always pawn in a slug
-		if ( slug || this.needsPawn( selection, insertionAnnotations ) ) {
+		//if ( slug || this.needsPawn( selection, insertionAnnotations ) ) {
+		if ( slug ) {
 			placeholder = '♙';
 			if ( !insertionAnnotations.isEmpty() ) {
 				placeholder = [placeholder, insertionAnnotations.getIndexes()];
