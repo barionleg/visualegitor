@@ -68,8 +68,13 @@ ve.ce.Surface = function VeCeSurface( model, surface, options ) {
 	this.surfaceObserver.connect(
 		this, { 'contentChange': 'onContentChange', 'selectionChange': 'onSelectionChange' }
 	);
-	this.model.connect( this,
-		{ 'select': 'onModelSelect', 'documentUpdate': 'onModelDocumentUpdate' }
+	this.model.connect(
+		this,
+		{
+			'select': 'onModelSelect',
+			'documentUpdate': 'onModelDocumentUpdate',
+			'insertionAnnotationsChange': 'onInsertionAnnotationsChange'
+		}
 	);
 
 	$documentNode = this.getDocument().getDocumentNode().$element;
@@ -306,6 +311,7 @@ ve.ce.Surface.prototype.getSelectionRect = function () {
 		// Calculate starting range position
 		startRange = sel.getRangeAt( 0 );
 		$span = this.$( '<span>|</span>', startRange.startContainer.ownerDocument );
+		// TODO: the next line closes IMEs
 		startRange.insertNode( $span[0] );
 		startOffset = $span.offset();
 		$span.detach();
@@ -1362,6 +1368,10 @@ ve.ce.Surface.prototype.onModelSelect = function ( selection ) {
 		next = null,
 		previous = this.focusedNode;
 
+	if ( this.isRenderingLocked ) {
+		return;
+	}
+
 	this.contentBranchNodeChanged = false;
 
 	if ( !selection ) {
@@ -1437,6 +1447,30 @@ ve.ce.Surface.prototype.onModelDocumentUpdate = function () {
 	}
 	// Update the state of the SurfaceObserver
 	this.surfaceObserver.pollOnceNoEmit();
+};
+
+ve.ce.Surface.prototype.onInsertionAnnotationsChange = function ( /* insertionAnnotations */ ) {
+	this.renderSelectedContentBranchNode();
+	// Must re-apply the selection after re-rendering
+	this.showSelection( this.surface.getModel().getSelection() );
+	this.surfaceObserver.pollOnceNoEmit();
+};
+
+ve.ce.Surface.prototype.renderSelectedContentBranchNode = function () {
+	var dmRange, ceNode;
+	dmRange = this.model.getSelection();
+	if ( dmRange === null ) {
+		return;
+	}
+	ceNode = this.documentView.getNodeFromOffset( dmRange.start );
+	if ( ceNode === null ) {
+		return;
+	}
+	if ( !ceNode instanceof ve.ce.ContentBranchNode ) {
+		// not a content branch node
+		return;
+	}
+	ceNode.renderContents();
 };
 
 /**
@@ -1672,8 +1706,9 @@ ve.ce.Surface.prototype.endRelocation = function () {
 /**
  * @method
  */
-ve.ce.Surface.prototype.handleLeftOrRightArrowKey = function ( e ) {
-	var selection, range, direction;
+ve.ce.Surface.prototype.handleLeftOrRightArrowKey = function ( /* e */ ) {
+	return; // XXX Do it natively
+	/* var selection, range, direction;
 	// On Mac OS pressing Command (metaKey) + Left/Right is same as pressing Home/End.
 	// As we are not able to handle it programmatically (because we don't know at which offsets
 	// lines starts and ends) let it happen natively.
@@ -1709,7 +1744,7 @@ ve.ce.Surface.prototype.handleLeftOrRightArrowKey = function ( e ) {
 	this.model.setSelection( range );
 	// TODO: onDocumentKeyDown does this anyway
 	this.surfaceObserver.startTimerLoop();
-	this.surfaceObserver.pollOnce();
+	this.surfaceObserver.pollOnce(); */
 };
 
 /**
@@ -1800,7 +1835,8 @@ ve.ce.Surface.prototype.handleInsertion = function () {
 	if ( selection.isCollapsed() ) {
 		slug = this.documentView.getSlugAtOffset( selection.start );
 		// Always pawn in a slug
-		if ( slug || this.needsPawn( selection, insertionAnnotations ) ) {
+		//if ( slug || this.needsPawn( selection, insertionAnnotations ) ) {
+		if ( slug ) {
 			placeholder = '♙';
 			if ( !insertionAnnotations.isEmpty() ) {
 				placeholder = [placeholder, insertionAnnotations.getIndexes()];

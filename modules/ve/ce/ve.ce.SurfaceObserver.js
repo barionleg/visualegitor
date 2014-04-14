@@ -116,7 +116,8 @@ ve.ce.SurfaceObserver.prototype.timerLoop = function ( firstTime ) {
 	}
 	// only reach this point if pollOnce does not throw an exception
 	if ( this.frequency !== null ) {
-		this.timeoutId = setTimeout( ve.bind( this.timerLoop, this ), this.frequency );
+		// TODO: this setTimeout closes IMEs
+		// this.timeoutId = setTimeout( ve.bind( this.timerLoop, this ), this.frequency );
 	}
 };
 
