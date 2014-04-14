@@ -5,6 +5,10 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
+.ve-ce-documentNode span, .ve-ce-documentNode b, .ve-ce-documentNode i, .ve-ce-documentNode u {
+	/* border: solid red 1px; border-radius: 5px; */
+}
+
 body {
 	margin: 0;
 	padding: 0;
