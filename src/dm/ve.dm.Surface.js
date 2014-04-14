@@ -21,6 +21,7 @@ ve.dm.Surface = function VeDmSurface( doc ) {
 	this.documentModel = doc;
 	this.metaList = new ve.dm.MetaList( this );
 	this.selection = null;
+	this.translatedSelection = null;
 	this.selectionBefore = null;
 	this.branchNodes = {};
 	this.selectedNode = null;
@@ -36,7 +37,11 @@ ve.dm.Surface = function VeDmSurface( doc ) {
 	this.contextChangeQueued = false;
 
 	// Events
-	this.documentModel.connect( this, { transact: 'onDocumentTransact' } );
+	this.documentModel.connect( this, {
+		transact: 'onDocumentTransact',
+		precommit: 'onDocumentPreCommit',
+		presynchronize: 'onDocumentPreSynchronize'
+	} );
 };
 
 /* Inheritance */
@@ -433,6 +438,16 @@ ve.dm.Surface.prototype.getSelection = function () {
 };
 
 /**
+ * Get the selection.
+ *
+ * @method
+ * @returns {ve.Range} Current selection
+ */
+ve.dm.Surface.prototype.getTranslatedSelection = function () {
+	return this.translatedSelection || this.selection;
+};
+
+/**
  * Get a fragment for a range.
  *
  * @method
@@ -534,12 +549,18 @@ ve.dm.Surface.prototype.setSelection = function ( selection ) {
 	if ( !this.enabled ) {
 		return;
 	}
+	this.translatedSelection = null;
 
 	if ( this.transacting ) {
 		// Update the selection but don't do any processing
 		this.selection = selection;
 		return;
 	}
+
+	// Update state
+	this.selection = selection;
+	this.branchNodes = branchNodes;
+	this.selectedNode = selectedNode;
 
 	if ( selection ) {
 		// Update branch nodes
@@ -555,7 +576,7 @@ ve.dm.Surface.prototype.setSelection = function ( selection ) {
 			}
 		}
 
-		// Figure out which annotations to use for insertions
+		// Find content offsets for left and right of selection
 		if ( selection.isCollapsed() ) {
 			// Get annotations from either side of the cursor
 			left = Math.max( 0, selection.start - 1 );
@@ -571,22 +592,37 @@ ve.dm.Surface.prototype.setSelection = function ( selection ) {
 			left = linearData.getNearestContentOffset( selection.start );
 			right = linearData.getNearestContentOffset( selection.end );
 		}
+
+		// Figure out which annotations to use for insertions
 		if ( left === -1 ) {
-			// No content offset to our left, use empty set
-			insertionAnnotations = new ve.dm.AnnotationSet( this.documentModel.getStore() );
+			if ( right === -1 ) {
+				// No content; use empty set
+				insertionAnnotations = new ve.dm.AnnotationSet(
+					this.documentModel.getStore()
+				);
+			} else {
+				// Start of content; use annotations from right that should prepend
+				insertionAnnotations = linearData.getAnnotationsFromOffset( right )
+					.filter( function ( annotation ) {
+						return annotation.constructor.static.applyToPrependedContent;
+					} );
+			}
 		} else {
 			// Include annotations on the left that should be added to appended content, or ones that
 			// are on both the left and the right that should not
 			leftAnnotations = linearData.getAnnotationsFromOffset( left );
-			if ( right !== -1 ) {
-				rightAnnotations = linearData.getAnnotationsFromOffset( right );
-				insertionAnnotations = leftAnnotations.filter( function ( annotation ) {
-					return annotation.constructor.static.applyToAppendedContent ||
-						rightAnnotations.containsComparable( annotation );
-				} );
+			if ( right === -1 ) {
+				// End of content; use empty set for right annotations
+				rightAnnotations = new ve.dm.AnnotationSet(
+					this.documentModel.getStore()
+				);
 			} else {
-				insertionAnnotations = leftAnnotations;
+				rightAnnotations = linearData.getAnnotationsFromOffset( right );
 			}
+			insertionAnnotations = leftAnnotations.filter( function ( annotation ) {
+				return annotation.constructor.static.applyToAppendedContent ||
+					rightAnnotations.containsComparable( annotation );
+			} );
 		}
 
 		// Only emit an annotations change event if there's a meaningful difference
@@ -607,11 +643,6 @@ ve.dm.Surface.prototype.setSelection = function ( selection ) {
 	) {
 		contextChange = true;
 	}
-
-	// Update state
-	this.selection = selection;
-	this.branchNodes = branchNodes;
-	this.selectedNode = selectedNode;
 
 	// Emit events
 	if ( !oldSelection || !oldSelection.equals( this.selection ) ) {
@@ -834,4 +865,26 @@ ve.dm.Surface.prototype.onDocumentTransact = function ( tx ) {
  */
 ve.dm.Surface.prototype.getSelectedNode = function () {
 	return this.selectedNode;
+};
+
+/**
+ * Clone the selection ready for early translation (before synchronization).
+ *
+ * This is so #ve.ce.ContentBranchNode.getRenderedContents can consider the translated
+ * selection for unicorn rendering.
+ */
+ve.dm.Surface.prototype.onDocumentPreCommit = function () {
+	this.translatedSelection = this.selection ? this.selection.clone() : null;
+};
+
+/**
+ * Update translatedSelection early (before synchronization)
+ *
+ * @param {ve.dm.Transaction} tx Transaction that was processed
+ * @fires documentUpdate
+ */
+ve.dm.Surface.prototype.onDocumentPreSynchronize = function ( tx ) {
+	if ( this.translatedSelection ) {
+		this.translatedSelection = tx.translateRange( this.translatedSelection );
+	}
 };
