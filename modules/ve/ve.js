@@ -907,6 +907,100 @@
 	};
 
 	/**
+	 * Finds the nearest common ancestor of DOM nodes
+	 *
+	 * @param {Node...} DOM nodes in the same document
+	 * @returns {Node} Common ancestor node
+	 */
+	ve.getCommonAncestor = function () {
+		var i, j, nodeCount, chain, node,
+			minHeight = null,
+			chains = [],
+			args = Array.prototype.slice.call( arguments );
+		nodeCount = args.length;
+		if ( nodeCount === 0 ) {
+			throw new Error( 'Need at least one node' );
+		}
+		// Build every chain
+		for ( i = 0; i < nodeCount; i++ ) {
+			chain = [];
+			node = args[ i ];
+			while ( node !== null ) {
+				chain.unshift( node );
+				node = node.parentNode;
+			}
+			if ( minHeight === null || minHeight > chain.length ) {
+				minHeight = chain.length;
+			}
+			chains.push( chain );
+		}
+		// Step through chains in parallel, until they differ
+		// All chains are guaranteed to start with documentNode
+		for ( i = 1; i < minHeight; i++ ) {
+			node = chains[ 0 ][ i ];
+			for ( j = 1; j < nodeCount; j++ ) {
+				if ( node !== chains[ j ][ i ] ) {
+					return chains[ 0 ][ i - 1 ];
+				}
+			}
+		}
+		return chains[ 0 ][ minHeight - 1 ];
+	};
+
+	/**
+	 * Get the offset path from ancestor to offset in descendent
+	 *
+	 * @param {Node} ancestor The ancestor node
+	 * @param {Node} node The descendent node
+	 * @param {number} nodeOffset The offset in the descendent node
+	 * @return {number[]} The offset path
+	 */
+	ve.getOffsetPath = function ( ancestor, node, nodeOffset ) {
+		var path = [ nodeOffset ];
+		while ( node !== ancestor ) {
+			if ( node.parentNode === null ) {
+				ve.log( node, 'is not a descendent of', ancestor );
+				throw new Error( 'Not a descendent' );
+			}
+			path.unshift(
+				Array.prototype.indexOf.call( node.parentNode.childNodes, node )
+			);
+			node = node.parentNode;
+		}
+		return path;
+	};
+
+	/**
+	 * Test whether a position change passed forward over a point
+	 *
+	 * @param {number[]} start Start position offset path
+	 * @param {number[]} mid Mid position offset path
+	 * @param {number[]} end End position offset path
+	 * @return {boolean} True if (start < mid <= end || start <= mid < end)
+	 */
+	ve.isForwardJump = function ( start, mid, end ) {
+		var i, startElt, midElt, endElt,
+			cmpStartMid = 0,
+			cmpMidEnd = 0,
+			len = Math.max( start.length, mid.length, end.length );
+		for ( i = 0; i < len; i++ ) {
+			startElt = start[ i ] === undefined ? -1 : start[ i ];
+			midElt = mid[ i ] === undefined ? -1 : mid[ i ];
+			endElt = end[ i ] === undefined ? -1 : end[ i ];
+			if ( !cmpStartMid ) {
+				cmpStartMid = midElt - startElt;
+			}
+			if ( !cmpMidEnd ) {
+				cmpMidEnd = endElt - midElt;
+			}
+			if ( cmpStartMid && cmpMidEnd ) {
+				break;
+			}
+		}
+		return cmpStartMid >= 0 && cmpMidEnd >= 0 && cmpStartMid + cmpMidEnd > 0;
+	};
+
+	/**
 	 * Get the current time, measured in milliseconds since January 1, 1970 (UTC).
 	 *
 	 * On browsers that implement the Navigation Timing API, this function will produce floating-point
