@@ -22,6 +22,7 @@ ve.dm.Surface = function VeDmSurface( doc ) {
 	this.documentModel = doc;
 	this.metaList = new ve.dm.MetaList( this );
 	this.selection = null;
+	this.translatedSelection = null;
 	this.selectionBefore = null;
 	this.selectedNodes = {};
 	this.newTransactions = [];
@@ -36,7 +37,11 @@ ve.dm.Surface = function VeDmSurface( doc ) {
 	this.contextChangeQueued = false;
 
 	// Events
-	this.documentModel.connect( this, { 'transact': 'onDocumentTransact' } );
+	this.documentModel.connect( this, {
+		'transact': 'onDocumentTransact',
+		'precommit': 'onDocumentPreCommit',
+		'presynchronize': 'onDocumentPreSynchronize'
+	} );
 };
 
 /* Inheritance */
@@ -428,6 +433,16 @@ ve.dm.Surface.prototype.getSelection = function () {
 };
 
 /**
+ * Get the selection.
+ *
+ * @method
+ * @returns {ve.Range} Current selection
+ */
+ve.dm.Surface.prototype.getTranslatedSelection = function () {
+	return this.translatedSelection || this.selection;
+};
+
+/**
  * Get a fragment for a range.
  *
  * @method
@@ -528,6 +543,7 @@ ve.dm.Surface.prototype.setSelection = function ( selection ) {
 	if ( !this.enabled ) {
 		return;
 	}
+	this.translatedSelection = null;
 
 	if ( this.transacting ) {
 		// Update the selection but don't do any processing
@@ -789,4 +805,26 @@ ve.dm.Surface.prototype.onDocumentTransact = function ( tx ) {
 		this.setSelection( tx.translateRange( this.selection ) );
 	}
 	this.emit( 'documentUpdate', tx );
+};
+
+/**
+ * Clone the selection ready for early translation (before synchronization).
+ *
+ * This is so #ve.ce.ContentBranchNode.getRenderedContents can consider the translated
+ * selection for unicorn rendering.
+ */
+ve.dm.Surface.prototype.onDocumentPreCommit = function () {
+	this.translatedSelection = this.selection ? this.selection.clone() : null;
+};
+
+/**
+ * Update translatedSelection early (before synchronization)
+ *
+ * @param {ve.dm.Transaction} tx Transaction that was processed
+ * @fires documentUpdate
+ */
+ve.dm.Surface.prototype.onDocumentPreSynchronize = function ( tx ) {
+	if ( this.translatedSelection ) {
+		this.translatedSelection = tx.translateRange( this.translatedSelection );
+	}
 };

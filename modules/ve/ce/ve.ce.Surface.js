@@ -37,7 +37,8 @@ ve.ce.Surface = function VeCeSurface( model, surface, options ) {
 	this.$document = this.$( this.getElementDocument() );
 	this.eventSequencer = new ve.EventSequencer( [
 		'keydown', 'keypress', 'keyup',
-		'compositionstart', 'compositionend'
+		'compositionstart', 'compositionend',
+		'input'
 	] );
 	this.clipboard = [];
 	this.clipboardId = String( Math.random() );
@@ -63,13 +64,21 @@ ve.ce.Surface = function VeCeSurface( model, surface, options ) {
 	// This is set on entering changeModel, then unset when leaving.
 	// It is used to test whether a reflected change event is emitted.
 	this.newModelSelection = null;
+	// These are set during cursor moves (but not text addions/deletions at the cursor)
+	this.cursorEvent = null;
+	this.cursorStartRange = null;
 
 	// Events
 	this.surfaceObserver.connect(
 		this, { 'contentChange': 'onContentChange', 'selectionChange': 'onSelectionChange' }
 	);
-	this.model.connect( this,
-		{ 'select': 'onModelSelect', 'documentUpdate': 'onModelDocumentUpdate' }
+	this.model.connect(
+		this,
+		{
+			'select': 'onModelSelect',
+			'documentUpdate': 'onModelDocumentUpdate',
+			'insertionAnnotationsChange': 'onInsertionAnnotationsChange'
+		}
 	);
 
 	$documentNode = this.getDocument().getDocumentNode().$element;
@@ -123,8 +132,10 @@ ve.ce.Surface = function VeCeSurface( model, surface, options ) {
 		'keyup': ve.bind( this.onDocumentKeyUp, this ),
 		'keypress': ve.bind( this.onDocumentKeyPress, this ),
 		'compositionstart': ve.bind( this.onDocumentCompositionStart, this ),
-		'compositionend': ve.bind( this.onDocumentCompositionEnd, this )
+		'compositionend': ve.bind( this.onDocumentCompositionEnd, this ),
+		'input': ve.bind( this.onDocumentInput, this )
 	} ).after( {
+		'keydown': ve.bind( this.afterDocumentKeyDown, this ),
 		'keypress': ve.bind( this.afterDocumentKeyPress, this )
 	} );
 
@@ -306,6 +317,7 @@ ve.ce.Surface.prototype.getSelectionRect = function () {
 		// Calculate starting range position
 		startRange = sel.getRangeAt( 0 );
 		$span = this.$( '<span>|</span>', startRange.startContainer.ownerDocument );
+		// TODO: the next line closes IMEs
 		startRange.insertNode( $span[0] );
 		startOffset = $span.offset();
 		$span.detach();
@@ -828,11 +840,92 @@ ve.ce.Surface.prototype.onDocumentKeyPress = function ( e ) {
 };
 
 /**
+ * @param {jQuery.Event} e
+ */
+ve.ce.Surface.prototype.afterDocumentKeyDown = function ( e ) {
+	var fixupCursor;
+	console.log( 'e=', e, ', this.cursorEvent=', this.cursorEvent );
+	if ( e !== this.cursorEvent ) {
+		return;
+	}
+	fixupCursor = ( e.keyCode === OO.ui.Keys.LEFT || e.keyCode === OO.ui.Keys.RIGHT );
+	this.checkUnicorns( e, fixupCursor );
+};
+
+ve.ce.Surface.prototype.checkUnicorns = function ( e, fixupCursor ) {
+	var sel, oldRange, newRange, ancestor, unicorns, oldPos, newPos, u1, u1Pos, u2, u2Pos,
+		fixup, jumpedUnicorn;
+	sel = rangy.getSelection();
+	if ( sel.rangeCount === 0 ) {
+		return;
+	}
+	newRange = sel.getRangeAt( 0 );
+	if ( !newRange.collapsed ) {
+		// XXX consider how to handle this
+		return;
+	}
+	oldRange = this.cursorStartRange;
+	ancestor = ve.getCommonAncestor( oldRange.startContainer, newRange.startContainer );
+	if ( ancestor.nodeType === Node.TEXT_NODE ) {
+		// Not jumped over unicorn
+		return;
+	}
+	unicorns = ancestor.getElementsByClassName( 've-ce-unicorn' );
+	if ( unicorns.length === 0 ) {
+		// Not jumped over unicorn
+		return;
+	} else if ( unicorns.length === 1 ) {
+		ve.log( 'Unbalanced unicorns', ancestor.innerHTML );
+		throw new Error( 'Unbalanced unicorns' );
+	}
+	// Find positions. This assumes oldPos is still attached and valid in some sense
+	oldPos = ve.getOffsetPath( ancestor, oldRange.startContainer, oldRange.startOffset );
+	newPos = ve.getOffsetPath( ancestor, newRange.startContainer, newRange.startOffset );
+	u1 = unicorns[ 0 ];
+	u2 = unicorns[ 1 ];
+	u1Pos = ve.getOffsetPath(
+		ancestor,
+		u1.parentNode,
+		Array.prototype.indexOf.call( u1.parentNode.childNodes, u1 )
+	);
+	u2Pos = ve.getOffsetPath(
+		ancestor,
+		u2.parentNode,
+		1 + Array.prototype.indexOf.call( u2.parentNode.childNodes, u2 )
+	);
+
+	// Calculate fixup, if a unicorn was jumped.
+	fixup = 0;
+	jumpedUnicorn = false;
+	if ( ve.isForwardJump( newPos, u1Pos, oldPos ) ) {
+		ve.log( 'jumped to before pre-unicorn', oldPos, u1Pos, newPos );
+		fixup = -1;
+		jumpedUnicorn = true;
+	} else if ( ve.isForwardJump( oldPos, u2Pos, newPos ) ) {
+		ve.log( 'jumped to after post-unicorn', oldPos, u2Pos, newPos );
+		fixup = 1;
+		jumpedUnicorn = true;
+	} else if ( ve.isForwardJump( oldPos, u1Pos, newPos ) ) {
+		ve.log( 'Weird! jumped to after pre-unicorn', oldPos, u1Pos, newPos );
+		jumpedUnicorn = true;
+	} else if ( ve.isForwardJump( newPos, u2Pos, oldPos ) ) {
+		ve.log( 'Weird! jumped to before post-unicorn', oldPos, u2Pos, newPos );
+		jumpedUnicorn = true;
+	}
+	if ( jumpedUnicorn ) {
+		if ( fixupCursor && fixup !== 0 ) {
+			this.moveModelCursor( fixup );
+		}
+		this.renderSelectedContentBranchNode();
+	}
+};
+
+/**
  * Poll again after the native key press
  * @param {jQuery.Event} ev
  */
 ve.ce.Surface.prototype.afterDocumentKeyPress = function () {
-	this.surfaceObserver.pollOnce();
+	// this.surfaceObserver.pollOnce( { force: true } );
 };
 
 /**
@@ -1343,6 +1436,9 @@ ve.ce.Surface.prototype.afterPaste = function () {
  * @param {jQuery.Event} e Composition start event
  */
 ve.ce.Surface.prototype.onDocumentCompositionStart = function () {
+	if ( true ) {
+		return;
+	}
 	this.handleInsertion();
 };
 
@@ -1353,6 +1449,9 @@ ve.ce.Surface.prototype.onDocumentCompositionStart = function () {
  * @param {jQuery.Event} e Composition end event
  */
 ve.ce.Surface.prototype.onDocumentCompositionEnd = function () {
+	if ( true ) {
+		return;
+	}
 	this.incRenderLock();
 	try {
 		this.surfaceObserver.pollOnce();
@@ -1360,6 +1459,25 @@ ve.ce.Surface.prototype.onDocumentCompositionEnd = function () {
 		this.decRenderLock();
 	}
 	this.surfaceObserver.startTimerLoop();
+};
+
+/**
+ * Handle document composition end events.
+ *
+ * @method
+ * @param {jQuery.Event} e Input event
+ */
+ve.ce.Surface.prototype.onDocumentInput = function () {
+	// XXX ask Trevor
+	if ( true ) {
+		return;
+	}
+	this.incRenderLock();
+	try {
+		this.surfaceObserver.pollOnce();
+	} finally {
+		this.decRenderLock();
+	}
 };
 
 /*! Custom Events */
@@ -1452,6 +1570,30 @@ ve.ce.Surface.prototype.onModelDocumentUpdate = function () {
 	}
 	// Update the state of the SurfaceObserver
 	this.surfaceObserver.pollOnceNoEmit();
+};
+
+ve.ce.Surface.prototype.onInsertionAnnotationsChange = function ( /* insertionAnnotations */ ) {
+	this.renderSelectedContentBranchNode();
+	// Must re-apply the selection after re-rendering
+	this.showSelection( this.surface.getModel().getSelection() );
+	this.surfaceObserver.pollOnceNoEmit();
+};
+
+ve.ce.Surface.prototype.renderSelectedContentBranchNode = function () {
+	var dmRange, ceNode;
+	dmRange = this.model.getSelection();
+	if ( dmRange === null ) {
+		return;
+	}
+	ceNode = this.documentView.getNodeFromOffset( dmRange.start );
+	if ( ceNode === null ) {
+		return;
+	}
+	if ( !ceNode instanceof ve.ce.ContentBranchNode ) {
+		// not a content branch node
+		return;
+	}
+	ceNode.renderContents();
 };
 
 /**
@@ -1690,7 +1832,25 @@ ve.ce.Surface.prototype.endRelocation = function () {
  * @param {jQuery.Event} e Left or right key down event
  */
 ve.ce.Surface.prototype.handleLeftOrRightArrowKey = function ( e ) {
-	var selection, range, direction;
+	var sel, range;
+	sel = rangy.getSelection();
+	// Store the key event / range, obliterating the old one if necessary.
+	if ( sel.rangeCount === 0 ) {
+		this.cursorEvent = null;
+		this.cursorStartRange = null;
+		return;
+	}
+	range = sel.getRangeAt( 0 );
+	if ( !range.collapsed ) {
+		this.cursorEvent = null;
+		this.cursorStartRange = null;
+		return;
+	}
+
+	this.cursorEvent = e;
+	this.cursorStartRange = range;
+	return; // XXX Do it natively
+	/* var selection, range, direction;
 	// On Mac OS pressing Command (metaKey) + Left/Right is same as pressing Home/End.
 	// As we are not able to handle it programmatically (because we don't know at which offsets
 	// lines starts and ends) let it happen natively.
@@ -1726,7 +1886,20 @@ ve.ce.Surface.prototype.handleLeftOrRightArrowKey = function ( e ) {
 	this.model.setSelection( range );
 	// TODO: onDocumentKeyDown does this anyway
 	this.surfaceObserver.startTimerLoop();
-	this.surfaceObserver.pollOnce();
+	this.surfaceObserver.pollOnce(); */
+};
+
+/**
+ * Move the DM surface cursor
+ * @param {number} offset Distance to move (negative = toward document start)
+ */
+ve.ce.Surface.prototype.moveModelCursor = function ( offset ) {
+	this.model.setSelection( this.getDocument().getRelativeRange(
+		this.model.getSelection(),
+		offset,
+		'character',
+		false
+	) );
 };
 
 /**
@@ -1838,7 +2011,8 @@ ve.ce.Surface.prototype.handleInsertion = function () {
 	if ( selection.isCollapsed() ) {
 		slug = this.documentView.getSlugAtOffset( selection.start );
 		// Always pawn in a slug
-		if ( slug || this.needsPawn( selection, insertionAnnotations ) ) {
+		//if ( slug || this.needsPawn( selection, insertionAnnotations ) ) {
+		if ( slug ) {
 			placeholder = '♙';
 			if ( !insertionAnnotations.isEmpty() ) {
 				placeholder = [placeholder, insertionAnnotations.getIndexes()];
