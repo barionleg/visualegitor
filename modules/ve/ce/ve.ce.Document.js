@@ -136,11 +136,43 @@ ve.ce.Document.prototype.getRelativeOffset = function ( offset, direction, unit 
  * @throws {Error} Offset could not be translated to a DOM element and offset
  */
 ve.ce.Document.prototype.getNodeAndOffset = function ( offset ) {
+	var nao, n1, n2;
+	function getNext ( node ) {
+		while ( node.nextSibling === null ) {
+			node = node.parentNode;
+			if ( node === null ) {
+				return null;
+			}
+		}
+		node = node.nextSibling;
+		while ( node.firstChild ) {
+			node = node.firstChild;
+		}
+		return node;
+	}
+
+	nao = this.getNodeAndOffset2( offset );
+	n1 = nao.node;
+	n2 = getNext( n1 );
+
+	// If just before the unicorn, return the point just after it	
+	if ( n1.nodeType === 3 &&
+		nao.offset === n1.data.length &&
+		n2 && n2.nodeType === 1 && n2.getAttribute( 'class' ) === 've-ce-unicorn'
+	) {
+		return ve.ce.nextCursorOffset( n2 );
+	} else {
+		return nao;
+	}
+};
+
+ve.ce.Document.prototype.getNodeAndOffset2 = function ( offset ) {
 	var node, startOffset, current, stack, item, $item, length,
 		slug = this.getSlugAtOffset( offset );
 	if ( slug ) {
 		return { node: slug, offset: 0 };
 	}
+
 	node = this.getNodeFromOffset( offset );
 	startOffset = node.getOffset() + ( ( node.isWrapped() ) ? 1 : 0 );
 	current = [node.$element.contents(), 0];

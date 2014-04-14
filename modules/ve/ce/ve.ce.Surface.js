@@ -63,8 +63,13 @@ ve.ce.Surface = function VeCeSurface( model, surface, options ) {
 	this.surfaceObserver.connect(
 		this, { 'contentChange': 'onContentChange', 'selectionChange': 'onSelectionChange' }
 	);
-	this.model.connect( this,
-		{ 'select': 'onModelSelect', 'documentUpdate': 'onModelDocumentUpdate' }
+	this.model.connect(
+		this,
+		{
+			'select': 'onModelSelect',
+			'documentUpdate': 'onModelDocumentUpdate',
+			'insertionAnnotationsChange': 'onInsertionAnnotationsChange'
+		 }
 	);
 
 	$documentNode = this.documentView.getDocumentNode().$element;
@@ -1317,6 +1322,7 @@ ve.ce.Surface.prototype.onModelSelect = function ( selection ) {
 	// changeModelSelection is currently being called with the same (object-identical)
 	// selection object (i.e. if the model is calling us back)
 	if ( !this.focusedNode && !this.isRenderingLocked() && selection !== this.newModelSelection ) {
+	//if ( !this.focusedNode ) {
 		this.showSelection( selection );
 	}
 
@@ -1335,6 +1341,34 @@ ve.ce.Surface.prototype.onModelDocumentUpdate = function () {
 	}
 	// Update the state of the SurfaceObserver
 	this.surfaceObserver.pollOnceNoEmit();
+};
+
+ve.ce.Surface.prototype.onInsertionAnnotationsChange = function ( insertionAnnotations ) {
+	this.renderSelectedContentBranchNode();
+	//this.onModelSelect( this.surface.getModel().getSelection() );
+	this.showSelection( this.surface.getModel().getSelection() );
+	this.surfaceObserver.pollOnceNoEmit();
+};
+
+ve.ce.Surface.prototype.renderSelectedContentBranchNode = function () {
+	var dmRange, ceNode;
+	dmRange = this.model.getSelection();
+	if ( dmRange === null ) {
+		console.log( 'renderSelectedContentBranchNode: no selection' );
+		return;
+	}
+	ceNode = this.documentView.getNodeFromOffset( dmRange.start );
+	if ( ceNode === null ) {
+		console.log( 'renderSelectedContentBranchNode: no node at ' + dmRange.start );
+		return;
+	}
+	if ( !ceNode instanceof ve.ce.ContentBranchNode ) {
+		console.log( 'renderSelectedContentBranchNode: not a content branch node:', ceNode );
+		// not a content branch node
+		return;
+	}
+	console.log( 'renderSelectedContentBranchNode: Unicorn at ' + dmRange.start );
+	ceNode.renderContents();
 };
 
 /**
@@ -1555,6 +1589,7 @@ ve.ce.Surface.prototype.endRelocation = function () {
  * @method
  */
 ve.ce.Surface.prototype.handleLeftOrRightArrowKey = function ( e ) {
+	return; // XXX Do it natively
 	var selection, range, direction;
 	// On Mac OS pressing Command (metaKey) + Left/Right is same as pressing Home/End.
 	// As we are not able to handle it programmatically (because we don't know at which offsets
@@ -1690,7 +1725,8 @@ ve.ce.Surface.prototype.handleInsertion = function () {
 	if ( selection.isCollapsed() ) {
 		slug = this.documentView.getSlugAtOffset( selection.start );
 		// Always pawn in a slug
-		if ( slug || this.needsPawn( selection, insertionAnnotations ) ) {
+		//if ( slug || this.needsPawn( selection, insertionAnnotations ) ) {
+		if ( slug ) {
 			placeholder = '♙';
 			if ( !insertionAnnotations.isEmpty() ) {
 				placeholder = [placeholder, insertionAnnotations.getIndexes()];
@@ -2259,6 +2295,7 @@ ve.ce.Surface.prototype.getFocusedNode = function () {
  * @returns {boolean} Render is locked
  */
 ve.ce.Surface.prototype.isRenderingLocked = function () {
+	return false; // XXX Always render for now
 	return this.renderLocks > 0;
 };
 
@@ -2295,6 +2332,7 @@ ve.ce.Surface.prototype.changeModel = function ( transaction, range ) {
 	if ( this.newModelSelection !== null ) {
 		throw new Error( 'Nested change of newModelSelection' );
 	}
+
 	this.newModelSelection = range;
 	try {
 		this.model.change( transaction, range );

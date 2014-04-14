@@ -233,6 +233,10 @@ ve.ce.SurfaceObserver.prototype.pollOnceInternal = function ( emitChanges ) {
 		text = ve.ce.getDomText( node.$element[0] );
 		hash = ve.ce.getDomHash( node.$element[0] );
 		if ( this.text !== text || this.hash !== hash ) {
+			ve.log( 'oldHash:', this.hash );
+			ve.log( 'newHash:', hash );
+			ve.log( 'oldText:', this.text );
+			ve.log( 'newText:', text );
 			if ( emitChanges ) {
 				this.emit(
 					'contentChange',
