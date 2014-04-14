@@ -133,6 +133,9 @@ ve.ui.Toolbar.prototype.onWindowResize = function () {
  * This is for when the cursor is obscured by a floating toolbar.
  */
 ve.ui.Toolbar.prototype.onSurfaceViewKeyUp = function () {
+	if ( true ) {
+		return; // TODO: getSelectionRect closes IMEs
+	}
 	var barHeight, scrollTo, obscured, cursorPos;
 
 	if ( !this.floating ) {
