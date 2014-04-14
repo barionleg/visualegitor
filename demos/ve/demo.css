@@ -4,6 +4,12 @@
  * @copyright 2011-2014 VisualEditor Team and others; see http://ve.mit-license.org
  */
 
+.ve-ce-documentNode span, .ve-ce-documentNode b, .ve-ce-documentNode i, .ve-ce-documentNode u {
+	border: solid red 1px; border-radius: 5px;
+}
+
+/*.ve-ce-unicorn { width: 0; height: 0 }*/
+
 body {
 	margin: 0;
 	padding: 0;
