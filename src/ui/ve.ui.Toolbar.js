@@ -140,6 +140,9 @@ ve.ui.Toolbar.prototype.onWindowResize = function () {
  */
 ve.ui.Toolbar.prototype.onSurfaceViewKeyUp = function () {
 	var surfaceView, nativeRange, clientRect, barHeight, scrollTo, obscured;
+	// if ( true ) {
+	// 	return; // TODO: getSelectionRect closes IMEs
+	// }
 
 	if ( !this.floating ) {
 		return;
