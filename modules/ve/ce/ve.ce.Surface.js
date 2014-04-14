@@ -37,7 +37,8 @@ ve.ce.Surface = function VeCeSurface( model, surface, options ) {
 	this.$document = this.$( this.getElementDocument() );
 	this.eventSequencer = new ve.EventSequencer( [
 		'keydown', 'keypress', 'keyup',
-		'compositionstart', 'compositionend'
+		'compositionstart', 'compositionend',
+		'input'
 	] );
 	this.clipboard = [];
 	this.clipboardId = String( Math.random() );
@@ -63,13 +64,23 @@ ve.ce.Surface = function VeCeSurface( model, surface, options ) {
 	// This is set on entering changeModel, then unset when leaving.
 	// It is used to test whether a reflected change event is emitted.
 	this.newModelSelection = null;
+	// These are set during cursor moves (but not text addions/deletions at the cursor)
+	this.cursorEvent = null;
+	this.cursorStartRange = null;
+	this.unicorningNode = null;
+	this.setUnicorningRecursionGuard = false;
 
 	// Events
 	this.surfaceObserver.connect(
 		this, { 'contentChange': 'onContentChange', 'selectionChange': 'onSelectionChange' }
 	);
-	this.model.connect( this,
-		{ 'select': 'onModelSelect', 'documentUpdate': 'onModelDocumentUpdate' }
+	this.model.connect(
+		this,
+		{
+			'select': 'onModelSelect',
+			'documentUpdate': 'onModelDocumentUpdate',
+			'insertionAnnotationsChange': 'onInsertionAnnotationsChange'
+		}
 	);
 
 	$documentNode = this.getDocument().getDocumentNode().$element;
@@ -122,10 +133,9 @@ ve.ce.Surface = function VeCeSurface( model, surface, options ) {
 		'keydown': ve.bind( this.onDocumentKeyDown, this ),
 		'keyup': ve.bind( this.onDocumentKeyUp, this ),
 		'keypress': ve.bind( this.onDocumentKeyPress, this ),
-		'compositionstart': ve.bind( this.onDocumentCompositionStart, this ),
-		'compositionend': ve.bind( this.onDocumentCompositionEnd, this )
+		'input': ve.bind( this.onDocumentInput, this )
 	} ).after( {
-		'keypress': ve.bind( this.afterDocumentKeyPress, this )
+		'keydown': ve.bind( this.afterDocumentKeyDown, this )
 	} );
 
 	// Initialization
@@ -306,6 +316,7 @@ ve.ce.Surface.prototype.getSelectionRect = function () {
 		// Calculate starting range position
 		startRange = sel.getRangeAt( 0 );
 		$span = this.$( '<span>|</span>', startRange.startContainer.ownerDocument );
+		// TODO: the next line closes IMEs
 		startRange.insertNode( $span[0] );
 		startOffset = $span.offset();
 		$span.detach();
@@ -724,6 +735,9 @@ ve.ce.Surface.prototype.onDocumentKeyDown = function ( e ) {
 	} finally {
 		this.decRenderLock();
 	}
+
+	this.storeKeyDownState( e );
+
 	switch ( e.keyCode ) {
 		case OO.ui.Keys.LEFT:
 		case OO.ui.Keys.RIGHT:
@@ -828,11 +842,85 @@ ve.ce.Surface.prototype.onDocumentKeyPress = function ( e ) {
 };
 
 /**
- * Poll again after the native key press
- * @param {jQuery.Event} ev
+ * @param {jQuery.Event} e
  */
-ve.ce.Surface.prototype.afterDocumentKeyPress = function () {
-	this.surfaceObserver.pollOnce();
+ve.ce.Surface.prototype.afterDocumentKeyDown = function ( e ) {
+	var fixupCursor;
+	if ( e !== this.cursorEvent ) {
+		return;
+	}
+	fixupCursor = (
+		!e.shiftKey &&
+		( e.keyCode === OO.ui.Keys.LEFT || e.keyCode === OO.ui.Keys.RIGHT )
+	);
+	this.incRenderLock();
+	try {
+		this.surfaceObserver.pollOnce();
+	} finally {
+		this.decRenderLock();
+	}
+	this.checkUnicorns( fixupCursor );
+};
+
+ve.ce.Surface.prototype.checkUnicorns = function ( fixupCursor ) {
+	var preUnicorn, postUnicorn, sel, range, node, fixup, ancestor,
+		endCursorPos, preUnicornPos;
+	if ( !this.unicorningNode || !this.unicorningNode.unicorns ) {
+		return;
+	}
+	preUnicorn = this.unicorningNode.unicorns[ 0 ];
+	postUnicorn = this.unicorningNode.unicorns[ 1 ];
+
+	sel = rangy.getSelection();
+	if ( sel.rangeCount === 0 ) {
+		// XXX do we want to clear unicorns in this case?
+		return;
+	}
+	range = sel.getRangeAt( 0 );
+
+	// Test whether the selection endpoint is between unicorns. If so, do nothing.
+	// Unicorns can only contain text, so just move backwards until we hit a non-text node.
+	node = range.endContainer;
+	if ( node.nodeType === Node.ELEMENT_NODE ) {
+		node = range.endOffset > 0 ? node.childNodes [ range.endOffset - 1 ] : null;
+	}
+	while ( node !== null && node.nodeType === Node.TEXT_NODE ) {
+		node = node.previousSibling;
+	}
+	if ( node === preUnicorn ) {
+		return;
+	}
+
+	// Selection endpoint is not between unicorns.
+	// Test whether it is before or after the pre-unicorn (i.e. before/after both unicorns)
+	ancestor = ve.getCommonAncestor( range.endContainer, preUnicorn );
+	if ( ancestor === null ) {
+		throw new Error( 'No common ancestor' );
+	}
+	endCursorPos = ve.getOffsetPath( ancestor, range.endContainer, range.endOffset );
+	preUnicornPos = ve.getOffsetPath(
+		ancestor,
+		preUnicorn.parentNode,
+		Array.prototype.indexOf.call( preUnicorn.parentNode.childNodes, preUnicorn )
+	);
+
+	if ( ve.cmpOffsetPaths( endCursorPos, preUnicornPos ) < 0 ) {
+		// before the pre-unicorn
+		fixup = -1;
+	} else {
+		// at or after the pre-unicorn (actually must be after the post-unicorn)
+		fixup = 1;
+	}
+	if ( fixupCursor ) {
+		this.incRenderLock();
+		try {
+			this.moveModelCursor( fixup );
+		} finally {
+			this.decRenderLock();
+		}
+	}
+	this.renderSelectedContentBranchNode();
+	this.showSelection( this.surface.getModel().getSelection() );
 };
 
 /**
@@ -1337,29 +1425,18 @@ ve.ce.Surface.prototype.afterPaste = function () {
 };
 
 /**
- * Handle document composition start events.
- *
- * @method
- * @param {jQuery.Event} e Composition start event
- */
-ve.ce.Surface.prototype.onDocumentCompositionStart = function () {
-	this.handleInsertion();
-};
-
-/**
  * Handle document composition end events.
  *
  * @method
- * @param {jQuery.Event} e Composition end event
+ * @param {jQuery.Event} e Input event
  */
-ve.ce.Surface.prototype.onDocumentCompositionEnd = function () {
+ve.ce.Surface.prototype.onDocumentInput = function () {
 	this.incRenderLock();
 	try {
 		this.surfaceObserver.pollOnce();
 	} finally {
 		this.decRenderLock();
 	}
-	this.surfaceObserver.startTimerLoop();
 };
 
 /*! Custom Events */
@@ -1435,8 +1512,9 @@ ve.ce.Surface.prototype.onModelSelect = function ( selection ) {
 	// selection object (i.e. if the model is calling us back)
 	if ( !this.focusedNode && !this.isRenderingLocked() && selection !== this.newModelSelection ) {
 		this.showSelection( selection );
+		this.checkUnicorns( false );
 	}
-
+	this.renderSelectedContentBranchNode();
 	// Update the selection state in the SurfaceObserver
 	this.surfaceObserver.pollOnceNoEmit();
 };
@@ -1452,6 +1530,30 @@ ve.ce.Surface.prototype.onModelDocumentUpdate = function () {
 	}
 	// Update the state of the SurfaceObserver
 	this.surfaceObserver.pollOnceNoEmit();
+};
+
+ve.ce.Surface.prototype.onInsertionAnnotationsChange = function ( /* insertionAnnotations */ ) {
+	this.renderSelectedContentBranchNode();
+	// Must re-apply the selection after re-rendering
+	this.showSelection( this.surface.getModel().getSelection() );
+	this.surfaceObserver.pollOnceNoEmit();
+};
+
+ve.ce.Surface.prototype.renderSelectedContentBranchNode = function () {
+	var dmRange, ceNode;
+	dmRange = this.model.getSelection();
+	if ( dmRange === null ) {
+		return;
+	}
+	ceNode = this.documentView.getNodeFromOffset( dmRange.start );
+	if ( ceNode === null ) {
+		return;
+	}
+	if ( !( ceNode instanceof ve.ce.ContentBranchNode ) ) {
+		// not a content branch node
+		return;
+	}
+	ceNode.renderContents();
 };
 
 /**
@@ -1474,6 +1576,7 @@ ve.ce.Surface.prototype.onSelectionChange = function ( oldRange, newRange ) {
 	} finally {
 		this.decRenderLock();
 	}
+	this.checkUnicorns( false );
 };
 
 /**
@@ -1533,10 +1636,51 @@ ve.ce.Surface.prototype.onContentChange = function ( node, previous, next ) {
 				next.range.start - nodeOffset - 1
 			);
 			// Apply insertion annotations
-			annotations = this.model.getInsertionAnnotations();
-			if ( annotations instanceof ve.dm.AnnotationSet ) {
-				ve.dm.Document.static.addAnnotationsToData( data, this.model.getInsertionAnnotations() );
+			//annotations = node.unicornAnnotations || this.model.getInsertionAnnotations();
+			//ve.dm.Document.static.addAnnotationsToData( data, annotations );
+
+			// FIXME duplication
+
+			// TODO verify variable substitutions
+
+			if ( node.unicornAnnotations !== null ) {
+				// This CBN is unicorned. Use the stored annotations.
+				annotations = node.unicornAnnotations;
+			} else {
+				annotations = this.model.getInsertionAnnotations();
 			}
+			if ( annotations.getLength() ) {
+				annotationsLeft = this.model.getDocument().data.getAnnotationsFromOffset( previous.range.start - lengthDiff );
+				annotationsRight = this.model.getDocument().data.getAnnotationsFromOffset( previous.range.start );
+				for ( i = 0, length = annotations.getLength(); i < length; i++ ) {
+					annotation = annotations.get( i );
+					annotationIndex = annotations.getIndex( i );
+					if ( annotation.constructor.static.splitOnWordbreak ) {
+						nextData = ve.splitClusters( next.text );
+						dataString = new ve.dm.DataString( nextData );
+						if (
+							// if no annotation to the right, check for wordbreak
+							(
+								!annotationsRight.containsIndex( annotationIndex ) &&
+								unicodeJS.wordbreak.isBreak( dataString, previous.range.start - lengthDiff - nodeOffset )
+							) ||
+							// if no annotation to the left, check for wordbreak
+							(
+								!annotationsLeft.containsIndex( annotationIndex ) &&
+								unicodeJS.wordbreak.isBreak( dataString, previous.range.start - nodeOffset )
+							)
+						) {
+							annotations.removeAt( i );
+							i--;
+							length--;
+						}
+					}
+				}
+				ve.dm.Document.static.addAnnotationsToData( data, annotations );
+			}
+
+			// FIXME duplication above
+
 			this.incRenderLock();
 			try {
 				this.changeModel(
@@ -1590,8 +1734,15 @@ ve.ce.Surface.prototype.onContentChange = function ( node, previous, next ) {
 		++fromRight;
 	}
 	data = nextData.slice( fromLeft, nextData.length - fromRight );
-	// Get annotations to the left of new content and apply
-	annotations = this.model.getDocument().data.getAnnotationsFromOffset( nodeOffset + 1 + fromLeft );
+
+	if ( node.unicornAnnotations !== null ) {
+		// This CBN is unicorned. Use the stored annotations.
+		annotations = node.unicornAnnotations;
+	} else {
+		// Guess that we want to use the annotations from the first changed character
+		// This could be wrong, e.g. slice->slide could happen by changing 'ic' to 'id'
+		annotations = this.model.getDocument().data.getAnnotationsFromOffset( nodeOffset + 1 + fromLeft );
+	}
 	if ( annotations.getLength() ) {
 		annotationsLeft = this.model.getDocument().data.getAnnotationsFromOffset( nodeOffset + fromLeft );
 		annotationsRight = this.model.getDocument().data.getAnnotationsFromOffset( nodeOffset + 1 + previousData.length - fromRight );
@@ -1685,6 +1836,39 @@ ve.ce.Surface.prototype.endRelocation = function () {
 /*! Utilities */
 
 /**
+ * Store the current selection range, and a key down event if relevant
+ *
+ * @param {jQuery.Event|null} e Key down event
+ */
+ve.ce.Surface.prototype.storeKeyDownState = function ( e ) {
+	var sel, range;
+	sel = rangy.getSelection( this.$document[0] );
+	// Store the key event / range, obliterating the old one if necessary.
+	if ( sel.rangeCount === 0 ) {
+		this.cursorEvent = null;
+		this.cursorStartRange = null;
+		return;
+	}
+	range = sel.getRangeAt( 0 );
+
+	this.cursorEvent = e;
+	this.cursorStartRange = range;
+};
+
+/**
+ * Move the DM surface cursor
+ * @param {number} offset Distance to move (negative = toward document start)
+ */
+ve.ce.Surface.prototype.moveModelCursor = function ( offset ) {
+	this.model.setSelection( this.getDocument().getRelativeRange(
+		this.model.getSelection(),
+		offset,
+		'character',
+		false
+	) );
+};
+
+/**
  * Handle left or right arrow key events
  *
  * @param {jQuery.Event} e Left or right key down event
@@ -1697,7 +1881,6 @@ ve.ce.Surface.prototype.handleLeftOrRightArrowKey = function ( e ) {
 	if ( e.metaKey ) {
 		return;
 	}
-
 	// Selection is going to be displayed programmatically so prevent default browser behaviour
 	e.preventDefault();
 	// TODO: onDocumentKeyDown did this already
@@ -1716,13 +1899,13 @@ ve.ce.Surface.prototype.handleLeftOrRightArrowKey = function ( e ) {
 	} else {
 		direction = e.keyCode === OO.ui.Keys.LEFT ? -1 : 1;
 	}
-
 	range = this.getDocument().getRelativeRange(
 		selection,
 		direction,
 		( e.altKey === true || e.ctrlKey === true ) ? 'word' : 'character',
 		e.shiftKey
 	);
+	ve.log( 'would set range:', range );
 	this.model.setSelection( range );
 	// TODO: onDocumentKeyDown does this anyway
 	this.surfaceObserver.startTimerLoop();
@@ -1838,7 +2021,8 @@ ve.ce.Surface.prototype.handleInsertion = function () {
 	if ( selection.isCollapsed() ) {
 		slug = this.documentView.getSlugAtOffset( selection.start );
 		// Always pawn in a slug
-		if ( slug || this.needsPawn( selection, insertionAnnotations ) ) {
+		//if ( slug || this.needsPawn( selection, insertionAnnotations ) ) {
+		if ( slug ) {
 			placeholder = '♙';
 			if ( !insertionAnnotations.isEmpty() ) {
 				placeholder = [placeholder, insertionAnnotations.getIndexes()];
@@ -2456,4 +2640,46 @@ ve.ce.Surface.prototype.changeModel = function ( transaction, range ) {
 
 ve.ce.Surface.prototype.setContentBranchNodeChanged = function ( isChanged ) {
 	this.contentBranchNodeChanged = isChanged;
+	if ( isChanged === true ) {
+		this.cursorEvent = null;
+		this.cursorStartRange = null;
+	}
+};
+
+/**
+ * @param {ve.ce.ContentBranchNode} node The node claiming the unicorn
+ */
+ve.ce.Surface.prototype.setUnicorning = function ( node ) {
+	if ( this.setUnicorningRecursionGuard ) {
+		throw new Error( 'setUnicorning recursing' );
+	}
+	if ( this.unicorningNode && this.unicorningNode !== node ) {
+		this.setUnicorningRecursionGuard = true;
+		try {
+			this.unicorningNode.renderContents();
+		} finally {
+			this.setUnicorningRecursionGuard = false;
+		}
+	}
+	this.unicorningNode = node;
+};
+
+/**
+ * @param {ve.ce.ContentBranchNode} node The node releasing the unicorn
+ */
+ve.ce.Surface.prototype.setNotUnicorning = function ( node ) {
+	if ( this.unicorningNode === node ) {
+		this.unicorningNode = null;
+	}
+};
+
+/**
+ * @param {ve.ce.ContentBranchNode} node The node releasing the unicorn
+ */
+ve.ce.Surface.prototype.setNotUnicorningAll = function ( node ) {
+	if ( this.unicorningNode === node ) {
+		// Don't call back node.renderContents()
+		this.unicorningNode = null;
+	}
+	this.setUnicorning( null );
 };
