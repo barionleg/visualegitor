@@ -122,7 +122,8 @@ ve.ce.ContentBranchNode.prototype.onSplice = function () {
  * @returns {HTMLElement} Wrapper containing rendered contents
  */
 ve.ce.ContentBranchNode.prototype.getRenderedContents = function () {
-	var i, ilen, j, jlen, item, itemAnnotations, ann, clone,
+	var i, ilen, j, jlen, item, itemAnnotations, ann, clone, dmSurface, dmRange, relCursor,
+		unicorn, img1, img2, annotationsChanged, childLength, offset, htmlItem,
 		store = this.model.doc.getStore(),
 		annotationStack = new ve.dm.AnnotationSet( store ),
 		annotatedHtml = [],
@@ -133,6 +134,7 @@ ve.ce.ContentBranchNode.prototype.getRenderedContents = function () {
 		node = this;
 
 	function openAnnotation( annotation ) {
+		annotationsChanged = true;
 		if ( buffer !== '' ) {
 			current.appendChild( doc.createTextNode( buffer ) );
 			buffer = '';
@@ -146,6 +148,7 @@ ve.ce.ContentBranchNode.prototype.getRenderedContents = function () {
 	}
 
 	function closeAnnotation() {
+		annotationsChanged = true;
 		if ( buffer !== '' ) {
 			current.appendChild( doc.createTextNode( buffer ) );
 			buffer = '';
@@ -159,6 +162,45 @@ ve.ce.ContentBranchNode.prototype.getRenderedContents = function () {
 		annotatedHtml = annotatedHtml.concat( this.children[i].getAnnotatedHtml() );
 	}
 
+	// Set relCursor to collapsed selection offset, or -1 if none
+	// (in which case we don't need to worry about preannotation)
+	relCursor = -1;
+	if ( this.getRoot() ) {
+		dmSurface = this.getRoot().getSurface().getModel();
+		dmRange = dmSurface.getTranslatedSelection();
+		if ( dmRange && dmRange.start === dmRange.end ) {
+			// subtract 1 for CBN opening tag
+			relCursor = dmRange.start - this.getOffset() - 1;
+		}
+	}
+
+	// Splice the unicorn into the collapsed selection offset, if relevant.
+	// It will be rendered later if it is needed, else ignored
+	if ( relCursor > -1 ) {
+		offset = 0;
+		unicorn = [ { uni: 'corn' }, dmSurface.getInsertionAnnotations().storeIndexes ];
+		for ( i = 0, ilen = annotatedHtml.length; i < ilen; i++ ) {
+			htmlItem = annotatedHtml[i][0];
+			if ( typeof htmlItem === 'string' ) {
+				childLength = 1;
+			} else if ( htmlItem.hasClass ) {
+				childLength = 2;
+			} else {
+				ve.log( 'Unknown node type: ', htmlItem );
+				throw new Error( 'Unknown node type: ' + htmlItem );
+			}
+			if ( offset <= relCursor && relCursor < offset + childLength ) {
+				annotatedHtml.splice( i, 0, unicorn );
+				break;
+			}
+			offset += childLength;
+		}
+		// Special case for final position
+		if ( i === ilen && offset === relCursor ) {
+			annotatedHtml.push( unicorn );
+		}
+	}
+
 	// Render HTML with annotations
 	for ( i = 0, ilen = annotatedHtml.length; i < ilen; i++ ) {
 		if ( ve.isArray( annotatedHtml[i] ) ) {
@@ -169,6 +211,7 @@ ve.ce.ContentBranchNode.prototype.getRenderedContents = function () {
 			itemAnnotations = new ve.dm.AnnotationSet( store );
 		}
 
+		annotationsChanged = false;
 		ve.dm.Converter.openAndCloseAnnotations( annotationStack, itemAnnotations,
 			openAnnotation, closeAnnotation
 		);
@@ -176,6 +219,25 @@ ve.ce.ContentBranchNode.prototype.getRenderedContents = function () {
 		// Handle the actual item
 		if ( typeof item === 'string' ) {
 			buffer += item;
+		} else if ( unicorn && item === unicorn[0] ) {
+			if ( annotationsChanged ) {
+				if ( buffer !== '' ) {
+					current.appendChild( doc.createTextNode( buffer ) );
+					buffer = '';
+				}
+				img1 = doc.createElement( 'img' );
+				img1.className = 've-ce-unicorn ve-ce-pre-unicorn';
+				//img.setAttribute( 'src', ve.ce.minImgDataUri );
+				img1.setAttribute( 'src', ve.ce.unicornImgDataUri );
+				$( img1 ).data( 'dmOffset', ( this.getOffset() + 1 + i ) );
+				current.appendChild( img1 );
+				img2 = doc.createElement( 'img' );
+				img2.className = 've-ce-unicorn ve-ce-post-unicorn';
+				//img.setAttribute( 'src', ve.ce.minImgDataUri );
+				img2.setAttribute( 'src', ve.ce.unicornImgDataUri );
+				$( img2 ).data( 'dmOffset', ( this.getOffset() + 1 + i ) );
+				current.appendChild( img2 );
+			}
 		} else {
 			if ( buffer !== '' ) {
 				current.appendChild( doc.createTextNode( buffer ) );
