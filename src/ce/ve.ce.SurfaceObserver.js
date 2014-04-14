@@ -22,7 +22,7 @@ ve.ce.SurfaceObserver = function VeCeSurfaceObserver( documentView ) {
 
 	// Properties
 	this.documentView = documentView;
-	this.domDocument = null;
+	this.domDocument = this.documentView.getDocumentNode().getElementDocument();
 	this.polling = false;
 	this.timeoutId = null;
 	this.frequency = 250; // ms
@@ -95,7 +95,6 @@ ve.ce.SurfaceObserver.prototype.detach = function () {
  * @method
  */
 ve.ce.SurfaceObserver.prototype.startTimerLoop = function () {
-	this.domDocument = this.documentView.getDocumentNode().getElementDocument();
 	this.polling = true;
 	this.timerLoop( true ); // will not sync immediately, because timeoutId should be null
 };
