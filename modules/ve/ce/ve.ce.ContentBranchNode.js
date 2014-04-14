@@ -22,6 +22,8 @@ ve.ce.ContentBranchNode = function VeCeContentBranchNode( model, config ) {
 
 	// Properties
 	this.lastTransaction = null;
+	this.unicornAnnotations = null;
+	this.unicorns = null;
 
 	// Events
 	this.connect( this, { 'childUpdate': 'onChildUpdate' } );
@@ -122,7 +124,8 @@ ve.ce.ContentBranchNode.prototype.onSplice = function () {
  * @returns {HTMLElement} Wrapper containing rendered contents
  */
 ve.ce.ContentBranchNode.prototype.getRenderedContents = function () {
-	var i, ilen, j, jlen, item, itemAnnotations, ann, clone,
+	var i, ilen, j, jlen, item, itemAnnotations, ann, clone, dmSurface, dmRange, relCursor,
+		unicorn, img1, img2, annotationsChanged, childLength, offset, htmlItem, ceSurface,
 		store = this.model.doc.getStore(),
 		annotationStack = new ve.dm.AnnotationSet( store ),
 		annotatedHtml = [],
@@ -133,6 +136,7 @@ ve.ce.ContentBranchNode.prototype.getRenderedContents = function () {
 		node = this;
 
 	function openAnnotation( annotation ) {
+		annotationsChanged = true;
 		if ( buffer !== '' ) {
 			current.appendChild( doc.createTextNode( buffer ) );
 			buffer = '';
@@ -146,6 +150,7 @@ ve.ce.ContentBranchNode.prototype.getRenderedContents = function () {
 	}
 
 	function closeAnnotation() {
+		annotationsChanged = true;
 		if ( buffer !== '' ) {
 			current.appendChild( doc.createTextNode( buffer ) );
 			buffer = '';
@@ -159,6 +164,56 @@ ve.ce.ContentBranchNode.prototype.getRenderedContents = function () {
 		annotatedHtml = annotatedHtml.concat( this.children[i].getAnnotatedHtml() );
 	}
 
+	// Set relCursor to collapsed selection offset, or -1 if none
+	// (in which case we don't need to worry about preannotation)
+	relCursor = -1;
+	if ( this.getRoot() ) {
+		ceSurface = this.getRoot().getSurface();
+		dmSurface = ceSurface.getModel();
+		dmRange = dmSurface.getTranslatedSelection();
+		if ( dmRange && dmRange.start === dmRange.end ) {
+			// subtract 1 for CBN opening tag
+			relCursor = dmRange.start - this.getOffset() - 1;
+		}
+	}
+
+	// Splice the unicorn into the collapsed selection offset, if relevant.
+	// It will be rendered later if it is needed, else ignored
+	if ( relCursor > -1 ) {
+		offset = 0;
+		for ( i = 0, ilen = annotatedHtml.length; i < ilen; i++ ) {
+			htmlItem = annotatedHtml[i][0];
+			if ( typeof htmlItem === 'string' ) {
+				childLength = 1;
+			} else if ( htmlItem.hasClass ) {
+				childLength = 2;
+			} else {
+				ve.log( 'Unknown node type: ', htmlItem );
+				throw new Error( 'Unknown node type: ' + htmlItem );
+			}
+			if ( offset <= relCursor && relCursor < offset + childLength ) {
+				unicorn = [
+					{}, // unique object, for testing object equality later
+					dmSurface.getInsertionAnnotations().storeIndexes
+				];
+				annotatedHtml.splice( i, 0, unicorn );
+				break;
+			}
+			offset += childLength;
+		}
+		// Special case for final position
+		if ( i === ilen && offset === relCursor ) {
+			unicorn = [
+				{}, // unique object, for testing object equality later
+				dmSurface.getInsertionAnnotations().storeIndexes
+			];
+			annotatedHtml.push( unicorn );
+		}
+		if ( !unicorn ) {
+			ceSurface.setNotUnicorning( this );
+		}
+	}
+
 	// Render HTML with annotations
 	for ( i = 0, ilen = annotatedHtml.length; i < ilen; i++ ) {
 		if ( ve.isArray( annotatedHtml[i] ) ) {
@@ -169,6 +224,7 @@ ve.ce.ContentBranchNode.prototype.getRenderedContents = function () {
 			itemAnnotations = new ve.dm.AnnotationSet( store );
 		}
 
+		annotationsChanged = false;
 		ve.dm.Converter.openAndCloseAnnotations( annotationStack, itemAnnotations,
 			openAnnotation, closeAnnotation
 		);
@@ -176,6 +232,39 @@ ve.ce.ContentBranchNode.prototype.getRenderedContents = function () {
 		// Handle the actual item
 		if ( typeof item === 'string' ) {
 			buffer += item;
+		} else if ( unicorn && item === unicorn[0] ) {
+			if ( annotationsChanged ) {
+				if ( buffer !== '' ) {
+					current.appendChild( doc.createTextNode( buffer ) );
+					buffer = '';
+				}
+				img1 = doc.createElement( 'img' );
+				img2 = doc.createElement( 'img' );
+				img1.className = 've-ce-unicorn ve-ce-pre-unicorn';
+				img2.className = 've-ce-unicorn ve-ce-post-unicorn';
+				$( img1 ).data( 'dmOffset', ( this.getOffset() + 1 + i ) );
+				$( img2 ).data( 'dmOffset', ( this.getOffset() + 1 + i ) );
+				if ( ve.debug ) {
+					img1.setAttribute( 'src', ve.ce.unicornImgDataUri );
+					img2.setAttribute( 'src', ve.ce.unicornImgDataUri );
+				} else {
+					img1.setAttribute( 'src', ve.ce.minImgDataUri );
+					img2.setAttribute( 'src', ve.ce.minImgDataUri );
+					img1.style.width = '0px';
+					img2.style.width = '0px';
+					img1.style.height = '0px';
+					img2.style.height = '0px';
+				}
+				current.appendChild( img1 );
+				current.appendChild( img2 );
+				this.unicornAnnotations = dmSurface.getInsertionAnnotations();
+				this.unicorns = [ img1, img2 ];
+				ceSurface.setUnicorning( this );
+			} else {
+				this.unicornAnnotations = null;
+				this.unicorns = null;
+				ceSurface.setNotUnicorningAll( this );
+			}
 		} else {
 			if ( buffer !== '' ) {
 				current.appendChild( doc.createTextNode( buffer ) );
@@ -255,4 +344,15 @@ ve.ce.ContentBranchNode.prototype.renderContents = function () {
 			this.$element.css( 'backgroundColor', '' );
 		}, this ), 500 );
 	}
+};
+
+/**
+ * Handle teardown event.
+ *
+ * @method
+ */
+ve.ce.ContentBranchNode.prototype.onTeardown = function () {
+	var ceSurface = this.getRoot().getSurface();
+	ve.ce.BranchNode.prototype.onTeardown.call( this );
+	ceSurface.setNotUnicorning( this );
 };
