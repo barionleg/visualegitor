@@ -132,6 +132,7 @@ ve.ui.Toolbar.prototype.onWindowResize = function () {
  * the cursor is obscured by the toolbar.
  */
 ve.ui.Toolbar.prototype.onSurfaceViewKeyUp = function () {
+	return; // TODO: getSelectionRect closes IMEs
 	var barHeight, scrollTo, obscured, cursorPos = this.surface.view.getSelectionRect();
 	if ( !cursorPos ) {
 		return;
