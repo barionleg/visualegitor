@@ -21,7 +21,7 @@ ve.dm.Surface = function VeDmSurface( doc ) {
 	// Properties
 	this.documentModel = doc;
 	this.metaList = new ve.dm.MetaList( this );
-	this.selection = new ve.Range( 1, 1 );
+	this.selection = new ve.Range( 1 );
 	this.selectedNodes = {};
 	this.newTransactions = [];
 	this.undoStack = [];
@@ -77,20 +77,24 @@ OO.mixinClass( ve.dm.Surface, OO.EventEmitter );
  * Disable changes.
  *
  * @method
+ * @fires history
  */
 ve.dm.Surface.prototype.disable = function () {
 	this.stopHistoryTracking();
 	this.enabled = false;
+	this.emit( 'history' );
 };
 
 /**
  * Enable changes.
  *
  * @method
+ * @fires history
  */
 ve.dm.Surface.prototype.enable = function () {
 	this.enabled = true;
 	this.startHistoryTracking();
+	this.emit( 'history' );
 };
 
 /**
@@ -230,13 +234,23 @@ ve.dm.Surface.prototype.removeInsertionAnnotations = function ( annotations ) {
 };
 
 /**
- * Check if there is a state to redo.
+ * Check if redo is allowed in the current state.
  *
  * @method
- * @returns {boolean} Has a future state
+ * @returns {boolean} Can redo
  */
-ve.dm.Surface.prototype.hasFutureState = function () {
-	return this.undoIndex > 0;
+ve.dm.Surface.prototype.canRedo = function () {
+	return this.undoIndex > 0 && this.enabled;
+};
+
+/**
+ * Check if undo is allowed in the current state.
+ *
+ * @method
+ * @returns {boolean} Can undo
+ */
+ve.dm.Surface.prototype.canUndo = function () {
+	return this.hasBeenModified() && this.enabled;
 };
 
 /**
@@ -245,7 +259,7 @@ ve.dm.Surface.prototype.hasFutureState = function () {
  * @method
  * @returns {boolean} Has a past state
  */
-ve.dm.Surface.prototype.hasPastState = function () {
+ve.dm.Surface.prototype.hasBeenModified = function () {
 	return this.undoStack.length - this.undoIndex > 0 || !!this.newTransactions.length;
 };
 
@@ -567,7 +581,7 @@ ve.dm.Surface.prototype.breakpoint = function () {
  */
 ve.dm.Surface.prototype.undo = function () {
 	var i, item, transaction, transactions = [];
-	if ( !this.enabled || !this.hasPastState() ) {
+	if ( !this.canUndo() ) {
 		return;
 	}
 
@@ -594,7 +608,7 @@ ve.dm.Surface.prototype.undo = function () {
  */
 ve.dm.Surface.prototype.redo = function () {
 	var item;
-	if ( !this.enabled || !this.hasFutureState() ) {
+	if ( !this.canRedo() ) {
 		return;
 	}
 
