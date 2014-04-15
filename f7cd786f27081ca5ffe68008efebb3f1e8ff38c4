@@ -16,6 +16,24 @@
       "revId": "f7cd786f27081ca5ffe68008efebb3f1e8ff38c4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_1d65bedd",
+        "filename": "modules/ve/ui/ve.ui.Context.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-04-15T20:05:06Z",
+      "side": 1,
+      "message": "2. Closing the inspector applies the changes, so is necessary before saving. There\u0027s no need to close the popup icon though.",
+      "parentUuid": "8e23439c_a2b9057a",
+      "revId": "f7cd786f27081ca5ffe68008efebb3f1e8ff38c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
