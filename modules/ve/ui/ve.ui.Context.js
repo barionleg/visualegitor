@@ -53,6 +53,18 @@ ve.ui.Context.prototype.getInspector = function ( name ) {
 };
 
 /**
+ * Close the current inspector if there is one.
+ *
+ * @method
+ */
+ve.ui.Context.prototype.closeCurrentInspector = function () {
+	if ( this.inspectors.getCurrentWindow() ) {
+		this.inspectors.getCurrentWindow().close();
+	}
+};
+
+
+/**
  * Destroy the context, removing all DOM elements.
  *
  * @method
