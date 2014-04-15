@@ -34,6 +34,24 @@
       "revId": "f7cd786f27081ca5ffe68008efebb3f1e8ff38c4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_7da9528c",
+        "filename": "modules/ve/ui/ve.ui.Context.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-04-15T20:15:34Z",
+      "side": 1,
+      "message": "Per IRL discussion with Trevor, they should both be \u0027back\u0027. \u0027hide\u0027 is never used. Inspector closing is in DesktopContext because this.popup only exists there.\n\nIn practice mobile won\u0027t use this so it should be in DesktopContext too, but theoretically it\u0027s fine to have here as this.inspectors is defined in Context.\n\nAlso we\u0027re soon going to merge Inspectors and Dialogs at which point they\u0027ll share a WindowSet and this will all become irrelevant.",
+      "parentUuid": "8e23439c_1d65bedd",
+      "revId": "f7cd786f27081ca5ffe68008efebb3f1e8ff38c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
