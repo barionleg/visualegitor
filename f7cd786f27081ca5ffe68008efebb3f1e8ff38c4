@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_a2b9057a",
+        "filename": "modules/ve/ui/ve.ui.Context.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-04-15T19:49:04Z",
+      "side": 1,
+      "message": "- Shouldn\u0027t this be .close( { \u0027action\u0027: \u0027hide\u0027 } ) for consistency with ve.ui.DesktopContext.prototype.hide ? (Also, why is inspector closing in DesktopContext anyway? Feels like it should be in Context)\n- Is there any reason this isn\u0027t using this.hide() to also hide the context itself?",
+      "revId": "f7cd786f27081ca5ffe68008efebb3f1e8ff38c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
