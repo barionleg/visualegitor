@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_dd7cd8b6",
+        "filename": "modules/ve/ui/ve.ui.DesktopContext.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-04-16T19:40:15Z",
+      "side": 1,
+      "message": "To be more accurate and make the code easier to understand, I think this variable should be renamed to selectionChange \u003d !!this.afterModelChangeRange",
+      "revId": "794e7e4fd3068e3c02709a658328cd1598473507",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
