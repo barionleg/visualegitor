@@ -81,7 +81,6 @@ QUnit.test( 'breakpoint', 7, function ( assert ) {
 } );
 
 // TODO: ve.dm.Surface#getHistory
-// TODO: ve.dm.Surface#purgeHistory
 // TODO: ve.dm.Surface#hasFutureState
 // TODO: ve.dm.Surface#hasPastState
 // TODO: ve.dm.Surface#truncateUndoStack
