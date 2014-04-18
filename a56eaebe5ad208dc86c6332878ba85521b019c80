@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_a109e330",
+        "filename": "build/modules.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-04-18T20:16:51Z",
+      "side": 1,
+      "message": "annotations, not nodes",
+      "revId": "a56eaebe5ad208dc86c6332878ba85521b019c80",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
