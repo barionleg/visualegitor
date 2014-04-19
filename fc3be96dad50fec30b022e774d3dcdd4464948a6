@@ -16,6 +16,24 @@
       "revId": "fc3be96dad50fec30b022e774d3dcdd4464948a6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_7cc7f44a",
+        "filename": "bin/update-oojs-ui.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2014-04-19T02:06:17Z",
+      "side": 0,
+      "message": "They\u0027re quite different at this point though. Maybe a tech debt bug if you feel its worth sharing logic.",
+      "parentUuid": "8e23439c_dcb608d7",
+      "revId": "fc3be96dad50fec30b022e774d3dcdd4464948a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
