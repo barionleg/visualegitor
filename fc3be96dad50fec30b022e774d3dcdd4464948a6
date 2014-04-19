@@ -34,6 +34,24 @@
       "revId": "fc3be96dad50fec30b022e774d3dcdd4464948a6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_fcdae41f",
+        "filename": "bin/update-oojs-ui.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-04-19T02:06:49Z",
+      "side": 0,
+      "message": "OK.",
+      "parentUuid": "8e23439c_7cc7f44a",
+      "revId": "fc3be96dad50fec30b022e774d3dcdd4464948a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
