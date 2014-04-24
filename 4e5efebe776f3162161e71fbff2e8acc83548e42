@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_a744294c",
+        "filename": "modules/ve/ui/dialogs/ve.ui.ActionDialog.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-04-24T02:12:43Z",
+      "side": 1,
+      "message": "But what should they do instead, then? Call getApplyChangesDeferred() , return the promise, and resolve/reject once done?\n\nSee also the comment two lines down.",
+      "revId": "4e5efebe776f3162161e71fbff2e8acc83548e42",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_87412d3c",
+        "filename": "modules/ve/ui/dialogs/ve.ui.ActionDialog.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-04-24T02:12:43Z",
+      "side": 1,
+      "message": "What deferred object?\n\nMaybe this API would be better if there were a deferred object directly passed into an overridable method (whose default action is to just resolve immediately) and this class handled all of the plumbing around it? That would be much more obvious and need less documentation. The way it\u0027s set up here is more unwieldy and not clearly documented.",
+      "revId": "4e5efebe776f3162161e71fbff2e8acc83548e42",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_4777959b",
+        "filename": "modules/ve/ui/dialogs/ve.ui.NodeDialog.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-04-24T02:12:43Z",
+      "side": 1,
+      "message": "Function[] surely?",
+      "revId": "4e5efebe776f3162161e71fbff2e8acc83548e42",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
