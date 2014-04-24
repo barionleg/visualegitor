@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_14742dcb",
+        "filename": "modules/ve/ui/widgets/ve.ui.LanguageInputWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-04-24T01:30:42Z",
+      "side": 1,
+      "message": "This is horrible and at least deserves a // HACK: comment",
+      "revId": "e0ec7172f3ad95634cd7f8679ed5fa29b5293e56",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_b4821996",
+        "filename": "modules/ve/ui/widgets/ve.ui.LanguageInputWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-04-24T01:30:42Z",
+      "side": 1,
+      "message": "Why not use .connect?\n\nchangeButton.connect( searchDialog, { \u0027click\u0027: \u0027open\u0027 } );",
+      "revId": "e0ec7172f3ad95634cd7f8679ed5fa29b5293e56",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
