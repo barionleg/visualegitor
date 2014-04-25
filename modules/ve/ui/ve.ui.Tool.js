@@ -69,13 +69,13 @@ ve.ui.Tool.static.getCommandName = function () {
  * Handle the toolbar state being updated.
  *
  * @method
- * @param {ve.dm.Node[]} nodes List of nodes covered by the current selection
- * @param {ve.dm.AnnotationSet} full Annotations that cover all of the current selection
- * @param {ve.dm.AnnotationSet} partial Annotations that cover some or all of the current selection
- * @param {ve.Range|null} range The surface range
+ * @param {Object} context Context object
+ * @param {ve.dm.Node[]} context.nodes List of nodes covered by the current selection
+ * @param {ve.dm.SurfaceFragment} context.fragment Surface fragment
+ * @param {Object} context.direction Context direction with 'inline' & 'block' properties
  */
-ve.ui.Tool.prototype.onUpdateState = function ( nodes, full, partial, range ) {
-	this.setDisabled( this.constructor.static.requiresRange && !range );
+ve.ui.Tool.prototype.onUpdateState = function ( context ) {
+	this.setDisabled( this.constructor.static.requiresRange && !context.fragment.getRange() );
 };
 
 /**

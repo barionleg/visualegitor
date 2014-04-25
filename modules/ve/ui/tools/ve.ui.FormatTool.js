@@ -48,11 +48,12 @@ ve.ui.FormatTool.static.requiresRange = true;
 /**
  * @inheritdoc
  */
-ve.ui.FormatTool.prototype.onUpdateState = function ( nodes ) {
+ve.ui.FormatTool.prototype.onUpdateState = function ( context ) {
 	// Parent method
 	ve.ui.Tool.prototype.onUpdateState.apply( this, arguments );
 
 	var i, len,
+		nodes = context.nodes,
 		format = this.constructor.static.format,
 		all = !!nodes.length;
 
