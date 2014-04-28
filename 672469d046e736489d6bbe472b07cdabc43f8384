@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_34ff10ff",
+        "filename": "modules/ve/ui/dialogs/ve.ui.ActionDialog.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-04-28T19:23:30Z",
+      "side": 1,
+      "message": "Nope, this is an action dialog",
+      "revId": "672469d046e736489d6bbe472b07cdabc43f8384",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_b412005a",
+        "filename": "modules/ve/ui/dialogs/ve.ui.NodeDialog.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-04-28T19:23:30Z",
+      "side": 1,
+      "message": "...or creating or inspecting.\n\nDialog associated with a node?",
+      "revId": "672469d046e736489d6bbe472b07cdabc43f8384",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
