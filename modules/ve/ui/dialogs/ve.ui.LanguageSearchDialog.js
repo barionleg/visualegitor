@@ -82,7 +82,7 @@ ve.ui.LanguageSearchDialog.prototype.setup = function () {
  * Handle window ready events
  */
 ve.ui.LanguageSearchDialog.prototype.onReady = function () {
-	this.searchWidget.query.$input[0].focus();
+	this.searchWidget.focus();
 };
 
 /**
