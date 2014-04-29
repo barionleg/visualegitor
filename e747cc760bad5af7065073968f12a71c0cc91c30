@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_cee4c03b",
+        "filename": "modules/ve/ui/widgets/ve.ui.LanguageResultWidget.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 88
+      },
+      "writtenOn": "2014-04-29T18:05:17Z",
+      "side": 1,
+      "message": "You mean empty().append() probably, using html() as a setter is meant to take a string (see documentation).",
+      "revId": "e747cc760bad5af7065073968f12a71c0cc91c30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_aedf446b",
+        "filename": "modules/ve/ui/widgets/ve.ui.LanguageResultWidget.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 88
+      },
+      "writtenOn": "2014-04-29T18:05:17Z",
+      "side": 1,
+      "message": "Same as above.",
+      "revId": "e747cc760bad5af7065073968f12a71c0cc91c30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
