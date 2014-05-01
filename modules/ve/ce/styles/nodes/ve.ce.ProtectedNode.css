@@ -6,7 +6,7 @@
  */
 
 .ve-ce-protectedNode,
-.ve-ce-protectedNode * {
+.ve-ce-protectedNode  .ve-ce-protectedNode-shielded {
 	position: relative !important;
 	top: 0 !important;
 	left: 0 !important;
