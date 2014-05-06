@@ -16,6 +16,24 @@
       "revId": "f7021e47452072213813dc846a9482b6757ede13",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_fd66e6e8",
+        "filename": "modules/ve/ui/styles/ve.ui.MobileContext.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 542
+      },
+      "writtenOn": "2014-05-06T20:11:55Z",
+      "side": 1,
+      "message": "Oops, sorry, forgot to do git add.",
+      "parentUuid": "8e23439c_69ab3f6d",
+      "revId": "f7021e47452072213813dc846a9482b6757ede13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
