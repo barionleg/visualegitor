@@ -79,6 +79,8 @@ $( function () {
 					}
 
 					$targetContainer.slideDown().promise().done( function () {
+						// Unset fixed height created by slideDown
+						$targetContainer.removeAttr( 'style' );
 						target.$document[0].focus();
 						currentTarget = target;
 						debugBar.attachToSurface( currentTarget.surface );
