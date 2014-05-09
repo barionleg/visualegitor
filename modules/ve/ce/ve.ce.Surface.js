@@ -102,7 +102,7 @@ ve.ce.Surface = function VeCeSurface( model, surface, options ) {
 		'copy': ve.bind( this.onCopy, this )
 	} );
 
-	$documentNode.on( $.browser.msie ? 'beforepaste' : 'paste', ve.bind( this.onPaste, this ) );
+	$documentNode.on( 'beforepaste paste', ve.bind( this.onPaste, this ) );
 	$documentNode.on( 'focus', 'a', function () {
 		// Opera <= 12 triggers 'blur' on document node before any link is
 		// focused and we don't want that
