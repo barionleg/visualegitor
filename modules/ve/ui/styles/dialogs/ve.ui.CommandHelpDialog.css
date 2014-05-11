@@ -54,6 +54,12 @@
 .ve-ui-commandHelpDialog-list dt kbd {
 	display: block;
 	clear: right;
+	font-family: inherit;
+}
+
+/* Enlarge vertical spacing in a list of shortcuts for one action */
+.ve-ui-commandHelpDialog-list dt kbd ~ kbd {
+	margin-top: 0.2em;
 }
 
 .ve-ui-commandHelpDialog-list dd,
