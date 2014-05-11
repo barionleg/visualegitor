@@ -152,6 +152,26 @@ ve.dm.Surface.prototype.isStaging = function () {
 };
 
 /**
+ * Get the staging state the current staging stack depth
+ *
+ * @returns {Object|undefined} staging Staging state object, or undefined if not staging
+ * @returns {ve.dm.Transaction[]} staging.transactions Staging transactions
+ * @returns {boolean} staging.allowUndo Allow undo while staging
+ */
+ve.dm.Surface.prototype.getStaging = function () {
+	return this.stagingStack[this.stagingStack.length - 1];
+};
+
+/**
+ * Undo is allowed at the current staging stack depth
+ *
+ * @returns {boolean} Undo is allowed
+ */
+ve.dm.Surface.prototype.isStagingAllowUndo = function () {
+	return this.stagingStack[this.stagingStack.length - 1];
+};
+
+/**
  * Get the staging transactions at the current staging stack depth
  *
  * The array is returned by reference so it can be pushed to.
@@ -159,15 +179,17 @@ ve.dm.Surface.prototype.isStaging = function () {
  * @returns {ve.dm.Transaction[]|undefined} Staging transactions, or undefined if not staging
  */
 ve.dm.Surface.prototype.getStagingTransactions = function () {
-	return this.stagingStack[this.stagingStack.length - 1];
+	var staging = this.getStaging();
+	return staging && staging.transactions;
 };
 
 /**
  * Push another level of staging to the staging stack
  *
+ * @param {boolean} allowUndo Allow undo while staging
  * @fires history
  */
-ve.dm.Surface.prototype.pushStaging = function () {
+ve.dm.Surface.prototype.pushStaging = function ( allowUndo ) {
 	// If we're starting staging stop history tracking
 	if ( !this.isStaging() ) {
 		// Set a breakpoint to make sure newTransactions is clear
@@ -175,7 +197,7 @@ ve.dm.Surface.prototype.pushStaging = function () {
 		this.stopHistoryTracking();
 		this.emit( 'history' );
 	}
-	this.stagingStack.push( [] );
+	this.stagingStack.push( { 'transactions': [], 'allowUndo': allowUndo } );
 };
 
 /**
@@ -191,7 +213,8 @@ ve.dm.Surface.prototype.popStaging = function () {
 
 	var i, transaction,
 		reverseTransactions = [],
-		transactions = this.stagingStack.pop();
+		staging = this.stagingStack.pop(),
+		transactions = staging.transactions;
 
 	// Not applying, so rollback transactions
 	for ( i = transactions.length - 1; i >= 0; i-- ) {
@@ -218,7 +241,8 @@ ve.dm.Surface.prototype.applyStaging = function () {
 		return;
 	}
 
-	var transactions = this.stagingStack.pop();
+	var staging = this.stagingStack.pop(),
+		transactions = staging.transactions;
 
 	if ( this.isStaging() ) {
 		// Move transactions to the next item down in the staging stack
@@ -347,7 +371,7 @@ ve.dm.Surface.prototype.removeInsertionAnnotations = function ( annotations ) {
  * @returns {boolean} Redo is allowed
  */
 ve.dm.Surface.prototype.canRedo = function () {
-	return this.undoIndex > 0 && this.enabled && !this.isStaging();
+	return this.undoIndex > 0 && this.enabled;
 };
 
 /**
@@ -357,7 +381,7 @@ ve.dm.Surface.prototype.canRedo = function () {
  * @returns {boolean} Undo is allowed
  */
 ve.dm.Surface.prototype.canUndo = function () {
-	return this.hasBeenModified() && this.enabled && !this.isStaging();
+	return this.hasBeenModified() && this.enabled && ( !this.isStaging() || this.isStagingAllowUndo() );
 };
 
 /**
@@ -698,6 +722,10 @@ ve.dm.Surface.prototype.undo = function () {
 	var i, item, transaction, transactions = [];
 	if ( !this.canUndo() ) {
 		return;
+	}
+
+	if ( this.isStaging() ) {
+		this.popAllStaging();
 	}
 
 	this.breakpoint();
