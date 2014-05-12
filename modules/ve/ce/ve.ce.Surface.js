@@ -66,7 +66,11 @@ ve.ce.Surface = function VeCeSurface( model, surface, options ) {
 
 	// Events
 	this.surfaceObserver.connect(
-		this, { 'contentChange': 'onContentChange', 'selectionChange': 'onSelectionChange' }
+		this, {
+			'contentChange': 'onContentChange',
+			'selectionChange': 'onSelectionChange',
+			'slugChange': 'onSlugChange'
+		}
 	);
 	this.model.connect( this,
 		{ 'select': 'onModelSelect', 'documentUpdate': 'onModelDocumentUpdate' }
@@ -829,7 +833,7 @@ ve.ce.Surface.prototype.onDocumentKeyPress = function ( e ) {
 
 /**
  * Poll again after the native key press
- * @param {jQuery.Event} ev
+ * @param {jQuery.Event} e Key press event
  */
 ve.ce.Surface.prototype.afterDocumentKeyPress = function () {
 	this.surfaceObserver.pollOnce();
@@ -1443,6 +1447,7 @@ ve.ce.Surface.prototype.onModelSelect = function ( selection ) {
 
 /**
  * Handle documentUpdate events on the surface model.
+ *
  * @param {ve.dm.Transaction} transaction Transaction that was processed
  */
 ve.ce.Surface.prototype.onModelDocumentUpdate = function () {
@@ -1473,6 +1478,52 @@ ve.ce.Surface.prototype.onSelectionChange = function ( oldRange, newRange ) {
 		this.changeModel( null, newRange );
 	} finally {
 		this.decRenderLock();
+	}
+
+};
+
+/**
+ * Handle slug change events.
+ *
+ * @see ve.ce.SurfaceObserver#pollOnce
+ *
+ * @param {ve.Range|null} range
+ * @param {boolean} newSlug
+ */
+ve.ce.Surface.prototype.onSlugChange = function ( range, newSlug ) {
+	if ( this.slugFragment || newSlug ) {
+		var model = this.getModel(),
+			doc = model.getDocument(),
+			fragment = model.getFragment( range );
+
+		if ( this.slugFragment ) {
+			if ( this.slugFragment.getRange().getLength() === 2 ) {
+				if ( !range || !this.slugFragment.getRange().containsOffset( range.start ) ) {
+					model.popStaging();
+					// After popStaging we may have removed a paragraph before our current
+					// cursor position. Polling with the SurfaceObserver won't notice a change
+					// in the rangy range as our cursor doesn't move within its node so we
+					// need to clear it first.
+					this.surfaceObserver.clear();
+					this.surfaceObserver.pollOnceNoEmit();
+					this.slugFragment = null;
+				}
+			} else {
+				model.applyStaging();
+				this.slugFragment = null;
+			}
+		}
+		if ( newSlug ) {
+			range = fragment.getRange();
+			model.pushStaging( true );
+			this.changeModel( ve.dm.Transaction.newFromInsertion(
+				doc, range.start, [
+					{ 'type': 'paragraph', 'internal': { 'generated': 'slug' } },
+					{ 'type': '/paragraph' }
+				]
+			), new ve.Range( range.start + 1 ) );
+			this.slugFragment = fragment;
+		}
 	}
 };
 
@@ -1769,7 +1820,7 @@ ve.ce.Surface.prototype.handleUpOrDownArrowKey = function ( e ) {
 			}
 			this.model.setSelection( range );
 			this.surfaceObserver.pollOnce();
-		}, this ), 0 );
+		}, this ) );
 	} else {
 		// TODO: onDocumentKeyDown does this anyway
 		this.surfaceObserver.startTimerLoop();

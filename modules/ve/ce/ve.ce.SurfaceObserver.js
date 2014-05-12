@@ -59,8 +59,17 @@ OO.mixinClass( ve.ce.SurfaceObserver, OO.EventEmitter );
  * is emitted (before the properties are updated).
  *
  * @event selectionChange
- * @param {ve.Range|null} oldRange
- * @param {ve.Range|null} newRange
+ * @param {ve.Range|null} oldRange Old range
+ * @param {ve.Range|null} newRange New range
+ */
+
+/**
+ * When #poll observes a change in content or the selection such
+ * that a slug may have to be added or removed, this event is emitted
+ *
+ * @event slugChange
+ * @param {ve.Range|null} range New range
+ * @param {boolean} newSlug The cusor was moved into a slug
  */
 
 /* Methods */
@@ -173,7 +182,9 @@ ve.ce.SurfaceObserver.prototype.pollOnceNoEmit = function () {
  * @fires selectionChange
  */
 ve.ce.SurfaceObserver.prototype.pollOnceInternal = function ( emitChanges ) {
-	var $nodeOrSlug, node, text, hash, range, rangyRange, $slugWrapper, observer = this;
+	var $nodeOrSlug, node, text, hash, range, rangyRange, $slugWrapper, newSlug,
+		emitSlugChange = false,
+		observer = this;
 
 	if ( !this.domDocument ) {
 		return;
@@ -201,25 +212,27 @@ ve.ce.SurfaceObserver.prototype.pollOnceInternal = function ( emitChanges ) {
 			}
 		}
 
-		if ( this.$slugWrapper && !this.$slugWrapper.is( $slugWrapper ) ) {
-			this.$slugWrapper
-				.addClass( 've-ce-branchNode-blockSlugWrapper-unfocused' )
-				.removeClass( 've-ce-branchNode-blockSlugWrapper-focused' );
-			this.$slugWrapper = null;
-			// Emit 'position' on the surface view after the animation completes
-			setTimeout( function () {
-				if ( observer.documentView ) {
-					observer.documentView.documentNode.surface.emit( 'position' );
-				}
-			}, 200 );
-		}
+		if ( emitChanges ) {
+			if ( this.$slugWrapper && !this.$slugWrapper.is( $slugWrapper ) ) {
+				this.$slugWrapper
+					.addClass( 've-ce-branchNode-blockSlugWrapper-unfocused' )
+					.removeClass( 've-ce-branchNode-blockSlugWrapper-focused' );
+				this.$slugWrapper = null;
+				// Emit 'position' on the surface view after the animation completes
+				setTimeout( function () {
+					if ( observer.documentView ) {
+						observer.documentView.documentNode.surface.emit( 'position' );
+					}
+				}, 200 );
+			}
 
-		if ( $slugWrapper && !$slugWrapper.is( this.$slugWrapper) ) {
-			this.$slugWrapper = $slugWrapper
-				.addClass( 've-ce-branchNode-blockSlugWrapper-focused' )
-				.removeClass( 've-ce-branchNode-blockSlugWrapper-unfocused' );
+			if ( $slugWrapper && $slugWrapper.length && !$slugWrapper.is( this.$slugWrapper ) ) {
+				newSlug = true;
+				this.$slugWrapper = $slugWrapper
+					.addClass( 've-ce-branchNode-blockSlugWrapper-focused' )
+					.removeClass( 've-ce-branchNode-blockSlugWrapper-unfocused' );
+			}
 		}
-
 	}
 
 	if ( this.node !== node ) {
@@ -247,6 +260,7 @@ ve.ce.SurfaceObserver.prototype.pollOnceInternal = function ( emitChanges ) {
 					},
 					{ 'text': text, 'hash': hash, 'range': range }
 				);
+				emitSlugChange = true;
 			}
 			this.text = text;
 			this.hash = hash;
@@ -261,7 +275,12 @@ ve.ce.SurfaceObserver.prototype.pollOnceInternal = function ( emitChanges ) {
 				this.range,
 				range
 			);
+			emitSlugChange = true;
 		}
 		this.range = range;
+	}
+
+	if ( emitSlugChange ) {
+		this.emit( 'slugChange', range, newSlug );
 	}
 };
