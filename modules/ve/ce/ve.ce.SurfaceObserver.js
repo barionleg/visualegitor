@@ -59,8 +59,17 @@ OO.mixinClass( ve.ce.SurfaceObserver, OO.EventEmitter );
  * is emitted (before the properties are updated).
  *
  * @event selectionChange
- * @param {ve.Range|null} oldRange
- * @param {ve.Range|null} newRange
+ * @param {ve.Range|null} oldRange Old range
+ * @param {ve.Range|null} newRange New range
+ */
+
+/**
+ * When #poll observes a change in content or the selection such
+ * that a slug may have to be added or removed, this event is emitted
+ *
+ * @event slugChange
+ * @param {ve.Range|null} range New range
+ * @param {boolean} newSlug The cursor was moved into a slug
  */
 
 /* Methods */
@@ -77,6 +86,7 @@ ve.ce.SurfaceObserver.prototype.clear = function ( range ) {
 	this.node = null;
 	this.text = null;
 	this.hash = null;
+	this.$slugWrapper = null;
 };
 
 /**
@@ -173,7 +183,9 @@ ve.ce.SurfaceObserver.prototype.pollOnceNoEmit = function () {
  * @fires selectionChange
  */
 ve.ce.SurfaceObserver.prototype.pollOnceInternal = function ( emitChanges ) {
-	var $nodeOrSlug, node, text, hash, range, rangyRange, $slugWrapper, observer = this;
+	var $nodeOrSlug, node, text, hash, range, rangyRange, $slugWrapper, newSlug,
+		emitSlugChange = false,
+		observer = this;
 
 	if ( !this.domDocument ) {
 		return;
@@ -214,12 +226,12 @@ ve.ce.SurfaceObserver.prototype.pollOnceInternal = function ( emitChanges ) {
 			}, 200 );
 		}
 
-		if ( $slugWrapper && !$slugWrapper.is( this.$slugWrapper) ) {
+		if ( $slugWrapper && $slugWrapper.length && !$slugWrapper.is( this.$slugWrapper ) ) {
+			newSlug = true;
 			this.$slugWrapper = $slugWrapper
 				.addClass( 've-ce-branchNode-blockSlugWrapper-focused' )
 				.removeClass( 've-ce-branchNode-blockSlugWrapper-unfocused' );
 		}
-
 	}
 
 	if ( this.node !== node ) {
@@ -247,6 +259,7 @@ ve.ce.SurfaceObserver.prototype.pollOnceInternal = function ( emitChanges ) {
 					},
 					{ text: text, hash: hash, range: range }
 				);
+				emitSlugChange = true;
 			}
 			this.text = text;
 			this.hash = hash;
@@ -261,7 +274,12 @@ ve.ce.SurfaceObserver.prototype.pollOnceInternal = function ( emitChanges ) {
 				this.range,
 				range
 			);
+			emitSlugChange = true;
 		}
 		this.range = range;
+	}
+
+	if ( emitSlugChange ) {
+		this.emit( 'slugChange', range, newSlug );
 	}
 };
