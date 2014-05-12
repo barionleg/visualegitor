@@ -61,7 +61,11 @@ ve.ce.Surface = function VeCeSurface( model, surface, options ) {
 
 	// Events
 	this.surfaceObserver.connect(
-		this, { 'contentChange': 'onContentChange', 'selectionChange': 'onSelectionChange' }
+		this, {
+			'contentChange': 'onContentChange',
+			'selectionChange': 'onSelectionChange',
+			'slugChange': 'onSlugChange'
+		}
 	);
 	this.model.connect( this,
 		{ 'select': 'onModelSelect', 'documentUpdate': 'onModelDocumentUpdate' }
@@ -1381,6 +1385,38 @@ ve.ce.Surface.prototype.onSelectionChange = function ( oldRange, newRange ) {
 	} finally {
 		this.decRenderLock();
 	}
+
+};
+
+ve.ce.Surface.prototype.onSlugChange = function ( range, newSlug ) {
+	if ( this.slugFragment || newSlug ) {
+		var model = this.getModel(),
+			doc = model.getDocument(),
+			fragment = model.getFragment( range );
+
+		if ( this.slugFragment ) {
+			if ( this.slugFragment.getRange().getLength() === 2 ) {
+				if ( !range || !this.slugFragment.getRange().containsOffset( range.start ) ) {
+					model.popStaging();
+					this.slugFragment = null;
+				}
+			} else {
+				model.applyStaging();
+				this.slugFragment = null;
+			}
+		}
+		if ( newSlug ) {
+			range = fragment.getRange();
+			model.pushStaging( true );
+			this.changeModel( ve.dm.Transaction.newFromInsertion(
+				doc, range.start, [
+					{ 'type': 'paragraph', 'internal': { 'generated': 'slug' } },
+					{ 'type': '/paragraph' }
+				]
+			), new ve.Range( range.start + 1 ) );
+			this.slugFragment = fragment;
+		}
+	}
 };
 
 /**
@@ -1732,6 +1768,7 @@ ve.ce.Surface.prototype.handleInsertion = function () {
 	if ( hasChanged ) {
 		this.surfaceObserver.stopTimerLoop();
 		this.surfaceObserver.pollOnce();
+		this.surfaceObserver.emitSlug = true;
 	}
 };
 
