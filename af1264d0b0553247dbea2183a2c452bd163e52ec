@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_14903045",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-05-13T21:03:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_2e707ba2",
+      "revId": "af1264d0b0553247dbea2183a2c452bd163e52ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_8381a8a6",
         "filename": "Gruntfile.js",
         "patchSetId": 1
@@ -241,6 +259,24 @@
       "side": 1,
       "message": "Hmm, there\u0027s probably cleaner way to do it but it\u0027s only utility code.",
       "parentUuid": "8e23439c_8e32efed",
+      "revId": "af1264d0b0553247dbea2183a2c452bd163e52ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_f494943b",
+        "filename": "build/tasks/buildloader.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-05-13T21:03:32Z",
+      "side": 1,
+      "message": "Yeah. I came up with 3 or 4 different ideas, only to find them harder to implement in JS than it was worth, so ended up doing this. Oh well.",
+      "parentUuid": "8e23439c_ae980b7d",
       "revId": "af1264d0b0553247dbea2183a2c452bd163e52ec",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
