@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "8e23439c_2e707ba2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-05-13T17:16:05Z",
+      "side": 1,
+      "message": "now breaking change (target -\u003e targetFile)",
+      "revId": "af1264d0b0553247dbea2183a2c452bd163e52ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_8381a8a6",
         "filename": "Gruntfile.js",
         "patchSetId": 1
@@ -206,6 +223,24 @@
       "side": 1,
       "message": "Except you want the first-most dependency after walking the tree, not the first encountered (which may be an earlier dependency). Theoretically we could work out which this is and then swap them, but…",
       "parentUuid": "8e23439c_033a38e4",
+      "revId": "af1264d0b0553247dbea2183a2c452bd163e52ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_ae980b7d",
+        "filename": "build/tasks/buildloader.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-05-13T17:16:05Z",
+      "side": 1,
+      "message": "Hmm, there\u0027s probably cleaner way to do it but it\u0027s only utility code.",
+      "parentUuid": "8e23439c_8e32efed",
       "revId": "af1264d0b0553247dbea2183a2c452bd163e52ec",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
