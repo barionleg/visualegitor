@@ -94,7 +94,7 @@ ve.ui.LinkInspector.prototype.getNodeChanges = function () {
  */
 ve.ui.LinkInspector.prototype.initialize = function () {
 	// Parent method
-	ve.ui.AnnotationInspector.prototype.initialize.call( this );
+	ve.ui.LinkInspector.super.prototype.initialize.call( this );
 
 	// Properties
 	this.targetInput = new this.constructor.static.linkTargetInputWidget( {
@@ -108,96 +108,36 @@ ve.ui.LinkInspector.prototype.initialize = function () {
 /**
  * @inheritdoc
  */
-ve.ui.LinkInspector.prototype.setup = function ( data ) {
-	var focusedNode = this.getFragment().getSelectedNode();
-
-	if (
-		focusedNode &&
-		ve.isInstanceOfAny( focusedNode, this.constructor.static.modelClasses )
-	) {
-		this.linkNode = focusedNode;
-		// Call grandparent method, skipping AnnotationInspector
-		ve.ui.Inspector.prototype.setup.call( this, data );
-	} else {
-		this.linkNode = null;
-		// Parent method
-		ve.ui.AnnotationInspector.prototype.setup.call( this, data );
-	}
-
-	// Disable surface until animation is complete; will be reenabled in ready()
-	this.getFragment().getSurface().disable();
+ve.ui.LinkInspector.prototype.getSetupProcess = function ( data ) {
+	return ve.ui.LinkInspector.super.prototype.getSetupProcess.call( this, data )
+		.next( function () {
+			// Disable surface until animation is complete; will be reenabled in ready()
+			this.getFragment().getSurface().disable();
+		}, this );
 };
 
 /**
  * @inheritdoc
  */
-ve.ui.LinkInspector.prototype.ready = function () {
-	var href;
+ve.ui.LinkInspector.prototype.getReadyProcess = function () {
+	return ve.ui.LinkInspector.super.prototype.getReadyProcess.call( this )
+		.next( function () {
+			var href;
 
-	// Parent method
-	ve.ui.AnnotationInspector.prototype.ready.call( this );
+			// Note: Focus input prior to setting target annotation
+			this.targetInput.focus();
 
-	// Note: Focus input prior to setting target annotation
-	this.targetInput.focus();
-
-	if ( this.linkNode ) {
-		href = this.linkNode.getAttribute( 'href' );
-		if ( typeof href === 'string' && href.length ) {
-			this.targetInput.setValue( href );
-		}
-	} else {
-		this.targetInput.setAnnotation( this.initialAnnotation );
-	}
-	this.targetInput.select();
-	this.getFragment().getSurface().enable();
-};
-
-/**
- * @inheritdoc
- */
-ve.ui.LinkInspector.prototype.teardown = function ( data ) {
-	var changes, remove, replace, nodeRange, surfaceModel = this.getFragment().getSurface();
-	if ( this.linkNode ) {
-		nodeRange = this.linkNode.getOuterRange();
-		changes = this.getNodeChanges();
-		replace = ve.isArray( changes );
-		// FIXME figure out a better way to do the "if input is empty, remove" thing,
-		// not duplicating it here from AnnotationInspector (where it doesn't even belong)
-		remove = data.action === 'remove' || this.shouldRemoveAnnotation();
-		if ( remove || replace ) {
-			surfaceModel.change(
-				ve.dm.Transaction.newFromRemoval(
-					surfaceModel.getDocument(),
-					nodeRange
-				)
-			);
-		}
-		if ( !remove ) {
-			if ( replace ) {
-				// We've already removed the node, so we just need to do an insertion now
-				surfaceModel.change(
-					ve.dm.Transaction.newFromInsertion(
-						surfaceModel.getDocument(),
-						nodeRange.start,
-						changes
-					)
-				);
+			if ( this.linkNode ) {
+				href = this.linkNode.getAttribute( 'href' );
+				if ( typeof href === 'string' && href.length ) {
+					this.targetInput.setValue( href );
+				}
 			} else {
-				surfaceModel.change(
-					ve.dm.Transaction.newFromAttributeChanges(
-						surfaceModel.getDocument(),
-						nodeRange.start,
-						changes
-					)
-				);
+				this.targetInput.setAnnotation( this.initialAnnotation );
 			}
-		}
-		// Call grandparent method, skipping AnnotationInspector
-		ve.ui.Inspector.prototype.teardown.call( this, data );
-	} else {
-		// Parent method
-		ve.ui.AnnotationInspector.prototype.teardown.call( this, data );
-	}
+			this.targetInput.select();
+			this.getFragment().getSurface().enable();
+		}, this );
 };
 
 /* Registration */
