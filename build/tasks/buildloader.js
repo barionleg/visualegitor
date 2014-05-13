@@ -6,13 +6,14 @@
 module.exports = function ( grunt ) {
 
 	grunt.registerMultiTask( 'buildloader', function () {
-		var module,
+		var moduleName, module,
 			styles = '',
 			scripts = '',
-			target = this.data.target,
+			targetFile = this.data.targetFile,
 			pathPrefix = this.data.pathPrefix || '',
 			indent = this.data.indent || '',
 			modules = this.data.modules,
+			target = this.data.target,
 			env = this.data.env || {},
 			placeholders = this.data.placeholders || {},
 			text = grunt.file.read( this.data.template ),
@@ -52,17 +53,21 @@ module.exports = function ( grunt ) {
 			}
 		}
 
-		for ( module in modules ) {
-			if ( modules[module].scripts ) {
-				scripts += indent + '<!-- ' + module + ' -->\n';
-				scripts += modules[module].scripts
+		for ( moduleName in modules ) {
+			module = modules[moduleName];
+			if ( target && module.targets && module.targets.indexOf( target ) === -1 ) {
+				continue;
+			}
+			if ( module.scripts ) {
+				scripts += indent + '<!-- ' + moduleName + ' -->\n';
+				scripts += module.scripts
 					.map( expand ).filter( filter ).map( scriptTag )
 					.join( '\n' ) + '\n';
 				scripts += '\n';
 			}
-			if ( modules[module].styles ) {
-				styles += indent + '<!-- ' + module + ' -->\n';
-				styles += modules[module].styles
+			if ( module.styles ) {
+				styles += indent + '<!-- ' + moduleName + ' -->\n';
+				styles += module.styles
 					.map( expand ).filter( filter ).map( styleTag )
 					.join( '\n' ) + '\n';
 				styles += '\n';
@@ -87,8 +92,8 @@ module.exports = function ( grunt ) {
 				} );
 			},
 			function () {
-				grunt.file.write( target, text );
-				grunt.log.ok( 'File "' + target + '" written.' );
+				grunt.file.write( targetFile, text );
+				grunt.log.ok( 'File "' + targetFile + '" written.' );
 
 				done();
 			}

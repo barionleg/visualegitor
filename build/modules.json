@@ -276,7 +276,8 @@
 	"visualEditor.desktop": {
 		"styles": [
 			"modules/ve/ui/themes/apex/ve.ui.Inspector.css"
-		]
+		],
+		"targets": [ "desktop" ]
 	},
 	"visualEditor.mobile": {
 		"scripts": [
@@ -286,6 +287,7 @@
 		"styles": [
 			"modules/ve/ui/styles/ve.ui.MobileSurface.css",
 			"modules/ve/ui/styles/ve.ui.MobileContext.css"
-		]
+		],
+		"targets": [ "mobile" ]
 	}
 }
