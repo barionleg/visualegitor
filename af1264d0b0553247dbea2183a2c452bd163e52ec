@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_8381a8a6",
+        "filename": "Gruntfile.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-05-13T15:51:27Z",
+      "side": 1,
+      "message": "rename to targetFile as in my commit to avoid target/targets confusion",
+      "revId": "af1264d0b0553247dbea2183a2c452bd163e52ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_0e001f03",
+        "filename": "build/modules.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-05-13T15:51:27Z",
+      "side": 1,
+      "message": "desktop should probably load before standalone",
+      "revId": "af1264d0b0553247dbea2183a2c452bd163e52ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_e3705cdb",
+        "filename": "build/tasks/buildloader.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-05-13T15:51:27Z",
+      "side": 1,
+      "message": "not building a tree, building a list form a tree, also fix local var tree",
+      "revId": "af1264d0b0553247dbea2183a2c452bd163e52ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_638e8cd7",
+        "filename": "build/tasks/buildloader.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-05-13T15:51:27Z",
+      "side": 1,
+      "message": "spaces inside brackets\nwe usually do i \u003c length",
+      "revId": "af1264d0b0553247dbea2183a2c452bd163e52ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_036c7804",
+        "filename": "build/tasks/buildloader.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-05-13T15:51:27Z",
+      "side": 1,
+      "message": "always returns a boolean, so no need to strict equal false, just !modules.hasOwnProperty(target)",
+      "revId": "af1264d0b0553247dbea2183a2c452bd163e52ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_033a38e4",
+        "filename": "build/tasks/buildloader.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-05-13T15:51:27Z",
+      "side": 1,
+      "message": "just check for duplicates as you add them ( Array.indexOf !\u003d\u003d -1)",
+      "revId": "af1264d0b0553247dbea2183a2c452bd163e52ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
