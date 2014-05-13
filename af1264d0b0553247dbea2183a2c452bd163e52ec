@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_ce090731",
+        "filename": "Gruntfile.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-05-13T16:04:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_8381a8a6",
+      "revId": "af1264d0b0553247dbea2183a2c452bd163e52ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_0e001f03",
         "filename": "build/modules.json",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2014-05-13T15:51:27Z",
       "side": 1,
       "message": "desktop should probably load before standalone",
+      "revId": "af1264d0b0553247dbea2183a2c452bd163e52ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_2e22bba2",
+        "filename": "build/modules.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-05-13T16:04:29Z",
+      "side": 1,
+      "message": "That breaks everything, because SA needs to load before core but after base, and desktop loads core. This is icky but the only thing that actually works.",
+      "parentUuid": "8e23439c_0e001f03",
       "revId": "af1264d0b0553247dbea2183a2c452bd163e52ec",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_ae35abd9",
+        "filename": "build/tasks/buildloader.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-05-13T16:04:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_e3705cdb",
+      "revId": "af1264d0b0553247dbea2183a2c452bd163e52ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_638e8cd7",
         "filename": "build/tasks/buildloader.js",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2014-05-13T15:51:27Z",
       "side": 1,
       "message": "spaces inside brackets\nwe usually do i \u003c length",
+      "revId": "af1264d0b0553247dbea2183a2c452bd163e52ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_ce20e798",
+        "filename": "build/tasks/buildloader.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-05-13T16:04:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_638e8cd7",
       "revId": "af1264d0b0553247dbea2183a2c452bd163e52ec",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "8e23439c_6e2f9386",
+        "filename": "build/tasks/buildloader.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-05-13T16:04:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e23439c_036c7804",
+      "revId": "af1264d0b0553247dbea2183a2c452bd163e52ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e23439c_033a38e4",
         "filename": "build/tasks/buildloader.js",
         "patchSetId": 1
@@ -98,6 +188,24 @@
       "writtenOn": "2014-05-13T15:51:27Z",
       "side": 1,
       "message": "just check for duplicates as you add them ( Array.indexOf !\u003d\u003d -1)",
+      "revId": "af1264d0b0553247dbea2183a2c452bd163e52ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e23439c_8e32efed",
+        "filename": "build/tasks/buildloader.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-05-13T16:04:29Z",
+      "side": 1,
+      "message": "Except you want the first-most dependency after walking the tree, not the first encountered (which may be an earlier dependency). Theoretically we could work out which this is and then swap them, but…",
+      "parentUuid": "8e23439c_033a38e4",
       "revId": "af1264d0b0553247dbea2183a2c452bd163e52ec",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
