@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_8e9b0f68",
+        "filename": "Gruntfile.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2014-05-13T17:26:22Z",
+      "side": 1,
+      "message": "\u0027target\u0027 is already used here to refer to the individual file that use VisualEditor, and in VisualEditor core as the name for platform instances, and in ResourceLoader for segmentation of the registry by device support. Using it here as well seems confusing. Maybe call it \"moduleNames: []\" instead, or \"load: []\".",
+      "revId": "325635a4acc86317c9a9b0a2dc1d362db710e209",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
