@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_6e467356",
+        "filename": "build/tasks/buildloader.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-05-13T16:07:25Z",
+      "side": 1,
+      "message": "unactioned comment in PS1",
+      "revId": "9980eaef9abc92a54d5c40ee7c56e9151a386868",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
