@@ -23,6 +23,7 @@ module.exports = function ( grunt ) {
 				target: '.docs/eg-iframe.html',
 				template: '.docs/eg-iframe.html.template',
 				modules: modules,
+				targets: [ 'visualEditor.desktop' ],
 				pathPrefix: '../',
 				indent: '\t\t'
 			},
@@ -30,6 +31,7 @@ module.exports = function ( grunt ) {
 				target: 'demos/ve/index.html',
 				template: 'demos/ve/index.html.template',
 				modules: modules,
+				targets: [ 'visualEditor.standalone.desktop' ],
 				env: {
 					debug: true
 				},
@@ -55,6 +57,7 @@ module.exports = function ( grunt ) {
 				target: 'modules/ve/test/index.html',
 				template: 'modules/ve/test/index.html.template',
 				modules: modules,
+				targets: [ 'visualEditor.standalone', 'visualEditor.core' ],
 				pathPrefix: '../../../',
 				indent: '\t\t'
 			}

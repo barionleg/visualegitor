@@ -7,12 +7,15 @@ module.exports = function ( grunt ) {
 
 	grunt.registerMultiTask( 'buildloader', function () {
 		var module,
+			dependency,
+			dependencies,
 			styles = '',
 			scripts = '',
 			target = this.data.target,
 			pathPrefix = this.data.pathPrefix || '',
 			indent = this.data.indent || '',
 			modules = this.data.modules,
+			targets = this.data.targets,
 			env = this.data.env || {},
 			placeholders = this.data.placeholders || {},
 			text = grunt.file.read( this.data.template ),
@@ -38,6 +41,38 @@ module.exports = function ( grunt ) {
 			return true;
 		}
 
+		function buildDependencyTree( modules, targets ) {
+			var i, j, k, target, tree = [];
+
+			for (i = 0; i <= targets.length - 1; i++) {
+				target = targets[i];
+
+				if ( modules.hasOwnProperty( target ) === false )
+				{
+					throw new Error( 'Dependency ' + target + ' not found' );
+				}
+
+				// Add in any dependencies' dependencies
+				if ( modules[target].hasOwnProperty( 'dependencies' ) ) {
+					tree = ( buildDependencyTree( modules, modules[target].dependencies ) ).concat( tree );
+				}
+
+				// Append target to the end of the current tree
+				tree.push( target );
+			}
+
+			// We always want to retain the first entry of duplicates
+			for (j = 0; j <= tree.length - 1; j++) {
+				for (k = j + 1; k <= tree.length - 1; k++) {
+					if ( tree[j] === tree[k] ) {
+						tree.splice(k--, 1);
+					}
+				}
+			}
+
+			return tree;
+		}
+
 		function placeholder( input, id, replacement, callback ) {
 			var output,
 				rComment = new RegExp( '^[^\\S\\n]*<!-- ' + id + ' -->[^\\S\\n]*$', 'm' );
@@ -52,7 +87,9 @@ module.exports = function ( grunt ) {
 			}
 		}
 
-		for ( module in modules ) {
+		dependencies = buildDependencyTree( modules, targets );
+		for ( dependency in dependencies ) {
+			module = dependencies[dependency];
 			if ( modules[module].scripts ) {
 				scripts += indent + '<!-- ' + module + ' -->\n';
 				scripts += modules[module].scripts
