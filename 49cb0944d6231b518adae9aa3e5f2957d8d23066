@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_5a0c8e45",
+        "filename": "build/modules.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-05-14T19:27:36Z",
+      "side": 1,
+      "message": "Possibly move the IME tests into their own module? visualEditor.test.ime?",
+      "revId": "49cb0944d6231b518adae9aa3e5f2957d8d23066",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
