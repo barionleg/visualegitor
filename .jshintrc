@@ -3,6 +3,7 @@
 
 	// Enforcing
 	"eqeqeq": true,
+	"freeze": true,
 	"latedef": true,
 	"noarg": true,
 	"nonew": true,
@@ -11,29 +12,8 @@
 
 	/* Local */
 
-	// Disabled style checks deprecated in JSHint 3,
-	// done by node-jscs instead
-	// - Enforcing
-	"camelcase": false,
-	"curly": false,
-	"immed": false,
-	"newcap": false,
-	"noempty": false,
-	"quotmark": false,
-	"trailing": false,
-	// - Relaxing
-	"multistr": true,
-	"sub": true,
-	"smarttabs": true,
-	// - Legacy
-	"nomen": false,
-	"onevar": false,
-
 	// Enforcing
 	"bitwise": true,
-	"forin": false,
-	"plusplus": false,
-	"regexp": true,
 	"strict": false,
 	// Relaxing
 	"es5": false,
