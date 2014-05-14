@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e23439c_e4d85f81",
+        "filename": "modules/ve/ui/widgets/ve.ui.LanguageInputWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-05-14T13:22:45Z",
+      "side": 1,
+      "message": "Wat.",
+      "revId": "e04df70e6816d620c2631c9e1fa118a9719efd77",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
