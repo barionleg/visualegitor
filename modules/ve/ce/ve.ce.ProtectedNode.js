@@ -89,12 +89,17 @@ ve.ce.ProtectedNode.prototype.onProtectedSetup = function () {
 		if ( this.nodeType === Node.ELEMENT_NODE ) {
 			var $this = node.$( this );
 			if (
-				( $this.css( 'float' ) === 'none' || $this.css( 'float' ) === '' ) &&
+				// Always shield the root
 				!$this.hasClass( 've-ce-protectedNode' ) &&
 				// Phantoms are built off shields, so make sure $phantomable has a shield
 				!$this.is( node.$phantomable )
 			) {
-				return;
+				// .css( 'float' ) is *very* expensive so compute at
+				// last possible opportunity
+				var cssFloat = $this.css( 'float' );
+				if ( cssFloat === 'none' || cssFloat === '' ) {
+					return;
+				}
 			}
 			$shield = node.createShield()
 				.appendTo( $this )
