@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e20cf91_3dc8c1a9",
+        "filename": "modules/ve/ce/styles/nodes/ve.ce.GeneratedContentNode.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-05-19T18:14:01Z",
+      "side": 1,
+      "message": "This introduces a new star selector :(",
+      "revId": "b23f63cd76124026deaae6050b1b057f15f99841",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e20cf91_7d3d198a",
+        "filename": "modules/ve/ce/ve.ce.ProtectedNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-05-19T18:14:01Z",
+      "side": 1,
+      "message": "This actually attaches shields, not phantoms",
+      "revId": "b23f63cd76124026deaae6050b1b057f15f99841",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
