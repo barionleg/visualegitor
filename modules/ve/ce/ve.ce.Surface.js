@@ -49,8 +49,11 @@ ve.ce.Surface = function VeCeSurface( model, surface, options ) {
 	this.resizing = false;
 	this.focused = false;
 	this.contentBranchNodeChanged = false;
-	this.$phantoms = this.$( '<div>' );
-	this.$highlights = this.$( '<div>' );
+	this.$highlightsFocused = this.$( '<div>' );
+	this.$highlightsBlurred = this.$( '<div>' );
+	this.$highlights = this.$( '<div>' ).append(
+		this.$highlightsFocused, this.$highlightsBlurred
+	);
 	this.$pasteTarget = this.$( '<div>' );
 	this.pasting = false;
 	this.pasteSpecial = false;
@@ -76,6 +79,10 @@ ve.ce.Surface = function VeCeSurface( model, surface, options ) {
 		'mousemove': ve.bind( this.onDocumentMouseMove, this ),
 		'cut': ve.bind( this.onCut, this ),
 		'copy': ve.bind( this.onCopy, this )
+	} );
+
+	this.$window.on( {
+		'resize': ve.bind( this.onWindowResize, this )
 	} );
 
 	// Use onDOMEvent to get jQuery focusin/focusout events to work in iframes
@@ -130,15 +137,16 @@ ve.ce.Surface = function VeCeSurface( model, surface, options ) {
 
 	// Initialization
 	this.$element.addClass( 've-ce-surface' );
-	this.$phantoms.addClass( 've-ce-surface-phantoms' );
 	this.$highlights.addClass( 've-ce-surface-highlights' );
+	this.$highlightsFocused.addClass( 've-ce-surface-highlights-focused' );
+	this.$highlightsBlurred.addClass( 've-ce-surface-highlights-blurred' );
 	this.$pasteTarget.addClass( 've-ce-surface-paste' )
 		.attr( 'tabIndex', -1 )
 		.prop( 'contentEditable', 'true' );
 
 	// Add elements to the DOM
 	this.$element.append( this.documentView.getDocumentNode().$element, this.$pasteTarget );
-	this.surface.$localOverlayBlockers.append( this.$phantoms, this.$highlights );
+	this.surface.$localOverlayBlockers.append( this.$highlights );
 };
 
 /* Inheritance */
@@ -163,6 +171,13 @@ OO.mixinClass( ve.ce.Surface, OO.EventEmitter );
 
 /**
  * @event relocationEnd
+ */
+
+/**
+ * When the surface changes its position (only if it happens
+ * after initialize has already been called).
+ *
+ * @event position
  */
 
 /**
@@ -351,7 +366,7 @@ ve.ce.Surface.prototype.destroy = function () {
 	this.surfaceObserver.detach();
 	this.documentView.getDocumentNode().setLive( false );
 	this.$element.remove();
-	this.$phantoms.remove();
+	this.$highlights.remove();
 };
 
 /**
@@ -1549,6 +1564,15 @@ ve.ce.Surface.prototype.onContentChange = function ( node, previous, next ) {
 	);
 };
 
+/**
+ * Handle window resize event.
+ *
+ * @param {jQuery.Event} e Window resize event
+ */
+ve.ce.Surface.prototype.onWindowResize = ve.debounce( function () {
+	this.emit( 'position' );
+}, 50 );
+
 /*! Relocation */
 
 /**
@@ -2072,23 +2096,22 @@ ve.ce.Surface.prototype.showSelection = function ( range ) {
 };
 
 /**
- * Append passed phantoms to phantoms container after emptying it first.
- *
- * @method
- * @param {jQuery} $phantoms Phantoms to append
- */
-ve.ce.Surface.prototype.replacePhantoms = function ( $phantoms ) {
-	this.$phantoms.empty().append( $phantoms );
-};
-
-/**
- * Append passed highlights to highlight container after emptying it first.
+ * Append passed highlights to highlight container.
  *
  * @method
  * @param {jQuery} $highlights Highlights to append
+ * @param {boolean} focused Highlights are currently focused
  */
-ve.ce.Surface.prototype.replaceHighlight = function ( $highlights ) {
-	this.$highlights.empty().append( $highlights );
+ve.ce.Surface.prototype.appendHighlights = function ( $highlights, focused ) {
+	// Only one item can be blurred-highlighted at a time, so remove the others.
+	// Remove by detaching so they don't lose their event handlers, in case they
+	// are attached again.
+	this.$highlightsBlurred.children().detach();
+	if ( focused ) {
+		this.$highlightsFocused.append( $highlights );
+	} else {
+		this.$highlightsBlurred.append( $highlights );
+	}
 };
 
 /*! Helpers */
