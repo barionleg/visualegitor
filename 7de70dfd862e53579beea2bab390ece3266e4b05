@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e20cf91_cfc34e60",
+        "filename": "modules/ve/ce/styles/nodes/ve.ce.GeneratedContentNode.css",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-05-19T21:41:29Z",
+      "side": 1,
+      "message": "Why is this being changed to *? Do you want links inside of generated content to be clickable?",
+      "revId": "7de70dfd862e53579beea2bab390ece3266e4b05",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
