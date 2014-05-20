@@ -16,6 +16,24 @@
       "revId": "7de70dfd862e53579beea2bab390ece3266e4b05",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e20cf91_e0d73927",
+        "filename": "modules/ve/ce/styles/nodes/ve.ce.GeneratedContentNode.css",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-05-20T10:38:30Z",
+      "side": 1,
+      "message": "It\u0027s a more correct selector in that, as the comment says, the only thing we don\u0027t want to interact with in the wrapper (for the purposes of not triggering mouseover\u0027s). I was having problems with mousedown or mouseenter events not triggering when they should because of this.\n\nIf this was ever being used to make stuff *inside* GC non-interactive then that was bad, as that should be done with protected node stuff.",
+      "parentUuid": "6e20cf91_cfc34e60",
+      "revId": "7de70dfd862e53579beea2bab390ece3266e4b05",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
