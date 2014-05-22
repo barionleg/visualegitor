@@ -78,7 +78,14 @@ $( function () {
 					'overflow': 'hidden'
 				} );
 
-				$targetContainer.css( 'direction', dir );
+				$( 'body' ).css( 'direction', dir );
+				if ( dir === 'rtl' ) {
+					$( '.stylesheet-ltr' ).attr( 'disabled', 'disabled' );
+					$( '.stylesheet-rtl' ).removeAttr( 'disabled' );
+				} else {
+					$( '.stylesheet-rtl' ).attr( 'disabled', 'disabled' );
+					$( '.stylesheet-ltr' ).removeAttr( 'disabled' );
+				}
 
 				// The container must be attached to the DOM before
 				// the target is initialised
