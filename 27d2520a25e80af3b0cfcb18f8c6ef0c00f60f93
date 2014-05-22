@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e1dcb5b_c3c10085",
+        "filename": "build/tasks/buildloader.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2014-05-22T11:18:48Z",
+      "side": 1,
+      "message": "Use \"\u003c .. disabled\u003e\", html5 style.\n\nhttps://www.youtube.com/watch?v\u003ddDZzl9AyXeg#t\u003d45s",
+      "revId": "27d2520a25e80af3b0cfcb18f8c6ef0c00f60f93",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_83d4284d",
+        "filename": "demos/ve/demo.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2014-05-22T11:18:48Z",
+      "side": 1,
+      "message": "Use prop(\u0027disabled\u0027, true/false) as attributes don\u0027t reflect live state, only initial state of HTML element (changing the \"disabled\" attribute does nothing).\n\nOlder jQuery attr() called prop() for you for certain attribute names, though that is deprecated (does that even work in jQuery 1.11?). Oh, right, haven\u0027t updated jQuery in ve standalone yet.\n\nAnyhow, prop() always works so be sure to use that to avoid having to change it post-migrate.",
+      "revId": "27d2520a25e80af3b0cfcb18f8c6ef0c00f60f93",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
