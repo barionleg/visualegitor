@@ -87,7 +87,7 @@ ve.init.Target.static.toolbarGroups = [
 		'indicator': 'down',
 		'include': [ { 'group': 'format' } ],
 		'promote': [ 'paragraph' ],
-		'demote': [ 'preformatted' ]
+		'demote': [ 'preformatted', 'blockquote' ]
 	},
 	// Style
 	{
@@ -136,6 +136,7 @@ ve.init.Target.static.surfaceCommands = [
 	'heading5',
 	'heading6',
 	'preformatted',
+	'blockquote',
 	'pasteSpecial'
 ];
 
