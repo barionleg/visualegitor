@@ -42,3 +42,7 @@
 .oo-ui-menuToolGroup .oo-ui-tool-name-preformatted .oo-ui-tool-title {
 	font-family: monospace, "Courier New";
 }
+
+.oo-ui-menuToolGroup .oo-ui-tool-name-blockquote .oo-ui-tool-title {
+	margin-left: 1em;
+}
