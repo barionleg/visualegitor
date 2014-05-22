@@ -76,6 +76,7 @@ module.exports = function ( grunt ) {
 				targetFile: 'demos/ve/desktop.html',
 				template: 'demos/ve/demo.html.template',
 				modules: modules,
+				janus: true,
 				load: [ 'visualEditor.desktop.standalone.demo' ],
 				env: {
 					debug: true
@@ -97,6 +98,7 @@ module.exports = function ( grunt ) {
 				targetFile: 'demos/ve/mobile.html',
 				template: 'demos/ve/demo.html.template',
 				modules: modules,
+				janus: true,
 				load: [ 'visualEditor.mobile.standalone.demo' ],
 				env: {
 					debug: true

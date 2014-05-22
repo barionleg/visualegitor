@@ -48,6 +48,15 @@ $( function () {
 				currentTarget.destroy();
 			}
 
+			$( 'body' ).css( 'direction', dir );
+			if ( dir === 'rtl' ) {
+				$( '.stylesheet-ltr' ).attr( 'disabled', 'disabled' );
+				$( '.stylesheet-rtl' ).removeAttr( 'disabled' );
+			} else {
+				$( '.stylesheet-rtl' ).attr( 'disabled', 'disabled' );
+				$( '.stylesheet-ltr' ).removeAttr( 'disabled' );
+			}
+
 			// Container needs to be visually hidden, but not display:none
 			// so that the toolbar can be measured
 			$targetContainer.empty().show().css( {
