@@ -142,6 +142,9 @@ ve.ui.commandRegistry.register(
 	new ve.ui.Command( 'preformatted', 'format', 'convert', 'preformatted' )
 );
 ve.ui.commandRegistry.register(
+	new ve.ui.Command( 'blockquote', 'format', 'convert', 'blockquote' )
+);
+ve.ui.commandRegistry.register(
 	new ve.ui.Command( 'pasteSpecial', 'content', 'pasteSpecial' )
 );
 ve.ui.commandRegistry.register(

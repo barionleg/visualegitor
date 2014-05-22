@@ -155,5 +155,8 @@ ve.ui.triggerRegistry.register(
 	'preformatted', new ve.ui.Trigger ( 'ctrl+7' )
 );
 ve.ui.triggerRegistry.register(
+	'blockquote', new ve.ui.Trigger ( 'ctrl+8' )
+);
+ve.ui.triggerRegistry.register(
 	'pasteSpecial', { mac: new ve.ui.Trigger( 'cmd+shift+v' ), pc: new ve.ui.Trigger ( 'ctrl+shift+v' ) }
 );
