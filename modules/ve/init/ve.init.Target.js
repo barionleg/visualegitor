@@ -42,6 +42,9 @@ ve.init.Target = function VeInitTarget( $container ) {
 	 * @property {ve.ui.TargetToolbar}
 	 */
 	this.toolbar = null;
+
+	// Register
+	ve.init.target = this;
 };
 
 /**
