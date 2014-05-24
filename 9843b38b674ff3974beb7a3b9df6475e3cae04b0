@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e1dcb5b_0c5cbd4d",
+        "filename": "modules/ve/dm/ve.dm.Surface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-05-24T03:51:08Z",
+      "side": 1,
+      "message": "Missing \"and\"",
+      "revId": "9843b38b674ff3974beb7a3b9df6475e3cae04b0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_cffb5710",
+        "filename": "modules/ve/dm/ve.dm.Surface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-05-24T03:51:08Z",
+      "side": 1,
+      "message": "Why not *does*StagingAllowUndo?",
+      "revId": "9843b38b674ff3974beb7a3b9df6475e3cae04b0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_0c0a7d29",
+        "filename": "modules/ve/dm/ve.dm.Surface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-05-24T03:51:08Z",
+      "side": 1,
+      "message": "Missing .allowUndo? (and check for undefined)",
+      "revId": "9843b38b674ff3974beb7a3b9df6475e3cae04b0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
