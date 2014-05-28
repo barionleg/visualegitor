@@ -125,15 +125,17 @@ ve.ui.ActionDialog.prototype.applyChanges = function () {
  * @param {string[]} errors List of errors that occured
  */
 ve.ui.ActionDialog.prototype.showErrors = function ( errors ) {
-	var i, len,
+	var i, len, $errorDiv,
 		$errors = $( [] );
 
 	for ( i = 0, len = errors.length; i < len; i++ ) {
-		$errors = $errors.add(
-			this.$( '<div>' )
-				.addClass( 've-ui-actionDialog-error' )
-				.text( String( errors[i] ) )
-		);
+		$errorDiv = this.$( '<div>' ).addClass( 've-ui-actionDialog-error' );
+		if ( typeof errors[i] === 'string' ) {
+			$errorDiv.text( String( errors[i] ) );
+		} else if ( errors[i] instanceof jQuery ) {
+			$errorDiv.append( errors[i] );
+		}
+		$errors = $errors.add( $errorDiv );
 	}
 
 	this.$errorsTitle.after( $errors );
