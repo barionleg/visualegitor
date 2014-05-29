@@ -914,6 +914,13 @@
 			function () { return navStart + perf.now(); } : Date.now;
 	}() );
 
+	/**
+	 * DEPRECATED: Detect Internet Explorer
+	 *
+	 * Code still using this should be fixed to use specific feature detection.
+	 */
+	ve.isMsie = /(msie) ([\w.]+)/.test( navigator.userAgent.toLowerCase() );
+
 	// Expose
 	window.ve = ve;
 }() );
