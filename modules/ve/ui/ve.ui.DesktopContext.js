@@ -333,8 +333,8 @@ ve.ui.DesktopContext.prototype.updateDimensions = function ( transition ) {
 
 	$container = inspector ? this.inspectors.$element : this.$menu;
 	if ( focusedNode ) {
-		// We're on top of a node
-		$node = focusedNode.$focusable;
+		// Use the first highlight, instead of .$focusable to filter out zero-height wrappers
+		$node = focusedNode.$highlights.children().first();
 		if ( this.embedded ) {
 			// Get the position relative to the surface it is embedded in
 			focusableOffset = OO.ui.Element.getRelativePosition(
@@ -437,9 +437,10 @@ ve.ui.DesktopContext.prototype.show = function ( transition, repositionOnly ) {
 		} else {
 			this.embedded = (
 				focusedNode &&
-				focusedNode.$focusable.outerHeight() > this.$menu.outerHeight() * 2 &&
-				focusedNode.$focusable.outerWidth() > this.$menu.outerWidth() * 2
+				focusedNode.$highlights.children().first().outerHeight() > this.$menu.outerHeight() * 2 &&
+				focusedNode.$highlights.children().first().outerWidth() > this.$menu.outerWidth() * 2
 			);
+
 			this.popup.useTail( !this.embedded );
 			this.$menu.show();
 		}
