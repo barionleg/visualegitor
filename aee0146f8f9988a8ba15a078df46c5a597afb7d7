@@ -70,6 +70,24 @@
       "revId": "aee0146f8f9988a8ba15a078df46c5a597afb7d7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_deac0735",
+        "filename": "modules/ve/ve.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 922,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-05-29T18:02:24Z",
+      "side": 1,
+      "message": "In general we don\u0027t take over changes as it causes confusion and conflicts. Just leave a comment, I\u0027ll get to it in good time. Patience.\n\nIf you mean your point about IE11+, then that doesn\u0027t matter, neither did jQuery. If we have support issues for those browsers that requires UA detection then that existed before and is outside the scope of this fix.",
+      "parentUuid": "4e1dcb5b_fea0e33f",
+      "revId": "aee0146f8f9988a8ba15a078df46c5a597afb7d7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
