@@ -16,6 +16,24 @@
       "revId": "aee0146f8f9988a8ba15a078df46c5a597afb7d7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_fe3ea325",
+        "filename": "modules/ve/ve.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 922,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-05-29T17:45:48Z",
+      "side": 1,
+      "message": "Done, though this doesn\u0027t detect IE11+…",
+      "parentUuid": "4e1dcb5b_d3f1a093",
+      "revId": "aee0146f8f9988a8ba15a078df46c5a597afb7d7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
