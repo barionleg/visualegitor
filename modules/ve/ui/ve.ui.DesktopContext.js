@@ -361,8 +361,8 @@ ve.ui.DesktopContext.prototype.updateDimensions = function ( transition ) {
 
 	$container = inspector ? this.inspectors.$element : this.$menu;
 	if ( focusedNode ) {
-		// We're on top of a node
-		$node = focusedNode.$focusable;
+		// Use the first shield, instead of .$focusable to filter out zero-height wrappers
+		$node = focusedNode.$visibleShields.first();
 		if ( this.embedded ) {
 			// Get the position relative to the surface it is embedded in
 			focusableOffset = OO.ui.Element.getRelativePosition(
@@ -468,9 +468,10 @@ ve.ui.DesktopContext.prototype.show = function ( transition, repositionOnly ) {
 				// HACK: 5 and 10 are estimates of what 0.25em and 0.5em (the margins of the menu
 				// when embedded) are in pixels, what needs to actually be done is to take
 				// measurements to find the margins and use those value instead
-				focusedNode.$focusable.outerHeight() > this.$menu.outerHeight() + 5 &&
-				focusedNode.$focusable.outerWidth() > this.$menu.outerWidth() + 10
+				focusedNode.$visibleShields.first().outerHeight() > this.$menu.outerHeight() + 5 &&
+				focusedNode.$visibleShields.first().outerWidth() > this.$menu.outerWidth() + 10
 			);
+
 			this.popup.useTail( !this.embedded );
 			this.$menu.show();
 		}
