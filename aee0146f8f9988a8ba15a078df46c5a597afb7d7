@@ -88,6 +88,24 @@
       "revId": "aee0146f8f9988a8ba15a078df46c5a597afb7d7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_3e22dbb1",
+        "filename": "modules/ve/ve.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 922,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-05-29T18:05:07Z",
+      "side": 1,
+      "message": "In VE-MW we depend on jquery.client to detect IE-ness; maybe use that?",
+      "parentUuid": "4e1dcb5b_deac0735",
+      "revId": "aee0146f8f9988a8ba15a078df46c5a597afb7d7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
