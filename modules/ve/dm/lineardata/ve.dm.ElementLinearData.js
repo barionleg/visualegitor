@@ -898,3 +898,20 @@ ve.dm.ElementLinearData.prototype.cloneElements = function () {
 		}
 	}
 };
+
+/**
+ * Counts all elements that aren't between internalList and /internalList
+ * @returns {number} Number of elements that aren't in internalList
+ */
+ve.dm.ElementLinearData.prototype.countNoninternalElemenets = function () {
+	var i, internalDepth = 0, count = 0, nodeClass;
+	for ( i = 0; i < this.data.length; i++ ) {
+		nodeClass = ve.dm.nodeFactory.lookup( this.getType( i ) );
+		if ( nodeClass && nodeClass.static.isInternal ) {
+			internalDepth++;
+		} else if ( !internalDepth ) {
+			count++;
+		}
+	}
+	return count;
+};
