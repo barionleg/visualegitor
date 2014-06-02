@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e1dcb5b_664437be",
+        "filename": "modules/ve/dm/lineardata/ve.dm.ElementLinearData.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 906,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-06-02T17:56:55Z",
+      "side": 1,
+      "message": "The implementation looks fine now, but you should add unit tests for this method as well.",
+      "revId": "fa6a5384a974a46ddd33db5e74a00e1eeb4f268e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_a6e48fdc",
+        "filename": "modules/ve/dm/lineardata/ve.dm.ElementLinearData.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 909,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-06-02T17:56:55Z",
+      "side": 1,
+      "message": "There\u0027s a shortcut you can use: ve.dm.nodeFactory.isNodeInternal( this.getType( i ) )",
+      "revId": "fa6a5384a974a46ddd33db5e74a00e1eeb4f268e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
