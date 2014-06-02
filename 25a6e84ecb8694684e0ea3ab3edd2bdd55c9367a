@@ -19,6 +19,125 @@
     },
     {
       "key": {
+        "uuid": "4e1dcb5b_7114f2a0",
+        "filename": "demos/ve/pages/h1.html",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-06-02T14:24:00Z",
+      "side": 1,
+      "message": "intentional?",
+      "revId": "25a6e84ecb8694684e0ea3ab3edd2bdd55c9367a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_1125be03",
+        "filename": "modules/ve/ce/ve.ce.ContentBranchNode.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-06-02T14:24:00Z",
+      "side": 1,
+      "message": "dm-\u003emodel",
+      "revId": "25a6e84ecb8694684e0ea3ab3edd2bdd55c9367a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_b1816aca",
+        "filename": "modules/ve/ce/ve.ce.ContentBranchNode.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-06-02T14:24:00Z",
+      "side": 1,
+      "message": "uni:corn? wat?",
+      "revId": "25a6e84ecb8694684e0ea3ab3edd2bdd55c9367a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_31543a56",
+        "filename": "modules/ve/ce/ve.ce.Document.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-06-02T14:24:00Z",
+      "side": 1,
+      "message": "use more verbose names for all three",
+      "revId": "25a6e84ecb8694684e0ea3ab3edd2bdd55c9367a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_b1684a1a",
+        "filename": "modules/ve/ce/ve.ce.Document.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-06-02T14:24:00Z",
+      "side": 1,
+      "message": "trailing ws",
+      "revId": "25a6e84ecb8694684e0ea3ab3edd2bdd55c9367a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_b1c72a15",
+        "filename": "modules/ve/ce/ve.ce.Document.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-06-02T14:24:00Z",
+      "side": 1,
+      "message": "or .className, are we confident this is the only class it will ever have? (beware other code adding classes to your nodes)",
+      "revId": "25a6e84ecb8694684e0ea3ab3edd2bdd55c9367a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_51d8d6f3",
+        "filename": "modules/ve/ce/ve.ce.Document.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-06-02T14:24:00Z",
+      "side": 1,
+      "message": "still document",
+      "revId": "25a6e84ecb8694684e0ea3ab3edd2bdd55c9367a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e1dcb5b_f1bb62b8",
         "filename": "modules/ve/ce/ve.ce.Surface.js",
         "patchSetId": 2
@@ -36,6 +155,23 @@
     },
     {
       "key": {
+        "uuid": "4e1dcb5b_9111ceb3",
+        "filename": "modules/ve/ce/ve.ce.Surface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 1381,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-06-02T14:24:00Z",
+      "side": 1,
+      "message": "we usually use model/view, so modelRange/viewNode",
+      "revId": "25a6e84ecb8694684e0ea3ab3edd2bdd55c9367a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e1dcb5b_b1ddea19",
         "filename": "modules/ve/ce/ve.ce.Surface.js",
         "patchSetId": 2
@@ -47,6 +183,40 @@
       "writtenOn": "2014-06-02T14:13:14Z",
       "side": 1,
       "message": "todo: delete the function",
+      "revId": "25a6e84ecb8694684e0ea3ab3edd2bdd55c9367a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_f1dc82e7",
+        "filename": "modules/ve/ce/ve.ce.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-06-02T14:24:00Z",
+      "side": 1,
+      "message": "again, equality, or contains class?\n\nuse Node.CONSTANT (and fix others while here)",
+      "revId": "25a6e84ecb8694684e0ea3ab3edd2bdd55c9367a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e1dcb5b_d1ebc675",
+        "filename": "modules/ve/ce/ve.ce.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-06-02T14:24:00Z",
+      "side": 1,
+      "message": "trailing ws, more documentation",
       "revId": "25a6e84ecb8694684e0ea3ab3edd2bdd55c9367a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
