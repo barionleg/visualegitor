@@ -30,7 +30,7 @@ ve.ui.DesktopContext = function VeUiDesktopContext( surface, config ) {
 	this.relocating = false;
 	this.embedded = false;
 	this.selection = null;
-	this.toolbar = null;
+	this.context = null;
 	this.afterModelChangeTimeout = null;
 	this.afterModelChangeRange = null;
 	this.$menu = this.$( '<div>' );
@@ -78,6 +78,15 @@ ve.ui.DesktopContext = function VeUiDesktopContext( surface, config ) {
 OO.inheritClass( ve.ui.DesktopContext, ve.ui.Context );
 
 /* Methods */
+
+/**
+ * Handle context item choose events.
+ *
+ * @param {ve.ui.ContextItemWidget} item Chosen item
+ */
+ve.ui.DesktopContext.prototype.onContextItemChoose = function ( item ) {
+	item.getData().command.execute( this.surface );
+};
 
 /**
  * Handle window resize events.
@@ -274,7 +283,8 @@ ve.ui.DesktopContext.prototype.onInspectorClose = function () {
  * @chainable
  */
 ve.ui.DesktopContext.prototype.update = function ( transition, repositionOnly ) {
-	var i, nodes, tools,
+	var i, len, nodes, tool, tools,
+		items = [],
 		fragment = this.surface.getModel().getFragment( null, false ),
 		selection = fragment.getRange(),
 		inspector = this.inspectors.getCurrentWindow();
@@ -286,9 +296,10 @@ ve.ui.DesktopContext.prototype.update = function ( transition, repositionOnly ) 
 		// No inspector is open, or the selection has changed, show a menu of available inspectors
 		tools = ve.ui.toolFactory.getToolsForAnnotations( fragment.getAnnotations() );
 		nodes = fragment.getCoveredNodes();
-		for ( i = 0; i < nodes.length; i++ ) {
+		for ( i = 0, len = nodes.length; i < len; i++ ) {
 			if ( nodes[i].range && nodes[i].range.isCollapsed() ) {
 				nodes.splice( i, 1 );
+				len--;
 				i--;
 			}
 		}
@@ -298,14 +309,28 @@ ve.ui.DesktopContext.prototype.update = function ( transition, repositionOnly ) 
 		if ( tools.length ) {
 			// There's at least one inspectable annotation, build a menu and show it
 			this.$menu.empty();
-			if ( this.toolbar ) {
-				this.toolbar.destroy();
+			if ( this.context ) {
+				this.context.disconnect( this );
 			}
-			this.toolbar = new ve.ui.Toolbar( this.surface );
-			this.toolbar.setup( [ { 'include': tools } ] );
-			this.$menu.append( this.toolbar.$element );
+			this.context = new ve.ui.ContextWidget();
+			for ( i = 0, len = tools.length; i < len; i++ ) {
+				tool = ve.ui.toolFactory.lookup( tools[i] );
+				items.push(
+					new ve.ui.ContextItemWidget(
+						{ 'command': ve.ui.commandRegistry.lookup( tool.static.getCommandName() ) },
+						{
+							'$': this.$,
+							'icon': tool.static.icon,
+							'label': tool.static.title
+						}
+					)
+				);
+			}
+			this.context
+				.connect( this, { 'choose': 'onContextItemChoose' } )
+				.addItems( items );
+			this.$menu.append( this.context.$element );
 			this.show( transition, repositionOnly );
-			this.toolbar.initialize();
 		} else if ( this.visible ) {
 			// Nothing to inspect
 			this.hide();
