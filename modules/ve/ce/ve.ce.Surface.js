@@ -1586,7 +1586,7 @@ ve.ce.Surface.prototype.onWindowResize = ve.debounce( function () {
 /**
  * Start a relocation action.
  *
- * @see ve.ce.RelocatableNode
+ * @see ve.ce.FocusableNode
  *
  * @method
  * @param {ve.ce.Node} node Node being relocated
@@ -1599,7 +1599,7 @@ ve.ce.Surface.prototype.startRelocation = function ( node ) {
 /**
  * Complete a relocation action.
  *
- * @see ve.ce.RelocatableNode
+ * @see ve.ce.FocusableNode
  *
  * @method
  * @param {ve.ce.Node} node Node being relocated
