@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e1a5767_9cb9292c",
+        "filename": "modules/ve/ce/ve.ce.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2014-06-03T17:02:51Z",
+      "side": 1,
+      "message": "The function is not expected to react sanely if domOffset is out of range, right? (We should document the answer to this question)",
+      "revId": "132e24afad49087302bcac38a4e0f9721edfaaa5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_3ca9f5dc",
+        "filename": "modules/ve/ce/ve.ce.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2014-06-03T17:02:51Z",
+      "side": 1,
+      "message": "Should we have the following here?\n\n  if ( n \u003d\u003d\u003d null ) return null;\n\n(If so, it should be returns {Node|null} above)",
+      "revId": "132e24afad49087302bcac38a4e0f9721edfaaa5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_5cd95182",
+        "filename": "modules/ve/ce/ve.ce.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2014-06-03T17:02:51Z",
+      "side": 1,
+      "message": "Deal with the case node \u003d\u003d\u003d null here?",
+      "revId": "132e24afad49087302bcac38a4e0f9721edfaaa5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
