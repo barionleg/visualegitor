@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e1a5767_079f0657",
+        "filename": "modules/ve/dm/nodes/ve.dm.DocumentNode.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2014-06-03T18:42:30Z",
+      "side": 1,
+      "message": "A lot of the classes you updated were changed to calling parent constructor this this/arguments. Thus enforcing that subclasses must be compatible with parent classes (which I like from an API point of view, allows consumers of classes to construct a node while only having to know the generic signature). So the only place extra arguments could be added is at the end.\n\nIdeally we\u0027d do that with DocumentNode as well. Fine to do that later of course, maybe add as TODO?",
+      "revId": "d505ef6fec5a145b55019a768f2c35d1774f1cba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_47acde84",
+        "filename": "modules/ve/dm/nodes/ve.dm.TextNode.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2014-06-03T18:42:30Z",
+      "side": 1,
+      "message": "ve.dm.TextNode.test.js was changed to call setLength. Any other usages? Can be done later as TODO, but was just wondering since it did get changed in ve.dm.TextNode.test.js.",
+      "revId": "d505ef6fec5a145b55019a768f2c35d1774f1cba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
