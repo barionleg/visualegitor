@@ -609,10 +609,18 @@ ve.ce.Surface.prototype.onDocumentDrop = function ( e ) {
 			// Remove node from old location (auto-updates targetFragment's range)
 			originFragment.removeContent();
 
-			// Re-insert node at new location and re-select it
-			targetFragment.insertContent( nodeData ).select();
-
 			this.endRelocation();
+
+			// Re-insert node at new location
+			targetFragment.insertContent( nodeData );
+			if ( targetFragment.getRange().getLength() > nodeData.length ) {
+				// If the transaction had to fix up the insertion by closing some elements
+				// then adjust the range accordingly
+				while ( ve.dm.LinearData.static.isCloseElementData( targetFragment.getData()[0] ) ) {
+					targetFragment = targetFragment.adjustRange( 1, -1 );
+				}
+				targetFragment.select();
+			}
 		}, this ) );
 	}
 
