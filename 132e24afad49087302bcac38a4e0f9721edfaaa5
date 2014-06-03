@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "2e1a5767_fc7c981d",
+        "filename": "modules/ve/ce/ve.ce.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2014-06-03T22:08:02Z",
+      "side": 1,
+      "message": "Personally I feel ok with \u0027n\u0027 for node here (an inner function that\u0027s very algorithmic). The obvious alternative, calling it \u0027node\u0027, would shadow the outer variable (which is OK in terms of program logic, but not necessarily more readable).",
+      "revId": "132e24afad49087302bcac38a4e0f9721edfaaa5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e1a5767_3ca9f5dc",
         "filename": "modules/ve/ce/ve.ce.js",
         "patchSetId": 7
