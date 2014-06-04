@@ -84,6 +84,23 @@
       "revId": "132e24afad49087302bcac38a4e0f9721edfaaa5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_013a49c0",
+        "filename": "modules/ve/test/ce/ve.ce.test.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-06-04T18:03:02Z",
+      "side": 1,
+      "message": "should you be able to put the cursor inside a *protected* inline node?",
+      "revId": "132e24afad49087302bcac38a4e0f9721edfaaa5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
