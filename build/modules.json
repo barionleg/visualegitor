@@ -480,5 +480,18 @@
 			"visualEditor.mobile.standalone",
 			"visualEditor.standalone.demo"
 		]
+	},
+	"visualEditor.buildfiles.intro": {
+		"scripts": [
+			"build/intro.js.txt"
+		],
+		"styles": [
+			"build/intro.css"
+		]
+	},
+	"visualEditor.buildfiles.outro": {
+		"scripts": [
+			"build/outro.js.txt"
+		]
 	}
 }
