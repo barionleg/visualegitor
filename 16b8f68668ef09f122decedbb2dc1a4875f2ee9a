@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e1a5767_812779b1",
+        "filename": "modules/ve/ui/styles/widgets/ve.ui.ContextWidget.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-06-04T17:57:54Z",
+      "side": 1,
+      "message": "cool css rule, bro",
+      "revId": "16b8f68668ef09f122decedbb2dc1a4875f2ee9a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
