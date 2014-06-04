@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2e1a5767_e1ed0db6",
+        "filename": "modules/ve/ce/ve.ce.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-06-04T19:04:25Z",
+      "side": 1,
+      "message": "It isn\u0027t; but I should check this and make it throw an exception. Same if domNode has no ancestor with a .data(\u0027view\u0027) (see below).",
+      "parentUuid": "2e1a5767_9cb9292c",
+      "revId": "132e24afad49087302bcac38a4e0f9721edfaaa5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e1a5767_e23998cc",
         "filename": "modules/ve/ce/ve.ce.js",
         "patchSetId": 7
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "2e1a5767_61e33dd5",
+        "filename": "modules/ve/ce/ve.ce.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-06-04T19:04:25Z",
+      "side": 1,
+      "message": "Yeah, Node is the parent class (or an ancestor class, at least) of both HTMLElement and TextNode. Type \"Node\" into a browser console and you\u0027ll see.\n\nYeah, I agree n is a bit nasty. I also don\u0027t want to call it node because shadowing is evil. Other suggestions?",
+      "parentUuid": "2e1a5767_e23998cc",
+      "revId": "132e24afad49087302bcac38a4e0f9721edfaaa5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e1a5767_3ca9f5dc",
         "filename": "modules/ve/ce/ve.ce.js",
         "patchSetId": 7
@@ -64,6 +100,24 @@
       "writtenOn": "2014-06-03T17:02:51Z",
       "side": 1,
       "message": "Should we have the following here?\n\n  if ( n \u003d\u003d\u003d null ) return null;\n\n(If so, it should be returns {Node|null} above)",
+      "revId": "132e24afad49087302bcac38a4e0f9721edfaaa5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_01f12992",
+        "filename": "modules/ve/ce/ve.ce.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-06-04T19:04:25Z",
+      "side": 1,
+      "message": "In normal cases, this shouldn\u0027t happen, because domNode should be the ve-ce-documentNode or one of its descendants, so the documentNode will be an ancestor of anything n can possibly be, and it has .data(\u0027view\u0027).\n\nHowever, as above, we should probably deal with invalid input sanely, yes.",
+      "parentUuid": "2e1a5767_3ca9f5dc",
       "revId": "132e24afad49087302bcac38a4e0f9721edfaaa5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "2e1a5767_014009a7",
+        "filename": "modules/ve/ce/ve.ce.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-06-04T19:04:25Z",
+      "side": 1,
+      "message": "Yeah, we should throw a sensible exception if that happens, as above.",
+      "parentUuid": "2e1a5767_5cd95182",
+      "revId": "132e24afad49087302bcac38a4e0f9721edfaaa5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e1a5767_013a49c0",
         "filename": "modules/ve/test/ce/ve.ce.test.js",
         "patchSetId": 7
@@ -98,6 +170,24 @@
       "writtenOn": "2014-06-04T18:03:02Z",
       "side": 1,
       "message": "should you be able to put the cursor inside a *protected* inline node?",
+      "revId": "132e24afad49087302bcac38a4e0f9721edfaaa5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_41b161db",
+        "filename": "modules/ve/test/ce/ve.ce.test.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-06-04T19:04:25Z",
+      "side": 1,
+      "message": "No. But, if through some act of $DEITY, you did get your hands on a cursor position in there, the result should make sense, IMO.",
+      "parentUuid": "2e1a5767_013a49c0",
       "revId": "132e24afad49087302bcac38a4e0f9721edfaaa5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
