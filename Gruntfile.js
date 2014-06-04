@@ -6,7 +6,21 @@
 
 /*jshint node:true */
 module.exports = function ( grunt ) {
-	var modules = grunt.file.readJSON( 'build/modules.json' );
+	grunt.loadNpmTasks( 'grunt-contrib-clean' );
+	grunt.loadNpmTasks( 'grunt-contrib-csslint' );
+	grunt.loadNpmTasks( 'grunt-contrib-jshint' );
+	grunt.loadNpmTasks( 'grunt-contrib-qunit' );
+	grunt.loadNpmTasks( 'grunt-contrib-watch' );
+	grunt.loadNpmTasks( 'grunt-banana-checker' );
+	grunt.loadNpmTasks( 'grunt-jscs-checker' );
+	grunt.loadTasks( 'build/tasks' );
+
+	var modules = grunt.file.readJSON( 'build/modules.json' ),
+		moduleUtils = require( './build/moduleUtils' ),
+		introBuildFiles = moduleUtils.makeBuildList( modules, [ 'visualEditor.buildfiles.intro' ] ),
+		outroBuildFiles = moduleUtils.makeBuildList( modules, [ 'visualEditor.buildfiles.outro' ] ),
+		desktopSABuildFiles = moduleUtils.makeBuildList( modules, [ 'visualEditor.desktop.standalone' ] ),
+		mobileSABuildFiles = moduleUtils.makeBuildList( modules, [ 'visualEditor.mobile.standalone' ] );
 
 	function demoMenu( callback ) {
 		var html = [],
@@ -22,16 +36,49 @@ module.exports = function ( grunt ) {
 		callback( html.join( '\n' ) );
 	}
 
-	grunt.loadNpmTasks( 'grunt-contrib-csslint' );
-	grunt.loadNpmTasks( 'grunt-contrib-jshint' );
-	grunt.loadNpmTasks( 'grunt-contrib-qunit' );
-	grunt.loadNpmTasks( 'grunt-contrib-watch' );
-	grunt.loadNpmTasks( 'grunt-banana-checker' );
-	grunt.loadNpmTasks( 'grunt-jscs-checker' );
-	grunt.loadTasks( 'build/tasks' );
-
 	grunt.initConfig( {
 		pkg: grunt.file.readJSON( 'package.json' ),
+		clean: {
+			dist: [ 'dist/*/', 'dist/*.*' ]
+		},
+		concat: {
+			desktopSAjs: {
+				dest: 'dist/visualEditor.desktop.standalone.js',
+				src: introBuildFiles.scripts
+					.concat(desktopSABuildFiles.scripts)
+					.concat(outroBuildFiles.scripts)
+			},
+			desktopSAcss: {
+				dest: 'dist/visualEditor.desktop.standalone.css',
+				src: introBuildFiles.styles
+					.concat(desktopSABuildFiles.styles)
+					.concat(outroBuildFiles.styles)
+			},
+			mobileSAjs: {
+				dest: 'dist/visualEditor.mobile.standalone.js',
+				src: introBuildFiles.scripts
+					.concat(mobileSABuildFiles.scripts)
+					.concat(outroBuildFiles.scripts)
+			},
+			mobileSAcss: {
+				dest: 'dist/visualEditor.mobile.standalone.css',
+				src: introBuildFiles.styles
+					.concat(mobileSABuildFiles.styles)
+					.concat(outroBuildFiles.styles)
+			}
+		},
+		copy: {
+			images: {
+				src: 'src/ui/styles/images/**/*.*',
+				strip: 'src/ui/styles/',
+				dest: 'dist/'
+			},
+			i18n: {
+				src: 'i18n/*.json',
+				dest: 'dist'
+			}
+		},
+
 		buildloader: {
 			iframe: {
 				targetFile: '.docs/eg-iframe.html',
@@ -119,7 +166,7 @@ module.exports = function ( grunt ) {
 
 	grunt.registerTask( 'lint', [ 'jshint', 'jscs', 'csslint', 'banana' ] );
 	grunt.registerTask( 'unit', 'qunit' );
-	grunt.registerTask( 'build', 'buildloader' );
+	grunt.registerTask( 'build', [ 'clean', 'git-build', 'concat', 'copy', 'buildloader' ] );
 	grunt.registerTask( 'test', [ 'build', 'lint', 'unit' ] );
 	grunt.registerTask( 'default', 'test' );
 };
