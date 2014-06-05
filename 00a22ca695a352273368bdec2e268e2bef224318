@@ -16,6 +16,24 @@
       "revId": "00a22ca695a352273368bdec2e268e2bef224318",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_4ede2472",
+        "filename": "build/intro.js.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-06-05T15:55:00Z",
+      "side": 1,
+      "message": "How\u0027s that going to work? We only have one file…",
+      "parentUuid": "2e1a5767_a806d5cf",
+      "revId": "00a22ca695a352273368bdec2e268e2bef224318",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
