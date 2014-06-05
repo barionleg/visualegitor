@@ -71,6 +71,14 @@ ve.dm.LanguageAnnotation.prototype.getComparableObject = function () {
 	};
 };
 
+ve.dm.LanguageAnnotation.prototype.getLanguage = function () {
+	return this.getAttribute( 'lang' );
+};
+
+ve.dm.LanguageAnnotation.prototype.getDirection = function () {
+	return this.getAttribute( 'dir' );
+};
+
 /* Registration */
 
 ve.dm.modelRegistry.register( ve.dm.LanguageAnnotation );

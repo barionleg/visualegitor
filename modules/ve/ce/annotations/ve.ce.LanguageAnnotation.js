@@ -45,6 +45,15 @@ ve.ce.LanguageAnnotation.static.name = 'meta/language';
 
 ve.ce.LanguageAnnotation.static.tagName = 'span';
 
+/* Static Methods */
+
+/**
+ * @inheritdoc
+ */
+ve.ce.LanguageAnnotation.static.getDescription = function ( model ) {
+	return model.getLanguage() + ' (' + model.getDirection() + ')';
+};
+
 /* Registration */
 
 ve.ce.annotationFactory.register( ve.ce.LanguageAnnotation );
