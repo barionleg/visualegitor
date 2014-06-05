@@ -34,6 +34,24 @@
       "revId": "00a22ca695a352273368bdec2e268e2bef224318",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_426ef52b",
+        "filename": "build/intro.js.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-06-05T22:27:58Z",
+      "side": 1,
+      "message": "\"Strict mode for functions\"\n\nhttps://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions_and_function_scope/Strict_mode",
+      "parentUuid": "2e1a5767_4ede2472",
+      "revId": "00a22ca695a352273368bdec2e268e2bef224318",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
