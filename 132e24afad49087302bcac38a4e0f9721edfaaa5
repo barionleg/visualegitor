@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "2e1a5767_dd4e649b",
+        "filename": "modules/ve/ce/ve.ce.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-06-06T01:42:29Z",
+      "side": 1,
+      "message": "Done in PS9: domOffset is validated and an exception is thrown if it\u0027s out of range",
+      "parentUuid": "2e1a5767_e1ed0db6",
+      "revId": "132e24afad49087302bcac38a4e0f9721edfaaa5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e1a5767_e23998cc",
         "filename": "modules/ve/ce/ve.ce.js",
         "patchSetId": 7
@@ -124,6 +142,24 @@
     },
     {
       "key": {
+        "uuid": "2e1a5767_9d48ec8d",
+        "filename": "modules/ve/ce/ve.ce.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-06-06T01:42:29Z",
+      "side": 1,
+      "message": "PS9 takes care of this in a different way: by throwing an exception from within traverse() if this happens.",
+      "parentUuid": "2e1a5767_01f12992",
+      "revId": "132e24afad49087302bcac38a4e0f9721edfaaa5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e1a5767_5cd95182",
         "filename": "modules/ve/ce/ve.ce.js",
         "patchSetId": 7
@@ -153,6 +189,24 @@
       "side": 1,
       "message": "Yeah, we should throw a sensible exception if that happens, as above.",
       "parentUuid": "2e1a5767_5cd95182",
+      "revId": "132e24afad49087302bcac38a4e0f9721edfaaa5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e1a5767_7d4d109b",
+        "filename": "modules/ve/ce/ve.ce.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-06-06T01:42:29Z",
+      "side": 1,
+      "message": "PS9 makes checking for this unnecessary, because traverse() will either successfully return a Node, or throw an exception.",
+      "parentUuid": "2e1a5767_014009a7",
       "revId": "132e24afad49087302bcac38a4e0f9721edfaaa5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
