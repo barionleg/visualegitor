@@ -35,6 +35,17 @@ QUnit.test( 'getOffset', function ( assert ) {
 		expected = 0,
 		testCases = [
 			{
+				'msg': 'Empty paragraph',
+				'html': '<p></p>',
+				// CE html summary;
+				// <p><span [inlineSlug]>&#xFEFF;</span></p>
+				'expected': [
+					0,
+					1, 1, 1, 1, 1, 1,
+					2
+				]
+			},
+			{
 				'msg': 'Annotations',
 				'html': '<p><i><b>Foo</b></i></p>',
 				'expected': [
