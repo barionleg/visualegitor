@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e3593d1_556c9e05",
+        "filename": "modules/ve/ui/ve.ui.MobileSurface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-06-06T19:03:59Z",
+      "side": 1,
+      "message": "This is incorrect. The global $() is used deliberately here, as well as in other places that deal with the global overlay.",
+      "revId": "1dda38b33247a6796448ed1789a2c223f1dd33bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
