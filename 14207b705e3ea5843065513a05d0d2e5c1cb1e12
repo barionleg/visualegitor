@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e3593d1_3510faac",
+        "filename": "modules/ve/ce/ve.ce.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-06-06T18:31:53Z",
+      "side": 1,
+      "message": "This isn\u0027t the right place to check for slug-ness. PS3 adds test cases that expose this problem.",
+      "revId": "14207b705e3ea5843065513a05d0d2e5c1cb1e12",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
