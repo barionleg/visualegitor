@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e1a5767_dd3544f5",
+        "filename": "modules/ve/ce/ve.ce.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-06-06T01:46:58Z",
+      "side": 1,
+      "message": "Eww duplication of logic, error message.",
+      "revId": "81f2aa41a54b0328cf52769ef0f42257bbcc2690",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
