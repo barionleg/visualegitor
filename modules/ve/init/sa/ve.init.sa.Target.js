@@ -70,17 +70,19 @@ ve.init.sa.Target.prototype.setup = function () {
 	this.setupDone = true;
 	this.surface = this.createSurface( this.document );
 	this.$document = this.surface.$element.find( '.ve-ce-documentNode' );
-	this.toolbar = new ve.ui.TargetToolbar( this, this.surface, { 'shadow': true } );
+
+	this.$element.append( this.surface.$element );
+
+	this.setupToolbar( { 'shadow': true } );
+	if ( ve.debug ) {
+		this.setupDebugBar();
+	}
 
 	// Initialization
 	this.toolbar.$element.addClass( 've-init-sa-target-toolbar' );
-	this.toolbar.setup( this.constructor.static.toolbarGroups );
 	this.toolbar.enableFloatable();
 
-	this.$element.append( this.toolbar.$element, this.surface.$element );
-
 	this.toolbar.initialize();
-	this.surface.addCommands( this.constructor.static.surfaceCommands );
 	this.surface.setPasteRules( this.constructor.static.pasteRules );
 	this.surface.initialize();
 
