@@ -35,6 +35,17 @@ QUnit.test( 'getOffset', function ( assert ) {
 		expected = 0,
 		testCases = [
 			{
+				'msg': 'Empty paragraph',
+				'html': '<p></p>',
+				// CE html summary;
+				// <p><span [inlineSlug]>&#xFEFF;</span></p>
+				'expected': [
+					0,
+					1, 1, 1, 1, 1, 1,
+					2
+				]
+			},
+			{
 				'msg': 'Annotations',
 				'html': '<p><i><b>Foo</b></i></p>',
 				'expected': [
@@ -81,6 +92,32 @@ QUnit.test( 'getOffset', function ( assert ) {
 					8,
 					9, 9,
 					10
+				]
+			},
+			{
+				'msg': 'Table with block slugs',
+				'html': '<table><tr><td>Foo</td></tr></table>',
+				// CE html summary;
+				// <div [slugWrapper]><p [blockSlug]></p></div>
+				// <table><tbody><tr><td>
+				//  <p>Foo</p>
+				// </td></tr></tbody></table>
+				// <div [slugWrapper]><p [blockSlug]></p></div>
+				'expected': [
+					0, 0, 0, 0, 0, 0, 0, 0,
+					1,
+					2,
+					3,
+					4,
+					5, 5,
+					6,
+					7,
+					8, 8,
+					9,
+					10,
+					11,
+					12,
+					13, 13, 13, 13, 13, 13, 13, 13
 				]
 			}
 		];

@@ -250,7 +250,7 @@ ve.ce.getOffset = function ( domNode, domOffset ) {
 		// node is an ancestor of startNode
 		// Add 1 to take the opening into account
 		offset += view.getModel().isWrapped() ? 1 : 0;
-		if ( view.getModel().canContainContent() ) {
+		if ( view.getModel().canContainContent() && !$( startNode.parentNode ).hasClass( 've-ce-branchNode-slug' ) ) {
 			offset += lengthSum;
 		}
 		// else: we're inside an alienated node: throw away all the text node lengths,
