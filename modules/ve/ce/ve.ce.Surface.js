@@ -1040,7 +1040,7 @@ ve.ce.Surface.prototype.afterPaste = function () {
 			// Invalid JSON
 			return;
 		}
-		$( this ).attr( attrs );
+		this.$( this ).attr( attrs );
 		this.removeAttribute( 'data-ve-attributes' );
 	} );
 
@@ -1143,7 +1143,7 @@ ve.ce.Surface.prototype.afterPaste = function () {
 				// CE destroyed an important span, so revert to using clipboard data
 				htmlDoc = ve.createDocumentFromHtml( beforePasteData.html );
 				// Remove the pasteProtect class. See #onCopy.
-				$( htmlDoc ).find( 'span' ).removeClass( 've-pasteProtect' );
+				this.$( htmlDoc ).find( 'span' ).removeClass( 've-pasteProtect' );
 				beforePasteData.context = null;
 			}
 		}
