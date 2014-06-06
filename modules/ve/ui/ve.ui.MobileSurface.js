@@ -56,7 +56,7 @@ ve.ui.MobileSurface.prototype.setupContext = function () {
 ve.ui.MobileSurface.prototype.showGlobalOverlay = function () {
 	this.scrollPos = $( 'body' ).scrollTop();
 	// overflow: hidden on 'body' alone is not enough for iOS Safari
-	$( 'html, body' ).addClass( 've-ui-mobileSurface-overlay-global-enabled' );
+	this.$( 'html, body' ).addClass( 've-ui-mobileSurface-overlay-global-enabled' );
 	this.$globalOverlay.addClass( 've-ui-mobileSurface-overlay-global-visible' );
 };
 
@@ -66,6 +66,6 @@ ve.ui.MobileSurface.prototype.showGlobalOverlay = function () {
  */
 ve.ui.MobileSurface.prototype.hideGlobalOverlay = function () {
 	this.$globalOverlay.removeClass( 've-ui-mobileSurface-overlay-global-visible' );
-	$( 'html, body' ).removeClass( 've-ui-mobileSurface-overlay-global-enabled' );
-	$( 'body' ).scrollTop( this.scrollPos );
+	this.$( 'html, body' ).removeClass( 've-ui-mobileSurface-overlay-global-enabled' );
+	this.$( 'body' ).scrollTop( this.scrollPos );
 };

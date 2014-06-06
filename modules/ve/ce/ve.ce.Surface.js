@@ -1016,6 +1016,7 @@ ve.ce.Surface.prototype.afterPaste = function () {
 		$elements, parts, pasteData, slice, tx, internalListRange,
 		data, doc, htmlDoc,
 		context, left, right, contextRange,
+		surface = this,
 		pasteRules = this.getSurface().getPasteRules(),
 		beforePasteData = this.beforePasteData || {},
 		selection = this.model.getSelection();
@@ -1040,7 +1041,7 @@ ve.ce.Surface.prototype.afterPaste = function () {
 			// Invalid JSON
 			return;
 		}
-		$( this ).attr( attrs );
+		surface.$( this ).attr( attrs );
 		this.removeAttribute( 'data-ve-attributes' );
 	} );
 
@@ -1143,7 +1144,7 @@ ve.ce.Surface.prototype.afterPaste = function () {
 				// CE destroyed an important span, so revert to using clipboard data
 				htmlDoc = ve.createDocumentFromHtml( beforePasteData.html );
 				// Remove the pasteProtect class. See #onCopy.
-				$( htmlDoc ).find( 'span' ).removeClass( 've-pasteProtect' );
+				this.$( htmlDoc ).find( 'span' ).removeClass( 've-pasteProtect' );
 				beforePasteData.context = null;
 			}
 		}
