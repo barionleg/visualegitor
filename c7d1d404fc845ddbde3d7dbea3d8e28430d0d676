@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e20cf91_d8c45197",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-06-06T01:57:07Z",
+      "side": 1,
+      "message": "s/out/our/",
+      "revId": "c7d1d404fc845ddbde3d7dbea3d8e28430d0d676",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e20cf91_d8433114",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-06-06T01:57:07Z",
+      "side": 1,
+      "message": "I\u0027m assuming \"upstream\" is in jscs here.",
+      "revId": "c7d1d404fc845ddbde3d7dbea3d8e28430d0d676",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e20cf91_984db942",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-06-06T01:57:07Z",
+      "side": 1,
+      "message": "This is totally a distinct change, but eh…",
+      "revId": "c7d1d404fc845ddbde3d7dbea3d8e28430d0d676",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
