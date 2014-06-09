@@ -1,0 +1,208 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e3593d1_74055213",
+        "filename": "modules/ve/ce/annotations/ve.ce.LanguageAnnotation.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-06-09T23:54:40Z",
+      "side": 1,
+      "message": "I feel like this should be an i18n message defaulting to \u0027$1 ($2)\u0027",
+      "revId": "c1018a6db9ca8ee76996c2ef4873367b56e138e4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e3593d1_b4229aa0",
+        "filename": "modules/ve/ce/ve.ce.AnnotationFactory.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-06-09T23:54:40Z",
+      "side": 1,
+      "message": "Lies",
+      "revId": "c1018a6db9ca8ee76996c2ef4873367b56e138e4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e3593d1_1433a6f4",
+        "filename": "modules/ve/ce/ve.ce.AnnotationFactory.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-06-09T23:54:40Z",
+      "side": 1,
+      "message": "annotation",
+      "revId": "c1018a6db9ca8ee76996c2ef4873367b56e138e4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e3593d1_741c326b",
+        "filename": "modules/ve/ce/ve.ce.AnnotationFactory.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-06-09T23:54:40Z",
+      "side": 1,
+      "message": "annotation",
+      "revId": "c1018a6db9ca8ee76996c2ef4873367b56e138e4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e3593d1_942796b1",
+        "filename": "modules/ve/ce/ve.ce.AnnotationFactory.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-06-09T23:54:40Z",
+      "side": 1,
+      "message": "annotation",
+      "revId": "c1018a6db9ca8ee76996c2ef4873367b56e138e4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e3593d1_f42f0284",
+        "filename": "modules/ve/dm/annotations/ve.dm.LanguageAnnotation.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-06-09T23:54:40Z",
+      "side": 1,
+      "message": "document",
+      "revId": "c1018a6db9ca8ee76996c2ef4873367b56e138e4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e3593d1_d42cfe91",
+        "filename": "modules/ve/dm/annotations/ve.dm.LanguageAnnotation.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-06-09T23:54:40Z",
+      "side": 1,
+      "message": "document",
+      "revId": "c1018a6db9ca8ee76996c2ef4873367b56e138e4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e3593d1_d4b99e2a",
+        "filename": "modules/ve/dm/ve.dm.SurfaceFragment.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-06-09T23:54:40Z",
+      "side": 1,
+      "message": "Error description, maybe?",
+      "revId": "c1018a6db9ca8ee76996c2ef4873367b56e138e4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e3593d1_34e10a2a",
+        "filename": "modules/ve/ui/widgets/ve.ui.ContextItemWidget.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-06-09T23:54:40Z",
+      "side": 1,
+      "message": "function *Ve*UiContextItemWidget",
+      "revId": "c1018a6db9ca8ee76996c2ef4873367b56e138e4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e3593d1_54d36e61",
+        "filename": "modules/ve/ui/widgets/ve.ui.ContextItemWidget.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-06-09T23:54:40Z",
+      "side": 1,
+      "message": "document",
+      "revId": "c1018a6db9ca8ee76996c2ef4873367b56e138e4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e3593d1_34c8eaa9",
+        "filename": "modules/ve/ui/widgets/ve.ui.ContextItemWidget.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-06-09T23:54:40Z",
+      "side": 1,
+      "message": "document",
+      "revId": "c1018a6db9ca8ee76996c2ef4873367b56e138e4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e3593d1_14c5e690",
+        "filename": "modules/ve/ui/widgets/ve.ui.ContextWidget.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-06-09T23:54:40Z",
+      "side": 1,
+      "message": "*Ve*UiContextWidget",
+      "revId": "c1018a6db9ca8ee76996c2ef4873367b56e138e4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
