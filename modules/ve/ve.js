@@ -662,30 +662,20 @@
 	};
 
 	/**
-	 * Check whether a given DOM element is of a block or inline type.
+	 * Check whether a given DOM element has a block element type.
 	 *
-	 * @param {HTMLElement} element
-	 * @returns {boolean} True if element is block, false if it is inline
+	 * @param {HTMLElement|string} element Element or element name
+	 * @returns {boolean} Element is a block element
 	 */
 	ve.isBlockElement = function ( element ) {
-		return ve.isBlockElementType( element.nodeName.toLowerCase() );
+		var elementName = typeof element === 'string' ? element : element.nodeName.toLowerCase();
+		return ve.indexOf( elementName, ve.isBlockElement.types ) !== -1;
 	};
 
 	/**
-	 * Check whether a given tag name is a block or inline tag.
-	 *
-	 * @param {string} nodeName All-lowercase HTML tag name
-	 * @returns {boolean} True if block, false if inline
+	 * Private data for #isBlockElement.
 	 */
-	ve.isBlockElementType = function ( nodeName ) {
-		return ve.indexOf( nodeName, ve.isBlockElementType.blockTypes ) !== -1;
-	};
-
-	/**
-	 * Private data for #isBlockElementType.
-	 *
-	 */
-	ve.isBlockElementType.blockTypes = [
+	ve.isBlockElement.types = [
 		'div', 'p',
 		// tables
 		'table', 'tbody', 'thead', 'tfoot', 'caption', 'th', 'tr', 'td',
@@ -699,6 +689,25 @@
 		// other
 		'hr', 'button', 'canvas', 'center', 'col', 'colgroup', 'embed',
 		'map', 'object', 'pre', 'progress', 'video'
+	];
+
+	/**
+	 * Check whether a given DOM element is a void element (can't have children).
+	 *
+	 * @param {HTMLElement|string} element Element or element name
+	 * @returns {boolean} Element is a void element
+	 */
+	ve.isVoidElement = function ( element ) {
+		var elementName = typeof element === 'string' ? element : element.nodeName.toLowerCase();
+		return ve.indexOf( elementName, ve.isVoidElement.types ) !== -1;
+	};
+
+	/**
+	 * Private data for #isVoidElement.
+	 */
+	ve.isVoidElement.types = [
+		'area', 'base', 'br', 'col', 'command', 'embed', 'hr', 'img',
+		'input', 'keygen', 'link', 'meta', 'param', 'source', 'track', 'wbr'
 	];
 
 	/**

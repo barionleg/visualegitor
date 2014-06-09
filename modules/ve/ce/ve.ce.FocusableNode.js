@@ -106,7 +106,7 @@ ve.ce.FocusableNode.prototype.onFocusableSetup = function () {
 
 	// DOM changes
 	this.$element
-		.addClass( 've-ce-focusableNode' )
+		.addClass( 've-ce-focusableNode ve-ce-focusableNode-requiresShield' )
 		.prop( 'contentEditable', 'false' );
 
 	// Events
@@ -144,7 +144,10 @@ ve.ce.FocusableNode.prototype.attachShields = function () {
 		return;
 	}
 
-	var shields = [], node = this;
+	var shields = [], node = this,
+		unshieldableFilter = function () {
+			return this.nodeType === 3 || ve.isVoidElement( this.nodeName );
+		};
 
 	// Events
 	this.surface.connect( this, { 'position': 'positionHighlights' } );
@@ -153,9 +156,19 @@ ve.ce.FocusableNode.prototype.attachShields = function () {
 	this.$element.find( '*' ).addBack().each( function () {
 		if ( this.nodeType === Node.ELEMENT_NODE ) {
 			var cssFloat, $this = node.$( this );
+			// If a generated content wrapper contains only shieldable nodes there's no need to shield it.
+			// Doing so may make the shield larger than it needs to be.
+			if (
+				$this.hasClass( 've-ce-generatedContentNode' ) &&
+				!$this.contents().filter( unshieldableFilter ).length
+			) {
+				// Mark children as requiring shields instead
+				$this.children().addClass( 've-ce-focusableNode-requiresShield' );
+				return;
+			}
 			if (
 				// Always shield the root
-				!$this.hasClass( 've-ce-focusableNode' ) &&
+				!$this.hasClass( 've-ce-focusableNode-requiresShield' ) &&
 				// Highlights are built off shields, so make sure $focusable has a shield
 				!$this.is( node.$focusable )
 			) {
