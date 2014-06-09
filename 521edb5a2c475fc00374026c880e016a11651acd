@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "0e3593d1_3921109b",
+        "filename": "modules/ve/ce/ve.ce.FocusableNode.js",
+        "patchSetId": 21
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-06-09T13:39:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e3593d1_c7ea1c05",
+      "revId": "521edb5a2c475fc00374026c880e016a11651acd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e3593d1_07e14429",
         "filename": "modules/ve/ce/ve.ce.FocusableNode.js",
         "patchSetId": 21
@@ -47,6 +65,24 @@
       "writtenOn": "2014-06-07T05:13:57Z",
       "side": 1,
       "message": "The internet seems to tell me that e.toElement doesn\u0027t exist in Firefox, and that the more standardized version is e.relatedTarget.",
+      "revId": "521edb5a2c475fc00374026c880e016a11651acd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e3593d1_591cd46a",
+        "filename": "modules/ve/ce/ve.ce.FocusableNode.js",
+        "patchSetId": 21
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-06-09T13:39:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e3593d1_07e14429",
       "revId": "521edb5a2c475fc00374026c880e016a11651acd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +123,24 @@
     },
     {
       "key": {
+        "uuid": "0e3593d1_19364ce5",
+        "filename": "modules/ve/ce/ve.ce.FocusableNode.js",
+        "patchSetId": 21
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-06-09T13:39:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e3593d1_67d93083",
+      "revId": "521edb5a2c475fc00374026c880e016a11651acd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e3593d1_47ce2cbb",
         "filename": "modules/ve/ce/ve.ce.FocusableNode.js",
         "patchSetId": 21
@@ -98,6 +152,24 @@
       "writtenOn": "2014-06-07T05:13:57Z",
       "side": 1,
       "message": "use width variable",
+      "revId": "521edb5a2c475fc00374026c880e016a11651acd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e3593d1_f93268ee",
+        "filename": "modules/ve/ce/ve.ce.FocusableNode.js",
+        "patchSetId": 21
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-06-09T13:39:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e3593d1_47ce2cbb",
       "revId": "521edb5a2c475fc00374026c880e016a11651acd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +193,24 @@
     },
     {
       "key": {
+        "uuid": "0e3593d1_99491c6d",
+        "filename": "modules/ve/ce/ve.ce.Surface.js",
+        "patchSetId": 21
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-06-09T13:39:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e3593d1_27d32863",
+      "revId": "521edb5a2c475fc00374026c880e016a11651acd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e3593d1_07c824a9",
         "filename": "modules/ve/ce/ve.ce.Surface.js",
         "patchSetId": 21
@@ -138,6 +228,24 @@
     },
     {
       "key": {
+        "uuid": "0e3593d1_794e7874",
+        "filename": "modules/ve/ce/ve.ce.Surface.js",
+        "patchSetId": 21
+      },
+      "lineNbr": 2106,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-06-09T13:39:23Z",
+      "side": 1,
+      "message": "No, but you can have one focus-highlighted and one blur-highlighted (focus A, then mouse-over B).",
+      "parentUuid": "0e3593d1_07c824a9",
+      "revId": "521edb5a2c475fc00374026c880e016a11651acd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e3593d1_e7c40097",
         "filename": "modules/ve/ce/ve.ce.SurfaceObserver.js",
         "patchSetId": 21
@@ -149,6 +257,24 @@
       "writtenOn": "2014-06-07T05:13:57Z",
       "side": 1,
       "message": "This check needs to be moved inside of the setTimeout() callback: when the surfaceObserver is detached, its .documentView is set to null.",
+      "revId": "521edb5a2c475fc00374026c880e016a11651acd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e3593d1_5953b41a",
+        "filename": "modules/ve/ce/ve.ce.SurfaceObserver.js",
+        "patchSetId": 21
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-06-09T13:39:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e3593d1_e7c40097",
       "revId": "521edb5a2c475fc00374026c880e016a11651acd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
