@@ -246,6 +246,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_fa437813",
+        "filename": "modules/ve/ce/ve.ce.Surface.js",
+        "patchSetId": 21
+      },
+      "lineNbr": 2106,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-06-10T21:24:47Z",
+      "side": 1,
+      "message": "OK. So then why is there special code to unhighlight the previous blur-highlighted node, but not for the previous focus-highlighted node?",
+      "parentUuid": "0e3593d1_794e7874",
+      "revId": "521edb5a2c475fc00374026c880e016a11651acd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e3593d1_e7c40097",
         "filename": "modules/ve/ce/ve.ce.SurfaceObserver.js",
         "patchSetId": 21
