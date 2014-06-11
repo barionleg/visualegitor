@@ -351,7 +351,7 @@ ve.ui.DesktopContext.prototype.update = function ( transition, repositionOnly ) 
  * @chainable
  */
 ve.ui.DesktopContext.prototype.updateDimensions = function ( transition ) {
-	var $node, $container, focusableOffset, focusableWidth, nodePosition, cursorPosition, position,
+	var $node, $container, focusableOffset, nodePosition, cursorPosition, position,
 		documentOffset, nodeOffset,
 		surface = this.surface.getView(),
 		inspector = this.inspectors.getCurrentWindow(),
@@ -375,8 +375,7 @@ ve.ui.DesktopContext.prototype.updateDimensions = function ( transition ) {
 				position.x = focusableOffset.left;
 				this.popup.align = 'left';
 			} else {
-				focusableWidth = $node.outerWidth();
-				position.x = focusableOffset.left + focusableWidth;
+				position.x = focusableOffset.left + $node.outerWidth();
 				this.popup.align = 'right';
 			}
 		} else {
@@ -388,11 +387,7 @@ ve.ui.DesktopContext.prototype.updateDimensions = function ( transition ) {
 				left: nodeOffset.left - documentOffset.left
 			};
 			// Get the position of the focusedNode:
-			position = { 'x': nodePosition.left, 'y': nodePosition.top + $node.outerHeight() };
-			// When the context is displayed in LTR, it should be on the right of the node
-			if ( !rtl ) {
-				position.x += $node.outerWidth();
-			}
+			position = { 'x': nodePosition.left + $node.outerWidth() / 2, 'y': nodePosition.top + $node.outerHeight() };
 			this.popup.align = 'center';
 		}
 	} else {
