@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_7fdc124c",
+        "filename": "modules/ve/ce/ve.ce.FocusableNode.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-06-11T18:21:06Z",
+      "side": 1,
+      "message": "Stray space",
+      "revId": "0a5b84b0fe42386ae52c359cfadc856fc203637a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_dfa2dea3",
+        "filename": "modules/ve/ce/ve.ce.FocusableNode.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-06-11T18:21:06Z",
+      "side": 1,
+      "message": "+of",
+      "revId": "0a5b84b0fe42386ae52c359cfadc856fc203637a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
