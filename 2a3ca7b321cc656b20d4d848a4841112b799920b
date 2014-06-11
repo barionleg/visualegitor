@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_7f341247",
+        "filename": "modules/ve/ce/ve.ce.FocusableNode.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-06-11T18:26:02Z",
+      "side": 1,
+      "message": "Use Node.TEXT_NODE instead of 3",
+      "revId": "2a3ca7b321cc656b20d4d848a4841112b799920b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
