@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_28276d0f",
+        "filename": "lib/oojs-ui/i18n/be.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-06-11T23:16:30Z",
+      "side": 1,
+      "message": "*cough*",
+      "revId": "738b10e993f4279b0fc32b1ebdd27d35263ac0a0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
