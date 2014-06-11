@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_1d7bd6be",
+        "filename": "modules/ve/ce/ve.ce.FocusableNode.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-06-11T00:24:03Z",
+      "side": 1,
+      "message": "This is too early. When you drop, onDocumentDrop in ce.Surface runs before the dragend event is fired, and it ends up calling clearHighlights which unbinds the dragend handler, so the dragend event is never received by anything. This results in a bug where if you drag and drop once, the context goes away and never reappears, because it believes you\u0027re still dragging and hides itself.",
+      "revId": "a619354c0660dfe763a35af106849e861cff205e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
