@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_e1229ba1",
+        "filename": "modules/ve/dm/nodes/ve.dm.AlienNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-06-12T19:46:36Z",
+      "side": 1,
+      "message": "Nooooo :( can\u0027t we just make ve: an extension-specific type instead?",
+      "revId": "c5d2909456c87dd307c4518512ce9edac3f684df",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
