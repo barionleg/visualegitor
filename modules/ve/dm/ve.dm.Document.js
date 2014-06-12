@@ -863,6 +863,7 @@ ve.dm.Document.prototype.fixupInsertion = function ( data, offset ) {
 			openings = [];
 			closings = [];
 			reopenElements = [];
+
 			// Opening or content
 			// Make sure that opening this element here does not violate the parent/children/content
 			// rules. If it does, insert stuff to fix it
@@ -872,8 +873,20 @@ ve.dm.Document.prototype.fixupInsertion = function ( data, offset ) {
 			if ( ve.dm.nodeFactory.isNodeContent( childType ) &&
 				!ve.dm.nodeFactory.canNodeContainContent( parentType )
 			) {
-				childType = 'paragraph';
-				openings.unshift( ve.dm.nodeFactory.getDataElement( childType ) );
+				// If we're adding an inline image and our parent node has
+				// a paragraph as first child, add the image there.
+				if (
+					childType === 'mwInlineImage' &&
+					parentNode.children &&
+					parentNode.children[0].type === 'paragraph'
+				) {
+					// Insert the node into the existing paragraph
+					return this.fixupInsertion( data, offset + 1 );
+				} else {
+					// No paragraph exists, so wrap content in paragraph
+					childType = 'paragraph';
+					openings.unshift( ve.dm.nodeFactory.getDataElement( childType ) );
+				}
 			}
 
 			// Check that this node is allowed to have the containing node as its parent. If not,
