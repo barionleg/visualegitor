@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_de1c167f",
+        "filename": "modules/ve/dm/ve.dm.Document.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 877,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-06-12T19:44:40Z",
+      "side": 1,
+      "message": "Note that, often, the documentNode will also have a paragraph as its first child ;)",
+      "revId": "17bbdf2c4b9b7260fc4013815f393ed997a74149",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_9e168e59",
+        "filename": "modules/ve/dm/ve.dm.Document.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 879,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-06-12T19:44:40Z",
+      "side": 1,
+      "message": "Per Ed, using an MW type here is evil. Instead, define a static property that mwInlineImage sets to true",
+      "revId": "17bbdf2c4b9b7260fc4013815f393ed997a74149",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
