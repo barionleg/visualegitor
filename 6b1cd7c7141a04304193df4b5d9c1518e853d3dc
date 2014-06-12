@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_de00966f",
+        "filename": "modules/ve/init/sa/ve.init.sa.Platform.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-06-12T19:26:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee391fd1_beaa7280",
+      "revId": "6b1cd7c7141a04304193df4b5d9c1518e853d3dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_3ef202e0",
         "filename": "modules/ve/init/ve.init.Platform.js",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2014-06-12T19:13:00Z",
       "side": 1,
       "message": "Misspelled language",
+      "revId": "6b1cd7c7141a04304193df4b5d9c1518e853d3dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_1eee1eb2",
+        "filename": "modules/ve/init/ve.init.Platform.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-06-12T19:26:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee391fd1_3ef202e0",
       "revId": "6b1cd7c7141a04304193df4b5d9c1518e853d3dc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ee391fd1_feea3a9b",
+        "filename": "modules/ve/init/ve.init.Platform.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-06-12T19:26:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee391fd1_7e276a60",
+      "revId": "6b1cd7c7141a04304193df4b5d9c1518e853d3dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee391fd1_3e19e227",
         "filename": "modules/ve/init/ve.init.Platform.js",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2014-06-12T19:13:00Z",
       "side": 1,
       "message": "and here",
+      "revId": "6b1cd7c7141a04304193df4b5d9c1518e853d3dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_de2f76f2",
+        "filename": "modules/ve/init/ve.init.Platform.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-06-12T19:26:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee391fd1_3e19e227",
       "revId": "6b1cd7c7141a04304193df4b5d9c1518e853d3dc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
