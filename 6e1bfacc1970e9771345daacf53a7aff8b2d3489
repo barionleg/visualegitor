@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_59c3923d",
+        "filename": "demos/ve/demo.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2014-06-15T12:34:08Z",
+      "side": 1,
+      "message": "Can surfaceView be used here?",
+      "revId": "6e1bfacc1970e9771345daacf53a7aff8b2d3489",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
