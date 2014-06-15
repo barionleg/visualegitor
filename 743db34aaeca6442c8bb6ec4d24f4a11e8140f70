@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_19bd0aae",
+        "filename": "demos/ve/pages/complex.html",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2014-06-15T12:35:45Z",
+      "side": 1,
+      "message": "This makes the alieninline nodes cite nodes. Not sure if that was intentional, but I suppose it\u0027s useful to always have some alien inline nodes for testing that will never be defined (we might, if not already, support cite).",
+      "revId": "743db34aaeca6442c8bb6ec4d24f4a11e8140f70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
