@@ -249,20 +249,24 @@ ve.ce.FocusableNode.prototype.onFocusableMouseDown = function ( e ) {
 		selectionRange = surfaceModel.getSelection(),
 		nodeRange = this.model.getOuterRange();
 
-	surfaceModel.getFragment(
-		e.shiftKey ?
-			ve.Range.newCoveringRange(
-				[ selectionRange, nodeRange ], selectionRange.from > nodeRange.from
-			) :
-			nodeRange
-	).select();
-
+	// Don't prevent default on the relocatable marker otherwise dragging can't start
 	if ( !$( e.target ).hasClass( 've-ce-focusableNode-highlight-relocatable-marker' ) ) {
 		e.preventDefault();
 		// Abort mousedown events otherwise the surface will go into
 		// dragging mode on touch devices
 		e.stopPropagation();
 	}
+
+	// As we can't always preventDefault, wait for native selection to change before correcting
+	setTimeout( function () {
+		surfaceModel.getFragment(
+			e.shiftKey ?
+				ve.Range.newCoveringRange(
+					[ selectionRange, nodeRange ], selectionRange.from > nodeRange.from
+				) :
+				nodeRange
+		).select();
+	} );
 };
 
 /**
