@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_9e68b785",
+        "filename": "modules/ve/init/ve.init.Target.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-06-16T19:23:50Z",
+      "side": 1,
+      "message": "How is this part of the *toolbar* setup?",
+      "revId": "303c6f9f537684097569409ead2eafdea7da54e5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_9eff97a7",
+        "filename": "modules/ve/init/ve.init.Target.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-06-16T19:23:50Z",
+      "side": 1,
+      "message": "Excess blank line",
+      "revId": "303c6f9f537684097569409ead2eafdea7da54e5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_dec63f4e",
+        "filename": "modules/ve/ui/ve.ui.DebugBar.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-06-16T19:23:50Z",
+      "side": 1,
+      "message": "Why are you emitting a fake event? That\u0027s generally evil",
+      "revId": "303c6f9f537684097569409ead2eafdea7da54e5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
