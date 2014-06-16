@@ -52,6 +52,24 @@
       "revId": "743db34aaeca6442c8bb6ec4d24f4a11e8140f70",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_6fd43bed",
+        "filename": "demos/ve/pages/complex.html",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-06-16T23:23:30Z",
+      "side": 1,
+      "message": "Well VE core can edit more than just Parsoid HTML, but I don\u0027t think invalid HTML can be covered by the warranty.",
+      "parentUuid": "ee391fd1_8fa99f7a",
+      "revId": "743db34aaeca6442c8bb6ec4d24f4a11e8140f70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
