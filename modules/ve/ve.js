@@ -722,7 +722,7 @@
 		var newDocument, $iframe, iframe;
 		try {
 			newDocument = new DOMParser().parseFromString( html, 'text/html' );
-			if ( newDocument ) {
+			if ( newDocument && newDocument.documentElement ) {
 				return newDocument;
 			}
 		} catch ( e ) { }
