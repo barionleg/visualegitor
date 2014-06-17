@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_0acebd31",
+        "filename": "modules/ve/ui/dialogs/ve.ui.CommandHelpDialog.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-06-17T08:33:20Z",
+      "side": 1,
+      "message": "revert, per comments",
+      "revId": "707a74548bf086762b6a07c8ed74d3334bb53068",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_2ac98129",
+        "filename": "modules/ve/ui/ve.ui.Trigger.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-06-17T08:33:20Z",
+      "side": 1,
+      "message": "probably cleaner to use toLowerCase and then capitalise with CSS",
+      "revId": "707a74548bf086762b6a07c8ed74d3334bb53068",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
