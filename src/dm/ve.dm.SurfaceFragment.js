@@ -5,6 +5,8 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
+( function ( ve ) {
+
 /**
  * DataModel surface fragment.
  *
@@ -28,7 +30,7 @@ ve.dm.SurfaceFragment = function VeDmSurfaceFragment( surface, range, noAutoSele
 	this.excludeInsertions = !!excludeInsertions;
 	this.surface = surface;
 	this.range = range && range instanceof ve.Range ? range : surface.getSelection();
-	this.leafNodes = null;
+	this.cache = {};
 
 	// Short-circuit for invalid range null fragment
 	if ( !this.range ) {
@@ -48,6 +50,36 @@ ve.dm.SurfaceFragment = function VeDmSurfaceFragment( surface, range, noAutoSele
 /* Static Properties */
 
 ve.dm.SurfaceFragment.static = {};
+
+/* Private helper functions */
+
+/**
+ * Wrap a method to try the cache before doing computation.
+ *
+ * Use this to wrap a method like this:
+ *    ve.dm.SurfaceFragment.prototype.getFoo = tryCache( 'foo', function () {
+ *        return this.range.whatever();
+ *    } );
+ *
+ * The cache is cleared when a transaction happens or this.range changes.
+ *
+ * @private
+ * @param {string} key Cache key
+ * @param {Function} func Function to wrap. You can use 'this' inside this function
+ * @returns {Function} Wrapped function that tries the cache first
+ */
+function tryCache( key, func ) {
+	return function () {
+		// Let update run to clear cache if needed
+		this.update();
+		// Try cache
+		if ( this.cache[key] !== undefined ) {
+			return this.cache[key];
+		}
+		this.cache[key] = func.call( this );
+		return this.cache[key];
+	};
+}
 
 /* Methods */
 
@@ -137,7 +169,7 @@ ve.dm.SurfaceFragment.prototype.update = function () {
 		txs = this.document.getCompleteHistorySince( this.historyPointer );
 		this.range = this.getTranslatedRange( txs, true );
 		this.historyPointer += txs.length;
-		this.leafNodes = null;
+		this.cache = {};
 	}
 };
 
@@ -161,6 +193,8 @@ ve.dm.SurfaceFragment.prototype.change = function ( txs, range ) {
 		this.update();
 		// Overwrite it
 		this.range = range;
+		// Clear cache
+		this.cache = {};
 	}
 };
 
@@ -455,7 +489,7 @@ ve.dm.SurfaceFragment.prototype.getData = function ( deep ) {
  * @method
  * @returns {string} Fragment text
  */
-ve.dm.SurfaceFragment.prototype.getText = function () {
+ve.dm.SurfaceFragment.prototype.getText = tryCache( 'text', function () {
 	// Handle null fragment
 	if ( this.isNull() ) {
 		return '';
@@ -470,7 +504,7 @@ ve.dm.SurfaceFragment.prototype.getText = function () {
 		}
 	}
 	return text;
-};
+} );
 
 /**
  * Get annotations in fragment.
@@ -520,20 +554,14 @@ ve.dm.SurfaceFragment.prototype.hasAnnotations = function () {
  * @method
  * @returns {Array} List of nodes and related information
  */
-ve.dm.SurfaceFragment.prototype.getLeafNodes = function () {
+ve.dm.SurfaceFragment.prototype.getLeafNodes = tryCache( 'leafNodes', function () {
 	// Handle null fragment
 	if ( this.isNull() ) {
 		return [];
 	}
 
-	// Update in case the cache needs invalidating
-	this.update();
-	// Cache leafNodes because it's expensive to compute
-	if ( !this.leafNodes ) {
-		this.leafNodes = this.document.selectNodes( this.getRange( true ), 'leaves' );
-	}
-	return this.leafNodes;
-};
+	return this.document.selectNodes( this.getRange( true ), 'leaves' );
+} );
 
 /**
  * Get all leaf nodes excluding nodes where the selection is empty.
@@ -541,7 +569,7 @@ ve.dm.SurfaceFragment.prototype.getLeafNodes = function () {
  * @method
  * @returns {Array} List of nodes and related information
  */
-ve.dm.SurfaceFragment.prototype.getSelectedLeafNodes = function () {
+ve.dm.SurfaceFragment.prototype.getSelectedLeafNodes = tryCache( 'selectedLeafNodes', function () {
 	// Handle null fragment
 	if ( this.isNull() ) {
 		return [];
@@ -554,7 +582,7 @@ ve.dm.SurfaceFragment.prototype.getSelectedLeafNodes = function () {
 		}
 	}
 	return selectedLeafNodes;
-};
+} );
 
 /**
  * Get the node selected by a range, i.e. the range matches the node's range exactly.
@@ -564,7 +592,7 @@ ve.dm.SurfaceFragment.prototype.getSelectedLeafNodes = function () {
  *
  * @returns {ve.dm.Node|null} The node selected by the range, or null if a node is not selected
  */
-ve.dm.SurfaceFragment.prototype.getSelectedNode = function () {
+ve.dm.SurfaceFragment.prototype.getSelectedNode = tryCache( 'selectedNode', function () {
 	// Handle null fragment
 	if ( this.isNull() ) {
 		return null;
@@ -579,7 +607,7 @@ ve.dm.SurfaceFragment.prototype.getSelectedNode = function () {
 		}
 	}
 	return null;
-};
+} );
 
 /**
  * Get nodes covered by the fragment.
@@ -593,13 +621,13 @@ ve.dm.SurfaceFragment.prototype.getSelectedNode = function () {
  * @method
  * @returns {Array} List of nodes and related information
  */
-ve.dm.SurfaceFragment.prototype.getCoveredNodes = function () {
+ve.dm.SurfaceFragment.prototype.getCoveredNodes = tryCache( 'coveredNodes', function () {
 	// Handle null fragment
 	if ( this.isNull() ) {
 		return [];
 	}
 	return this.document.selectNodes( this.getRange(), 'covered' );
-};
+} );
 
 /**
  * Get nodes covered by the fragment.
@@ -611,13 +639,13 @@ ve.dm.SurfaceFragment.prototype.getCoveredNodes = function () {
  * @method
  * @returns {Array} List of nodes and related information
  */
-ve.dm.SurfaceFragment.prototype.getSiblingNodes = function () {
+ve.dm.SurfaceFragment.prototype.getSiblingNodes = tryCache( 'siblingNodes', function () {
 	// Handle null fragment
 	if ( this.isNull() ) {
 		return [];
 	}
 	return this.document.selectNodes( this.getRange(), 'siblings' );
-};
+} );
 
 /**
  * Apply the fragment's range to the surface as a selection.
@@ -1135,3 +1163,5 @@ ve.dm.SurfaceFragment.prototype.isolateAndUnwrap = function ( isolateForType ) {
 
 	return this;
 };
+
+} )( ve );
