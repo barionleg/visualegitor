@@ -402,7 +402,11 @@ ve.ce.Surface.prototype.focus = function () {
  * @param {jQuery.Event} e focusin or focusout event
  */
 ve.ce.Surface.prototype.onFocusChange = function ( e ) {
-	var hasFocus = ve.contains(
+	var hasFocus = false;
+
+	// rangy.getSelection can throw an exception in FF
+	try {
+		hasFocus = ve.contains(
 			[
 				this.documentView.getDocumentNode().$element[0],
 				this.$pasteTarget[0]
@@ -410,6 +414,7 @@ ve.ce.Surface.prototype.onFocusChange = function ( e ) {
 			rangy.getSelection( this.getElementDocument() ).anchorNode,
 			true
 		);
+	} catch ( ex ) {}
 
 	if ( hasFocus && !this.isFocused() ) {
 		this.onDocumentFocus( e );
