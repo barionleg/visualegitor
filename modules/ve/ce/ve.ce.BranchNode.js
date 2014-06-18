@@ -215,8 +215,16 @@ ve.ce.BranchNode.prototype.onSplice = function ( index ) {
  * @method
  */
 ve.ce.BranchNode.prototype.setupSlugs = function () {
-	var key, slug, i, len, first, last, childTypes,
+	var key, slug, i, len, first, last,
 		doc = this.getElementDocument();
+
+	function canParentContainParagraph( node ) {
+		if ( !node.parent ) {
+			return false;
+		}
+		var childTypes = node.parent.getChildNodeTypes();
+		return childTypes === null || ve.indexOf( 'paragraph', childTypes ) !== -1;
+	}
 
 	// Remove all slugs in this branch
 	for ( key in this.slugs ) {
@@ -237,17 +245,16 @@ ve.ce.BranchNode.prototype.setupSlugs = function () {
 	// completely empty, so this ensures DocumentNode gets a slug.
 	// Can't use this.getLength() because the internal list adds to the length but doesn't render.
 	if ( this.$element.contents().length === 0 ) {
-		childTypes = this.getChildNodeTypes();
 		// Only insert a slug where paragraphs are allowed
-		if ( childTypes === null || ve.indexOf( 'paragraph', childTypes ) !== -1 ) {
+		if ( canParentContainParagraph( this ) ) {
 			this.slugs[0] = doc.importNode( slug, true );
 			this.$element[0].appendChild( this.slugs[0] );
 		}
 	} else {
 		// Iterate over all children of this branch and add slugs in appropriate places
 		for ( i = 0, len = this.children.length; i < len; i++ ) {
-			// Don't put slugs after internal nodes.
-			if ( ve.dm.nodeFactory.isNodeInternal( this.children[i].model.type ) ) {
+			// Don't put slugs after internal nodes or in nodes which can't contain paragraphs
+			if ( ve.dm.nodeFactory.isNodeInternal( this.children[i].model.type ) || !canParentContainParagraph( this.children[i] ) ) {
 				continue;
 			}
 			// First sluggable child (left side)
