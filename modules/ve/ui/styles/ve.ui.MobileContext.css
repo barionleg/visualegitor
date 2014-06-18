@@ -5,16 +5,19 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-.ve-ui-mobileContext-visible {
-	position: absolute;
-	top: 0;
-	width: 100%;
-	height: 100%;
+.ve-ui-mobileContext {
+	position: fixed;
+	top: 3.35em;
 	background: #fff;
+	width: 100%;
+	-webkit-transform: translate3d(0, -200%, 0);
+	transform: translate3d(0, -200%, 0);
+
+	-webkit-transition: -webkit-transform .3s, opacity .3s;
+	transition: transform .3s, opacity .3s;
 }
 
-/* inspector styles */
-
-.ve-ui-mobileContext .oo-ui-frame {
-	width: 100%;
+.ve-ui-mobileContext-visible {
+	-webkit-transform: none;
+	transform: none;
 }
