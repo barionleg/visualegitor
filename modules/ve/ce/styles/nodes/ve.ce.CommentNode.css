@@ -1,0 +1,20 @@
+/*!
+* VisualEditor ContentEditable CommentNode styles.
+*
+* @copyright 2011-2014 VisualEditor Team and others; see AUTHORS.txt
+* @license The MIT License (MIT); see LICENSE.txt
+*/
+
+.ve-ce-commentNode {
+	display: inline-block;
+	background-color: #fcf0ad;
+	border: 1px silver solid;
+	padding: 0;
+	margin: 0.25em;
+}
+
+.ve-ce-commentNode-paragraph {
+	width: 1.5em;
+	height: 1.5em;
+	margin: 0.25em;
+}
