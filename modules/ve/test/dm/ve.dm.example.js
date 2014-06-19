@@ -1462,6 +1462,7 @@ ve.dm.example.domToDataCases = {
 	'empty document with meta': {
 		'body': '<!-- comment -->',
 		'data': [
+			{ 'type': 'paragraph', 'internal': { 'generated': 'wrapper' } },
 			{
 				'type': 'comment',
 				'attributes': {
@@ -1469,7 +1470,6 @@ ve.dm.example.domToDataCases = {
 				}
 			},
 			{ 'type': '/comment' },
-			{ 'type': 'paragraph', 'internal': { 'generated': 'empty' } },
 			{ 'type': '/paragraph' },
 			{ 'type': 'internalList' },
 			{ 'type': '/internalList' }
@@ -2106,31 +2106,25 @@ ve.dm.example.domToDataCases = {
 		]
 	},
 	'whitespace preservation with wrapped text and comments': {
-		'body': '<!-- Foo --> <!-- Bar -->\nFoo',
+		'body': '<!-- Foo --> <!-- Bar --> Foo',
 		'data': [
+			{ 'type': 'paragraph', 'internal': { 'generated': 'wrapper' } },
 			{
 				'type': 'comment',
-				'internal': { 'whitespace': [ undefined, undefined, undefined, ' ' ] },
 				'attributes': {
 					'text': ' Foo '
 				}
 			},
 			{ 'type': '/comment' },
+			' ',
 			{
 				'type': 'comment',
-				'internal': { 'whitespace': [ ' ', undefined, undefined, '\n' ] },
 				'attributes': {
 					'text': ' Bar '
 				}
 			},
 			{ 'type': '/comment' },
-			{
-				'type': 'paragraph',
-				'internal': {
-					'generated': 'wrapper',
-					'whitespace': [ '\n' ]
-				}
-			},
+			' ',
 			'F',
 			'o',
 			'o',
@@ -2200,27 +2194,22 @@ ve.dm.example.domToDataCases = {
 				'internal': {
 					'generated': 'wrapper',
 					'whitespace': [
+						' ',
+						undefined,
+						undefined,
 						' '
 					]
 				}
 			},
 			'b', 'a', 'r',
-			{ 'type': '/paragraph' },
 			{
 				'type': 'comment',
 				'attributes': {
 					'text': ' baz '
-				},
-				'internal': {
-					'whitespace': [
-						undefined,
-						undefined,
-						undefined,
-						' '
-					]
 				}
 			},
 			{ 'type': '/comment' },
+			{ 'type': '/paragraph' },
 			{ 'type': '/listItem' },
 			{ 'type': '/list' },
 			{ 'type': 'internalList' },
@@ -2253,38 +2242,23 @@ ve.dm.example.domToDataCases = {
 					]
 				}
 			},
-			'f', 'o', 'o',
-			{ 'type': '/paragraph' },
+			'f', 'o', 'o', ' ',
 			{
 				'type': 'comment',
 				'attributes': {
 					'text': ' bar '
-				},
-				'internal': {
-					'whitespace': [
-						' ',
-						undefined,
-						undefined,
-						' '
-					]
 				}
 			},
 			{ 'type': '/comment' },
+			' ',
 			{
 				'type': 'comment',
 				'attributes': {
 					'text': ' baz '
-				},
-				'internal': {
-					'whitespace': [
-						' ',
-						undefined,
-						undefined,
-						' '
-					]
 				}
 			},
 			{ 'type': '/comment' },
+			{ 'type': '/paragraph' },
 			{ 'type': '/listItem' },
 			{ 'type': '/list' },
 			{ 'type': 'internalList' },
