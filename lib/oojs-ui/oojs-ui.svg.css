@@ -1,12 +1,12 @@
 /*!
- * OOjs UI v0.1.0-pre (7a0e222a75)
+ * OOjs UI v0.1.0-pre (69060dd93f)
  * https://www.mediawiki.org/wiki/OOjs_UI
  *
  * Copyright 2011–2014 OOjs Team and other contributors.
  * Released under the MIT license
  * http://oojs.mit-license.org
  *
- * Date: Wed Jun 18 2014 16:18:02 GMT-0700 (PDT)
+ * Date: Thu Jun 19 2014 11:38:54 GMT-0700 (PDT)
  */
 
 /* Textures */
@@ -33,53 +33,7 @@
   direction: ltr;
 }
 
-.oo-ui-dialog {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding: 1em;
-  line-height: 1em;
-  /* Fix for strange opacity-related rendering issues.
-	   CAUTION: -webkit-backface-visibility: hidden; is EXTREMELY DANGEROUS.
-	   If applied to a VE surface directly, it will break selection of
-	   FocusableNodes, and in the past it's caused transparent PNGs to
-	   render as opaque black images. For some reason applying it to the dialog
-	   wrapper in the main document fixes opacity-related behavior in the iframe
-	   document, but doesn't break the surface inside the iframe. */
 
-  -webkit-backface-visibility: hidden;
-          backface-visibility: hidden;
-}
-
-.oo-ui-dialog > .oo-ui-window-frame {
-  position: fixed;
-  right: 0;
-  left: 0;
-  min-height: 12em;
-  margin: auto;
-  overflow: hidden;
-}
-
-.oo-ui-dialog > .oo-ui-window-frame .oo-ui-frame {
-  width: 100%;
-  height: 100%;
-}
-
-.oo-ui-dialog-content .oo-ui-window-foot .oo-ui-buttonedElement-framed {
-  float: left;
-}
-
-.oo-ui-dialog-content .oo-ui-window-foot .oo-ui-flaggableElement-primary,
-.oo-ui-dialog-content .oo-ui-window-foot .oo-ui-flaggableElement-constructive,
-.oo-ui-dialog-content .oo-ui-window-foot .oo-ui-flaggableElement-destructive {
-  float: right;
-}
-
-.oo-ui-dialog-content-footless .oo-ui-window-foot {
-  display: none;
-}
 
 .oo-ui-frame {
   padding: 0;
@@ -157,7 +111,12 @@
   background-repeat: no-repeat;
 }
 
-.oo-ui-window-head {
+.oo-ui-window {
+  line-height: 1em;
+}
+
+.oo-ui-window-head,
+.oo-ui-window-foot {
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
@@ -165,22 +124,32 @@
   -webkit-touch-callout: none;
 }
 
-.oo-ui-window-icon {
-  float: left;
-  background-position: center center;
-  background-repeat: no-repeat;
-}
-
-.oo-ui-window-title {
-  float: left;
-  white-space: nowrap;
-  cursor: default;
-}
-
 .oo-ui-window-overlay {
   position: absolute;
   top: 0;
   left: 0;
+}
+
+.oo-ui-modalDialog {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1em;
+}
+
+.oo-ui-modalDialog > .oo-ui-window-frame {
+  position: fixed;
+  right: 0;
+  left: 0;
+  margin: auto;
+  overflow: hidden;
+}
+
+.oo-ui-modalDialog > .oo-ui-window-frame .oo-ui-frame {
+  width: 100%;
+  height: 100%;
 }
 
 .oo-ui-buttonedElement .oo-ui-buttonedElement-button {
@@ -594,7 +563,7 @@
 }
 
 .oo-ui-popupTool .oo-ui-popupWidget-popup,
-.oo-ui-popupTool .oo-ui-popupWidget-tail {
+.oo-ui-popupTool .oo-ui-popupWidget-anchor {
   z-index: 4;
 }
 
@@ -655,8 +624,8 @@
   white-space: nowrap;
 }
 
-.oo-ui-optionWidget .oo-ui-iconedElement-icon,
-.oo-ui-optionWidget .oo-ui-indicatedElement-indicator {
+.oo-ui-decoratedOptionWidget .oo-ui-iconedElement-icon,
+.oo-ui-decoratedOptionWidget .oo-ui-indicatedElement-indicator {
   position: absolute;
   top: 50%;
   width: 2em;
@@ -666,11 +635,11 @@
   background-repeat: no-repeat;
 }
 
-.oo-ui-optionWidget .oo-ui-iconedElement-icon {
+.oo-ui-decoratedOptionWidget .oo-ui-iconedElement-icon {
   left: 0.5em;
 }
 
-.oo-ui-optionWidget .oo-ui-indicatedElement-indicator {
+.oo-ui-decoratedOptionWidget .oo-ui-indicatedElement-indicator {
   right: 0.5em;
 }
 
@@ -686,20 +655,104 @@
   opacity: 0;
 }
 
+.oo-ui-navigationWidget {
+  position: relative;
+  height: 3.4em;
+  padding: 0 1em;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.oo-ui-navigationWidget .oo-ui-navigationWidget-accept,
+.oo-ui-navigationWidget .oo-ui-navigationWidget-reject {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+
+.oo-ui-navigationWidget .oo-ui-navigationWidget-accept {
+  right: 0;
+}
+
+.oo-ui-navigationWidget .oo-ui-navigationWidget-reject {
+  left: 0;
+}
+
+.oo-ui-navigationWidget .oo-ui-navigationWidget-location {
+  height: 1.9em;
+  padding: 0.75em 0;
+  overflow: hidden;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: default;
+}
+
+.oo-ui-navigationWidget.oo-ui-labeledElement .oo-ui-navigationWidget-location > .oo-ui-labeledElement-label {
+  font-weight: bold;
+  line-height: 1.9em;
+}
+
+.oo-ui-navigationButtonWidget {
+  white-space: nowrap;
+}
+
+.oo-ui-navigationButtonWidget .oo-ui-buttonedElement-button {
+  min-width: 1.9em;
+  min-height: 1.9em;
+  padding-top: 0.75em;
+  padding-bottom: 0.75em;
+}
+
+.oo-ui-navigationButtonWidget .oo-ui-labeledElement-label {
+  padding: 0 1em;
+  line-height: 1.9em;
+}
+
+.oo-ui-navigationButtonWidget .oo-ui-iconedElement-icon {
+  position: absolute;
+  margin-top: -0.125em;
+}
+
+.oo-ui-navigationButtonWidget.oo-ui-iconedElement.oo-ui-navigationWidget-acceptButton .oo-ui-iconedElement-icon {
+  right: 0.5em;
+}
+
+.oo-ui-navigationButtonWidget.oo-ui-iconedElement.oo-ui-navigationWidget-acceptButton .oo-ui-labeledElement-label {
+  padding-right: 2.25em;
+}
+
+.oo-ui-navigationButtonWidget.oo-ui-iconedElement.oo-ui-navigationWidget-rejectButton .oo-ui-iconedElement-icon {
+  left: 0.5em;
+}
+
+.oo-ui-navigationButtonWidget.oo-ui-iconedElement.oo-ui-navigationWidget-rejectButton .oo-ui-labeledElement-label {
+  padding-left: 2.25em;
+}
+
+.oo-ui-navigationButtonWidget.oo-ui-buttonedElement-framed .oo-ui-buttonedElement-button {
+  padding: 0;
+  margin: 0.75em;
+  vertical-align: middle;
+}
+
 .oo-ui-popupWidget-popup {
   position: absolute;
   overflow: hidden;
 }
 
-.oo-ui-popupWidget-tail {
+.oo-ui-popupWidget-anchor {
   display: none;
 }
 
-.oo-ui-popupWidget-tailed .oo-ui-popupWidget-popup {
+.oo-ui-popupWidget-anchored .oo-ui-popupWidget-popup {
   margin-top: 7px;
 }
 
-.oo-ui-popupWidget-tailed .oo-ui-popupWidget-tail {
+.oo-ui-popupWidget-anchored .oo-ui-popupWidget-anchor {
   position: absolute;
   display: block;
   background-repeat: no-repeat;
@@ -772,6 +825,47 @@
 .oo-ui-buttonSelectWidget {
   display: inline-block;
   white-space: nowrap;
+}
+
+.oo-ui-actionOptionWidget {
+  position: relative;
+  height: 3.4em;
+  padding: 0;
+  text-align: center;
+}
+
+.oo-ui-actionOptionWidget .oo-ui-labeledElement-label {
+  position: relative;
+  top: auto;
+  bottom: auto;
+  display: inline;
+  padding: 0 1em;
+  line-height: 3.4em;
+  white-space: nowrap;
+}
+
+.oo-ui-actionSelectWidget-columns .oo-ui-actionOptionWidget {
+  display: table-cell;
+  width: 1%;
+}
+
+.oo-ui-actionSelectWidget-rows .oo-ui-actionOptionWidget {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.oo-ui-actionSelectWidget {
+  width: 100%;
+}
+
+.oo-ui-actionSelectWidget.oo-ui-actionSelectWidget-columns {
+  display: table;
+  table-layout: fixed;
+}
+
+.oo-ui-actionSelectWidget.oo-ui-actionSelectWidget-rows {
+  display: block;
 }
 
 .oo-ui-buttonWidget {
