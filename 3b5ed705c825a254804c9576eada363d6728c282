@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee391fd1_1a8a731c",
+        "filename": "modules/ve/ce/nodes/ve.ce.CommentNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-06-19T19:15:22Z",
+      "side": 1,
+      "message": "model.getAttribute( \u0027text\u0027 )\n\n(also $model is undefined)",
+      "revId": "3b5ed705c825a254804c9576eada363d6728c282",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_da7bcb22",
+        "filename": "modules/ve/ce/nodes/ve.ce.CommentNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-06-19T19:15:22Z",
+      "side": 1,
+      "message": "Wrong class name",
+      "revId": "3b5ed705c825a254804c9576eada363d6728c282",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee391fd1_fa80cffa",
+        "filename": "modules/ve/ce/nodes/ve.ce.CommentNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-06-19T19:15:22Z",
+      "side": 1,
+      "message": "Not actually defined yet",
+      "revId": "3b5ed705c825a254804c9576eada363d6728c282",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
