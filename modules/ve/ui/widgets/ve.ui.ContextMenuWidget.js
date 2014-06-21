@@ -1,5 +1,5 @@
 /**
- * List of context items, displaying information about the current context.
+ * Menu of items, each an inspectablec attribute of the current context.
  *
  * Use with ve.ui.ContextItemWidget.
  *
@@ -9,29 +9,29 @@
  * @constructor
  * @param {Object} [config] Configuration options
  */
-ve.ui.ContextWidget = function VeUiContextWidget( config ) {
+ve.ui.ContextMenuWidget = function VeUiContextMenuWidget( config ) {
 	// Config intialization
 	config = config || {};
 
 	// Parent constructor
-	ve.ui.ContextWidget.super.call( this, config );
+	ve.ui.ContextMenuWidget.super.call( this, config );
 
 	this.connect( this, { 'choose': 'onChooseItem' } );
 
 	// Initialization
-	this.$element.addClass( 've-ui-contextWidget' );
+	this.$element.addClass( 've-ui-contextMenuWidget' );
 };
 
 /* Setup */
 
-OO.inheritClass( ve.ui.ContextWidget, OO.ui.SelectWidget );
+OO.inheritClass( ve.ui.ContextMenuWidget, OO.ui.SelectWidget );
 
 /* Methods */
 
 /**
  * Handle choose item events.
  */
-ve.ui.ContextWidget.prototype.onChooseItem = function () {
+ve.ui.ContextMenuWidget.prototype.onChooseItem = function () {
 	// Auto-deselect
 	this.selectItem( null );
 };

@@ -9,14 +9,14 @@
  * Dialog associated with a node.
  *
  * @class
- * @extends ve.ui.ActionDialog
+ * @extends OO.ui.ActionDialog
  *
  * @constructor
  * @param {Object} [config] Configuration options
  */
 ve.ui.NodeDialog = function VeUiNodeDialog( config ) {
 	// Parent constructor
-	ve.ui.ActionDialog.call( this, config );
+	OO.ui.ActionDialog.call( this, config );
 
 	// Properties
 	this.selectedNode = null;
@@ -24,7 +24,7 @@ ve.ui.NodeDialog = function VeUiNodeDialog( config ) {
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.NodeDialog, ve.ui.ActionDialog );
+OO.inheritClass( ve.ui.NodeDialog, OO.ui.ActionDialog );
 
 /* Static Properties */
 

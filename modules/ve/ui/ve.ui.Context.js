@@ -22,9 +22,8 @@ ve.ui.Context = function VeUiContext( surface, config ) {
 
 	// Properties
 	this.surface = surface;
-	this.inspectors = new ve.ui.WindowSet(
-		ve.ui.windowFactory, { '$': this.$, '$contextOverlay': this.$element }
-	);
+	this.visible = false;
+	this.inspectors = new OO.ui.WindowSet( ve.ui.windowFactory, { '$': this.$ } );
 };
 
 /* Inheritance */
@@ -34,57 +33,52 @@ OO.inheritClass( ve.ui.Context, OO.ui.Element );
 /* Methods */
 
 /**
- * Get the surface the context is being used in.
+ * Check if context is visible.
  *
- * @method
- * @returns {ve.ui.Surface} Surface of context
+ * @return {boolean} Context is visible
+ */
+ve.ui.Context.prototype.isVisible = function () {
+	return this.visible;
+};
+
+/**
+ * Get the surface the context is being used with.
+ *
+ * @return {ve.ui.Surface}
  */
 ve.ui.Context.prototype.getSurface = function () {
 	return this.surface;
 };
 
 /**
- * Get an inspector.
+ * Get inspector window set.
  *
- * @method
- * @param {string} Symbolic name of inspector
- * @returns {ve.ui.Inspector|undefined} Inspector or undefined if none exists by that name
+ * @return {OO.ui.WindowSet}
  */
-ve.ui.Context.prototype.getInspector = function ( name ) {
-	return this.inspectors.getWindow( name );
-};
-
-/**
- * Close the current inspector if there is one.
- *
- * @method
- */
-ve.ui.Context.prototype.closeCurrentInspector = function () {
-	if ( this.inspectors.getCurrentWindow() ) {
-		this.inspectors.getCurrentWindow().close( { 'action': 'back' } );
-	}
+ve.ui.Context.prototype.getInspectors = function () {
+	return this.inspectors;
 };
 
 /**
  * Destroy the context, removing all DOM elements.
- *
- * @method
- * @returns {ve.ui.Context} Context UserInterface
- * @chainable
  */
 ve.ui.Context.prototype.destroy = function () {
 	this.$element.remove();
+	this.inspectors.$element.remove();
 	return this;
 };
 
 /**
- * Hide the context.
+ * Toggle the visibility of the context.
  *
- * @method
- * @abstract
- * @chainable
- * @throws {Error} If this method is not overridden in a concrete subclass
+ * @param {boolean} [show] Show the context, omit to toggle
+ * @return {jQuery.Promise} Promise resolved when context is finished showing/hiding
  */
-ve.ui.Context.prototype.hide = function () {
-	throw new Error( 've.ui.Context.hide must be overridden in subclass' );
+ve.ui.Context.prototype.toggle = function ( show ) {
+	show = show === undefined ? !this.visible : !!show;
+	if ( show !== this.visible ) {
+		this.visible = show;
+		this.$element.toggle();
+	}
+	return $.Deferred().resolve().promise();
 };

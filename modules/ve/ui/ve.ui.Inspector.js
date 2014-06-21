@@ -10,18 +10,16 @@
  *
  * @class
  * @abstract
- * @extends OO.ui.Window
+ * @extends OO.ui.Dialog
  *
  * @constructor
  * @param {Object} [config] Configuration options
- * @cfg {jQuery} [$contextOverlay] Context overlay layer
  */
 ve.ui.Inspector = function VeUiInspector( config ) {
 	// Parent constructor
 	OO.ui.Window.call( this, config );
 
 	// Properties
-	this.$contextOverlay = config.$contextOverlay;
 	this.fragment = null;
 
 	// Initialization
@@ -30,7 +28,7 @@ ve.ui.Inspector = function VeUiInspector( config ) {
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.Inspector, OO.ui.Window );
+OO.inheritClass( ve.ui.Inspector, OO.ui.Dialog );
 
 /* Static Properties */
 
@@ -182,4 +180,70 @@ ve.ui.Inspector.prototype.getReadyProcess = function ( data ) {
 			// Wait for animation to complete
 			return OO.ui.Process.static.delay( 260 );
 		}, this );
+};
+
+/**
+ * Set the size of window frame.
+ *
+ * @param {number} [width=auto] Custom width
+ * @param {number} [height=auto] Custom height
+ * @chainable
+ */
+ve.ui.Inspector.prototype.setSize = function ( width, height ) {
+	if ( !this.frame.$content ) {
+		return;
+	}
+
+	this.frame.$element.css( {
+		'width': width === undefined ? 'auto' : width,
+		'height': height === undefined ? 'auto' : height
+	} );
+
+	return this;
+};
+
+/**
+ * Set the position of window to fit with contents.
+ *
+ * @param {string} left Left offset
+ * @param {string} top Top offset
+ * @chainable
+ */
+ve.ui.Inspector.prototype.setPosition = function ( left, top ) {
+	this.$element.css( { 'left': left, 'top': top } );
+	return this;
+};
+
+/**
+ * Set the height of window to fit with contents.
+ *
+ * @param {number} [min=0] Min height
+ * @param {number} [max] Max height (defaults to content's outer height)
+ * @chainable
+ */
+ve.ui.Inspector.prototype.fitHeightToContents = function ( min, max ) {
+	var height = this.frame.$content.outerHeight();
+
+	this.frame.$element.css(
+		'height', Math.max( min || 0, max === undefined ? height : Math.min( max, height ) )
+	);
+
+	return this;
+};
+
+/**
+ * Set the width of window to fit with contents.
+ *
+ * @param {number} [min=0] Min height
+ * @param {number} [max] Max height (defaults to content's outer width)
+ * @chainable
+ */
+ve.ui.Inspector.prototype.fitWidthToContents = function ( min, max ) {
+	var width = this.frame.$content.outerWidth();
+
+	this.frame.$element.css(
+		'width', Math.max( min || 0, max === undefined ? width : Math.min( max, width ) )
+	);
+
+	return this;
 };

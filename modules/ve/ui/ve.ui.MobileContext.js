@@ -19,6 +19,9 @@ ve.ui.MobileContext = function VeUiMobileContext( surface, config ) {
 	// Parent constructor
 	ve.ui.Context.call( this, surface, config );
 
+	// Properties
+	this.transitioning = null;
+
 	// Events
 	this.inspectors.connect( this, {
 		'setup': 'show',
@@ -38,26 +41,29 @@ OO.inheritClass( ve.ui.MobileContext, ve.ui.Context );
 /* Methods */
 
 /**
- * Shows the context.
- *
- * @method
- * @chainable
- */
-ve.ui.MobileContext.prototype.show = function () {
-	this.$element.addClass( 've-ui-mobileContext-visible' );
-	this.surface.showGlobalOverlay();
-};
-
-/**
  * @inheritdoc
  */
-ve.ui.MobileContext.prototype.hide = function () {
-	var self = this;
+ve.ui.MobileContext.prototype.toggle = function ( show ) {
+	var promise;
 
-	this.surface.hideGlobalOverlay();
-	// Make sure that the context is hidden only after the transition
-	// of global overlay finishes (see ve.ui.MobileSurface.css).
-	setTimeout( function () {
-		self.$element.removeClass( 've-ui-mobileContext-visible' );
-	}, 300 );
+	if ( this.transitioning ) {
+		return this.transitioning;
+	}
+	show = show === undefined ? !this.visible : !!show;
+	if ( show === this.visible ) {
+		return $.Deferred().resolve().promise();
+	}
+
+	this.visible = show;
+	this.transitioning = this.surface.toggleGlobalOverlay( show );
+	promise = this.transitioning.promise();
+
+	this.transitioning.then( ve.bind( function () {
+			this.$element.toggleClass( 've-ui-mobileContext-visible', show );
+			this.transitioning.resolve();
+			this.transitioning = null;
+			this.visible = show;
+		}, this ) );
+
+	return promise;
 };

@@ -27,9 +27,7 @@ OO.inheritClass( ve.ui.LinkInspector, ve.ui.AnnotationInspector );
 
 ve.ui.LinkInspector.static.name = 'link';
 
-ve.ui.LinkInspector.static.icon = 'link';
-
-ve.ui.LinkInspector.static.title = OO.ui.deferMsg( 'visualeditor-linkinspector-title' );
+ve.ui.LinkInspector.static.label = OO.ui.deferMsg( 'visualeditor-linkinspector-title' );
 
 ve.ui.LinkInspector.static.linkTargetInputWidget = ve.ui.LinkTargetInputWidget;
 
@@ -77,7 +75,8 @@ ve.ui.LinkInspector.prototype.initialize = function () {
 
 	// Properties
 	this.targetInput = new this.constructor.static.linkTargetInputWidget( {
-		'$': this.$, '$overlay': this.$contextOverlay || this.$overlay
+		'$': this.$,
+		'$overlay': this.$frame
 	} );
 
 	// Initialization

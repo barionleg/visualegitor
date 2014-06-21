@@ -293,7 +293,7 @@ ve.ce.ResizableNode.prototype.onResizeHandlesCornerMouseDown = function ( e ) {
 	// Hide context menu
 	// TODO: Maybe there's a more generic way to handle this sort of thing? For relocation it's
 	// handled in ve.ce.Surface
-	this.root.getSurface().getSurface().getContext().hide();
+	this.root.getSurface().getSurface().getContext().toggle( false );
 
 	// Set bounding box width and undo the handle margins
 	this.$resizeHandles

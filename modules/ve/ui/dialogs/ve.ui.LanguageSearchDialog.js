@@ -30,10 +30,8 @@ OO.inheritClass( ve.ui.LanguageSearchDialog, ve.ui.Dialog );
 
 ve.ui.LanguageSearchDialog.static.name = 'languageSearch';
 
-ve.ui.LanguageSearchDialog.static.title =
+ve.ui.LanguageSearchDialog.static.label =
 	OO.ui.deferMsg( 'visualeditor-dialog-language-search-title' );
-
-ve.ui.LanguageSearchDialog.static.icon = 'language';
 
 /**
  * Language search widget class to use.

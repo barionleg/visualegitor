@@ -236,7 +236,6 @@
 			"modules/ve/ui/ve.ui.Context.js",
 			"modules/ve/ui/ve.ui.Dialog.js",
 			"modules/ve/ui/ve.ui.Inspector.js",
-			"modules/ve/ui/ve.ui.WindowSet.js",
 			"modules/ve/ui/ve.ui.Tool.js",
 			"modules/ve/ui/ve.ui.Toolbar.js",
 			"modules/ve/ui/ve.ui.TargetToolbar.js",
@@ -255,7 +254,6 @@
 			"modules/ve/ui/actions/ve.ui.IndentationAction.js",
 			"modules/ve/ui/actions/ve.ui.ListAction.js",
 			"modules/ve/ui/actions/ve.ui.WindowAction.js",
-			"modules/ve/ui/dialogs/ve.ui.ActionDialog.js",
 			"modules/ve/ui/dialogs/ve.ui.NodeDialog.js",
 			"modules/ve/ui/dialogs/ve.ui.CommandHelpDialog.js",
 			"modules/ve/ui/widgets/ve.ui.LanguageResultWidget.js",
@@ -263,7 +261,7 @@
 			"modules/ve/ui/dialogs/ve.ui.LanguageSearchDialog.js",
 			"modules/ve/ui/widgets/ve.ui.SurfaceWidget.js",
 			"modules/ve/ui/widgets/ve.ui.LinkTargetInputWidget.js",
-			"modules/ve/ui/widgets/ve.ui.ContextWidget.js",
+			"modules/ve/ui/widgets/ve.ui.ContextMenuWidget.js",
 			"modules/ve/ui/widgets/ve.ui.ContextItemWidget.js",
 			"modules/ve/ui/widgets/ve.ui.DimensionsWidget.js",
 			"modules/ve/ui/widgets/ve.ui.MediaSizeWidget.js",
@@ -293,7 +291,6 @@
 			"modules/ve/ce/styles/nodes/ve.ce.ResizableNode.css",
 			"modules/ve/ce/styles/nodes/ve.ce.TableCellNode.css",
 			"modules/ve/ce/styles/ve.ce.Surface.css",
-			"modules/ve/ui/styles/dialogs/ve.ui.ActionDialog.css",
 			"modules/ve/ui/styles/dialogs/ve.ui.CommandHelpDialog.css",
 			"modules/ve/ui/styles/tools/ve.ui.FormatTool.css",
 			"modules/ve/ui/styles/ve.ui.Inspector.css",
@@ -401,8 +398,7 @@
 		],
 		"styles": [
 			"modules/ve/ui/styles/ve.ui.DesktopContext.css",
-			"modules/ve/ui/themes/apex/ve.ui.Inspector.css",
-			"modules/ve/ui/themes/apex/dialogs/ve.ui.ActionDialog.css"
+			"modules/ve/ui/themes/apex/ve.ui.Inspector.css"
 		],
 		"dependencies": [
 			"oojs-ui-apex",

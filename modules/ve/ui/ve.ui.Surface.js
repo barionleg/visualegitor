@@ -42,17 +42,17 @@ ve.ui.Surface = function VeUiSurface( dataOrDoc, config ) {
 	}
 	this.model = new ve.dm.Surface( documentModel );
 	this.view = new ve.ce.Surface( this.model, this, { '$': this.$ } );
-	this.dialogs = new ve.ui.WindowSet( ve.ui.windowFactory, { '$': this.$ } );
+	this.dialogs = new OO.ui.WindowSet( ve.ui.windowFactory, { '$': this.$ } );
 	this.commands = {};
 	this.triggers = {};
 	this.pasteRules = {};
 	this.enabled = true;
+	this.context = this.createContext();
 
 	// Events
 	this.dialogs.connect( this, { 'teardown': 'onDialogTeardown' } );
 
 	// Initialization
-	this.setupContext();
 	this.$element
 		.addClass( 've-ui-surface' )
 		.append( this.view.$element );
@@ -150,8 +150,8 @@ ve.ui.Surface.prototype.initialize = function () {
  * @abstract
  * @throws {Error} If this method is not overridden in a concrete subclass
  */
-ve.ui.Surface.prototype.setupContext = function () {
-	throw new Error( 've.ui.Surface.setupContext must be overridden in subclass' );
+ve.ui.Surface.prototype.createContext = function () {
+	throw new Error( 've.ui.Surface.createContext must be overridden in subclass' );
 };
 
 /**

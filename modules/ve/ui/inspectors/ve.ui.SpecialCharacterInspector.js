@@ -75,9 +75,7 @@ OO.inheritClass( ve.ui.SpecialCharacterInspector, ve.ui.Inspector );
 
 ve.ui.SpecialCharacterInspector.static.name = 'specialcharacter';
 
-ve.ui.SpecialCharacterInspector.static.icon = 'special-character';
-
-ve.ui.SpecialCharacterInspector.static.title =
+ve.ui.SpecialCharacterInspector.static.label =
 	OO.ui.deferMsg( 'visualeditor-specialcharacterinspector-title' );
 
 ve.ui.SpecialCharacterInspector.static.removable = false;

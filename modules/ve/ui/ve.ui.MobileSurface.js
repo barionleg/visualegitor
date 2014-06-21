@@ -22,14 +22,13 @@ ve.ui.MobileSurface = function VeUiMobileSurface() {
 
 	// Events
 	this.dialogs.connect( this, {
-		'setup': 'showGlobalOverlay',
-		// Dialogs emit this with a delay which causes hiding animation to fail
-		// see https://bugzilla.wikimedia.org/show_bug.cgi?id=64775
-		'teardown': 'hideGlobalOverlay'
+		'setup': [ 'toggleGlobalOverlay', true ],
+		'teardown': [ 'toggleGlobalOverlay', false ]
 	} );
 
 	// Initialization
-	this.$globalOverlay.append( this.context.$element )
+	this.$globalOverlay
+		.append( this.context.$element )
 		.addClass( 've-ui-mobileSurface-overlay ve-ui-mobileSurface-overlay-global' );
 };
 
@@ -40,32 +39,49 @@ OO.inheritClass( ve.ui.MobileSurface, ve.ui.Surface );
 /* Methods */
 
 /**
- * Set up a context.
+ * @inheridoc
+ */
+ve.ui.MobileSurface.prototype.createContext = function () {
+	return new ve.ui.MobileContext( this, { '$': this.$ } );
+};
+
+/**
+ * Toggle context visibility.
  *
- * @method
- * @returns {ve.ui.MobileContext} Context instance
+ * @param {boolean} [show] Show context, omit to toggle
+ * @return {jQuery.Promise} Promise resolved when context is shown/hidden
  */
-ve.ui.MobileSurface.prototype.setupContext = function () {
-	this.context = new ve.ui.MobileContext( this, { '$': this.$ } );
-};
+ve.ui.MobileSurface.prototype.toggleGlobalOverlay = function ( show ) {
+	var promise;
 
-/**
- * Make global overlay visible and cover the entire screen with it.
- * Also disables scrolling of underlying content.
- */
-ve.ui.MobileSurface.prototype.showGlobalOverlay = function () {
-	this.scrollPos = $( 'body' ).scrollTop();
-	// overflow: hidden on 'body' alone is not enough for iOS Safari
-	$( 'html, body' ).addClass( 've-ui-mobileSurface-overlay-global-enabled' );
-	this.$globalOverlay.addClass( 've-ui-mobileSurface-overlay-global-visible' );
-};
+	if ( this.globalOverlayTransitioning ) {
+		return this.globalOverlayTransitioning;
+	}
+	show = show === undefined ? !this.globalOverlayVisible : !!show;
+	if ( show === this.globalOverlayVisible ) {
+		return $.Deferred().resolve().promise();
+	}
 
-/**
- * Hide the global overlay and return underlying content to previous scroll
- * position.
- */
-ve.ui.MobileSurface.prototype.hideGlobalOverlay = function () {
-	this.$globalOverlay.removeClass( 've-ui-mobileSurface-overlay-global-visible' );
-	$( 'html, body' ).removeClass( 've-ui-mobileSurface-overlay-global-enabled' );
-	$( 'body' ).scrollTop( this.scrollPos );
+	this.globalOverlayTransitioning = $.Deferred();
+	promise = this.globalOverlayTransitioning.promise();
+
+	// Save/restore scroll position
+	if ( show ) {
+		this.scrollPos = $( 'body' ).scrollTop();
+	} else {
+		$( 'body' ).scrollTop( this.scrollPos );
+	}
+
+	// Toggle classes
+	$( 'html, body' ).toggleClass( 've-ui-mobileSurface-overlay-global-enabled', show );
+	this.$globalOverlay.toggleClass( 've-ui-mobileSurface-overlay-global-visible', show );
+
+	// Wait for CSS animations to complete
+	setTimeout( ve.bind( function () {
+		this.globalOverlayTransitioning.resolve();
+		this.globalOverlayTransitioning = null;
+		this.globalOverlayVisible = show;
+	}, this ), 300 );
+
+	return promise;
 };

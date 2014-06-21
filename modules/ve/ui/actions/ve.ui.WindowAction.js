@@ -56,7 +56,7 @@ ve.ui.WindowAction.prototype.open = function ( name, data ) {
 	if ( windowClass.prototype instanceof ve.ui.Dialog ) {
 		win = this.surface.getDialogs().getWindow( name );
 	} else if ( windowClass.prototype instanceof ve.ui.Inspector ) {
-		win = this.surface.getContext().getInspector( name );
+		win = this.surface.getContext().getInspectors().getWindow( name );
 	}
 	win.open( fragment, data );
 };
