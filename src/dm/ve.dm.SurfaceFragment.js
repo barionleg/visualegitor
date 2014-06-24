@@ -710,6 +710,63 @@ ve.dm.SurfaceFragment.prototype.annotateContent = function ( method, nameOrAnnot
 };
 
 /**
+ * Apply an annotation to content in the fragment, or remove the inverse if its present instead.
+ *
+ *
+ * @method
+ * @param {string|ve.dm.Annotation} obverseNameOrAnnotation Annotation name, for example:
+ *   'textStyle/small' or Annotation object
+ * @param {string|ve.dm.Annotation} reverseNameOrAnnotation Opposite annotation name, for example:
+ *   'textStyle/big' or Annotation object
+ * @param {Object} [data] Additional annotation data (not used if annotation object is given)
+ * @chainable
+ */
+ve.dm.SurfaceFragment.prototype.annotateOrDeannotateContent = function ( obverseNameOrAnnotation, reverseNameOrAnnotation, data ) {
+	var localAnnotations, obverseAnnotation, reverseName, ranges, i, range, pos,
+		doc = this.document,
+		transactions = [];
+
+	// Handle null fragment
+	if ( this.isNull() ) {
+		return this;
+	}
+
+	obverseAnnotation = ( obverseNameOrAnnotation instanceof ve.dm.Annotation ) ?
+		obverseNameOrAnnotation :
+		ve.dm.annotationFactory.create( obverseNameOrAnnotation, data );
+	reverseName = ( reverseNameOrAnnotation instanceof ve.dm.Annotation ) ?
+		reverseNameOrAnnotation.name : reverseNameOrAnnotation;
+	ranges = this.getSelection().getRanges();
+
+	// For each range, perform the action requested
+	for ( i in ranges ) {
+		range = ranges[ i ];
+
+		// For each position, set the obverse annotation iff the reverse annotation is not set,
+		// otherwise remove the obverse annotation.
+		for ( pos = range.start; pos < range.end; pos++ ) {
+			localAnnotations = doc.data.getAnnotationsFromRange( range, true ).getAnnotationsByName( reverseName );
+
+			debugger;
+
+			if ( localAnnotations.isEmpty() ) {
+				transactions.push(
+					ve.dm.Transaction.newFromAnnotation( doc, range, 'set', obverseAnnotation )
+				);
+			} else {
+				transactions.push(
+					ve.dm.Transaction.newFromAnnotation( doc, range, 'clear', localAnnotations.get( 0 ) )
+				);
+			}
+		}
+
+	}
+	this.change( transactions );
+
+	return this;
+};
+
+/**
  * Remove content in the fragment and insert content before it.
  *
  * This will move the fragment's range to cover the inserted content. Note that this may be
