@@ -21,6 +21,11 @@
 	background-image: url(images/icons/align-float-right.svg);
 }
 
+.oo-ui-icon-bigger-a {
+	/* @embed */
+	background-image: url(images/icons/bigger-a.svg);
+}
+
 .oo-ui-icon-bold-a {
 	/* @embed */
 	background-image: url(images/icons/bold-a.svg);
@@ -208,6 +213,11 @@
 .ve-ui-dir-block-ltr .oo-ui-icon-outdent-list {
 	/* @embed */
 	background-image: url(images/icons/outdent-list-ltr.svg);
+}
+
+.oo-ui-icon-smaller-a {
+	/* @embed */
+	background-image: url(images/icons/smaller-a.svg);
 }
 
 .oo-ui-icon-special-character {

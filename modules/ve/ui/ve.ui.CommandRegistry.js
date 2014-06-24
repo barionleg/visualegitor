@@ -85,6 +85,12 @@ ve.ui.commandRegistry.register(
 	new ve.ui.Command( 'superscript', 'annotation', 'toggle', 'textStyle/superscript' )
 );
 ve.ui.commandRegistry.register(
+	new ve.ui.Command( 'big', 'annotation', 'toggle', 'textStyle/big' )
+);
+ve.ui.commandRegistry.register(
+	new ve.ui.Command( 'small', 'annotation', 'toggle', 'textStyle/small' )
+);
+ve.ui.commandRegistry.register(
 	new ve.ui.Command( 'link', 'window', 'open', 'link' )
 );
 ve.ui.commandRegistry.register(
