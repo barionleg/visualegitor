@@ -272,3 +272,51 @@ ve.ui.SuperscriptAnnotationTool.static.title =
 ve.ui.SuperscriptAnnotationTool.static.annotation = { 'name': 'textStyle/superscript' };
 ve.ui.SuperscriptAnnotationTool.static.commandName = 'superscript';
 ve.ui.toolFactory.register( ve.ui.SuperscriptAnnotationTool );
+
+/**
+* UserInterface big tool.
+*
+* @class
+* @extends ve.ui.AnnotationTool
+* @constructor
+* @param {OO.ui.ToolGroup} toolGroup
+* @param {Object} [config] Configuration options
+*/
+ve.ui.BigAnnotationTool = function VeUiBigAnnotationTool( toolGroup, config ) {
+	ve.ui.AnnotationTool.call( this, toolGroup, config );
+};
+OO.inheritClass( ve.ui.BigAnnotationTool, ve.ui.AnnotationTool );
+ve.ui.BigAnnotationTool.static.name = 'big';
+ve.ui.BigAnnotationTool.static.group = 'textStyle';
+ve.ui.BigAnnotationTool.static.icon = {
+	'default': 'bigger-a'
+};
+ve.ui.BigAnnotationTool.static.title =
+	OO.ui.deferMsg( 'visualeditor-annotationbutton-big-tooltip' );
+ve.ui.BigAnnotationTool.static.annotation = { 'name': 'textStyle/big' };
+ve.ui.BigAnnotationTool.static.commandName = 'big';
+ve.ui.toolFactory.register( ve.ui.BigAnnotationTool );
+
+/**
+* UserInterface small tool.
+*
+* @class
+* @extends ve.ui.AnnotationTool
+* @constructor
+* @param {OO.ui.ToolGroup} toolGroup
+* @param {Object} [config] Configuration options
+*/
+ve.ui.SmallAnnotationTool = function VeUiSmallAnnotationTool( toolGroup, config ) {
+	ve.ui.AnnotationTool.call( this, toolGroup, config );
+};
+OO.inheritClass( ve.ui.SmallAnnotationTool, ve.ui.AnnotationTool );
+ve.ui.SmallAnnotationTool.static.name = 'small';
+ve.ui.SmallAnnotationTool.static.group = 'textStyle';
+ve.ui.SmallAnnotationTool.static.icon = {
+	'default': 'smaller-a'
+};
+ve.ui.SmallAnnotationTool.static.title =
+	OO.ui.deferMsg( 'visualeditor-annotationbutton-small-tooltip' );
+ve.ui.SmallAnnotationTool.static.annotation = { 'name': 'textStyle/small' };
+ve.ui.SmallAnnotationTool.static.commandName = 'small';
+ve.ui.toolFactory.register( ve.ui.SmallAnnotationTool );
