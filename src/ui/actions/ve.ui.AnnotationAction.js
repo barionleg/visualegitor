@@ -32,7 +32,7 @@ ve.ui.AnnotationAction.static.name = 'annotation';
  * @static
  * @property
  */
-ve.ui.AnnotationAction.static.methods = [ 'set', 'clear', 'toggle', 'clearAll' ];
+ve.ui.AnnotationAction.static.methods = [ 'set', 'clear', 'toggle', 'clearAll', 'setReplace' ];
 
 /* Methods */
 
@@ -53,6 +53,26 @@ ve.ui.AnnotationAction.prototype.set = function ( name, data ) {
 		fragment.annotateContent( 'clear', removes[i] );
 	}
 	fragment.annotateContent( 'set', name, data );
+};
+
+/**
+ * Set an annotation, or remove the anannotation if present instead.
+ *
+ * @method
+ * @param {string} annotation Annotation name, for example: 'textStyle/big'
+ * @param {string} anannotation Anannotation name, for example: 'textStyle/small'
+ * @param {Object} [data] Additional annotation data
+ */
+ve.ui.AnnotationAction.prototype.setReplace = function ( annotation, anannotation, data ) {
+	var i,
+		fragment = this.surface.getModel().getFragment(),
+		removes = ve.dm.annotationFactory.lookup( annotation ).static.removes;
+
+	for ( i = removes.length - 1; i >= 0; i-- ) {
+		fragment.annotateContent( 'clear', removes[i] );
+	}
+
+	fragment.annotateOrDeannotateContent( annotation, anannotation, data );
 };
 
 /**
