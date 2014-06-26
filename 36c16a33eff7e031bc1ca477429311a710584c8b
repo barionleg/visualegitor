@@ -16,6 +16,24 @@
       "revId": "36c16a33eff7e031bc1ca477429311a710584c8b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_aaa910de",
+        "filename": "demos/ve/pages/aliens.html",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-06-26T18:49:13Z",
+      "side": 1,
+      "message": "No, because at the moment slugs are always paragraphs. You\u0027d need another mechanism for inserting extra table rows.",
+      "parentUuid": "ae43a74e_1b551153",
+      "revId": "36c16a33eff7e031bc1ca477429311a710584c8b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
