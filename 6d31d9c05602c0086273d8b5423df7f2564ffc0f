@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae43a74e_9befc182",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-06-26T16:51:29Z",
+      "side": 1,
+      "message": "Do you mean the other way around maybe? getBCR is wrong but getCR[0] is right?",
+      "revId": "6d31d9c05602c0086273d8b5423df7f2564ffc0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_3bfe9536",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-06-26T16:51:29Z",
+      "side": 1,
+      "message": "Typo in \"Bounding\"",
+      "revId": "6d31d9c05602c0086273d8b5423df7f2564ffc0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
