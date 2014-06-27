@@ -70,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "ae43a74e_14195b7e",
+        "filename": "modules/ve/ui/tools/ve.ui.AnnotationTool.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-06-27T01:55:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae43a74e_39f218e0",
+      "revId": "089ba54e110edc52dfacac27ef2c4905494a9028",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae43a74e_b92de843",
         "filename": "modules/ve/ui/tools/ve.ui.AnnotationTool.js",
         "patchSetId": 1
@@ -81,6 +99,24 @@
       "writtenOn": "2014-06-27T00:08:38Z",
       "side": 1,
       "message": "Should be bigger? bigger-a? Language code map? I forget. Whatever the bold tool does.",
+      "revId": "089ba54e110edc52dfacac27ef2c4905494a9028",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_340c5f3d",
+        "filename": "modules/ve/ui/tools/ve.ui.AnnotationTool.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-06-27T01:55:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae43a74e_b92de843",
       "revId": "089ba54e110edc52dfacac27ef2c4905494a9028",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -104,6 +140,24 @@
     },
     {
       "key": {
+        "uuid": "ae43a74e_f415b741",
+        "filename": "modules/ve/ui/tools/ve.ui.AnnotationTool.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-06-27T01:55:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae43a74e_591cbc18",
+      "revId": "089ba54e110edc52dfacac27ef2c4905494a9028",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae43a74e_79278060",
         "filename": "modules/ve/ui/tools/ve.ui.AnnotationTool.js",
         "patchSetId": 1
@@ -115,6 +169,24 @@
       "writtenOn": "2014-06-27T00:08:38Z",
       "side": 1,
       "message": "smaller-a",
+      "revId": "089ba54e110edc52dfacac27ef2c4905494a9028",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_d422b3a1",
+        "filename": "modules/ve/ui/tools/ve.ui.AnnotationTool.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-06-27T01:55:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae43a74e_79278060",
       "revId": "089ba54e110edc52dfacac27ef2c4905494a9028",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
