@@ -5,11 +5,11 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-.ve-ce-surface-highlights-focused .ve-ce-focusableNode-highlights {
+.ve-ce-surface-highlights-focused .ve-ce-focusableNode-highlight {
 	opacity: 0.5;
 }
 
-.ve-ce-surface-highlights-blurred .ve-ce-focusableNode-highlights {
+.ve-ce-surface-highlights-blurred .ve-ce-focusableNode-highlight {
 	opacity: 0.15;
 }
 
