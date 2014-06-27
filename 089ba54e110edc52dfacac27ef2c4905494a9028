@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae43a74e_990b44d9",
+        "filename": "modules/ve/ui/styles/images/icons/bigger-a.svg",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-06-27T00:08:38Z",
+      "side": 1,
+      "message": "We should clean up this SVG file\n\nAnd by we I mean Trevor or Ed",
+      "revId": "089ba54e110edc52dfacac27ef2c4905494a9028",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_d901ccba",
+        "filename": "modules/ve/ui/styles/images/icons/bigger-a.svg",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-06-27T00:08:38Z",
+      "side": 1,
+      "message": "Scary whitespace",
+      "revId": "089ba54e110edc52dfacac27ef2c4905494a9028",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_59f5dcc6",
+        "filename": "modules/ve/ui/styles/images/icons/smaller-a.svg",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-06-27T00:08:38Z",
+      "side": 1,
+      "message": "Scary whitespace",
+      "revId": "089ba54e110edc52dfacac27ef2c4905494a9028",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_39f218e0",
+        "filename": "modules/ve/ui/tools/ve.ui.AnnotationTool.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-06-27T00:08:38Z",
+      "side": 1,
+      "message": "Name mismatch",
+      "revId": "089ba54e110edc52dfacac27ef2c4905494a9028",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_b92de843",
+        "filename": "modules/ve/ui/tools/ve.ui.AnnotationTool.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-06-27T00:08:38Z",
+      "side": 1,
+      "message": "Should be bigger? bigger-a? Language code map? I forget. Whatever the bold tool does.",
+      "revId": "089ba54e110edc52dfacac27ef2c4905494a9028",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_591cbc18",
+        "filename": "modules/ve/ui/tools/ve.ui.AnnotationTool.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-06-27T00:08:38Z",
+      "side": 1,
+      "message": "Name mismatch",
+      "revId": "089ba54e110edc52dfacac27ef2c4905494a9028",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_79278060",
+        "filename": "modules/ve/ui/tools/ve.ui.AnnotationTool.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-06-27T00:08:38Z",
+      "side": 1,
+      "message": "smaller-a",
+      "revId": "089ba54e110edc52dfacac27ef2c4905494a9028",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
