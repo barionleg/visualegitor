@@ -16,17 +16,15 @@ body {
 /* Demo */
 
 .ve-demo-menu {
-	list-style: none;
-	margin: 0;
 	padding: 0.75em 1.5em;
-	display: inline-block;
 }
 
-.ve-demo-menu li {
-	list-style: none;
-	margin: 0 0.75em 0 0;
-	padding: 0;
-	display: inline-block;
+.ve-demo-menu .oo-ui-inlineMenuWidget {
+	min-width: 10em;
+}
+
+.ve-demo-menu .oo-ui-inlineMenuWidget .oo-ui-labeledElement-label {
+	text-transform: capitalize;
 }
 
 .ve-demo-source {
@@ -36,6 +34,8 @@ body {
 .ve-demo-source textarea {
 	font-family: monospace;
 	border: 0;
+	border-radius: 0;
+	box-shadow: none;
 }
 
 .ve-demo-source.oo-ui-widget-enabled textarea:focus {
