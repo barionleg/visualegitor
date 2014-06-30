@@ -88,6 +88,24 @@
       "revId": "54c3249e3c926b4971a4ea75441529a2d492fbc6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_ecaef9e3",
+        "filename": "modules/ve/ce/annotations/ve.ce.LinkAnnotation.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-06-30T22:26:08Z",
+      "side": 1,
+      "message": "For me it does nothing in Chrome, and pastes in FF (Ubuntu). Right click will work with this code, as it doesn\u0027t prevent mousedown.",
+      "parentUuid": "ae43a74e_4ca065f1",
+      "revId": "54c3249e3c926b4971a4ea75441529a2d492fbc6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
