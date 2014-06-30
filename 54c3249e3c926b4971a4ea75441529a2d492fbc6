@@ -34,6 +34,24 @@
       "revId": "54c3249e3c926b4971a4ea75441529a2d492fbc6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_d1fe2e35",
+        "filename": "modules/ve/ce/annotations/ve.ce.LinkAnnotation.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-06-30T21:56:31Z",
+      "side": 1,
+      "message": "Links in CE aren\u0027t supposed to do anything even on middle click or ctrl click. This won\u0027t prevent context menus either (that would be on mousedown).",
+      "parentUuid": "ae43a74e_91f546b8",
+      "revId": "54c3249e3c926b4971a4ea75441529a2d492fbc6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
