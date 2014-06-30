@@ -16,6 +16,24 @@
       "revId": "54c3249e3c926b4971a4ea75441529a2d492fbc6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_91f546b8",
+        "filename": "modules/ve/ce/annotations/ve.ce.LinkAnnotation.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2014-06-30T21:04:50Z",
+      "side": 1,
+      "message": "That is, unless you have a better version of this check in some helper function somewhere:\n\n\tif ( !( e.which !\u003d\u003d 1 || e.altKey || e.ctrlKey || e.shiftKey || e.metaKey ) ) {\n\t\te.preventDefault();\n\t}",
+      "parentUuid": "ae43a74e_31dd7a48",
+      "revId": "54c3249e3c926b4971a4ea75441529a2d492fbc6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
