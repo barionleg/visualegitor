@@ -16,6 +16,24 @@
       "revId": "602fbd221697e465b278f404bcc7568dbc1345a4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_8c164df5",
+        "filename": "modules/ve/ui/styles/ve.ui.MobileContext.css",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 542
+      },
+      "writtenOn": "2014-06-30T22:52:50Z",
+      "side": 1,
+      "message": "I added a comment.",
+      "parentUuid": "ae43a74e_0caa5dd1",
+      "revId": "602fbd221697e465b278f404bcc7568dbc1345a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
