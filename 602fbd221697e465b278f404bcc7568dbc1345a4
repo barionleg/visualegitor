@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae43a74e_0caa5dd1",
+        "filename": "modules/ve/ui/styles/ve.ui.MobileContext.css",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 78
+      },
+      "writtenOn": "2014-06-30T22:25:27Z",
+      "side": 1,
+      "message": "What is this rule for? Might be good to add a comment if it\u0027s not obvious.",
+      "revId": "602fbd221697e465b278f404bcc7568dbc1345a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
