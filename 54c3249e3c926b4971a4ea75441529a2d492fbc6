@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae43a74e_31dd7a48",
+        "filename": "modules/ve/ce/annotations/ve.ce.LinkAnnotation.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2014-06-30T21:02:15Z",
+      "side": 1,
+      "message": "Please only prevent the default if the link was left-clicked with no modifier keys. I like to middle-click these and I\u0027d prefer if that kept working, and right-clicking is also surely useful.",
+      "revId": "54c3249e3c926b4971a4ea75441529a2d492fbc6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
