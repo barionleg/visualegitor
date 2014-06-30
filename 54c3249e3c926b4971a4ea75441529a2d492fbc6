@@ -52,6 +52,24 @@
       "revId": "54c3249e3c926b4971a4ea75441529a2d492fbc6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_cc6455e4",
+        "filename": "modules/ve/ce/annotations/ve.ce.LinkAnnotation.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-06-30T22:20:53Z",
+      "side": 1,
+      "message": "Yes they are. Middle-click and Right-click are both meant to work, and do.",
+      "parentUuid": "ae43a74e_d1fe2e35",
+      "revId": "54c3249e3c926b4971a4ea75441529a2d492fbc6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
