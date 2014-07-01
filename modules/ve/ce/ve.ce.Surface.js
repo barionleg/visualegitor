@@ -735,10 +735,7 @@ ve.ce.Surface.prototype.onDocumentKeyDown = function ( e ) {
 			e.preventDefault();
 			focusedNode = this.getFocusedNode();
 			if ( focusedNode ) {
-				command = ve.ui.commandRegistry.getCommandForNode( focusedNode );
-				if ( command ) {
-					command.execute( this.surface );
-				}
+				focusedNode.executeCommand();
 			} else {
 				this.handleEnter( e );
 				updateFromModel = true;
