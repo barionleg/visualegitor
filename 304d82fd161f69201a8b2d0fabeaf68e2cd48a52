@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae43a74e_3029eb36",
+        "filename": "modules/ve/ui/ve.ui.DesktopContext.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-01T19:53:32Z",
+      "side": 1,
+      "message": "This causes JS errors because isInspectable() is defined for nodes but not for annotations. That should be fixed: isInspectable() should be moved up to ve.dm.Model",
+      "revId": "304d82fd161f69201a8b2d0fabeaf68e2cd48a52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
