@@ -1,0 +1,19 @@
+/*!
+ * ObjectOriented UserInterface FragmentInspector styles.
+ *
+ * @copyright 2011-2014 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+.ve-ui-fragmentInspector-form {
+	margin: 0.75em;
+	padding: 0;
+}
+
+.ve-ui-fragmentInspector-content .oo-ui-processDialog-actions-other {
+	margin: 0 0.75em 0.75em 0.75em;
+}
+
+.ve-ui-fragmentInspector-content .oo-ui-processDialog-actions-other .oo-ui-actionButtonWidget {
+	margin: 0 0.75em 0 0;
+}
