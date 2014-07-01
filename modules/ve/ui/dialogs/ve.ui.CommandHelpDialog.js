@@ -9,33 +9,47 @@
  * Dialog listing all command keyboard shortcuts.
  *
  * @class
- * @extends ve.ui.Dialog
+ * @extends OO.ui.ProcessDialog
  *
  * @constructor
  * @param {Object} [config] Configuration options
  */
-ve.ui.CommandHelpDialog = function VeUiCommandHelpDialog( config ) {
+ve.ui.CommandHelpDialog = function VeUiCommandHelpDialog( manager, config ) {
 	// Configuration initialization
 	config = ve.extendObject( { 'footless': true }, config );
 
 	// Parent constructor
-	ve.ui.Dialog.call( this, config );
+	ve.ui.CommandHelpDialog.super.call( this, manager, config );
 };
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.CommandHelpDialog, ve.ui.Dialog );
+OO.inheritClass( ve.ui.CommandHelpDialog, OO.ui.ProcessDialog );
 
 /* Static Properties */
 
 ve.ui.CommandHelpDialog.static.name = 'commandHelp';
 
+ve.ui.CommandHelpDialog.static.size = 'large';
+
 ve.ui.CommandHelpDialog.static.title =
 	OO.ui.deferMsg( 'visualeditor-dialog-command-help-title' );
 
-ve.ui.CommandHelpDialog.static.icon = 'help';
+ve.ui.CommandHelpDialog.static.actions = [
+	{
+		'label': OO.ui.deferMsg( 'visualeditor-dialog-action-done' ),
+		'flags': 'primary'
+	}
+];
 
 /* Methods */
+
+/**
+ * @inheritdoc
+ */
+ve.ui.CommandHelpDialog.prototype.getBodyHeight = function () {
+	return Math.round( this.contentLayout.$element[0].scrollHeight );
+};
 
 /**
  * @inheritdoc
@@ -48,13 +62,14 @@ ve.ui.CommandHelpDialog.prototype.initialize = function () {
 		platform = ve.init.platform.getSystemPlatform(),
 		platformKey = platform === 'mac' ? 'mac' : 'pc',
 		$list, $shortcut,
-		commandGroups = this.constructor.static.getCommandGroups(),
-		contentLayout = new OO.ui.PanelLayout( {
+		commandGroups = this.constructor.static.getCommandGroups();
+
+	this.contentLayout = new OO.ui.PanelLayout( {
 			'$': this.$,
 			'scrollable': true,
 			'padded': true
-		} ),
-		$container = this.$( '<div>' ).addClass( 've-ui-commandHelpDialog-container' );
+		} );
+	this.$container = this.$( '<div>' ).addClass( 've-ui-commandHelpDialog-container' );
 
 	for ( i in commandGroups ) {
 		commands = commandGroups[i].commands;
@@ -85,7 +100,7 @@ ve.ui.CommandHelpDialog.prototype.initialize = function () {
 				this.$( '<dd>' ).text( ve.msg( commands[j].msg ) )
 			);
 		}
-		$container.append(
+		this.$container.append(
 			this.$( '<div>' )
 				.addClass( 've-ui-commandHelpDialog-section' )
 				.append(
@@ -95,8 +110,8 @@ ve.ui.CommandHelpDialog.prototype.initialize = function () {
 		);
 	}
 
-	contentLayout.$element.append( $container );
-	this.$body.append( contentLayout.$element );
+	this.contentLayout.$element.append( this.$container );
+	this.$body.append( this.contentLayout.$element );
 };
 
 /* Static methods */
