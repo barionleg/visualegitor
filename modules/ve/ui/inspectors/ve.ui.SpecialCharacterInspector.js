@@ -6,19 +6,18 @@
  */
 
 /**
- * Special character inspector.
+ * Modeless dialog for inserting special characters.
  *
  * @class
- * @extends ve.ui.Inspector
+ * @extends ve.ui.FragmentInspector
  *
  * @constructor
- * @param {ve.dm.SurfaceFragment} fragment Surface fragment the inspector is for
  * @param {Object} [config] Configuration options
  */
-ve.ui.SpecialCharacterInspector = function VeUiSpecialCharacterInspector( fragment, config ) {
+ve.ui.SpecialCharacterInspector = function VeUiSpecialCharacterInspector( manager, config ) {
 
 	// Parent constructor
-	ve.ui.Inspector.call( this, fragment, config );
+	ve.ui.FragmentInspector.call( this, manager, config );
 
 	this.characters = null;
 	this.$buttonDomList = null;
@@ -69,13 +68,11 @@ ve.ui.SpecialCharacterInspector = function VeUiSpecialCharacterInspector( fragme
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.SpecialCharacterInspector, ve.ui.Inspector );
+OO.inheritClass( ve.ui.SpecialCharacterInspector, ve.ui.FragmentInspector );
 
 /* Static properties */
 
 ve.ui.SpecialCharacterInspector.static.name = 'specialcharacter';
-
-ve.ui.SpecialCharacterInspector.static.icon = 'special-character';
 
 ve.ui.SpecialCharacterInspector.static.title =
 	OO.ui.deferMsg( 'visualeditor-specialcharacterinspector-title' );
@@ -94,7 +91,7 @@ ve.ui.SpecialCharacterInspector.prototype.initialize = function () {
 	ve.ui.SpecialCharacterInspector.super.prototype.initialize.call( this );
 
 	this.$spinner = this.$( '<div>' ).addClass( 've-ui-specialCharacterInspector-spinner' );
-	this.$form.append( this.$spinner );
+	this.form.$element.append( this.$spinner );
 };
 
 /**
@@ -180,7 +177,7 @@ ve.ui.SpecialCharacterInspector.prototype.buildButtonList = function () {
 
 	$list.on( 'click', ve.bind( this.onListClick, this ) );
 
-	this.$form.append( $list );
+	this.form.$element.append( $list );
 };
 
 /**

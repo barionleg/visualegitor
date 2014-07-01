@@ -6,18 +6,18 @@
  */
 
 /**
- * Annotation inspector.
+ * Modeless dialog for inspecting an annotation.
  *
  * @class
  * @abstract
- * @extends ve.ui.Inspector
+ * @extends ve.ui.FragmentInspector
  *
  * @constructor
  * @param {Object} [config] Configuration options
  */
-ve.ui.AnnotationInspector = function VeUiAnnotationInspector( config ) {
+ve.ui.AnnotationInspector = function VeUiAnnotationInspector( manager, config ) {
 	// Parent constructor
-	ve.ui.Inspector.call( this, config );
+	ve.ui.FragmentInspector.call( this, manager, config );
 
 	// Properties
 	this.previousSelection = null;
@@ -29,7 +29,7 @@ ve.ui.AnnotationInspector = function VeUiAnnotationInspector( config ) {
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.AnnotationInspector, ve.ui.Inspector );
+OO.inheritClass( ve.ui.AnnotationInspector, ve.ui.FragmentInspector );
 
 /**
  * Annotation models this inspector can edit.
@@ -39,6 +39,14 @@ OO.inheritClass( ve.ui.AnnotationInspector, ve.ui.Inspector );
  * @property {Function[]}
  */
 ve.ui.AnnotationInspector.static.modelClasses = [];
+
+ve.ui.AnnotationInspector.static.actions = [
+	{
+		'action': 'remove',
+		'label': 'Remove',
+		'flags': 'destructive'
+	}
+].concat( ve.ui.FragmentInspector.static.actions );
 
 /* Methods */
 
