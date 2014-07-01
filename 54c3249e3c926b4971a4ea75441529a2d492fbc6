@@ -124,6 +124,24 @@
       "revId": "54c3249e3c926b4971a4ea75441529a2d492fbc6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_5ca00e9a",
+        "filename": "modules/ve/ce/annotations/ve.ce.LinkAnnotation.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2014-07-01T14:11:36Z",
+      "side": 1,
+      "message": "Hmm, you\u0027re right that this doesn\u0027t prevent middle-clicking and right-clicking, as long as it is hooked the the \u0027click\u0027 event. It does, however, prevent Shift-clicking and Ctrl-clicking to open the link in new tab/window.",
+      "parentUuid": "ae43a74e_8c940d8f",
+      "revId": "54c3249e3c926b4971a4ea75441529a2d492fbc6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
