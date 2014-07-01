@@ -26,10 +26,10 @@ ve.ui.Surface = function VeUiSurface( dataOrDoc, config ) {
 	OO.EventEmitter.call( this, config );
 
 	// Properties
-	this.$globalOverlay = this.$( '<div>' );
-	this.$localOverlay = this.$( '<div>' );
-	this.$localOverlayBlockers = this.$( '<div>' );
-	this.$localOverlayControls = this.$( '<div>' );
+	this.globalOverlay = new ve.ui.Overlay();
+	this.localOverlay = new ve.ui.Overlay( { '$': this.$ } );
+	this.$blockers = this.$( '<div>' );
+	this.$controls = this.$( '<div>' );
 	if ( dataOrDoc instanceof ve.dm.Document ) {
 		// ve.dm.Document
 		documentModel = dataOrDoc;
@@ -42,27 +42,22 @@ ve.ui.Surface = function VeUiSurface( dataOrDoc, config ) {
 	}
 	this.model = new ve.dm.Surface( documentModel );
 	this.view = new ve.ce.Surface( this.model, this, { '$': this.$ } );
-	this.dialogs = new ve.ui.WindowSet( ve.ui.windowFactory, { '$': this.$ } );
+	this.dialogs = new OO.ui.WindowManager( ve.ui.windowFactory );
 	this.commands = {};
 	this.triggers = {};
 	this.pasteRules = {};
 	this.enabled = true;
+	this.context = this.createContext();
 
 	// Events
 	this.dialogs.connect( this, { 'teardown': 'onDialogTeardown' } );
 
 	// Initialization
-	this.setupContext();
 	this.$element
 		.addClass( 've-ui-surface' )
 		.append( this.view.$element );
-	this.$localOverlay
-		.addClass( 've-ui-surface-overlay ve-ui-surface-overlay-local' )
-		.append( this.$localOverlayBlockers )
-		.append( this.$localOverlayControls );
-	this.$globalOverlay
-		.addClass( 've-ui-surface-overlay ve-ui-surface-overlay-global' )
-		.append( this.dialogs.$element );
+	this.localOverlay.$element.append( this.$blockers, this.$controls );
+	this.globalOverlay.$element.append( this.dialogs.$element );
 
 	// Make instance globally accessible for debugging
 	ve.instances.push( this );
@@ -115,8 +110,8 @@ ve.ui.Surface.prototype.destroy = function () {
 
 	// Remove DOM elements
 	this.$element.remove();
-	this.$globalOverlay.remove();
-	this.$localOverlay.remove();
+	this.globalOverlay.$element.remove();
+	this.localOverlay.$element.remove();
 
 	// Let others know we have been destroyed
 	this.emit( 'destroy' );
@@ -135,9 +130,9 @@ ve.ui.Surface.prototype.onDialogTeardown = function () {
  * This must be called after the surface has been attached to the DOM.
  */
 ve.ui.Surface.prototype.initialize = function () {
-	this.getView().$element.after( this.$localOverlay );
+	this.getView().$element.after( this.localOverlay.$element );
 	// Attach globalOverlay to the global <body>, not the local frame's <body>
-	$( 'body' ).append( this.$globalOverlay );
+	$( 'body' ).append( this.globalOverlay.$element );
 
 	this.$element.addClass( 've-ui-surface-dir-' + this.getDir() );
 
@@ -152,8 +147,8 @@ ve.ui.Surface.prototype.initialize = function () {
  * @abstract
  * @throws {Error} If this method is not overridden in a concrete subclass
  */
-ve.ui.Surface.prototype.setupContext = function () {
-	throw new Error( 've.ui.Surface.setupContext must be overridden in subclass' );
+ve.ui.Surface.prototype.createContext = function () {
+	throw new Error( 've.ui.Surface.createContext must be overridden in subclass' );
 };
 
 /**
@@ -200,7 +195,7 @@ ve.ui.Surface.prototype.getContext = function () {
  * Get dialogs window set.
  *
  * @method
- * @returns {OO.ui.WindowSet} Dialogs window set
+ * @returns {OO.ui.WindowManager} Dialogs window set
  */
 ve.ui.Surface.prototype.getDialogs = function () {
 	return this.dialogs;

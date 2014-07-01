@@ -6,8 +6,7 @@
  */
 
 /**
- * UserInterface context that positions inspectors near the text cursor on
- * desktop.
+ * Context menu and inspectors.
  *
  * @class
  * @extends ve.ui.Context
@@ -20,42 +19,48 @@ ve.ui.DesktopContext = function VeUiDesktopContext( surface, config ) {
 	// Parent constructor
 	ve.ui.Context.call( this, surface, config );
 
-	// Properties
-	this.visible = false;
-	this.showing = false;
-	this.hiding = false;
-	this.selecting = false;
-	this.relocating = false;
-	this.embedded = false;
-	this.containsInspector = false;
-	this.selection = null;
-	this.$menu = this.$( '<div>' );
-	this.popup = new OO.ui.PopupWidget( {
-		'$': this.$,
-		'$container': this.surface.$element
-	} );
+	// Properites
+	this.menu = new ve.ui.ContextMenuWidget( { '$': this.$ } );
+	this.popup = new OO.ui.PopupWidget( { '$': this.$, '$container': this.surface.$element } );
+	this.transitioning = null;
+	this.inspector = null;
+	this.suppressed = false;
+	this.afterModelChangeTimeout = null;
+	this.afterModelChangeRange = null;
+	this.onWindowResizeHandler = ve.bind( this.onWindowResize, this );
+	this.afterModelChangeHandler = ve.bind( this.afterModelChange, this );
+	this.$window = this.$( this.getElementWindow() );
 
 	// Events
+	this.surface.getModel().connect( this, {
+		'documentUpdate': 'onModelChange',
+		'select': 'onModelChange'
+	} );
 	this.surface.getView().connect( this, {
-		'selectionStart': 'onSelectionStart',
-		'selectionEnd': 'onSelectionEnd',
-		'relocationStart': 'onRelocationStart',
-		'relocationEnd': 'onRelocationEnd',
-		'focus': 'onSurfaceFocus',
-		'blur': 'onSurfaceBlur',
+		'selectionStart': 'onSuppress',
+		'selectionEnd': 'onUnsuppress',
+		'relocationStart': 'onSuppress',
+		'relocationEnd': 'onUnsuppress',
+		'blur': 'onSuppress',
+		'focus': 'onUnsuppress',
 		'position': 'onSurfacePosition'
 	} );
-
-	this.$element.add( this.$menu )
-		.on( 'mousedown', false );
+	this.inspectors.connect( this, {
+		'opening': 'onInspectorOpening',
+		'setup': 'onInspectorSetup',
+		'ready': 'onInspectorReady'
+	} );
+	this.menu.connect( this, { 'choose': 'onContextItemChoose' } );
+	this.$window.on( 'resize', this.onWindowResizeHandler );
+	this.$element.on( 'mousedown', false );
 
 	// Initialization
-	this.$element.addClass( 've-ui-desktopContext' ).append( this.popup.$element );
-	this.$menu.append( this.context.$element );
-	this.popup.$body.append(
-		this.$menu.addClass( 've-ui-desktopContext-menu' ),
-		this.inspectors.$element.addClass( 've-ui-desktopContext-inspectors' )
-	);
+	this.$element
+		.addClass( 've-ui-desktopContext' )
+		.append( this.popup.$element );
+	this.menu.$element.addClass( 've-ui-desktopContext-menu' );
+	this.inspectors.$element.addClass( 've-ui-desktopContext-inspectors' );
+	this.popup.$body.append( this.menu.$element, this.inspectors.$element );
 };
 
 /* Inheritance */
@@ -65,160 +70,318 @@ OO.inheritClass( ve.ui.DesktopContext, ve.ui.Context );
 /* Methods */
 
 /**
- * Handle window resize events.
+ * Handle model change event.
+ *
+ * While an inspector is opening or closing, all changes are ignored so as to prevent inspectors
+ * that change the selection from within their setup or teardown processes changing context state.
+ *
+ * The response to selection changes is deferred to prevent teardown processes handlers that change
+ * the selection from causing this function to recurse. These responses are also debounced for
+ * efficiency, so that if there are three selection changes in the same tick, #afterModelChange only
+ * runs once.
+ *
+ * @method
+ * @param {ve.Range} range Range if triggered by selection change, null otherwise
+ * @see #afterModelChange
  */
-ve.ui.DesktopContext.prototype.onWindowResize = function () {
-	// Update, no transition
-	this.update( false );
+ve.ui.DesktopContext.prototype.onModelChange = function ( range ) {
+	if ( this.inspector && ( this.inspector.isOpening() || this.inspector.isClosing() ) ) {
+		// Cancel debounced change handler
+		clearTimeout( this.afterModelChangeTimeout );
+		this.afterModelChangeTimeout = null;
+		this.afterModelChangeRange = null;
+	} else {
+		if ( this.afterModelChangeTimeout === null ) {
+			// Ensure change is handled on next cycle
+			this.afterModelChangeTimeout = setTimeout( this.afterModelChangeHandler );
+		}
+		if ( range instanceof ve.Range ) {
+			// Store the latest range
+			this.afterModelChangeRange = range;
+		}
+	}
+	// Purge available tools cache
+	this.availableTools = null;
 };
 
 /**
- * Deferred response to one or more select events.
+ * Deferred response to one or more select event.
  *
  * Update the context menu for the new selection, except if the user is selecting or relocating
  * content. If the popup is open, close it, even while selecting or relocating.
  */
 ve.ui.DesktopContext.prototype.afterModelChange = function () {
-	var win = this.inspectors.getCurrentWindow(),
-		selectionChange = !!this.afterModelChangeRange,
-		moving = selectionChange && !( win && ( win.isOpening() || win.isClosing() ) );
+	var selection, inspectable;
 
+	// Reset debouncing state
 	this.afterModelChangeTimeout = null;
 	this.afterModelChangeRange = null;
 
-	if ( this.popup.isVisible() && moving ) {
-		this.hide();
-	}
-
 	// Bypass while dragging
-	if ( this.selecting || this.relocating ) {
+	if ( this.suppressed ) {
 		return;
 	}
 
-	this.update( !moving  );
-};
-
-/**
- * Respond to focus events on the surfaceView by hiding the context.
- *
- * If there's an inspector open and the user manages to drop the cursor in the surface such that
- * the selection doesn't change (i.e. the resulting model selection is equal to the previous model
- * selection), then #onModelChange won't cause the inspector to be closed, so we do that here.
- *
- * Hiding the context immediately on focus also avoids flickering phenomena where the inspector
- * remains open or the context remains visible in the wrong place while the selection is visually
- * already moving somewhere else. We deliberately don't call #update to avoid drawing the context
- * in a place that the selection is about to move away from.
- *
- * However, we only do this when clicking out of an inspector. Hiding the context when the document
- * is focused through other means than closing an inspector is actually harmful.
- *
- * We don't have to defer the response to this event because there is no danger that inspectors'
- * close handlers will end up invoking this handler again.
- */
-ve.ui.DesktopContext.prototype.onSurfaceFocus = function () {
-	if ( this.inspectors.getCurrentWindow() ) {
-		this.hide();
+	inspectable = this.isInspectable();
+	if ( this.isVisible() ) {
+		selection = this.surface.getModel().getSelection();
+		if ( this.menu.isVisible() ) {
+			if ( inspectable ) {
+				// Change state: menu -> menu
+				this.populateMenu();
+				this.updateDimensions();
+			} else {
+				// Change state: menu -> closed
+				this.menu.toggle( false );
+				this.toggle( false );
+			}
+		} else if ( this.inspector ) {
+			// Change state: inspector -> (closed|menu)
+			this.inspector.close();
+		}
+	} else {
+		if ( inspectable ) {
+			// Change state: closed -> menu
+			this.toggle( true );
+			this.menu.toggle( true );
+			this.populateMenu();
+			this.updateDimensions();
+		}
 	}
 };
 
 /**
- * Response to blur events on the surface.
+ * Handle context supression event.
  */
-ve.ui.DesktopContext.prototype.onSurfaceBlur = function () {
-	if ( !this.surface.getModel().getSelection() ) {
-		this.hide();
+ve.ui.DesktopContext.prototype.onSuppress = function () {
+	this.suppressed = true;
+
+	if ( this.isVisible() ) {
+		if ( this.menu.isVisible() ) {
+			// Change state: menu -> closed
+			this.menu.toggle( false );
+			this.toggle( false );
+		} else if ( this.inspector ) {
+			// Change state: inspector -> closed
+			this.inspector.close();
+		}
 	}
 };
 
 /**
- * Response to position events on the surface.
+ * Handle context unsupression event.
+ */
+ve.ui.DesktopContext.prototype.onUnsuppress = function () {
+	var inspectable = !!this.getAvailableTools().length;
+
+	this.suppressed = false;
+
+	if ( inspectable ) {
+		// Change state: closed -> menu
+		this.toggle( true );
+		this.menu.toggle( true );
+		this.populateMenu();
+		this.updateDimensions();
+	}
+};
+
+/**
+ * Handle surface position event.
  */
 ve.ui.DesktopContext.prototype.onSurfacePosition = function () {
-	this.update( false );
+	this.updateDimensions( true );
 };
 
 /**
- * Handle selection start events on the view.
+ * Handle an inspector opening event.
  *
  * @method
+ * @param {OO.ui.Window} win Window that's being opened
+ * @param {jQuery.Promise} opening Promise resolved when window is opened; when the promise is
+ *   resolved the first argument will be a promise which will be resolved when the window begins
+ *   closing, the second argument will be the opening data
+ * @param {Object} data Window opening data
  */
-ve.ui.DesktopContext.prototype.onSelectionStart = function () {
-	this.selecting = true;
-	this.hide();
-};
+ve.ui.DesktopContext.prototype.onInspectorOpening = function ( win, opening ) {
+	this.inspector = win;
 
-/**
- * Handle selection end events on the view.
- *
- * @method
- */
-ve.ui.DesktopContext.prototype.onSelectionEnd = function () {
-	this.selecting = false;
-	if ( !this.relocating ) {
-		this.update();
+	if ( this.menu.isVisible() ) {
+		// Change state: menu -> inspector
+		this.menu.toggle( false );
+	} else if ( !this.isVisible() ) {
+		// Change state: closed -> inspector
+		this.toggle( true );
 	}
+
+	opening.always( ve.bind( function ( opened ) {
+		opened.always( ve.bind( function ( closed ) {
+			closed.always( ve.bind( function () {
+				var inspectable = !!this.getAvailableTools().length;
+
+				this.inspector = null;
+
+				if ( inspectable ) {
+					// Change state: inspector -> menu
+					this.menu.toggle( true );
+					this.populateMenu();
+					this.updateDimensions();
+				} else {
+					// Change state: inspector -> closed
+					this.toggle( false );
+				}
+
+				// Restore selection
+				if ( this.getSurface().getModel().getSelection() ) {
+					this.getSurface().getView().focus();
+				}
+			}, this ) );
+		}, this ) );
+	}, this ) );
 };
 
 /**
- * Handle selection start events on the view.
+ * Handle an inspector ready event.
  *
  * @method
- */
-ve.ui.DesktopContext.prototype.onRelocationStart = function () {
-	this.relocating = true;
-	this.hide();
-};
-
-/**
- * Handle selection end events on the view.
- *
- * @method
- */
-ve.ui.DesktopContext.prototype.onRelocationEnd = function () {
-	this.relocating = false;
-	this.update();
-};
-
-/**
- * @inheritdoc
+ * @param {OO.ui.Window} inspector Window that's ready
+ * @param {Object} data Window opening data
  */
 ve.ui.DesktopContext.prototype.onInspectorSetup = function () {
-	this.selection = this.surface.getModel().getSelection();
-	this.show( true );
+	this.updateDimensions( true );
 };
 
 /**
- * @inheritdoc
+ * Handle an inspector ready event.
+ *
+ * @method
+ * @param {OO.ui.Window} inspector Window that's ready
+ * @param {Object} data Window opening data
  */
-ve.ui.DesktopContext.prototype.onInspectorTeardown = function () {
-	this.update();
-	if ( this.getSurface().getModel().getSelection() ) {
-		this.getSurface().getView().focus();
+ve.ui.DesktopContext.prototype.onInspectorReady = function () {
+	this.updateDimensions( true );
+};
+
+/**
+ * Handle window resize events.
+ */
+ve.ui.DesktopContext.prototype.onWindowResize = function () {
+	if ( this.isVisible() ) {
+		this.updateDimensions();
 	}
 };
 
 /**
- * Updates the position and size.
+ * Handle context item choose events.
  *
- * @method
- * @param {boolean} [transition=false] Use a smooth transition
+ * @param {ve.ui.ContextItemWidget} item Chosen item
+ */
+ve.ui.DesktopContext.prototype.onContextItemChoose = function ( item ) {
+	if ( item ) {
+		item.getCommand().execute( this.surface );
+	}
+};
+
+/**
+ * Check if context can be embedded onto the currently focused node.
+ *
+ * @return {boolean} Context can be embedded
+ */
+ve.ui.DesktopContext.prototype.isEmbeddable = function () {
+	var dim,
+		node = this.surface.getView().getFocusedNode();
+
+	if ( node instanceof ve.ce.FocusableNode ) {
+		dim = node.getDimensions();
+		return (
+			// HACK: `5` and `10` are estimates of what `0.25em` and `0.5em` (the margins of the
+			// menu when embedded) are in pixels, what needs to actually be done is to take
+			// measurements to find the margins and use those value instead
+			dim.height > this.menu.$element.outerHeight() + 5 &&
+			dim.width > this.menu.$element.outerWidth() + 10
+		);
+	}
+	return false;
+};
+
+/**
+ * Get context menu.
+ *
+ * @return {ve.ui.ContextMenu}
+ */
+ve.ui.DesktopContext.prototype.getMenu = function () {
+	return this.menu;
+};
+
+/**
+ * Get available tools.
+ *
+ * Result is cached, and cleared when the model or selection changes.
+ *
+ * @returns {Object[]} List of objects containing `tool` and `model` properties, representing each
+ *   compatible tool and the node or annotation it is compatible with
+ */
+ve.ui.DesktopContext.prototype.getAvailableTools = function () {
+	if ( !this.availableTools ) {
+		this.availableTools = ve.ui.toolFactory.getToolsForFragment(
+			this.surface.getModel().getFragment( null, false )
+		);
+	}
+	return this.availableTools;
+};
+
+/**
+ * Check if current content is inspectable.
+ *
+ * @return {boolean} Content is inspectable
+ */
+ve.ui.DesktopContext.prototype.isInspectable = function () {
+	return !!this.getAvailableTools().length;
+};
+
+/**
+ * Update the contents of the menu.
+ *
  * @chainable
  */
+ve.ui.DesktopContext.prototype.populateMenu = function () {
+	var i, len, tool,
+		items = [],
+		tools = this.getAvailableTools();
+
+	this.menu.clearItems();
+	if ( tools.length ) {
+		for ( i = 0, len = tools.length; i < len; i++ ) {
+			tool = tools[i];
+			items.push( new ve.ui.ContextItemWidget(
+				tool.tool.static.name, tool.tool, tool.model, { '$': this.$ }
+			) );
+		}
+		this.menu.addItems( items );
+	}
+
+	return this;
+};
+
+/**
+ * Update the size and position of the context.
+ *
+ * @param {boolean} [transition] Smoothly transition from previous size and position
+ */
 ve.ui.DesktopContext.prototype.updateDimensions = function ( transition ) {
-	var  $container, focusedOffset, focusedDimensions, cursorPosition, position,
+	var $container, focusedOffset, focusedDimensions, cursorPosition, position,
 		surface = this.surface.getView(),
-		inspector = this.inspectors.getCurrentWindow(),
 		focusedNode = surface.getFocusedNode(),
 		surfaceOffset = surface.$element.offset(),
-		rtl = this.surface.getModel().getDocument().getDir() === 'rtl';
+		rtl = this.surface.getModel().getDocument().getDir() === 'rtl',
+		embeddable = this.isEmbeddable();
 
-	$container = inspector ? this.inspectors.$element : this.$menu;
+	$container = this.inspector ? this.inspector.$frame : this.menu.$element;
 	if ( focusedNode ) {
+		this.popup.toggleAnchor( !embeddable );
 		// Get the position relative to the surface it is embedded in
 		focusedOffset = focusedNode.getRelativeOffset();
 		focusedDimensions = focusedNode.getDimensions();
-		if ( this.embedded ) {
+		if ( embeddable ) {
 			position = { 'y': focusedOffset.top };
 			// When context is embedded in RTL, it requires adjustments to the relative
 			// positioning (pop up on the other side):
@@ -264,65 +427,8 @@ ve.ui.DesktopContext.prototype.updateDimensions = function ( transition ) {
 	this.popup.display(
 		$container.outerWidth( true ),
 		$container.outerHeight( true ),
-		transition
+		false && transition
 	);
-
-	return this;
-};
-
-/**
- * Shows the context menu.
- *
- * @method
- * @param {boolean} [transition=false] Use a smooth transition
- * @chainable
- */
-ve.ui.DesktopContext.prototype.show = function ( transition ) {
-	var focusedDimensions,
-		inspector = this.inspectors.getCurrentWindow(),
-		focusedNode = this.surface.getView().getFocusedNode();
-
-	if ( !this.showing && !this.hiding ) {
-		this.showing = true;
-
-		// HACK: make the context and popup visibility: hidden; instead of display: none; because
-		// they contain inspector iframes, and applying display: none; to those causes them to
-		// not load in Firefox
-		this.$element.css( 'visibility', '' );
-		this.popup.$element.css( 'visibility', '' );
-		this.popup.show();
-
-		// Show either inspector or menu
-		if ( inspector ) {
-			this.$menu.hide();
-			// Update size and fade the inspector in after animation is complete
-			setTimeout( ve.bind( function () {
-				inspector.fitHeightToContents();
-				this.updateDimensions( transition );
-			}, this ), 200 );
-		} else {
-			if ( focusedNode && !this.containsInspector ) {
-				focusedDimensions = focusedNode.getDimensions();
-				this.embedded = (
-					// HACK: 5 and 10 are estimates of what 0.25em and 0.5em (the margins of the menu
-					// when embedded) are in pixels, what needs to actually be done is to take
-					// measurements to find the margins and use those value instead
-					focusedDimensions.height > this.$menu.outerHeight() + 5 &&
-					focusedDimensions.width > this.$menu.outerWidth() + 10
-				);
-			} else {
-				this.embedded = false;
-			}
-
-			this.popup.useTail( !this.embedded );
-			this.$menu.show();
-		}
-
-		this.updateDimensions( transition );
-
-		this.visible = true;
-		this.showing = false;
-	}
 
 	return this;
 };
@@ -330,22 +436,56 @@ ve.ui.DesktopContext.prototype.show = function ( transition ) {
 /**
  * @inheritdoc
  */
-ve.ui.DesktopContext.prototype.hide = function () {
-	var inspector = this.inspectors.getCurrentWindow();
+ve.ui.DesktopContext.prototype.toggle = function ( show ) {
+	var promise;
 
-	if ( !this.hiding && !this.showing ) {
-		this.hiding = true;
-		if ( inspector ) {
-			inspector.close( { 'action': 'back', 'noSelect': true } );
-		}
-		// HACK: make the context and popup visibility: hidden; instead of display: none; because
-		// they contain inspector iframes, and applying display: none; to those causes them to
-		// not load in Firefox
-		this.popup.hide();
-		this.popup.$element.show().css( 'visibility', 'hidden' );
-		this.$element.css( 'visibility', 'hidden' );
-		this.visible = false;
-		this.hiding = false;
+	if ( this.transitioning ) {
+		return this.transitioning;
 	}
-	return this;
+	show = show === undefined ? !this.visible : !!show;
+	if ( show === this.visible ) {
+		return $.Deferred().resolve().promise();
+	}
+
+	this.visible = show;
+	this.transitioning = $.Deferred();
+	promise = this.transitioning.promise();
+
+	// HACK: make the context and popup visibility: hidden; instead of display: none; because
+	// they contain inspector iframes, and applying display: none; to those causes them to
+	// not load in Firefox
+	this.$element.add( this.popup.$element ).css( 'visibility', show ? '' : 'hidden' );
+	this.popup.$element.toggle( show );
+	this.popup.toggle( show );
+	this.popup.setClipping( show );
+
+	this.transitioning.resolve();
+	this.transitioning = null;
+	this.visible = show;
+
+	if ( show ) {
+		this.updateDimensions();
+	} else if ( this.inspector ) {
+		this.inspector.close();
+	}
+
+	return promise;
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ui.DesktopContext.prototype.destroy = function () {
+	// Disconnect
+	this.surface.getModel().disconnect( this );
+	this.surface.getView().disconnect( this );
+	this.inspectors.disconnect( this );
+	this.menu.disconnect( this );
+	this.$window.off( 'resize', this.onWindowResizeHandler );
+
+	// Stop timers
+	clearTimeout( this.afterModelChangeTimeout );
+
+	// Parent method
+	return ve.ui.DesktopContext.super.prototype.destroy.call( this );
 };

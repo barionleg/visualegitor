@@ -14,9 +14,9 @@
  * @constructor
  * @param {Object} [config] Configuration options
  */
-ve.ui.LinkInspector = function VeUiLinkInspector( config ) {
+ve.ui.LinkInspector = function VeUiLinkInspector( manager, config ) {
 	// Parent constructor
-	ve.ui.AnnotationInspector.call( this, config );
+	ve.ui.AnnotationInspector.call( this, manager, config );
 };
 
 /* Inheritance */
@@ -27,15 +27,44 @@ OO.inheritClass( ve.ui.LinkInspector, ve.ui.AnnotationInspector );
 
 ve.ui.LinkInspector.static.name = 'link';
 
-ve.ui.LinkInspector.static.icon = 'link';
-
 ve.ui.LinkInspector.static.title = OO.ui.deferMsg( 'visualeditor-linkinspector-title' );
 
 ve.ui.LinkInspector.static.linkTargetInputWidget = ve.ui.LinkTargetInputWidget;
 
 ve.ui.LinkInspector.static.modelClasses = [ ve.dm.LinkAnnotation ];
 
+ve.ui.LinkInspector.static.actions = ve.ui.LinkInspector.super.static.actions.concat( [
+	{ 'action': 'open', 'label': 'Open' }
+] );
+
 /* Methods */
+
+/**
+ * Handle target input change events.
+ *
+ * Updates the open button's hyperlink location.
+ *
+ * @param {string} value New target input value
+ */
+ve.ui.LinkInspector.prototype.onTargetInputChange = function ( value ) {
+	var openButton = this.actionButtons.getButtonByAction( 'open' );
+
+	if ( openButton ) {
+		openButton
+			.setHref( value ).setTarget( '_blank' )
+			.setDisabled( !this.isHrefValid( value ) );
+	}
+};
+
+/**
+ * Checks if a hyperlink location is valid.
+ *
+ * @param {string} value Hyperlink location to check
+ * @return {boolean} Hyperlink location is valid
+ */
+ve.ui.LinkInspector.prototype.isHrefValid = function ( value ) {
+	return value.match( /(^|\s)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/gi )
+};
 
 /**
  * @inheritdoc
@@ -77,11 +106,18 @@ ve.ui.LinkInspector.prototype.initialize = function () {
 
 	// Properties
 	this.targetInput = new this.constructor.static.linkTargetInputWidget( {
-		'$': this.$, '$overlay': this.$contextOverlay || this.$overlay
+		'$': this.$,
+		'$overlay': this.$frame,
+		'disabled': true,
+		'classes': [ 've-ui-linkInspector-target' ]
 	} );
 
+	// Events
+	this.targetInput.connect( this, { 'change': 'onTargetInputChange' } );
+
 	// Initialization
-	this.$form.append( this.targetInput.$element );
+	this.frame.$content.addClass( 've-ui-linkInspector-content' );
+	this.form.$element.append( this.targetInput.$element );
 };
 
 /**
@@ -102,8 +138,18 @@ ve.ui.LinkInspector.prototype.getSetupProcess = function ( data ) {
 ve.ui.LinkInspector.prototype.getReadyProcess = function () {
 	return ve.ui.LinkInspector.super.prototype.getReadyProcess.call( this )
 		.next( function () {
-			this.targetInput.focus().select();
+			this.targetInput.setDisabled( false ).focus().select();
 			this.getFragment().getSurface().enable();
+		}, this );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ui.LinkInspector.prototype.getHoldProcess = function () {
+	return ve.ui.LinkInspector.super.prototype.getHoldProcess.call( this )
+		.next( function () {
+			this.targetInput.setDisabled( true ).blur();
 		}, this );
 };
 

@@ -9,22 +9,22 @@
  * Dialog listing all command keyboard shortcuts.
  *
  * @class
- * @extends ve.ui.Dialog
+ * @extends OO.ui.ProcessDialog
  *
  * @constructor
  * @param {Object} [config] Configuration options
  */
-ve.ui.CommandHelpDialog = function VeUiCommandHelpDialog( config ) {
+ve.ui.CommandHelpDialog = function VeUiCommandHelpDialog( manager, config ) {
 	// Configuration initialization
 	config = ve.extendObject( { 'footless': true }, config );
 
 	// Parent constructor
-	ve.ui.Dialog.call( this, config );
+	ve.ui.CommandHelpDialog.super.call( this, manager, config );
 };
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.CommandHelpDialog, ve.ui.Dialog );
+OO.inheritClass( ve.ui.CommandHelpDialog, OO.ui.ProcessDialog );
 
 /* Static Properties */
 
@@ -32,8 +32,6 @@ ve.ui.CommandHelpDialog.static.name = 'commandHelp';
 
 ve.ui.CommandHelpDialog.static.title =
 	OO.ui.deferMsg( 'visualeditor-dialog-command-help-title' );
-
-ve.ui.CommandHelpDialog.static.icon = 'help';
 
 /* Methods */
 
