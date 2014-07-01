@@ -21,6 +21,15 @@ ve.ui.MobileContext = function VeUiMobileContext( surface, config ) {
 	// Parent constructor
 	ve.ui.Context.call( this, surface, config );
 
+	// Properties
+	this.transitioning = null;
+
+	// Events
+	this.inspectors.connect( this, {
+		'setup': 'show',
+		'teardown': 'hide'
+	} );
+
 	// Initialization
 	this.$element
 		.addClass( 've-ui-mobileContext' )
@@ -37,55 +46,29 @@ OO.inheritClass( ve.ui.MobileContext, ve.ui.Context );
 /* Methods */
 
 /**
- * Deferred response to one or more select events.
- * Update the context toolbar for the new selection.
- *
- * @method
- */
-ve.ui.MobileContext.prototype.afterModelChange = function () {
-	var win = this.inspectors.getCurrentWindow(),
-		selectionChange = !!this.afterModelChangeRange,
-		moving = selectionChange && !( win && ( win.isOpening() || win.isClosing() ) );
-
-	this.afterModelChangeTimeout = null;
-	this.afterModelChangeRange = null;
-
-	// TODO this is the only big difference between MobileContext and DesktopContext
-	// merge this code somehow?
-	this.hide();
-
-	this.update( !moving  );
-};
-
-/**
  * @inheritdoc
  */
-ve.ui.MobileContext.prototype.onInspectorSetup = function () {
-	this.surface.showGlobalOverlay();
-};
+ve.ui.MobileContext.prototype.toggle = function ( show ) {
+	var promise;
 
-/**
- * @inheritdoc
- */
-ve.ui.MobileContext.prototype.onInspectorTeardown = function () {
-	this.surface.hideGlobalOverlay();
-};
+	if ( this.transitioning ) {
+		return this.transitioning;
+	}
+	show = show === undefined ? !this.visible : !!show;
+	if ( show === this.visible ) {
+		return $.Deferred().resolve().promise();
+	}
 
-/**
- * Shows the context.
- *
- * @method
- * @chainable
- */
-ve.ui.MobileContext.prototype.show = function () {
-	this.$element.addClass( 've-ui-mobileContext-visible' );
-	return this;
-};
+	this.visible = show;
+	this.transitioning = this.surface.toggleGlobalOverlay( show );
+	promise = this.transitioning.promise();
 
-/**
- * @inheritdoc
- */
-ve.ui.MobileContext.prototype.hide = function () {
-	this.$element.removeClass( 've-ui-mobileContext-visible' );
-	return this;
+	this.transitioning.then( ve.bind( function () {
+		this.$element.toggleClass( 've-ui-mobileContext-visible', show );
+		this.transitioning.resolve();
+		this.transitioning = null;
+		this.visible = show;
+	}, this ) );
+
+	return promise;
 };
