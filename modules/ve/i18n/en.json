@@ -34,6 +34,7 @@
     "visualeditor-clipboard-paste-special": "Paste as plain text",
     "visualeditor-dialog-action-apply": "Apply changes",
     "visualeditor-dialog-action-cancel": "Cancel",
+    "visualeditor-dialog-action-done": "Done",
     "visualeditor-dialog-action-goback": "Go back",
     "visualeditor-dialog-error": "Something went wrong…",
     "visualeditor-dialog-error-dismiss": "Go back",

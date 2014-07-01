@@ -10,14 +10,14 @@
  *
  * @class
  * @abstract
- * @extends OO.ui.Dialog
+ * @extends OO.ui.ProcessDialog
  *
  * @constructor
  * @param {Object} [config] Configuration options
  */
-ve.ui.Dialog = function VeUiDialog( config ) {
+ve.ui.FragmentDialog = function VeUiDialog( manager, config ) {
 	// Parent constructor
-	OO.ui.Dialog.call( this, config );
+	ve.ui.FragmentDialog.super.call( this, manager, config );
 
 	// Properties
 	this.fragment = null;
@@ -25,34 +25,27 @@ ve.ui.Dialog = function VeUiDialog( config ) {
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.Dialog, OO.ui.Dialog );
+OO.inheritClass( ve.ui.FragmentDialog, OO.ui.ProcessDialog );
 
 /**
  * @inheritdoc
  */
-ve.ui.Dialog.prototype.open = function ( fragment, data ) {
-	this.fragment = fragment;
-
-	// Parent method
-	return ve.ui.Dialog.super.prototype.open.call( this, data );
+ve.ui.FragmentDialog.prototype.getSetupProcess = function ( data ) {
+	data = data || {};
+	return ve.ui.FragmentDialog.super.prototype.getSetupProcess.apply( this, data )
+		.next( function () {
+			if ( !( data.fragment instanceof ve.dm.SurfaceFragment ) ) {
+				throw new Error( 'Cannot open dialog: opening data must contain a fragment' );
+			}
+			this.fragment = data.fragment;
+		}, this );
 };
 
 /**
  * @inheritdoc
  */
-ve.ui.Dialog.prototype.close = function ( data ) {
-	// Parent method
-	return ve.ui.Dialog.super.prototype.close.call( this, data )
-		.then( ve.bind( function () {
-			this.fragment = null;
-		}, this ) );
-};
-
-/**
- * @inheritdoc
- */
-ve.ui.Dialog.prototype.getTeardownProcess = function ( data ) {
-	return ve.ui.Dialog.super.prototype.getTeardownProcess.apply( this, data )
+ve.ui.FragmentDialog.prototype.getTeardownProcess = function ( data ) {
+	return ve.ui.FragmentDialog.super.prototype.getTeardownProcess.apply( this, data )
 		.first( function () {
 			// Restore selection
 			// HACK: Integration is a mess, and to prevent teardown being called multiple times we
@@ -62,6 +55,7 @@ ve.ui.Dialog.prototype.getTeardownProcess = function ( data ) {
 			if ( this.fragment ) {
 				this.fragment.select();
 			}
+			this.fragment = null;
 		}, this );
 };
 
@@ -70,6 +64,6 @@ ve.ui.Dialog.prototype.getTeardownProcess = function ( data ) {
  *
  * @returns {ve.dm.SurfaceFragment|null} Surface fragment the dialog is for, null if the dialog is closed
  */
-ve.ui.Dialog.prototype.getFragment = function () {
+ve.ui.FragmentDialog.prototype.getFragment = function () {
 	return this.fragment;
 };
