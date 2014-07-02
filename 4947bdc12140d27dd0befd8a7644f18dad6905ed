@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae43a74e_c9eb1076",
+        "filename": "modules/ve/ce/ve.ce.ResizableNode.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-07-02T23:58:54Z",
+      "side": 1,
+      "message": "not sure where it broke, but the highlight doesn\u0027t redraw after dragging now (try clicking without dragging)",
+      "revId": "4947bdc12140d27dd0befd8a7644f18dad6905ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
