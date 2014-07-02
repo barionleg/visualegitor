@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae43a74e_6de439dc",
+        "filename": "modules/ve/dm/ve.dm.SurfaceFragment.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 731,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-02T02:30:00Z",
+      "side": 1,
+      "message": "This method needs unit tests, either here or at the action layer (where most things similar to this are actually tested)",
+      "revId": "e56b295cbd068f5114db2b3f14fa173f0debc43e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
