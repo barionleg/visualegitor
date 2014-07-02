@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "ae43a74e_29261c12",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-07-02T23:44:01Z",
+      "side": 1,
+      "message": "Fixes bug 54759",
+      "revId": "1840570d99427b6a165bd254bd911a7e9e0bfe88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae43a74e_891188b3",
         "filename": "modules/ve/ui/inspectors/ve.ui.LinkInspector.js",
         "patchSetId": 3
