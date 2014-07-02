@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "ae43a74e_698b04e9",
+        "filename": "modules/ve/ui/dialogs/ve.ui.LanguageSearchDialog.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-07-02T23:47:12Z",
+      "side": 1,
+      "message": "This dialog no longer has a cancel button for when the user decides they don\u0027t want to select a new language after all, so one should be added.",
+      "revId": "1840570d99427b6a165bd254bd911a7e9e0bfe88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae43a74e_891188b3",
         "filename": "modules/ve/ui/inspectors/ve.ui.LinkInspector.js",
         "patchSetId": 3
