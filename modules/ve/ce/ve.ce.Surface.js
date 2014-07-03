@@ -509,7 +509,7 @@ ve.ce.Surface.prototype.onDocumentMouseDown = function ( e ) {
 	}
 
 	// Handle triple click
-	if ( e.originalEvent.detail >= 3 ) {
+	if ( e.originalEvent.detail >= 3 && false ) {
 		// Browser default behaviour for triple click won't behave as we want
 		e.preventDefault();
 
