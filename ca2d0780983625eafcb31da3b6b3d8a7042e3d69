@@ -16,6 +16,24 @@
       "revId": "ca2d0780983625eafcb31da3b6b3d8a7042e3d69",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_44fa6741",
+        "filename": "build/intro.js.txt",
+        "patchSetId": 19
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-07-03T02:55:55Z",
+      "side": 1,
+      "message": "Fixed in I12cb7921.",
+      "parentUuid": "ae43a74e_cde9e5a8",
+      "revId": "ca2d0780983625eafcb31da3b6b3d8a7042e3d69",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
