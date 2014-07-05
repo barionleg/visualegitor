@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae43a74e_9b341ca9",
+        "filename": "modules/ve/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-07-05T10:48:21Z",
+      "side": 1,
+      "message": "Clearly this is a browser bug, you shouldn\u0027t have to blur something which has been removed from the DOM. I can\u0027t reproduce in FF latest or Chrome, so this should be commented as a hack, and if possible identify which browser version is affects so we know when we can remove it in the future.",
+      "revId": "610161d246fc43d7f15a1db1ac64442d64e60dbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae43a74e_7b3738ac",
+        "filename": "modules/ve/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-07-05T10:48:21Z",
+      "side": 1,
+      "message": "use $element[0].blur() as jQuery blur is much slower than native blur",
+      "revId": "610161d246fc43d7f15a1db1ac64442d64e60dbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
