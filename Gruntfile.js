@@ -122,8 +122,8 @@ module.exports = function ( grunt ) {
 				placeholders: { menu: demoMenu }
 			},
 			test: {
-				targetFile: 'modules/ve/test/index.html',
-				template: 'modules/ve/test/index.html.template',
+				targetFile: 'modules/ve/tests/index.html',
+				template: 'modules/ve/tests/index.html.template',
 				modules: modules,
 				env: {
 					test: true
@@ -145,7 +145,7 @@ module.exports = function ( grunt ) {
 		jscs: {
 			src: [
 				'<%= jshint.all %>',
-				'!modules/ve/test/ce/imetests/*.js'
+				'!modules/ve/tests/ce/imetests/*.js'
 			]
 		},
 		csslint: {
@@ -159,7 +159,7 @@ module.exports = function ( grunt ) {
 		},
 		qunit: {
 			unicodejs: 'modules/unicodejs/index.html',
-			ve: 'modules/ve/test/index.html'
+			ve: 'modules/ve/tests/index.html'
 		},
 		watch: {
 			files: [
