@@ -40,8 +40,7 @@ ve.ce.FocusableNode = function VeCeFocusableNode( $focusable ) {
 		'teardown': 'onFocusableTeardown',
 		'resizeStart': 'onFocusableResizeStart',
 		'resizeEnd': 'onFocusableResizeEnd',
-		'rerender': 'onFocusableRerender',
-		'live': 'onFocusableLive'
+		'rerender': 'onFocusableRerender'
 	} );
 };
 
@@ -83,11 +82,16 @@ ve.ce.FocusableNode.prototype.createHighlight = function () {
 };
 
 /**
- * Handle setup event.
+ * Handle node setup.
  *
  * @method
  */
 ve.ce.FocusableNode.prototype.onFocusableSetup = function () {
+	var surface = this.getRoot().getSurface(),
+		surfaceModel = surface.getModel();
+
+	surfaceModel.connect( this, { 'history': 'onFocusableHistory' } );
+
 	// Exit if already setup or not attached
 	if ( this.isSetup || !this.root ) {
 		return;
@@ -110,40 +114,18 @@ ve.ce.FocusableNode.prototype.onFocusableSetup = function () {
 };
 
 /**
- * Handle node live.
+ * Handle node teardown.
  *
  * @method
  */
-ve.ce.FocusableNode.prototype.onFocusableLive = function () {
+ve.ce.FocusableNode.prototype.onFocusableTeardown = function () {
 	// We don't set this.surface here because there are cases where teardown+setup are emitted
 	// but live isn't :(
 	var surface = this.getRoot().getSurface(),
 		surfaceModel = surface.getModel();
 
-	if ( this.live ) {
-		surfaceModel.connect( this, { 'history': 'onFocusableHistory' } );
-	} else {
-		surfaceModel.disconnect( this, { 'history': 'onFocusableHistory' } );
-	}
-};
+	surfaceModel.disconnect( this, { 'history': 'onFocusableHistory' } );
 
-/**
- * Handle history event.
- *
- * @method
- */
-ve.ce.FocusableNode.prototype.onFocusableHistory = function () {
-	if ( this.focused ) {
-		this.redrawHighlights();
-	}
-};
-
-/**
- * Handle teardown events.
- *
- * @method
- */
-ve.ce.FocusableNode.prototype.onFocusableTeardown = function () {
 	// Exit if not setup or not attached
 	if ( !this.isSetup || !this.root ) {
 		return;
@@ -162,6 +144,17 @@ ve.ce.FocusableNode.prototype.onFocusableTeardown = function () {
 
 	this.isSetup = false;
 	this.surface = null;
+};
+
+/**
+ * Handle history event.
+ *
+ * @method
+ */
+ve.ce.FocusableNode.prototype.onFocusableHistory = function () {
+	if ( this.focused ) {
+		this.redrawHighlights();
+	}
 };
 
 /**
