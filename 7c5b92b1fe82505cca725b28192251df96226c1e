@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_4944026f",
+        "filename": "modules/ve/ui/actions/ve.ui.WindowAction.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-07-09T11:28:07Z",
+      "side": 1,
+      "message": "why not OO.ui.Inspector?",
+      "revId": "7c5b92b1fe82505cca725b28192251df96226c1e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_0926fac9",
+        "filename": "modules/ve/ui/dialogs/ve.ui.FragmentDialog.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-07-09T11:28:07Z",
+      "side": 1,
+      "message": "document throws",
+      "revId": "7c5b92b1fe82505cca725b28192251df96226c1e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_c4157742",
+        "filename": "modules/ve/ui/dialogs/ve.ui.LanguageSearchDialog.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-07-09T11:28:07Z",
+      "side": 1,
+      "message": "This dialog need a close/cancel action for when the user gives up on selecting a new language. Previously this was the close button. Now the only way is by pressing esc.",
+      "revId": "7c5b92b1fe82505cca725b28192251df96226c1e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
