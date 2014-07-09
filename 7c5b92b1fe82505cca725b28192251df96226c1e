@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_82863c17",
+        "filename": "modules/ve/ui/actions/ve.ui.WindowAction.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 88
+      },
+      "writtenOn": "2014-07-09T20:06:55Z",
+      "side": 1,
+      "message": "There\u0027s no such thing, and there\u0027s also no such thing as ve.ui.Inspector, ve.ui.FragmentInspector is the base class of all inspectors, and is naturally the only thing you would invoke in the context, which is entirely fragment oriented.",
+      "parentUuid": "8e28a382_4944026f",
+      "revId": "7c5b92b1fe82505cca725b28192251df96226c1e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_44586735",
         "filename": "modules/ve/ui/dialogs/ve.ui.CommandHelpDialog.js",
         "patchSetId": 10
@@ -30,6 +48,24 @@
       "writtenOn": "2014-07-09T17:10:11Z",
       "side": 1,
       "message": "Is this not a message dialog?",
+      "revId": "7c5b92b1fe82505cca725b28192251df96226c1e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_a2901847",
+        "filename": "modules/ve/ui/dialogs/ve.ui.CommandHelpDialog.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 88
+      },
+      "writtenOn": "2014-07-09T20:06:55Z",
+      "side": 1,
+      "message": "No, it\u0027s not. A message dialog is like an alert or a confirmation. This may not feel like a \"process\" but it has the same control scheme as a process dialog and would be full screen on a mobile device, for instance.\n\nIt is definitely not a message dialog.",
+      "parentUuid": "8e28a382_44586735",
       "revId": "7c5b92b1fe82505cca725b28192251df96226c1e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -200,6 +236,24 @@
       "writtenOn": "2014-07-09T17:10:11Z",
       "side": 1,
       "message": "Should we override the default action? Hitting \u0027done\u0027 just closes the inspector, but so does choosing a character, so \u0027done\u0027 is really \u0027cancel\u0027/\u0027close\u0027.",
+      "revId": "7c5b92b1fe82505cca725b28192251df96226c1e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_65211a9a",
+        "filename": "modules/ve/ui/inspectors/ve.ui.SpecialCharacterInspector.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 88
+      },
+      "writtenOn": "2014-07-09T20:06:55Z",
+      "side": 1,
+      "message": "I\u0027m adding InsertionInspector which this, and other things like it can inherit from, that does just that.",
+      "parentUuid": "8e28a382_9c38e79c",
       "revId": "7c5b92b1fe82505cca725b28192251df96226c1e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
