@@ -19,6 +19,40 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_44586735",
+        "filename": "modules/ve/ui/dialogs/ve.ui.CommandHelpDialog.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-07-09T17:10:11Z",
+      "side": 1,
+      "message": "Is this not a message dialog?",
+      "revId": "7c5b92b1fe82505cca725b28192251df96226c1e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_243d5bb9",
+        "filename": "modules/ve/ui/dialogs/ve.ui.CommandHelpDialog.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-07-09T17:10:11Z",
+      "side": 1,
+      "message": "document manager, here and it every other file that uses it",
+      "revId": "7c5b92b1fe82505cca725b28192251df96226c1e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_0926fac9",
         "filename": "modules/ve/ui/dialogs/ve.ui.FragmentDialog.js",
         "patchSetId": 10
@@ -47,6 +81,125 @@
       "writtenOn": "2014-07-09T11:28:07Z",
       "side": 1,
       "message": "This dialog need a close/cancel action for when the user gives up on selecting a new language. Previously this was the close button. Now the only way is by pressing esc.",
+      "revId": "7c5b92b1fe82505cca725b28192251df96226c1e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_da09d235",
+        "filename": "modules/ve/ui/inspectors/ve.ui.AnnotationInspector.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-07-09T17:10:11Z",
+      "side": 1,
+      "message": "Non capisco \u0027Remove\u0027. i18n?",
+      "revId": "7c5b92b1fe82505cca725b28192251df96226c1e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_fc2feb83",
+        "filename": "modules/ve/ui/inspectors/ve.ui.FragmentInspector.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-07-09T17:10:11Z",
+      "side": 1,
+      "message": "document manager",
+      "revId": "7c5b92b1fe82505cca725b28192251df96226c1e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_3c3693e5",
+        "filename": "modules/ve/ui/inspectors/ve.ui.LanguageInspector.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-07-09T17:10:11Z",
+      "side": 1,
+      "message": "document manager",
+      "revId": "7c5b92b1fe82505cca725b28192251df96226c1e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_5c215f99",
+        "filename": "modules/ve/ui/inspectors/ve.ui.LinkInspector.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-07-09T17:10:11Z",
+      "side": 1,
+      "message": "document manager",
+      "revId": "7c5b92b1fe82505cca725b28192251df96226c1e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_1c0cf73c",
+        "filename": "modules/ve/ui/inspectors/ve.ui.LinkInspector.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-07-09T17:10:11Z",
+      "side": 1,
+      "message": "\u0027Open\u0027? Que? i18n...",
+      "revId": "7c5b92b1fe82505cca725b28192251df96226c1e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_9cd90786",
+        "filename": "modules/ve/ui/inspectors/ve.ui.SpecialCharacterInspector.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-07-09T17:10:11Z",
+      "side": 1,
+      "message": "\"Modeless dialog\"? Aren\u0027t we still calling them inspectors?",
+      "revId": "7c5b92b1fe82505cca725b28192251df96226c1e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_9c38e79c",
+        "filename": "modules/ve/ui/inspectors/ve.ui.SpecialCharacterInspector.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-07-09T17:10:11Z",
+      "side": 1,
+      "message": "Should we override the default action? Hitting \u0027done\u0027 just closes the inspector, but so does choosing a character, so \u0027done\u0027 is really \u0027cancel\u0027/\u0027close\u0027.",
       "revId": "7c5b92b1fe82505cca725b28192251df96226c1e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
