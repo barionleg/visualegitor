@@ -21,6 +21,11 @@
 	background-image: url(images/icons/align-float-right.svg);
 }
 
+.oo-ui-icon-big-add-item {
+	/* @embed */
+	background-image: url(images/icons/big-add-item.svg);
+}
+
 .oo-ui-icon-bold-a {
 	/* @embed */
 	background-image: url(images/icons/bold-a.svg);
