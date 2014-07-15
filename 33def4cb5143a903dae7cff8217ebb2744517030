@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_b08a6d6c",
+        "filename": "modules/ve/dm/ve.dm.Scalable.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 88
+      },
+      "writtenOn": "2014-07-15T21:35:14Z",
+      "side": 1,
+      "message": "Why were these below in the first place?\n\nI would also recommend just including them under // Properties",
+      "revId": "33def4cb5143a903dae7cff8217ebb2744517030",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_f0b8f526",
+        "filename": "modules/ve/dm/ve.dm.Scalable.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 88
+      },
+      "writtenOn": "2014-07-15T21:35:14Z",
+      "side": 1,
+      "message": "Use this.currentDimensions property lookup here, or cache the result of the method in a local variable and use it both places. Don\u0027t call the method twice.\n\nAnd the same goes of course for things below.",
+      "revId": "33def4cb5143a903dae7cff8217ebb2744517030",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
