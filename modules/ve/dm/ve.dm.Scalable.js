@@ -98,6 +98,24 @@ OO.mixinClass( ve.dm.Scalable, OO.EventEmitter );
 
 /* Methods */
 
+ve.dm.Scalable.prototype.clone = function () {
+	var config = {
+		currentDimensions: ve.copy( this.getCurrentDimensions() ),
+		originalDimensions: ve.copy( this.getOriginalDimensions() ),
+		defaultDimensions: ve.copy( this.getDefaultDimensions() ),
+		isDefault: !!this.isDefault(),
+		enforceMin: !!this.isEnforcedMin(),
+		enforceMax: !!this.isEnforcedMax()
+	};
+	if ( this.getMinDimensions() ) {
+		config.minDimensions = ve.copy( this.getMinDimensions() );
+	}
+	if ( this.getMaxDimensions() ) {
+		config.maxDimensions = ve.copy( this.getMaxDimensions() );
+	}
+	return new this.constructor( config );
+};
+
 /**
  * Set the fixed aspect ratio from specified dimensions.
  *
