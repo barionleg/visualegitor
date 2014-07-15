@@ -33,6 +33,10 @@ ve.dm.Scalable = function VeDmScalable( config ) {
 	// Mixin constructors
 	OO.EventEmitter.call( this );
 
+	// Computed properties
+	this.ratio = null;
+	this.valid = null;
+
 	// Properties
 	this.fixedRatio = config.fixedRatio;
 	if ( config.currentDimensions ) {
@@ -56,10 +60,6 @@ ve.dm.Scalable = function VeDmScalable( config ) {
 
 	this.setEnforcedMin( config.enforceMin );
 	this.setEnforcedMax( config.enforceMax );
-
-	// Computed properties
-	this.ratio = null;
-	this.valid = null;
 };
 
 /* Inheritance */
@@ -97,6 +97,30 @@ OO.mixinClass( ve.dm.Scalable, OO.EventEmitter );
  */
 
 /* Methods */
+
+ve.dm.Scalable.prototype.clone = function () {
+	var config = {
+		isDefault: !!this.isDefault(),
+		enforceMin: !!this.isEnforcedMin(),
+		enforceMax: !!this.isEnforcedMax()
+	};
+	if ( this.getCurrentDimensions() ) {
+		config.currentDimensions = ve.copy( this.getCurrentDimensions() );
+	}
+	if ( this.getOriginalDimensions() ) {
+		config.originalDimensions = ve.copy( this.getOriginalDimensions() );
+	}
+	if ( this.getDefaultDimensions() ) {
+		config.defaultDimensions = ve.copy( this.getDefaultDimensions() );
+	}
+	if ( this.getMinDimensions() ) {
+		config.minDimensions = ve.copy( this.getMinDimensions() );
+	}
+	if ( this.getMaxDimensions() ) {
+		config.maxDimensions = ve.copy( this.getMaxDimensions() );
+	}
+	return new this.constructor( config );
+};
 
 /**
  * Set the fixed aspect ratio from specified dimensions.
