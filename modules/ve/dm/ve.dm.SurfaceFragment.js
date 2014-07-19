@@ -815,7 +815,7 @@ ve.dm.SurfaceFragment.prototype.convertNodes = function ( type, attr ) {
  * Example:
  *     // fragment is a selection of: <p>a</p><p>b</p>
  *     fragment.wrapNodes(
- *         [{ 'type': 'list', 'attributes': { 'style': 'bullet' } }, { 'type': 'listItem' }]
+ *         [{ type: 'list', attributes: { style: 'bullet' } }, { type: 'listItem' }]
  *     )
  *     // fragment is now a selection of: <ul><li><p>a</p></li></ul><ul><li><p>b</p></li></ul>
  *
@@ -892,7 +892,7 @@ ve.dm.SurfaceFragment.prototype.unwrapNodes = function ( outerDepth, innerDepth 
  *     // fragment is a selection of: <dl><dt><p>a</p></dt></dl><dl><dt><p>b</p></dt></dl>
  *     fragment.rewrapNodes(
  *         2,
- *         [{ 'type': 'list', 'attributes': { 'style': 'bullet' } }, { 'type': 'listItem' }]
+ *         [{ type: 'list', attributes: { style: 'bullet' } }, { type: 'listItem' }]
  *     )
  *     // fragment is now a selection of: <ul><li><p>a</p></li></ul><ul><li><p>b</p></li></ul>
  *
@@ -940,7 +940,7 @@ ve.dm.SurfaceFragment.prototype.rewrapNodes = function ( depth, wrapper ) {
  * Example:
  *     // fragment is a selection of: <p>a</p><p>b</p>
  *     fragment.wrapAllNodes(
- *         [{ 'type': 'list', 'attributes': { 'style': 'bullet' } }, { 'type': 'listItem' }]
+ *         [{ type: 'list', attributes: { style: 'bullet' } }, { type: 'listItem' }]
  *     )
  *     // fragment is now a selection of: <ul><li><p>a</p><p>b</p></li></ul>
  *
@@ -975,7 +975,7 @@ ve.dm.SurfaceFragment.prototype.wrapAllNodes = function ( wrapper ) {
  *
  * Example:
  *     // fragment is a selection of: <h1><p>a</p><p>b</p></h1>
- *     fragment.rewrapAllNodes( 1, { 'type': 'heading', 'attributes': { 'level': 2 } } );
+ *     fragment.rewrapAllNodes( 1, { type: 'heading', attributes: { level: 2 } } );
  *     // fragment is now a selection of: <h2><p>a</p><p>b</p></h2>
  *
  * @method
@@ -1049,7 +1049,7 @@ ve.dm.SurfaceFragment.prototype.isolateAndUnwrap = function ( isolateForType ) {
 		var i, length, tx,
 			adjustment = 0, data = [];
 		for ( i = 0, length = splitNodes.length; i < length; i++ ) {
-			data.unshift( { 'type': '/' + splitNodes[i].type } );
+			data.unshift( { type: '/' + splitNodes[i].type } );
 			data.push( splitNodes[i].getClonedElement() );
 
 			if ( insertBefore ) {

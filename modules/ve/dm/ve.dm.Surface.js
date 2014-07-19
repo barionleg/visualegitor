@@ -36,7 +36,7 @@ ve.dm.Surface = function VeDmSurface( doc ) {
 	this.contextChangeQueued = false;
 
 	// Events
-	this.documentModel.connect( this, { 'transact': 'onDocumentTransact' } );
+	this.documentModel.connect( this, { transact: 'onDocumentTransact' } );
 };
 
 /* Inheritance */
@@ -136,7 +136,7 @@ ve.dm.Surface.prototype.stopHistoryTracking = function () {
  */
 ve.dm.Surface.prototype.getHistory = function () {
 	if ( this.newTransactions.length > 0 ) {
-		return this.undoStack.slice( 0 ).concat( [{ 'transactions': this.newTransactions.slice( 0 ) }] );
+		return this.undoStack.slice( 0 ).concat( [{ transactions: this.newTransactions.slice( 0 ) }] );
 	} else {
 		return this.undoStack.slice( 0 );
 	}
@@ -198,7 +198,7 @@ ve.dm.Surface.prototype.pushStaging = function ( allowUndo ) {
 		this.stopHistoryTracking();
 		this.emit( 'history' );
 	}
-	this.stagingStack.push( { 'transactions': [], 'allowUndo': !!allowUndo } );
+	this.stagingStack.push( { transactions: [], allowUndo: !!allowUndo } );
 };
 
 /**
@@ -710,9 +710,9 @@ ve.dm.Surface.prototype.breakpoint = function () {
 	}
 	if ( this.newTransactions.length > 0 ) {
 		this.undoStack.push( {
-			'transactions': this.newTransactions,
-			'selection': this.selection && this.selection.clone(),
-			'selectionBefore': this.selectionBefore && this.selectionBefore.clone()
+			transactions: this.newTransactions,
+			selection: this.selection && this.selection.clone(),
+			selectionBefore: this.selectionBefore && this.selectionBefore.clone()
 		} );
 		this.newTransactions = [];
 		this.emit( 'history' );

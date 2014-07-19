@@ -30,9 +30,9 @@ ve.dm.CommentMetaItem.static.storeHtmlAttributes = false;
 
 ve.dm.CommentMetaItem.static.toDataElement = function ( domElements ) {
 	return {
-		'type': this.name,
-		'attributes': {
-			'text': domElements[0].data
+		type: this.name,
+		attributes: {
+			text: domElements[0].data
 		}
 	};
 };
