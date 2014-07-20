@@ -40,8 +40,7 @@ ve.ce.FocusableNode = function VeCeFocusableNode( $focusable ) {
 		'teardown': 'onFocusableTeardown',
 		'resizeStart': 'onFocusableResizeStart',
 		'resizeEnd': 'onFocusableResizeEnd',
-		'rerender': 'onFocusableRerender',
-		'live': 'onFocusableLive'
+		'rerender': 'onFocusableRerender'
 	} );
 };
 
@@ -107,35 +106,6 @@ ve.ce.FocusableNode.prototype.onFocusableSetup = function () {
 	} );
 
 	this.isSetup = true;
-};
-
-/**
- * Handle node live.
- *
- * @method
- */
-ve.ce.FocusableNode.prototype.onFocusableLive = function () {
-	// We don't set this.surface here because there are cases where teardown+setup are emitted
-	// but live isn't :(
-	var surface = this.getRoot().getSurface(),
-		surfaceModel = surface.getModel();
-
-	if ( this.live ) {
-		surfaceModel.connect( this, { 'history': 'onFocusableHistory' } );
-	} else {
-		surfaceModel.disconnect( this, { 'history': 'onFocusableHistory' } );
-	}
-};
-
-/**
- * Handle history event.
- *
- * @method
- */
-ve.ce.FocusableNode.prototype.onFocusableHistory = function () {
-	if ( this.focused ) {
-		this.redrawHighlights();
-	}
 };
 
 /**
