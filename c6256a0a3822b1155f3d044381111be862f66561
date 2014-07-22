@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_53caf671",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 14
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-07-22T19:22:58Z",
+      "side": 1,
+      "message": "VE core is a standalone product, so technically it can\u0027t be dependent on ve-mw, it just breaks it (hence breaking change).",
+      "revId": "c6256a0a3822b1155f3d044381111be862f66561",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
