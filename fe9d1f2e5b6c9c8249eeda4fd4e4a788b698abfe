@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_bbc8c55a",
+        "filename": "modules/ve/ce/nodes/ve.ce.CommentNode.js",
+        "patchSetId": 16
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-23T23:48:24Z",
+      "side": 1,
+      "message": "Removed in PS20",
+      "parentUuid": "8e28a382_95083831",
+      "revId": "fe9d1f2e5b6c9c8249eeda4fd4e4a788b698abfe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_404c4c7a",
         "filename": "modules/ve/tests/dm/ve.dm.example.js",
         "patchSetId": 16
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_011be673",
+        "filename": "modules/ve/ui/inspectors/ve.ui.CommentInspector.js",
+        "patchSetId": 16
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-23T23:48:24Z",
+      "side": 1,
+      "message": "Fixed in PS20",
+      "parentUuid": "8e28a382_a03c10bc",
+      "revId": "fe9d1f2e5b6c9c8249eeda4fd4e4a788b698abfe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_c0ca7ca2",
         "filename": "modules/ve/ui/inspectors/ve.ui.CommentInspector.js",
         "patchSetId": 16
@@ -64,6 +100,24 @@
       "writtenOn": "2014-07-23T21:05:42Z",
       "side": 1,
       "message": "This is unnecessary, only MWExtensionInspector uses nodeModel",
+      "revId": "fe9d1f2e5b6c9c8249eeda4fd4e4a788b698abfe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_e11fba5c",
+        "filename": "modules/ve/ui/inspectors/ve.ui.CommentInspector.js",
+        "patchSetId": 16
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-23T23:48:24Z",
+      "side": 1,
+      "message": "Removed in PS20",
+      "parentUuid": "8e28a382_c0ca7ca2",
       "revId": "fe9d1f2e5b6c9c8249eeda4fd4e4a788b698abfe",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_a13532d8",
+        "filename": "modules/ve/ui/inspectors/ve.ui.CommentInspector.js",
+        "patchSetId": 16
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-23T23:48:24Z",
+      "side": 1,
+      "message": "Obsolete in PS20",
+      "parentUuid": "8e28a382_00388438",
+      "revId": "fe9d1f2e5b6c9c8249eeda4fd4e4a788b698abfe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_805a3451",
         "filename": "modules/ve/ui/inspectors/ve.ui.CommentInspector.js",
         "patchSetId": 16
@@ -98,6 +170,24 @@
       "writtenOn": "2014-07-23T21:05:42Z",
       "side": 1,
       "message": "This is done, right?",
+      "revId": "fe9d1f2e5b6c9c8249eeda4fd4e4a788b698abfe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_612bca78",
+        "filename": "modules/ve/ui/inspectors/ve.ui.CommentInspector.js",
+        "patchSetId": 16
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-23T23:48:24Z",
+      "side": 1,
+      "message": "Removed in PS20",
+      "parentUuid": "8e28a382_805a3451",
       "revId": "fe9d1f2e5b6c9c8249eeda4fd4e4a788b698abfe",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +211,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_414c4e7a",
+        "filename": "modules/ve/ui/inspectors/ve.ui.CommentInspector.js",
+        "patchSetId": 16
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-23T23:48:24Z",
+      "side": 1,
+      "message": "Done in PS20",
+      "parentUuid": "8e28a382_e0421862",
+      "revId": "fe9d1f2e5b6c9c8249eeda4fd4e4a788b698abfe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_1b2a397a",
         "filename": "modules/ve/ui/inspectors/ve.ui.CommentInspector.js",
         "patchSetId": 16
@@ -138,6 +246,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_0152c615",
+        "filename": "modules/ve/ui/inspectors/ve.ui.CommentInspector.js",
+        "patchSetId": 16
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-23T23:48:24Z",
+      "side": 1,
+      "message": "Fixed in PS20",
+      "parentUuid": "8e28a382_1b2a397a",
+      "revId": "fe9d1f2e5b6c9c8249eeda4fd4e4a788b698abfe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_7b45bd46",
         "filename": "modules/ve/ui/inspectors/ve.ui.CommentInspector.js",
         "patchSetId": 16
@@ -149,6 +275,24 @@
       "writtenOn": "2014-07-23T21:05:42Z",
       "side": 1,
       "message": "Again, you can use this.getSelectedNode(). Also, you probably have this.commentNode already, right?",
+      "revId": "fe9d1f2e5b6c9c8249eeda4fd4e4a788b698abfe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_e1569a08",
+        "filename": "modules/ve/ui/inspectors/ve.ui.CommentInspector.js",
+        "patchSetId": 16
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-23T23:48:24Z",
+      "side": 1,
+      "message": "Fixed in PS20",
+      "parentUuid": "8e28a382_7b45bd46",
       "revId": "fe9d1f2e5b6c9c8249eeda4fd4e4a788b698abfe",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
