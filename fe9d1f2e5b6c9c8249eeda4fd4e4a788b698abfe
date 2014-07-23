@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_95083831",
+        "filename": "modules/ve/ce/nodes/ve.ce.CommentNode.js",
+        "patchSetId": 16
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-23T21:05:42Z",
+      "side": 1,
+      "message": "Why is this here? Is it used at all? It\u0027s more efficient to do this as .data( \u0027comment\u0027, value ) but I doubt it\u0027s needed anyway.",
+      "revId": "fe9d1f2e5b6c9c8249eeda4fd4e4a788b698abfe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_404c4c7a",
+        "filename": "modules/ve/tests/dm/ve.dm.example.js",
+        "patchSetId": 16
+      },
+      "lineNbr": 2119,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-23T21:05:42Z",
+      "side": 1,
+      "message": "Changing these tests this way is the wrong thing to do. They are testing important whitespace preservation logic for meta items, so instead of changing them to account for the meta-\u003enode change in the nature of comments, change the comments to \u003cmeta\u003e tags or whatever and keep the linmod essentially the same. This way we don\u0027t lose coverage for the whitespace tracking code.",
+      "revId": "fe9d1f2e5b6c9c8249eeda4fd4e4a788b698abfe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_a03c10bc",
+        "filename": "modules/ve/ui/inspectors/ve.ui.CommentInspector.js",
+        "patchSetId": 16
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-23T21:05:42Z",
+      "side": 1,
+      "message": "Lies",
+      "revId": "fe9d1f2e5b6c9c8249eeda4fd4e4a788b698abfe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_c0ca7ca2",
+        "filename": "modules/ve/ui/inspectors/ve.ui.CommentInspector.js",
+        "patchSetId": 16
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-23T21:05:42Z",
+      "side": 1,
+      "message": "This is unnecessary, only MWExtensionInspector uses nodeModel",
+      "revId": "fe9d1f2e5b6c9c8249eeda4fd4e4a788b698abfe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_00388438",
+        "filename": "modules/ve/ui/inspectors/ve.ui.CommentInspector.js",
+        "patchSetId": 16
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-23T21:05:42Z",
+      "side": 1,
+      "message": "I don\u0027t know what the typical style is for adding actions, but you should either use the actual parent class here (which is NodeInspector; but use super), or just CommentInspector itself (it\u0027ll already have the parent\u0027s values thanks to inheritance)",
+      "revId": "fe9d1f2e5b6c9c8249eeda4fd4e4a788b698abfe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_805a3451",
+        "filename": "modules/ve/ui/inspectors/ve.ui.CommentInspector.js",
+        "patchSetId": 16
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-23T21:05:42Z",
+      "side": 1,
+      "message": "This is done, right?",
+      "revId": "fe9d1f2e5b6c9c8249eeda4fd4e4a788b698abfe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_e0421862",
+        "filename": "modules/ve/ui/inspectors/ve.ui.CommentInspector.js",
+        "patchSetId": 16
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-23T21:05:42Z",
+      "side": 1,
+      "message": "You\u0027re in a NodeInspector so you can use this.getSelectedNode();",
+      "revId": "fe9d1f2e5b6c9c8249eeda4fd4e4a788b698abfe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_1b2a397a",
+        "filename": "modules/ve/ui/inspectors/ve.ui.CommentInspector.js",
+        "patchSetId": 16
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-23T21:05:42Z",
+      "side": 1,
+      "message": "This is an XSS vulnerability. Suppose the comment looks like \u003c!-- Hello \u003cscript\u003eevilCode();\u003c/script\u003e world --\u003e\n\nTo achieve the effect you want, you can simply use this.$view.text( comment ); (.text() is XSS-safe) and use the white-space: pre; CSS property.\n\nAlternatively, if we eliminate the distinction between viewing and editing the comment (and go straight to editing always, like for links) then this whole problem goes away anyway.",
+      "revId": "fe9d1f2e5b6c9c8249eeda4fd4e4a788b698abfe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_7b45bd46",
+        "filename": "modules/ve/ui/inspectors/ve.ui.CommentInspector.js",
+        "patchSetId": 16
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-23T21:05:42Z",
+      "side": 1,
+      "message": "Again, you can use this.getSelectedNode(). Also, you probably have this.commentNode already, right?",
+      "revId": "fe9d1f2e5b6c9c8249eeda4fd4e4a788b698abfe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
