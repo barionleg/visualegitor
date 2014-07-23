@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_402b2c2f",
+        "filename": "modules/ve/ui/inspectors/ve.ui.SpecialCharacterInspector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-23T20:52:23Z",
+      "side": 1,
+      "message": "You should set charsObj \u003d {}; or whatever in this case, so the caller doesn\u0027t get undefined",
+      "revId": "55085b9f60fb47b99c0057cd16b6377cce2bd33f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
