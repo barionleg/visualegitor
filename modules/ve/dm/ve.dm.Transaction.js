@@ -1335,8 +1335,8 @@ ve.dm.Transaction.prototype.pushRemoval = function ( doc, currentOffset, range, 
 		} else {
 			// Either the first node or the last node is partially covered, so remove
 			// the selected content
-			removeStart = ( first.range || first.nodeRange ).start;
-			removeEnd = ( last.range || last.nodeRange ).end;
+			removeStart = ( first.range || first.nodeOuterRange ).start;
+			removeEnd = ( last.range || last.nodeOuterRange ).end;
 		}
 		this.pushRetain( removeStart - currentOffset );
 		this.addSafeRemoveOps( doc, removeStart, removeEnd, removeMetadata );
