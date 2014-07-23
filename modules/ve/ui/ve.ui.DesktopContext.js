@@ -46,6 +46,12 @@ ve.ui.DesktopContext = function VeUiDesktopContext( surface, config ) {
 	this.menu.$element.addClass( 've-ui-desktopContext-menu' );
 	this.inspectors.$element.addClass( 've-ui-desktopContext-inspectors' );
 	this.popup.$body.append( this.menu.$element, this.inspectors.$element );
+
+	// HACK: hide the popup with visibility: hidden; rather than display: none;, because
+	// the popup contains inspector iframes, and applying display: none; to those causes them to
+	// not load in Firefox
+	this.popup.$element.css( 'visibility', 'hidden' );
+	this.popup.toggle( true ); // Hidden by default, so "show" it to get rid of display: none;
 };
 
 /* Inheritance */
@@ -175,7 +181,6 @@ ve.ui.DesktopContext.prototype.toggle = function ( show ) {
 	// not load in Firefox
 	this.$element.add( this.popup.$element ).css( 'visibility', show ? '' : 'hidden' );
 
-	this.popup.toggle( show );
 	this.transitioning.resolve();
 	this.transitioning = null;
 	this.visible = show;
