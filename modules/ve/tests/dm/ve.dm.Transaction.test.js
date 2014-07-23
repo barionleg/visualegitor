@@ -1345,7 +1345,7 @@ QUnit.test( 'newFromContentBranchConversion', function ( assert ) {
 				]
 			},
 			'zero-length range before inline node at the start': {
-				'args': [doc2, new ve.Range( 1, 1 ), 'heading', { 'level': 2 }],
+				'args': [doc2, new ve.Range( 1 ), 'heading', { 'level': 2 }],
 				'ops': [
 					{
 						'type': 'replace',
@@ -1362,7 +1362,7 @@ QUnit.test( 'newFromContentBranchConversion', function ( assert ) {
 				]
 			},
 			'zero-length range inside inline node at the start': {
-				'args': [doc2, new ve.Range( 2, 2 ), 'heading', { 'level': 2 }],
+				'args': [doc2, new ve.Range( 2 ), 'heading', { 'level': 2 }],
 				'ops': [
 					{
 						'type': 'replace',
@@ -1379,7 +1379,7 @@ QUnit.test( 'newFromContentBranchConversion', function ( assert ) {
 				]
 			},
 			'zero-length range after inline node at the start': {
-				'args': [doc2, new ve.Range( 3, 3 ), 'heading', { 'level': 2 }],
+				'args': [doc2, new ve.Range( 3 ), 'heading', { 'level': 2 }],
 				'ops': [
 					{
 						'type': 'replace',
@@ -1396,7 +1396,7 @@ QUnit.test( 'newFromContentBranchConversion', function ( assert ) {
 				]
 			},
 			'zero-length range before inline node at the end': {
-				'args': [doc2, new ve.Range( 6, 6 ), 'heading', { 'level': 2 }],
+				'args': [doc2, new ve.Range( 6 ), 'heading', { 'level': 2 }],
 				'ops': [
 					{
 						'type': 'replace',
@@ -1413,7 +1413,7 @@ QUnit.test( 'newFromContentBranchConversion', function ( assert ) {
 				]
 			},
 			'zero-length range inside inline node at the end': {
-				'args': [doc2, new ve.Range( 7, 7 ), 'heading', { 'level': 2 }],
+				'args': [doc2, new ve.Range( 7 ), 'heading', { 'level': 2 }],
 				'ops': [
 					{
 						'type': 'replace',
@@ -1430,7 +1430,7 @@ QUnit.test( 'newFromContentBranchConversion', function ( assert ) {
 				]
 			},
 			'zero-length range after inline node at the end': {
-				'args': [doc2, new ve.Range( 8, 8 ), 'heading', { 'level': 2 }],
+				'args': [doc2, new ve.Range( 8 ), 'heading', { 'level': 2 }],
 				'ops': [
 					{
 						'type': 'replace',
@@ -1758,7 +1758,7 @@ QUnit.test( 'getModifiedRange', function ( assert ) {
 					['pushReplace', doc, 5, 13, []],
 					['pushRetain', 42]
 				],
-				'range': new ve.Range( 5, 5 ),
+				'range': new ve.Range( 5 ),
 				'msg': 'simple removal returns zero-length range at removal'
 			},
 			{
@@ -1794,7 +1794,7 @@ QUnit.test( 'getModifiedRange', function ( assert ) {
 				'calls': [
 					['pushReplace', doc, 0, 3, []]
 				],
-				'range': new ve.Range( 0, 0 ),
+				'range': new ve.Range( 0 ),
 				'msg': 'removal without retains'
 			},
 			{
@@ -1809,7 +1809,7 @@ QUnit.test( 'getModifiedRange', function ( assert ) {
 					['pushRetain', 5],
 					['pushReplaceElementAttribute', 'style', 'bullet', 'number']
 				],
-				'range': new ve.Range( 5, 5 ),
+				'range': new ve.Range( 5 ),
 				'msg': 'single attribute change'
 			},
 			{

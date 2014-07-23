@@ -3149,7 +3149,7 @@ ve.dm.example.selectNodesCases = [
 			{
 				'node': [ 2, 1 ],
 				'index': 1,
-				'nodeRange': new ve.Range( 40, 40 ),
+				'nodeRange': new ve.Range( 40 ),
 				'nodeOuterRange': new ve.Range( 39, 41 ),
 				'parentOuterRange': new ve.Range( 37, 43 )
 			},
@@ -3231,13 +3231,13 @@ ve.dm.example.selectNodesCases = [
 		'msg': 'more than 2 siblings at the document level'
 	},
 	{
-		'range': new ve.Range( 1, 1 ),
+		'range': new ve.Range( 1 ),
 		'mode': 'leaves',
 		'expected': [
 			// heading/text
 			{
 				'node': [ 0, 0 ],
-				'range': new ve.Range( 1, 1 ),
+				'range': new ve.Range( 1 ),
 				'index': 0,
 				'nodeRange': new ve.Range( 1, 4 ),
 				'nodeOuterRange': new ve.Range( 1, 4 ),
@@ -3247,13 +3247,13 @@ ve.dm.example.selectNodesCases = [
 		'msg': 'zero-length range at the start of a text node returns text node rather than parent'
 	},
 	{
-		'range': new ve.Range( 4, 4 ),
+		'range': new ve.Range( 4 ),
 		'mode': 'leaves',
 		'expected': [
 			// heading/text
 			{
 				'node': [ 0, 0 ],
-				'range': new ve.Range( 4, 4 ),
+				'range': new ve.Range( 4 ),
 				'index': 0,
 				'nodeRange': new ve.Range( 1, 4 ),
 				'nodeOuterRange': new ve.Range( 1, 4 ),
@@ -3279,13 +3279,13 @@ ve.dm.example.selectNodesCases = [
 		'msg': 'range entirely within one leaf node'
 	},
 	{
-		'range': new ve.Range( 5, 5 ),
+		'range': new ve.Range( 5 ),
 		'mode': 'leaves',
 		'expected': [
 			// document
 			{
 				'node': [],
-				'range': new ve.Range( 5, 5 ),
+				'range': new ve.Range( 5 ),
 				// no 'index' because documentNode has no parent
 				'indexInNode': 1,
 				'nodeRange': new ve.Range( 0, 63 ),
@@ -3295,13 +3295,13 @@ ve.dm.example.selectNodesCases = [
 		'msg': 'zero-length range between two children of the document'
 	},
 	{
-		'range': new ve.Range( 0, 0 ),
+		'range': new ve.Range( 0 ),
 		'mode': 'leaves',
 		'expected': [
 			// document
 			{
 				'node': [],
-				'range': new ve.Range( 0, 0 ),
+				'range': new ve.Range( 0 ),
 				// no 'index' because documentNode has no parent
 				'indexInNode': 0,
 				'nodeRange': new ve.Range( 0, 63 ),
@@ -3317,7 +3317,7 @@ ve.dm.example.selectNodesCases = [
 			// table/tableSection/tableRow/tableCell/list
 			{
 				'node': [ 1, 0, 0, 0, 2 ],
-				'range': new ve.Range( 32, 32 ),
+				'range': new ve.Range( 32 ),
 				'index': 2,
 				'indexInNode': 1,
 				'nodeRange': new ve.Range( 27, 32 ),
@@ -3388,13 +3388,13 @@ ve.dm.example.selectNodesCases = [
 		'msg': 'range from the first heading into the second-to-last paragraph, in covered mode'
 	},
 	{
-		'range': new ve.Range( 14, 14 ),
+		'range': new ve.Range( 14 ),
 		'mode': 'siblings',
 		'expected': [
 			// table/tableSection/tableRow/tableCell/list/listItem
 			{
 				'node': [ 1, 0, 0, 0, 1, 0 ],
-				'range': new ve.Range( 14, 14 ),
+				'range': new ve.Range( 14 ),
 				'index': 0,
 				'indexInNode': 0,
 				'nodeRange': new ve.Range( 14, 24 ),
@@ -3410,7 +3410,7 @@ ve.dm.example.selectNodesCases = [
 			// table/tableSection/tableRow/tableCell/list
 			{
 				'node': [ 1, 0, 0, 0, 1 ],
-				'range': new ve.Range( 25, 25 ),
+				'range': new ve.Range( 25 ),
 				'index': 1,
 				'indexInNode': 1,
 				'nodeRange': new ve.Range( 13, 25 ),
@@ -3419,7 +3419,7 @@ ve.dm.example.selectNodesCases = [
 			// table/tableSection/tableRow/tableCell/list
 			{
 				'node': [ 1, 0, 0, 0, 2 ],
-				'range': new ve.Range( 27, 27 ),
+				'range': new ve.Range( 27 ),
 				'index': 2,
 				'indexInNode': 0,
 				'nodeRange': new ve.Range( 27, 32 ),
@@ -3429,13 +3429,13 @@ ve.dm.example.selectNodesCases = [
 		'msg': 'range covering a list closing and a list opening'
 	},
 	{
-		'range': new ve.Range( 39, 39 ),
+		'range': new ve.Range( 39 ),
 		'mode': 'leaves',
 		'expected': [
 			// preformatted/text
 			{
 				'node': [ 2, 0 ],
-				'range': new ve.Range( 39, 39 ),
+				'range': new ve.Range( 39 ),
 				'index': 0,
 				'nodeRange': new ve.Range( 38, 39 ),
 				'nodeOuterRange': new ve.Range( 38, 39 ),
@@ -3445,13 +3445,13 @@ ve.dm.example.selectNodesCases = [
 		'msg': 'zero-length range in text node before inline node'
 	},
 	{
-		'range': new ve.Range( 41, 41 ),
+		'range': new ve.Range( 41 ),
 		'mode': 'leaves',
 		'expected': [
 			// preformatted/text
 			{
 				'node': [ 2, 2 ],
-				'range': new ve.Range( 41, 41 ),
+				'range': new ve.Range( 41 ),
 				'index': 2,
 				'nodeRange': new ve.Range( 41, 42 ),
 				'nodeOuterRange': new ve.Range( 41, 42 ),
@@ -3468,10 +3468,10 @@ ve.dm.example.selectNodesCases = [
 			// table
 			{
 				'node': [ 0 ],
-				'range': new ve.Range( 1, 1 ),
+				'range': new ve.Range( 1 ),
 				'index': 0,
 				'indexInNode': 0,
-				'nodeRange': new ve.Range( 1, 1 ),
+				'nodeRange': new ve.Range( 1 ),
 				'nodeOuterRange': new ve.Range( 0, 2 ),
 				'parentOuterRange': new ve.Range( 0, 4 )
 			}
