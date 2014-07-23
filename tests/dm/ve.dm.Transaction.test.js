@@ -427,6 +427,7 @@ QUnit.test( 'newFromRemoval', function ( assert ) {
 		alienWithEmptyDoc = ve.dm.example.createExampleDocument( 'alienWithEmptyData' ),
 		metaDoc = ve.dm.example.createExampleDocument( 'withMeta' ),
 		internalDoc = ve.dm.example.createExampleDocument( 'internalData' ),
+		inlineAtEdgesDoc = ve.dm.example.createExampleDocument( 'inlineAtEdges' ),
 		cases = {
 			'content in first element': {
 				args: [ doc, new ve.Range( 1, 3 ) ],
@@ -453,6 +454,18 @@ QUnit.test( 'newFromRemoval', function ( assert ) {
 						insert: []
 					},
 					{ type: 'retain', length: 3 }
+				]
+			},
+			'branch offset to content offset': {
+				args: [ doc, new ve.Range( 55, 59 ) ],
+				ops: [
+					{ type: 'retain', length: 56 },
+					{
+						type: 'replace',
+						remove: doc.getData().slice( 56, 59 ),
+						insert: []
+					},
+					{ type: 'retain', length: 4 }
 				]
 			},
 			'first element': {
@@ -605,6 +618,18 @@ QUnit.test( 'newFromRemoval', function ( assert ) {
 						insert: []
 					},
 					{ type: 'retain', length: alienWithEmptyDoc.data.getLength() - 6 }
+				]
+			},
+			'from end of inline alien and end of paragraph to same in next paragraph': {
+				args: [ inlineAtEdgesDoc, new ve.Range( 8, 17 ) ],
+				ops: [
+					{ type: 'retain', length: 8 },
+					{
+						type: 'replace',
+						remove: inlineAtEdgesDoc.getData().slice( 8, 17 ),
+						insert: []
+					},
+					{ type: 'retain', length: 3 }
 				]
 			},
 			'merging two paragraphs inside definitionListItems': {
@@ -1490,7 +1515,7 @@ QUnit.test( 'newFromContentBranchConversion', function ( assert ) {
 						remove: [ { type: '/paragraph' } ],
 						insert: [ { type: '/heading' } ]
 					},
-					{ type: 'retain', length: 2 }
+					{ type: 'retain', length: 11 }
 				]
 			},
 			'zero-length range inside inline node at the start': {
@@ -1507,7 +1532,7 @@ QUnit.test( 'newFromContentBranchConversion', function ( assert ) {
 						remove: [ { type: '/paragraph' } ],
 						insert: [ { type: '/heading' } ]
 					},
-					{ type: 'retain', length: 2 }
+					{ type: 'retain', length: 11 }
 				]
 			},
 			'zero-length range after inline node at the start': {
@@ -1524,7 +1549,7 @@ QUnit.test( 'newFromContentBranchConversion', function ( assert ) {
 						remove: [ { type: '/paragraph' } ],
 						insert: [ { type: '/heading' } ]
 					},
-					{ type: 'retain', length: 2 }
+					{ type: 'retain', length: 11 }
 				]
 			},
 			'zero-length range before inline node at the end': {
@@ -1541,7 +1566,7 @@ QUnit.test( 'newFromContentBranchConversion', function ( assert ) {
 						remove: [ { type: '/paragraph' } ],
 						insert: [ { type: '/heading' } ]
 					},
-					{ type: 'retain', length: 2 }
+					{ type: 'retain', length: 11 }
 				]
 			},
 			'zero-length range inside inline node at the end': {
@@ -1558,7 +1583,7 @@ QUnit.test( 'newFromContentBranchConversion', function ( assert ) {
 						remove: [ { type: '/paragraph' } ],
 						insert: [ { type: '/heading' } ]
 					},
-					{ type: 'retain', length: 2 }
+					{ type: 'retain', length: 11 }
 				]
 			},
 			'zero-length range after inline node at the end': {
@@ -1575,7 +1600,7 @@ QUnit.test( 'newFromContentBranchConversion', function ( assert ) {
 						remove: [ { type: '/paragraph' } ],
 						insert: [ { type: '/heading' } ]
 					},
-					{ type: 'retain', length: 2 }
+					{ type: 'retain', length: 11 }
 				]
 			}
 		};
