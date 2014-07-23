@@ -817,7 +817,22 @@ ve.dm.example.inlineAtEdges = [
 	// 8
 	{ type: '/paragraph' },
 	// 9
+	{ type: 'paragraph' },
+	// 10
+	ve.dm.example.image.data,
+	// 11
+	{ type: '/image' },
+	// 12
+	'B', 'a', 'r',
+	// 13
+	{ type: 'alienInline', attributes: { domElements: $( '<foobar />' ).toArray() } },
+	// 14
+	{ type: '/alienInline' },
+	// 15
+	{ type: '/paragraph' },
+	// 16
 	{ type: 'internalList' },
+	// 17
 	{ type: '/internalList' }
 ];
 
