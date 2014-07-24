@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_a10f7239",
+        "filename": "modules/ve/dm/ve.dm.Transaction.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 1338,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-24T00:59:54Z",
+      "side": 1,
+      "message": "Are you sure this is right? nodeRange feels right to me here. Say first is fully covered but last is partially covered, e.g. |\u003cp\u003eFoo\u003c/p\u003e\u003cp\u003eBa|rs\u003c/p\u003e . Then what we want is to merge the two paragraphs, i.e. \u003cp\u003e|Foo\u003c/p\u003e\u003cp\u003eBa|rs\u003c/p\u003e --\u003e \u003cp\u003ers\u003c/p\u003e\n\nOr maybe I misunderstand what first and last end up being?",
+      "revId": "07c33fd82a7aced8765857677407e27fc08bd4eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
