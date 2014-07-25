@@ -14,4 +14,5 @@
 	background-position: center center;
 	/* @embed */
 	background-image: url(../../../../ve/ui/styles/images/comment.svg);
+	opacity: 0.5;
 }
