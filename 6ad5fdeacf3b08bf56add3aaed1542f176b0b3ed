@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_b71e8673",
+        "filename": "modules/ve/dm/nodes/ve.dm.CommentNode.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-07-25T18:16:24Z",
+      "side": 1,
+      "message": "It\u0027s moved up in the next commit, I\u0027ll fix it there",
+      "parentUuid": "8e28a382_976eeafc",
+      "revId": "6ad5fdeacf3b08bf56add3aaed1542f176b0b3ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_f7a3ee3d",
         "filename": "modules/ve/dm/nodes/ve.dm.CommentNode.js",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_97238ab4",
+        "filename": "modules/ve/dm/nodes/ve.dm.CommentNode.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-07-25T18:16:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_f7a3ee3d",
+      "revId": "6ad5fdeacf3b08bf56add3aaed1542f176b0b3ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_776ffef9",
         "filename": "modules/ve/dm/nodes/ve.dm.CommentNode.js",
         "patchSetId": 2
@@ -47,6 +83,24 @@
       "writtenOn": "2014-07-25T18:08:14Z",
       "side": 1,
       "message": "function VeDm*Fake*CommentNode",
+      "revId": "6ad5fdeacf3b08bf56add3aaed1542f176b0b3ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_77149e51",
+        "filename": "modules/ve/dm/nodes/ve.dm.CommentNode.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-07-25T18:16:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_776ffef9",
       "revId": "6ad5fdeacf3b08bf56add3aaed1542f176b0b3ed",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
