@@ -83,8 +83,6 @@ ve.ce.View.static.renderHtmlAttributes = [
 	'summary', 'title', 'type', 'typeof', 'valign', 'value', 'width'
 ];
 
-/* Methods */
-
 /**
  * Get an HTML document from the model, to use for URL resolution.
  *

@@ -422,6 +422,16 @@ ve.dm.Model.prototype.hasAttributes = function ( attributes, strict ) {
 };
 
 /**
+ * Get a plain text description of the model
+ *
+ * @inheritable
+ * @returns {string} Description of model
+ */
+ve.dm.Model.prototype.getDescription = function () {
+	return '';
+};
+
+/**
  * Get a clone of the model's linear model element.
  *
  * The attributes object will be deep-copied.

@@ -71,6 +71,21 @@ ve.dm.LanguageAnnotation.prototype.getComparableObject = function () {
 	};
 };
 
+/**
+ * @inheritdoc
+ */
+ve.dm.LanguageAnnotation.prototype.getDescription = function () {
+	var lang = this.getAttribute( 'lang' ).toLowerCase(),
+		name = ve.init.platform.getLanguageName( lang ),
+		dir = ( this.getAttribute( 'dir' ) || '' ).toUpperCase();
+
+	if ( !dir || dir === ve.init.platform.getLanguageDirection( lang ).toUpperCase() ) {
+		return ve.msg( 'visualeditor-languageannotation-description', name );
+	} else {
+		return ve.msg( 'visualeditor-languageannotation-description-with-dir', name, dir );
+	}
+};
+
 /* Registration */
 
 ve.dm.modelRegistry.register( ve.dm.LanguageAnnotation );

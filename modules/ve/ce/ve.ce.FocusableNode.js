@@ -70,6 +70,7 @@ ve.ce.FocusableNode.static.isFocusable = true;
 ve.ce.FocusableNode.prototype.createHighlight = function () {
 	return this.$( '<div>' )
 		.addClass( 've-ce-focusableNode-highlight' )
+		.attr( 'title', this.model.getDescription() )
 		.attr( 'draggable', false )
 		.append( this.$( '<img>' )
 			.addClass( 've-ce-focusableNode-highlight-relocatable-marker' )

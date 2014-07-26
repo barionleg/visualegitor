@@ -74,13 +74,20 @@ ve.dm.LinkAnnotation.prototype.getHref = function () {
 };
 
 /**
- * @returns {Object}
+ * @inheritdoc
  */
 ve.dm.LinkAnnotation.prototype.getComparableObject = function () {
 	return {
 		type: this.getType(),
 		href: this.getAttribute( 'href' )
 	};
+};
+
+/**
+ * @inheritdoc
+ */
+ve.dm.LinkAnnotation.prototype.getDescription = function () {
+	return this.getHref();
 };
 
 /* Registration */

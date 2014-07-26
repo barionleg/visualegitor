@@ -41,15 +41,6 @@ ve.ce.CommentNode.static.name = 'comment';
 
 ve.ce.CommentNode.static.primaryCommandName = 'comment';
 
-/* Methods */
-
-/**
-* @inheritdoc ve.ce.Node
-*/
-ve.ce.CommentNode.static.getDescription = function ( model ) {
-	return model.getAttribute( 'text' );
-};
-
 /* Registration */
 
 ve.ce.nodeFactory.register( ve.ce.CommentNode );

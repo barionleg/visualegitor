@@ -54,6 +54,15 @@ ve.dm.CommentNode.static.toDomElements = function ( dataElement, doc, converter 
 	}
 };
 
+/* Methods */
+
+/**
+ * @inheritdoc
+ */
+ve.dm.CommentNode.prototype.getDescription = function () {
+	return this.getAttribute( 'text' );
+};
+
 /**
  * @class
  * @extends ve.dm.CommentNode
