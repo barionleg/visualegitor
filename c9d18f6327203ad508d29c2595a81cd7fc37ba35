@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_22fdaf69",
+        "filename": "demos/ve/demo.css",
+        "patchSetId": 23
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-26T00:36:22Z",
+      "side": 1,
+      "message": "Commented-out CSS?",
+      "revId": "c9d18f6327203ad508d29c2595a81cd7fc37ba35",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_02f6338c",
+        "filename": "demos/ve/pages/h1.html",
+        "patchSetId": 23
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-26T00:36:22Z",
+      "side": 1,
+      "message": "Maybe create this as a separate demo? The demo called h1.html should presumably contain an h1.",
+      "revId": "c9d18f6327203ad508d29c2595a81cd7fc37ba35",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_62361751",
+        "filename": "modules/ve/ce/ve.ce.ContentBranchNode.js",
+        "patchSetId": 23
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-26T00:36:22Z",
+      "side": 1,
+      "message": "Make this if ( relCursor \u003e\u003d 0 \u0026\u0026 relCursor \u003c\u003d this.getLength() )",
+      "revId": "c9d18f6327203ad508d29c2595a81cd7fc37ba35",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_42855bd2",
+        "filename": "modules/ve/ce/ve.ce.ContentBranchNode.js",
+        "patchSetId": 23
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-26T00:36:22Z",
+      "side": 1,
+      "message": "This childLength \u003d 1 / childLength \u003d 2 logic kind of bothers me. It\u0027s making a lot of assumptions about what ve.ce.TextNode will do (deliver text split up in 1-character strings) and what other nodes will not do (use text in any form whatsoever, instead always use jQuery objects). These assumptions happen to hold true right now but I really don\u0027t want to rely on them.\n\nWe could clean this up by tracking the length of each child in the loop that aggregates annotatedHtml. I think I\u0027ll do that later, maybe in a post-merge cleanup commit.",
+      "revId": "c9d18f6327203ad508d29c2595a81cd7fc37ba35",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_223c8f2c",
+        "filename": "modules/ve/ce/ve.ce.ContentBranchNode.js",
+        "patchSetId": 23
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-26T00:36:22Z",
+      "side": 1,
+      "message": "Use htmlItem instanceof jQuery. Or just don\u0027t bother checking, we don\u0027t do it in the other code path either: instead we just assume that everything that\u0027s not a string is a jQuery object (or at least behaves like an array of DOM nodes)",
+      "revId": "c9d18f6327203ad508d29c2595a81cd7fc37ba35",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_c2782bf0",
+        "filename": "modules/ve/ce/ve.ce.ContentBranchNode.js",
+        "patchSetId": 23
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-26T00:36:22Z",
+      "side": 1,
+      "message": "Add comment explaining that annotationsChanged gets set to true by openAnnotation and closeAnnotation. Otherwise this is quite mysterious",
+      "revId": "c9d18f6327203ad508d29c2595a81cd7fc37ba35",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_c24f0bc0",
+        "filename": "modules/ve/ce/ve.ce.ContentBranchNode.js",
+        "patchSetId": 23
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-26T00:36:22Z",
+      "side": 1,
+      "message": "This could benefit from jQuery constructor, would make the code more concise. I\u0027ll do that soon.",
+      "revId": "c9d18f6327203ad508d29c2595a81cd7fc37ba35",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
