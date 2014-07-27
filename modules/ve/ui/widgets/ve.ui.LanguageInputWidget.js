@@ -75,7 +75,9 @@ ve.ui.LanguageInputWidget = function VeUiLanguageInputWidget( config ) {
 			icon: 'text-dir-ltr'
 		} )
 	] );
-	this.overlay.$element.append( this.dialogs.$element );
+	this.overlay.$element
+		.addClass( 've-ui-surface-globalOverlay' )
+		.append( this.dialogs.$element );
 	$( 'body' ).append( this.overlay.$element );
 	// TODO: Rethink the layout, maybe integrate the change button into the language field
 	// TODO: Consider using getAutonym to display a nicer language name label somewhere
