@@ -73,7 +73,7 @@ ve.ui.CommentInspector.prototype.initialize = function () {
 		autosize: true
 	} );
 
-	this.frame.$content.addClass( 've-ui-commentInspector-content' );
+	this.$content.addClass( 've-ui-commentInspector-content' );
 	this.form.$element.append( this.textWidget.$element );
 };
 
