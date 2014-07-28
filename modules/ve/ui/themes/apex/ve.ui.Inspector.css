@@ -5,7 +5,7 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
-.ve-ui-inspector .oo-ui-frame {
+.ve-ui-inspector .oo-ui-window-frame iframe {
 	width: 17.25em;
 	height: 3em;
 }

@@ -80,7 +80,7 @@ ve.ui.FragmentInspector.prototype.initialize = function () {
 	this.form.connect( this, { submit: 'onFormSubmit' } );
 
 	// Initialization
-	this.frame.$content.addClass( 've-ui-fragmentInspector-content' );
+	this.$content.addClass( 've-ui-fragmentInspector-content' );
 	this.container.$element.append( this.form.$element, this.$otherActions );
 	this.$body.append( this.container.$element );
 };

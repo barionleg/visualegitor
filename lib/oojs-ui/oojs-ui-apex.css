@@ -1,12 +1,12 @@
 /*!
- * OOjs UI v0.1.0-pre (a7ce4d48d9)
+ * OOjs UI v0.1.0-pre (b0e8f2d611)
  * https://www.mediawiki.org/wiki/OOjs_UI
  *
  * Copyright 2011–2014 OOjs Team and other contributors.
  * Released under the MIT license
  * http://oojs.mit-license.org
  *
- * Date: 2014-07-23T23:47:29Z
+ * Date: 2014-07-28T21:40:22Z
  */
 .oo-ui-dialog-content > .oo-ui-window-head,
 .oo-ui-dialog-content > .oo-ui-window-body,
@@ -39,11 +39,6 @@
 
 .oo-ui-dialog-content > .oo-ui-window-overlay {
   z-index: 3;
-}
-
-.oo-ui-frame-content {
-  font-family: sans-serif;
-  font-size: 0.8em;
 }
 
 .oo-ui-toolbar-bar {
@@ -93,11 +88,13 @@
   color: #000;
 }
 
-.oo-ui-window-content {
+.oo-ui-window-isolated.oo-ui-window-content {
+  font-family: sans-serif;
+  font-size: 0.8em;
   background: transparent;
 }
 
-.oo-ui-window-overlay {
+.oo-ui-window-isolated.oo-ui-window-overlay {
   font-family: sans-serif;
   font-size: 1em;
   line-height: 1.5em;

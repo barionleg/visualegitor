@@ -70,7 +70,7 @@ ve.ui.NodeInspector.prototype.initialize = function ( data ) {
 	ve.ui.NodeInspector.super.prototype.initialize.call( this, data );
 
 	// Initialization
-	this.frame.$content.addClass( 've-ui-nodeInspector' );
+	this.$content.addClass( 've-ui-nodeInspector' );
 };
 
 /**
