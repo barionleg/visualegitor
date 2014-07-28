@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_8daa4867",
+        "filename": "modules/ve/ce/ve.ce.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-28T19:59:11Z",
+      "side": 1,
+      "message": "PS4 makes this variable do what it\u0027s supposed to do in summer",
+      "parentUuid": "8e28a382_0df3f8d2",
+      "revId": "7c5d971cd15f4c69560ad99ef5342aa9442e9e34",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_cdc05057",
         "filename": "modules/ve/ce/ve.ce.js",
         "patchSetId": 3
@@ -48,6 +66,24 @@
       "side": 1,
       "message": "Yeah that\u0027s sensible.",
       "parentUuid": "8e28a382_cdc05057",
+      "revId": "7c5d971cd15f4c69560ad99ef5342aa9442e9e34",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_0da778a5",
+        "filename": "modules/ve/ce/ve.ce.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-28T19:59:11Z",
+      "side": 1,
+      "message": "Done in PS4, with a guard for viewNode being null as a bonus",
+      "parentUuid": "8e28a382_8db6c8f4",
       "revId": "7c5d971cd15f4c69560ad99ef5342aa9442e9e34",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
