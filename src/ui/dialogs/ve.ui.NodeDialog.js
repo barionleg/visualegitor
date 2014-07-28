@@ -70,7 +70,7 @@ ve.ui.NodeDialog.prototype.initialize = function ( data ) {
 	ve.ui.NodeDialog.super.prototype.initialize.call( this, data );
 
 	// Initialization
-	this.frame.$content.addClass( 've-ui-nodeDialog' );
+	this.$content.addClass( 've-ui-nodeDialog' );
 };
 
 /**

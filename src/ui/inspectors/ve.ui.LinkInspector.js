@@ -115,7 +115,7 @@ ve.ui.LinkInspector.prototype.initialize = function () {
 	this.targetInput.connect( this, { change: 'onTargetInputChange' } );
 
 	// Initialization
-	this.frame.$content.addClass( 've-ui-linkInspector-content' );
+	this.$content.addClass( 've-ui-linkInspector-content' );
 	this.form.$element.append( this.targetInput.$element );
 };
 
