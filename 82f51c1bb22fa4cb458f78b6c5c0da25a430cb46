@@ -36,6 +36,57 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_6b25c455",
+        "filename": "modules/ve/ce/ve.ce.Surface.js",
+        "patchSetId": 25
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-28T23:13:20Z",
+      "side": 1,
+      "message": "Misspells additions",
+      "revId": "82f51c1bb22fa4cb458f78b6c5c0da25a430cb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_30616b00",
+        "filename": "modules/ve/ce/ve.ce.Surface.js",
+        "patchSetId": 25
+      },
+      "lineNbr": 878,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-28T23:13:20Z",
+      "side": 1,
+      "message": "Conservatively, I\u0027d say no. Who knows if an IME might temporarily unfocus the surface or whatever.",
+      "revId": "82f51c1bb22fa4cb458f78b6c5c0da25a430cb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_105aef52",
+        "filename": "modules/ve/ce/ve.ce.Surface.js",
+        "patchSetId": 25
+      },
+      "lineNbr": 887,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-28T23:13:20Z",
+      "side": 1,
+      "message": "Excessive spacing: current style calls for node.childNodes[range.endOffset - 1] or node.childNodes[ range.endOffset - 1]\n\nPutting spaces inside the [] is accepted (James/Timo say \"encouraged\") for complex expressions, so that would be fine, but there\u0027s no space /before/ the [",
+      "revId": "82f51c1bb22fa4cb458f78b6c5c0da25a430cb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_797da9af",
         "filename": "modules/ve/ce/ve.ce.Surface.js",
         "patchSetId": 25
@@ -47,6 +98,91 @@
       "writtenOn": "2014-07-28T07:32:48Z",
       "side": 1,
       "message": "Should be removed if not needed.",
+      "revId": "82f51c1bb22fa4cb458f78b6c5c0da25a430cb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_6bbb84de",
+        "filename": "modules/ve/ce/ve.ce.Surface.js",
+        "patchSetId": 25
+      },
+      "lineNbr": 1443,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-28T23:13:20Z",
+      "side": 1,
+      "message": "So remove this handler?",
+      "revId": "82f51c1bb22fa4cb458f78b6c5c0da25a430cb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_4bd44817",
+        "filename": "modules/ve/ce/ve.ce.Surface.js",
+        "patchSetId": 25
+      },
+      "lineNbr": 1453,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-28T23:13:20Z",
+      "side": 1,
+      "message": "Same",
+      "revId": "82f51c1bb22fa4cb458f78b6c5c0da25a430cb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_2bd1fc25",
+        "filename": "modules/ve/ce/ve.ce.Surface.js",
+        "patchSetId": 25
+      },
+      "lineNbr": 1458,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-28T23:13:20Z",
+      "side": 1,
+      "message": "Lies",
+      "revId": "82f51c1bb22fa4cb458f78b6c5c0da25a430cb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_0bcac070",
+        "filename": "modules/ve/ce/ve.ce.Surface.js",
+        "patchSetId": 25
+      },
+      "lineNbr": 1565,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-28T23:13:20Z",
+      "side": 1,
+      "message": "Document.\n\nAlso, the way we do omitted parameters these days is we document them with @param , and then we don\u0027t do the ( /* foo */ ) thing, we just do ()",
+      "revId": "82f51c1bb22fa4cb458f78b6c5c0da25a430cb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_ebc6546a",
+        "filename": "modules/ve/ce/ve.ce.Surface.js",
+        "patchSetId": 25
+      },
+      "lineNbr": 1572,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-28T23:13:20Z",
+      "side": 1,
+      "message": "Document",
       "revId": "82f51c1bb22fa4cb458f78b6c5c0da25a430cb46",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -70,6 +206,108 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_0ba1a09e",
+        "filename": "modules/ve/ce/ve.ce.Surface.js",
+        "patchSetId": 25
+      },
+      "lineNbr": 1829,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-28T23:13:20Z",
+      "side": 1,
+      "message": "You could also document this as:\n\n    @param {jQuery.Event} [e] Keydown event\n\nwhich indicates the parameter is optional. If the caller then omits the parameter, e will be undefined.",
+      "revId": "82f51c1bb22fa4cb458f78b6c5c0da25a430cb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_4bc8c859",
+        "filename": "modules/ve/ce/ve.ce.Surface.js",
+        "patchSetId": 25
+      },
+      "lineNbr": 1968,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-28T23:13:20Z",
+      "side": 1,
+      "message": "Remove commented-out code? If the new line is actually right that is. We have issues because 1) pawning in slugs currently fights with unicorning and explodes; 2) some functionality that relied on pawning (forceContinuation / wordbreak stuff) now doesn\u0027t work any more.\n\nAlso, if we\u0027re gonna stop calling needsPawn, remove that function.",
+      "revId": "82f51c1bb22fa4cb458f78b6c5c0da25a430cb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_ebbad4b4",
+        "filename": "modules/ve/ce/ve.ce.Surface.js",
+        "patchSetId": 25
+      },
+      "lineNbr": 2585,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-28T23:13:20Z",
+      "side": 1,
+      "message": "Document",
+      "revId": "82f51c1bb22fa4cb458f78b6c5c0da25a430cb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_0bbe40ab",
+        "filename": "modules/ve/ce/ve.ce.Surface.js",
+        "patchSetId": 25
+      },
+      "lineNbr": 2587,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-28T23:13:20Z",
+      "side": 1,
+      "message": "No need to do \u003d\u003d\u003d true",
+      "revId": "82f51c1bb22fa4cb458f78b6c5c0da25a430cb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_cbdb9823",
+        "filename": "modules/ve/ce/ve.ce.Surface.js",
+        "patchSetId": 25
+      },
+      "lineNbr": 2594,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-28T23:13:20Z",
+      "side": 1,
+      "message": "Write slightly more docs for these next three functions; in particular, explain the difference between NotUnicorning and NotUnicorningAll",
+      "revId": "82f51c1bb22fa4cb458f78b6c5c0da25a430cb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_2bcc5c64",
+        "filename": "modules/ve/ce/ve.ce.Surface.js",
+        "patchSetId": 25
+      },
+      "lineNbr": 2603,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-28T23:13:20Z",
+      "side": 1,
+      "message": "Add a comment explaining why we rerender in this case",
+      "revId": "82f51c1bb22fa4cb458f78b6c5c0da25a430cb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_f96999f6",
         "filename": "modules/ve/ce/ve.ce.SurfaceObserver.js",
         "patchSetId": 25
@@ -87,6 +325,160 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_5064f710",
+        "filename": "modules/ve/ce/ve.ce.SurfaceObserver.js",
+        "patchSetId": 25
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-28T23:13:20Z",
+      "side": 1,
+      "message": "This code probably shouldn\u0027t actually be removed, because we probably do want to keep the polling loop around. We just need to find a way to make it play nice with IMEs.",
+      "parentUuid": "8e28a382_f96999f6",
+      "revId": "82f51c1bb22fa4cb458f78b6c5c0da25a430cb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_ab072c84",
+        "filename": "modules/ve/ce/ve.ce.js",
+        "patchSetId": 25
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-28T23:13:20Z",
+      "side": 1,
+      "message": "Is this code still right? Don\u0027t unicorns have multiple classes now?",
+      "revId": "82f51c1bb22fa4cb458f78b6c5c0da25a430cb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_0bec00b7",
+        "filename": "modules/ve/ce/ve.ce.js",
+        "patchSetId": 25
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-28T23:13:20Z",
+      "side": 1,
+      "message": "Write actual documentation for these two functions",
+      "revId": "82f51c1bb22fa4cb458f78b6c5c0da25a430cb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_eb4c14cd",
+        "filename": "modules/ve/dm/ve.dm.Document.js",
+        "patchSetId": 25
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-28T23:13:20Z",
+      "side": 1,
+      "message": "In the future I might try to come up with a way to make this precommit/presync stuff unnecessary.",
+      "revId": "82f51c1bb22fa4cb458f78b6c5c0da25a430cb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_6be704a8",
+        "filename": "modules/ve/dm/ve.dm.Surface.js",
+        "patchSetId": 25
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-28T23:13:20Z",
+      "side": 1,
+      "message": "Make this doc comment something other than a literal copy of getSelection\u0027s, so someone reading the docs stands a chance at figuring out what the difference is between the two.",
+      "revId": "82f51c1bb22fa4cb458f78b6c5c0da25a430cb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_6b9ee40b",
+        "filename": "modules/ve/dm/ve.dm.Surface.js",
+        "patchSetId": 25
+      },
+      "lineNbr": 813,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-28T23:13:20Z",
+      "side": 1,
+      "message": "Correct syntax: ve.ce.ContentBranchNode#getRenderedContents",
+      "revId": "82f51c1bb22fa4cb458f78b6c5c0da25a430cb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_eb89b4cb",
+        "filename": "modules/ve/dm/ve.dm.Surface.js",
+        "patchSetId": 25
+      },
+      "lineNbr": 824,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-28T23:13:20Z",
+      "side": 1,
+      "message": "Lies",
+      "revId": "82f51c1bb22fa4cb458f78b6c5c0da25a430cb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_cbba786c",
+        "filename": "modules/ve/dm/ve.dm.TransactionProcessor.js",
+        "patchSetId": 25
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-28T23:13:20Z",
+      "side": 1,
+      "message": "This function doesn\u0027t actually take a parameter.",
+      "revId": "82f51c1bb22fa4cb458f78b6c5c0da25a430cb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_8bb0f089",
+        "filename": "modules/ve/tests/ce/ve.ce.test.js",
+        "patchSetId": 25
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-28T23:13:20Z",
+      "side": 1,
+      "message": "Why are you creating elt in the context of a new document? Why not just use document.createElement( \u0027div\u0027 ) ?",
+      "revId": "82f51c1bb22fa4cb458f78b6c5c0da25a430cb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_d955bd27",
         "filename": "modules/ve/ve.EventSequencer.js",
         "patchSetId": 25
@@ -98,6 +490,24 @@
       "writtenOn": "2014-07-28T07:32:48Z",
       "side": 1,
       "message": "var must be the first thing in the function.",
+      "revId": "82f51c1bb22fa4cb458f78b6c5c0da25a430cb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_469c3db8",
+        "filename": "modules/ve/ve.EventSequencer.js",
+        "patchSetId": 25
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-28T23:13:20Z",
+      "side": 1,
+      "message": "This line should probably be removed in the final version",
+      "parentUuid": "8e28a382_d955bd27",
       "revId": "82f51c1bb22fa4cb458f78b6c5c0da25a430cb46",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -132,6 +542,40 @@
       "writtenOn": "2014-07-28T07:32:48Z",
       "side": 1,
       "message": "Missing tab.",
+      "revId": "82f51c1bb22fa4cb458f78b6c5c0da25a430cb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_665739ce",
+        "filename": "modules/ve/ve.EventSequencer.js",
+        "patchSetId": 25
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-28T23:13:20Z",
+      "side": 1,
+      "message": "This is needlessly complex. It\u0027s much simpler to just do this.pendingCalls \u003d afterKeyDownCalls;",
+      "revId": "82f51c1bb22fa4cb458f78b6c5c0da25a430cb46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_8620e547",
+        "filename": "modules/ve/ve.js",
+        "patchSetId": 25
+      },
+      "lineNbr": 945,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-28T23:13:20Z",
+      "side": 1,
+      "message": "Change to: All chains have been checked to start at the same root node",
       "revId": "82f51c1bb22fa4cb458f78b6c5c0da25a430cb46",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
