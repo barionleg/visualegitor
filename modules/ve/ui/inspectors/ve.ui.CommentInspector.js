@@ -49,12 +49,6 @@ ve.ui.CommentInspector.static.actions = [
 		label: OO.ui.deferMsg( 'visualeditor-commentinspector-insert' ),
 		flags: [ 'constructive', 'primary' ],
 		modes: 'insert'
-	},
-	{
-		action: 'remove',
-		label: OO.ui.deferMsg( 'visualeditor-inspector-remove-tooltip' ),
-		flags: 'destructive',
-		modes: 'edit'
 	}
 ];
 
@@ -81,7 +75,7 @@ ve.ui.CommentInspector.prototype.initialize = function () {
  * @inheritdoc
  */
 ve.ui.CommentInspector.prototype.getActionProcess = function ( action ) {
-	if ( action === 'remove' || action === 'insert' ) {
+	if ( action === 'insert' ) {
 		return new OO.ui.Process( function () {
 			this.close( { action: action } );
 		}, this );
@@ -145,7 +139,7 @@ ve.ui.CommentInspector.prototype.getTeardownProcess = function ( data ) {
 				rawNewValue = this.whitespace[0] + newValue + this.whitespace[1];
 
 			if ( this.commentNode ) {
-				if ( data.action === 'remove' || newValue === '' ) {
+				if ( newValue === '' ) {
 					// Remove comment node
 					this.fragment = this.getFragment().clone( this.commentNode.getOuterRange() );
 					this.fragment.removeContent();
