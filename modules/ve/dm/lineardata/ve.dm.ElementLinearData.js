@@ -530,7 +530,7 @@ ve.dm.ElementLinearData.prototype.getRelativeOffset = function ( offset, distanc
 	}
 	// Initial values
 	direction = (
-		offset <= 0 ? 1 : (
+		offset < 0 ? 1 : (
 			offset >= this.getLength() ? -1 : (
 				distance > 0 ? 1 : -1
 			)
