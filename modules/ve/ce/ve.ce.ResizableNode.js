@@ -190,7 +190,7 @@ ve.ce.ResizableNode.prototype.showHandles = function ( handles ) {
 		this.$resizeHandles.find( 'div' ).show();
 	} else {
 		this.$resizeHandles.find( 'div' ).hide();
-		for ( i = handles.length; i >= 0; i-- ) {
+		for ( i = handles.length; i--; ) {
 			// The following classes can be used here:
 			// ve-ce-resizableNode-nwHandle
 			// ve-ce-resizableNode-neHandle
