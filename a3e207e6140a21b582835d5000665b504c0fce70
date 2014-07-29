@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_ea9d270e",
+        "filename": "modules/ve/ui/widgets/ve.ui.WhitespaceTextInputWidget.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-29T18:41:01Z",
+      "side": 1,
+      "message": "config.whitespace should be respected here",
+      "revId": "a3e207e6140a21b582835d5000665b504c0fce70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_ea73e7e2",
+        "filename": "modules/ve/ui/widgets/ve.ui.WhitespaceTextInputWidget.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-29T18:41:01Z",
+      "side": 1,
+      "message": "This does not work if the value is all whitespace: in that case, the full value will be recorded twice (both as pre and post), and when you attempt to get the value back out again, you\u0027ll get a string that\u0027s twice as long.\n\nThe else code path does protect against this, by removing the pre-whitespace before identifying the post-whitespace.",
+      "revId": "a3e207e6140a21b582835d5000665b504c0fce70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
