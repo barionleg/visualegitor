@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_00560f09",
+        "filename": "modules/ve/ui/widgets/ve.ui.WhitespaceTextInputWidget.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-07-29T22:31:00Z",
+      "side": 1,
+      "message": "I thought that was a bit long so it\u0027s a shorthand. Undecided...",
+      "parentUuid": "8e28a382_909374a5",
+      "revId": "a3e207e6140a21b582835d5000665b504c0fce70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_ea9d270e",
         "filename": "modules/ve/ui/widgets/ve.ui.WhitespaceTextInputWidget.js",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_4050970d",
+        "filename": "modules/ve/ui/widgets/ve.ui.WhitespaceTextInputWidget.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-07-29T22:31:00Z",
+      "side": 1,
+      "message": "I meant to get rid of config.whitespace.",
+      "parentUuid": "8e28a382_ea9d270e",
+      "revId": "a3e207e6140a21b582835d5000665b504c0fce70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_ea73e7e2",
         "filename": "modules/ve/ui/widgets/ve.ui.WhitespaceTextInputWidget.js",
         "patchSetId": 2
@@ -47,6 +83,24 @@
       "writtenOn": "2014-07-29T18:41:01Z",
       "side": 1,
       "message": "This does not work if the value is all whitespace: in that case, the full value will be recorded twice (both as pre and post), and when you attempt to get the value back out again, you\u0027ll get a string that\u0027s twice as long.\n\nThe else code path does protect against this, by removing the pre-whitespace before identifying the post-whitespace.",
+      "revId": "a3e207e6140a21b582835d5000665b504c0fce70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_a0461b52",
+        "filename": "modules/ve/ui/widgets/ve.ui.WhitespaceTextInputWidget.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-07-29T22:31:00Z",
+      "side": 1,
+      "message": "Meant to fix this one too...",
+      "parentUuid": "8e28a382_ea73e7e2",
       "revId": "a3e207e6140a21b582835d5000665b504c0fce70",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
