@@ -507,7 +507,7 @@ ve.dm.ElementLinearData.prototype.trimOuterSpaceFromRange = function ( range ) {
  * @returns {number} Relative valid offset or -1 if there are no valid offsets in data
  * @throws {Error} offset was inside a handlesOwnChildren node
  */
-ve.dm.ElementLinearData.prototype.getRelativeOffset = function ( offset, distance, callback ) {
+ve.dm.ElementLinearData.prototype.getRelativeOffset = function ( offset, distance, callback, bounce ) {
 	var i, direction,
 		dataOffset, isOpen,
 		args = Array.prototype.slice.call( arguments, 3 ),
@@ -524,10 +524,13 @@ ve.dm.ElementLinearData.prototype.getRelativeOffset = function ( offset, distanc
 			distance = 1;
 		}
 	}
+	if ( bounce === undefined ) {
+		bounce = true;
+	}
 	// Initial values
 	direction = (
-		offset <= 0 ? 1 : (
-			offset >= this.getLength() ? -1 : (
+		offset <= 0 && bounce ? 1 : (
+			offset >= this.getLength() && bounce ? -1 : (
 				distance > 0 ? 1 : -1
 			)
 		)
@@ -601,8 +604,8 @@ ve.dm.ElementLinearData.prototype.getRelativeOffset = function ( offset, distanc
  * @param {number} distance Number of content offsets to move
  * @returns {number} Relative content offset or -1 if there are no valid offsets in data
  */
-ve.dm.ElementLinearData.prototype.getRelativeContentOffset = function ( offset, distance ) {
-	return this.getRelativeOffset( offset, distance, this.constructor.prototype.isContentOffset );
+ve.dm.ElementLinearData.prototype.getRelativeContentOffset = function ( offset, distance, bounce ) {
+	return this.getRelativeOffset( offset, distance, this.constructor.prototype.isContentOffset, bounce );
 };
 
 /**
@@ -619,16 +622,16 @@ ve.dm.ElementLinearData.prototype.getRelativeContentOffset = function ( offset, 
  * @param {number} [direction] Direction to prefer matching offset in, -1 for left and 1 for right
  * @returns {number} Nearest content offset or -1 if there are no valid offsets in data
  */
-ve.dm.ElementLinearData.prototype.getNearestContentOffset = function ( offset, direction ) {
+ve.dm.ElementLinearData.prototype.getNearestContentOffset = function ( offset, direction, bounce ) {
 	if ( this.isContentOffset( offset ) ) {
 		return offset;
 	}
 	if ( direction === undefined ) {
-		var left = this.getRelativeContentOffset( offset, -1 ),
-			right = this.getRelativeContentOffset( offset, 1 );
+		var left = this.getRelativeContentOffset( offset, -1, bounce ),
+			right = this.getRelativeContentOffset( offset, 1, bounce );
 		return offset - left < right - offset ? left : right;
 	} else {
-		return this.getRelativeContentOffset( offset, direction > 0 ? 1 : -1 );
+		return this.getRelativeContentOffset( offset, direction > 0 ? 1 : -1, bounce );
 	}
 };
 
