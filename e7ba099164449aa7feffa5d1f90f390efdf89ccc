@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_b6c9d05f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-07-29T08:13:59Z",
+      "side": 1,
+      "message": "This already exists as of yesterday.",
+      "revId": "e7ba099164449aa7feffa5d1f90f390efdf89ccc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_96c49445",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-07-29T08:13:59Z",
+      "side": 1,
+      "message": "Trailing WS",
+      "revId": "e7ba099164449aa7feffa5d1f90f390efdf89ccc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
