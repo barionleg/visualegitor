@@ -564,7 +564,7 @@ ve.dm.Surface.prototype.setSelection = function ( selection ) {
 		// Figure out which annotations to use for insertions
 		if ( this.selection.isCollapsed() ) {
 			// Get annotations from the left of the cursor
-			left = dataModelData.getNearestContentOffset( Math.max( 0, this.selection.start - 1 ), -1 );
+			left = dataModelData.getNearestContentOffset( Math.max( 0, this.selection.start - 1 ), -1, false );
 			right = dataModelData.getNearestContentOffset( Math.max( 0, this.selection.start ) );
 		} else {
 			// Get annotations from the first character of the selection
