@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "8e28a382_909374a5",
+        "filename": "modules/ve/ui/widgets/ve.ui.WhitespaceTextInputWidget.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-07-29T19:28:28Z",
+      "side": 1,
+      "message": "Maybe WhitespacePreservingTextInputWidget?\n\nThis isn\u0027t a widget to let you input WhitespaceText…",
+      "revId": "a3e207e6140a21b582835d5000665b504c0fce70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_ea9d270e",
         "filename": "modules/ve/ui/widgets/ve.ui.WhitespaceTextInputWidget.js",
         "patchSetId": 2
