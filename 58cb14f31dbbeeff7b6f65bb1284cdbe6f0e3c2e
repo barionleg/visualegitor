@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_a4fce86d",
+        "filename": "modules/ve/ce/ve.ce.ContentBranchNode.js",
+        "patchSetId": 29
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-30T18:36:35Z",
+      "side": 1,
+      "message": "This should be:\n\n    @returns {Object} return.unicornInfo",
+      "revId": "58cb14f31dbbeeff7b6f65bb1284cdbe6f0e3c2e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_448e64d6",
+        "filename": "modules/ve/ce/ve.ce.ContentBranchNode.js",
+        "patchSetId": 29
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-30T18:36:35Z",
+      "side": 1,
+      "message": "Why?",
+      "revId": "58cb14f31dbbeeff7b6f65bb1284cdbe6f0e3c2e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_44e0a492",
+        "filename": "modules/ve/ce/ve.ce.ContentBranchNode.js",
+        "patchSetId": 29
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-30T18:36:35Z",
+      "side": 1,
+      "message": "To make this code more generally applicable I think we\u0027ll need to rewrite it to look for annotations with .static.forceContinuation set in their CE class",
+      "revId": "58cb14f31dbbeeff7b6f65bb1284cdbe6f0e3c2e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_44f78456",
+        "filename": "modules/ve/ce/ve.ce.ContentBranchNode.js",
+        "patchSetId": 29
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-30T18:36:35Z",
+      "side": 1,
+      "message": "Why undefined in the else case? Why not []? How does AnnotationSet even behave if you give it undefined?",
+      "revId": "58cb14f31dbbeeff7b6f65bb1284cdbe6f0e3c2e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_e4be705f",
+        "filename": "modules/ve/ce/ve.ce.Surface.js",
+        "patchSetId": 29
+      },
+      "lineNbr": 1517,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-30T18:36:35Z",
+      "side": 1,
+      "message": "Comment why",
+      "revId": "58cb14f31dbbeeff7b6f65bb1284cdbe6f0e3c2e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
