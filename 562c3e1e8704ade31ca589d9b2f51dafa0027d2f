@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_4708a9dc",
+        "filename": "modules/ve/ui/widgets/ve.ui.WhitespacePreservingTextInputWidget.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2014-07-30T14:47:34Z",
+      "side": 1,
+      "message": "The parent constructor registers config option \u0027value\u0027 and calls setValue() from the constructor. That seems suboptimal to have it set twice (includes DOM operations). And more importantly, to have two config options in the API of which one is effectively ignored. Generally subclasses should be usable in place of a parent class to code not knowing about it.\n\nWould it be feasible to fold setValueAndWhitespace into setValue?",
+      "revId": "562c3e1e8704ade31ca589d9b2f51dafa0027d2f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
