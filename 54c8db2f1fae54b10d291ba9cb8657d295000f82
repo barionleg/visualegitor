@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_f38f542d",
+        "filename": "modules/ve/ce/ve.ce.SurfaceObserver.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-31T00:45:18Z",
+      "side": 1,
+      "message": "Misspells cursor",
+      "revId": "54c8db2f1fae54b10d291ba9cb8657d295000f82",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_b3854c0d",
+        "filename": "modules/ve/ce/ve.ce.SurfaceObserver.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-31T00:45:18Z",
+      "side": 1,
+      "message": "Why is this whole block wrapped in emitChanges? There\u0027s nothing actually being emitted from it (apart from \u0027position\u0027), and it\u0027s setting $slugWrapper and other state that sounds like we\u0027d want to set even on a pollOnceNoEmit",
+      "revId": "54c8db2f1fae54b10d291ba9cb8657d295000f82",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_532868dc",
+        "filename": "modules/ve/dm/ve.dm.Converter.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 1404,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-31T00:45:18Z",
+      "side": 1,
+      "message": "I\u0027m not entirely comfortable with this because we\u0027ve kept slugs as a CE-only concept so far. Rather than putting slug-specifc code in DM, maybe we could use a more generic name for \"kill this\"?",
+      "revId": "54c8db2f1fae54b10d291ba9cb8657d295000f82",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
