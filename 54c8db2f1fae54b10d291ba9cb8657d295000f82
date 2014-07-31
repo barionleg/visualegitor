@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_f38074c6",
+        "filename": "modules/ve/ce/ve.ce.SurfaceObserver.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-07-31T00:50:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_f38f542d",
+      "revId": "54c8db2f1fae54b10d291ba9cb8657d295000f82",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_b3854c0d",
         "filename": "modules/ve/ce/ve.ce.SurfaceObserver.js",
         "patchSetId": 7
