@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_137540f4",
+        "filename": "modules/ve/ui/ve.ui.MobileContext.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-07-31T00:57:22Z",
+      "side": 1,
+      "message": "I\u0027ll merge this as is, but for future reference, you can do:\n\n    classes \u003d [ ve.dm.MWInternalLinkAnnotation, ve.dm.MWExternalLinkAnnotation, ve.dm.MWRferenceNode ];\n    return ve.isInstanceOfAny( tool.model, classes );",
+      "revId": "b28f2f148367bda880c693fd5e5dc3a0bd40cd60",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
