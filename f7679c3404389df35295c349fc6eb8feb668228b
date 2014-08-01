@@ -16,6 +16,24 @@
       "revId": "f7679c3404389df35295c349fc6eb8feb668228b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_8eb1f7f5",
+        "filename": "modules/ve/ce/ve.ce.BranchNode.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-08-01T18:06:42Z",
+      "side": 1,
+      "message": "IE9 and the WIndows 8 distribution IE11, which deserves to be called IE9 because of its terrible regression.",
+      "parentUuid": "8e28a382_ceddbf48",
+      "revId": "f7679c3404389df35295c349fc6eb8feb668228b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
