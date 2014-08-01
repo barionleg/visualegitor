@@ -111,6 +111,12 @@ ve.dm.DocumentSynchronizer.synchronizers.resize = function ( action ) {
 	this.adjustment += action.adjustment;
 };
 
+ve.dm.DocumentSynchronizer.synchronizers.insertTextNode = function ( action ) {
+	var textNode = new ve.dm.TextNode();
+	textNode.setLength( action.length );
+	action.parentNode.splice( action.index, 0, textNode );
+};
+
 /**
  * Synchronize a rebuild action.
  *
@@ -211,6 +217,15 @@ ve.dm.DocumentSynchronizer.prototype.pushResize = function ( node, adjustment ) 
 		type: 'resize',
 		node: node,
 		adjustment: adjustment
+	} );
+};
+
+ve.dm.DocumentSynchronizer.prototype.pushInsertTextNode = function ( parentNode, index, length ) {
+	this.actionQueue.push( {
+		type: 'insertTextNode',
+		parentNode: parentNode,
+		index: index,
+		length: length
 	} );
 };
 
