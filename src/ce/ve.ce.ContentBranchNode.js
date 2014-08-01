@@ -104,12 +104,32 @@ ve.ce.ContentBranchNode.prototype.onChildUpdate = function ( transaction ) {
  *
  * @method
  */
-ve.ce.ContentBranchNode.prototype.onSplice = function () {
+ve.ce.ContentBranchNode.prototype.onSplice = function ( index, howmany ) {
 	// Parent method
 	ve.ce.BranchNode.prototype.onSplice.apply( this, arguments );
 
+	if (
+		this.root instanceof ve.ce.DocumentNode &&
+		this.root.getSurface().isRenderingLocked
+	) {
+		// HACK: adjust slugNodes indexes
+		this.slugNodes.splice.apply( this.slugNodes, [ index, howmany ].concat( new Array( arguments.length - 2 ) ) );
+	}
+
 	// Rerender to make sure annotations are applied correctly
 	this.renderContents();
+};
+
+/** @inheritdoc */
+ve.ce.ContentBranchNode.prototype.setupSlugs = function () {
+	// Respect render lock
+	if (
+		this.root instanceof ve.ce.DocumentNode &&
+		this.root.getSurface().isRenderingLocked()
+	) {
+		return;
+	}
+	ve.ce.BranchNode.prototype.setupSlugs.apply( this, arguments );
 };
 
 /**
