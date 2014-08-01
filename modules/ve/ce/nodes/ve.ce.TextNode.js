@@ -17,6 +17,8 @@
 ve.ce.TextNode = function VeCeTextNode( model, config ) {
 	// Parent constructor
 	ve.ce.LeafNode.call( this, model, config );
+
+	this.$element = $( [] );
 };
 
 /* Inheritance */

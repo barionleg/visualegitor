@@ -1977,7 +1977,7 @@ ve.ce.Surface.prototype.handleInsertion = function () {
 		slug = this.documentView.getSlugAtOffset( selection.start );
 		// Always pawn in a slug
 		//if ( slug || this.needsPawn( selection, insertionAnnotations ) ) {
-		if ( slug ) {
+		if ( slug && false ) {
 			placeholder = '♙';
 			if ( !insertionAnnotations.isEmpty() ) {
 				placeholder = [placeholder, insertionAnnotations.getIndexes()];

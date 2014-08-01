@@ -61,8 +61,12 @@ OO.mixinClass( ve.ce.BranchNode, ve.BranchNode );
  * @property {jQuery}
  */
 ve.ce.BranchNode.$inlineSlugTemplate = $( '<span>' )
-	.addClass( 've-ce-branchNode-slug ve-ce-branchNode-inlineSlug' )
-	.html( '&#xFEFF;' );
+	.addClass( /*'ve-ce-branchNode-slug*/ 've-ce-branchNode-inlineSlug' )
+	//.html( '&#xFEFF;' );
+	.append(
+		$( '<img>' )
+			.attr( 'src', ve.debug ? ve.ce.unicornImgDataUri : ve.minImgDataUri )
+	);
 
 /**
  * Block slug template.
