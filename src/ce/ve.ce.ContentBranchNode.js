@@ -112,6 +112,18 @@ ve.ce.ContentBranchNode.prototype.onSplice = function () {
 	this.renderContents();
 };
 
+/** @inheritdoc */
+ve.ce.ContentBranchNode.prototype.setupSlugs = function () {
+	// Respect render lock
+	if (
+		this.root instanceof ve.ce.DocumentNode &&
+		this.root.getSurface().isRenderingLocked()
+	) {
+		return;
+	}
+	ve.ce.BranchNode.prototype.setupSlugs.apply( this, arguments );
+};
+
 /**
  * Get an HTML rendering of the contents.
  *
