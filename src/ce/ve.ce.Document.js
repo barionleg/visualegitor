@@ -91,13 +91,19 @@ ve.ce.Document.prototype.getNodeAndOffset = function ( offset ) {
 	previousNode = getPrevious( currentNode );
 
 	// Adjust for unicorn if necessary, then return
-	if ( currentNode.nodeType === Node.TEXT_NODE &&
-		nao.offset === currentNode.data.length &&
+	if (
+		( (
+			currentNode.nodeType === Node.TEXT_NODE &&
+			nao.offset === currentNode.data.length
+		) || (
+			currentNode.nodeType === Node.ELEMENT_NODE &&
+			currentNode.classList.contains( 've-ce-branchNode-inlineSlug' )
+		) ) &&
 		nextNode &&
 		nextNode.nodeType === Node.ELEMENT_NODE &&
 		nextNode.classList.contains( 've-ce-pre-unicorn' )
 	) {
-		// At text offset just before the pre unicorn; return the point just after it
+		// At text offset or slug just before the pre unicorn; return the point just after it
 		return ve.ce.nextCursorOffset( nextNode );
 	} else if ( currentNode.nodeType === Node.ELEMENT_NODE &&
 		currentNode.children.length > nao.offset &&
@@ -106,13 +112,19 @@ ve.ce.Document.prototype.getNodeAndOffset = function ( offset ) {
 	) {
 		// At element offset just before the pre unicorn; return the point just after it
 		return { node: nao.node, offset: nao.offset + 1 };
-	} else if ( currentNode.nodeType === Node.TEXT_NODE &&
-		// At text offset just after the post unicorn; return the point just before it
-		nao.offset === 0 &&
+	} else if (
+		( (
+			currentNode.nodeType === Node.TEXT_NODE &&
+			nao.offset === 0
+		) || (
+			currentNode.nodeType === Node.ELEMENT_NODE &&
+			currentNode.classList.contains( 've-ce-branchNode-inlineSlug' )
+		) ) &&
 		previousNode &&
 		previousNode.nodeType === Node.ELEMENT_NODE &&
 		previousNode.classList.contains( 've-ce-post-unicorn' )
 	) {
+		// At text offset or slug just after the post unicorn; return the point just before it
 		return ve.ce.previousCursorOffset( previousNode );
 	} else if ( currentNode.nodeType === Node.ELEMENT_NODE &&
 		nao.offset > 0 &&
