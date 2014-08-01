@@ -2186,7 +2186,7 @@ ve.ce.Surface.prototype.handleInsertion = function () {
 	if ( selection.isCollapsed() ) {
 		hasSlug = documentModel.hasSlugAtOffset( selection.start );
 		// Always pawn in a slug
-		if ( hasSlug ) {
+		if ( hasSlug && false ) {
 			placeholder = '♙';
 			if ( !insertionAnnotations.isEmpty() ) {
 				placeholder = [placeholder, insertionAnnotations.getIndexes()];
