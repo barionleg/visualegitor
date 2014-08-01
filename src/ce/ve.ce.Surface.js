@@ -970,8 +970,6 @@ ve.ce.Surface.prototype.onDocumentKeyPress = function ( e ) {
 	// Filter out non-character keys. Doing this prevents:
 	// * Unexpected content deletion when selection is not collapsed and the user presses, for
 	//   example, the Home key (Firefox fires 'keypress' for it)
-	// * Incorrect pawning when selection is collapsed and the user presses a key that is not handled
-	//   elsewhere and doesn't produce any text, for example Escape
 	// TODO: Should be covered with Selenium tests.
 	if (
 		// Catches most keys that don't produce output (charCode === 0, thus no character)
@@ -2224,7 +2222,7 @@ ve.ce.Surface.prototype.handleInsertion = function () {
 		return;
 	}
 
-	var hasSlug, data, range, annotations, insertionAnnotations, placeholder,
+	var annotations,
 		hasChanged = false,
 		selection = this.model.getSelection(),
 		documentModel = this.model.getDocument();
@@ -2248,35 +2246,6 @@ ve.ce.Surface.prototype.handleInsertion = function () {
 			selection = this.model.getSelection();
 		}
 		this.model.setInsertionAnnotations( annotations );
-	}
-
-	insertionAnnotations = this.model.getInsertionAnnotations() ||
-		new ve.dm.AnnotationSet( documentModel.getStore() );
-
-	if ( selection.isCollapsed() ) {
-		hasSlug = documentModel.hasSlugAtOffset( selection.start );
-		// Always pawn in a slug
-		if ( hasSlug ) {
-			placeholder = '♙';
-			if ( !insertionAnnotations.isEmpty() ) {
-				placeholder = [placeholder, insertionAnnotations.getIndexes()];
-			}
-			// Is this a slug and if so, is this a block slug?
-			if ( hasSlug && documentModel.data.isStructuralOffset( selection.start ) ) {
-				range = new ve.Range( selection.start + 1, selection.start + 2 );
-				data = [{ type: 'paragraph' }, placeholder, { type: '/paragraph' }];
-			} else {
-				range = new ve.Range( selection.start, selection.start + 1 );
-				data = [placeholder];
-			}
-			this.model.change(
-				ve.dm.Transaction.newFromInsertion(
-					this.documentView.model, selection.start, data
-				),
-				range
-			);
-			hasChanged = true;
-		}
 	}
 
 	if ( hasChanged ) {
@@ -2716,58 +2685,6 @@ ve.ce.Surface.prototype.getNearestCorrectOffset = function ( offset, direction )
 			return Math.max( contentOffset, structuralOffset );
 		}
 	}
-};
-
-/**
- * Checks if we need to pawn for insertionAnnotations based on the related annotationSet.
- *
- * "Related" is typically to the left, unless at the beginning of a node.
- *
- * We choose to pawn if the related annotationSet doesn't match insertionAnnotations, or if
- * we are at the edge of an annotation that requires pawning (i.e. an annotation requiring pawning
- * is present on the left but not on the right, or vice versa).
- *
- * @method
- * @param {ve.Range} selection
- * @param {ve.dm.AnnotationSet} insertionAnnotations
- * @returns {boolean} Whether we need to pawn
- */
-ve.ce.Surface.prototype.needsPawn = function ( selection, insertionAnnotations ) {
-	var leftAnnotations, rightAnnotations, documentModel = this.model.documentModel;
-
-	function isForced( annotation ) {
-		return ve.ce.annotationFactory.isAnnotationContinuationForced( annotation.constructor.static.name );
-	}
-
-	if ( selection.start > 0 ) {
-		leftAnnotations = documentModel.data.getAnnotationsFromOffset( selection.start - 1 );
-	}
-	if ( selection.start < documentModel.data.getLength() ) {
-		rightAnnotations = documentModel.data.getAnnotationsFromOffset( selection.start + 1 );
-	}
-
-	// Take annotations from the left
-	// TODO reorganize the logic in this function
-	if ( leftAnnotations && !leftAnnotations.compareTo( insertionAnnotations ) ) {
-		return true;
-	}
-	// At the beginning of a node, take from the right
-	if (
-		this.nativeSelection.anchorOffset === 0 &&
-		rightAnnotations &&
-		!rightAnnotations.compareTo( insertionAnnotations )
-	) {
-		return true;
-	}
-
-	if (
-		leftAnnotations && rightAnnotations &&
-		!leftAnnotations.filter( isForced ).compareTo( rightAnnotations.filter( isForced ) )
-	) {
-		return true;
-	}
-
-	return false;
 };
 
 /*! Getters */

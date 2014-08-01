@@ -218,10 +218,10 @@ ve.ce.SurfaceObserver.prototype.pollOnceInternal = function ( emitChanges, selec
 
 	if ( anchorNodeChange ) {
 		node = null;
-		$nodeOrSlug = $( domRange.anchorNode ).closest( '.ve-ce-branchNode, .ve-ce-branchNode-slug' );
+		$nodeOrSlug = $( domRange.anchorNode ).closest( '.ve-ce-branchNode, .ve-ce-branchNode-blockSlugWrapper' );
 		if ( $nodeOrSlug.length ) {
-			if ( $nodeOrSlug.hasClass( 've-ce-branchNode-slug' ) ) {
-				$slugWrapper = $nodeOrSlug.closest( '.ve-ce-branchNode-blockSlugWrapper' );
+			if ( $nodeOrSlug.hasClass( 've-ce-branchNode-blockSlugWrapper' ) ) {
+				$slugWrapper = $nodeOrSlug;
 			} else {
 				node = $nodeOrSlug.data( 'view' );
 				// Check this node belongs to our document
