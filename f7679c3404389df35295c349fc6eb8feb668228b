@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_ceddbf48",
+        "filename": "modules/ve/ce/ve.ce.BranchNode.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-08-01T18:04:21Z",
+      "side": 1,
+      "message": "ITYM IE11 :(",
+      "revId": "f7679c3404389df35295c349fc6eb8feb668228b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
