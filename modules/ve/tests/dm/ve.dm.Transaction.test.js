@@ -47,6 +47,23 @@ function runConstructorTests( assert, constructor, cases, testRange ) {
 	}
 }
 
+// assert.deepEqual will invoke tx1.clone(), so bypass that and compare fields
+function txequal( tx1, tx2 ) {
+	var i, v1, v2,
+		keys = ve.getObjectKeys( tx1 );
+	if ( !ve.compare( keys, ve.getObjectKeys( tx2 ) ) ) {
+		return false;
+	}
+	for ( i = 0; i < keys.length; i++ ) {
+		v1 = ve.copy( tx1[keys[i]], ve.convertDomElements );
+		v2 = ve.copy( tx2[keys[i]], ve.convertDomElements );
+		if (!ve.compare( v1, v2 ) ) {
+			return false;
+		}
+	}
+	return true;
+}
+
 /* Tests */
 
 QUnit.test( 'newNoOp', function ( assert ) {
@@ -1841,6 +1858,111 @@ QUnit.test( 'getModifiedRange', function ( assert ) {
 		}
 		assert.equalRange( tx.getModifiedRange(), cases[i].range, cases[i].msg );
 	}
+} );
+
+QUnit.test( 'copy', function ( assert ) {
+	var cases = {
+		newNoOp: {
+			doc: 'data',
+			call: [
+				'newNoOp'
+			]
+		},
+		newFromReplacement: {
+			doc: 'internalData',
+			call: [
+				'newFromReplacement', new ve.Range( 7, 12 ),
+				[ { type: 'paragraph' }, 'X', { type: '/paragraph' } ]
+			]
+		},
+		newFromInsertion: {
+			doc: 'data',
+			call: [
+				'newFromInsertion', 0,
+				[{ type: 'paragraph' }, '1', { type: '/paragraph' }]
+			]
+		},
+		newFromRemoval: {
+			doc: 'data',
+			call: [
+				'newFromRemoval', new ve.Range( 1, 3 )
+			]
+		},
+		newFromDocumentInsertion: {
+			doc: 'internalData',
+			call: [
+				'newFromDocumentInsertion', 7,
+				ve.dm.example.createExampleDocument( 'internalData' ).
+					cloneFromRange( new ve.Range( 7, 12 ) )
+			]
+		},
+		newFromAttributeChanges: {
+			doc: 'data',
+			call: [
+				'newFromAttributeChanges', 0, { level: 2 }
+			]
+		},
+		newFromAnnotation: {
+			doc: 'data',
+			call: [
+				'newFromAnnotation', new ve.Range( 1, 2 ), 'set',
+				ve.dm.example.createAnnotation( ve.dm.example.bold )
+			]
+		},
+		newFromMetadataInsertion: {
+			doc: 'withMeta',
+			call: [
+				'newFromMetadataInsertion', 11, 2,
+				[ {
+					type: 'alienMeta',
+					attributes: { style: 'comment', text: 'inline' }
+				} ]
+			]
+		},
+		newFromMetadataRemoval: {
+			doc: 'withMeta',
+			call: [
+				'newFromMetadataRemoval', 11, new ve.Range( 0, 4 )
+			]
+		},
+		newFromMetadataElementReplacement: {
+			doc: 'withMeta',
+			call: [
+				'newFromMetadataElementReplacement', 11, 3,
+				{
+					type: 'alienMeta',
+					attributes: { style: 'comment', text: 'inline' }
+				}
+			]
+		},
+		newFromContentBranchConversion: {
+			doc: 'data',
+			call: [
+				'newFromContentBranchConversion', new ve.Range( 1, 2 ),
+				'paragraph'
+			]
+		},
+		newFromWrap: {
+			doc: 'listWithMeta',
+			call: [
+				'newFromWrap', new ve.Range( 1, 11 ),
+				[ { type: 'list' } ], [],
+				[ { type: 'listItem', attributes: { styles: ['bullet'] } } ], []
+			]
+		}
+	};
+	// Run tests
+	QUnit.expect( ve.getObjectKeys( cases ).length );
+	$.each( cases, function ( name, test ) {
+		var doc, args, tx1, tx2;
+		doc = ve.dm.example.createExampleDocument( test.doc );
+		args = [ doc ].concat( test.call.slice( 1 ) );
+		tx1 = ve.dm.Transaction[ test.call[0] ].apply(
+			ve.dm.Transaction, args
+		);
+		tx2 = tx1.copy( doc );
+		assert.ok( txequal( tx1, tx2 ), name );
+	} );
 } );
 
 QUnit.test( 'pushRetain', 4, function ( assert ) {

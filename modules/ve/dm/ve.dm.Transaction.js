@@ -901,6 +901,17 @@ ve.dm.Transaction.prototype.isNoOp = function () {
 };
 
 /**
+ * Duplicate a transaction.
+ *
+ * @method
+ * @param {ve.dm.Document} doc Document to generate a transaction for
+ * @returns {ve.dm.Transaction} A new transaction performing the same operations as this.
+ */
+ve.dm.Transaction.prototype.copy = function ( doc ) {
+	return ve.dm.Transaction.newFromIntention( doc, ve.copy( this.intention ) );
+};
+
+/**
  * Get all operations.
  *
  * @method
