@@ -2385,3 +2385,31 @@ QUnit.test( 'isNoOp', function ( assert ) {
 		// metadata replacement never creates no-op
 	} );
 } );
+
+QUnit.test( 'newFromIntention', function ( assert ) {
+	var i, tx,
+		doc = ve.dm.example.createExampleDocument(),
+		cases = [
+			{
+				msg: 'Simple insertion',
+				method: 'newFromInsertion',
+				args: [doc, 1, ['a', 'b']]
+			},
+			{
+				msg: 'Simple removal',
+				method: 'newFromRemoval',
+				args: [doc, new ve.Range( 1, 3 )]
+			}
+		];
+
+	QUnit.expect( cases.length );
+
+	for ( i = 0; i < cases.length; i++ ) {
+		tx = ve.dm.Transaction[cases[i].method].apply( this, cases[i].args );
+		assert.deepEqual(
+			ve.dm.Transaction.newFromIntention( cases[i].args[0], tx.getIntention() ),
+			tx, cases[i].msg
+		);
+	}
+
+} );
