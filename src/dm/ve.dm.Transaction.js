@@ -9,14 +9,35 @@
  *
  * @class
  * @constructor
+ * @param {Array} intention The "intention" of this transaction, which could be passed to Transaction.newFromIntention to recreate it.
  */
-ve.dm.Transaction = function VeDmTransaction() {
+ve.dm.Transaction = function VeDmTransaction( intention ) {
+	this.intention = intention;
 	this.operations = [];
 	this.lengthDifference = 0;
 	this.applied = false;
 };
 
 /* Static Methods */
+
+/**
+ * Coerce an index or range to a collapsed range.
+ *
+ * If the argument is already a range, return it.
+ *
+ * @private
+ * @static
+ * @param {number|ve.Range} indexOrRange An index or a range
+ * @returns {ve.Range} The input range, or a collapsed range if the input was a number
+ * @throws {Error} Range must be collapsed
+ */
+ve.dm.Transaction.coerceToCollapsedRange = function ( indexOrRange ) {
+	var range = indexOrRange instanceof ve.Range ? indexOrRange : new ve.Range( indexOrRange );
+	if ( !range.isCollapsed() ) {
+		throw new Error( 'Range must be collapsed' );
+	}
+	return range;
+};
 
 /**
  * Generate a transaction that replaces data in a range.
@@ -30,9 +51,19 @@ ve.dm.Transaction = function VeDmTransaction() {
  * @throws {Error} Invalid range
  */
 ve.dm.Transaction.newFromReplacement = function ( doc, range, data, removeMetadata ) {
-	var endOffset, tx = new ve.dm.Transaction();
-	endOffset = tx.pushRemoval( doc, 0, range, removeMetadata );
-	endOffset = tx.pushInsertion( doc, endOffset, endOffset, data );
+	var endOffset, tx = new ve.dm.Transaction( [
+		'newFromReplacement', range, data, !!removeMetadata
+	] );
+	if ( range.isCollapsed() ) {
+		// Insertions can move their start offset, so don't retain up to
+		// them before hand.
+		// TODO: Allow insertion-offset removing in complex removes (although
+		// we have no real case for this at the moment).
+		endOffset = tx.pushInsertion( doc, 0, range.start, data );
+	} else {
+		endOffset = tx.pushRemoval( doc, 0, range, removeMetadata );
+		endOffset = tx.pushInsertion( doc, endOffset, endOffset, data );
+	}
 	tx.pushFinalRetain( doc, endOffset );
 	return tx;
 };
@@ -40,19 +71,20 @@ ve.dm.Transaction.newFromReplacement = function ( doc, range, data, removeMetada
 /**
  * Generate a transaction that inserts data at an offset.
  *
+ * Helper for newFromReplacement
+ *
  * @static
  * @method
  * @param {ve.dm.Document} doc Document to create transaction for
- * @param {number} offset Offset to insert at
+ * @param {number|ve.Range} offsetOrRange Offset to insert at (or collapsed range)
  * @param {Array} data Data to insert
  * @returns {ve.dm.Transaction} Transaction that inserts data
+ * @throws {Error} Invalid range
  */
-ve.dm.Transaction.newFromInsertion = function ( doc, offset, data ) {
-	var tx = new ve.dm.Transaction(),
-		endOffset = tx.pushInsertion( doc, 0, offset, data );
-	// Retain to end of document, if needed (for completeness)
-	tx.pushFinalRetain( doc, endOffset );
-	return tx;
+ve.dm.Transaction.newFromInsertion = function ( doc, offsetOrRange, data ) {
+	return ve.dm.Transaction.newFromReplacement(
+		doc, ve.dm.Transaction.coerceToCollapsedRange( offsetOrRange ), data, false
+	);
 };
 
 /**
@@ -81,11 +113,10 @@ ve.dm.Transaction.newFromInsertion = function ( doc, offset, data ) {
  * @throws {Error} Invalid range
  */
 ve.dm.Transaction.newFromRemoval = function ( doc, range, removeMetadata ) {
-	var tx = new ve.dm.Transaction(),
-		endOffset = tx.pushRemoval( doc, 0, range, removeMetadata );
-	// Retain to end of document, if needed (for completeness)
-	tx.pushFinalRetain( doc, endOffset );
-	return tx;
+	// this is just a helper for newFromReplacement
+	return ve.dm.Transaction.newFromReplacement(
+		doc, range, [], removeMetadata
+	);
 };
 
 /**
@@ -97,19 +128,21 @@ ve.dm.Transaction.newFromRemoval = function ( doc, range, removeMetadata ) {
  * be resolved in newDoc's favor.
  *
  * @param {ve.dm.Document} doc Main document
- * @param {number} offset Offset to insert at
+ * @param {number|ve.Range} offsetOrRange Offset to insert at (or collapsed range)
  * @param {ve.dm.Document} newDoc Document to insert
  * @param {ve.Range} [newDocRange] Range from the new document to insert (defaults to entire document)
  * @returns {ve.dm.Transaction} Transaction that inserts the nodes and updates the internal list
+ * @throws {Error} Invalid range
  */
-ve.dm.Transaction.newFromDocumentInsertion = function ( doc, offset, newDoc, newDocRange ) {
+ve.dm.Transaction.newFromDocumentInsertion = function ( doc, offsetOrRange, newDoc, newDocRange ) {
 	var i, len, merge, data, metadata, listData, listMetadata, oldEndOffset, newEndOffset, tx,
 		insertion, spliceItemRange, spliceListNodeRange,
 		listNode = doc.internalList.getListNode(),
 		listNodeRange = listNode.getRange(),
 		newListNode = newDoc.internalList.getListNode(),
 		newListNodeRange = newListNode.getRange(),
-		newListNodeOuterRange = newListNode.getOuterRange();
+		newListNodeOuterRange = newListNode.getOuterRange(),
+		offset = new ve.dm.Transaction.coerceToCollapsedRange( offsetOrRange ).from;
 
 	if ( newDocRange ) {
 		data = new ve.dm.ElementLinearData( doc.getStore(), newDoc.getData( newDocRange, true ) );
@@ -167,7 +200,9 @@ ve.dm.Transaction.newFromDocumentInsertion = function ( doc, offset, newDoc, new
 		listMetadata = listMetadata.concat( newDoc.getMetadata( merge.newItemRanges[i], true ) );
 	}
 
-	tx = new ve.dm.Transaction();
+	tx = new ve.dm.Transaction( [
+		'newFromDocumentInsertion', new ve.Range( offset ), newDoc, newDocRange
+	] );
 
 	if ( offset <= listNodeRange.start ) {
 		// offset is before listNodeRange
@@ -236,18 +271,18 @@ ve.dm.Transaction.newFromDocumentInsertion = function ( doc, offset, newDoc, new
  * @static
  * @method
  * @param {ve.dm.Document} doc Document to create transaction for
- * @param {number} offset Offset of element
+ * @param {number|ve.Range} offsetOrRange Offset of element (or collapsed range)
  * @param {Object.<string,Mixed>} attr List of attribute key and value pairs, use undefined value
  *  to remove an attribute
  * @returns {ve.dm.Transaction} Transaction that changes an element
  * @throws {Error} Cannot set attributes to non-element data
  * @throws {Error} Cannot set attributes on closing element
  */
-ve.dm.Transaction.newFromAttributeChanges = function ( doc, offset, attr ) {
-	var key,
-		oldValue,
-		tx = new ve.dm.Transaction(),
+ve.dm.Transaction.newFromAttributeChanges = function ( doc, offsetOrRange, attr ) {
+	var key, oldValue, tx,
+		offset = ve.dm.Transaction.coerceToCollapsedRange( offsetOrRange ).from,
 		data = doc.getData();
+
 	// Verify element exists at offset
 	if ( data[offset].type === undefined ) {
 		throw new Error( 'Cannot set attributes to non-element data' );
@@ -256,6 +291,9 @@ ve.dm.Transaction.newFromAttributeChanges = function ( doc, offset, attr ) {
 	if ( data[offset].type.charAt( 0 ) === '/' ) {
 		throw new Error( 'Cannot set attributes on closing element' );
 	}
+	tx = new ve.dm.Transaction( [
+		'newFromAttributeChanges', new ve.Range( offset ), attr
+	] );
 	// Retain up to element
 	tx.pushRetain( offset );
 	// Change attribute
@@ -284,14 +322,17 @@ ve.dm.Transaction.newFromAttributeChanges = function ( doc, offset, attr ) {
  * @returns {ve.dm.Transaction} Transaction that annotates content
  */
 ve.dm.Transaction.newFromAnnotation = function ( doc, range, method, annotation ) {
-	var covered, type, annotatable,
-		tx = new ve.dm.Transaction(),
+	var covered, type, annotatable, tx,
 		data = doc.data,
 		i = range.start,
 		span = i,
 		on = false,
 		insideContentNode = false,
 		handlesOwnChildrenDepth = 0;
+
+	tx = new ve.dm.Transaction( [
+		'newFromAnnotation', range, method, annotation
+	] );
 
 	// Iterate over all data in range, annotating where appropriate
 	while ( i < range.end ) {
@@ -380,40 +421,29 @@ ve.dm.Transaction.newFromAnnotation = function ( doc, range, method, annotation 
 /**
  * Generate a transaction that inserts metadata elements.
  *
+ * Helper for newFromMetadataReplacement
+ *
  * @static
  * @method
  * @param {ve.dm.Document} doc Document to create transaction for
- * @param {number} offset Offset of element
- * @param {number} index Index of metadata cursor within element
+ * @param {number|ve.Range} offsetOrRange Offset of element (or collapsed range)
+ * @param {number|ve.Range} indexOrRange Index of metadata cursor within element (or collapsed range)
  * @param {Array} newElements New elements to insert
  * @returns {ve.dm.Transaction} Transaction that inserts the metadata elements
+ * @throws {Error} Invalid range
  */
-ve.dm.Transaction.newFromMetadataInsertion = function ( doc, offset, index, newElements ) {
-	var tx = new ve.dm.Transaction(),
-		data = doc.metadata,
-		elements = data.getData( offset ) || [];
-
-	if ( newElements.length === 0 ) {
-		return tx; // no-op
-	}
-
-	// Retain up to element
-	tx.pushRetain( offset );
-	// Retain up to metadata element (second dimension)
-	tx.pushRetainMetadata( index );
-	// Insert metadata elements
-	tx.pushReplaceMetadata(
-		[], newElements
+ve.dm.Transaction.newFromMetadataInsertion = function ( doc, offsetOrRange, indexOrRange, newElements ) {
+	var offset = ve.dm.Transaction.coerceToCollapsedRange( offsetOrRange ),
+		index = ve.dm.Transaction.coerceToCollapsedRange( indexOrRange );
+	return ve.dm.Transaction.newFromMetadataReplacement(
+		doc, offset, index, newElements
 	);
-	// Retain up to end of metadata elements (second dimension)
-	tx.pushRetainMetadata( elements.length - index );
-	// Retain to end of document
-	tx.pushFinalRetain( doc, offset, elements.length );
-	return tx;
 };
 
 /**
  * Generate a transaction that removes metadata elements.
+ *
+ * Helper for newFromMetadataReplacement
  *
  * @static
  * @method
@@ -425,24 +455,71 @@ ve.dm.Transaction.newFromMetadataInsertion = function ( doc, offset, index, newE
  * @throws {Error} Range out of bounds
  */
 ve.dm.Transaction.newFromMetadataRemoval = function ( doc, offset, range ) {
-	var selection,
-		tx = new ve.dm.Transaction(),
-		data = doc.metadata,
-		elements = data.getData( offset ) || [];
+	return ve.dm.Transaction.newFromMetadataReplacement(
+		doc, offset, range, []
+	);
+};
 
-	if ( !elements.length ) {
-		throw new Error( 'Cannot remove metadata from empty list' );
+/**
+ * Generate a transaction that replaces a single metadata element.
+ *
+ * Helper for newFromMetadataReplacement
+ *
+ * @static
+ * @method
+ * @param {ve.dm.Document} doc Document to create transaction for
+ * @param {number} offsetOrRange Offset of element
+ * @param {number|ve.Range} indexOrRange Index or range (with length 1) of metadata cursor within element
+ * @param {Object} newElement New element to insert
+ * @returns {ve.dm.Transaction} Transaction that replaces a metadata element
+ * @throws {Error} Metadata index out of bounds
+ */
+ve.dm.Transaction.newFromMetadataElementReplacement = function ( doc, offsetOrRange, indexOrRange, newElement ) {
+	var range = indexOrRange instanceof ve.Range ? indexOrRange : new ve.Range( indexOrRange, indexOrRange + 1 ),
+		offset = ve.dm.Transaction.coerceToCollapsedRange( offsetOrRange );
+
+	if ( range.getLength() !== 1 ) {
+		throw new Error( 'Range must have length of 1' );
+	}
+	return ve.dm.Transaction.newFromMetadataReplacement(
+		doc, offset, range, [newElement]
+	);
+};
+
+/**
+ * Generate a transaction that replaces a range of metadata elements.
+ *
+ * @static
+ * @method
+ * @param {ve.dm.Document} doc Document to create transaction for
+ * @param {number|ve.Range} offset Offset of element (or collapsed range)
+ * @param {ve.Range} range Range of metadata (within element) to be replaced
+ * @param {Array} newElements New elements to insert
+ * @returns {ve.dm.Transaction} Transaction that replaces the metadata elements
+ * @throws {Error} Metadata index out of bounds
+ */
+ve.dm.Transaction.newFromMetadataReplacement = function ( doc, offset, range, newElements ) {
+	var oldElements, tx, elements,
+		data = doc.getMetadata();
+
+	// XXX if range.isCollapsed && newElements.length === 0, return newNoOp.
+
+	if ( offset instanceof ve.Range ) {
+		// allow collapsed range, instead of numeric offset
+		offset = offset.from;
 	}
 
+	tx = new ve.dm.Transaction( [
+		'newFromMetadataElementReplacement',
+		new ve.Range( offset ), range, newElements
+	] );
+
+	elements = data[offset] || [];
 	if ( range.start < 0 || range.end > elements.length ) {
-		throw new Error( 'Range out of bounds' );
+		throw new Error( 'Metadata index out of bounds' );
 	}
 
-	selection = elements.slice( range.start, range.end );
-
-	if ( selection.length === 0 ) {
-		return tx; // no-op.
-	}
+	oldElements = elements.slice( range.start, range.end );
 
 	// Retain up to element
 	tx.pushRetain( offset );
@@ -450,49 +527,10 @@ ve.dm.Transaction.newFromMetadataRemoval = function ( doc, offset, range ) {
 	tx.pushRetainMetadata( range.start );
 	// Remove metadata elements
 	tx.pushReplaceMetadata(
-		selection, []
+		oldElements, newElements
 	);
 	// Retain up to end of metadata elements (second dimension)
 	tx.pushRetainMetadata( elements.length - range.end );
-	// Retain to end of document (unless we're already off the end )
-	tx.pushFinalRetain( doc, offset, elements.length );
-	return tx;
-};
-
-/**
- * Generate a transaction that replaces a single metadata element.
- *
- * @static
- * @method
- * @param {ve.dm.Document} doc Document to create transaction for
- * @param {number} offset Offset of element
- * @param {number} index Index of metadata cursor within element
- * @param {Object} newElement New element to insert
- * @returns {ve.dm.Transaction} Transaction that replaces a metadata element
- * @throws {Error} Metadata index out of bounds
- */
-ve.dm.Transaction.newFromMetadataElementReplacement = function ( doc, offset, index, newElement ) {
-	var oldElement,
-		tx = new ve.dm.Transaction(),
-		data = doc.getMetadata(),
-		elements = data[offset] || [];
-
-	if ( index >= elements.length ) {
-		throw new Error( 'Metadata index out of bounds' );
-	}
-
-	oldElement = elements[index];
-
-	// Retain up to element
-	tx.pushRetain( offset );
-	// Retain up to metadata element (second dimension)
-	tx.pushRetainMetadata( index );
-	// Remove metadata elements
-	tx.pushReplaceMetadata(
-		[ oldElement ], [ newElement ]
-	);
-	// Retain up to end of metadata elements (second dimension)
-	tx.pushRetainMetadata( elements.length - index - 1 );
 	// Retain to end of document (unless we're already off the end )
 	tx.pushFinalRetain( doc, offset, elements.length );
 	return tx;
@@ -510,13 +548,17 @@ ve.dm.Transaction.newFromMetadataElementReplacement = function ( doc, offset, in
  * @returns {ve.dm.Transaction} Transaction that converts content branches
  */
 ve.dm.Transaction.newFromContentBranchConversion = function ( doc, range, type, attr ) {
-	var i, selected, branch, branchOuterRange,
-		tx = new ve.dm.Transaction(),
+	var i, selected, branch, branchOuterRange, tx,
 		selection = doc.selectNodes( range, 'leaves' ),
 		opening = { type: type },
 		closing = { type: '/' + type },
 		previousBranch,
 		previousBranchOuterRange;
+
+	tx = new ve.dm.Transaction( [
+		'newFromContentBranchConversion', range, type, attr
+	] );
+
 	// Add attributes to opening if needed
 	if ( ve.isPlainObject( attr ) ) {
 		opening.attributes = attr;
@@ -591,9 +633,12 @@ ve.dm.Transaction.newFromContentBranchConversion = function ( doc, range, type, 
  * @returns {ve.dm.Transaction}
  */
 ve.dm.Transaction.newFromWrap = function ( doc, range, unwrapOuter, wrapOuter, unwrapEach, wrapEach ) {
-	var i, j, unwrapOuterData, startOffset, unwrapEachData, closingUnwrapEach, closingWrapEach,
-		tx = new ve.dm.Transaction(),
+	var i, j, unwrapOuterData, startOffset, unwrapEachData, closingUnwrapEach, closingWrapEach, tx,
 		depth = 0;
+
+	tx = new ve.dm.Transaction( [
+		'newFromWrap', range, unwrapOuter, wrapOuter, unwrapEach, wrapEach
+	] );
 
 	// Function to generate arrays of closing elements in reverse order
 	function closingArray( openings ) {
@@ -730,7 +775,7 @@ ve.dm.Transaction.reversers = {
  * @returns {ve.dm.Transaction} Clone of this transaction
  */
 ve.dm.Transaction.prototype.clone = function () {
-	var tx = new this.constructor();
+	var tx = new this.constructor( ve.copy( this.intention ) );
 	tx.operations = ve.copy( this.operations );
 	tx.lengthDifference = this.lengthDifference;
 	return tx;
@@ -746,7 +791,15 @@ ve.dm.Transaction.prototype.clone = function () {
  * @returns {ve.dm.Transaction} Reverse of this transaction
  */
 ve.dm.Transaction.prototype.reversed = function () {
-	var i, len, op, newOp, reverse, prop, tx = new this.constructor();
+	var i, len, op, newOp, reverse, prop, tx,
+		intention = ve.copy( this.intention );
+
+	if ( intention[0] === 'reversed' ) {
+		intention = intention.slice( 1 );
+	} else {
+		intention.unshift( 'reversed' );
+	}
+	tx = new this.constructor( intention );
 	for ( i = 0, len = this.operations.length; i < len; i++ ) {
 		op = this.operations[i];
 		newOp = ve.copy( op );
@@ -774,16 +827,23 @@ ve.dm.Transaction.prototype.reversed = function () {
  * @returns {boolean} Transaction is no-op
  */
 ve.dm.Transaction.prototype.isNoOp = function () {
-	if ( this.operations.length === 0 ) {
-		return true;
-	} else if ( this.operations.length === 1 ) {
-		return this.operations[0].type === 'retain';
-	} else if ( this.operations.length === 2 ) {
-		return this.operations[0].type === 'retain' &&
-			this.operations[1].type === 'retainMetadata';
-	} else {
-		return false;
+	var i;
+	for ( i = this.operations.length - 1; i >= 0; i-- ) {
+		if ( this.operations[i].type !== 'retain' && this.operations[i].type !== 'retainMetadata' ) {
+			return false;
+		}
 	}
+	return true;
+};
+
+/**
+ * Get the "intention" for the transaction.
+ *
+ * @method
+ * @returns {Object[]} "Intention" of the transaction
+ */
+ve.dm.Transaction.prototype.getIntention = function () {
+	return this.intention;
 };
 
 /**

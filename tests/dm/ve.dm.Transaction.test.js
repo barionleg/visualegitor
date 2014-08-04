@@ -11,7 +11,7 @@ QUnit.module( 've.dm.Transaction' );
 function runBuilderTests( assert, cases ) {
 	var msg, tx, i;
 	for ( msg in cases ) {
-		tx = new ve.dm.Transaction();
+		tx = new ve.dm.Transaction( [ 'bogus' ] );
 		for ( i = 0; i < cases[msg].calls.length; i++ ) {
 			tx[cases[msg].calls[i][0]].apply( tx, cases[msg].calls[i].slice( 1 ) );
 		}
@@ -1696,7 +1696,7 @@ QUnit.test( 'newFromWrap', function ( assert ) {
 QUnit.test( 'translateOffset', function ( assert ) {
 	var mapping, offset, expected,
 		doc = new ve.dm.Document( '-----defg---h--'.split( '' ) ),
-		tx = new ve.dm.Transaction();
+		tx = new ve.dm.Transaction( [ 'bogus' ] );
 
 	tx.pushReplace( doc, 0, 0, ['a', 'b', 'c'] );
 	tx.pushRetain( 5 );
@@ -1738,7 +1738,7 @@ QUnit.test( 'translateOffset', function ( assert ) {
 QUnit.test( 'translateRange', function ( assert ) {
 	var i, cases,
 		doc = ve.dm.example.createExampleDocument(),
-		tx = new ve.dm.Transaction();
+		tx = new ve.dm.Transaction( [ 'bogus' ] );
 	tx.pushRetain( 55 );
 	tx.pushReplace( doc, 55, 0, [ { type: 'list', attributes: { style: 'number' } } ] );
 	tx.pushReplace( doc, 55, 0, [ { type: 'listItem' } ] );
@@ -1871,7 +1871,7 @@ QUnit.test( 'getModifiedRange', function ( assert ) {
 
 	QUnit.expect( cases.length );
 	for ( i = 0, len = cases.length; i < len; i++ ) {
-		tx = new ve.dm.Transaction();
+		tx = new ve.dm.Transaction( [ 'bogus' ] );
 		for ( j = 0; j < cases[i].calls.length; j++ ) {
 			tx[cases[i].calls[j][0]].apply( tx, cases[i].calls[j].slice( 1 ) );
 		}
@@ -2317,46 +2317,46 @@ QUnit.test( 'isNoOp', function ( assert ) {
 		tx = ve.dm.Transaction.newFromReplacement(
 			d, new ve.Range( 1 ), [], false
 		);
-		assert.strictEqual( tx.isNoOp(), true );
+		assert.strictEqual( tx.isNoOp(), true, 'Replacing collapsed range with no data' );
 
 		tx = ve.dm.Transaction.newFromInsertion(
 			d, 1, []
 		);
-		assert.strictEqual( tx.isNoOp(), true );
+		assert.strictEqual( tx.isNoOp(), true, 'Inserting no data' );
 
 		tx = ve.dm.Transaction.newFromRemoval(
-			d, new ve.Range(1), false
+			d, new ve.Range( 1 ), false
 		);
-		assert.strictEqual( tx.isNoOp(), true );
+		assert.strictEqual( tx.isNoOp(), true, 'Removing collapsed range' );
 
 		if ( !isListMetaDoc ) {
 			tx = ve.dm.Transaction.newFromDocumentInsertion(
 				d, 1,
 				ve.dm.example.createExampleDocument(), new ve.Range( 0 )
 			);
-			assert.strictEqual( tx.isNoOp(), true );
+			assert.strictEqual( tx.isNoOp(), true, 'Inserting empty document' );
 		}
 
 		tx = ve.dm.Transaction.newFromAttributeChanges(
 			d, isListMetaDoc ? 1 : 0, {}
 		);
-		assert.strictEqual( tx.isNoOp(), true );
+		assert.strictEqual( tx.isNoOp(), true, 'Empty object attribute change' );
 
 		tx = ve.dm.Transaction.newFromAnnotation(
 			d, new ve.Range( 1 ), 'set', new ve.dm.ItalicAnnotation()
 		);
-		assert.strictEqual( tx.isNoOp(), true );
+		assert.strictEqual( tx.isNoOp(), true, 'Setting annotation on collapsed range' );
 
 		tx = ve.dm.Transaction.newFromMetadataInsertion(
 			d, 1, 0, []
 		);
-		assert.strictEqual( tx.isNoOp(), true );
+		assert.strictEqual( tx.isNoOp(), true, 'Inserting empty metadata' );
 
 		if ( !isDoc ) {
 			tx = ve.dm.Transaction.newFromMetadataRemoval(
 				d, 0, new ve.Range( 1 )
 			);
-			assert.strictEqual( tx.isNoOp(), true );
+			assert.strictEqual( tx.isNoOp(), true, 'Removing empty metadata selection' );
 		}
 
 		// metadata replacement never creates no-op
