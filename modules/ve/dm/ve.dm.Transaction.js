@@ -832,10 +832,21 @@ ve.dm.Transaction.reversers = {
  * @returns {ve.dm.Transaction} Clone of this transaction
  */
 ve.dm.Transaction.prototype.clone = function () {
-	var tx = new this.constructor();
+	var tx = new this.constructor( this.intention );
 	tx.operations = ve.copy( this.operations );
 	tx.lengthDifference = this.lengthDifference;
 	return tx;
+};
+
+/**
+ * Duplicate a transaction.
+ *
+ * @method
+ * @param {ve.dm.Document} doc Document to generate a transaction for
+ * @returns {ve.dm.Transaction} A new transaction performing the same operations as this.
+ */
+ve.dm.Transaction.prototype.copy = function ( doc ) {
+	return ve.dm.Transaction.newFromIntention( doc, ve.copy( this.intention ) );
 };
 
 /**
