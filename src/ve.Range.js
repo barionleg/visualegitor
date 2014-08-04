@@ -80,6 +80,19 @@ ve.Range.newCoveringRange = function ( ranges, backwards ) {
 	return range;
 };
 
+/**
+ * Coerce an integer to a collapsed range.
+ * If the argument is already a range, return it.
+
+ * @static
+ * @param {number|ve.Range} number_or_range a number or a range
+ * @returns {ve.Range} The input range, or a collapsed range if the input was a number
+ */
+ve.Range.coerce = function( number_or_range ) {
+    return number_or_range instanceof ve.Range ? number_or_range :
+	new ve.Range( number_or_range );
+};
+
 /* Methods */
 
 /**
