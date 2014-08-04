@@ -517,7 +517,8 @@ QUnit.test( 'cloneSliceFromRange', function ( assert ) {
 } );
 
 QUnit.test( 'protection against double application of transactions', 1, function ( assert ) {
-	var tx = new ve.dm.Transaction(), testDocument = ve.dm.example.createExampleDocument();
+	var tx = new ve.dm.Transaction( [ 'bogus' ] ),
+		testDocument = ve.dm.example.createExampleDocument();
 	tx.pushRetain( 1 );
 	tx.pushReplace( testDocument, 1, 0, ['H', 'e', 'l', 'l', 'o' ] );
 	testDocument.commit( tx );
