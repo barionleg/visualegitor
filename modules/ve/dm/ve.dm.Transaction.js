@@ -438,7 +438,7 @@ ve.dm.Transaction.newFromMetadataInsertion = function ( doc, offset, index, newE
 	] );
 
 	if ( newElements.length === 0 ) {
-		return tx; // no-op
+		return ve.dm.Transaction.newNoOp( doc );
 	}
 
 	elements = data.getData( offset ) || [];
@@ -494,7 +494,7 @@ ve.dm.Transaction.newFromMetadataRemoval = function ( doc, offset, range ) {
 	selection = elements.slice( range.start, range.end );
 
 	if ( selection.length === 0 ) {
-		return tx; // no-op.
+		return ve.dm.Transaction.newNoOp( doc );
 	}
 
 	// Retain up to element
@@ -789,6 +789,18 @@ ve.dm.Transaction.reversers = {
 		removeMetadata: 'insertMetadata'
 	},
 	replaceMetadata: { insert: 'remove', remove: 'insert' } // swap .insert with .remove
+};
+
+/**
+ * Generate a transaction that does nothing.
+ *
+ * @param {ve.dm.Document} doc Document to generate a transaction for
+ * @returns {ve.dm.Transaction}
+ */
+ve.dm.Transaction.newNoOp = function ( doc ) {
+	var tx = new ve.dm.Transaction( [ 'newNoOp' ] );
+	tx.pushFinalRetain( doc, 0 );
+	return tx;
 };
 
 /* Methods */
