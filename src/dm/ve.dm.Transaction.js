@@ -40,6 +40,18 @@ ve.dm.Transaction.coerceToCollapsedRange = function ( indexOrRange ) {
 };
 
 /**
+ * Generate a transaction that does nothing.
+ *
+ * @param {ve.dm.Document} doc Document to generate a transaction for
+ * @returns {ve.dm.Transaction}
+ */
+ve.dm.Transaction.newNoOp = function ( doc ) {
+	var tx = new ve.dm.Transaction( [ 'newNoOp' ] );
+	tx.pushFinalRetain( doc, 0 );
+	return tx;
+};
+
+/**
  * Generate a transaction that replaces data in a range.
  *
  * @method
