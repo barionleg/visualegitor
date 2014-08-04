@@ -11,7 +11,8 @@
  * @class
  * @constructor
  */
-ve.dm.Transaction = function VeDmTransaction() {
+ve.dm.Transaction = function VeDmTransaction( intention ) {
+	this.intention = intention;
 	this.operations = [];
 	this.lengthDifference = 0;
 	this.applied = false;
@@ -31,7 +32,9 @@ ve.dm.Transaction = function VeDmTransaction() {
  * @throws {Error} Invalid range
  */
 ve.dm.Transaction.newFromReplacement = function ( doc, range, data, removeMetadata ) {
-	var endOffset, tx = new ve.dm.Transaction();
+	var endOffset, tx = new ve.dm.Transaction( [
+		'newFromReplacement', range, data, removeMetadata
+	] );
 	endOffset = tx.pushRemoval( doc, 0, range, removeMetadata );
 	endOffset = tx.pushInsertion( doc, endOffset, endOffset, data );
 	tx.pushFinalRetain( doc, endOffset );
@@ -49,8 +52,17 @@ ve.dm.Transaction.newFromReplacement = function ( doc, range, data, removeMetada
  * @returns {ve.dm.Transaction} Transaction that inserts data
  */
 ve.dm.Transaction.newFromInsertion = function ( doc, offset, data ) {
-	var tx = new ve.dm.Transaction(),
-		endOffset = tx.pushInsertion( doc, 0, offset, data );
+	var tx, endOffset;
+
+	if ( offset instanceof ve.Range ) {
+		// allow collapsed range, instead of numeric offset
+		offset = offset.from;
+	}
+
+	tx = new ve.dm.Transaction( [
+		'newFromInsertion', new ve.Range( offset ), data
+	] );
+	endOffset = tx.pushInsertion( doc, 0, offset, data );
 	// Retain to end of document, if needed (for completeness)
 	tx.pushFinalRetain( doc, endOffset );
 	return tx;
@@ -82,8 +94,14 @@ ve.dm.Transaction.newFromInsertion = function ( doc, offset, data ) {
  * @throws {Error} Invalid range
  */
 ve.dm.Transaction.newFromRemoval = function ( doc, range, removeMetadata ) {
-	var tx = new ve.dm.Transaction(),
-		endOffset = tx.pushRemoval( doc, 0, range, removeMetadata );
+	var tx, endOffset;
+
+	tx = new ve.dm.Transaction( [
+		'newFromRemoval', range, removeMetadata
+	] );
+
+	endOffset = tx.pushRemoval( doc, 0, range, removeMetadata );
+
 	// Retain to end of document, if needed (for completeness)
 	tx.pushFinalRetain( doc, endOffset );
 	return tx;
@@ -111,6 +129,11 @@ ve.dm.Transaction.newFromDocumentInsertion = function ( doc, offset, newDoc, new
 		newListNode = newDoc.internalList.getListNode(),
 		newListNodeRange = newListNode.getRange(),
 		newListNodeOuterRange = newListNode.getOuterRange();
+
+	if ( offset instanceof ve.Range ) {
+		// allow collapsed range, instead of numeric offset
+		offset = offset.from;
+	}
 
 	if ( newDocRange ) {
 		data = new ve.dm.ElementLinearData( doc.getStore(), newDoc.getData( newDocRange, true ) );
@@ -168,7 +191,9 @@ ve.dm.Transaction.newFromDocumentInsertion = function ( doc, offset, newDoc, new
 		listMetadata = listMetadata.concat( newDoc.getMetadata( merge.newItemRanges[i], true ) );
 	}
 
-	tx = new ve.dm.Transaction();
+	tx = new ve.dm.Transaction( [
+		'newFromDocumentInsertion', new ve.Range( offset ), newDoc, newDocRange
+	] );
 
 	if ( offset <= listNodeRange.start ) {
 		// offset is before listNodeRange
@@ -245,10 +270,14 @@ ve.dm.Transaction.newFromDocumentInsertion = function ( doc, offset, newDoc, new
  * @throws {Error} Cannot set attributes on closing element
  */
 ve.dm.Transaction.newFromAttributeChanges = function ( doc, offset, attr ) {
-	var key,
-		oldValue,
-		tx = new ve.dm.Transaction(),
+	var key, oldValue, tx,
 		data = doc.getData();
+
+	if ( offset instanceof ve.Range ) {
+		// allow collapsed range, instead of numeric offset
+		offset = offset.from;
+	}
+
 	// Verify element exists at offset
 	if ( data[offset].type === undefined ) {
 		throw new Error( 'Cannot set attributes to non-element data' );
@@ -257,6 +286,9 @@ ve.dm.Transaction.newFromAttributeChanges = function ( doc, offset, attr ) {
 	if ( data[offset].type.charAt( 0 ) === '/' ) {
 		throw new Error( 'Cannot set attributes on closing element' );
 	}
+	tx = new ve.dm.Transaction( [
+		'newFromAttributeChanges', new ve.Range( offset ), attr
+	] );
 	// Retain up to element
 	tx.pushRetain( offset );
 	// Change attribute
@@ -285,14 +317,17 @@ ve.dm.Transaction.newFromAttributeChanges = function ( doc, offset, attr ) {
  * @returns {ve.dm.Transaction} Transaction that annotates content
  */
 ve.dm.Transaction.newFromAnnotation = function ( doc, range, method, annotation ) {
-	var covered, type, annotatable,
-		tx = new ve.dm.Transaction(),
+	var covered, type, annotatable, tx,
 		data = doc.data,
 		i = range.start,
 		span = i,
 		on = false,
 		insideContentNode = false,
 		handlesOwnChildrenDepth = 0;
+
+	tx = new ve.dm.Transaction( [
+		'newFromAnnotation', range, method, annotation
+	] );
 
 	// Iterate over all data in range, annotating where appropriate
 	while ( i < range.end ) {
@@ -390,14 +425,23 @@ ve.dm.Transaction.newFromAnnotation = function ( doc, range, method, annotation 
  * @returns {ve.dm.Transaction} Transaction that inserts the metadata elements
  */
 ve.dm.Transaction.newFromMetadataInsertion = function ( doc, offset, index, newElements ) {
-	var tx = new ve.dm.Transaction(),
-		data = doc.metadata,
-		elements = data.getData( offset ) || [];
+	var tx, elements,
+		data = doc.metadata;
+
+	if ( offset instanceof ve.Range ) {
+		// allow collapsed range, instead of numeric offset
+		offset = offset.from;
+	}
+
+	tx = new ve.dm.Transaction( [
+		'newFromMetadataInsertion', new ve.Range( offset ), index, newElements
+	] );
 
 	if ( newElements.length === 0 ) {
 		return tx; // no-op
 	}
 
+	elements = data.getData( offset ) || [];
 	// Retain up to element
 	tx.pushRetain( offset );
 	// Retain up to metadata element (second dimension)
@@ -426,11 +470,19 @@ ve.dm.Transaction.newFromMetadataInsertion = function ( doc, offset, index, newE
  * @throws {Error} Range out of bounds
  */
 ve.dm.Transaction.newFromMetadataRemoval = function ( doc, offset, range ) {
-	var selection,
-		tx = new ve.dm.Transaction(),
-		data = doc.metadata,
-		elements = data.getData( offset ) || [];
+	var selection, tx, elements,
+		data = doc.metadata;
 
+	if ( offset instanceof ve.Range ) {
+		// allow collapsed range, instead of numeric offset
+		offset = offset.from;
+	}
+
+	tx = new ve.dm.Transaction( [
+		'newFromMetadataRemoval', new ve.Range( offset ), range
+	] );
+
+	elements = data.getData( offset ) || [];
 	if ( !elements.length ) {
 		throw new Error( 'Cannot remove metadata from empty list' );
 	}
@@ -473,11 +525,24 @@ ve.dm.Transaction.newFromMetadataRemoval = function ( doc, offset, range ) {
  * @throws {Error} Metadata index out of bounds
  */
 ve.dm.Transaction.newFromMetadataElementReplacement = function ( doc, offset, index, newElement ) {
-	var oldElement,
-		tx = new ve.dm.Transaction(),
-		data = doc.getMetadata(),
-		elements = data[offset] || [];
+	var oldElement, tx, elements,
+		data = doc.getMetadata();
 
+	if ( offset instanceof ve.Range ) {
+		// allow collapsed range, instead of numeric offset
+		offset = offset.from;
+	}
+	if ( index instanceof ve.Range ) {
+		// allow collapsed range, instead of numeric index
+		index = index.from;
+	}
+
+	tx = new ve.dm.Transaction( [
+		'newFromMetadataElementReplacement',
+		new ve.Range( offset ), new ve.Range( index ), newElement
+	] );
+
+	elements = data[offset] || [];
 	if ( index >= elements.length ) {
 		throw new Error( 'Metadata index out of bounds' );
 	}
@@ -511,13 +576,17 @@ ve.dm.Transaction.newFromMetadataElementReplacement = function ( doc, offset, in
  * @returns {ve.dm.Transaction} Transaction that converts content branches
  */
 ve.dm.Transaction.newFromContentBranchConversion = function ( doc, range, type, attr ) {
-	var i, selected, branch, branchOuterRange,
-		tx = new ve.dm.Transaction(),
+	var i, selected, branch, branchOuterRange, tx,
 		selection = doc.selectNodes( range, 'leaves' ),
 		opening = { type: type },
 		closing = { type: '/' + type },
 		previousBranch,
 		previousBranchOuterRange;
+
+	tx = new ve.dm.Transaction( [
+		'newFromContentBranchConversion', range, type, attr
+	] );
+
 	// Add attributes to opening if needed
 	if ( ve.isPlainObject( attr ) ) {
 		opening.attributes = attr;
@@ -592,9 +661,12 @@ ve.dm.Transaction.newFromContentBranchConversion = function ( doc, range, type, 
  * @returns {ve.dm.Transaction}
  */
 ve.dm.Transaction.newFromWrap = function ( doc, range, unwrapOuter, wrapOuter, unwrapEach, wrapEach ) {
-	var i, j, unwrapOuterData, startOffset, unwrapEachData, closingUnwrapEach, closingWrapEach,
-		tx = new ve.dm.Transaction(),
+	var i, j, unwrapOuterData, startOffset, unwrapEachData, closingUnwrapEach, closingWrapEach, tx,
 		depth = 0;
+
+	tx = new ve.dm.Transaction( [
+		'newFromWrap', range, unwrapOuter, wrapOuter, unwrapEach, wrapEach
+	] );
 
 	// Function to generate arrays of closing elements in reverse order
 	function closingArray( openings ) {
@@ -731,7 +803,7 @@ ve.dm.Transaction.reversers = {
  * @returns {ve.dm.Transaction} Clone of this transaction
  */
 ve.dm.Transaction.prototype.clone = function () {
-	var tx = new this.constructor();
+	var tx = new this.constructor( this.intention );
 	tx.operations = ve.copy( this.operations );
 	tx.lengthDifference = this.lengthDifference;
 	return tx;
@@ -747,7 +819,8 @@ ve.dm.Transaction.prototype.clone = function () {
  * @returns {ve.dm.Transaction} Reverse of this transaction
  */
 ve.dm.Transaction.prototype.reversed = function () {
-	var i, len, op, newOp, reverse, prop, tx = new this.constructor();
+	var i, len, op, newOp, reverse, prop, tx;
+	tx = new this.constructor( [ 'bogus' ] );
 	for ( i = 0, len = this.operations.length; i < len; i++ ) {
 		op = this.operations[i];
 		newOp = ve.copy( op );
