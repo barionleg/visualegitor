@@ -21,6 +21,23 @@ ve.dm.Transaction = function VeDmTransaction( intention ) {
 /* Static Methods */
 
 /**
+ * Create a new transaction from an intention.
+ *
+ * @private
+ * @param {ve.dm.Document} doc Document to generate a transaction for
+ * @param {Array[]} intention The transaction intention.
+ * @returns {ve.dm.Transaction}
+ */
+ve.dm.Transaction.newFromIntention = function ( doc, intention ) {
+	var constructorName = intention[0],
+		args = intention.slice( 1 );
+
+	return ve.dm.Transaction[constructorName].apply(
+		ve.dm.Transaction, [ doc ].concat( args )
+	);
+};
+
+/**
  * Generate a transaction that does nothing.
  *
  * @param {ve.dm.Document} doc Document to generate a transaction for
