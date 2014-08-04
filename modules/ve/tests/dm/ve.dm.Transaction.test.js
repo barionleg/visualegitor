@@ -49,6 +49,29 @@ function runConstructorTests( assert, constructor, cases, testRange ) {
 
 /* Tests */
 
+QUnit.test( 'newNoOp', function ( assert ) {
+	var doc = ve.dm.example.createExampleDocument(),
+		listWithMetaDoc = ve.dm.example.createExampleDocument( 'listWithMeta' ),
+		cases;
+	cases = {
+		'example document': {
+			args: [ doc ],
+			ops: [
+				{ type: 'retain', length: 63 }
+			]
+		},
+		'trailing metadata': {
+			args: [ listWithMetaDoc ],
+			ops: [
+				{ type: 'retain', length: 12 },
+				{ type: 'retainMetadata', length: 1 }
+			]
+		}
+	};
+	QUnit.expect( ve.getObjectKeys( cases ).length );
+	runConstructorTests( assert, ve.dm.Transaction.newNoOp, cases );
+} );
+
 QUnit.test( 'newFromInsertion', function ( assert ) {
 	var i, key,
 		doc = ve.dm.example.createExampleDocument(),
