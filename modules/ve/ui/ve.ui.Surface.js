@@ -48,6 +48,7 @@ ve.ui.Surface = function VeUiSurface( dataOrDoc, config ) {
 	this.pasteRules = {};
 	this.enabled = true;
 	this.context = this.createContext();
+	this.filibuster = null;
 
 	// Events
 	this.dialogs.connect( this, { closing: 'onDialogClosing' } );
@@ -392,4 +393,35 @@ ve.ui.Surface.prototype.setPasteRules = function ( pasteRules ) {
  */
 ve.ui.Surface.prototype.getDir = function () {
 	return this.$element.css( 'direction' );
+};
+
+ve.ui.Surface.prototype.startFilibuster = function () {
+	var uiSurface = this;
+	if ( !this.filibuster ) {
+		this.filibuster = new ve.Filibuster();
+		this.filibuster.wrapNamespace( ve.ui, 've.ui' );
+		this.filibuster.wrapNamespace( ve.ce, 've.ce' );
+		this.filibuster.wrapNamespace( ve.dm, 've.dm' );
+		this.filibuster.setObserver( 'dmDoc', function () {
+			return JSON.stringify( uiSurface.model.documentModel.data.data );
+		} );
+		this.filibuster.setObserver( 'dmRange', function () {
+			var selection = uiSurface.model.selection;
+			if ( !selection ) {
+				return null;
+			}
+			return [ selection.from, selection.to ].join( ',' );
+		} );
+	} else {
+		this.filibuster.clearLogs();
+	}
+	if ( this.view && this.view.surfaceObserver ) {
+		// Disable setTimeout
+		this.view.surfaceObserver.setTimeout = function () {};
+	}
+	this.filibuster.start();
+};
+
+ve.ui.Surface.prototype.stopFilibuster = function () {
+	this.filibuster.stop();
 };
