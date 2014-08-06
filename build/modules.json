@@ -150,6 +150,7 @@
 			"modules/ve/ve.LeafNode.js",
 			"modules/ve/ve.Document.js",
 			"modules/ve/ve.EventSequencer.js",
+			"modules/ve/ve.Filibuster.js",
 			"modules/ve/dm/ve.dm.js",
 			"modules/ve/dm/ve.dm.Model.js",
 			"modules/ve/dm/ve.dm.ModelRegistry.js",

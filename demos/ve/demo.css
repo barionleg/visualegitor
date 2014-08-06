@@ -70,3 +70,9 @@ body {
 .ve-ui-debugBar {
 	padding: 1.5em;
 }
+
+table.ve-filibuster, table.ve-filibuster td {
+	border: solid gray 1px;
+	border-collapse: collapse;
+	vertical-align: top;
+}
