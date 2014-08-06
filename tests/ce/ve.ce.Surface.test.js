@@ -385,7 +385,9 @@ QUnit.test( 'onContentChange', function ( assert ) {
 						{
 							type: 'replace',
 							insert: [ 'B' ],
-							remove: [ 'A' ]
+							remove: [ 'A' ],
+							insertedDataLength: 1,
+							insertedDataOffset: 0
 						},
 						{ type: 'retain', length: 3 }
 					]
@@ -403,7 +405,9 @@ QUnit.test( 'onContentChange', function ( assert ) {
 						{
 							type: 'replace',
 							insert: [ ['B', [1]] ],
-							remove: [ ['X', [1]] ]
+							remove: [ ['X', [1]] ],
+							insertedDataLength: 1,
+							insertedDataOffset: 0
 						},
 						{ type: 'retain', length: 4 }
 					]
