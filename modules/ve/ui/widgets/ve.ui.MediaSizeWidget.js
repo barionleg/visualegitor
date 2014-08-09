@@ -156,6 +156,19 @@ ve.ui.MediaSizeWidget.prototype.onScalableOriginalSizeChange = function ( dimens
 	var disabled = !dimensions || $.isEmptyObject( dimensions );
 	this.fullSizeButton.setDisabled( disabled );
 	this.sizeTypeSelectWidget.getItemFromData( 'default' ).setDisabled( disabled );
+	// Revalidate current dimensions
+	this.validateDimensions();
+};
+
+/**
+ * Respond to change in current dimensions in the scalable object.
+ *
+ * @param {Object} dimensions Original dimensions
+ */
+ve.ui.MediaSizeWidget.prototype.onScalableCurrentSizeChange = function ( dimensions ) {
+	if ( !$.isEmptyObject( dimensions ) ) {
+		this.setCurrentDimensions( dimensions );
+	}
 };
 
 /**
@@ -295,7 +308,8 @@ ve.ui.MediaSizeWidget.prototype.setScalable = function ( scalable ) {
 	// Events
 	this.scalable.connect( this, {
 		defaultSizeChange: 'onScalableDefaultSizeChange',
-		originalSizeChange: 'onScalableOriginalSizeChange'
+		originalSizeChange: 'onScalableOriginalSizeChange',
+		currentSizeChange: 'onScalableCurrentSizeChange'
 	} );
 
 	this.updateDefaultDimensions();

@@ -70,6 +70,13 @@ OO.mixinClass( ve.dm.Scalable, OO.EventEmitter );
 /* Events */
 
 /**
+ * Current changed
+ *
+ * @event currentSizeChange
+ * @param {Object} Current dimensions width and height
+ */
+
+/**
  * Default size or state changed
  *
  * @event defaultSizeChange
@@ -190,6 +197,7 @@ ve.dm.Scalable.prototype.setRatioFromDimensions = function ( dimensions ) {
  * Also sets the aspect ratio if not set and in fixed ratio mode.
  *
  * @param {Object} dimensions Dimensions object with width & height
+ * @fires currentSizeChange
  */
 ve.dm.Scalable.prototype.setCurrentDimensions = function ( dimensions ) {
 	if ( this.isDimensionsObjectValid( dimensions ) ) {
@@ -199,6 +207,7 @@ ve.dm.Scalable.prototype.setCurrentDimensions = function ( dimensions ) {
 			this.setRatioFromDimensions( this.getCurrentDimensions() );
 		}
 		this.valid = null;
+		this.emit( 'currentSizeChange', this.getCurrentDimensions() );
 	}
 };
 
