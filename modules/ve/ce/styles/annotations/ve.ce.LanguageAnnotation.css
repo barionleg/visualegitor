@@ -9,3 +9,9 @@
 	border-bottom: 1px dashed #ccc;
 	background-color: #ebf3f5;
 }
+
+.ve-ce-bidi-isolate {
+	unicode-bidi: isolate;
+	unicode-bidi: -moz-isolate;
+	unicode-bidi: -webkit-isolate;
+}
