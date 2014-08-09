@@ -27,7 +27,7 @@ module.exports = function ( grunt ) {
 
 	// FIXME: This doesn't work and you still get 404s. Bad karma.
 	testFiles = testFiles.concat(
-		{ pattern: 'modules/ve/i18n/*.json', included: false, served: true },
+		{ pattern: 'i18n/*.json', included: false, served: true },
 		{ pattern: 'lib/oojs-ui/i18n/*.json', included: false, served: true }
 	);
 
@@ -47,7 +47,7 @@ module.exports = function ( grunt ) {
 	grunt.initConfig( {
 		pkg: grunt.file.readJSON( 'package.json' ),
 		clean: {
-			dist: [ 'dist/*/', 'dist/*.*', 'testcoverage/*/' ]
+			dist: [ 'dist/*/', 'dist/*.*', 'test-coverage/*/' ]
 		},
 		concat: {
 			buildJs: {
@@ -69,13 +69,12 @@ module.exports = function ( grunt ) {
 		},
 		copy: {
 			images: {
-				src: 'modules/ve/ui/styles/images/**/*.*',
-				strip: 'modules/ve/ui/styles/',
+				src: 'src/ui/styles/images/**/*.*',
+				strip: 'src/ui/styles/',
 				dest: 'dist/'
 			},
 			i18n: {
-				src: 'modules/ve/i18n/*.json',
-				strip: 'modules/ve/',
+				src: 'i18n/*.json',
 				dest: 'dist/'
 			}
 		},
@@ -137,64 +136,36 @@ module.exports = function ( grunt ) {
 			},
 			all: [
 				'*.js',
-				'{.docs,build,demos,modules}/**/*.js'
+				'{.docs,build,demos,src,tests}/**/*.js'
 			]
 		},
 		jscs: {
 			src: [
 				'<%= jshint.all %>',
-				'!modules/ve/tests/ce/imetests/*.js'
+				'!tests/ce/imetests/*.js'
 			]
 		},
 		csslint: {
 			options: {
 				csslintrc: '.csslintrc'
 			},
-			all: '{.docs,build,demos,modules}/**/*.css'
+			all: '{.docs,build,demos,src,tests}/**/*.css'
 		},
 		banana: {
-			all: 'modules/ve/i18n/'
+			all: 'i18n/'
 		},
 		karma: {
 			options: {
+				files: testFiles,
 				frameworks: [ 'qunit' ],
 				reporters: [ 'dots' ],
 				singleRun: true,
 				autoWatch: false
 			},
-			// FIXME: OMG ARGH DIE DIE DIE PLEASE MOVE TO A DIFFERENT REPO
-			unicodejs: {
+			phantomjs: {
 				browsers: [ 'PhantomJS' ],
-				options: {
-					files: [
-						'lib/jquery/jquery.js',
-						'modules/unicodejs/unicodejs.js',
-						'modules/unicodejs/unicodejs.textstring.js',
-						'modules/unicodejs/unicodejs.graphemebreakproperties.js',
-						'modules/unicodejs/unicodejs.graphemebreak.js',
-						'modules/unicodejs/unicodejs.wordbreakproperties.js',
-						'modules/unicodejs/unicodejs.wordbreak.js',
-						'modules/unicodejs/tests/unicodejs.test.js',
-						'modules/unicodejs/tests/unicodejs.graphemebreak.test.js',
-						'modules/unicodejs/tests/unicodejs.wordbreak.test.js'
-					]
-				},
 				preprocessors: {
-					'modules/unicodejs/*.js': [ 'coverage' ]
-				},
-				reporters: [ 'dots', 'coverage' ],
-				coverageReporter: { reporters: [
-					{ type: 'html', dir: 'test-coverage/unicodejs' },
-					{ type: 'text-summary', dir: 'test-coverage/unicodejs' }
-				] }
-			},
-			visualeditor: {
-				browsers: [ 'PhantomJS' ],
-				options: {
-					files: testFiles
-				},
-				preprocessors: {
-					'modules/ve/**/*.js': [ 'coverage' ]
+					'src/**/*.js': [ 'coverage' ]
 				},
 				reporters: [ 'dots', 'coverage' ],
 				coverageReporter: { reporters: [
@@ -203,15 +174,9 @@ module.exports = function ( grunt ) {
 				] }
 			},
 			local: {
-				options: {
-					files: testFiles
-				},
 				browsers: [ 'Firefox', 'Chrome' ]
 			},
 			bg: {
-				options: {
-					files: testFiles
-				},
 				browsers: [ 'PhantomJS', 'Firefox', 'Chrome' ],
 				singleRun: false,
 				background: true
@@ -228,9 +193,9 @@ module.exports = function ( grunt ) {
 	} );
 
 	grunt.registerTask( 'lint', [ 'jshint', 'jscs', 'csslint', 'banana' ] );
-	grunt.registerTask( 'unit', [ 'karma:unicodejs', 'karma:visualeditor' ] );
+	grunt.registerTask( 'unit', [ 'karma:phantomjs' ] );
 	grunt.registerTask( 'build', [ 'clean', 'git-build', 'concat', 'cssjanus', 'copy', 'buildloader' ] );
-	grunt.registerTask( 'test', [ 'build', 'lint', 'karma:unicodejs', 'karma:visualeditor' ] );
+	grunt.registerTask( 'test', [ 'build', 'lint', 'karma:phantomjs' ] );
 	grunt.registerTask( 'watch', [ 'karma:bg:start', 'runwatch' ] );
 	grunt.registerTask( 'default', 'test' );
 };
