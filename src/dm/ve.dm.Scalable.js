@@ -38,6 +38,13 @@ ve.dm.Scalable = function VeDmScalable( config ) {
 	this.valid = null;
 	this.defaultSize = false;
 
+	// Initialize
+	this.currentDimensions = {};
+	this.defaultDimensions = {};
+	this.originalDimensions = {};
+	this.minDimensions = {};
+	this.maxDimensions = {};
+
 	// Properties
 	this.fixedRatio = config.fixedRatio;
 	if ( config.currentDimensions ) {
@@ -68,6 +75,13 @@ ve.dm.Scalable = function VeDmScalable( config ) {
 OO.mixinClass( ve.dm.Scalable, OO.EventEmitter );
 
 /* Events */
+
+/**
+ * Current changed
+ *
+ * @event currentSizeChange
+ * @param {Object} Current dimensions width and height
+ */
 
 /**
  * Default size or state changed
@@ -190,15 +204,37 @@ ve.dm.Scalable.prototype.setRatioFromDimensions = function ( dimensions ) {
  * Also sets the aspect ratio if not set and in fixed ratio mode.
  *
  * @param {Object} dimensions Dimensions object with width & height
+ * @fires currentSizeChange
  */
 ve.dm.Scalable.prototype.setCurrentDimensions = function ( dimensions ) {
-	if ( this.isDimensionsObjectValid( dimensions ) ) {
+	var oldDimensions = this.getCurrentDimensions();
+
+	// Only update the new value if new dimensions are valid and
+	// either the old dimensions aren't valid or they are different
+	// than the new dimensions
+	// Or if the old object is empty
+	if (
+		(
+			this.isDimensionsObjectValid( dimensions ) &&
+			!this.isDimensionsObjectValid( oldDimensions )
+		) ||
+		(
+			this.isDimensionsObjectValid( dimensions ) &&
+			this.isDimensionsObjectValid( oldDimensions ) &&
+			!ve.compare( dimensions, oldDimensions )
+		) ||
+		(
+			this.isDimensionsObjectValid( dimensions ) &&
+			$.isEmptyObject( dimensions )
+		)
+	) {
 		this.currentDimensions = ve.copy( dimensions );
 		// Only use current dimensions for ratio if it isn't set
 		if ( this.fixedRatio && !this.ratio ) {
 			this.setRatioFromDimensions( this.getCurrentDimensions() );
 		}
 		this.valid = null;
+		this.emit( 'currentSizeChange', this.getCurrentDimensions() );
 	}
 };
 
@@ -246,6 +282,26 @@ ve.dm.Scalable.prototype.setDefaultDimensions = function ( dimensions ) {
 		this.valid = null;
 		this.emit( 'defaultSizeChange', this.isDefault() );
 	}
+};
+
+/**
+ * Reset and remove the default dimensions
+ * @fires defaultSizeChange
+ */
+ve.dm.Scalable.prototype.resetDefaultDimensions = function () {
+	this.defaultDimensions = {};
+	this.valid = null;
+	this.emit( 'defaultSizeChange', this.isDefault() );
+};
+
+/**
+ * Reset and remove the default dimensions
+ * @fires defaultSizeChange
+ */
+ve.dm.Scalable.prototype.resetOriginalDimensions = function () {
+	this.originalDimensions = {};
+	this.valid = null;
+	this.emit( 'originalSizeChange', this.isDefault() );
 };
 
 /**
@@ -542,8 +598,8 @@ ve.dm.Scalable.prototype.getBoundedDimensions = function ( dimensions, grid ) {
  */
 ve.dm.Scalable.prototype.isCurrentDimensionsValid = function () {
 	var dimensions = this.getCurrentDimensions(),
-		minDimensions = this.isEnforcedMin() && this.getMinDimensions(),
-		maxDimensions = this.isEnforcedMax() && this.getMaxDimensions();
+		minDimensions = this.isEnforcedMin() && !$.isEmptyObject( this.getMinDimensions() ) && this.getMinDimensions(),
+		maxDimensions = this.isEnforcedMax() && !$.isEmptyObject( this.getMaxDimensions() ) && this.getMaxDimensions();
 
 	this.valid = (
 		$.isNumeric( dimensions.width ) &&
