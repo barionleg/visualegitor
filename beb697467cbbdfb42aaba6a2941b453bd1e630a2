@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_2ced2b23",
+        "filename": "modules/ve/ui/ve.ui.DebugBar.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-08-10T10:50:50Z",
+      "side": 1,
+      "message": "This also needs to use debugBar.$()",
+      "revId": "beb697467cbbdfb42aaba6a2941b453bd1e630a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
