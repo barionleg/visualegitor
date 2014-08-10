@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_cc6ea7c4",
+        "filename": "modules/ve/dm/ve.dm.Transaction.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 1178,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-08-10T10:42:46Z",
+      "side": 1,
+      "message": "wasMerged is named like a boolean, and initialized to false, but here you\u0027re setting it to an array. Instead, name it according to what it contains when it\u0027s set (lastInsertionData or something) and initialize it to undefined.\n\nAlternatively, set it to an empty array, then you could simplify the wasMerged ? 1 : 0 ternary below to foo.length, and wasMerged || [] to foo.",
+      "revId": "045810ecad6d671d24668eac11f1785f112f41e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_8caf7fde",
+        "filename": "modules/ve/dm/ve.dm.Transaction.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 1187,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-08-10T10:42:46Z",
+      "side": 1,
+      "message": "There\u0027s no reason to put !extraMetadata in parentheses",
+      "revId": "045810ecad6d671d24668eac11f1785f112f41e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_ac991bca",
+        "filename": "modules/ve/dm/ve.dm.Transaction.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 1188,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-08-10T10:42:46Z",
+      "side": 1,
+      "message": "That\u0027s a lot of nested ! operators. You could at least simplify this to !( wasMerged \u0026\u0026 insertMetadata !\u003d\u003d undefined \u0026\u0026 !isInsertEmpty )",
+      "revId": "045810ecad6d671d24668eac11f1785f112f41e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_0ca4af03",
+        "filename": "modules/ve/dm/ve.dm.Transaction.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 1198,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-08-10T10:42:46Z",
+      "side": 1,
+      "message": "If lastOp.insertMetadata is always an array when it\u0027s not undefined, you can suffice with ( lastOp.insertMetadata || new Array( lastOp.insert.length ) ) here.",
+      "revId": "045810ecad6d671d24668eac11f1785f112f41e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
