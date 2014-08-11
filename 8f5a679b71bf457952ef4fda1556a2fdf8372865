@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_2dbc02b1",
+        "filename": "Gruntfile.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2014-08-11T18:25:17Z",
+      "side": 1,
+      "message": "test-coverage or testcoverage? See gitignore.",
+      "revId": "8f5a679b71bf457952ef4fda1556a2fdf8372865",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
