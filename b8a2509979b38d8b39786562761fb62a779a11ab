@@ -16,6 +16,24 @@
       "revId": "b8a2509979b38d8b39786562761fb62a779a11ab",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_1e43ae44",
+        "filename": "modules/ve/dm/ve.dm.TransactionProcessor.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-08-11T22:37:23Z",
+      "side": 1,
+      "message": "not a bad idea",
+      "parentUuid": "8e28a382_8cdd3f76",
+      "revId": "b8a2509979b38d8b39786562761fb62a779a11ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
