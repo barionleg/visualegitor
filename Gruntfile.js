@@ -76,6 +76,7 @@ module.exports = function ( grunt ) {
 				modules: modules,
 				load: [ 'visualEditor.desktop.standalone' ],
 				pathPrefix: '../',
+				i18n: [ 'modules/ve/i18n/', 'lib/oojs-ui/i18n/' ],
 				indent: '\t\t'
 			},
 			desktopDemo: {
@@ -87,6 +88,7 @@ module.exports = function ( grunt ) {
 					debug: true
 				},
 				pathPrefix: '../../',
+				i18n: [ 'modules/ve/i18n/', 'lib/oojs-ui/i18n/' ],
 				indent: '\t\t',
 				placeholders: { menu: demoMenu }
 			},
@@ -96,6 +98,7 @@ module.exports = function ( grunt ) {
 				modules: modules,
 				load: [ 'visualEditor.desktop.standalone.demo.dist' ],
 				pathPrefix: '../../',
+				i18n: [ 'dist/i18n/', 'lib/oojs-ui/i18n/' ],
 				indent: '\t\t',
 				placeholders: { menu: demoMenu }
 			},
@@ -108,6 +111,7 @@ module.exports = function ( grunt ) {
 					debug: true
 				},
 				pathPrefix: '../../',
+				i18n: [ 'modules/ve/i18n/', 'lib/oojs-ui/i18n/' ],
 				indent: '\t\t',
 				placeholders: { menu: demoMenu }
 			},
@@ -117,6 +121,7 @@ module.exports = function ( grunt ) {
 				modules: modules,
 				load: [ 'visualEditor.mobile.standalone.demo.dist' ],
 				pathPrefix: '../../',
+				i18n: [ 'dist/i18n/', 'lib/oojs-ui/i18n/' ],
 				indent: '\t\t',
 				placeholders: { menu: demoMenu }
 			},
