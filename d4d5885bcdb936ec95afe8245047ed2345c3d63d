@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_4f1cdb7c",
+        "filename": "Gruntfile.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2014-08-12T21:54:56Z",
+      "side": 1,
+      "message": "This should re-use \u0027unit\u0027. It got lost in the previous refactor from qunit to karma where you probably misread unit as qunit and replaced it with karma.",
+      "revId": "d4d5885bcdb936ec95afe8245047ed2345c3d63d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
