@@ -16,6 +16,24 @@
       "revId": "2075a46f1bc364521303b3a9cca86c26b9802fd5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_b6283397",
+        "filename": "Gruntfile.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-08-13T20:23:06Z",
+      "side": 1,
+      "message": "concat is badly named, it\u0027s main feature is adding build info, all grunt tasks concat",
+      "parentUuid": "8e28a382_56f10fc7",
+      "revId": "2075a46f1bc364521303b3a9cca86c26b9802fd5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
