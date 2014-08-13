@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_56f10fc7",
+        "filename": "Gruntfile.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-08-13T19:47:15Z",
+      "side": 1,
+      "message": "This is really ugly. Can\u0027t you just skip this now?",
+      "revId": "2075a46f1bc364521303b3a9cca86c26b9802fd5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
