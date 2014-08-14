@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_c0352af5",
+        "filename": "modules/ve/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-08-14T19:39:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae43a74e_9b341ca9",
+      "revId": "610161d246fc43d7f15a1db1ac64442d64e60dbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae43a74e_7b3738ac",
         "filename": "modules/ve/ce/ve.ce.Surface.js",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2014-07-05T10:48:21Z",
       "side": 1,
       "message": "use $element[0].blur() as jQuery blur is much slower than native blur",
+      "revId": "610161d246fc43d7f15a1db1ac64442d64e60dbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_40625a07",
+        "filename": "modules/ve/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-08-14T19:39:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae43a74e_7b3738ac",
       "revId": "610161d246fc43d7f15a1db1ac64442d64e60dbd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
