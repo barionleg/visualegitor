@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_e02a6673",
+        "filename": "modules/ve/dm/ve.dm.Transaction.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 1178,
+      "author": {
+        "id": 664
+      },
+      "writtenOn": "2014-08-14T18:46:18Z",
+      "side": 1,
+      "message": "I\u0027ll fix this, probably by renaming to \u0027mergedMetadata\u0027 or some such.",
+      "parentUuid": "8e28a382_cc6ea7c4",
+      "revId": "045810ecad6d671d24668eac11f1785f112f41e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_8caf7fde",
         "filename": "modules/ve/dm/ve.dm.Transaction.js",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2014-08-10T10:42:46Z",
       "side": 1,
       "message": "There\u0027s no reason to put !extraMetadata in parentheses",
+      "revId": "045810ecad6d671d24668eac11f1785f112f41e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_c0fbea0f",
+        "filename": "modules/ve/dm/ve.dm.Transaction.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 1187,
+      "author": {
+        "id": 664
+      },
+      "writtenOn": "2014-08-14T18:46:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28a382_8caf7fde",
       "revId": "045810ecad6d671d24668eac11f1785f112f41e9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_953886ec",
+        "filename": "modules/ve/dm/ve.dm.Transaction.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 1188,
+      "author": {
+        "id": 664
+      },
+      "writtenOn": "2014-08-14T18:46:18Z",
+      "side": 1,
+      "message": "I tried various applications of de morgan\u0027s laws to this conditional, and this is the phrasing which I think makes the most sense to read.",
+      "parentUuid": "8e28a382_ac991bca",
+      "revId": "045810ecad6d671d24668eac11f1785f112f41e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_0ca4af03",
         "filename": "modules/ve/dm/ve.dm.Transaction.js",
         "patchSetId": 2
@@ -64,6 +118,24 @@
       "writtenOn": "2014-08-10T10:42:46Z",
       "side": 1,
       "message": "If lastOp.insertMetadata is always an array when it\u0027s not undefined, you can suffice with ( lastOp.insertMetadata || new Array( lastOp.insert.length ) ) here.",
+      "revId": "045810ecad6d671d24668eac11f1785f112f41e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_150b762f",
+        "filename": "modules/ve/dm/ve.dm.Transaction.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 1198,
+      "author": {
+        "id": 664
+      },
+      "writtenOn": "2014-08-14T18:46:18Z",
+      "side": 1,
+      "message": "Yes, however -- lastOp.insertMetadata is set to undefined whevener it would otherwise be empty in order to save memory for the common case.  Not my fault!",
+      "parentUuid": "8e28a382_0ca4af03",
       "revId": "045810ecad6d671d24668eac11f1785f112f41e9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
