@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_c18e492a",
+        "filename": "src/ui/ve.ui.Surface.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-08-15T15:16:42Z",
+      "side": 1,
+      "message": "maybe make all these methods chainable?",
+      "revId": "d6204ec366d14b42c981eb96229d51193dae6252",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
