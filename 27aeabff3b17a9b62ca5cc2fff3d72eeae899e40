@@ -1,0 +1,344 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_619f9556",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-08-15T15:27:39Z",
+      "side": 1,
+      "message": "document construction argument",
+      "revId": "27aeabff3b17a9b62ca5cc2fff3d72eeae899e40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_21a98d78",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-08-15T15:27:39Z",
+      "side": 1,
+      "message": "update documentation",
+      "revId": "27aeabff3b17a9b62ca5cc2fff3d72eeae899e40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_419a5965",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-08-15T15:27:39Z",
+      "side": 1,
+      "message": "maybe throw an exception if the range isn\u0027t collapsed?",
+      "revId": "27aeabff3b17a9b62ca5cc2fff3d72eeae899e40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_a1ac5d85",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-08-15T15:27:39Z",
+      "side": 1,
+      "message": "update docs",
+      "revId": "27aeabff3b17a9b62ca5cc2fff3d72eeae899e40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_81af2178",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-08-15T15:27:39Z",
+      "side": 1,
+      "message": "again check it is collapsed?",
+      "revId": "27aeabff3b17a9b62ca5cc2fff3d72eeae899e40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_41c13933",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-08-15T15:27:39Z",
+      "side": 1,
+      "message": "same as above",
+      "revId": "27aeabff3b17a9b62ca5cc2fff3d72eeae899e40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_e1d9452d",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-08-15T15:27:39Z",
+      "side": 1,
+      "message": "same as above",
+      "revId": "27aeabff3b17a9b62ca5cc2fff3d72eeae899e40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_a1e33dd3",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-08-15T15:27:39Z",
+      "side": 1,
+      "message": "same as above",
+      "revId": "27aeabff3b17a9b62ca5cc2fff3d72eeae899e40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_81e601e2",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-08-15T15:27:39Z",
+      "side": 1,
+      "message": "same as above",
+      "revId": "27aeabff3b17a9b62ca5cc2fff3d72eeae899e40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_61cd5562",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-08-15T15:27:39Z",
+      "side": 1,
+      "message": "same as above",
+      "revId": "27aeabff3b17a9b62ca5cc2fff3d72eeae899e40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_41c81951",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-08-15T15:27:39Z",
+      "side": 1,
+      "message": "same as above",
+      "revId": "27aeabff3b17a9b62ca5cc2fff3d72eeae899e40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_21d74df4",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-08-15T15:27:39Z",
+      "side": 1,
+      "message": "same as above",
+      "revId": "27aeabff3b17a9b62ca5cc2fff3d72eeae899e40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_01d21101",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-08-15T15:27:39Z",
+      "side": 1,
+      "message": "same as above",
+      "revId": "27aeabff3b17a9b62ca5cc2fff3d72eeae899e40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_e100256f",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-08-15T15:27:39Z",
+      "side": 1,
+      "message": "same as above",
+      "revId": "27aeabff3b17a9b62ca5cc2fff3d72eeae899e40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_c103e977",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-08-15T15:27:39Z",
+      "side": 1,
+      "message": "same as above",
+      "revId": "27aeabff3b17a9b62ca5cc2fff3d72eeae899e40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_a1fa1d71",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-08-15T15:27:39Z",
+      "side": 1,
+      "message": "same as above",
+      "revId": "27aeabff3b17a9b62ca5cc2fff3d72eeae899e40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_81fde16b",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 541,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-08-15T15:27:39Z",
+      "side": 1,
+      "message": "same as above",
+      "revId": "27aeabff3b17a9b62ca5cc2fff3d72eeae899e40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_61f43584",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 591,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-08-15T15:27:39Z",
+      "side": 1,
+      "message": "this could\u0027ve stayed in the var statement...",
+      "revId": "27aeabff3b17a9b62ca5cc2fff3d72eeae899e40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_41eff9ae",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 671,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-08-15T15:27:39Z",
+      "side": 1,
+      "message": "could stay in var?",
+      "revId": "27aeabff3b17a9b62ca5cc2fff3d72eeae899e40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_21ee2db2",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 827,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-08-15T15:27:39Z",
+      "side": 1,
+      "message": "??",
+      "revId": "27aeabff3b17a9b62ca5cc2fff3d72eeae899e40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
