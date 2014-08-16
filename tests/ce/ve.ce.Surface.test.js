@@ -553,7 +553,7 @@ QUnit.test( 'onCopy', function ( assert ) {
 } );
 
 QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
-	var i, exampleDoc = '<p></p><p>Foo</p>',
+	var i, exampleDoc = '<p></p><p>Foo</p><h2> Baz </h2>',
 		TestEvent = function ( data ) {
 			this.originalEvent = {
 				clipboardData: {
@@ -579,7 +579,7 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 							],
 							remove: []
 						},
-						{ type: 'retain', length: 8 }
+						{ type: 'retain', length: 13 }
 					]
 				],
 				msg: 'Text into empty paragraph'
@@ -596,7 +596,7 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 							insert: [ 'B', 'a', 'r' ],
 							remove: []
 						},
-						{ type: 'retain', length: 5 }
+						{ type: 'retain', length: 10 }
 					]
 				],
 				msg: 'Text into paragraph'
@@ -617,7 +617,7 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 							],
 							remove: []
 						},
-						{ type: 'retain', length: 5 }
+						{ type: 'retain', length: 10 }
 					]
 				],
 				msg: 'Formatted text into paragraph'
@@ -635,7 +635,7 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 							insert: [ 'B', 'a', 'r' ],
 							remove: []
 						},
-						{ type: 'retain', length: 5 }
+						{ type: 'retain', length: 10 }
 					]
 				],
 				msg: 'Formatted text into paragraph with pasteSpecial'
@@ -652,7 +652,7 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 							insert: [ 'B', 'a', 'r' ],
 							remove: []
 						},
-						{ type: 'retain', length: 5 }
+						{ type: 'retain', length: 10 }
 					]
 				],
 				msg: 'Paragraph into paragraph'
@@ -669,7 +669,7 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 							insert: [ 'B', 'a', 'r' ],
 							remove: []
 						},
-						{ type: 'retain', length: 3 }
+						{ type: 'retain', length: 8 }
 					]
 				],
 				msg: 'Paragraph at end of paragraph'
@@ -686,10 +686,27 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 							insert: [ 'B', 'a', 'r' ],
 							remove: []
 						},
-						{ type: 'retain', length: 6 }
+						{ type: 'retain', length: 11 }
 					]
 				],
 				msg: 'Paragraph at start of paragraph'
+			},
+			{
+				range: new ve.Range( 11 ),
+				pasteHtml: '<h2>Quux</h2>',
+				expectedRange: new ve.Range( 15 ),
+				expectedOps: [
+					[
+						{ type: 'retain', length: 11 },
+						{
+							type: 'replace',
+							insert: [ 'Q', 'u', 'u', 'x' ],
+							remove: []
+						},
+						{ type: 'retain', length: 3 }
+					]
+				],
+				msg: 'Heading into heading with whitespace'
 			},
 			{
 				range: new ve.Range( 4 ),
@@ -703,7 +720,7 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 							insert: [ '☂', 'f', 'o', 'o', '☀' ],
 							remove: []
 						},
-						{ type: 'retain', length: 5 }
+						{ type: 'retain', length: 10 }
 					]
 				],
 				msg: 'Left/right placeholder characters'
@@ -728,7 +745,7 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 							],
 							remove: []
 						},
-						{ type: 'retain', length: 2 }
+						{ type: 'retain', length: 7 }
 					]
 				],
 				msg: 'List at end of paragraph (moves insertion point)'
@@ -764,7 +781,7 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 							],
 							remove: []
 						},
-						{ type: 'retain', length: 5 }
+						{ type: 'retain', length: 10 }
 					]
 				],
 				msg: 'Table with caption into paragraph'
@@ -786,7 +803,7 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 							insert: ve.dm.example.RDFa.slice( 0, 5 ),
 							remove: []
 						},
-						{ type: 'retain', length: 9 }
+						{ type: 'retain', length: 14 }
 					]
 				],
 				msg: 'RDFa attributes restored/overwritten from data-ve-attributes'
