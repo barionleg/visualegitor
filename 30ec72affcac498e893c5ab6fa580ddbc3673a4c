@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_fad1eb27",
+        "filename": "src/ve.Filibuster.js",
+        "patchSetId": 16
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-08-16T14:37:11Z",
+      "side": 1,
+      "message": "@chainable",
+      "revId": "30ec72affcac498e893c5ab6fa580ddbc3673a4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
