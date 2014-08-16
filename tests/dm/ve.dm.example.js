@@ -1114,14 +1114,14 @@ ve.dm.example.domToDataCases = {
 		]
 	},
 	'paragraphs with an alienBlock between them': {
-		body: '<p>abc</p><figure>abc</figure><p>def</p>',
+		body: '<p>abc</p><div rel="ve:Alien">abc</div><p>def</p>',
 		data: [
 			{ type: 'paragraph' },
 			'a',
 			'b',
 			'c',
 			{ type: '/paragraph' },
-			{ type: 'alienBlock', attributes: { domElements: $( '<figure>abc</figure>' ).toArray() } },
+			{ type: 'alienBlock', attributes: { domElements: $( '<div rel="ve:Alien">abc</div>' ).toArray() } },
 			{ type: '/alienBlock' },
 			{ type: 'paragraph' },
 			'd',
@@ -1335,14 +1335,14 @@ ve.dm.example.domToDataCases = {
 		]
 	},
 	'wrapping of bare content with block alien': {
-		body: '1<figure class="bar">baz</figure>2',
+		body: '1<div rel="ve:Alien" class="bar">baz</div>2',
 		data: [
 			{ type: 'paragraph', internal: { generated: 'wrapper' } },
 			'1',
 			{ type: '/paragraph' },
 			{
 				type: 'alienBlock',
-				attributes: { domElements: $( '<figure class="bar">baz</figure>' ).toArray() }
+				attributes: { domElements: $( '<div rel="ve:Alien" class="bar">baz</div>' ).toArray() }
 			},
 			{ type: '/alienBlock' },
 			{ type: 'paragraph', internal: { generated: 'wrapper' } },
@@ -2001,12 +2001,12 @@ ve.dm.example.domToDataCases = {
 		]
 	},
 	'whitespace preservation with aliens': {
-		body: ' <figure>  <br>   </figure>    <p>\tFoo\t\t<foobar>\t\t\tBar\t\t\t\t</foobar>\nBaz\n\n<foobar>\n\n\nQuux\n\n\n\n</foobar> \tWhee \n</p>\t\n<figure>\n\tYay \t </figure> \n ',
+		body: ' <div rel="ve:Alien">  <br>   </div>    <p>\tFoo\t\t<foobar>\t\t\tBar\t\t\t\t</foobar>\nBaz\n\n<foobar>\n\n\nQuux\n\n\n\n</foobar> \tWhee \n</p>\t\n<div rel="ve:Alien">\n\tYay \t </div> \n ',
 		data: [
 			{
 				type: 'alienBlock',
 				attributes: {
-					domElements: $( '<figure>  <br>   </figure>' ).toArray()
+					domElements: $( '<div rel="ve:Alien">  <br>   </div>' ).toArray()
 				},
 				internal: {
 					whitespace: [ ' ', undefined, undefined, '    ' ]
@@ -2044,7 +2044,7 @@ ve.dm.example.domToDataCases = {
 			{
 				type: 'alienBlock',
 				attributes: {
-					domElements: $( '<figure>\n\tYay \t </figure>' ).toArray()
+					domElements: $( '<div rel="ve:Alien">\n\tYay \t </div>' ).toArray()
 				},
 				internal: {
 					whitespace: [ '\t\n', undefined, undefined, ' \n ' ]
@@ -2533,27 +2533,27 @@ ve.dm.example.domToDataCases = {
 		]
 	},
 	'about grouping': {
-		body: '<figure about="#mwt1">Foo</figure>' +
-			'<figure about="#mwt1">Bar</figure>' +
-			'<figure about="#mwt2">Baz</figure>' +
+		body: '<div rel="ve:Alien" about="#mwt1">Foo</div>' +
+			'<div rel="ve:Alien" about="#mwt1">Bar</div>' +
+			'<div rel="ve:Alien" about="#mwt2">Baz</div>' +
 			'<foobar about="#mwt2">Quux</foobar>' +
 			'<p>Whee</p>' +
 			'<foobar about="#mwt2">Yay</foobar>' +
-			'<figure about="#mwt2">Blah</figure>' +
+			'<div rel="ve:Alien" about="#mwt2">Blah</div>' +
 			'<foobar about="#mwt3">Meh</foobar>',
 		data: [
 			{
 				type: 'alienBlock',
 				attributes: {
-					domElements: $( '<figure about="#mwt1">Foo</figure>' +
-						'<figure about="#mwt1">Bar</figure>' ).toArray()
+					domElements: $( '<div rel="ve:Alien" about="#mwt1">Foo</div>' +
+						'<div rel="ve:Alien" about="#mwt1">Bar</div>' ).toArray()
 				}
 			},
 			{ type: '/alienBlock' },
 			{
 				type: 'alienBlock',
 				attributes: {
-					domElements: $( '<figure about="#mwt2">Baz</figure>' +
+					domElements: $( '<div rel="ve:Alien" about="#mwt2">Baz</div>' +
 						'<foobar about="#mwt2">Quux</foobar>' ).toArray()
 				}
 			},
@@ -2568,7 +2568,7 @@ ve.dm.example.domToDataCases = {
 				type: 'alienBlock',
 				attributes: {
 					domElements: $( '<foobar about="#mwt2">Yay</foobar>' +
-						'<figure about="#mwt2">Blah</figure>' ).toArray()
+						'<div rel="ve:Alien" about="#mwt2">Blah</div>' ).toArray()
 				}
 			},
 			{ type: '/alienBlock' },
@@ -2586,14 +2586,14 @@ ve.dm.example.domToDataCases = {
 		]
 	},
 	'whitespace preservation with an about group': {
-		body: ' <figure about="#mwt1">\tFoo\t\t</figure>\t\t\t' +
-			'<figure about="#mwt1">  Bar   </figure>    ',
+		body: ' <div rel="ve:Alien" about="#mwt1">\tFoo\t\t</div>\t\t\t' +
+			'<div rel="ve:Alien" about="#mwt1">  Bar   </div>    ',
 		data: [
 			{
 				type: 'alienBlock',
 				attributes: {
-					domElements: $( '<figure about="#mwt1">\tFoo\t\t</figure>\t\t\t' +
-						'<figure about="#mwt1">  Bar   </figure>' ).toArray()
+					domElements: $( '<div rel="ve:Alien" about="#mwt1">\tFoo\t\t</div>\t\t\t' +
+						'<div rel="ve:Alien" about="#mwt1">  Bar   </div>' ).toArray()
 				},
 				internal: {
 					whitespace: [ ' ', undefined, undefined, '    ' ]
