@@ -2,6 +2,91 @@
   "comments": [
     {
       "key": {
+        "uuid": "8e28a382_adf9dd4c",
+        "filename": "src/ce/ve.ce.SurfaceObserver.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-08-18T22:57:09Z",
+      "side": 1,
+      "message": "Capital W",
+      "revId": "8a8580604b7227ef245a4671560ef6387e7ecfca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_ed9ec509",
+        "filename": "src/ui/ve.ui.DebugBar.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-08-18T22:57:09Z",
+      "side": 1,
+      "message": "You should be able to use .hide() and .show() for this, right?",
+      "revId": "8a8580604b7227ef245a4671560ef6387e7ecfca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_cd8549b3",
+        "filename": "src/ui/ve.ui.DebugBar.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-08-18T22:57:09Z",
+      "side": 1,
+      "message": "this.$filibuster.empty()",
+      "revId": "8a8580604b7227ef245a4671560ef6387e7ecfca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_4db95977",
+        "filename": "src/ui/ve.ui.Surface.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-08-18T22:57:09Z",
+      "side": 1,
+      "message": "Our indent style for this tends to be something more like:\n\n    this.filibuster \u003d new ve.Filibuster()\n        .wrapClass( ve.EventSequencer )\n        .wrapNamespace( ve.dm, \u0027ve.dm\u0027 )\n        .wrapNamespace( ve.ui, \u0027ve.ui\u0027, [\n            // blacklist\n            foo,\n            bar\n        ] )\n        .setObserver( \u0027dm doc\u0027, function () {\n            do stuff\n        } )\n        .setObserver( \u0027dm range\u0027, function () {\n            do stuff\n        } );",
+      "revId": "8a8580604b7227ef245a4671560ef6387e7ecfca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_2dbccd66",
+        "filename": "src/ui/ve.ui.Surface.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-08-18T22:57:09Z",
+      "side": 1,
+      "message": "Huh? Why?",
+      "revId": "8a8580604b7227ef245a4671560ef6387e7ecfca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_8de18199",
         "filename": "src/ve.EventSequencer.js",
         "patchSetId": 17
@@ -13,6 +98,176 @@
       "writtenOn": "2014-08-18T19:18:14Z",
       "side": 1,
       "message": "You forgot to document listener",
+      "revId": "8a8580604b7227ef245a4671560ef6387e7ecfca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_0db35197",
+        "filename": "src/ve.Filibuster.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-08-18T22:57:09Z",
+      "side": 1,
+      "message": "Is this needed? Didn\u0027t you already put this in the config file too?",
+      "revId": "8a8580604b7227ef245a4671560ef6387e7ecfca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_4d6839f2",
+        "filename": "src/ve.Filibuster.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-08-18T22:57:09Z",
+      "side": 1,
+      "message": "I\u0027m amused by the irony that that case is about a food product that you refuse to consume",
+      "revId": "8a8580604b7227ef245a4671560ef6387e7ecfca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_0d7231e2",
+        "filename": "src/ve.Filibuster.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-08-18T22:57:09Z",
+      "side": 1,
+      "message": "Lowercase n names",
+      "revId": "8a8580604b7227ef245a4671560ef6387e7ecfca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_ed7485ce",
+        "filename": "src/ve.Filibuster.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-08-18T22:57:09Z",
+      "side": 1,
+      "message": "The cool kids use OO.initClass( ve.Filibuster ); here",
+      "revId": "8a8580604b7227ef245a4671560ef6387e7ecfca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_8d8501a2",
+        "filename": "src/ve.Filibuster.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-08-18T22:57:09Z",
+      "side": 1,
+      "message": "and comparability, presumably?",
+      "revId": "8a8580604b7227ef245a4671560ef6387e7ecfca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_ed4b6586",
+        "filename": "src/ve.Filibuster.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-08-18T22:57:09Z",
+      "side": 1,
+      "message": "You don\u0027t need !! here",
+      "revId": "8a8580604b7227ef245a4671560ef6387e7ecfca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_cd62e905",
+        "filename": "src/ve.Filibuster.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-08-18T22:57:09Z",
+      "side": 1,
+      "message": "Capital B Be",
+      "revId": "8a8580604b7227ef245a4671560ef6387e7ecfca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_f01fbc5c",
+        "filename": "src/ve.Filibuster.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-08-18T22:57:09Z",
+      "side": 1,
+      "message": "That sounds like it could be more than just an array. mixed?",
+      "revId": "8a8580604b7227ef245a4671560ef6387e7ecfca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_33bc2e67",
+        "filename": "src/ve.debug.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-08-18T22:57:09Z",
+      "side": 1,
+      "message": "Can we push this behavior into oojs itself? Maybe without the exception on early binding, too",
+      "revId": "8a8580604b7227ef245a4671560ef6387e7ecfca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_ad5d5d4d",
+        "filename": "src/ve.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-08-18T22:57:09Z",
+      "side": 1,
+      "message": "Spelling of \"implementation\" (2nd usage)",
       "revId": "8a8580604b7227ef245a4671560ef6387e7ecfca",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
