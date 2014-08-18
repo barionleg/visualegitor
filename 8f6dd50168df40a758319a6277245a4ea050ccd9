@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_be5fc513",
+        "filename": "src/dm/ve.dm.Scalable.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-08-18T23:50:38Z",
+      "side": 1,
+      "message": "Include the parameter name:\n\n    @param {Object} currentDimensions Current dimensions width and height",
+      "revId": "8f6dd50168df40a758319a6277245a4ea050ccd9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_bedc6578",
+        "filename": "src/dm/ve.dm.Scalable.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-08-18T23:50:38Z",
+      "side": 1,
+      "message": "Every single one of your cases asserts that the new dimensions are valid. So maybe you can restructure this so you check for that right at the start, and bail if the new dimensions aren\u0027t valid?",
+      "revId": "8f6dd50168df40a758319a6277245a4ea050ccd9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_7ee6fd40",
+        "filename": "src/dm/ve.dm.Scalable.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-08-18T23:50:38Z",
+      "side": 1,
+      "message": "You don\u0027t need to assert that oldDimensions are valid here, because if they were not valid, the first operand of the || would have been true and this condition would never even have been checked.\n\nThere is also no reason to check for the \"old was invalid, new is valid\" case, because if that is true, then old and new will be different and the \"old and new are different\" case will be triggered.",
+      "revId": "8f6dd50168df40a758319a6277245a4ea050ccd9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_1ecff9b6",
+        "filename": "src/dm/ve.dm.Scalable.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-08-18T23:50:38Z",
+      "side": 1,
+      "message": "Why is empty object a special case? It can\u0027t be for validity because you\u0027re checking that separately. I also can\u0027t see a reason why you\u0027d want a change from {} to {} to still trigger the event and all that stuff.",
+      "revId": "8f6dd50168df40a758319a6277245a4ea050ccd9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_dec851ac",
+        "filename": "src/dm/ve.dm.Scalable.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-08-18T23:50:38Z",
+      "side": 1,
+      "message": "With all the comments above, I think this 15-line if statement could be simplified to:\n\n    // If the new dimensions aren\u0027t valid, or they\u0027re the same as the existing\n    // ones, do nothing.\n    // TODO: should we throw an exception if the new dimensions are invalid?\n    if ( !this.isDimensionsObjectValid( dimensions ) || ve.compare( dimensions, oldDimensions ) ) {\n        return;\n    }",
+      "revId": "8f6dd50168df40a758319a6277245a4ea050ccd9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_9ec2c986",
+        "filename": "src/dm/ve.dm.Scalable.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-08-18T23:50:38Z",
+      "side": 1,
+      "message": "We typically call these kinds of methods \"clearFoo\" rather than \"resetFoo\"",
+      "revId": "8f6dd50168df40a758319a6277245a4ea050ccd9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_bec3458c",
+        "filename": "src/dm/ve.dm.Scalable.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-08-18T23:50:38Z",
+      "side": 1,
+      "message": "Lies",
+      "revId": "8f6dd50168df40a758319a6277245a4ea050ccd9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
