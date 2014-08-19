@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e28a382_e4437ab4",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-08-19T11:57:23Z",
+      "side": 1,
+      "message": "Array[] is an array of arrays, just Array",
+      "revId": "aa8d9885b1e1d077219f03aba2c730fd4711ed52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
