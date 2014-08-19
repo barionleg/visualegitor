@@ -87,6 +87,24 @@
     },
     {
       "key": {
+        "uuid": "8e28a382_b99a3f62",
+        "filename": "src/ui/ve.ui.Surface.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2014-08-19T14:41:56Z",
+      "side": 1,
+      "message": "Hmm, I did it because SurfaceObserver\u0027s setTimeout introduces non-deterministic behaviour. But disabling it breaks some things.\n\nSo I\u0027ll remove this chunk of code, but leave SurfaceObserver\u0027s setTimeout calls setTimeout factored out into a method call, which can then be disabled easily from the debugger console.",
+      "parentUuid": "8e28a382_2dbccd66",
+      "revId": "8a8580604b7227ef245a4671560ef6387e7ecfca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e28a382_8de18199",
         "filename": "src/ve.EventSequencer.js",
         "patchSetId": 17
@@ -115,6 +133,24 @@
       "writtenOn": "2014-08-18T22:57:09Z",
       "side": 1,
       "message": "Is this needed? Didn\u0027t you already put this in the config file too?",
+      "revId": "8a8580604b7227ef245a4671560ef6387e7ecfca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_ff7427ce",
+        "filename": "src/ve.Filibuster.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2014-08-19T14:41:56Z",
+      "side": 1,
+      "message": "Yes, it seems, for jshint (as opposed to jsduck)",
+      "parentUuid": "8e28a382_0db35197",
       "revId": "8a8580604b7227ef245a4671560ef6387e7ecfca",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -251,6 +287,24 @@
       "writtenOn": "2014-08-18T22:57:09Z",
       "side": 1,
       "message": "Can we push this behavior into oojs itself? Maybe without the exception on early binding, too",
+      "revId": "8a8580604b7227ef245a4671560ef6387e7ecfca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_5f4fbb97",
+        "filename": "src/ve.debug.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2014-08-19T14:41:56Z",
+      "side": 1,
+      "message": "Done (https://gerrit.wikimedia.org/r/155025) in a slightly neater way that is possible when not patching.",
+      "parentUuid": "8e28a382_33bc2e67",
       "revId": "8a8580604b7227ef245a4671560ef6387e7ecfca",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
