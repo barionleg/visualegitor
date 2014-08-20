@@ -16,6 +16,24 @@
       "revId": "787faed30837228ff6dea63b33955223f142ea49",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e28a382_58a34ba8",
+        "filename": "src/ve.Filibuster.js",
+        "patchSetId": 19
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2014-08-20T12:20:29Z",
+      "side": 1,
+      "message": "Yes! Done",
+      "parentUuid": "8e28a382_1b8a606e",
+      "revId": "787faed30837228ff6dea63b33955223f142ea49",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
