@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e322bf2_e1774cce",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 1144,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-08-21T17:31:11Z",
+      "side": 1,
+      "message": "This looks very magical to me, maybe there could be a comment explaining what\u0027s going on? Or a length check?",
+      "revId": "f49a38ba07cbcfbfb28ce6d2eb224f6162de34b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
