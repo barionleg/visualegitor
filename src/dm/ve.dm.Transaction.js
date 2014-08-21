@@ -1141,8 +1141,8 @@ ve.dm.Transaction.prototype.pushReplace = function ( doc, offset, removeLength, 
 		range = new ve.Range( offset, offset + removeLength ),
 		remove = doc.getData( range ),
 		removeMetadata = doc.getMetadata( range ),
-		isRemoveEmpty = ve.compare( removeMetadata, new Array( removeMetadata.length ) ),
-		isInsertEmpty = insertMetadata && ve.compare( insertMetadata, new Array( insertMetadata.length ) );
+		isRemoveEmpty = ve.compare( removeMetadata, [] ),
+		isInsertEmpty = insertMetadata && ve.compare( insertMetadata, [] );
 
 	if ( !insertMetadata && !isRemoveEmpty ) {
 		// if we are removing a range which includes metadata, we need to
