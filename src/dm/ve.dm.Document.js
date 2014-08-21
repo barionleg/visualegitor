@@ -510,15 +510,26 @@ ve.dm.Document.prototype.cloneSliceFromRange = function ( range ) {
  * @returns {ve.dm.Document} New document
  */
 ve.dm.Document.prototype.cloneFromRange = function ( range ) {
-	var data, newDoc,
-		store = this.getStore().clone(),
-		listRange = this.getInternalList().getListNode().getOuterRange();
-
-	data = ve.copy( this.getFullData( range, true ) );
+	var listRange = this.getInternalList().getListNode().getOuterRange(),
+		data = ve.copy( this.getFullData( range, true ) );
 	if ( range.start > listRange.start || range.end < listRange.end ) {
 		// The range does not include the entire internal list, so add it
 		data = data.concat( this.getFullData( listRange ) );
 	}
+	return this.cloneWithData( data );
+};
+
+/**
+ * Create a sub-document associated with this document like cloneFromRange(), but without cloning
+ * any data from a range in this document: instead, use the specified data.
+ *
+ * @param {Array} data Linear model data
+ * @returns {ve.dm.Document} New document
+ */
+ve.dm.Document.prototype.cloneWithData = function ( data ) {
+	var newDoc,
+		store = this.getStore().clone();
+
 	newDoc = new this.constructor(
 		new ve.dm.FlatLinearData( store, data ),
 		this.getHtmlDocument(), undefined, this.getInternalList(), undefined,
