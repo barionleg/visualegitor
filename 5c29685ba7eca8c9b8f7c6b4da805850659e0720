@@ -16,6 +16,24 @@
       "revId": "5c29685ba7eca8c9b8f7c6b4da805850659e0720",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e322bf2_2440b8a7",
+        "filename": "src/ce/nodes/ve.ce.ImageNode.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-08-22T21:37:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e322bf2_fe50ffda",
+      "revId": "5c29685ba7eca8c9b8f7c6b4da805850659e0720",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
