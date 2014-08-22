@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e322bf2_fe50ffda",
+        "filename": "src/ce/nodes/ve.ce.ImageNode.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-08-22T18:22:07Z",
+      "side": 1,
+      "message": "What is this supposed to be set to for inline images? It seems to be set to the \u003cimg\u003e, but maybe the documentation should be clearer?",
+      "revId": "5c29685ba7eca8c9b8f7c6b4da805850659e0720",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
