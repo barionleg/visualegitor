@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e322bf2_fd77e8cd",
+        "filename": "src/ce/nodes/ve.ce.InlineImageNode.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-08-22T16:42:00Z",
+      "side": 1,
+      "message": "Surely this should be VeCeInlineImageNode now?",
+      "revId": "efef0d9380ada3504fe8d919a746c881f90094d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
