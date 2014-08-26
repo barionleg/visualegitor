@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e322bf2_eb6ca607",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 542
+      },
+      "writtenOn": "2014-08-26T21:03:11Z",
+      "side": 1,
+      "message": "Is this the comment that needs rewording?\n\nHow about:\n\nIf the document is being focused by a non-mouse user event, find the first content offset instead and place the cursor there.",
+      "revId": "a800388c0d31bca997f70fd48352b3528a677c78",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
