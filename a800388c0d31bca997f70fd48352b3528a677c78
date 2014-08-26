@@ -16,6 +16,24 @@
       "revId": "a800388c0d31bca997f70fd48352b3528a677c78",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e322bf2_c6167f5a",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-08-26T23:43:16Z",
+      "side": 1,
+      "message": "I guess I was thinking it wasn\u0027t detecting non-mouse events but it never really was. Your comment seems fine.",
+      "parentUuid": "4e322bf2_eb6ca607",
+      "revId": "a800388c0d31bca997f70fd48352b3528a677c78",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
