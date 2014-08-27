@@ -825,17 +825,25 @@ ve.ce.Surface.prototype.onDocumentKeyUp = function ( e ) {
  * @param {jQuery.Event} e Cut event
  */
 ve.ce.Surface.prototype.onCut = function ( e ) {
+	var selection, tx;
+
 	// TODO: no pollOnce here: but should we add one?
 	this.surfaceObserver.stopTimerLoop();
+
+	// Process the cut event like a copy first
 	this.onCopy( e );
+
+	// We don't like how browsers cut, so disallow that.
+	e.preventDefault();
+
+	// In Firefox, even after calling preventDefault(), the selection is very briefly
+	// fudged by the browser for unknown reasons, which would restore the cursor to
+	// the beginning of the paragraph after processing this transaction.
+	// The only way to ensure that the cursor remains in the correct position is to
+	// wait for the browser to finish doing its thing.
 	setTimeout( ve.bind( function () {
-		var selection, tx;
-
-		// We don't like how browsers cut, so let's undo it and do it ourselves.
-		this.$document[0].execCommand( 'undo', false, false );
+		// Read the selection information and generate a removal transaction
 		selection = this.model.getSelection();
-
-		// Transact
 		tx = ve.dm.Transaction.newFromRemoval( this.documentView.model, selection );
 
 		// Document may not have had real focus (e.g. with a FocusableNode)
