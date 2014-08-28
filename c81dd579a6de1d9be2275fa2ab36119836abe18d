@@ -16,6 +16,24 @@
       "revId": "c81dd579a6de1d9be2275fa2ab36119836abe18d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_5496e2f4",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 2067,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-08-28T17:26:52Z",
+      "side": 1,
+      "message": "It\u0027s unreachable if direction is 0 (see line 2062)",
+      "parentUuid": "2e2fb78d_54c82225",
+      "revId": "c81dd579a6de1d9be2275fa2ab36119836abe18d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
