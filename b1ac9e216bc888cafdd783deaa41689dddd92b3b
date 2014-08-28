@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_dfc2eb38",
+        "filename": "lib/oojs-ui/images/icons.less",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-08-28T18:20:39Z",
+      "side": 1,
+      "message": "Presumably this file (and the rest of images/*.less) shouldn\u0027t be added as it\u0027s already compiled into the main build?",
+      "revId": "b1ac9e216bc888cafdd783deaa41689dddd92b3b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
