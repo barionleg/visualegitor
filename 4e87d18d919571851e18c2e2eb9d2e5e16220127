@@ -16,6 +16,24 @@
       "revId": "4e87d18d919571851e18c2e2eb9d2e5e16220127",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_aea81775",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 2157,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-08-28T12:57:01Z",
+      "side": 1,
+      "message": "This is for when direction \u003d\u003d\u003d 0, i.e. when cut is being used.",
+      "parentUuid": "2e2fb78d_cecec386",
+      "revId": "4e87d18d919571851e18c2e2eb9d2e5e16220127",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
