@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_54c82225",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 2067,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2014-08-28T17:24:42Z",
+      "side": 1,
+      "message": "Should this one swap to -1 as well if 0?",
+      "revId": "c81dd579a6de1d9be2275fa2ab36119836abe18d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
