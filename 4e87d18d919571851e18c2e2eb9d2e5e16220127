@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_cecec386",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 2157,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2014-08-28T12:47:31Z",
+      "side": 1,
+      "message": "Is this default as in, when the parameter isn\u0027t passed, or does it handle 0? I think the parameter is still required to be passed and this handles 0, can you confirm? (Maybe document in the code, seems odd enough to better be safe to the next reader.)",
+      "revId": "4e87d18d919571851e18c2e2eb9d2e5e16220127",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
