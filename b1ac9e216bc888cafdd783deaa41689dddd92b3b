@@ -16,6 +16,24 @@
       "revId": "b1ac9e216bc888cafdd783deaa41689dddd92b3b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_9fbc63b3",
+        "filename": "lib/oojs-ui/images/icons.less",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-08-28T19:47:19Z",
+      "side": 1,
+      "message": "Done upstream.",
+      "parentUuid": "2e2fb78d_dfc2eb38",
+      "revId": "b1ac9e216bc888cafdd783deaa41689dddd92b3b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
