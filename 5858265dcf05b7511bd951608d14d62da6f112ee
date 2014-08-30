@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_914e8a71",
+        "filename": "lib/oojs-ui/images/icons.less",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-08-30T00:17:49Z",
+      "side": 1,
+      "message": "This file and all of these icons/*.less files need to not be included. I think this might be because you\u0027re based on an older version of oojs-ui where the Gruntfile wasn\u0027t yet fixed to exclude these from the dist directory?",
+      "revId": "5858265dcf05b7511bd951608d14d62da6f112ee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
