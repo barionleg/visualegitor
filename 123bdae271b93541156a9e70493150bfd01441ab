@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_6c19ee26",
+        "filename": "src/ce/styles/ve.ce.Surface.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-09-03T16:03:02Z",
+      "side": 1,
+      "message": "This is hacky enough to require a comment?",
+      "revId": "123bdae271b93541156a9e70493150bfd01441ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
