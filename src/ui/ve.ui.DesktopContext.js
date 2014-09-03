@@ -209,7 +209,6 @@ ve.ui.DesktopContext.prototype.updateDimensions = function ( transition ) {
 	var $container, boundingRect, cursorPosition, position, rtl,
 		surface = this.surface.getView(),
 		focusedNode = surface.getFocusedNode(),
-		surfaceOffset = surface.$element.offset(),
 		embeddable = this.isEmbeddable();
 
 	$container = this.inspector ? this.inspector.$frame : this.menu.$element;
@@ -236,15 +235,14 @@ ve.ui.DesktopContext.prototype.updateDimensions = function ( transition ) {
 	} else {
 		// We're on top of a selected text
 		// Get the position of the cursor
-		cursorPosition = surface.getSelectionRect();
+		cursorPosition = surface.getRelativeSelectionRect();
 		if ( cursorPosition ) {
-			// Correct for surface offset:
 			position = {
-				x: cursorPosition.end.x - surfaceOffset.left,
-				y: cursorPosition.end.y - surfaceOffset.top
+				x: cursorPosition.right,
+				y: cursorPosition.bottom
 			};
 		}
-		// If !cursorPosition, the surface apparently isn't selected, so getSelectionRect()
+		// If !cursorPosition, the surface apparently isn't selected, so getRelativeSelectionRect()
 		// returned null. This shouldn't happen because the context is only supposed to be
 		// displayed in response to a selection, but for some reason this does happen when opening
 		// an inspector without changing the selection.
