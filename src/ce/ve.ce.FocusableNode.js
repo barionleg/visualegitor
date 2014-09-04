@@ -32,7 +32,10 @@ ve.ce.FocusableNode = function VeCeFocusableNode( $focusable ) {
 	this.$highlights = this.$( '<div>' ).addClass( 've-ce-focusableNode-highlights' );
 	this.$focusable = $focusable || this.$element;
 	this.surface = null;
+	this.outerRects = null;
 	this.boundingRect = null;
+	this.topInlineRect = null;
+	this.bottomInlineRect = null;
 
 	// Events
 	this.connect( this, {
@@ -400,7 +403,7 @@ ve.ce.FocusableNode.prototype.positionHighlights = function () {
 		return;
 	}
 
-	var i, l, top, left, bottom, right,
+	var i, l, relativeOuterRect,
 		outerRects = [],
 		surfaceOffset = this.surface.getSurface().getBoundingClientRect();
 
@@ -449,31 +452,33 @@ ve.ce.FocusableNode.prototype.positionHighlights = function () {
 		}
 	} );
 
-	this.boundingRect = {
-		top: Infinity,
-		left: Infinity,
-		bottom: -Infinity,
-		right: -Infinity
-	};
+	this.outerRects = outerRects;
+	this.boundingRect = null;
+	this.topInlineRect = null;
+	this.bottomInlineRect = null;
 
-	for ( i = 0, l = outerRects.length; i < l; i++ ) {
-		top = outerRects[i].top - surfaceOffset.top;
-		left = outerRects[i].left - surfaceOffset.left;
-		bottom = outerRects[i].bottom - surfaceOffset.top;
-		right = outerRects[i].right - surfaceOffset.left;
+	for ( i = 0, l = this.outerRects.length; i < l; i++ ) {
+		relativeOuterRect = ve.translateOffsets( this.outerRects[i], -surfaceOffset.left, -surfaceOffset.top );
 		this.$highlights.append(
 			this.createHighlight().css( {
-				top: top,
-				left: left,
-				height: outerRects[i].height,
-				width: outerRects[i].width
+				top: relativeOuterRect.top,
+				left: relativeOuterRect.left,
+				width: relativeOuterRect.width,
+				height: relativeOuterRect.height
 			} )
 		);
-		this.boundingRect.top = Math.min( this.boundingRect.top, top );
-		this.boundingRect.left = Math.min( this.boundingRect.left, left );
-		this.boundingRect.bottom = Math.max( this.boundingRect.bottom, bottom );
-		this.boundingRect.right = Math.max( this.boundingRect.right, right );
+
+		if ( !this.boundingRect ) {
+			this.boundingRect = ve.copy( relativeOuterRect );
+		} else {
+			this.boundingRect.top = Math.min( this.boundingRect.top, relativeOuterRect.top );
+			this.boundingRect.left = Math.min( this.boundingRect.left, relativeOuterRect.left );
+			this.boundingRect.bottom = Math.max( this.boundingRect.bottom, relativeOuterRect.bottom );
+			this.boundingRect.right = Math.max( this.boundingRect.right, relativeOuterRect.right );
+		}
 	}
+	this.boundingRect.width = this.boundingRect.right - this.boundingRect.left;
+	this.boundingRect.height = this.boundingRect.bottom - this.boundingRect.top;
 };
 
 /**
@@ -488,15 +493,35 @@ ve.ce.FocusableNode.prototype.getBoundingRect = function () {
 	return this.boundingRect;
 };
 
-/**
- * Get the dimensions of the focusable node highight
- *
- * @return {Object} Width and height of the focusable node
- */
-ve.ce.FocusableNode.prototype.getDimensions = function () {
-	var boundingRect = this.getBoundingRect();
+ve.ce.FocusableNode.prototype.getInlineRects = function () {
+	var i, l, relativeOuterRect, surfaceOffset;
+	if ( !this.highlighted ) {
+		this.createHighlights();
+	}
+	if ( !this.topInlineRect ) {
+		surfaceOffset = this.surface.getSurface().getBoundingClientRect();
+		for ( i = 0, l = this.outerRects.length; i < l; i++ ) {
+			relativeOuterRect = ve.translateOffsets( this.outerRects[i], -surfaceOffset.left, -surfaceOffset.top );
+			// Record the top-most and bottom-most rectangles for inline selection emulation.
+			// These boxes may be segmented so 'join' them together if they have matching top/baselines.
+			if ( !this.topInlineRect || relativeOuterRect.top < this.topInlineRect.top ) {
+				this.topInlineRect = relativeOuterRect;
+			} else if ( relativeOuterRect.top === this.topInlineRect.top ) {
+				this.topInlineRect.left = Math.min( this.topInlineRect.left, relativeOuterRect.left );
+				this.topInlineRect.right = Math.min( this.topInlineRect.right, relativeOuterRect.right );
+				this.topInlineRect.width = this.topInlineRect.right - this.topInlineRect.left;
+			}
+			if ( !this.bottomInlineRect || relativeOuterRect.bottom > this.bottomInlineRect.bottom ) {
+				this.bottomInlineRect = relativeOuterRect;
+			} else if ( relativeOuterRect.bottom === this.bottomInlineRect.bottom ) {
+				this.bottomInlineRect.left = Math.min( this.bottomInlineRect.left, relativeOuterRect.left );
+				this.bottomInlineRect.right = Math.max( this.bottomInlineRect.right, relativeOuterRect.right );
+				this.bottomInlineRect.width = this.topInlineRect.right - this.topInlineRect.left;
+			}
+		}
+	}
 	return {
-		width: boundingRect.right - boundingRect.left,
-		height: boundingRect.bottom - boundingRect.top
+		start: this.topInlineRect,
+		end: this.bottomInlineRect
 	};
 };

@@ -957,6 +957,29 @@
 		return false;
 	};
 
+	ve.translateOffsets = function ( offsets, x, y ) {
+		var translatedOffsets = {};
+		if ( offsets.top !== undefined ) {
+			translatedOffsets.top = offsets.top + y;
+		}
+		if ( offsets.bottom !== undefined ) {
+			translatedOffsets.bottom = offsets.bottom + y;
+		}
+		if ( offsets.left !== undefined ) {
+			translatedOffsets.left = offsets.left + x;
+		}
+		if ( offsets.right !== undefined ) {
+			translatedOffsets.right = offsets.right + x;
+		}
+		if ( offsets.width !== undefined ) {
+			translatedOffsets.width = offsets.width;
+		}
+		if ( offsets.height !== undefined ) {
+			translatedOffsets.height = offsets.height;
+		}
+		return translatedOffsets;
+	};
+
 	/**
 	 * Get the current time, measured in milliseconds since January 1, 1970 (UTC).
 	 *
