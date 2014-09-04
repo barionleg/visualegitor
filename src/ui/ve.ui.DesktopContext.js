@@ -127,28 +127,6 @@ ve.ui.DesktopContext.prototype.onWindowResize = function () {
 };
 
 /**
- * Check if context can be embedded onto the currently focused node.
- *
- * @return {boolean} Context can be embedded
- */
-ve.ui.DesktopContext.prototype.isEmbeddable = function () {
-	var dim,
-		node = this.surface.getView().getFocusedNode();
-
-	if ( node && node.isFocusable() && !this.hasInspector() ) {
-		dim = node.getDimensions();
-		return (
-			// HACK: `5` and `10` are estimates of what `0.25em` and `0.5em` (the margins of the
-			// menu when embedded) are in pixels, what needs to actually be done is to take
-			// measurements to find the margins and use those value instead
-			dim.height > this.menu.$element.outerHeight() + 5 &&
-			dim.width > this.menu.$element.outerWidth() + 10
-		);
-	}
-	return false;
-};
-
-/**
  * @inheritdoc
  */
 ve.ui.DesktopContext.prototype.createInspectorWindowManager = function () {
@@ -208,41 +186,45 @@ ve.ui.DesktopContext.prototype.toggle = function ( show ) {
  * @inheritdoc
  */
 ve.ui.DesktopContext.prototype.updateDimensions = function ( transition ) {
-	var $container, cursorPosition, position, rtl,
+	var $container, boundingRect, inlineRects, position, rtl, embeddable,
 		surface = this.surface.getView(),
-		focusedNode = surface.getFocusedNode(),
-		embeddable = this.isEmbeddable();
+		focusedNode = surface.getFocusedNode();
 
 	$container = this.inspector ? this.inspector.$frame : this.menu.$element;
-	cursorPosition = surface.getRelativeSelectionRect();
 
-	if ( focusedNode ) {
+	if ( focusedNode && !focusedNode.isContent() ) {
 		rtl = this.surface.getModel().getDocument().getDir() === 'rtl';
+		boundingRect = surface.getSelectionBoundingRelativeRect();
+		embeddable = !this.hasInspector() &&
+			boundingRect.height > this.menu.$element.outerHeight() + 5 &&
+			boundingRect.width > this.menu.$element.outerWidth() + 10;
 		this.popup.toggleAnchor( !embeddable );
 		if ( embeddable ) {
 			// Embedded context position depends on directionality
 			position = {
-				x: rtl ? cursorPosition.left : cursorPosition.right,
-				y: cursorPosition.top
+				x: rtl ? boundingRect.left : boundingRect.right,
+				y: boundingRect.top
 			};
 			this.popup.align = rtl ? 'left' : 'right';
 		} else {
-			// Get the position of the focusedNode:
+			// Position the context underneath the center of the node
 			position = {
-				x: ( cursorPosition.left + cursorPosition.right ) / 2,
-				y: cursorPosition.bottom
+				x: ( boundingRect.left + boundingRect.right ) / 2,
+				y: boundingRect.bottom
 			};
 			this.popup.align = 'center';
 		}
 	} else {
-		// We're on top of a selected text
-		if ( cursorPosition ) {
+		// The selection is text or an inline focused node
+		inlineRects = surface.getSelectionInlineRelativeRects();
+		if ( inlineRects ) {
 			position = {
-				x: cursorPosition.right,
-				y: cursorPosition.bottom
+				x: inlineRects.end.right,
+				y: inlineRects.end.bottom
 			};
 		}
-		// If !cursorPosition, the surface apparently isn't selected, so getRelativeSelectionRect()
+		this.popup.toggleAnchor( true );
+		// If !inlineRects, the surface apparently isn't selected, so getSelectionBoundingRelativeRect()
 		// returned null. This shouldn't happen because the context is only supposed to be
 		// displayed in response to a selection, but for some reason this does happen when opening
 		// an inspector without changing the selection.
