@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_e429729b",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-09-04T00:44:18Z",
+      "side": 1,
+      "message": "Object|null",
+      "revId": "e88f073461e9a080af61b135a3a9f57422e817de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_24409a5a",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-09-04T00:44:18Z",
+      "side": 1,
+      "message": "The lede description of this method is same as getClientSelectionRect which seems wrong.",
+      "revId": "e88f073461e9a080af61b135a3a9f57422e817de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_2449ba90",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-09-04T00:44:18Z",
+      "side": 1,
+      "message": "lies",
+      "revId": "e88f073461e9a080af61b135a3a9f57422e817de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_0722409f",
+        "filename": "src/ui/ve.ui.DesktopContext.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-09-04T00:44:18Z",
+      "side": 1,
+      "message": "This is the same as cursorPosition now. It would be neater if we move that out of the \u0027if\u0027 (and rename to selectionRect).",
+      "revId": "e88f073461e9a080af61b135a3a9f57422e817de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
