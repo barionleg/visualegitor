@@ -16,6 +16,24 @@
       "revId": "123bdae271b93541156a9e70493150bfd01441ab",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_84306efd",
+        "filename": "src/ce/styles/ve.ce.Surface.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-09-04T00:12:02Z",
+      "side": 1,
+      "message": "Yeah I suppose so, good call.",
+      "parentUuid": "2e2fb78d_6c19ee26",
+      "revId": "123bdae271b93541156a9e70493150bfd01441ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
