@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_c94d5dc9",
+        "filename": "lib/oojs-ui/images/anchor.png",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-09-05T21:33:05Z",
+      "side": 1,
+      "message": "Oops, this file shouldn\u0027t have been pulled in",
+      "revId": "98fb46ec86a681722db1934ca779625cc679192e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
