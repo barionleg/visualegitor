@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_f87b3de9",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 516,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-09-07T00:11:00Z",
+      "side": 0,
+      "message": "Why did it do that? Why is this OK without a try-catch now?",
+      "revId": "069c8636c279e42af2c113b51317e0c58b618389",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

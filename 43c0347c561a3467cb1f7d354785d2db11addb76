@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_3872e510",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-09-07T00:11:00Z",
+      "side": 1,
+      "message": "Typo: \"typo\"",
+      "revId": "43c0347c561a3467cb1f7d354785d2db11addb76",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_186de92d",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-09-07T00:11:00Z",
+      "side": 1,
+      "message": "Maybe add a comment explaining this is a singleton live object? It\u0027s not obvious unless you read the DOM spec",
+      "revId": "43c0347c561a3467cb1f7d354785d2db11addb76",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_58625138",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 2264,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-09-07T00:11:00Z",
+      "side": 1,
+      "message": "selection.isBackwards() is a function, you have to call it. Looks like this was broken before as well.",
+      "revId": "43c0347c561a3467cb1f7d354785d2db11addb76",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
