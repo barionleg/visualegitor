@@ -16,6 +16,24 @@
       "revId": "069c8636c279e42af2c113b51317e0c58b618389",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_989559e9",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 516,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-09-07T02:27:36Z",
+      "side": 0,
+      "message": "Either it was lying, or rangy.getSelection reached further into the selection object. Either way, accessing the nativeSelection singleton can\u0027t possibly throw an exception.",
+      "parentUuid": "2e2fb78d_f87b3de9",
+      "revId": "069c8636c279e42af2c113b51317e0c58b618389",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }

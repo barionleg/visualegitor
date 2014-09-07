@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "2e2fb78d_d88ac1bf",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-09-07T02:27:36Z",
+      "side": 1,
+      "message": "Maybe.",
+      "parentUuid": "2e2fb78d_186de92d",
+      "revId": "43c0347c561a3467cb1f7d354785d2db11addb76",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e2fb78d_58625138",
         "filename": "src/ce/ve.ce.Surface.js",
         "patchSetId": 1
@@ -47,6 +65,24 @@
       "writtenOn": "2014-09-07T00:11:00Z",
       "side": 1,
       "message": "selection.isBackwards() is a function, you have to call it. Looks like this was broken before as well.",
+      "revId": "43c0347c561a3467cb1f7d354785d2db11addb76",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_f88fbdcf",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 2264,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-09-07T02:27:36Z",
+      "side": 1,
+      "message": "No, selection is a plain object here, see ce.Surface#getSelection",
+      "parentUuid": "2e2fb78d_58625138",
       "revId": "43c0347c561a3467cb1f7d354785d2db11addb76",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
