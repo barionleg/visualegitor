@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_1b0f19e6",
+        "filename": "src/ui/widgets/ve.ui.ContextItemWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-09-08T23:30:07Z",
+      "side": 1,
+      "message": "FIXME: This should be a sibling of the description label, with enough space left to the right of the description so it shows even if the description is too wide (e.g. an external link)",
+      "revId": "3f5029c2104cb03fcbb0379abad5728c48c10eb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
