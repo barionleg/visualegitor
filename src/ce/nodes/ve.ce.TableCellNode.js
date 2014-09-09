@@ -32,6 +32,8 @@ OO.inheritClass( ve.ce.TableCellNode, ve.ce.BranchNode );
 
 ve.ce.TableCellNode.static.name = 'tableCell';
 
+ve.ce.TableCellNode.static.mergeOnDelete = false;
+
 /* Methods */
 
 /**
