@@ -46,6 +46,10 @@ ve.dm.TableNode.prototype.onStructureChange = function ( context ) {
 	this.emit( 'tableStructureChange', context );
 };
 
+ve.dm.TableNode.prototype.canBeMergedWith = function () {
+	return false;
+};
+
 /**
  * Get table matrix for this table node
  *
