@@ -309,7 +309,7 @@ ve.dm.example.data = [
 	//  7 - Beginning of row
 	{ type: 'tableRow' },
 	//  8 - Beginning of cell
-	{ type: 'tableCell', attributes: { style: 'data' } },
+	{ type: 'tableCell', attributes: { style: 'data', colspan: null, rowspan: null } },
 	//  9 - Beginning of paragraph
 	{ type: 'paragraph' },
 	// 10 - Plain "d"
@@ -790,7 +790,7 @@ ve.dm.example.complexTable = [
 	{ type: '/tableCaption' },
 	{ type: 'tableSection', attributes: { style: 'header' } },
 	{ type: 'tableRow' },
-	{ type: 'tableCell', attributes: { style: 'header' } },
+	{ type: 'tableCell', attributes: { style: 'header', colspan: null, rowspan: null } },
 	{ type: 'paragraph', internal: { generated: 'wrapper' } },
 	'B',
 	'a',
@@ -801,7 +801,7 @@ ve.dm.example.complexTable = [
 	{ type: '/tableSection' },
 	{ type: 'tableSection', attributes: { style: 'footer' } },
 	{ type: 'tableRow' },
-	{ type: 'tableCell', attributes: { style: 'data' } },
+	{ type: 'tableCell', attributes: { style: 'data', colspan: null, rowspan: null } },
 	{ type: 'paragraph', internal: { generated: 'wrapper' } },
 	'B',
 	'a',
@@ -812,7 +812,7 @@ ve.dm.example.complexTable = [
 	{ type: '/tableSection' },
 	{ type: 'tableSection', attributes: { style: 'body' } },
 	{ type: 'tableRow' },
-	{ type: 'tableCell', attributes: { style: 'data' } },
+	{ type: 'tableCell', attributes: { style: 'data', colspan: null, rowspan: null } },
 	{ type: 'paragraph', internal: { generated: 'wrapper' } },
 	'Q',
 	'u',
@@ -820,7 +820,7 @@ ve.dm.example.complexTable = [
 	'x',
 	{ type: '/paragraph' },
 	{ type: '/tableCell' },
-	{ type: 'tableCell', attributes: { style: 'data' } },
+	{ type: 'tableCell', attributes: { style: 'data', colspan: null, rowspan: null } },
 	{ type: 'paragraph', internal: { generated: 'wrapper' } },
 	'W',
 	'h',
@@ -1007,7 +1007,7 @@ ve.dm.example.conversions = {
 	},
 	tableCell: {
 		domElement: ve.dm.example.createDomElement( 'td' ),
-		dataElement: { type: 'tableCell', attributes: { style: 'data' } }
+		dataElement: { type: 'tableCell', attributes: { style: 'data', colspan: null, rowspan: null } }
 	},
 	table: {
 		domElement: ve.dm.example.createDomElement( 'table' ),
@@ -2128,7 +2128,7 @@ ve.dm.example.domToDataCases = {
 			{ type: 'table' },
 			{ type: 'tableSection', attributes: { style: 'body' } },
 			{ type: 'tableRow' },
-			{ type: 'tableCell', attributes: { style: 'data' } },
+			{ type: 'tableCell', attributes: { style: 'data', colspan: null, rowspan: null } },
 			{ type: 'paragraph', internal: { generated: 'wrapper' } },
 			'F',
 			'o',
@@ -2746,7 +2746,7 @@ ve.dm.example.domToDataCases = {
 			{ type: 'tableRow' },
 			{
 				type: 'tableCell',
-				attributes: { style: 'data' },
+				attributes: { style: 'data', colspan: null, rowspan: null },
 				internal: { whitespace: [ undefined, undefined, '\n' ] }
 			},
 			{
@@ -2864,19 +2864,19 @@ ve.dm.example.isolationData = [
 	{ type: 'table' },
 	{ type: 'tableSection', attributes: { style: 'body' } },
 	{ type: 'tableRow' },
-	{ type: 'tableCell', attributes: { style: 'data' } },
+	{ type: 'tableCell', attributes: { style: 'data', colspan: null, rowspan: null } },
 	{ type: 'paragraph', internal: { generated: 'wrapper' } },
 	// 80
 	'C', 'e', 'l', 'l', ' ', '1',
 	{ type: '/paragraph' },
 	{ type: '/tableCell' },
-	{ type: 'tableCell', attributes: { style: 'data' } },
+	{ type: 'tableCell', attributes: { style: 'data', colspan: null, rowspan: null } },
 	{ type: 'paragraph', internal: { generated: 'wrapper' } },
 	// 90
 	'C', 'e', 'l', 'l', ' ', '2',
 	{ type: '/paragraph' },
 	{ type: '/tableCell' },
-	{ type: 'tableCell', attributes: { style: 'data' } },
+	{ type: 'tableCell', attributes: { style: 'data', colspan: null, rowspan: null } },
 	{ type: 'paragraph', internal: { generated: 'wrapper' } },
 	// 100
 	'C', 'e', 'l', 'l', ' ', '3',
@@ -2885,7 +2885,7 @@ ve.dm.example.isolationData = [
 	{ type: '/tableRow' },
 	{ type: 'tableRow' },
 	// 110
-	{ type: 'tableCell', attributes: { style: 'data' } },
+	{ type: 'tableCell', attributes: { style: 'data', colspan: null, rowspan: null } },
 	{ type: 'paragraph', internal: { generated: 'wrapper' } },
 	'C', 'e', 'l', 'l', ' ', '4',
 	{ type: '/paragraph' },
