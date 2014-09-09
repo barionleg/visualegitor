@@ -72,6 +72,16 @@
 			{
 				"name": "Models",
 				"classes": ["ve.dm.*Model"]
+			},
+			{
+				"name": "Table model",
+				"classes": [
+					"ve.dm.TableMatrix",
+					"ve.dm.TableMatrixCell",
+					"ve.dm.TableMatrixPlaceholder",
+					"ve.dm.TableMatrixRectangle",
+					"ve.dm.TableNodeCellIterator"
+				]
 			}
 		]
 	},
