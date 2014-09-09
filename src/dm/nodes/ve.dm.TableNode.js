@@ -34,6 +34,11 @@ ve.dm.TableNode.static.childNodeTypes = [ 'tableSection', 'tableCaption' ];
 
 ve.dm.TableNode.static.matchTagNames = [ 'table' ];
 
+// Blacklisting 'colspan' and 'rowspan' as they are managed explicitly
+ve.dm.TableCellNode.static.storeHtmlAttributes = {
+	blacklist: ['colspan', 'rowspan']
+};
+
 /* Prototype functions */
 
 ve.dm.TableNode.prototype.onStructureChange = function ( context ) {
