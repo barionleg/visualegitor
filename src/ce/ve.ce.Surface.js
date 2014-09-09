@@ -2275,6 +2275,16 @@ ve.ce.Surface.prototype.handleDelete = function ( e, direction ) {
 			if ( startNode.isFocusable() ) {
 				model.setSelection( startNode.getOuterRange() );
 				return;
+			} else if ( !startNode.mergeOnDelete() ) {
+				// HACK: preventing a deletion of table nodes
+				// TODO: there are more cases which alter a tables structure, which must not happen:
+				// e.g., delete with non-collapsed selection, cut, paster
+				model.setSelection(
+					this.getDocument().getRelativeRange(
+						model.getSelection(), direction, 'character', false
+					)
+				);
+				return;
 			}
 		}
 		if ( rangeToRemove.isCollapsed() ) {
