@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_2f23af55",
+        "filename": "src/ui/tools/ve.ui.TableTool.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-09-09T15:16:13Z",
+      "side": 1,
+      "message": "TableTool. ;-)",
+      "revId": "a60a6fd6b45f9cbc93401aaaf315f36ded075e4f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
