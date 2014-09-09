@@ -154,6 +154,7 @@
 			"src/dm/ve.dm.InternalList.js",
 			"src/dm/ve.dm.MetaItem.js",
 			"src/dm/ve.dm.MetaList.js",
+			"src/dm/ve.dm.TableMatrix.js",
 			"src/dm/ve.dm.TransactionProcessor.js",
 			"src/dm/ve.dm.Transaction.js",
 			"src/dm/ve.dm.Surface.js",
