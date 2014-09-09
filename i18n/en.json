@@ -100,5 +100,15 @@
     "visualeditor-toolbar-structure": "Structure",
     "visualeditor-toolbar-style-tooltip": "Style text",
     "visualeditor-toolbar-text-style": "Styling",
+    "visualeditor-toolbar-table": "Table",
+    "visualeditor-toolbar-table-delete": "Delete",
+    "visualeditor-toolbar-table-deletetable": "Table",
+    "visualeditor-toolbar-table-deleterow": "Row",
+    "visualeditor-toolbar-table-deletecol": "Column",
+    "visualeditor-toolbar-table-insert": "Insert",
+    "visualeditor-toolbar-table-insertcolbefore": "Left",
+    "visualeditor-toolbar-table-insertcolafter": "Right",
+    "visualeditor-toolbar-table-insertrowbefore": "Above",
+    "visualeditor-toolbar-table-insertrowafter": "Below",
     "visualeditor-version-label": "Version"
 }
