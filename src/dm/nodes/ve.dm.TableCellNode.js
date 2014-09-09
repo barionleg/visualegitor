@@ -17,6 +17,13 @@
 ve.dm.TableCellNode = function VeDmTableCellNode() {
 	// Parent constructor
 	ve.dm.BranchNode.apply( this, arguments );
+
+	// Events
+	this.connect( this, {
+		attach: 'onAttach',
+		detach: 'onDetach',
+		attributeChange: 'onAttributeChange'
+	} );
 };
 
 /* Inheritance */
@@ -29,20 +36,128 @@ ve.dm.TableCellNode.static.name = 'tableCell';
 
 ve.dm.TableCellNode.static.parentNodeTypes = [ 'tableRow' ];
 
-ve.dm.TableCellNode.static.defaultAttributes = {
-	style: 'data'
-};
+ve.dm.TableCellNode.static.defaultAttributes = { style: 'data' };
 
 ve.dm.TableCellNode.static.matchTagNames = [ 'td', 'th' ];
 
 ve.dm.TableCellNode.static.toDataElement = function ( domElements ) {
-	var style = domElements[0].nodeName.toLowerCase() === 'th' ? 'header' : 'data';
-	return { type: this.name, attributes: { style: style } };
+	var style = domElements[0].nodeName.toLowerCase() === 'th' ? 'header' : 'data',
+		colspan = domElements[0].getAttribute( 'colspan' ),
+		rowspan = domElements[0].getAttribute( 'rowspan' );
+
+	return {
+		type: this.name,
+		attributes: {
+			style: style,
+			colspan: colspan !== null && colspan !== '' ? Number( colspan ) : null,
+			rowspan: rowspan !== null && rowspan !== '' ? Number( rowspan ) : null
+		}
+	};
 };
 
 ve.dm.TableCellNode.static.toDomElements = function ( dataElement, doc ) {
-	var tag = dataElement.attributes && dataElement.attributes.style === 'header' ? 'th' : 'td';
-	return [ doc.createElement( tag ) ];
+	var tag = dataElement.attributes && dataElement.attributes.style === 'header' ? 'th' : 'td',
+		colspan = dataElement.attributes.colspan,
+		rowspan = dataElement.attributes.rowspan,
+		el = doc.createElement( tag );
+
+	if ( colspan !== null ) {
+		el.setAttribute( 'colspan', colspan );
+	}
+	if ( rowspan !== null ) {
+		el.setAttribute( 'rowspan', rowspan );
+	}
+
+	return [ el ];
+};
+
+/* Methods */
+
+/**
+ * Get the number of rows the cell spans
+ *
+ * @return {number} Rows spanned
+ */
+ve.dm.TableCellNode.prototype.getRowspan = function () {
+	return this.element.attributes.rowspan || 1;
+};
+
+/**
+ * Get the number of columns the cell spans
+ *
+ * @return {number} Columns spanned
+ */
+ve.dm.TableCellNode.prototype.getColspan = function () {
+	return this.element.attributes.colspan || 1;
+};
+
+/**
+ * Get number of columns and rows the cell spans
+ *
+ * @return {object} Object containing 'col' and 'row'
+ */
+ve.dm.TableCellNode.prototype.getSpans = function () {
+	return {
+		col: this.getColspan(),
+		row: this.getRowspan()
+	};
+};
+
+/**
+ * Get the style of the cell
+ *
+ * @return {string} Style, 'header' or 'data'
+ */
+ve.dm.TableCellNode.prototype.getStyle = function () {
+	return this.element.attributes.style || 'data';
+};
+
+/**
+ * Handle the cell being attached
+ */
+ve.dm.TableCellNode.prototype.onAttach = function ( to ) {
+	if ( to.onStructureChange ) {
+		to.onStructureChange( { cell: this } );
+	}
+};
+
+/**
+ * Handle the cell being detached
+ */
+ve.dm.TableCellNode.prototype.onDetach = function ( from ) {
+	if ( from.onStructureChange ) {
+		from.onStructureChange( { cell: this } );
+	}
+};
+
+/**
+ * @inheritdoc
+ */
+ve.dm.TableCellNode.prototype.onAttributeChange = function ( key ) {
+	if ( this.parent && ( key === 'colspan' || key === 'rowspan' ) ) {
+		this.parent.onStructureChange( { cell: this } );
+	}
+};
+
+/**
+ * Creates data that can be inserted into the model to create a new table cell.
+ *
+ * @param {Object} [options] An object with property 'style' which can be either 'header' or 'data'.
+ * @return {Array} Model data for a new table cell
+ */
+ve.dm.TableCellNode.createData = function ( options ) {
+	options = options || {};
+	return [
+		{
+			type: 'tableCell',
+			attributes: {
+				style: options.style || 'data'
+			}
+		},
+		{ type: 'paragraph' },
+		{ type: '/paragraph' },
+		{ type: '/tableCell' }
+	];
 };
 
 /* Registration */
