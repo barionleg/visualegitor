@@ -5,10 +5,23 @@
  * @license The MIT License (MIT); see LICENSE.txt
  */
 
+.ve-ce-tableCellNode {
+	border: 1px dotted #ccc;
+	padding: 0.25em 0.5em;
+}
+
+.ve-ce-tableNode-focused .ve-ce-tableCellNode {
+	border-style: solid;
+}
+
+.ve-ce-tableCellNode {
+	min-width: 1em;
+}
+
 .ve-ce-tableCellNode .ve-ce-paragraphNode {
 	margin: 0;
 }
 
-.ve-ce-tableCellNode {
-	border: 1px dotted #ccc;
+thead .ve-ce-tableCellNode {
+	background-color: #EEE;
 }
