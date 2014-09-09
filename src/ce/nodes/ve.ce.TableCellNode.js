@@ -18,10 +18,18 @@ ve.ce.TableCellNode = function VeCeTableCellNode( model, config ) {
 	ve.ce.BranchNode.call( this, model, config );
 
 	// Events
-	this.model.connect( this, { update: 'onUpdate' } );
+	this.model.connect( this, {
+		update: 'onUpdate',
+		attributeChange: 'onAttributeChange'
+	} );
 
 	// DOM changes
-	this.$element.addClass( 've-ce-tableCellNode' );
+	this.$element
+		.addClass( 've-ce-tableCellNode' )
+		.attr( {
+			rowspan: this.model.getRowspan(),
+			colspan: this.model.getColspan()
+		} );
 };
 
 /* Inheritance */
@@ -40,7 +48,7 @@ ve.ce.TableCellNode.static.name = 'tableCell';
  * Tag name is selected based on the model's style attribute.
  *
  * @returns {string} HTML tag name
- * @throws {Error} If style is invalid
+ * @throws {Error} Invalid style
  */
 ve.ce.TableCellNode.prototype.getTagName = function () {
 	var style = this.model.getAttribute( 'style' ),
@@ -61,6 +69,19 @@ ve.ce.TableCellNode.prototype.getTagName = function () {
  */
 ve.ce.TableCellNode.prototype.onUpdate = function () {
 	this.updateTagName();
+};
+
+/**
+ * Handle attribute changes to keep the life HTML element updated.
+ */
+ve.ce.TableCellNode.prototype.onAttributeChange = function ( key, from, to ) {
+	if ( key === 'colspan' || key === 'rowspan' ) {
+		if ( to > 1 ) {
+			this.$element.attr( key, to );
+		} else {
+			this.$element.removeAttr( key );
+		}
+	}
 };
 
 /* Registration */
