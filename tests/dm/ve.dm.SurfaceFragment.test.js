@@ -511,7 +511,7 @@ QUnit.test( 'rewrapAllNodes', 6, function ( assert ) {
 			{ type: 'table' },
 			{ type: 'tableSection', attributes: { style: 'body' } },
 			{ type: 'tableRow' },
-			{ type: 'tableCell', attributes: { style: 'data' } }
+			{ type: 'tableCell', attributes: { style: 'data', colspan: null, rowspan: null } }
 		]
 	);
 
