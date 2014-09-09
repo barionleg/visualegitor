@@ -29,6 +29,8 @@ OO.inheritClass( ve.ce.TableSectionNode, ve.ce.BranchNode );
 
 ve.ce.TableSectionNode.static.name = 'tableSection';
 
+ve.ce.TableSectionNode.static.mergeOnDelete = false;
+
 /* Methods */
 
 /**
