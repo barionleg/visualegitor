@@ -29,8 +29,9 @@
 
 .ve-ui-surface {
 	box-shadow: 0 0.25em 1.5em 0 #ddd;
-	border: 1px solid #ccc;
-	border-top: none;
+	/* surface is used for positioning so avoid border */
+	box-shadow: inset 0 0 0 1px #ccc;
+	margin-top: -1px;
 }
 
 .ve-init-sa-target-toolbar > .oo-ui-toolbar-bar {

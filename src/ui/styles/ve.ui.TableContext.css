@@ -1,0 +1,43 @@
+/*!
+ * VisualEditor UserInterface Table Context styles.
+ *
+ * @copyright 2011-2014 VisualEditor Team and others; see http://ve.mit-license.org
+ */
+
+.ve-ui-tableContext {
+	position: absolute;
+}
+
+.ve-ui-tableContext-menu {
+	font-size: 0.8em;
+}
+
+.ve-ui-tableContext-indicator {
+	display: block;
+	border: 1px solid #ccc;
+	background-color: #fff;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	cursor: pointer;
+}
+
+.ve-ui-tableContext-colContext .ve-ui-tableContext-indicator {
+	width: 1.2em;
+	height: 0.8em;
+	margin-top: -0.8em;
+	margin-left: -0.6em;
+	border-bottom: 0;
+}
+
+.ve-ui-tableContext-rowContext {
+	left: -0.4em;
+}
+
+.ve-ui-tableContext-rowContext .ve-ui-tableContext-indicator {
+	width: 0.8em;
+	height: 1.2em;
+	margin-top: -0.6em;
+	margin-left: -0.4em;
+	border-right: 0;
+}
