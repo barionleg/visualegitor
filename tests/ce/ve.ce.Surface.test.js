@@ -801,7 +801,7 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 								{ type: '/tableCaption' },
 								{ type: 'tableSection', attributes: { style: 'body' } },
 								{ type: 'tableRow' },
-								{ type: 'tableCell', attributes: { style: 'data' } },
+								{ type: 'tableCell', attributes: { style: 'data', colspan: null, rowspan: null } },
 								{ type: 'paragraph', internal: { generated: 'wrapper' } },
 								'B', 'a', 'r',
 								{ type: '/paragraph' },
