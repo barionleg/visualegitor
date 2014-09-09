@@ -233,3 +233,26 @@ ve.ui.PreformattedFormatTool.static.title =
 ve.ui.PreformattedFormatTool.static.format = { type: 'preformatted' };
 ve.ui.PreformattedFormatTool.static.commandName = 'preformatted';
 ve.ui.toolFactory.register( ve.ui.PreformattedFormatTool );
+
+/**
+ * UserInterface table cell header tool.
+ *
+ * @class
+ * @extends ve.ui.FormatTool
+ * @constructor
+ * @param {OO.ui.ToolGroup} toolGroup
+ * @param {Object} [config] Configuration options
+ */
+ve.ui.TableCellHeaderFormatTool = function VeUiTableCellHeaderFormatTool( toolGroup, config ) {
+	ve.ui.FormatTool.call( this, toolGroup, config );
+};
+OO.inheritClass( ve.ui.TableCellHeaderFormatTool, ve.ui.FormatTool );
+ve.ui.TableCellHeaderFormatTool.static.name = 'tableCellHeader';
+ve.ui.TableCellHeaderFormatTool.static.group = 'format-table';
+ve.ui.TableCellHeaderFormatTool.static.autoAddToCatchall = false;
+ve.ui.TableCellHeaderFormatTool.static.icon = 'check';
+ve.ui.TableCellHeaderFormatTool.static.title =
+	OO.ui.deferMsg( 'visualeditor-table-format-header' );
+ve.ui.TableCellHeaderFormatTool.static.format = { type: 'tableCell', attributes: { style: 'header' } };
+ve.ui.TableCellHeaderFormatTool.static.commandName = 'tableCellHeader';
+ve.ui.toolFactory.register( ve.ui.TableCellHeaderFormatTool );
