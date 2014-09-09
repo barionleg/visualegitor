@@ -110,6 +110,13 @@ ve.dm.TableCellNode.prototype.getColspan = function () {
 	return this.element.attributes.colspan || 1;
 };
 
+ve.dm.TableCellNode.prototype.getSpans = function () {
+	return {
+		col: this.getColspan(),
+		row: this.getRowspan()
+	};
+};
+
 /**
  * Get number of columns and rows the cell spans
  *
