@@ -126,6 +126,7 @@
 					"ve.ui.MobileContext",
 					"ve.ui.Overlay",
 					"ve.ui.Toolbar",
+					"ve.ui.TableToolbar",
 					"ve.ui.TargetToolbar",
 					"ve.ui.DebugBar",
 					"ve.ui.Action",
