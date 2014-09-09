@@ -133,13 +133,13 @@ QUnit.test( 'newFromInsertion', function ( assert ) {
 				range: new ve.Range( 12, 17 )
 			},
 			'tableCell inside the document is wrapped in a table, tableSection and tableRow': {
-				args: [doc, 43, [{ type: 'tableCell', attributes: { style: 'data' } }, { type: 'paragraph' }, 'F', 'O', 'O', { type: '/paragraph' }, { type: '/tableCell' }]],
+				args: [doc, 43, [{ type: 'tableCell', attributes: { style: 'data', colspan: null, rowspan: null } }, { type: 'paragraph' }, 'F', 'O', 'O', { type: '/paragraph' }, { type: '/tableCell' }]],
 				ops: [
 					{ type: 'retain', length: 43 },
 					{
 						type: 'replace',
 						remove: [],
-						insert: [{ type: 'table' }, { type: 'tableSection', attributes: { style: 'body' } }, { type: 'tableRow' }, { type: 'tableCell', attributes: { style: 'data' } }, { type: 'paragraph' }, 'F', 'O', 'O', { type: '/paragraph' }, { type: '/tableCell' }, { type: '/tableRow' }, { type: '/tableSection' }, { type: '/table' }],
+						insert: [{ type: 'table' }, { type: 'tableSection', attributes: { style: 'body' } }, { type: 'tableRow' }, { type: 'tableCell', attributes: { style: 'data', colspan: null, rowspan: null } }, { type: 'paragraph' }, 'F', 'O', 'O', { type: '/paragraph' }, { type: '/tableCell' }, { type: '/tableRow' }, { type: '/tableSection' }, { type: '/table' }],
 						insertedDataOffset: 3,
 						insertedDataLength: 7
 					},
@@ -148,13 +148,13 @@ QUnit.test( 'newFromInsertion', function ( assert ) {
 				range: new ve.Range( 46, 53 )
 			},
 			'tableCell inside a paragraph is wrapped in a table, tableSection and tableRow and moves outside of paragraph': {
-				args: [doc, 52, [{ type: 'tableCell', attributes: { style: 'data' } }, { type: 'paragraph' }, 'F', 'O', 'O', { type: '/paragraph' }, { type: '/tableCell' }]],
+				args: [doc, 52, [{ type: 'tableCell', attributes: { style: 'data', colspan: null, rowspan: null } }, { type: 'paragraph' }, 'F', 'O', 'O', { type: '/paragraph' }, { type: '/tableCell' }]],
 				ops: [
 					{ type: 'retain', length: 53 },
 					{
 						type: 'replace',
 						remove: [],
-						insert: [{ type: 'table' }, { type: 'tableSection', attributes: { style: 'body' } }, { type: 'tableRow' }, { type: 'tableCell', attributes: { style: 'data' } }, { type: 'paragraph' }, 'F', 'O', 'O', { type: '/paragraph' }, { type: '/tableCell' }, { type: '/tableRow' }, { type: '/tableSection' }, { type: '/table' }],
+						insert: [{ type: 'table' }, { type: 'tableSection', attributes: { style: 'body' } }, { type: 'tableRow' }, { type: 'tableCell', attributes: { style: 'data', colspan: null, rowspan: null } }, { type: 'paragraph' }, 'F', 'O', 'O', { type: '/paragraph' }, { type: '/tableCell' }, { type: '/tableRow' }, { type: '/tableSection' }, { type: '/table' }],
 						insertedDataOffset: 3,
 						insertedDataLength: 7
 					},
@@ -1563,10 +1563,10 @@ QUnit.test( 'newFromWrap', function ( assert ) {
 				]
 			},
 			'replaces a table with a list': {
-				args: [doc, new ve.Range( 9, 33 ), [ { type: 'table' }, { type: 'tableSection', attributes: { style: 'body' } }, { type: 'tableRow' }, { type: 'tableCell' } ], [ { type: 'list' }, { type: 'listItem' } ], [], []],
+				args: [doc, new ve.Range( 9, 33 ), [ { type: 'table' }, { type: 'tableSection', attributes: { style: 'body' } }, { type: 'tableRow' }, { type: 'tableCell', attributes: { style: 'data', colspan: null, rowspan: null } } ], [ { type: 'list' }, { type: 'listItem' } ], [], []],
 				ops: [
 					{ type: 'retain', length: 5 },
-					{ type: 'replace', remove: [ { type: 'table' }, { type: 'tableSection', attributes: { style: 'body' } }, { type: 'tableRow' }, { type: 'tableCell', attributes: { style: 'data' } } ], insert: [ { type: 'list' }, { type: 'listItem' } ] },
+					{ type: 'replace', remove: [ { type: 'table' }, { type: 'tableSection', attributes: { style: 'body' } }, { type: 'tableRow' }, { type: 'tableCell', attributes: { style: 'data', colspan: null, rowspan: null } } ], insert: [ { type: 'list' }, { type: 'listItem' } ] },
 					{ type: 'retain', length: 24 },
 					{ type: 'replace', remove: [ { type: '/tableCell' }, { type: '/tableRow' }, { type: '/tableSection' }, { type: '/table' } ], insert: [ { type: '/listItem' }, { type: '/list' } ] },
 					{ type: 'retain', length: 26 }
