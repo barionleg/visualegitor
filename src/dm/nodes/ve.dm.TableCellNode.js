@@ -87,6 +87,13 @@ ve.dm.TableCellNode.prototype.getColspan = function () {
 	return this.element.attributes.colspan || 1;
 };
 
+ve.dm.TableCellNode.prototype.getSpans = function () {
+	return {
+		col: this.getColspan(),
+		row: this.getRowspan()
+	};
+};
+
 ve.dm.TableCellNode.prototype.getStyle = function () {
 	return this.element.attributes.style || 'data';
 };
