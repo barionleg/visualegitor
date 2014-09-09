@@ -83,6 +83,10 @@ ve.dm.TableSectionNode.prototype.onStructureChange = function ( context ) {
 	}
 };
 
+ve.dm.TableSectionNode.prototype.canBeMergedWith = function () {
+	return false;
+};
+
 /* Registration */
 
 ve.dm.modelRegistry.register( ve.dm.TableSectionNode );
