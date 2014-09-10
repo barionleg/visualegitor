@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_07cfb22e",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-09-10T19:52:37Z",
+      "side": 1,
+      "message": "It would be nicer/safer to use this.$element.find( \u0027.ve-ce-textRange-drop-marker\u0027 ) instead",
+      "revId": "51ed6b5fcda27d6bda4c8eba547e79237400e212",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
