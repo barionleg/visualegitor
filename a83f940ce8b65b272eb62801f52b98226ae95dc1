@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_a7c9fe56",
+        "filename": "src/ce/ve.ce.FocusableNode.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-09-10T19:30:41Z",
+      "side": 1,
+      "message": "Those properties don\u0027t exist. Did you mean to return this.inlineRects?",
+      "revId": "a83f940ce8b65b272eb62801f52b98226ae95dc1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_27de2e15",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-09-10T19:30:41Z",
+      "side": 1,
+      "message": "return null; so as to not lie in the docs",
+      "revId": "a83f940ce8b65b272eb62801f52b98226ae95dc1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_073b3238",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-09-10T19:30:41Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be + rather than - ? You\u0027re undoing the client-\u003esurface transformation that getInlineRects() did (which is fine, because we don\u0027t want to cache client coords, but the code can\u0027t be the same)",
+      "revId": "a83f940ce8b65b272eb62801f52b98226ae95dc1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_6749d6d2",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-09-10T19:30:41Z",
+      "side": 1,
+      "message": "Also + instead of - here I think",
+      "revId": "a83f940ce8b65b272eb62801f52b98226ae95dc1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_e714a6a2",
+        "filename": "src/ui/ve.ui.DesktopContext.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-09-10T19:30:41Z",
+      "side": 1,
+      "message": "This comment now lies, because you\u0027re not checking inlineRects for undefined before accessing it. Which you probably should be doing.",
+      "revId": "a83f940ce8b65b272eb62801f52b98226ae95dc1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_87aa826b",
+        "filename": "src/ve.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 962,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-09-10T19:30:41Z",
+      "side": 1,
+      "message": "Spelling of \"width\"",
+      "revId": "a83f940ce8b65b272eb62801f52b98226ae95dc1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_c7c76a49",
+        "filename": "src/ve.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 1004,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-09-10T19:30:41Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be max() instead of min()?",
+      "revId": "a83f940ce8b65b272eb62801f52b98226ae95dc1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
