@@ -16,6 +16,24 @@
       "revId": "51ed6b5fcda27d6bda4c8eba547e79237400e212",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_2ddccd4a",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-09-10T21:54:28Z",
+      "side": 1,
+      "message": "In theory onDocumentDrop, which calls this, only fires when the drop has happened on x,y coordinates within the document, but\n\na) other callers might be less careful\nb) I don\u0027t trust browsers to not move the goalposts, especially IE",
+      "parentUuid": "2e2fb78d_07cfb22e",
+      "revId": "51ed6b5fcda27d6bda4c8eba547e79237400e212",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
