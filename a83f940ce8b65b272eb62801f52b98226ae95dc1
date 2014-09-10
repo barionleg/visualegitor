@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2e2fb78d_2aaa7382",
+        "filename": "src/ce/ve.ce.FocusableNode.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-09-10T21:46:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e2fb78d_a7c9fe56",
+      "revId": "a83f940ce8b65b272eb62801f52b98226ae95dc1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e2fb78d_27de2e15",
         "filename": "src/ce/ve.ce.Surface.js",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2014-09-10T19:30:41Z",
       "side": 1,
       "message": "return null; so as to not lie in the docs",
+      "revId": "a83f940ce8b65b272eb62801f52b98226ae95dc1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_8aa4c7b0",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-09-10T21:46:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e2fb78d_27de2e15",
       "revId": "a83f940ce8b65b272eb62801f52b98226ae95dc1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "2e2fb78d_4a7fffdd",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-09-10T21:46:54Z",
+      "side": 1,
+      "message": "Yes, although this was masked by this code path never currently being called (we always ask for relative rects, and if it\u0027s focused, relative rects has a shortcut for that)",
+      "parentUuid": "2e2fb78d_073b3238",
+      "revId": "a83f940ce8b65b272eb62801f52b98226ae95dc1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e2fb78d_6749d6d2",
         "filename": "src/ce/ve.ce.Surface.js",
         "patchSetId": 5
@@ -64,6 +118,24 @@
       "writtenOn": "2014-09-10T19:30:41Z",
       "side": 1,
       "message": "Also + instead of - here I think",
+      "revId": "a83f940ce8b65b272eb62801f52b98226ae95dc1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_0a89f7ef",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-09-10T21:46:54Z",
+      "side": 1,
+      "message": "Ditto.",
+      "parentUuid": "2e2fb78d_6749d6d2",
       "revId": "a83f940ce8b65b272eb62801f52b98226ae95dc1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "2e2fb78d_0a9d770e",
+        "filename": "src/ui/ve.ui.DesktopContext.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-09-10T21:46:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e2fb78d_e714a6a2",
+      "revId": "a83f940ce8b65b272eb62801f52b98226ae95dc1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e2fb78d_87aa826b",
         "filename": "src/ve.js",
         "patchSetId": 5
@@ -98,6 +188,24 @@
       "writtenOn": "2014-09-10T19:30:41Z",
       "side": 1,
       "message": "Spelling of \"width\"",
+      "revId": "a83f940ce8b65b272eb62801f52b98226ae95dc1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_ca63ef08",
+        "filename": "src/ve.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 962,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-09-10T21:46:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e2fb78d_87aa826b",
       "revId": "a83f940ce8b65b272eb62801f52b98226ae95dc1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
