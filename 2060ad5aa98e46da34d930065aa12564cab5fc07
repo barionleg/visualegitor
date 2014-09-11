@@ -16,6 +16,24 @@
       "revId": "2060ad5aa98e46da34d930065aa12564cab5fc07",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_50e7a93b",
+        "filename": "tests/ve.Range.test.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-09-11T17:45:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e2fb78d_ed948a48",
+      "revId": "2060ad5aa98e46da34d930065aa12564cab5fc07",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
