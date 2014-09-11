@@ -265,7 +265,7 @@ ve.ce.TestRunner.prototype.changeSel = function ( start, end ) {
  */
 ve.ce.TestRunner.prototype.testEqual = function ( assert, testName, sequence ) {
 	var comment = testName + ' seq=' + sequence + ': "' + this.lastText + '"';
-	assert.equal( this.model.getDocument().getText(), this.lastText, comment );
+	assert.strictEqual( this.model.getDocument().getText(), this.lastText, comment );
 };
 
 /**
