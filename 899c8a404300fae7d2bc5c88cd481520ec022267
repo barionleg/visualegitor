@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_e9f8f0e3",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 664
+      },
+      "writtenOn": "2014-09-11T21:47:06Z",
+      "side": 1,
+      "message": "VE newbie question -- is there a better way to define module-local functions?  I think I\u0027m exposing coerceToCollapsedRange as a global here, which isn\u0027t really what I want.  Some modules appear to wrap the entire file in a function -- I didn\u0027t want to do that because it would obscure the actual changes in this patch.",
+      "revId": "899c8a404300fae7d2bc5c88cd481520ec022267",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
