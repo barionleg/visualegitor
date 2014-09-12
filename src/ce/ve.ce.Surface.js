@@ -317,26 +317,31 @@ ve.ce.Surface.prototype.getOffsetFromCoords = function ( x, y ) {
 };
 
 /**
- * Get the inline coordinates of the selection range relative to the viewport.
+ * Get the start and end rectangles of the selection range relative to the viewport.
  *
  * Returned coordinates are client coordinates (i.e. relative to the viewport).
- * For coordinates relative to the surface, use #getSelectionInlineRelativeRects
+ * For coordinates relative to the surface, use #getSelectionStartAndEndRelativeRects
  *
  * @method
+ * @param {ve.Range} [range] Optional range to get the selection for, defaults to current selection
  * @returns {Object|null} Start and end selection rectangles
  */
-ve.ce.Surface.prototype.getSelectionInlineClientRects = function () {
-	var inlineRects, surfaceRect, boundingRect, rtl, x, collapsedRect;
-	if ( this.focusedNode ) {
-		inlineRects = this.focusedNode.getInlineRects();
+ve.ce.Surface.prototype.getSelectionStartAndEndClientRects = function ( range ) {
+	var startAndEndRects, surfaceRect, boundingRect, rtl, x, collapsedRect, focusedNode;
+
+	range = range || this.getModel().getSelection();
+	focusedNode = this.getFocusedNode( range );
+
+	if ( focusedNode ) {
+		startAndEndRects = focusedNode.getStartAndEndRects();
 		surfaceRect = this.getSurface().getBoundingClientRect();
-		if ( !inlineRects || !surfaceRect ) {
+		if ( !startAndEndRects || !surfaceRect ) {
 			return null;
 		}
 		// Convert surface relative coords to client coords
 		return {
-			start: ve.translateRect( inlineRects.start, surfaceRect.left, surfaceRect.top ),
-			end: ve.translateRect( inlineRects.end, surfaceRect.left, surfaceRect.top )
+			start: ve.translateRect( startAndEndRects.start, surfaceRect.left, surfaceRect.top ),
+			end: ve.translateRect( startAndEndRects.end, surfaceRect.left, surfaceRect.top )
 		};
 	}
 
@@ -349,7 +354,7 @@ ve.ce.Surface.prototype.getSelectionInlineClientRects = function () {
 	// * in Firefox on page load when the address bar is still focused
 	// * in empty paragraphs
 	try {
-		return ve.getStartAndEndRects( this.getNativeRange().getClientRects() );
+		return ve.getStartAndEndRects( this.getNativeRange( range ).getClientRects() );
 	} catch ( e ) {
 		// When possible, pretend the cursor is the left/right border of the node
 		// (depending on directionality) as a fallback.
@@ -388,13 +393,17 @@ ve.ce.Surface.prototype.getSelectionInlineClientRects = function () {
  * For coordinates relative to the surface, use #getSelectionBoundingRelativeRect
  *
  * @method
+ * @param {ve.Range} [range] Optional range to get the selection for, defaults to current selection
  * @returns {Object|null} Selection rectangle, with keys top, bottom, left, right, width, height
  */
-ve.ce.Surface.prototype.getSelectionBoundingClientRect = function () {
-	var inlineRects, boundingRect, surfaceRect, nativeRange;
+ve.ce.Surface.prototype.getSelectionBoundingClientRect = function ( range ) {
+	var rects, boundingRect, surfaceRect, focusedNode, nativeRange;
 
-	if ( this.focusedNode ) {
-		boundingRect = this.focusedNode.getBoundingRect();
+	range = range || this.getModel().getSelection();
+	focusedNode = this.getFocusedNode( range );
+
+	if ( focusedNode ) {
+		boundingRect = focusedNode.getBoundingRect();
 		surfaceRect = this.getSurface().getBoundingClientRect();
 		if ( !boundingRect || !surfaceRect ) {
 			return;
@@ -409,16 +418,16 @@ ve.ce.Surface.prototype.getSelectionBoundingClientRect = function () {
 	}
 
 	try {
-		nativeRange = this.getNativeRange();
-		inlineRects = nativeRange.getClientRects();
-		// Try the zeroth inline rect first as Chrome sometimes returns a rectangle
+		nativeRange = this.getNativeRange( range );
+		rects = nativeRange.getClientRects();
+		// Try the zeroth rect first as Chrome sometimes returns a rectangle
 		// full of zeros for getBoundingClientRect when the cursor is collapsed.
-		// We could test for this failure and fall back to inline[0], except for the
-		// fact that the bounding rect is 1px bigger than inline[0], so cursoring across
+		// We could test for this failure and fall back to rects[0], except for the
+		// fact that the bounding rect is 1px bigger than rects[0], so cursoring across
 		// a link causes a verticle wobble as it alternately breaks and unbreaks.
 		// See https://code.google.com/p/chromium/issues/detail?id=238976
-		if ( inlineRects.length === 1 ) {
-			return inlineRects[0];
+		if ( rects.length === 1 ) {
+			return rects[0];
 		}
 		return nativeRange.getBoundingClientRect();
 	} catch ( e ) {
@@ -430,27 +439,31 @@ ve.ce.Surface.prototype.getSelectionBoundingClientRect = function () {
  * Get the inline coordinates of the selection range relative to the surface.
  *
  * Returned coordinates are relative to the surface. For client coordinates,
- * use #getSelectionInlineClientRects.
+ * use #getSelectionStartAndEndClientRects.
  *
  * @method
+ * @param {ve.Range} [range] Optional range to get the selection for, defaults to current selection
  * @returns {Object|null} Start and end selection rectangles
  */
-ve.ce.Surface.prototype.getSelectionInlineRelativeRects = function () {
-	var inlineRects, surfaceRect;
+ve.ce.Surface.prototype.getSelectionStartAndEndRelativeRects = function ( range ) {
+	var startAndEndRects, surfaceRect, focusedNode;
 
-	if ( this.focusedNode ) {
+	range = range || this.getModel().getSelection();
+	focusedNode = this.getFocusedNode( range );
+
+	if ( focusedNode ) {
 		// We can optimize the focusedNode case as we already have the relative coordinates
-		return this.focusedNode.getInlineRects();
+		return focusedNode.getStartAndEndRects();
 	}
 
-	inlineRects = this.getSelectionInlineClientRects();
+	startAndEndRects = this.getSelectionStartAndEndClientRects();
 	surfaceRect = this.getSurface().getBoundingClientRect();
-	if ( !inlineRects || !surfaceRect ) {
+	if ( !startAndEndRects || !surfaceRect ) {
 		return null;
 	}
 	return {
-		start: ve.translateRect( inlineRects.start, -surfaceRect.left, -surfaceRect.top ),
-		end: ve.translateRect( inlineRects.end, -surfaceRect.left, -surfaceRect.top )
+		start: ve.translateRect( startAndEndRects.start, -surfaceRect.left, -surfaceRect.top ),
+		end: ve.translateRect( startAndEndRects.end, -surfaceRect.left, -surfaceRect.top )
 	};
 };
 
@@ -461,13 +474,18 @@ ve.ce.Surface.prototype.getSelectionInlineRelativeRects = function () {
  * use #getSelectionBoundingClientRect.
  *
  * @method
+ * @param {ve.Range} [range] Optional range to get the selection for, defaults to current selection
  * @returns {Object|null} Selection rectangle, with keys top, bottom, left, right, width, height
  */
-ve.ce.Surface.prototype.getSelectionBoundingRelativeRect = function () {
-	var boundingRect, surfaceRect;
-	if ( this.focusedNode ) {
+ve.ce.Surface.prototype.getSelectionBoundingRelativeRect = function ( range ) {
+	var boundingRect, surfaceRect, focusedNode;
+
+	range = range || this.getModel().getSelection();
+	focusedNode = this.getFocusedNode( range );
+
+	if ( focusedNode ) {
 		// We can optimize the focusedNode case as we already have the relative coordinates
-		return this.focusedNode.getBoundingRect();
+		return focusedNode.getBoundingRect();
 	}
 
 	boundingRect = this.getSelectionBoundingClientRect();
