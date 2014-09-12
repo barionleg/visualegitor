@@ -323,12 +323,17 @@ ve.ce.Surface.prototype.getOffsetFromCoords = function ( x, y ) {
  * For coordinates relative to the surface, use #getSelectionInlineRelativeRects
  *
  * @method
+ * @param {ve.Range} [range] Optional range to get the selection for, defaults to current selection
  * @returns {Object|null} Start and end selection rectangles
  */
-ve.ce.Surface.prototype.getSelectionInlineClientRects = function () {
-	var inlineRects, surfaceRect, boundingRect, rtl, x, collapsedRect;
-	if ( this.focusedNode ) {
-		inlineRects = this.focusedNode.getInlineRects();
+ve.ce.Surface.prototype.getSelectionInlineClientRects = function ( range ) {
+	var inlineRects, surfaceRect, boundingRect, rtl, x, collapsedRect, focusedNode;
+
+	range = range || this.getModel().getSelection();
+	focusedNode = this.getFocusedNode( range );
+
+	if ( focusedNode ) {
+		inlineRects = focusedNode.getInlineRects();
 		surfaceRect = this.getSurface().getBoundingClientRect();
 		if ( !inlineRects || !surfaceRect ) {
 			return null;
@@ -349,7 +354,7 @@ ve.ce.Surface.prototype.getSelectionInlineClientRects = function () {
 	// * in Firefox on page load when the address bar is still focused
 	// * in empty paragraphs
 	try {
-		return ve.getStartAndEndRects( this.nativeSelection.getRangeAt( 0 ).getClientRects() );
+		return ve.getStartAndEndRects( this.getNativeRange( range ).getClientRects() );
 	} catch ( e ) {
 		// When possible, pretend the cursor is the left/right border of the node
 		// (depending on directionality) as a fallback.
@@ -388,13 +393,17 @@ ve.ce.Surface.prototype.getSelectionInlineClientRects = function () {
  * For coordinates relative to the surface, use #getSelectionBoundingRelativeRect
  *
  * @method
+ * @param {ve.Range} [range] Optional range to get the selection for, defaults to current selection
  * @returns {Object|null} Selection rectangle, with keys top, bottom, left, right, width, height
  */
-ve.ce.Surface.prototype.getSelectionBoundingClientRect = function () {
-	var inlineRects, boundingRect, surfaceRect;
+ve.ce.Surface.prototype.getSelectionBoundingClientRect = function ( range ) {
+	var inlineRects, boundingRect, surfaceRect, focusedNode, nativeRange;
 
-	if ( this.focusedNode ) {
-		boundingRect = this.focusedNode.getBoundingRect();
+	range = range || this.getModel().getSelection();
+	focusedNode = this.getFocusedNode( range );
+
+	if ( focusedNode ) {
+		boundingRect = focusedNode.getBoundingRect();
 		surfaceRect = this.getSurface().getBoundingClientRect();
 		if ( !boundingRect || !surfaceRect ) {
 			return;
@@ -409,7 +418,8 @@ ve.ce.Surface.prototype.getSelectionBoundingClientRect = function () {
 	}
 
 	try {
-		inlineRects = this.nativeSelection.getRangeAt( 0 ).getClientRects();
+		nativeRange = this.getNativeRange( range );
+		inlineRects = nativeRange.getClientRects();
 		// Try the zeroth inline rect first as Chrome sometimes returns a rectangle
 		// full of zeros for getBoundingClientRect when the cursor is collapsed.
 		// We could test for this failure and fall back to inline[0], except for the
@@ -419,7 +429,7 @@ ve.ce.Surface.prototype.getSelectionBoundingClientRect = function () {
 		if ( inlineRects.length === 1 ) {
 			return inlineRects[0];
 		}
-		return this.nativeSelection.getRangeAt( 0 ).getBoundingClientRect();
+		return nativeRange.getBoundingClientRect();
 	} catch ( e ) {
 		return null;
 	}
@@ -432,14 +442,18 @@ ve.ce.Surface.prototype.getSelectionBoundingClientRect = function () {
  * use #getSelectionInlineClientRects.
  *
  * @method
+ * @param {ve.Range} [range] Optional range to get the selection for, defaults to current selection
  * @returns {Object|null} Start and end selection rectangles
  */
-ve.ce.Surface.prototype.getSelectionInlineRelativeRects = function () {
-	var inlineRects, surfaceRect;
+ve.ce.Surface.prototype.getSelectionInlineRelativeRects = function ( range ) {
+	var inlineRects, surfaceRect, focusedNode;
 
-	if ( this.focusedNode ) {
+	range = range || this.getModel().getSelection();
+	focusedNode = this.getFocusedNode( range );
+
+	if ( focusedNode ) {
 		// We can optimize the focusedNode case as we already have the relative coordinates
-		return this.focusedNode.getInlineRects();
+		return focusedNode.getInlineRects();
 	}
 
 	inlineRects = this.getSelectionInlineClientRects();
@@ -460,13 +474,18 @@ ve.ce.Surface.prototype.getSelectionInlineRelativeRects = function () {
  * use #getSelectionBoundingClientRect.
  *
  * @method
+ * @param {ve.Range} [range] Optional range to get the selection for, defaults to current selection
  * @returns {Object|null} Selection rectangle, with keys top, bottom, left, right, width, height
  */
-ve.ce.Surface.prototype.getSelectionBoundingRelativeRect = function () {
-	var boundingRect, surfaceRect;
-	if ( this.focusedNode ) {
+ve.ce.Surface.prototype.getSelectionBoundingRelativeRect = function ( range ) {
+	var boundingRect, surfaceRect, focusedNode;
+
+	range = range || this.getModel().getSelection();
+	focusedNode = this.getFocusedNode( range );
+
+	if ( focusedNode ) {
 		// We can optimize the focusedNode case as we already have the relative coordinates
-		return this.focusedNode.getBoundingRect();
+		return focusedNode.getBoundingRect();
 	}
 
 	boundingRect = this.getSelectionBoundingClientRect();
@@ -1101,7 +1120,7 @@ ve.ce.Surface.prototype.onCopy = function ( e ) {
 		// Save scroll position before changing focus to "offscreen" paste target
 		scrollTop = this.$window.scrollTop();
 
-		originalRange = this.nativeSelection.getRangeAt( 0 ).cloneRange();
+		originalRange = this.getNativeRange().cloneRange();
 		this.nativeSelection.removeAllRanges();
 		this.$pasteTarget[0].focus();
 		this.nativeSelection.addRange( nativeRange );
@@ -1517,7 +1536,7 @@ ve.ce.Surface.prototype.onModelSelect = function ( selection ) {
 		return;
 	}
 
-	focusedNode = this.getFocusedNodeAt( selection );
+	focusedNode = this.findFocusedNode( selection );
 
 	// If focus has changed, update nodes and this.focusedNode
 	if ( focusedNode !== this.focusedNode ) {
@@ -1558,12 +1577,25 @@ ve.ce.Surface.prototype.onModelSelect = function ( selection ) {
 };
 
 /**
- * Get the focused node at a specified range, or null if one is not present
+ * Get the focused node (optionally at a specified range), or null if one is not present
  *
- * @param {ve.Range} range Range to check for focusable node
+ * @param {ve.Range} [range] Optional range to check for focused node, defaults to current selection
  * @return {ve.ce.Node|null} Focused node
  */
-ve.ce.Surface.prototype.getFocusedNodeAt = function ( range ) {
+ve.ce.Surface.prototype.getFocusedNode = function ( range ) {
+	if ( !range || range.equalsSelection( this.getModel().getSelection() ) ) {
+		return this.focusedNode;
+	}
+	return this.findFocusedNode( range );
+};
+
+/**
+ * Find the focusedNode at a specified range
+ *
+ * @param {ve.Range} range Range to search at for a focusable node
+ * @return {ve.ce.Null|null} Focused node
+ */
+ve.ce.Surface.prototype.findFocusedNode = function ( range ) {
 	var startNode, endNode,
 		documentNode = this.documentView.getDocumentNode();
 	// Detect when only a single focusable element is selected
@@ -2419,6 +2451,29 @@ ve.ce.Surface.prototype.getRangeSelection = function ( range ) {
 };
 
 /**
+ * Get a native range object for a specified range
+ *
+ * Doesn't correct backwards selection so should be used for measurement only.
+ *
+ * @param {ve.Range} [range] Optional range to get the native range for, defaults to current selection
+ * @return {Range} Native range object
+ */
+ve.ce.Surface.prototype.getNativeRange = function ( range ) {
+	if ( !range || range.equalsSelection( this.getModel().getSelection() ) ) {
+		return this.nativeSelection.getRangeAt( 0 );
+	}
+
+	var nativeRange = document.createRange(),
+		rangeSelection = this.getRangeSelection( range );
+
+	nativeRange.setStart( rangeSelection.start.node, rangeSelection.start.offset );
+	if ( rangeSelection.end ) {
+		nativeRange.setEnd( rangeSelection.end.node, rangeSelection.end.offset );
+	}
+	return nativeRange;
+};
+
+/**
  * Append passed highlights to highlight container.
  *
  * @method
@@ -2578,16 +2633,6 @@ ve.ce.Surface.prototype.getModel = function () {
  */
 ve.ce.Surface.prototype.getDocument = function () {
 	return this.documentView;
-};
-
-/**
- * Get the currently focused node.
- *
- * @method
- * @returns {ve.ce.Node|undefined} Focused node
- */
-ve.ce.Surface.prototype.getFocusedNode = function () {
-	return this.focusedNode;
 };
 
 /**
