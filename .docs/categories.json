@@ -241,11 +241,23 @@
 		"groups": [
 			{
 				"name": "OOJS",
-				"classes": ["OO", "OO.EventEmitter", "OO.Factory", "OO.Registry"]
+				"classes": [
+					"OO",
+					"OO.EventEmitter",
+					"OO.Factory",
+					"OO.Registry"
+				]
 			},
 			{
 				"name": "jQuery",
-				"classes": ["jQuery", "jQuery.Event", "jQuery.Promise", "jQuery.Deferred", "jQuery.jqXHR", "QUnit"]
+				"classes": [
+					"jQuery",
+					"jQuery.Event",
+					"jQuery.Promise",
+					"jQuery.Deferred",
+					"jQuery.jqXHR",
+					"QUnit"
+				]
 			},
 			{
 				"name": "JavaScript",
