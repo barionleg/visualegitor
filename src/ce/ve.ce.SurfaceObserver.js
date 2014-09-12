@@ -174,7 +174,9 @@ ve.ce.SurfaceObserver.prototype.pollOnceNoEmit = function () {
  * @fires selectionChange
  */
 ve.ce.SurfaceObserver.prototype.pollOnceInternal = function ( emitChanges ) {
-	var $nodeOrSlug, node, text, hash, range, domRange, $slugWrapper, observer = this;
+	var $nodeOrSlug, node, text, hash, range, domRange, $slugWrapper,
+		slugChange = false,
+		observer = this;
 
 	if ( !this.domDocument ) {
 		return;
@@ -207,18 +209,23 @@ ve.ce.SurfaceObserver.prototype.pollOnceInternal = function ( emitChanges ) {
 				.addClass( 've-ce-branchNode-blockSlugWrapper-unfocused' )
 				.removeClass( 've-ce-branchNode-blockSlugWrapper-focused' );
 			this.$slugWrapper = null;
-			// Emit 'position' on the surface view after the animation completes
-			this.setTimeout( function () {
-				if ( observer.documentView ) {
-					observer.documentView.documentNode.surface.emit( 'position' );
-				}
-			}, 200 );
+			slugChange = true;
 		}
 
 		if ( $slugWrapper && !$slugWrapper.is( this.$slugWrapper) ) {
 			this.$slugWrapper = $slugWrapper
 				.addClass( 've-ce-branchNode-blockSlugWrapper-focused' )
 				.removeClass( 've-ce-branchNode-blockSlugWrapper-unfocused' );
+			slugChange = true;
+		}
+
+		if ( slugChange ) {
+			// Emit 'position' on the surface view after the animation completes
+			this.setTimeout( function () {
+				if ( observer.documentView ) {
+					observer.documentView.documentNode.surface.emit( 'position' );
+				}
+			}, 200 );
 		}
 
 	}
