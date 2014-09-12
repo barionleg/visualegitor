@@ -1482,9 +1482,7 @@ ve.ce.Surface.prototype.onDocumentCompositionEnd = function () {
  * @param {ve.Range|null} selection
  */
 ve.ce.Surface.prototype.onModelSelect = function ( selection ) {
-	var start, end, nativeRange,
-		next = null,
-		previous = this.focusedNode;
+	var nativeRange, focusedNode;
 
 	this.contentBranchNodeChanged = false;
 
@@ -1492,31 +1490,17 @@ ve.ce.Surface.prototype.onModelSelect = function ( selection ) {
 		return;
 	}
 
-	// Detect when only a single inline element is selected
-	if ( !selection.isCollapsed() ) {
-		start = this.documentView.getDocumentNode().getNodeFromOffset( selection.start + 1 );
-		if ( start.isFocusable() ) {
-			end = this.documentView.getDocumentNode().getNodeFromOffset( selection.end - 1 );
-			if ( start === end ) {
-				next = start;
-			}
-		}
-	} else {
-		// Check we haven't been programmatically placed inside a focusable node with a collapsed selection
-		start = this.documentView.getDocumentNode().getNodeFromOffset( selection.start );
-		if ( start.isFocusable() ) {
-			next = start;
-		}
-	}
+	focusedNode = this.getFocusedNodeAt( selection );
+
 	// If focus has changed, update nodes and this.focusedNode
-	if ( previous !== next ) {
-		if ( previous ) {
-			previous.setFocused( false );
+	if ( focusedNode !== this.focusedNode ) {
+		if ( this.focusedNode ) {
+			this.focusedNode.setFocused( false );
 			this.focusedNode = null;
 		}
-		if ( next ) {
-			next.setFocused( true );
-			this.focusedNode = next;
+		if ( focusedNode ) {
+			focusedNode.setFocused( true );
+			this.focusedNode = focusedNode;
 
 			// As FF won't fire a copy event with nothing selected, make
 			// a dummy selection of one space in the pasteTarget.
@@ -1544,6 +1528,34 @@ ve.ce.Surface.prototype.onModelSelect = function ( selection ) {
 
 	// Update the selection state in the SurfaceObserver
 	this.surfaceObserver.pollOnceNoEmit();
+};
+
+/**
+ * Get the focused node at a specified range, or null if one is not present
+ *
+ * @param {ve.Range} range Range to check for focusable node
+ * @return {ve.ce.Node|null} Focused node
+ */
+ve.ce.Surface.prototype.getFocusedNodeAt = function ( range ) {
+	var startNode, endNode,
+		documentNode = this.documentView.getDocumentNode();
+	// Detect when only a single focusable element is selected
+	if ( !range.isCollapsed() ) {
+		startNode = documentNode.getNodeFromOffset( range.start + 1 );
+		if ( startNode.isFocusable() ) {
+			endNode = documentNode.getNodeFromOffset( range.end - 1 );
+			if ( startNode === endNode ) {
+				return startNode;
+			}
+		}
+	} else {
+		// Check if the range is inside a focusable node with a collapsed selection
+		startNode = documentNode.getNodeFromOffset( range.start );
+		if ( startNode.isFocusable() ) {
+			return startNode;
+		}
+	}
+	return null;
 };
 
 /**
