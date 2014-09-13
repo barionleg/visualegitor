@@ -140,23 +140,23 @@ ve.ui.Toolbar.prototype.onWindowResize = function () {
  * FIXME: this code should be in a target class or something
  */
 ve.ui.Toolbar.prototype.onSurfaceViewKeyUp = function () {
-	var clientRect, barHeight, scrollTo, obscured;
+	var clientRects, barHeight, scrollTo, obscured;
 
 	if ( !this.floating ) {
 		return;
 	}
 
-	clientRect = this.getSurface().getView().getSelectionBoundingClientRect();
-	if ( !clientRect ) {
+	clientRects = this.getSurface().getView().getSelectionInlineClientRects();
+	if ( !clientRects || !clientRects.start ) {
 		return;
 	}
 
 	barHeight = this.$bar.height();
-	obscured = clientRect.top < barHeight;
+	obscured = clientRects.start.top < barHeight;
 
 	// If toolbar is floating and cursor is obscured, scroll cursor into view
 	if ( obscured ) {
-		scrollTo = this.$window.scrollTop() + clientRect.top - barHeight;
+		scrollTo = this.$window.scrollTop() + clientRects.start.top - barHeight;
 		this.$window.scrollTop( scrollTo );
 	}
 };
