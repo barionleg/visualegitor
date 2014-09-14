@@ -1542,7 +1542,7 @@ ve.ce.Surface.prototype.onModelSelect = function ( selection ) {
 			// Since the selection is no longer in the documentNode, clear the SurfaceObserver's
 			// selection state. Otherwise, if the user places the selection back into the documentNode
 			// in exactly the same place where it was before, the observer won't consider that a change.
-			this.surfaceObserver.clear();
+			this.surfaceObserver.clear(); 
 		}
 	}
 
