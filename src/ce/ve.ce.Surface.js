@@ -323,12 +323,17 @@ ve.ce.Surface.prototype.getOffsetFromCoords = function ( x, y ) {
  * For coordinates relative to the surface, use #getSelectionStartAndEndRelativeRects
  *
  * @method
+ * @param {ve.Range} [range] Optional range to get the selection for, defaults to current selection
  * @returns {Object|null} Start and end selection rectangles
  */
-ve.ce.Surface.prototype.getSelectionStartAndEndClientRects = function () {
-	var startAndEndRects, surfaceRect, boundingRect, rtl, x, collapsedRect;
-	if ( this.focusedNode ) {
-		startAndEndRects = this.focusedNode.getStartAndEndRects();
+ve.ce.Surface.prototype.getSelectionStartAndEndClientRects = function ( range ) {
+	var startAndEndRects, surfaceRect, boundingRect, rtl, x, collapsedRect, focusedNode;
+
+	range = range || this.getModel().getSelection();
+	focusedNode = this.getFocusedNode( range );
+
+	if ( focusedNode ) {
+		startAndEndRects = focusedNode.getStartAndEndRects();
 		surfaceRect = this.getSurface().getBoundingClientRect();
 		if ( !startAndEndRects || !surfaceRect ) {
 			return null;
@@ -349,7 +354,7 @@ ve.ce.Surface.prototype.getSelectionStartAndEndClientRects = function () {
 	// * in Firefox on page load when the address bar is still focused
 	// * in empty paragraphs
 	try {
-		return ve.getStartAndEndRects( this.getNativeRange().getClientRects() );
+		return ve.getStartAndEndRects( this.getNativeRange( range ).getClientRects() );
 	} catch ( e ) {
 		// When possible, pretend the cursor is the left/right border of the node
 		// (depending on directionality) as a fallback.
@@ -388,13 +393,17 @@ ve.ce.Surface.prototype.getSelectionStartAndEndClientRects = function () {
  * For coordinates relative to the surface, use #getSelectionBoundingRelativeRect
  *
  * @method
+ * @param {ve.Range} [range] Optional range to get the selection for, defaults to current selection
  * @returns {Object|null} Selection rectangle, with keys top, bottom, left, right, width, height
  */
-ve.ce.Surface.prototype.getSelectionBoundingClientRect = function () {
-	var rects, boundingRect, surfaceRect, nativeRange;
+ve.ce.Surface.prototype.getSelectionBoundingClientRect = function ( range ) {
+	var rects, boundingRect, surfaceRect, focusedNode, nativeRange;
 
-	if ( this.focusedNode ) {
-		boundingRect = this.focusedNode.getBoundingRect();
+	range = range || this.getModel().getSelection();
+	focusedNode = this.getFocusedNode( range );
+
+	if ( focusedNode ) {
+		boundingRect = focusedNode.getBoundingRect();
 		surfaceRect = this.getSurface().getBoundingClientRect();
 		if ( !boundingRect || !surfaceRect ) {
 			return;
@@ -409,7 +418,7 @@ ve.ce.Surface.prototype.getSelectionBoundingClientRect = function () {
 	}
 
 	try {
-		nativeRange = this.getNativeRange();
+		nativeRange = this.getNativeRange( range );
 		rects = nativeRange.getClientRects();
 		// Try the zeroth rect first as Chrome sometimes returns a rectangle
 		// full of zeros for getBoundingClientRect when the cursor is collapsed.
@@ -433,17 +442,21 @@ ve.ce.Surface.prototype.getSelectionBoundingClientRect = function () {
  * use #getSelectionStartAndEndClientRects.
  *
  * @method
+ * @param {ve.Range} [range] Optional range to get the selection for, defaults to current selection
  * @returns {Object|null} Start and end selection rectangles
  */
-ve.ce.Surface.prototype.getSelectionStartAndEndRelativeRects = function () {
-	var startAndEndRects, surfaceRect;
+ve.ce.Surface.prototype.getSelectionStartAndEndRelativeRects = function ( range ) {
+	var startAndEndRects, surfaceRect, focusedNode;
 
-	if ( this.focusedNode ) {
+	range = range || this.getModel().getSelection();
+	focusedNode = this.getFocusedNode( range );
+
+	if ( focusedNode ) {
 		// We can optimize the focusedNode case as we already have the relative coordinates
-		return this.focusedNode.getStartAndEndRects();
+		return focusedNode.getStartAndEndRects();
 	}
 
-	startAndEndRects = this.getSelectionStartAndEndClientRects();
+	startAndEndRects = this.getSelectionStartAndEndClientRects( range );
 	surfaceRect = this.getSurface().getBoundingClientRect();
 	if ( !startAndEndRects || !surfaceRect ) {
 		return null;
@@ -461,16 +474,21 @@ ve.ce.Surface.prototype.getSelectionStartAndEndRelativeRects = function () {
  * use #getSelectionBoundingClientRect.
  *
  * @method
+ * @param {ve.Range} [range] Optional range to get the selection for, defaults to current selection
  * @returns {Object|null} Selection rectangle, with keys top, bottom, left, right, width, height
  */
-ve.ce.Surface.prototype.getSelectionBoundingRelativeRect = function () {
-	var boundingRect, surfaceRect;
-	if ( this.focusedNode ) {
+ve.ce.Surface.prototype.getSelectionBoundingRelativeRect = function ( range ) {
+	var boundingRect, surfaceRect, focusedNode;
+
+	range = range || this.getModel().getSelection();
+	focusedNode = this.getFocusedNode( range );
+
+	if ( focusedNode ) {
 		// We can optimize the focusedNode case as we already have the relative coordinates
-		return this.focusedNode.getBoundingRect();
+		return focusedNode.getBoundingRect();
 	}
 
-	boundingRect = this.getSelectionBoundingClientRect();
+	boundingRect = this.getSelectionBoundingClientRect( range );
 	surfaceRect = this.getSurface().getBoundingClientRect();
 	if ( !boundingRect || !surfaceRect ) {
 		return null;
