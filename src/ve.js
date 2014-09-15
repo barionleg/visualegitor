@@ -722,6 +722,9 @@
 	 *
 	 * To create an empty document, pass the empty string.
 	 *
+	 * If your input is both valid HTML and valid XML, and you need to work around style
+	 * normalization bugs in Internet Explorer, use #parseXhtml and #serializeXhtml.
+	 *
 	 * @param {string} html HTML string
 	 * @returns {HTMLDocument} Document constructed from the HTML string
 	 */
@@ -850,7 +853,7 @@
 	};
 
 	/**
-	 * Helper function for ve#properInnerHtml and #properOuterHtml.
+	 * Helper function for #properInnerHtml, #properOuterHtml and #serializeXhtml.
 	 *
 	 * Detect whether the browser has broken `<pre>` serialization, and if so return a clone
 	 * of the node with extra newlines added to make it serialize properly. If the browser is not
@@ -891,6 +894,113 @@
 		return $element.get( 0 );
 	};
 
+	/**
+	 * Helper function for #parseXhtml and #serializeXhtml.
+	 *
+	 * Detect whether the browser normalizes style attributes (IE does this)
+	 * and if so, map broken attributes to attributes prefixed with data-ve-
+	 * or vice versa.
+	 *
+	 * @param {string} html HTML string. Must also be valid XML
+	 * @param {boolean} unmask Map the masked attributes back to their originals
+	 * @returns {string} HTML string, possibly modified to mask broken attributes
+	 */
+	ve.transformStyleAttributes = function ( html, unmask ) {
+		var xmlDoc, fromAttr, toAttr, i, len,
+			maskAttrs = [
+				'style', // IE normalizes 'color:#ffd' to 'color: rgb(255, 255, 221);'
+				'bgcolor' // IE normalizes '#FFDEAD' to '#ffdead'
+			];
+
+		function normalizeAttr( name, value, nodeName ) {
+			var node = document.createElement( nodeName || 'div' );
+			node.setAttribute( name, value );
+			// IE normalizes invalid CSS to empty string, then if you normalize
+			// an empty string again it becomes null. Return an empty string
+			// instead of null to make this function idempotent.
+			return node.getAttribute( name ) || '';
+		}
+
+		// Feature-detect style attribute breakage in IE
+		if ( ve.isStyleAttributeBroken === undefined ) {
+			ve.isStyleAttributeBroken = normalizeAttr( 'style', 'color:#ffd' ) !== 'color:#ffd';
+		}
+		if ( !ve.isStyleAttributeBroken ) {
+			// Nothing to do
+			return html;
+		}
+
+		// Parse the HTML into an XML DOM
+		xmlDoc = new DOMParser().parseFromString( html, 'text/xml' );
+
+		// Go through and mask/unmask each attribute on all elements that have it
+		for ( i = 0, len = maskAttrs.length; i < len; i++ ) {
+			fromAttr = unmask ? 'data-ve-' + maskAttrs[i] : maskAttrs[i];
+			toAttr = unmask ? maskAttrs[i] : 'data-ve-' + maskAttrs[i];
+			/*jshint loopfunc:true */
+			$( xmlDoc ).find( '[' + fromAttr + ']' ).each( function () {
+				var toAttrValue, fromAttrNormalized,
+					fromAttrValue = this.getAttribute( fromAttr );
+
+				if ( unmask ) {
+					this.removeAttribute( fromAttr );
+
+					// If the data-ve- version doesn't normalize to the same value,
+					// the attribute must have changed, so don't overwrite it
+					fromAttrNormalized = normalizeAttr( toAttr, fromAttrValue, this.nodeName );
+					// toAttr can't not be set, but IE returns null if the value was ''
+					toAttrValue = this.getAttribute( toAttr ) || '';
+					if ( toAttrValue !== fromAttrNormalized ) {
+						return;
+					}
+				}
+
+				this.setAttribute( toAttr, fromAttrValue );
+			} );
+		}
+
+		// HACK: Inject empty text nodes into empty non-void tags to prevent
+		// things like <a></a> from being serialized as <a /> and wreaking havoc
+		$( xmlDoc ).find( ':empty:not(' + ve.elementTypes.void.join( ',' ) + ')' ).each( function () {
+			this.appendChild( xmlDoc.createTextNode( '' ) );
+		} );
+
+		// Serialize back to a string
+		return new XMLSerializer().serializeToString( xmlDoc );
+	};
+
+	/**
+	 * Parse an HTML string into an HTML DOM, while masking attributes affected by
+	 * normalization bugs if a broken browser is detected.
+	 * Since this process uses an XML parser, the input must be valid XML as well as HTML.
+	 *
+	 * @param {string} html HTML string. Must also be valid XML
+	 * @return {HTMLDocument} HTML DOM
+	 */
+	ve.parseXhtml = function ( html ) {
+		return ve.createDocumentFromHtml( ve.transformStyleAttributes( html, false ) );
+	};
+
+	/**
+	 * Serialize an HTML DOM created with #parseXhtml back to an HTML string, unmasking any
+	 * attributes that were masked.
+	 *
+	 * @param {HTMLDocument} doc HTML DOM
+	 * @return {string} Serialized HTML string
+	 */
+	ve.serializeXhtml = function ( doc ) {
+		var xml = new XMLSerializer().serializeToString( ve.fixupPreBug( doc.documentElement ) );
+		// HACK: strip out xmlns
+		xml = xml.replace( '<html xmlns="http://www.w3.org/1999/xhtml"', '<html' );
+		return ve.transformStyleAttributes( xml, true );
+	};
+
+	/**
+	 * Wrapper for node.normalize(). The native implementation is broken in IE,
+	 * so we use our own implementation in that case.
+	 *
+	 * @param {Node} node Node to normalize
+	 */
 	ve.normalizeNode = function ( node ) {
 		var p, nodeIterator, textNode;
 		if ( ve.isNormalizeBroken === undefined ) {
