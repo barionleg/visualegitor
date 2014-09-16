@@ -42,6 +42,7 @@ ve.ui.Toolbar = function VeUiToolbar( surface, options ) {
 	};
 	// Default directions
 	this.contextDirection = { inline: 'ltr', block: 'ltr' };
+
 	// The following classes can be used here:
 	// ve-ui-dir-inline-ltr
 	// ve-ui-dir-inline-rtl

@@ -429,16 +429,7 @@ ve.dm.SurfaceFragment.prototype.getText = function () {
 	if ( !( this.selection instanceof ve.dm.LinearSelection ) ) {
 		return '';
 	}
-	var i, length,
-		text = '',
-		data = this.document.getData( this.getSelection( true ).getRange() );
-	for ( i = 0, length = data.length; i < length; i++ ) {
-		if ( data[i].type === undefined ) {
-			// Annotated characters have a string at index 0, plain characters are 1-char strings
-			text += typeof data[i] === 'string' ? data[i] : data[i][0];
-		}
-	}
-	return text;
+	return this.document.data.getText( false, this.getSelection( true ).getRange() );
 };
 
 /**

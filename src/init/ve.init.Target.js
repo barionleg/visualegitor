@@ -245,6 +245,8 @@ ve.init.Target.prototype.setupToolbar = function ( config ) {
 	this.toolbar.setup( this.constructor.static.toolbarGroups );
 	this.surface.addCommands( this.constructor.static.surfaceCommands );
 	this.toolbar.$element.insertBefore( this.surface.$element );
+	this.find = new ve.ui.Find( this.surface, { $: this.surface.$ } );
+	this.toolbar.$bar.append( this.find.$element );
 };
 
 /**

@@ -4,6 +4,11 @@
  * @copyright 2011-2014 VisualEditor Team and others; see http://ve.mit-license.org
  */
 
+.ve-ce-focusableNode-highlights {
+	position: absolute;
+	pointer-events: none;
+}
+
 .ve-ce-surface-highlights-focused .ve-ce-focusableNode-highlights {
 	opacity: 0.5;
 }
@@ -27,6 +32,7 @@
 	background: #6da9f7;
 	box-shadow: inset 0 0 0 1px #4C76ac;
 	position: absolute;
+	pointer-events: auto;
 }
 
 .ve-ce-focusableNode-highlight-relocatable-marker {

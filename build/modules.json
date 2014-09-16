@@ -301,6 +301,7 @@
 			"src/ui/ve.ui.Surface.js",
 			"src/ui/ve.ui.Context.js",
 			"src/ui/ve.ui.TableContext.js",
+			"src/ui/ve.ui.Find.js",
 			"src/ui/ve.ui.Tool.js",
 			"src/ui/ve.ui.Toolbar.js",
 			"src/ui/ve.ui.TargetToolbar.js",
@@ -392,6 +393,7 @@
 			"src/ui/styles/ve.ui.Surface.css",
 			"src/ui/styles/widgets/ve.ui.SurfaceWidget.css",
 			"src/ui/styles/ve.ui.TableContext.css",
+			"src/ui/styles/ve.ui.Find.css",
 			"src/ui/styles/ve.ui.Toolbar.css",
 			"src/ui/styles/ve.ui.Icons.css"
 		],

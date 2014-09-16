@@ -1229,6 +1229,29 @@ ve.dm.Document.prototype.fixupInsertion = function ( data, offset ) {
 };
 
 /**
+ * Find a text string within the document
+ *
+ * @param {string} query Text to find
+ * @param {boolean} caseSensitive Case sensitive search
+ * @return {number[]} List of offsets where the string was found
+ */
+ve.dm.Document.prototype.findText = function ( query, caseSensitive ) {
+	var offset = -1,
+		offsets = [],
+		text = this.data.getText( true );
+
+	if ( !caseSensitive ) {
+		text = text.toLowerCase();
+		query = query.toLowerCase();
+	}
+
+	while ( ( offset = text.indexOf( query, offset + 1 ) ) !== -1 ) {
+		offsets.push( offset ) ;
+	}
+	return offsets;
+};
+
+/**
  * Get the length of the complete history stack. This is also the current pointer.
  * @returns {number} Length of the complete history stack
  */
