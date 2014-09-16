@@ -16,6 +16,24 @@
       "revId": "017c49519bc1ab38432e44dfa36596e549d390ac",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_9863d4d8",
+        "filename": "src/ve.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 1005,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-09-16T20:33:30Z",
+      "side": 1,
+      "message": "Yeah, that\u0027s probably cleaner. Right now ve.parseXhtml is already equivalent to ve.createDocumentFromHtml() if style attributes aren\u0027t broken, because transformStyleAttributes is a no-op in that case.",
+      "parentUuid": "2e2fb78d_9d64e612",
+      "revId": "017c49519bc1ab38432e44dfa36596e549d390ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
