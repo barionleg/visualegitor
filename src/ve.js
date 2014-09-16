@@ -1001,7 +1001,14 @@
 	 * @return {string} Serialized HTML string
 	 */
 	ve.serializeXhtml = function ( doc ) {
-		var xml = new XMLSerializer().serializeToString( ve.fixupPreBug( doc.documentElement ) );
+		var xml;
+		// HORRIBLE HACK: use outerHTML if possible because in Firefox, XMLSerializer URL-encodes
+		// hrefs but outerHTML doesn't
+		if ( ve.isStyleAttributeBroken === false ) {
+			return ve.properOuterHtml( doc.documentElement );
+		}
+
+		xml = new XMLSerializer().serializeToString( ve.fixupPreBug( doc.documentElement ) );
 		// HACK: strip out xmlns
 		xml = xml.replace( '<html xmlns="http://www.w3.org/1999/xhtml"', '<html' );
 		return ve.transformStyleAttributes( xml, true );
