@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_987f5410",
+        "filename": "src/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-09-16T21:00:48Z",
+      "side": 1,
+      "message": "Then why are you using \u0026\u0026 ? Shouldn\u0027t you be using || ?",
+      "revId": "ba0122a638b98b361af2be298f847f7638297ab7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
