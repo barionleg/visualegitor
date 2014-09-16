@@ -609,6 +609,18 @@ ve.dm.Document.prototype.getNodeFromOffset = function ( offset ) {
 };
 
 /**
+ * Check if there is a slug at an offset.
+ *
+ * @method
+ * @param {number} offset Offset to check for a slug at
+ * @returns {boolean} There is a slug at the offset
+ */
+ve.dm.Document.prototype.hasSlugAtOffset = function ( offset ) {
+	var node = this.hasSlugAtOffset( offset );
+	return node ? node.hasSlugAtOffset( offset ) : null;
+};
+
+/**
  * Get the content data of a node.
  *
  * @method
