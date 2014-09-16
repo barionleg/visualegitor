@@ -52,6 +52,13 @@ ve.ui.Surface = function VeUiSurface( dataOrDoc, config ) {
 	this.showProgressDebounced = ve.debounce( this.showProgress.bind( this ) );
 	this.filibuster = null;
 
+	this.toolbarWindows = new ve.ui.WindowManager( {
+		$: this.$,
+		factory: ve.ui.windowFactory,
+		modal: false,
+		isolate: true
+	} );
+
 	// Initialization
 	this.$menus.append( this.context.$element );
 	this.$element

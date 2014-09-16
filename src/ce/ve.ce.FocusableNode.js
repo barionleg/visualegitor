@@ -508,6 +508,11 @@ ve.ce.FocusableNode.prototype.positionHighlights = function () {
 			} )
 		);
 	}
+
+	this.$highlights.css( {
+		width: this.boundingRect.left + this.boundingRect.width,
+		height: this.boundingRect.top + this.boundingRect.height
+	} );
 };
 
 /**
