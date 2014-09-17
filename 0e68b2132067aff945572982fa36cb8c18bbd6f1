@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_87c00c80",
+        "filename": "src/dm/ve.dm.BranchNode.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-09-17T20:48:26Z",
+      "side": 1,
+      "message": "Add return false; at the end.",
+      "revId": "0e68b2132067aff945572982fa36cb8c18bbd6f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_e7ac70ed",
+        "filename": "src/dm/ve.dm.Document.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-09-17T20:48:26Z",
+      "side": 1,
+      "message": "Infinite recursion?",
+      "revId": "0e68b2132067aff945572982fa36cb8c18bbd6f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e2fb78d_67b88025",
+        "filename": "src/dm/ve.dm.Document.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 620,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-09-17T20:48:26Z",
+      "side": 1,
+      "message": "Defaulting to null in a function that returns a boolean?",
+      "revId": "0e68b2132067aff945572982fa36cb8c18bbd6f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
