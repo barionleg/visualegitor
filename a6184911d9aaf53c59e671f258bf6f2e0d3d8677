@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e2fb78d_67140045",
+        "filename": "src/ce/ve.ce.BranchNode.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-09-17T20:46:55Z",
+      "side": 1,
+      "message": "Should there be a getter for this maybe?",
+      "revId": "a6184911d9aaf53c59e671f258bf6f2e0d3d8677",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
