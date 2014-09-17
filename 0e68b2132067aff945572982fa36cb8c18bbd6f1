@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "2e2fb78d_87780c27",
+        "filename": "src/dm/ve.dm.Document.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-09-17T20:52:23Z",
+      "side": 1,
+      "message": "Looks like it\u0027s fixed in the next commit, but that still makes this commit broken.",
+      "parentUuid": "2e2fb78d_e7ac70ed",
+      "revId": "0e68b2132067aff945572982fa36cb8c18bbd6f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e2fb78d_67b88025",
         "filename": "src/dm/ve.dm.Document.js",
         "patchSetId": 2
