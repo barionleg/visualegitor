@@ -259,6 +259,14 @@
 					"RegExp",
 					"String"
 				]
+			},
+			{
+				"name": "DOM",
+				"classes": [
+					"ClientRect",
+					"Range",
+					"Selection"
+				]
 			}
 		]
 	}
