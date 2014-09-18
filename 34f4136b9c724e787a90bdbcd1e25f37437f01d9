@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee62ffec_929fbdb9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-09-18T18:40:05Z",
+      "side": 1,
+      "message": "How about: \"Use \u0027position\u0027 and \u0027context\u0027 change events rather than generic ones\"",
+      "revId": "34f4136b9c724e787a90bdbcd1e25f37437f01d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
