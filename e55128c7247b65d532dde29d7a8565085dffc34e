@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee62ffec_12718d0b",
+        "filename": "tests/dm/ve.dm.Document.test.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-09-18T18:58:04Z",
+      "side": 1,
+      "message": "This needs to run length+1 assertions, because there are length+1 offsets in the document.",
+      "revId": "e55128c7247b65d532dde29d7a8565085dffc34e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
