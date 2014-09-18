@@ -16,6 +16,24 @@
       "revId": "925ed5c0bfc7b5be225702caaed75d39cb92c7d7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_ec9983c9",
+        "filename": "src/dm/ve.dm.Node.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-09-18T17:58:32Z",
+      "side": 1,
+      "message": "Done in https://gerrit.wikimedia.org/r/#/c/161033/",
+      "parentUuid": "2e2fb78d_a9b52431",
+      "revId": "925ed5c0bfc7b5be225702caaed75d39cb92c7d7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
