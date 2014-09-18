@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee62ffec_750673d3",
+        "filename": "src/ui/ve.ui.Context.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-09-18T20:20:50Z",
+      "side": 1,
+      "message": "This is parenthesized all wrong. \u0026\u0026 binds more tightly than || , so what you have here is ( this.inspector \u0026\u0026 !selectedNode ) || selectedNodeChanged whereas presumably what you wanted is this.inspector \u0026\u0026 ( !selectedNode || selectedNodeChanged ). For this reason I recommend always using parentheses when mixing \u0026\u0026 and || , even if the default order of operations happens to result in the same grouping.",
+      "revId": "695525bd4e4d95db5fdd80a37fb1eff8acb54b3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
