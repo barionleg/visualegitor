@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee62ffec_88c30a0a",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-09-18T23:07:10Z",
+      "side": 1,
+      "message": "Why is this still here? You should be able to get rid of all uses of this.nativeSelection in functions like these, right?",
+      "revId": "b0edb5807aa1bbbc4480debd743b755444c9ed88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
