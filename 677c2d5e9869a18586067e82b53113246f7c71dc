@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee62ffec_263d6fb9",
+        "filename": "src/dm/nodes/ve.dm.TableCellNode.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-09-19T01:20:58Z",
+      "side": 1,
+      "message": "Typo: \"explicitly\"",
+      "revId": "677c2d5e9869a18586067e82b53113246f7c71dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_c6433342",
+        "filename": "src/dm/nodes/ve.dm.TableCellNode.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-09-19T01:20:58Z",
+      "side": 1,
+      "message": "dataElement.attributes might be undefined, use \u0026\u0026 like the line above. Alternatively, do var attributes \u003d dataElement.attributes || {} then access attributes.style, attributes.colspan, etc.",
+      "revId": "677c2d5e9869a18586067e82b53113246f7c71dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_a6703fa4",
+        "filename": "src/dm/nodes/ve.dm.TableCellNode.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-09-19T01:20:58Z",
+      "side": 1,
+      "message": "Shouldn\u0027t there be code preventing these attributes from being set to 1? We don\u0027t want \u003ctd colspan\u003d1\u003e, we just want \u003ctd\u003e in that case.",
+      "revId": "677c2d5e9869a18586067e82b53113246f7c71dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_06b02b3d",
+        "filename": "src/dm/nodes/ve.dm.TableCellNode.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-09-19T01:20:58Z",
+      "side": 1,
+      "message": "Add documentation for all of these methods",
+      "revId": "677c2d5e9869a18586067e82b53113246f7c71dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_466f43c1",
+        "filename": "src/dm/nodes/ve.dm.TableCellNode.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-09-19T01:20:58Z",
+      "side": 1,
+      "message": "this.element.attributes can be undefined. Use this.getAttribute( \u0027rowspan\u0027 )",
+      "revId": "677c2d5e9869a18586067e82b53113246f7c71dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_4685035a",
+        "filename": "src/dm/nodes/ve.dm.TableCellNode.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-09-19T01:20:58Z",
+      "side": 1,
+      "message": "Rename this to ve.dm.TableCellNode.static.createData and move it up to the static function section.\n\nShould the options parameter really be called attributes maybe?",
+      "revId": "677c2d5e9869a18586067e82b53113246f7c71dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_06deeb70",
+        "filename": "src/dm/nodes/ve.dm.TableNode.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-09-19T01:20:58Z",
+      "side": 1,
+      "message": "Document",
+      "revId": "677c2d5e9869a18586067e82b53113246f7c71dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_e6eab704",
+        "filename": "src/dm/nodes/ve.dm.TableNode.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-09-19T01:20:58Z",
+      "side": 1,
+      "message": "Copypasted documentation from getIterator(), doesn\u0027t actually apply to this function",
+      "revId": "677c2d5e9869a18586067e82b53113246f7c71dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_c6e7b33a",
+        "filename": "src/dm/nodes/ve.dm.TableNode.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-09-19T01:20:58Z",
+      "side": 1,
+      "message": "Document",
+      "revId": "677c2d5e9869a18586067e82b53113246f7c71dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
