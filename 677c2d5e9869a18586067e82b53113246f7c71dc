@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee62ffec_46bd03d1",
+        "filename": "src/dm/nodes/ve.dm.TableCellNode.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-09-19T02:34:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee62ffec_263d6fb9",
+      "revId": "677c2d5e9869a18586067e82b53113246f7c71dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee62ffec_c6433342",
         "filename": "src/dm/nodes/ve.dm.TableCellNode.js",
         "patchSetId": 10
@@ -30,6 +48,24 @@
       "writtenOn": "2014-09-19T01:20:58Z",
       "side": 1,
       "message": "dataElement.attributes might be undefined, use \u0026\u0026 like the line above. Alternatively, do var attributes \u003d dataElement.attributes || {} then access attributes.style, attributes.colspan, etc.",
+      "revId": "677c2d5e9869a18586067e82b53113246f7c71dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_06cf0b84",
+        "filename": "src/dm/nodes/ve.dm.TableCellNode.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-09-19T02:34:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee62ffec_c6433342",
       "revId": "677c2d5e9869a18586067e82b53113246f7c71dc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ee62ffec_e6cbd773",
+        "filename": "src/dm/nodes/ve.dm.TableCellNode.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-09-19T02:34:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee62ffec_a6703fa4",
+      "revId": "677c2d5e9869a18586067e82b53113246f7c71dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee62ffec_06b02b3d",
         "filename": "src/dm/nodes/ve.dm.TableCellNode.js",
         "patchSetId": 10
@@ -64,6 +118,24 @@
       "writtenOn": "2014-09-19T01:20:58Z",
       "side": 1,
       "message": "Add documentation for all of these methods",
+      "revId": "677c2d5e9869a18586067e82b53113246f7c71dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_86aadb80",
+        "filename": "src/dm/nodes/ve.dm.TableCellNode.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-09-19T02:34:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee62ffec_06b02b3d",
       "revId": "677c2d5e9869a18586067e82b53113246f7c71dc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "ee62ffec_a6a5dfb3",
+        "filename": "src/dm/nodes/ve.dm.TableCellNode.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-09-19T02:34:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee62ffec_466f43c1",
+      "revId": "677c2d5e9869a18586067e82b53113246f7c71dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee62ffec_4685035a",
         "filename": "src/dm/nodes/ve.dm.TableCellNode.js",
         "patchSetId": 10
@@ -98,6 +188,24 @@
       "writtenOn": "2014-09-19T01:20:58Z",
       "side": 1,
       "message": "Rename this to ve.dm.TableCellNode.static.createData and move it up to the static function section.\n\nShould the options parameter really be called attributes maybe?",
+      "revId": "677c2d5e9869a18586067e82b53113246f7c71dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_66afe792",
+        "filename": "src/dm/nodes/ve.dm.TableCellNode.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-09-19T02:34:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee62ffec_4685035a",
       "revId": "677c2d5e9869a18586067e82b53113246f7c71dc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "ee62ffec_46b4e3e4",
+        "filename": "src/dm/nodes/ve.dm.TableNode.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-09-19T02:34:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee62ffec_06deeb70",
+      "revId": "677c2d5e9869a18586067e82b53113246f7c71dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee62ffec_e6eab704",
         "filename": "src/dm/nodes/ve.dm.TableNode.js",
         "patchSetId": 10
@@ -138,6 +264,24 @@
     },
     {
       "key": {
+        "uuid": "ee62ffec_2699ef80",
+        "filename": "src/dm/nodes/ve.dm.TableNode.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-09-19T02:34:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee62ffec_e6eab704",
+      "revId": "677c2d5e9869a18586067e82b53113246f7c71dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee62ffec_c6e7b33a",
         "filename": "src/dm/nodes/ve.dm.TableNode.js",
         "patchSetId": 10
@@ -149,6 +293,24 @@
       "writtenOn": "2014-09-19T01:20:58Z",
       "side": 1,
       "message": "Document",
+      "revId": "677c2d5e9869a18586067e82b53113246f7c71dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_8691bb54",
+        "filename": "src/dm/nodes/ve.dm.TableNode.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-09-19T02:34:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee62ffec_c6e7b33a",
       "revId": "677c2d5e9869a18586067e82b53113246f7c71dc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
