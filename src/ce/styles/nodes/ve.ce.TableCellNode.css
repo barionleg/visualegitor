@@ -9,7 +9,7 @@
 	padding: 0.25em 0.5em;
 }
 
-.ve-ce-tableNode-focused > tbody > tr > .ve-ce-tableCellNode {
+.ve-ce-tableNode-active > tbody > tr > .ve-ce-tableCellNode {
 	border-style: solid;
 }
 

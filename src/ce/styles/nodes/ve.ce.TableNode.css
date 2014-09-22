@@ -14,7 +14,7 @@
 	pointer-events: none;
 }
 
-.ve-ce-tableNode-focused > .ve-ce-tableNodeOverlay {
+.ve-ce-tableNode-active > .ve-ce-tableNodeOverlay {
 	visibility: visible;
 }
 

@@ -18,7 +18,7 @@ ve.ce.TableNode = function VeCeTableNode( model, config ) {
 	ve.ce.BranchNode.call( this, model, config );
 
 	this.surface = null;
-	this.focused = false;
+	this.active = false;
 	// A ve.dm.TableMatrix.Rectange instance or null if no valid selection
 	this.selectedRectangle = null;
 };
@@ -82,7 +82,7 @@ ve.ce.TableNode.prototype.onSurfaceModelSelect = function ( selection ) {
 	var isSelected, tableSelection,
 		range = this.model.getRange();
 
-	// Consider this table focused when the selection is fully within the range
+	// Consider this table active when the selection is fully within the range
 	isSelected = ( selection && range.containsRange( selection ) );
 
 	// make sure that the selection does really belong to this table not to a nested one
@@ -91,16 +91,16 @@ ve.ce.TableNode.prototype.onSurfaceModelSelect = function ( selection ) {
 		isSelected = ( tableSelection && tableSelection.node === this.model );
 	}
 
-	this.$element.toggleClass( 've-ce-tableNode-focused', isSelected );
+	this.$element.toggleClass( 've-ce-tableNode-active', isSelected );
 	if ( isSelected ) {
-		if ( !this.focused ) {
-			this.focused = true;
+		if ( !this.active ) {
+			this.active = true;
 			this.$overlay.show();
 		}
 		this.selectedRectangle = this.model.getRectangle( tableSelection.startCell, tableSelection.endCell );
 		this.updateOverlayDebounced();
-	} else if ( !isSelected && this.focused ) {
-		this.focused = false;
+	} else if ( !isSelected && this.active ) {
+		this.active = false;
 		this.selectedRectangle = null;
 		this.$overlay.hide();
 	}
