@@ -66,7 +66,7 @@ ve.dm.SurfaceFragment.prototype.getTranslatedRange = function ( txs, noUpdate ) 
 
 	var i, len, range;
 
-	if ( !ve.isArray( txs ) ) {
+	if ( !Array.isArray( txs ) ) {
 		txs = [ txs ];
 	}
 
@@ -848,7 +848,7 @@ ve.dm.SurfaceFragment.prototype.wrapNodes = function ( wrapper ) {
 		return this;
 	}
 
-	if ( !ve.isArray( wrapper ) ) {
+	if ( !Array.isArray( wrapper ) ) {
 		wrapper = [wrapper];
 	}
 	this.change(
@@ -929,7 +929,7 @@ ve.dm.SurfaceFragment.prototype.rewrapNodes = function ( depth, wrapper ) {
 	var i,
 		unwrapper = [];
 
-	if ( !ve.isArray( wrapper ) ) {
+	if ( !Array.isArray( wrapper ) ) {
 		wrapper = [wrapper];
 	}
 
@@ -973,7 +973,7 @@ ve.dm.SurfaceFragment.prototype.wrapAllNodes = function ( wrapper ) {
 		return this;
 	}
 
-	if ( !ve.isArray( wrapper ) ) {
+	if ( !Array.isArray( wrapper ) ) {
 		wrapper = [wrapper];
 	}
 
@@ -1014,7 +1014,7 @@ ve.dm.SurfaceFragment.prototype.rewrapAllNodes = function ( depth, wrapper ) {
 			this.getRange( true ).end - depth
 		);
 
-	if ( !ve.isArray( wrapper ) ) {
+	if ( !Array.isArray( wrapper ) ) {
 		wrapper = [wrapper];
 	}
 
