@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee62ffec_82b3c74b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-09-23T20:11:27Z",
+      "side": 1,
+      "message": "solves *a* problem",
+      "revId": "5c46fd59394aed5fdde7190904ffeb13a009143f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_4294af8d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-09-23T20:11:27Z",
+      "side": 1,
+      "message": "How can that happen? We remove the container that the cursor is in. Is this still a problem? Can you provide a screenshot and/or reproduction steps?",
+      "revId": "5c46fd59394aed5fdde7190904ffeb13a009143f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
