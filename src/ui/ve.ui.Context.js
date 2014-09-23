@@ -50,9 +50,6 @@ OO.inheritClass( ve.ui.Context, OO.ui.Element );
 /**
  * Handle context change event.
  *
- * While an inspector is opening or closing, all changes are ignored so as to prevent inspectors
- * that change the selection from within their setup or teardown processes changing context state.
- *
  * The response to selection changes is deferred to prevent teardown processes handlers that change
  * the selection from causing this function to recurse. These responses are also debounced for
  * efficiency, so that if there are three selection changes in the same tick, #afterContextChange only
@@ -61,15 +58,9 @@ OO.inheritClass( ve.ui.Context, OO.ui.Element );
  * @see #afterContextChange
  */
 ve.ui.Context.prototype.onContextChange = function () {
-	if ( this.inspector && ( this.inspector.isOpening() || this.inspector.isClosing() ) ) {
-		// Cancel debounced change handler
-		clearTimeout( this.afterContextChangeTimeout );
-		this.afterContextChangeTimeout = null;
-	} else {
-		if ( this.afterContextChangeTimeout === null ) {
-			// Ensure change is handled on next cycle
-			this.afterContextChangeTimeout = setTimeout( this.afterContextChangeHandler );
-		}
+	if ( this.afterContextChangeTimeout === null ) {
+		// Ensure change is handled on next cycle
+		this.afterContextChangeTimeout = setTimeout( this.afterContextChangeHandler );
 	}
 	// Purge available tools cache
 	this.availableTools = null;
@@ -95,9 +86,14 @@ ve.ui.Context.prototype.afterContextChange = function () {
 				this.menu.toggle( false );
 				this.toggle( false );
 			}
-		} else if ( this.inspector && ( !selectedNode || ( selectedNode !== this.lastSelectedNode ) ) ) {
+		} else if (
+			this.inspector &&
+			( !selectedNode || ( selectedNode !== this.lastSelectedNode ) ) &&
+			!this.inspector.isOpening() && !this.inspector.isClosing()
+		) {
 			// Change state: inspector -> (closed|menu)
-			// Unless there is a selectedNode that hasn't changed (e.g. your inspector is editing a node)
+			// Unless there is a selectedNode that hasn't changed (e.g. your inspector is editing a node),
+			// or we're in the middle of opening or closing an inspector already
 			this.inspector.close();
 		}
 	} else {
