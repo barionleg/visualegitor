@@ -16,6 +16,24 @@
       "revId": "4ad56e9f37ff5e260d951b09c374633448136448",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_f1eb6007",
+        "filename": "src/dm/ve.dm.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 640,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-09-25T18:47:08Z",
+      "side": 1,
+      "message": "No. This function searches up and down the whole document for a content offset. If it returns -1 it\u0027s because the document has no content offsets which is quite an edge case. It may still have a slug.",
+      "parentUuid": "ee62ffec_f119207f",
+      "revId": "4ad56e9f37ff5e260d951b09c374633448136448",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
