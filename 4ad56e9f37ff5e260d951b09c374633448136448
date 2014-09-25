@@ -34,6 +34,24 @@
       "revId": "4ad56e9f37ff5e260d951b09c374633448136448",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee62ffec_14182222",
+        "filename": "src/dm/ve.dm.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 640,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-09-25T20:27:20Z",
+      "side": 1,
+      "message": "Sorry, I\u0027m blind. It says -1 and I thought it said 1.",
+      "parentUuid": "ee62ffec_f1eb6007",
+      "revId": "4ad56e9f37ff5e260d951b09c374633448136448",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
