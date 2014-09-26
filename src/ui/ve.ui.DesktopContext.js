@@ -20,6 +20,7 @@ ve.ui.DesktopContext = function VeUiDesktopContext( surface, config ) {
 
 	// Properites
 	this.popup = new OO.ui.PopupWidget( { $: this.$, $container: this.surface.$element } );
+	this.popup.toggleClipping( false );
 	this.transitioning = null;
 	this.suppressed = false;
 	this.onWindowResizeHandler = ve.bind( this.onPosition, this );
@@ -251,6 +252,8 @@ ve.ui.DesktopContext.prototype.updateDimensions = function () {
 		$container.outerWidth( true ),
 		$container.outerHeight( true )
 	);
+
+	this.popup.scrollElementIntoView();
 
 	return this;
 };
