@@ -26,3 +26,10 @@ ve.now = ( function () {
 	return navStart && typeof perf.now === 'function' ?
 		function () { return navStart + perf.now(); } : Date.now;
 }() );
+
+/**
+ * Check if the user probably has a touch screen based on existence of touch events
+ *
+ * @type {boolean}
+ */
+ve.isTouchScreen = 'ontouchstart' in window;

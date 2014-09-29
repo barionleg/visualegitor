@@ -409,6 +409,7 @@
 			"src/ui/tools/ve.ui.LanguageInspectorTool.js",
 			"src/ui/tools/ve.ui.ListTool.js",
 			"src/ui/tools/ve.ui.TableTool.js",
+			"src/ui/tools/ve.ui.RemoveTool.js",
 			"src/ui/inspectors/ve.ui.FragmentInspector.js",
 			"src/ui/inspectors/ve.ui.AnnotationInspector.js",
 			"src/ui/inspectors/ve.ui.NodeInspector.js",
