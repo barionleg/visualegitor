@@ -38,6 +38,9 @@ ve.ui.DesktopContext = function VeUiDesktopContext( surface, config ) {
 	this.surface.getModel().connect( this, {
 		select: 'onPosition'
 	} );
+	this.inspectors.connect( this, {
+		resize: 'setPopupSize'
+	} );
 	this.$window.on( 'resize', this.onWindowResizeHandler );
 	this.$element.on( 'mousedown', false );
 
@@ -245,14 +248,23 @@ ve.ui.DesktopContext.prototype.updateDimensions = function () {
 		this.$element.css( { left: position.x, top: position.y } );
 	}
 
-	// HACK: setSize() has to be called at the end because it reads this.popup.align,
+	// HACK: setPopupSize() has to be called at the end because it reads this.popup.align,
 	// which we set directly in the code above
+	this.setPopupSize();
+
+	return this;
+};
+
+/**
+ * Resize the popup to match the size of its contents (menu or inspector).
+ */
+ve.ui.DesktopContext.prototype.setPopupSize = function () {
+	var $container = this.inspector ? this.inspector.$frame : this.menu.$element;
+
 	this.popup.setSize(
 		$container.outerWidth( true ),
 		$container.outerHeight( true )
 	);
-
-	return this;
 };
 
 /**
