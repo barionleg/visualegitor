@@ -214,7 +214,7 @@ ve.ce.BranchNode.prototype.onSplice = function ( index ) {
  * @method
  */
 ve.ce.BranchNode.prototype.setupSlugs = function () {
-	var i, slugTemplate, slugNode,
+	var i, slugTemplate, slugNode, child,
 		isBlock = this.canHaveChildrenNotContent(),
 		doc = this.getElementDocument();
 
@@ -231,7 +231,9 @@ ve.ce.BranchNode.prototype.setupSlugs = function () {
 	for ( i in this.getModel().slugPositions ) {
 		slugNode = doc.importNode( slugTemplate, true );
 		if ( this.children[i] ) {
-			this.$element[0].insertBefore( slugNode, this.children[i].$element[0] );
+			child = this.children[i].$element[0];
+			// child.parentNode might not be this.$element[0]: e.g. annotated inline nodes
+			child.parentNode.insertBefore( slugNode, child );
 		} else {
 			this.$element[0].appendChild( slugNode );
 		}
