@@ -16,6 +16,24 @@
       "revId": "37ddb6a0f3e3bb11c593af361ebe5662f2f5171c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_aca4c805",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-09-29T20:25:09Z",
+      "side": 1,
+      "message": "Yes. That\u0027s the name of the class.",
+      "parentUuid": "ce8c5bf9_b1217fae",
+      "revId": "37ddb6a0f3e3bb11c593af361ebe5662f2f5171c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
