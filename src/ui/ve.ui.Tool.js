@@ -56,6 +56,22 @@ ve.ui.Tool.static.getCommandName = function () {
 	return this.commandName;
 };
 
+/**
+ * Get title for this tool given a specific model
+ *
+ * @param {ve.dm.Model} model Model
+ * @return {string} Title
+ */
+ve.ui.Tool.static.getTitle = function ( model ) {
+	var description;
+	if ( model instanceof ve.dm.Annotation ) {
+		description = ve.ce.annotationFactory.getDescription( model );
+	} else if ( model instanceof ve.dm.Node ) {
+		description = ve.ce.nodeFactory.getDescription( model );
+	}
+	return description || this.title;
+};
+
 /* Methods */
 
 /**

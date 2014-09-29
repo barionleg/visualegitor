@@ -310,3 +310,9 @@ ve.ui.commandRegistry.register(
 		{ args: ['data'], supportedSelections: ['table'] }
 	)
 );
+ve.ui.commandRegistry.register(
+	new ve.ui.Command( 'remove', 'content', 'remove' )
+);
+ve.ui.commandRegistry.register(
+	new ve.ui.Command( 'comment', 'window', 'open', 'comment' )
+);
