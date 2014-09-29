@@ -71,8 +71,23 @@ ve.ui.CommentInspector.prototype.initialize = function () {
 		autosize: true
 	} );
 
+	this.textWidget.connect( this, { change: 'onPotentialResize' } );
+
 	this.$content.addClass( 've-ui-commentInspector-content' );
 	this.form.$element.append( this.textWidget.$element );
+};
+
+/**
+ * Called when the size of the multiline input widget might have changed.
+ */
+ve.ui.CommentInspector.prototype.onPotentialResize = function () {
+	this.getManager().updateWindowSize( this );
+	// From DesktopContext. We can't reach the context from here. This should probably emit some
+	// events that context should connect to…
+	ve.instances[0].context.popup.setSize(
+		this.$frame.outerWidth( true ),
+		this.$frame.outerHeight( true )
+	);
 };
 
 /**
