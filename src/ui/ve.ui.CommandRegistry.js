@@ -144,5 +144,8 @@ ve.ui.commandRegistry.register(
 	new ve.ui.Command( 'pasteSpecial', 'content', 'pasteSpecial' )
 );
 ve.ui.commandRegistry.register(
+	new ve.ui.Command( 'remove', 'content', 'remove' )
+);
+ve.ui.commandRegistry.register(
 	new ve.ui.Command( 'comment', 'window', 'open', 'comment' )
 );
