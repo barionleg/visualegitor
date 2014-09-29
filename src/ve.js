@@ -1176,6 +1176,13 @@
 		return ( ve.init.platform && ve.init.platform.constructor || ve.init.Platform ).static.getSystemPlatform();
 	};
 
+	/**
+	 * Check if the user probably has a touch screen based on existence of touch events
+	 *
+	 * @type {boolean}
+	 */
+	ve.isTouchScreen = 'ontouchstart' in window;
+
 	// Expose
 	window.ve = ve;
 }() );

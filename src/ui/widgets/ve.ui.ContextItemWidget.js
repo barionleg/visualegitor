@@ -58,18 +58,7 @@ OO.inheritClass( ve.ui.ContextItemWidget, OO.ui.DecoratedOptionWidget );
  * @return {string} Description of model
  */
 ve.ui.ContextItemWidget.prototype.getDescription = function () {
-	var description;
-
-	if ( this.model instanceof ve.dm.Annotation ) {
-		description = ve.ce.annotationFactory.getDescription( this.model );
-	} else if ( this.model instanceof ve.dm.Node ) {
-		description = ve.ce.nodeFactory.getDescription( this.model );
-	}
-	if ( !description ) {
-		description = this.tool.static.title;
-	}
-
-	return description;
+	return this.tool.static.getTitle( this.model );
 };
 
 /**
