@@ -44,6 +44,8 @@
 					"ve.dm.NodeFactory",
 					"ve.dm.Surface",
 					"ve.dm.SurfaceFragment",
+					"ve.dm.Selection",
+					"ve.dm.*Selection",
 					"ve.dm.Transaction",
 					"ve.dm.TransactionProcessor",
 					"ve.dm.TransactionProcessor.processors"
