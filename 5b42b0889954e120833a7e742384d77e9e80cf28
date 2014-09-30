@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce8c5bf9_0fc27c88",
+        "filename": "src/ui/inspectors/ve.ui.CommentInspector.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 88
+      },
+      "writtenOn": "2014-09-30T22:38:03Z",
+      "side": 1,
+      "message": "This looks evil. Text wrapping means there are probably more rows than line breaks. Just measure the height and see if it\u0027s changed, forget this row stuff.",
+      "revId": "5b42b0889954e120833a7e742384d77e9e80cf28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
