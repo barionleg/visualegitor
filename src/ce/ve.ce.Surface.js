@@ -1696,7 +1696,7 @@ ve.ce.Surface.prototype.onSurfaceObserverRangeChange = function ( oldRange, newR
  * @see ve.ce.SurfaceObserver#pollOnce
  */
 ve.ce.Surface.prototype.onSurfaceObserverSlugEnter = function () {
-	var fragment, offset,
+	var fragment, offset, $paragraph, $wrapper,
 		model = this.getModel(),
 		doc = model.getDocument();
 
@@ -1716,6 +1716,19 @@ ve.ce.Surface.prototype.onSurfaceObserverSlugEnter = function () {
 		]
 	), new ve.dm.LinearSelection( new ve.Range( offset + 1 ) ) );
 	this.slugFragment = fragment;
+
+	// Clear wrappers from previous former slugs
+	this.$element.find( '.ve-ce-branchNode-blockSlugWrapper-former' ).remove();
+	// Style paragraph as an unfocused slug, then remove unfocused class to trigger transtion
+	// The order is important: if we set -former before -former-unfocused, we'll get two transitions
+	$paragraph = this.getDocument().getBranchNodeFromOffset( offset + 1 ).$element;
+	$paragraph.wrap( this.$( '<div>' ).addClass( 've-ce-branchNode-blockSlugWrapper-former-unfocused' ) );
+	this.onModelSelect( model.getSelection() );
+	$wrapper = $paragraph.parent();
+	// Enable transitions
+	$wrapper.addClass( 've-ce-branchNode-blockSlugWrapper-former' );
+	// Remove unfocused again to trigger transition
+	$wrapper.removeClass( 've-ce-branchNode-blockSlugWrapper-former-unfocused' );
 };
 
 /**
