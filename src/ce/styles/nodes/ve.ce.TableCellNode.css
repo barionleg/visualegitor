@@ -9,6 +9,14 @@
 	padding: 0.25em 0.5em;
 }
 
+.ve-ce-tableCellNode-editing {
+	cursor: text;
+}
+
+.ve-ce-tableCellNode-editing:focus {
+	outline: none;
+}
+
 .ve-ce-tableNode-active > tbody > tr > .ve-ce-tableCellNode {
 	border-style: solid;
 }
@@ -19,8 +27,4 @@
 
 .ve-ce-tableCellNode .ve-ce-paragraphNode {
 	margin: 0;
-}
-
-thead .ve-ce-tableCellNode {
-	background-color: #EEE;
 }

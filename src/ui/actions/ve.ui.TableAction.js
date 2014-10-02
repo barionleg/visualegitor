@@ -32,7 +32,7 @@ ve.ui.TableAction.static.name = 'table';
  * @static
  * @property
  */
-ve.ui.TableAction.static.methods = [ 'create', 'insert', 'delete' ];
+ve.ui.TableAction.static.methods = [ 'create', 'insert', 'delete', 'toggleCellHeader' ];
 
 /* Methods */
 
@@ -78,21 +78,28 @@ ve.ui.TableAction.prototype.create = function ( options ) {
  *   and 'after' to insert after it
  */
 ve.ui.TableAction.prototype.insert = function ( mode, position ) {
-	var tableSelection, table, matrix, rect, index,
-		surfaceModel = this.surface.getModel();
+	var index,
+		surfaceModel = this.surface.getModel(),
+		selection = surfaceModel.getSelection();
 
-	tableSelection = ve.dm.TableNode.static.lookupSelection( surfaceModel.documentModel, surfaceModel.selection );
-	if ( !tableSelection ) {
+	if ( !( selection instanceof ve.dm.TableSelection ) ) {
 		return;
 	}
-	// Retrieve the bounding rectangle
-	table = tableSelection.node;
-	matrix = tableSelection.node.matrix;
-	rect = matrix.getRectangle( tableSelection.startCell, tableSelection.endCell );
-	rect = matrix.getBoundingRectangle( rect );
 	// and insert either before or after
-	index = position === 'before' ? rect.start[mode] : rect.end[mode];
-	this.insertRowOrCol( table, mode, index, position );
+	if ( mode === 'col' ) {
+		index = position === 'before' ? selection.startCol : selection.endCol;
+	} else {
+		index = position === 'before' ? selection.startRow : selection.endRow;
+	}
+	if ( position === 'before' && selection instanceof ve.dm.TableSelection ) {
+		if ( mode === 'col' ) {
+			selection = selection.newFromAdjustment( 1, 0 );
+		} else {
+			selection = selection.newFromAdjustment( 0, 1 );
+		}
+		surfaceModel.setSelection( selection );
+	}
+	this.insertRowOrCol( selection.getTableNode(), mode, index, position, selection );
 };
 
 /**
@@ -101,46 +108,83 @@ ve.ui.TableAction.prototype.insert = function ( mode, position ) {
  * @param {String} mode 'row' to delete rows, 'col' for columns, and 'table' to remove the whole table
  */
 ve.ui.TableAction.prototype.delete = function ( mode ) {
-	var tableSelection, table, matrix, rect, minIndex, maxIndex,
-		surfaceModel = this.surface.getModel();
+	var tableNode, minIndex, maxIndex, isFull,
+		selection = this.surface.getModel().getSelection();
 
-	tableSelection = ve.dm.TableNode.static.lookupSelection( surfaceModel.documentModel, surfaceModel.selection );
-	if ( !tableSelection ) {
+	if ( !( selection instanceof ve.dm.TableSelection ) ) {
 		return;
 	}
+
+	tableNode = selection.getTableNode();
 	// Either delete the table or rows or columns
-	table = tableSelection.node;
-	matrix = tableSelection.node.matrix;
 	if ( mode === 'table' ) {
-		this.deleteTable( tableSelection.node );
+		this.deleteTable( tableNode );
 	} else {
-		// Retrieve the bounding rectangle
-		rect = matrix.getRectangle( tableSelection.startCell, tableSelection.endCell );
-		rect = matrix.getBoundingRectangle( rect );
-		minIndex = rect.start[mode];
-		maxIndex = rect.end[mode];
-		// delete the whole table if all rows or cols get deleted
-		if ( minIndex === 0 && maxIndex === table.getSize( mode ) - 1 ) {
-			this.deleteTable( table );
+		if ( mode === 'col' ) {
+			minIndex = selection.startCol;
+			maxIndex = selection.endCol;
+			isFull = selection.isFullRow();
 		} else {
-			this.deleteRowsOrColumns( table, mode, minIndex, maxIndex );
+			minIndex = selection.startRow;
+			maxIndex = selection.endRow;
+			isFull = selection.isFullCol();
+		}
+		// delete the whole table if all rows or cols get deleted
+		if ( isFull ) {
+			this.deleteTable( tableNode );
+		} else {
+			this.deleteRowsOrColumns( tableNode, mode, minIndex, maxIndex );
 		}
 	}
 };
 
-// Low-level API
-// -------------
-// TODO This API does only depend on DM code, so it would make sense to
-// move this into DM world later
+/**
+ * Change a selection of cells to header cells
+ *
+ * If all the selected cells are header cells they are changed back to data cells.
+ */
+ve.ui.TableAction.prototype.toggleCellHeader = function () {
+	var i, ranges, style,
+		allHeaders = true,
+		txs = [],
+		surfaceModel = this.surface.getModel(),
+		selection = surfaceModel.getSelection();
+
+	if ( !( selection instanceof ve.dm.TableSelection ) ) {
+		return;
+	}
+
+	ranges = selection.getOuterRanges();
+	for ( i = ranges.length - 1; i >= 0; i-- ) {
+		if ( surfaceModel.getDocument().data.getData( ranges[i].start ).attributes.style !== 'header' ) {
+			allHeaders = false;
+			break;
+		}
+	}
+	style = allHeaders ? 'data' : 'header';
+	for ( i = ranges.length - 1; i >= 0; i-- ) {
+		txs.push(
+			ve.dm.Transaction.newFromAttributeChanges(
+				surfaceModel.getDocument(), ranges[i].start, { style: style }
+			)
+		);
+	}
+	surfaceModel.change( txs );
+};
+
+/**
+ * Low-level API
+ *
+ * TODO: This API does only depends on the model so it should possibly be moved
+ */
 
 /**
  * Deletes a whole table.
  *
  * @param {ve.dm.TableNode} table Table node
  */
-ve.ui.TableAction.prototype.deleteTable = function ( table ) {
-	this.surface.getModel().setSelection( table.getOuterRange() );
-	this.surface.getView().handleDelete( {}, 0 );
+ve.ui.TableAction.prototype.deleteTable = function ( tableNode ) {
+	this.surface.getModel().getLinearFragment( tableNode.getOuterRange() ).delete();
 };
 
 /**
@@ -150,21 +194,22 @@ ve.ui.TableAction.prototype.deleteTable = function ( table ) {
  *
  *    insertRowOrCol( table, 'row', 1, 'after' );
  *
- * @param {ve.dm.TableNode} table
+ * @param {ve.dm.TableNode} tableNode
  * @param {String} mode 'row' or 'col'
  * @param {Number} index row or column index of the base row or column.
  * @param {String} insertMode 'before' or 'after'
+ * @param {ve.dm.TableSelection} [selection] Selection to move to after insert
  */
-ve.ui.TableAction.prototype.insertRowOrCol = function ( table, mode, index, insertMode ) {
-	var matrix, refIndex, cells, refCells, before,
+ve.ui.TableAction.prototype.insertRowOrCol = function ( tableNode, mode, index, insertMode, selection ) {
+	var refIndex, cells, refCells, before,
 		offset, range, i, l, cell, refCell, data, style,
+		matrix = tableNode.matrix,
 		txs = [],
 		updated = {},
 		inserts = [],
 		surfaceModel = this.surface.getModel();
 
 	before = insertMode === 'before';
-	matrix = table.matrix;
 
 	// Note: when we insert a new row (or column) we might need to increment a span property
 	// instead of inserting a new cell.
@@ -252,7 +297,7 @@ ve.ui.TableAction.prototype.insertRowOrCol = function ( table, mode, index, inse
 			txs.push( ve.dm.Transaction.newFromInsertion( surfaceModel.getDocument(), offset, data ) );
 		}
 	}
-	surfaceModel.change( txs );
+	surfaceModel.change( txs, selection.translateByTransactions( txs ) );
 };
 
 /**
@@ -406,14 +451,14 @@ ve.ui.TableAction.prototype.deleteRowsOrColumns = function ( table, mode, minInd
 			}
 		}
 	}
-	surfaceModel.change( txs );
+	surfaceModel.change( txs, new ve.dm.NullSelection( surfaceModel.getDocument() ) );
 };
 
 /**
  * Inserts a new cell for an orphaned placeholder.
  *
  * @param {ve.dm.TableNode} table
- * @param {ve.dm.TableMatrixPlaceholder} placeholder
+ * @param {ve.dm.TableMatrixCell} placeholder
  */
 ve.ui.TableAction.prototype.replacePlaceholder = function ( table, placeholder ) {
 	var range, offset, data, style,

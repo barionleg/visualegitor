@@ -22,14 +22,6 @@ ve.ce.TableCellNode = function VeCeTableCellNode( model, config ) {
 		update: 'onUpdate',
 		attributeChange: 'onAttributeChange'
 	} );
-
-	// DOM changes
-	this.$element
-		.addClass( 've-ce-tableCellNode' )
-		.attr( {
-			rowspan: this.model.getRowspan(),
-			colspan: this.model.getColspan()
-		} );
 };
 
 /* Inheritance */
@@ -43,6 +35,30 @@ ve.ce.TableCellNode.static.name = 'tableCell';
 ve.ce.TableCellNode.static.mergeOnDelete = false;
 
 /* Methods */
+
+/**
+ * @inheritdoc
+ */
+ve.ce.TableCellNode.prototype.onSetup = function () {
+	// Parent method
+	ve.ce.TableCellNode.super.prototype.onSetup.call( this );
+
+	// Exit if already setup or not attached
+	if ( this.isSetup || !this.root ) {
+		return;
+	}
+
+	// DOM changes
+	this.$element
+		// The following classes can be used here:
+		// ve-ce-tableCellNode-data
+		// ve-ce-tableCellNode-header
+		.addClass( 've-ce-tableCellNode ve-ce-tableCellNode-' + this.model.style )
+		.attr( {
+			rowspan: this.model.getRowspan(),
+			colspan: this.model.getColspan()
+		} );
+};
 
 /**
  * Get the HTML tag name.
@@ -63,6 +79,17 @@ ve.ce.TableCellNode.prototype.getTagName = function () {
 };
 
 /**
+ * Set the editing mode of a table cell node
+ *
+ * @param {boolean} enable Enable editing
+ */
+ve.ce.TableCellNode.prototype.setEditing = function ( enable ) {
+	this.$element
+		.toggleClass( 've-ce-tableCellNode-editing', enable )
+		.prop( 'contentEditable', enable.toString() );
+};
+
+/**
  * Handle model update events.
  *
  * If the style changed since last update the DOM wrapper will be replaced with an appropriate one.
@@ -77,12 +104,18 @@ ve.ce.TableCellNode.prototype.onUpdate = function () {
  * Handle attribute changes to keep the life HTML element updated.
  */
 ve.ce.TableCellNode.prototype.onAttributeChange = function ( key, from, to ) {
-	if ( key === 'colspan' || key === 'rowspan' ) {
-		if ( to > 1 ) {
-			this.$element.attr( key, to );
-		} else {
-			this.$element.removeAttr( key );
-		}
+	switch ( key ) {
+		case 'colspan':
+		case 'rowspan':
+			if ( to > 1 ) {
+				this.$element.attr( key, to );
+			} else {
+				this.$element.removeAttr( key );
+			}
+			break;
+		case 'style':
+			this.updateTagName();
+			break;
 	}
 };
 
