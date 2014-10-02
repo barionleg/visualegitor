@@ -188,83 +188,6 @@ ve.dm.TableMatrix.prototype.getRowNodes = function () {
 };
 
 /**
- * Computes a the rectangle for a given start and end cell node.
- *
- * @param {ve.dm.TableCellNode} startCellNode Start anchor
- * @param {ve.dm.TableCellNode} endCellNode End anchor
- * @returns {ve.dm.TableMatrixRectangle}
- */
-ve.dm.TableMatrix.prototype.getRectangle = function ( startCellNode, endCellNode ) {
-	var endCell, minRow, maxRow, minCol, maxCol,
-		startCell = this.lookupCell( startCellNode );
-	if ( !startCell ) {
-		return null;
-	}
-	if ( startCellNode === endCellNode ) {
-		endCell = startCell;
-	} else {
-		endCell = this.lookupCell( endCellNode );
-	}
-	minRow = Math.min( startCell.row, endCell.row );
-	maxRow = Math.max( startCell.row, endCell.row );
-	minCol = Math.min( startCell.col, endCell.col );
-	maxCol = Math.max( startCell.col, endCell.col );
-	return new ve.dm.TableMatrixRectangle( minRow, minCol, maxRow, maxCol );
-};
-
-/**
- * Retrieves all cells (no placeholders) within a given rectangle.
- *
- * @param {ve.dm.TableMatrixRectangle} rect Rectangle
- * @returns {ve.dm.TableMatrixCell[]} List of table cells
- */
-ve.dm.TableMatrix.prototype.getCellsForRectangle = function ( rect ) {
-	var row, col, cell,
-		cells = [],
-		visited = {};
-
-	for ( row = rect.start.row; row <= rect.end.row; row++ ) {
-		for ( col = rect.start.col; col <= rect.end.col; col++ ) {
-			cell = this.getCell( row, col );
-			if ( cell.isPlaceholder() ) {
-				cell = cell.owner;
-			}
-			if ( !visited[cell.key] ) {
-				cells.push( cell );
-				visited[cell.key] = true;
-			}
-		}
-	}
-	return cells;
-};
-
-/**
- * Retrieves a bounding rectangle for all cells described by a given rectangle.
- * This takes spanning cells into account.
- *
- * @param {ve.dm.TableMatrixRectangle} rect Rectangle
- * @returns {ve.dm.TableMatrixRectangle} Bounding rectangle
- */
-ve.dm.TableMatrix.prototype.getBoundingRectangle = function ( rect ) {
-	var cells, cell, i;
-
-	rect = rect.clone();
-	cells = this.getCellsForRectangle( rect );
-
-	if ( !cells || cells.length === 0 ) {
-		return null;
-	}
-	for ( i = 0; i < cells.length; i++ ) {
-		cell = cells[i];
-		rect.start.row = Math.min( rect.start.row, cell.row );
-		rect.start.col = Math.min( rect.start.col, cell.col );
-		rect.end.row = Math.max( rect.end.row, cell.row + cell.node.getRowspan() - 1 );
-		rect.end.col = Math.max( rect.end.col, cell.col + cell.node.getColspan() - 1 );
-	}
-	return rect;
-};
-
-/**
  * Provides a tuple with number of rows and columns.
  *
  * @returns {Number[]} Tuple: row count, column count
@@ -346,6 +269,11 @@ OO.initClass( ve.dm.TableMatrixCell );
 
 /* Methods */
 
+/**
+ * Check if this cell is a placeholder
+ *
+ * @return {boolean} This cell is a placeholder
+ */
 ve.dm.TableMatrixCell.prototype.isPlaceholder = function () {
 	return false;
 };

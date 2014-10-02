@@ -7,6 +7,7 @@
 .ve-ce-tableNode {
 	border-spacing: 0;
 	border-collapse: collapse;
+	cursor: default;
 }
 
 .ve-ce-tableNodeOverlay {
@@ -14,17 +15,27 @@
 	pointer-events: none;
 }
 
-.ve-ce-tableNode-active > .ve-ce-tableNodeOverlay {
-	visibility: visible;
+.ve-ce-tableNodeOverlay-selection-box {
+	position: absolute;
+	border: solid 2px #6da9f7;
+	background: rgba(109, 169, 247, 0.3); /* #6da9f7 */
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	opacity: 0.6;
 }
 
-.ve-ce-tableNodeOverlay-selection-box {
+.ve-ce-tableNodeOverlay-selection-box-anchor {
 	position: absolute;
 	border: solid 2px #6da9f7;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
-	opacity: 0.6;
+}
+
+.ve-ce-tableNodeOverlay-editing .ve-ce-tableNodeOverlay-selection-box {
+	border-width: 1px;
+	background: transparent;
 }
 
 .ve-ce-tableNodeOverlay-row-bracket,
@@ -47,8 +58,4 @@
 	top: -12px;
 	height: 6px;
 	border-bottom: 0;
-}
-
-.ve-ce-tableNode caption {
-	caption-side: bottom;
 }

@@ -675,9 +675,10 @@ ve.dm.Document.prototype.getRelativeOffset = function ( offset, direction, unit 
  * @param {number} direction Direction to look in, +1 or -1
  * @param {string} unit Unit [word|character]
  * @param {boolean} expand Expanding range
+ * @param {ve.Range} [limit] Optional limiting range
  * @returns {ve.Range} Relative range
  */
-ve.dm.Document.prototype.getRelativeRange = function ( range, direction, unit, expand ) {
+ve.dm.Document.prototype.getRelativeRange = function ( range, direction, unit, expand, limit ) {
 	var contentOrSlugOffset,
 		focusableNode,
 		newOffset,
@@ -702,6 +703,9 @@ ve.dm.Document.prototype.getRelativeRange = function ( range, direction, unit, e
 		newRange = focusableNode.getOuterRange( direction === -1 );
 	} else {
 		newRange = new ve.Range( contentOrSlugOffset );
+	}
+	if ( limit && !limit.containsRange( newRange ) ) {
+		return range;
 	}
 	if ( expand ) {
 		return new ve.Range( range.from, newRange.to );

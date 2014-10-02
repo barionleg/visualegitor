@@ -39,20 +39,12 @@ ve.ui.DebugBar = function VeUiDebugBar( surface, config ) {
 	this.$filibuster = this.$( '<div class="ve-ui-debugBar-filibuster"></div>' );
 
 	// Widgets
-	this.fromTextInput = new OO.ui.TextInputWidget( { readOnly: true } );
-	this.toTextInput = new OO.ui.TextInputWidget( { readOnly: true } );
+	this.selectionLabel = new OO.ui.LabelWidget( { classes: ['ve-ui-debugBar-selectionLabel'] } );
 
 	this.logRangeButton = new OO.ui.ButtonWidget( { label: 'Log', disabled: true } );
 	this.dumpModelButton = new OO.ui.ButtonWidget( { label: 'Dump model' } );
 	this.dumpModelChangeToggle = new OO.ui.ToggleButtonWidget( { label: 'Dump on change' } );
 	this.filibusterToggle = new OO.ui.ToggleButtonWidget( { label: 'Start Filibuster' } );
-
-	var fromLabel = new OO.ui.LabelWidget(
-			{ label: 'Range', input: this.fromTextInput }
-		),
-		toLabel = new OO.ui.LabelWidget(
-			{ label: '-', input: this.toTextInput }
-		);
 
 	// Events
 	this.logRangeButton.on( 'click', ve.bind( this.onLogRangeButtonClick, this ) );
@@ -67,10 +59,7 @@ ve.ui.DebugBar = function VeUiDebugBar( surface, config ) {
 	this.$element.addClass( 've-ui-debugBar' );
 	this.$element.append(
 		this.$commands.append(
-			fromLabel.$element,
-			this.fromTextInput.$element,
-			toLabel.$element,
-			this.toTextInput.$element,
+			this.selectionLabel.$element,
 			this.logRangeButton.$element,
 			this.$( this.constructor.static.dividerTemplate ),
 			this.dumpModelButton.$element,
@@ -110,15 +99,28 @@ ve.ui.DebugBar.prototype.getSurface = function () {
  * @param {ve.dm.Selection} selection
  */
 ve.ui.DebugBar.prototype.onSurfaceSelect = function ( selection ) {
-	var range;
 	if ( selection instanceof ve.dm.LinearSelection ) {
-		range = selection.getRange();
-		this.fromTextInput.setValue( range.from );
-		this.toTextInput.setValue( range.to );
+		this.selectionLabel.setLabel(
+			'Linear: ' +
+			selection.getRange().from +
+			' - ' +
+			selection.getRange().to
+		);
+	} else if ( selection instanceof ve.dm.TableSelection ) {
+		this.selectionLabel.setLabel(
+			'Table: ' +
+			selection.tableRange.from +
+			' - ' +
+			selection.tableRange.to +
+			', ' +
+			'c' + selection.fromCol + ' r' + selection.fromRow +
+			' - ' +
+			'c' + selection.toCol + ' r' + selection.toRow
+		);
+	} else if ( selection instanceof ve.dm.NullSelection ) {
+		this.selectionLabel.setLabel( 'Null' );
 	}
-	this.fromTextInput.setDisabled( !range );
-	this.toTextInput.setDisabled( !range );
-	this.logRangeButton.setDisabled( !range || range.isCollapsed() );
+	this.logRangeButton.setDisabled( !( selection instanceof ve.dm.LinearSelection ) );
 };
 
 /**
@@ -127,10 +129,9 @@ ve.ui.DebugBar.prototype.onSurfaceSelect = function ( selection ) {
  * @param {jQuery.Event} e Event
  */
 ve.ui.DebugBar.prototype.onLogRangeButtonClick = function () {
-	var from = this.fromTextInput.getValue(),
-		to = this.toTextInput.getValue();
-	// TODO: Validate input
-	ve.dir( this.getSurface().view.documentView.model.data.slice( from, to ) );
+	if ( selection instanceof ve.dm.LinearSelection ) {
+		ve.dir( this.getSurface().view.documentView.model.data.slice( from, to ) );
+	}
 };
 
 /**
