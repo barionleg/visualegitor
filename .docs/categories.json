@@ -80,7 +80,6 @@
 					"ve.dm.TableMatrix",
 					"ve.dm.TableMatrixCell",
 					"ve.dm.TableMatrixPlaceholder",
-					"ve.dm.TableMatrixRectangle",
 					"ve.dm.TableNodeCellIterator"
 				]
 			}

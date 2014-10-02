@@ -75,11 +75,7 @@ ve.ui.TableToolbar.prototype.onContextChange = function () {
  * Update the state of the tools
  */
 ve.ui.TableToolbar.prototype.updateToolState = function () {
-	var surface, selection, tableSelection;
-	surface = this.surface.getModel();
-	selection = surface.selection;
-	tableSelection = ve.dm.TableNode.static.lookupSelection( surface.documentModel, selection );
-	this.setVisible( !!tableSelection );
+	this.setVisible( this.surface.getModel().getSelection() instanceof ve.dm.TableSelection );
 };
 
 ve.ui.TableToolbar.prototype.setVisible = function ( visible ) {
