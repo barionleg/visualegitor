@@ -69,7 +69,7 @@ ve.ce.Surface = function VeCeSurface( model, surface, options ) {
 	this.surfaceObserver.connect( this, {
 		contentChange: 'onContentChange',
 		selectionChange: 'onSelectionChange',
-		slugChange: 'onSlugChange'
+		slugEnter: 'onSlugEnter'
 	} );
 	this.model.connect( this, {
 		select: 'onModelSelect',
@@ -1642,50 +1642,62 @@ ve.ce.Surface.prototype.onSelectionChange = function ( oldRange, newRange ) {
 	} finally {
 		this.decRenderLock();
 	}
+	this.updateSlug();
 
 };
 
 /**
- * Handle slug change events.
+ * Handle slug enter events.
  *
  * @see ve.ce.SurfaceObserver#pollOnce
- *
- * @param {ve.Range|null} range
- * @param {boolean} newSlug
  */
-ve.ce.Surface.prototype.onSlugChange = function ( range, newSlug ) {
-	if ( this.slugFragment || newSlug ) {
-		var model = this.getModel(),
-			doc = model.getDocument(),
-			fragment = model.getFragment( range );
+ve.ce.Surface.prototype.onSlugEnter = function () {
+	var fragment, offset,
+		model = this.getModel(),
+		doc = model.getDocument();
 
-		if ( this.slugFragment ) {
-			if ( this.slugFragment.getRange().getLength() === 2 ) {
-				if ( !range || !this.slugFragment.getRange().containsOffset( range.start ) ) {
-					model.popStaging();
-					// After popStaging we may have removed a paragraph before our current
-					// cursor position. Polling with the SurfaceObserver won't notice a change
-					// in the rangy range as our cursor doesn't move within its node so we
-					// need to clear it first.
-					this.surfaceObserver.clear();
-					this.surfaceObserver.pollOnceNoEmit();
-					this.slugFragment = null;
-				}
-			} else {
-				model.applyStaging();
+	this.updateSlug();
+	// Wait until after updateSlug() to get selection
+	fragment = model.getFragment();
+	offset = fragment.getRange().start;
+	model.pushStaging( true );
+	this.changeModel( ve.dm.Transaction.newFromInsertion(
+		doc, offset, [
+			{ type: 'paragraph', internal: { generated: 'slug' } },
+			{ type: '/paragraph' }
+		]
+	), new ve.Range( offset + 1 ) );
+	this.slugFragment = fragment;
+};
+
+/**
+ * Unslug if needed.
+ *
+ * If the slug is no longer empty, commit the staged changes.
+ * If the slug is still empty and the cursor has moved out of it,
+ * clear the staged changes.
+ * If the slug is still empty and the cursor is still inside it,
+ * or if there is no active slug, do nothing.
+ */
+ve.ce.Surface.prototype.updateSlug = function () {
+	if ( this.slugFragment ) {
+		var model = this.getModel(),
+			range = model.getSelection();
+
+		if ( this.slugFragment.getRange().getLength() === 2 ) {
+			if ( !range || !this.slugFragment.getRange().containsOffset( range.start ) ) {
+				model.popStaging();
+				// After popStaging we may have removed a paragraph before our current
+				// cursor position. Polling with the SurfaceObserver won't notice a change
+				// in the rangy range as our cursor doesn't move within its node so we
+				// need to clear it first.
+				this.surfaceObserver.clear();
+				this.surfaceObserver.pollOnceNoEmit();
 				this.slugFragment = null;
 			}
-		}
-		if ( newSlug ) {
-			range = fragment.getRange();
-			model.pushStaging( true );
-			this.changeModel( ve.dm.Transaction.newFromInsertion(
-				doc, range.start, [
-					{ type: 'paragraph', internal: { generated: 'slug' } },
-					{ type: '/paragraph' }
-				]
-			), new ve.Range( range.start + 1 ) );
-			this.slugFragment = fragment;
+		} else {
+			model.applyStaging();
+			this.slugFragment = null;
 		}
 	}
 };
@@ -1872,6 +1884,7 @@ ve.ce.Surface.prototype.onContentChange = function ( node, previous, next ) {
 		ve.dm.Transaction.newFromReplacement( this.documentView.model, replacementRange, data ),
 		newRange
 	);
+	this.updateSlug();
 };
 
 /**
