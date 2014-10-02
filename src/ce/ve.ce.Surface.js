@@ -69,7 +69,7 @@ ve.ce.Surface = function VeCeSurface( model, surface, options ) {
 	this.surfaceObserver.connect( this, {
 		contentChange: 'onSurfaceObserverContentChange',
 		rangeChange: 'onSurfaceObserverRangeChange',
-		slugChange: 'onSurfaceObserverSlugChange'
+		slugEnter: 'onSurfaceObserverSlugEnter'
 	} );
 	this.model.connect( this, {
 		select: 'onModelSelect',
@@ -1686,52 +1686,67 @@ ve.ce.Surface.prototype.onSurfaceObserverRangeChange = function ( oldRange, newR
 	} finally {
 		this.decRenderLock();
 	}
+	this.updateSlug();
 
 };
 
 /**
- * Handle slug change events.
+ * Handle slug enter events.
  *
  * @see ve.ce.SurfaceObserver#pollOnce
- *
- * @param {ve.Range|null} range
- * @param {boolean} newSlug
  */
-ve.ce.Surface.prototype.onSurfaceObserverSlugChange = function ( range, newSlug ) {
-	if ( this.slugFragment || newSlug ) {
-		var slugFragmentRange,
-			model = this.getModel(),
-			doc = model.getDocument(),
-			fragment = model.getLinearFragment( range );
+ve.ce.Surface.prototype.onSurfaceObserverSlugEnter = function () {
+	var fragment, offset,
+		model = this.getModel(),
+		doc = model.getDocument();
 
-		if ( this.slugFragment ) {
-			slugFragmentRange = this.slugFragment.getSelection().getRange();
-			if ( slugFragmentRange.getLength() === 2 ) {
-				if ( !range || !slugFragmentRange.containsOffset( range.start ) ) {
-					model.popStaging();
-					// After popStaging we may have removed a paragraph before our current
-					// cursor position. Polling with the SurfaceObserver won't notice a change
-					// in the rangy range as our cursor doesn't move within its node so we
-					// need to clear it first.
-					this.surfaceObserver.clear();
-					this.surfaceObserver.pollOnceNoEmit();
-					this.slugFragment = null;
-				}
-			} else {
-				model.applyStaging();
+	this.updateSlug();
+	// Wait until after updateSlug() to get selection
+	fragment = model.getFragment();
+	if ( !( fragment instanceof ve.dm.LinearSelection ) ) {
+		// This shouldn't happen
+		return;
+	}
+	offset = fragment.getSelection().getRange().start;
+	model.pushStaging( true );
+	this.changeModel( ve.dm.Transaction.newFromInsertion(
+		doc, offset, [
+			{ type: 'paragraph', internal: { generated: 'slug' } },
+			{ type: '/paragraph' }
+		]
+	), new ve.dm.LinearSelection( new ve.Range( offset + 1 ) ) );
+	this.slugFragment = fragment;
+};
+
+/**
+ * Unslug if needed.
+ *
+ * If the slug is no longer empty, commit the staged changes.
+ * If the slug is still empty and the cursor has moved out of it,
+ * clear the staged changes.
+ * If the slug is still empty and the cursor is still inside it,
+ * or if there is no active slug, do nothing.
+ */
+ve.ce.Surface.prototype.updateSlug = function () {
+	if ( this.slugFragment ) {
+		var slugFragmentRange = this.slugFragment.getSelection().getRange(),
+			model = this.getModel(),
+			range = model.getSelection();
+
+		if ( slugFragmentRange.getLength() === 2 ) {
+			if ( !range || !slugFragmentRange.containsOffset( range.start ) ) {
+				model.popStaging();
+				// After popStaging we may have removed a paragraph before our current
+				// cursor position. Polling with the SurfaceObserver won't notice a change
+				// in the rangy range as our cursor doesn't move within its node so we
+				// need to clear it first.
+				this.surfaceObserver.clear();
+				this.surfaceObserver.pollOnceNoEmit();
 				this.slugFragment = null;
 			}
-		}
-		if ( newSlug ) {
-			range = fragment.getSelection().getRange();
-			model.pushStaging( true );
-			this.changeModel( ve.dm.Transaction.newFromInsertion(
-				doc, range.start, [
-					{ type: 'paragraph', internal: { generated: 'slug' } },
-					{ type: '/paragraph' }
-				]
-			), new ve.dm.LinearSelection( doc, new ve.Range( range.start + 1 ) ) );
-			this.slugFragment = fragment;
+		} else {
+			model.applyStaging();
+			this.slugFragment = null;
 		}
 	}
 };
@@ -1918,6 +1933,7 @@ ve.ce.Surface.prototype.onSurfaceObserverContentChange = function ( node, previo
 		ve.dm.Transaction.newFromReplacement( this.documentView.model, replacementRange, data ),
 		new ve.dm.LinearSelection( this.documentView.model, newRange )
 	);
+	this.updateSlug();
 };
 
 /**
