@@ -46,6 +46,15 @@ ve.dm.TableNode.prototype.canBeMergedWith = function () {
 };
 
 /**
+ * Get table matrix for this table node
+ *
+ * @return {ve.dm.TableMatrix} Table matrix
+ */
+ve.dm.TableNode.prototype.getMatrix = function () {
+	return this.matrix;
+};
+
+/**
  * Provides a cell iterator that allows convenient traversal regardless of
  * the structure with respect to sections.
  *
@@ -53,29 +62,6 @@ ve.dm.TableNode.prototype.canBeMergedWith = function () {
  */
 ve.dm.TableNode.prototype.getIterator = function () {
 	return new ve.dm.TableNodeCellIterator( this );
-};
-
-/**
- * Provides a cell iterator that allows convenient traversal regardless of
- * the structure with respect to sections.
- *
- * @param {String} [dimension] The dimension asked for; 'row' for number of rows,
- *     'col' for number of cols, or no argument for retrieving a tuple.
- * @return {Number|Number[]} The size in the given dimension or a tuple.
- */
-ve.dm.TableNode.prototype.getSize = function ( dimension ) {
-	var dim = this.matrix.getSize();
-	if ( dimension === 'row' ) {
-		return dim[0];
-	} else if ( dimension === 'col' ) {
-		return dim[1];
-	} else {
-		return dim;
-	}
-};
-
-ve.dm.TableNode.prototype.getRectangle = function ( startCellNode, endCellNode ) {
-	return this.matrix.getRectangle( startCellNode, endCellNode );
 };
 
 /* Static Methods */
@@ -190,10 +176,12 @@ ve.dm.TableNodeCellIterator.prototype.nextSection = function ( it ) {
 	it.sectionNode = this.table.children[it.sectionIndex];
 	if ( !it.sectionNode ) {
 		it.finished = true;
-	} else {
+	} else if ( it.sectionNode instanceof ve.dm.TableSectionNode ) {
 		it.rowIndex = 0;
 		it.rowNode = it.sectionNode.children[0];
 		this.onNewSection( it.sectionNode );
+	} else if ( it.sectionNode instanceof ve.dm.TableCaptionNode ) {
+		// TODO: Handle captions
 	}
 };
 
