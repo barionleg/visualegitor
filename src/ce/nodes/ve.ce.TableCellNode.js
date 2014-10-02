@@ -62,6 +62,12 @@ ve.ce.TableCellNode.prototype.getTagName = function () {
 	return types[style];
 };
 
+ve.ce.TableCellNode.prototype.setEditing = function ( enable ) {
+	this.$element
+		.toggleClass( 've-ce-tableCellNode-editing', enable )
+		.prop( 'contentEditable', enable.toString() );
+};
+
 /**
  * Handle model update events.
  *

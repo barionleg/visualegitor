@@ -188,43 +188,18 @@ ve.dm.TableMatrix.prototype.getRowNodes = function () {
 };
 
 /**
- * Computes a the rectangle for a given start and end cell node.
+ * Retrieves all cells (no placeholders) within a given selection.
  *
- * @param {ve.dm.TableCellNode} startCellNode Start anchor
- * @param {ve.dm.TableCellNode} endCellNode End anchor
- * @returns {ve.dm.TableMatrixRectangle}
- */
-ve.dm.TableMatrix.prototype.getRectangle = function ( startCellNode, endCellNode ) {
-	var endCell, minRow, maxRow, minCol, maxCol,
-		startCell = this.lookupCell( startCellNode );
-	if ( !startCell ) {
-		return null;
-	}
-	if ( startCellNode === endCellNode ) {
-		endCell = startCell;
-	} else {
-		endCell = this.lookupCell( endCellNode );
-	}
-	minRow = Math.min( startCell.row, endCell.row );
-	maxRow = Math.max( startCell.row, endCell.row );
-	minCol = Math.min( startCell.col, endCell.col );
-	maxCol = Math.max( startCell.col, endCell.col );
-	return new ve.dm.TableMatrixRectangle( minRow, minCol, maxRow, maxCol );
-};
-
-/**
- * Retrieves all cells (no placeholders) within a given rectangle.
- *
- * @param {ve.dm.TableMatrixRectangle} rect Rectangle
+ * @param {ve.dm.TableSelection} selection Table selection
  * @returns {ve.dm.TableMatrixCell[]} List of table cells
  */
-ve.dm.TableMatrix.prototype.getCellsForRectangle = function ( rect ) {
+ve.dm.TableMatrix.prototype.getCellsForSelection = function ( selection ) {
 	var row, col, cell,
 		cells = [],
 		visited = {};
 
-	for ( row = rect.start.row; row <= rect.end.row; row++ ) {
-		for ( col = rect.start.col; col <= rect.end.col; col++ ) {
+	for ( row = selection.startRow; row <= selection.endRow; row++ ) {
+		for ( col = selection.startCol; col <= selection.endCol; col++ ) {
 			cell = this.getCell( row, col );
 			if ( cell.isPlaceholder() ) {
 				cell = cell.owner;
@@ -242,26 +217,36 @@ ve.dm.TableMatrix.prototype.getCellsForRectangle = function ( rect ) {
  * Retrieves a bounding rectangle for all cells described by a given rectangle.
  * This takes spanning cells into account.
  *
- * @param {ve.dm.TableMatrixRectangle} rect Rectangle
- * @returns {ve.dm.TableMatrixRectangle} Bounding rectangle
+ * @param {ve.dm.TableSelection} selection Selection
+ * @returns {ve.dm.TableSelection} Bounding selection
  */
-ve.dm.TableMatrix.prototype.getBoundingRectangle = function ( rect ) {
-	var cells, cell, i;
+ve.dm.TableMatrix.prototype.getBoundingSelection = function ( selection ) {
+	var cells, cell, i,
+		startCol = Infinity,
+		startRow = Infinity,
+		endCol = -Infinity,
+		endRow = -Infinity;
 
-	rect = rect.clone();
-	cells = this.getCellsForRectangle( rect );
+	cells = this.getCellsForSelection( selection );
 
 	if ( !cells || cells.length === 0 ) {
 		return null;
 	}
 	for ( i = 0; i < cells.length; i++ ) {
 		cell = cells[i];
-		rect.start.row = Math.min( rect.start.row, cell.row );
-		rect.start.col = Math.min( rect.start.col, cell.col );
-		rect.end.row = Math.max( rect.end.row, cell.row + cell.node.getRowspan() - 1 );
-		rect.end.col = Math.max( rect.end.col, cell.col + cell.node.getColspan() - 1 );
+		startCol = Math.min( startCol, cell.col );
+		startRow = Math.min( startRow, cell.row );
+		endCol = Math.max( endCol, cell.col + cell.node.getColspan() - 1 );
+		endRow = Math.max( endRow, cell.row + cell.node.getRowspan() - 1 );
 	}
-	return rect;
+	return new ve.dm.TableSelection(
+		selection.getDocument(),
+		selection.tableRange,
+		startCol,
+		startRow,
+		endCol,
+		endRow
+	);
 };
 
 /**

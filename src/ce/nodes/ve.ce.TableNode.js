@@ -19,8 +19,8 @@ ve.ce.TableNode = function VeCeTableNode( model, config ) {
 
 	this.surface = null;
 	this.active = false;
-	// A ve.dm.TableMatrix.Rectange instance or null if no valid selection
-	this.selectedRectangle = null;
+	this.startCell = null;
+	this.editingSelection = null;
 };
 
 /* Inheritance */
@@ -40,11 +40,11 @@ ve.ce.TableNode.prototype.onSetup = function () {
 	this.surface = this.getRoot().getSurface();
 
 	// DOM changes
-
-	this.$element.addClass( 've-ce-tableNode' );
+	this.$element
+		.addClass( 've-ce-tableNode' )
+		.prop( 'contentEditable', 'false' );
 
 	// Overlay
-
 	this.$selectionBox = this.$( '<div>' ).addClass( 've-ce-tableNodeOverlay-selection-box' );
 	this.$rowBracket = this.$( '<div>' ).addClass( 've-ce-tableNodeOverlay-row-bracket' );
 	this.$colBracket = this.$( '<div>' ).addClass( 've-ce-tableNodeOverlay-column-bracket' );
@@ -59,6 +59,13 @@ ve.ce.TableNode.prototype.onSetup = function () {
 		] );
 	this.surface.surface.$blockers.append( this.$overlay );
 
+	// Events
+	this.$element.on( {
+		'mousedown.ve-ce-tableNode': ve.bind( this.onTableMouseDown, this ),
+		'dblclick.ve-ce-tableNode': ve.bind( this.onTableDblClick, this )
+	} );
+	this.onTableMouseUpHandler = ve.bind( this.onTableMouseUp, this );
+	this.onTableMouseMoveHandler = ve.bind( this.onTableMouseMove, this );
 	// Select and position events both fire updateOverlay, so debounce. Also makes
 	// sure that this.selectedRectangle is up to date before redrawing.
 	this.updateOverlayDebounced = ve.debounce( ve.bind( this.updateOverlay, this ) );
@@ -69,9 +76,110 @@ ve.ce.TableNode.prototype.onSetup = function () {
 ve.ce.TableNode.prototype.onTeardown = function () {
 	// Parent method
 	ve.ce.TableNode.super.prototype.onTeardown.call( this );
+	// Events
+	this.$element.off( '.ve-ce-tableNode' );
 	this.surface.getModel().disconnect( this, { select: 'onSurfaceModelSelect' } );
 	this.surface.disconnect( this, { position: this.updateOverlayDebounced } );
 	this.$overlay.remove();
+};
+
+ve.ce.TableNode.prototype.onTableDblClick = function ( e ) {
+	var tableNode = $( e.target ).closest( 'table' ).data( 'view' );
+	if ( tableNode === this ) {
+		this.setEditing( true );
+	}
+};
+
+ve.ce.TableNode.prototype.onTableMouseDown = function ( e ) {
+	var cellNode, cell, selection,
+		tableNode = $( e.target ).closest( 'table' ).data( 'view' );
+
+	if ( tableNode !== this ) {
+		// Nested table, ignore event
+		return;
+	}
+
+	cellNode = $( e.target ).closest( 'td, th' ).data( 'view' );
+	if ( !cellNode ) {
+		e.preventDefault();
+		return;
+	}
+	cell = this.getModel().matrix.lookupCell( cellNode.getModel() );
+	if ( !cell ) {
+		e.preventDefault();
+		return;
+	}
+	selection = new ve.dm.TableSelection(
+		this.getModel().getDocument(),
+		this.getModel().getOuterRange(),
+		cell.col, cell.row, cell.col, cell.row
+	);
+	if ( this.editingSelection ) {
+		if ( selection.equals( this.editingSelection ) ) {
+			// Clicking on the editing cell, don't prevent default
+			return;
+		} else {
+			this.setEditing( false );
+		}
+	}
+	this.surface.getModel().setSelection( selection );
+	this.startCell = cell;
+	this.surface.$document.on( {
+		mouseup: this.onTableMouseUpHandler,
+		mousemove: this.onTableMouseMoveHandler
+	} );
+	e.preventDefault();
+};
+
+ve.ce.TableNode.prototype.onTableMouseMove = function ( e ) {
+	var cell, selection, node = $( e.target ).closest( 'td, th' ).data( 'view' );
+	if ( !node ) {
+		return;
+	}
+	cell = this.getModel().matrix.lookupCell( node.getModel() );
+	if ( !cell ) {
+		return;
+	}
+	selection = new ve.dm.TableSelection(
+		this.getModel().getDocument(),
+		this.getModel().getOuterRange(),
+		this.startCell.col, this.startCell.row, cell.col, cell.row
+	);
+	this.surface.getModel().setSelection( selection );
+};
+
+ve.ce.TableNode.prototype.onTableMouseUp = function () {
+	this.startCell = null;
+	this.surface.$document.off( {
+		mouseup: this.onTableMouseUpHandler,
+		mousemove: this.onTableMouseMoveHandler
+	} );
+};
+
+ve.ce.TableNode.prototype.setEditing = function ( editing ) {
+	if ( editing ) {
+		var cell, selection = this.surface.getModel().getSelection();
+		if ( !selection.isSingleCell() ) {
+			selection = selection.collapseToStart();
+			this.surface.getModel().setSelection( selection );
+		}
+		this.editingSelection = selection;
+		cell = this.getCellFromSelection( selection );
+		cell.setEditing( true );
+		// TODO: Find content offset/slug offset within cell
+		this.surface.getModel().setLinearSelection( new ve.Range( cell.getModel().getRange().end - 1 ) );
+	} else if ( this.editingSelection ) {
+		this.getCellFromSelection( this.editingSelection ).setEditing( false );
+		this.editingSelection = null;
+	}
+	this.$element.toggleClass( 've-ce-tableNode-editing', editing );
+	this.$overlay.toggleClass( 've-ce-tableNodeOverlay-editing', editing );
+	this.surface.setTableEditingSelection( this.editingSelection );
+};
+
+ve.ce.TableNode.prototype.getCellFromSelection = function ( selection ) {
+	var cellModel = this.getModel().matrix.getCellsForSelection( selection )[0].node;
+	return this.surface.getDocument().getBranchNodeFromOffset( cellModel.getRange().start );
 };
 
 /**
@@ -79,30 +187,29 @@ ve.ce.TableNode.prototype.onTeardown = function () {
  * the table.
  */
 ve.ce.TableNode.prototype.onSurfaceModelSelect = function ( selection ) {
-	var isSelected, tableSelection,
-		range = this.model.getRange();
+	var isActive = (
+			this.editingSelection !== null &&
+			selection instanceof ve.dm.LinearSelection &&
+			this.getModel().getOuterRange().containsRange( selection.getRange() )
+		) ||
+		(
+			selection instanceof ve.dm.TableSelection &&
+			selection.tableRange.equals( this.getModel().getOuterRange() )
+		);
 
-	// Consider this table active when the selection is fully within the range
-	isSelected = ( selection && range.containsRange( selection ) );
-
-	// make sure that the selection does really belong to this table not to a nested one
-	if ( isSelected ) {
-		tableSelection = ve.dm.TableNode.static.lookupSelection( this.surface.getModel().getDocument(), selection );
-		isSelected = ( tableSelection && tableSelection.node === this.model );
-	}
-
-	this.$element.toggleClass( 've-ce-tableNode-active', isSelected );
-	if ( isSelected ) {
+	this.$element.toggleClass( 've-ce-tableNode-active', isActive );
+	if ( isActive ) {
 		if ( !this.active ) {
 			this.active = true;
 			this.$overlay.show();
 		}
-		this.selectedRectangle = this.model.getRectangle( tableSelection.startCell, tableSelection.endCell );
 		this.updateOverlayDebounced();
-	} else if ( !isSelected && this.active ) {
+	} else if ( !isActive && this.active ) {
 		this.active = false;
-		this.selectedRectangle = null;
 		this.$overlay.hide();
+		if ( this.editingSelection ) {
+			this.setEditing( false );
+		}
 	}
 };
 
@@ -110,7 +217,7 @@ ve.ce.TableNode.prototype.onSurfaceModelSelect = function ( selection ) {
  * Update the overlay positions
  */
 ve.ce.TableNode.prototype.updateOverlay = function () {
-	if ( !this.selectedRectangle ) {
+	if ( !this.active ) {
 		return;
 	}
 
@@ -123,7 +230,7 @@ ve.ce.TableNode.prototype.updateOverlay = function () {
 		return;
 	}
 
-	$cells = this.getElementsForSelectedRectangle();
+	$cells = this.getElementsForSelection();
 
 	top = Infinity;
 	bottom = -Infinity;
@@ -167,12 +274,13 @@ ve.ce.TableNode.prototype.updateOverlay = function () {
 /**
  * Retrieves DOM elements corresponding to the the cells for the current selection.
  */
-ve.ce.TableNode.prototype.getElementsForSelectedRectangle = function () {
+ve.ce.TableNode.prototype.getElementsForSelection = function () {
 	var i, l, cell, cellNode, offset,
 		cells = [],
 		matrix = this.model.matrix,
-		rect = matrix.getBoundingRectangle( this.selectedRectangle ),
-		cellModels = matrix.getCellsForRectangle( rect );
+		selection = this.editingSelection || this.surface.getModel().getSelection(),
+		boundingSelection = matrix.getBoundingSelection( selection ),
+		cellModels = matrix.getCellsForSelection( boundingSelection );
 
 	for ( i = 0, l = cellModels.length; i < l; i++ ) {
 		cell = cellModels[i];

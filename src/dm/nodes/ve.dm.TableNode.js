@@ -74,10 +74,6 @@ ve.dm.TableNode.prototype.getSize = function ( dimension ) {
 	}
 };
 
-ve.dm.TableNode.prototype.getRectangle = function ( startCellNode, endCellNode ) {
-	return this.matrix.getRectangle( startCellNode, endCellNode );
-};
-
 /* Static Methods */
 
 /**
@@ -190,10 +186,12 @@ ve.dm.TableNodeCellIterator.prototype.nextSection = function ( it ) {
 	it.sectionNode = this.table.children[it.sectionIndex];
 	if ( !it.sectionNode ) {
 		it.finished = true;
-	} else {
+	} else if ( it.sectionNode instanceof ve.dm.TableSectionNode ) {
 		it.rowIndex = 0;
 		it.rowNode = it.sectionNode.children[0];
 		this.onNewSection( it.sectionNode );
+	} else if ( it.sectionNode instanceof ve.dm.TableCaptionNode ) {
+		// TODO: Handle captions
 	}
 };
 
