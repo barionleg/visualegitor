@@ -188,94 +188,22 @@ ve.dm.TableMatrix.prototype.getRowNodes = function () {
 };
 
 /**
- * Computes a the rectangle for a given start and end cell node.
+ * Get number of rows in the table
  *
- * @param {ve.dm.TableCellNode} startCellNode Start anchor
- * @param {ve.dm.TableCellNode} endCellNode End anchor
- * @returns {ve.dm.TableMatrixRectangle}
+ * @returns {number} Number of rows
  */
-ve.dm.TableMatrix.prototype.getRectangle = function ( startCellNode, endCellNode ) {
-	var endCell, minRow, maxRow, minCol, maxCol,
-		startCell = this.lookupCell( startCellNode );
-	if ( !startCell ) {
-		return null;
-	}
-	if ( startCellNode === endCellNode ) {
-		endCell = startCell;
-	} else {
-		endCell = this.lookupCell( endCellNode );
-	}
-	minRow = Math.min( startCell.row, endCell.row );
-	maxRow = Math.max( startCell.row, endCell.row );
-	minCol = Math.min( startCell.col, endCell.col );
-	maxCol = Math.max( startCell.col, endCell.col );
-	return new ve.dm.TableMatrixRectangle( minRow, minCol, maxRow, maxCol );
+ve.dm.TableMatrix.prototype.getRowCount = function () {
+	return this.getMatrix().length;
 };
 
 /**
- * Retrieves all cells (no placeholders) within a given rectangle.
+ * Get number of columns in the table
  *
- * @param {ve.dm.TableMatrixRectangle} rect Rectangle
- * @returns {ve.dm.TableMatrixCell[]} List of table cells
+ * @returns {number} Number of columns
  */
-ve.dm.TableMatrix.prototype.getCellsForRectangle = function ( rect ) {
-	var row, col, cell,
-		cells = [],
-		visited = {};
-
-	for ( row = rect.start.row; row <= rect.end.row; row++ ) {
-		for ( col = rect.start.col; col <= rect.end.col; col++ ) {
-			cell = this.getCell( row, col );
-			if ( cell.isPlaceholder() ) {
-				cell = cell.owner;
-			}
-			if ( !visited[cell.key] ) {
-				cells.push( cell );
-				visited[cell.key] = true;
-			}
-		}
-	}
-	return cells;
-};
-
-/**
- * Retrieves a bounding rectangle for all cells described by a given rectangle.
- * This takes spanning cells into account.
- *
- * @param {ve.dm.TableMatrixRectangle} rect Rectangle
- * @returns {ve.dm.TableMatrixRectangle} Bounding rectangle
- */
-ve.dm.TableMatrix.prototype.getBoundingRectangle = function ( rect ) {
-	var cells, cell, i;
-
-	rect = rect.clone();
-	cells = this.getCellsForRectangle( rect );
-
-	if ( !cells || cells.length === 0 ) {
-		return null;
-	}
-	for ( i = 0; i < cells.length; i++ ) {
-		cell = cells[i];
-		rect.start.row = Math.min( rect.start.row, cell.row );
-		rect.start.col = Math.min( rect.start.col, cell.col );
-		rect.end.row = Math.max( rect.end.row, cell.row + cell.node.getRowspan() - 1 );
-		rect.end.col = Math.max( rect.end.col, cell.col + cell.node.getColspan() - 1 );
-	}
-	return rect;
-};
-
-/**
- * Provides a tuple with number of rows and columns.
- *
- * @returns {Number[]} Tuple: row count, column count
- */
-ve.dm.TableMatrix.prototype.getSize = function () {
+ve.dm.TableMatrix.prototype.getColCount = function () {
 	var matrix = this.getMatrix();
-	if ( matrix.length === 0 ) {
-		return [0, 0];
-	} else {
-		return [matrix.length, matrix[0].length];
-	}
+	return matrix.length ? matrix[0].length : 0;
 };
 
 /**
@@ -346,6 +274,11 @@ OO.initClass( ve.dm.TableMatrixCell );
 
 /* Methods */
 
+/**
+ * Check if this cell is a placeholder
+ *
+ * @return {boolean} This cell is a placeholder
+ */
 ve.dm.TableMatrixCell.prototype.isPlaceholder = function () {
 	return false;
 };
@@ -382,28 +315,4 @@ OO.inheritClass( ve.dm.TableMatrixPlaceholder, ve.dm.TableMatrixCell );
 
 ve.dm.TableMatrixPlaceholder.prototype.isPlaceholder = function () {
 	return true;
-};
-
-/**
- * An object describing a rectangular selection in a table matrix.
- * It has two properties, 'start' and 'end', which both are objects with
- * properties 'row' and 'col'. 'start' describes the upper-left, and
- * 'end' the lower-right corner of the rectangle.
- *
- * @class
- * @constructor
- * @param {Number} minRow row Index of upper-left corner
- * @param {Number} minCol column Index of upper-left corner
- * @param {Number} maxRow row Index of lower-left corner
- * @param {Number} maxCol column Index of lower-left corner
- */
-ve.dm.TableMatrixRectangle = function ( minRow, minCol, maxRow, maxCol ) {
-	this.start = { row: minRow, col: minCol };
-	this.end = { row: maxRow, col: maxCol };
-};
-
-/* Methods */
-
-ve.dm.TableMatrixRectangle.prototype.clone = function () {
-	return new this.constructor( this.start.row, this.start.col, this.end.row, this.end.col );
 };

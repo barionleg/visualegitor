@@ -80,7 +80,6 @@
 					"ve.dm.TableMatrix",
 					"ve.dm.TableMatrixCell",
 					"ve.dm.TableMatrixPlaceholder",
-					"ve.dm.TableMatrixRectangle",
 					"ve.dm.TableNodeCellIterator"
 				]
 			}
@@ -126,7 +125,6 @@
 					"ve.ui.MobileContext",
 					"ve.ui.Overlay",
 					"ve.ui.Toolbar",
-					"ve.ui.TableToolbar",
 					"ve.ui.TargetToolbar",
 					"ve.ui.DebugBar",
 					"ve.ui.Action",

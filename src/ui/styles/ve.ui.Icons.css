@@ -271,8 +271,8 @@
 	background-image: url(images/icons/underline-u.svg);
 }
 
-.oo-ui-icon-table {
-	background-image: /* @embed */ url(images/icons/table.svg);
+.oo-ui-icon-table-insert {
+	background-image: /* @embed */ url(images/icons/table-insert.svg);
 	background-position: center;
 }
 
@@ -286,11 +286,6 @@
 	background-position: center;
 }
 
-.oo-ui-icon-table-delete-row {
-	background-image: /* @embed */ url(images/icons/table-delete-row.svg);
-	background-position: center;
-}
-
 .oo-ui-icon-table-insert-column-before {
 	background-image: /* @embed */ url(images/icons/table-insert-column-before.svg);
 	background-position: center;
@@ -298,15 +293,5 @@
 
 .oo-ui-icon-table-insert-column-after {
 	background-image: /* @embed */ url(images/icons/table-insert-column-after.svg);
-	background-position: center;
-}
-
-.oo-ui-icon-table-delete-column {
-	background-image: /* @embed */ url(images/icons/table-delete-column.svg);
-	background-position: center;
-}
-
-.oo-ui-icon-table-delete {
-	background-image: /* @embed */ url(images/icons/table-delete.svg);
 	background-position: center;
 }
