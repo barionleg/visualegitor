@@ -193,6 +193,7 @@ ve.ui.MediaSizeWidget.prototype.onScalableDefaultSizeChange = function ( isDefau
  * the value is numeric. Invoke validation for every change.
  * @param {string} type The input that was updated, 'width' or 'height'
  * @param {string} value The new value of the input
+ * @fires change
  */
 ve.ui.MediaSizeWidget.prototype.onDimensionsChange = function ( type, value ) {
 	var dimensions = {};
@@ -208,6 +209,9 @@ ve.ui.MediaSizeWidget.prototype.onDimensionsChange = function ( type, value ) {
 			this.validateDimensions();
 		}
 	}
+
+	// Emit change event
+	this.emit( 'change', this.currentDimensions );
 };
 
 /**
