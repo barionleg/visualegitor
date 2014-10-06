@@ -57,8 +57,8 @@ ve.ce.getDomText = function ( element ) {
 			nodeType === Node.DOCUMENT_NODE ||
 			nodeType === Node.DOCUMENT_FRAGMENT_NODE
 		) {
-			if ( $element.hasClass( 've-ce-branchNode-slug' ) ) {
-				// Slugs are not represented in the model at all, but they do
+			if ( $element.hasClass( 've-ce-branchNode-blockSlug' ) ) {
+				// Block slugs are not represented in the model at all, but they do
 				// contain a single nbsp/FEFF character in the DOM, so make sure
 				// that character isn't counted
 				return '';
@@ -279,8 +279,8 @@ ve.ce.getOffset = function ( domNode, domOffset ) {
 			node = traverse( startNode );
 		}
 	} else {
-		// Text inside of a slug doesn't count
-		if ( !$( domNode.parentNode ).hasClass( 've-ce-branchNode-slug' ) ) {
+		// Text inside of a block slug doesn't count
+		if ( !$( domNode.parentNode ).hasClass( 've-ce-branchNode-blockSlug' ) ) {
 			lengthSum += domOffset;
 		}
 		startNode = domNode;
@@ -300,8 +300,8 @@ ve.ce.getOffset = function ( domNode, domOffset ) {
 			break;
 		}
 
-		// Text inside of a slug doesn't count
-		if ( node.nodeType === Node.TEXT_NODE && !$( node.parentNode ).hasClass( 've-ce-branchNode-slug' ) ) {
+		// Text inside of a block slug doesn't count
+		if ( node.nodeType === Node.TEXT_NODE && !$( node.parentNode ).hasClass( 've-ce-branchNode-blockSlug' ) ) {
 			lengthSum += node.data.length;
 		}
 		// else: non-text nodes that don't have a .data( 'view' ) don't exist in the DM
