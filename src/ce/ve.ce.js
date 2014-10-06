@@ -30,6 +30,7 @@ ve.ce.whitespacePattern = /[\u0020\u00A0]/g;
  */
 ve.ce.minImgDataUri = 'data:image/gif;base64,R0lGODdhAQABAADcACwAAAAAAQABAAA';
 ve.ce.unicornImgDataUri = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAATCAQAAADly58hAAAAAmJLR0QAAKqNIzIAAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQfeChIMMi319aEqAAAAzUlEQVQoz4XSMUoDURAG4K8NIljaeQZrCwsRb5FWL5Daa1iIjQewTycphAQloBEUAoogFmqMsiBmHSzcdfOWlcyU3/+YGXgsqJZMbvv/wLqZDCw1B9rCBSaOmgOHQsfQvVYT7wszIbPSxO9CCF8ebNXx1J2TIvDoxlrKU3mBIYz1U87mMISB3QqXk7e/A4bp1WV/CiE3sFHymZ4X4cO57yLWdVDyjoknr47/MPRcput1k+ljt/O4V1vu2bXViq9qPNW3WfGoxrk37UVfxQ999n1bP+Vh5gAAAABJRU5ErkJggg==';
+ve.ce.chimeraImgDataUri = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAATCAYAAAByUDbMAAAABGdBTUEAALGPC%2FxhBQAAAWdJREFUOMu10z9IlWEUx%2FGPdZciGyyHFm1wbYtwuo21XBoKQtykpoIgEHKpxaHJyUACG6IghyhqSUHhRkSDUlSQKKT9IQ1dXDQVuS7nxsPl3vfey60DL%2B%2F7nHOe73N%2B5zwv%2F9AONph3EztYaeWwoxjGOl7gUlbygTqwHcxiG9%2Bw1ArsD%2FJ4gh5sNiOrCyP4gK94jpcR68U7zEVsEn21BpBHMap9iBkcRgFtGEAHHkRsC3dwBk9RKoPasRpVjUaPSlHVxfguoh%2B%2FY70Ylf3CrbTCK1jGYCSmz%2FV4j%2BFzRWwN1wL4dwCn8Abnmrw6x0PFiRT2FufxqEnYPDqxALlwPovLWcBVXIimw89kczHaISS%2BwjhuSDbAaUxjAx8Tfy7kf8enxH8IZ2OSlythcBIT%2BBESsmwAd3EPe6nMsi3jC17jdgbocUxwqgyqBkt%2Fs%2B4M2LFqzlqwLQxlwN5HjxuC3cdunZ4d8T9tH1W7V%2F6yCPoIAAAAAElFTkSuQmCC';
 
 /* Static Methods */
 
@@ -57,8 +58,8 @@ ve.ce.getDomText = function ( element ) {
 			nodeType === Node.DOCUMENT_NODE ||
 			nodeType === Node.DOCUMENT_FRAGMENT_NODE
 		) {
-			if ( $element.hasClass( 've-ce-branchNode-slug' ) ) {
-				// Slugs are not represented in the model at all, but they do
+			if ( $element.hasClass( 've-ce-branchNode-blockSlug' ) ) {
+				// Block slugs are not represented in the model at all, but they do
 				// contain a single nbsp/FEFF character in the DOM, so make sure
 				// that character isn't counted
 				return '';
@@ -279,8 +280,8 @@ ve.ce.getOffset = function ( domNode, domOffset ) {
 			node = traverse( startNode );
 		}
 	} else {
-		// Text inside of a slug doesn't count
-		if ( !$( domNode.parentNode ).hasClass( 've-ce-branchNode-slug' ) ) {
+		// Text inside of a block slug doesn't count
+		if ( !$( domNode.parentNode ).hasClass( 've-ce-branchNode-blockSlug' ) ) {
 			lengthSum += domOffset;
 		}
 		startNode = domNode;
@@ -300,8 +301,8 @@ ve.ce.getOffset = function ( domNode, domOffset ) {
 			break;
 		}
 
-		// Text inside of a slug doesn't count
-		if ( node.nodeType === Node.TEXT_NODE && !$( node.parentNode ).hasClass( 've-ce-branchNode-slug' ) ) {
+		// Text inside of a block slug doesn't count
+		if ( node.nodeType === Node.TEXT_NODE && !$( node.parentNode ).hasClass( 've-ce-branchNode-blockSlug' ) ) {
 			lengthSum += node.data.length;
 		}
 		// else: non-text nodes that don't have a .data( 'view' ) don't exist in the DM
