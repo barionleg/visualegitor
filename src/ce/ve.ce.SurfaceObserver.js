@@ -63,7 +63,7 @@ OO.mixinClass( ve.ce.SurfaceObserver, OO.EventEmitter );
  */
 
 /**
- * When #poll observes that the cursor was moved into a slug
+ * When #poll observes that the cursor was moved into a block slug
  *
  * @event slugEnter
  */
@@ -161,7 +161,7 @@ ve.ce.SurfaceObserver.prototype.enable = function () {
  *
  * TODO: fixing selection in certain cases, handling selection across multiple nodes in Firefox
  *
- * FIXME: Does not work well (rangeChange is not emitted) when cursor is placed inside a slug
+ * FIXME: Does not work well (rangeChange is not emitted) when cursor is placed inside a block slug
  * with a mouse.
  *
  * @method
@@ -197,7 +197,7 @@ ve.ce.SurfaceObserver.prototype.pollOnceSelection = function () {
  *
  * TODO: fixing selection in certain cases, handling selection across multiple nodes in Firefox
  *
- * FIXME: Does not work well (rangeChange is not emitted) when cursor is placed inside a slug
+ * FIXME: Does not work well (rangeChange is not emitted) when cursor is placed inside a block slug
  * with a mouse.
  *
  * @method
@@ -211,8 +211,8 @@ ve.ce.SurfaceObserver.prototype.pollOnceSelection = function () {
 ve.ce.SurfaceObserver.prototype.pollOnceInternal = function ( emitChanges, selectionOnly ) {
 	var $nodeOrSlug, node, text, hash, range, domRange, $slugWrapper,
 		anchorNodeChange = false,
-		enteredSlug = false,
-		leftSlug = false,
+		enteredBlockSlug = false,
+		leftBlockSlug = false,
 		observer = this;
 
 	if ( !this.domDocument || this.disabled ) {
@@ -252,17 +252,17 @@ ve.ce.SurfaceObserver.prototype.pollOnceInternal = function ( emitChanges, selec
 				.addClass( 've-ce-branchNode-blockSlugWrapper-unfocused' )
 				.removeClass( 've-ce-branchNode-blockSlugWrapper-focused' );
 			this.$slugWrapper = null;
-			leftSlug = true;
+			leftBlockSlug = true;
 		}
 
 		if ( $slugWrapper && $slugWrapper.length && !$slugWrapper.is( this.$slugWrapper ) ) {
 			this.$slugWrapper = $slugWrapper
 				.addClass( 've-ce-branchNode-blockSlugWrapper-focused' )
 				.removeClass( 've-ce-branchNode-blockSlugWrapper-unfocused' );
-			enteredSlug = true;
+			enteredBlockSlug = true;
 		}
 
-		if ( enteredSlug || leftSlug ) {
+		if ( enteredBlockSlug || leftBlockSlug ) {
 			// Emit 'position' on the surface view after the animation completes
 			this.setTimeout( function () {
 				if ( observer.surface ) {
@@ -315,7 +315,7 @@ ve.ce.SurfaceObserver.prototype.pollOnceInternal = function ( emitChanges, selec
 		this.range = range;
 	}
 
-	if ( emitChanges && enteredSlug ) {
+	if ( emitChanges && enteredBlockSlug ) {
 		this.emit( 'slugEnter' );
 	}
 };
