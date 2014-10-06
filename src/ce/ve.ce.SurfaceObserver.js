@@ -63,7 +63,7 @@ OO.mixinClass( ve.ce.SurfaceObserver, OO.EventEmitter );
  */
 
 /**
- * When #poll observes that the cursor was moved into a slug
+ * When #poll observes that the cursor was moved into a block slug
  *
  * @event slugEnter
  */
@@ -157,7 +157,7 @@ ve.ce.SurfaceObserver.prototype.enable = function () {
  *
  * TODO: fixing selection in certain cases, handling selection across multiple nodes in Firefox
  *
- * FIXME: Does not work well (rangeChange is not emitted) when cursor is placed inside a slug
+ * FIXME: Does not work well (rangeChange is not emitted) when cursor is placed inside a block slug
  * with a mouse.
  *
  * @method
@@ -193,7 +193,7 @@ ve.ce.SurfaceObserver.prototype.pollOnceSelection = function () {
  *
  * TODO: fixing selection in certain cases, handling selection across multiple nodes in Firefox
  *
- * FIXME: Does not work well (rangeChange is not emitted) when cursor is placed inside a slug
+ * FIXME: Does not work well (rangeChange is not emitted) when cursor is placed inside a block slug
  * with a mouse.
  *
  * @method
@@ -259,7 +259,7 @@ ve.ce.SurfaceObserver.prototype.pollOnceInternal = function ( emitChanges, selec
 		);
 	}
 
-	if ( newState.enteredBlockSlug ) {
+	if ( newState.enteredBlockSlug && emitChanges ) {
 		this.emit( 'slugEnter' );
 	}
 };
