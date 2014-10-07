@@ -29,6 +29,8 @@ ve.dm.LinkAnnotation.static.name = 'link';
 
 ve.dm.LinkAnnotation.static.matchTagNames = ['a'];
 
+ve.dm.LinkAnnotation.static.applyToPrependedContent = false;
+
 ve.dm.LinkAnnotation.static.splitOnWordbreak = true;
 
 ve.dm.LinkAnnotation.static.toDataElement = function ( domElements ) {
