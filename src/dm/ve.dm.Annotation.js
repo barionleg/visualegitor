@@ -48,6 +48,13 @@ ve.dm.Annotation.static.enableAboutGrouping = false;
 ve.dm.Annotation.static.applyToAppendedContent = true;
 
 /**
+ * At a leftmost content offset, automatically apply annotation to content inserted before it
+ *
+ * @property {boolean}
+ */
+ve.dm.Annotation.static.applyToPrependedContent = true;
+
+/**
  * Abandon continuation when a wordbreak is generated
  *
  * @type {boolean}
