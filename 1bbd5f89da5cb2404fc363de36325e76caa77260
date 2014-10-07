@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce8c5bf9_9b2307a6",
+        "filename": ".docs/categories.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-07T12:34:23Z",
+      "side": 1,
+      "message": "\"*\" expands to 0+ characters, so listing ve.dm.Selection is unnecessary as it\u0027s included in ve.dm.*Selection",
+      "revId": "1bbd5f89da5cb2404fc363de36325e76caa77260",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_9b4a275e",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 1198,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-07T12:34:23Z",
+      "side": 1,
+      "message": "Love this",
+      "revId": "1bbd5f89da5cb2404fc363de36325e76caa77260",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_bb8feb25",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 2457,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-07T12:34:23Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be instanceof NullSelection or !instanceof LinearSelection or something?",
+      "revId": "1bbd5f89da5cb2404fc363de36325e76caa77260",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_dba98f79",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 2596,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-07T12:34:23Z",
+      "side": 1,
+      "message": "Also update documentation for parameter rename",
+      "revId": "1bbd5f89da5cb2404fc363de36325e76caa77260",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_7bb083d8",
+        "filename": "src/dm/ve.dm.Surface.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-07T12:34:23Z",
+      "side": 1,
+      "message": "\"a null\" not \"an null\"",
+      "revId": "1bbd5f89da5cb2404fc363de36325e76caa77260",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_5e0c8df0",
+        "filename": "src/ui/inspectors/ve.ui.AnnotationInspector.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-07T12:34:23Z",
+      "side": 1,
+      "message": "Spelling of getDocument",
+      "revId": "1bbd5f89da5cb2404fc363de36325e76caa77260",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_3e18a922",
+        "filename": "src/ui/ve.ui.Toolbar.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-07T12:34:23Z",
+      "side": 1,
+      "message": "It looks like this will cause classes like ve-ui-dir-inline-null to be added. dirInline comes from getDirectionFromSelection(), which returns null if the selection is a NullSelection",
+      "revId": "1bbd5f89da5cb2404fc363de36325e76caa77260",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_7ebcf1d5",
+        "filename": "tests/dm/ve.dm.SurfaceFragment.test.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-07T12:34:23Z",
+      "side": 1,
+      "message": "Maybe fix the name of this variable while you\u0027re in there?",
+      "revId": "1bbd5f89da5cb2404fc363de36325e76caa77260",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
