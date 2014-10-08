@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce8c5bf9_c430c355",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 2458,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-10-08T19:21:50Z",
+      "side": 1,
+      "message": "Simplify if (range \u0026\u0026 … and then if !range?",
+      "revId": "388a930e4e9b1d1dbc7d4a130e2908eb73a8cf85",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
