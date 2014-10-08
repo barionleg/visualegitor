@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce8c5bf9_552543bb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-08T07:01:38Z",
+      "side": 1,
+      "message": "The magic syntax to get the bots to pick up on things is:\n\n    Bug: 57628\n\nand there can\u0027t be a blank line between that and the Change-Id: line, or the bot won\u0027t see it :|",
+      "revId": "8a4d3f88c814644cbb0b0f1fc391c85e0d0fbaeb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_f5333708",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 1197,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-08T07:01:38Z",
+      "side": 1,
+      "message": "Stray whitespace",
+      "revId": "8a4d3f88c814644cbb0b0f1fc391c85e0d0fbaeb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_b51daf7a",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 1790,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-08T07:01:38Z",
+      "side": 1,
+      "message": "Well spotted",
+      "revId": "8a4d3f88c814644cbb0b0f1fc391c85e0d0fbaeb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
