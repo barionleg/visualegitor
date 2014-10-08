@@ -16,6 +16,24 @@
       "revId": "388a930e4e9b1d1dbc7d4a130e2908eb73a8cf85",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8c5bf9_c4c44314",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 2458,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-08T19:26:02Z",
+      "side": 1,
+      "message": "The body of the first if block sets range to null, which is then used to trigger the second if block and also farther down in the function.\n\nThis flow is a bit weird but it\u0027s pre-existing.",
+      "parentUuid": "ce8c5bf9_c430c355",
+      "revId": "388a930e4e9b1d1dbc7d4a130e2908eb73a8cf85",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
