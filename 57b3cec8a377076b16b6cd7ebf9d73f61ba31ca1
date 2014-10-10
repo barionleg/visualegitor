@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e96e304_5ec3750a",
+        "filename": "tests/dm/ve.dm.example.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 2735,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-10-10T00:36:11Z",
+      "side": 1,
+      "message": "Maybe \u003ch2\u003eFoo\u003c/h2\u003e\u003ch2\u003eBar\u003c/h2\u003e?",
+      "revId": "57b3cec8a377076b16b6cd7ebf9d73f61ba31ca1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
