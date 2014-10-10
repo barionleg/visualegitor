@@ -42,11 +42,9 @@ OO.mixinClass( ve.ce.SurfaceObserver, OO.EventEmitter );
  * @param {HTMLElement} node DOM node the change occurred in
  * @param {Object} previous Old data
  * @param {Object} previous.text Old plain text content
- * @param {Object} previous.hash Old DOM hash
  * @param {ve.Range} previous.range Old selection
  * @param {Object} next New data
  * @param {Object} next.text New plain text content
- * @param {Object} next.hash New DOM hash
  * @param {ve.Range} next.range New selection
  */
 
@@ -252,8 +250,8 @@ ve.ce.SurfaceObserver.prototype.pollOnceInternal = function ( emitChanges, selec
 		this.emit(
 			'contentChange',
 			newState.node,
-			{ text: oldState.text, hash: oldState.hash, range: oldState.veRange },
-			{ text: newState.text, hash: newState.hash, range: newState.veRange }
+			{ text: oldState.text, range: oldState.veRange },
+			{ text: newState.text, range: newState.veRange }
 		);
 	}
 
