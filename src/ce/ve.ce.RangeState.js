@@ -61,11 +61,6 @@ ve.ce.RangeState = function VeCeRangeState( old, $surfaceElement, docNode, selec
 	 */
 	this.text = null;
 
-	/**
-	 * @property {string} DOM Hash of current branch node
-	 */
-	this.hash = null;
-
 	this.saveState( old, $surfaceElement, docNode, selectionOnly );
 };
 
@@ -159,16 +154,13 @@ ve.ce.RangeState.prototype.saveState = function ( old, $surfaceElement, docNode,
 
 	this.branchNodeChanged = ( !old || this.node !== old.node );
 
-	// Compute text/hash, for change comparison
+	// Compute text, for change comparison
 	if ( selectionOnly && !anchorNodeChanged ) {
 		this.text = old.text;
-		this.hash = old.hash;
 	} else if ( this.node === null ) {
 		this.text = null;
-		this.hash = null;
 	} else {
 		this.text = ve.ce.getDomText( this.node.$element[0] );
-		this.hash = ve.ce.getDomHash( this.node.$element[0] );
 	}
 
 	this.leftBlockSlug = (
@@ -188,9 +180,7 @@ ve.ce.RangeState.prototype.saveState = function ( old, $surfaceElement, docNode,
 		!selectionOnly &&
 		old &&
 		old.node === this.node && (
-			old.hash === null ||
 			old.text === null ||
-			old.hash !== this.hash ||
 			old.text !== this.text
 		)
 	);

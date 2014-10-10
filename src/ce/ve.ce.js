@@ -92,38 +92,6 @@ ve.ce.getDomText = function ( element ) {
 };
 
 /**
- * Gets a hash of a DOM element's structure.
- *
- * In the returned string text nodes are represented as "#" and elements are represented as "<type>"
- * and "</type>" where "type" is their element name. This effectively generates an HTML
- * serialization without any attributes or text contents. This can be used to observe structural
- * changes.
- *
- * @method
- * @param {HTMLElement} element DOM element to get hash of
- * @returns {string} Hash of DOM element
- */
-ve.ce.getDomHash = function ( element ) {
-	var nodeType = element.nodeType,
-		nodeName = element.nodeName,
-		hash = '';
-
-	if ( nodeType === 3 || nodeType === 4 ) {
-		return '#';
-	} else if ( nodeType === 1 || nodeType === 9 ) {
-		hash += '<' + nodeName + '>';
-		// Traverse its children
-		for ( element = element.firstChild; element; element = element.nextSibling ) {
-			hash += ve.ce.getDomHash( element );
-		}
-		hash += '</' + nodeName + '>';
-		// Merge adjacent text node representations
-		hash = hash.replace( /##+/g, '#' );
-	}
-	return hash;
-};
-
-/**
  * Get the first cursor offset immediately after a node.
  *
  * @param {Node} node DOM node
