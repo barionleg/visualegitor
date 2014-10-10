@@ -425,12 +425,10 @@ QUnit.test( 'onSurfaceObserverContentChange', function ( assert ) {
 			nextNode = $( nextHtml )[0],
 			prev = {
 				text: ve.ce.getDomText( prevNode ),
-				hash: ve.ce.getDomHash( prevNode ),
 				range: prevRange
 			},
 			next = {
 				text: ve.ce.getDomText( nextNode ),
-				hash: ve.ce.getDomHash( nextNode ),
 				range: nextRange
 			};
 
