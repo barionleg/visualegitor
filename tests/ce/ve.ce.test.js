@@ -15,19 +15,17 @@ QUnit.test( 'whitespacePattern', 4, function ( assert ) {
 	assert.strictEqual( 'ab'.match( ve.ce.whitespacePattern ), null, 'does not match non-whitespace' );
 } );
 
-QUnit.test( 'getDomHash/getDomText', function ( assert ) {
+QUnit.test( 'getDomText', function ( assert ) {
 	var i, surface, documentView,
 		cases = [
 			{
 				msg: 'Nested annotations',
 				html: '<p><span>a<b><a href="#">b</a></b><span> </span><i>c</i>d</span></p>',
-				hash: '<DIV><P><SPAN>#<B><A>#</A></B><SPAN>#</SPAN><I>#</I>#</SPAN></P></DIV>',
 				text: 'ab cd'
 			},
 			{
 				msg: 'Inline nodes produce snowmen',
 				html: '<p>Foo <span rel="ve:Alien">Alien</span> bar</p>',
-				hash: '<DIV><P>#<SPAN>#</SPAN>#</P></DIV>',
 				text: 'Foo ☃☃ bar'
 			},
 			{
@@ -36,23 +34,20 @@ QUnit.test( 'getDomHash/getDomText', function ( assert ) {
 					'<span about="g1" rel="ve:Alien">Alien</span>' +
 					'<span about="g1" rel="ve:Alien">Aliens</span>' +
 					'<span about="g1" rel="ve:Alien">Alien³</span> bar</p>',
-				hash: '<DIV><P>#<SPAN>#</SPAN><SPAN>#</SPAN><SPAN>#</SPAN>#</P></DIV>',
 				text: 'Foo ☃☃ bar'
 			},
 			{
 				msg: 'Branch slugs are ignored',
 				html: '<table><tr><td>Foo</td></tr></table>',
-				hash: '<DIV><DIV><P>#</P></DIV><TABLE><TBODY><TR><TD><P>#</P></TD></TR></TBODY></TABLE><DIV><P>#</P></DIV></DIV>',
 				text: 'Foo'
 			}
 		];
 
-	QUnit.expect( cases.length * 2 );
+	QUnit.expect( cases.length );
 
 	for ( i = 0; i < cases.length; i++ ) {
 		surface = ve.test.utils.createSurfaceFromHtml( cases[i].html );
 		documentView = surface.getView().getDocument();
-		assert.strictEqual( ve.ce.getDomHash( documentView.getDocumentNode().$element[0] ), cases[i].hash, 'getDomHash: ' + cases[i].msg );
 		assert.strictEqual( ve.ce.getDomText( documentView.getDocumentNode().$element[0] ), cases[i].text, 'getDomText: ' + cases[i].msg );
 	}
 } );

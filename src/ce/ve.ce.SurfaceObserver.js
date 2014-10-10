@@ -43,11 +43,9 @@ OO.mixinClass( ve.ce.SurfaceObserver, OO.EventEmitter );
  * @param {HTMLElement} node DOM node the change occured in
  * @param {Object} previous Old data
  * @param {Object} previous.text Old plain text content
- * @param {Object} previous.hash Old DOM hash
  * @param {ve.Range} previous.range Old selection
  * @param {Object} next New data
  * @param {Object} next.text New plain text content
- * @param {Object} next.hash New DOM hash
  * @param {ve.Range} next.range New selection
  */
 
@@ -80,7 +78,6 @@ ve.ce.SurfaceObserver.prototype.clear = function ( range ) {
 	this.range = range || null;
 	this.node = null;
 	this.text = null;
-	this.hash = null;
 	this.$slugWrapper = null;
 };
 
@@ -260,31 +257,26 @@ ve.ce.SurfaceObserver.prototype.pollOnceInternal = function ( emitChanges, selec
 	if ( this.node !== node ) {
 		if ( node === null ) {
 			this.text = null;
-			this.hash = null;
 			this.node = null;
 		} else {
 			this.text = ve.ce.getDomText( node.$element[0] );
-			this.hash = ve.ce.getDomHash( node.$element[0] );
 			this.node = node;
 		}
 	} else if ( !selectionOnly && node !== null ) {
 		text = ve.ce.getDomText( node.$element[0] );
-		hash = ve.ce.getDomHash( node.$element[0] );
-		if ( this.text !== text || this.hash !== hash ) {
+		if ( this.text !== text ) {
 			if ( emitChanges ) {
 				this.emit(
 					'contentChange',
 					node,
 					{
 						text: this.text,
-						hash: this.hash,
 						range: this.range
 					},
-					{ text: text, hash: hash, range: range }
+					{ text: text, range: range }
 				);
 			}
 			this.text = text;
-			this.hash = hash;
 		}
 	}
 
