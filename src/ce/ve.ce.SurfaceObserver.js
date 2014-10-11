@@ -24,7 +24,7 @@ ve.ce.SurfaceObserver = function VeCeSurfaceObserver( surface ) {
 	this.polling = false;
 	this.disabled = false;
 	this.timeoutId = null;
-	this.pollInterval = 250; // ms
+	this.pollInterval = 5000; // ms
 
 	// Initialization
 	this.clear();
@@ -209,113 +209,56 @@ ve.ce.SurfaceObserver.prototype.pollOnceSelection = function () {
  * @fires slugEnter
  */
 ve.ce.SurfaceObserver.prototype.pollOnceInternal = function ( emitChanges, selectionOnly ) {
-	var $nodeOrSlug, node, text, hash, range, domRange, $slugWrapper,
-		anchorNodeChange = false,
-		enteredBlockSlug = false,
-		leftBlockSlug = false,
+	var oldState, newState,
 		observer = this;
 
 	if ( !this.domDocument || this.disabled ) {
 		return;
 	}
 
-	range = this.range;
-	node = this.node;
-	domRange = ve.ce.DomRange.newFromDocument( this.domDocument );
+	oldState = this.rangeState;
+	newState = this.constructor.static.getUpdatedRangeState(
+		oldState,
+		this.documentView.getDocumentNode()
+	);
 
-	if ( !domRange.equals( this.domRange ) ) {
-		if ( !this.domRange || this.domRange.anchorNode !== domRange.anchorNode ) {
-			anchorNodeChange = true;
-		}
-		range = domRange.getRange();
-		this.domRange = domRange;
+	if ( newState.leftBlockSlug ) {
+		oldState.$slugWrapper
+			.addClass( 've-ce-branchNode-blockSlugWrapper-unfocused' )
+			.removeClass( 've-ce-branceNode-blockSlugWrapper-focused' );
 	}
 
-	if ( anchorNodeChange ) {
-		node = null;
-		$nodeOrSlug = $( domRange.anchorNode ).closest( '.ve-ce-branchNode, .ve-ce-branchNode-blockSlugWrapper' );
-		if ( $nodeOrSlug.length ) {
-			if ( $nodeOrSlug.hasClass( 've-ce-branchNode-blockSlugWrapper' ) ) {
-				$slugWrapper = $nodeOrSlug;
-			} else {
-				node = $nodeOrSlug.data( 'view' );
-				// Check this node belongs to our document
-				if ( node && node.root !== this.documentView.getDocumentNode() ) {
-					node = null;
-					range = null;
-				}
+	if ( newState.enteredBlockSlug ) {
+		newState.$slugWrapper
+			.addClass( 've-ce-branchNode-blockSlugWrapper-focused' )
+			.removeClass( 've-ce-branchNode-blockSlugWrapper-unfocused' );
+	}
+
+	this.rangeState = newState;
+
+	if ( newState.enteredBlockSlug || newState.leftBlockSlug ) {
+		// Emit 'position' on the surface view after the animation completes
+		this.setTimeout( function () {
+			if ( observer.surface ) {
+				observer.surface.emit( 'position' );
 			}
-		}
-
-		if ( this.$slugWrapper && !this.$slugWrapper.is( $slugWrapper ) ) {
-			this.$slugWrapper
-				.addClass( 've-ce-branchNode-blockSlugWrapper-unfocused' )
-				.removeClass( 've-ce-branchNode-blockSlugWrapper-focused' );
-			this.$slugWrapper = null;
-			leftBlockSlug = true;
-		}
-
-		if ( $slugWrapper && $slugWrapper.length && !$slugWrapper.is( this.$slugWrapper ) ) {
-			this.$slugWrapper = $slugWrapper
-				.addClass( 've-ce-branchNode-blockSlugWrapper-focused' )
-				.removeClass( 've-ce-branchNode-blockSlugWrapper-unfocused' );
-			enteredBlockSlug = true;
-		}
-
-		if ( enteredBlockSlug || leftBlockSlug ) {
-			// Emit 'position' on the surface view after the animation completes
-			this.setTimeout( function () {
-				if ( observer.surface ) {
-					observer.surface.emit( 'position' );
-				}
-			}, 200 );
-		}
+		}, 200 );
 	}
 
-	if ( this.node !== node ) {
-		if ( node === null ) {
-			this.text = null;
-			this.hash = null;
-			this.node = null;
-		} else {
-			this.text = ve.ce.getDomText( node.$element[0] );
-			this.hash = ve.ce.getDomHash( node.$element[0] );
-			this.node = node;
-		}
-	} else if ( !selectionOnly && node !== null ) {
-		text = ve.ce.getDomText( node.$element[0] );
-		hash = ve.ce.getDomHash( node.$element[0] );
-		if ( this.text !== text || this.hash !== hash ) {
-			if ( emitChanges ) {
-				this.emit(
-					'contentChange',
-					node,
-					{
-						text: this.text,
-						hash: this.hash,
-						range: this.range
-					},
-					{ text: text, hash: hash, range: range }
-				);
-			}
-			this.text = text;
-			this.hash = hash;
-		}
+	if ( !selectionOnly && newState.node !== null && newState.contentChanged && emitChanges ) {
+		this.emit(
+			'contentChange',
+			newState.node,
+			{ text: oldState.text, hash: oldState.hash, range: oldState.veRange },
+			{ text: newState.text, hash: newState.hash, range: newState.veRange }
+		);
 	}
 
-	// Only emit rangeChange event if there's a meaningful range difference
-	if ( ( this.range && range ) ? !this.range.equals( range ) : ( this.range !== range ) ) {
-		if ( emitChanges ) {
-			this.emit(
-				'rangeChange',
-				this.range,
-				range
-			);
-		}
-		this.range = range;
+	if ( newState.domRangeChanged && emitChanges ) {
+		this.emit( 'rangeChange', oldState.veRange, newState.veRange );
 	}
 
-	if ( emitChanges && enteredBlockSlug ) {
+	if ( newState.enteredBlockSlug ) {
 		this.emit( 'slugEnter' );
 	}
 };
@@ -328,4 +271,123 @@ ve.ce.SurfaceObserver.prototype.pollOnceInternal = function ( emitChanges, selec
  */
 ve.ce.SurfaceObserver.prototype.setTimeout = function ( callback, timeout ) {
 	return setTimeout( callback, timeout );
+};
+
+/* Static Methods */
+
+/**
+ * Gets DOM range state and compares to previous state
+ * @param {Object} oldState Result of previous call to this method
+ * @param {ve.ce.DocumentNode} docNode The current document node
+ * @returns {Object} DOM range state
+ * @returns.domRangeChanged {boolean} Whether the DOM range changed
+ * @returns.contentChanged {boolean} Whether the content changed
+ * @returns.leftBlockSlug {boolean} Whether the range left a block slug
+ * @returns.enteredBlockSlug {boolean} Whether the range entered a block slug
+ * @returns.veRange {ve.Range} The current selection range
+ * @returns.node {ve.ce.BranchNode|null} The current branch node
+ * @returns.$slugWrapper {jQuery|null} The current slug wrapper
+ * @returns.text {string} Plain text of current node
+ * @returns.hash {string} DOM hash of current node
+ * @returns.isDomRangeChanged {Function} Closure function to test future ranges
+ * @returns.isAnchorNodeChanged {Function} Closure function to test future ranges
+ */
+ve.ce.SurfaceObserver.static.getUpdatedRangeState = function ( oldState, docNode ) {
+	var $nodeOrSlug, selection,
+		newState = {};
+
+	selection = ( function ( selection ) {
+		// freeze selection out of live object
+		return {
+			focusNode: selection.focusNode,
+			focusOffset: selection.focusOffset,
+			anchorNode: selection.anchorNode,
+			anchorOffset: selection.anchorOffset
+		};
+	} ( docNode.getElementDocument().getSelection() ) );
+
+	// Get new range information
+	if ( oldState && !oldState.isDomRangeChanged( selection ) ) {
+		// No change; use old values for speed
+		newState.domRangeChanged = false;
+		newState.veRange = oldState.veRange;
+		newState.$slugWrapper = oldState.$slugWrapper;
+		newState.leftBlockSlug = false;
+		newState.enteredBlockSlug = false;
+	} else {
+		newState.domRangeChanged = true;
+		try {
+			newState.veRange = new ve.Range(
+				ve.ce.getOffset( selection.anchorNode, selection.anchorOffset ),
+				ve.ce.getOffset( selection.focusNode, selection.focusOffset )
+			);
+		} catch ( e ) {
+			newState.veRange = null;
+		}
+	}
+
+	if ( oldState && !oldState.isAnchorNodeChanged( selection ) ) {
+		newState.node = oldState.node;
+		newState.$slugWrapper = oldState.$slugWrapper;
+	} else {
+		$nodeOrSlug = $( selection.anchorNode ).closest(
+			'.ve-ce-branchNode, .ve-ce-branchNode-blockSlugWrapper'
+		);
+		if ( $nodeOrSlug.length === 0 ) {
+			newState.node = null;
+			newState.$slugWrapper = null;
+		} else if ( $nodeOrSlug.hasClass( 've-ce-branchNode-blockSlugWrapper' ) ) {
+			newState.node = null;
+			newState.$slugWrapper = $nodeOrSlug;
+		} else {
+			newState.node = $nodeOrSlug.data( 'view' );
+			newState.$slugWrapper = null;
+			// Check this node belongs to our document
+			if ( newState.node && newState.node.root !== docNode ) {
+				newState.node = null;
+				newState.veRange = null;
+			}
+		}
+	}
+
+	if ( newState.node === null ) {
+		newState.text = null;
+		newState.hash = null;
+	} else {
+		newState.text = ve.ce.getDomText( newState.node.$element[0] );
+		newState.hash = ve.ce.getDomHash( newState.node.$element[0] );
+	}
+
+	newState.leftBlockSlug = (
+		oldState &&
+		oldState.$slugWrapper &&
+		!oldState.$slugWrapper.is( newState.$slugWrapper )
+	);
+	newState.enteredBlockSlug = (
+		oldState &&
+		newState.$slugWrapper &&
+		newState.$slugWrapper.length > 0 &&
+		!newState.$slugWrapper.is( oldState.$slugWrapper )
+	);
+
+	newState.contentChanged = (
+		!oldState ||
+		oldState.hash !== newState.hash ||
+		oldState.text !== newState.text
+	);
+
+	// Don't store exposed selection attributes (the nodes are misleadingly live).
+	// But do allow DOM range / anchor node comparisons via function closure.
+	newState.isDomRangeChanged = function ( futureSelection ) {
+		return (
+			futureSelection.focusNode !== selection.focusNode ||
+			futureSelection.focusOffset !== selection.focusOffset ||
+			futureSelection.anchorNode !== selection.anchorNode ||
+			futureSelection.anchorOffset !== selection.anchorOffset
+		);
+	};
+	newState.isAnchorNodeChanged = function ( futureSelection ) {
+		return futureSelection.anchorNode !== selection.anchorNode;
+	};
+	return newState;
 };
