@@ -145,7 +145,7 @@ ve.ce.Document.prototype.getNodeAndOffsetUnadjustedForUnicorn = function ( offse
 	var node, startOffset, current, stack, item, $item, length, model,
 		countedNodes = [],
 		slug = this.getSlugAtOffset( offset );
-	if ( slug ) {
+	if ( slug && slug.textContent === '' ) {
 		return { node: slug, offset: 0 };
 	}
 	node = this.getBranchNodeFromOffset( offset );
