@@ -145,7 +145,8 @@ ve.ce.Document.prototype.getNodeAndOffsetUnadjustedForUnicorn = function ( offse
 	var node, startOffset, current, stack, item, $item, length, model,
 		countedNodes = [],
 		slug = this.getSlugAtOffset( offset );
-	if ( slug ) {
+	// Check for a slug that is empty (apart from a chimera)
+	if ( slug && ( !slug.firstChild || $( slug.firstChild ).hasClass( 've-ce-chimera' ) ) ) {
 		return { node: slug, offset: 0 };
 	}
 	node = this.getBranchNodeFromOffset( offset );
