@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e96e304_7d489a8c",
+        "filename": "lib/oojs-ui/oojs-ui.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-15T18:53:34Z",
+      "side": 1,
+      "message": "This should 1) be changed in the oojs-ui repo, and 2) shouldn\u0027t be done at all because oojs-ui code isn\u0027t supposed to depend on VE code.",
+      "revId": "327a3f01b0fc2832955d49d8e30293230cd48bfb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
