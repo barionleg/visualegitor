@@ -50,7 +50,7 @@ ve.ui.TableContext = function VeUiTableContext( tableNode, config ) {
 	this.menu.addItems( items );
 
 	// Events
-	this.indicator.$element.on( 'mousedown',this.onIndicatorMouseDown.bind( this ) );
+	this.indicator.$element.on( 'mousedown', this.onIndicatorMouseDown.bind( this ) );
 	this.menu.connect( this, { choose: 'onContextItemChoose' } );
 	this.onDocumentMouseDownHandler = this.onDocumentMouseDown.bind( this );
 
