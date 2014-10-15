@@ -310,6 +310,27 @@ ve.Filibuster.prototype.getObservationsHtml = function () {
 	);
 };
 
+if ( typeof Set === 'undefined' ) {
+	// No native 'Set'; implement the bits we need with a (slow) array-based algorithm
+	// This is needed by PhantomJS 1.9.x
+	/*jshint -W020 */
+	Set = function () {
+		this.contents = [];
+	};
+	Set.prototype.has = function ( x ) {
+		var i, len;
+		for ( i = 0, len = this.contents.length; i < len; i++ ) {
+			if ( this.contents[ i ] === x ) {
+				return true;
+			}
+			return false;
+		}
+	};
+	Set.prototype.add = function ( x ) {
+		this.contents.push( x );
+	};
+}
+
 /**
  * Get a plain-old-data deep clone of val.
  *
