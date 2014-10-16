@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e96e304_2cebb80a",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-16T19:47:15Z",
+      "side": 1,
+      "message": "This doesn\u0027t support \u0027reversed\u0027 transactions",
+      "revId": "887b4f8fa11288e40dc2bc3a4d9ec7774c24ca99",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
