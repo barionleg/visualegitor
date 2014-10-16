@@ -425,7 +425,11 @@ ve.ui.Surface.prototype.initFilibuster = function () {
 	var surface = this;
 	this.filibuster = new ve.Filibuster()
 		.wrapClass( ve.EventSequencer )
-		.wrapNamespace( ve.dm, 've.dm' )
+		.wrapNamespace( ve.dm, 've.dm', [
+			// blacklist
+			ve.dm.LinearSelection.prototype.getRanges,
+			ve.dm.NullSelection.prototype.getRanges
+		] )
 		.wrapNamespace( ve.ce, 've.ce' )
 		.wrapNamespace( ve.ui, 've.ui', [
 			// blacklist
@@ -435,12 +439,14 @@ ve.ui.Surface.prototype.initFilibuster = function () {
 		.setObserver( 'dm doc', function () {
 			return JSON.stringify( surface.model.documentModel.data.data );
 		} )
-		.setObserver( 'dm range', function () {
+		.setObserver( 'dm selection', function () {
 			var selection = surface.model.selection;
 			if ( !selection ) {
 				return null;
 			}
-			return [ selection.from, selection.to ].join( ',' );
+			return selection.getRanges().map( function ( range ) {
+				return range.from + '-' + range.to;
+			} ).join( ', ' );
 		} )
 		.setObserver( 'DOM doc', function () {
 			return surface.view.$element.html();
