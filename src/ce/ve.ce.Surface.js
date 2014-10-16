@@ -1185,11 +1185,9 @@ ve.ce.Surface.prototype.onCopy = function ( e ) {
 	clipboardItem = { slice: slice, hash: null };
 	clipboardIndex = this.clipboard.push( clipboardItem ) - 1;
 
-	// Check we have setData and that it actually works (returns true)
+	// Check we have a W3C clipboardData API
 	if (
-		clipboardData && clipboardData.setData &&
-		clipboardData.setData( 'text/xcustom', '' ) &&
-		clipboardData.setData( 'text/html', '' )
+		clipboardData && clipboardData.items
 	) {
 		// Webkit allows us to directly edit the clipboard
 		// Disable the default event so we can override the data
