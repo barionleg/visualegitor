@@ -75,39 +75,39 @@ ve.ce.Surface = function VeCeSurface( model, surface, options ) {
 		documentUpdate: 'onModelDocumentUpdate'
 	} );
 
-	this.onDocumentMouseUpHandler = ve.bind( this.onDocumentMouseUp, this );
+	this.onDocumentMouseUpHandler = this.onDocumentMouseUp.bind( this );
 	this.$documentNode.on( {
 		// mouse events shouldn't be sequenced as the event sequencer
 		// is detached on blur
-		mousedown: ve.bind( this.onDocumentMouseDown, this ),
+		mousedown: this.onDocumentMouseDown.bind( this ),
 		// mouseup is bound to the whole document on mousedown
-		mousemove: ve.bind( this.onDocumentMouseMove, this ),
-		cut: ve.bind( this.onCut, this ),
-		copy: ve.bind( this.onCopy, this )
+		mousemove: this.onDocumentMouseMove.bind( this ),
+		cut: this.onCut.bind( this ),
+		copy: this.onCopy.bind( this )
 	} );
 
-	this.onWindowResizeHandler = ve.bind( this.onWindowResize, this );
+	this.onWindowResizeHandler = this.onWindowResize.bind( this );
 	this.$window.on( 'resize', this.onWindowResizeHandler );
 
 	// Use onDOMEvent to get jQuery focusin/focusout events to work in iframes
-	this.onDocumentFocusInOutHandler = ve.bind( this.onDocumentFocusInOut, this );
+	this.onDocumentFocusInOutHandler = this.onDocumentFocusInOut.bind( this );
 	OO.ui.Element.onDOMEvent( this.getElementDocument(), 'focusin', this.onDocumentFocusInOutHandler );
 	OO.ui.Element.onDOMEvent( this.getElementDocument(), 'focusout', this.onDocumentFocusInOutHandler );
 	// It is possible for a mousedown to clear the selection
 	// without triggering a focus change event (e.g. if the
 	// document has been programmatically blurred) so trigger
 	// a focus change to check if we still have a selection
-	this.debounceFocusChange = ve.bind( ve.debounce( this.onFocusChange ), this );
+	this.debounceFocusChange = ve.debounce( this.onFocusChange ).bind( this );
 	this.$document.on( 'mousedown', this.debounceFocusChange );
 
 	this.$pasteTarget.on( {
-		cut: ve.bind( this.onCut, this ),
-		copy: ve.bind( this.onCopy, this )
+		cut: this.onCut.bind( this ),
+		copy: this.onCopy.bind( this )
 	} );
 
 	this.$documentNode
 		// Bug 65714: MSIE possibly needs `beforepaste` to also be bound; to test.
-		.on( 'paste', ve.bind( this.onPaste, this ) )
+		.on( 'paste', this.onPaste.bind( this ) )
 		.on( 'focus', 'a', function () {
 			// Opera <= 12 triggers 'blur' on document node before any link is
 			// focused and we don't want that
@@ -115,27 +115,27 @@ ve.ce.Surface = function VeCeSurface( model, surface, options ) {
 		} );
 
 	if ( this.hasSelectionChangeEvents ) {
-		this.$document.on( 'selectionchange', ve.bind( this.onDocumentSelectionChange, this ) );
+		this.$document.on( 'selectionchange', this.onDocumentSelectionChange.bind( this ) );
 	} else {
-		this.$documentNode.on( 'mousemove', ve.bind( this.onDocumentSelectionChange, this ) );
+		this.$documentNode.on( 'mousemove', this.onDocumentSelectionChange.bind( this ) );
 	}
 
 	this.$element.on( {
-		dragstart: ve.bind( this.onDocumentDragStart, this ),
-		dragover: ve.bind( this.onDocumentDragOver, this ),
-		drop: ve.bind( this.onDocumentDrop, this )
+		dragstart: this.onDocumentDragStart.bind( this ),
+		dragover: this.onDocumentDragOver.bind( this ),
+		drop: this.onDocumentDrop.bind( this )
 	} );
 
 	// Add listeners to the eventSequencer. They won't get called until
 	// eventSequencer.attach(node) has been called.
 	this.eventSequencer.on( {
-		keydown: ve.bind( this.onDocumentKeyDown, this ),
-		keyup: ve.bind( this.onDocumentKeyUp, this ),
-		keypress: ve.bind( this.onDocumentKeyPress, this ),
-		compositionstart: ve.bind( this.onDocumentCompositionStart, this ),
-		compositionend: ve.bind( this.onDocumentCompositionEnd, this )
+		keydown: this.onDocumentKeyDown.bind( this ),
+		keyup: this.onDocumentKeyUp.bind( this ),
+		keypress: this.onDocumentKeyPress.bind( this ),
+		compositionstart: this.onDocumentCompositionStart.bind( this ),
+		compositionend: this.onDocumentCompositionEnd.bind( this )
 	} ).after( {
-		keypress: ve.bind( this.afterDocumentKeyPress, this )
+		keypress: this.afterDocumentKeyPress.bind( this )
 	} );
 
 	// Initialization
@@ -531,7 +531,7 @@ ve.ce.Surface.prototype.focus = function () {
 		// If we are calling focus after replacing a node the selection may be gone
 		// but onDocumentFocus won't fire so restore the selection here too.
 		this.onModelSelect( this.surface.getModel().getSelection() );
-		setTimeout( ve.bind( function () {
+		setTimeout( function () {
 			// In some browsers (e.g. Chrome) giving the document node focus doesn't
 			// necessarily give you a selection (e.g. if the first child is a <figure>)
 			// so if the surface isn't 'focused' (has no selection) give it a selection
@@ -541,7 +541,7 @@ ve.ce.Surface.prototype.focus = function () {
 			if ( !this.isFocused() ) {
 				this.getModel().selectFirstContentOffset();
 			}
-		}, this ) );
+		}.bind( this ) );
 	}
 	// onDocumentFocus takes care of the rest
 };
@@ -823,7 +823,7 @@ ve.ce.Surface.prototype.onDocumentDrop = function ( e ) {
 	}
 
 	// Process drop operation after native drop has been prevented below
-	setTimeout( ve.bind( function () {
+	setTimeout( function () {
 		var dragRange, originFragment, originData, targetRange, targetOffset, targetFragment;
 
 		if ( focusedNode ) {
@@ -868,7 +868,7 @@ ve.ce.Surface.prototype.onDocumentDrop = function ( e ) {
 
 			this.endRelocation();
 		}
-	}, this ) );
+	}.bind( this ) );
 
 	// Prevent native drop event from modifying view
 	return false;
@@ -1013,9 +1013,9 @@ ve.ce.Surface.prototype.onDocumentKeyUp = function ( e ) {
  */
 ve.ce.Surface.prototype.onCut = function ( e ) {
 	this.onCopy( e );
-	setTimeout( ve.bind( function () {
+	setTimeout( function () {
 		this.getModel().getFragment().delete().select();
-	}, this ) );
+	}.bind( this ) );
 };
 
 /**
@@ -1134,14 +1134,14 @@ ve.ce.Surface.prototype.onPaste = function ( e ) {
 	}
 	this.pasting = true;
 	this.beforePaste( e );
-	setTimeout( ve.bind( function () {
+	setTimeout( function () {
 		this.afterPaste( e );
 
 		// Allow pasting again
 		this.pasting = false;
 		this.pasteSpecial = false;
 		this.beforePasteData = null;
-	}, this ) );
+	}.bind( this ) );
 };
 
 /**
@@ -1981,7 +1981,7 @@ ve.ce.Surface.prototype.handleUpOrDownArrowKey = function ( e ) {
 	if ( endNode && endNode.nodeType === Node.TEXT_NODE ) {
 		ve.normalizeNode( endNode );
 	}
-	setTimeout( ve.bind( function () {
+	setTimeout( function () {
 		var viewNode, range;
 		// Chrome bug lets you cursor into a multi-line contentEditable=false with up/down...
 		viewNode = $( this.nativeSelection.anchorNode ).closest( '.ve-ce-leafNode,.ve-ce-branchNode' ).data( 'view' );
@@ -1997,7 +1997,7 @@ ve.ce.Surface.prototype.handleUpOrDownArrowKey = function ( e ) {
 		}
 		this.model.setSelection( range );
 		this.surfaceObserver.pollOnce();
-	}, this ) );
+	}.bind( this ) );
 };
 
 /**
