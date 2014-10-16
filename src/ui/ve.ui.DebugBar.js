@@ -260,8 +260,10 @@ ve.ui.DebugBar.prototype.onDumpModelChangeToggleClick = function () {
  * @param {jQuery.Event} e Event
  */
 ve.ui.DebugBar.prototype.onFilibusterToggleClick = function () {
+	var debugBar = this;
 	if ( this.filibusterToggle.getValue() ) {
 		this.filibusterToggle.setLabel( 'Stop Filibuster' );
+		this.$filibuster.off( 'click' );
 		this.$filibuster.hide();
 		this.$filibuster.empty();
 		this.getSurface().startFilibuster();
@@ -269,6 +271,28 @@ ve.ui.DebugBar.prototype.onFilibusterToggleClick = function () {
 		this.getSurface().stopFilibuster();
 		this.$filibuster.html( this.getSurface().filibuster.getObservationsHtml() );
 		this.$filibuster.show();
+		this.$filibuster.on( 'click', function ( e ) {
+			var match, path,
+				$li = $( e.target ).closest( '.ve-filibuster-frame' );
+
+			if ( $li.hasClass( 've-filibuster-frame-expandable' ) ) {
+				$li.removeClass( 've-filibuster-frame-expandable' );
+				match = $li.attr( 'class' ).match( /\bve-filibuster-frame-([0-9_]+)\b/ );
+				if ( !match ) {
+					return;
+				}
+				path = match[ 1 ].split( /_/ ).map( function ( n ) {
+					return parseInt( n );
+				} );
+				$li.children( 'span').replaceWith(
+					$( debugBar.getSurface().filibuster.getObservationsHtml( path ) )
+				);
+				$li.toggleClass( 've-filibuster-frame-expanded' );
+			} else if ( $li.children( 'ul' ).length ) {
+				$li.toggleClass( 've-filibuster-frame-collapsed' );
+				$li.toggleClass( 've-filibuster-frame-expanded' );
+			}
+		} );
 		this.filibusterToggle.setLabel( 'Start Filibuster' );
 	}
 };
