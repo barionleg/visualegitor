@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e96e304_7f27240e",
+        "filename": "src/ui/ve.ui.Toolbar.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2014-10-16T21:39:56Z",
+      "side": 1,
+      "message": "No, read the comment. This is about jQuery.proxy (aka ve.bind). And naturally does not apply to native bind.",
+      "revId": "7a2795e395314f561ae4406ff829276c82d23a22",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
