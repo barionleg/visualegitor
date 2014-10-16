@@ -31,7 +31,7 @@ ve.ui.Toolbar = function VeUiToolbar( surface, options ) {
 	this.$surfaceView = null;
 	this.elementOffset = null;
 	this.windowEvents = {
-		// jQuery puts a guid on our prototype function when we use ve.bind,
+		// jQuery puts a guid on our prototype function when we use bind,
 		// we don't want that because that means calling $window.off( toolbarB.windowEvents )
 		// will effectively also unbind toolbarA.windowEvents as they would share a guid.
 		// Though jQuery does not share the reference (both A and B have the correct context
