@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_13e29400",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 749,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-17T19:21:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e96e304_508c9232",
+      "revId": "4d300e4fe5e4e2dbbc869e15c716bbd244be732d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_f09cbe61",
         "filename": "src/ce/ve.ce.Surface.js",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2014-10-17T18:15:23Z",
       "side": 1,
       "message": "That\u0027s a very verbose way of writing setSelection( selectionBefore )",
+      "revId": "4d300e4fe5e4e2dbbc869e15c716bbd244be732d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_53d81c58",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 765,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-17T19:21:05Z",
+      "side": 1,
+      "message": "no, selectionBefore...from, newSelection...to",
+      "parentUuid": "8e96e304_f09cbe61",
       "revId": "4d300e4fe5e4e2dbbc869e15c716bbd244be732d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
