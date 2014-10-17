@@ -16,6 +16,24 @@
       "revId": "b0435249916bea7604a0b0712e0865e0d2d894e4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_18287680",
+        "filename": "tests/ve.qunit.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-17T07:12:11Z",
+      "side": 1,
+      "message": "It\u0027s not the same. ToJson returns an object whereas stringify returns a string. The former produces nicely formatted diffs when there\u0027s a problem.",
+      "parentUuid": "8e96e304_a2958f37",
+      "revId": "b0435249916bea7604a0b0712e0865e0d2d894e4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
