@@ -34,6 +34,24 @@
       "revId": "b0435249916bea7604a0b0712e0865e0d2d894e4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_93a6a44f",
+        "filename": "tests/ve.qunit.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-17T19:32:24Z",
+      "side": 1,
+      "message": "Riiight. I guess it makes sense that toJSON returns an object, from the perspective of how it\u0027s used, but the name is horrible and gave me the wrong idea.",
+      "parentUuid": "8e96e304_18287680",
+      "revId": "b0435249916bea7604a0b0712e0865e0d2d894e4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
