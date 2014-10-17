@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e96e304_90ff7aa7",
+        "filename": "src/dm/ve.dm.Surface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-17T17:56:21Z",
+      "side": 0,
+      "message": "This was moved up here by David deliberately, so that this.selection would already be updated by the time setInsertionAnnotations() is called and onInsertionAnnotationsChange is emitted. This is needed for the unicorn code to work properly.\n\nI do see that I\u0027ve Made A Huge Mistake rebasing this and now things are screwed up, but from the looks of it this is going to break unicorns, so maybe this can be fixed with a smaller change?",
+      "revId": "74fc34ac9ec222c49be2267ed0aaa7f3be444fae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
