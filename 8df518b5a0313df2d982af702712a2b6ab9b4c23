@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e96e304_30d46648",
+        "filename": "src/ui/ve.ui.DesktopContext.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-17T17:46:42Z",
+      "side": 0,
+      "message": "Why is this being removed?",
+      "revId": "8df518b5a0313df2d982af702712a2b6ab9b4c23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
