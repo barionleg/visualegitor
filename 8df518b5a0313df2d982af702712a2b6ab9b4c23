@@ -16,6 +16,24 @@
       "revId": "8df518b5a0313df2d982af702712a2b6ab9b4c23",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_734f586f",
+        "filename": "src/ui/ve.ui.DesktopContext.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-17T19:07:57Z",
+      "side": 0,
+      "message": "because it shouldn\u0027t be there in the first place - we render selections during selection, and we show context menus if your selection warrants it.",
+      "parentUuid": "8e96e304_30d46648",
+      "revId": "8df518b5a0313df2d982af702712a2b6ab9b4c23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
