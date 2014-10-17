@@ -575,9 +575,6 @@ ve.dm.Surface.prototype.setSelection = function ( selection ) {
 	var left, right, leftAnnotations, rightAnnotations, insertionAnnotations,
 		startNode, selectedNode, range, coveredAnnotations,
 		branchNodes = {},
-		oldSelection = this.selection,
-		oldBranchNodes = this.branchNodes,
-		oldSelectedNode = this.selectedNode,
 		contextChange = false,
 		linearData = this.getDocument().data;
 
@@ -591,11 +588,6 @@ ve.dm.Surface.prototype.setSelection = function ( selection ) {
 		this.selection = selection;
 		return;
 	}
-
-	// Update state
-	this.selection = selection;
-	this.branchNodes = branchNodes;
-	this.selectedNode = selectedNode;
 
 	if ( selection instanceof ve.dm.LinearSelection ) {
 		range = selection.getRange();
@@ -663,17 +655,21 @@ ve.dm.Surface.prototype.setSelection = function ( selection ) {
 
 	// If branchNodes or selectedNode changed emit a contextChange
 	if (
-		selectedNode !== oldSelectedNode ||
-		branchNodes.start !== oldBranchNodes.start ||
-		branchNodes.end !== oldBranchNodes.end
+		selectedNode !== this.selectedNode ||
+		branchNodes.start !== this.branchNodes.start ||
+		branchNodes.end !== this.branchNodes.end
 	) {
+		this.branchNodes = branchNodes;
+		this.selectedNode = selectedNode;
 		contextChange = true;
 	}
 
-	// Emit events
-	if ( !oldSelection.equals( this.selection ) ) {
+	// If selection changed emit a select
+	if ( !this.selection.equals( selection ) ) {
+		this.selection = selection;
 		this.emit( 'select', this.selection.clone() );
 	}
+
 	if ( contextChange ) {
 		this.emitContextChange();
 	}
