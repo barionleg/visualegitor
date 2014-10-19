@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e96e304_4ad85958",
+        "filename": "src/ui/ve.ui.DebugBar.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-19T01:28:02Z",
+      "side": 1,
+      "message": "Use this.inputDebuggingToggle.getValue() instead.",
+      "revId": "e6f955225ee95bf4ae4b3b05a0c7dd4450bab8fc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
