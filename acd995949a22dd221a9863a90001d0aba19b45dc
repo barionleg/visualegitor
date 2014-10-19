@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e96e304_0a233155",
+        "filename": "src/ui/inspectors/ve.ui.SpecialCharacterInspector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-19T01:20:13Z",
+      "side": 1,
+      "message": "You should inpsect the spelling of this comment",
+      "revId": "acd995949a22dd221a9863a90001d0aba19b45dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_6a2e7540",
+        "filename": "src/ui/inspectors/ve.ui.SpecialCharacterInspector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-19T01:20:13Z",
+      "side": 1,
+      "message": "What would be even nicer is if this function did this.close( { character: $( e.target ).data( \u0027character\u0027 ) } );",
+      "revId": "acd995949a22dd221a9863a90001d0aba19b45dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
