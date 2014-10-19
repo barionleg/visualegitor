@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e96e304_ca1c691b",
+        "filename": "src/ui/inspectors/ve.ui.CommentInspector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-19T01:26:07Z",
+      "side": 1,
+      "message": "The pselling of the comment in this pscae requires epsecially close inpsection",
+      "revId": "3493c115af60c8a43e1958e489ee88c560e6bec3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
