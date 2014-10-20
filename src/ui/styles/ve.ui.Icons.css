@@ -290,3 +290,8 @@
 .oo-ui-icon-table-insert-column-after {
 	background-image: /* @embed */ url(images/icons/table-insert-column-after.svg);
 }
+
+.oo-ui-icon-table-merge-cells {
+	background-image: /* @embed */ url(images/icons/table-merge-cells.svg);
+	background-position: center;
+}
