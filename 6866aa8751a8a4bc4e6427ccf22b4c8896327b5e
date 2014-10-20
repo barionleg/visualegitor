@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e96e304_21d5eb47",
+        "filename": "i18n/qqq.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2014-10-20T18:27:14Z",
+      "side": 1,
+      "message": "This file has mixed indentation. Can you please update it to use tabs exclusively?",
+      "revId": "6866aa8751a8a4bc4e6427ccf22b4c8896327b5e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
