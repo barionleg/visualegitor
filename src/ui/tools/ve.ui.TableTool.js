@@ -115,3 +115,32 @@ ve.ui.DeleteColumnTool.static.title =
 ve.ui.DeleteColumnTool.static.commandName = 'deleteColumn';
 ve.ui.DeleteColumnTool.static.requiresSelection = [ 'table' ];
 ve.ui.toolFactory.register( ve.ui.DeleteColumnTool );
+
+ve.ui.MergeCellsTool = function VeUiDeleteColumnTool( toolGroup, config ) {
+	ve.ui.Tool.call( this, toolGroup, config );
+};
+OO.inheritClass( ve.ui.MergeCellsTool, ve.ui.Tool );
+ve.ui.MergeCellsTool.static.name = 'mergeCells';
+ve.ui.MergeCellsTool.static.group = 'table';
+ve.ui.MergeCellsTool.static.autoAddToCatchall = false;
+ve.ui.MergeCellsTool.static.icon = 'table-merge-cells';
+ve.ui.MergeCellsTool.static.title =
+	OO.ui.deferMsg( 'visualeditor-table-merge-cells' );
+ve.ui.MergeCellsTool.static.commandName = 'mergeCells';
+ve.ui.MergeCellsTool.static.requiresSelection = [ 'table' ];
+ve.ui.MergeCellsTool.static.deactivateOnSelect = false;
+
+ve.ui.MergeCellsTool.prototype.onUpdateState = function ( fragment ) {
+	// Parent method
+	ve.ui.MergeCellsTool.super.prototype.onUpdateState.apply( this, arguments );
+
+	var selection = fragment.getSelection();
+
+	this.setActive(
+		selection instanceof ve.dm.TableSelection &&
+		selection.isSingleCell() &&
+		selection.getMatrixCells( true ).length > 1
+	);
+};
+
+ve.ui.toolFactory.register( ve.ui.MergeCellsTool );
