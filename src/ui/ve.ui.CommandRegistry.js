@@ -177,3 +177,6 @@ ve.ui.commandRegistry.register(
 ve.ui.commandRegistry.register(
 	new ve.ui.Command( 'toggleCellHeader', 'table', 'toggleCellHeader' )
 );
+ve.ui.commandRegistry.register(
+	new ve.ui.Command( 'mergeCells', 'table', 'mergeCells' )
+);

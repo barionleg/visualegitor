@@ -295,3 +295,8 @@
 	background-image: /* @embed */ url(images/icons/table-insert-column-after.svg);
 	background-position: center;
 }
+
+.oo-ui-icon-table-merge-cells {
+	background-image: /* @embed */ url(images/icons/table-merge-cells.svg);
+	background-position: center;
+}
