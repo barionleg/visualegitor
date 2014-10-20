@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e96e304_4107d7cd",
+        "filename": "src/ui/inspectors/ve.ui.SpecialCharacterInspector.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-20T18:33:20Z",
+      "side": 1,
+      "message": "Should be \u0027safe\u0027, not \u0027destructive\u0027",
+      "revId": "2a80d6ca344f0a8708a325041720b624975e1741",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_81fcffb2",
+        "filename": "src/ui/inspectors/ve.ui.SpecialCharacterInspector.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-20T18:33:20Z",
+      "side": 1,
+      "message": "This is unnecessary. \u0027cancel\u0027 should be the safe action, so it should be the default if no action is specified in teardownProcess\u0027s data.action",
+      "revId": "2a80d6ca344f0a8708a325041720b624975e1741",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
