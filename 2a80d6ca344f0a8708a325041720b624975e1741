@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "8e96e304_611693f8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-20T18:34:11Z",
+      "side": 1,
+      "message": "inpsector",
+      "revId": "2a80d6ca344f0a8708a325041720b624975e1741",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_4107d7cd",
         "filename": "src/ui/inspectors/ve.ui.SpecialCharacterInspector.js",
         "patchSetId": 2
