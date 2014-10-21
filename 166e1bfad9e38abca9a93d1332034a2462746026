@@ -1,0 +1,735 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e96e304_7662d838",
+        "filename": "src/dm/nodes/ve.dm.TableCellNode.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-21T02:28:01Z",
+      "side": 1,
+      "message": "It could also be undefined, for newly created tableCells (unless you want to make tableCell creation very heavy)",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_1611145f",
+        "filename": "src/dm/nodes/ve.dm.TableCellNode.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-21T02:28:01Z",
+      "side": 1,
+      "message": "Why isn\u0027t this .static ?",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_19106752",
+        "filename": "src/dm/nodes/ve.dm.TableNode.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-21T02:28:01Z",
+      "side": 1,
+      "message": "Document. This is also misnamed IMO as it\u0027s not a real event listener, instead it\u0027s called manually by the node\u0027s descendants.",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_d9199f7f",
+        "filename": "src/dm/nodes/ve.dm.TableNode.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-21T02:28:01Z",
+      "side": 1,
+      "message": "Document event emission and existence",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_591d8f65",
+        "filename": "src/dm/nodes/ve.dm.TableNode.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-21T02:28:01Z",
+      "side": 1,
+      "message": "After the Great Selection Rewrite, I think it\u0027s a bad idea to call a variable \u0027selection\u0027 but have it not be a ve.dm.Selection object",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_3960c3cb",
+        "filename": "src/dm/nodes/ve.dm.TableNode.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-21T02:28:01Z",
+      "side": 1,
+      "message": "Not an optional param",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_f959fb2d",
+        "filename": "src/dm/nodes/ve.dm.TableNode.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-21T02:28:01Z",
+      "side": 1,
+      "message": "Also not optional",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_79adebe6",
+        "filename": "src/dm/nodes/ve.dm.TableNode.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-21T02:28:01Z",
+      "side": 1,
+      "message": "Object|null",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_59aa6fd2",
+        "filename": "src/dm/nodes/ve.dm.TableNode.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-21T02:28:01Z",
+      "side": 1,
+      "message": "This break breaks out of the switch, not the while, so it\u0027s useless and confusing. I think it would be clearer if you flipped the condition:\n\n    if ( !constraint || node.getRange().containsOffset( constraint ) ) {\n        return { .... };\n    }",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_19b4e732",
+        "filename": "src/dm/nodes/ve.dm.TableNode.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-21T02:28:01Z",
+      "side": 1,
+      "message": "Not optional",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_d968bf86",
+        "filename": "src/dm/nodes/ve.dm.TableNode.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-21T02:28:01Z",
+      "side": 1,
+      "message": "Why are these here? Why doesn\u0027t this use events?",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_995b17fd",
+        "filename": "src/dm/nodes/ve.dm.TableNode.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-21T02:28:01Z",
+      "side": 1,
+      "message": "Document \"it\" parameter. Also, why doesn\u0027t this use this.iterator like next() does?",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_590caff0",
+        "filename": "src/dm/nodes/ve.dm.TableNode.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-21T02:28:01Z",
+      "side": 1,
+      "message": "Presumably these should be skipped over, since we\u0027re iterating cells?",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_790f2be5",
+        "filename": "src/dm/nodes/ve.dm.TableRowNode.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-21T02:28:01Z",
+      "side": 1,
+      "message": "Document. Not a real event handler, so I don\u0027t like the naming.",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_d9ff5fa6",
+        "filename": "src/dm/nodes/ve.dm.TableRowNode.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-21T02:28:01Z",
+      "side": 1,
+      "message": "Modifying the arguments is evil but I guess in this case it\u0027s fine",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_19f627d5",
+        "filename": "src/dm/nodes/ve.dm.TableRowNode.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-21T02:28:01Z",
+      "side": 1,
+      "message": "Missing spaces inside parens",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_99d8f759",
+        "filename": "src/dm/nodes/ve.dm.TableRowNode.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-21T02:28:01Z",
+      "side": 1,
+      "message": "Document as:\n\n    @param {Object} [options] Creation options\n    @param {string} [options.style\u003d\u0027data\u0027] Cell style; \u0027data\u0027 or \u0027header\u0027\n    @param {number} [options.cellCount\u003d1] Number of cells to create",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_9929d738",
+        "filename": "src/dm/nodes/ve.dm.TableRowNode.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-21T02:28:01Z",
+      "side": 1,
+      "message": "Why not .static ? I like where this is going though. We have defaultAttributes, but with this approach we can fix https://bugzilla.wikimedia.org/show_bug.cgi?id\u003d62816",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_d9f51fb7",
+        "filename": "src/dm/nodes/ve.dm.TableSectionNode.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-21T02:28:01Z",
+      "side": 1,
+      "message": "Document, not a real event handler, same as the other ones",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_f9f01bc6",
+        "filename": "src/dm/ve.dm.Document.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 695,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-21T02:28:01Z",
+      "side": 1,
+      "message": "Explain what this is more clearly. My understanding from reading the code is that getRelativeRange() will not return anything outside of the limiting range, instead returning the original range in that case.",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_b9a9338f",
+        "filename": "src/dm/ve.dm.SurfaceFragment.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 846,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-21T02:28:01Z",
+      "side": 1,
+      "message": "Hah, good catch",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_bc04c181",
+        "filename": "src/dm/ve.dm.TableMatrix.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-21T02:28:01Z",
+      "side": 1,
+      "message": "Not optional",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_59e4afdb",
+        "filename": "src/dm/ve.dm.TableMatrix.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-21T02:28:01Z",
+      "side": 1,
+      "message": "Lowercase n number, throughout the file",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_19ce2760",
+        "filename": "src/dm/ve.dm.TableMatrix.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-21T02:28:01Z",
+      "side": 1,
+      "message": "We usually use null for this, not undefined.\n\nIn Trevor\u0027s words: null means \"I know what you\u0027re talking about, but it\u0027s not there\", undefined means \"I don\u0027t know what you\u0027re talking about\"",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_d9d75ff1",
+        "filename": "src/dm/ve.dm.TableMatrix.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-21T02:28:01Z",
+      "side": 1,
+      "message": "Not optional",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_39f0c38d",
+        "filename": "src/dm/ve.dm.TableMatrix.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-21T02:28:01Z",
+      "side": 1,
+      "message": "Not optional",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_1944e7bc",
+        "filename": "src/dm/ve.dm.TableMatrix.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-21T02:28:01Z",
+      "side": 1,
+      "message": "Not optional",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_f9481bd1",
+        "filename": "src/dm/ve.dm.TableMatrix.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-21T02:28:01Z",
+      "side": 1,
+      "message": "More like [][]",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_192b87dc",
+        "filename": "src/dm/ve.dm.TableMatrix.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-21T02:28:01Z",
+      "side": 1,
+      "message": "Use imperative: \"Look up the cell\"",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_d9243f0a",
+        "filename": "src/dm/ve.dm.TableMatrix.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-21T02:28:01Z",
+      "side": 1,
+      "message": "Document parameter",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_396d232e",
+        "filename": "src/dm/ve.dm.TableMatrix.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-21T02:28:01Z",
+      "side": 1,
+      "message": "cellNode is a ve.dm.Node, right? So use .getParent() instead then?",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_bc8fe125",
+        "filename": "src/dm/ve.dm.TableMatrix.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-21T02:28:01Z",
+      "side": 1,
+      "message": "The documentation should be clearer. It doesn\u0027t actually find the closest one, necessarily, because it first goes to the left, and only if there\u0027s nothing to the left does it look to the right. It will also never leave the row, and if the row consists only of placeholder cells it\u0027ll return null.\n\nFrom the calls I can find in TableAction this all seems to be expected, but most of it is documented *there* in the form of comments rather than in these docs right here.\n\nI guess what this function is actually being used for is \"I want to insert a real cell in place of this placeholder cell, so I need a DM offset that corresponds to the location of this placeholder cell\". I\u0027m not sure that moving right is a useful strategy there, because if there are only placeholders to the left, presumably you just want the start of the row?",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_798babe8",
+        "filename": "src/dm/ve.dm.TableMatrix.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-21T02:28:01Z",
+      "side": 1,
+      "message": "Document parameter",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_3c9bd169",
+        "filename": "src/dm/ve.dm.TableMatrix.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-21T02:28:01Z",
+      "side": 1,
+      "message": "[owner] since this param is optional",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_9cb305e8",
+        "filename": "src/dm/ve.dm.TableMatrix.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-21T02:28:01Z",
+      "side": 1,
+      "message": "Missing param name",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_fca489a0",
+        "filename": "src/dm/ve.dm.TableMatrix.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-21T02:28:01Z",
+      "side": 1,
+      "message": "@return",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_bcb601d6",
+        "filename": "src/dm/ve.dm.TableMatrix.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-21T02:28:01Z",
+      "side": 1,
+      "message": "Document",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_5cad7d7f",
+        "filename": "src/dm/ve.dm.TableSelection.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-21T02:28:01Z",
+      "side": 1,
+      "message": "Wrong class name",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_1cfff532",
+        "filename": "src/dm/ve.dm.TableSelection.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-21T02:28:01Z",
+      "side": 1,
+      "message": "I guess this is the performance thing you wanted my input on? Every time this function is called, which is every time we need the matrix, it searches for the table node all over again?\n\nMy first suggestion would be to lazily cache the table node, and clear it in translateByTransaction if it\u0027s not attached any more.",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_7ce87977",
+        "filename": "src/dm/ve.dm.TableSelection.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-21T02:28:01Z",
+      "side": 1,
+      "message": "adjustED",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_9c9225ff",
+        "filename": "src/dm/ve.dm.TableSelection.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-21T02:28:01Z",
+      "side": 1,
+      "message": "Document how these offsets are used. From what I can tell, they can be positive or negative, and placeholders are not counted.",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_3c8191a4",
+        "filename": "src/dm/ve.dm.TableSelection.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-21T02:28:01Z",
+      "side": 1,
+      "message": "Maybe it\u0027s just me but I was confused when reading this. It sounded to me like it would return true if the selection covered exactly one row, but instead it returns true if the selection covers every column, i.e. covers exactly the width of the table, possibly covering multiple rows.\n\nThis also doesn\u0027t seem to account for the case where there\u0027s a placeholder in the last column? Selections aren\u0027t normalized for boundaries at placeholders, it seems, and we don\u0027t seem to bother to check at use time either. I vaguely recall something about you saying this kind of edge case where there\u0027s a placeholder at the boundary should be out of scope, do I remember that right?",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_fc8a49bf",
+        "filename": "tests/ce/ve.ce.Surface.test.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 795,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-21T02:28:01Z",
+      "side": 1,
+      "message": "And that\u0027s why I think you should gracefully handle undefined",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
