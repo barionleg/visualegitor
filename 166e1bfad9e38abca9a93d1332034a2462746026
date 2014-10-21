@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_ffd23b00",
+        "filename": "src/dm/nodes/ve.dm.TableCellNode.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-21T11:32:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e96e304_7662d838",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_1611145f",
         "filename": "src/dm/nodes/ve.dm.TableCellNode.js",
         "patchSetId": 34
@@ -30,6 +48,24 @@
       "writtenOn": "2014-10-21T02:28:01Z",
       "side": 1,
       "message": "Why isn\u0027t this .static ?",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_3fc98355",
+        "filename": "src/dm/nodes/ve.dm.TableCellNode.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-21T11:32:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e96e304_1611145f",
       "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_dfe17f98",
+        "filename": "src/dm/nodes/ve.dm.TableNode.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-21T11:32:52Z",
+      "side": 1,
+      "message": "Not my code. Replaced all of this with onSplice events at each level of the table (except cell) that invalidate the matrix directly",
+      "parentUuid": "8e96e304_19106752",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_d9199f7f",
         "filename": "src/dm/nodes/ve.dm.TableNode.js",
         "patchSetId": 34
@@ -64,6 +118,24 @@
       "writtenOn": "2014-10-21T02:28:01Z",
       "side": 1,
       "message": "Document event emission and existence",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_3fd3c3d8",
+        "filename": "src/dm/nodes/ve.dm.TableNode.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-21T11:32:52Z",
+      "side": 1,
+      "message": "Event never used",
+      "parentUuid": "8e96e304_d9199f7f",
       "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_1fffe732",
+        "filename": "src/dm/nodes/ve.dm.TableNode.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-21T11:32:52Z",
+      "side": 1,
+      "message": "Method no-longer used",
+      "parentUuid": "8e96e304_591d8f65",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_3960c3cb",
         "filename": "src/dm/nodes/ve.dm.TableNode.js",
         "patchSetId": 34
@@ -98,6 +188,24 @@
       "writtenOn": "2014-10-21T02:28:01Z",
       "side": 1,
       "message": "Not an optional param",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_dff89f48",
+        "filename": "src/dm/nodes/ve.dm.TableNode.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-21T11:32:52Z",
+      "side": 1,
+      "message": "Method no longer used",
+      "parentUuid": "8e96e304_3960c3cb",
       "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -189,6 +297,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_7f9f0b07",
+        "filename": "src/dm/nodes/ve.dm.TableNode.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-21T11:32:52Z",
+      "side": 1,
+      "message": "Not my code. Fixed.",
+      "parentUuid": "8e96e304_d968bf86",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_995b17fd",
         "filename": "src/dm/nodes/ve.dm.TableNode.js",
         "patchSetId": 34
@@ -200,6 +326,24 @@
       "writtenOn": "2014-10-21T02:28:01Z",
       "side": 1,
       "message": "Document \"it\" parameter. Also, why doesn\u0027t this use this.iterator like next() does?",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_9f4f7797",
+        "filename": "src/dm/nodes/ve.dm.TableNode.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-21T11:32:52Z",
+      "side": 1,
+      "message": "Indeed. And why have this.iterator at all, just make them root properties.",
+      "parentUuid": "8e96e304_995b17fd",
       "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -223,6 +367,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_ff80fb8f",
+        "filename": "src/dm/nodes/ve.dm.TableNode.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-21T11:32:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e96e304_590caff0",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_790f2be5",
         "filename": "src/dm/nodes/ve.dm.TableRowNode.js",
         "patchSetId": 34
@@ -234,6 +396,24 @@
       "writtenOn": "2014-10-21T02:28:01Z",
       "side": 1,
       "message": "Document. Not a real event handler, so I don\u0027t like the naming.",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_bf52733d",
+        "filename": "src/dm/nodes/ve.dm.TableRowNode.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-21T11:32:52Z",
+      "side": 1,
+      "message": "Deleted.",
+      "parentUuid": "8e96e304_790f2be5",
       "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -308,6 +488,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_5f49ef8e",
+        "filename": "src/dm/nodes/ve.dm.TableRowNode.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-21T11:32:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e96e304_9929d738",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_d9f51fb7",
         "filename": "src/dm/nodes/ve.dm.TableSectionNode.js",
         "patchSetId": 34
@@ -325,6 +523,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_bf3913f1",
+        "filename": "src/dm/nodes/ve.dm.TableSectionNode.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-21T11:32:52Z",
+      "side": 1,
+      "message": "Deleted.",
+      "parentUuid": "8e96e304_d9f51fb7",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_f9f01bc6",
         "filename": "src/dm/ve.dm.Document.js",
         "patchSetId": 34
@@ -336,6 +552,24 @@
       "writtenOn": "2014-10-21T02:28:01Z",
       "side": 1,
       "message": "Explain what this is more clearly. My understanding from reading the code is that getRelativeRange() will not return anything outside of the limiting range, instead returning the original range in that case.",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_1f2a878f",
+        "filename": "src/dm/ve.dm.Document.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 695,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-21T11:32:52Z",
+      "side": 1,
+      "message": "Yes, done.",
+      "parentUuid": "8e96e304_f9f01bc6",
       "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -393,6 +627,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_ff055b17",
+        "filename": "src/dm/ve.dm.TableMatrix.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-21T11:32:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e96e304_59e4afdb",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_19ce2760",
         "filename": "src/dm/ve.dm.TableMatrix.js",
         "patchSetId": 34
@@ -404,6 +656,24 @@
       "writtenOn": "2014-10-21T02:28:01Z",
       "side": 1,
       "message": "We usually use null for this, not undefined.\n\nIn Trevor\u0027s words: null means \"I know what you\u0027re talking about, but it\u0027s not there\", undefined means \"I don\u0027t know what you\u0027re talking about\"",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_aafc6f09",
+        "filename": "src/dm/ve.dm.TableMatrix.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-21T11:32:52Z",
+      "side": 1,
+      "message": "Out of bounds does mean \"I don\u0027t know what you\u0027re talking about\".\n\ne.g. x \u003d [1,null,3] would return 1, null, 3, undefined, \nundefined ... for it\u0027s offsets.\n\nThis is just a getter for a 2D array.\n\ncf LinearData.getData.",
+      "parentUuid": "8e96e304_19ce2760",
       "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -427,6 +697,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_8a097331",
+        "filename": "src/dm/ve.dm.TableMatrix.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-21T11:32:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e96e304_d9d75ff1",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_39f0c38d",
         "filename": "src/dm/ve.dm.TableMatrix.js",
         "patchSetId": 34
@@ -438,6 +726,24 @@
       "writtenOn": "2014-10-21T02:28:01Z",
       "side": 1,
       "message": "Not optional",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_2a105f52",
+        "filename": "src/dm/ve.dm.TableMatrix.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-21T11:32:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e96e304_39f0c38d",
       "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -461,6 +767,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_4a0b6b26",
+        "filename": "src/dm/ve.dm.TableMatrix.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-21T11:32:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e96e304_1944e7bc",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_f9481bd1",
         "filename": "src/dm/ve.dm.TableMatrix.js",
         "patchSetId": 34
@@ -472,6 +796,24 @@
       "writtenOn": "2014-10-21T02:28:01Z",
       "side": 1,
       "message": "More like [][]",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_8a209397",
+        "filename": "src/dm/ve.dm.TableMatrix.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-21T11:32:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e96e304_f9481bd1",
       "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -495,6 +837,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_4a328bf0",
+        "filename": "src/dm/ve.dm.TableMatrix.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-21T11:32:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e96e304_192b87dc",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_d9243f0a",
         "filename": "src/dm/ve.dm.TableMatrix.js",
         "patchSetId": 34
@@ -512,6 +872,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_0a2c838e",
+        "filename": "src/dm/ve.dm.TableMatrix.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-21T11:32:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e96e304_d9243f0a",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_396d232e",
         "filename": "src/dm/ve.dm.TableMatrix.js",
         "patchSetId": 34
@@ -523,6 +901,24 @@
       "writtenOn": "2014-10-21T02:28:01Z",
       "side": 1,
       "message": "cellNode is a ve.dm.Node, right? So use .getParent() instead then?",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_aa4a2f5d",
+        "filename": "src/dm/ve.dm.TableMatrix.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-21T11:32:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e96e304_396d232e",
       "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -563,6 +959,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_4a392bca",
+        "filename": "src/dm/ve.dm.TableMatrix.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-21T11:32:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e96e304_798babe8",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_3c9bd169",
         "filename": "src/dm/ve.dm.TableMatrix.js",
         "patchSetId": 34
@@ -574,6 +988,24 @@
       "writtenOn": "2014-10-21T02:28:01Z",
       "side": 1,
       "message": "[owner] since this param is optional",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_ea47d74e",
+        "filename": "src/dm/ve.dm.TableMatrix.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-21T11:32:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e96e304_3c9bd169",
       "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -597,6 +1029,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_0a432344",
+        "filename": "src/dm/ve.dm.TableMatrix.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-21T11:32:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e96e304_9cb305e8",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_fca489a0",
         "filename": "src/dm/ve.dm.TableMatrix.js",
         "patchSetId": 34
@@ -608,6 +1058,24 @@
       "writtenOn": "2014-10-21T02:28:01Z",
       "side": 1,
       "message": "@return",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_aa71cfa8",
+        "filename": "src/dm/ve.dm.TableMatrix.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-21T11:32:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e96e304_fca489a0",
       "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -631,6 +1099,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_4a604bcc",
+        "filename": "src/dm/ve.dm.TableMatrix.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-21T11:32:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e96e304_bcb601d6",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_5cad7d7f",
         "filename": "src/dm/ve.dm.TableSelection.js",
         "patchSetId": 34
@@ -642,6 +1128,24 @@
       "writtenOn": "2014-10-21T02:28:01Z",
       "side": 1,
       "message": "Wrong class name",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_0a5a4322",
+        "filename": "src/dm/ve.dm.TableSelection.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-21T11:32:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e96e304_5cad7d7f",
       "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -665,6 +1169,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_caf1bbff",
+        "filename": "src/dm/ve.dm.TableSelection.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-21T11:32:52Z",
+      "side": 1,
+      "message": "translateByTransaction returns a new instance, as does every other method which changes the offsets. The main problem is that we store selections in the undo stack, so pressing undo would pull up an old selection whose table may no longer be valid.\n\nWe should be confident the tableRange is correct, so perhaps we could check in the node is attached? Or is it possible you\u0027d get another attached node?",
+      "parentUuid": "8e96e304_1cfff532",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_7ce87977",
         "filename": "src/dm/ve.dm.TableSelection.js",
         "patchSetId": 34
@@ -676,6 +1198,24 @@
       "writtenOn": "2014-10-21T02:28:01Z",
       "side": 1,
       "message": "adjustED",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_0a900397",
+        "filename": "src/dm/ve.dm.TableSelection.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-21T11:32:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e96e304_7ce87977",
       "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -699,6 +1239,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_6af8a7e2",
+        "filename": "src/dm/ve.dm.TableSelection.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-21T11:32:52Z",
+      "side": 1,
+      "message": "Isn\u0027t it obvious an offset can be any integer, especially when the method is adjustment? Will document placeholders.",
+      "parentUuid": "8e96e304_9c9225ff",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_3c8191a4",
         "filename": "src/dm/ve.dm.TableSelection.js",
         "patchSetId": 34
@@ -716,6 +1274,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_eaeb5707",
+        "filename": "src/dm/ve.dm.TableSelection.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-21T11:32:52Z",
+      "side": 1,
+      "message": "User created selections /should/ always expand to incude their placeholders. This works with mouse selections, but I apparently need to fix keyboard selections (newFromAdjustment).",
+      "parentUuid": "8e96e304_3c8191a4",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_fc8a49bf",
         "filename": "tests/ce/ve.ce.Surface.test.js",
         "patchSetId": 34
@@ -727,6 +1303,24 @@
       "writtenOn": "2014-10-21T02:28:01Z",
       "side": 1,
       "message": "And that\u0027s why I think you should gracefully handle undefined",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e96e304_8ad2d35b",
+        "filename": "tests/ce/ve.ce.Surface.test.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 795,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-21T11:32:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e96e304_fc8a49bf",
       "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
