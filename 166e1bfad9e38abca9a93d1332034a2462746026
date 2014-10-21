@@ -1187,6 +1187,24 @@
     },
     {
       "key": {
+        "uuid": "8e96e304_cbc21d5d",
+        "filename": "src/dm/ve.dm.TableSelection.js",
+        "patchSetId": 34
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-21T17:35:46Z",
+      "side": 1,
+      "message": "Hmm. I think we probably shouldn\u0027t cache the table node in the selection object then. There\u0027s not much gained there unless selection operations frequently happen without changing the offsets and creating a brand new selection. I\u0027m also concerned that caching the table node will cause memory leaks, because the old selection object (which will almost certainly never be used again, and even if it is reused its table node won\u0027t be valid) will keep a reference to the table node forever, keeping the table node and all its descendants alive forever even after it\u0027s supposed to have been discarded.\n\nMaybe there\u0027s some other place where we can store the currently-selected table node, as an optimization? Could dm.Surface\u0027s selectedNode be used?",
+      "parentUuid": "8e96e304_caf1bbff",
+      "revId": "166e1bfad9e38abca9a93d1332034a2462746026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e96e304_7ce87977",
         "filename": "src/dm/ve.dm.TableSelection.js",
         "patchSetId": 34
