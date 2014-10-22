@@ -50,6 +50,16 @@ ve.ce.TableNode.prototype.onSetup = function () {
 	// Overlay
 	this.$selectionBox = this.$( '<div>' ).addClass( 've-ce-tableNodeOverlay-selection-box' );
 	this.$selectionBoxAnchor = this.$( '<div>' ).addClass( 've-ce-tableNodeOverlay-selection-box-anchor' );
+	this.colContext = new ve.ui.TableContext( this, {
+		classes: ['ve-ui-tableContext-colContext'],
+		toolSet: 'col',
+		indicator: 'down'
+	} );
+	this.rowContext = new ve.ui.TableContext( this, {
+		classes: ['ve-ui-tableContext-rowContext'],
+		toolSet: 'row',
+		indicator: 'next'
+	} );
 
 	this.$overlay = $( '<div>' )
 		.hide()
@@ -57,6 +67,8 @@ ve.ce.TableNode.prototype.onSetup = function () {
 		.append( [
 			this.$selectionBox,
 			this.$selectionBoxAnchor,
+			this.colContext.$element,
+			this.rowContext.$element,
 			this.$rowBracket,
 			this.$colBracket
 		] );
@@ -337,6 +349,12 @@ ve.ce.TableNode.prototype.updateOverlay = function () {
 	this.$overlay.css( {
 		top: tableOffset.top - surfaceOffset.top,
 		left: tableOffset.left - surfaceOffset.left
+	} );
+	this.colContext.$element.css( {
+		left: ( selectionOffset.left + selectionOffset.right ) / 2
+	} );
+	this.rowContext.$element.css( {
+		top: ( selectionOffset.top + selectionOffset.bottom ) / 2
 	} );
 
 	// Classes
