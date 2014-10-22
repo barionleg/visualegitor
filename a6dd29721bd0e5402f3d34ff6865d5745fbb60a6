@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_5ce61415",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 2854,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-22T17:28:32Z",
+      "side": 1,
+      "message": "You already have this in the boundingRect variable",
+      "revId": "a6dd29721bd0e5402f3d34ff6865d5745fbb60a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
