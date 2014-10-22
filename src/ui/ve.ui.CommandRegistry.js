@@ -174,3 +174,12 @@ ve.ui.commandRegistry.register(
 ve.ui.commandRegistry.register(
 	new ve.ui.Command( 'deleteColumn', 'table', 'delete', 'col' )
 );
+ve.ui.commandRegistry.register(
+	new ve.ui.Command( 'tableCellHeader', 'table', 'changeCellStyle', 'header' )
+);
+ve.ui.commandRegistry.register(
+	new ve.ui.Command( 'tableCellData', 'table', 'changeCellStyle', 'data' )
+);
+ve.ui.commandRegistry.register(
+	new ve.ui.Command( 'mergeCells', 'table', 'mergeCells' )
+);

@@ -32,7 +32,7 @@ ve.ui.TableAction.static.name = 'table';
  * @static
  * @property
  */
-ve.ui.TableAction.static.methods = [ 'create', 'insert', 'delete' ];
+ve.ui.TableAction.static.methods = [ 'create', 'insert', 'delete', 'changeCellStyle', 'mergeCells' ];
 
 /* Methods */
 
@@ -152,6 +152,82 @@ ve.ui.TableAction.prototype.delete = function ( mode ) {
 			this.deleteRowsOrColumns( tableNode.matrix, mode, minIndex, maxIndex );
 		}
 	}
+};
+
+/**
+ * Change cell style
+ *
+ * @param {string} style Cell style; 'header' or 'data'
+ */
+ve.ui.TableAction.prototype.changeCellStyle = function ( style ) {
+	var i, ranges,
+		txs = [],
+		surfaceModel = this.surface.getModel(),
+		selection = surfaceModel.getSelection();
+
+	if ( !( selection instanceof ve.dm.TableSelection ) ) {
+		return;
+	}
+
+	ranges = selection.getOuterRanges();
+	for ( i = ranges.length - 1; i >= 0; i-- ) {
+		txs.push(
+			ve.dm.Transaction.newFromAttributeChanges(
+				surfaceModel.getDocument(), ranges[i].start, { style: style }
+			)
+		);
+	}
+	surfaceModel.change( txs );
+};
+
+/**
+ * Merge multiple cells into one, or split a merged cell.
+ */
+ve.ui.TableAction.prototype.mergeCells = function () {
+	var i, cells,
+		txs = [],
+		surfaceModel = this.surface.getModel(),
+		selection = surfaceModel.getSelection();
+
+	if ( !( selection instanceof ve.dm.TableSelection ) ) {
+		return;
+	}
+
+	if ( selection.isSingleCell() ) {
+		// Split
+		cells = selection.getMatrixCells( true );
+		txs.push(
+			ve.dm.Transaction.newFromAttributeChanges(
+				surfaceModel.getDocument(), cells[0].node.getOuterRange().start,
+				{ colspan: 1, rowspan: 1 }
+			)
+		);
+		for ( i = cells.length - 1; i >= 1; i-- ) {
+			txs.push(
+				this.replacePlaceholder( selection.getTableNode().getMatrix(), cells[i] )
+			);
+		}
+	} else {
+		// Merge
+		cells = selection.getMatrixCells();
+		txs.push(
+			ve.dm.Transaction.newFromAttributeChanges(
+				surfaceModel.getDocument(), cells[0].node.getOuterRange().start,
+				{
+					colspan: 1 + selection.endCol - selection.startCol,
+					rowspan: 1 + selection.endRow - selection.startRow
+				}
+			)
+		);
+		for ( i = cells.length - 1; i >= 1; i-- ) {
+			txs.push(
+				ve.dm.Transaction.newFromRemoval(
+					surfaceModel.getDocument(), cells[i].node.getOuterRange()
+				)
+			);
+		}
+	}
+	surfaceModel.change( txs );
 };
 
 /* Low-level API */
