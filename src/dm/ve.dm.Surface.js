@@ -571,7 +571,7 @@ ve.dm.Surface.prototype.setNullSelection = function () {
  * @fires contextChange
  */
 ve.dm.Surface.prototype.setSelection = function ( selection ) {
-	var left, right, leftAnnotations, rightAnnotations, insertionAnnotations,
+	var left, right, leftAnnotations, rightAnnotations, insertionAnnotations, needsContinuation,
 		startNode, selectedNode, range,
 		branchNodes = {},
 		oldSelection = this.selection,
@@ -628,9 +628,11 @@ ve.dm.Surface.prototype.setSelection = function ( selection ) {
 			left = linearData.getNearestContentOffset( range.start );
 			right = linearData.getNearestContentOffset( range.end );
 		}
+
 		if ( left === -1 ) {
 			// No content offset to our left, use empty set
 			insertionAnnotations = new ve.dm.AnnotationSet( this.getDocument().getStore() );
+			needsContinuation = false;
 		} else {
 			// Include annotations on the left that should be added to appended content, or ones that
 			// are on both the left and the right that should not
@@ -644,12 +646,19 @@ ve.dm.Surface.prototype.setSelection = function ( selection ) {
 			} else {
 				insertionAnnotations = leftAnnotations;
 			}
+			needsContinuation = !leftAnnotations.filter( function ( annotation ) {
+				return annotation.constructor.static.nativeContinuation ||
+					right === -1 ||
+					!rightAnnotations.containsComparable( annotation );
+			} ).isEmpty();
 		}
 
-		// Only emit an annotations change event if there's a meaningful difference
+		// Emit an annotations change event if there's a meaningful difference, or if
+		// emulated continuation is needed
 		if (
 			!insertionAnnotations.containsAllOf( this.insertionAnnotations ) ||
-			!this.insertionAnnotations.containsAllOf( insertionAnnotations )
+			!this.insertionAnnotations.containsAllOf( insertionAnnotations ) ||
+			needsContinuation
 		) {
 			this.setInsertionAnnotations( insertionAnnotations );
 			contextChange = true;
