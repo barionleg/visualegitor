@@ -169,8 +169,8 @@ ve.ce.Document.prototype.getNodeAndOffsetUnadjustedForUnicorn = function ( offse
 			} else if ( $item.hasClass( 've-ce-unicorn' ) ) {
 				if ( offset === startOffset ) {
 					return {
-						node: $item[0].parentNode,
-						offset: offset - startOffset
+						node: $item[0],
+						offset: 0
 					};
 				}
 			} else if ( $item.is( '.ve-ce-branchNode, .ve-ce-leafNode' ) ) {
