@@ -126,7 +126,7 @@ ve.ce.ContentBranchNode.prototype.onSplice = function () {
 ve.ce.ContentBranchNode.prototype.getRenderedContents = function () {
 	var i, ilen, j, jlen, item, itemAnnotations, ann, clone, dmSurface, dmSelection, relCursor,
 		unicorn, img1, img2, annotationsChanged, childLength, offset, htmlItem, ceSurface,
-		nextItemAnnotations, linkAnnotations,
+		nextItemAnnotations,
 		store = this.model.doc.getStore(),
 		annotationStack = new ve.dm.AnnotationSet( store ),
 		annotatedHtml = [],
@@ -136,6 +136,10 @@ ve.ce.ContentBranchNode.prototype.getRenderedContents = function () {
 		unicornInfo = {},
 		buffer = '',
 		node = this;
+
+	function hasNonNativeContinuation( annotation ) {
+		return !annotation.constructor.static.nativeContinuation;
+	}
 
 	function openAnnotation( annotation ) {
 		annotationsChanged = true;
@@ -219,23 +223,27 @@ ve.ce.ContentBranchNode.prototype.getRenderedContents = function () {
 			itemAnnotations = new ve.dm.AnnotationSet( store );
 		}
 
-		// Remove 'a' from the unicorn, if the following item has no 'a'
-		if ( unicorn && item === unicorn[0] && i < ilen - 1 ) {
-			linkAnnotations = itemAnnotations.getAnnotationsByName( 'link' );
-			nextItemAnnotations = new ve.dm.AnnotationSet(
-				store,
-				Array.isArray( annotatedHtml[i + 1] ) ? annotatedHtml[i + 1][1] : undefined
-			);
-			if ( !nextItemAnnotations.containsAllOf( linkAnnotations ) ) {
-				itemAnnotations.removeSet( linkAnnotations );
-			}
-		}
-
 		// annotationsChanged gets set to true by openAnnotation and closeAnnotation
 		annotationsChanged = false;
 		ve.dm.Converter.openAndCloseAnnotations( annotationStack, itemAnnotations,
 			openAnnotation, closeAnnotation
 		);
+
+		// Force annotationsChanged if unicorn has a non-native-continuation annotation
+		// not shared by the following item
+		if ( unicorn && item === unicorn[0] && i < ilen - 1 ) {
+			nextItemAnnotations = new ve.dm.AnnotationSet(
+				store,
+				(
+					Array.isArray( annotatedHtml[i + 1] ) ?
+					annotatedHtml[i + 1][1] :
+					undefined
+				)
+			);
+			if ( !nextItemAnnotations.containsAllOf( itemAnnotations.filter( hasNonNativeContinuation ) ) {
+				annotationsChanged = true;
+			}
+		}
 
 		// Handle the actual item
 		if ( typeof item === 'string' ) {
@@ -298,9 +306,10 @@ ve.ce.ContentBranchNode.prototype.getRenderedContents = function () {
  * Render contents.
  *
  * @method
+ * @param {boolean} [ignoreUnicornRemoval] Don't rerender if unicorn removal is the only change
  * @return {boolean} Whether the contents have changed
  */
-ve.ce.ContentBranchNode.prototype.renderContents = function () {
+ve.ce.ContentBranchNode.prototype.renderContents = function ( ignoreUnicornRemoval ) {
 	var i, len, element, rendered, unicornInfo, oldWrapper, newWrapper,
 		node = this;
 	if (
@@ -331,6 +340,13 @@ ve.ce.ContentBranchNode.prototype.renderContents = function () {
 	ve.normalizeNode( newWrapper );
 	if ( newWrapper.isEqualNode( oldWrapper ) ) {
 		return false;
+	}
+	if ( ignoreUnicornRemoval ) {
+		ve.removeUnicorns( oldWrapper );
+		ve.normalizeNode( oldWrapper );
+		if ( newWrapper.isEqualNode( oldWrapper ) ) {
+			return false;
+		}
 	}
 
 	this.unicornAnnotations = unicornInfo.annotations || null;
