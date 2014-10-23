@@ -1011,6 +1011,18 @@ ve.normalizeNode = function ( node ) {
 };
 
 /**
+ * Remove any .ve-ce-unicorn children from a node
+ */
+ve.removeUnicorns = function ( node ) {
+	var unicorns, i, unicorn;
+	unicorns = node.getElementsByClassName( 've-ce-unicorn' );
+	for ( i = unicorns.length - 1; i >= 0; i-- ) {
+		unicorn = unicorns[i];
+		unicorn.parentNode.removeChild( unicorn );
+	}
+};
+
+/**
  * Translate rect by some fixed vector and return a new offset object
  * @param {Object} rect Offset object containing all or any of top, left, bottom, right, width & height
  * @param {number} x Horizontal translation
