@@ -84,7 +84,7 @@ ve.ce.Surface = function VeCeSurface( model, ui, options ) {
 	this.model.connect( this, {
 		select: 'onModelSelect',
 		documentUpdate: 'onModelDocumentUpdate',
-		insertionAnnotationsChange: 'onInsertionAnnotationsChange'
+		activeAnnotationsChange: 'onActiveAnnotationsChange'
 	} );
 
 	this.onDocumentMouseUpHandler = this.onDocumentMouseUp.bind( this );
@@ -431,7 +431,9 @@ ve.ce.Surface.prototype.getSelectionRects = function ( selection ) {
 			throw new Error( 'getClientRects returned empty list' );
 		}
 	} catch ( e ) {
-		rects = [ this.getClientRectFromNode() ];
+		rects = [
+			this.getNativeRangeBoundingClientRect( nativeRange ) || this.getClientRectFromNode()
+		];
 	}
 
 	surfaceRect = this.getSurface().getBoundingClientRect();
@@ -1799,11 +1801,20 @@ ve.ce.Surface.prototype.onModelDocumentUpdate = function () {
 };
 
 /**
- * Handle insertionAnnotationsChange events on the surface model.
- * @param {ve.dm.AnnotationSet} insertionAnnotations
+ * Handle activeAnnotationsChange events on the surface model.
  */
-ve.ce.Surface.prototype.onInsertionAnnotationsChange = function () {
-	var changed = this.renderSelectedContentBranchNode();
+ve.ce.Surface.prototype.onActiveAnnotationsChange = function () {
+	var locks, changed;
+
+	// Render, with locks temporarily disabled
+	locks = this.renderLocks;
+	this.renderLocks = 0;
+	try {
+		changed = this.renderSelectedContentBranchNode();
+	} finally {
+		this.renderLocks += locks;
+	}
+
 	if ( !changed ) {
 		return;
 	}
@@ -2141,12 +2152,19 @@ ve.ce.Surface.prototype.onSurfaceObserverContentChange = function ( node, previo
 		// This CBN is unicorned. Use the stored annotations.
 		annotations = node.unicornAnnotations;
 	} else {
-		// Guess that we want to use the annotations from the first changed character
-		// This could be wrong, e.g. slice->slide could happen by changing 'ic' to 'id'
-		annotations = this.model.getDocument().data.getAnnotationsFromOffset( replacementRange.start );
+		// Guess that we should use the annotation of the first replaced character. We
+		// know we're not collapsed, so that means the annotations at the offset *after*
+		// the first character.
+		// Note this guess could be wrong; e.g. the user might have changed 'slice'->'slide'
+		// by removing 'ic' and inserting 'id', in which case we would guess the annotations
+		// from 'c' but the better guess would be the annotations at 'i'.
+		annotations = this.model.getDocument().data.getAnnotationsFromOffset(
+			replacementRange.start + 1
+		);
 	}
 	if ( annotations.getLength() ) {
-		filterForWordbreak( annotations, replacementRange );
+		// Don't filterForWordbreak: if a whole word is being replaced, annotations can
+		// be lost entirely.
 		ve.dm.Document.static.addAnnotationsToData( data, annotations );
 	}
 	newRange = next.range;
@@ -2816,7 +2834,7 @@ ve.ce.Surface.prototype.getNativeRange = function ( range ) {
  * @return {ClientRect|null} Client rectangle of the native selection, or null if there was a problem
  */
 ve.ce.Surface.prototype.getNativeRangeBoundingClientRect = function ( nativeRange ) {
-	var rects, boundingRect;
+	var rects, boundingRect, node, rect;
 
 	if ( !nativeRange ) {
 		return null;
@@ -2825,6 +2843,20 @@ ve.ce.Surface.prototype.getNativeRangeBoundingClientRect = function ( nativeRang
 	try {
 		rects = nativeRange.getClientRects();
 		if ( rects.length === 0 ) {
+			// Check for unicorn
+			if ( nativeRange.collapsed ) {
+				node = nativeRange.endContainer.childNodes[nativeRange.endOffset];
+				if (
+					$( node ).hasClass( 've-ce-unicorn' ) &&
+					!node.childNodes.length
+				) {
+					rect = this.getClientRectFromNode();
+					rect.left = Math.floor( node.getBoundingClientRect().left );
+					rect.right = Math.floor( node.getBoundingClientRect().right );
+					return rect;
+				}
+			}
+
 			// If there are no rects return null, otherwise we'll fall through to
 			// getBoundingClientRect, which in Chrome becomes [0,0,0,0].
 			return null;
