@@ -70,8 +70,10 @@ OO.mixinClass( ve.dm.Surface, OO.EventEmitter );
  */
 
 /**
- * @event insertionAnnotationsChange
- * @param {ve.dm.AnnotationSet} insertionAnnotations AnnotationSet being inserted
+ * @event activeAnnotationsChange
+ *
+ * Emitted when there is a change in the annotations that would apply at the cursor, or when
+ * a position is entered where browser-native annotation continuation does not apply.
  */
 
 /**
@@ -316,10 +318,11 @@ ve.dm.Surface.prototype.getInsertionAnnotations = function () {
  *
  * @method
  * @param {ve.dm.AnnotationSet|null} Insertion annotations to use or null to disable them
+ * @param {bool} [noEmit] don't emit change events (for internal use only)
  * @fires insertionAnnotationsChange
  * @fires contextChange
  */
-ve.dm.Surface.prototype.setInsertionAnnotations = function ( annotations ) {
+ve.dm.Surface.prototype.setInsertionAnnotations = function ( annotations, noEmit ) {
 	if ( !this.enabled ) {
 		return;
 	}
@@ -327,8 +330,10 @@ ve.dm.Surface.prototype.setInsertionAnnotations = function ( annotations ) {
 		annotations.clone() :
 		new ve.dm.AnnotationSet( this.getDocument().getStore() );
 
-	this.emit( 'insertionAnnotationsChange', this.insertionAnnotations );
-	this.emit( 'contextChange' );
+	if ( !noEmit ) {
+		this.emit( 'activeAnnotationsChange' );
+		this.emit( 'contextChange' );
+	}
 };
 
 /**
@@ -571,7 +576,7 @@ ve.dm.Surface.prototype.setNullSelection = function () {
  * @fires contextChange
  */
 ve.dm.Surface.prototype.setSelection = function ( selection ) {
-	var left, right, leftAnnotations, rightAnnotations, insertionAnnotations,
+	var left, right, leftAnnotations, rightAnnotations, insertionAnnotations, needsContinuation,
 		startNode, selectedNode, range,
 		branchNodes = {},
 		oldSelection = this.selection,
@@ -628,9 +633,11 @@ ve.dm.Surface.prototype.setSelection = function ( selection ) {
 			left = linearData.getNearestContentOffset( range.start );
 			right = linearData.getNearestContentOffset( range.end );
 		}
+
 		if ( left === -1 ) {
 			// No content offset to our left, use empty set
 			insertionAnnotations = new ve.dm.AnnotationSet( this.getDocument().getStore() );
+			needsContinuation = false;
 		} else {
 			// Include annotations on the left that should be added to appended content, or ones that
 			// are on both the left and the right that should not
@@ -644,14 +651,23 @@ ve.dm.Surface.prototype.setSelection = function ( selection ) {
 			} else {
 				insertionAnnotations = leftAnnotations;
 			}
+			needsContinuation = !leftAnnotations.filter( function ( annotation ) {
+				return annotation.constructor.static.nativeContinuation || (
+					rightAnnotations &&
+					!rightAnnotations.containsComparable( annotation )
+				);
+			} ).isEmpty();
 		}
 
-		// Only emit an annotations change event if there's a meaningful difference
+		// Emit an annotations change event if there's a meaningful difference, or if
+		// emulated continuation is needed
 		if (
+			needsContinuation ||
 			!insertionAnnotations.containsAllOf( this.insertionAnnotations ) ||
 			!this.insertionAnnotations.containsAllOf( insertionAnnotations )
 		) {
-			this.setInsertionAnnotations( insertionAnnotations );
+			this.setInsertionAnnotations( insertionAnnotations, true );
+			this.emit( 'activeAnnotationsChange' );
 			contextChange = true;
 		}
 	}
