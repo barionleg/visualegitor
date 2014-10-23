@@ -55,6 +55,14 @@ ve.dm.Annotation.static.applyToAppendedContent = true;
 ve.dm.Annotation.static.splitOnWordbreak = false;
 
 /**
+ *
+ * Browsers consistently follow the same continuation rules as DM for this annotation
+ *
+ * @type {boolean}
+ */
+ve.dm.Annotation.static.nativeContinuation = true;
+
+/**
  * Annotations which are removed when this one is applied
  *
  * @type {string[]}
