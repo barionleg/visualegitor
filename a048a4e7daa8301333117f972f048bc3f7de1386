@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_80b182de",
+        "filename": "src/dm/ve.dm.Annotation.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-23T21:45:02Z",
+      "side": 1,
+      "message": "Grumble DM should not know about browsers grumble. But this is a quick fix, we can rearchitect later.",
+      "revId": "a048a4e7daa8301333117f972f048bc3f7de1386",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_60ac7685",
+        "filename": "src/dm/ve.dm.Surface.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-23T21:45:02Z",
+      "side": 1,
+      "message": "Document what this event means.\n\nWe haven\u0027t done nearly enough of this historically but we\u0027re trying to get better, and the meaning of this event is not obvious from its name.",
+      "revId": "a048a4e7daa8301333117f972f048bc3f7de1386",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_c0b78ad2",
+        "filename": "src/dm/ve.dm.Surface.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 653,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-23T21:45:02Z",
+      "side": 1,
+      "message": "Upon rereading I now understand what this was meant to do: rightAnnotations is only set if right !\u003d\u003d-1. It would be clearer to replace this with the equivalent:\n\n   rightAnnotations \u0026\u0026 !rightAnnotations.containsComparable( annotation )",
+      "revId": "a048a4e7daa8301333117f972f048bc3f7de1386",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
