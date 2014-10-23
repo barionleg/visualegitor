@@ -84,7 +84,7 @@ ve.ce.Surface = function VeCeSurface( model, ui, options ) {
 	this.model.connect( this, {
 		select: 'onModelSelect',
 		documentUpdate: 'onModelDocumentUpdate',
-		insertionAnnotationsChange: 'onInsertionAnnotationsChange'
+		activeAnnotationsChange: 'onActiveAnnotationsChange'
 	} );
 
 	this.onDocumentMouseUpHandler = this.onDocumentMouseUp.bind( this );
@@ -431,7 +431,9 @@ ve.ce.Surface.prototype.getSelectionRects = function ( selection ) {
 			throw new Error( 'getClientRects returned empty list' );
 		}
 	} catch ( e ) {
-		rects = [ this.getClientRectFromNode() ];
+		rects = [
+			this.getNativeRangeBoundingClientRect( nativeRange ) || this.getClientRectFromNode()
+		];
 	}
 
 	surfaceRect = this.getSurface().getBoundingClientRect();
@@ -1799,11 +1801,26 @@ ve.ce.Surface.prototype.onModelDocumentUpdate = function () {
 };
 
 /**
- * Handle insertionAnnotationsChange events on the surface model.
- * @param {ve.dm.AnnotationSet} insertionAnnotations
+ * Handle activeAnnotationsChange events on the surface model.
  */
-ve.ce.Surface.prototype.onInsertionAnnotationsChange = function () {
-	var changed = this.renderSelectedContentBranchNode();
+ve.ce.Surface.prototype.onActiveAnnotationsChange = function () {
+	var locks, changed, insideUnicorn;
+
+	// If we're unicorning, then don't change the surface just for unicorns
+	insideUnicorn = (
+		this.unicorningNode &&
+		this.unicorningNode === this.getSelectedContentBranchNode()
+	);
+
+	// Render, with locks temporarily disabled
+	locks = this.renderLocks;
+	this.renderLocks = 0;
+	try {
+		changed = this.renderSelectedContentBranchNode( insideUnicorn );
+	} finally {
+		this.renderLocks += locks;
+	}
+
 	if ( !changed ) {
 		return;
 	}
@@ -1813,25 +1830,36 @@ ve.ce.Surface.prototype.onInsertionAnnotationsChange = function () {
 };
 
 /**
- * Re-render the ContentBranchNode the selection is currently in.
+ * Return the ContentBranchNode of the selection anchor, or null
  *
- * @return {boolean} Whether a re-render actually happened
+ * @return {ve.ce.ContentBranchNode|null} the ContentBranchNode
  */
-ve.ce.Surface.prototype.renderSelectedContentBranchNode = function () {
-	var selection, ceNode;
+ve.ce.Surface.prototype.getSelectedContentBranchNode = function () {
+	var selection, branchNode;
 	selection = this.model.getSelection();
 	if ( !( selection instanceof ve.dm.LinearSelection ) ) {
+		return null;
+	}
+	branchNode = this.documentView.getBranchNodeFromOffset( selection.getRange().start );
+	if ( !( branchNode instanceof ve.ce.ContentBranchNode ) ) {
+		// branchNode is null, or not a content branch node
+		return null;
+	}
+	return branchNode;
+};
+
+/**
+ * Re-render the ContentBranchNode the selection anchor is currently in.
+ *
+ * @param {boolean} ignoreUnicorns Ignore uncorns when considering whether to rerender
+ * @return {boolean} Whether a re-render actually happened
+ */
+ve.ce.Surface.prototype.renderSelectedContentBranchNode = function ( ignoreUnicorns ) {
+	var contentBranchNode = this.getSelectedContentBranchNode();
+	if ( contentBranchNode === null ) {
 		return false;
 	}
-	ceNode = this.documentView.getBranchNodeFromOffset( selection.getRange().start );
-	if ( ceNode === null ) {
-		return false;
-	}
-	if ( !( ceNode instanceof ve.ce.ContentBranchNode ) ) {
-		// not a content branch node
-		return false;
-	}
-	return ceNode.renderContents();
+	return contentBranchNode.renderContents( ignoreUnicorns );
 };
 
 /**
@@ -1987,7 +2015,7 @@ ve.ce.Surface.prototype.updateSlug = function () {
  */
 ve.ce.Surface.prototype.onSurfaceObserverContentChange = function ( node, previous, next ) {
 	var data, range, len, annotations, offsetDiff, sameLeadingAndTrailing,
-		previousStart, nextStart, newRange, replacementRange,
+		previousStart, nextStart, newRange, replacementRange, copyIndex,
 		fromLeft = 0,
 		fromRight = 0,
 		nodeOffset = node.getModel().getOffset(),
@@ -2141,12 +2169,22 @@ ve.ce.Surface.prototype.onSurfaceObserverContentChange = function ( node, previo
 		// This CBN is unicorned. Use the stored annotations.
 		annotations = node.unicornAnnotations;
 	} else {
-		// Guess that we want to use the annotations from the first changed character
-		// This could be wrong, e.g. slice->slide could happen by changing 'ic' to 'id'
-		annotations = this.model.getDocument().data.getAnnotationsFromOffset( replacementRange.start );
+		// Guess which annotation to use. If there has been some deletion, use the
+		// annotation at the start of the first deleted character. Else use the annotation
+		// at the start of the change.
+		// Note this guess could be wrong; e.g. the user might have changed 'slice'->'slide'
+		// by removing 'ic' and inserting 'id', in which case we would guess the annotations
+		// from 'c' but the better guess would be the annotations at 'i'.
+		if ( fromLeft + fromRight === previousData.length ) {
+			copyIndex = Math.max( 0, replacementRange.start - 1 );
+		} else {
+			copyIndex = replacementRange.start;
+		}
+		annotations = this.model.getDocument().data.getAnnotationsFromOffset( copyIndex );
 	}
 	if ( annotations.getLength() ) {
-		filterForWordbreak( annotations, replacementRange );
+		// Don't filterForWordbreak: if a whole word is being replaced, annotations can
+		// be lost entirely.
 		ve.dm.Document.static.addAnnotationsToData( data, annotations );
 	}
 	newRange = next.range;
@@ -2816,7 +2854,7 @@ ve.ce.Surface.prototype.getNativeRange = function ( range ) {
  * @return {ClientRect|null} Client rectangle of the native selection, or null if there was a problem
  */
 ve.ce.Surface.prototype.getNativeRangeBoundingClientRect = function ( nativeRange ) {
-	var rects, boundingRect;
+	var rects, boundingRect, node, rect;
 
 	if ( !nativeRange ) {
 		return null;
@@ -2825,6 +2863,20 @@ ve.ce.Surface.prototype.getNativeRangeBoundingClientRect = function ( nativeRang
 	try {
 		rects = nativeRange.getClientRects();
 		if ( rects.length === 0 ) {
+			// Check for unicorn
+			if ( nativeRange.collapsed ) {
+				node = nativeRange.endContainer.childNodes[nativeRange.endOffset];
+				if (
+					$( node ).hasClass( 've-ce-unicorn' ) &&
+					!node.childNodes.length
+				) {
+					rect = this.getClientRectFromNode();
+					rect.left = Math.floor( node.getBoundingClientRect().left );
+					rect.right = Math.floor( node.getBoundingClientRect().right );
+					return rect;
+				}
+			}
+
 			// If there are no rects return null, otherwise we'll fall through to
 			// getBoundingClientRect, which in Chrome becomes [0,0,0,0].
 			return null;

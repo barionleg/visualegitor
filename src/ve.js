@@ -1085,6 +1085,18 @@
 	};
 
 	/**
+	 * Remove any .ve-ce-unicorn children from a node
+	 */
+	ve.removeUnicorns = function ( node ) {
+		var unicorns, i, unicorn;
+		unicorns = node.getElementsByClassName( 've-ce-unicorn' );
+		for ( i = unicorns.length - 1; i >= 0; i-- ) {
+			unicorn = unicorns[i];
+			unicorn.parentNode.removeChild( unicorn );
+		}
+	};
+
+	/**
 	 * Check if a node is contained within another node
 	 *
 	 * Similar to jQuery#contains except a list of containers can be supplied
