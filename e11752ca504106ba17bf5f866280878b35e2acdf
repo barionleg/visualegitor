@@ -1,0 +1,616 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_7910acad",
+        "filename": "demos/ve/demo.desktop.css",
+        "patchSetId": 47
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T23:30:42Z",
+      "side": 1,
+      "message": "This overrides the box-shadow rule from the line above. If you wanted two box-shadows, you should have combined them with a comma, but I\u0027m not so sure you want that because this code is weird.",
+      "revId": "e11752ca504106ba17bf5f866280878b35e2acdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_9915789f",
+        "filename": "demos/ve/demo.desktop.css",
+        "patchSetId": 47
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T23:30:42Z",
+      "side": 1,
+      "message": "You shouldn\u0027t need a negative margin to compensate for a box-shadow; that\u0027s for borders. Also, why only at the top?",
+      "revId": "e11752ca504106ba17bf5f866280878b35e2acdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_5927f00d",
+        "filename": "src/ce/nodes/ve.ce.TableNode.js",
+        "patchSetId": 47
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T23:30:42Z",
+      "side": 1,
+      "message": "$: this.$",
+      "revId": "e11752ca504106ba17bf5f866280878b35e2acdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_f9235cfe",
+        "filename": "src/ce/nodes/ve.ce.TableNode.js",
+        "patchSetId": 47
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T23:30:42Z",
+      "side": 1,
+      "message": "$: this.$",
+      "revId": "e11752ca504106ba17bf5f866280878b35e2acdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_192168f6",
+        "filename": "src/ce/nodes/ve.ce.TableNode.js",
+        "patchSetId": 47
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T23:30:42Z",
+      "side": 1,
+      "message": "this.$",
+      "revId": "e11752ca504106ba17bf5f866280878b35e2acdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_3971c40b",
+        "filename": "src/ce/nodes/ve.ce.TableNode.js",
+        "patchSetId": 47
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T23:30:42Z",
+      "side": 1,
+      "message": "It would be nicer if these things were encapsulated so you could just tell TableContext that you need a certain top and height and have it reach into the indicator and the popup for you.\n\nProbably the nicest way to do it is have TableContext know its orientation (row/col or horizontal/vertical) and based on that extract the right information from selectionOffset, as well as choosing the indicator and setting a class.",
+      "revId": "e11752ca504106ba17bf5f866280878b35e2acdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_f9e03c95",
+        "filename": "src/dm/nodes/ve.dm.TableCellNode.js",
+        "patchSetId": 47
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T23:30:42Z",
+      "side": 1,
+      "message": "Document",
+      "revId": "e11752ca504106ba17bf5f866280878b35e2acdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_19f5e84c",
+        "filename": "src/ui/actions/ve.ui.TableAction.js",
+        "patchSetId": 47
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T23:30:42Z",
+      "side": 1,
+      "message": "Document as:\n\n    @param {Object} [options]\n    @param {number} [options.rows\u003d3]\n    etc.",
+      "revId": "e11752ca504106ba17bf5f866280878b35e2acdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_79b2ec93",
+        "filename": "src/ui/actions/ve.ui.TableAction.js",
+        "patchSetId": 47
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T23:30:42Z",
+      "side": 1,
+      "message": "This comment appears to bear no relation to the code below it?",
+      "revId": "e11752ca504106ba17bf5f866280878b35e2acdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_d96c6008",
+        "filename": "src/ui/actions/ve.ui.TableAction.js",
+        "patchSetId": 47
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T23:30:42Z",
+      "side": 1,
+      "message": "??",
+      "revId": "e11752ca504106ba17bf5f866280878b35e2acdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_9976d8d4",
+        "filename": "src/ui/actions/ve.ui.TableAction.js",
+        "patchSetId": 47
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T23:30:42Z",
+      "side": 1,
+      "message": "selection is a TableSelection, you\u0027ve already made sure of that",
+      "revId": "e11752ca504106ba17bf5f866280878b35e2acdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_b935d4f5",
+        "filename": "src/ui/actions/ve.ui.TableAction.js",
+        "patchSetId": 47
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T23:30:42Z",
+      "side": 1,
+      "message": "\"after or before *which*\"?",
+      "revId": "e11752ca504106ba17bf5f866280878b35e2acdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_d93a20e4",
+        "filename": "src/ui/actions/ve.ui.TableAction.js",
+        "patchSetId": 47
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T23:30:42Z",
+      "side": 1,
+      "message": "Fix \"consider to insert\"",
+      "revId": "e11752ca504106ba17bf5f866280878b35e2acdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_193088fb",
+        "filename": "src/ui/actions/ve.ui.TableAction.js",
+        "patchSetId": 47
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T23:30:42Z",
+      "side": 1,
+      "message": "\"will not mess [missing preposition] range indexes\"",
+      "revId": "e11752ca504106ba17bf5f866280878b35e2acdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_d921c0ad",
+        "filename": "src/ui/actions/ve.ui.TableAction.js",
+        "patchSetId": 47
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T23:30:42Z",
+      "side": 1,
+      "message": "interferE",
+      "revId": "e11752ca504106ba17bf5f866280878b35e2acdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_c1054615",
+        "filename": "src/ui/actions/ve.ui.TableAction.js",
+        "patchSetId": 47
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T23:30:42Z",
+      "side": 1,
+      "message": "@return {ve.dm.Transaction} (for all of these functions)",
+      "revId": "e11752ca504106ba17bf5f866280878b35e2acdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_21766aa0",
+        "filename": "src/ui/actions/ve.ui.TableAction.js",
+        "patchSetId": 47
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T23:30:42Z",
+      "side": 1,
+      "message": "This seems to be inclusive of both minIndex and maxIndex? That should be documented",
+      "revId": "e11752ca504106ba17bf5f866280878b35e2acdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_c16a26b1",
+        "filename": "src/ui/actions/ve.ui.TableAction.js",
+        "patchSetId": 47
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T23:30:42Z",
+      "side": 1,
+      "message": "currently?",
+      "revId": "e11752ca504106ba17bf5f866280878b35e2acdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_e16f22bf",
+        "filename": "src/ui/actions/ve.ui.TableAction.js",
+        "patchSetId": 47
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T23:30:42Z",
+      "side": 1,
+      "message": "s/much/must/",
+      "revId": "e11752ca504106ba17bf5f866280878b35e2acdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_81641ee3",
+        "filename": "src/ui/actions/ve.ui.TableAction.js",
+        "patchSetId": 47
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T23:30:42Z",
+      "side": 1,
+      "message": "interferE",
+      "revId": "e11752ca504106ba17bf5f866280878b35e2acdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_e1ae42e4",
+        "filename": "src/ui/actions/ve.ui.TableAction.js",
+        "patchSetId": 47
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T23:30:42Z",
+      "side": 1,
+      "message": "Missing space before \u0027)\u0027   (how did jscs not spot this?)",
+      "revId": "e11752ca504106ba17bf5f866280878b35e2acdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_e185e25b",
+        "filename": "src/ui/actions/ve.ui.TableAction.js",
+        "patchSetId": 47
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T23:30:42Z",
+      "side": 1,
+      "message": "orpHaned",
+      "revId": "e11752ca504106ba17bf5f866280878b35e2acdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_a197da92",
+        "filename": "src/ui/actions/ve.ui.TableAction.js",
+        "patchSetId": 47
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T23:30:42Z",
+      "side": 1,
+      "message": "interferE",
+      "revId": "e11752ca504106ba17bf5f866280878b35e2acdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_e1596202",
+        "filename": "src/ui/styles/images/icons/table-merge-cells-alt.svg",
+        "patchSetId": 47
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T23:30:42Z",
+      "side": 1,
+      "message": "This was the icon we decided not to use, right? It doesn\u0027t belong in this commit, and should probably be removed entirely.",
+      "revId": "e11752ca504106ba17bf5f866280878b35e2acdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_81f5fec9",
+        "filename": "src/ui/styles/ve.ui.Icons.css",
+        "patchSetId": 47
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T23:30:42Z",
+      "side": 1,
+      "message": "background-position: center; doesn\u0027t belong in this file. Users of the icons should set that. Which is already happening because DecoratedOptionWidget already sets background-position: center center; on icons inside of it, so this rule isn\u0027t even being used.",
+      "revId": "e11752ca504106ba17bf5f866280878b35e2acdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_21974af1",
+        "filename": "src/ui/ve.ui.TableContext.js",
+        "patchSetId": 47
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T23:30:42Z",
+      "side": 1,
+      "message": "Copypasta.\n\nAlso I\u0027d really like for these documentation comments to actually say something useful about what the class is, especially in the case of UI classes.",
+      "revId": "e11752ca504106ba17bf5f866280878b35e2acdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_e1a08240",
+        "filename": "src/ui/ve.ui.TableContext.js",
+        "patchSetId": 47
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T23:30:42Z",
+      "side": 1,
+      "message": "That\u0027s a lie, it\u0027s instantiated in ce.TableNode",
+      "revId": "e11752ca504106ba17bf5f866280878b35e2acdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_8185feb3",
+        "filename": "src/ui/ve.ui.TableContext.js",
+        "patchSetId": 47
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T23:30:42Z",
+      "side": 1,
+      "message": "Wrong param name",
+      "revId": "e11752ca504106ba17bf5f866280878b35e2acdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_41a61652",
+        "filename": "src/ui/ve.ui.TableContext.js",
+        "patchSetId": 47
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T23:30:42Z",
+      "side": 1,
+      "message": "Optional",
+      "revId": "e11752ca504106ba17bf5f866280878b35e2acdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_817bbebc",
+        "filename": "src/ui/ve.ui.TableContext.js",
+        "patchSetId": 47
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T23:30:42Z",
+      "side": 1,
+      "message": "Config values must be optional. If something isn\u0027t optional, it shouldn\u0027t go in config.",
+      "revId": "e11752ca504106ba17bf5f866280878b35e2acdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_4185b69e",
+        "filename": "src/ui/ve.ui.TableContext.js",
+        "patchSetId": 47
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T23:30:42Z",
+      "side": 1,
+      "message": ".getSurface().getSurface()",
+      "revId": "e11752ca504106ba17bf5f866280878b35e2acdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_8162de04",
+        "filename": "src/ui/ve.ui.TableContext.js",
+        "patchSetId": 47
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T23:30:42Z",
+      "side": 1,
+      "message": "It would be better for this population loop to be in its own method that is called by the constructor. That reduces clutter in the constructor, and makes it easier for subclasses to override things.",
+      "revId": "e11752ca504106ba17bf5f866280878b35e2acdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_e1440271",
+        "filename": "src/ui/ve.ui.TableContext.js",
+        "patchSetId": 47
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T23:30:42Z",
+      "side": 1,
+      "message": "Unused",
+      "revId": "e11752ca504106ba17bf5f866280878b35e2acdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_642d608b",
+        "filename": "src/ui/ve.ui.TableContext.js",
+        "patchSetId": 47
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T23:30:42Z",
+      "side": 1,
+      "message": "ALL    THE   SPACES",
+      "revId": "e11752ca504106ba17bf5f866280878b35e2acdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_c4531419",
+        "filename": "src/ui/ve.ui.TableContext.js",
+        "patchSetId": 47
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T23:30:42Z",
+      "side": 1,
+      "message": "This toggle function doesn\u0027t actually toggle: calling .toggle() without parameters hides, rather than toggling visibility.",
+      "revId": "e11752ca504106ba17bf5f866280878b35e2acdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_244f5870",
+        "filename": "src/ui/ve.ui.TableContext.js",
+        "patchSetId": 47
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T23:30:42Z",
+      "side": 1,
+      "message": ".disconnect( this )",
+      "revId": "e11752ca504106ba17bf5f866280878b35e2acdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
