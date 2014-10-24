@@ -1,0 +1,242 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_b08bb971",
+        "filename": "src/ce/nodes/ve.ce.TableCellNode.js",
+        "patchSetId": 40
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T21:33:40Z",
+      "side": 1,
+      "message": "live with a v",
+      "revId": "8eab9bf6f1682c99f6f0d6f566f03a9ff03aa5e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_503d9589",
+        "filename": "src/ce/nodes/ve.ce.TableNode.js",
+        "patchSetId": 40
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T21:33:40Z",
+      "side": 1,
+      "message": "this.$()",
+      "revId": "8eab9bf6f1682c99f6f0d6f566f03a9ff03aa5e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_109aadbd",
+        "filename": "src/ce/nodes/ve.ce.TableNode.js",
+        "patchSetId": 40
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T21:33:40Z",
+      "side": 1,
+      "message": "It\u0027s customary to just call .disconnect( this ); in destructors, that unbinds all handlers associated with the object.",
+      "revId": "8eab9bf6f1682c99f6f0d6f566f03a9ff03aa5e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_f090619a",
+        "filename": "src/ce/nodes/ve.ce.TableNode.js",
+        "patchSetId": 40
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T21:33:40Z",
+      "side": 1,
+      "message": "How could it not be? I\u0027m guessing this is to support nested tables? If so, add a comment.\n\nAlso wouldn\u0027t it be easier and equivalent to do $( e.target ).closest( \u0027table\u0027 ).is( this.$element ) ?",
+      "revId": "8eab9bf6f1682c99f6f0d6f566f03a9ff03aa5e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_90ed5d25",
+        "filename": "src/ce/nodes/ve.ce.TableNode.js",
+        "patchSetId": 40
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T21:33:40Z",
+      "side": 1,
+      "message": "I thought elementFromPoint was browser-specific, or had browser support problems?",
+      "revId": "8eab9bf6f1682c99f6f0d6f566f03a9ff03aa5e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_5a160b5c",
+        "filename": "src/ce/nodes/ve.ce.TableNode.js",
+        "patchSetId": 40
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T21:33:40Z",
+      "side": 1,
+      "message": "This seems like a hack to work around the fact that .end is a non-content offset between the \u003c/p\u003e and the \u003c/td\u003e. That\u0027s assuming there\u0027s always only paragraphs in table cells. I would feel more comfortable if this instead looked for the nearest content offset to the left of .end",
+      "revId": "8eab9bf6f1682c99f6f0d6f566f03a9ff03aa5e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_b0f2d901",
+        "filename": "src/ce/nodes/ve.ce.TableNode.js",
+        "patchSetId": 40
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T21:33:40Z",
+      "side": 1,
+      "message": "I don\u0027t think this works: you have to cache the result of .bind(), or it won\u0027t be reference-identical.",
+      "revId": "8eab9bf6f1682c99f6f0d6f566f03a9ff03aa5e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_70fc51d6",
+        "filename": "src/ce/nodes/ve.ce.TableNode.js",
+        "patchSetId": 40
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T21:33:40Z",
+      "side": 1,
+      "message": "Did you mean \"is LESS accurate\"?",
+      "revId": "8eab9bf6f1682c99f6f0d6f566f03a9ff03aa5e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_256440e1",
+        "filename": "src/ce/nodes/ve.ce.TableNode.js",
+        "patchSetId": 40
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T21:33:40Z",
+      "side": 1,
+      "message": "Equivalently (and clearer IMO) you could use cellModel.getOffset() - his.model.getOffset()",
+      "revId": "8eab9bf6f1682c99f6f0d6f566f03a9ff03aa5e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_c0822acd",
+        "filename": "src/ce/styles/nodes/ve.ce.TableNode.css",
+        "patchSetId": 40
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T21:33:40Z",
+      "side": 1,
+      "message": "pointer-events: none; does not work in IE10, and without it double-click is broken. I know it\u0027s only IE10, but we do claim to support IE10, and it probably wouldn\u0027t be too hard to fix this? Maybe by attaching handlers to the overlay or the selection box?",
+      "revId": "8eab9bf6f1682c99f6f0d6f566f03a9ff03aa5e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_b9d71428",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 40
+      },
+      "lineNbr": 2245,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T21:33:40Z",
+      "side": 1,
+      "message": "Document. Also this function is misnamed: it takes a selection so its name should not refer to a fragment.",
+      "revId": "8eab9bf6f1682c99f6f0d6f566f03a9ff03aa5e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_d9dc604e",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 40
+      },
+      "lineNbr": 2249,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T21:33:40Z",
+      "side": 1,
+      "message": "Document",
+      "revId": "8eab9bf6f1682c99f6f0d6f566f03a9ff03aa5e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_59e850dd",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 40
+      },
+      "lineNbr": 2408,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T21:33:40Z",
+      "side": 1,
+      "message": "Eww. Please implement a getter in SurfaceObserver for this, if for no other reason than that it will be easier for David not to break this in his observer rewrite.",
+      "revId": "8eab9bf6f1682c99f6f0d6f566f03a9ff03aa5e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_3980e4f8",
+        "filename": "tests/ce/ve.ce.Surface.test.js",
+        "patchSetId": 40
+      },
+      "lineNbr": 1131,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-24T21:33:40Z",
+      "side": 1,
+      "message": "+ all the table ones you added",
+      "revId": "8eab9bf6f1682c99f6f0d6f566f03a9ff03aa5e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
