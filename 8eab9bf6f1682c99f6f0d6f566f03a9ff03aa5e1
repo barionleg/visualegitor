@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_75e8ac0b",
+        "filename": "src/ce/nodes/ve.ce.TableCellNode.js",
+        "patchSetId": 40
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-26T17:23:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_b08bb971",
+      "revId": "8eab9bf6f1682c99f6f0d6f566f03a9ff03aa5e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_503d9589",
         "filename": "src/ce/nodes/ve.ce.TableNode.js",
         "patchSetId": 40
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_f5d35c5f",
+        "filename": "src/ce/nodes/ve.ce.TableNode.js",
+        "patchSetId": 40
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-26T17:23:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_109aadbd",
+      "revId": "8eab9bf6f1682c99f6f0d6f566f03a9ff03aa5e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_f090619a",
         "filename": "src/ce/nodes/ve.ce.TableNode.js",
         "patchSetId": 40
@@ -64,6 +100,24 @@
       "writtenOn": "2014-10-24T21:33:40Z",
       "side": 1,
       "message": "How could it not be? I\u0027m guessing this is to support nested tables? If so, add a comment.\n\nAlso wouldn\u0027t it be easier and equivalent to do $( e.target ).closest( \u0027table\u0027 ).is( this.$element ) ?",
+      "revId": "8eab9bf6f1682c99f6f0d6f566f03a9ff03aa5e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_95c8d8ab",
+        "filename": "src/ce/nodes/ve.ce.TableNode.js",
+        "patchSetId": 40
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-26T17:23:33Z",
+      "side": 1,
+      "message": "Did on line 120, forgot this one.\n\nDoesn\u0027t seem much easier or faster, does it? I think this reads quite clearly.",
+      "parentUuid": "6e936f18_f090619a",
       "revId": "8eab9bf6f1682c99f6f0d6f566f03a9ff03aa5e1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_55c25089",
+        "filename": "src/ce/nodes/ve.ce.TableNode.js",
+        "patchSetId": 40
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-26T17:23:33Z",
+      "side": 1,
+      "message": "I think I tested it on IE10+, Chrome \u0026 FF, feel free to double check. Also how old is your browser if it has touch events (line 171)?",
+      "parentUuid": "6e936f18_90ed5d25",
+      "revId": "8eab9bf6f1682c99f6f0d6f566f03a9ff03aa5e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_5a160b5c",
         "filename": "src/ce/nodes/ve.ce.TableNode.js",
         "patchSetId": 40
@@ -98,6 +170,24 @@
       "writtenOn": "2014-10-24T21:33:40Z",
       "side": 1,
       "message": "This seems like a hack to work around the fact that .end is a non-content offset between the \u003c/p\u003e and the \u003c/td\u003e. That\u0027s assuming there\u0027s always only paragraphs in table cells. I would feel more comfortable if this instead looked for the nearest content offset to the left of .end",
+      "revId": "8eab9bf6f1682c99f6f0d6f566f03a9ff03aa5e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_1534c8a6",
+        "filename": "src/ce/nodes/ve.ce.TableNode.js",
+        "patchSetId": 40
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-26T17:23:33Z",
+      "side": 1,
+      "message": "Yes, see TODO.",
+      "parentUuid": "6e936f18_5a160b5c",
       "revId": "8eab9bf6f1682c99f6f0d6f566f03a9ff03aa5e1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +211,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_d53d008c",
+        "filename": "src/ce/nodes/ve.ce.TableNode.js",
+        "patchSetId": 40
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-26T17:23:33Z",
+      "side": 1,
+      "message": "Oops, meant to use just the namespaced event.",
+      "parentUuid": "6e936f18_b0f2d901",
+      "revId": "8eab9bf6f1682c99f6f0d6f566f03a9ff03aa5e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_70fc51d6",
         "filename": "src/ce/nodes/ve.ce.TableNode.js",
         "patchSetId": 40
@@ -132,6 +240,24 @@
       "writtenOn": "2014-10-24T21:33:40Z",
       "side": 1,
       "message": "Did you mean \"is LESS accurate\"?",
+      "revId": "8eab9bf6f1682c99f6f0d6f566f03a9ff03aa5e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_95477822",
+        "filename": "src/ce/nodes/ve.ce.TableNode.js",
+        "patchSetId": 40
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-26T17:23:33Z",
+      "side": 1,
+      "message": "No, I\u0027m using the one which is more accurate (in terms of px errors), but can\u0027t be mixed with getClientRects ever (for iOS7).",
+      "parentUuid": "6e936f18_70fc51d6",
       "revId": "8eab9bf6f1682c99f6f0d6f566f03a9ff03aa5e1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -155,6 +281,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_5551f0db",
+        "filename": "src/ce/nodes/ve.ce.TableNode.js",
+        "patchSetId": 40
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-26T17:23:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_256440e1",
+      "revId": "8eab9bf6f1682c99f6f0d6f566f03a9ff03aa5e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_c0822acd",
         "filename": "src/ce/styles/nodes/ve.ce.TableNode.css",
         "patchSetId": 40
@@ -166,6 +310,24 @@
       "writtenOn": "2014-10-24T21:33:40Z",
       "side": 1,
       "message": "pointer-events: none; does not work in IE10, and without it double-click is broken. I know it\u0027s only IE10, but we do claim to support IE10, and it probably wouldn\u0027t be too hard to fix this? Maybe by attaching handlers to the overlay or the selection box?",
+      "revId": "8eab9bf6f1682c99f6f0d6f566f03a9ff03aa5e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_d55420cc",
+        "filename": "src/ce/styles/nodes/ve.ce.TableNode.css",
+        "patchSetId": 40
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-26T17:23:33Z",
+      "side": 1,
+      "message": "FFS. This is going to be a problem we can\u0027t always work around like this. Even here, mouse down for selecting a cell is going to be much harder. In the future we\u0027d need to render other users\u0027 selections with PE:N.\n\nThis polyfill seems to think you can get around it by using document.elementFromPoint(): https://github.com/kmewhort/pointer_events_polyfill/blob/master/pointer_events_polyfill.js\n\nPossibly work this into a later commit?",
+      "parentUuid": "6e936f18_c0822acd",
       "revId": "8eab9bf6f1682c99f6f0d6f566f03a9ff03aa5e1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -189,6 +351,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_f5591c02",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 40
+      },
+      "lineNbr": 2245,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-26T17:23:33Z",
+      "side": 1,
+      "message": "Hmm, but it sets \u0027tableEditingFragment\u0027. I\u0027ll go with just \u0027setTableEditing\u0027",
+      "parentUuid": "6e936f18_b9d71428",
+      "revId": "8eab9bf6f1682c99f6f0d6f566f03a9ff03aa5e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_d9dc604e",
         "filename": "src/ce/ve.ce.Surface.js",
         "patchSetId": 40
@@ -200,6 +380,24 @@
       "writtenOn": "2014-10-24T21:33:40Z",
       "side": 1,
       "message": "Document",
+      "revId": "8eab9bf6f1682c99f6f0d6f566f03a9ff03aa5e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_956e9892",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 40
+      },
+      "lineNbr": 2249,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-26T17:23:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_d9dc604e",
       "revId": "8eab9bf6f1682c99f6f0d6f566f03a9ff03aa5e1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -223,6 +421,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_75650caa",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 40
+      },
+      "lineNbr": 2408,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-26T17:23:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_59e850dd",
+      "revId": "8eab9bf6f1682c99f6f0d6f566f03a9ff03aa5e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_3980e4f8",
         "filename": "tests/ce/ve.ce.Surface.test.js",
         "patchSetId": 40
@@ -234,6 +450,24 @@
       "writtenOn": "2014-10-24T21:33:40Z",
       "side": 1,
       "message": "+ all the table ones you added",
+      "revId": "8eab9bf6f1682c99f6f0d6f566f03a9ff03aa5e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_d50bc0d7",
+        "filename": "tests/ce/ve.ce.Surface.test.js",
+        "patchSetId": 40
+      },
+      "lineNbr": 1131,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-26T17:23:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_3980e4f8",
       "revId": "8eab9bf6f1682c99f6f0d6f566f03a9ff03aa5e1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
