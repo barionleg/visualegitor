@@ -34,6 +34,24 @@
       "revId": "d89a67fbd71e899bf72f24a6484079033346f5d1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_d5f740f1",
+        "filename": "i18n/en.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-26T16:38:32Z",
+      "side": 1,
+      "message": "They\u0027re in the formatting menu, so they come without a verb. Data/content/normal/plain are all options. \u0027Data\u0027 is what html uses, but that doesn\u0027t make them right.",
+      "parentUuid": "6e936f18_2982e8a9",
+      "revId": "d89a67fbd71e899bf72f24a6484079033346f5d1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
