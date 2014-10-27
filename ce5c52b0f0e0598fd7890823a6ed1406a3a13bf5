@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_f69a8265",
+        "filename": "src/dm/ve.dm.Surface.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-27T11:29:48Z",
+      "side": 1,
+      "message": "Any node change in linear selection does, so any table selection in general (which always changes nodes) should too. Tools which require linear selections will ignore this event fairly early on.",
+      "parentUuid": "6e936f18_64c9e07a",
+      "revId": "ce5c52b0f0e0598fd7890823a6ed1406a3a13bf5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_e4b410e7",
         "filename": "src/ui/tools/ve.ui.FormatTool.js",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2014-10-25T00:44:51Z",
       "side": 1,
       "message": "There seems to be a bug in this code somewhere: after changing the style of a cell, the check mark does not appear in the dropdown, but it does appear when changing the selection to a cell.",
+      "revId": "ce5c52b0f0e0598fd7890823a6ed1406a3a13bf5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_b69cfa60",
+        "filename": "src/ui/tools/ve.ui.FormatTool.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-27T11:29:48Z",
+      "side": 1,
+      "message": "Have you tried this on linear selections :) ? OOUI TD.",
+      "parentUuid": "6e936f18_e4b410e7",
       "revId": "ce5c52b0f0e0598fd7890823a6ed1406a3a13bf5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_56a9f676",
+        "filename": "src/ui/tools/ve.ui.FormatTool.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-27T11:29:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_c4af9490",
+      "revId": "ce5c52b0f0e0598fd7890823a6ed1406a3a13bf5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_64a0009b",
         "filename": "src/ui/tools/ve.ui.FormatTool.js",
         "patchSetId": 3
@@ -64,6 +118,24 @@
       "writtenOn": "2014-10-25T00:44:51Z",
       "side": 1,
       "message": "Here too",
+      "revId": "ce5c52b0f0e0598fd7890823a6ed1406a3a13bf5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_76a672a9",
+        "filename": "src/ui/tools/ve.ui.FormatTool.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-27T11:29:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_64a0009b",
       "revId": "ce5c52b0f0e0598fd7890823a6ed1406a3a13bf5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
