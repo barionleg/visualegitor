@@ -16,6 +16,24 @@
       "revId": "163f04a7f516a52c1da0ddfe20fefcc344a780b6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_168cce31",
+        "filename": "src/dm/ve.dm.SurfaceFragment.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 665,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-27T11:22:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_6491e09b",
+      "revId": "163f04a7f516a52c1da0ddfe20fefcc344a780b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
