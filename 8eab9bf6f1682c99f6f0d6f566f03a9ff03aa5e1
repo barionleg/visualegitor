@@ -159,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_403047fc",
+        "filename": "src/ce/nodes/ve.ce.TableNode.js",
+        "patchSetId": 40
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-27T18:32:18Z",
+      "side": 1,
+      "message": "Right, fair point, I missed that if statement :)",
+      "parentUuid": "6e936f18_55c25089",
+      "revId": "8eab9bf6f1682c99f6f0d6f566f03a9ff03aa5e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_5a160b5c",
         "filename": "src/ce/nodes/ve.ce.TableNode.js",
         "patchSetId": 40
@@ -188,6 +206,24 @@
       "side": 1,
       "message": "Yes, see TODO.",
       "parentUuid": "6e936f18_5a160b5c",
+      "revId": "8eab9bf6f1682c99f6f0d6f566f03a9ff03aa5e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_200adb29",
+        "filename": "src/ce/nodes/ve.ce.TableNode.js",
+        "patchSetId": 40
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-27T18:32:18Z",
+      "side": 1,
+      "message": "Oh yes, I\u0027m blind.",
+      "parentUuid": "6e936f18_1534c8a6",
       "revId": "8eab9bf6f1682c99f6f0d6f566f03a9ff03aa5e1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -328,6 +364,24 @@
       "side": 1,
       "message": "FFS. This is going to be a problem we can\u0027t always work around like this. Even here, mouse down for selecting a cell is going to be much harder. In the future we\u0027d need to render other users\u0027 selections with PE:N.\n\nThis polyfill seems to think you can get around it by using document.elementFromPoint(): https://github.com/kmewhort/pointer_events_polyfill/blob/master/pointer_events_polyfill.js\n\nPossibly work this into a later commit?",
       "parentUuid": "6e936f18_c0822acd",
+      "revId": "8eab9bf6f1682c99f6f0d6f566f03a9ff03aa5e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_4344d14a",
+        "filename": "src/ce/styles/nodes/ve.ce.TableNode.css",
+        "patchSetId": 40
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-27T18:32:18Z",
+      "side": 1,
+      "message": "Yeah, IE is broken right now anyway (inspectors close themselves) so I\u0027m OK with this not blocking merge.",
+      "parentUuid": "6e936f18_d55420cc",
       "revId": "8eab9bf6f1682c99f6f0d6f566f03a9ff03aa5e1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
