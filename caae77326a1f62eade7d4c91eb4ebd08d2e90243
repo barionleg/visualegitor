@@ -16,6 +16,24 @@
       "revId": "caae77326a1f62eade7d4c91eb4ebd08d2e90243",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_43fcd1b1",
+        "filename": "src/ui/actions/ve.ui.TableAction.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-27T18:50:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_6dc8dcaa",
+      "revId": "caae77326a1f62eade7d4c91eb4ebd08d2e90243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
