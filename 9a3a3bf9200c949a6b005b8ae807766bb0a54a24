@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_7943beb6",
+        "filename": "src/ui/styles/ve.ui.Icons.css",
+        "patchSetId": 10
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-27T19:36:19Z",
+      "side": 1,
+      "message": "As with all the other ones, this background-position: center; should be removed. It\u0027s already set (twice) by other CSS anyway.",
+      "revId": "9a3a3bf9200c949a6b005b8ae807766bb0a54a24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_f916eeab",
+        "filename": "src/ui/tools/ve.ui.TableTool.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-27T19:36:19Z",
+      "side": 1,
+      "message": "Wrong function name",
+      "revId": "9a3a3bf9200c949a6b005b8ae807766bb0a54a24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
