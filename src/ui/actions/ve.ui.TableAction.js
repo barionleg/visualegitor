@@ -43,10 +43,12 @@ ve.ui.TableAction.static.methods = [ 'create', 'insert', 'delete', 'changeCellSt
  * @param {number} [options.cols=4] Number of rows
  * @param {number} [options.rows=3] Number of columns
  * @param {boolean} [options.header] Make the first row a header row
+ * @param {Object} [options.attributes] Attributes to give the table
  */
 ve.ui.TableAction.prototype.create = function ( options ) {
 	options = options || {};
 	var i,
+		tableElement = { type: 'table' },
 		surfaceModel = this.surface.getModel(),
 		fragment = surfaceModel.getFragment(),
 		data = [],
@@ -57,7 +59,11 @@ ve.ui.TableAction.prototype.create = function ( options ) {
 		return;
 	}
 
-	data.push( { type: 'table' } );
+	if ( options.attributes ) {
+		tableElement.attributes = ve.copy( options.attributes );
+	}
+
+	data.push( tableElement );
 	if ( options.header ) {
 		data.push( { type: 'tableSection', attributes: { style: 'header' } } );
 		data = data.concat( ve.dm.TableRowNode.static.createData( { style: 'header', cellCount: numberOfCols } ) );
