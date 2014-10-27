@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_c359c102",
+        "filename": "src/ui/actions/ve.ui.TableAction.js",
+        "patchSetId": 49
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-27T18:47:38Z",
+      "side": 1,
+      "message": "The name of the parameter is cell not Cell",
+      "revId": "8d8e1da262035b6a551eb57816aa1f58cbac39c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_636ead95",
+        "filename": "src/ui/actions/ve.ui.TableAction.js",
+        "patchSetId": 49
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-27T18:47:38Z",
+      "side": 1,
+      "message": "Here too",
+      "revId": "8d8e1da262035b6a551eb57816aa1f58cbac39c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_836bb981",
+        "filename": "src/ui/actions/ve.ui.TableAction.js",
+        "patchSetId": 49
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-27T18:47:38Z",
+      "side": 1,
+      "message": "Here too",
+      "revId": "8d8e1da262035b6a551eb57816aa1f58cbac39c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_a354b5ca",
+        "filename": "src/ui/ve.ui.TableContext.js",
+        "patchSetId": 49
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-27T18:47:38Z",
+      "side": 1,
+      "message": "Why did you stop passing the handler there? This unbinds ALL mousedown events. Either pass the handler in again, or use a namespace.",
+      "revId": "8d8e1da262035b6a551eb57816aa1f58cbac39c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
