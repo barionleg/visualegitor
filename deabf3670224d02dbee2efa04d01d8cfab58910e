@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_782e5340",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-28T09:51:12Z",
+      "side": 1,
+      "message": "breaking change",
+      "revId": "deabf3670224d02dbee2efa04d01d8cfab58910e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_f8190328",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-28T09:51:12Z",
+      "side": 1,
+      "message": "not dependent on ve-mw, breaks ve-mw",
+      "revId": "deabf3670224d02dbee2efa04d01d8cfab58910e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
