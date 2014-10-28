@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_0e9b406b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-10-28T19:51:39Z",
+      "side": 1,
+      "message": "+ bug: 68590\n\n(others?)",
+      "revId": "6b820e6ee55dc632083c2fb1256ad769f5416daa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
