@@ -50,6 +50,23 @@
       "revId": "0336bc3c876dac00db6eaf6fdc3ab7451682dba2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_1217f057",
+        "filename": "src/ui/tools/ve.ui.TableTool.js",
+        "patchSetId": 19
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-28T01:09:01Z",
+      "side": 1,
+      "message": "Wrong function name",
+      "revId": "0336bc3c876dac00db6eaf6fdc3ab7451682dba2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
