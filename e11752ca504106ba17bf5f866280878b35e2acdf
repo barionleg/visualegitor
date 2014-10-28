@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_038c8988",
+        "filename": "demos/ve/demo.desktop.css",
+        "patchSetId": 47
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-28T18:39:39Z",
+      "side": 1,
+      "message": "Aah, OK, that makes sense.",
+      "parentUuid": "6e936f18_36922a58",
+      "revId": "e11752ca504106ba17bf5f866280878b35e2acdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_5927f00d",
         "filename": "src/ce/nodes/ve.ce.TableNode.js",
         "patchSetId": 47
@@ -1221,6 +1239,24 @@
       "side": 1,
       "message": "Does it? It call this.popup.toggle(undefined) then observes isVisible.",
       "parentUuid": "6e936f18_c4531419",
+      "revId": "e11752ca504106ba17bf5f866280878b35e2acdf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_e35abdf8",
+        "filename": "src/ui/ve.ui.TableContext.js",
+        "patchSetId": 47
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-28T18:39:39Z",
+      "side": 1,
+      "message": "Right! Once again, I\u0027m blind :|",
+      "parentUuid": "6e936f18_b555d454",
       "revId": "e11752ca504106ba17bf5f866280878b35e2acdf",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
