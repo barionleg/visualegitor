@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_d229889b",
+        "filename": "i18n/en.json",
+        "patchSetId": 19
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-28T01:08:06Z",
+      "side": 1,
+      "message": "???",
+      "revId": "0336bc3c876dac00db6eaf6fdc3ab7451682dba2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_f22604c9",
+        "filename": "i18n/qqq.json",
+        "patchSetId": 19
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-28T01:08:06Z",
+      "side": 1,
+      "message": "???",
+      "revId": "0336bc3c876dac00db6eaf6fdc3ab7451682dba2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_b2307cfd",
+        "filename": "src/ui/styles/ve.ui.Icons.css",
+        "patchSetId": 19
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-10-28T01:08:06Z",
+      "side": 1,
+      "message": "Remove background-position: center;",
+      "revId": "0336bc3c876dac00db6eaf6fdc3ab7451682dba2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
