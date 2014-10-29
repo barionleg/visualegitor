@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_9beeab1e",
+        "filename": "lib/rangefix/rangefix.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2014-10-29T17:40:15Z",
+      "side": 1,
+      "message": "typo",
+      "revId": "170f8d5c71ecc9923dd22a685e6b138dea949361",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_fbe6cf3e",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2014-10-29T17:40:15Z",
+      "side": 1,
+      "message": "Why the try/catch? Is it because something inside RangeFix.getBoundingClientRect can throw? Should we comment this?",
+      "revId": "170f8d5c71ecc9923dd22a685e6b138dea949361",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
