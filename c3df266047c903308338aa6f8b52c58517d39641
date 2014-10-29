@@ -50,6 +50,23 @@
       "revId": "c3df266047c903308338aa6f8b52c58517d39641",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_9d6464e3",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 2875,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-29T09:41:06Z",
+      "side": 1,
+      "message": "I see this isn\u0027t a real ClientRect so is mutable, but why are we rounding? I think when you move this code to getClientRectFromNode it should simplify. At the very least node.getBCR should be cached.",
+      "revId": "c3df266047c903308338aa6f8b52c58517d39641",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
