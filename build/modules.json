@@ -233,6 +233,7 @@
 			"src/ce/ve.ce.Annotation.js",
 			"src/ce/ve.ce.Node.js",
 			"src/ce/ve.ce.BranchNode.js",
+			"src/ce/ve.ce.ClassAttributeNode.js",
 			"src/ce/ve.ce.ContentBranchNode.js",
 			"src/ce/ve.ce.LeafNode.js",
 			"src/ce/ve.ce.FocusableNode.js",
