@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_3d7670a0",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-29T09:37:24Z",
+      "side": 1,
+      "message": "Test for unicorns here...",
+      "revId": "c3df266047c903308338aa6f8b52c58517d39641",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_1d7134a7",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-29T09:37:24Z",
+      "side": 1,
+      "message": "If you move hacks to getClientRectFromNode this change should get reverted",
+      "revId": "c3df266047c903308338aa6f8b52c58517d39641",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_7d44f84a",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 2851,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-10-29T09:37:24Z",
+      "side": 1,
+      "message": "as this describes, this method is only for fixing browser bugs in Range#getBoundingClientRect (by using getClientRects instead). What you\u0027ve added is a VE-specific hack for getting the range from a specific type of node. That should go in getClientRectFromNode.",
+      "revId": "c3df266047c903308338aa6f8b52c58517d39641",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
