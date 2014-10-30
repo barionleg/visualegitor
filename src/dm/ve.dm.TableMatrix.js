@@ -73,11 +73,15 @@ ve.dm.TableMatrix.prototype.update = function () {
 
 	// Iterates through all cells and stores the cells as well as
 	// so called placeholders into the matrix.
-	while ( ( cellNode = iterator.next() ) !== null )  {
+	while ( ( cellNode = iterator.next() ) !== undefined ) {
 		col++;
 		// skip placeholders
 		while ( matrix[row][col] ) {
 			col++;
+		}
+		if ( !cellNode ) {
+			matrix[row][col] = null;
+			continue;
 		}
 		cell = new ve.dm.TableMatrixCell( cellNode, row, col );
 		// store the cell in the matrix
@@ -223,7 +227,7 @@ ve.dm.TableMatrix.prototype.lookupCell = function ( cellNode ) {
 	}
 	rowCells = matrix[row];
 	for ( col = 0, cols = rowCells.length; col < cols; col++ ) {
-		if ( rowCells[col].node === cellNode ) {
+		if ( rowCells[col] && rowCells[col].node === cellNode ) {
 			return rowCells[col];
 		}
 	}
