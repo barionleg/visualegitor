@@ -168,9 +168,15 @@ ve.dm.TableNodeCellIterator.prototype.nextSection = function () {
  * @fires newRow
  */
 ve.dm.TableNodeCellIterator.prototype.nextRow = function () {
-	this.rowIndex++;
 	if ( this.sectionNode ) {
-		this.rowNode = this.sectionNode.children[this.rowIndex];
+		while ( this.rowNode ) {
+			this.rowIndex++;
+			this.rowNode = this.sectionNode.children[this.rowIndex];
+			// Make sure we have a row node (and not an alien node)
+			if ( this.rowNode instanceof ve.dm.TableRowNode ) {
+				break;
+			}
+		}
 	}
 	while ( !this.rowNode && !this.finished ) {
 		this.nextSection();
@@ -186,9 +192,13 @@ ve.dm.TableNodeCellIterator.prototype.nextRow = function () {
  * Move to the next table cell
  */
 ve.dm.TableNodeCellIterator.prototype.nextCell = function () {
-	if ( this.cellNode ) {
+	while ( this.cellNode ) {
 		this.cellIndex++;
 		this.cellNode = this.rowNode.children[this.cellIndex];
+		// Make sure we have a cell node (and not an alien node)
+		if ( this.cellNode instanceof ve.dm.TableCellNode ) {
+			break;
+		}
 	}
 	// Step into the next row if there is no next cell or if the column is
 	// beyond the rectangle boundaries
