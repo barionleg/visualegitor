@@ -887,7 +887,7 @@ ve.ce.Surface.prototype.onDocumentDrop = function ( e ) {
 	// Properties may be nullified by other events, so cache before setTimeout
 	var selectionJSON,
 		dataTransfer = e.originalEvent.dataTransfer,
-		focusedNode = this.relocating,
+		relocatingNode = this.relocating,
 		$dropTarget = this.$lastDropTarget,
 		dropPosition = this.lastDropPosition,
 		surface = this;
@@ -902,8 +902,8 @@ ve.ce.Surface.prototype.onDocumentDrop = function ( e ) {
 	setTimeout( function () {
 		var dragSelection, dragRange, originFragment, originData, targetRange, targetOffset, targetFragment;
 
-		if ( focusedNode ) {
-			dragRange = focusedNode.getModel().getOuterRange();
+		if ( relocatingNode ) {
+			dragRange = relocatingNode.getModel().getOuterRange();
 		} else if ( selectionJSON ) {
 			dragSelection = ve.dm.Selection.static.newFromJSON( surface.getModel().getDocument(), selectionJSON );
 			if ( dragSelection instanceof ve.dm.LinearSelection ) {
@@ -912,7 +912,7 @@ ve.ce.Surface.prototype.onDocumentDrop = function ( e ) {
 		}
 
 		if ( dragRange && !dragRange.isCollapsed() ) {
-			if ( focusedNode && !focusedNode.getModel().isContent() ) {
+			if ( relocatingNode && !relocatingNode.getModel().isContent() ) {
 				// Block level drag and drop: use the lastDropTarget to get the targetOffset
 				if ( $dropTarget ) {
 					targetRange = $dropTarget.data( 'view' ).getModel().getOuterRange();
