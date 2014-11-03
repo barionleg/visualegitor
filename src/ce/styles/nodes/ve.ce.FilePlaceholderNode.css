@@ -1,0 +1,18 @@
+/*!
+ * VisualEditor ContentEditable FilePlaceholderNode styles.
+ *
+ * @copyright 2011-2014 VisualEditor Team and others; see http://ve.mit-license.org
+ */
+
+.ve-ce-filePlaceholderNode {
+	display: inline-block;
+	vertical-align: middle;
+	padding: 0.2em;
+	margin: -0.25em 0.15em 0 0.15em;
+	width: 1em;
+	height: 1em;
+	min-width: 31px;
+	min-height: 31px;
+	/* @embed */
+	background: url(../../../ui/styles/images/spinner.gif) no-repeat center center;
+}
