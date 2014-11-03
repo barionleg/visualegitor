@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_99bc57b3",
+        "filename": "src/ce/ve.ce.SurfaceObserver.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2014-11-03T23:03:46Z",
+      "side": 1,
+      "message": "That makes sense ... I wanted to use closure rather than properties to implement isDomRangeChanged/isAnchorNodeChanged but I can still do that in a separate class.",
+      "parentUuid": "6e936f18_516ea9c5",
+      "revId": "e62be03237d3604365d5e344b6f2c8b2be4c23e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_d114f946",
         "filename": "src/ce/ve.ce.SurfaceObserver.js",
         "patchSetId": 8
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_59824fce",
+        "filename": "src/ce/ve.ce.SurfaceObserver.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2014-11-03T23:03:46Z",
+      "side": 1,
+      "message": "When I move this into a separate class, I\u0027ll make sure the function signatures are documented properly",
+      "parentUuid": "6e936f18_d114f946",
+      "revId": "e62be03237d3604365d5e344b6f2c8b2be4c23e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_717165a6",
         "filename": "src/ce/ve.ce.SurfaceObserver.js",
         "patchSetId": 8
@@ -47,6 +83,24 @@
       "writtenOn": "2014-11-03T16:00:23Z",
       "side": 1,
       "message": "Why the function here, why not just set selection immediately?",
+      "revId": "e62be03237d3604365d5e344b6f2c8b2be4c23e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_b9cef35d",
+        "filename": "src/ce/ve.ce.SurfaceObserver.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2014-11-03T23:03:46Z",
+      "side": 1,
+      "message": "I\u0027m trying not to leave a handle to the live selection anywhere (in particular, in the closures defined below).",
+      "parentUuid": "6e936f18_717165a6",
       "revId": "e62be03237d3604365d5e344b6f2c8b2be4c23e9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
