@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_3ca171f5",
+        "filename": "src/dm/nodes/ve.dm.TableNode.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-11-03T18:52:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_1c583534",
+      "revId": "d235bbd22da86492ca929506ac00040e1760271d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_bc3ee1b3",
         "filename": "src/dm/nodes/ve.dm.TableNode.js",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2014-11-03T18:49:21Z",
       "side": 1,
       "message": "sectionS",
+      "revId": "d235bbd22da86492ca929506ac00040e1760271d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_9c5a0521",
+        "filename": "src/dm/nodes/ve.dm.TableNode.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-11-03T18:52:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_bc3ee1b3",
       "revId": "d235bbd22da86492ca929506ac00040e1760271d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
