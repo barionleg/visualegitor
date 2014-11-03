@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_516ea9c5",
+        "filename": "src/ce/ve.ce.SurfaceObserver.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-11-03T16:00:23Z",
+      "side": 1,
+      "message": "with this many properties and methods being returned, sounds like you need a class... like ve.ce.DomRange used to do?",
+      "revId": "e62be03237d3604365d5e344b6f2c8b2be4c23e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_d114f946",
+        "filename": "src/ce/ve.ce.SurfaceObserver.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-11-03T16:00:23Z",
+      "side": 1,
+      "message": "It\u0027s a DOM Selection, not a Range. The reason we have to use selection objects (which theoretically can contain multiple ranges) is that ranges are always forwards.",
+      "revId": "e62be03237d3604365d5e344b6f2c8b2be4c23e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_717165a6",
+        "filename": "src/ce/ve.ce.SurfaceObserver.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-11-03T16:00:23Z",
+      "side": 1,
+      "message": "Why the function here, why not just set selection immediately?",
+      "revId": "e62be03237d3604365d5e344b6f2c8b2be4c23e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
