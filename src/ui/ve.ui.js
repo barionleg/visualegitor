@@ -15,6 +15,7 @@ ve.ui = {
 	//'commandRegistry' instantiated in ve.ui.CommandRegistry.js
 	//'triggerRegistry' instantiated in ve.ui.TriggerRegistry.js
 	//'toolFactory' instantiated in ve.ui.ToolFactory.js
+	//'fileDropHandlerRegistry' instantiated in ve.ui.DropHandlerRegistry.js
 	windowFactory: new OO.Factory()
 };
 
