@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_6caada6e",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 975,
+      "author": {
+        "id": 88
+      },
+      "writtenOn": "2014-11-04T22:00:04Z",
+      "side": 1,
+      "message": "Can you invert this interface so that file handlers produce the content to be inserted, perhaps using a method like getInsertableContent(), which is called and then inserted into the fragment if it\u0027s non-empty?\n\nMy concern is that passing the fragment to the file handler gives the file handler way too much power, and it\u0027s easy for them to do non-insertion stuff which may be dangerous.",
+      "revId": "d812700c628dd97045dadac24d5dc5e9815dad3a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_ccc9ae56",
+        "filename": "src/ui/ve.ui.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 88
+      },
+      "writtenOn": "2014-11-04T22:00:04Z",
+      "side": 1,
+      "message": "The class is a factory, not a registry, you probably just need to update this comment accordingly.",
+      "revId": "d812700c628dd97045dadac24d5dc5e9815dad3a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
