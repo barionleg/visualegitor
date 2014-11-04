@@ -16,6 +16,24 @@
       "revId": "6d68a21d5e38e70674c037cbd6e0a9d9c3d6a58a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_bbc9fe56",
+        "filename": "src/init/ve.init.Target.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-11-04T18:29:38Z",
+      "side": 1,
+      "message": "Debatable. Remember this is non-MW document editor context. I\u0027ve yet to find an editor that doesn\u0027t promote underline.",
+      "parentUuid": "6e936f18_fbb0e6d9",
+      "revId": "6d68a21d5e38e70674c037cbd6e0a9d9c3d6a58a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
