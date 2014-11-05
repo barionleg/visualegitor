@@ -41,6 +41,39 @@ ve.Node = function VeNode() {
 /* Abstract Methods */
 
 /**
+ * Get allowed child node types.
+ *
+ * @method
+ * @abstract
+ * @returns {string[]|null} List of node types allowed as children or null if any type is allowed
+ */
+ve.Node.prototype.getChildNodeTypes = function () {
+	throw new Error( 've.Node.getChildNodeTypes must be overridden in subclass' );
+};
+
+/**
+ * Get allowed parent node types.
+ *
+ * @method
+ * @abstract
+ * @returns {string[]|null} List of node types allowed as parents or null if any type is allowed
+ */
+ve.Node.prototype.getParentNodeTypes = function () {
+	throw new Error( 've.Node.getParentNodeTypes must be overridden in subclass' );
+};
+
+/**
+ * Get suggested parent node types.
+ *
+ * @method
+ * @abstract
+ * @returns {string[]|null} List of node types suggested as parents or null if any type is suggested
+ */
+ve.Node.prototype.getSuggestedParentNodeTypes = function () {
+	throw new Error( 've.Node.getSuggestedParentNodeTypes must be overridden in subclass' );
+};
+
+/**
  * Check if the node can have children.
  *
  * @method
@@ -65,6 +98,28 @@ ve.Node.prototype.canHaveChildrenNotContent = function () {
 };
 
 /**
+ * Check if the node can contain content.
+ *
+ * @method
+ * @abstract
+ * @returns {boolean} Node can contain content
+ */
+ve.Node.prototype.canContainContent = function () {
+	throw new Error( 've.Node.canContainContent must be overridden in subclass' );
+};
+
+/**
+ * Check if the node is content.
+ *
+ * @method
+ * @abstract
+ * @returns {boolean} Node is content
+ */
+ve.Node.prototype.isContent = function () {
+	throw new Error( 've.Node.isContent must be overridden in subclass' );
+};
+
+/**
  * Check if the node has a wrapped element in the document data.
  *
  * @method
@@ -74,6 +129,17 @@ ve.Node.prototype.canHaveChildrenNotContent = function () {
  */
 ve.Node.prototype.isWrapped = function () {
 	throw new Error( 've.Node.isWrapped must be overridden in subclass' );
+};
+
+/**
+ * Check if the node is focusable
+ *
+ * @method
+ * @abstract
+ * @returns {boolean} Node is focusable
+ */
+ve.Node.prototype.isFocusable = function () {
+	throw new Error( 've.Node.isFocusable must be overridden in subclass' );
 };
 
 /**
@@ -89,15 +155,30 @@ ve.Node.prototype.getLength = function () {
 };
 
 /**
- * Get the outer length of the node, which includes wrappers if present.
+ * Get the offset of the node within the document.
+ *
+ * If the node has no parent than the result will always be 0.
  *
  * @method
  * @abstract
- * @returns {number} Node outer length
- * @throws {Error} if not overridden
+ * @returns {number} Offset of node
+ * @throws {Error} Node not found in parent's children array
  */
-ve.Node.prototype.getOuterLength = function () {
-	throw new Error( 've.Node.getOuterLength must be overridden in subclass' );
+ve.Node.prototype.getOffset = function () {
+	throw new Error( 've.Node.getOffset must be overridden in subclass' );
+};
+
+/**
+ * Get the range inside the node.
+ *
+ * @method
+ * @param {boolean} backwards Return a backwards range
+ * @returns {ve.Range} Inner node range
+ */
+ve.Node.prototype.getRange = function ( backwards ) {
+	var offset = this.getOffset() + ( this.isWrapped() ? 1 : 0 ),
+		range = new ve.Range( offset, offset + this.getLength() );
+	return backwards ? range.flip() : range;
 };
 
 /**
@@ -109,11 +190,17 @@ ve.Node.prototype.getOuterLength = function () {
  */
 ve.Node.prototype.getOuterRange = function ( backwards ) {
 	var range = new ve.Range( this.getOffset(), this.getOffset() + this.getOuterLength() );
-	if ( backwards ) {
-		return range.flip();
-	} else {
-		return range;
-	}
+	return backwards ? range.flip() : range;
+};
+
+/**
+ * Get the outer length of the node, which includes wrappers if present.
+ *
+ * @method
+ * @returns {number} Node outer length
+ */
+ve.Node.prototype.getOuterLength = function () {
+	return this.getLength() + ( this.isWrapped() ? 2 : 0 );
 };
 
 /* Methods */
