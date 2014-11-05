@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_068209cd",
+        "filename": "src/ce/ve.ce.RangeState.js",
+        "patchSetId": 12
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-11-05T22:01:04Z",
+      "side": 1,
+      "message": "most places we do this as a method compare( other )",
+      "revId": "aaf2cf00af86fdea429b6215aa4aa79719740c99",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
