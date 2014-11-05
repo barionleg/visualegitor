@@ -31,7 +31,7 @@ OO.inheritClass( ve.ui.ActionFactory, OO.Factory );
  * @returns {boolean} The action supports the method
  */
 ve.ui.ActionFactory.prototype.doesActionSupportMethod = function ( action, method ) {
-	if ( action in this.registry ) {
+	if ( this.registry.hasOwnProperty( action ) ) {
 		return this.registry[action].static.methods.indexOf( method ) !== -1;
 	}
 	throw new Error( 'Unknown action: ' + action );

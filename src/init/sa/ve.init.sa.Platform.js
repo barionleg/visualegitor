@@ -72,7 +72,7 @@ ve.init.sa.Platform.prototype.addParsedMessages = function ( messages ) {
 
 /** @inheritdoc */
 ve.init.sa.Platform.prototype.getParsedMessage = function ( key ) {
-	if ( key in this.parsedMessages ) {
+	if ( this.parsedMessages.hasOwnProperty( key ) ) {
 		return this.parsedMessages[key];
 	}
 	// Fallback to regular messages, html escaping applied.
