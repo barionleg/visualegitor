@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_3b8645ad",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2014-11-05T13:51:19Z",
+      "side": 1,
+      "message": "What\u0027s the closure for in this file?",
+      "revId": "b69f90a82de9fc5f0208acfd0ceda0089d7be9a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
