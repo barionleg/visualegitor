@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_9fe5fca1",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 975,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-11-06T11:33:10Z",
+      "side": 1,
+      "message": "Seems sensible. Of course it will have to be promise-based.",
+      "parentUuid": "6e936f18_6caada6e",
+      "revId": "d812700c628dd97045dadac24d5dc5e9815dad3a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_ccc9ae56",
         "filename": "src/ui/ve.ui.js",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2014-11-04T22:00:04Z",
       "side": 1,
       "message": "The class is a factory, not a registry, you probably just need to update this comment accordingly.",
+      "revId": "d812700c628dd97045dadac24d5dc5e9815dad3a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_ff6be0eb",
+        "filename": "src/ui/ve.ui.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-11-06T11:33:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_ccc9ae56",
       "revId": "d812700c628dd97045dadac24d5dc5e9815dad3a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
