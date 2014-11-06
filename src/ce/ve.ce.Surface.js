@@ -549,21 +549,24 @@ ve.ce.Surface.prototype.focus = function () {
 	} else if ( selection instanceof ve.dm.LinearSelection ) {
 		node = this.getDocument().getNodeAndOffset( selection.getRange().start ).node;
 		$( node ).closest( '[contenteditable=true]' )[0].focus();
-		// If we are calling focus after replacing a node the selection may be gone
-		// but onDocumentFocus won't fire so restore the selection here too.
-		this.onModelSelect( selection );
-		setTimeout( function () {
-			// In some browsers (e.g. Chrome) giving the document node focus doesn't
-			// necessarily give you a selection (e.g. if the first child is a <figure>)
-			// so if the surface isn't 'focused' (has no selection) give it a selection
-			// manually
-			// TODO: rename isFocused and other methods to something which reflects
-			// the fact they actually mean "has a native selection"
-			if ( !surface.isFocused() ) {
-				surface.getModel().selectFirstContentOffset();
-			}
-		} );
+	} else {
+		this.$documentNode[0].focus();
 	}
+
+	// If we are calling focus after replacing a node the selection may be gone
+	// but onDocumentFocus won't fire so restore the selection here too.
+	this.onModelSelect( selection );
+	setTimeout( function () {
+		// In some browsers (e.g. Chrome) giving the document node focus doesn't
+		// necessarily give you a selection (e.g. if the first child is a <figure>)
+		// so if the surface isn't 'focused' (has no selection) give it a selection
+		// manually
+		// TODO: rename isFocused and other methods to something which reflects
+		// the fact they actually mean "has a native selection"
+		if ( !surface.isFocused() ) {
+			surface.getModel().selectFirstContentOffset();
+		}
+	} );
 	// onDocumentFocus takes care of the rest
 };
 
