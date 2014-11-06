@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_a1a77607",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-11-06T22:37:07Z",
+      "side": 1,
+      "message": "I think you can return here. Modifying the  model will trigger onModelSelection and showSelection.",
+      "revId": "8e96a4eb55b6d3b29cc27d724df6d2fb7ba9172c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
