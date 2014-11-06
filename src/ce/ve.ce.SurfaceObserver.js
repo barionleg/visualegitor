@@ -53,6 +53,16 @@ OO.mixinClass( ve.ce.SurfaceObserver, OO.EventEmitter );
  */
 
 /**
+ * When #poll observes a change in the document and the new selection anchor
+ * branch node does not equal as the last known one, this event
+ * is emitted.
+ *
+ * @event branchNodeChange
+ * @param {ve.ce.BranchNode} oldBranchNode
+ * @param {ve.ce.BranchNode} newBranchNode
+ */
+
+/**
  * When #poll observes a change in the document and the new
  * selection does not equal as the last known selection, this event
  * is emitted (before the properties are updated).
@@ -248,6 +258,14 @@ ve.ce.SurfaceObserver.prototype.pollOnceInternal = function ( emitChanges, selec
 			newState.node,
 			{ text: oldState.text, hash: oldState.hash, range: oldState.veRange },
 			{ text: newState.text, hash: newState.hash, range: newState.veRange }
+		);
+	}
+
+	if ( newState.branchNodeChanged ) {
+		this.emit(
+			'branchNodeChange',
+			( oldState && oldState.node && oldState.node.root ? oldState.node : null ),
+			newState.node
 		);
 	}
 
