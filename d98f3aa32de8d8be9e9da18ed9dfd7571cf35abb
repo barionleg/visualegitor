@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_2fad7f99",
+        "filename": "src/dm/nodes/ve.dm.TableCellNode.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-11-10T11:17:35Z",
+      "side": 1,
+      "message": "document x2",
+      "revId": "d98f3aa32de8d8be9e9da18ed9dfd7571cf35abb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_0fa8c388",
+        "filename": "src/dm/nodes/ve.dm.TableCellNode.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-11-10T11:17:35Z",
+      "side": 1,
+      "message": "opening",
+      "revId": "d98f3aa32de8d8be9e9da18ed9dfd7571cf35abb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
