@@ -16,6 +16,23 @@
       "revId": "dad5b95bb6f6261d61b2978c57e04126f3d6d7e3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_8fae132a",
+        "filename": "src/ui/styles/ve.ui.TableContext.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-11-10T12:33:33Z",
+      "side": 1,
+      "message": "this was deliberate so that the context menu triangle points to the middle of the icon.",
+      "revId": "dad5b95bb6f6261d61b2978c57e04126f3d6d7e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
