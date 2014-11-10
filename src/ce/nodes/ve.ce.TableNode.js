@@ -336,6 +336,7 @@ ve.ce.TableNode.prototype.updateOverlay = function () {
 	}
 
 	var i, l, nodes, cellOffset, anchorNode, anchorOffset, selectionOffset,
+		captionModel, captionView, captionSide,
 		top, left, bottom, right,
 		selection = this.editingFragment ?
 			this.editingFragment.getSelection() :
@@ -350,6 +351,12 @@ ve.ce.TableNode.prototype.updateOverlay = function () {
 	}
 
 	nodes = this.getCellNodesFromSelection( selection );
+	captionModel = selection.getTableNode().getCaptionNode();
+	captionView = captionModel ?
+		this.getNodeFromOffset( captionModel.getOffset() - this.model.getOffset() ) :
+		null;
+	captionSide = this.$element.css( 'caption-side' );
+
 	anchorNode = this.getCellNodesFromSelection( selection.collapseToFrom() )[0];
 	anchorOffset = ve.translateRect( anchorNode.$element[0].getBoundingClientRect(), -tableOffset.left, -tableOffset.top );
 
@@ -393,7 +400,8 @@ ve.ce.TableNode.prototype.updateOverlay = function () {
 		left: tableOffset.left - surfaceOffset.left
 	} );
 	this.colContext.$element.css( {
-		left: selectionOffset.left
+		left: selectionOffset.left,
+		top: ( captionView && captionSide === 'top' ) ? captionView.$element.height() : 0
 	} );
 	this.colContext.indicator.$element.css( {
 		width: selectionOffset.width
@@ -402,7 +410,8 @@ ve.ce.TableNode.prototype.updateOverlay = function () {
 		'margin-left': selectionOffset.width / 2
 	} );
 	this.rowContext.$element.css( {
-		top: selectionOffset.top
+		top: selectionOffset.top,
+		left: ( captionView && captionSide === 'left' ) ? captionView.$element.width() : 0
 	} );
 	this.rowContext.indicator.$element.css( {
 		height: selectionOffset.height

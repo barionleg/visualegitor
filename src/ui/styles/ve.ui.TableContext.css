@@ -29,18 +29,15 @@
 	border-bottom: 0;
 }
 
-.ve-ui-tableContext-rowContext {
+.ve-ui-tableContext-rowContext .oo-ui-popupWidget {
 	/* Gap + half context width (for centering), 0.2 + 0.8/2 */
 	left: -0.6em;
-}
-
-.ve-ui-tableContext-rowContext .oo-ui-popupWidget {
 	top: 0.3em;
 }
 
 .ve-ui-tableContext-rowContext .ve-ui-tableContext-indicator {
 	width: 0.8em;
-	/* Half context width (for centering) */
-	margin-left: -0.4em;
+	/* Gap + context width, 0.2 + 0.8 */
+	margin-left: -1em;
 	border-right: 0;
 }
