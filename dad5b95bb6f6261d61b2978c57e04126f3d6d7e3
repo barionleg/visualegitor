@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_04fe6a66",
+        "filename": "src/ce/nodes/ve.ce.TableNode.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-11-10T09:02:01Z",
+      "side": 1,
+      "message": "Using computed CSS is slow. It would be much easier to just find the first row and use that as the vertical offset. Then we don\u0027t have to account for the various values of caption side.",
+      "revId": "dad5b95bb6f6261d61b2978c57e04126f3d6d7e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
