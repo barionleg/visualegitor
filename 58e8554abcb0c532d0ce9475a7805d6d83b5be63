@@ -33,6 +33,24 @@
       "revId": "58e8554abcb0c532d0ce9475a7805d6d83b5be63",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_bd49c437",
+        "filename": "src/ui/tools/ve.ui.TableTool.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-11-10T22:31:23Z",
+      "side": 1,
+      "message": "No, it\u0027s enabled in the parent.",
+      "parentUuid": "6e936f18_fda74c06",
+      "revId": "58e8554abcb0c532d0ce9475a7805d6d83b5be63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
