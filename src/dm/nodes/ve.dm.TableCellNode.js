@@ -88,7 +88,10 @@ ve.dm.TableCellNode.static.toDomElements = function ( dataElement, doc ) {
 /**
  * Creates data that can be inserted into the model to create a new table cell.
  *
- * @param {Object} [options] An object with property 'style' which can be either 'header' or 'data'.
+ * @param {Object} [options]
+ * @param {string} [options.style='data'] Either 'header' or 'data'
+ * @param {number} [options.rowspan=1]
+ * @param {number} [options.colspan=1]
  * @return {Array} Model data for a new table cell
  */
 ve.dm.TableCellNode.static.createData = function ( options ) {
@@ -97,7 +100,9 @@ ve.dm.TableCellNode.static.createData = function ( options ) {
 		{
 			type: 'tableCell',
 			attributes: {
-				style: options.style || 'data'
+				style: options.style || 'data',
+				rowspan: options.rowspan || 1,
+				colspan: options.colspan || 1
 			}
 		},
 		{ type: 'paragraph' },
