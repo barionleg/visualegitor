@@ -754,6 +754,38 @@ ve.dm.SurfaceFragment.prototype.insertContent = function ( content, annotate ) {
 };
 
 /**
+ * Insert HTML in the fragment.
+ *
+ * @method
+ * @param {string} html HTML to insert
+ * @param {Object} pasteRules The paste rules for the target surface
+ * @chainable
+ */
+ve.dm.SurfaceFragment.prototype.insertHtml = function ( html, pasteRules ) {
+	if ( !( this.selection instanceof ve.dm.LinearSelection ) ) {
+		return this;
+	}
+	this.insertDocument( this.getDocument().newFromHtml( html, pasteRules ) );
+	return this;
+};
+
+/**
+ */
+ve.dm.SurfaceFragment.prototype.insertDocument = function ( doc ) {
+	if ( !( this.selection instanceof ve.dm.LinearSelection ) ) {
+		return this;
+	}
+
+	this.change( new ve.dm.Transaction.newFromDocumentInsertion(
+		this.getDocument(),
+		this.getSelection().getRange().start,
+		doc
+	) );
+
+	return this;
+};
+
+/**
  * Remove content in the fragment.
  *
  * @method
