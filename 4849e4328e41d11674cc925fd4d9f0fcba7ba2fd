@@ -16,6 +16,24 @@
       "revId": "4849e4328e41d11674cc925fd4d9f0fcba7ba2fd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_fa6f4424",
+        "filename": "src/ce/nodes/ve.ce.GeneratedContentNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-11-12T19:42:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_ba58dc29",
+      "revId": "4849e4328e41d11674cc925fd4d9f0fcba7ba2fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
