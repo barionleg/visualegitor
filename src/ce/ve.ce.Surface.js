@@ -978,31 +978,18 @@ ve.ce.Surface.prototype.onDocumentDrop = function ( e ) {
 			// Re-insert data at new location
 			targetFragment.insertContent( originData );
 		} else if ( fileHandlers.length ) {
-			insert = function ( data ) {
-				targetFragment.collapseToEnd().insertContent( data );
+			insert = function ( docOrData ) {
+				if ( docOrData instanceof ve.dm.Document ) {
+					targetFragment.collapseToEnd().insertDocument( docOrData );
+				} else {
+					targetFragment.collapseToEnd().insertContent( docOrData );
+				}
 			};
 			for ( i = 0, l = fileHandlers.length; i < l; i++ ) {
 				fileHandlers[i].getInsertableData().done( insert );
 			}
 		} else if ( dragHtml ) {
-			importRules = this.getSurface().getImportRules();
-			htmlDoc = ve.createDocumentFromHtml( dragHtml );
-			doc = ve.dm.converter.getModelFromDom( htmlDoc, this.getModel().getDocument().getHtmlDocument() );
-			data = doc.data;
-			// Clear metadata
-			doc.metadata = new ve.dm.MetaLinearData( doc.getStore(), new Array( 1 + data.getLength() ) );
-			data.sanitize( importRules.external, this.pasteSpecial );
-			if ( importRules.all ) {
-				data.sanitize( importRules.all );
-			}
-			data.remapInternalListKeys( this.model.getDocument().getInternalList() );
-			// Initialize node tree
-			doc.buildNodeTree();
-			this.getModel().change( new ve.dm.Transaction.newFromDocumentInsertion(
-				this.getModel().getDocument(),
-				targetOffset,
-				doc
-			) );
+			targetFragment.insertHtml( dragHtml, this.getSurface().getImportRules() );
 		} else if ( dragText ) {
 			targetFragment.insertContent( dragText );
 		}
