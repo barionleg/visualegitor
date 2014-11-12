@@ -978,8 +978,12 @@ ve.ce.Surface.prototype.onDocumentDrop = function ( e ) {
 			// Re-insert data at new location
 			targetFragment.insertContent( originData );
 		} else if ( fileHandlers.length ) {
-			insert = function ( data ) {
-				targetFragment.collapseToEnd().insertContent( data );
+			insert = function ( docOrData ) {
+				if ( docOrData instanceof ve.dm.Document ) {
+					targetFragment.collapseToEnd().insertDocument( docOrData );
+				} else {
+					targetFragment.collapseToEnd().insertContent( docOrData );
+				}
 			};
 			for ( i = 0, l = fileHandlers.length; i < l; i++ ) {
 				fileHandlers[i].getInsertableData().done( insert );
@@ -997,6 +1001,7 @@ ve.ce.Surface.prototype.onDocumentDrop = function ( e ) {
 			}
 			data.remapInternalListKeys( this.model.getDocument().getInternalList() );
 			// Initialize node tree
+			// BUG T75569: This shouldn't be needed
 			doc.buildNodeTree();
 			this.getModel().change( new ve.dm.Transaction.newFromDocumentInsertion(
 				this.getModel().getDocument(),
