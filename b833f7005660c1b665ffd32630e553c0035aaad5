@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_538d032d",
+        "filename": "src/ui/filedrophandlers/ve.ui.HTMLFileDropHandler.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-11-12T22:57:01Z",
+      "side": 1,
+      "message": "I think we avoid the name document to avoid confusion with window.document. Use doc or documentModel instead.",
+      "revId": "b833f7005660c1b665ffd32630e553c0035aaad5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
