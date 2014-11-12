@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_a0c51066",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 24
+      },
+      "writtenOn": "2014-11-12T14:02:28Z",
+      "side": 1,
+      "message": "Please mention the change bumps rubocop to 0.27.1 which fixed https://github.com/bbatsov/rubocop/issues/1401 (i.e. support dot files).",
+      "revId": "d6341e6ab5119549d9e803c156e91c7cbd1a4032",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
