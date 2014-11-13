@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_657aacb9",
+        "filename": "src/ce/ve.ce.RangeState.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-11-13T20:04:31Z",
+      "side": 1,
+      "message": "OK. At a higher level, it seems sensible that the DOM selection could sometimes be in a non-content branch node, and ce.Surface would then have to correct that, but in order to do so it first needs ce.SurfaceObserver to tell it about this situation. So SurfaceObserver should be capable of notifying the Surface about non-CBN selections.",
+      "parentUuid": "6e936f18_82148e52",
+      "revId": "d8487f4abd011acec0b1013b48d1217c747aa8ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_4c4ca243",
         "filename": "src/ce/ve.ce.RangeState.js",
         "patchSetId": 14
@@ -118,6 +136,24 @@
       "side": 1,
       "message": "It\u0027s definitely suboptimal. It relies on explicit pollOnceInternal calls synchronizing everything before the branch node changes. However, that\u0027s the same as the prior behaviour: contentChange was not emitted if there was a node change.\n\nThis is not usually a problem because blocks cannot easily be out of sync at the time that you move blocks, but (say) an un-event-ful spellcheck change would be missed if it were followed swiftly by a selection change.\n\nThis isn\u0027t trivial to fix but I think it\u0027s outside the scope of this patchset.",
       "parentUuid": "6e936f18_2c783625",
+      "revId": "d8487f4abd011acec0b1013b48d1217c747aa8ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_65ab8c1a",
+        "filename": "src/ce/ve.ce.RangeState.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-11-13T20:04:31Z",
+      "side": 1,
+      "message": "I\u0027m OK with not changing the existing behavior of contentChange not being emitted when moving to a different node. What I was asking specifically was for you to convince me that something sane will happen when moving from one block slug to another. But I think that\u0027s fine now because of slug staging, and so such a move will always be from a (staged) paragraph to a slug?",
+      "parentUuid": "6e936f18_0245de46",
       "revId": "d8487f4abd011acec0b1013b48d1217c747aa8ef",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
