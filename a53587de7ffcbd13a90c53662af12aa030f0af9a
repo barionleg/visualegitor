@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_85f8187b",
+        "filename": "src/dm/ve.dm.Document.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 1233,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-11-13T19:50:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_6b74c9cc",
+      "revId": "a53587de7ffcbd13a90c53662af12aa030f0af9a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_0b7d05b0",
         "filename": "src/dm/ve.dm.Document.js",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2014-11-12T16:48:56Z",
       "side": 1,
       "message": "The paste rules to sanitize the data with",
+      "revId": "a53587de7ffcbd13a90c53662af12aa030f0af9a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_e5079c83",
+        "filename": "src/dm/ve.dm.Document.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 1237,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-11-13T19:50:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_0b7d05b0",
       "revId": "a53587de7ffcbd13a90c53662af12aa030f0af9a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_45f6908d",
+        "filename": "src/dm/ve.dm.SurfaceFragment.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 773,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-11-13T19:50:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_cb82bd97",
+      "revId": "a53587de7ffcbd13a90c53662af12aa030f0af9a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_ab55f127",
         "filename": "src/dm/ve.dm.SurfaceFragment.js",
         "patchSetId": 3
@@ -64,6 +118,24 @@
       "writtenOn": "2014-11-12T16:48:56Z",
       "side": 1,
       "message": "I guess we should remove any content in the unlikely event the selection isn\u0027t collapsed, for consistency with insertContent. Copy lines 728-730.",
+      "revId": "a53587de7ffcbd13a90c53662af12aa030f0af9a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_e536bc4e",
+        "filename": "src/dm/ve.dm.SurfaceFragment.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 779,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-11-13T19:50:35Z",
+      "side": 1,
+      "message": "Done. Should we also do this for insertHtml?",
+      "parentUuid": "6e936f18_ab55f127",
       "revId": "a53587de7ffcbd13a90c53662af12aa030f0af9a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
