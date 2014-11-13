@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_82148e52",
+        "filename": "src/ce/ve.ce.RangeState.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2014-11-13T17:48:47Z",
+      "side": 1,
+      "message": "Urghhh ...\n\nDuring the processing of an Enter keydown, ve.ce.BranchNode onSplice leaves a collapsed DOM selection just after the previously-active paragraph node (i.e. with anchorNode set to the div.ve-ce-documentNode and the anchorOffset set to, say, 1).\n\nUltimately the DOM selection gets restored to something more meaningful. But before this happens, the ve.dm.Document emits a transact event that causes a call to ve.ce.SurfaceObserver pollOnceNoEmit. So we end up with a spurious RangeState with a selection anchored at ve.ce.DocumentNode.\n\nThat is, it\u0027s an emit-halfway-through-changing-state quirk. It\u0027s ugly but it seems not to matter much.",
+      "parentUuid": "6e936f18_accc46c1",
+      "revId": "d8487f4abd011acec0b1013b48d1217c747aa8ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_4c4ca243",
         "filename": "src/ce/ve.ce.RangeState.js",
         "patchSetId": 14
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_bf69a5f7",
+        "filename": "src/ce/ve.ce.RangeState.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2014-11-13T17:48:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_6cd4fe17",
+      "revId": "d8487f4abd011acec0b1013b48d1217c747aa8ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_2c783625",
         "filename": "src/ce/ve.ce.RangeState.js",
         "patchSetId": 14
@@ -64,6 +100,24 @@
       "writtenOn": "2014-11-07T19:30:38Z",
       "side": 1,
       "message": "Hmm, does this behave correctly when moving from one block slug to another? It\u0027s possible that it does, it\u0027s just not immediately obvious to me why.",
+      "revId": "d8487f4abd011acec0b1013b48d1217c747aa8ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_0245de46",
+        "filename": "src/ce/ve.ce.RangeState.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2014-11-13T17:48:47Z",
+      "side": 1,
+      "message": "It\u0027s definitely suboptimal. It relies on explicit pollOnceInternal calls synchronizing everything before the branch node changes. However, that\u0027s the same as the prior behaviour: contentChange was not emitted if there was a node change.\n\nThis is not usually a problem because blocks cannot easily be out of sync at the time that you move blocks, but (say) an un-event-ful spellcheck change would be missed if it were followed swiftly by a selection change.\n\nThis isn\u0027t trivial to fix but I think it\u0027s outside the scope of this patchset.",
+      "parentUuid": "6e936f18_2c783625",
       "revId": "d8487f4abd011acec0b1013b48d1217c747aa8ef",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
