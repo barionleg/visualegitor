@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_1c49ba35",
+        "filename": "src/dm/ve.dm.AnnotationSet.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-11-14T18:36:54Z",
+      "side": 1,
+      "message": "Uhm, this was copied from compareTo()...",
+      "parentUuid": "6e936f18_8b98226e",
+      "revId": "f7c8ef35c6a7c51db32ccadbc023b3319d1f9cdc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_cbb94ac8",
         "filename": "src/dm/ve.dm.AnnotationSet.js",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2014-11-14T12:55:27Z",
       "side": 1,
       "message": "\u0027compare\u0027 suggests you\u0027re using comparable. I suggest\n\n(compareTo|equals)(\u0027\u0027|InOrder)\n\nor similar as the naming scheme, where \u0027equals\u0027 is IV index, and \u0027compareTo\u0027 is comparable.\n\nThat would make this equalsInOrder, so you could probably scale back the \"NB: this compares in order!!\" comments",
+      "revId": "f7c8ef35c6a7c51db32ccadbc023b3319d1f9cdc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_9c5ceaf5",
+        "filename": "src/dm/ve.dm.AnnotationSet.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-11-14T18:36:54Z",
+      "side": 1,
+      "message": "Good call, I\u0027ll do that",
+      "parentUuid": "6e936f18_cbb94ac8",
       "revId": "f7c8ef35c6a7c51db32ccadbc023b3319d1f9cdc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
