@@ -60,7 +60,7 @@ module.exports = function ( grunt ) {
 			},
 			css: {
 				dest: 'dist/visualEditor.css',
-				src: ['dist/visualEditor.css']
+				src: coreBuildFiles.styles
 			}
 		},
 		cssjanus: {
@@ -205,7 +205,7 @@ module.exports = function ( grunt ) {
 		}
 	} );
 
-	grunt.registerTask( 'build', [ 'clean', 'cssUrlEmbed', 'concat', 'cssjanus', 'copy', 'buildloader' ] );
+	grunt.registerTask( 'build', [ 'clean', 'concat', 'cssjanus', 'cssUrlEmbed', 'copy', 'buildloader' ] );
 	grunt.registerTask( 'lint', [ 'jshint', 'jscs', 'csslint', 'banana' ] );
 	grunt.registerTask( 'unit', [ 'karma:main' ] );
 	grunt.registerTask( 'test', [ 'git-build', 'build', 'lint', 'unit' ] );
