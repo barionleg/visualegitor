@@ -7,7 +7,7 @@
 /**
  * Proxy for a tool, displaying information about the current context.
  *
- * Use with ve.ui.ContextMenuWidget.
+ * Use with ve.ui.ContextSelectWidget.
  *
  * @class
  * @extends OO.ui.DecoratedOptionWidget
@@ -18,21 +18,21 @@
  * @param {ve.dm.Node|ve.dm.Annotation} model Node or annotation item is related to
  * @param {Object} [config] Configuration options
  */
-ve.ui.ContextItemWidget = function VeUiContextItemWidget( data, tool, model, config ) {
+ve.ui.ContextOptionWidget = function VeUiContextOptionWidget( data, tool, model, config ) {
 	var $label;
 
 	// Config intialization
 	config = config || {};
 
 	// Parent constructor
-	ve.ui.ContextItemWidget.super.call( this, data, config );
+	ve.ui.ContextOptionWidget.super.call( this, data, config );
 
 	// Properties
 	this.tool = tool;
 	this.model = model;
 
 	// Initialization
-	this.$element.addClass( 've-ui-contextItemWidget' );
+	this.$element.addClass( 've-ui-contextOptionWidget' );
 	this.setIcon( this.tool.static.icon );
 
 	// FIXME: A hacky way to provide a secondary label/description.
@@ -40,7 +40,7 @@ ve.ui.ContextItemWidget = function VeUiContextItemWidget( data, tool, model, con
 	$label = $( '<span>' )
 		.append( this.getDescription() )
 		.append(
-			$( '<span class="ve-ui-contextItemWidget-label-secondary">' )
+			$( '<span class="ve-ui-contextOptionWidget-label-secondary">' )
 				.text( ve.msg( 'visualeditor-contextitemwidget-label-secondary' ) )
 		);
 	this.setLabel( $label );
@@ -48,7 +48,7 @@ ve.ui.ContextItemWidget = function VeUiContextItemWidget( data, tool, model, con
 
 /* Setup */
 
-OO.inheritClass( ve.ui.ContextItemWidget, OO.ui.DecoratedOptionWidget );
+OO.inheritClass( ve.ui.ContextOptionWidget, OO.ui.DecoratedOptionWidget );
 
 /* Methods */
 
@@ -57,7 +57,7 @@ OO.inheritClass( ve.ui.ContextItemWidget, OO.ui.DecoratedOptionWidget );
  *
  * @return {string} Description of model
  */
-ve.ui.ContextItemWidget.prototype.getDescription = function () {
+ve.ui.ContextOptionWidget.prototype.getDescription = function () {
 	var description;
 
 	if ( this.model instanceof ve.dm.Annotation ) {
@@ -77,6 +77,6 @@ ve.ui.ContextItemWidget.prototype.getDescription = function () {
  *
  * @return {ve.ui.Command} Command
  */
-ve.ui.ContextItemWidget.prototype.getCommand = function () {
+ve.ui.ContextOptionWidget.prototype.getCommand = function () {
 	return ve.ui.commandRegistry.lookup( this.tool.static.commandName );
 };

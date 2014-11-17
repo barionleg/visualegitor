@@ -7,12 +7,12 @@
 /* Most vendor prefixes are not needed on mobile devices */
 /*csslint compatible-vendor-prefixes:false */
 
-.ve-ui-mobileContext .ve-ui-contextItemWidget .ve-ui-contextItemWidget-label-secondary {
+.ve-ui-mobileContext .ve-ui-contextOptionWidget .ve-ui-contextOptionWidget-label-secondary {
 	display: inline;
 	color: #347bff;
 }
 
-.ve-ui-mobileContext .ve-ui-contextItemWidget .ve-ui-contextItemWidget-label-secondary::before {
+.ve-ui-mobileContext .ve-ui-contextOptionWidget .ve-ui-contextOptionWidget-label-secondary::before {
 	content: " • ";
 	color: #666;
 }
