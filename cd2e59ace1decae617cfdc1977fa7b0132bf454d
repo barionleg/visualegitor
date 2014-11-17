@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_b32d43f0",
+        "filename": "src/ui/filedrophandlers/ve.ui.DSVFileDropHandler.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-11-17T21:11:32Z",
+      "side": 1,
+      "message": "Whoops, thought-o.",
+      "parentUuid": "6e936f18_ad3ace91",
+      "revId": "cd2e59ace1decae617cfdc1977fa7b0132bf454d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_4d522adf",
         "filename": "src/ui/filedrophandlers/ve.ui.DSVFileDropHandler.js",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "6e936f18_d3280fdf",
+        "filename": "src/ui/filedrophandlers/ve.ui.DSVFileDropHandler.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-11-17T21:11:32Z",
+      "side": 1,
+      "message": "I agree this is ugly; file a tech-debt bug?",
+      "parentUuid": "6e936f18_4d522adf",
+      "revId": "cd2e59ace1decae617cfdc1977fa7b0132bf454d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_6d40460a",
         "filename": "src/ui/filedrophandlers/ve.ui.DSVFileDropHandler.js",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2014-11-17T20:47:57Z",
       "side": 1,
       "message": "Why doesn\u0027t the parent class do this? It creates this.reader, after all, and now every child class is doing this itself.",
+      "revId": "cd2e59ace1decae617cfdc1977fa7b0132bf454d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_931e07bd",
+        "filename": "src/ui/filedrophandlers/ve.ui.DSVFileDropHandler.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-11-17T21:11:32Z",
+      "side": 1,
+      "message": "As above.",
+      "parentUuid": "6e936f18_6d40460a",
       "revId": "cd2e59ace1decae617cfdc1977fa7b0132bf454d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
