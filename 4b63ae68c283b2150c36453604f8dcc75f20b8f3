@@ -16,6 +16,24 @@
       "revId": "4b63ae68c283b2150c36453604f8dcc75f20b8f3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_1d252656",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 1290,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-11-17T18:10:08Z",
+      "side": 1,
+      "message": "wat - that belongs in another commit",
+      "parentUuid": "6e936f18_1d08c629",
+      "revId": "4b63ae68c283b2150c36453604f8dcc75f20b8f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
