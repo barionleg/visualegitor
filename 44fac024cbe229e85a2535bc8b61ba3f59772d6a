@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_7f65340c",
+        "filename": "src/ui/filedrophandlers/ve.ui.DSVFileDropHandler.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-11-18T19:08:48Z",
+      "side": 1,
+      "message": "Also return; here. There\u0027s no point building data and attempting to resolve an already-rejected promise.",
+      "revId": "44fac024cbe229e85a2535bc8b61ba3f59772d6a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
