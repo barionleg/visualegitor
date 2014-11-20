@@ -56,6 +56,10 @@ ve.ui.WindowAction.prototype.open = function ( name, data ) {
 		if ( windowClass.prototype instanceof ve.ui.FragmentInspector ) {
 			windowManager = surface.getContext().getInspectors();
 			windowManager.openWindow( name, data );
+		} else if ( windowClass.prototype instanceof ve.ui.ToolbarDialog ) {
+			data = ve.extendObject( data, { surface: surface } );
+			windowManager = surface.toolbarWindows;
+			windowManager.openWindow( name, data );
 		} else if ( windowClass.prototype instanceof OO.ui.Dialog ) {
 			// For non-isolated dialogs, remove the selection and re-apply on close
 			surface.getView().nativeSelection.removeAllRanges();
