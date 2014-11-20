@@ -29,6 +29,13 @@ ve.ui.WindowManager = function VeUiWindowManager( config ) {
 
 OO.inheritClass( ve.ui.WindowManager, OO.ui.WindowManager );
 
+/* Static properties */
+
+ve.ui.WindowManager.static.sizes.wide = {
+	width: '100%',
+	maxHeight: '100%'
+};
+
 /* Methods */
 
 /**

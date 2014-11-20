@@ -57,6 +57,7 @@ ve.ce.Surface = function VeCeSurface( model, ui, options ) {
 	this.$highlights = this.$( '<div>' ).append(
 		this.$highlightsFocused, this.$highlightsBlurred
 	);
+	this.$findResults = this.$( '<div>' );
 	this.$dropMarker = this.$( '<div>' ).addClass( 've-ce-focusableNode-dropMarker' );
 	this.$lastDropTarget = null;
 	this.lastDropPosition = null;
@@ -156,6 +157,7 @@ ve.ce.Surface = function VeCeSurface( model, ui, options ) {
 	this.$highlights.addClass( 've-ce-surface-highlights' );
 	this.$highlightsFocused.addClass( 've-ce-surface-highlights-focused' );
 	this.$highlightsBlurred.addClass( 've-ce-surface-highlights-blurred' );
+	this.$findResults.addClass( 've-ce-surface-findResults' );
 	this.$pasteTarget.addClass( 've-ce-surface-paste' )
 		.attr( 'tabIndex', -1 )
 		.prop( 'contentEditable', 'true' );
@@ -163,6 +165,7 @@ ve.ce.Surface = function VeCeSurface( model, ui, options ) {
 	// Add elements to the DOM
 	this.$element.append( this.$documentNode, this.$pasteTarget );
 	this.surface.$blockers.append( this.$highlights );
+	this.surface.$controls.append( this.$findResults );
 };
 
 /* Inheritance */

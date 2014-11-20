@@ -159,7 +159,8 @@
 				"classes": [
 					"ve.ui.*WindowManager",
 					"ve.ui.*InspectorManager",
-					"ve.ui.*Dialog"
+					"ve.ui.*Dialog",
+					"ve.ui.FindAndReplace"
 				]
 			}
 		]
