@@ -129,6 +129,11 @@ ve.ui.commandRegistry.register(
 );
 ve.ui.commandRegistry.register(
 	new ve.ui.Command(
+		'find', 'window', 'open', { args: ['find'] }
+	)
+);
+ve.ui.commandRegistry.register(
+	new ve.ui.Command(
 		'code', 'annotation', 'toggle',
 		{ args: ['textStyle/code'], supportedSelections: ['linear', 'table'] }
 	)

@@ -160,6 +160,7 @@ ve.init.Target.static.surfaceCommands = [
 	'indent',
 	'outdent',
 	'commandHelp',
+	'find',
 	'paragraph',
 	'heading1',
 	'heading2',
@@ -249,6 +250,7 @@ ve.init.Target.prototype.setupToolbar = function ( config ) {
 	this.toolbar.setup( this.constructor.static.toolbarGroups );
 	this.surface.addCommands( this.constructor.static.surfaceCommands );
 	this.toolbar.$element.insertBefore( this.surface.$element );
+	this.toolbar.$bar.append( this.surface.toolbarWindows.$element );
 };
 
 /**
