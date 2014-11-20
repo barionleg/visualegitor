@@ -58,7 +58,9 @@ ve.ui.WindowAction.prototype.open = function ( name, data ) {
 
 	data = ve.extendObject( { dir: dir }, data, { fragment: fragment } );
 
-	if ( windowClass.prototype instanceof OO.ui.Dialog ) {
+	if ( windowClass.prototype instanceof ve.ui.ToolbarDialog ) {
+		data = ve.extendObject( data, { surface: surface } );
+	} else if ( windowClass.prototype instanceof OO.ui.Dialog ) {
 		// For non-isolated dialogs, remove the selection and re-apply on close
 		surface.getView().nativeSelection.removeAllRanges();
 		onOpen = function ( opened ) {
@@ -136,6 +138,8 @@ ve.ui.WindowAction.prototype.toggle = function ( name, data ) {
 ve.ui.WindowAction.prototype.getWindowManager = function ( windowClass ) {
 	if ( windowClass.prototype instanceof ve.ui.FragmentInspector ) {
 		return this.surface.getContext().getInspectors();
+	} else if ( windowClass.prototype instanceof ve.ui.ToolbarDialog ) {
+		return this.surface.toolbarWindows;
 	} else if ( windowClass.prototype instanceof OO.ui.Dialog ) {
 		return this.surface.getDialogs();
 	}
