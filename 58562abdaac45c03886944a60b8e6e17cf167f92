@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e936f18_c654af2c",
+        "filename": "src/ce/ve.ce.RangeState.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-11-20T19:01:51Z",
+      "side": 1,
+      "message": "Comment from PS14:\n\nDidn\u0027t we find that this caused bugs before? Because a transaction could happen that changes the veRange associated with a selection without actually changing the selection itself. (The kind of false negative mentioned in the compareSelection documentation.)",
+      "revId": "58562abdaac45c03886944a60b8e6e17cf167f92",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_267473fa",
+        "filename": "src/ce/ve.ce.SurfaceObserver.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-11-20T19:01:51Z",
+      "side": 1,
+      "message": "Don\u0027t we need to clear other properties here too? If not, why not? Should RangeState have a clear function?",
+      "revId": "58562abdaac45c03886944a60b8e6e17cf167f92",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e936f18_c6834fcf",
+        "filename": "src/ce/ve.ce.SurfaceObserver.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-11-20T19:01:51Z",
+      "side": 1,
+      "message": "Still needs to check for emitChanges",
+      "revId": "58562abdaac45c03886944a60b8e6e17cf167f92",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
