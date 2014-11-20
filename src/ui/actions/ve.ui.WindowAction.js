@@ -53,7 +53,11 @@ ve.ui.WindowAction.prototype.open = function ( name, data ) {
 	data = ve.extendObject( { dir: dir }, data, { fragment: fragment } );
 
 	if ( windowClass ) {
-		if ( windowClass.prototype instanceof ve.ui.FragmentInspector ) {
+		if ( windowClass === ve.ui.FindAndReplace ) {
+			data = ve.extendObject( data, { surface: surface } );
+			windowManager = surface.toolbarWindows;
+			windowManager.openWindow( name, data );
+		} else if ( windowClass.prototype instanceof ve.ui.FragmentInspector ) {
 			windowManager = surface.getContext().getInspectors();
 			windowManager.openWindow( name, data );
 		} else if ( windowClass.prototype instanceof OO.ui.Dialog ) {
