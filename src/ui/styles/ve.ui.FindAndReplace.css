@@ -1,0 +1,82 @@
+/*!
+ * VisualEditor UserInterface Fin dstyles.
+ *
+ * @copyright 2011-2014 VisualEditor Team and others; see http://ve.mit-license.org
+ */
+
+.ve-ui-findAndReplace {
+	padding: 0.375em; /* 0.3em / 0.8 */
+	overflow-y: hidden;
+	max-height: 0;
+	-webkit-transition: max-height 250ms;
+	-moz-transition: max-height 250ms;
+	-o-transition: max-height 250ms;
+	transition: max-height 250ms;
+}
+
+.ve-ui-findAndReplace.oo-ui-window-ready {
+	/* approximate max height for transition */
+	max-height: 150px;
+}
+
+.ve-ui-findAndReplace-content > .oo-ui-window-body {
+	bottom: auto;
+}
+
+.ve-ui-findAndReplace-row {
+	display: table;
+	min-width: 30em;
+	padding-bottom: 0.3em;
+}
+
+.ve-ui-findAndReplace-row:last-child {
+	padding-bottom: 0;
+}
+
+.ve-ui-findAndReplace-row .ve-ui-findAndReplace-cell {
+	display: table-cell;
+	vertical-align: middle;
+	white-space: nowrap;
+	padding-right: 1em;
+}
+
+.ve-ui-findAndReplace-row .ve-ui-findAndReplace-cell:last-child {
+	padding-right: 0;
+}
+
+.ve-ui-findAndReplace-findText input {
+	padding-right: 6em;
+}
+
+.ve-ui-findAndReplace-focusedIndexLabel {
+	position: absolute;
+	right: 1.4em;
+	color: #888;
+}
+
+.ve-ce-surface-findResults {
+	position: absolute;
+	top: 0;
+	left: 0;
+	pointer-events: none;
+}
+
+.ve-ce-surface-findResult {
+	opacity: 0.2;
+}
+
+.ve-ce-surface-findResult div {
+	background: #28bb0b;
+	position: absolute;
+	margin-top: -0.15em;
+	padding: 0.15em 0;
+	border-radius: 0.15em;
+}
+
+.ve-ce-surface-findResult-focused {
+	opacity: 0.4;
+}
+
+.ve-ce-surface-findResult-focused div {
+	background: #1f850b;
+}
