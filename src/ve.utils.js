@@ -450,7 +450,7 @@ ve.escapeHtml = function ( value ) {
  * @method escapeHtml_escapeHtmlCharacter
  * @private
  * @param {string} key Property name of value being replaced
- * @returns {string} Escaped charcater
+ * @returns {string} Escaped character
  */
 ve.escapeHtml.escapeHtmlCharacter = function ( value ) {
 	switch ( value ) {
