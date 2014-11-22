@@ -718,12 +718,9 @@ ve.dm.SurfaceFragment.prototype.insertContent = function ( content, annotate ) {
 		return this;
 	}
 
-	var annotations, tx, offset, newRange;
+	var annotations, tx, newRange,
+		range = this.getSelection( true ).getRange();
 
-	if ( !this.getSelection( true ).isCollapsed() ) {
-		this.removeContent();
-	}
-	offset = this.getSelection( true ).getRange().start;
 	// Auto-convert content to array of plain text characters
 	if ( typeof content === 'string' ) {
 		content = content.split( '' );
@@ -734,16 +731,26 @@ ve.dm.SurfaceFragment.prototype.insertContent = function ( content, annotate ) {
 			// FIXME: the logic we actually need for annotating inserted content correctly
 			// is MUCH more complicated
 			annotations = this.document.data
-				.getAnnotationsFromOffset( offset === 0 ? 0 : offset - 1 );
+				.getAnnotationsFromOffset( range.end === 0 ? 0 : range.end - 1 );
 			if ( annotations.getLength() > 0 ) {
 				ve.dm.Document.static.addAnnotationsToData( content, annotations );
 			}
 		}
-		tx = ve.dm.Transaction.newFromInsertion(
-			this.document,
-			offset,
-			content
-		);
+		if ( !range.isCollapsed() ) {
+			tx = ve.dm.Transaction.newFromReplacement(
+				this.document,
+				range,
+				content
+			);
+		} else {
+			// newFromReplacement doesn't yet handle complex replaces where
+			// the offset may move, so use newFromInsertion when possible
+			tx = ve.dm.Transaction.newFromInsertion(
+				this.document,
+				range.start,
+				content
+			);
+		}
 		// Set the range to cover the inserted content; the offset translation will be wrong
 		// if newFromInsertion() decided to move the insertion point
 		newRange = tx.getModifiedRange();
