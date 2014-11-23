@@ -2245,6 +2245,9 @@ ve.ce.Surface.prototype.onSurfaceObserverContentChange = function ( node, previo
 			} finally {
 				this.decRenderLock();
 			}
+			setTimeout( function () {
+				surface.checkSequences();
+			} );
 			return;
 		}
 
@@ -2311,6 +2314,24 @@ ve.ce.Surface.prototype.onSurfaceObserverContentChange = function ( node, previo
 		ve.dm.Transaction.newFromReplacement( this.documentView.model, replacementRange, data ),
 		new ve.dm.LinearSelection( this.documentView.model, newRange )
 	);
+	this.queueCheckSequences = true;
+	setTimeout( function () {
+		surface.checkSequences();
+	} );
+};
+
+/**
+ * Check the current surface offset for sequence matches
+ */
+ve.ce.Surface.prototype.checkSequences = function () {
+	var i, surfaceModel = this.surface.getModel(),
+		sequences = ve.ui.sequenceRegistry.findMatching( surfaceModel.getDocument().data, surfaceModel.getSelection().getRange().end );
+
+	// sequences.length will likely be 0 or 1 so don't cache
+	for ( i = 0; i < sequences.length; i++ ) {
+		sequences[i].execute( this.surface );
+	}
+	this.showSelection( this.surface.getModel().getSelection() );
 };
 
 /**
