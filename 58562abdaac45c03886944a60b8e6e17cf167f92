@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_b7008f05",
+        "filename": "src/ce/ve.ce.SurfaceObserver.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2014-11-24T22:48:27Z",
+      "side": 1,
+      "message": "Hmm, I was trying to replicate the existing logic more closely ... but on reflection it seems like actually wiping the whole rangeState makes more logical sense.",
+      "parentUuid": "6e936f18_267473fa",
+      "revId": "58562abdaac45c03886944a60b8e6e17cf167f92",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_c6834fcf",
         "filename": "src/ce/ve.ce.SurfaceObserver.js",
         "patchSetId": 17
@@ -47,6 +65,24 @@
       "writtenOn": "2014-11-20T19:01:51Z",
       "side": 1,
       "message": "Still needs to check for emitChanges",
+      "revId": "58562abdaac45c03886944a60b8e6e17cf167f92",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_57058b12",
+        "filename": "src/ce/ve.ce.SurfaceObserver.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2014-11-24T22:48:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_c6834fcf",
       "revId": "58562abdaac45c03886944a60b8e6e17cf167f92",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
