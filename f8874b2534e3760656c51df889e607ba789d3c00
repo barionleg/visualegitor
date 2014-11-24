@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_06435bb7",
+        "filename": "src/dm/lineardata/ve.dm.ElementLinearData.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-11-24T19:39:55Z",
+      "side": 1,
+      "message": "Mark as optional",
+      "revId": "f8874b2534e3760656c51df889e607ba789d3c00",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
