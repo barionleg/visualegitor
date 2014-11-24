@@ -16,6 +16,24 @@
       "revId": "959e54e633cf067dd2de9c1b8538a497e11e14c9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_57710bdc",
+        "filename": "src/ui/actions/ve.ui.IndentationAction.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-11-24T23:45:18Z",
+      "side": 1,
+      "message": "They already do.",
+      "parentUuid": "4ea06b5a_d77afbe6",
+      "revId": "959e54e633cf067dd2de9c1b8538a497e11e14c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
