@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_d77afbe6",
+        "filename": "src/ui/actions/ve.ui.IndentationAction.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-11-24T23:37:59Z",
+      "side": 1,
+      "message": "The actions in this file don\u0027t get return true?",
+      "revId": "959e54e633cf067dd2de9c1b8538a497e11e14c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
