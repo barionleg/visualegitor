@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_4639633d",
+        "filename": "src/dm/ve.dm.Document.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 1237,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-11-24T19:49:12Z",
+      "side": 1,
+      "message": "Done in I40d1d788; rebased onto that.",
+      "parentUuid": "6e936f18_f3e2ebce",
+      "revId": "5f3b573f08a8f68a73184db62f28cfc3d34d7bce",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_f3abcb6a",
         "filename": "src/dm/ve.dm.Document.js",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2014-11-17T21:09:25Z",
       "side": 1,
       "message": "This is a paste-specific thing and possibly should not be in the generic newFromHtml() function. Maybe make this be triggered by a pasteRules property?",
+      "revId": "5f3b573f08a8f68a73184db62f28cfc3d34d7bce",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_663edf28",
+        "filename": "src/dm/ve.dm.Document.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 1245,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-11-24T19:49:12Z",
+      "side": 1,
+      "message": "Eurgh. Leave as tech-debt?",
+      "parentUuid": "6e936f18_f3abcb6a",
       "revId": "5f3b573f08a8f68a73184db62f28cfc3d34d7bce",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_c651f366",
+        "filename": "src/dm/ve.dm.Document.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 1257,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-11-24T19:49:12Z",
+      "side": 1,
+      "message": "Done by you; comment added.",
+      "parentUuid": "6e936f18_13af5779",
+      "revId": "5f3b573f08a8f68a73184db62f28cfc3d34d7bce",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_13e677e3",
         "filename": "src/dm/ve.dm.SurfaceFragment.js",
         "patchSetId": 5
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_06d7dbc5",
+        "filename": "src/dm/ve.dm.SurfaceFragment.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 762,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-11-24T19:49:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_13e677e3",
+      "revId": "5f3b573f08a8f68a73184db62f28cfc3d34d7bce",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e936f18_f338ab3b",
         "filename": "src/dm/ve.dm.SurfaceFragment.js",
         "patchSetId": 5
@@ -81,6 +153,24 @@
       "writtenOn": "2014-11-17T21:09:25Z",
       "side": 1,
       "message": "Both checks above are duplicative of the checks in insertDocument(), which this function calls.",
+      "revId": "5f3b573f08a8f68a73184db62f28cfc3d34d7bce",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_26d457be",
+        "filename": "src/dm/ve.dm.SurfaceFragment.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 772,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-11-24T19:49:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e936f18_f338ab3b",
       "revId": "5f3b573f08a8f68a73184db62f28cfc3d34d7bce",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
