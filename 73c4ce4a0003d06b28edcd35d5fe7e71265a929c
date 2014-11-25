@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_88869469",
+        "filename": "src/dm/ve.dm.SurfaceFragment.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 747,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-11-25T02:45:17Z",
+      "side": 1,
+      "message": "So... how do we know that we\u0027re only calling newFromReplacement in cases it can handle? Cause right now it looks like it\u0027s always called when there\u0027s anything at all to remove.",
+      "revId": "73c4ce4a0003d06b28edcd35d5fe7e71265a929c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
