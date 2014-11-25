@@ -265,6 +265,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_685ea17d",
+        "filename": "src/ui/ve.ui.FindAndReplace.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-11-25T22:35:42Z",
+      "side": 1,
+      "message": "I don\u0027t think you can, it\u0027s inside the TextWidget\u0027s $element, which is a wrapper div, not $input.",
+      "parentUuid": "4ea06b5a_085b5d27",
+      "revId": "08eab5365556ffd14363cdd15fc638644a7df141",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_fc0fde39",
         "filename": "src/ui/ve.ui.FindAndReplace.js",
         "patchSetId": 8
