@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_17fe2336",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 3064,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-11-25T00:27:49Z",
+      "side": 1,
+      "message": "Why was [0] removed here? Does the .closest() call sometimes return an empty set?",
+      "revId": "a238a601fa0b4ff9159ab797b477bc81aa841f56",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_57b26b93",
+        "filename": "src/ui/ve.ui.Sequence.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-11-25T00:27:49Z",
+      "side": 1,
+      "message": "Document parameters",
+      "revId": "a238a601fa0b4ff9159ab797b477bc81aa841f56",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_12c871a9",
+        "filename": "src/ui/ve.ui.Sequence.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-11-25T00:27:49Z",
+      "side": 1,
+      "message": "Should this be an error? Or should we silently ignore?",
+      "revId": "a238a601fa0b4ff9159ab797b477bc81aa841f56",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_b25f3de8",
+        "filename": "src/ui/ve.ui.Sequence.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-11-25T00:27:49Z",
+      "side": 1,
+      "message": "Document",
+      "revId": "a238a601fa0b4ff9159ab797b477bc81aa841f56",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_7259b500",
+        "filename": "src/ui/ve.ui.Sequence.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-11-25T00:27:49Z",
+      "side": 1,
+      "message": "Document",
+      "revId": "a238a601fa0b4ff9159ab797b477bc81aa841f56",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
