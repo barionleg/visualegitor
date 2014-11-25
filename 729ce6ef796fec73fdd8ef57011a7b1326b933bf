@@ -16,6 +16,24 @@
       "revId": "729ce6ef796fec73fdd8ef57011a7b1326b933bf",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_c891f553",
+        "filename": "src/ui/ve.ui.Sequence.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-11-25T22:15:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea06b5a_77ac4085",
+      "revId": "729ce6ef796fec73fdd8ef57011a7b1326b933bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
