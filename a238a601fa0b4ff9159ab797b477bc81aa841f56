@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_8e63fd3a",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 3064,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-11-25T12:35:46Z",
+      "side": 1,
+      "message": "Yes, in the fakeIME tests, when triggered by the showSelection in checkSequences. Possibly another way to fix, but this seems like more robust code anyway.",
+      "parentUuid": "4ea06b5a_17fe2336",
+      "revId": "a238a601fa0b4ff9159ab797b477bc81aa841f56",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_57b26b93",
         "filename": "src/ui/ve.ui.Sequence.js",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2014-11-25T00:27:49Z",
       "side": 1,
       "message": "Document parameters",
+      "revId": "a238a601fa0b4ff9159ab797b477bc81aa841f56",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_8ed21dd4",
+        "filename": "src/ui/ve.ui.Sequence.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-11-25T12:35:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea06b5a_57b26b93",
       "revId": "a238a601fa0b4ff9159ab797b477bc81aa841f56",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_4ed415bf",
+        "filename": "src/ui/ve.ui.Sequence.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-11-25T12:35:46Z",
+      "side": 1,
+      "message": "Can\u0027t think when you\u0027d register a sequence against a command which may not exist. We do the same check in ve.ui.Surface#addCommands",
+      "parentUuid": "4ea06b5a_12c871a9",
+      "revId": "a238a601fa0b4ff9159ab797b477bc81aa841f56",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_b25f3de8",
         "filename": "src/ui/ve.ui.Sequence.js",
         "patchSetId": 3
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_eee08195",
+        "filename": "src/ui/ve.ui.Sequence.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-11-25T12:35:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea06b5a_b25f3de8",
+      "revId": "a238a601fa0b4ff9159ab797b477bc81aa841f56",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_7259b500",
         "filename": "src/ui/ve.ui.Sequence.js",
         "patchSetId": 3
@@ -81,6 +153,24 @@
       "writtenOn": "2014-11-25T00:27:49Z",
       "side": 1,
       "message": "Document",
+      "revId": "a238a601fa0b4ff9159ab797b477bc81aa841f56",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_0ede0ddf",
+        "filename": "src/ui/ve.ui.Sequence.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-11-25T12:35:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea06b5a_7259b500",
       "revId": "a238a601fa0b4ff9159ab797b477bc81aa841f56",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
