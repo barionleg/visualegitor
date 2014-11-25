@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_2810995a",
+        "filename": "src/ui/dialogs/ve.ui.FindAndReplaceDialog.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-11-25T22:55:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea06b5a_e85dd11b",
+      "revId": "075c7055f1c239843afe690fd8f6421e66064efb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_286e5994",
         "filename": "src/ui/dialogs/ve.ui.ToolbarDialog.js",
         "patchSetId": 10
@@ -30,6 +48,24 @@
       "writtenOn": "2014-11-25T22:07:54Z",
       "side": 1,
       "message": "VeUiFind is outdated",
+      "revId": "075c7055f1c239843afe690fd8f6421e66064efb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_e8095135",
+        "filename": "src/ui/dialogs/ve.ui.ToolbarDialog.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-11-25T22:55:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea06b5a_286e5994",
       "revId": "075c7055f1c239843afe690fd8f6421e66064efb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_0807dd20",
+        "filename": "src/ui/styles/dialogs/ve.ui.FindAndReplaceDialog.css",
+        "patchSetId": 10
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-11-25T22:55:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea06b5a_88fc4dd7",
+      "revId": "075c7055f1c239843afe690fd8f6421e66064efb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_68f781f3",
         "filename": "src/ui/styles/dialogs/ve.ui.ToolbarDialog.css",
         "patchSetId": 10
@@ -64,6 +118,24 @@
       "writtenOn": "2014-11-25T22:05:20Z",
       "side": 1,
       "message": "Misplaces space, and also the wrong title",
+      "revId": "075c7055f1c239843afe690fd8f6421e66064efb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_436146cf",
+        "filename": "src/ui/styles/dialogs/ve.ui.ToolbarDialog.css",
+        "patchSetId": 10
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-11-25T22:55:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea06b5a_68f781f3",
       "revId": "075c7055f1c239843afe690fd8f6421e66064efb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
