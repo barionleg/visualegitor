@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_68e461a4",
+        "filename": "lib/papaparse/papaparse.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-11-25T22:38:17Z",
+      "side": 1,
+      "message": "This should be v4.0.6-edg2s or something.",
+      "revId": "bbd147c8043760d8c8bbfc75ea226c96e3f9b4de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
