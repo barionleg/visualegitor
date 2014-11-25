@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_cdcb4e74",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 992,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-11-25T01:41:47Z",
+      "side": 1,
+      "message": "Why was the conversion to an insertHtml() call undone here? Rebase snafu?",
+      "revId": "472f8e2590afc5fede28a1e2e7f0291aa7692e46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
