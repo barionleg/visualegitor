@@ -301,6 +301,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_03fc9eb0",
+        "filename": "src/ui/ve.ui.FindAndReplace.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 88
+      },
+      "writtenOn": "2014-11-25T23:54:32Z",
+      "side": 1,
+      "message": "That would be hot - we need a name for this kind of \"little bit of grayed out text on the right that tells you something interesting\" thing.",
+      "parentUuid": "4ea06b5a_c300f606",
+      "revId": "08eab5365556ffd14363cdd15fc638644a7df141",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_fc0fde39",
         "filename": "src/ui/ve.ui.FindAndReplace.js",
         "patchSetId": 8
@@ -558,6 +576,24 @@
       "side": 1,
       "message": "We could get rid of it, but it would hide your original selection while finding. Of course now that we can paint fake selections we could kill isolated windows altogether in the future.",
       "parentUuid": "4ea06b5a_37ca3f4b",
+      "revId": "08eab5365556ffd14363cdd15fc638644a7df141",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_e3cbb273",
+        "filename": "src/ui/ve.ui.Surface.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 88
+      },
+      "writtenOn": "2014-11-25T23:54:32Z",
+      "side": 1,
+      "message": "This is a good point - but part of getting rid of isolated windows is to come up with a way to solve that problem, so this just adds a new case we need to solve that problem for.",
+      "parentUuid": "4ea06b5a_4e4095a8",
       "revId": "08eab5365556ffd14363cdd15fc638644a7df141",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
