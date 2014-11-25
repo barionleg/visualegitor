@@ -16,6 +16,24 @@
       "revId": "3c780ed27c93a80a76a93426d6e9b787c177ef7a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_79fbe011",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 1257,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-11-25T12:22:30Z",
+      "side": 1,
+      "message": "We don\u0027t always do that, especially when the function starts with unrelated logic.",
+      "parentUuid": "4ea06b5a_86644b47",
+      "revId": "3c780ed27c93a80a76a93426d6e9b787c177ef7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
