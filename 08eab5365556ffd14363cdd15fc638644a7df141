@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_eecba173",
+        "filename": "src/ui/actions/ve.ui.WindowAction.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-11-25T12:21:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea06b5a_1c7dea17",
+      "revId": "08eab5365556ffd14363cdd15fc638644a7df141",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_bcbf16a7",
         "filename": "src/ui/styles/ve.ui.FindAndReplace.css",
         "patchSetId": 8
@@ -30,6 +48,24 @@
       "writtenOn": "2014-11-24T23:33:46Z",
       "side": 1,
       "message": "Misplaced space",
+      "revId": "08eab5365556ffd14363cdd15fc638644a7df141",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_0ec92d7b",
+        "filename": "src/ui/styles/ve.ui.FindAndReplace.css",
+        "patchSetId": 8
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-11-25T12:21:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea06b5a_bcbf16a7",
       "revId": "08eab5365556ffd14363cdd15fc638644a7df141",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_aea599b3",
+        "filename": "src/ui/ve.ui.FindAndReplace.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-11-25T12:21:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea06b5a_1cf16a92",
+      "revId": "08eab5365556ffd14363cdd15fc638644a7df141",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_7c2f4ef4",
         "filename": "src/ui/ve.ui.FindAndReplace.js",
         "patchSetId": 8
@@ -64,6 +118,24 @@
       "writtenOn": "2014-11-24T23:33:46Z",
       "side": 1,
       "message": "Lies",
+      "revId": "08eab5365556ffd14363cdd15fc638644a7df141",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_ceaa6582",
+        "filename": "src/ui/ve.ui.FindAndReplace.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-11-25T12:21:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea06b5a_7c2f4ef4",
       "revId": "08eab5365556ffd14363cdd15fc638644a7df141",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_6eaf9192",
+        "filename": "src/ui/ve.ui.FindAndReplace.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-11-25T12:21:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea06b5a_dcea229c",
+      "revId": "08eab5365556ffd14363cdd15fc638644a7df141",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_7c166eae",
         "filename": "src/ui/ve.ui.FindAndReplace.js",
         "patchSetId": 8
@@ -98,6 +188,24 @@
       "writtenOn": "2014-11-24T23:33:46Z",
       "side": 1,
       "message": "i18n",
+      "revId": "08eab5365556ffd14363cdd15fc638644a7df141",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_eebf21a6",
+        "filename": "src/ui/ve.ui.FindAndReplace.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-11-25T12:21:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea06b5a_7c166eae",
       "revId": "08eab5365556ffd14363cdd15fc638644a7df141",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_aed9192e",
+        "filename": "src/ui/ve.ui.FindAndReplace.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-11-25T12:21:39Z",
+      "side": 1,
+      "message": "The label shows \"4 of 8\" _inside_ the input widget on the right as a watermark, much like how Chrome and Google Docs do it.",
+      "parentUuid": "4ea06b5a_bc2396ff",
+      "revId": "08eab5365556ffd14363cdd15fc638644a7df141",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_fc0fde39",
         "filename": "src/ui/ve.ui.FindAndReplace.js",
         "patchSetId": 8
@@ -132,6 +258,24 @@
       "writtenOn": "2014-11-24T23:33:46Z",
       "side": 1,
       "message": "Why isn\u0027t this done in findText() itself? Maybe as an option? Then you could avoid passing unnecessary data around",
+      "revId": "08eab5365556ffd14363cdd15fc638644a7df141",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_8eff7d62",
+        "filename": "src/ui/ve.ui.FindAndReplace.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-11-25T12:21:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea06b5a_fc0fde39",
       "revId": "08eab5365556ffd14363cdd15fc638644a7df141",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_4ef17591",
+        "filename": "src/ui/ve.ui.FindAndReplace.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-11-25T12:21:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea06b5a_37debf71",
+      "revId": "08eab5365556ffd14363cdd15fc638644a7df141",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_f7e7f739",
         "filename": "src/ui/ve.ui.FindAndReplace.js",
         "patchSetId": 8
@@ -166,6 +328,24 @@
       "writtenOn": "2014-11-24T23:33:46Z",
       "side": 1,
       "message": "this.$",
+      "revId": "08eab5365556ffd14363cdd15fc638644a7df141",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_eeede1b5",
+        "filename": "src/ui/ve.ui.FindAndReplace.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-11-25T12:21:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea06b5a_f7e7f739",
       "revId": "08eab5365556ffd14363cdd15fc638644a7df141",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -189,6 +369,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_ce1b45d3",
+        "filename": "src/ui/ve.ui.FindAndReplace.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-11-25T12:21:39Z",
+      "side": 1,
+      "message": "Apart from the layer I\u0027m not sure how much a selection painting API would have in common with this as here we have custom colour for find results and a \u0027highlighted\u0027 state for navigating through them.",
+      "parentUuid": "4ea06b5a_176e2394",
+      "revId": "08eab5365556ffd14363cdd15fc638644a7df141",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_97a553b4",
         "filename": "src/ui/ve.ui.FindAndReplace.js",
         "patchSetId": 8
@@ -200,6 +398,24 @@
       "writtenOn": "2014-11-24T23:33:46Z",
       "side": 1,
       "message": "If you want to scroll the highlighted result to the center of the scrollable area, presumably you need something like offset - ( windowScrollHeight / 2 ) + toolbarHeight or something?\n\nAlso these calculations don\u0027t account for the case where the toolbar is not floating, in which case it\u0027s farther down than you think, and you might wrongly conclude that something is in view when it\u0027s not.",
+      "revId": "08eab5365556ffd14363cdd15fc638644a7df141",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_6e39d13d",
+        "filename": "src/ui/ve.ui.FindAndReplace.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-11-25T12:21:39Z",
+      "side": 1,
+      "message": "Adding surfaceView.$element.offset().top accounts for that.",
+      "parentUuid": "4ea06b5a_97a553b4",
       "revId": "08eab5365556ffd14363cdd15fc638644a7df141",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -223,6 +439,24 @@
     },
     {
       "key": {
+        "uuid": "4ea06b5a_8e3e9d25",
+        "filename": "src/ui/ve.ui.FindAndReplace.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-11-25T12:21:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea06b5a_57e34bd4",
+      "revId": "08eab5365556ffd14363cdd15fc638644a7df141",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea06b5a_37ca3f4b",
         "filename": "src/ui/ve.ui.Surface.js",
         "patchSetId": 8
@@ -234,6 +468,24 @@
       "writtenOn": "2014-11-24T23:33:46Z",
       "side": 1,
       "message": "Ugh, we\u0027re introducing new isolated windows while I\u0027m trying to get rid of them? I mean I guess I understand why isolation is helpful here (dual selection), but it seems like it wouldn\u0027t be too difficult to avoid? Or am I missing something here?",
+      "revId": "08eab5365556ffd14363cdd15fc638644a7df141",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_4e4095a8",
+        "filename": "src/ui/ve.ui.Surface.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-11-25T12:21:39Z",
+      "side": 1,
+      "message": "We could get rid of it, but it would hide your original selection while finding. Of course now that we can paint fake selections we could kill isolated windows altogether in the future.",
+      "parentUuid": "4ea06b5a_37ca3f4b",
       "revId": "08eab5365556ffd14363cdd15fc638644a7df141",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
