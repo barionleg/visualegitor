@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_e85dd11b",
+        "filename": "src/ui/dialogs/ve.ui.FindAndReplaceDialog.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-11-25T22:05:20Z",
+      "side": 1,
+      "message": "This should probably use a different class name now?",
+      "revId": "075c7055f1c239843afe690fd8f6421e66064efb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_88fc4dd7",
+        "filename": "src/ui/styles/dialogs/ve.ui.FindAndReplaceDialog.css",
+        "patchSetId": 10
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-11-25T22:05:20Z",
+      "side": 1,
+      "message": "Outdated title",
+      "revId": "075c7055f1c239843afe690fd8f6421e66064efb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_68f781f3",
+        "filename": "src/ui/styles/dialogs/ve.ui.ToolbarDialog.css",
+        "patchSetId": 10
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-11-25T22:05:20Z",
+      "side": 1,
+      "message": "Misplaces space, and also the wrong title",
+      "revId": "075c7055f1c239843afe690fd8f6421e66064efb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
