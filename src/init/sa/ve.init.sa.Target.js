@@ -59,7 +59,7 @@ ve.init.sa.Target.static.defaultSurfaceType = 'desktop';
  * @fires surfaceReady
  */
 ve.init.sa.Target.prototype.setup = function ( dmDoc ) {
-	var target = this;
+	var surface, target = this;
 
 	if ( this.setupDone ) {
 		return;
@@ -67,13 +67,10 @@ ve.init.sa.Target.prototype.setup = function ( dmDoc ) {
 
 	// Properties
 	this.setupDone = true;
-	this.surface = this.createSurface( dmDoc, { excludeCommands: this.constructor.static.excludeCommands } );
-	this.$element.append( this.surface.$element );
+	surface = this.addSurface( dmDoc );
+	this.$element.append( surface.$element );
 
-	this.setupToolbar();
-	if ( ve.debug ) {
-		this.setupDebugBar();
-	}
+	this.setupToolbar( surface );
 
 	// Initialization
 	// The following classes can be used here:
@@ -84,12 +81,11 @@ ve.init.sa.Target.prototype.setup = function ( dmDoc ) {
 	this.toolbar.enableFloatable();
 
 	this.toolbar.initialize();
-	this.surface.setImportRules( this.constructor.static.importRules );
-	this.surface.initialize();
+	surface.initialize();
 
 	// HACK: On mobile place the context inside toolbar.$bar which floats
 	if ( this.surfaceType === 'mobile' ) {
-		this.toolbar.$bar.append( this.surface.context.$element );
+		this.toolbar.$bar.append( surface.context.$element );
 	}
 
 	// This must be emitted asynchronously because ve.init.Platform#initialize
@@ -105,6 +101,10 @@ ve.init.sa.Target.prototype.setup = function ( dmDoc ) {
  * @inheritdoc
  */
 ve.init.sa.Target.prototype.createSurface = function ( dmDoc, config ) {
+	config = ve.extendObject( {
+		excludeCommands: this.constructor.static.excludeCommands,
+		importRules: this.constructor.static.importRules
+	}, config );
 	return new this.surfaceClass( dmDoc, config );
 };
 
@@ -114,7 +114,7 @@ ve.init.sa.Target.prototype.createSurface = function ( dmDoc, config ) {
 ve.init.sa.Target.prototype.setupToolbar = function () {
 	ve.init.sa.Target.super.prototype.setupToolbar.call( this, { shadow: true, actions: true } );
 
-	var actions = new ve.ui.TargetToolbar( this, this.surface );
+	var actions = new ve.ui.TargetToolbar( this, this.getSurface() );
 
 	actions.setup( [
 		{ include: [ 'commandHelp' ] }
