@@ -10,6 +10,7 @@
  * @class
  * @abstract
  * @mixins OO.EventEmitter
+ * @mixins ve.TriggerListener
  *
  * @constructor
  * @param {jQuery} $container Container to render target into, must be attached to the DOM
@@ -22,9 +23,11 @@ ve.init.Target = function VeInitTarget( $container ) {
 
 	// Mixin constructors
 	OO.EventEmitter.call( this );
+	ve.TriggerListener.call( this, this.constructor.static.targetCommands );
 
 	// Properties
 	this.$element = $container;
+	this.elementDocument = this.$element[0].ownerDocument;
 	this.surfaces = [];
 	this.surface = null;
 	this.toolbar = null;
@@ -35,6 +38,9 @@ ve.init.Target = function VeInitTarget( $container ) {
 	if ( ve.init.platform.constructor.static.isInternetExplorer() ) {
 		this.$element.addClass( 've-init-target-ie' );
 	}
+
+	// Events
+	$( this.elementDocument ).on( 'keydown', this.onDocumentKeyDown.bind( this ) );
 
 	// Register
 	ve.init.target = this;
@@ -73,6 +79,8 @@ ve.init.Target.prototype.destroy = function () {
 /* Inheritance */
 
 OO.mixinClass( ve.init.Target, OO.EventEmitter );
+
+OO.mixinClass( ve.init.Target, ve.TriggerListener );
 
 /* Static Properties */
 
@@ -144,6 +152,8 @@ ve.init.Target.static.toolbarGroups = [
 	}
 ];
 
+ve.init.Target.static.targetCommands = ['commandHelp'];
+
 ve.init.Target.static.excludeCommands = [];
 
 /**
@@ -170,6 +180,21 @@ ve.init.Target.static.importRules = {
 /* Methods */
 
 /**
+ * Handle key down events on the document
+ *
+ * @param {jQuery.Event} e Key down event
+ */
+ve.init.Target.prototype.onDocumentKeyDown = function ( e ) {
+	var command, trigger = new ve.ui.Trigger( e );
+	if ( trigger.isComplete() ) {
+		command = this.getCommandByTrigger( trigger.toString() );
+		if ( command && command.execute( this.getSurface() ) ) {
+			e.preventDefault();
+		}
+	}
+};
+
+/**
  * Create a surface.
  *
  * @method
@@ -179,7 +204,10 @@ ve.init.Target.static.importRules = {
  */
 ve.init.Target.prototype.createSurface = function ( dmDoc, config ) {
 	config = ve.extendObject( {
-		excludeCommands: this.constructor.static.excludeCommands,
+		excludeCommands: OO.simpleArrayUnion(
+			this.constructor.static.excludeCommands,
+			this.constructor.static.targetCommands
+		),
 		importRules: this.constructor.static.importRules
 	}, config );
 	return new ve.ui.DesktopSurface( dmDoc, config );
