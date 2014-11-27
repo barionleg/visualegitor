@@ -17,7 +17,7 @@
  */
 ve.ui.TargetToolbar = function VeUiTargetToolbar( target, surface, options ) {
 	// Parent constructor
-	ve.ui.Toolbar.call( this, surface, options );
+	ve.ui.TargetToolbar.super.call( this, surface, options );
 
 	// Properties
 	this.target = target;
@@ -36,4 +36,12 @@ OO.inheritClass( ve.ui.TargetToolbar, ve.ui.Toolbar );
  */
 ve.ui.TargetToolbar.prototype.getTarget = function () {
 	return this.target;
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ui.TargetToolbar.prototype.getTriggers = function ( name ) {
+	var triggers = ve.ui.TargetToolbar.super.prototype.getTriggers.apply( this, arguments );
+	return triggers && triggers.length ? triggers : this.getTarget().getTriggers( name );
 };

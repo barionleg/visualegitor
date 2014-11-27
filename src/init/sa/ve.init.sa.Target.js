@@ -64,8 +64,6 @@ ve.init.sa.Target.prototype.setup = function ( dmDoc ) {
 	if ( this.setupDone ) {
 		return;
 	}
-
-	// Properties
 	this.setupDone = true;
 	surface = this.addSurface( dmDoc );
 	this.$element.append( surface.$element );
