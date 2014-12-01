@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_acf25dcb",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-01T23:15:31Z",
+      "side": 1,
+      "message": "Since the comment on line 367 says that Firefox can return null (by which I assume an empty array was meant), let\u0027s check getClientRects()[0] before descending into it.",
+      "revId": "4dc6197d29c4ba862b6c95bbff31f6285a4dc73f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
