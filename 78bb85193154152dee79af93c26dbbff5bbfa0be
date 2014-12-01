@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_e17dce18",
+        "filename": "src/ui/ve.ui.Surface.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-01T21:52:05Z",
+      "side": 1,
+      "message": "Also needs TableSelection now that that exists",
+      "revId": "78bb85193154152dee79af93c26dbbff5bbfa0be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_6191be49",
+        "filename": "src/ui/ve.ui.Surface.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-01T21:52:05Z",
+      "side": 1,
+      "message": "Maybe put the selection type here as well? Ed did that in a debugging thingy elsewhere",
+      "revId": "78bb85193154152dee79af93c26dbbff5bbfa0be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_a1bd86af",
+        "filename": "src/ve.Filibuster.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-01T21:52:05Z",
+      "side": 1,
+      "message": "It so happens that path is an array of integers in this context, but in general the output of JSON.stringify() can contain double quotes (\"). You should put it in single quotes instead.",
+      "revId": "78bb85193154152dee79af93c26dbbff5bbfa0be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_61df7e11",
+        "filename": "src/ve.Filibuster.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-01T21:52:05Z",
+      "side": 1,
+      "message": "Also do ve.dm.TableSelection",
+      "revId": "78bb85193154152dee79af93c26dbbff5bbfa0be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
