@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea06b5a_67f0ee62",
+        "filename": "src/ce/ve.ce.Document.js",
+        "patchSetId": 20
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-02T01:59:00Z",
+      "side": 1,
+      "message": "We should figure out why this is here. It seem to be breaking things rather than fixing them, so I\u0027m leaning towards removing it.",
+      "revId": "88bcd5d9db858d57ba7b6e5225ad31a6953569d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_e7fb9e42",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 20
+      },
+      "lineNbr": 2030,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-02T01:59:00Z",
+      "side": 1,
+      "message": "Misspells unicorns",
+      "revId": "88bcd5d9db858d57ba7b6e5225ad31a6953569d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea06b5a_e7d4fec0",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 20
+      },
+      "lineNbr": 1016,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-02T01:59:00Z",
+      "side": 1,
+      "message": "This should be moved to ve.ce at least. Or maybe even to ve.ce.ContentBranchNode because it\u0027s only used in that file.",
+      "revId": "88bcd5d9db858d57ba7b6e5225ad31a6953569d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
