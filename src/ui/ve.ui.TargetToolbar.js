@@ -12,12 +12,11 @@
  *
  * @constructor
  * @param {ve.init.Target} target Target to control
- * @param {ve.ui.Surface} surface Surface to control
  * @param {Object} [options] Configuration options
  */
-ve.ui.TargetToolbar = function VeUiTargetToolbar( target, surface, options ) {
+ve.ui.TargetToolbar = function VeUiTargetToolbar( target, options ) {
 	// Parent constructor
-	ve.ui.TargetToolbar.super.call( this, surface, options );
+	ve.ui.TargetToolbar.super.call( this, options );
 
 	// Properties
 	this.target = target;

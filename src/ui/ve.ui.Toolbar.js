@@ -11,20 +11,13 @@
  * @extends OO.ui.Toolbar
  *
  * @constructor
- * @param {ve.ui.Surface} surface Surface to control
  * @param {Object} [options] Configuration options
  */
-ve.ui.Toolbar = function VeUiToolbar( surface, options ) {
-	var toolbar = this;
-
-	// Configuration initialization
-	options = options || {};
-
+ve.ui.Toolbar = function VeUiToolbar( config ) {
 	// Parent constructor
-	OO.ui.Toolbar.call( this, ve.ui.toolFactory, ve.ui.toolGroupFactory, options );
+	OO.ui.Toolbar.call( this, ve.ui.toolFactory, ve.ui.toolGroupFactory, config );
 
 	// Properties
-	this.surface = surface;
 	this.floating = false;
 	this.floatable = false;
 	this.$window = null;
@@ -33,9 +26,10 @@ ve.ui.Toolbar = function VeUiToolbar( surface, options ) {
 		// Must use Function#bind (or a closure) instead of direct reference
 		// because we need a unique function references for each Toolbar instance
 		// to avoid $window.off() from unbinding other toolbars' event handlers.
-		resize: toolbar.onWindowResize.bind( toolbar ),
-		scroll: toolbar.onWindowScroll.bind( toolbar )
+		resize: this.onWindowResize.bind( this ),
+		scroll: this.onWindowScroll.bind( this )
 	};
+	this.groupsConfig = null;
 	// Default directions
 	this.contextDirection = { inline: 'ltr', block: 'ltr' };
 	// The following classes can be used here:
@@ -47,8 +41,6 @@ ve.ui.Toolbar = function VeUiToolbar( surface, options ) {
 		.addClass( 've-ui-toolbar' )
 		.addClass( 've-ui-dir-inline-' + this.contextDirection.inline )
 		.addClass( 've-ui-dir-block-' + this.contextDirection.block );
-	// Events
-	this.surface.getModel().connect( this, { contextChange: 'onContextChange' } );
 };
 
 /* Inheritance */
@@ -64,6 +56,34 @@ OO.inheritClass( ve.ui.Toolbar, OO.ui.Toolbar );
  */
 
 /* Methods */
+
+/**
+ * Attach the toolbar to another surface
+ *
+ * @param {ve.ui.Surface} surface Surface
+ */
+ve.ui.Toolbar.prototype.attachToSurface = function ( surface ) {
+	this.setup( this.groupsConfig, surface );
+};
+
+/**
+ * inheritdoc
+ */
+ve.ui.Toolbar.prototype.setup = function ( groups, surface ) {
+	// Disconnect from last surface
+	if ( this.getSurface() ) {
+		this.getSurface().getModel().disconnect( this );
+	}
+
+	this.surface = surface;
+	this.groupsConfig = groups;
+
+	// Parent method
+	ve.ui.Toolbar.super.prototype.setup.call( this, groups );
+
+	// Events
+	this.getSurface().getModel().connect( this, { contextChange: 'onContextChange' } );
+};
 
 /**
  * inheritdoc

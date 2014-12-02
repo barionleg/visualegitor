@@ -14,9 +14,10 @@
  *
  * @constructor
  * @param {jQuery} $container Container to render target into, must be attached to the DOM
+ * @param {Object} toolbarConfig Configuration options for the toolbar
  * @throws {Error} Container must be attached to the DOM
  */
-ve.init.Target = function VeInitTarget( $container ) {
+ve.init.Target = function VeInitTarget( $container, toolbarConfig ) {
 	if ( !$.contains( $container[0].ownerDocument, $container[0] ) ) {
 		throw new Error( 'Container must be attached to the DOM' );
 	}
@@ -30,7 +31,7 @@ ve.init.Target = function VeInitTarget( $container ) {
 	this.elementDocument = this.$element[0].ownerDocument;
 	this.surfaces = [];
 	this.surface = null;
-	this.toolbar = null;
+	this.toolbar = new ve.ui.TargetToolbar( this, toolbarConfig );
 
 	// Initialization
 	this.$element.addClass( 've-init-target' );
@@ -223,9 +224,6 @@ ve.init.Target.prototype.createSurface = function ( dmDoc, config ) {
 ve.init.Target.prototype.addSurface = function ( dmDoc, config ) {
 	var surface = this.createSurface( dmDoc, config );
 	this.surfaces.push( surface );
-	if ( !this.getSurface() ) {
-		this.setSurface( surface );
-	}
 	surface.getView().connect( this, { focus: this.onSurfaceViewFocus.bind( this, surface ) } );
 	return surface;
 };
@@ -247,6 +245,7 @@ ve.init.Target.prototype.onSurfaceViewFocus = function ( surface ) {
 ve.init.Target.prototype.setSurface = function ( surface ) {
 	if ( surface !== this.surface ) {
 		this.surface = surface;
+		this.setupToolbar( surface );
 	}
 };
 
@@ -269,17 +268,11 @@ ve.init.Target.prototype.getToolbar = function () {
 };
 
 /**
- * Set up the toolbar and insert it into the DOM.
+ * Set up the toolbar.
  *
- * The default implementation inserts it before the surface, but subclasses can override this.
- *
- * @param {Object} [config] Configuration options
+ * @param {ve.ui.Surface} surface Surface
  */
-ve.init.Target.prototype.setupToolbar = function ( config ) {
-	if ( !this.surfaces.length ) {
-		throw new Error( 'Surface must be setup before Toolbar' );
-	}
-	this.toolbar = new ve.ui.TargetToolbar( this, this.getSurface(), config );
-	this.toolbar.setup( this.constructor.static.toolbarGroups );
-	this.toolbar.$element.insertBefore( this.getSurface().$element );
+ve.init.Target.prototype.setupToolbar = function ( surface ) {
+	this.toolbar.setup( this.constructor.static.toolbarGroups, surface );
+	this.getToolbar().$element.insertBefore( surface.$element );
 };
