@@ -11,10 +11,11 @@
  *
  * @constructor
  * @param {ve.ce.RangeState|null} old Previous range state
+ * @param {jQuery} $surfaceElement The CE Surface $element
  * @param {ve.ce.DocumentNode} docNode The current document node
  * @param {boolean} selectionOnly The caller promises the content has not changed from old
  */
-ve.ce.RangeState = function VeCeRangeState( old, docNode, selectionOnly ) {
+ve.ce.RangeState = function VeCeRangeState( old, $surfaceElement, docNode, selectionOnly ) {
 	/**
 	 * @property {boolean} branchNodeChanged Whether the CE branch node changed
 	 */
@@ -65,7 +66,7 @@ ve.ce.RangeState = function VeCeRangeState( old, docNode, selectionOnly ) {
 	 */
 	this.hash = null;
 
-	this.saveState( old, docNode, selectionOnly );
+	this.saveState( old, $surfaceElement, docNode, selectionOnly );
 };
 
 /* Inheritance */
@@ -78,10 +79,11 @@ OO.initClass( ve.ce.RangeState );
  * Saves a snapshot of the current range state
  * @method
  * @param {ve.ce.RangeState|null} old Previous range state
+ * @param {jQuery} $surfaceElement The CE Surface $element
  * @param {ve.ce.DocumentNode} docNode The current document node
  * @param {boolean} selectionOnly The caller promises the content has not changed from old
  */
-ve.ce.RangeState.prototype.saveState = function ( old, docNode, selectionOnly ) {
+ve.ce.RangeState.prototype.saveState = function ( old, $surfaceElement, docNode, selectionOnly ) {
 	var $nodeOrSlug, selection, anchorNodeChanged;
 
 	// Freeze selection out of live object.
@@ -93,6 +95,20 @@ ve.ce.RangeState.prototype.saveState = function ( old, docNode, selectionOnly ) 
 			anchorOffset: liveSelection.anchorOffset
 		};
 	} ( docNode.getElementDocument().getSelection() ) );
+
+	// If the selection is not inside this surface, then use a blank selection
+	if (
+		selection.rangeCount && $(
+			selection.getRangeAt( 0 ).commonAncestorContainer
+		).closest( '.ve-ce-surface' )[0] !== $surfaceElement[0]
+	) {
+		selection = {
+			focusNode: null,
+			focusOffset: null,
+			anchorNode: null,
+			anchorOffset: null
+		};
+	}
 
 	// Get new range information
 	if ( old && !old.compareSelection( selection ) ) {
