@@ -549,3 +549,25 @@ ve.dm.AnnotationSet.prototype.intersectWith = function ( set ) {
 	newSet.removeNotInSet( set );
 	return newSet;
 };
+
+/**
+ * Add annotations from the other set, normalizing for uniqueness etc as appropriate.
+ *
+ * @method
+ * @param {ve.dm.AnnotationSet} set Other set
+ */
+ve.dm.AnnotationSet.static.addNormalized = function ( set ) {
+        var i, len, newAnnotation;
+	for ( i = 0, len = set.getLength(); i < len; i++ ) {
+                newAnnotation = set.get( i );
+                // Normalize (omit) duplicated idempotent annotations
+                if ( newAnnotation.constructor.static.isIdempotent ) {
+                        if ( this.containsMatching( function ( annotation ) {
+                                return annotation.getType() === newAnnotation.getType();
+                        } ) ) {
+                                continue;
+                        }
+                }
+                this.push( newAnnotation );
+        }
+};

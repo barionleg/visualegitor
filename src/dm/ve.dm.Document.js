@@ -183,8 +183,10 @@ ve.dm.Document.static.addAnnotationsToData = function ( data, annotationSet ) {
 			newAnnotationSet = annotationSet.clone();
 		} else {
 			// Add to existing array
-			newAnnotationSet = new ve.dm.AnnotationSet( store, data[i][1] );
-			newAnnotationSet.addSet( annotationSet.clone() );
+			newAnnotationSet = annotationSet.clone();
+			newAnnotationSet.addNormalized(
+				new ve.dm.AnnotationSet( store, data[i][1] )
+			);
 		}
 		data[i][1] = newAnnotationSet.getIndexes();
 	}
