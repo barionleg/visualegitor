@@ -21,6 +21,15 @@
 ve.dm.Annotation = function VeDmAnnotation( element ) {
 	// Parent constructor
 	ve.dm.Model.call( this, element );
+
+	// Add default nodeName
+	if ( !element.attributes ) {
+		element.attributes = {};
+	}
+	if ( !element.attributes.nodeName ) {
+		element.attributes.nodeName = this.constructor.static.matchTagNames[0];
+	}
+
 	// Properties
 	this.name = this.constructor.static.name; // For ease of filtering
 };
