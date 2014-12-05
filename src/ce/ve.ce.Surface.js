@@ -1558,6 +1558,7 @@ ve.ce.Surface.prototype.afterPaste = function () {
 		$elements, parts, pasteData, slice, tx, internalListRange,
 		data, doc, htmlDoc,
 		context, left, right, contextRange,
+		importantSpan = 'span[id],span[typeof],span[rel]',
 		importRules = this.getSurface().getImportRules(),
 		beforePasteData = this.beforePasteData || {},
 		selection = this.model.getSelection(),
@@ -1619,6 +1620,9 @@ ve.ce.Surface.prototype.afterPaste = function () {
 			$elements = this.$pasteTarget.contents();
 		}
 	}
+
+	// Remove the clipboard key
+	this.$pasteTarget.find( 'span[data-ve-clipboard-key]' ).remove();
 
 	// If we have a clipboard key, validate it and fetch data
 	if ( clipboardKey ) {
@@ -1694,8 +1698,8 @@ ve.ce.Surface.prototype.afterPaste = function () {
 			if (
 				// HACK: Allow the test runner to force the use of clipboardData
 				clipboardKey === 'useClipboardData-0' || (
-					$elements.filter( 'span[id],span[typeof],span[rel]' ).length > 0 &&
-					this.$pasteTarget.filter('span[id],span[typeof],span[rel]').length === 0
+					$elements.find( importantSpan ).andSelf().filter( importantSpan ).length > 0 &&
+					this.$pasteTarget.find( importantSpan ).length === 0
 				)
 			) {
 				// CE destroyed an important span, so revert to using clipboard data
