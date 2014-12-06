@@ -1058,12 +1058,8 @@ ve.ce.Surface.prototype.onDocumentKeyDown = function ( e ) {
 			}
 
 			if ( selection instanceof ve.dm.LinearSelection ) {
-				if ( e.keyCode === OO.ui.Keys.LEFT || e.keyCode === OO.ui.Keys.RIGHT ) {
-					this.handleLinearLeftOrRightArrowKey( e );
-				} else {
-					this.handleLinearUpOrDownArrowKey( e );
-					updateFromModel = true;
-				}
+				this.handleLinearArrowKey( e );
+				updateFromModel = true;
 			} else if ( selection instanceof ve.dm.TableSelection ) {
 				this.handleTableArrowKey( e );
 			}
@@ -1090,11 +1086,13 @@ ve.ce.Surface.prototype.onDocumentKeyDown = function ( e ) {
 			break;
 		case OO.ui.Keys.BACKSPACE:
 		case OO.ui.Keys.DELETE:
-			e.preventDefault();
 			if ( selection instanceof ve.dm.LinearSelection ) {
-				this.handleLinearDelete( e );
+				if ( this.handleLinearDelete( e ) ) {
+					e.preventDefault();
+				}
 				updateFromModel = true;
 			} else if ( selection instanceof ve.dm.TableSelection ) {
+				e.preventDefault();
 				this.handleTableDelete( e );
 			}
 			break;
@@ -2483,61 +2481,28 @@ ve.ce.Surface.prototype.moveModelCursor = function ( offset ) {
 };
 
 /**
- * Handle left or right arrow key events with a linear selection.
- *
- * @param {jQuery.Event} e Left or right key down event
- */
-ve.ce.Surface.prototype.handleLinearLeftOrRightArrowKey = function ( e ) {
-	var direction, range = this.getModel().getSelection().getRange();
-
-	// On Mac OS pressing Command (metaKey) + Left/Right is same as pressing Home/End.
-	// As we are not able to handle it programmatically (because we don't know at which offsets
-	// lines starts and ends) let it happen natively.
-	if ( e.metaKey ) {
-		return;
-	}
-	// Selection is going to be displayed programmatically so prevent default browser behaviour
-	e.preventDefault();
-	// TODO: onDocumentKeyDown did this already
-	this.surfaceObserver.stopTimerLoop();
-	this.incRenderLock();
-	try {
-		// TODO: onDocumentKeyDown did this already
-		this.surfaceObserver.pollOnce();
-	} finally {
-		this.decRenderLock();
-	}
-	if ( this.$( e.target ).css( 'direction' ) === 'rtl' ) {
-		// If the language direction is RTL, switch left/right directions:
-		direction = e.keyCode === OO.ui.Keys.LEFT ? 1 : -1;
-	} else {
-		direction = e.keyCode === OO.ui.Keys.LEFT ? -1 : 1;
-	}
-
-	range = this.model.getDocument().getRelativeRange(
-		range,
-		direction,
-		( e.altKey === true || e.ctrlKey === true ) ? 'word' : 'character',
-		e.shiftKey,
-		this.getActiveTableNode() ? this.getActiveTableNode().getEditingRange() : null
-	);
-	this.model.setLinearSelection( range );
-	// TODO: onDocumentKeyDown does this anyway
-	this.surfaceObserver.startTimerLoop();
-	this.surfaceObserver.pollOnce();
-};
-
-/**
  * Handle up or down arrow key events with a linear selection.
  *
  * @param {jQuery.Event} e Up or down key down event
  */
-ve.ce.Surface.prototype.handleLinearUpOrDownArrowKey = function ( e ) {
-	var nativeRange, slug, $cursorHolder, endNode, endOffset,
+ve.ce.Surface.prototype.handleLinearArrowKey = function ( e ) {
+	var nativeRange, slug, $cursorHolder, endNode, endOffset, direction,
 		range = this.model.getSelection().getRange(),
 		tableEditingRange = this.getActiveTableNode() ? this.getActiveTableNode().getEditingRange() : null,
-		direction = e.keyCode === OO.ui.Keys.DOWN ? 1 : -1,
 		surface = this;
+
+	if ( e.keyCode === OO.ui.Keys.DOWN ) {
+		direction = 1;
+	} else if ( e.keyCode === OO.ui.Keys.UP ) {
+		direction = -1;
+	/*jshint bitwise:false */
+	} else if ( e.keyCode === OO.ui.Keys.LEFT ^ this.$( e.target ).css( 'direction' ) === 'rtl' ) {
+		// leftarrow in ltr, or rightarrow in rtl
+		direction = -1;
+	} else {
+		// leftarrow in rtl, or rightarrow in ltr
+		direction = 1;
+	}
 
 	// TODO: onDocumentKeyDown did this already
 	this.surfaceObserver.stopTimerLoop();
@@ -2950,9 +2915,11 @@ ve.ce.Surface.prototype.handleTableEnter = function ( e ) {
  * Handle delete and backspace key down events with a linear selection.
  *
  * @param {jQuery.Event} e Delete key down event
+ * @return {bool} whether the delete action was handled in javascript
  */
 ve.ce.Surface.prototype.handleLinearDelete = function ( e ) {
 	var docLength, startNode, tableEditingRange,
+		surface = this,
 		direction = e.keyCode === OO.ui.Keys.DELETE ? 1 : -1,
 		unit = ( e.altKey === true || e.ctrlKey === true ) ? 'word' : 'character',
 		offset = 0,
@@ -2961,12 +2928,25 @@ ve.ce.Surface.prototype.handleLinearDelete = function ( e ) {
 		data = documentModel.data;
 
 	if ( rangeToRemove.isCollapsed() ) {
+		// Use native behaviour then poll, if we are adjacent to some content
+		// TODO: this may not be safe when CTRL is depressed
+		offset = rangeToRemove.start;
+		if (
+			( direction === -1 && offset > 0 && !data.getData( offset - 1 ).type ) ||
+			( direction === 1 && offset < data.getLength() && !data.getData( offset ).type )
+		) {
+			setTimeout( function () {
+				surface.pollOnce();
+			} );
+			return false;
+		}
+
 		// In case when the range is collapsed use the same logic that is used for cursor left and
 		// right movement in order to figure out range to remove.
 		rangeToRemove = documentModel.getRelativeRange( rangeToRemove, direction, unit, true );
 		tableEditingRange = this.getActiveTableNode() ? this.getActiveTableNode().getEditingRange() : null;
 		if ( tableEditingRange && !tableEditingRange.containsRange( rangeToRemove ) ) {
-			return;
+			return true;
 		}
 		offset = rangeToRemove.start;
 		docLength = data.getLength();
@@ -2979,12 +2959,12 @@ ve.ce.Surface.prototype.handleLinearDelete = function ( e ) {
 			startNode = documentModel.getDocumentNode().getNodeFromOffset( offset + 1 );
 			if ( startNode.isFocusable() ) {
 				this.getModel().setLinearSelection( startNode.getOuterRange() );
-				return;
+				return true;
 			}
 		}
 		if ( rangeToRemove.isCollapsed() ) {
 			// For instance beginning or end of the document.
-			return;
+			return true;
 		}
 	}
 
