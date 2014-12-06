@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e9df725_891c587e",
+        "filename": "src/dm/lineardata/ve.dm.ElementLinearData.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2014-12-06T22:24:50Z",
+      "side": 1,
+      "message": "What kind of non-string data can be in this array? This method didn\u0027t used to check for that. Test and commit message didn\u0027t mention it.",
+      "revId": "dd1186711d7bde19d775da993eed094c15ad0e04",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
