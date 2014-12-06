@@ -1,0 +1,107 @@
+/**
+ * Keyboard manager for ContentEditable surface.
+ *
+ * This implements the prepare-observe-fixup pattern, whereby native actions (e.g. cursoring) occur
+ * and then are corrected if necessary.
+ *
+ * @class
+ * @constructor
+ * @param {ve.ce.Surface} surface ContentEditable surface
+ */
+ve.ce.KeyboardManager = function VeCeKeyboardManager( surface ) {
+	this.surface = surface;
+	this.postponements = [];
+	this.surface.eventSequencer.on( {
+		'keydown': ve.bind( this.onKeyDown, this ),
+		'keyup': ve.bind( this.onKeyUp, this ),
+		'keypress': ve.bind( this.onKeyPress, this ),
+		'compositionstart': ve.bind( this.onCompositionStart, this ),
+		'compositionend': ve.bind( this.onCompositionEnd, this )
+	} );
+	this.surface.eventSequencer.onLoop( [ ve.bind( this.onLoop, this ) ] );
+	this.surface.eventSequencer.afterLoop( [ ve.bind( this.afterLoop, this ) ] );
+};
+
+ve.ce.KeyboardManager.prototype.onLoop = function () {
+	this.clear();
+};
+
+ve.ce.KeyboardManager.prototype.onKeyDown = function ( ev ) {
+	// TODO: ev.which === 229 special case?
+	this.fixup();
+	var handled = this.surface.handleKeyDown( ev );
+	if ( !handled ) {
+		this.postpone( 'fixKeyDown', ev );
+	}
+};
+
+ve.ce.KeyboardManager.prototype.onKeyPress = function ( ev ) {
+	this.surface.handleKeyPress( ev );
+};
+
+ve.ce.KeyboardManager.prototype.onKeyUp = function ( ev ) {
+	// TODO: ev.which === 229 special case?
+	this.fixup();
+	this.surface.handleKeyUp( ev );
+};
+
+ve.ce.KeyboardManager.prototype.onInput = function () {
+	this.fixup();
+};
+
+ve.ce.KeyboardManager.prototype.onCompositionStart = function ( ev ) {
+	this.fixup();
+	this.postpone( 'fixCompositionStart', ev );
+};
+
+ve.ce.KeyboardManager.prototype.onCompositionUpdate = function ( ev ) {
+	this.postpone( 'fixCompositionUpdate', ev );
+};
+
+ve.ce.KeyboardManager.prototype.onCompositionEnd = function () {
+	this.fixup();
+};
+
+ve.ce.KeyboardManager.prototype.clear = function () {
+	this.postponements.length = 0;
+};
+
+ve.ce.KeyboardManager.prototype.postpone = function ( methodName, ev ) {
+	this.postponements.push( {
+		// TODO: store the old content too, not just the selection
+		'methodName': methodName,
+		'ev': ev,
+		'oldSelection': rangy.getSelection( this.surface.$document[0] )
+	} );
+	if ( this.postponeEvent === null ) {
+		this.postponeEvent = ev;
+	}
+};
+
+ve.ce.KeyboardManager.prototype.fixup = function () {
+	var i, len, postponement, postponements, method, needPoll;
+
+	// Empty this.postponements into local copy and run elements in turn
+	postponements = this.postponements.splice( 0, this.postponements.length );
+	needPoll = false;
+	for ( i = 0, len = postponements.length; i < len; i++ ) {
+		postponement = postponements[i];
+		method = this.surface[postponement.methodName];
+		needPoll = needPoll || method.call(
+			this.surface,
+			postponement.ev,
+			postponement.oldSelection
+		);
+	}
+	// Synchronize once at the end of everything
+	if ( needPoll ) {
+		this.surface.surfaceObserver.pollOnce();
+	} else {
+		// TODO: stop handleKeyPress etc using the model, then we won't need to sync
+		this.surface.surfaceObserver.pollOnce();
+	}
+};
+
+ve.ce.KeyboardManager.prototype.afterLoop = function () {
+	this.surface.surfaceObserver.pollOnce();
+};

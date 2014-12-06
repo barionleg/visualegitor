@@ -1084,11 +1084,13 @@ ve.ce.Surface.prototype.onDocumentKeyDown = function ( e ) {
 			break;
 		case OO.ui.Keys.BACKSPACE:
 		case OO.ui.Keys.DELETE:
-			e.preventDefault();
 			if ( selection instanceof ve.dm.LinearSelection ) {
-				this.handleLinearDelete( e );
+				if ( this.handleLinearDelete( e ) ) {
+					e.preventDefault();
+				}
 				updateFromModel = true;
 			} else if ( selection instanceof ve.dm.TableSelection ) {
+				e.preventDefault();
 				this.handleTableDelete( e );
 			}
 			break;
@@ -1195,7 +1197,7 @@ ve.ce.Surface.prototype.afterDocumentKeyDown = function ( e ) {
 				}
 			}
 		}
-	}
+        }
 
 	fixupCursor = (
 		!e.shiftKey &&
@@ -2531,36 +2533,46 @@ ve.ce.Surface.prototype.moveModelCursor = function ( offset ) {
 };
 
 /**
- * Get the directionality at the current focusedNode.
- * @param {ve.Range} selectedRange The currently selected range
- * @returns {string} 'ltr' or 'rtl'
- */
-ve.ce.Surface.prototype.getFocusedNodeDirectionality = function ( selectedRange ) {
-	var cursorNode;
-	// Use stored directionality if we have one. Else fall back on the CSS directionality of
-	// the focused node at the DM selection focus, which is less reliable because it does not
-	// take plaintext bidi into account.
-	if ( this.cursorDirectionality ) {
-		return this.cursorDirectionality;
-	}
-
-	cursorNode = this.getDocument().getNodeAndOffset( selectedRange.to ).node;
-	if ( cursorNode.nodeType === Node.TEXT_NODE ) {
-		cursorNode = cursorNode.parentNode;
-	}
-	return this.$( cursorNode ).css( 'direction' );
-};
-
-/**
  * Handle up or down arrow key events with a linear selection.
  *
  * @param {jQuery.Event} e Up or down key down event
  */
 ve.ce.Surface.prototype.handleLinearArrowKey = function ( e ) {
-	var nativeRange, slug, $cursorHolder, endNode, endOffset, direction, directionality,
+	var nativeRange, slug, $cursorHolder, endNode, endOffset,
+		direction, cursorNode, directionality,
 		range = this.model.getSelection().getRange(),
 		tableEditingRange = this.getActiveTableNode() ? this.getActiveTableNode().getEditingRange() : null,
 		surface = this;
+
+	if ( e.keyCode === OO.ui.Keys.DOWN ) {
+		direction = 1;
+	} else if ( e.keyCode === OO.ui.Keys.UP ) {
+		direction = -1;
+	} else {
+		// leftarrow/rightarrow. Use stored directionality if we have one. Else
+		// fall back on the CSS directionality of the node at the cursor, which
+		// is less reliable because it does not take plaintext bidi into account.
+		directionality = this.cursorDirectionality;
+		if ( !directionality ) {
+			cursorNode = this.nativeSelection.focusNode;
+			if ( OO.ui.contains( this.$pasteTarget[0], cursorNode, true ) ) {
+				// Using emulated selection; get cursorNode from DM selection
+				cursorNode = this.getDocument().getNodeAndOffset( range.from ).node;
+			}
+			if ( cursorNode.nodeType === Node.TEXT_NODE ) {
+				cursorNode = cursorNode.parentNode;
+			}
+			directionality = this.$( cursorNode ).css( 'direction' ) || 'ltr';
+			/*jshint bitwise:false */
+		}
+		if ( e.keyCode === OO.ui.Keys.LEFT ^ directionality === 'rtl' ) {
+			// leftarrow in ltr, or rightarrow in rtl
+			direction = -1;
+		} else {
+			// leftarrow in rtl, or rightarrow in ltr
+			direction = 1;
+		}
+	}
 
 	// TODO: onDocumentKeyDown did this already
 	this.surfaceObserver.stopTimerLoop();
@@ -2568,21 +2580,6 @@ ve.ce.Surface.prototype.handleLinearArrowKey = function ( e ) {
 	this.surfaceObserver.pollOnce();
 
 	if ( this.focusedNode ) {
-		if ( e.keyCode === OO.ui.Keys.DOWN ) {
-			direction = 1;
-		} else if ( e.keyCode === OO.ui.Keys.UP ) {
-			direction = -1;
-		} else {
-			directionality = this.getFocusedNodeDirectionality( range );
-			/*jshint bitwise:false */
-			if ( e.keyCode === OO.ui.Keys.LEFT ^ directionality === 'rtl' ) {
-				// leftarrow in ltr, or rightarrow in rtl
-				direction = -1;
-			} else {
-				// leftarrow in rtl, or rightarrow in ltr
-				direction = 1;
-			}
-		}
 		e.preventDefault();
 		if ( !this.focusedNode.isContent() ) {
 			// Block focusable node, just move back/forward in the model
@@ -2637,36 +2634,33 @@ ve.ce.Surface.prototype.handleLinearArrowKey = function ( e ) {
 	if ( endNode && endNode.nodeType === Node.TEXT_NODE ) {
 		ve.normalizeNode( endNode.parentNode );
 	}
-	if ( e.keyCode === OO.ui.Keys.UP || e.keyCode === OO.ui.Keys.DOWN ) {
-		direction = ( e.keyCode === OO.ui.Keys.UP ? -1 : 1 );
-		this.eventSequencer.afterOne( { keydown: function () {
-			var viewNode, newRange;
-			// Chrome bug lets you cursor into a multi-line contentEditable=false with up/down...
-			viewNode = $( surface.nativeSelection.anchorNode ).closest( '.ve-ce-leafNode,.ve-ce-branchNode' ).data( 'view' );
-			if ( !viewNode ) {
-				// Irrelevant selection (or none)
-				return;
-			}
-			if ( viewNode.isFocusable() ) {
-				newRange = direction === 1 ? viewNode.getOuterRange() : viewNode.getOuterRange().flip();
-			} else {
-				// Check where the range is about to move to
-				surface.surfaceObserver.pollOnceNoEmit();
-				newRange = new ve.Range( surface.surfaceObserver.getRange().to );
-			}
-			// Expand range
-			if ( e.shiftKey === true ) {
-				newRange = new ve.Range( range.from, newRange.to );
-			}
-			if ( tableEditingRange && !tableEditingRange.containsRange( newRange ) ) {
-				// The cursor moved outside the editing cell, move it back
-				surface.showSelection( surface.getModel().getSelection() );
-			} else {
-				surface.getModel().setLinearSelection( newRange );
-			}
-			surface.surfaceObserver.pollOnce();
-		} } );
-	}
+	this.eventSequencer.afterOne( { keydown: function () {
+		var viewNode, newRange;
+		// Chrome bug lets you cursor into a multi-line contentEditable=false with up/down...
+		viewNode = $( surface.nativeSelection.anchorNode ).closest( '.ve-ce-leafNode,.ve-ce-branchNode' ).data( 'view' );
+		if ( !viewNode ) {
+			// Irrelevant selection (or none)
+			return;
+		}
+		if ( viewNode.isFocusable() ) {
+			newRange = direction === 1 ? viewNode.getOuterRange() : viewNode.getOuterRange().flip();
+		} else {
+			// Check where the range is about to move to
+			surface.surfaceObserver.pollOnceNoEmit();
+			newRange = new ve.Range( surface.surfaceObserver.getRange().to );
+		}
+		// Expand range
+		if ( e.shiftKey === true ) {
+			newRange = new ve.Range( range.from, newRange.to );
+		}
+		if ( tableEditingRange && !tableEditingRange.containsRange( newRange ) ) {
+			// The cursor moved outside the editing cell, move it back
+			surface.showSelection( surface.getModel().getSelection() );
+		} else {
+			surface.getModel().setLinearSelection( newRange );
+		}
+		surface.surfaceObserver.pollOnce();
+	} } );
 };
 
 /**
@@ -2995,9 +2989,11 @@ ve.ce.Surface.prototype.handleTableEnter = function ( e ) {
  * Handle delete and backspace key down events with a linear selection.
  *
  * @param {jQuery.Event} e Delete key down event
+ * @return {bool} whether the delete action was handled in javascript
  */
 ve.ce.Surface.prototype.handleLinearDelete = function ( e ) {
 	var docLength, startNode, tableEditingRange,
+		surfaceObserver = this.surfaceObserver,
 		direction = e.keyCode === OO.ui.Keys.DELETE ? 1 : -1,
 		unit = ( e.altKey === true || e.ctrlKey === true ) ? 'word' : 'character',
 		offset = 0,
@@ -3006,12 +3002,25 @@ ve.ce.Surface.prototype.handleLinearDelete = function ( e ) {
 		data = documentModel.data;
 
 	if ( rangeToRemove.isCollapsed() ) {
+		// Use native behaviour then poll, if we are adjacent to some content
+		// TODO: this may not be safe when CTRL is depressed
+		offset = rangeToRemove.start;
+		if (
+			( direction === -1 && offset > 0 && !data.getData( offset - 1 ).type ) ||
+			( direction === 1 && offset < data.getLength() && !data.getData( offset ).type )
+		) {
+			this.eventSequencer.afterOne( { keydown: function () {
+				surfaceObserver.pollOnce();
+			} } );
+			return false;
+		}
+
 		// In case when the range is collapsed use the same logic that is used for cursor left and
 		// right movement in order to figure out range to remove.
 		rangeToRemove = documentModel.getRelativeRange( rangeToRemove, direction, unit, true );
 		tableEditingRange = this.getActiveTableNode() ? this.getActiveTableNode().getEditingRange() : null;
 		if ( tableEditingRange && !tableEditingRange.containsRange( rangeToRemove ) ) {
-			return;
+			return true;
 		}
 		offset = rangeToRemove.start;
 		docLength = data.getLength();
@@ -3024,12 +3033,12 @@ ve.ce.Surface.prototype.handleLinearDelete = function ( e ) {
 			startNode = documentModel.getDocumentNode().getNodeFromOffset( offset + 1 );
 			if ( startNode.isFocusable() ) {
 				this.getModel().setLinearSelection( startNode.getOuterRange() );
-				return;
+				return true;
 			}
 		}
 		if ( rangeToRemove.isCollapsed() ) {
 			// For instance beginning or end of the document.
-			return;
+			return true;
 		}
 	}
 
