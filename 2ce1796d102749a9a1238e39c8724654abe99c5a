@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2e9df725_88851fb4",
+        "filename": "src/init/sa/ve.init.sa.Target.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-12-09T21:32:51Z",
+      "side": 1,
+      "message": "Yes - I\u0027ll fix it in a later commit - too much rebasing as it is. TD.",
+      "parentUuid": "2e9df725_658c7edc",
+      "revId": "2ce1796d102749a9a1238e39c8724654abe99c5a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e9df725_08a02ff0",
         "filename": "src/init/ve.init.Target.js",
         "patchSetId": 7
@@ -30,6 +48,24 @@
       "writtenOn": "2014-12-09T20:59:39Z",
       "side": 1,
       "message": "Why does this class both mixin a TriggerListener and compose two TriggerListeners?",
+      "revId": "2ce1796d102749a9a1238e39c8724654abe99c5a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_a8825ba7",
+        "filename": "src/init/ve.init.Target.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-12-09T21:32:51Z",
+      "side": 1,
+      "message": "Used to be a mixin. Removing.",
+      "parentUuid": "2e9df725_08a02ff0",
       "revId": "2ce1796d102749a9a1238e39c8724654abe99c5a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "2e9df725_688c53dc",
+        "filename": "src/init/ve.init.Target.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-12-09T21:32:51Z",
+      "side": 1,
+      "message": "yup, because it pre-dates that class.",
+      "parentUuid": "2e9df725_c5fa3273",
+      "revId": "2ce1796d102749a9a1238e39c8724654abe99c5a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e9df725_65eb1ea1",
         "filename": "src/init/ve.init.Target.js",
         "patchSetId": 7
@@ -64,6 +118,41 @@
       "writtenOn": "2014-12-09T20:59:39Z",
       "side": 1,
       "message": "This event handler is never unbound?",
+      "revId": "2ce1796d102749a9a1238e39c8724654abe99c5a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_e8b70380",
+        "filename": "src/init/ve.init.Target.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-12-09T21:32:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e9df725_65eb1ea1",
+      "revId": "2ce1796d102749a9a1238e39c8724654abe99c5a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_88ac3f34",
+        "filename": "src/init/ve.init.Target.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-12-09T21:32:51Z",
+      "side": 1,
+      "message": "Removed.",
       "revId": "2ce1796d102749a9a1238e39c8724654abe99c5a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +176,24 @@
     },
     {
       "key": {
+        "uuid": "2e9df725_a8a9fb22",
+        "filename": "src/init/ve.init.Target.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-12-09T21:32:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e9df725_05eb3a78",
+      "revId": "2ce1796d102749a9a1238e39c8724654abe99c5a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e9df725_485e3719",
         "filename": "src/ui/ve.ui.Surface.js",
         "patchSetId": 7
@@ -104,6 +211,24 @@
     },
     {
       "key": {
+        "uuid": "2e9df725_68a3f33f",
+        "filename": "src/ui/ve.ui.Surface.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-12-09T21:32:51Z",
+      "side": 1,
+      "message": "Ditto target",
+      "parentUuid": "2e9df725_485e3719",
+      "revId": "2ce1796d102749a9a1238e39c8724654abe99c5a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e9df725_450aa22a",
         "filename": "src/ui/ve.ui.TargetToolbar.js",
         "patchSetId": 7
@@ -115,6 +240,24 @@
       "writtenOn": "2014-12-09T20:59:39Z",
       "side": 1,
       "message": "OK now I\u0027m totally confused.\n\nThe documentation for TriggerListener#getTriggers claims that it will always return an array. If that is true, then you can\u0027t use || here, because all arrays are truthy, even empty ones (i.e. [] || [3,4] \u003d\u003d\u003d []).\n\nHowever, that doesn\u0027t seem to be true, from reading the implementation of TriggerListener it seems like it can probably return undefined. Furthermore, the parent method (ui.Toolbar#getTriggers) claims to always return an array but seems to sometimes return something falsy, because you\u0027re checking for triggers \u0026\u0026 triggers.length. To top it off, the implementation of the parent method is to just call into TriggerListener, so it\u0027s impossible for them to behave differently, but this code seems to assume they do behave differently.\n\nHalp?",
+      "revId": "2ce1796d102749a9a1238e39c8724654abe99c5a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_4885d79e",
+        "filename": "src/ui/ve.ui.TargetToolbar.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-12-09T21:32:51Z",
+      "side": 1,
+      "message": "Triggers are always registered as lists, so the registry, from which this gets it results, returns either Trigger[] or undefined. Will update docs and remove length check.",
+      "parentUuid": "2e9df725_450aa22a",
       "revId": "2ce1796d102749a9a1238e39c8724654abe99c5a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
