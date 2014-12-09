@@ -16,6 +16,24 @@
       "revId": "dd1186711d7bde19d775da993eed094c15ad0e04",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_a2c35c3c",
+        "filename": "src/dm/lineardata/ve.dm.ElementLinearData.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-09T19:59:45Z",
+      "side": 1,
+      "message": "The commit message does mention it (\"Fix getCharacterData to always return a string\") and given the changes to trimOuterSpaceFromRange() below I\u0027d guess that it\u0027s for either out-of-bound offsets or structural offsets.\n\nIn any case, a unit test should be added for this.",
+      "parentUuid": "2e9df725_891c587e",
+      "revId": "dd1186711d7bde19d775da993eed094c15ad0e04",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
