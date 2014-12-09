@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e9df725_658c7edc",
+        "filename": "src/init/sa/ve.init.sa.Target.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-09T20:59:39Z",
+      "side": 1,
+      "message": "Ugh, this method is entirely duplicated from ve.init.Target, except for the this.surfaceClass part. Maybe that should be pushed down into the base class so this class doesn\u0027t need to override here?",
+      "revId": "2ce1796d102749a9a1238e39c8724654abe99c5a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_08a02ff0",
+        "filename": "src/init/ve.init.Target.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-09T20:59:39Z",
+      "side": 1,
+      "message": "Why does this class both mixin a TriggerListener and compose two TriggerListeners?",
+      "revId": "2ce1796d102749a9a1238e39c8724654abe99c5a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_c5fa3273",
+        "filename": "src/init/ve.init.Target.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-09T20:59:39Z",
+      "side": 1,
+      "message": "Urgh, why is Target not an OO.ui.Element ... :(\n\n(that\u0027s for a different commit though)",
+      "revId": "2ce1796d102749a9a1238e39c8724654abe99c5a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_65eb1ea1",
+        "filename": "src/init/ve.init.Target.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-09T20:59:39Z",
+      "side": 1,
+      "message": "This event handler is never unbound?",
+      "revId": "2ce1796d102749a9a1238e39c8724654abe99c5a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_05eb3a78",
+        "filename": "src/init/ve.init.Target.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-09T20:59:39Z",
+      "side": 1,
+      "message": "Misspells commands (all four of these comments do)",
+      "revId": "2ce1796d102749a9a1238e39c8724654abe99c5a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_485e3719",
+        "filename": "src/ui/ve.ui.Surface.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-09T20:59:39Z",
+      "side": 1,
+      "message": "Why does this class both mixin a TriggerListener and compose a TriggerListener?",
+      "revId": "2ce1796d102749a9a1238e39c8724654abe99c5a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_450aa22a",
+        "filename": "src/ui/ve.ui.TargetToolbar.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-09T20:59:39Z",
+      "side": 1,
+      "message": "OK now I\u0027m totally confused.\n\nThe documentation for TriggerListener#getTriggers claims that it will always return an array. If that is true, then you can\u0027t use || here, because all arrays are truthy, even empty ones (i.e. [] || [3,4] \u003d\u003d\u003d []).\n\nHowever, that doesn\u0027t seem to be true, from reading the implementation of TriggerListener it seems like it can probably return undefined. Furthermore, the parent method (ui.Toolbar#getTriggers) claims to always return an array but seems to sometimes return something falsy, because you\u0027re checking for triggers \u0026\u0026 triggers.length. To top it off, the implementation of the parent method is to just call into TriggerListener, so it\u0027s impossible for them to behave differently, but this code seems to assume they do behave differently.\n\nHalp?",
+      "revId": "2ce1796d102749a9a1238e39c8724654abe99c5a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_85298a9c",
+        "filename": "src/ui/ve.ui.TargetToolbar.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-09T20:59:39Z",
+      "side": 1,
+      "message": "You don\u0027t need to chain concats like foo.concat( bar ).concat( baz ), you can do foo.concat( bar, baz )",
+      "revId": "2ce1796d102749a9a1238e39c8724654abe99c5a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_288c0b89",
+        "filename": "src/ve.TriggerListener.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-09T20:59:39Z",
+      "side": 1,
+      "message": "Either use this.commands or commands in the body of this function, don\u0027t use them interchangeably. I realize they\u0027re the same, but still.",
+      "revId": "2ce1796d102749a9a1238e39c8724654abe99c5a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_28072bcf",
+        "filename": "src/ve.TriggerListener.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-09T20:59:39Z",
+      "side": 1,
+      "message": "Can this return undefined?",
+      "revId": "2ce1796d102749a9a1238e39c8724654abe99c5a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
