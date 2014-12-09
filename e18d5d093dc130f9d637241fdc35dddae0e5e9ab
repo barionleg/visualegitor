@@ -16,6 +16,23 @@
       "revId": "e18d5d093dc130f9d637241fdc35dddae0e5e9ab",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_8e3d27bb",
+        "filename": "src/init/ve.init.Target.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-09T22:48:51Z",
+      "side": 1,
+      "message": "The destructor wasn\u0027t updated and still uses this.elementDocument, which is now undefined",
+      "revId": "e18d5d093dc130f9d637241fdc35dddae0e5e9ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
