@@ -13,21 +13,21 @@
  * @mixins ve.ce.ResizableNode
  *
  * @constructor
- * @param {jQuery} $figure Image or figure element
- * @param {jQuery} [$image] Actual image element, if $figure is just a container
+ * @param {jQuery} $container Image container (e.g. figure or span)
+ * @param {jQuery} $image Actual image element
  * @param {Object} [config] Configuration options
  */
-ve.ce.ImageNode = function VeCeImageNode( $figure, $image, config ) {
+ve.ce.ImageNode = function VeCeImageNode( $container, $image, config ) {
 	config = ve.extendObject( {
 		enforceMax: false,
 		minDimensions: { width: 1, height: 1 }
 	}, config );
 
-	this.$figure = $figure;
-	this.$image = $image || $figure;
+	this.$container = $container;
+	this.$image = $image;
 
 	// Mixin constructors
-	ve.ce.FocusableNode.call( this, this.$figure, config );
+	ve.ce.FocusableNode.call( this, this.$container, config );
 	ve.ce.ResizableNode.call( this, this.$image, config );
 
 	// Events
