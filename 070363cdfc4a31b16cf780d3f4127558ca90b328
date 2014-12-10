@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "2e9df725_2bff20a9",
+        "filename": "demos/ve/demo.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-12-10T11:18:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e9df725_8e9a07bc",
+      "revId": "070363cdfc4a31b16cf780d3f4127558ca90b328",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e9df725_0e34b7a6",
         "filename": "src/init/sa/ve.init.sa.Target.js",
         "patchSetId": 8
@@ -47,6 +65,24 @@
       "writtenOn": "2014-12-10T01:56:11Z",
       "side": 1,
       "message": "Why was this moved here from the parent class?",
+      "revId": "070363cdfc4a31b16cf780d3f4127558ca90b328",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_ebd7f826",
+        "filename": "src/init/sa/ve.init.sa.Target.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-12-10T11:18:49Z",
+      "side": 1,
+      "message": "It needs to happen after it is appended to the target. Where it is appended is implementation-specific so can\u0027t be in the parent class.",
+      "parentUuid": "2e9df725_0e34b7a6",
       "revId": "070363cdfc4a31b16cf780d3f4127558ca90b328",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "2e9df725_abe1f0fc",
+        "filename": "src/init/sa/ve.init.sa.Target.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-12-10T11:18:49Z",
+      "side": 1,
+      "message": "Needs to happen after append",
+      "parentUuid": "2e9df725_2e39739f",
+      "revId": "070363cdfc4a31b16cf780d3f4127558ca90b328",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e9df725_0e0277be",
         "filename": "src/init/ve.init.Target.js",
         "patchSetId": 8
@@ -87,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "2e9df725_ebbe18d1",
+        "filename": "src/init/ve.init.Target.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-12-10T11:18:49Z",
+      "side": 1,
+      "message": "mw target still emits surfaceReady",
+      "parentUuid": "2e9df725_0e0277be",
+      "revId": "070363cdfc4a31b16cf780d3f4127558ca90b328",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e9df725_74bf4af7",
         "filename": "src/ui/ve.ui.Toolbar.js",
         "patchSetId": 8
@@ -98,6 +170,24 @@
       "writtenOn": "2014-12-10T01:56:11Z",
       "side": 1,
       "message": "\"when scroll\"?",
+      "revId": "070363cdfc4a31b16cf780d3f4127558ca90b328",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_eba5b8b2",
+        "filename": "src/ui/ve.ui.Toolbar.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-12-10T11:18:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e9df725_74bf4af7",
       "revId": "070363cdfc4a31b16cf780d3f4127558ca90b328",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
