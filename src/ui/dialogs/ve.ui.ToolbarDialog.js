@@ -45,3 +45,15 @@ ve.ui.ToolbarDialog.prototype.initialize = function () {
 };
 
 ve.ui.ToolbarDialog.static.size = 'full';
+
+/* Methods */
+
+/**
+ * @inheritdoc
+ */
+ve.ui.ToolbarDialog.prototype.initialize = function () {
+	// Parent method
+	ve.ui.ToolbarDialog.super.prototype.initialize.apply( this );
+
+	this.$content.addClass( 've-ui-toolbarDialog-content' );
+};

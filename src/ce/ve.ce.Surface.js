@@ -50,6 +50,8 @@ ve.ce.Surface = function VeCeSurface( model, ui, options ) {
 	this.selecting = false;
 	this.resizing = false;
 	this.focused = false;
+	this.deactivated = false;
+	this.$deactivatedSelection = this.$( '<div>' );
 	this.activeTableNode = null;
 	this.contentBranchNodeChanged = false;
 	this.$highlightsFocused = this.$( '<div>' );
@@ -156,6 +158,7 @@ ve.ce.Surface = function VeCeSurface( model, ui, options ) {
 	this.$highlights.addClass( 've-ce-surface-highlights' );
 	this.$highlightsFocused.addClass( 've-ce-surface-highlights-focused' );
 	this.$highlightsBlurred.addClass( 've-ce-surface-highlights-blurred' );
+	this.$deactivatedSelection.addClass( 've-ce-surface-deactivatedSelection' );
 	this.$pasteTarget.addClass( 've-ce-surface-paste' )
 		.attr( 'tabIndex', -1 )
 		.prop( 'contentEditable', 'true' );
@@ -163,6 +166,7 @@ ve.ce.Surface = function VeCeSurface( model, ui, options ) {
 	// Add elements to the DOM
 	this.$element.append( this.$documentNode, this.$pasteTarget );
 	this.surface.$blockers.append( this.$highlights );
+	this.surface.$selections.append( this.$deactivatedSelection );
 };
 
 /* Inheritance */
@@ -289,7 +293,7 @@ ve.ce.Surface.prototype.destroy = function () {
 	this.$window.off( 'resize', this.onWindowResizeHandler );
 
 	// HACK: Blur to make selection/cursor disappear (needed in Firefox in some cases)
-	documentNode.$element[0].blur();
+	this.$documentNode[0].blur();
 
 	// Remove DOM elements (also disconnects their events)
 	this.$element.remove();
@@ -401,7 +405,7 @@ ve.ce.Surface.prototype.getClientRectFromNode = function () {
  * @returns {Object[]|null} Selection rectangles
  */
 ve.ce.Surface.prototype.getSelectionRects = function ( selection ) {
-	var i, l, range, nativeRange, surfaceRect, focusedNode,
+	var i, l, range, nativeRange, surfaceRect, focusedNode, rect,
 		rects = [],
 		relativeRects = [];
 
@@ -431,7 +435,10 @@ ve.ce.Surface.prototype.getSelectionRects = function ( selection ) {
 			throw new Error( 'getClientRects returned empty list' );
 		}
 	} catch ( e ) {
-		rects = [ this.getClientRectFromNode() ];
+		rect = this.getClientRectFromNode();
+		if ( rect ) {
+			rects = [ rect ];
+		}
 	}
 
 	surfaceRect = this.getSurface().getBoundingClientRect();
@@ -615,17 +622,70 @@ ve.ce.Surface.prototype.onFocusChange = function () {
 	hasFocus = OO.ui.contains(
 		[
 			this.$documentNode[0],
-			this.$pasteTarget[0]
+			this.$pasteTarget[0]/*,
+			this.surface.localOverlay.$element,
+			this.surface.globalOverlay.$element*/
 		],
 		this.nativeSelection.anchorNode,
 		true
 	);
 
-	if ( hasFocus && !this.isFocused() ) {
-		this.onDocumentFocus();
+	if ( this.deactivated ) {
+		if ( OO.ui.contains( this.$documentNode[0], this.nativeSelection.anchorNode, true ) ) {
+			this.onDocumentFocus();
+		}
+	} else {
+		if ( hasFocus && !this.isFocused() ) {
+			this.onDocumentFocus();
+		}
+		if ( !hasFocus && this.isFocused() ) {
+			this.onDocumentBlur();
+		}
 	}
-	if ( !hasFocus && this.isFocused() ) {
-		this.onDocumentBlur();
+};
+
+ve.ce.Surface.prototype.deactivate = function () {
+	if ( !this.deactivated ) {
+		// Disable the surface observer, there can be no observeable changes
+		// until the surface is activated
+		this.surfaceObserver.disable();
+		this.deactivated = true;
+		// Remove ranges so the user can't type into the document
+		this.nativeSelection.removeAllRanges();
+		// Defer until view has updated
+		this.updateDeactivedSelection();
+	}
+};
+
+ve.ce.Surface.prototype.activate = function () {
+	if ( this.deactivated ) {
+		this.deactivated = false;
+		this.updateDeactivedSelection();
+		this.surfaceObserver.enable();
+		if ( OO.ui.contains( this.$documentNode[0], this.nativeSelection.anchorNode, true ) ) {
+			this.surfaceObserver.pollOnce();
+		}
+		this.showSelection( this.getModel().getSelection() );
+	}
+};
+
+ve.ce.Surface.prototype.updateDeactivedSelection = function () {
+	var i, l, rects,
+		selection = this.getModel().getSelection();
+
+	this.$deactivatedSelection.empty();
+
+	if ( !this.deactivated || this.focusedNode || !( selection instanceof ve.dm.LinearSelection ) ) {
+		return;
+	}
+	rects = this.getSelectionRects( selection );
+	for ( i = 0, l = rects.length; i < l; i++ ) {
+		this.$deactivatedSelection.append( this.$( '<div>' ).css( {
+			top: rects[i].top,
+			left: rects[i].left,
+			width: rects[i].width,
+			height: rects[i].height
+		} ) );
 	}
 };
 
@@ -646,6 +706,7 @@ ve.ce.Surface.prototype.onDocumentFocus = function () {
 	this.eventSequencer.attach( this.$element );
 	this.surfaceObserver.startTimerLoop();
 	this.focused = true;
+	this.activate();
 	this.emit( 'focus' );
 };
 
@@ -662,12 +723,12 @@ ve.ce.Surface.prototype.onDocumentBlur = function () {
 	this.surfaceObserver.stopTimerLoop();
 	this.surfaceObserver.pollOnce();
 	this.surfaceObserver.clear();
+	this.dragging = false;
+	this.focused = false;
 	if ( this.focusedNode ) {
 		this.focusedNode.setFocused( false );
 		this.focusedNode = null;
 	}
-	this.dragging = false;
-	this.focused = false;
 	this.getModel().setNullSelection();
 	this.emit( 'blur' );
 };
@@ -1237,7 +1298,7 @@ ve.ce.Surface.prototype.checkUnicorns = function ( fixupCursor ) {
 		}
 	}
 	this.renderSelectedContentBranchNode();
-	this.showSelection( this.surface.getModel().getSelection() );
+	this.showSelection( this.getModel().getSelection() );
 };
 
 /**
@@ -1899,10 +1960,10 @@ ve.ce.Surface.prototype.onModelSelect = function ( selection ) {
 		this.focusedNode = null;
 	}
 
-	// If there is no focused node, use native selection, but ignore the selection if
-	// changeModelSelection is currently being called with the same (object-identical)
-	// selection object (i.e. if the model is calling us back)
-	if ( !this.focusedNode && !this.isRenderingLocked() && selection !== this.newModelSelection ) {
+	// Ignore the selection if changeModelSelection is currently being
+	// called with the same (object-identical) selection object
+	// (i.e. if the model is calling us back)
+	if ( !this.isRenderingLocked() && selection !== this.newModelSelection ) {
 		this.showSelection( selection );
 		this.checkUnicorns( false );
 	}
@@ -3040,7 +3101,13 @@ ve.ce.Surface.prototype.handleTableEditingEscape = function ( e ) {
  * @param {ve.dm.Selection} selection Selection to show
  */
 ve.ce.Surface.prototype.showSelection = function ( selection ) {
-	if ( !( selection instanceof ve.dm.LinearSelection ) ) {
+	if ( this.deactivated ) {
+		// Defer until view has updated
+		setTimeout( this.updateDeactivedSelection.bind( this ) );
+		return;
+	}
+
+	if ( !( selection instanceof ve.dm.LinearSelection ) || this.focusedNode ) {
 		return;
 	}
 
@@ -3118,7 +3185,10 @@ ve.ce.Surface.prototype.getNativeRange = function ( range ) {
 	var nativeRange, rangeSelection,
 		selection = this.getModel().getSelection();
 
-	if ( range && selection instanceof ve.dm.LinearSelection && selection.getRange().equalsSelection( range ) ) {
+	if (
+		range && !this.deactivated &&
+		selection instanceof ve.dm.LinearSelection && selection.getRange().equalsSelection( range )
+	) {
 		// Range requested is equivalent to native selection so reset
 		range = null;
 	}
