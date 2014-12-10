@@ -58,8 +58,11 @@ ve.ui.WindowAction.prototype.open = function ( name, data ) {
 
 	data = ve.extendObject( { dir: dir }, data, { fragment: fragment } );
 
-	if ( windowType === 'toolbar' ) {
+	if ( windowType === 'inspector' ) {
+		surface.getView().deactivate();
+	} else if ( windowType === 'toolbar' ) {
 		data = ve.extendObject( data, { surface: surface } );
+		surface.getView().deactivate();
 	} else if ( windowType === 'dialog' ) {
 		// For non-isolated dialogs, remove the selection and re-apply on close
 		surface.getView().nativeSelection.removeAllRanges();

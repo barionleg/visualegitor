@@ -30,6 +30,7 @@ ve.ui.Surface = function VeUiSurface( dataOrDoc, config ) {
 	// Properties
 	this.globalOverlay = new ve.ui.Overlay( { classes: ['ve-ui-overlay-global'] } );
 	this.localOverlay = new ve.ui.Overlay( { $: this.$, classes: ['ve-ui-overlay-local'] } );
+	this.$selections = this.$( '<div>' );
 	this.$blockers = this.$( '<div>' );
 	this.$controls = this.$( '<div>' );
 	this.$menus = this.$( '<div>' );
@@ -60,8 +61,7 @@ ve.ui.Surface = function VeUiSurface( dataOrDoc, config ) {
 	this.toolbarDialogs = new ve.ui.ToolbarDialogWindowManager( {
 		$: this.$,
 		factory: ve.ui.windowFactory,
-		modal: false,
-		isolate: true
+		modal: false
 	} );
 
 	// Initialization
@@ -70,7 +70,7 @@ ve.ui.Surface = function VeUiSurface( dataOrDoc, config ) {
 	this.$element
 		.addClass( 've-ui-surface' )
 		.append( this.view.$element );
-	this.localOverlay.$element.append( this.$blockers, this.$controls, this.$menus );
+	this.localOverlay.$element.append( this.$selections, this.$blockers, this.$controls, this.$menus );
 	this.globalOverlay.$element.append( this.dialogs.$element );
 };
 

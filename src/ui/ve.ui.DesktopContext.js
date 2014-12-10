@@ -138,8 +138,7 @@ ve.ui.DesktopContext.prototype.createInspectorWindowManager = function () {
 		$: this.$,
 		factory: ve.ui.windowFactory,
 		overlay: this.surface.getLocalOverlay(),
-		modal: false,
-		isolate: true
+		modal: false
 	} );
 };
 
