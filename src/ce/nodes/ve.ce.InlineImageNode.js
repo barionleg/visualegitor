@@ -24,12 +24,17 @@ ve.ce.InlineImageNode = function VeCeInlineImageNode( model, config ) {
 	// Parent constructor
 	ve.ce.InlineImageNode.super.call( this, model, config );
 
+	// Build DOM
+	this.$image = this.$( '<img>' )
+		.attr( 'src', this.getResolvedAttribute( 'src' ) )
+		.prependTo( this.$element );
+
 	// Mixin constructors
-	ve.ce.ImageNode.call( this, this.$element, null, config );
+	ve.ce.ImageNode.call( this, this.$element, this.$image, config );
 
 	// Initialization
-	this.$element
-		.addClass( 've-ce-inlineImageNode' )
+	this.$element.addClass( 've-ce-inlineImageNode' );
+	this.$image
 		.attr( {
 			alt: this.model.getAttribute( 'alt' ),
 			src: this.getResolvedAttribute( 'src' )
@@ -50,7 +55,7 @@ OO.mixinClass( ve.ce.InlineImageNode, ve.ce.ImageNode );
 
 ve.ce.InlineImageNode.static.name = 'inlineImage';
 
-ve.ce.InlineImageNode.static.tagName = 'img';
+ve.ce.InlineImageNode.static.tagName = 'span';
 
 /* Registration */
 
