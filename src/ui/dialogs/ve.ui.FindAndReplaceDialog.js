@@ -111,6 +111,11 @@ ve.ui.FindAndReplaceDialog.prototype.initialize = function () {
 				this.replaceAllButton
 			]
 		} ),
+		doneButton = new OO.ui.ButtonWidget( {
+			$: this.$,
+			classes: ['ve-ui-findAndReplaceDialog-cell'],
+			label: ve.msg( 'visualeditor-dialog-action-done' )
+		} ),
 		$findRow = this.$( '<div>' ).addClass( 've-ui-findAndReplaceDialog-row' ),
 		$replaceRow = this.$( '<div>' ).addClass( 've-ui-findAndReplaceDialog-row' );
 
@@ -127,6 +132,7 @@ ve.ui.FindAndReplaceDialog.prototype.initialize = function () {
 	this.previousButton.connect( this, { click: 'onPreviousButtonClick' } );
 	this.replaceButton.connect( this, { click: 'onReplaceButtonClick' } );
 	this.replaceAllButton.connect( this, { click: 'onReplaceAllButtonClick' } );
+	doneButton.connect( this, { click: 'close' } );
 	this.$content.on( 'keydown', this.onContentKeyDown.bind( this ) );
 
 	// Initialization
@@ -144,7 +150,8 @@ ve.ui.FindAndReplaceDialog.prototype.initialize = function () {
 			),
 			$replaceRow.append(
 				this.replaceText.$element,
-				replaceGroup.$element
+				replaceGroup.$element,
+				doneButton.$element
 			)
 		);
 };
