@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e9df725_b444f21d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-10T01:56:11Z",
+      "side": 1,
+      "message": "Please write a more substantive commit summary",
+      "revId": "070363cdfc4a31b16cf780d3f4127558ca90b328",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_8e9a07bc",
+        "filename": "demos/ve/demo.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-10T01:56:11Z",
+      "side": 1,
+      "message": "Another argument for factoring this out into something like target.destroyAllSurfaces(); or target.clearSurfaces(); or whatever",
+      "revId": "070363cdfc4a31b16cf780d3f4127558ca90b328",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_0e34b7a6",
+        "filename": "src/init/sa/ve.init.sa.Target.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-10T01:56:11Z",
+      "side": 1,
+      "message": "Why was this moved here from the parent class?",
+      "revId": "070363cdfc4a31b16cf780d3f4127558ca90b328",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_2e39739f",
+        "filename": "src/init/sa/ve.init.sa.Target.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-10T01:56:11Z",
+      "side": 1,
+      "message": "Why doesn\u0027t the parent do this?",
+      "revId": "070363cdfc4a31b16cf780d3f4127558ca90b328",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_0e0277be",
+        "filename": "src/init/ve.init.Target.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-10T01:56:11Z",
+      "side": 1,
+      "message": "This event isn\u0027t emitted by this class any more, or by anything in VE core for that matter. This seems like something that would break VE-MW?",
+      "revId": "070363cdfc4a31b16cf780d3f4127558ca90b328",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_74bf4af7",
+        "filename": "src/ui/ve.ui.Toolbar.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-10T01:56:11Z",
+      "side": 1,
+      "message": "\"when scroll\"?",
+      "revId": "070363cdfc4a31b16cf780d3f4127558ca90b328",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_1434c6a6",
+        "filename": "src/ui/ve.ui.Toolbar.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-10T01:56:11Z",
+      "side": 1,
+      "message": "Document what null means",
+      "revId": "070363cdfc4a31b16cf780d3f4127558ca90b328",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e9df725_3439c29f",
+        "filename": "src/ui/ve.ui.Toolbar.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-10T01:56:11Z",
+      "side": 1,
+      "message": "The event binding that called this function was removed, it\u0027s now orphaned",
+      "revId": "070363cdfc4a31b16cf780d3f4127558ca90b328",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
