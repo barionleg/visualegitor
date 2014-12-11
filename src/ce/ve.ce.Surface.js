@@ -2489,7 +2489,8 @@ ve.ce.Surface.prototype.moveModelCursor = function ( offset ) {
  * @param {jQuery.Event} e Left or right key down event
  */
 ve.ce.Surface.prototype.handleLinearLeftOrRightArrowKey = function ( e ) {
-	var direction, range = this.getModel().getSelection().getRange();
+	var direction, cursorNode, directionality,
+		range = this.getModel().getSelection().getRange();
 
 	// On Mac OS pressing Command (metaKey) + Left/Right is same as pressing Home/End.
 	// As we are not able to handle it programmatically (because we don't know at which offsets
@@ -2508,11 +2509,25 @@ ve.ce.Surface.prototype.handleLinearLeftOrRightArrowKey = function ( e ) {
 	} finally {
 		this.decRenderLock();
 	}
-	if ( this.$( e.target ).css( 'direction' ) === 'rtl' ) {
-		// If the language direction is RTL, switch left/right directions:
-		direction = e.keyCode === OO.ui.Keys.LEFT ? 1 : -1;
+
+	// Read the CSS directionality of the node at the cursor
+	// TODO: handle plaintext bidi better
+	cursorNode = this.nativeSelection.focusNode;
+	if ( OO.ui.contains( this.$pasteTarget[0], cursorNode, true ) ) {
+		// Using emulated selection; get cursorNode from DM selection
+		cursorNode = this.getDocument().getNodeAndOffset( range.from ).node;
+	}
+	if ( cursorNode.nodeType === Node.TEXT_NODE ) {
+		cursorNode = cursorNode.parentNode;
+	}
+	directionality = this.$( cursorNode ).css( 'direction' ) || 'ltr';
+	/*jshint bitwise:false */
+	if ( e.keyCode === OO.ui.Keys.LEFT ^ directionality === 'rtl' ) {
+		// leftarrow in ltr, or rightarrow in rtl
+		direction = -1;
 	} else {
-		direction = e.keyCode === OO.ui.Keys.LEFT ? -1 : 1;
+		// leftarrow in rtl, or rightarrow in ltr
+		direction = 1;
 	}
 
 	range = this.model.getDocument().getRelativeRange(
