@@ -8,9 +8,12 @@ QUnit.module( 've.ce.Surface' );
 
 /* Tests */
 
-ve.test.utils.runSurfaceHandleSpecialKeyTest = function ( assert, html, range, operations, expectedData, expectedRange, msg ) {
-	var i, method, args,
-		selection,
+ve.test.utils.runSurfaceHandleSpecialKeyTestAsync = function ( assert, html, range, operations, expectedData, expectedRange, msg ) {
+	ve.test.utils.runSurfaceHandleSpecialKeyTest( assert, html, range, operations, expectedData, expectedRange, msg, true );
+};
+
+ve.test.utils.runSurfaceHandleSpecialKeyTest = function ( assert, html, range, operations, expectedData, expectedRange, msg, async ) {
+	var i, method, args, selection,
 		actions = {
 			backspace: [ 'handleLinearDelete', { keyCode: OO.ui.Keys.BACKSPACE } ],
 			delete: [ 'handleLinearDelete', { keyCode: OO.ui.Keys.DELETE } ],
@@ -40,12 +43,22 @@ ve.test.utils.runSurfaceHandleSpecialKeyTest = function ( assert, html, range, o
 	}
 	expectedData( data );
 
-	assert.deepEqualWithDomElements( model.getDocument().getFullData(), data, msg + ': data' );
-	assert.equalRange( selection.getRange(), expectedRange, msg + ': range' );
-	surface.destroy();
+	function finishTest() {
+		if ( async ) {
+			QUnit.start();
+		}
+		assert.deepEqualWithDomElements( model.getDocument().getFullData(), data, msg + ': data' );
+		assert.equalRange( selection.getRange(), expectedRange, msg + ': range' );
+		surface.destroy();
+	}
+	if ( async ) {
+		view.eventSequencer.afterLoopOne( finishTest );
+	} else {
+		finishTest();
+	}
 };
 
-QUnit.test( 'handleLinearDelete', function ( assert ) {
+QUnit.asyncTest( 'handleLinearDelete', function ( assert ) {
 	var i,
 		cases = [
 			{
@@ -151,7 +164,7 @@ QUnit.test( 'handleLinearDelete', function ( assert ) {
 	QUnit.expect( cases.length * 2 );
 
 	for ( i = 0; i < cases.length; i++ ) {
-		ve.test.utils.runSurfaceHandleSpecialKeyTest(
+		ve.test.utils.runSurfaceHandleSpecialKeyTestAsync(
 			assert, cases[i].html, cases[i].range, cases[i].operations,
 			cases[i].expectedData, cases[i].expectedRange, cases[i].msg
 		);
