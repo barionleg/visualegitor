@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_a9bfe9a6",
+        "filename": "src/ce/styles/ve.ce.Surface.css",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-12-11T23:00:46Z",
+      "side": 1,
+      "message": "Moving rule down makes for ugliness when rects overlap.",
+      "parentUuid": "0e6cb3ef_2eaf5f93",
+      "revId": "db48a76f8156539f83c7b11b163c1756776d8a73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6cb3ef_ae236fff",
         "filename": "src/ce/ve.ce.Surface.js",
         "patchSetId": 4

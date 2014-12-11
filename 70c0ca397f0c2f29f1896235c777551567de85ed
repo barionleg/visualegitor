@@ -16,6 +16,24 @@
       "revId": "70c0ca397f0c2f29f1896235c777551567de85ed",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_89c30561",
+        "filename": "src/ui/ve.ui.DesktopContext.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-12-11T23:00:46Z",
+      "side": 0,
+      "message": "Because when the contents are isolated, this is as bad as it looks. You can\u0027t click on anything!",
+      "parentUuid": "0e6cb3ef_2953d91b",
+      "revId": "70c0ca397f0c2f29f1896235c777551567de85ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
