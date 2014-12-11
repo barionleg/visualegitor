@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6cb3ef_2eaf5f93",
+        "filename": "src/ce/styles/ve.ce.Surface.css",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-11T22:51:20Z",
+      "side": 1,
+      "message": "This also needs:\n\n    .ve-init-target-ie .ve-ce-surface-deactivatedSelection {\n        opacity: 1;\n    }\n    .ve-init-target-ie .ve-ce-surface-deactivatedSelection \u003e div {\n        opacity: 0.5;\n    }\n\nOr just move the opacity setting down to the \u003ediv rule",
+      "revId": "db48a76f8156539f83c7b11b163c1756776d8a73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_ae236fff",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-11T22:51:20Z",
+      "side": 1,
+      "message": "Commented-out code?",
+      "revId": "db48a76f8156539f83c7b11b163c1756776d8a73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_4e8c1300",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 635,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-11T22:51:20Z",
+      "side": 1,
+      "message": "So onDocumentFocus can be fired twice, without a blur in between? That\u0027s worth documenting",
+      "revId": "db48a76f8156539f83c7b11b163c1756776d8a73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_ce77c3fc",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 647,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-11T22:51:20Z",
+      "side": 1,
+      "message": "Document",
+      "revId": "db48a76f8156539f83c7b11b163c1756776d8a73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_6e679723",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 655,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-11T22:51:20Z",
+      "side": 1,
+      "message": "This doesn\u0027t defer anything. Copied comment from showSelection()?",
+      "revId": "db48a76f8156539f83c7b11b163c1756776d8a73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_ae512f67",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 656,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-11T22:51:20Z",
+      "side": 1,
+      "message": "Misspelled function name",
+      "revId": "db48a76f8156539f83c7b11b163c1756776d8a73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_6ec3170b",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-11T22:51:20Z",
+      "side": 1,
+      "message": "Document",
+      "revId": "db48a76f8156539f83c7b11b163c1756776d8a73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_eed647c8",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 672,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-11T22:51:20Z",
+      "side": 1,
+      "message": "Document; correct spelling",
+      "revId": "db48a76f8156539f83c7b11b163c1756776d8a73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_4e1bb382",
+        "filename": "src/ui/actions/ve.ui.WindowAction.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-11T22:51:20Z",
+      "side": 1,
+      "message": "Commented-out code",
+      "revId": "db48a76f8156539f83c7b11b163c1756776d8a73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
