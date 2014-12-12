@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_b7841fa5",
+        "filename": "src/ce/styles/ve.ce.Surface.css",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-12-12T14:42:58Z",
+      "side": 1,
+      "message": "Done, and for find and replace highlights.",
+      "parentUuid": "0e6cb3ef_cf433d42",
+      "revId": "db48a76f8156539f83c7b11b163c1756776d8a73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6cb3ef_ae236fff",
         "filename": "src/ce/ve.ce.Surface.js",
         "patchSetId": 4
@@ -66,6 +84,24 @@
       "writtenOn": "2014-12-11T22:51:20Z",
       "side": 1,
       "message": "Commented-out code?",
+      "revId": "db48a76f8156539f83c7b11b163c1756776d8a73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_17786bbe",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-12-12T14:42:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e6cb3ef_ae236fff",
       "revId": "db48a76f8156539f83c7b11b163c1756776d8a73",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -123,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_774e879d",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 655,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-12-12T14:42:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e6cb3ef_6e679723",
+      "revId": "db48a76f8156539f83c7b11b163c1756776d8a73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6cb3ef_ae512f67",
         "filename": "src/ce/ve.ce.Surface.js",
         "patchSetId": 4
@@ -134,6 +188,24 @@
       "writtenOn": "2014-12-11T22:51:20Z",
       "side": 1,
       "message": "Misspelled function name",
+      "revId": "db48a76f8156539f83c7b11b163c1756776d8a73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_97531b43",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 656,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-12-12T14:42:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e6cb3ef_ae512f67",
       "revId": "db48a76f8156539f83c7b11b163c1756776d8a73",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -157,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_3a055614",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-12-12T14:42:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e6cb3ef_6ec3170b",
+      "revId": "db48a76f8156539f83c7b11b163c1756776d8a73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6cb3ef_eed647c8",
         "filename": "src/ce/ve.ce.Surface.js",
         "patchSetId": 4
@@ -168,6 +258,24 @@
       "writtenOn": "2014-12-11T22:51:20Z",
       "side": 1,
       "message": "Document; correct spelling",
+      "revId": "db48a76f8156539f83c7b11b163c1756776d8a73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_5a0a8a25",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 672,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-12-12T14:42:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e6cb3ef_eed647c8",
       "revId": "db48a76f8156539f83c7b11b163c1756776d8a73",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -191,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_fa0efe36",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 682,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-12-12T14:42:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e6cb3ef_4f6f2dc1",
+      "revId": "db48a76f8156539f83c7b11b163c1756776d8a73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6cb3ef_4e1bb382",
         "filename": "src/ui/actions/ve.ui.WindowAction.js",
         "patchSetId": 4
@@ -202,6 +328,24 @@
       "writtenOn": "2014-12-11T22:51:20Z",
       "side": 1,
       "message": "Commented-out code",
+      "revId": "db48a76f8156539f83c7b11b163c1756776d8a73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_da2c5a92",
+        "filename": "src/ui/actions/ve.ui.WindowAction.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2014-12-12T14:42:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e6cb3ef_4e1bb382",
       "revId": "db48a76f8156539f83c7b11b163c1756776d8a73",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
