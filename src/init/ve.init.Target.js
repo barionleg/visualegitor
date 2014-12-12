@@ -39,11 +39,27 @@ ve.init.Target = function VeInitTarget( toolbarConfig ) {
 
 	// Events
 	this.onDocumentKeyDownHandler = this.onDocumentKeyDown.bind( this );
-	$( this.getElementDocument() ).on( 'keydown', this.onDocumentKeyDownHandler );
-	this.$element.on( 'keydown', this.onTargetKeyDown.bind( this ) );
+	this.onTargetKeyDownHandler = this.onTargetKeyDown.bind( this );
+	this.bindHandlers();
 
 	// Register
 	ve.init.target = this;
+};
+
+/**
+ * Bind event handlers to target and document
+ */
+ve.init.Target.prototype.bindHandlers = function () {
+	$( this.getElementDocument() ).on( 'keydown', this.onDocumentKeyDownHandler );
+	this.$element.on( 'keydown', this.onTargetKeyDownHandler );
+};
+
+/**
+ * Unbind event handlers on target and document
+ */
+ve.init.Target.prototype.unbindHandlers = function () {
+	$( this.getElementDocument() ).off( 'keydown', this.onDocumentKeyDownHandler );
+	this.$element.off( 'keydown', this.onTargetKeyDownHandler );
 };
 
 /**
@@ -59,7 +75,7 @@ ve.init.Target.prototype.destroy = function () {
 		this.$element.remove();
 		this.$element = null;
 	}
-	$( this.getElementDocument() ).off( 'keydown', this.onDocumentKeyDownHandler );
+	this.unbindHandlers();
 	ve.init.target = null;
 };
 
