@@ -34,6 +34,24 @@
       "revId": "70c0ca397f0c2f29f1896235c777551567de85ed",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_ef63a1d8",
+        "filename": "src/ui/ve.ui.DesktopContext.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-12T01:17:52Z",
+      "side": 0,
+      "message": "LOL, right. Good one.",
+      "parentUuid": "0e6cb3ef_89c30561",
+      "revId": "70c0ca397f0c2f29f1896235c777551567de85ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }

@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_cf433d42",
+        "filename": "src/ce/styles/ve.ce.Surface.css",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-12T01:17:52Z",
+      "side": 1,
+      "message": "Right, OK. Then we\u0027ll need to do the conditional stuff.",
+      "parentUuid": "0e6cb3ef_a9bfe9a6",
+      "revId": "db48a76f8156539f83c7b11b163c1756776d8a73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6cb3ef_ae236fff",
         "filename": "src/ce/ve.ce.Surface.js",
         "patchSetId": 4
@@ -150,6 +168,23 @@
       "writtenOn": "2014-12-11T22:51:20Z",
       "side": 1,
       "message": "Document; correct spelling",
+      "revId": "db48a76f8156539f83c7b11b163c1756776d8a73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_4f6f2dc1",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 682,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-12T01:17:52Z",
+      "side": 1,
+      "message": "This explodes if rects is null",
       "revId": "db48a76f8156539f83c7b11b163c1756776d8a73",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
