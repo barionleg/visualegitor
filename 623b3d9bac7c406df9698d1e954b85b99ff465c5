@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6cb3ef_effde139",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-12T04:23:26Z",
+      "side": 1,
+      "message": "This is the kind of variable where it would be good to document what it means (and why it\u0027s misleading). We don\u0027t usually do that, but we sometimes do, and here I feel like we should.",
+      "revId": "623b3d9bac7c406df9698d1e954b85b99ff465c5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_8f3a25e3",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 1159,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-12T04:23:26Z",
+      "side": 1,
+      "message": "Nowhere is it actually enforced or assumed that the node be focusable",
+      "revId": "623b3d9bac7c406df9698d1e954b85b99ff465c5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_6f679123",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 1162,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-12T04:23:26Z",
+      "side": 1,
+      "message": "Write a proper documentation comment (with @private) for this function, so a reader can tell what the return type is and what the parameter types are",
+      "revId": "623b3d9bac7c406df9698d1e954b85b99ff465c5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_cf81fd93",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 1177,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-12T04:23:26Z",
+      "side": 1,
+      "message": "It\u0027s conventional to return null in these cases",
+      "revId": "623b3d9bac7c406df9698d1e954b85b99ff465c5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_6f4eb19d",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 1181,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-12T04:23:26Z",
+      "side": 1,
+      "message": "...which then requires || null here",
+      "revId": "623b3d9bac7c406df9698d1e954b85b99ff465c5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_af328904",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 1237,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-12T04:23:26Z",
+      "side": 1,
+      "message": "Merge this into the if block above",
+      "revId": "623b3d9bac7c406df9698d1e954b85b99ff465c5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_cf581d5c",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 1249,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-12T04:23:26Z",
+      "side": 1,
+      "message": "Uhm, what? Doesn\u0027t !direction mean that an arrow key was pressed but the selection didn\u0027t move? Shouldn\u0027t we just immediately bail on !direction, knowing that the cursor didn\u0027t move?\n\nIn any case, we shouldn\u0027t throw an error just because we\u0027re confused and don\u0027t know what to do. We should do nothing, or maybe do something vaguely sensible, but not crash.",
+      "revId": "623b3d9bac7c406df9698d1e954b85b99ff465c5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_8149996c",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 2672,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-12T04:23:26Z",
+      "side": 1,
+      "message": "Commented-out code. Figure out what should happen to this",
+      "revId": "623b3d9bac7c406df9698d1e954b85b99ff465c5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_a14e1d71",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 2698,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-12T04:23:26Z",
+      "side": 1,
+      "message": "Mention the setTimeout -\u003e afterOne change in the commit summary",
+      "revId": "623b3d9bac7c406df9698d1e954b85b99ff465c5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_4153811a",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 2703,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2014-12-12T04:23:26Z",
+      "side": 1,
+      "message": "Mention this fix in the commit summary",
+      "revId": "623b3d9bac7c406df9698d1e954b85b99ff465c5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
