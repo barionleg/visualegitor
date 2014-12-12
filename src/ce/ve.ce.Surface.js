@@ -2527,7 +2527,7 @@ ve.ce.Surface.prototype.handleLinearLeftOrRightArrowKey = function ( e ) {
  * @param {jQuery.Event} e Up or down key down event
  */
 ve.ce.Surface.prototype.handleLinearUpOrDownArrowKey = function ( e ) {
-	var nativeRange, slug, $cursorHolder, endNode, endOffset,
+	var nativeRange, slug, endNode, endOffset,
 		range = this.model.getSelection().getRange(),
 		tableEditingRange = this.getActiveTableNode() ? this.getActiveTableNode().getEditingRange() : null,
 		direction = e.keyCode === OO.ui.Keys.DOWN ? 1 : -1,
@@ -2569,30 +2569,20 @@ ve.ce.Surface.prototype.handleLinearUpOrDownArrowKey = function ( e ) {
 				endNode = this.nativeSelection.focusNode;
 				endOffset = this.nativeSelection.focusOffset;
 			}
-			$cursorHolder = this.$( '<span class="ve-ce-surface-cursorHolder"> </span>' ).hide();
-			if ( endNode.nodeType === Node.TEXT_NODE ) {
-				endNode.splitText( endOffset );
-			}
-			endNode.parentNode.insertBefore(
-				$cursorHolder[0],
-				endNode.nextSibling
-			);
 		}
 	}
-	if ( $cursorHolder || slug ) {
+	if ( endNode || slug ) {
 		nativeRange = this.getElementDocument().createRange();
-		nativeRange.selectNode( $cursorHolder ? $cursorHolder[0] : slug );
+		if ( endNode ) {
+			nativeRange.setStart( endNode, endOffset );
+			nativeRange.setEnd( endNode, endOffset );
+		} else {
+			nativeRange.selectNode( slug );
+		}
 		this.nativeSelection.removeAllRanges();
 		this.nativeSelection.addRange( nativeRange );
 	}
-	if ( $cursorHolder ) {
-		$cursorHolder.remove();
-		this.surfaceObserver.clear();
-	}
-	// If we did text node splitting, try and patch things up
-	if ( endNode && endNode.nodeType === Node.TEXT_NODE ) {
-		ve.normalizeNode( endNode.parentNode );
-	}
+
 	setTimeout( function () {
 		var viewNode, newRange;
 		// Chrome bug lets you cursor into a multi-line contentEditable=false with up/down...
