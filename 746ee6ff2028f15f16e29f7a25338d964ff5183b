@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6cb3ef_4fe88daf",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 1176,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2014-12-12T02:51:20Z",
+      "side": 1,
+      "message": "Please just call this \"compareDocumentOrder\" per coding style.",
+      "revId": "746ee6ff2028f15f16e29f7a25338d964ff5183b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
