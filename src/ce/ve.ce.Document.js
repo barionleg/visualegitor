@@ -17,7 +17,8 @@
 ve.ce.Document = function VeCeDocument( model, surface ) {
 	// Parent constructor
 	ve.Document.call( this, new ve.ce.DocumentNode(
-		model.getDocumentNode(), surface, { $: surface.$ }
+		// DOCSET TODO: HACK
+		model.getDocumentNode(), surface, { $: OO.ui.Element.static.getJQuery( document ) }
 	) );
 
 	this.getDocumentNode().$element.prop( {
