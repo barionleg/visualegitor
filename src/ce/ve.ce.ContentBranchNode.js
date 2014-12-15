@@ -76,7 +76,7 @@ ve.ce.ContentBranchNode.static.appendRenderedContents = function ( container, wr
 /* Methods */
 
 /**
- * Handle splice events.
+ * Handle childUpdate events.
  *
  * Rendering is only done once per transaction. If a paragraph has multiple nodes in it then it's
  * possible to receive multiple `childUpdate` events for a single transaction such as annotating
