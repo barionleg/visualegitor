@@ -317,6 +317,37 @@ ve.batchPush = function ( arr, data ) {
 };
 
 /**
+ * Use binary search to locate an element in a sorted array.
+ *
+ * searchFunc is given an element from the array. searchFunc(elem) must return a number
+ * >0 if the element we're searching for is to the right of (has a higher index than) elem,
+ * <0 if it is to the left of elem, or zero if it's equal to elem.
+ *
+ * To search for a specific value with a comparator function (a function cmp(a,b) that returns
+ * >0 if a > b, <0 if a < b and 0 if a == b), you can use searchFunc = cmp.bind( null, value )
+ *
+ * @param {Array} arr Array to search in
+ * @param {Function} searchFunc Search function
+ * @param {bool} [forInsertion] If not found, return index where val could be inserted
+ * @return {number|null} Index where val was found, or null if not found
+ */
+ve.binarySearch = function ( arr, searchFunc, forInsertion ) {
+	var mid, cmpResult, left = 0, right = arr.length;
+	while ( left < right ) {
+		mid = Math.floor( ( left + right ) / 2 );
+		cmpResult = searchFunc( arr[mid] );
+		if ( cmpResult < 0 ) {
+			right = mid;
+		} else if ( cmpResult > 0 ) {
+			left = mid + 1;
+		} else {
+			return mid;
+		}
+	}
+	return forInsertion ? right : null;
+};
+
+/**
  * Log data to the console.
  *
  * This implementation does nothing, to add a real implementation ve.debug needs to be loaded.
@@ -1234,20 +1265,33 @@ ve.getOffsetPath = function ( ancestor, node, nodeOffset ) {
 };
 
 /**
- * Compare two offset paths for position in document
+ * Compare two tuples in lexicographical order.
  *
- * @param {number[]} path1 First offset path
- * @param {number[]} path2 Second offset path
- * @return {number} negative, zero or positive number
+ * This function first compares a[0] with b[0], then a[1] with b[1], etc.
+ * until it encounters a pair where a[k] != b[k]; then returns a[k]-b[k].
+ * If a[k] == b[k] for every k, this function returns 0.
+ *
+ * If a and b are of unequal length, but a[k] == b[k] for all k that exist in both a and b, then
+ * this function returns Infinity (if a is longer) or -Infinity (if b is longer).
+ *
+ * @param {number[]} a First tuple
+ * @param {number[]} b Second tuple
+ * @return {number} a[k]-b[k] where k is the lowest k such that a[k] != b[k]
  */
-ve.compareOffsetPaths = function ( path1, path2 ) {
+ve.compareTuples = function ( a, b ) {
 	var i, len;
-	for ( i = 0, len = Math.min( path1.length, path2.length ); i < len; i++ ) {
-		if ( path1[ i ] !== path2[ i ] ) {
-			return path1[ i ] - path2[ i ];
+	for ( i = 0, len = Math.min( a.length, b.length ); i < len; i++ ) {
+		if ( a[i] !== b[i] ) {
+			return a[i] - b[i];
 		}
 	}
-	return path1.length - path2.length;
+	if ( a.length > b.length ) {
+		return Infinity;
+	}
+	if ( a.length < b.length ) {
+		return -Infinity;
+	}
+	return 0;
 };
 
 /**
@@ -1260,12 +1304,11 @@ ve.compareOffsetPaths = function ( path1, path2 ) {
  * @return {number} negative, zero or positive number
  */
 ve.compareDocumentOrder = function ( node1, offset1, node2, offset2 ) {
-
 	var commonAncestor = ve.getCommonAncestor( node1, node2 );
 	if ( commonAncestor === null ) {
 		throw new Error( 'No common ancestor' );
 	}
-	return ve.compareOffsetPaths(
+	return ve.compareTuples(
 		ve.getOffsetPath( commonAncestor, node1, offset1 ),
 		ve.getOffsetPath( commonAncestor, node2, offset2 )
 	);

@@ -107,6 +107,18 @@ ve.ce.BranchNode.prototype.onSetup = function () {
 };
 
 /**
+ * Handle teardown event.
+ *
+ * @method
+ */
+ve.ce.BranchNode.prototype.onTeardown = function () {
+	ve.ce.Node.prototype.onTeardown.call( this );
+	this.$element.removeClass( 've-ce-branchNode' );
+	// FIXME should be in destroy
+	this.model.disconnect( this );
+};
+
+/**
  * Update the DOM wrapper.
  *
  * WARNING: The contents, .data( 'view' ), the contentEditable property and any classes the wrapper

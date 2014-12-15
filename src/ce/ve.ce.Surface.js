@@ -1572,6 +1572,8 @@ ve.ce.Surface.prototype.onCopy = function ( e ) {
 	// Clone the elements in the slice
 	slice.data.cloneElements( true );
 
+	// SUBDOCUMENT TODO: figure out a way to do this better
+	slice.parentSet = this.model.documentModel.getParentSet();
 	ve.dm.converter.getDomSubtreeFromModel( slice, this.$pasteTarget[0], true );
 
 	// Some browsers strip out spans when they match the styling of the
