@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6cb3ef_8e78b6ee",
+        "filename": "src/ui/ve.ui.MobileContext.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 98
+      },
+      "writtenOn": "2014-12-18T11:33:46Z",
+      "side": 1,
+      "message": "I4c2ff743",
+      "revId": "9e87ccb9916e0450ba97e945c50cc918a21a9957",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
