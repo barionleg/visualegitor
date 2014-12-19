@@ -47,6 +47,8 @@ $( function () {
 		languageInput.languageCodeField.$element.hide();
 
 		languageInput.setLangAndDir( currentLang, currentDir );
+		// Dir doesn't change on init but styles need to be set
+		updateStylesFromDir();
 
 		languageInput.on( 'change', function ( lang, dir ) {
 			if ( dir === currentDir && lang !== 'qqx' && ve.indexOf( lang, ve.availableLanguages ) === -1 ) {
@@ -56,14 +58,7 @@ $( function () {
 			$.i18n().locale = currentLang = lang;
 			currentDir = dir;
 
-			var oldDir = currentDir === 'ltr' ? 'rtl' : 'ltr';
-
-			$( '.stylesheet-' + currentDir ).prop( 'disabled', false );
-			$( '.stylesheet-' + oldDir ).prop( 'disabled', true );
-
-			$( 'body' ).css( 'direction', currentDir )
-				.addClass( 've-demo-dir-' + currentDir )
-				.removeClass( 've-demo-dir-' + oldDir );
+			updateStylesFromDir();
 
 			// HACK: Override/restore message functions for qqx mode
 			if ( lang === 'qqx' ) {
@@ -96,6 +91,17 @@ $( function () {
 		);
 
 		$editor.append( target.$element );
+
+		function updateStylesFromDir() {
+			var oldDir = currentDir === 'ltr' ? 'rtl' : 'ltr';
+
+			$( '.stylesheet-' + currentDir ).prop( 'disabled', false );
+			$( '.stylesheet-' + oldDir ).prop( 'disabled', true );
+
+			$( 'body' ).css( 'direction', currentDir )
+				.addClass( 've-demo-dir-' + currentDir )
+				.removeClass( 've-demo-dir-' + oldDir );
+		}
 
 		function updateHash() {
 			var i, pages = [];
