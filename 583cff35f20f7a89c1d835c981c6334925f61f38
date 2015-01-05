@@ -16,6 +16,24 @@
       "revId": "583cff35f20f7a89c1d835c981c6334925f61f38",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6cb3ef_cda74db9",
+        "filename": "src/ui/dialogs/ve.ui.FindAndReplaceDialog.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-01-05T11:08:58Z",
+      "side": 1,
+      "message": "See comment on line 47. renderedFragments is a ve.Range. Note that ve.Range is not restricted to representing DM offsets.",
+      "parentUuid": "0e6cb3ef_4d66ddeb",
+      "revId": "583cff35f20f7a89c1d835c981c6334925f61f38",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
