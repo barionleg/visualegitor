@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6cb3ef_46af0f92",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 19
+      },
+      "lineNbr": 2777,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-01-05T14:58:01Z",
+      "side": 1,
+      "message": "Combine into else if. Add comment explaining why this is conditonal",
+      "revId": "c52e1c23ee9f22f015fccce221ee0ce59cf11807",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
