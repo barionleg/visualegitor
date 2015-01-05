@@ -39,6 +39,7 @@
     "visualeditor-contextitemwidget-label-secondary": "Edit",
     "visualeditor-dialog-action-apply": "Apply changes",
     "visualeditor-dialog-action-cancel": "Cancel",
+    "visualeditor-dialog-action-close": "Close",
     "visualeditor-dialog-action-done": "Done",
     "visualeditor-dialog-action-goback": "Go back",
     "visualeditor-dialog-action-insert": "Insert",
