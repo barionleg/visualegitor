@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e6cb3ef_8a461b7f",
+        "filename": "src/ui/dialogs/ve.ui.FindAndReplaceDialog.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-01-05T09:30:44Z",
+      "side": 1,
+      "message": "Never mind, this property is removed in the next commit anyway",
+      "parentUuid": "0e6cb3ef_aab51f7a",
+      "revId": "89a117563fcb375b04938772e297f04827e6d127",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6cb3ef_0aa44b46",
         "filename": "src/ui/dialogs/ve.ui.FindAndReplaceDialog.js",
         "patchSetId": 2
