@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6cb3ef_4d66ddeb",
+        "filename": "src/ui/dialogs/ve.ui.FindAndReplaceDialog.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-01-05T10:24:47Z",
+      "side": 1,
+      "message": "??? this.focusedIndex is an array index, not a DM offset",
+      "revId": "583cff35f20f7a89c1d835c981c6334925f61f38",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
