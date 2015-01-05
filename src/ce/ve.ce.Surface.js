@@ -1540,9 +1540,6 @@ ve.ce.Surface.prototype.beforePaste = function ( e ) {
 		textStart = textEnd = 0;
 		nodeRange = node.getRange();
 		contextElement = node.getClonedElement();
-		// Throw away inner whitespace and other internal properties
-		// otherwise our textStart/End offsets may be wrong.
-		delete contextElement.internal;
 		context = [ contextElement ];
 		// If there is content to the left of the cursor, put a placeholder
 		// character to the left of the cursor
@@ -1803,7 +1800,7 @@ ve.ce.Surface.prototype.afterPaste = function () {
 			left = 0;
 			while (
 				context.getLength() &&
-				ve.dm.ElementLinearData.static.compareUnannotated(
+				ve.dm.ElementLinearData.static.compareElements(
 					data.getData( left ),
 					data.isElementData( left ) ? context.getData( 0 ) : beforePasteData.leftText
 				)
@@ -1816,7 +1813,7 @@ ve.ce.Surface.prototype.afterPaste = function () {
 			right = internalListRange.start;
 			while (
 				context.getLength() &&
-				ve.dm.ElementLinearData.static.compareUnannotated(
+				ve.dm.ElementLinearData.static.compareElements(
 					data.getData( right - 1 ),
 					data.isElementData( right - 1 ) ? context.getData( context.getLength() - 1 ) : beforePasteData.rightText
 				)
