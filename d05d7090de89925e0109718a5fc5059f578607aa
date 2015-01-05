@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6cb3ef_46b86fe2",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 18
+      },
+      "lineNbr": 1232,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-01-05T14:58:08Z",
+      "side": 1,
+      "message": "Hmm I guess we\u0027re technically still computing the surrounding focusablenode here if direction\u003d0",
+      "revId": "d05d7090de89925e0109718a5fc5059f578607aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
