@@ -34,6 +34,24 @@
       "revId": "dfc5908f7de0c61e1801e504f47b3f9cc196a728",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee703fc5_6ca0f63e",
+        "filename": "src/dm/ve.dm.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-01-07T20:07:01Z",
+      "side": 1,
+      "message": "Not at the moment, but the API lets you call pushStaging() without adding a transaction, so we should check for it.",
+      "parentUuid": "ee703fc5_2cc3de3e",
+      "revId": "dfc5908f7de0c61e1801e504f47b3f9cc196a728",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
