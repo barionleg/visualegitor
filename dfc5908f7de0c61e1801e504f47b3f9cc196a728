@@ -52,6 +52,24 @@
       "revId": "dfc5908f7de0c61e1801e504f47b3f9cc196a728",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee703fc5_8cb8ea75",
+        "filename": "src/dm/ve.dm.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 798
+      },
+      "writtenOn": "2015-01-07T20:09:10Z",
+      "side": 1,
+      "message": "Okay, fair enough.\n\nWe do need to find another solution for this, then. The dialog is checking whether the surface has changed, and since it\u0027s not showing staged changes, the answer is no when you add something like a link. When you apply there is no repeated \"transact\" event, so the document isn\u0027t checked again which makes the dialog think that surfaces have not been changed.\n\nHow can we fix this with a bit less aggressive test?",
+      "parentUuid": "ee703fc5_6ca0f63e",
+      "revId": "dfc5908f7de0c61e1801e504f47b3f9cc196a728",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
