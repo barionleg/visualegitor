@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee703fc5_d6eaf504",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 2993,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-01-07T16:04:06Z",
+      "side": 1,
+      "message": "boolean\ncapital \u0027W\u0027\n\u0027handled logically\u0027",
+      "revId": "8bcd44e0c0d06e032b42fad3f3a85a3a8b2bc41e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee703fc5_16c86da9",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 3007,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-01-07T16:04:06Z",
+      "side": 1,
+      "message": "Then shouldn\u0027t we also use logical when CTRL is pressed for now?",
+      "revId": "8bcd44e0c0d06e032b42fad3f3a85a3a8b2bc41e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee703fc5_76d3e961",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 3011,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-01-07T16:04:06Z",
+      "side": 1,
+      "message": "use #isElementData( offset )\n\nThis also alows you to remove your length check",
+      "revId": "8bcd44e0c0d06e032b42fad3f3a85a3a8b2bc41e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee703fc5_f6e7f939",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 3014,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-01-07T16:04:06Z",
+      "side": 1,
+      "message": "or just this.surfaceObserver.pollOnce.bind( this.surfaceObserver );",
+      "revId": "8bcd44e0c0d06e032b42fad3f3a85a3a8b2bc41e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee703fc5_36ded171",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 3050,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-01-07T16:04:06Z",
+      "side": 1,
+      "message": "add \u0027return false\u0027 at the end so the docs don\u0027t lie",
+      "revId": "8bcd44e0c0d06e032b42fad3f3a85a3a8b2bc41e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
