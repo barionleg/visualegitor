@@ -409,7 +409,11 @@ ve.dm.Surface.prototype.canUndo = function () {
  * @returns {boolean} The surface has been modified
  */
 ve.dm.Surface.prototype.hasBeenModified = function () {
-	return this.undoStack.length - this.undoIndex > 0 || !!this.newTransactions.length;
+	return (
+		this.isStaging() ||
+		this.undoStack.length - this.undoIndex > 0 ||
+		!!this.newTransactions.length
+	);
 };
 
 /**
