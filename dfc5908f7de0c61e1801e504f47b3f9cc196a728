@@ -16,6 +16,24 @@
       "revId": "dfc5908f7de0c61e1801e504f47b3f9cc196a728",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee703fc5_2cc3de3e",
+        "filename": "src/dm/ve.dm.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 798
+      },
+      "writtenOn": "2015-01-07T19:33:21Z",
+      "side": 1,
+      "message": "I thought that too, but after further thinking -- is there a situation at all where we have staged transactions and no changes? Doesn\u0027t seem to happen. \"isStaging\" checks the length of the stagingStack -- if we have any staged transactions, the document changed, even if it is temporary. When we undo it returns to non-changed status, but then you have stagingStack false, transactions false and the rest of this condition is correctly representing the state.\n\nDoes that make sense? Do you have an example of where we may have staging transactions but the reply to \"hasBeenChanged\" should be false?",
+      "parentUuid": "ee703fc5_0c9ffa56",
+      "revId": "dfc5908f7de0c61e1801e504f47b3f9cc196a728",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
