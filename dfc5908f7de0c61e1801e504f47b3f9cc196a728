@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee703fc5_0c9ffa56",
+        "filename": "src/dm/ve.dm.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-01-07T19:29:49Z",
+      "side": 1,
+      "message": "This looks too aggressive. Just because we are staging, doesn\u0027t mean we have modifications. The number of staged transactions might be zero.",
+      "revId": "dfc5908f7de0c61e1801e504f47b3f9cc196a728",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
