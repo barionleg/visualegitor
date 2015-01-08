@@ -7,6 +7,12 @@
 /**
  * Initialization Standalone target.
  *
+ *     @example
+ *     var target = new ve.init.sa.Target(
+ *     	// something, ve.createDocumentFromHtml( '<p>Hello world.</p>' )
+ *     );
+ *     $( 'body' ).append( target.$element );
+ *
  * @class
  * @extends ve.init.Target
  *
