@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee703fc5_eafe25ab",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 2993,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-01-08T01:13:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee703fc5_d6eaf504",
+      "revId": "8bcd44e0c0d06e032b42fad3f3a85a3a8b2bc41e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee703fc5_16c86da9",
         "filename": "src/ce/ve.ce.Surface.js",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2015-01-07T16:04:06Z",
       "side": 1,
       "message": "Then shouldn\u0027t we also use logical when CTRL is pressed for now?",
+      "revId": "8bcd44e0c0d06e032b42fad3f3a85a3a8b2bc41e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee703fc5_6ab8d5e2",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 3007,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-01-08T01:13:28Z",
+      "side": 1,
+      "message": "Hmm, ok - it\u0027ll be a bit weird in some languages, but at least it can\u0027t then clobber alienated content",
+      "parentUuid": "ee703fc5_16c86da9",
       "revId": "8bcd44e0c0d06e032b42fad3f3a85a3a8b2bc41e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ee703fc5_aa282d33",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 3011,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-01-08T01:13:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee703fc5_76d3e961",
+      "revId": "8bcd44e0c0d06e032b42fad3f3a85a3a8b2bc41e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee703fc5_f6e7f939",
         "filename": "src/ce/ve.ce.Surface.js",
         "patchSetId": 3
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "ee703fc5_6a221552",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 3014,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-01-08T01:13:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee703fc5_f6e7f939",
+      "revId": "8bcd44e0c0d06e032b42fad3f3a85a3a8b2bc41e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee703fc5_36ded171",
         "filename": "src/ce/ve.ce.Surface.js",
         "patchSetId": 3
@@ -81,6 +153,24 @@
       "writtenOn": "2015-01-07T16:04:06Z",
       "side": 1,
       "message": "add \u0027return false\u0027 at the end so the docs don\u0027t lie",
+      "revId": "8bcd44e0c0d06e032b42fad3f3a85a3a8b2bc41e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee703fc5_8a27695f",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 3050,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-01-08T01:13:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee703fc5_36ded171",
       "revId": "8bcd44e0c0d06e032b42fad3f3a85a3a8b2bc41e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
