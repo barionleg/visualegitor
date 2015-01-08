@@ -1,7 +1,7 @@
 /*!
  * VisualEditor IME test for Chromium on Ubuntu in Japanese using iBus Anthy.
  *
- * @copyright 2011-2014 VisualEditor Team and others; see http://ve.mit-license.org
+ * @copyright 2011-2015 VisualEditor Team and others; see http://ve.mit-license.org
  */
 
 ve.ce.imetests.push( [ 'input-chromium-ubuntu-ibus-japanese-anthy--hiraganaonly', [
@@ -288,7 +288,7 @@ ve.ce.imetests.push( [ 'input-chromium-ubuntu-ibus-japanese-anthy--hiraganaonly'
 	{"seq":278,"time":14.148,"action":"changeSel","args":[13,13]},
 	{"seq":279,"time":14.148,"action":"sendEvent","args":["keyup",{"keyCode":229}]},
 	{"seq":280,"time":14.169,"action":"sendEvent","args":["keydown",{"keyCode":229}]},
-	{"seq":281,"time":14.18,"action":"changeText","args":["なまむぎ、なまごめ、なまた"]},
+	{"seq":281,"time":14.18,"action":"changeText","args":["なまむぎ、なまご���、なまた"]},
 	{"seq":282,"time":14.18,"action":"changeSel","args":[0,0]},
 	{"seq":283,"time":14.18,"action":"sendEvent","args":["input",{}]},
 	{"seq":284,"time":14.211,"action":"changeSel","args":[13,13]},
