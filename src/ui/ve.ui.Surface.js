@@ -61,6 +61,11 @@ ve.ui.Surface = function VeUiSurface( dataOrDoc, config ) {
 	this.debugBar = null;
 
 	this.toolbarHeight = 0;
+	this.fixedToolbarDialogs = new ve.ui.ToolbarDialogWindowManager( {
+		$: this.$,
+		factory: ve.ui.windowFactory,
+		modal: false
+	} );
 	this.toolbarDialogs = new ve.ui.ToolbarDialogWindowManager( {
 		$: this.$,
 		factory: ve.ui.windowFactory,
@@ -235,6 +240,14 @@ ve.ui.Surface.prototype.getContext = function () {
  */
 ve.ui.Surface.prototype.getDialogs = function () {
 	return this.dialogs;
+};
+
+/**
+ * Get toolbar dialogs window set.
+ * @returns {ve.ui.WindowManager} Toolbar dialogs window set
+ */
+ve.ui.Surface.prototype.getFixedToolbarDialogs = function () {
+	return this.fixedToolbarDialogs;
 };
 
 /**

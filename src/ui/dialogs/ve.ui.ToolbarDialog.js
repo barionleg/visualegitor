@@ -33,7 +33,19 @@ OO.inheritClass( ve.ui.ToolbarDialog, OO.ui.Dialog );
 
 ve.ui.ToolbarDialog.static.size = 'full';
 
+ve.ui.ToolbarDialog.static.activeSurface = true;
+
 /* Methods */
+
+/**
+ * Get the surface fragment the dialog opened with
+ *
+ * @returns {ve.dm.SurfaceFragment|null} Surface fragment the dialog opened with, null if the
+ *   dialog is closed
+ */
+ve.ui.ToolbarDialog.prototype.getFragment = function () {
+	return this.fragment;
+};
 
 /**
  * @inheritdoc
@@ -43,4 +55,28 @@ ve.ui.ToolbarDialog.prototype.initialize = function () {
 	ve.ui.ToolbarDialog.super.prototype.initialize.call( this );
 
 	this.$content.addClass( 've-ui-toolbarDialog-content' );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ui.ToolbarDialog.prototype.getSetupProcess = function ( data ) {
+	data = data || {};
+	return ve.ui.ToolbarDialog.super.prototype.getSetupProcess.call( this, data )
+		.first( function () {
+			if ( !( data.fragment instanceof ve.dm.SurfaceFragment ) ) {
+				throw new Error( 'Cannot open inspector: opening data must contain a fragment' );
+			}
+			this.fragment = data.fragment;
+		}, this );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ui.ToolbarDialog.prototype.getTeardownProcess = function ( data ) {
+	return ve.ui.ToolbarDialog.super.prototype.getTeardownProcess.apply( this, data )
+		.next( function () {
+			this.fragment = null;
+		}, this );
 };
