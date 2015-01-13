@@ -16,6 +16,24 @@
       "revId": "b096b4db5a0a46cb7d5c40fa6857b76ab315e6c3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee703fc5_20d89557",
+        "filename": "tests/ce/imetests/input-chromium-ubuntu-ibus-japanese-anthy--hiraganaonly.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-01-13T16:22:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee703fc5_6068cd84",
+      "revId": "b096b4db5a0a46cb7d5c40fa6857b76ab315e6c3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
