@@ -11,3 +11,7 @@
 	right: 1.4em;
 	color: #888;
 }
+
+.ve-ui-findAndReplaceDialog .oo-ui-dialog-content > .oo-ui-window-body {
+	outline: none;
+}
