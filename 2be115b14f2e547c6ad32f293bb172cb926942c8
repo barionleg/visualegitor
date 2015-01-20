@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae6ac7d6_675b1e27",
+        "filename": "src/ui/actions/ve.ui.WindowAction.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-01-20T19:20:34Z",
+      "side": 1,
+      "message": "Isn\u0027t this a string?",
+      "revId": "2be115b14f2e547c6ad32f293bb172cb926942c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6ac7d6_27f3e608",
+        "filename": "src/ui/dialogs/ve.ui.FindAndReplaceDialog.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-01-20T19:20:34Z",
+      "side": 1,
+      "message": "Can\u0027t you just do new OO.ui.Process( this[action], this ); ?",
+      "revId": "2be115b14f2e547c6ad32f293bb172cb926942c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
