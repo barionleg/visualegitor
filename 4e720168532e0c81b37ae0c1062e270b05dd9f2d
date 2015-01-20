@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae6ac7d6_3c7a1920",
+        "filename": "src/themes/mediawiki/dialogs.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-01-20T16:47:45Z",
+      "side": 1,
+      "message": "this should be in toolbardialog, the parent class",
+      "revId": "4e720168532e0c81b37ae0c1062e270b05dd9f2d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
