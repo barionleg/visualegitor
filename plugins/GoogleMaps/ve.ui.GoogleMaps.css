@@ -1,0 +1,13 @@
+.oo-ui-icon-map-marker {
+	/* @embed */
+	background-image: url(map-marker.svg);
+}
+
+.ve-ce-googleMapsNode {
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+}
+
+.ve-ui-googleMapsDialog-mapWidget {
+	margin: 0 auto 1em auto;
+}

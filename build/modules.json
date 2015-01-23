@@ -75,6 +75,18 @@
 			"lib/rangefix/rangefix.js"
 		]
 	},
+	"googlemaps": {
+		"scripts": [
+			"plugins/GoogleMaps/ve.dm.GoogleMapsNode.js",
+			"plugins/GoogleMaps/ve.ce.GoogleMapsNode.js",
+			"plugins/GoogleMaps/ve.ui.GoogleMapsDialog.js",
+			"plugins/GoogleMaps/ve.ui.GoogleMapsTool.js",
+			"plugins/GoogleMaps/ve.ui.GoogleMapsURLTransferHandler.js"
+		],
+		"styles": [
+			"plugins/GoogleMaps/ve.ui.GoogleMaps.css"
+		]
+	},
 	"jquery.i18n": {
 		"scripts": [
 			"lib/jquery.i18n/src/jquery.i18n.js",
@@ -197,7 +209,8 @@
 	"visualEditor.core": {
 		"dependencies": [
 			"visualEditor.base",
-			"visualEditor.core.build"
+			"visualEditor.core.build",
+			"googlemaps"
 		]
 	},
 	"visualEditor.core.build": {
