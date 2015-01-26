@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae6ac7d6_93f539ca",
+        "filename": "i18n/en-gb.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2015-01-26T23:49:40Z",
+      "side": 1,
+      "message": "Yay!",
+      "revId": "80042786c3b6c3cf9737dc483baab0045ac5c01f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6ac7d6_d322d14f",
+        "filename": "i18n/qqq.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2015-01-26T23:49:40Z",
+      "side": 1,
+      "message": "If you don\u0027t actually maintain https://translatewiki.net/wiki/Template:Identical/Right, you shouldn\u0027t be adding {{Identical|Right}} here. It could be done at a later point by someone who\u0027s working on that at translatewiki.net. Same for the two keys above.",
+      "revId": "80042786c3b6c3cf9737dc483baab0045ac5c01f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
