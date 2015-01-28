@@ -364,6 +364,17 @@ ve.msg = function () {
 };
 
 /**
+ * Get a config value.
+ *
+ * @param {string} key Config key
+ */
+ve.config = function () {
+	// Avoid using bind because ve.init.platform doesn't exist yet.
+	// TODO: Fix dependency issues between ve.js and ve.init.platform
+	return ve.init.platform.getConfig.apply( ve.init.platform, arguments );
+};
+
+/**
  * Determine if the text consists of only unattached combining marks.
  *
  * @param {string} text Text to test
