@@ -62,7 +62,7 @@ ve.ce.TableNode.prototype.onSetup = function () {
 	} );
 
 	this.$overlay = this.$( '<div>' )
-		.hide()
+		.addClass( 'oo-ui-element-hidden' )
 		.addClass( 've-ce-tableNodeOverlay' )
 		.append( [
 			this.$selectionBox,
@@ -306,7 +306,7 @@ ve.ce.TableNode.prototype.onSurfaceModelSelect = function ( selection ) {
 
 	if ( active ) {
 		if ( !this.active ) {
-			this.$overlay.show();
+			this.$overlay.removeClass( 'oo-ui-element-hidden' );
 			// Only register touchstart event after table has become active to prevent
 			// accidental focusing of the table while scrolling
 			this.$element.on( 'touchstart.ve-ce-tableNode', this.onTableMouseDown.bind( this ) );
@@ -314,7 +314,7 @@ ve.ce.TableNode.prototype.onSurfaceModelSelect = function ( selection ) {
 		this.surface.setActiveTableNode( this );
 		this.updateOverlayDebounced();
 	} else if ( !active && this.active ) {
-		this.$overlay.hide();
+		this.$overlay.addClass( 'oo-ui-element-hidden' );
 		if ( this.editingFragment ) {
 			this.setEditing( false, true );
 		}
