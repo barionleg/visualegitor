@@ -17,8 +17,10 @@ ve.ce.AlignableNode = function VeCeAlignableNode( $alignable, config ) {
 
 	this.$alignable = $alignable || this.$element;
 
-	if ( this.model.getAttribute( 'align' ) ) {
-		this.$alignable.addClass( 've-align-' + this.model.getAttribute( 'align' ) );
+	var align = this.model.getAttribute( 'align' );
+	if ( align ) {
+		this.$alignable.addClass( 've-align-' + align );
+		this.emit( 'align', align );
 	}
 
 	this.model.connect( this, { attributeChange: 'onAlignableAttributeChange' } );
@@ -28,6 +30,13 @@ ve.ce.AlignableNode = function VeCeAlignableNode( $alignable, config ) {
 
 OO.initClass( ve.ce.AlignableNode );
 
+/* Events */
+
+/**
+ * @event align
+ * @param {string} align New alignment, 'left', 'right' or 'center'
+ */
+
 ve.ce.AlignableNode.prototype.onAlignableAttributeChange = function ( key, from, to ) {
 	if ( key === 'align' ) {
 		if ( from ) {
@@ -36,5 +45,6 @@ ve.ce.AlignableNode.prototype.onAlignableAttributeChange = function ( key, from,
 		if ( to ) {
 			this.$alignable.addClass( 've-align-' + to );
 		}
+		this.emit( 'align', to );
 	}
 };
