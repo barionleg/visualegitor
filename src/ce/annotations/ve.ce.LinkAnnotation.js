@@ -22,7 +22,7 @@ ve.ce.LinkAnnotation = function VeCeLinkAnnotation() {
 	this.$element
 		.addClass( 've-ce-linkAnnotation' )
 		.prop( {
-			href: ve.resolveUrl( this.model.getHref(), this.getModelHtmlDocument() ),
+			href: this.getResolvedAttribute( 'href' ),
 			title: this.constructor.static.getDescription( this.model )
 		} )
 		// Some browsers will try to let links do their thing
