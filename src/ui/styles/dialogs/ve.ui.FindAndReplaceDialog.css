@@ -34,10 +34,6 @@
 	background-color: #edd;
 }
 
-.ve-ui-findAndReplaceDialog-focusedIndexLabel {
-	position: absolute;
-}
-
 /* @noflip */
 .ve-ui-findAndReplaceDialog-findResults {
 	position: absolute;
