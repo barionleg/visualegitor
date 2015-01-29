@@ -38,7 +38,9 @@ ve.ui.Context = function VeUiContext( surface, config ) {
 	// Initialization
 	// Hide element using a class, not this.toggle, as child implementations
 	// of toggle may require the instance to be fully constructed before running.
-	this.$element.addClass( 've-ui-context' );
+	this.$element
+		.addClass( 've-ui-context' );
+	this.toggle( false );
 	this.menu.toggle( false );
 	this.inspectors.$element.addClass( 've-ui-context-inspectors' );
 };
@@ -324,7 +326,7 @@ ve.ui.Context.prototype.toggle = function ( show ) {
 	show = show === undefined ? !this.visible : !!show;
 	if ( show !== this.visible ) {
 		this.visible = show;
-		this.$element.toggle();
+		this.$element.toggleClass( 'oo-ui-element-hidden', !this.visible );
 	}
 	return $.Deferred().resolve().promise();
 };
