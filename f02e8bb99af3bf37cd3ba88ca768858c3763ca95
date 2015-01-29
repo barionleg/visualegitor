@@ -16,6 +16,24 @@
       "revId": "f02e8bb99af3bf37cd3ba88ca768858c3763ca95",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e7fc396_ec12c400",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2015-01-29T01:20:45Z",
+      "side": 1,
+      "message": "No. contentEditable is an exceptional property that actually has booelan-like string values. Look it up :)",
+      "parentUuid": "8e7fc396_2c199c27",
+      "revId": "f02e8bb99af3bf37cd3ba88ca768858c3763ca95",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
