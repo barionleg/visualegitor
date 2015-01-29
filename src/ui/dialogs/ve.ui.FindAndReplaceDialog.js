@@ -73,10 +73,6 @@ ve.ui.FindAndReplaceDialog.prototype.initialize = function () {
 		icon: 'regular-expression',
 		iconTitle: ve.msg( 'visualeditor-find-and-replace-regular-expression' )
 	} );
-	this.focusedIndexLabel = new OO.ui.LabelWidget( {
-		$: this.$,
-		classes: ['ve-ui-findAndReplaceDialog-focusedIndexLabel']
-	} );
 
 	this.previousButton = new OO.ui.ButtonWidget( {
 		$: this.$,
@@ -159,9 +155,7 @@ ve.ui.FindAndReplaceDialog.prototype.initialize = function () {
 	this.$body
 		.append(
 			$findRow.append(
-				this.findText.$element.append(
-					this.focusedIndexLabel.$element
-				),
+				this.findText.$element,
 				navigateGroup.$element,
 				optionsGroup.$element
 			),
@@ -376,11 +370,11 @@ ve.ui.FindAndReplaceDialog.prototype.highlightFocused = function ( scrollIntoVie
 		surfaceView = this.surface.getView();
 
 	if ( this.results ) {
-		this.focusedIndexLabel.setLabel(
+		this.findText.setLabel(
 			ve.msg( 'visualeditor-find-and-replace-results', this.focusedIndex + 1, this.results )
 		);
 	} else {
-		this.focusedIndexLabel.setLabel(
+		this.findText.setLabel(
 			this.invalidRegex ? ve.msg( 'visualeditor-find-and-replace-invalid-regex' ) : ''
 		);
 		return;
