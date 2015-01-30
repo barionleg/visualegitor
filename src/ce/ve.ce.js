@@ -124,23 +124,52 @@ ve.ce.getDomHash = function ( element ) {
 };
 
 /**
- * Get the first cursor offset immediately after a node.
+ * Get the first cursor offset immediately after a DOM Element node.
  *
- * @param {Node} node DOM node
+ * @param {Node} elementNode Element node
  * @returns {Object}
  * @returns {Node} return.node
  * @returns {number} return.offset
  */
-ve.ce.nextCursorOffset = function ( node ) {
-	var nextNode, offset;
-	if ( node.nextSibling !== null && node.nextSibling.nodeType === Node.TEXT_NODE ) {
-		nextNode = node.nextSibling;
-		offset = 0;
-	} else {
-		nextNode = node.parentNode;
-		offset = 1 + Array.prototype.indexOf.call( node.parentNode.childNodes, node );
+ve.ce.nextCursorOffset = function ( elementNode ) {
+	var nextNode = ve.ce.nextEditLeaf( elementNode );
+	if ( nextNode === null ) {
+		// Stay on this node
+		nextNode = elementNode;
+	} else if ( nextNode.nodeType === Node.TEXT_NODE ) {
+		return { node: nextNode, offset: 0 };
 	}
-	return { node: nextNode, offset: offset };
+
+	// Return the offset after the node
+	return {
+		node: nextNode.parentNode,
+		offset: 1 + Array.prototype.indexOf.call( nextNode.parentNode.childNodes, nextNode )
+	};
+};
+
+/**
+ * Get the next non-descendent "edit leaf node" within the current branch node
+ *
+ * A node is an "edit leaf node" if it is a DOM leaf node or is not contenteditable
+ * @param {Node} node DOM node
+ * @returns {Node|null} Next node
+ */
+ve.ce.nextEditLeaf = function ( node ) {
+	while ( node.nextSibling === null ) {
+		node = node.parentNode;
+		if ( node === null || node.classList.contains( 've-ce-branchNode' ) ) {
+			return null;
+		}
+	}
+	node = node.nextSibling;
+	while (
+		node.nodeType === Node.ELEMENT_NODE &&
+		node.isContentEditable &&
+		node.childNodes.length > 1
+	) {
+		node = node.childNodes[0];
+	}
+	return node;
 };
 
 /**
