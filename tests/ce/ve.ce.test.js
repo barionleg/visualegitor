@@ -252,7 +252,7 @@ QUnit.test( 'isShortcutKey', 3, function ( assert ) {
 	assert.strictEqual( ve.ce.isShortcutKey( {} ), false, 'Not set' );
 } );
 
-QUnit.test( 'nextCursorOffset', function ( assert ) {
+QUnit.test( 'nextEditLeaf/nextCursorOffset', function ( assert ) {
 	var i, len, tests, elt, test, img, nextOffset;
 
 	function dumpnode( node ) {
@@ -269,8 +269,16 @@ QUnit.test( 'nextCursorOffset', function ( assert ) {
 		{ html: '<p><b>foo</b><img>bar</p>', expected: ['#bar', 0] },
 		{ html: '<p>foo<b><i><img></i></b></p>', expected: ['i', 1] },
 		{ html: '<p><b>foo</b><img></p>', expected: ['p', 2] },
-		{ html: '<p><img><b>foo</b></p>', expected: ['p', 1] },
-		{ html: '<p><b>foo</b><img><b>bar</b></p>', expected: ['p', 2] }
+		{ html: '<p><img><b>foo</b></p>', expected: ['#foo', 0] },
+		{ html: '<div><b>foo</b><img><b>bar</b></div>', expected: ['#bar', 0] },
+		{
+			html: '<div><x class="ve-ce-whatever"><img></x><x class="ve-ce-whatever">bar</x></div>',
+			expected: ['#bar', 0]
+		},
+		{
+			html: '<div><x class="ve-ce-branchNode"><img></x><x class="ve-ce-branchNode">bar</x></div>',
+			expected: ['x', 1]
+		}
 	];
 	QUnit.expect( tests.length );
 	elt = ve.createDocumentFromHtml( '' ).createElement( 'div' );
