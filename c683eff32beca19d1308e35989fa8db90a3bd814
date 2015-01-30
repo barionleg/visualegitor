@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_fed355d5",
+        "filename": "src/ce/nodes/ve.ce.TableNode.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 798
+      },
+      "writtenOn": "2015-01-30T23:13:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e7fc396_1e807ff8",
+      "revId": "c683eff32beca19d1308e35989fa8db90a3bd814",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e7fc396_beb70bd3",
         "filename": "src/ui/ve.ui.Context.js",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_bedddde3",
+        "filename": "src/ui/ve.ui.Context.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 798
+      },
+      "writtenOn": "2015-01-30T23:13:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e7fc396_beb70bd3",
+      "revId": "c683eff32beca19d1308e35989fa8db90a3bd814",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e7fc396_febca3b3",
         "filename": "src/ui/ve.ui.MobileContext.js",
         "patchSetId": 2
@@ -47,6 +83,24 @@
       "writtenOn": "2015-01-30T00:20:17Z",
       "side": 1,
       "message": "Do we need the mobileContext-visible class? What is it for? If git blame tells you that it was introduced by me less than 2 weeks ago, then it was a poor man\u0027s oo-ui-element-hidden and you can remove it.",
+      "revId": "c683eff32beca19d1308e35989fa8db90a3bd814",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_7eef4583",
+        "filename": "src/ui/ve.ui.MobileContext.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 798
+      },
+      "writtenOn": "2015-01-30T23:13:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e7fc396_febca3b3",
       "revId": "c683eff32beca19d1308e35989fa8db90a3bd814",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
