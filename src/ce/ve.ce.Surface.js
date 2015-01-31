@@ -1237,8 +1237,8 @@ ve.ce.Surface.prototype.onDocumentKeyPress = function ( e ) {
  * @param {jQuery.Event} e keydown event
  */
 ve.ce.Surface.prototype.afterDocumentKeyDown = function ( e ) {
-	var isArrow, direction, focusableNode, startOffset, endOffset, offsetDiff,
-		range, fixupCursorForUnicorn;
+	var isArrow, direction, focusableNode, startOffset, endOffset, offsetDiff, veRange,
+		fixupCursorForUnicorn, prevOffset, nextOffset, approachNode, domRange;
 
 	/**
 	 * Determine whether a position is editable, and if so which focusable node it is in
@@ -1314,6 +1314,49 @@ ve.ce.Surface.prototype.afterDocumentKeyDown = function ( e ) {
 			)
 		) || null;
 	}
+
+	// If we arrowed up to a focusable node, but the browser erroneously did not cross it,
+	// select across it up to the following cursor position.
+	// TODO: This code is aesthetically if-y to say the least
+	if (
+		e.shiftKey &&
+		this.nativeSelection.focusNode &&
+		this.nativeSelection.focusNode.nodeType === Node.ELEMENT_NODE &&
+		( direction = direction || getDirection( this ) ) &&
+		( approachNode = this.nativeSelection.focusNode[
+			this.nativeSelection.focusOffset - ( direction > 0 ? 0 : 1 )
+		] ) &&
+		approachNode.nodeType === Node.ELEMENT_NODE &&
+		( prevOffset = ve.ce.previousCursorOffset( approachNode ) ) &&
+		prevOffset.node.nodeType === Node.TextNode &&
+		( nextOffset = ve.ce.nextCursorOffset( approachNode ) ) &&
+		nextOffset.node.nodeType === Node.TextNode && (
+			(
+				direction > 0 &&
+				this.misleadingCursorStartSelection.focusNode === prevOffset.node &&
+				this.misleadingCursorStartSelection.focusOffset === prevOffset.offset
+			) ||
+			(
+				direction < 0 &&
+				this.misleadingCursorStartSelection.focusNode === nextOffset.node &&
+				this.misleadingCursorStartSelection.focusOffset === nextOffset.offset
+			)
+		) &&
+		( focusableNode = approachNode.data( 'view' ) ) &&
+		focusableNode.isFocusable()
+	) {
+		domRange = this.nativeSelection.getRangeAt( 0 );
+		if ( direction > 0 ) {
+			domRange.focusNode = nextOffset.node;
+			domRange.focusOffset = nextOffset.focusOffset;
+		} else {
+			domRange.focusNode = prevOffset.node;
+			domRange.focusOffset = prevOffset.focusOffset;
+		}
+		this.nativeSelection.removeAllRanges();
+		this.nativeSelection.addRange( domRange );
+	}
+
 	// If we arrowed a collapsed cursor across a focusable node, select the node instead
 	if (
 		isArrow &&
@@ -1322,7 +1365,7 @@ ve.ce.Surface.prototype.afterDocumentKeyDown = function ( e ) {
 		!e.metaKey &&
 		this.misleadingCursorStartSelection.isCollapsed &&
 		this.nativeSelection.isCollapsed &&
-		( direction = getDirection( this ) )
+		( direction = direction || getDirection( this ) )
 	) {
 		focusableNode = getSurroundingFocusableNode(
 			this.nativeSelection.focusNode,
@@ -1355,7 +1398,7 @@ ve.ce.Surface.prototype.afterDocumentKeyDown = function ( e ) {
 				);
 
 				if ( focusableNode.isFocusable() ) {
-					range = new ve.Range( startOffset, endOffset );
+					veRange = new ve.Range( startOffset, endOffset );
 				} else {
 					focusableNode = undefined;
 				}
@@ -1363,13 +1406,13 @@ ve.ce.Surface.prototype.afterDocumentKeyDown = function ( e ) {
 		}
 
 		if ( focusableNode ) {
-			if ( !range ) {
-				range = focusableNode.getOuterRange();
+			if ( !veRange ) {
+				veRange = focusableNode.getOuterRange();
 				if ( direction < 0 ) {
-					range = range.flip();
+					veRange = veRange.flip();
 				}
 			}
-			this.model.setLinearSelection( range );
+			this.model.setLinearSelection( veRange );
 			if ( e.keyCode === OO.ui.Keys.LEFT ) {
 				this.cursorDirectionality = direction > 0 ? 'rtl' : 'ltr';
 			} else if ( e.keyCode === OO.ui.Keys.RIGHT ) {
