@@ -8,7 +8,7 @@
  * HTML file transfer handler.
  *
  * @class
- * @extends ve.ui.DataTransferHandler
+ * @extends ve.ui.FileTransferHandler
  *
  * @constructor
  * @param {ve.ui.Surface} surface
@@ -21,7 +21,7 @@ ve.ui.HTMLFileTransferHandler = function VeUiHTMLFileTransferHandler() {
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.HTMLFileTransferHandler, ve.ui.DataTransferHandler );
+OO.inheritClass( ve.ui.HTMLFileTransferHandler, ve.ui.FileTransferHandler );
 
 /* Static properties */
 
