@@ -68,23 +68,46 @@ ve.ui.DataTransferHandlerFactory.prototype.getHandlerNameForItem = function ( it
 ve.ui.dataTransferHandlerFactory = new ve.ui.DataTransferHandlerFactory();
 
 /**
- * Fake data transfer item from a file
+ * Fake data transfer item from a blob or data URI
  *
  * @class
  * @constructor
- * @param {File} file Data transfer file
+ * @param {Blob|string} blobOrDataUri Data transfer blob or data URI
  */
-ve.ui.DataTransferItem = function VeUiDataTransferItem( file ) {
+ve.ui.DataTransferItem = function VeUiDataTransferItem( blobOrDataUri ) {
+	if ( typeof blobOrDataUri === 'string' ) {
+		// Data URI: extra metadata, but don't convert until
+		// getAsFile is called
+		this.dataUri = blobOrDataUri;
+		this.type = blobOrDataUri.match( /^data:([^;,]+)/ )[1];
+	} else {
+		this.blob = blobOrDataUri;
+		this.type = blobOrDataUri.type;
+	}
 	this.kind = 'file';
-	this.type = file.type;
-	this.file = file;
 };
 
 /**
- * Get file object
+ * Get file blob
  *
- * @return {File} File object
+ * Generically getAsFile returns a Blob, which could be a File.
+ *
+ * @return {Blob} File blob
  */
 ve.ui.DataTransferItem.prototype.getAsFile = function () {
-	return this.file;
+	var parts, binary, array, i;
+	if ( !this.blob ) {
+		parts = this.dataUri.split( ',' );
+		delete this.dataUri;
+		binary = atob( parts[1] );
+		array = [];
+		for ( i = 0; i < binary.length; i++ ) {
+			array.push( binary.charCodeAt( i ) );
+		}
+		this.blob = new Blob(
+			[ new Uint8Array( array ) ],
+			{ type: this.type }
+		);
+	}
+	return this.blob;
 };
