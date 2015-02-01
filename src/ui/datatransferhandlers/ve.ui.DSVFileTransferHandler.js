@@ -8,7 +8,7 @@
  * Delimiter-separated values data transfer handler.
  *
  * @class
- * @extends ve.ui.DataTransferHandler
+ * @extends ve.ui.FileTransferHandler
  *
  * @constructor
  * @param {ve.ui.Surface} surface
@@ -21,7 +21,7 @@ ve.ui.DSVFileTransferHandler = function VeUiDSVFileTransferHandler() {
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.DSVFileTransferHandler, ve.ui.DataTransferHandler );
+OO.inheritClass( ve.ui.DSVFileTransferHandler, ve.ui.FileTransferHandler );
 
 /* Static properties */
 
