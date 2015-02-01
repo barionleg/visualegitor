@@ -995,18 +995,41 @@ ve.ce.Surface.prototype.onDocumentDragOver = function ( e ) {
  */
 ve.ce.Surface.prototype.onDocumentDrop = function ( e ) {
 	// Properties may be nullified by other events, so cache before setTimeout
-	var selectionJSON, dragSelection, dragRange, originFragment, originData,
+	var i, l, selectionJSON, dragSelection, dragRange, originFragment, originData,
 		targetRange, targetOffset, targetFragment, dragHtml, dragText,
-		i, l, name, insert, item,
-		fileHandlers = [],
+		items = [],
 		dataTransfer = e.originalEvent.dataTransfer,
-		items = dataTransfer && ( dataTransfer.items || dataTransfer.files ),
 		$dropTarget = this.$lastDropTarget,
 		dropPosition = this.lastDropPosition;
 
 	// Prevent native drop event from modifying view
 	e.preventDefault();
 
+	// Determine drop position
+	if ( this.relocatingNode && !this.relocatingNode.getModel().isContent() ) {
+		// Block level drag and drop: use the lastDropTarget to get the targetOffset
+		if ( $dropTarget ) {
+			targetRange = $dropTarget.data( 'view' ).getModel().getOuterRange();
+			if ( dropPosition === 'top' ) {
+				targetOffset = targetRange.start;
+			} else {
+				targetOffset = targetRange.end;
+			}
+		} else {
+			return;
+		}
+	} else {
+		targetOffset = this.getOffsetFromCoords(
+			e.originalEvent.pageX - this.$document.scrollLeft(),
+			e.originalEvent.pageY - this.$document.scrollTop()
+		);
+		if ( targetOffset === -1 ) {
+			return;
+		}
+	}
+	targetFragment = this.getModel().getLinearFragment( new ve.Range( targetOffset ) );
+
+	// Get source range from drag data
 	try {
 		selectionJSON = dataTransfer.getData( 'application-x/VisualEditor' );
 	} catch ( err ) {
@@ -1017,7 +1040,6 @@ ve.ce.Surface.prototype.onDocumentDrop = function ( e ) {
 			selectionJSON = null;
 		}
 	}
-
 	if ( this.relocatingNode ) {
 		dragRange = this.relocatingNode.getModel().getOuterRange();
 	} else if ( selectionJSON ) {
@@ -1025,24 +1047,31 @@ ve.ce.Surface.prototype.onDocumentDrop = function ( e ) {
 		if ( dragSelection instanceof ve.dm.LinearSelection ) {
 			dragRange = dragSelection.getRange();
 		}
+	}
+
+	// Internal drop
+	if ( dragRange ) {
+		// Get a fragment and data of the node being dragged
+		originFragment = this.getModel().getLinearFragment( dragRange );
+		originData = originFragment.getData();
+
+		// Remove node from old location
+		originFragment.removeContent();
+
+		// Re-insert data at new location
+		targetFragment.insertContent( originData );
 	} else {
-		if ( items && items.length ) {
-			for ( i = 0, l = items.length; i < l; i++ ) {
-				if ( items[i].kind ) {
-					item = items[i];
-				} else {
-					// Create fake DataTransferItem from file
-					item = new ve.ui.DataTransferItem( items[i] );
-				}
-				name = ve.ui.dataTransferHandlerFactory.getHandlerNameForItem( item );
-				if ( name ) {
-					fileHandlers.push(
-						ve.ui.dataTransferHandlerFactory.create( name, this.surface, item )
-					);
-				}
+		// External drop
+		if ( dataTransfer && dataTransfer.items ) {
+			items = dataTransfer.items;
+		} else if ( dataTransfer && dataTransfer.files ) {
+			for ( i = 0, l = dataTransfer.files.length; i < l; i++ ) {
+				// Create fake DataTransferItem from file
+				items.push( new ve.ui.DataTransferItem( dataTransfer.files[i] ) );
 			}
 		}
-		if ( !fileHandlers.length ) {
+		// Insert files
+		if ( !this.handleDataTransferItems( items, targetFragment ) ) {
 			try {
 				dragHtml = dataTransfer.getData( 'text/html' );
 				if ( !dragHtml ) {
@@ -1051,59 +1080,12 @@ ve.ce.Surface.prototype.onDocumentDrop = function ( e ) {
 			} catch ( err ) {
 				dragText = dataTransfer.getData( 'text' );
 			}
-		}
-	}
-
-	if ( ( dragRange && !dragRange.isCollapsed() ) || fileHandlers.length || dragHtml || dragText  ) {
-		if ( this.relocatingNode && !this.relocatingNode.getModel().isContent() ) {
-			// Block level drag and drop: use the lastDropTarget to get the targetOffset
-			if ( $dropTarget ) {
-				targetRange = $dropTarget.data( 'view' ).getModel().getOuterRange();
-				if ( dropPosition === 'top' ) {
-					targetOffset = targetRange.start;
-				} else {
-					targetOffset = targetRange.end;
-				}
-			} else {
-				return;
+			// Insert HTML/text
+			if ( dragHtml ) {
+				targetFragment.insertHtml( dragHtml, this.getSurface().getImportRules() );
+			} else if ( dragText ) {
+				targetFragment.insertContent( dragText );
 			}
-		} else {
-			targetOffset = this.getOffsetFromCoords(
-				e.originalEvent.pageX - this.$document.scrollLeft(),
-				e.originalEvent.pageY - this.$document.scrollTop()
-			);
-			if ( targetOffset === -1 ) {
-				return;
-			}
-		}
-
-		targetFragment = this.getModel().getLinearFragment( new ve.Range( targetOffset ) );
-
-		if ( dragRange ) {
-			// Get a fragment and data of the node being dragged
-			originFragment = this.getModel().getLinearFragment( dragRange );
-			originData = originFragment.getData();
-
-			// Remove node from old location
-			originFragment.removeContent();
-
-			// Re-insert data at new location
-			targetFragment.insertContent( originData );
-		} else if ( fileHandlers.length ) {
-			insert = function ( docOrData ) {
-				if ( docOrData instanceof ve.dm.Document ) {
-					targetFragment.collapseToEnd().insertDocument( docOrData );
-				} else {
-					targetFragment.collapseToEnd().insertContent( docOrData );
-				}
-			};
-			for ( i = 0, l = fileHandlers.length; i < l; i++ ) {
-				fileHandlers[i].getInsertableData().done( insert );
-			}
-		} else if ( dragHtml ) {
-			targetFragment.insertHtml( dragHtml, this.getSurface().getImportRules() );
-		} else if ( dragText ) {
-			targetFragment.insertContent( dragText );
 		}
 	}
 	this.endRelocation();
@@ -1644,8 +1626,9 @@ ve.ce.Surface.prototype.beforePaste = function ( e ) {
 ve.ce.Surface.prototype.afterPaste = function () {
 	var clipboardKey, clipboardId, clipboardIndex, range,
 		$elements, parts, pasteData, slice, tx, internalListRange,
-		data, doc, htmlDoc,
+		data, doc, htmlDoc, $images, i,
 		context, left, right, contextRange,
+		items = [],
 		importantSpan = 'span[id],span[typeof],span[rel]',
 		importRules = this.getSurface().getImportRules(),
 		beforePasteData = this.beforePasteData || {},
@@ -1804,6 +1787,17 @@ ve.ce.Surface.prototype.afterPaste = function () {
 			// in edge cases (e.g. pasting a single MWReference)
 			htmlDoc = ve.createDocumentFromHtml( this.$pasteTarget.html() );
 		}
+		// Some browsers don't provide pasted image data through the clipboardData API and
+		// instead create img tags with data URLs, so detect those here
+		$images = $( htmlDoc.body ).find( 'img[src^=data\\:]' );
+		if ( $images.length ) {
+			for ( i = 0; i < $images.length; i++ ) {
+				items.push( new ve.ui.DataTransferItem( $images.eq( i ).attr( 'src' ) ) );
+			}
+		}
+		if ( this.handleDataTransferItems( items ) ) {
+			return;
+		}
 		// External paste
 		doc = ve.dm.converter.getModelFromDom( htmlDoc, this.getModel().getDocument().getHtmlDocument() );
 		data = doc.data;
@@ -1887,6 +1881,38 @@ ve.ce.Surface.prototype.afterPaste = function () {
 	this.model.change( tx, selection.collapseToStart() );
 	// Move cursor to end of selection
 	this.model.setSelection( selection.collapseToEnd() );
+};
+
+/**
+ * Handle the insertion of data tranfer items
+ *
+ * @param {DataTransferItemList|DataTransferItem[]} items Data transfer items
+ * @param {ve.dm.SurfaceFragment} targetFragment Fragment to inserto data items at, defaults to current selection
+ * @return {boolean} One more items was handled
+ */
+ve.ce.Surface.prototype.handleDataTransferItems = function ( items, targetFragment ) {
+	var i, l, name,
+		handled = false;
+
+	targetFragment = targetFragment || this.getModel().getFragment();
+
+	function insert( docOrData ) {
+		if ( docOrData instanceof ve.dm.Document ) {
+			targetFragment.collapseToEnd().insertDocument( docOrData );
+		} else {
+			targetFragment.collapseToEnd().insertContent( docOrData );
+		}
+	}
+
+	for ( i = 0, l = items.length; i < l; i++ ) {
+		name = ve.ui.dataTransferHandlerFactory.getHandlerNameForItem( items[i] );
+		if ( name ) {
+			ve.ui.dataTransferHandlerFactory.create( name, this.surface, items[i] )
+				.getInsertableData().done( insert );
+			handled = true;
+		}
+	}
+	return handled;
 };
 
 /**
