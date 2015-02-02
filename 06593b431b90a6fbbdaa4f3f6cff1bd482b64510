@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_e3a2d13a",
+        "filename": "src/ce/ve.ce.ResizableNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-02-02T19:36:14Z",
+      "side": 1,
+      "message": "This replaces code in VE-MW, right? Could you submit a change to remove that code from VE-MW?",
+      "revId": "06593b431b90a6fbbdaa4f3f6cff1bd482b64510",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
