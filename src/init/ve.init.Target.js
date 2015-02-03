@@ -109,7 +109,7 @@ ve.init.Target.static.toolbarGroups = [
 		title: OO.ui.deferMsg( 'visualeditor-toolbar-insert' ),
 		indicator: 'down',
 		include: '*',
-		demote: [ 'specialcharacter' ]
+		exclude: [ 'specialcharacter' ]
 	},
 	// Table
 	{
@@ -119,6 +119,11 @@ ve.init.Target.static.toolbarGroups = [
 		indicator: 'down',
 		include: [ { group: 'table' } ],
 		demote: [ 'deleteTable' ]
+	},
+	// Special character
+	{
+		header: OO.ui.deferMsg( 'visualeditor-specialCharacterDialog-title' ),
+		include: [ 'specialcharacter' ]
 	}
 ];
 
