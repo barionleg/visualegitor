@@ -57,8 +57,6 @@ ve.ui.WindowAction.prototype.open = function ( name, data, action ) {
 	}
 
 	data = ve.extendObject( { dir: dir }, data, { fragment: fragment } );
-
-	surface.getView().deactivate();
 	if ( windowType === 'toolbar' ) {
 		data = ve.extendObject( data, { surface: surface } );
 	}
@@ -68,9 +66,15 @@ ve.ui.WindowAction.prototype.open = function ( name, data, action ) {
 
 		surface.getView().emit( 'position' );
 
+		if ( !win.constructor.static.activeSurface ) {
+			surface.getView().deactivate();
+		}
+
 		opening.then( function ( closing ) {
 			closing.then( function ( closed ) {
-				surface.getView().activate();
+				if ( !win.constructor.static.activeSurface ) {
+					surface.getView().activate();
+				}
 				closed.then( function () {
 					surface.getView().emit( 'position' );
 				} );
