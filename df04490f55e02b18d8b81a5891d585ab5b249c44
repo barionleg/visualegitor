@@ -34,6 +34,24 @@
       "revId": "df04490f55e02b18d8b81a5891d585ab5b249c44",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_a7e125fd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2015-02-05T22:25:42Z",
+      "side": 1,
+      "message": "If it has been merged, released and this repo has been updated to include it, then not (the dependency is implicit through git parent relation).\n\nI\u0027d recommend still mentioning it as a related commit, but indeed not a dependency if so.",
+      "parentUuid": "6e7c4fa4_271675f7",
+      "revId": "df04490f55e02b18d8b81a5891d585ab5b249c44",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
