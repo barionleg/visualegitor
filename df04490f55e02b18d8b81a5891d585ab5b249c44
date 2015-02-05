@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_27cc358c",
+        "filename": "src/ui/ve.ui.Context.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 798
+      },
+      "writtenOn": "2015-02-05T22:34:47Z",
+      "side": 1,
+      "message": "You\u0027re right. I fixed it up due to a CR comment and missed the code comment.",
+      "parentUuid": "6e7c4fa4_c7bd41d3",
+      "revId": "df04490f55e02b18d8b81a5891d585ab5b249c44",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_a7afe590",
         "filename": "src/ui/ve.ui.DesktopContext.js",
         "patchSetId": 8
@@ -83,6 +101,24 @@
       "writtenOn": "2015-02-05T22:30:18Z",
       "side": 1,
       "message": "This means the element-hidden class (which does display:none) will be used if the context widget is not shown. Is that desired? The pre-existing comment is confusing in the current state.\n\nIf other code is adding this class, then we should probably remove the class always. Or (ideally) prevent it from being added.",
+      "revId": "df04490f55e02b18d8b81a5891d585ab5b249c44",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_07925957",
+        "filename": "src/ui/ve.ui.DesktopContext.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 798
+      },
+      "writtenOn": "2015-02-05T22:34:47Z",
+      "side": 1,
+      "message": "I see what you mean. I added it because of the display: \u0027\u0027 below, but I didn\u0027t consider the fact this always *removes* rather than toggles the state. \n\nFixing.",
+      "parentUuid": "6e7c4fa4_a7afe590",
       "revId": "df04490f55e02b18d8b81a5891d585ab5b249c44",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
