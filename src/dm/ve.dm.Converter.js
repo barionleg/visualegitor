@@ -22,6 +22,7 @@ ve.dm.Converter = function VeDmConverter( modelRegistry, nodeFactory, annotation
 	this.annotationFactory = annotationFactory;
 	this.metaItemFactory = metaItemFactory;
 	this.doc = null;
+	this.dmDoc = null;
 	this.documentData = null;
 	this.store = null;
 	this.internalList = null;
@@ -265,6 +266,14 @@ ve.dm.Converter.prototype.getHtmlDocument = function () {
  */
 ve.dm.Converter.prototype.getTargetHtmlDocument = function () {
 	return this.targetDoc;
+};
+
+/**
+ * Get the DM document we are converting.
+ * @return {ve.dm.Document|null} DM document being converted, or null if not converting
+ */
+ve.dm.Converter.prototype.getDocumentModel = function () {
+	return this.dmDoc;
 };
 
 /**
@@ -1099,6 +1108,7 @@ ve.dm.Converter.prototype.getDomFromModel = function ( model, forClipboard ) {
  */
 ve.dm.Converter.prototype.getDomSubtreeFromModel = function ( model, container, forClipboard ) {
 	// Set up the converter state
+	this.dmDoc = model;
 	this.documentData = model.getFullData();
 	this.store = model.getStore();
 	this.internalList = model.getInternalList();
@@ -1107,6 +1117,7 @@ ve.dm.Converter.prototype.getDomSubtreeFromModel = function ( model, container, 
 	this.getDomSubtreeFromData( this.documentData, container, model.getInnerWhitespace() );
 
 	// Clear the state
+	this.dmDoc = null;
 	this.documentData = null;
 	this.store = null;
 	this.internalList = null;
