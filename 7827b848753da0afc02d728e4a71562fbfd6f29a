@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_6e5bef26",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 29
+      },
+      "lineNbr": 2853,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-02-05T01:48:04Z",
+      "side": 1,
+      "message": "This TODO identifies exactly why this commit breaks arrow key handling in tables: you\u0027re now able to arrow key out of a table cell, which is prevented in master.",
+      "revId": "7827b848753da0afc02d728e4a71562fbfd6f29a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
