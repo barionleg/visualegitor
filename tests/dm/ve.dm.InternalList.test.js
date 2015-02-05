@@ -14,7 +14,7 @@ QUnit.test( 'getDocument', 1, function ( assert ) {
 	assert.deepEqual( internalList.getDocument(), doc, 'Returns original document' );
 } );
 
-QUnit.test( 'queueItemHtml/getItemHtmlQueue', 5, function ( assert ) {
+QUnit.test( 'queueItemHtml', 5, function ( assert ) {
 	var doc = ve.dm.example.createExampleDocument(),
 		internalList = doc.getInternalList();
 	assert.deepEqual(
@@ -41,7 +41,7 @@ QUnit.test( 'queueItemHtml/getItemHtmlQueue', 5, function ( assert ) {
 		'Third queued item is new because existing data in queue was empty'
 	);
 
-	assert.deepEqual( internalList.getItemHtmlQueue(), ['Bar', 'Baz', 'Quux'], 'getItemHtmlQueue returns stored HTML items' );
+	assert.deepEqual( internalList.itemHtmlQueue, ['Bar', 'Baz', 'Quux'], 'itemHtmlQueue contains stored HTML items' );
 } );
 
 QUnit.test( 'convertToData', 2, function ( assert ) {
@@ -73,7 +73,7 @@ QUnit.test( 'convertToData', 2, function ( assert ) {
 	internalList.queueItemHtml( 'reference', 'foo', 'Bar' );
 	internalList.queueItemHtml( 'reference', 'bar', 'Baz' );
 	assert.deepEqual( internalList.convertToData( ve.dm.converter, htmlDoc ), expectedData, 'Data matches' );
-	assert.deepEqual( internalList.getItemHtmlQueue(), [], 'Items html is emptied after conversion' );
+	assert.deepEqual( internalList.itemHtmlQueue, [], 'Item queue is emptied after conversion' );
 } );
 
 QUnit.test( 'clone', 5, function ( assert ) {

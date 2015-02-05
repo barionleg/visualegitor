@@ -80,15 +80,6 @@ ve.dm.InternalList.prototype.queueItemHtml = function ( groupName, key, html ) {
 };
 
 /**
- * Gets all the item's HTML strings
- * @method
- * @returns {Object} Name-indexed object containing HTMLElements
- */
-ve.dm.InternalList.prototype.getItemHtmlQueue = function () {
-	return this.itemHtmlQueue;
-};
-
-/**
  * Gets the internal list's document model
  * @method
  * @returns {ve.dm.Document} Document model
@@ -211,14 +202,13 @@ ve.dm.InternalList.prototype.getNextUniqueNumber = function () {
  * @returns {Array} Linear model data
  */
 ve.dm.InternalList.prototype.convertToData = function ( converter, doc ) {
-	var i, length, itemData, div,
-		itemHtmlQueue = this.getItemHtmlQueue(), list = [];
+	var i, length, itemData, div, list = [];
 
 	list.push( { type: 'internalList' } );
-	for ( i = 0, length = itemHtmlQueue.length; i < length; i++ ) {
-		if ( itemHtmlQueue[i] !== '' ) {
+	for ( i = 0, length = this.itemHtmlQueue.length; i < length; i++ ) {
+		if ( this.itemHtmlQueue[i] !== '' ) {
 			div = doc.createElement( 'div' );
-			div.innerHTML = itemHtmlQueue[i];
+			div.innerHTML = this.itemHtmlQueue[i].html;
 			itemData = converter.getDataFromDomSubtree( div );
 			list = list.concat(
 				[{ type: 'internalItem' }],
