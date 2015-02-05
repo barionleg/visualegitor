@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_a722854e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2015-02-05T22:23:22Z",
+      "side": 1,
+      "message": "Needs longer substring of Ibf7c99aa4 as its currently too short for auto-linking in Gerrit. May want to mention the dependency is in oojs-ui.",
+      "revId": "df04490f55e02b18d8b81a5891d585ab5b249c44",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
