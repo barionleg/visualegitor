@@ -18,17 +18,17 @@ QUnit.test( 'queueItemHtml', 5, function ( assert ) {
 	var doc = ve.dm.example.createExampleDocument(),
 		internalList = doc.getInternalList();
 	assert.deepEqual(
-		internalList.queueItemHtml( 'reference', 'foo', 'Bar' ),
+		internalList.queueItemHtml( 'reference', 'foo', 'Bar', 'fooid' ),
 		{ index: 0, isNew: true },
 		'First queued item returns index 0 and is new'
 	);
 	assert.deepEqual(
-		internalList.queueItemHtml( 'reference', 'foo', 'Baz' ),
+		internalList.queueItemHtml( 'reference', 'foo', 'Baz', 'fooid' ),
 		{ index: 0, isNew: false },
 		'Duplicate key returns index 0 and is not new'
 	);
 	assert.deepEqual(
-		internalList.queueItemHtml( 'reference', 'bar', 'Baz' ),
+		internalList.queueItemHtml( 'reference', 'bar', 'Baz', 'barid' ),
 		{ index: 1, isNew: true },
 		'Second queued item returns index 1 and is new'
 	);
@@ -36,12 +36,19 @@ QUnit.test( 'queueItemHtml', 5, function ( assert ) {
 	// Queue up empty data
 	internalList.queueItemHtml( 'reference', 'baz', '' );
 	assert.deepEqual(
-		internalList.queueItemHtml( 'reference', 'baz', 'Quux' ),
+		internalList.queueItemHtml( 'reference', 'baz', 'Quux', 'bazid' ),
 		{ index: 2, isNew: true },
 		'Third queued item is new because existing data in queue was empty'
 	);
 
-	assert.deepEqual( internalList.itemHtmlQueue, ['Bar', 'Baz', 'Quux'], 'itemHtmlQueue contains stored HTML items' );
+	assert.deepEqual(
+		internalList.itemHtmlQueue,
+		[
+			{ html: 'Bar', id: 'fooid' },
+			{ html: 'Baz', id: 'barid' },
+			{ html: 'Quux', id: 'bazid' }
+		],
+		'itemHtmlQueue contains stored HTML items and IDs' );
 } );
 
 QUnit.test( 'convertToData', 2, function ( assert ) {

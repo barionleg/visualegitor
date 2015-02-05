@@ -56,21 +56,22 @@ OO.mixinClass( ve.dm.InternalList, OO.EventEmitter );
  * @param {string} groupName Item group
  * @param {string} key Item key
  * @param {string} html Item contents
+ * @oaram {string} [id] ID of DOM element to get contents from if all calls for this key pass empty html
  * @returns {Object} Object containing index of the item in the index-value store
  * (and also its index in the internal list node), and a flag indicating if it is a new item.
  */
-ve.dm.InternalList.prototype.queueItemHtml = function ( groupName, key, html ) {
+ve.dm.InternalList.prototype.queueItemHtml = function ( groupName, key, html, id ) {
 	var isNew = false,
 		index = this.getKeyIndex( groupName, key );
 
 	if ( index === undefined ) {
 		index = this.itemHtmlQueue.length;
 		this.keyIndexes[groupName + '/' + key] = index;
-		this.itemHtmlQueue.push( html );
+		this.itemHtmlQueue.push( { html: html, id: id } );
 		isNew = true;
-	} else if ( this.itemHtmlQueue[index] === '' ) {
+	} else if ( this.itemHtmlQueue[index].html === '' ) {
 		// Previous value with this key was empty, overwrite value in queue
-		this.itemHtmlQueue[index] = html;
+		this.itemHtmlQueue[index] = { html: html, id: id };
 		isNew = true;
 	}
 	return {
@@ -198,26 +199,30 @@ ve.dm.InternalList.prototype.getNextUniqueNumber = function () {
  *
  * @method
  * @param {ve.dm.Converter} converter Converter object
- * @param {HTMLDocument} doc Document to create nodes in
+ * @param {HTMLDocument} doc Document to create nodes in and search for IDs in
  * @returns {Array} Linear model data
  */
 ve.dm.InternalList.prototype.convertToData = function ( converter, doc ) {
-	var i, length, itemData, div, list = [];
+	var i, length, itemData, div, elem, list = [];
 
 	list.push( { type: 'internalList' } );
 	for ( i = 0, length = this.itemHtmlQueue.length; i < length; i++ ) {
-		if ( this.itemHtmlQueue[i] !== '' ) {
+		itemData = [];
+		if ( this.itemHtmlQueue[i].html !== '' ) {
 			div = doc.createElement( 'div' );
 			div.innerHTML = this.itemHtmlQueue[i].html;
 			itemData = converter.getDataFromDomSubtree( div );
-			list = list.concat(
-				[{ type: 'internalItem' }],
-				itemData,
-				[{ type: '/internalItem' }]
-			);
-		} else {
-			list = list.concat( [ { type: 'internalItem' }, { type: '/internalItem' } ] );
+		} else if ( this.itemHtmlQueue[i].id ) {
+			elem = doc.getElementById( this.itemHtmlQueue[i].id );
+			if ( elem ) {
+				itemData = converter.getDataFromDomSubtree( elem );
+			}
 		}
+		list = list.concat(
+			[{ type: 'internalItem' }],
+			itemData,
+			[{ type: '/internalItem' }]
+		);
 	}
 	list.push( { type: '/internalList' } );
 	// After conversion we no longer need the HTML
