@@ -52,6 +52,23 @@
       "revId": "df04490f55e02b18d8b81a5891d585ab5b249c44",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_c7bd41d3",
+        "filename": "src/ui/ve.ui.Context.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2015-02-05T22:27:14Z",
+      "side": 1,
+      "message": "Adjust comment or code depending on whether this code comment is wrong, or calling toggle() is indeed not needed.",
+      "revId": "df04490f55e02b18d8b81a5891d585ab5b249c44",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
