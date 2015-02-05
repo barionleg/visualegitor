@@ -16,6 +16,24 @@
       "revId": "df04490f55e02b18d8b81a5891d585ab5b249c44",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_271675f7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 798
+      },
+      "writtenOn": "2015-02-05T22:24:30Z",
+      "side": 1,
+      "message": "That dependency is merged anyways. Do we still need to mention it?\nhttps://gerrit.wikimedia.org/r/#/c/187614/",
+      "parentUuid": "6e7c4fa4_a722854e",
+      "revId": "df04490f55e02b18d8b81a5891d585ab5b249c44",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
