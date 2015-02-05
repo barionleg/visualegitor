@@ -99,14 +99,20 @@
 		return n;
 	};
 
+	ve.test.utils.makeDocument = function ( body, head ) {
+		// Make sure we've always got a <base> tag
+		var defaultHead = '<base href="' + ve.dm.example.base + '">';
+		return ve.createDocumentFromHtml(
+			'<head>' + ( head || defaultHead ) + '</head>' +
+			'<body>' + body + '</body>'
+		);
+	};
+
 	ve.test.utils.runGetModelFromDomTest = function ( assert, caseItem, msg ) {
-		var model, i, length, hash, html,
-			// Make sure we've always got a <base> tag
-			defaultHead = '<base href="' + ve.dm.example.base + '">';
+		var model, i, length, hash;
 
 		if ( caseItem.head !== undefined || caseItem.body !== undefined ) {
-			html = '<head>' + ( caseItem.head || defaultHead ) + '</head><body>' + caseItem.body + '</body>';
-			model = ve.dm.converter.getModelFromDom( ve.createDocumentFromHtml( html ) );
+			model = ve.dm.converter.getModelFromDom( ve.test.utils.makeDocument( caseItem.body, caseItem.head ) );
 			ve.dm.example.preprocessAnnotations( caseItem.data, model.getStore() );
 			assert.deepEqualWithDomElements( model.getFullData(), caseItem.data, msg + ': data' );
 			assert.deepEqual( model.getInnerWhitespace(), caseItem.innerWhitespace || new Array( 2 ), msg + ': inner whitespace' );
@@ -137,7 +143,10 @@
 		if ( caseItem.modify ) {
 			caseItem.modify( caseItem.data );
 		}
-		doc = new ve.dm.Document( ve.dm.example.preprocessAnnotations( caseItem.data, store ) );
+		doc = new ve.dm.Document(
+			ve.dm.example.preprocessAnnotations( caseItem.data, store ),
+			ve.test.utils.makeDocument( caseItem.body, caseItem.head )
+		);
 		doc.innerWhitespace = caseItem.innerWhitespace ? ve.copy( caseItem.innerWhitespace ) : new Array( 2 );
 		originalData = ve.copy( doc.getFullData() );
 		html = '<body>' + ( caseItem.normalizedBody || caseItem.body ) + '</body>';
