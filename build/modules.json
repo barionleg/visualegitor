@@ -422,6 +422,7 @@
 			"src/ui/styles/ve.ui.Toolbar.css",
 			"src/ui/styles/ve.ui.Icons.css"
 		],
+		"styleGroup": "ve",
 		"dependencies": [
 			"visualEditor.base.build"
 		]
@@ -571,6 +572,11 @@
 			"visualEditor.standalone.build"
 		]
 	},
+	"visualEditor.standalone.read": {
+		"styles": [
+			"src/init/sa/styles/ve.init.sa.css"
+		]
+	},
 	"visualEditor.standalone.build": {
 		"scripts": [
 			"src/init/sa/ve.init.sa.js",
@@ -578,7 +584,6 @@
 			"src/init/sa/ve.init.sa.Target.js"
 		],
 		"styles": [
-			"src/init/sa/styles/ve.init.sa.css",
 			{ "file": "src/ui/styles/ve.ui.DebugBar.css", "debug": true }
 		],
 		"dependencies": [
@@ -670,6 +675,7 @@
 		],
 		"styles": [
 			"dist/visualEditor.css"
-		]
+		],
+		"styleGroup": "ve"
 	}
 }
