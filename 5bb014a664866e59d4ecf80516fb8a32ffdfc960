@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_6ce51b9f",
+        "filename": "src/dm/ve.dm.AlignableNode.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-02-09T21:04:53Z",
+      "side": 1,
+      "message": "Because of context thrashing bugs in Sizzle, please don\u0027t use jQuery in DM code. Instead, you can use https://developer.mozilla.org/en-US/docs/Web/API/Element.classList which, to my surprise, is supported in IE10+",
+      "revId": "5bb014a664866e59d4ecf80516fb8a32ffdfc960",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
