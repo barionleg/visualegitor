@@ -16,6 +16,24 @@
       "revId": "14affc399ca7972486f1a215571d93262455b45c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0ee7b10e",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2015-02-10T22:25:27Z",
+      "side": 1,
+      "message": "Sure, though I\u0027d rather have that be the subject of a later commit.",
+      "parentUuid": "6e7c4fa4_eb37c8a9",
+      "revId": "14affc399ca7972486f1a215571d93262455b45c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
