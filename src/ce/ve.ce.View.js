@@ -166,18 +166,17 @@ ve.ce.View.prototype.isInContentEditable = function () {
 };
 
 /**
- * Render an HTML attribute list onto this.$element
- *
- * If no attributeList is given, the attribute list stored in the linear model will be used.
- *
- * @param {Object[]} [attributeList] HTML attribute list, see ve.dm.Converter#buildHtmlAttributeList
+ * TODO document me
  */
-ve.ce.View.prototype.renderAttributes = function ( attributeList ) {
+ve.ce.View.prototype.renderAttributes = function () {
 	ve.dm.Converter.renderHtmlAttributeList(
-		attributeList || this.model.getHtmlAttributes(),
+		this.model.getOriginalDomElements(),
 		this.$element,
 		this.constructor.static.renderHtmlAttributes,
-		true // computed attributes
+		true, // computed attributes
+		!ve.dm.nodeFactory.lookup( this.model.getType() ) ||
+			!ve.dm.nodeFactory.canNodeHaveChildren( this.model.getType() ) ||
+			ve.dm.nodeFactory.doesNodeHandleOwnChildren( this.model.getType() )
 	);
 };
 
