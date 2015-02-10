@@ -251,6 +251,7 @@ ve.dm.Model.static.getHashObject = function ( dataElement ) {
 	return {
 		type: dataElement.type,
 		attributes: dataElement.attributes,
+		// FIXME AARGH
 		htmlAttributes: dataElement.htmlAttributes
 	};
 };
@@ -375,11 +376,10 @@ ve.dm.Model.prototype.getAttributes = function ( prefix ) {
 };
 
 /**
- * Get the preserved HTML attributes.
- * @returns {Object[]} HTML attribute list, or empty array
+ * TODO document me
  */
-ve.dm.Model.prototype.getHtmlAttributes = function () {
-	return ( this.element && this.element.htmlAttributes ) || [];
+ve.dm.Model.prototype.getOriginalDomElements = function () {
+	return ( this.element && this.element.originalDomElements ) || [];
 };
 
 /**
