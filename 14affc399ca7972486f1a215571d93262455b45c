@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_eb37c8a9",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-02-10T18:40:05Z",
+      "side": 1,
+      "message": "can you make it possible for the unit test to sabotage this method and thus test the polyfill?",
+      "revId": "14affc399ca7972486f1a215571d93262455b45c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
