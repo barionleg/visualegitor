@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_69af48df",
+        "filename": "src/dm/ve.dm.ResourceProvider.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2015-02-10T02:30:24Z",
+      "side": 1,
+      "message": "Be sure to document it better than this (or remove this first line to allow jsduck options to find that it isn\u0027t documented).",
+      "revId": "45624931e9cf38819bf9b13c3fe2ce3333ff3b92",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_09bed413",
+        "filename": "src/dm/ve.dm.ResourceProvider.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2015-02-10T02:30:24Z",
+      "side": 1,
+      "message": "Unless the constructor does something to influence or modify EventEmitter, it\u0027s common (and safer) to call this from the top, not the bottom. Else any methods you call above this may fail if they inadvertently/understandably interact with EventEmitter.",
+      "revId": "45624931e9cf38819bf9b13c3fe2ce3333ff3b92",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
