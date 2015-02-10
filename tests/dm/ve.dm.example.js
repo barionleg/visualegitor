@@ -231,7 +231,8 @@ ve.dm.example.blockImage = {
 				alt: 'Example',
 				width: 100,
 				height: 50,
-				originalAlign: 'right',
+				originalClasses: 've-align-right',
+				unrecognizedClasses: [],
 				align: 'right'
 			},
 			htmlAttributes: [
