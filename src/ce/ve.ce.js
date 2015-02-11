@@ -112,9 +112,11 @@ ve.ce.getDomHash = function ( element ) {
 		return '#';
 	} else if ( nodeType === Node.ELEMENT_NODE || nodeType === Node.DOCUMENT_NODE ) {
 		hash += '<' + nodeName + '>';
-		// Traverse its children
-		for ( element = element.firstChild; element; element = element.nextSibling ) {
-			hash += ve.ce.getDomHash( element );
+		if ( nodeType !== Node.ELEMENT_NODE || !element.classList.contains( 've-ce-branchNode-blockSlugWrapper' ) ) {
+			// Traverse its children
+			for ( element = element.firstChild; element; element = element.nextSibling ) {
+				hash += ve.ce.getDomHash( element );
+			}
 		}
 		hash += '</' + nodeName + '>';
 		// Merge adjacent text node representations
