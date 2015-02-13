@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_3edba426",
+        "filename": "src/dm/ve.dm.APIResultsProvider.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 798
+      },
+      "writtenOn": "2015-02-13T19:43:00Z",
+      "side": 1,
+      "message": "Yeah, it was a parameter, and I turned it into a config again. I wasn\u0027t sure if it should be a parameter when I designed the tests; I figured we may be able to have a provider that is local or works with internal processes which doesn\u0027t require a URL.\n\nBut since we\u0027re working on these as API providers specifically, you\u0027re right. I\u0027ll bring the apiurl out of the config and back as a parameter.\n\n(done)",
+      "parentUuid": "6e7c4fa4_1e27c860",
+      "revId": "0528cab3874ecafc9ad92fbc757659b7e232442f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_bef6d4d2",
         "filename": "src/dm/ve.dm.APIResultsProvider.js",
         "patchSetId": 13
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_3eec048e",
+        "filename": "src/dm/ve.dm.APIResultsProvider.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 798
+      },
+      "writtenOn": "2015-02-13T19:43:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_bef6d4d2",
+      "revId": "0528cab3874ecafc9ad92fbc757659b7e232442f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_de187025",
         "filename": "src/dm/ve.dm.APIResultsProvider.js",
         "patchSetId": 13
@@ -47,6 +83,24 @@
       "writtenOn": "2015-02-13T18:50:06Z",
       "side": 1,
       "message": "init not required if you have a mixin or inherit",
+      "revId": "0528cab3874ecafc9ad92fbc757659b7e232442f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5eef8082",
+        "filename": "src/dm/ve.dm.APIResultsProvider.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 798
+      },
+      "writtenOn": "2015-02-13T19:43:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_de187025",
       "revId": "0528cab3874ecafc9ad92fbc757659b7e232442f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_fee52ca0",
+        "filename": "src/dm/ve.dm.APIResultsProvider.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 798
+      },
+      "writtenOn": "2015-02-13T19:43:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_9e12f8ff",
+      "revId": "0528cab3874ecafc9ad92fbc757659b7e232442f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_3ed9645c",
         "filename": "src/dm/ve.dm.APIResultsProvider.js",
         "patchSetId": 13
@@ -98,6 +170,24 @@
       "writtenOn": "2015-02-13T18:50:06Z",
       "side": 1,
       "message": "missing param name",
+      "revId": "0528cab3874ecafc9ad92fbc757659b7e232442f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_defab03f",
+        "filename": "src/dm/ve.dm.APIResultsProvider.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 798
+      },
+      "writtenOn": "2015-02-13T19:43:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_3ed9645c",
       "revId": "0528cab3874ecafc9ad92fbc757659b7e232442f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -138,6 +228,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_9ef43852",
+        "filename": "src/dm/ve.dm.APIResultsProvider.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 798
+      },
+      "writtenOn": "2015-02-13T19:43:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_fee20cff",
+      "revId": "0528cab3874ecafc9ad92fbc757659b7e232442f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_1ee6e813",
         "filename": "src/dm/ve.dm.APIResultsProvider.js",
         "patchSetId": 13
@@ -155,6 +263,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_5e96a0f4",
+        "filename": "src/dm/ve.dm.APIResultsProvider.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 798
+      },
+      "writtenOn": "2015-02-13T19:43:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_1ee6e813",
+      "revId": "0528cab3874ecafc9ad92fbc757659b7e232442f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_dee7100c",
         "filename": "src/dm/ve.dm.APIResultsProvider.js",
         "patchSetId": 13
@@ -166,6 +292,24 @@
       "writtenOn": "2015-02-13T18:50:06Z",
       "side": 1,
       "message": "missing description",
+      "revId": "0528cab3874ecafc9ad92fbc757659b7e232442f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_fe9c4c14",
+        "filename": "src/dm/ve.dm.APIResultsProvider.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 798
+      },
+      "writtenOn": "2015-02-13T19:43:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_dee7100c",
       "revId": "0528cab3874ecafc9ad92fbc757659b7e232442f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -206,6 +350,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_1ea0283d",
+        "filename": "src/dm/ve.dm.APIResultsProvider.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 798
+      },
+      "writtenOn": "2015-02-13T19:43:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_3ec08454",
+      "revId": "0528cab3874ecafc9ad92fbc757659b7e232442f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_5ec30061",
         "filename": "src/dm/ve.dm.APIResultsProvider.js",
         "patchSetId": 13
@@ -217,6 +379,24 @@
       "writtenOn": "2015-02-13T18:50:06Z",
       "side": 1,
       "message": "missing param name",
+      "revId": "0528cab3874ecafc9ad92fbc757659b7e232442f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_de8150a5",
+        "filename": "src/dm/ve.dm.APIResultsProvider.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 798
+      },
+      "writtenOn": "2015-02-13T19:43:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_5ec30061",
       "revId": "0528cab3874ecafc9ad92fbc757659b7e232442f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -240,6 +420,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_7e903cf1",
+        "filename": "src/dm/ve.dm.APIResultsQueue.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 798
+      },
+      "writtenOn": "2015-02-13T19:43:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_feb9ace6",
+      "revId": "0528cab3874ecafc9ad92fbc757659b7e232442f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_7ecd9c87",
         "filename": "src/dm/ve.dm.APIResultsQueue.js",
         "patchSetId": 13
@@ -251,6 +449,24 @@
       "writtenOn": "2015-02-13T18:50:06Z",
       "side": 1,
       "message": "document default",
+      "revId": "0528cab3874ecafc9ad92fbc757659b7e232442f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5ebd4062",
+        "filename": "src/dm/ve.dm.APIResultsQueue.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 798
+      },
+      "writtenOn": "2015-02-13T19:43:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_7ecd9c87",
       "revId": "0528cab3874ecafc9ad92fbc757659b7e232442f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -274,6 +490,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_feb3ec93",
+        "filename": "src/dm/ve.dm.APIResultsQueue.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 798
+      },
+      "writtenOn": "2015-02-13T19:43:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_9ec8b878",
+      "revId": "0528cab3874ecafc9ad92fbc757659b7e232442f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_5eaa2083",
         "filename": "src/dm/ve.dm.APIResultsQueue.js",
         "patchSetId": 13
@@ -285,6 +519,24 @@
       "writtenOn": "2015-02-13T18:50:06Z",
       "side": 1,
       "message": "search",
+      "revId": "0528cab3874ecafc9ad92fbc757659b7e232442f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_1eb7c882",
+        "filename": "src/dm/ve.dm.APIResultsQueue.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 798
+      },
+      "writtenOn": "2015-02-13T19:43:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_5eaa2083",
       "revId": "0528cab3874ecafc9ad92fbc757659b7e232442f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -308,6 +560,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_bead7430",
+        "filename": "src/dm/ve.dm.APIResultsQueue.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 798
+      },
+      "writtenOn": "2015-02-13T19:43:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_3ea724bc",
+      "revId": "0528cab3874ecafc9ad92fbc757659b7e232442f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_1eb4a8e3",
         "filename": "src/dm/ve.dm.APIResultsQueue.js",
         "patchSetId": 13
@@ -325,6 +595,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_dec95056",
+        "filename": "src/dm/ve.dm.APIResultsQueue.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 798
+      },
+      "writtenOn": "2015-02-13T19:43:00Z",
+      "side": 1,
+      "message": "oops!",
+      "parentUuid": "6e7c4fa4_1eb4a8e3",
+      "revId": "0528cab3874ecafc9ad92fbc757659b7e232442f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_9e9f5862",
         "filename": "src/dm/ve.dm.APIResultsQueue.js",
         "patchSetId": 13
@@ -336,6 +624,24 @@
       "writtenOn": "2015-02-13T18:50:06Z",
       "side": 1,
       "message": "getThreshold",
+      "revId": "0528cab3874ecafc9ad92fbc757659b7e232442f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_7ea7dc4c",
+        "filename": "src/dm/ve.dm.APIResultsQueue.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 798
+      },
+      "writtenOn": "2015-02-13T19:43:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_9e9f5862",
       "revId": "0528cab3874ecafc9ad92fbc757659b7e232442f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
