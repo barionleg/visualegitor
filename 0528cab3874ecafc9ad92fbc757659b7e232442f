@@ -1,0 +1,344 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_1e27c860",
+        "filename": "src/dm/ve.dm.APIResultsProvider.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-02-13T18:50:06Z",
+      "side": 1,
+      "message": "this is required so should indeed be a parameter as documented, currently it is a config though.",
+      "revId": "0528cab3874ecafc9ad92fbc757659b7e232442f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_bef6d4d2",
+        "filename": "src/dm/ve.dm.APIResultsProvider.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-02-13T18:50:06Z",
+      "side": 1,
+      "message": "document config options",
+      "revId": "0528cab3874ecafc9ad92fbc757659b7e232442f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_de187025",
+        "filename": "src/dm/ve.dm.APIResultsProvider.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-02-13T18:50:06Z",
+      "side": 1,
+      "message": "init not required if you have a mixin or inherit",
+      "revId": "0528cab3874ecafc9ad92fbc757659b7e232442f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_7e17dcf2",
+        "filename": "src/dm/ve.dm.APIResultsProvider.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-02-13T18:50:06Z",
+      "side": 1,
+      "message": "API",
+      "revId": "0528cab3874ecafc9ad92fbc757659b7e232442f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_9e12f8ff",
+        "filename": "src/dm/ve.dm.APIResultsProvider.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-02-13T18:50:06Z",
+      "side": 1,
+      "message": "missing param name (should be apiurl, not url)",
+      "revId": "0528cab3874ecafc9ad92fbc757659b7e232442f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3ed9645c",
+        "filename": "src/dm/ve.dm.APIResultsProvider.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-02-13T18:50:06Z",
+      "side": 1,
+      "message": "missing param name",
+      "revId": "0528cab3874ecafc9ad92fbc757659b7e232442f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5edc604b",
+        "filename": "src/dm/ve.dm.APIResultsProvider.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-02-13T18:50:06Z",
+      "side": 1,
+      "message": "description should be Sentence case.",
+      "revId": "0528cab3874ecafc9ad92fbc757659b7e232442f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_fee20cff",
+        "filename": "src/dm/ve.dm.APIResultsProvider.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-02-13T18:50:06Z",
+      "side": 1,
+      "message": "missing param description",
+      "revId": "0528cab3874ecafc9ad92fbc757659b7e232442f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_1ee6e813",
+        "filename": "src/dm/ve.dm.APIResultsProvider.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-02-13T18:50:06Z",
+      "side": 1,
+      "message": "description, sentence case",
+      "revId": "0528cab3874ecafc9ad92fbc757659b7e232442f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_dee7100c",
+        "filename": "src/dm/ve.dm.APIResultsProvider.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-02-13T18:50:06Z",
+      "side": 1,
+      "message": "missing description",
+      "revId": "0528cab3874ecafc9ad92fbc757659b7e232442f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_9ef198ca",
+        "filename": "src/dm/ve.dm.APIResultsProvider.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-02-13T18:50:06Z",
+      "side": 1,
+      "message": "description, sentence case",
+      "revId": "0528cab3874ecafc9ad92fbc757659b7e232442f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3ec08454",
+        "filename": "src/dm/ve.dm.APIResultsProvider.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-02-13T18:50:06Z",
+      "side": 1,
+      "message": "isDepleted, missing description",
+      "revId": "0528cab3874ecafc9ad92fbc757659b7e232442f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5ec30061",
+        "filename": "src/dm/ve.dm.APIResultsProvider.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-02-13T18:50:06Z",
+      "side": 1,
+      "message": "missing param name",
+      "revId": "0528cab3874ecafc9ad92fbc757659b7e232442f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_feb9ace6",
+        "filename": "src/dm/ve.dm.APIResultsQueue.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-02-13T18:50:06Z",
+      "side": 1,
+      "message": "rm initclass",
+      "revId": "0528cab3874ecafc9ad92fbc757659b7e232442f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_7ecd9c87",
+        "filename": "src/dm/ve.dm.APIResultsQueue.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-02-13T18:50:06Z",
+      "side": 1,
+      "message": "document default",
+      "revId": "0528cab3874ecafc9ad92fbc757659b7e232442f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_9ec8b878",
+        "filename": "src/dm/ve.dm.APIResultsQueue.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-02-13T18:50:06Z",
+      "side": 1,
+      "message": "missing param",
+      "revId": "0528cab3874ecafc9ad92fbc757659b7e232442f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5eaa2083",
+        "filename": "src/dm/ve.dm.APIResultsQueue.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-02-13T18:50:06Z",
+      "side": 1,
+      "message": "search",
+      "revId": "0528cab3874ecafc9ad92fbc757659b7e232442f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3ea724bc",
+        "filename": "src/dm/ve.dm.APIResultsQueue.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-02-13T18:50:06Z",
+      "side": 1,
+      "message": "search",
+      "revId": "0528cab3874ecafc9ad92fbc757659b7e232442f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_1eb4a8e3",
+        "filename": "src/dm/ve.dm.APIResultsQueue.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-02-13T18:50:06Z",
+      "side": 1,
+      "message": "setThreshold",
+      "revId": "0528cab3874ecafc9ad92fbc757659b7e232442f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_9e9f5862",
+        "filename": "src/dm/ve.dm.APIResultsQueue.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-02-13T18:50:06Z",
+      "side": 1,
+      "message": "getThreshold",
+      "revId": "0528cab3874ecafc9ad92fbc757659b7e232442f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
