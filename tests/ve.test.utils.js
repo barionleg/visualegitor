@@ -125,7 +125,7 @@
 	};
 
 	ve.test.utils.runGetDomFromModelTest = function ( assert, caseItem, msg ) {
-		var originalData, model, store, i, length, html;
+		var originalData, model, store, i, length, html, clipboardHtml;
 
 		store = new ve.dm.IndexValueStore();
 		// Load storeItems into store
@@ -141,10 +141,16 @@
 		}
 		originalData = ve.copy( model.getFullData() );
 		html = '<body>' + ( caseItem.normalizedBody || caseItem.body ) + '</body>';
+		clipboardHtml = '<body>' + ( caseItem.clipboardBody || caseItem.normalizedBody || caseItem.body ) + '</body>';
 		assert.equalDomElement(
 			ve.dm.converter.getDomFromModel( model ),
 			ve.createDocumentFromHtml( html ),
 			msg
+		);
+		assert.equalDomElement(
+			ve.dm.converter.getDomFromModel( model, true ),
+			ve.createDocumentFromHtml( clipboardHtml ),
+			msg + ' (clipboard mode)'
 		);
 		assert.deepEqualWithDomElements( model.getFullData(), originalData, msg + ' (data hasn\'t changed)' );
 	};
