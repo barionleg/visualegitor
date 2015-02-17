@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_424eb1c5",
+        "filename": "src/dm/ve.dm.Annotation.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-02-17T00:38:04Z",
+      "side": 1,
+      "message": "Magic deserves an explanation.",
+      "revId": "c5f6c8dac54d6c1aeb70fd91af4c6324425bf87c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
