@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_2bdcade4",
+        "filename": "src/ce/ve.ce.AlignableNode.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-02-17T16:19:27Z",
+      "side": 0,
+      "message": "Aren\u0027t all our files meant to start with a file-level comment mentioning the licence?",
+      "revId": "c6dee65dffc7388b378ccadc5491a5739d33209c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
