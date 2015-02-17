@@ -118,15 +118,13 @@ ve.dm.Annotation.prototype.getComparableObject = function () {
  * @returns {Object} An object all HTML attributes except data-parsoid
  */
 ve.dm.Annotation.prototype.getComparableHtmlAttributes = function () {
-	var comparableAttributes, attributes = this.getHtmlAttributes();
-
-	if ( attributes[0] ) {
-		comparableAttributes = ve.copy( attributes[0].values );
+	var comparableAttributes, domElements = this.getOriginalDomElements();
+	if ( domElements[0] ) {
+		comparableAttributes = ve.getDomAttributes( domElements[0] );
 		delete comparableAttributes['data-parsoid'];
 		return comparableAttributes;
-	} else {
-		return {};
 	}
+	return {};
 };
 
 /**
@@ -156,7 +154,7 @@ ve.dm.Annotation.prototype.getComparableObjectForSerialization = function () {
  * @returns {boolean} The annotation was generated
  */
 ve.dm.Annotation.prototype.isGenerated = function () {
-	return this.getHtmlAttributes().length > 0;
+	return this.getOriginalDomElements().length > 0;
 };
 
 /**

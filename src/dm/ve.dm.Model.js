@@ -251,7 +251,10 @@ ve.dm.Model.static.getHashObject = function ( dataElement ) {
 	return {
 		type: dataElement.type,
 		attributes: dataElement.attributes,
-		htmlAttributes: dataElement.htmlAttributes
+		originalDomElements: dataElement.originalDomElements &&
+			dataElement.originalDomElements.map( function ( el ) {
+				return el.outerHTML;
+			} ).join( '' )
 	};
 };
 
@@ -375,11 +378,11 @@ ve.dm.Model.prototype.getAttributes = function ( prefix ) {
 };
 
 /**
- * Get the preserved HTML attributes.
- * @returns {Object[]} HTML attribute list, or empty array
+ * Get the DOM element(s) this model was originally converted from, if any.
+ * @return {HTMLElement[]} DOM elements this model was converted from, empty if not applicable
  */
-ve.dm.Model.prototype.getHtmlAttributes = function () {
-	return ( this.element && this.element.htmlAttributes ) || [];
+ve.dm.Model.prototype.getOriginalDomElements = function () {
+	return ( this.element && this.element.originalDomElements ) || [];
 };
 
 /**
