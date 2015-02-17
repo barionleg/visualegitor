@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_79991fc6",
+        "filename": "src/ce/nodes/ve.ce.GeneratedContentNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-02-17T18:43:51Z",
+      "side": 1,
+      "message": "Conventionally, this section is labeled \"Setup\" rather than \"Inheritance\"",
+      "revId": "da95fc0d320390dc06d3ae250b7a6f74e60d7bbc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
