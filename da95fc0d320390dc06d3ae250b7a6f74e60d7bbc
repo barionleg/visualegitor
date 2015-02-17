@@ -52,6 +52,24 @@
       "revId": "da95fc0d320390dc06d3ae250b7a6f74e60d7bbc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_194fcb3a",
+        "filename": "src/ce/nodes/ve.ce.GeneratedContentNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 88
+      },
+      "writtenOn": "2015-02-17T18:47:28Z",
+      "side": 1,
+      "message": "Hmm.. Roan, touch every file to normalize or stay with the conventions of the local repo?",
+      "parentUuid": "6e7c4fa4_39e64740",
+      "revId": "da95fc0d320390dc06d3ae250b7a6f74e60d7bbc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
