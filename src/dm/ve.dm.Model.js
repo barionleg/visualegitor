@@ -199,44 +199,6 @@ ve.dm.Model.static.preserveHtmlAttributes = true;
 /* Static methods */
 
 /**
- * Determine whether an attribute name matches an attribute specification.
- *
- * @param {string} attribute Attribute name
- * @param {boolean|string|RegExp|Array|Object} spec Attribute specification, see #preserveHtmlAttributes
- * @returns {boolean} Attribute matches spec
- */
-ve.dm.Model.matchesAttributeSpec = function ( attribute, spec ) {
-	function matches( subspec ) {
-		if ( subspec instanceof RegExp ) {
-			return !!subspec.exec( attribute );
-		}
-		if ( typeof subspec === 'boolean' ) {
-			return subspec;
-		}
-		return attribute === subspec;
-	}
-
-	function matchesArray( specArray ) {
-		var i, len;
-		if ( !Array.isArray( specArray ) ) {
-			specArray = [ specArray ];
-		}
-		for ( i = 0, len = specArray.length; i < len; i++ ) {
-			if ( matches( specArray[i] ) ) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	if ( spec.whitelist === undefined && spec.blacklist === undefined ) {
-		// Not an object, treat spec as a whitelist
-		return matchesArray( spec );
-	}
-	return matchesArray( spec.whitelist || true ) && !matchesArray( spec.blacklist || false );
-};
-
-/**
  * Get hash object of a linear model data element.
  *
  * @static
