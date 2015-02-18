@@ -143,21 +143,21 @@ ve.dm.Converter.openAndCloseAnnotations = function ( currentSet, targetSet, open
  * @param {Object[]} [attributeList] Existing attribute list to populate; used for recursion
  * @returns {Object[]|undefined} Attribute list, or undefined if empty
  */
-ve.dm.Converter.buildHtmlAttributeList = function ( domElements, spec, deep, attributeList ) {
+ve.dm.Converter.buildHtmlAttributeList = function ( domElements, filter, deep, attributeList ) {
 	var i, ilen, j, jlen, domAttributes, childList, attrName,
 		empty = true;
 	attributeList = attributeList || [];
 	for ( i = 0, ilen = domElements.length; i < ilen; i++ ) {
+		attributeList.push( { values: {}, computed: {} } );
+		if ( !filter ) {
+			continue;
+		}
 		domAttributes = domElements[i].attributes || [];
-		attributeList[i] = { values: {} };
 		for ( j = 0, jlen = domAttributes.length; j < jlen; j++ ) {
 			attrName = domAttributes[j].name;
-			if ( ve.dm.Model.matchesAttributeSpec( attrName, spec ) ) {
+			if ( filter === true || filter( attrName ) ) {
 				attributeList[i].values[attrName] = domAttributes[j].value;
 				if ( ve.indexOf( attrName, this.computedAttributes ) !== -1 ) {
-					if ( !attributeList[i].computed ) {
-						attributeList[i].computed = {};
-					}
 					attributeList[i].computed[attrName] = domElements[i][attrName];
 				}
 				empty = false;
@@ -169,7 +169,7 @@ ve.dm.Converter.buildHtmlAttributeList = function ( domElements, spec, deep, att
 				// Use .children rather than .childNodes so we don't mess around with things that
 				// can't have attributes anyway. Unfortunately, non-element nodes have .children
 				// set to undefined so we have to coerce it to an array in that case.
-				domElements[i].children || [], spec, deep, attributeList[i].children
+				domElements[i].children || [], filter, deep, attributeList[i].children
 			);
 			if ( childList ) {
 				empty = false;
@@ -190,16 +190,16 @@ ve.dm.Converter.buildHtmlAttributeList = function ( domElements, spec, deep, att
  * @static
  * @param {Object[]} attributeList Attribute list, see buildHtmlAttributeList()
  * @param {HTMLElement[]} domElements Array of DOM elements to render onto
- * @param {boolean|string|RegExp|Array|Object} [spec=true] Attribute specification, see ve.dm.Model
+ * @param {boolean|Function} [filter=true] Attribute filter
  * @param {boolean} [computed=false] If true, use the computed values of attributes where available
  * @param {boolean} [overwrite=false] If true, overwrite attributes that are already set
  */
-ve.dm.Converter.renderHtmlAttributeList = function ( attributeList, domElements, spec, computed, overwrite ) {
+ve.dm.Converter.renderHtmlAttributeList = function ( attributeList, domElements, filter, computed, overwrite ) {
 	var i, ilen, key, values, value;
-	if ( spec === undefined ) {
-		spec = true;
+	if ( filter === undefined ) {
+		filter = true;
 	}
-	if ( spec === false ) {
+	if ( filter === false ) {
 		return;
 	}
 	for ( i = 0, ilen = attributeList.length; i < ilen; i++ ) {
@@ -208,7 +208,7 @@ ve.dm.Converter.renderHtmlAttributeList = function ( attributeList, domElements,
 		}
 		values = attributeList[i].values;
 		for ( key in values ) {
-			if ( ve.dm.Model.matchesAttributeSpec( key, spec ) ) {
+			if ( filter === true || filter( key ) ) {
 				value = computed && attributeList[i].computed && attributeList[i].computed[key] || values[key];
 				if ( value === undefined ) {
 					domElements[i].removeAttribute( key );
@@ -219,7 +219,7 @@ ve.dm.Converter.renderHtmlAttributeList = function ( attributeList, domElements,
 		}
 		if ( attributeList[i].children ) {
 			ve.dm.Converter.renderHtmlAttributeList(
-				attributeList[i].children, domElements[i].children, spec, computed, overwrite
+				attributeList[i].children, domElements[i].children, filter, computed, overwrite
 			);
 		}
 	}
@@ -783,7 +783,7 @@ ve.dm.Converter.prototype.getDataFromDomSubtree = function ( domElement, wrapper
 						!this.nodeFactory.doesNodeHandleOwnChildren( childDataElements[0].type )
 					) {
 						htmlAttributes = ve.dm.Converter.buildHtmlAttributeList(
-							childNodes, modelClass.static.storeHtmlAttributes
+							childNodes, modelClass.static.storeHtmlAttributes, false
 						);
 						if ( htmlAttributes ) {
 							childDataElements[0].htmlAttributes = htmlAttributes;
