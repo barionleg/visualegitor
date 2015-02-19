@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_2737f04c",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 1925,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-02-19T03:07:53Z",
+      "side": 1,
+      "message": "Cache length",
+      "revId": "6321098d0d09a863b156eaf8b86f5bdb459c14f8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_67e968a6",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 2022,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-02-19T03:07:53Z",
+      "side": 1,
+      "message": "Appears to be optional, from the way it\u0027s called?",
+      "revId": "6321098d0d09a863b156eaf8b86f5bdb459c14f8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0732f45b",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 2057,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-02-19T03:07:53Z",
+      "side": 1,
+      "message": "Appears to be optional, given that you have targetFragment \u003d targetFragment || something?",
+      "revId": "6321098d0d09a863b156eaf8b86f5bdb459c14f8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_e73c982f",
+        "filename": "src/dm/ve.dm.SurfaceFragment.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 724,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-02-19T03:07:53Z",
+      "side": 1,
+      "message": "This newlines-to-paragraphs feature deserves a mention in the commit message, and more importantly, in the documentation comment for this function.",
+      "revId": "6321098d0d09a863b156eaf8b86f5bdb459c14f8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_071994db",
+        "filename": "src/ui/ve.ui.DataTransferHandler.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-02-19T03:07:53Z",
+      "side": 1,
+      "message": "Lowercase boolean",
+      "revId": "6321098d0d09a863b156eaf8b86f5bdb459c14f8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
