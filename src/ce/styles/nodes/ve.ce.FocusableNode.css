@@ -24,6 +24,8 @@
 
 .ve-ce-focusableNode {
 	cursor: default;
+	/* T70537: work around Firefox bug */
+	-moz-user-select: none;
 }
 
 .ve-ce-focusableNode-dropMarker {
