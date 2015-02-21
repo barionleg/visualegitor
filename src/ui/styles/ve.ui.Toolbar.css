@@ -11,6 +11,11 @@
 
 .ve-ui-toolbar .oo-ui-toolbar-bar {
 	position: relative;
+	/* By default, later siblings go atop earlier ones in stacking order. Content is
+	   usually after toolbar, but toolbar should be on top with its dropdowns etc.
+	   Still, in most cases content is actually rendered behind dropdowns, but when css
+	   transformations are used, the natural stack will come in effect without this. */
+	z-index: 1;
 }
 
 .ve-ui-toolbar-floating > .oo-ui-toolbar-bar {
