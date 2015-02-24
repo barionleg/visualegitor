@@ -162,6 +162,7 @@
 				"classes": [
 					"ve.ui.*WindowManager",
 					"ve.ui.*Dialog",
+					"ve.ui.*Page",
 					"ve.ui.*Inspector"
 				]
 			}
