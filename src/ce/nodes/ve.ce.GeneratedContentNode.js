@@ -15,6 +15,7 @@
 ve.ce.GeneratedContentNode = function VeCeGeneratedContentNode() {
 	// Properties
 	this.generatingPromise = null;
+	this.cache = { config: null, contents: null };
 
 	// Events
 	this.model.connect( this, { update: 'onGeneratedContentNodeUpdate' } );
@@ -198,12 +199,12 @@ ve.ce.GeneratedContentNode.prototype.afterRender = function () {
  * @param {Object} [config] Optional additional data to pass to generateContents()
  */
 ve.ce.GeneratedContentNode.prototype.update = function ( config ) {
-	var store = this.model.doc.getStore(),
-		index = store.indexOfHash( OO.getHash( [ this.model, config ] ) );
-	if ( index !== null ) {
-		this.render( store.value( index ) );
-	} else {
+	if ( config !== this.cache.config ) {
+		// Invalidate
 		this.forceUpdate( config );
+	} else {
+		// Reuse
+		this.render( this.cache.contents );
 	}
 };
 
@@ -279,14 +280,10 @@ ve.ce.GeneratedContentNode.prototype.abortGenerating = function () {
  * @param {Object} [config] Config object passed to forceUpdate()
  */
 ve.ce.GeneratedContentNode.prototype.doneGenerating = function ( generatedContents, config ) {
-	var store, hash;
-
 	// Because doneGenerating is invoked asynchronously, the model node may have become detached
 	// in the meantime. Handle this gracefully.
 	if ( this.model.doc ) {
-		store = this.model.doc.getStore();
-		hash = OO.getHash( [ this.model, config ] );
-		store.index( generatedContents, hash );
+		this.cache = { config: config, contents: generatedContents };
 	}
 
 	this.$element.removeClass( 've-ce-generatedContentNode-generating' );
