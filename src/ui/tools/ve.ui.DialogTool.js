@@ -52,18 +52,20 @@ ve.ui.DialogTool.prototype.onUpdateState = function () {
 	// Parent method
 	ve.ui.Tool.prototype.onUpdateState.apply( this, arguments );
 	// Never show the tool as active
-	this.setActive( false );
+	//this.setActive( false );
 };
 
 /**
+ * Command help tool.
+ *
  * @class
  * @extends ve.ui.DialogTool
  * @constructor
  * @param {OO.ui.ToolGroup} toolGroup
  * @param {Object} [config] Configuration options
  */
-ve.ui.CommandHelpDialogTool = function VeUiCommandHelpDialogTool( toolGroup, config ) {
-	ve.ui.DialogTool.call( this, toolGroup, config );
+ve.ui.CommandHelpDialogTool = function VeUiCommandHelpDialogTool() {
+	ve.ui.CommandHelpDialogTool.super.apply( this, arguments );
 };
 OO.inheritClass( ve.ui.CommandHelpDialogTool, ve.ui.DialogTool );
 ve.ui.CommandHelpDialogTool.static.name = 'commandHelp';
@@ -75,3 +77,27 @@ ve.ui.CommandHelpDialogTool.static.autoAddToCatchall = false;
 ve.ui.CommandHelpDialogTool.static.autoAddToGroup = false;
 ve.ui.CommandHelpDialogTool.static.commandName = 'commandHelp';
 ve.ui.toolFactory.register( ve.ui.CommandHelpDialogTool );
+
+/**
+ * Special character tool.
+ *
+ * @class
+ * @extends ve.ui.DialogTool
+ * @constructor
+ * @param {OO.ui.ToolGroup} toolGroup
+ * @param {Object} [config] Configuration options
+ */
+ve.ui.SpecialCharacterDialogTool = function VeUiSpecialCharacterDialogTool() {
+	ve.ui.SpecialCharacterDialogTool.super.apply( this, arguments );
+};
+OO.inheritClass( ve.ui.SpecialCharacterDialogTool, ve.ui.DialogTool );
+ve.ui.SpecialCharacterDialogTool.static.name = 'specialCharacter';
+ve.ui.SpecialCharacterDialogTool.static.group = 'dialog';
+ve.ui.SpecialCharacterDialogTool.static.icon = 'special-character';
+ve.ui.SpecialCharacterDialogTool.static.title =
+	OO.ui.deferMsg( 'visualeditor-specialcharacter-button-tooltip' );
+ve.ui.SpecialCharacterDialogTool.static.autoAddToCatchall = false;
+ve.ui.SpecialCharacterDialogTool.static.autoAddToGroup = false;
+ve.ui.SpecialCharacterDialogTool.static.commandName = 'specialCharacter';
+ve.ui.SpecialCharacterDialogTool.static.deactivateOnSelect = true;
+ve.ui.toolFactory.register( ve.ui.SpecialCharacterDialogTool );
