@@ -19,6 +19,91 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_7c58ed28",
+        "filename": "src/ui/contextitems/ve.ui.CommentContextItem.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-02-25T17:52:19Z",
+      "side": 1,
+      "message": "comments should probably be trimmed eventually, some wiki pages have comments which run to hundreds of words. At the moment the context just gets taller and taller with the fixed width.",
+      "revId": "167b471362fbc2d3cb42f57167a6e1bb09c7c694",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_9c40693a",
+        "filename": "src/ui/styles/contextitems/ve.ui.LinkContextItem.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-02-25T17:52:19Z",
+      "side": 1,
+      "message": "this stands out a bit too much to me as the largest text on the page",
+      "revId": "167b471362fbc2d3cb42f57167a6e1bb09c7c694",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_fc563dd0",
+        "filename": "src/ui/styles/ve.ui.Context.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-02-25T17:52:19Z",
+      "side": 1,
+      "message": "empty css file",
+      "revId": "167b471362fbc2d3cb42f57167a6e1bb09c7c694",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5c93b1a5",
+        "filename": "src/ui/styles/ve.ui.ContextItem.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-02-25T17:52:19Z",
+      "side": 1,
+      "message": "why do we want to do this?\n\nAlso, if I disable these rules I still can\u0027t select the text but can\u0027t see why.",
+      "revId": "167b471362fbc2d3cb42f57167a6e1bb09c7c694",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3c77d59c",
+        "filename": "src/ui/styles/ve.ui.ContextItem.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-02-25T17:52:19Z",
+      "side": 1,
+      "message": "the left margin of 1em looks odd compared the the margins around the button, looks odd on comment nodes.",
+      "revId": "167b471362fbc2d3cb42f57167a6e1bb09c7c694",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_d047aa7a",
         "filename": "src/ui/styles/ve.ui.ContextItem.css",
         "patchSetId": 2
@@ -47,6 +132,142 @@
       "writtenOn": "2015-02-25T01:21:15Z",
       "side": 1,
       "message": "Swap.",
+      "revId": "167b471362fbc2d3cb42f57167a6e1bb09c7c694",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_7c10edf7",
+        "filename": "src/ui/ve.ui.ContextItem.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-02-25T17:52:19Z",
+      "side": 1,
+      "message": "optional? (also provide config \u003d config || {})",
+      "revId": "167b471362fbc2d3cb42f57167a6e1bb09c7c694",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_dc21014c",
+        "filename": "src/ui/ve.ui.ContextItem.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-02-25T17:52:19Z",
+      "side": 1,
+      "message": "/* Inheritance */",
+      "revId": "167b471362fbc2d3cb42f57167a6e1bb09c7c694",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_01195288",
+        "filename": "src/ui/ve.ui.ContextItem.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-02-25T17:52:19Z",
+      "side": 1,
+      "message": "dox?",
+      "revId": "167b471362fbc2d3cb42f57167a6e1bb09c7c694",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_bc97654a",
+        "filename": "src/ui/ve.ui.ModeledFactory.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-02-25T17:52:19Z",
+      "side": 1,
+      "message": "\"factories whose items associate with specific models\"",
+      "revId": "167b471362fbc2d3cb42f57167a6e1bb09c7c694",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3cc59564",
+        "filename": "src/ui/ve.ui.ModeledFactory.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-02-25T17:52:19Z",
+      "side": 1,
+      "message": "nope",
+      "revId": "167b471362fbc2d3cb42f57167a6e1bb09c7c694",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_7cef8de4",
+        "filename": "src/ui/ve.ui.ModeledFactory.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-02-25T17:52:19Z",
+      "side": 1,
+      "message": "remove",
+      "revId": "167b471362fbc2d3cb42f57167a6e1bb09c7c694",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5c797128",
+        "filename": "src/ui/ve.ui.ModeledFactory.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-02-25T17:52:19Z",
+      "side": 1,
+      "message": "Why is this limited to ve.dm.Models? Shouldn\u0027t it be made more generic?",
+      "revId": "167b471362fbc2d3cb42f57167a6e1bb09c7c694",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3c6115a4",
+        "filename": "src/ui/ve.ui.TableContext.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-02-25T17:52:19Z",
+      "side": 1,
+      "message": "commented out code",
       "revId": "167b471362fbc2d3cb42f57167a6e1bb09c7c694",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
