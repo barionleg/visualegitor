@@ -1,0 +1,13 @@
+/*!
+ * VisualEditor UserInterface LanguageContextItem styles.
+ *
+ * @copyright 2011-2015 VisualEditor Team and others; see http://ve.mit-license.org
+ */
+
+.ve-ui-languageContextItem .ve-ui-contextItem-body {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	font-size: 1.2em;
+	color: #555;
+}
