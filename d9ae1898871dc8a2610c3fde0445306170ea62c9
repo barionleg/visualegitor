@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_50239aff",
+        "filename": "src/ce/nodes/ve.ce.GeneratedContentNode.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-02-25T00:55:04Z",
+      "side": 1,
+      "message": "Per IRC, I\u0027m concerned that a per-instance cache isn\u0027t going to be nearly as effective as a document-level cache.",
+      "revId": "d9ae1898871dc8a2610c3fde0445306170ea62c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_b028eedd",
+        "filename": "src/dm/nodes/ve.dm.GeneratedContentNode.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-02-25T00:55:04Z",
+      "side": 1,
+      "message": "Please add a proper interface for this in IVStore, with documentation and everything.",
+      "revId": "d9ae1898871dc8a2610c3fde0445306170ea62c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
