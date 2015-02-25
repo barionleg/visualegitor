@@ -11,6 +11,7 @@
  *
  * @class
  * @extends OO.ui.Element
+ * @mixins OO.ui.GroupElement
  *
  * @constructor
  * @param {ve.ce.TableNode} tableNode
@@ -24,6 +25,9 @@ ve.ui.TableContext = function VeUiTableContext( tableNode, toolGroup, config ) {
 	// Parent constructor
 	ve.ui.TableContext.super.call( this, config );
 
+	// Mixin constructors
+	OO.ui.GroupElement.call( this, config );
+
 	// Properties
 	this.tableNode = tableNode;
 	this.toolGroup = toolGroup;
@@ -34,7 +38,6 @@ ve.ui.TableContext = function VeUiTableContext( tableNode, toolGroup, config ) {
 		classes: ['ve-ui-tableContext-indicator'],
 		indicator: config.indicator
 	} );
-	this.menu = new ve.ui.ContextSelectWidget( { $: this.$ } );
 	this.popup = new OO.ui.PopupWidget( {
 		$: this.$,
 		$container: this.surface.$element,
@@ -43,38 +46,40 @@ ve.ui.TableContext = function VeUiTableContext( tableNode, toolGroup, config ) {
 
 	// Events
 	this.indicator.$element.on( 'mousedown', this.onIndicatorMouseDown.bind( this ) );
-	this.menu.connect( this, { choose: 'onContextItemChoose' } );
 	this.onDocumentMouseDownHandler = this.onDocumentMouseDown.bind( this );
 
 	// Initialization
-	this.populateMenu();
-	this.menu.$element.addClass( 've-ui-tableContext-menu' );
-	this.popup.$body.append( this.menu.$element );
+	this.toggleMenu( true );
+	this.$group.addClass( 've-ui-tableContext-menu' );
+	this.popup.$body.append( this.$group );
 	this.$element.addClass( 've-ui-tableContext' ).append( this.indicator.$element, this.popup.$element );
 };
 
 /* Inheritance */
 
 OO.inheritClass( ve.ui.TableContext, OO.ui.Element );
+OO.mixinClass( ve.ui.TableContext, OO.ui.GroupElement );
 
 /* Methods */
 
 /**
  * Populate menu items.
  */
-ve.ui.TableContext.prototype.populateMenu = function () {
+ve.ui.TableContext.prototype.toggleMenu = function () {
+	/*
 	var i, l, tool,
 		items = [],
 		toolList = ve.ui.toolFactory.getTools( [ { group: this.toolGroup } ] );
 
-	this.menu.clearItems();
+	this.clearItems();
 	for ( i = 0, l = toolList.length; i < l; i++ ) {
 		tool = ve.ui.toolFactory.lookup( toolList[i] );
 		items.push( new ve.ui.ContextOptionWidget(
 			tool, this.tableNode.getModel(), { $: this.$, data: tool.static.name }
 		) );
 	}
-	this.menu.addItems( items );
+	this.addItems( items );
+	*/
 };
 
 /**
