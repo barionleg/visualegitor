@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_907e12ac",
+        "filename": "src/ui/contextitems/ve.ui.CommentContextItem.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2015-02-25T01:21:15Z",
+      "side": 1,
+      "message": "Oops.",
+      "revId": "167b471362fbc2d3cb42f57167a6e1bb09c7c694",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_d047aa7a",
+        "filename": "src/ui/styles/ve.ui.ContextItem.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2015-02-25T01:21:15Z",
+      "side": 1,
+      "message": "Swap \u00271px\u0027 and \u0027solid\u0027.",
+      "revId": "167b471362fbc2d3cb42f57167a6e1bb09c7c694",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_f04ae682",
+        "filename": "src/ui/styles/ve.ui.MobileContext.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2015-02-25T01:21:15Z",
+      "side": 1,
+      "message": "Swap.",
+      "revId": "167b471362fbc2d3cb42f57167a6e1bb09c7c694",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
