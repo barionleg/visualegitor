@@ -6,5 +6,4 @@
 
 /* Hide context by default, only show programmatically */
 .ve-ui-context {
-	visibility: hidden;
 }
