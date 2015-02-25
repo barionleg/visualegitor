@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_79679ab4",
+        "filename": "src/ui/contextitems/ve.ui.CommentContextItem.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 88
+      },
+      "writtenOn": "2015-02-25T22:41:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_907e12ac",
+      "revId": "167b471362fbc2d3cb42f57167a6e1bb09c7c694",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_7c58ed28",
         "filename": "src/ui/contextitems/ve.ui.CommentContextItem.js",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2015-02-25T17:52:19Z",
       "side": 1,
       "message": "comments should probably be trimmed eventually, some wiki pages have comments which run to hundreds of words. At the moment the context just gets taller and taller with the fixed width.",
+      "revId": "167b471362fbc2d3cb42f57167a6e1bb09c7c694",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_d96cae9b",
+        "filename": "src/ui/contextitems/ve.ui.CommentContextItem.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 88
+      },
+      "writtenOn": "2015-02-25T22:41:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_7c58ed28",
       "revId": "167b471362fbc2d3cb42f57167a6e1bb09c7c694",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_3905a2c5",
+        "filename": "src/ui/styles/contextitems/ve.ui.LinkContextItem.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 88
+      },
+      "writtenOn": "2015-02-25T22:41:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_9c40693a",
+      "revId": "167b471362fbc2d3cb42f57167a6e1bb09c7c694",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_fc563dd0",
         "filename": "src/ui/styles/ve.ui.Context.css",
         "patchSetId": 2
@@ -64,6 +118,24 @@
       "writtenOn": "2015-02-25T17:52:19Z",
       "side": 1,
       "message": "empty css file",
+      "revId": "167b471362fbc2d3cb42f57167a6e1bb09c7c694",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_b9f8d2c0",
+        "filename": "src/ui/styles/ve.ui.Context.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 88
+      },
+      "writtenOn": "2015-02-25T22:41:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_fc563dd0",
       "revId": "167b471362fbc2d3cb42f57167a6e1bb09c7c694",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_f9216a4b",
+        "filename": "src/ui/styles/ve.ui.ContextItem.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 88
+      },
+      "writtenOn": "2015-02-25T22:41:32Z",
+      "side": 1,
+      "message": "I\u0027ve added a comment - basically there\u0027s this really annoying thing that browsers do when you right click a link, they select it. We want people to be able to right click the link to get the menu that lets them open it in a new tab, but there\u0027s no way to interrupt this native behavior, except making the text unelectable via CSS.",
+      "parentUuid": "6e7c4fa4_5c93b1a5",
+      "revId": "167b471362fbc2d3cb42f57167a6e1bb09c7c694",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_3c77d59c",
         "filename": "src/ui/styles/ve.ui.ContextItem.css",
         "patchSetId": 2
@@ -98,6 +188,24 @@
       "writtenOn": "2015-02-25T17:52:19Z",
       "side": 1,
       "message": "the left margin of 1em looks odd compared the the margins around the button, looks odd on comment nodes.",
+      "revId": "167b471362fbc2d3cb42f57167a6e1bb09c7c694",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_d9d02e24",
+        "filename": "src/ui/styles/ve.ui.ContextItem.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 88
+      },
+      "writtenOn": "2015-02-25T22:41:32Z",
+      "side": 1,
+      "message": "Agreed that narrow icons look odd - but technically the icon box is in the right place so we are up against an odd dilema. Either adjust icon widths to match their graphics, make all icons more equally wide/tall or perhaps center align the icon/label to obscure the alignment issues. In the case of dialogs, we\u0027ve done the latter. The design work has been pushing us toward left-aligned icon/label pairs for this and inspectors, but maybe we should reconsider that position.",
+      "parentUuid": "6e7c4fa4_3c77d59c",
       "revId": "167b471362fbc2d3cb42f57167a6e1bb09c7c694",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_19e46609",
+        "filename": "src/ui/styles/ve.ui.ContextItem.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 88
+      },
+      "writtenOn": "2015-02-25T22:41:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_d047aa7a",
+      "revId": "167b471362fbc2d3cb42f57167a6e1bb09c7c694",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_f04ae682",
         "filename": "src/ui/styles/ve.ui.MobileContext.css",
         "patchSetId": 2
@@ -132,6 +258,24 @@
       "writtenOn": "2015-02-25T01:21:15Z",
       "side": 1,
       "message": "Swap.",
+      "revId": "167b471362fbc2d3cb42f57167a6e1bb09c7c694",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_79cb1a75",
+        "filename": "src/ui/styles/ve.ui.MobileContext.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 88
+      },
+      "writtenOn": "2015-02-25T22:41:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_f04ae682",
       "revId": "167b471362fbc2d3cb42f57167a6e1bb09c7c694",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_19b226f9",
+        "filename": "src/ui/ve.ui.ContextItem.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 88
+      },
+      "writtenOn": "2015-02-25T22:41:32Z",
+      "side": 1,
+      "message": "Making it optional, but we only use \"config \u003d config || {}\" when we are actually going to use \"config.something\". The rule is to use it when it\u0027s needed.",
+      "parentUuid": "6e7c4fa4_7c10edf7",
+      "revId": "167b471362fbc2d3cb42f57167a6e1bb09c7c694",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_dc21014c",
         "filename": "src/ui/ve.ui.ContextItem.js",
         "patchSetId": 2
@@ -166,6 +328,24 @@
       "writtenOn": "2015-02-25T17:52:19Z",
       "side": 1,
       "message": "/* Inheritance */",
+      "revId": "167b471362fbc2d3cb42f57167a6e1bb09c7c694",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_79a23aa5",
+        "filename": "src/ui/ve.ui.ContextItem.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 88
+      },
+      "writtenOn": "2015-02-25T22:41:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_dc21014c",
       "revId": "167b471362fbc2d3cb42f57167a6e1bb09c7c694",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -189,6 +369,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_999dd66b",
+        "filename": "src/ui/ve.ui.ContextItem.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 88
+      },
+      "writtenOn": "2015-02-25T22:41:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_01195288",
+      "revId": "167b471362fbc2d3cb42f57167a6e1bb09c7c694",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_bc97654a",
         "filename": "src/ui/ve.ui.ModeledFactory.js",
         "patchSetId": 2
@@ -200,6 +398,24 @@
       "writtenOn": "2015-02-25T17:52:19Z",
       "side": 1,
       "message": "\"factories whose items associate with specific models\"",
+      "revId": "167b471362fbc2d3cb42f57167a6e1bb09c7c694",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3990424e",
+        "filename": "src/ui/ve.ui.ModeledFactory.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 88
+      },
+      "writtenOn": "2015-02-25T22:41:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_bc97654a",
       "revId": "167b471362fbc2d3cb42f57167a6e1bb09c7c694",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -223,6 +439,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_f985ea0b",
+        "filename": "src/ui/ve.ui.ModeledFactory.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 88
+      },
+      "writtenOn": "2015-02-25T22:41:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_3cc59564",
+      "revId": "167b471362fbc2d3cb42f57167a6e1bb09c7c694",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_7cef8de4",
         "filename": "src/ui/ve.ui.ModeledFactory.js",
         "patchSetId": 2
@@ -240,6 +474,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_1989c626",
+        "filename": "src/ui/ve.ui.ModeledFactory.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 88
+      },
+      "writtenOn": "2015-02-25T22:41:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_7cef8de4",
+      "revId": "167b471362fbc2d3cb42f57167a6e1bb09c7c694",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_5c797128",
         "filename": "src/ui/ve.ui.ModeledFactory.js",
         "patchSetId": 2
@@ -251,6 +503,24 @@
       "writtenOn": "2015-02-25T17:52:19Z",
       "side": 1,
       "message": "Why is this limited to ve.dm.Models? Shouldn\u0027t it be made more generic?",
+      "revId": "167b471362fbc2d3cb42f57167a6e1bb09c7c694",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_398fe228",
+        "filename": "src/ui/ve.ui.ModeledFactory.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 88
+      },
+      "writtenOn": "2015-02-25T22:41:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_5c797128",
       "revId": "167b471362fbc2d3cb42f57167a6e1bb09c7c694",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
