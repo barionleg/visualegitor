@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_bbe4423a",
+        "filename": "src/ui/ve.ui.MobileContext.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-02-26T15:24:30Z",
+      "side": 1,
+      "message": "while you\u0027re here, pretty sure this 300ms delay is bollocks and therefore this whole method is the same as the parent.",
+      "revId": "78a3cafe09a85d093a3bb1bd58c2ed1d7d61a26f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_003dc389",
         "filename": "src/ui/ve.ui.ModeledFactory.js",
         "patchSetId": 7
