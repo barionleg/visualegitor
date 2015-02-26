@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_003dc389",
+        "filename": "src/ui/ve.ui.ModeledFactory.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-02-26T11:33:16Z",
+      "side": 1,
+      "message": "also {Object}",
+      "revId": "78a3cafe09a85d093a3bb1bd58c2ed1d7d61a26f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
