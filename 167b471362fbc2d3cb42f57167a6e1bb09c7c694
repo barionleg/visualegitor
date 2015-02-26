@@ -212,6 +212,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_80c1d384",
+        "filename": "src/ui/styles/ve.ui.ContextItem.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-02-26T11:32:32Z",
+      "side": 1,
+      "message": "Even without icon padding this looks odd, as you have 1em to the left of an icon, and 0.5em to the right of a button. The downside to making these equal would be that the icon/title ends up with more vertical margin than horizontal, due to vertical alignment with the button.\n\nWe should also be using the narrow button styling we use in process dialogs. This will help with the vertical margin issue on the icon/title.",
+      "parentUuid": "6e7c4fa4_d9d02e24",
+      "revId": "167b471362fbc2d3cb42f57167a6e1bb09c7c694",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_d047aa7a",
         "filename": "src/ui/styles/ve.ui.ContextItem.css",
         "patchSetId": 2
@@ -521,6 +539,24 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "6e7c4fa4_5c797128",
+      "revId": "167b471362fbc2d3cb42f57167a6e1bb09c7c694",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_606117a3",
+        "filename": "src/ui/ve.ui.ModeledFactory.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-02-26T11:32:32Z",
+      "side": 1,
+      "message": "I actually meant more generally: why does this mixin talk about models at all, instead of just classes? e.g. it could be used with views too.",
+      "parentUuid": "6e7c4fa4_398fe228",
       "revId": "167b471362fbc2d3cb42f57167a6e1bb09c7c694",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
