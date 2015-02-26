@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "6e7c4fa4_80f473ba",
+        "filename": "src/ui/contextitems/ve.ui.ToolContextItem.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-02-26T11:59:46Z",
+      "side": 1,
+      "message": "Noticed in MW that we should remove this fallback, now that we have an actual title field.\n\nRequires var description \u003d \u0027\u0027 at the top.",
+      "revId": "78a3cafe09a85d093a3bb1bd58c2ed1d7d61a26f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_003dc389",
         "filename": "src/ui/ve.ui.ModeledFactory.js",
         "patchSetId": 7
