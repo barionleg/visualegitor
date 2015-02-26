@@ -31,7 +31,14 @@ ve.ui.FragmentInspector.static.actions = ve.ui.FragmentInspector.super.static.ac
 	{
 		action: 'done',
 		label: OO.ui.deferMsg( 'visualeditor-dialog-action-done' ),
-		flags: [ 'progressive', 'primary' ]
+		flags: [ 'progressive', 'primary' ],
+		modes: 'edit'
+	},
+	{
+		action: 'done',
+		label: OO.ui.deferMsg( 'visualeditor-dialog-action-insert' ),
+		flags: [ 'constructive', 'primary' ],
+		modes: 'insert'
 	}
 ] );
 
@@ -104,6 +111,9 @@ ve.ui.FragmentInspector.prototype.getSetupProcess = function ( data ) {
 				throw new Error( 'Cannot open inspector: opening data must contain a fragment' );
 			}
 			this.fragment = data.fragment;
+		}, this )
+		.next( function () {
+			this.actions.setMode( this.fragment.getSelectedModels().length ? 'edit' : 'insert' );
 		}, this );
 };
 
