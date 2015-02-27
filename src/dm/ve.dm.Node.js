@@ -372,6 +372,13 @@ ve.dm.Node.prototype.isFocusable = function () {
 };
 
 /**
+ * @inheritdoc ve.Node
+ */
+ve.dm.Node.prototype.isAlignable = function () {
+	return this.constructor.static.isAlignable;
+};
+
+/**
  * Check if the node can have a slug before it.
  *
  * @method
