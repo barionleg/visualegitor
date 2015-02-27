@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3d849ca2",
+        "filename": "src/ui/inspectors/ve.ui.FragmentInspector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2015-02-27T22:02:18Z",
+      "side": 1,
+      "message": "@param…?",
+      "revId": "a54e2683edef9597a9295cceb7fbb8601ff41396",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
