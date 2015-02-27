@@ -42,8 +42,9 @@ ve.ui.FragmentInspector.static.actions = ve.ui.FragmentInspector.super.static.ac
  *
  * @method
  */
-ve.ui.FragmentInspector.prototype.onFormSubmit = function () {
+ve.ui.FragmentInspector.prototype.onFormSubmit = function ( e ) {
 	this.close( { action: 'done' } );
+	e.preventDefault();
 };
 
 /**
