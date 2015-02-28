@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5304e919",
+        "filename": "src/ui/inspectors/ve.ui.AnnotationInspector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-02-28T01:28:21Z",
+      "side": 1,
+      "message": "This causes the remove button to only appear in edit mode. That\u0027s good, but it\u0027s a significant change and should be mentioned in the commit message.",
+      "revId": "1d79207bb47406f8f7a9904d70ce4ff402b0f9ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ae04f017",
+        "filename": "src/ui/inspectors/ve.ui.AnnotationInspector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-02-28T01:28:21Z",
+      "side": 1,
+      "message": "It would be nice to provide a method in FragmentInspector so subclasses don\u0027t have to duplicate the logic deciding whether we\u0027re in edit or insert mode.",
+      "revId": "1d79207bb47406f8f7a9904d70ce4ff402b0f9ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ce07ec19",
+        "filename": "src/ui/inspectors/ve.ui.FragmentInspector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-02-28T01:28:21Z",
+      "side": 1,
+      "message": "Two actions with the same name but different flags? Is that even supported?",
+      "revId": "1d79207bb47406f8f7a9904d70ce4ff402b0f9ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
