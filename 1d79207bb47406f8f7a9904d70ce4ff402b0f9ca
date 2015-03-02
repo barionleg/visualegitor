@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_f7a4fc48",
+        "filename": "src/ui/inspectors/ve.ui.AnnotationInspector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-03-02T02:40:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_5304e919",
+      "revId": "1d79207bb47406f8f7a9904d70ce4ff402b0f9ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_ae04f017",
         "filename": "src/ui/inspectors/ve.ui.AnnotationInspector.js",
         "patchSetId": 1
@@ -47,6 +65,24 @@
       "writtenOn": "2015-02-28T01:28:21Z",
       "side": 1,
       "message": "Two actions with the same name but different flags? Is that even supported?",
+      "revId": "1d79207bb47406f8f7a9904d70ce4ff402b0f9ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_17a09830",
+        "filename": "src/ui/inspectors/ve.ui.FragmentInspector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-03-02T02:40:16Z",
+      "side": 1,
+      "message": "Seemingly not. :-)",
+      "parentUuid": "6e7c4fa4_ce07ec19",
       "revId": "1d79207bb47406f8f7a9904d70ce4ff402b0f9ca",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
