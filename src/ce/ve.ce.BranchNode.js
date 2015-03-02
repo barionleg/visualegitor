@@ -117,10 +117,10 @@ ve.ce.BranchNode.prototype.onTeardown = function () {
 /**
  * Update the DOM wrapper.
  *
- * WARNING: The contents, .data( 'view' ) and any classes the wrapper already has will be moved to
- * the new wrapper, but other attributes and any other information added using $.data() will be
- * lost upon updating the wrapper. To retain information added to the wrapper, subscribe to the
- * 'teardown' and 'setup' events.
+ * WARNING: The contents, .data( 'view' ), the contentEditable property and any classes the wrapper
+ * already has will be moved to  the new wrapper, but other attributes and any other information
+ * added using $.data() will be lost upon updating the wrapper. To retain information added to the
+ * wrapper, subscribe to the 'teardown' and 'setup' events.
  *
  * @method
  * @fires teardown
@@ -132,9 +132,13 @@ ve.ce.BranchNode.prototype.updateTagName = function () {
 
 	if ( tagName !== this.tagName ) {
 		this.emit( 'teardown' );
-		$wrapper = this.$( document.createElement( tagName ) );
-		// Move contents
-		$wrapper.append( this.$element.contents() );
+		$wrapper = this.$( document.createElement( tagName ) )
+			// Move contents
+			.append( this.$element.contents() )
+			// Copy classes
+			.prop( 'class', this.$element.prop( 'class' ) )
+			// Copy contentEditable
+			.prop( 'contentEditable', this.$element.prop( 'contentEditable' ) );
 		// Swap elements
 		this.$element.replaceWith( $wrapper );
 		// Use new element from now on
