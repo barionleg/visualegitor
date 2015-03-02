@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_306fd527",
+        "filename": "src/ce/ve.ce.BranchNode.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2015-03-02T22:22:27Z",
+      "side": 1,
+      "message": "Let\u0027s document here that this section must be kept in sync with onSetup.",
+      "revId": "436329d927263d2149fd12e22ecaa1728ec74f68",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_9067c949",
+        "filename": "src/ce/ve.ce.LeafNode.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2015-03-02T22:22:27Z",
+      "side": 1,
+      "message": "The constructor does this conditionally based on isWrapped. Should one of these be changed?",
+      "revId": "436329d927263d2149fd12e22ecaa1728ec74f68",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
