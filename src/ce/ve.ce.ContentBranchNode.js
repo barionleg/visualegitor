@@ -21,6 +21,7 @@ ve.ce.ContentBranchNode = function VeCeContentBranchNode( model, config ) {
 
 	// Properties
 	this.lastTransaction = null;
+	this.stopSetupSlugs = false;
 	this.unicornAnnotations = null;
 	this.unicorns = null;
 
@@ -105,8 +106,11 @@ ve.ce.ContentBranchNode.prototype.onChildUpdate = function ( transaction ) {
  * @method
  */
 ve.ce.ContentBranchNode.prototype.onSplice = function ( index, howmany ) {
+	// HACK: block calls to setupSlugs() from the parent's onSplice
+	this.stopSetupSlugs = true;
 	// Parent method
 	ve.ce.BranchNode.prototype.onSplice.apply( this, arguments );
+	this.stopSetupSlugs = false;
 
 	// HACK: adjust slugNodes indexes if isRenderingLocked. This should be sufficient to
 	// keep this.slugNodes valid - only text changes can occur, which cannot create a
@@ -117,19 +121,16 @@ ve.ce.ContentBranchNode.prototype.onSplice = function ( index, howmany ) {
 		this.root.getSurface().isRenderingLocked
 	) {
 		this.slugNodes.splice.apply( this.slugNodes, [ index, howmany ].concat( new Array( arguments.length - 2 ) ) );
+	} else {
+		// Rerender to make sure annotations are applied correctly
+		this.renderContents();
 	}
-
-	// Rerender to make sure annotations are applied correctly
-	this.renderContents();
 };
 
 /** @inheritdoc */
 ve.ce.ContentBranchNode.prototype.setupSlugs = function () {
-	// Respect render lock
-	if (
-		this.root instanceof ve.ce.DocumentNode &&
-		this.root.getSurface().isRenderingLocked()
-	) {
+	// HACK: block calls to setupSlugs() from the parent's onSplice
+	if ( this.stopSetupSlugs ) {
 		return;
 	}
 	ve.ce.BranchNode.prototype.setupSlugs.apply( this, arguments );
