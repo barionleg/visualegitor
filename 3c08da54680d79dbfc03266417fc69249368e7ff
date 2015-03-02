@@ -16,6 +16,24 @@
       "revId": "3c08da54680d79dbfc03266417fc69249368e7ff",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_402de4ec",
+        "filename": "src/ce/ve.ce.BranchNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-03-02T15:10:53Z",
+      "side": 1,
+      "message": "Good point, will fix. We should also add the class early so as to avoid a reflow.",
+      "parentUuid": "6e7c4fa4_204788c0",
+      "revId": "3c08da54680d79dbfc03266417fc69249368e7ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
