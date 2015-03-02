@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_fae7fcd0",
+        "filename": "src/ui/inspectors/ve.ui.AnnotationInspector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 88
+      },
+      "writtenOn": "2015-03-02T20:26:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_ae04f017",
+      "revId": "1d79207bb47406f8f7a9904d70ce4ff402b0f9ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_ce07ec19",
         "filename": "src/ui/inspectors/ve.ui.FragmentInspector.js",
         "patchSetId": 1
@@ -83,6 +101,24 @@
       "side": 1,
       "message": "Seemingly not. :-)",
       "parentUuid": "6e7c4fa4_ce07ec19",
+      "revId": "1d79207bb47406f8f7a9904d70ce4ff402b0f9ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_1af75889",
+        "filename": "src/ui/inspectors/ve.ui.FragmentInspector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 88
+      },
+      "writtenOn": "2015-03-02T20:26:04Z",
+      "side": 1,
+      "message": "Of course it is! Depending on the mode, the flags may vary, but we don\u0027t have to force everyone to create separate action code paths - in most cases \"done\" either inserts or edits, and the code is quite similar, so it\u0027s less of a mess to deal with the differences only when needed and at a more granular level.",
+      "parentUuid": "6e7c4fa4_17a09830",
       "revId": "1d79207bb47406f8f7a9904d70ce4ff402b0f9ca",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
