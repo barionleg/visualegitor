@@ -24,6 +24,9 @@ ve.ce.BranchNode = function VeCeBranchNode( model, config ) {
 	// Parent constructor
 	ve.ce.Node.call( this, model, config );
 
+	// DOM changes
+	this.$element.addClass( 've-ce-branchNode' );
+
 	// Properties
 	this.tagName = this.$element.get( 0 ).nodeName.toLowerCase();
 	this.slugNodes = [];
@@ -101,26 +104,6 @@ ve.ce.BranchNode.blockSlugTemplate = $( '<div>' )
 	.get( 0 );
 
 /* Methods */
-
-/**
- * Handle setup event.
- *
- * @method
- */
-ve.ce.BranchNode.prototype.onSetup = function () {
-	ve.ce.Node.prototype.onSetup.call( this );
-	this.$element.addClass( 've-ce-branchNode' );
-};
-
-/**
- * Handle teardown event.
- *
- * @method
- */
-ve.ce.BranchNode.prototype.onTeardown = function () {
-	ve.ce.Node.prototype.onTeardown.call( this );
-	this.$element.removeClass( 've-ce-branchNode' );
-};
 
 /**
  * Update the DOM wrapper.
