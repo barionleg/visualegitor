@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_204788c0",
+        "filename": "src/ce/ve.ce.BranchNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2015-03-02T15:10:02Z",
+      "side": 1,
+      "message": "I\u0027d swap these to append after setting properties. I don\u0027t foresee an immediate problem right now, but I\u0027d rather be careful and have no state where the elements are part of the element with the wrong properties. However small the window is. I don\u0027t trust browsers enough to get this right or possibly take the liberty to do something during appending when there is no ce restriction.",
+      "revId": "3c08da54680d79dbfc03266417fc69249368e7ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
