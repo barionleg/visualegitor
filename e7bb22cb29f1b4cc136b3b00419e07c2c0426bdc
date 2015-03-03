@@ -16,6 +16,24 @@
       "revId": "e7bb22cb29f1b4cc136b3b00419e07c2c0426bdc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_13273ac6",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-03-03T21:49:51Z",
+      "side": 1,
+      "message": "Oh crap, I meant to remove this comment but forgot",
+      "parentUuid": "6e7c4fa4_5341325c",
+      "revId": "e7bb22cb29f1b4cc136b3b00419e07c2c0426bdc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
