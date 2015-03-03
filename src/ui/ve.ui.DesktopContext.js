@@ -176,6 +176,7 @@ ve.ui.DesktopContext.prototype.toggle = function ( show ) {
 		this.updateDimensions();
 	} else if ( this.inspector ) {
 		this.inspector.close();
+		this.lastClosedSelection = null;
 	}
 
 	return promise;
@@ -190,7 +191,10 @@ ve.ui.DesktopContext.prototype.updateDimensions = function () {
 		surface = this.surface.getView(),
 		focusedNode = surface.getFocusedNode();
 
-	if ( !this.inspector || ( !this.inspector.isOpening() && !this.inspector.isOpened() ) ) {
+	if (
+		( !this.inspector || ( !this.inspector.isOpening() && !this.inspector.isOpened() ) ) &&
+		surface.getModel().getSelection() instanceof ve.dm.LinearSelection
+	) {
 		this.lastClosedSelection = surface.getModel().getSelection().clone();
 	}
 	boundingRect = surface.getSelectionBoundingRect( this.lastClosedSelection );
