@@ -16,6 +16,24 @@
       "revId": "b66e48d525edfbce10f4801e6649096fdf78184e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_011a7b1b",
+        "filename": "src/ui/ve.ui.DesktopContext.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-03-04T17:17:14Z",
+      "side": 1,
+      "message": "then selection is null and get\u0027s defaulted to the current selection inside getSelectionBoundingRect et al",
+      "parentUuid": "6e7c4fa4_1e0f3a8e",
+      "revId": "b66e48d525edfbce10f4801e6649096fdf78184e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
