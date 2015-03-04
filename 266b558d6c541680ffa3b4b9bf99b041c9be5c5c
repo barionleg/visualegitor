@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_b7bbc908",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 2877,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-03-04T20:18:16Z",
+      "side": 1,
+      "message": "I *think* the offsets are effectively ignored: the focusNode must have changed because we\u0027ve entered a focusable node. (But we should keep the offsets in any case, because it communicates more clearly that we are comparing the focus positions).",
+      "revId": "266b558d6c541680ffa3b4b9bf99b041c9be5c5c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
