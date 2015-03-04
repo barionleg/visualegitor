@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_1e0f3a8e",
+        "filename": "src/ui/ve.ui.DesktopContext.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-03-04T15:27:30Z",
+      "side": 1,
+      "message": "What if this.inspector is not set? Then selection is never set? The code you removed contained an if statement covering this case (using the model selection instead), and the \u0026\u0026 you wrote here appears to indicate that you\u0027re afraid this.inspector might not be set.",
+      "revId": "b66e48d525edfbce10f4801e6649096fdf78184e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
