@@ -1256,7 +1256,7 @@ ve.ce.Surface.prototype.afterDocumentKeyDown = function ( e ) {
 	 * Even if the user pressed a cursor key in the interior of the document, there may not
 	 * be any movement: browser BIDI and ce=false handling can be quite quirky
 	 *
-	 * @returns {number|null} -1 for startwards, 1 for endwards, null for none
+	 * @returns {number|null} negative for startwards, positive for endwards, null for none
 	 */
 	function getDirection() {
 		return (
@@ -1283,7 +1283,7 @@ ve.ce.Surface.prototype.afterDocumentKeyDown = function ( e ) {
 		return;
 	}
 
-	// If we arrowed a collapsed cursor across a focusable node, select the node instead
+	// If we arrowed a collapsed cursor into/across a focusable node, select the node instead
 	if (
 		isArrow &&
 		!e.ctrlKey &&
@@ -2827,15 +2827,15 @@ ve.ce.Surface.prototype.handleLinearArrowKey = function ( e ) {
 			}
 			// Else keep going with the cursor in the new place
 		}
-		// Else keep DM range and DOM selection as-is
 	}
+	// Else keep DM range and DOM selection as-is
 
-	if ( !this.nativeSelection.extend && range.isBackwards() ) {
+	if ( e.shiftKey && !this.nativeSelection.extend && range.isBackwards() ) {
 		// If the browser doesn't support backwards selections, but the dm range
 		// is backwards, then use "collapse to anchor - observe - expand".
 		collapseNode = this.nativeSelection.anchorNode;
 		collapseOffset = this.nativeSelection.anchorOffset;
-	} else if ( !range.isCollapsed() && upOrDown ) {
+	} else if ( e.shiftKey && !range.isCollapsed() && upOrDown ) {
 		// If selection is expanded and cursoring is up/down, use
 		// "collapse to focus - observe - expand" to work round quirks.
 		collapseNode = this.nativeSelection.focusNode;
@@ -2874,14 +2874,14 @@ ve.ce.Surface.prototype.handleLinearArrowKey = function ( e ) {
 			} else {
 				// Observe which way the cursor moved
 				afterDirection = ve.compareDocumentOrder(
-					startFocusNode,
-					startFocusOffset,
 					surface.nativeSelection.focusNode,
-					surface.nativeSelection.focusOffset
+					surface.nativeSelection.focusOffset,
+					startFocusNode,
+					startFocusOffset
 				);
 			}
 			newRange = (
-				afterDirection === 1 ?
+				afterDirection > 0 ?
 				viewNode.getOuterRange() :
 				viewNode.getOuterRange().flip()
 			);
