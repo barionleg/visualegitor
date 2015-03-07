@@ -66,8 +66,6 @@ OO.inheritClass( ve.ui.Toolbar, OO.ui.Toolbar );
  * @param {ve.ui.Surface} [surface] Surface to attach to
  */
 ve.ui.Toolbar.prototype.setup = function ( groups, surface ) {
-	this.detach();
-
 	this.surface = surface;
 
 	// Parent method
