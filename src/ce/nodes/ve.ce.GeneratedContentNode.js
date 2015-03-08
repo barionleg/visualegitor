@@ -174,6 +174,8 @@ ve.ce.GeneratedContentNode.prototype.render = function ( generatedContents ) {
 	}
 
 	if ( this.live ) {
+		// $element has changed, so re-initialize
+		this.emit( 'initialize' );
 		this.emit( 'setup' );
 		this.afterRender();
 	}

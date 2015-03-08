@@ -42,6 +42,7 @@ ve.ce.FocusableNode = function VeCeFocusableNode( $focusable ) {
 
 	// Events
 	this.connect( this, {
+		initialize: 'onFocusableInitialize',
 		setup: 'onFocusableSetup',
 		teardown: 'onFocusableTeardown',
 		resizeStart: 'onFocusableResizeStart',
@@ -89,6 +90,18 @@ ve.ce.FocusableNode.prototype.createHighlight = function () {
 };
 
 /**
+ * Handle node initialization.
+ *
+ * @method
+ */
+ve.ce.FocusableNode.prototype.onFocusableInitialize = function () {
+	// DOM changes
+	this.$element
+		.addClass( 've-ce-focusableNode' )
+		.prop( 'contentEditable', 'false' );
+};
+
+/**
  * Handle node setup.
  *
  * @method
@@ -100,11 +113,6 @@ ve.ce.FocusableNode.prototype.onFocusableSetup = function () {
 	}
 
 	this.surface = this.getRoot().getSurface();
-
-	// DOM changes (duplicated from constructor in case this.$element is replaced)
-	this.$element
-		.addClass( 've-ce-focusableNode' )
-		.prop( 'contentEditable', 'false' );
 
 	// Events
 	this.$focusable.on( {

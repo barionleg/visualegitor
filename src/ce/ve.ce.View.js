@@ -32,6 +32,7 @@ ve.ce.View = function VeCeView( model, config ) {
 
 	// Events
 	this.connect( this, {
+		initialize: 'onInitialize',
 		setup: 'onSetup',
 		teardown: 'onTeardown'
 	} );
@@ -108,6 +109,13 @@ ve.ce.View.static.renderHtmlAttributes = function ( attribute ) {
 ve.ce.View.prototype.getModelHtmlDocument = function () {
 	return null;
 };
+
+/**
+ * Initialize the $element.
+ *
+ * @method
+ */
+ve.ce.View.prototype.onInitialize = function () {};
 
 /**
  * Handle setup event.

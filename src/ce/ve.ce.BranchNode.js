@@ -17,15 +17,12 @@
  * @param {ve.dm.BranchNode} model Model to observe
  * @param {Object} [config] Configuration options
  */
-ve.ce.BranchNode = function VeCeBranchNode( model, config ) {
+ve.ce.BranchNode = function VeCeBranchNode() {
 	// Mixin constructor
 	ve.BranchNode.call( this );
 
 	// Parent constructor
-	ve.ce.Node.call( this, model, config );
-
-	// DOM changes (keep in sync with #onSetup)
-	this.$element.addClass( 've-ce-branchNode' );
+	ve.ce.BranchNode.super.apply( this, arguments );
 
 	// Properties
 	this.tagName = this.$element.get( 0 ).nodeName.toLowerCase();
@@ -35,7 +32,7 @@ ve.ce.BranchNode = function VeCeBranchNode( model, config ) {
 	this.model.connect( this, { splice: 'onSplice' } );
 
 	// Initialization
-	this.onSplice.apply( this, [0, 0].concat( model.getChildren() ) );
+	this.onSplice.apply( this, [0, 0].concat( this.model.getChildren() ) );
 };
 
 /* Inheritance */
@@ -100,11 +97,11 @@ ve.ce.BranchNode.blockSlugTemplate = $( '<div>' )
 /**
  * @inheritdoc
  */
-ve.ce.BranchNode.prototype.onSetup = function () {
+ve.ce.BranchNode.prototype.onInitialize = function () {
 	// Parent method
-	ve.ce.Node.prototype.onSetup.call( this );
+	ve.ce.BranchNode.super.prototype.onInitialize.call( this );
 
-	// DOM changes (duplicated from constructor in case this.$element is replaced)
+	// DOM changes
 	this.$element.addClass( 've-ce-branchNode' );
 };
 
@@ -141,6 +138,8 @@ ve.ce.BranchNode.prototype.updateTagName = function () {
 		}
 		// Use new element from now on
 		this.$element = $( wrapper );
+		// $element has changed, so re-initialize
+		this.emit( 'initialize' );
 		this.emit( 'setup' );
 		// Remember which tag name we are using now
 		this.tagName = tagName;
