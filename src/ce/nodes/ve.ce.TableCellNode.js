@@ -17,22 +17,6 @@ ve.ce.TableCellNode = function VeCeTableCellNode() {
 	// Parent constructor
 	ve.ce.TableCellNode.super.apply( this, arguments );
 
-	var rowspan = this.model.getRowspan(),
-		colspan = this.model.getColspan();
-
-	// DOM changes
-	this.$element
-		// The following classes can be used here:
-		// ve-ce-tableCellNode-data
-		// ve-ce-tableCellNode-header
-		.addClass( 've-ce-tableCellNode ve-ce-tableCellNode-' + this.model.getAttribute( 'style' ) );
-	if ( rowspan > 1 ) {
-		this.$element.attr( 'rowspan', rowspan );
-	}
-	if ( colspan > 1 ) {
-		this.$element.attr( 'colspan', colspan );
-	}
-
 	// Events
 	this.model.connect( this, {
 		update: 'onUpdate',
@@ -80,6 +64,31 @@ ve.ce.TableCellNode.prototype.setEditing = function ( enable ) {
 };
 
 /**
+ * @inheritdoc
+ */
+ve.ce.TableCellNode.prototype.onInitialize = function () {
+	// Parent method
+	ve.ce.TableCellNode.super.prototype.onInitialize.apply( this, arguments );
+
+	var rowspan = this.model.getRowspan(),
+		colspan = this.model.getColspan();
+
+	// DOM changes
+	this.$element
+		// The following classes can be used here:
+		// ve-ce-tableCellNode-data
+		// ve-ce-tableCellNode-header
+		.addClass( 've-ce-tableCellNode ve-ce-tableCellNode-' + this.model.getAttribute( 'style' ) );
+
+	if ( rowspan > 1 ) {
+		this.$element.attr( 'rowspan', rowspan );
+	}
+	if ( colspan > 1 ) {
+		this.$element.attr( 'colspan', colspan );
+	}
+};
+
+/**
  * Handle model update events.
  *
  * If the style changed since last update the DOM wrapper will be replaced with an appropriate one.
@@ -104,9 +113,6 @@ ve.ce.TableCellNode.prototype.onAttributeChange = function ( key, from, to ) {
 			}
 			break;
 		case 'style':
-			this.$element
-				.removeClass( 've-ce-tableCellNode-' + from )
-				.addClass( 've-ce-tableCellNode-' + to );
 			this.updateTagName();
 			break;
 	}

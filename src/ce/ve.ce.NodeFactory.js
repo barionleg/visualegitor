@@ -23,6 +23,18 @@ OO.inheritClass( ve.ce.NodeFactory, OO.Factory );
 /* Methods */
 
 /**
+ * @inheritdoc
+ */
+ve.ce.NodeFactory.prototype.create = function () {
+	// Parent method
+	var obj = ve.ce.NodeFactory.super.prototype.create.apply( this, arguments );
+
+	obj.emit( 'initialize' );
+
+	return obj;
+};
+
+/**
  * Get a plain text description of a node model.
  *
  * @param {ve.dm.Node} node Node to describe
