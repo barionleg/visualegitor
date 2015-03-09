@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5bc2803a",
+        "filename": "src/ce/nodes/ve.ce.GeneratedContentNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 88
+      },
+      "writtenOn": "2015-03-09T19:42:50Z",
+      "side": 1,
+      "message": "If you have code in a method called initialize that needs to be called more than once, you need to move that code to a setup method.",
+      "revId": "2c49f1e08de09948f522e0f6487e9f402e279b87",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
