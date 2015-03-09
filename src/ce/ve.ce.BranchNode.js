@@ -24,9 +24,6 @@ ve.ce.BranchNode = function VeCeBranchNode( model, config ) {
 	// Parent constructor
 	ve.ce.Node.call( this, model, config );
 
-	// DOM changes (keep in sync with #onSetup)
-	this.$element.addClass( 've-ce-branchNode' );
-
 	// Properties
 	this.tagName = this.$element.get( 0 ).nodeName.toLowerCase();
 	this.slugNodes = [];
@@ -100,11 +97,10 @@ ve.ce.BranchNode.blockSlugTemplate = $( '<div>' )
 /**
  * @inheritdoc
  */
-ve.ce.BranchNode.prototype.onSetup = function () {
+ve.ce.BranchNode.prototype.initialize = function () {
 	// Parent method
-	ve.ce.Node.prototype.onSetup.call( this );
+	ve.ce.Node.prototype.initialize.call( this );
 
-	// DOM changes (duplicated from constructor in case this.$element is replaced)
 	this.$element.addClass( 've-ce-branchNode' );
 };
 
@@ -114,7 +110,7 @@ ve.ce.BranchNode.prototype.onSetup = function () {
  * WARNING: The contents, .data( 'view' ), the contentEditable property and any classes the wrapper
  * already has will be moved to  the new wrapper, but other attributes and any other information
  * added using $.data() will be lost upon updating the wrapper. To retain information added to the
- * wrapper, subscribe to the 'teardown' and 'setup' events.
+ * wrapper, subscribe to the 'teardown' and 'setup' events, or override #initialize.
  *
  * @method
  * @fires teardown
@@ -141,9 +137,11 @@ ve.ce.BranchNode.prototype.updateTagName = function () {
 		}
 		// Use new element from now on
 		this.$element = $( wrapper );
-		this.emit( 'setup' );
 		// Remember which tag name we are using now
 		this.tagName = tagName;
+		// Give subclasses the opportunity to touch the new element
+		this.initialize();
+		this.emit( 'setup' );
 	}
 };
 

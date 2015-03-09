@@ -173,6 +173,7 @@ ve.ce.GeneratedContentNode.prototype.render = function ( generatedContents ) {
 		this.$resizable = this.getResizableElement();
 	}
 
+	this.initialize();
 	if ( this.live ) {
 		this.emit( 'setup' );
 		this.afterRender();
