@@ -121,6 +121,18 @@ ve.ce.View.prototype.getModelHtmlDocument = function () {
  * this.$element is replaced.
  */
 ve.ce.View.prototype.initialize = function () {
+	// Render attributes from original DOM elements
+	ve.dm.Converter.renderHtmlAttributeList(
+		this.model.getOriginalDomElements(),
+		this.$element,
+		this.constructor.static.renderHtmlAttributes,
+		// computed attributes
+		true,
+		// deep
+		!ve.dm.nodeFactory.lookup( this.model.getType() ) ||
+			!ve.dm.nodeFactory.canNodeHaveChildren( this.model.getType() ) ||
+			ve.dm.nodeFactory.doesNodeHandleOwnChildren( this.model.getType() )
+	);
 };
 
 /**
