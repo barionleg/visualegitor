@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_2f4e62c5",
+        "filename": "src/ce/nodes/ve.ce.GeneratedContentNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-03-09T13:09:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_efddca18",
+      "revId": "873cb50013dd15a900cd1600d82a427466397a20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_6ff0da8e",
         "filename": "src/ce/ve.ce.FocusableNode.js",
         "patchSetId": 1
@@ -47,6 +65,24 @@
       "writtenOn": "2015-03-09T12:44:51Z",
       "side": 1,
       "message": "This is duplicated from the constructor now, you should be able to remove it there",
+      "revId": "873cb50013dd15a900cd1600d82a427466397a20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_6fd3fad7",
+        "filename": "src/ce/ve.ce.FocusableNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-03-09T13:09:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_2feae29c",
       "revId": "873cb50013dd15a900cd1600d82a427466397a20",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
