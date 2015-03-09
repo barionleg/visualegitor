@@ -17,24 +17,6 @@ ve.ce.TableCellNode = function VeCeTableCellNode() {
 	// Parent constructor
 	ve.ce.TableCellNode.super.apply( this, arguments );
 
-	var rowspan = this.model.getRowspan(),
-		colspan = this.model.getColspan();
-
-	// DOM changes
-	this.$element
-		// The following classes can be used here:
-		// ve-ce-tableCellNode-data
-		// ve-ce-tableCellNode-header
-		.addClass( 've-ce-tableCellNode ve-ce-tableCellNode-' + this.model.getAttribute( 'style' ) );
-
-	// Set attributes (keep in sync with #onSetup)
-	if ( rowspan > 1 ) {
-		this.$element.attr( 'rowspan', rowspan );
-	}
-	if ( colspan > 1 ) {
-		this.$element.attr( 'colspan', colspan );
-	}
-
 	// Events
 	this.model.connect( this, {
 		update: 'onUpdate',
@@ -51,6 +33,31 @@ OO.inheritClass( ve.ce.TableCellNode, ve.ce.BranchNode );
 ve.ce.TableCellNode.static.name = 'tableCell';
 
 /* Methods */
+
+/**
+ * @inheritdoc
+ */
+ve.ce.TableCellNode.prototype.initialize = function () {
+	// Parent method
+	ve.ce.TableCellNode.super.prototype.initialize.call( this );
+
+	var rowspan = this.model.getRowspan(),
+		colspan = this.model.getColspan();
+
+	// Set rowspan and colspan
+	if ( rowspan > 1 ) {
+		this.$element.attr( 'rowspan', rowspan );
+	}
+	if ( colspan > 1 ) {
+		this.$element.attr( 'colspan', colspan );
+	}
+
+	this.$element
+		// The following classes can be used here:
+		// ve-ce-tableCellNode-data
+		// ve-ce-tableCellNode-header
+		.addClass( 've-ce-tableCellNode ve-ce-tableCellNode-' + this.model.getAttribute( 'style' ) );
+};
 
 /**
  * Get the HTML tag name.
@@ -90,24 +97,6 @@ ve.ce.TableCellNode.prototype.setEditing = function ( enable ) {
  */
 ve.ce.TableCellNode.prototype.onUpdate = function () {
 	this.updateTagName();
-};
-
-/**
- * @inheritdoc
- */
-ve.ce.TableCellNode.prototype.onSetup = function () {
-	// Parent method
-	ve.ce.TableCellNode.super.prototype.onSetup.call( this );
-
-	var rowspan = this.model.getRowspan(),
-		colspan = this.model.getColspan();
-	// Set attributes (duplicated from constructor in case this.$element is replaced)
-	if ( rowspan > 1 ) {
-		this.$element.attr( 'rowspan', rowspan );
-	}
-	if ( colspan > 1 ) {
-		this.$element.attr( 'colspan', colspan );
-	}
 };
 
 /**
