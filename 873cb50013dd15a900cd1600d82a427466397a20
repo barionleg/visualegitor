@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_efddca18",
+        "filename": "src/ce/nodes/ve.ce.GeneratedContentNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-03-09T12:44:51Z",
+      "side": 1,
+      "message": "I had to put this outside of the if block because otherwise the ve.ce.getDomText tests broke, since unattached GCNs whose this.$element changed wouldn\u0027t get .ve-ce-leafNode set on the new this.$element. I don\u0027t understand why this doesn\u0027t cause the tests to fail for you.",
+      "revId": "873cb50013dd15a900cd1600d82a427466397a20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_6ff0da8e",
+        "filename": "src/ce/ve.ce.FocusableNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-03-09T12:44:51Z",
+      "side": 1,
+      "message": "I suppose this is why an event might be nicer than a method, because FocusableNode can\u0027t use a method but can use an event",
+      "revId": "873cb50013dd15a900cd1600d82a427466397a20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_2feae29c",
+        "filename": "src/ce/ve.ce.FocusableNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-03-09T12:44:51Z",
+      "side": 1,
+      "message": "This is duplicated from the constructor now, you should be able to remove it there",
+      "revId": "873cb50013dd15a900cd1600d82a427466397a20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_6fc21a3b",
+        "filename": "src/ce/ve.ce.NodeFactory.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-03-09T12:44:51Z",
+      "side": 1,
+      "message": "This is why an event is not as nice as a method, because if you emit the event from the ce.View constructor, no one is listening to it yet, whereas a method can be called that early.",
+      "revId": "873cb50013dd15a900cd1600d82a427466397a20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
