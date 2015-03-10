@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_c8479b7b",
+        "filename": "src/dm/nodes/ve.dm.BlockImageNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-03-10T16:36:22Z",
+      "side": 1,
+      "message": "You flipped the logic here. It was \u003d\u003d\u003d -1 but you made it !\u003d\u003d -1",
+      "revId": "665b851dfa8126c7e9ad18f5c5f802742a35bdf5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
