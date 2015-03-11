@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_96bc58b3",
+        "filename": "AUTHORS.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2015-03-11T23:38:08Z",
+      "side": 1,
+      "message": "404 Not Found.\n\n-\u003e https://github.com/wikimedia/jquery-client",
+      "revId": "d6dac30a0975515840e5799d4c15e3b0b87970e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
