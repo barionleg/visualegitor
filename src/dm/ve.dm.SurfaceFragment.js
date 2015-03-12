@@ -825,15 +825,18 @@ ve.dm.SurfaceFragment.prototype.removeContent = function () {
  *
  * @method
  * @param {number} [directionAfterDelete=-1] Direction to move after delete: 1 or -1 or 0
+ * @param {Function} onPreBogusSelectEmit Callback before emitting a premature select event
+ * @param {Function} onPostBogusSelectEmit Callback after emitting a premature select event
  * @chainable
  */
-ve.dm.SurfaceFragment.prototype.delete = function ( directionAfterDelete ) {
+ve.dm.SurfaceFragment.prototype.delete = function ( directionAfterDelete, onPreBogusSelectEmit, onPostBogusSelectEmit ) {
 	if ( !( this.selection instanceof ve.dm.LinearSelection ) ) {
 		return this;
 	}
 
 	var rangeAfterRemove, internalListRange,
 		tx, startNode, endNode, endNodeData, nodeToDelete,
+		dmSurfaceEmitsABogusSelectEventThatCanBeIgnoredBecauseItWillEmitAProperOneAMomentLater,
 		rangeToRemove = this.getSelection( true ).getRange();
 
 	if ( rangeToRemove.isCollapsed() ) {
@@ -852,8 +855,27 @@ ve.dm.SurfaceFragment.prototype.delete = function ( directionAfterDelete ) {
 		rangeAfterRemove = new ve.Range( 1 );
 	} else {
 		tx = ve.dm.Transaction.newFromRemoval( this.document, rangeToRemove );
-		this.change( tx );
 		rangeAfterRemove = tx.translateRange( rangeToRemove );
+		// Detect whether the select event that will be emitted is bogus -- if so, it will
+		// be followed by a sensible select event below. We're slightly lucky, because we
+		// can predict this before making a call.
+		dmSurfaceEmitsABogusSelectEventThatCanBeIgnoredBecauseItWillEmitAProperOneAMomentLater = !rangeAfterRemove.isCollapsed();
+		if ( dmSurfaceEmitsABogusSelectEventThatCanBeIgnoredBecauseItWillEmitAProperOneAMomentLater ) {
+			// Notify the caller that we're about to spout nonsense
+			if ( onPreBogusSelectEmit ) {
+				onPreBogusSelectEmit();
+			}
+			try {
+				this.change( tx );
+			} finally {
+				if ( onPostBogusSelectEmit ) {
+					onPostBogusSelectEmit();
+				}
+			}
+		} else {
+			// Will emit sensible select event; do not notify the caller
+			this.change( tx );
+		}
 	}
 	if ( !rangeAfterRemove.isCollapsed() ) {
 		// If after processing removal transaction range is not collapsed it means that not

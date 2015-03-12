@@ -3275,7 +3275,15 @@ ve.ce.Surface.prototype.handleLinearDelete = function ( e ) {
 		}
 	}
 
-	this.getModel().getLinearFragment( rangeToRemove ).delete( direction );
+	// 'delete' may end up emitting an early bogus no-op selection change, which then kills
+	// onModelSelect because the DM does not yet match the CE. Pass callbacks to apply the
+	// render lock in this case
+	this.getModel().getLinearFragment( rangeToRemove ).delete(
+		direction,
+		this.incRenderLock.bind( this ),
+		this.decRenderLock.bind( this )
+	);
+
 	// Rerender selection even if it didn't change
 	// TODO: is any of this necessary?
 	this.focus();
