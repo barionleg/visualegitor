@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_53decd15",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 3283,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-03-12T13:45:16Z",
+      "side": 1,
+      "message": "don\u0027t like passing callbacks around, what happens if we just always inc/dec the render lock?",
+      "revId": "7310d37420611179903539f977abb01a27b94a16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_53b7add3",
+        "filename": "src/dm/ve.dm.SurfaceFragment.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 828,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-03-12T13:45:16Z",
+      "side": 1,
+      "message": "can\u0027t have non-optional params after an optional one",
+      "revId": "7310d37420611179903539f977abb01a27b94a16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_73bf49a8",
+        "filename": "src/dm/ve.dm.SurfaceFragment.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 862,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-03-12T13:45:16Z",
+      "side": 1,
+      "message": "why cache this result at all?",
+      "revId": "7310d37420611179903539f977abb01a27b94a16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
