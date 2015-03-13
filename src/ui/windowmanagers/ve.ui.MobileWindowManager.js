@@ -11,11 +11,13 @@
  * @extends ve.ui.WindowManager
  *
  * @constructor
+ * @param {ve.ui.Surface} Surface this belongs to
  * @param {Object} [config] Configuration options
+ * @cfg {ve.ui.Overlay} [overlay] Overlay to use for menus
  */
-ve.ui.MobileWindowManager = function VeUiMobileWindowManager( config ) {
+ve.ui.MobileWindowManager = function VeUiMobileWindowManager( surface, config ) {
 	// Parent constructor
-	ve.ui.MobileWindowManager.super.call( this, config );
+	ve.ui.MobileWindowManager.super.call( this, surface, config );
 };
 
 /* Inheritance */

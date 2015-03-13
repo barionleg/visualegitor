@@ -11,10 +11,11 @@
  * @extends OO.ui.WindowManager
  *
  * @constructor
+ * @param {ve.ui.Surface} Surface this belongs to
  * @param {Object} [config] Configuration options
  * @cfg {ve.ui.Overlay} [overlay] Overlay to use for menus
  */
-ve.ui.WindowManager = function VeUiWindowManager( config ) {
+ve.ui.WindowManager = function VeUiWindowManager( surface, config ) {
 	// Configuration initialization
 	config = config || {};
 
@@ -22,6 +23,7 @@ ve.ui.WindowManager = function VeUiWindowManager( config ) {
 	ve.ui.WindowManager.super.call( this, config );
 
 	// Properties
+	this.surface = surface;
 	this.overlay = config.overlay || null;
 };
 
@@ -38,6 +40,15 @@ OO.inheritClass( ve.ui.WindowManager, OO.ui.WindowManager );
  */
 ve.ui.WindowManager.prototype.getOverlay = function () {
 	return this.overlay;
+};
+
+/**
+ * Get surface.
+ *
+ * @return {ve.ui.Surface} Surface this belongs to
+ */
+ve.ui.WindowManager.prototype.getSurface = function () {
+	return this.surface;
 };
 
 /**
