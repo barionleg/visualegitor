@@ -32,6 +32,16 @@ OO.inheritClass( ve.ui.SurfaceWindowManager, ve.ui.WindowManager );
 /* Methods */
 
 /**
+ * Override the window manager's directionality method to get the
+ * directionality from the surface. The surface sometimes does not
+ * have a directionality set; fallback to direction from the document.
+ * @return {string} UI directionality
+ */
+ve.ui.SurfaceWindowManager.prototype.getDir = function () {
+	return this.surface.getDir() || $( 'body' ).css( 'direction' );
+};
+
+/**
  * Get surface.
  *
  * @return {ve.ui.Surface} Surface this belongs to
