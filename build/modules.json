@@ -41,7 +41,9 @@
 		],
 		"styles": [
 			"lib/oojs-ui/oojs-ui-apex.vector.css",
-			"lib/oojs-ui/oojs-ui-apex-icons-editing-core.vector.css"
+			"lib/oojs-ui/oojs-ui-apex-icons-editing-core.vector.css",
+			"lib/oojs-ui/oojs-ui-apex-icons-editing-styling.vector.css",
+			"lib/oojs-ui/oojs-ui-apex-icons-editing-list.vector.css"
 		],
 		"dependencies": [
 			"oojs-ui"
@@ -53,7 +55,9 @@
 		],
 		"styles": [
 			"lib/oojs-ui/oojs-ui-mediawiki.vector.css",
-			"lib/oojs-ui/oojs-ui-mediawiki-icons-editing-core.vector.css"
+			"lib/oojs-ui/oojs-ui-mediawiki-icons-editing-core.vector.css",
+			"lib/oojs-ui/oojs-ui-mediawiki-icons-editing-styling.vector.css",
+			"lib/oojs-ui/oojs-ui-mediawiki-icons-editing-list.vector.css"
 		],
 		"dependencies": [
 			"oojs-ui"
