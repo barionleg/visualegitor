@@ -23,6 +23,10 @@ ve.ui.WindowManager = function VeUiWindowManager( config ) {
 
 	// Properties
 	this.overlay = config.overlay || null;
+
+	this.$element
+		.removeClass( 've-ui-dir-block-rtl ve-ui-dir-block-ltr' )
+		.addClass( 've-ui-dir-block-' + this.getDir() );
 };
 
 /* Inheritance */
@@ -30,6 +34,14 @@ ve.ui.WindowManager = function VeUiWindowManager( config ) {
 OO.inheritClass( ve.ui.WindowManager, OO.ui.WindowManager );
 
 /* Methods */
+
+/**
+ * Get directionality
+ * @return {string} UI directionality
+ */
+ve.ui.WindowManager.prototype.getDir = function () {
+	return $( 'body' ).css( 'direction' );
+};
 
 /**
  * Get overlay for menus.
