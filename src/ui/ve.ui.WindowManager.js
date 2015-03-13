@@ -16,6 +16,7 @@
  * @cfg {ve.ui.Overlay} [overlay] Overlay to use for menus
  */
 ve.ui.WindowManager = function VeUiWindowManager( surface, config ) {
+	var dir;
 	// Configuration initialization
 	config = config || {};
 
@@ -25,6 +26,20 @@ ve.ui.WindowManager = function VeUiWindowManager( surface, config ) {
 	// Properties
 	this.surface = surface;
 	this.overlay = config.overlay || null;
+
+	// We need to make sure the window manager reflects page directionality
+	// however, the window manager is occasionally instantiated without having
+	// a reference to the surface, or with surface being a factory.
+	// In those cases we fall-back to the element if it is attached,
+	// or, if not attached, to the directionality of the body itself.
+	if ( this.surface && typeof this.surface.getDir === 'function' ) {
+		dir = this.surface.getDir();
+	}
+	dir = dir || this.$element.css( 'direction' ) || $( 'body' ).css( 'direction' );
+	this.$element
+		.removeClass( 've-ui-dir-block-rtl ve-ui-dir-block-ltr' )
+		.addClass( 've-ui-dir-block-' + dir );
+
 };
 
 /* Inheritance */
