@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_7f229a51",
+        "filename": "src/ui/windowmanagers/ve.ui.MobileWindowManager.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-03-13T23:31:31Z",
+      "side": 1,
+      "message": "??? Isn\u0027t this inherited from a parent somewhere?",
+      "revId": "b76b29272d7b072115ddf1fb9d561a699669373d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
