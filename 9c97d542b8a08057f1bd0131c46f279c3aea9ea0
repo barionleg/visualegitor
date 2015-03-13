@@ -16,6 +16,24 @@
       "revId": "9c97d542b8a08057f1bd0131c46f279c3aea9ea0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3f998280",
+        "filename": "src/ui/ve.ui.WindowManager.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 798
+      },
+      "writtenOn": "2015-03-13T23:35:16Z",
+      "side": 1,
+      "message": "This exposed a bug in the underlying commit. Trevor\u0027s fixing it now.",
+      "parentUuid": "6e7c4fa4_9fe4560c",
+      "revId": "9c97d542b8a08057f1bd0131c46f279c3aea9ea0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
