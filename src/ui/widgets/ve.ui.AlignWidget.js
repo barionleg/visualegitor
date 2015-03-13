@@ -24,19 +24,19 @@ ve.ui.AlignWidget = function VeUiAlignWidget( config ) {
 			new OO.ui.ButtonOptionWidget( {
 				$: this.$,
 				data: 'left',
-				icon: 'align-float-left',
+				icon: 'alignLeft',
 				label: ve.msg( 'visualeditor-align-widget-left' )
 			} ),
 			new OO.ui.ButtonOptionWidget( {
 				$: this.$,
 				data: 'center',
-				icon: 'align-center',
+				icon: 'alignCentre',
 				label: ve.msg( 'visualeditor-align-widget-center' )
 			} ),
 			new OO.ui.ButtonOptionWidget( {
 				$: this.$,
 				data: 'right',
-				icon: 'align-float-right',
+				icon: 'alignRight',
 				label: ve.msg( 'visualeditor-align-widget-right' )
 			} )
 		];

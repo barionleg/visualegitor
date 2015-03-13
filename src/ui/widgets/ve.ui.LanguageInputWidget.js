@@ -69,12 +69,12 @@ ve.ui.LanguageInputWidget = function VeUiLanguageInputWidget( config ) {
 		new OO.ui.ButtonOptionWidget( {
 			$: this.$,
 			data: 'rtl',
-			icon: 'text-dir-rtl'
+			icon: 'textDirRTL'
 		} ),
 		new OO.ui.ButtonOptionWidget( {
 			$: this.$,
 			data: 'ltr',
-			icon: 'text-dir-ltr'
+			icon: 'textDirLTR'
 		} )
 	];
 	if ( !config.requireDir ) {

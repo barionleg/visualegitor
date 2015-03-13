@@ -25,7 +25,7 @@ $( function () {
 			} ),
 
 			messageKeyButton = new OO.ui.ButtonWidget( {
-				icon: 'language',
+				icon: 'textLanguage',
 				label: 'Lang keys'
 			} ),
 			languageInput = new ve.ui.LanguageInputWidget( {
