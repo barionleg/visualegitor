@@ -11,12 +11,13 @@
  * @extends ve.ui.WindowManager
  *
  * @constructor
+ * @param {ve.ui.Surface} Surface this belongs to
  * @param {Object} [config] Configuration options
  * @cfg {ve.ui.Overlay} [overlay] Overlay to use for menus
  */
-ve.ui.DesktopInspectorWindowManager = function VeUiDesktopInspectorWindowManager( config ) {
+ve.ui.DesktopInspectorWindowManager = function VeUiDesktopInspectorWindowManager( surface, config ) {
 	// Parent constructor
-	ve.ui.DesktopInspectorWindowManager.super.call( this, config );
+	ve.ui.DesktopInspectorWindowManager.super.call( this, surface, config );
 };
 
 /* Inheritance */

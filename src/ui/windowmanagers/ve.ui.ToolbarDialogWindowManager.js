@@ -11,12 +11,13 @@
  * @extends ve.ui.WindowManager
  *
  * @constructor
+ * @param {ve.ui.Surface} Surface this belongs to
  * @param {Object} [config] Configuration options
  * @cfg {ve.ui.Overlay} [overlay] Overlay to use for menus
  */
-ve.ui.ToolbarDialogWindowManager = function VeUiToolbarDialogWindowManager( config ) {
+ve.ui.ToolbarDialogWindowManager = function VeUiToolbarDialogWindowManager( surface, config ) {
 	// Parent constructor
-	ve.ui.ToolbarDialogWindowManager.super.call( this, config );
+	ve.ui.ToolbarDialogWindowManager.super.call( this, surface, config );
 };
 
 /* Inheritance */
