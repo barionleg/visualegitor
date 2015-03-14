@@ -278,6 +278,46 @@ QUnit.test( 'delete', function ( assert ) {
 				msg: 'Focusable node deleted by cut'
 			},
 			{
+				html: '<p>a</p><ul><li><p></p></li></ul><p>b</p>',
+				range: new ve.Range( 6 ),
+				directionAfterRemove: 1,
+				expectedData: function ( data ) {
+					data.splice( 3, 6 );
+				},
+				expectedRange: new ve.Range( 4 ),
+				msg: 'Empty list node deleted by delete from inside'
+			},
+			{
+				html: '<p>a</p><ul><li><p></p></li></ul><p>b</p>',
+				range: new ve.Range( 6 ),
+				directionAfterRemove: -1,
+				expectedData: function ( data ) {
+					data.splice( 3, 6 );
+				},
+				expectedRange: new ve.Range( 2 ),
+				msg: 'Empty list node deleted by backspace from inside'
+			},
+			{
+				html: '<p>a</p><ul><li><p></p></li></ul><p>b</p>',
+				range: new ve.Range( 2 ),
+				directionAfterRemove: 1,
+				expectedData: function ( data ) {
+					data.splice( 3, 6 );
+				},
+				expectedRange: new ve.Range( 2 ),
+				msg: 'Empty list node deleted by delete from before'
+			},
+			{
+				html: '<p>a</p><ul><li><p></p></li></ul><p>b</p>',
+				range: new ve.Range( 10 ),
+				directionAfterRemove: -1,
+				expectedData: function ( data ) {
+					data.splice( 3, 6 );
+				},
+				expectedRange: new ve.Range( 2 ),
+				msg: 'Empty list node deleted by backspace from after'
+			},
+			{
 				range: new ve.Range( 0, 63 ),
 				directionAfterRemove: -1,
 				expectedData: function ( data ) {
