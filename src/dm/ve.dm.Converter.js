@@ -738,6 +738,9 @@ ve.dm.Converter.prototype.getDataFromDomSubtree = function ( domElement, wrapper
 								aboutGroup : [ childNode ];
 							childDataElements = this.createDataElements( modelClass, childNodes );
 							childIsContent = this.nodeFactory.isNodeContent( childDataElements[0].type );
+							if ( childDataElements && childDataElements[0] ) {
+								childDataElements[0].originalDomElements = childNodes;
+							}
 						}
 					}
 
