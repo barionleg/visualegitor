@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_da0e5337",
+        "filename": "src/ui/ve.ui.WindowManager.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-03-16T15:09:51Z",
+      "side": 1,
+      "message": "Why removeClass? Surely it has no classes to begin with?",
+      "revId": "3a385f4a06e42cb00ea6b3a9acd7aebebc36d9ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_fa378fd5",
+        "filename": "src/ui/windowmanagers/ve.ui.SurfaceWindowManager.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-03-16T15:09:51Z",
+      "side": 1,
+      "message": "The signature of ui.surface.getDir says it always returns a string. The only way .css(\u0027direction\u0027) would be empty is if the element isn\u0027t attached. Either that is incorrect or the fallback here is not necessary. If we do use the fallback it should be by calling the parent method:  \n\n ve.ui.SurfaceWindowManager.super.prototype.getDir.call( this )",
+      "revId": "3a385f4a06e42cb00ea6b3a9acd7aebebc36d9ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
