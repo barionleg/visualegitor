@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_e52930e3",
+        "filename": "src/ui/ve.ui.WindowManager.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 798
+      },
+      "writtenOn": "2015-03-16T16:52:50Z",
+      "side": 1,
+      "message": "You\u0027re right. I was concerned that since this is in the constructor, a child might add a class, and in general we should only have one directionality (so we should remove just in case) -- but I don\u0027t think that can happen with the way this is constructed.\n\nTaking that off.",
+      "parentUuid": "6e7c4fa4_da0e5337",
+      "revId": "3a385f4a06e42cb00ea6b3a9acd7aebebc36d9ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_fa378fd5",
         "filename": "src/ui/windowmanagers/ve.ui.SurfaceWindowManager.js",
         "patchSetId": 9
@@ -30,6 +48,24 @@
       "writtenOn": "2015-03-16T15:09:51Z",
       "side": 1,
       "message": "The signature of ui.surface.getDir says it always returns a string. The only way .css(\u0027direction\u0027) would be empty is if the element isn\u0027t attached. Either that is incorrect or the fallback here is not necessary. If we do use the fallback it should be by calling the parent method:  \n\n ve.ui.SurfaceWindowManager.super.prototype.getDir.call( this )",
+      "revId": "3a385f4a06e42cb00ea6b3a9acd7aebebc36d9ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_e5f3709a",
+        "filename": "src/ui/windowmanagers/ve.ui.SurfaceWindowManager.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 798
+      },
+      "writtenOn": "2015-03-16T16:52:50Z",
+      "side": 1,
+      "message": "Yes, we sometimes get a response of getDir() being empty, which I assume is because the surface is unattached. You have a point about the parent method, though, I\u0027ll fix that.",
+      "parentUuid": "6e7c4fa4_fa378fd5",
       "revId": "3a385f4a06e42cb00ea6b3a9acd7aebebc36d9ec",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
