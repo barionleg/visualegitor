@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_db3de7b9",
+        "filename": "src/ui/inspectors/ve.ui.AnnotationInspector.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-03-17T22:58:53Z",
+      "side": 1,
+      "message": "You can shorten this for loop to something like:\n\n    annotationSet \u003d getAnnotationsFromRange(...).filter( function ( annotation ) { return ve.instanceOfAny( annotation, modelClasses ); } );",
+      "revId": "ab829f19ee8d06f4ca9ade39668e5c2d879e8a96",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
