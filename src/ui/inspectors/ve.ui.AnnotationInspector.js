@@ -167,13 +167,13 @@ ve.ui.AnnotationInspector.prototype.getActionProcess = function ( action ) {
 ve.ui.AnnotationInspector.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.AnnotationInspector.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
-			var expandedFragment, trimmedFragment, initialCoveringAnnotation,
+			var i, len, expandedFragment, trimmedFragment, initialCoveringAnnotation,
+				annotationSet, annotations,
 				fragment = this.getFragment(),
 				surfaceModel = fragment.getSurface(),
 				annotation = this.getMatchingAnnotations( fragment, true ).get( 0 );
 
 			surfaceModel.pushStaging();
-
 			// Initialize range
 			if ( this.previousSelection instanceof ve.dm.LinearSelection && !annotation ) {
 				if (
@@ -183,11 +183,26 @@ ve.ui.AnnotationInspector.prototype.getSetupProcess = function ( data ) {
 					// Expand to nearest word
 					expandedFragment = fragment.expandLinearSelection( 'word' );
 					fragment = expandedFragment;
+
+					// Check if we're inside a relevant annotation and if so, define it
+					annotationSet = fragment.document.data.getAnnotationsFromRange( fragment.selection.range );
+					if ( annotationSet.getLength() > 0 ) {
+						for ( i = 0, len = this.constructor.static.modelClasses.length; i < len; i++ ) {
+							annotations = annotationSet.getAnnotationsByName( this.constructor.static.modelClasses[ i ].static.name );
+							if ( annotations.getLength() > 0 ) {
+								// We're in the middle of an annotation, let's make sure we expand
+								// our selection to include the entire existing annotation
+								fragment = fragment.expandLinearSelection( 'annotation', annotations.get( 0 ) );
+								break;
+							}
+						}
+					}
 				} else {
 					// Trim whitespace
 					trimmedFragment = fragment.trimLinearSelection();
 					fragment = trimmedFragment;
 				}
+
 				if ( !fragment.getSelection().isCollapsed() ) {
 					// Create annotation from selection
 					annotation = this.getAnnotationFromFragment( fragment );
@@ -195,7 +210,9 @@ ve.ui.AnnotationInspector.prototype.getSetupProcess = function ( data ) {
 						fragment.annotateContent( 'set', annotation );
 					}
 				}
-			} else {
+			}
+
+			if ( annotation ) {
 				// Expand range to cover annotation
 				expandedFragment = fragment.expandLinearSelection( 'annotation', annotation );
 				fragment = expandedFragment;
