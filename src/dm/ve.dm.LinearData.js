@@ -35,7 +35,11 @@ OO.initClass( ve.dm.LinearData );
  * @returns {string} Type of the element
  */
 ve.dm.LinearData.static.getType = function ( item ) {
-	return this.isCloseElementData( item ) ? item.type.slice( 1 ) : item.type;
+	if ( item ) {
+		return this.isCloseElementData( item ) ? item.type.slice( 1 ) : item.type;
+	} else {
+		return null;
+	}
 };
 
 /**
