@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_99769200",
+        "filename": "src/init/ve.init.Platform.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-03-18T16:52:34Z",
+      "side": 1,
+      "message": "Lies, there is no this.characters",
+      "revId": "91d06cb22051a64592cbfd798665a1682ae043fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
