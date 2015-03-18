@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_f4b8ede3",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2015-03-18T17:36:00Z",
+      "side": 1,
+      "message": "Is this needed? The split regex already takes away all adjacent whitespace.",
+      "revId": "db0dee7b3e46f69a702f2a6eefdf52af1324df19",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
