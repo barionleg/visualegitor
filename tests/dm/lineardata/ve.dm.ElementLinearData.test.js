@@ -1230,7 +1230,7 @@ QUnit.test( 'getNearestStructuralOffset', function ( assert ) {
 	}
 } );
 
-QUnit.test( 'getNearestWordRange', function ( assert ) {
+QUnit.test( 'getAdjacentWordRange', function ( assert ) {
 	var i, data, range, word,
 		store = new ve.dm.IndexValueStore(),
 		cases = [
@@ -1364,7 +1364,7 @@ QUnit.test( 'getNearestWordRange', function ( assert ) {
 	QUnit.expect( cases.length );
 	for ( i = 0; i < cases.length; i++ ) {
 		data = new ve.dm.ElementLinearData( store, cases[i].phrase.split( '' ) );
-		range = data.getNearestWordRange( cases[i].offset );
+		range = data.getAdjacentWordRange( cases[i].offset );
 		word = cases[i].phrase.substring( range.start, range.end );
 		assert.strictEqual( word, cases[i].expected,
 			cases[i].msg + ': ' +
