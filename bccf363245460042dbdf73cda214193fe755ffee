@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_1e3d8829",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 3266,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-03-18T15:52:45Z",
+      "side": 1,
+      "message": "Invoking getNodeFromOffset() on every single offset in a range is expensive. getNodeFromOffset() traverses the tree from the start to find the requested offset, and invoking it repeatedly with adjacent offsets will repeat (almost) the same traversal many times. Instead, you should use selectNodes() which traverses only once.\n\nIn this case it looks like rangeToRemove will be quite small, so it\u0027s not a real performance problem, but it\u0027s our convention to use selectNodes() for ranges rather than a getNodeFromOffset() loop.",
+      "revId": "bccf363245460042dbdf73cda214193fe755ffee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
