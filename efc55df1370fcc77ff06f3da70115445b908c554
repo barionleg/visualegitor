@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3eeba478",
+        "filename": "src/dm/ve.dm.SurfaceFragment.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 900,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-03-18T15:57:44Z",
+      "side": 1,
+      "message": "This is almost certainly wrong. It looks like you\u0027re trying to solve the problem of the selection ending up at |\u003cp\u003eFoo\u003c/p\u003e and moving it to \u003cp\u003e|Foo\u003c/p\u003e, but you can\u0027t assume every document starts with \u003cp\u003e or that 1 will be a content offset. For instance, the document could look start with \u003ctable\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd\u003e\u003cp\u003eFoo and then 1 wouldn\u0027t be a content offset and you\u0027d have to go to offset 5.\n\nInstead of hardcoding 1, it sounds like you need to use getNearestContentOffset or something like that.",
+      "revId": "efc55df1370fcc77ff06f3da70115445b908c554",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
