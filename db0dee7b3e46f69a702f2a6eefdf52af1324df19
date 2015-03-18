@@ -16,6 +16,58 @@
       "revId": "db0dee7b3e46f69a702f2a6eefdf52af1324df19",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_cfe67811",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-03-18T18:25:12Z",
+      "side": 1,
+      "message": "It\u0027s needed in the code path where classList1 was passed in as an array, in that case the split regex isn\u0027t run.",
+      "parentUuid": "6e7c4fa4_f4b8ede3",
+      "revId": "db0dee7b3e46f69a702f2a6eefdf52af1324df19",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0fb310fe",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-03-18T18:25:12Z",
+      "side": 1,
+      "message": "OO.unique does not exist yet (the OOjs version that introduces it hasn\u0027t been released yet)",
+      "revId": "db0dee7b3e46f69a702f2a6eefdf52af1324df19",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_cf943849",
+        "filename": "tests/ve.test.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-03-18T18:25:12Z",
+      "side": 1,
+      "message": "The first parameter to .apply() should be ve, not ve.compareClassLists",
+      "revId": "db0dee7b3e46f69a702f2a6eefdf52af1324df19",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
