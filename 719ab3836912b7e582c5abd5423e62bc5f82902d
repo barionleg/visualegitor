@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_030208be",
+        "filename": "src/dm/lineardata/ve.dm.ElementLinearData.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 796,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-03-19T00:32:29Z",
+      "side": 1,
+      "message": "s/see/See/",
+      "revId": "719ab3836912b7e582c5abd5423e62bc5f82902d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_2305c4c4",
+        "filename": "src/dm/lineardata/ve.dm.ElementLinearData.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 800,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-03-19T00:32:29Z",
+      "side": 1,
+      "message": "You put it in .static which looks good to me",
+      "revId": "719ab3836912b7e582c5abd5423e62bc5f82902d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_43ffa0a7",
+        "filename": "tests/dm/lineardata/ve.dm.ElementLinearData.test.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 1409,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-03-19T00:32:29Z",
+      "side": 1,
+      "message": "What\u0027s up with all the +1 and -1 stuff here? Why was that not previously required?",
+      "revId": "719ab3836912b7e582c5abd5423e62bc5f82902d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
