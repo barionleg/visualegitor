@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_710f0134",
+        "filename": "src/dm/ve.dm.SurfaceFragment.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-03-19T17:52:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_2e5cc44d",
+      "revId": "b91fa0245a864d299951ea6d34d2302dda19ef87",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_ce42f062",
         "filename": "src/dm/ve.dm.SurfaceFragment.js",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2015-03-19T17:48:12Z",
       "side": 1,
       "message": "And here you can then use blah[0].nodeOuterRange",
+      "revId": "b91fa0245a864d299951ea6d34d2302dda19ef87",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_910add20",
+        "filename": "src/dm/ve.dm.SurfaceFragment.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-03-19T17:52:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_ce42f062",
       "revId": "b91fa0245a864d299951ea6d34d2302dda19ef87",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
