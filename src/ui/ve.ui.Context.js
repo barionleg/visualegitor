@@ -35,7 +35,10 @@ ve.ui.Context = function VeUiContext( surface, config ) {
 	this.updateDimensionsDebounced = ve.debounce( this.updateDimensions.bind( this ) );
 
 	// Events
-	this.surface.getModel().connect( this, { contextChange: 'onContextChange' } );
+	this.surface.getModel().connect( this, {
+		contextChange: 'onContextChange',
+		documentUpdate: 'onDocumentUpdate'
+	} );
 	this.inspectors.connect( this, { opening: 'onInspectorOpening' } );
 
 	// Initialization
@@ -97,6 +100,17 @@ ve.ui.Context.prototype.onContextChange = function () {
 	}
 	// Purge related items cache
 	this.relatedSources = null;
+};
+
+/**
+ * Handle document update event.
+ */
+ve.ui.Context.prototype.onDocumentUpdate = function () {
+	// Only mind this event if the menu is visible
+	if ( this.isVisible() && !this.isEmpty() ) {
+		// Reuse the debounced context change hanlder
+		this.onContextChange();
+	}
 };
 
 /**
@@ -341,6 +355,7 @@ ve.ui.Context.prototype.toggleMenu = function ( show ) {
  * @chainable
  */
 ve.ui.Context.prototype.setupMenuItems = function () {
+	console.log( 'setup' );
 	var i, len, source,
 		sources = this.getRelatedSources(),
 		items = [];
