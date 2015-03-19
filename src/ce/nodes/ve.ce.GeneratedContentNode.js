@@ -304,6 +304,10 @@ ve.ce.GeneratedContentNode.prototype.failGenerating = function () {
 	this.generatingPromise = null;
 };
 
+ve.ce.GeneratedContentNode.prototype.isGenerating = function () {
+	return !!this.generatingPromise;
+};
+
 /**
  * Get the focusable element
  *
