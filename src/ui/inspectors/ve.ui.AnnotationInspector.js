@@ -260,7 +260,7 @@ ve.ui.AnnotationInspector.prototype.getTeardownProcess = function ( data ) {
 				remove = this.shouldRemoveAnnotation() || data.action === 'remove',
 				surfaceModel = this.getFragment().getSurface(),
 				fragment = surfaceModel.getFragment( this.initialSelection, false ),
-				selection = this.getFragment().getSelection();
+				selection = fragment.getSelection();
 
 			if (
 				!( selection instanceof ve.dm.LinearSelection ) ||
