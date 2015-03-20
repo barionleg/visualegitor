@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_08f5374d",
+        "filename": "src/ce/nodes/ve.ce.GeneratedContentNode.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-03-20T00:33:08Z",
+      "side": 1,
+      "message": "Documentation",
+      "revId": "2019b2a17c4fdbcbb324e93d53a8a48888a47a8d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
