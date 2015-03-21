@@ -206,7 +206,7 @@ ve.ce.SurfaceObserver.prototype.pollOnceInternal = function ( emitChanges, selec
 	oldState = this.rangeState;
 	newState = new ve.ce.RangeState(
 		oldState,
-		this.surface.$element,
+		this.surface,
 		this.documentView.getDocumentNode(),
 		selectionOnly
 	);
