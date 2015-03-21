@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_7dffc231",
+        "filename": "src/ce/ve.ce.RangeState.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-03-21T23:00:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_5d10c6f7",
+      "revId": "040404f037b8acb6a6d2982c3b5a23baf6d27bea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_9d1ade1a",
         "filename": "src/ce/ve.ce.RangeState.js",
         "patchSetId": 2
@@ -65,6 +83,24 @@
       "writtenOn": "2015-03-21T18:18:06Z",
       "side": 1,
       "message": "else {\n        // Freeze selection out of live object\n        selection \u003d {\n                focusNode: nativeSelection.focusNode,\n                ...\n        };\n}",
+      "revId": "040404f037b8acb6a6d2982c3b5a23baf6d27bea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_9dfc1e3d",
+        "filename": "src/ce/ve.ce.RangeState.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-03-21T23:00:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_9d1ade1a",
       "revId": "040404f037b8acb6a6d2982c3b5a23baf6d27bea",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
