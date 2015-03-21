@@ -11,11 +11,10 @@
  *
  * @constructor
  * @param {ve.ce.RangeState|null} old Previous range state
- * @param {jQuery} $surfaceElement The CE Surface $element
- * @param {ve.ce.DocumentNode} docNode The current document node
+ * @param {ve.ce.DocumentNode} documentNode Document node
  * @param {boolean} selectionOnly The caller promises the content has not changed from old
  */
-ve.ce.RangeState = function VeCeRangeState( old, $surfaceElement, docNode, selectionOnly ) {
+ve.ce.RangeState = function VeCeRangeState( old, documentNode, selectionOnly ) {
 	/**
 	 * @property {boolean} branchNodeChanged Whether the CE branch node changed
 	 */
@@ -51,7 +50,7 @@ ve.ce.RangeState = function VeCeRangeState( old, $surfaceElement, docNode, selec
 	 */
 	this.hash = null;
 
-	this.saveState( old, $surfaceElement, docNode, selectionOnly );
+	this.saveState( old, documentNode, selectionOnly );
 };
 
 /* Inheritance */
@@ -64,12 +63,12 @@ OO.initClass( ve.ce.RangeState );
  * Saves a snapshot of the current range state
  * @method
  * @param {ve.ce.RangeState|null} old Previous range state
- * @param {jQuery} $surfaceElement The CE Surface $element
- * @param {ve.ce.DocumentNode} docNode The current document node
+ * @param {ve.ce.DocumentNode} documentNode Document node
  * @param {boolean} selectionOnly The caller promises the content has not changed from old
  */
-ve.ce.RangeState.prototype.saveState = function ( old, $surfaceElement, docNode, selectionOnly ) {
-	var $node, selection, anchorNodeChanged;
+ve.ce.RangeState.prototype.saveState = function ( old, documentNode, selectionOnly ) {
+	var $node, selection, anchorNodeChanged,
+		nativeSelection = documentNode.getElementDocument().getSelection();
 
 	// Freeze selection out of live object.
 	selection = ( function ( liveSelection ) {
@@ -79,14 +78,11 @@ ve.ce.RangeState.prototype.saveState = function ( old, $surfaceElement, docNode,
 			anchorNode: liveSelection.anchorNode,
 			anchorOffset: liveSelection.anchorOffset
 		};
-	}( docNode.getElementDocument().getSelection() ) );
+	}( nativeSelection ) );
 
-	// Use a blank selection if the selection is outside this surface
-	// (or if the selection is inside another surface inside this one)
+	// Use a blank selection if the selection is outside the document
 	if (
-		selection.rangeCount && $(
-			selection.getRangeAt( 0 ).commonAncestorContainer
-		).closest( '.ve-ce-surface' )[0] !== $surfaceElement[0]
+		nativeSelection.rangeCount && !OO.ui.contains( documentNode.$element[0], nativeSelection.anchorNode, true )
 	) {
 		selection = {
 			focusNode: null,
@@ -117,7 +113,7 @@ ve.ce.RangeState.prototype.saveState = function ( old, $surfaceElement, docNode,
 		} else {
 			this.node = $node.data( 'view' );
 			// Check this node belongs to our document
-			if ( this.node && this.node.root !== docNode ) {
+			if ( this.node && this.node.root !== documentNode ) {
 				this.node = null;
 				this.veRange = null;
 			}
