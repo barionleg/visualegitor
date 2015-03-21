@@ -76,7 +76,7 @@ ve.ui.MobileSurface.prototype.createContext = function () {
  * @inheritdoc
  */
 ve.ui.MobileSurface.prototype.createDialogWindowManager = function () {
-	return new ve.ui.MobileWindowManager( this, {
+	return new ve.ui.MobileWindowManager( {
 		factory: ve.ui.windowFactory,
 		overlay: this.globalOverlay
 	} );

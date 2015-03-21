@@ -8,21 +8,20 @@
  * Window manager for toolbar dialogs.
  *
  * @class
- * @extends ve.ui.SurfaceWindowManager
+ * @extends ve.ui.WindowManager
  *
  * @constructor
- * @param {ve.ui.Surface} Surface this belongs to
  * @param {Object} [config] Configuration options
  * @cfg {ve.ui.Overlay} [overlay] Overlay to use for menus
  */
-ve.ui.ToolbarDialogWindowManager = function VeUiToolbarDialogWindowManager( surface, config ) {
+ve.ui.ToolbarDialogWindowManager = function VeUiToolbarDialogWindowManager( config ) {
 	// Parent constructor
-	ve.ui.ToolbarDialogWindowManager.super.call( this, surface, config );
+	ve.ui.ToolbarDialogWindowManager.super.call( this, config );
 };
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.ToolbarDialogWindowManager, ve.ui.SurfaceWindowManager );
+OO.inheritClass( ve.ui.ToolbarDialogWindowManager, ve.ui.WindowManager );
 
 /* Static Properties */
 

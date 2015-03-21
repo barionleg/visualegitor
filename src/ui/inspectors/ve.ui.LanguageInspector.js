@@ -72,10 +72,7 @@ ve.ui.LanguageInspector.prototype.initialize = function () {
 	ve.ui.LanguageInspector.super.prototype.initialize.call( this );
 
 	// Properties
-	this.languageInput = new ve.ui.LanguageInputWidget( {
-		$: this.$,
-		dialogManager: this.manager.getSurface().getDialogs()
-	} );
+	this.languageInput = new ve.ui.LanguageInputWidget( { $: this.$ } );
 
 	// Initialization
 	this.form.$element.append( this.languageInput.$element );
