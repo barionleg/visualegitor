@@ -19,6 +19,58 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_7deca2f2",
+        "filename": "src/ce/ve.ce.RangeState.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-03-21T18:18:06Z",
+      "side": 1,
+      "message": "Scrap that: on second thoughts (as further discussed) we decided there\u0027s no way to do so that actually turns out to be clearer than what you first wrote :-)",
+      "parentUuid": "6e7c4fa4_a22777c4",
+      "revId": "040404f037b8acb6a6d2982c3b5a23baf6d27bea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5d10c6f7",
+        "filename": "src/ce/ve.ce.RangeState.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-03-21T18:18:06Z",
+      "side": 1,
+      "message": "Remove this whole block and replace with the else-clause below",
+      "revId": "040404f037b8acb6a6d2982c3b5a23baf6d27bea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_9d1ade1a",
+        "filename": "src/ce/ve.ce.RangeState.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-03-21T18:18:06Z",
+      "side": 1,
+      "message": "else {\n        // Freeze selection out of live object\n        selection \u003d {\n                focusNode: nativeSelection.focusNode,\n                ...\n        };\n}",
+      "revId": "040404f037b8acb6a6d2982c3b5a23baf6d27bea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_622ddfa2",
         "filename": "src/ce/ve.ce.RangeState.js",
         "patchSetId": 2
@@ -30,6 +82,24 @@
       "writtenOn": "2015-03-21T17:16:38Z",
       "side": 1,
       "message": "As suggested by you, we can use the DOM node instead of the CE node throughout the method.",
+      "revId": "040404f037b8acb6a6d2982c3b5a23baf6d27bea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_9de97ee3",
+        "filename": "src/ce/ve.ce.RangeState.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-03-21T18:18:06Z",
+      "side": 1,
+      "message": "Scrap that (as above)",
+      "parentUuid": "6e7c4fa4_622ddfa2",
       "revId": "040404f037b8acb6a6d2982c3b5a23baf6d27bea",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
