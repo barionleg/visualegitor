@@ -8,8 +8,8 @@ QUnit.module( 've.ce.Surface' );
 
 /* Tests */
 
-ve.test.utils.runSurfaceHandleSpecialKeyTest = function ( assert, html, range, operations, expectedData, expectedRange, msg ) {
-	var i, method, args, selection,
+ve.test.utils.runSurfaceHandleSpecialKeyTest = function ( assert, html, selection, operations, expectedData, expectedSelection, msg ) {
+	var i, method, args,
 		actions = {
 			backspace: [ 'handleLinearDelete', { keyCode: OO.ui.Keys.BACKSPACE } ],
 			delete: [ 'handleLinearDelete', { keyCode: OO.ui.Keys.DELETE } ],
@@ -23,10 +23,24 @@ ve.test.utils.runSurfaceHandleSpecialKeyTest = function ( assert, html, range, o
 		model = surface.getModel(),
 		data = ve.copy( model.getDocument().getFullData() );
 
+	function makeSelection( selectionOrRange ) {
+		var constructor, obj;
+		if ( selectionOrRange instanceof ve.Range ) {
+			return new ve.dm.LinearSelection( model.getDocument(), selectionOrRange );
+		} else {
+			constructor = ve.dm[ selectionOrRange.type ];
+			obj = Object.create( constructor.prototype );
+			constructor.apply( obj, [ model.getDocument() ].concat( selectionOrRange.args ) );
+			return obj;
+		}
+	}
+
+	selection = makeSelection( selection );
+	expectedSelection = makeSelection( expectedSelection );
+
 	// TODO: model.getSelection() should be consistent after it has been
 	// changed but appears to behave differently depending on the browser.
 	// The selection from the select event is still consistent.
-	selection = new ve.dm.LinearSelection( model.getDocument(), range );
 	model.on( 'select', function ( s ) {
 		selection = s;
 	} );
@@ -40,7 +54,7 @@ ve.test.utils.runSurfaceHandleSpecialKeyTest = function ( assert, html, range, o
 	expectedData( data );
 
 	assert.equalLinearData( model.getDocument().getFullData(), data, msg + ': data' );
-	assert.equalRange( selection.getRange(), expectedRange, msg + ': range' );
+	assert.equalSelection( selection, expectedSelection, msg + ': selection' );
 	surface.destroy();
 };
 
@@ -53,7 +67,7 @@ QUnit.test( 'handleLinearDelete', function ( assert ) {
 				expectedData: function ( data ) {
 					data.splice( 1, 3 );
 				},
-				expectedRange: new ve.Range( 1 ),
+				expectedSelection: new ve.Range( 1 ),
 				msg: 'Selection deleted by backspace'
 			},
 			{
@@ -62,7 +76,7 @@ QUnit.test( 'handleLinearDelete', function ( assert ) {
 				expectedData: function ( data ) {
 					data.splice( 1, 3 );
 				},
-				expectedRange: new ve.Range( 1 ),
+				expectedSelection: new ve.Range( 1 ),
 				msg: 'Selection deleted by delete'
 			},
 			{
@@ -71,7 +85,7 @@ QUnit.test( 'handleLinearDelete', function ( assert ) {
 				expectedData: function ( data ) {
 					data.splice( 1, 3 );
 				},
-				expectedRange: new ve.Range( 1 ),
+				expectedSelection: new ve.Range( 1 ),
 				msg: 'Whole word deleted by modified backspace'
 			},
 			{
@@ -80,7 +94,7 @@ QUnit.test( 'handleLinearDelete', function ( assert ) {
 				expectedData: function ( data ) {
 					data.splice( 1, 3 );
 				},
-				expectedRange: new ve.Range( 1 ),
+				expectedSelection: new ve.Range( 1 ),
 				msg: 'Whole word deleted by modified delete'
 			},
 			{
@@ -89,21 +103,21 @@ QUnit.test( 'handleLinearDelete', function ( assert ) {
 				expectedData: function ( data ) {
 					data.splice( 0, 5 );
 				},
-				expectedRange: new ve.Range( 5 ),
+				expectedSelection: new ve.Range( 5 ),
 				msg: 'Empty node deleted by delete; selection goes to nearest content offset'
 			},
 			{
 				range: new ve.Range( 41 ),
 				operations: ['backspace'],
 				expectedData: function () {},
-				expectedRange: new ve.Range( 39, 41 ),
+				expectedSelection: new ve.Range( 39, 41 ),
 				msg: 'Focusable node selected but not deleted by backspace'
 			},
 			{
 				range: new ve.Range( 39 ),
 				operations: ['delete'],
 				expectedData: function () {},
-				expectedRange: new ve.Range( 39, 41 ),
+				expectedSelection: new ve.Range( 39, 41 ),
 				msg: 'Focusable node selected but not deleted by delete'
 			},
 			{
@@ -112,7 +126,7 @@ QUnit.test( 'handleLinearDelete', function ( assert ) {
 				expectedData: function ( data ) {
 					data.splice( 39, 2 );
 				},
-				expectedRange: new ve.Range( 39 ),
+				expectedSelection: new ve.Range( 39 ),
 				msg: 'Focusable node deleted if selected first'
 			},
 			{
@@ -124,7 +138,7 @@ QUnit.test( 'handleLinearDelete', function ( assert ) {
 							{ type: '/paragraph' }
 						);
 				},
-				expectedRange: new ve.Range( 1 ),
+				expectedSelection: new ve.Range( 1 ),
 				msg: 'Backspace after select all spanning entire document creates empty paragraph'
 			}
 		];
@@ -134,7 +148,7 @@ QUnit.test( 'handleLinearDelete', function ( assert ) {
 	for ( i = 0; i < cases.length; i++ ) {
 		ve.test.utils.runSurfaceHandleSpecialKeyTest(
 			assert, cases[i].html, cases[i].range, cases[i].operations,
-			cases[i].expectedData, cases[i].expectedRange, cases[i].msg
+			cases[i].expectedData, cases[i].expectedSelection, cases[i].msg
 		);
 	}
 } );
@@ -153,7 +167,7 @@ QUnit.test( 'handleLinearEnter', function ( assert ) {
 						{ type: 'paragraph' }
 					);
 				},
-				expectedRange: new ve.Range( 59 ),
+				expectedSelection: new ve.Range( 59 ),
 				msg: 'End of paragraph split by enter'
 			},
 			{
@@ -166,7 +180,7 @@ QUnit.test( 'handleLinearEnter', function ( assert ) {
 						{ type: 'paragraph' }
 					);
 				},
-				expectedRange: new ve.Range( 59 ),
+				expectedSelection: new ve.Range( 59 ),
 				msg: 'End of paragraph split by modified enter'
 			},
 			{
@@ -179,7 +193,7 @@ QUnit.test( 'handleLinearEnter', function ( assert ) {
 						{ type: 'paragraph' }
 					);
 				},
-				expectedRange: new ve.Range( 58 ),
+				expectedSelection: new ve.Range( 58 ),
 				msg: 'Start of paragraph split by enter'
 			},
 			{
@@ -192,7 +206,7 @@ QUnit.test( 'handleLinearEnter', function ( assert ) {
 						{ type: 'heading', attributes: { level: 1 } }
 					);
 				},
-				expectedRange: new ve.Range( 5 ),
+				expectedSelection: new ve.Range( 5 ),
 				msg: 'Heading split by enter'
 			},
 			{
@@ -205,7 +219,7 @@ QUnit.test( 'handleLinearEnter', function ( assert ) {
 						{ type: 'heading', attributes: { level: 1 } }
 					);
 				},
-				expectedRange: new ve.Range( 4 ),
+				expectedSelection: new ve.Range( 4 ),
 				msg: 'Selection in heading removed, then split by enter'
 			},
 			{
@@ -218,7 +232,7 @@ QUnit.test( 'handleLinearEnter', function ( assert ) {
 						{ type: '/paragraph' }
 					);
 				},
-				expectedRange: new ve.Range( 3 ),
+				expectedSelection: new ve.Range( 3 ),
 				msg: 'Start of heading split into a plain paragraph'
 			},
 			{
@@ -231,7 +245,7 @@ QUnit.test( 'handleLinearEnter', function ( assert ) {
 						{ type: '/paragraph' }
 					);
 				},
-				expectedRange: new ve.Range( 6 ),
+				expectedSelection: new ve.Range( 6 ),
 				msg: 'End of heading split into a plain paragraph'
 			},
 			{
@@ -246,7 +260,7 @@ QUnit.test( 'handleLinearEnter', function ( assert ) {
 						{ type: 'paragraph' }
 					);
 				},
-				expectedRange: new ve.Range( 20 ),
+				expectedSelection: new ve.Range( 20 ),
 				msg: 'List item split by enter'
 			},
 			{
@@ -259,7 +273,7 @@ QUnit.test( 'handleLinearEnter', function ( assert ) {
 						{ type: 'paragraph' }
 					);
 				},
-				expectedRange: new ve.Range( 18 ),
+				expectedSelection: new ve.Range( 18 ),
 				msg: 'List item not split by modified enter'
 			},
 			{
@@ -272,7 +286,7 @@ QUnit.test( 'handleLinearEnter', function ( assert ) {
 						{ type: '/paragraph' }
 					);
 				},
-				expectedRange: new ve.Range( 25 ),
+				expectedSelection: new ve.Range( 25 ),
 				msg: 'Two enters breaks out of a list and starts a new paragraph'
 			},
 			{
@@ -282,7 +296,7 @@ QUnit.test( 'handleLinearEnter', function ( assert ) {
 				expectedData: function ( data ) {
 					data.splice( 5, 6 );
 				},
-				expectedRange: new ve.Range( 6 ),
+				expectedSelection: new ve.Range( 6 ),
 				msg: 'Enter in an empty list destroys it and moves to next paragraph'
 			},
 			{
@@ -292,7 +306,7 @@ QUnit.test( 'handleLinearEnter', function ( assert ) {
 				expectedData: function ( data ) {
 					data.splice( 5, 6 );
 				},
-				expectedRange: new ve.Range( 4 ),
+				expectedSelection: new ve.Range( 4 ),
 				msg: 'Enter in an empty list at end of document destroys it and moves to previous paragraph'
 			},
 			{
@@ -302,7 +316,7 @@ QUnit.test( 'handleLinearEnter', function ( assert ) {
 				expectedData: function ( data ) {
 					data.splice( 0, 6 );
 				},
-				expectedRange: new ve.Range( 1 ),
+				expectedSelection: new ve.Range( 1 ),
 				msg: 'Enter in an empty list at start of document destroys it and moves to next paragraph'
 			},
 			{
@@ -316,7 +330,7 @@ QUnit.test( 'handleLinearEnter', function ( assert ) {
 						{ type: '/paragraph' }
 					);
 				},
-				expectedRange: new ve.Range( 1 ),
+				expectedSelection: new ve.Range( 1 ),
 				msg: 'Enter in an empty list with no adjacent content destroys it and creates a paragraph'
 			}
 		];
@@ -326,7 +340,7 @@ QUnit.test( 'handleLinearEnter', function ( assert ) {
 	for ( i = 0; i < cases.length; i++ ) {
 		ve.test.utils.runSurfaceHandleSpecialKeyTest(
 			assert, cases[i].html, cases[i].range, cases[i].operations,
-			cases[i].expectedData, cases[i].expectedRange, cases[i].msg
+			cases[i].expectedData, cases[i].expectedSelection, cases[i].msg
 		);
 	}
 } );

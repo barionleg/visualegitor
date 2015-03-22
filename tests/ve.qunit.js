@@ -232,15 +232,11 @@
 	};
 
 	QUnit.assert.equalRange = function ( actual, expected, message ) {
-		actual = actual && {
-			from: actual.from,
-			to: actual.to
-		};
-		expected = expected && {
-			from: expected.from,
-			to: expected.to
-		};
-		QUnit.push( QUnit.equiv(actual, expected), actual, expected, message );
+		QUnit.push( actual.equals(expected), actual, expected, message );
+	};
+
+	QUnit.assert.equalSelection = function ( actual, expected, message ) {
+		QUnit.push( actual.equals(expected), actual, expected, message );
 	};
 
 	QUnit.assert.equalHash = function ( actual, expected, message ) {
