@@ -11,7 +11,6 @@
  * @abstract
  * @extends ve.ce.LeafNode
  * @mixins ve.ce.FocusableNode
- * @mixins ve.ce.GeneratedContentNode
  *
  * @constructor
  * @param {ve.dm.AlienNode} model
@@ -21,11 +20,13 @@ ve.ce.AlienNode = function VeCeAlienNode() {
 	// Parent constructor
 	ve.ce.AlienNode.super.apply( this, arguments );
 
+	// DOM changes
+	this.$element = $( this.model.getOriginalDomElements() );
+
 	// Mixin constructors
 	ve.ce.FocusableNode.call( this );
-	ve.ce.GeneratedContentNode.call( this );
 
-	// DOM changes
+	// Alien nodes have styled highlights
 	this.$highlights.addClass( 've-ce-alienNode-highlights' );
 };
 
@@ -34,8 +35,6 @@ ve.ce.AlienNode = function VeCeAlienNode() {
 OO.inheritClass( ve.ce.AlienNode, ve.ce.LeafNode );
 
 OO.mixinClass( ve.ce.AlienNode, ve.ce.FocusableNode );
-
-OO.mixinClass( ve.ce.AlienNode, ve.ce.GeneratedContentNode );
 
 /* Static Properties */
 
