@@ -21,13 +21,12 @@ ve.ce.AlienNode = function VeCeAlienNode() {
 	ve.ce.AlienNode.super.apply( this, arguments );
 
 	// DOM changes
-	this.$element = $( this.model.getOriginalDomElements() );
+	this.$element = $( this.model.getOriginalDomElements(), {
+		classes: [ 've-ce-alienNode-highlights' ]
+	} );
 
 	// Mixin constructors
 	ve.ce.FocusableNode.call( this );
-
-	// Alien nodes have styled highlights
-	this.$highlights.addClass( 've-ce-alienNode-highlights' );
 };
 
 /* Inheritance */
