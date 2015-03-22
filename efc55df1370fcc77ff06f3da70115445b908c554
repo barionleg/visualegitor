@@ -16,6 +16,24 @@
       "revId": "efc55df1370fcc77ff06f3da70115445b908c554",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_73f29266",
+        "filename": "src/dm/ve.dm.SurfaceFragment.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 900,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2015-03-22T21:17:11Z",
+      "side": 1,
+      "message": "Actually, there is already code to handle this below. It seems broken though, which is why I thought I need to handle it here separately.",
+      "parentUuid": "6e7c4fa4_3eeba478",
+      "revId": "efc55df1370fcc77ff06f3da70115445b908c554",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
