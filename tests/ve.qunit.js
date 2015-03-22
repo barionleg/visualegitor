@@ -243,6 +243,10 @@
 		QUnit.push( QUnit.equiv(actual, expected), actual, expected, message );
 	};
 
+	QUnit.assert.equalSelection = function ( actual, expected, message ) {
+		QUnit.push( actual.equals(expected), actual, expected, message );
+	};
+
 	QUnit.assert.equalHash = function ( actual, expected, message ) {
 		actual = actual && actual.toJSON();
 		expected = expected && expected.toJSON();
