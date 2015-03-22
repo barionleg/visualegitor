@@ -34,6 +34,24 @@
       "revId": "efc55df1370fcc77ff06f3da70115445b908c554",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3650880d",
+        "filename": "src/dm/ve.dm.SurfaceFragment.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 900,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2015-03-22T21:59:16Z",
+      "side": 1,
+      "message": "https://gerrit.wikimedia.org/r/198656",
+      "parentUuid": "6e7c4fa4_73f29266",
+      "revId": "efc55df1370fcc77ff06f3da70115445b908c554",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
