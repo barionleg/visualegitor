@@ -3242,6 +3242,7 @@ ve.ce.Surface.prototype.handleTableEnter = function ( e ) {
  */
 ve.ce.Surface.prototype.handleLinearDelete = function ( e ) {
 	var docLength, startNode, tableEditingRange,
+		documentModelSelectedNodes, i, node, matrix,
 		direction = e.keyCode === OO.ui.Keys.DELETE ? 1 : -1,
 		unit = ( e.altKey === true || e.ctrlKey === true ) ? 'word' : 'character',
 		offset = 0,
@@ -3271,6 +3272,26 @@ ve.ce.Surface.prototype.handleLinearDelete = function ( e ) {
 		if ( tableEditingRange && !tableEditingRange.containsRange( rangeToRemove ) ) {
 			return true;
 		}
+
+		// Prevent backspacing/deleting over table cells, select the cell instead
+		documentModelSelectedNodes = documentModel.selectNodes( rangeToRemove, 'siblings' );
+		for ( i = 0; i < documentModelSelectedNodes.length; i++ ) {
+			node = documentModelSelectedNodes[ i ].node;
+			if ( node instanceof ve.dm.TableNode ) {
+				if ( rangeToRemove.containsOffset( node.getOuterRange().start ) ) {
+					this.getModel().setSelection( new ve.dm.TableSelection(
+						documentModel, node.getOuterRange(), 0, 0
+					) );
+				} else {
+					matrix = node.getMatrix();
+					this.getModel().setSelection( new ve.dm.TableSelection(
+						documentModel, node.getOuterRange(), matrix.getColCount() - 1, matrix.getRowCount() - 1
+					) );
+				}
+				return true;
+			}
+		}
+
 		offset = rangeToRemove.start;
 		docLength = data.getLength();
 		if ( offset < docLength ) {
