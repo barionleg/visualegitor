@@ -23,7 +23,7 @@ ve.ui.TableContext = function VeUiTableContext( tableNode, toolGroup, config ) {
 
 	// Parent constructor
 	ve.ui.TableContext.super.call( this, config );
-
+	
 	// Properties
 	this.tableNode = tableNode;
 	this.toolGroup = toolGroup;
@@ -63,13 +63,22 @@ OO.inheritClass( ve.ui.TableContext, OO.ui.Element );
  * Populate menu items.
  */
 ve.ui.TableContext.prototype.populateMenu = function () {
-	var i, l, tool,
+	var i, l, tool,selection,minColIndex,maxColIndex,minRowIndex,maxRowIndex,rowdiff,coldiff,
 		items = [],
 		toolList = ve.ui.toolFactory.getTools( [ { group: this.toolGroup } ] );
-
+		selection = this.tableNode.surface.getModel().getSelection();
+		minColIndex = selection.startCol;
+		maxColIndex = selection.endCol;
+		minRowIndex = selection.startRow;
+		maxRowIndex = selection.endRow;
+		rowdiff= maxRowIndex - minRowIndex;
+		coldiff= maxColIndex - minColIndex;
 	this.menu.clearItems();
+	
 	for ( i = 0, l = toolList.length; i < l; i++ ) {
 		tool = ve.ui.toolFactory.lookup( toolList[i] );
+		ve.ui.DeleteRowTool.static.title = rowdiff > 0 ? OO.ui.deferMsg( 'visualeditor-table-delete-rows' ) : OO.ui.deferMsg( 'visualeditor-table-delete-row' );
+		ve.ui.DeleteColumnTool.static.title = coldiff > 0 ? OO.ui.deferMsg( 'visualeditor-table-delete-cols' ) : OO.ui.deferMsg( 'visualeditor-table-delete-col' )
 		items.push( new ve.ui.ContextOptionWidget(
 			tool, this.tableNode.getModel(), { $: this.$, data: tool.static.name }
 		) );
@@ -119,6 +128,7 @@ ve.ui.TableContext.prototype.toggle = function ( show ) {
 	var dir,
 		surfaceModel = this.surface.getModel(),
 		surfaceView = this.surface.getView();
+	this.populateMenu();
 	this.popup.toggle( show );
 	if ( this.popup.isVisible() ) {
 		this.tableNode.setEditing( false );
