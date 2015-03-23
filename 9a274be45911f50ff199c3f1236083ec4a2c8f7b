@@ -16,6 +16,24 @@
       "revId": "9a274be45911f50ff199c3f1236083ec4a2c8f7b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_e29d660e",
+        "filename": "src/ce/nodes/ve.ce.AlienNode.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-03-23T18:10:19Z",
+      "side": 1,
+      "message": "went with getDescription instead, forgot to remove this.",
+      "parentUuid": "6e7c4fa4_e2f9e6e5",
+      "revId": "9a274be45911f50ff199c3f1236083ec4a2c8f7b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
