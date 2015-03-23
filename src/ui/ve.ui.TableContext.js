@@ -63,13 +63,22 @@ OO.inheritClass( ve.ui.TableContext, OO.ui.Element );
  * Populate menu items.
  */
 ve.ui.TableContext.prototype.populateMenu = function () {
-	var i, l, tool,
+	var i, l, tool, selection, minColIndex, maxColIndex, minRowIndex, maxRowIndex, rowdiff, coldiff,
 		items = [],
 		toolList = ve.ui.toolFactory.getTools( [ { group: this.toolGroup } ] );
-
+		selection = this.tableNode.surface.getModel().getSelection();
+		minColIndex = selection.startCol;
+		maxColIndex = selection.endCol;
+		minRowIndex = selection.startRow;
+		maxRowIndex = selection.endRow;
+		rowdiff = maxRowIndex - minRowIndex +1;
+		coldiff = maxColIndex - minColIndex +1;
 	this.menu.clearItems();
+
 	for ( i = 0, l = toolList.length; i < l; i++ ) {
 		tool = ve.ui.toolFactory.lookup( toolList[i] );
+		ve.ui.DeleteRowTool.static.title = OO.ui.deferMsg( 'visualeditor-table-delete-row', rowdiff );
+		ve.ui.DeleteColumnTool.static.title = OO.ui.deferMsg( 'visualeditor-table-delete-col', coldiff );
 		items.push( new ve.ui.ContextOptionWidget(
 			tool, this.tableNode.getModel(), { $: this.$, data: tool.static.name }
 		) );
@@ -119,6 +128,9 @@ ve.ui.TableContext.prototype.toggle = function ( show ) {
 	var dir,
 		surfaceModel = this.surface.getModel(),
 		surfaceView = this.surface.getView();
+
+	// Regenerate Context menu
+	this.populateMenu();
 	this.popup.toggle( show );
 	if ( this.popup.isVisible() ) {
 		this.tableNode.setEditing( false );
