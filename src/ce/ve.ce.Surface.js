@@ -1276,6 +1276,49 @@ ve.ce.Surface.prototype.afterDocumentKeyDown = function ( e ) {
 		) || null;
 	}
 
+	/**
+	 * Look in the DM to see whether a slug is needed at the selection focus
+	 * @returns {boolean} Whether a slug is needed
+	 */
+	function needSlugAtSelectionFocus() {
+		var focus, previousElement, nextElement,
+			linearData = surface.model.documentModel.data;
+
+		if ( !( surface.model.selection instanceof ve.dm.LinearSelection ) ) {
+			return false;
+		}
+		focus = surface.model.selection.getRange().end;
+
+		// Get the adjacent elements (or undefined)
+		previousElement = linearData.getData( focus - 1 );
+		nextElement = linearData.getData( focus );
+		return (
+			!( previousElement && previousElement.type === undefined ) &&
+			!( nextElement && nextElement.type === undefined )
+		);
+	}
+
+	if ( e.keyCode === OO.ui.Keys.BACKSPACE || e.keyCode === OO.ui.Keys.DELETE ) {
+		if (
+			this.nativeSelection.focusNode &&
+			this.nativeSelection.focusNode.nodeType === Node.ELEMENT_NODE &&
+			!this.nativeSelection.focusNode.classList.contains( 've-ce-branchNode-inlineSlug' )
+		) {
+			// In a non-slug element. Sync the DM, then see if we need a slug.
+			this.incRenderLock();
+			try {
+				this.surfaceObserver.pollOnce();
+			} finally {
+				this.decRenderLock();
+			}
+			if ( needSlugAtSelectionFocus() && this.nativeSelection.focusNode ) {
+				this.renderSelectedContentBranchNode();
+				this.showSelection( this.getModel().getSelection() );
+			}
+		}
+		return;
+	}
+
 	if ( e !== this.cursorEvent ) {
 		return;
 	}
