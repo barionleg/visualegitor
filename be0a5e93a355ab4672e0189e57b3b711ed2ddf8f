@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_a7df806b",
+        "filename": "i18n/en.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-03-23T15:55:59Z",
+      "side": 1,
+      "message": "This is indented with a tab, but the rest of the file uses 4 spaces",
+      "revId": "be0a5e93a355ab4672e0189e57b3b711ed2ddf8f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_87484433",
+        "filename": "i18n/en.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-03-23T15:55:59Z",
+      "side": 1,
+      "message": "Adding a separate message for the plural case doesn\u0027t work, because different languages have different plural rules. For example, English has only 2 forms (\u003d\u003d1 and !\u003d1) but some other languages have 3 or 4 forms.\n\nThe right way to do this is to pass the number of columns as a parameter to the message, and then use a single message that contains \"Delete {{PLURAL:$1|row|rows}}\". Then in the qqq, document that $1 is the number of rows.",
+      "revId": "be0a5e93a355ab4672e0189e57b3b711ed2ddf8f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_47e8ec0b",
+        "filename": "src/ui/ve.ui.TableContext.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-03-23T15:55:59Z",
+      "side": 1,
+      "message": "Excess whitespace (highlighted in red). Empty lines should be truly empty, they should not contain tabs or spaces.",
+      "revId": "be0a5e93a355ab4672e0189e57b3b711ed2ddf8f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_67e5e831",
+        "filename": "src/ui/ve.ui.TableContext.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-03-23T15:55:59Z",
+      "side": 1,
+      "message": "Put spaces between the variable names, like the spaces between the first three variables on this line",
+      "revId": "be0a5e93a355ab4672e0189e57b3b711ed2ddf8f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_07d67454",
+        "filename": "src/ui/ve.ui.TableContext.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-03-23T15:55:59Z",
+      "side": 1,
+      "message": "Add a space before the \u003d sign like on the lines above",
+      "revId": "be0a5e93a355ab4672e0189e57b3b711ed2ddf8f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_47bf8cf7",
+        "filename": "src/ui/ve.ui.TableContext.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-03-23T15:55:59Z",
+      "side": 1,
+      "message": "Modifying .static.title is probably the wrong way to do this, but I\u0027m not sure what the right way is. You should ask edsanders when he\u0027s on IRC.",
+      "revId": "be0a5e93a355ab4672e0189e57b3b711ed2ddf8f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_a7c6a09b",
+        "filename": "src/ui/ve.ui.TableContext.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-03-23T15:55:59Z",
+      "side": 1,
+      "message": "Add a comment explaining why this is necessary",
+      "revId": "be0a5e93a355ab4672e0189e57b3b711ed2ddf8f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
