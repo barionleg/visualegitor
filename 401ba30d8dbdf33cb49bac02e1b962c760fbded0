@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_407c36b4",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 3281,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-03-25T19:05:33Z",
+      "side": 1,
+      "message": "Don\u0027t use node.getOuterRange(), use documentModelSelectedNodes[i].nodeOuterRange",
+      "revId": "401ba30d8dbdf33cb49bac02e1b962c760fbded0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
