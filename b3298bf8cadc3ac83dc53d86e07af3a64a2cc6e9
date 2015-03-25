@@ -16,6 +16,24 @@
       "revId": "b3298bf8cadc3ac83dc53d86e07af3a64a2cc6e9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_e06a2211",
+        "filename": "tests/ce/ve.ce.Surface.test.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2015-03-25T18:57:32Z",
+      "side": 1,
+      "message": "Something went wrong with the rebase, I think. The first one is right.",
+      "parentUuid": "6e7c4fa4_402bd6da",
+      "revId": "b3298bf8cadc3ac83dc53d86e07af3a64a2cc6e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
