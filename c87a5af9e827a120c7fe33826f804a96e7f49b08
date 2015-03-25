@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_312aae8f",
+        "filename": "src/init/sa/ve.init.sa.Target.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 88
+      },
+      "writtenOn": "2015-03-25T22:04:08Z",
+      "side": 1,
+      "message": "You have to use OO.ui.deferMsg since this message is being specified at load time and the i18n system isn\u0027t guaranteed to be initialized yet.",
+      "revId": "c87a5af9e827a120c7fe33826f804a96e7f49b08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
