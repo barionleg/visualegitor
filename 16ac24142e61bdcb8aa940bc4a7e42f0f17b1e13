@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_2dc9e528",
+        "filename": "src/ui/dialogs/ve.ui.SpecialCharacterDialog.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-03-26T19:52:46Z",
+      "side": 1,
+      "message": "Ah, is the *manager* inside the dialog. That makes more sense.",
+      "parentUuid": "6e7c4fa4_8d703970",
+      "revId": "16ac24142e61bdcb8aa940bc4a7e42f0f17b1e13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_0db32e4d",
         "filename": "src/ui/dialogs/ve.ui.SpecialCharacterDialog.js",
         "patchSetId": 1
