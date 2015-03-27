@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ea198627",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-03-27T22:24:51Z",
+      "side": 1,
+      "message": "The commit message is now wrong: the commit ensures we scroll the *selection* into view when it isn\u0027t. It has nothing to do with insertion, at least not directly.",
+      "revId": "18ceded890929b66c9aecbad54105c8cb7599cff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_aaf86ebd",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 3513,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-03-27T22:24:51Z",
+      "side": 1,
+      "message": "Why is this in the else branch? This shouldn\u0027t be mutually exclusive with the below, *especially* since browsers have a tendency to scroll when .focus() is called",
+      "revId": "18ceded890929b66c9aecbad54105c8cb7599cff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_2a245e59",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 3514,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-03-27T22:24:51Z",
+      "side": 1,
+      "message": "Hmm, I wonder if we could get rid of the .closest() here? The only problem I can see with that is that scrollIntoView() may not work on a TextNode, but let\u0027s try.",
+      "revId": "18ceded890929b66c9aecbad54105c8cb7599cff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
