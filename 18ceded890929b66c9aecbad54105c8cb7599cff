@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_4aa8ba89",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 3513,
+      "author": {
+        "id": 798
+      },
+      "writtenOn": "2015-03-27T22:39:56Z",
+      "side": 1,
+      "message": "Because I didn\u0027t want to steal the operation from the focus() which actually scrolls properly? I figured that if that is called, then scrolling onto the node is unnecessary, because we\u0027re basically putting the focus on the entire content editable.",
+      "parentUuid": "6e7c4fa4_aaf86ebd",
+      "revId": "18ceded890929b66c9aecbad54105c8cb7599cff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_2a245e59",
         "filename": "src/ce/ve.ce.Surface.js",
         "patchSetId": 2
@@ -47,6 +65,24 @@
       "writtenOn": "2015-03-27T22:24:51Z",
       "side": 1,
       "message": "Hmm, I wonder if we could get rid of the .closest() here? The only problem I can see with that is that scrollIntoView() may not work on a TextNode, but let\u0027s try.",
+      "revId": "18ceded890929b66c9aecbad54105c8cb7599cff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_4a8f5a2f",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 3514,
+      "author": {
+        "id": 798
+      },
+      "writtenOn": "2015-03-27T22:39:56Z",
+      "side": 1,
+      "message": "Negative. It crashes on scrollIntoView() - it calls \"getDimensions\" and then \"getBorders\" where it dies in flames on \"getComputedStyle\" with:\n\nUncaught TypeError: Failed to execute \u0027getComputedStyle\u0027 on \u0027Window\u0027: parameter 1 is not of type \u0027Element\u0027.",
+      "parentUuid": "6e7c4fa4_2a245e59",
       "revId": "18ceded890929b66c9aecbad54105c8cb7599cff",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
