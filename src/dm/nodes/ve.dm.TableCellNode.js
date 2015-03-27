@@ -120,7 +120,10 @@ ve.dm.TableCellNode.static.createData = function ( options ) {
 		attributes: {
 			style: options.style || 'data',
 			rowspan: options.rowspan || 1,
-			colspan: options.colspan || 1
+			colspan: options.colspan || 1,
+			// HACK: This is a WIP, will eventually be feeded through i18n
+			title: 'Double click to edit'
+			// title: mw.message( 'visualeditor-tablecell-tooltip' )
 		}
 	};
 	content = options.content || [
@@ -160,6 +163,15 @@ ve.dm.TableCellNode.prototype.getSpans = function () {
 		col: this.getColspan(),
 		row: this.getRowspan()
 	};
+};
+
+/**
+ * Get tooltip text to render on hover
+ *
+ * @return {string} Tooltip text
+ */
+ve.dm.TableCellNode.prototype.getTitle = function () {
+	return this.element.attributes.title || '';
 };
 
 /**

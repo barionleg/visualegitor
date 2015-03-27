@@ -18,7 +18,8 @@ ve.ce.TableCellNode = function VeCeTableCellNode() {
 	ve.ce.TableCellNode.super.apply( this, arguments );
 
 	var rowspan = this.model.getRowspan(),
-		colspan = this.model.getColspan();
+		colspan = this.model.getColspan(),
+		title = this.model.getTitle();
 
 	// DOM changes
 	this.$element
@@ -34,6 +35,9 @@ ve.ce.TableCellNode = function VeCeTableCellNode() {
 	if ( colspan > 1 ) {
 		this.$element.attr( 'colspan', colspan );
 	}
+
+	// Add QoL tooltip
+	this.$element.attr( 'title', title );
 
 	// Events
 	this.model.connect( this, {
