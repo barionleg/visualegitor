@@ -2230,6 +2230,10 @@ ve.ce.Surface.prototype.onModelSelect = function () {
 					// in exactly the same place where it was before, the observer won't consider that a change.
 					this.surfaceObserver.clear();
 				}
+				// If the node is outside the view, scroll to it
+				if ( !this.isElementInView( this.focusedNode.$element ) ) {
+					this.focusedNode.$element.get( 0 ).scrollIntoView();
+				}
 			}
 		}
 	} else {
@@ -3465,7 +3469,7 @@ ve.ce.Surface.prototype.showSelection = function ( selection ) {
 		return;
 	}
 
-	var endRange, oldRange,
+	var endRange, oldRange, $node,
 		range = selection.getRange(),
 		rangeSelection = this.getRangeSelection( range ),
 		nativeRange = this.getElementDocument().createRange();
@@ -3508,7 +3512,26 @@ ve.ce.Surface.prototype.showSelection = function ( selection ) {
 	// Also set focus after range to prevent scrolling to top
 	if ( !OO.ui.contains( this.getElementDocument().activeElement, rangeSelection.start.node, true ) ) {
 		$( rangeSelection.start.node ).closest( '[contenteditable=true]' ).focus();
+	} else {
+		$node = $( rangeSelection.start.node ).closest( '.ve-ce-branchNode' );
+		// Check if the node is outside the window view
+		if ( !this.isElementInView( $node ) ) {
+			// Scroll to view
+			$node.get( 0 ).scrollIntoView();
+		}
 	}
+};
+
+/**
+ * Check if a specific element is in view
+ * @param {jQuery} $element Element to check
+ * @return {boolean} Element is in view
+ */
+ve.ce.Surface.prototype.isElementInView = function ( $element ) {
+	return (
+		$element.offset().top + $element.height() < $( window ).scrollTop() + $( window ).height() &&
+		$element.offset().top > 0
+	);
 };
 
 /**
