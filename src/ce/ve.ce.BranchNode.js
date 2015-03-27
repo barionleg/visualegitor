@@ -16,13 +16,19 @@
  * @constructor
  * @param {ve.dm.BranchNode} model Model to observe
  * @param {Object} [config] Configuration options
+ * @cfg {boolean} ignoreSlugs Ignore the rendering of slugs
  */
 ve.ce.BranchNode = function VeCeBranchNode( model, config ) {
+	config = config || {};
+
 	// Mixin constructor
 	ve.BranchNode.call( this );
 
 	// Parent constructor
 	ve.ce.Node.call( this, model, config );
+
+	// Ignore slugs
+	this.ignoreSlugs = !!config.ignoreSlugs;
 
 	// DOM changes (keep in sync with #onSetup)
 	this.$element.addClass( 've-ce-branchNode' );
@@ -235,6 +241,12 @@ ve.ce.BranchNode.prototype.setupSlugs = function () {
 	var i, slugTemplate, slugNode, child, slugButton,
 		isBlock = this.canHaveChildrenNotContent(),
 		doc = this.getElementDocument();
+
+	if ( this.ignoreSlugs ) {
+		// If we don't want to render the slugs, we should skip
+		// this method completely
+		return;
+	}
 
 	// Remove all slugs in this branch
 	for ( i in this.slugNodes ) {
