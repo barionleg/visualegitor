@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5622adb1",
+        "filename": "src/ce/nodes/ve.ce.TableCellNode.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 798
+      },
+      "writtenOn": "2015-03-27T17:30:13Z",
+      "side": 1,
+      "message": "Since this title is a general \"instructional\" one that doesn\u0027t change from cell to cell, it doesn\u0027t on the model. You should define and use it in the CE, no need to touch the data model for the table cell at all in this case.",
+      "revId": "f68351b7656958143efb4ad803205d9fedcc5f29",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_b938d2d0",
+        "filename": "src/dm/nodes/ve.dm.TableCellNode.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 798
+      },
+      "writtenOn": "2015-03-27T17:30:13Z",
+      "side": 1,
+      "message": "You should move this to the CE. This isn\u0027t a property of the cell, it\u0027s a general help message that is the same for all tables. No need to touch the data model for the cell.",
+      "revId": "f68351b7656958143efb4ad803205d9fedcc5f29",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
