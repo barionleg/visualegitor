@@ -16,13 +16,20 @@
  * @constructor
  * @param {ve.dm.BranchNode} model Model to observe
  * @param {Object} [config] Configuration options
+ * @cfg {boolean} isPreview Set as preview mode. Ignore slugs
+ *  in rendering.
  */
 ve.ce.BranchNode = function VeCeBranchNode( model, config ) {
+	config = config || {};
+
 	// Mixin constructor
 	ve.BranchNode.call( this );
 
 	// Parent constructor
 	ve.ce.Node.call( this, model, config );
+
+	// Preview mode
+	this.isPreview = !!config.isPreview;
 
 	// DOM changes (keep in sync with #onSetup)
 	this.$element.addClass( 've-ce-branchNode' );
@@ -235,6 +242,11 @@ ve.ce.BranchNode.prototype.setupSlugs = function () {
 	var i, slugTemplate, slugNode, child, slugButton,
 		isBlock = this.canHaveChildrenNotContent(),
 		doc = this.getElementDocument();
+
+	if ( this.isPreview ) {
+		// Preview mode should skip rendering slugs
+		return;
+	}
 
 	// Remove all slugs in this branch
 	for ( i in this.slugNodes ) {
