@@ -16,6 +16,24 @@
       "revId": "bbfc639bf144fa6d2c62c724c2e49f76e8510c59",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_bb8762b9",
+        "filename": "src/ce/ve.ce.RangeState.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-03-29T09:55:37Z",
+      "side": 1,
+      "message": "good point",
+      "parentUuid": "6e7c4fa4_7bd54ae8",
+      "revId": "bbfc639bf144fa6d2c62c724c2e49f76e8510c59",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
