@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_7b830a9c",
+        "filename": "src/ce/styles/nodes/ve.ce.BranchNode.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-03-29T10:30:20Z",
+      "side": 1,
+      "message": "Don\u0027t think this is necessary. The button becoming visible is enough. (And definitely not with a star selector)",
+      "revId": "87cf0143f1249ab23f7773c30234deef3cd61469",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3b51123b",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 2255,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-03-29T10:30:20Z",
+      "side": 1,
+      "message": "document",
+      "revId": "87cf0143f1249ab23f7773c30234deef3cd61469",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
