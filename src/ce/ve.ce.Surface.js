@@ -271,6 +271,21 @@ ve.ce.Surface.static.getClipboardHash = function ( nodes ) {
 	return hash.replace( /\s/gm, '' );
 };
 
+/**
+ * Compare two clipboard hashes.
+ *
+ * This comparison is tolerant of context markers appearing in actual but not in expected.
+ *
+ * @param {string} actual Hash of the pasted content
+ * @param {string} expected Hash of the copied content
+ * @return {boolean} The hashes are equivalent
+ */
+ve.ce.Surface.static.compareClipboardHashes = function ( actual, expected ) {
+	return actual === expected ||
+		// Try stripping paste context markers, if present
+		actual.replace( /^<[A-Z]+>☀/, '' ).replace( /☂$/, '' ) === expected;
+};
+
 /* Methods */
 
 /**
@@ -1895,8 +1910,10 @@ ve.ce.Surface.prototype.afterPaste = function () {
 			// equal to the hash of the pasted HTML to assert that the HTML
 			// hasn't been modified in another editor before being pasted back.
 			if ( beforePasteData.custom ||
-				this.clipboard[clipboardIndex].hash ===
-					this.constructor.static.getClipboardHash( $elements.toArray() )
+				this.constructor.static.compareClipboardHashes(
+					this.constructor.static.getClipboardHash( $elements.toArray() ),
+					this.clipboard[clipboardIndex].hash
+				)
 			) {
 				slice = this.clipboard[clipboardIndex].slice;
 			}
