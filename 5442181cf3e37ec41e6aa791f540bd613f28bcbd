@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5e64fb10",
+        "filename": "src/ce/ve.ce.RangeState.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-03-29T16:36:09Z",
+      "side": 1,
+      "message": "Hmm, now old will be null for a null selection, so !!old implies old.hash !\u003d\u003d null and old.text !\u003d\u003d null, right? So these two lines are now redundant (and confusing)?",
+      "revId": "5442181cf3e37ec41e6aa791f540bd613f28bcbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
