@@ -6,15 +6,22 @@
 
 .ve-ce-branchNode-blockSlug {
 	cursor: pointer;
-	opacity: 0;
+	/* TODO: set unselected blockSlug opacity back to zero before merging */
+	opacity: 0.2;
 	-webkit-transition: opacity 200ms ease-out;
 	-moz-transition: opacity 200ms ease-out;
 	-o-transition: opacity 200ms ease-out;
 	transition: opacity 200ms ease-out;
 }
 
-.ve-ce-branchNode-blockSlug:hover {
+.ve-ce-branchNode-blockSlug:hover,
+.ve-ce-branchNode-blockSlug.ve-ce-branchNode-blockSlug-focused {
 	opacity: 1;
+}
+
+.ve-ce-branchNode-blockSlug:hover a *,
+.ve-ce-branchNode-blockSlug.ve-ce-branchNode-blockSlug-focused a * {
+	text-decoration: underline;
 }
 
 .ve-ce-branchNode-blockSlug,
