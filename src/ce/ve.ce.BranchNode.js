@@ -91,8 +91,6 @@ ve.ce.BranchNode.inputDebugInlineSlugTemplate = $( '<span>' )
  */
 ve.ce.BranchNode.blockSlugTemplate = $( '<div>' )
 	.addClass( 've-ce-branchNode-slug ve-ce-branchNode-blockSlug' )
-	// TODO: work around ce=false IE9 bug
-	.prop( 'contentEditable', 'false' )
 	.get( 0 );
 
 /* Methods */
