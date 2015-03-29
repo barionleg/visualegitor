@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_7bd54ae8",
+        "filename": "src/ce/ve.ce.RangeState.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-03-29T04:59:21Z",
+      "side": 1,
+      "message": "We should compare node identity, whereas ve.compare looks at properties. E.g.\n\n    ve.compare(\n        document.createElement( \u0027span\u0027 ),\n        document.createElement( \u0027span\u0027 )\n    )\n\nreturns true. (Attaching the spans first doesn\u0027t help, either)",
+      "revId": "bbfc639bf144fa6d2c62c724c2e49f76e8510c59",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
