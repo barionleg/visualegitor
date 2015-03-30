@@ -25,8 +25,7 @@ ve.ce.TableNode = function VeCeTableNode() {
 
 	// DOM changes
 	this.$element
-		.addClass( 've-ce-tableNode' )
-		.prop( 'contentEditable', 'false' );
+		.addClass( 've-ce-tableNode' );
 };
 
 /* Inheritance */
