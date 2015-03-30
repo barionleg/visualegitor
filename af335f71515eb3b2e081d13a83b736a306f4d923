@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5df878bc",
+        "filename": "src/ce/ve.ce.BranchNode.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 88
+      },
+      "writtenOn": "2015-03-30T21:01:55Z",
+      "side": 1,
+      "message": "This is tricky, but I think this needs to be the method name, and the config option and property should just be called \"preview\". This would be more consistent with other code.\n\nAlso, add a method to check this, called isPreview()",
+      "revId": "af335f71515eb3b2e081d13a83b736a306f4d923",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
