@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "6e7c4fa4_cf4b7361",
+        "filename": "i18n/en.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-03-30T10:45:54Z",
+      "side": 1,
+      "message": "\u0027to edit cell\u0027\n\nOtherwise it could me to edit table properties, which this doesn\u0027t do.",
+      "revId": "3c619156058f4a105e7a04bb3bda91861023dcb3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_cf24d3af",
+        "filename": "src/ce/nodes/ve.ce.TableCellNode.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-03-30T10:45:54Z",
+      "side": 1,
+      "message": "just \u0027Add tooltip\u0027",
+      "revId": "3c619156058f4a105e7a04bb3bda91861023dcb3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_61e35832",
         "filename": "src/ce/nodes/ve.ce.TableCellNode.js",
         "patchSetId": 4
