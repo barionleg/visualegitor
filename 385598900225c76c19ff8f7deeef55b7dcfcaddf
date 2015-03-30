@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0f5c0b1d",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 1837,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-03-30T10:51:50Z",
+      "side": 0,
+      "message": "Ha, this should\u0027ve been span.ve-pasteProtect before. Oh well.",
+      "revId": "385598900225c76c19ff8f7deeef55b7dcfcaddf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
