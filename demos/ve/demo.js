@@ -197,7 +197,7 @@ ve.demo.SurfaceContainer = function VeDemoSurfaceContainer( target, page, lang, 
 	this.surface = null;
 	this.lang = lang;
 	this.dir = dir;
-	this.$surfaceWrapper = this.$( '<div>' );
+	this.$surfaceWrapper = this.$( '<div>' ).addClass( 've-demo-surfaceWrapper' );
 	this.mode = null;
 	this.pageMenu = pageDropdown.getMenu();
 	this.sourceTextInput = new OO.ui.TextInputWidget( {
@@ -220,7 +220,7 @@ ve.demo.SurfaceContainer = function VeDemoSurfaceContainer( target, page, lang, 
 	} );
 	removeButton.on( 'click', this.destroy.bind( this ) );
 
-	this.$element.append(
+	this.$element.addClass( 've-demo-surfaceContainer' ).append(
 		this.$( '<div>' ).addClass( 've-demo-toolbar ve-demo-surfaceToolbar' ).append(
 			this.$( '<div>' ).addClass( 've-demo-toolbar-commands' ).append(
 				pageLabel.$element,
