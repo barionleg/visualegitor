@@ -34,6 +34,24 @@
       "revId": "5442181cf3e37ec41e6aa791f540bd613f28bcbd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0a92b9a1",
+        "filename": "src/ce/ve.ce.RangeState.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-03-30T13:17:06Z",
+      "side": 1,
+      "message": "Oh yeah. But do you still want to trigger contentChanged if there\u0027s a state change of null to null? (Forgive me if I\u0027m being slow)",
+      "parentUuid": "6e7c4fa4_647da6af",
+      "revId": "5442181cf3e37ec41e6aa791f540bd613f28bcbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
