@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_61e35832",
+        "filename": "src/ce/nodes/ve.ce.TableCellNode.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 798
+      },
+      "writtenOn": "2015-03-30T03:26:52Z",
+      "side": 1,
+      "message": "Add spaces within parentheses:\nve.msg( \u0027visualeditor-tablecell-tooltip\u0027 )",
+      "revId": "3c619156058f4a105e7a04bb3bda91861023dcb3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
