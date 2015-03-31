@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ba4bc961",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 2310,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-03-31T19:22:06Z",
+      "side": 1,
+      "message": "Documentation?",
+      "revId": "ab24a7d10eaefb4df2632bb0abd2ce3aa5156834",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5a3ab5c0",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 2881,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-03-31T19:22:06Z",
+      "side": 1,
+      "message": "I\u0027m not sure if we ever announced this, but this.$() is dead. It\u0027s still there for b/c, but you should use $() in new code.",
+      "revId": "ab24a7d10eaefb4df2632bb0abd2ce3aa5156834",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
