@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_4e575cf9",
+        "filename": "src/ce/ve.ce.ContentBranchNode.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-03-31T06:39:07Z",
+      "side": 1,
+      "message": "Wrap this in try..finally... to avoid weirdness if BranchNode#onSplice throws an exception:\n\n    this.stopSetupSlugs \u003d true;\n    try {\n        ve.ce.BranchNode.prototype.onSplice.apply( this, arguments );\n    } finally {\n        this.stopSetupSlugs \u003d false;\n    }\n\nThis is then fine as long as there\u0027s no danger BranchNode#onSplice will indirectly call back ContentBranchNode#onSplice (recursion)",
+      "revId": "ae4655e3e8a4d83ea07f301230744176a2873330",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
