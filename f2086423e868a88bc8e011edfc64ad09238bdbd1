@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_24ed53ee",
+        "filename": "src/ce/ve.ce.ContentBranchNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-04-01T18:40:22Z",
+      "side": 1,
+      "message": "I don\u0027t understand.  this instanceof ve.ce.ContentBranchNode \u003d\u003d\u003d !this.canHaveChildrenNotContent() , so setupBlockSlugs is already a no-op, so why respect the render lock here?",
+      "revId": "f2086423e868a88bc8e011edfc64ad09238bdbd1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_e4f2fbcc",
+        "filename": "src/ce/ve.ce.ContentBranchNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-04-01T18:40:22Z",
+      "side": 1,
+      "message": "this instanceof ve.ce.ContentBranchNode \u003d\u003d\u003d !this.canHaveChildrenNotContent() , so calling setupInlineSlugs() in the new code is equivalent to calling setupSlugs() in the old code.",
+      "revId": "f2086423e868a88bc8e011edfc64ad09238bdbd1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_04ee17e8",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 1322,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-04-01T18:40:22Z",
+      "side": 1,
+      "message": "Am I right that this is the only line in this entire commit that actually changes behavior? This call is now a no-op for CBNs but wasn\u0027t before.",
+      "revId": "f2086423e868a88bc8e011edfc64ad09238bdbd1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
