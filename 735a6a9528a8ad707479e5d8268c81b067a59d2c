@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ef615dd2",
+        "filename": "src/ui/widgets/ve.ui.LinkTargetInputWidget.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-04-04T23:11:08Z",
+      "side": 1,
+      "message": "s/method/call/",
+      "revId": "735a6a9528a8ad707479e5d8268c81b067a59d2c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
