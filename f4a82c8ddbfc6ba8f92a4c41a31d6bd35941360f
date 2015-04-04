@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_a9de05de",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 2956,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-04-04T00:43:46Z",
+      "side": 1,
+      "message": "There is a utility method in the LinearData family to tell if something is a closing",
+      "revId": "f4a82c8ddbfc6ba8f92a4c41a31d6bd35941360f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_c9db41ed",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 2962,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-04-04T00:43:46Z",
+      "side": 1,
+      "message": "There is a utility method in the LinearData family to automatically strip the \u0027/\u0027 if needed",
+      "revId": "f4a82c8ddbfc6ba8f92a4c41a31d6bd35941360f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_69e8ed7a",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 2963,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-04-04T00:43:46Z",
+      "side": 1,
+      "message": "You can ask nodeFactory directly whether a node type is content, and that function is tolerant of being fed /-prefixed types IIRC",
+      "revId": "f4a82c8ddbfc6ba8f92a4c41a31d6bd35941360f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
