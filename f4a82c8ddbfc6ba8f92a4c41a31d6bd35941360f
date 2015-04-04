@@ -2,6 +2,74 @@
   "comments": [
     {
       "key": {
+        "uuid": "6e7c4fa4_2499bc22",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 2880,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-04-04T19:59:22Z",
+      "side": 1,
+      "message": "I feel like a lot of this indexOf() and offset calculation stuff could probably be prevented by using .previousSibling and .nextSibling",
+      "revId": "f4a82c8ddbfc6ba8f92a4c41a31d6bd35941360f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_449e380c",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 2903,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-04-04T19:59:22Z",
+      "side": 1,
+      "message": "This is equivalent to while ( node ) { .... } return null; right?",
+      "revId": "f4a82c8ddbfc6ba8f92a4c41a31d6bd35941360f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_e482e4a9",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 2947,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-04-04T19:59:22Z",
+      "side": 1,
+      "message": "offset \u003d\u003d\u003d dmData.length is allowed, it\u0027s the offset at the very end past the last element",
+      "revId": "f4a82c8ddbfc6ba8f92a4c41a31d6bd35941360f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_0480409f",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 2949,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-04-04T19:59:22Z",
+      "side": 1,
+      "message": "false?!",
+      "revId": "f4a82c8ddbfc6ba8f92a4c41a31d6bd35941360f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_a9de05de",
         "filename": "src/ce/ve.ce.Surface.js",
         "patchSetId": 1
