@@ -2860,12 +2860,122 @@ ve.ce.Surface.prototype.restoreActiveTableNodeSelection = function () {
 	}
 };
 
+ve.ce.Surface.prototype.findCursorAdjacentCeFalseNode = function ( direction ) {
+	var atEdge, sibling,
+		node = this.nativeSelection.focusNode,
+		offset = this.nativeSelection.focusOffset;
+
+	/**
+	 * Move up the tree, to the edge of the current node in the direction of travel
+	 */
+	function moveUp() {
+		node = node.parentNode;
+		if ( node.parentNode === null ) {
+			offset = null;
+			node = null;
+		} else {
+			offset = Array.prototype.indexOf.call(
+				node.parentNode.childNodes,
+				node
+			) + ( direction < 0 ? 0 : 1 );
+			node = node.parentNode;
+		}
+	}
+
+	function atEdge() {
+		return direction < 0 ? offset > 0 : offset < node.childNodes.length;
+	}
+
+	if ( node.type === Node.TEXT_NODE ) {
+		if ( direction < 0 ? offset > 0 : offset < node.length ) {
+			// We will reach some editable text
+			return null;
+		}
+		moveUp();
+	} else {
+		if ( direction > 0 ) {
+			// Start at the following node, not the preceding one
+			offset += 1;
+		}
+	}
+
+	while ( true ) {
+		if ( node === null ) {
+			return null;
+		}
+		if ( atEdge() ) {
+			moveUp();
+			continue;
+		}
+		do {
+			sibling = node.childNodes[offset];
+			if ( sibling.nodeType === Node.TEXT_NODE ) {
+				if ( sibling.length > 0 ) {
+					// We will reach some editable text
+					return null;
+				}
+			} else if ( sibling.classList.contains( 've-ce-branchNode' ) ) {
+				// We will land inside a branch node
+				// TODO: Can the branch node be empty (not even inline-slugged)?
+				return null;
+			} else if ( sibling.classList.contains( 've-ce-leafNode' ) ) {
+				if ( sibling.getAttribute( 'contenteditable' ) === 'false' ) {
+					return sibling;
+				}
+				// Else skip the leaf? (TODO: check logic and cursoring)
+			}
+			offset--;
+		} while ( !atEdge() );
+	}
+}
+
+ve.ce.Surface.prototype.findCursorAdjacentCeFalseNode = function ( direction ) {
+	var offset, focusOffset, dmData, item,
+		dmSelection = this.getModel().getSelection();
+
+	if ( !( dmSelection instanceof ve.dm.LinearSelection ) ) {
+		return null;
+	}
+
+	direction = direction < 0 ? -1 : 1;
+
+	dmData = this.getModel().getDocument().data.data;
+	var focusOffset = dmSelection.getRange().end;
+	offset = focusOffset;
+	while( true ) {
+		offset += ( direction < 0 ) ? -1 : 1;
+		if ( offset < 0 || offset >= dmData.length ) {
+			// TODO: should this be 1 .. len-1 ?
+			return false;
+		}
+		item = dmData[ offset ];
+		if ( !item.type ) {
+			// text: the cursor will land before crossing a ce=false
+			return null;
+		} else if (
+			( direction < 0 && item.type.startswith( '/' ) ) ||
+			( direction > 0 && !item.type.startswith( '/' ) )
+		) {
+			// the cursor will skip this tag
+			continue;
+		} else if ( ve.dm.modelRegistry.lookup(
+			item.type.substring( direction < 0 ? 1 : 0 )
+		) .static.isContent ) {
+			// content tag: the cursor will land before crossing a ce=false
+			return null;
+		} else {
+			// TODO: return the CE node corresponding to this
+		}
+	}
+};
+
 /**
  * Handle up or down arrow key events with a linear selection.
  *
  * @param {jQuery.Event} e Up or down key down event
  */
 ve.ce.Surface.prototype.handleLinearArrowKey = function ( e ) {
+	debugger;
 	var nativeRange, collapseNode, collapseOffset, direction, directionality, upOrDown,
 		startFocusNode, startFocusOffset,
 		range = this.model.getSelection().getRange(),
