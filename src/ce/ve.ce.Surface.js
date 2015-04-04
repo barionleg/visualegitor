@@ -81,6 +81,7 @@ ve.ce.Surface = function VeCeSurface( model, ui, options ) {
 	this.cursorDirectionality = null;
 	this.unicorningNode = null;
 	this.setUnicorningRecursionGuard = false;
+	this.cursorHolders = null;
 
 	this.hasSelectionChangeEvents = 'onselectionchange' in this.getElementDocument();
 
@@ -248,6 +249,29 @@ ve.ce.Surface.static.unsafeAttributes = [
 	// CSS: Values are often added or modified
 	'style'
 ];
+
+/**
+ * Cursor holder template
+ *
+ * @static
+ * @property {HTMLElement}
+ */
+ve.ce.Surface.static.cursorHolderTemplate = (
+	$( '<div>' )
+	.addClass( 've-ce-cursorHolder' )
+	.attr( 'contenteditable', 'true' )
+	.css( { position: 'absolute', width: '0', height: '0' } )
+	// TODO: remove the following line (visible marker) before merging
+	.css( { width: '2px', height: '2px', border: 'solid red 5px' } )
+	.append(
+		// The image does not need a src for firefox, because you can already cursor into
+		// ce=false in Firefox
+		$( '<img>' )
+		.addClass( 've-ce-cursorHolder-img' )
+		.css( { width: '0', height: '0' } )
+	)
+	.get( 0 )
+);
 
 /* Static methods */
 
@@ -752,6 +776,8 @@ ve.ce.Surface.prototype.onDocumentFocus = function () {
  * @fires blur
  */
 ve.ce.Surface.prototype.onDocumentBlur = function () {
+	// TODO: I suspect we should do nothing to cursor holders here, but let's discuss.
+	this.removeCursorHolders();
 	this.eventSequencer.detach();
 	this.surfaceObserver.stopTimerLoop();
 	this.surfaceObserver.pollOnce();
@@ -1337,8 +1363,29 @@ ve.ce.Surface.prototype.afterDocumentKeyDown = function ( e ) {
 		return;
 	}
 
-	// If we arrowed a collapsed cursor across a focusable node, select the node instead
+	// If we landed in a cursor holder, select the corresponding focusable node instead
+	// (which, for a table, will select the first cell). Else if we arrowed a collapsed
+	// cursor across a focusable node, select the node instead.
 	if (
+		this.nativeSelection.focusNode &&
+		this.nativeSelection.focusNode.classList &&
+		this.nativeSelection.focusNode.classList.contains( 've-ce-cursorHolder' )
+	) {
+		if ( this.nativeSelection.focusNode.classList.contains(
+			've-ce-cursorHolder-after'
+		) ) {
+			direction = -1;
+			focusableNode = $(
+				this.nativeSelection.focusNode.previousSibling
+			).data( 'view' );
+		} else {
+			direction = 1;
+			focusableNode = $(
+				this.nativeSelection.focusNode.nextSibling
+			).data( 'view' );
+		}
+		this.removeCursorHolders();
+	} else if (
 		isArrow &&
 		!e.ctrlKey &&
 		!e.altKey &&
@@ -1384,36 +1431,36 @@ ve.ce.Surface.prototype.afterDocumentKeyDown = function ( e ) {
 				}
 			}
 		}
+	}
 
-		if ( focusableNode ) {
-			if ( !range ) {
-				range = focusableNode.getOuterRange();
-				if ( direction < 0 ) {
-					range = range.flip();
-				}
+	if ( focusableNode ) {
+		if ( !range ) {
+			range = focusableNode.getOuterRange();
+			if ( direction < 0 ) {
+				range = range.flip();
 			}
-			if ( focusableNode instanceof ve.ce.TableNode ) {
-				if ( direction > 0 ) {
-					this.model.setSelection( new ve.dm.TableSelection(
-						this.model.documentModel, range, 0, 0
-					) );
-				} else {
-					matrix = focusableNode.getModel().getMatrix();
-					this.model.setSelection( new ve.dm.TableSelection(
-						this.model.documentModel, range, matrix.getColCount() - 1, matrix.getRowCount() - 1
-					) );
-				}
-			} else {
-				this.model.setLinearSelection( range );
-			}
-			if ( e.keyCode === OO.ui.Keys.LEFT ) {
-				this.cursorDirectionality = direction > 0 ? 'rtl' : 'ltr';
-			} else if ( e.keyCode === OO.ui.Keys.RIGHT ) {
-				this.cursorDirectionality = direction < 0 ? 'rtl' : 'ltr';
-			}
-			// else up/down pressed; leave this.cursorDirectionality as null
-			// (it was set by setLinearSelection calling onModelSelect)
 		}
+		if ( focusableNode instanceof ve.ce.TableNode ) {
+			if ( direction > 0 ) {
+				this.model.setSelection( new ve.dm.TableSelection(
+					this.model.documentModel, range, 0, 0
+				) );
+			} else {
+				matrix = focusableNode.getModel().getMatrix();
+				this.model.setSelection( new ve.dm.TableSelection(
+					this.model.documentModel, range, matrix.getColCount() - 1, matrix.getRowCount() - 1
+				) );
+			}
+		} else {
+			this.model.setLinearSelection( range );
+		}
+		if ( e.keyCode === OO.ui.Keys.LEFT ) {
+			this.cursorDirectionality = direction > 0 ? 'rtl' : 'ltr';
+		} else if ( e.keyCode === OO.ui.Keys.RIGHT ) {
+			this.cursorDirectionality = direction < 0 ? 'rtl' : 'ltr';
+		}
+		// else up/down pressed; leave this.cursorDirectionality as null
+		// (it was set by setLinearSelection calling onModelSelect)
 	}
 
 	fixupCursorForUnicorn = (
@@ -2410,9 +2457,15 @@ ve.ce.Surface.prototype.renderSelectedContentBranchNode = function () {
  * @param {ve.ce.BranchNode} newBranchNode Node into which the range anchor has just moved
  */
 ve.ce.Surface.prototype.onSurfaceObserverBranchNodeChange = function ( oldBranchNode ) {
+	var surface = this;
 	if ( oldBranchNode instanceof ve.ce.ContentBranchNode ) {
 		oldBranchNode.renderContents();
 	}
+	// TODO: this setTimeout is ugly: it's to wait until after the rangeChange handler
+	setTimeout( function () {
+		surface.removeCursorHolders();
+		surface.insertCursorHolders();
+	} );
 };
 
 /**
@@ -2861,13 +2914,82 @@ ve.ce.Surface.prototype.restoreActiveTableNodeSelection = function () {
 };
 
 /**
+ * Find a ce=false block node that a native cursor press *might* skip
+ *
+ * If a node is returned, then it might be possible to skip it from here with a
+ * single cursor press, but then again, it might not - it is hard to predict
+ * the behaviour of left/rightarrow (because of visual bidi cursoring) and
+ * up/downarrow (because of wrapping).
+ *
+ * However, if null is returned, then a single native cursor press is
+ * guaranteed *not* to skip an uneditable block node in the specified
+ * direction.
+ *
+ * @param {number} direction -1 for before the cursor, +1 for after
+ * @returns {ve.ce.BlockNode|null} Uneditable block node near cursor, or null
+ */
+ve.ce.Surface.prototype.findUneditableBlockNodeNearCursor = function ( direction ) {
+	var offset, focusOffset, linearData, node,
+		changedBlock = false,
+		forward = direction > 0,
+		dmSelection = this.getModel().getSelection();
+
+	if ( !( dmSelection instanceof ve.dm.LinearSelection ) ) {
+		return null;
+	}
+
+	linearData = this.getModel().getDocument().data;
+	focusOffset = dmSelection.getRange().end;
+	offset = focusOffset;
+	while ( true ) {
+		offset += forward ? 1 : -1;
+		if ( forward ? offset > linearData.getLength() - 1 : offset < 1 ) {
+			return false;
+		}
+
+		if ( !changedBlock ) {
+			if (
+				!linearData.isElementData( offset ) ||
+				ve.dm.nodeFactory.isNodeContent( linearData.getType( offset ) )
+			) {
+				// In the same block: up/downarrow could skip further than this
+				continue;
+			}
+			changedBlock = true;
+		}
+
+		if ( !linearData.isElementData( offset ) ) {
+			// text: the cursor will land before crossing a ce=false
+			return null;
+		} else if (
+			( forward && linearData.isCloseElementData( offset ) ) ||
+			( !forward && linearData.isOpenElementData( offset ) )
+		) {
+			// the cursor will skip this tag
+			continue;
+		} else if ( ve.dm.nodeFactory.isNodeContent( linearData.getType( offset ) ) ) {
+			// content tag: the cursor will land before crossing a ce=false
+			return null;
+		} else {
+			node = this.getDocument().getDocumentNode().getNodeFromOffset(
+				offset + ( forward ? 1 : 0 )
+			);
+			if ( node.$element.attr( 'contenteditable' ) === 'false' ) {
+				return node;
+			}
+			return null;
+		}
+	}
+};
+
+/**
  * Handle up or down arrow key events with a linear selection.
  *
  * @param {jQuery.Event} e Up or down key down event
  */
 ve.ce.Surface.prototype.handleLinearArrowKey = function ( e ) {
 	var nativeRange, collapseNode, collapseOffset, direction, directionality, upOrDown,
-		startFocusNode, startFocusOffset,
+		startFocusNode, startFocusOffset, cursorHolders,
 		range = this.model.getSelection().getRange(),
 		surface = this;
 
@@ -3027,6 +3149,49 @@ ve.ce.Surface.prototype.handleLinearArrowKey = function ( e ) {
 		}
 		surface.surfaceObserver.pollOnce();
 	} } );
+};
+
+/**
+ * Insert cursor holders, if they might be required as a cursor target
+ *
+ * @returns {Object}
+ * @returns.before {Node|null} Cursor holder before the cursor, or null
+ * @returns.after {Node|null} Cursor holder after the cursor, or null
+ */
+ve.ce.Surface.prototype.insertCursorHolders = function () {
+	var holderBefore = null,
+		holderAfter = null,
+		doc = this.getElementDocument(),
+		nodeBefore = this.findUneditableBlockNodeNearCursor( -1 ),
+		nodeAfter = this.findUneditableBlockNodeNearCursor( 1 );
+
+	if ( nodeBefore ) {
+		holderBefore = doc.importNode( this.constructor.static.cursorHolderTemplate, true );
+		holderBefore.classList.add( 've-ce-cursorHolder-after' );
+		nodeBefore.$element.after( holderBefore );
+	}
+	if ( nodeAfter ) {
+		holderAfter = doc.importNode( this.constructor.static.cursorHolderTemplate, true );
+		holderAfter.classList.add( 've-ce-cursorHolder-before' );
+		nodeAfter.$element.before( holderAfter );
+	}
+	this.cursorHolders = { before: holderBefore, after: holderAfter };
+};
+
+/**
+ * Remove cursor holders, if they exist
+ */
+ve.ce.Surface.prototype.removeCursorHolders = function () {
+	if ( !this.cursorHolders ) {
+		return;
+	}
+	if ( this.cursorHolders.before ) {
+		this.cursorHolders.before.remove();
+	}
+	if ( this.cursorHolders.after ) {
+		this.cursorHolders.after.remove();
+	}
+	this.cursorHolders = null;
 };
 
 /**
