@@ -249,6 +249,27 @@ ve.ce.Surface.static.unsafeAttributes = [
 	'style'
 ];
 
+/**
+ * Cursor holder template
+ *
+ * @static
+ * @property {HTMLElement}
+ */
+ve.ce.Surface.static.cursorHolderTemplate = (
+	$( '<span>' )
+	.addClass( 've-ce-cursorHolder' )
+	.attr( 'contenteditable', 'true' )
+	.css( { width: '0', height: '0' } )
+	.append(
+		// The image does not need a src for firefox, because you can already cursor into
+		// ce=false in Firefox
+		$( '<img>' )
+		.addClass( 've-ce-cursorHolder-img' )
+		.css( { width: '0', height: '0' } )
+	)
+	.get( 0 )
+);
+
 /* Static methods */
 
 /**
@@ -2861,13 +2882,82 @@ ve.ce.Surface.prototype.restoreActiveTableNodeSelection = function () {
 };
 
 /**
+ * Find a ce=false block node that a native cursor press *might* skip
+ *
+ * If a node is returned, then it might be possible to skip it from here with a
+ * single cursor press, but then again, it might not - it is hard to predict
+ * the behaviour of left/rightarrow (because of visual bidi cursoring) and
+ * up/downarrow (because of wrapping).
+ *
+ * However, if null is returned, then a single native cursor press is
+ * guaranteed *not* to skip an uneditable block node in the specified
+ * direction.
+ *
+ * @param {number} direction -1 for before the cursor, +1 for after
+ * @returns {ve.ce.BlockNode|null} Uneditable block node near cursor, or null
+ */
+ve.ce.Surface.prototype.findUneditableBlockNodeNearCursor = function ( direction ) {
+	var offset, focusOffset, linearData, node,
+		changedBlock = false,
+		forward = direction > 0,
+		dmSelection = this.getModel().getSelection();
+
+	if ( !( dmSelection instanceof ve.dm.LinearSelection ) ) {
+		return null;
+	}
+
+	linearData = this.getModel().getDocument().data;
+	focusOffset = dmSelection.getRange().end;
+	offset = focusOffset;
+	while ( true ) {
+		offset += forward ? 1 : -1;
+		if ( forward ? offset > linearData.getLength() - 1 : offset < 1 ) {
+			return false;
+		}
+
+		if ( !changedBlock ) {
+			if (
+				!linearData.isElementData( offset ) ||
+				ve.dm.nodeFactory.isNodeContent( linearData.getType( offset ) )
+			) {
+				// In the same block: up/downarrow could skip further than this
+				continue;
+			}
+			changedBlock = true;
+		}
+
+		if ( !linearData.isElementData( offset ) ) {
+			// text: the cursor will land before crossing a ce=false
+			return null;
+		} else if (
+			( forward && linearData.isCloseElementData( offset ) ) ||
+			( !forward && linearData.isOpenElementData( offset ) )
+		) {
+			// the cursor will skip this tag
+			continue;
+		} else if ( ve.dm.nodeFactory.isNodeContent( linearData.getType( offset ) ) ) {
+			// content tag: the cursor will land before crossing a ce=false
+			return null;
+		} else {
+			node = this.getDocument().getDocumentNode().getNodeFromOffset(
+				offset + ( forward ? 1 : 0 )
+			);
+			if ( node.$element.attr( 'contenteditable' ) === 'false' ) {
+				return node;
+			}
+			return null;
+		}
+	}
+};
+
+/**
  * Handle up or down arrow key events with a linear selection.
  *
  * @param {jQuery.Event} e Up or down key down event
  */
 ve.ce.Surface.prototype.handleLinearArrowKey = function ( e ) {
 	var nativeRange, collapseNode, collapseOffset, direction, directionality, upOrDown,
-		startFocusNode, startFocusOffset,
+		startFocusNode, startFocusOffset, cursorHolders,
 		range = this.model.getSelection().getRange(),
 		surface = this;
 
@@ -2980,12 +3070,22 @@ ve.ce.Surface.prototype.handleLinearArrowKey = function ( e ) {
 		this.nativeSelection.addRange( nativeRange );
 	}
 
+	// Insert cursor holders for block focusable nodes, if they might be needed
+	cursorHolders = this.insertCursorHolders();
+
 	startFocusNode = this.nativeSelection.focusNode;
 	startFocusOffset = this.nativeSelection.focusOffset;
 
 	// Re-expand (or fixup) the selection after the native action, if necessary
 	this.eventSequencer.afterOne( { keydown: function () {
 		var viewNode, newRange, afterDirection;
+
+		if ( cursorHolders.before ) {
+			cursorHolders.before.remove();
+		}
+		if ( cursorHolders.after ) {
+			cursorHolders.after.remove();
+		}
 
 		// Chrome bug lets you cursor into a multi-line contentEditable=false with up/down...
 		viewNode = $( surface.nativeSelection.focusNode ).closest( '.ve-ce-leafNode,.ve-ce-branchNode' ).data( 'view' );
@@ -3027,6 +3127,35 @@ ve.ce.Surface.prototype.handleLinearArrowKey = function ( e ) {
 		}
 		surface.surfaceObserver.pollOnce();
 	} } );
+};
+
+/**
+ * Insert cursor holders, if they might be required as a cursor target
+ *
+ * @returns {Object}
+ * @returns.before {Node|null} Cursor holder before the cursor, or null
+ * @returns.after {Node|null} Cursor holder after the cursor, or null
+ */
+ve.ce.Surface.prototype.insertCursorHolders = function () {
+	var holderBefore = null,
+		holderAfter = null,
+		doc = this.getElementDocument(),
+		nodeBefore = this.findUneditableBlockNodeNearCursor( -1 ),
+		nodeAfter = this.findUneditableBlockNodeNearCursor( 1 );
+
+	if ( nodeBefore ) {
+		holderBefore = doc.importNode( this.constructor.static.cursorHolderTemplate, true );
+		// TODO: this is unreasonable if $element is a table node, even
+		// though it appears to work in practice.
+		nodeBefore.$element.append( holderBefore );
+	}
+	if ( nodeAfter ) {
+		holderAfter = doc.importNode( this.constructor.static.cursorHolderTemplate, true );
+		// TODO: this is unreasonable if $element is a table node, even
+		// though it appears to work in practice.
+		nodeAfter.$element.append( holderAfter );
+	}
+	return { before: holderBefore, after: holderAfter };
 };
 
 /**
