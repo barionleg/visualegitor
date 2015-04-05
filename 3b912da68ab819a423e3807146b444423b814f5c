@@ -16,6 +16,24 @@
       "revId": "3b912da68ab819a423e3807146b444423b814f5c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5e08442b",
+        "filename": "src/ui/widgets/ve.ui.LinkTargetInputWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-04-05T18:36:00Z",
+      "side": 1,
+      "message": "we still want to update this.annotation",
+      "parentUuid": "6e7c4fa4_84b530cd",
+      "revId": "3b912da68ab819a423e3807146b444423b814f5c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
