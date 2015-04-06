@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_41938552",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-04-06T09:19:27Z",
+      "side": 1,
+      "message": "Is it possible to \u0027leave\u0027 a text node using left/right with the cursor logically not at an edge?",
+      "revId": "a022f971a6ca2994459d31b96a0a6d8b1dcb5e70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_a18ff92d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-04-06T09:19:27Z",
+      "side": 1,
+      "message": "Don\u0027t put them inside, but them adjacent.",
+      "revId": "a022f971a6ca2994459d31b96a0a6d8b1dcb5e70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_017eed15",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-04-06T09:19:27Z",
+      "side": 1,
+      "message": "Combine making them adjacent with making them zero height.",
+      "revId": "a022f971a6ca2994459d31b96a0a6d8b1dcb5e70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
