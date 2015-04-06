@@ -82,6 +82,15 @@ ve.dm.LinkAnnotation.prototype.getComparableObject = function () {
 	};
 };
 
+/**
+ * @inherit
+ */
+ve.dm.LinkAnnotation.prototype.getComparableHtmlAttributes = function () {
+	var comparableAttributes = ve.dm.LinkAnnotation.super.prototype.getComparableHtmlAttributes.call( this );
+	delete comparableAttributes.href;
+	return comparableAttributes;
+};
+
 /* Registration */
 
 ve.dm.modelRegistry.register( ve.dm.LinkAnnotation );
