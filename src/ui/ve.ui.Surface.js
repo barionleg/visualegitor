@@ -30,6 +30,7 @@ ve.ui.Surface = function VeUiSurface( dataOrDoc, config ) {
 	OO.EventEmitter.call( this, config );
 
 	// Properties
+	this.properties = config.properties || {};
 	this.globalOverlay = new ve.ui.Overlay( { classes: ['ve-ui-overlay-global'] } );
 	this.localOverlay = new ve.ui.Overlay( { $: this.$, classes: ['ve-ui-overlay-local'] } );
 	this.$selections = this.$( '<div>' );
@@ -440,4 +441,12 @@ ve.ui.Surface.prototype.startFilibuster = function () {
 
 ve.ui.Surface.prototype.stopFilibuster = function () {
 	this.filibuster.stop();
+};
+
+/**
+ * Get the special properties defined for this surface.
+ * @return {Object} Properties for the surface.
+ */
+ve.ui.Surface.prototype.getProperties = function () {
+	return this.properties;
 };

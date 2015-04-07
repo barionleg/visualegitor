@@ -29,7 +29,8 @@ ve.ui.SurfaceWidget = function VeUiSurfaceWidget( doc, config ) {
 	this.surface = ve.init.target.createSurface( doc, {
 		$: this.$,
 		excludeCommands: config.excludeCommands,
-		importRules: config.importRules
+		importRules: config.importRules,
+		properties: config.properties || {}
 	} );
 	this.toolbar = new ve.ui.Toolbar();
 
