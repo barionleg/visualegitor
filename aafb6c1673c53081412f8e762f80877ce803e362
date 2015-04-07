@@ -16,6 +16,24 @@
       "revId": "aafb6c1673c53081412f8e762f80877ce803e362",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_fd41093b",
+        "filename": "src/dm/nodes/ve.dm.CommentNode.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 664
+      },
+      "writtenOn": "2015-04-07T12:57:31Z",
+      "side": 1,
+      "message": "ve.escapeHtml won\u0027t escape `-`, which is safe elsewhere in HTML but not safe in comments.  An older version of the source exposed ve.escapeHtml.escapeHtmlCharacter which might have been a useful replacement for the callback here, but the current HEAD has no such code that can be reused.",
+      "parentUuid": "6e7c4fa4_2c9d155d",
+      "revId": "aafb6c1673c53081412f8e762f80877ce803e362",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
