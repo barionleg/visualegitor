@@ -17,6 +17,9 @@
  * @cfg {Object[]} [tools] Toolbar configuration
  * @cfg {string[]} [excludeCommands] List of commands to exclude
  * @cfg {Object} [importRules] Import rules
+ * @cfg {Object} [properties] Extra properties for the surface. These can
+ * then be given or checked by the tools in the toolbar attached to the
+ * surface.
  */
 ve.ui.SurfaceWidget = function VeUiSurfaceWidget( doc, config ) {
 	// Config initialization
@@ -29,7 +32,8 @@ ve.ui.SurfaceWidget = function VeUiSurfaceWidget( doc, config ) {
 	this.surface = ve.init.target.createSurface( doc, {
 		$: this.$,
 		excludeCommands: config.excludeCommands,
-		importRules: config.importRules
+		importRules: config.importRules,
+		properties: config.properties || {}
 	} );
 	this.toolbar = new ve.ui.Toolbar();
 
