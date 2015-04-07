@@ -34,6 +34,24 @@
       "revId": "aafb6c1673c53081412f8e762f80877ce803e362",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_229e7967",
+        "filename": "src/dm/nodes/ve.dm.CommentNode.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-04-07T19:20:10Z",
+      "side": 1,
+      "message": "Ugh, right, good point.",
+      "parentUuid": "6e7c4fa4_fd41093b",
+      "revId": "aafb6c1673c53081412f8e762f80877ce803e362",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
