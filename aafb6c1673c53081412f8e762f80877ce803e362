@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_2c9d155d",
+        "filename": "src/dm/nodes/ve.dm.CommentNode.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-04-07T06:18:59Z",
+      "side": 1,
+      "message": "We have a utility function for this: ve.escapeHtml()",
+      "revId": "aafb6c1673c53081412f8e762f80877ce803e362",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
