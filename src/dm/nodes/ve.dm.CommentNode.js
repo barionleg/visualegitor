@@ -34,9 +34,13 @@ ve.dm.CommentNode.static.isContent = true;
 ve.dm.CommentNode.static.preserveHtmlAttributes = false;
 
 ve.dm.CommentNode.static.toDataElement = function ( domElements, converter ) {
-	var text = domElements[0].nodeType === Node.COMMENT_NODE ?
-		domElements[0].data :
-		domElements[0].getAttribute( 'data-ve-comment' );
+	var text;
+	if ( domElements[0].nodeType === Node.COMMENT_NODE ) {
+		// Decode HTML entities, safely (no elements permitted inside textarea)
+		text = $( "<textarea/>" ).html( domElements[0].data ).text();
+	} else {
+		text = domElements[0].getAttribute( 'data-ve-comment' );
+	}
 	return {
 		// Disallows comment nodes between table rows and such
 		type: converter.isValidChildNodeType( 'comment' ) && text !== '' ? 'comment' : 'commentMeta',
@@ -55,7 +59,11 @@ ve.dm.CommentNode.static.toDomElements = function ( dataElement, doc, converter 
 		return [ span ];
 	} else {
 		// Real comment node
-		return [ doc.createComment( dataElement.attributes.text ) ];
+		// Encode & - > (see T95040)
+		var data = dataElement.attributes.text.replace( /[-&>]/g, function ( c ) {
+			return '&#' + c.charCodeAt(0) + ';';
+		} );
+		return [ doc.createComment( data ) ];
 	}
 };
 
