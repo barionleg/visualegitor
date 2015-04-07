@@ -55,7 +55,7 @@ ve.ui.HTMLFileTransferHandler.prototype.onFileProgress = function ( e ) {
  */
 ve.ui.HTMLFileTransferHandler.prototype.onFileLoad = function () {
 	this.insertableDataDeferred.resolve(
-		this.surface.getModel().getDocument().newFromHtml( this.reader.result, this.surface.getImportRules() )
+		this.surface.getModel().getDocument().newFromHtml( this.reader.result, this.surface.getImportRules(), true )
 	);
 	this.setProgress( 100 );
 };
