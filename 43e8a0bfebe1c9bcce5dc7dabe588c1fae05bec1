@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_6f421a13",
+        "filename": "src/ui/datatransferhandlers/ve.ui.HTMLFileTransferHandler.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-04-07T18:01:36Z",
+      "side": 1,
+      "message": "newFromHtml doesn\u0027t take a third parameter",
+      "revId": "43e8a0bfebe1c9bcce5dc7dabe588c1fae05bec1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
