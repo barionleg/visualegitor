@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3b6c649a",
+        "filename": "src/ui/actions/ve.ui.WindowAction.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 88
+      },
+      "writtenOn": "2015-04-07T21:14:07Z",
+      "side": 1,
+      "message": "I know that closeWindow doesn\u0027t throw an exception if currentInspector is null, but this is sloppy and will likely mask errors. Please check to see if currentInspector is a window before passing it to closeWindow.",
+      "revId": "9ec91de11f98a3a5d1cc4edfb3ab738ba3472dc3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
