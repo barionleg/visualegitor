@@ -16,6 +16,24 @@
       "revId": "43e8a0bfebe1c9bcce5dc7dabe588c1fae05bec1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_afe4b20b",
+        "filename": "src/ui/datatransferhandlers/ve.ui.HTMLFileTransferHandler.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-04-07T18:02:20Z",
+      "side": 1,
+      "message": "\"Oh yeah, it did then I changed it\" – Ed.",
+      "parentUuid": "6e7c4fa4_6f421a13",
+      "revId": "43e8a0bfebe1c9bcce5dc7dabe588c1fae05bec1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
