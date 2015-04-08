@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_b133b50f",
+        "filename": "src/ui/ve.ui.Surface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-04-08T01:12:24Z",
+      "side": 1,
+      "message": "Instead of introducing a generic \"properties\" property, just introduce \"inDialog\".",
+      "revId": "325fecb44de7834cdae6e7f7ecae6c15e886ca06",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
