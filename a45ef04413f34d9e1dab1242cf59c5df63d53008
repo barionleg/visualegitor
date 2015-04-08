@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_91fa39d9",
+        "filename": "src/ui/ve.ui.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-04-08T00:14:11Z",
+      "side": 1,
+      "message": "Document config option. I also don\u0027t really like a catch-all like \"properties\", I\u0027d prefer specific config options for specific things.",
+      "revId": "a45ef04413f34d9e1dab1242cf59c5df63d53008",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_51dca177",
+        "filename": "src/ui/widgets/ve.ui.SurfaceWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-04-08T00:14:11Z",
+      "side": 1,
+      "message": "Document config option here too",
+      "revId": "a45ef04413f34d9e1dab1242cf59c5df63d53008",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
