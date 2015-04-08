@@ -16,6 +16,23 @@
       "revId": "5456ff3df5cdbea637bc07df70eb23fcd2d8fc8e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_53d580e8",
+        "filename": "src/dm/nodes/ve.dm.CommentNode.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 664
+      },
+      "writtenOn": "2015-04-08T17:32:40Z",
+      "side": 1,
+      "message": "Instead:\ndata \u003d dataElement.attributes.text.replace( /^[-\u003e]|--|-$/g, function ( match ) {\n  return m.slice(0, m.length-1) + \u0027\u0026#\u0027 + m.charCodeAt(m.length-1) + \u0027;\u0027;\n} );",
+      "revId": "5456ff3df5cdbea637bc07df70eb23fcd2d8fc8e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
