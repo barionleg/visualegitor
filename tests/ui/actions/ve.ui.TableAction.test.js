@@ -25,7 +25,7 @@ function runTableActionTest( assert, html, method, args, selection, expectedData
 	surface.destroy();
 }
 
-QUnit.test( 'create / insert / mergeCells', function ( assert ) {
+QUnit.test( 'create / insert / mergeCells / delete', function ( assert ) {
 	var i,
 		expected = 0,
 		tableCellTail = [
@@ -288,6 +288,26 @@ QUnit.test( 'create / insert / mergeCells', function ( assert ) {
 					data.splice.apply( data, [ 96, 0 ].concat( tableData, tableData ) );
 				},
 				msg: 'unmerge cells'
+			},
+			{
+				html: ve.dm.example.mergedCellsHtml,
+				selection: {
+					type: 'table',
+					tableRange: new ve.Range( 0, 171 ),
+					fromCol: 0,
+					fromRow: 0,
+					toCol: 0,
+					toRow: 0
+				},
+				method: 'delete',
+				args: [ 'table' ],
+				expectedData: function ( data ) {
+					data.splice( 0, 171,
+						{ type: 'paragraph' },
+						{ type: '/paragraph' }
+					);
+				},
+				msg: 'delete whole table'
 			}
 		];
 
