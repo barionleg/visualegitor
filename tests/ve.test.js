@@ -331,6 +331,36 @@ QUnit.test( 'insertIntoArray', 3, function ( assert ) {
 	assert.deepEqual( target, [ 'a', 'b', 'c', 'x', 'y' ], 'insert beyond end' );
 } );
 
+QUnit.test( 'binarySearch', 7, function ( assert ) {
+	var data = [ -42, -10, 0, 2, 5, 7, 12, 21, 42, 70, 144, 1001 ];
+
+	function assertSearch( target, expected ) {
+		function dir( item ) {
+			return item < target ? 1 : ( item > target ? -1 : 0 );
+		}
+
+		var actual = [];
+
+		ve.binarySearch( data, function ( item ) {
+			actual.push( item );
+			return dir( item, target );
+		} );
+
+		assert.deepEqual( actual, expected, 'Search ' + target );
+	}
+
+	assertSearch( 12, [ 12 ] );
+
+	assertSearch( 7, [ 12, 2, 7 ] );
+	assertSearch( -42, [ 12, 2, -10, -42 ] );
+	assertSearch( -2000, [ 12, 2, -10, -42 ] );
+
+	assertSearch( 42, [ 12, 70, 42 ] );
+	assertSearch( 1001, [ 12, 70, 1001 ] );
+	assertSearch( 2000, [ 12, 70, 1001 ] );
+
+} );
+
 QUnit.test( 'escapeHtml', 1, function ( assert ) {
 	assert.strictEqual( ve.escapeHtml( ' "script\' <foo & bar> ' ), ' &quot;script&#039; &lt;foo &amp; bar&gt; ' );
 } );
