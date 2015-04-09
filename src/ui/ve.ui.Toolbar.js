@@ -25,6 +25,7 @@ ve.ui.Toolbar = function VeUiToolbar( config ) {
 	this.floatable = !!config.floatable;
 	this.$window = this.$( this.getElementWindow() );
 	this.elementOffset = null;
+	this.scrollOffset = config.scrollOffset;
 	this.windowEvents = {
 		// Must use Function#bind (or a closure) instead of direct reference
 		// because we need a unique function references for each Toolbar instance
@@ -106,7 +107,7 @@ ve.ui.Toolbar.prototype.isToolAvailable = function ( name ) {
 ve.ui.Toolbar.prototype.onWindowScroll = function () {
 	var scrollTop = this.$window.scrollTop();
 
-	if ( scrollTop > this.elementOffset.top ) {
+	if ( scrollTop + this.scrollOffset > this.elementOffset.top ) {
 		this.float();
 	} else if ( this.floating ) {
 		this.unfloat();
