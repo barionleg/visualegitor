@@ -59,9 +59,7 @@ ve.init.Platform.static.isInternetExplorer = function () {
  * @abstract
  * @returns {RegExp} Regular expression object
  */
-ve.init.Platform.prototype.getExternalLinkUrlProtocolsRegExp = function () {
-	throw new Error( 've.init.Platform.getExternalLinkUrlProtocolsRegExp must be overridden in subclass' );
-};
+ve.init.Platform.prototype.getExternalLinkUrlProtocolsRegExp = null;
 
 /**
  * Get a config value from the platform.
@@ -71,9 +69,7 @@ ve.init.Platform.prototype.getExternalLinkUrlProtocolsRegExp = function () {
  * @param {string|string[]} key Config key, or list of keys
  * @returns {Mixed|Object} Config value, or keyed object of config values if list of keys provided
  */
-ve.init.Platform.prototype.getConfig = function () {
-	throw new Error( 've.init.Platform.getConfig must be overridden in subclass' );
-};
+ve.init.Platform.prototype.getConfig = null;
 
 /**
  * Add multiple messages to the localization system.
@@ -82,9 +78,7 @@ ve.init.Platform.prototype.getConfig = function () {
  * @abstract
  * @param {Object} messages Containing plain message values
  */
-ve.init.Platform.prototype.addMessages = function () {
-	throw new Error( 've.init.Platform.addMessages must be overridden in subclass' );
-};
+ve.init.Platform.prototype.addMessages = null;
 
 /**
  * Get a message from the localization system.
@@ -95,9 +89,7 @@ ve.init.Platform.prototype.addMessages = function () {
  * @param {Mixed...} [args] List of arguments which will be injected at $1, $2, etc. in the message
  * @returns {string} Localized message, or key or '<' + key + '>' if message not found
  */
-ve.init.Platform.prototype.getMessage = function () {
-	throw new Error( 've.init.Platform.getMessage must be overridden in subclass' );
-};
+ve.init.Platform.prototype.getMessage = null;
 
 /**
  * Add multiple parsed messages to the localization system.
@@ -106,9 +98,7 @@ ve.init.Platform.prototype.getMessage = function () {
  * @abstract
  * @param {Object} messages Map of message-key/html pairs
  */
-ve.init.Platform.prototype.addParsedMessages = function () {
-	throw new Error( 've.init.Platform.addParsedMessages must be overridden in subclass' );
-};
+ve.init.Platform.prototype.addParsedMessages = null;
 
 /**
  * Get a parsed message as HTML string.
@@ -120,9 +110,7 @@ ve.init.Platform.prototype.addParsedMessages = function () {
  * @param {string} key Message key
  * @returns {string} Parsed localized message as HTML string
  */
-ve.init.Platform.prototype.getParsedMessage = function () {
-	throw new Error( 've.init.Platform.getParsedMessage must be overridden in subclass' );
-};
+ve.init.Platform.prototype.getParsedMessage = null;
 
 /**
  * Get the user language and any fallback languages.
@@ -131,9 +119,7 @@ ve.init.Platform.prototype.getParsedMessage = function () {
  * @abstract
  * @returns {string[]} User language strings
  */
-ve.init.Platform.prototype.getUserLanguages = function () {
-	throw new Error( 've.init.Platform.getUserLanguages must be overridden in subclass' );
-};
+ve.init.Platform.prototype.getUserLanguages = null;
 
 /**
  * Get a list of URL entry points where media can be found.
@@ -142,9 +128,7 @@ ve.init.Platform.prototype.getUserLanguages = function () {
  * @abstract
  * @returns {string[]} API URLs
  */
-ve.init.Platform.prototype.getMediaSources = function () {
-	throw new Error( 've.init.Platform.getMediaSources must be overridden in subclass' );
-};
+ve.init.Platform.prototype.getMediaSources = null;
 
 /**
  * Get a list of all language codes.
@@ -153,9 +137,7 @@ ve.init.Platform.prototype.getMediaSources = function () {
  * @abstract
  * @returns {string[]} Language codes
  */
-ve.init.Platform.prototype.getLanguageCodes = function () {
-	throw new Error( 've.init.Platform.getLanguageCodes must be overridden in subclass' );
-};
+ve.init.Platform.prototype.getLanguageCodes = null;
 
 /**
  * Get a language's name from its code, in the current user language if possible.
@@ -165,9 +147,7 @@ ve.init.Platform.prototype.getLanguageCodes = function () {
  * @param {string} code Language code
  * @returns {string} Language name
  */
-ve.init.Platform.prototype.getLanguageName = function () {
-	throw new Error( 've.init.Platform.getLanguageName must be overridden in subclass' );
-};
+ve.init.Platform.prototype.getLanguageName = null;
 
 /**
  * Get a language's autonym from its code.
@@ -177,9 +157,7 @@ ve.init.Platform.prototype.getLanguageName = function () {
  * @param {string} code Language code
  * @returns {string} Language autonym
  */
-ve.init.Platform.prototype.getLanguageAutonym = function () {
-	throw new Error( 've.init.Platform.getLanguageAutonym must be overridden in subclass' );
-};
+ve.init.Platform.prototype.getLanguageAutonym = null;
 
 /**
  * Get a language's direction from its code.
@@ -189,9 +167,7 @@ ve.init.Platform.prototype.getLanguageAutonym = function () {
  * @param {string} code Language code
  * @returns {string} Language direction
  */
-ve.init.Platform.prototype.getLanguageDirection = function () {
-	throw new Error( 've.init.Platform.getLanguageDirection must be overridden in subclass' );
-};
+ve.init.Platform.prototype.getLanguageDirection = null;
 
 /**
  * Initialize the platform. The default implementation is to do nothing and return a resolved
