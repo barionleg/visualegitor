@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_0de3579d",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-04-09T17:03:24Z",
+      "side": 1,
+      "message": "This seems like functionality rather than style to me - isn\u0027t it clearer here?",
+      "parentUuid": "6e7c4fa4_8dd527ec",
+      "revId": "079fddd05c4d3801a90382b6f117d70a5d095048",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_edc85b53",
         "filename": "src/ce/ve.ce.Surface.js",
         "patchSetId": 6
@@ -71,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_0d15974d",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-04-09T17:03:24Z",
+      "side": 1,
+      "message": "See above",
+      "parentUuid": "6e7c4fa4_cdcb1f4e",
+      "revId": "079fddd05c4d3801a90382b6f117d70a5d095048",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_2de733e1",
         "filename": "src/ce/ve.ce.Surface.js",
         "patchSetId": 6
@@ -105,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_ed0b7b2c",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 2474,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-04-09T17:03:24Z",
+      "side": 1,
+      "message": "Maybe?? I guess this way is clearer to the reader, whereas the other way is more mistake-proof in a different way.",
+      "parentUuid": "6e7c4fa4_8dbe87aa",
+      "revId": "079fddd05c4d3801a90382b6f117d70a5d095048",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_ed7b7b22",
         "filename": "src/ce/ve.ce.Surface.js",
         "patchSetId": 6
@@ -116,6 +170,24 @@
       "writtenOn": "2015-04-09T16:33:50Z",
       "side": 1,
       "message": "branch?",
+      "revId": "079fddd05c4d3801a90382b6f117d70a5d095048",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_8d08c731",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 2942,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-04-09T17:03:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_ed7b7b22",
       "revId": "079fddd05c4d3801a90382b6f117d70a5d095048",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -139,6 +211,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_ad058318",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 2944,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-04-09T17:03:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_8da767a4",
+      "revId": "079fddd05c4d3801a90382b6f117d70a5d095048",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_2d997371",
         "filename": "src/ce/ve.ce.Surface.js",
         "patchSetId": 6
@@ -150,6 +240,24 @@
       "writtenOn": "2015-04-09T16:33:50Z",
       "side": 1,
       "message": "doesn\u0027t return",
+      "revId": "079fddd05c4d3801a90382b6f117d70a5d095048",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_50fa480e",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 3166,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-04-09T17:03:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_2d997371",
       "revId": "079fddd05c4d3801a90382b6f117d70a5d095048",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
