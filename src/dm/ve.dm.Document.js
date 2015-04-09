@@ -40,7 +40,6 @@ ve.dm.Document = function VeDmDocument( data, htmlDocument, parentDocument, inte
 	this.dir = dir || 'ltr';
 
 	this.documentNode.setRoot( root );
-	this.documentNode.setDocument( doc );
 	this.internalList = internalList ? internalList.clone( this ) : new ve.dm.InternalList( this );
 	this.innerWhitespace = innerWhitespace ? ve.copy( innerWhitespace ) : new Array( 2 );
 
