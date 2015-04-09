@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_d0df386c",
+        "filename": "src/ui/inspectors/ve.ui.AnnotationInspector.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-04-09T17:21:54Z",
+      "side": 0,
+      "message": "You removed documentation that is truthful, but you didn\u0027t convert this method to null?",
+      "revId": "2ac1ae14e4c559b815e2d76c04fb5a1070b46744",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_90e9c012",
+        "filename": "src/ui/inspectors/ve.ui.AnnotationInspector.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-04-09T17:21:54Z",
+      "side": 0,
+      "message": "Same here",
+      "revId": "2ac1ae14e4c559b815e2d76c04fb5a1070b46744",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
