@@ -92,154 +92,30 @@ ve.dm.Transaction.newFromRemoval = function ( doc, range, removeMetadata ) {
 /**
  * Build a transaction that inserts the contents of a document at a given offset.
  *
- * This is typically used to merge changes to a document slice back into the main document. If newDoc
- * is a document slice of doc, it's assumed that there were no changes to doc's internal list since
- * the slice, so any differences between internal items that doc and newDoc have in common will
- * be resolved in newDoc's favor.
- *
  * @param {ve.dm.Document} doc Main document
  * @param {number} offset Offset to insert at
  * @param {ve.dm.Document} newDoc Document to insert
  * @param {ve.Range} [newDocRange] Range from the new document to insert (defaults to entire document)
- * @returns {ve.dm.Transaction} Transaction that inserts the nodes and updates the internal list
+ * @returns {ve.dm.Transaction} Transaction that inserts the contents of newDoc
  */
 ve.dm.Transaction.newFromDocumentInsertion = function ( doc, offset, newDoc, newDocRange ) {
-	var i, len, storeMerge, listMerge, data, metadata, listData, listMetadata, linearData,
-		oldEndOffset, newEndOffset, tx, insertion, spliceItemRange, spliceListNodeRange,
-		listNode = doc.internalList.getListNode(),
-		listNodeRange = listNode.getRange(),
-		newListNode = newDoc.internalList.getListNode(),
-		newListNodeRange = newListNode.getRange(),
-		newListNodeOuterRange = newListNode.getOuterRange();
+	var storeMerge, data, metadata, tx, insertion;
 
-	if ( newDocRange ) {
-		data = new ve.dm.ElementLinearData( doc.getStore(), newDoc.getData( newDocRange, true ) );
-		metadata = new ve.dm.MetaLinearData( doc.getStore(), newDoc.getMetadata( newDocRange, true ) );
-	} else {
-		// Get the data and the metadata, but skip over the internal list
-		data = new ve.dm.ElementLinearData( doc.getStore(),
-			newDoc.getData( new ve.Range( 0, newListNodeOuterRange.start ), true ).concat(
-				newDoc.getData( new ve.Range( newListNodeOuterRange.end, newDoc.data.getLength() ), true )
-			)
-		);
-		metadata = new ve.dm.MetaLinearData( doc.getStore(),
-			newDoc.getMetadata( new ve.Range( 0, newListNodeOuterRange.start ), true ).concat(
-				newListNodeOuterRange.end < newDoc.data.getLength() ? newDoc.getMetadata(
-					new ve.Range( newListNodeOuterRange.end + 1, newDoc.data.getLength() ), true
-				) : []
-			)
-		);
-		// TODO deal with metadata right before and right after the internal list
-	}
+	data = new ve.dm.ElementLinearData( doc.getStore(), newDoc.getData( newDocRange, true ) );
+	metadata = new ve.dm.MetaLinearData( doc.getStore(), newDoc.getMetadata( newDocRange, true ) );
 
 	// Merge the stores
 	storeMerge = doc.getStore().merge( newDoc.getStore() );
 	// Remap the store indexes in the data
 	data.remapStoreIndexes( storeMerge );
 
-	listMerge = doc.internalList.merge( newDoc.internalList, newDoc.origInternalListLength || 0 );
-	// Remap the indexes in the data
-	data.remapInternalListIndexes( listMerge.mapping, doc.internalList );
-	// Get data for the new internal list
-	if ( newDoc.origDoc === doc ) {
-		// newDoc is a document slice based on doc, so all the internal list items present in doc
-		// when it was cloned are also in newDoc. We need to get the newDoc version of these items
-		// so that changes made in newDoc are reflected.
-		if ( newDoc.origInternalListLength > 0 ) {
-			oldEndOffset = doc.internalList.getItemNode( newDoc.origInternalListLength - 1 ).getOuterRange().end;
-			newEndOffset = newDoc.internalList.getItemNode( newDoc.origInternalListLength - 1 ).getOuterRange().end;
-		} else {
-			oldEndOffset = listNodeRange.start;
-			newEndOffset = newListNodeRange.start;
-		}
-		linearData = new ve.dm.ElementLinearData(
-			doc.getStore(),
-			newDoc.getData( new ve.Range( newListNodeRange.start, newEndOffset ), true )
-		);
-		// Remap indexes in data coming from newDoc
-		linearData.remapStoreIndexes( storeMerge );
-		listData = linearData.data
-			.concat( doc.getData( new ve.Range( oldEndOffset, listNodeRange.end ), true ) );
-		listMetadata = newDoc.getMetadata( new ve.Range( newListNodeRange.start, newEndOffset ), true )
-			.concat( doc.getMetadata( new ve.Range( oldEndOffset, listNodeRange.end ), true ) );
-	} else {
-		// newDoc is brand new, so use doc's internal list as a base
-		listData = doc.getData( listNodeRange, true );
-		listMetadata = doc.getMetadata( listNodeRange, true );
-	}
-	for ( i = 0, len = listMerge.newItemRanges.length; i < len; i++ ) {
-		linearData = new ve.dm.ElementLinearData(
-			doc.getStore(),
-			newDoc.getData( listMerge.newItemRanges[i], true )
-		);
-		// Remap indexes in data coming from newDoc
-		linearData.remapStoreIndexes( storeMerge );
-		listData = listData.concat( linearData.data );
-		// We don't have to worry about merging metadata at the edges, because there can't be
-		// metadata between internal list items
-		listMetadata = listMetadata.concat( newDoc.getMetadata( listMerge.newItemRanges[i], true ) );
-	}
-
 	tx = new ve.dm.Transaction( doc );
 
-	if ( offset <= listNodeRange.start ) {
-		// offset is before listNodeRange
-		// First replace the node, then the internal list
-
-		// Fix up the node insertion
-		insertion = doc.fixupInsertion( data.data, offset );
-		tx.pushRetain( insertion.offset );
-		tx.pushReplace( doc, insertion.offset, insertion.remove, insertion.data, metadata.data );
-		tx.pushRetain( listNodeRange.start - ( insertion.offset + insertion.remove ) );
-		tx.pushReplace( doc, listNodeRange.start, listNodeRange.end - listNodeRange.start,
-			listData, listMetadata
-		);
-		tx.pushFinalRetain( doc, listNodeRange.end );
-	} else if ( offset >= listNodeRange.end ) {
-		// offset is after listNodeRange
-		// First replace the internal list, then the node
-
-		// Fix up the node insertion
-		insertion = doc.fixupInsertion( data.data, offset );
-		tx.pushRetain( listNodeRange.start );
-		tx.pushReplace( doc, listNodeRange.start, listNodeRange.end - listNodeRange.start,
-			listData, listMetadata
-		);
-		tx.pushRetain( insertion.offset - listNodeRange.end );
-		tx.pushReplace( doc, insertion.offset, insertion.remove, insertion.data, metadata.data );
-		tx.pushFinalRetain( doc, insertion.offset + insertion.remove );
-	} else if ( offset >= listNodeRange.start && offset <= listNodeRange.end ) {
-		// offset is within listNodeRange
-		// Merge data into listData, then only replace the internal list
-		// Find the internalItem we are inserting into
-		i = 0;
-		// Find item node in doc
-		while (
-			( spliceItemRange = doc.internalList.getItemNode( i ).getRange() ) &&
-			offset > spliceItemRange.end
-		) {
-			i++;
-		}
-
-		if ( newDoc.origDoc === doc ) {
-			// Get spliceItemRange from newDoc
-			spliceItemRange = newDoc.internalList.getItemNode( i ).getRange();
-			spliceListNodeRange = newListNodeRange;
-		} else {
-			// Get spliceItemRange from doc; the while loop has already set it
-			spliceListNodeRange = listNodeRange;
-		}
-		ve.batchSplice( listData, spliceItemRange.start - spliceListNodeRange.start,
-			spliceItemRange.end - spliceItemRange.start, data.data );
-		ve.batchSplice( listMetadata, spliceItemRange.start - spliceListNodeRange.start,
-			spliceItemRange.end - spliceItemRange.start, metadata.data );
-
-		tx.pushRetain( listNodeRange.start );
-		tx.pushReplace( doc, listNodeRange.start, listNodeRange.end - listNodeRange.start,
-			listData, listMetadata
-		);
-		tx.pushFinalRetain( doc, listNodeRange.end );
-	}
+	// Fix up the node insertion
+	insertion = doc.fixupInsertion( data.data, offset );
+	tx.pushRetain( insertion.offset );
+	tx.pushReplace( doc, insertion.offset, insertion.remove, insertion.data, metadata.data );
+	tx.pushFinalRetain( doc, insertion.offset + insertion.remove );
 	return tx;
 };
 
@@ -1103,26 +979,7 @@ ve.dm.Transaction.prototype.pushRetainMetadata = function ( length ) {
  * @param {boolean} [removeMetadata=false] Remove metadata instead of collapsing it
  */
 ve.dm.Transaction.prototype.addSafeRemoveOps = function ( doc, removeStart, removeEnd, removeMetadata ) {
-	var i, retainStart, internalStackDepth = 0;
-	// Iterate over removal range and use a stack counter to determine if
-	// we are inside an internal node
-	for ( i = removeStart; i < removeEnd; i++ ) {
-		if ( doc.data.isElementData( i ) && ve.dm.nodeFactory.isNodeInternal( doc.data.getType( i ) ) ) {
-			if ( !doc.data.isCloseElementData( i ) ) {
-				if ( internalStackDepth === 0 ) {
-					this.pushReplace( doc, removeStart, i - removeStart, [], removeMetadata ? [] : undefined );
-					retainStart = i;
-				}
-				internalStackDepth++;
-			} else {
-				internalStackDepth--;
-				if ( internalStackDepth === 0 ) {
-					this.pushRetain( i + 1 - retainStart );
-					removeStart = i + 1;
-				}
-			}
-		}
-	}
+	// SUBDOCUMENT TODO: redo this utility function or eliminate it
 	this.pushReplace( doc, removeStart, removeEnd - removeStart, [], removeMetadata ? [] : undefined );
 };
 

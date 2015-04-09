@@ -1778,7 +1778,7 @@ ve.ce.Surface.prototype.beforePaste = function ( e ) {
 		ve.dm.converter.getDomSubtreeFromModel(
 			new ve.dm.Document(
 				new ve.dm.ElementLinearData( doc.getStore(), context ),
-				doc.getHtmlDocument(), undefined, doc.getInternalList(),
+				doc.getHtmlDocument(), undefined,
 				doc.getLang(), doc.getDir()
 			),
 			this.$pasteTarget[0]
@@ -1818,7 +1818,7 @@ ve.ce.Surface.prototype.beforePaste = function ( e ) {
  */
 ve.ce.Surface.prototype.afterPaste = function () {
 	var clipboardKey, clipboardId, clipboardIndex, clipboardHash, range,
-		$elements, parts, pasteData, slice, tx, internalListRange,
+		$elements, parts, pasteData, slice, tx,
 		data, doc, htmlDoc, $images, i,
 		context, left, right, contextRange,
 		items = [],
@@ -2015,14 +2015,12 @@ ve.ce.Surface.prototype.afterPaste = function () {
 		} else {
 			data.sanitize( importRules.all || {}, this.pasteSpecial );
 		}
-		data.remapInternalListKeys( this.model.getDocument().getInternalList() );
 
 		// Initialize node tree
 		doc.buildNodeTree();
 
 		// If the paste was given context, calculate the range of the inserted data
 		if ( beforePasteData.context ) {
-			internalListRange = doc.getInternalList().getListNode().getOuterRange();
 			context = new ve.dm.ElementLinearData(
 				doc.getStore(),
 				ve.copy( beforePasteData.context )
@@ -2046,7 +2044,7 @@ ve.ce.Surface.prototype.afterPaste = function () {
 			}
 
 			// Remove matching context from the right
-			right = internalListRange.start;
+			right = doc.getLength();
 			while (
 				right > 0 &&
 				context.getLength() &&
@@ -2065,6 +2063,7 @@ ve.ce.Surface.prototype.afterPaste = function () {
 			contextRange = new ve.Range( left, right );
 		}
 
+		// SUBDOCUMENT TODO: Port this
 		tx = ve.dm.Transaction.newFromDocumentInsertion(
 			this.documentView.model,
 			range.start,
@@ -2160,7 +2159,7 @@ ve.ce.Surface.prototype.handleDataTransferItems = function ( items, isPaste, tar
  * Select all the contents within the current context
  */
 ve.ce.Surface.prototype.selectAll = function () {
-	var internalListRange, range, matrix,
+	var range, matrix,
 		selection = this.getModel().getSelection();
 
 	if ( selection instanceof ve.dm.LinearSelection ) {
@@ -2168,10 +2167,9 @@ ve.ce.Surface.prototype.selectAll = function () {
 			range = this.getActiveTableNode().getEditingRange();
 			range = new ve.Range( range.from + 1, range.to - 1 );
 		} else {
-			internalListRange = this.getModel().getDocument().getInternalList().getListNode().getOuterRange();
 			range = new ve.Range(
 				this.getNearestCorrectOffset( 0, 1 ),
-				this.getNearestCorrectOffset( internalListRange.start, -1 )
+				this.getNearestCorrectOffset( this.getModel().getDocument().getLength() -1 )
 			);
 		}
 		this.getModel().setLinearSelection( range );
@@ -3502,8 +3500,9 @@ ve.ce.Surface.prototype.getViewportRange = function () {
 		padding = 50,
 		top = Math.max( this.surface.toolbarHeight - surfaceRect.top - padding, 0 ),
 		bottom = top + this.$window.height() - this.surface.toolbarHeight + ( padding * 2 ),
-		documentRange = new ve.Range( 0, this.getModel().getDocument().getInternalList().getListNode().getOuterRange().start );
+		documentRange = new ve.Range( 0, this.getModel().getDocument().getLength() );
 
+	// SUBDOCUMENT TODO: port to ve.binarySearch
 	function binarySearch( offset, range, side ) {
 		var mid, rect,
 			start = range.start,

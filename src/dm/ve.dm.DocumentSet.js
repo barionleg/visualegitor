@@ -188,9 +188,8 @@ ve.dm.DocumentSet.prototype.getOffsetTuple = function ( node ) {
 	return tuple;
 };
 
-// SUBDOCUMENT TODO: account for offsets changing over time, probably using fragments
+// SUBDOCUMENT TODO: account for offsets changing over time, probably using fragments (except we don't have a surface here)
 // SUBDOCUMENT TODO: factor out similar/identical comparators
-// SUBDOCUMENT TODO: offsets might be incomparable if from different documents
 // SUBDOCUMENT TODO: assume in-order registration when building node tree
 // SUBDOCUMENT TODO: come up with a way to make event emission MUCH more efficient
 // We should be able to identify exactly which nodes were affected

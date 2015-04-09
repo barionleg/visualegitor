@@ -21,12 +21,11 @@
  *  If omitted, a new document will be created. If data is an HTMLDocument, this parameter is
  *  ignored.
  * @param {ve.dm.Document} [parentDocument] Document to use as root for created nodes
- * @param {ve.dm.InternalList} [internalList] Internal list to clone; passed when creating a document slice
  * @param {Array} [innerWhitespace] Inner whitespace to clone; passed when creating a document slice
  * @param {string} [lang] Language code
  * @param {string} [dir='ltr'] Directionality (ltr/rtl)
  */
-ve.dm.Document = function VeDmDocument( data, htmlDocument, parentDocument, internalList, innerWhitespace, lang, dir ) {
+ve.dm.Document = function VeDmDocument( data, htmlDocument, parentDocument, innerWhitespace, lang, dir ) {
 	// Parent constructor
 	ve.Document.call( this, new ve.dm.DocumentNode() );
 
@@ -43,7 +42,6 @@ ve.dm.Document = function VeDmDocument( data, htmlDocument, parentDocument, inte
 
 	this.documentNode.setRoot( root );
 	this.documentNode.setDocument( doc );
-	this.internalList = internalList ? internalList.clone( this ) : new ve.dm.InternalList( this );
 	this.innerWhitespace = innerWhitespace ? ve.copy( innerWhitespace ) : new Array( 2 );
 
 	// Properties
@@ -300,7 +298,8 @@ ve.dm.Document.prototype.buildNodeTree = function () {
 	}
 
 	// State variable that allows nodes to know that they are being
-	// appended in order. Used by ve.dm.InternalList.
+	// appended in order. Used by ve.dm.DocumentSet.
+	// SUBDOCUMENT TODO: make this true
 	doc.buildingNodeTree = true;
 
 	// The end state is stack = [ [this.documentNode] [ array, of, its, children ] ]
@@ -328,6 +327,10 @@ ve.dm.Document.prototype.getParentSet = function () {
 
 ve.dm.Document.prototype.getParentSetIndex = function () {
 	return this.parentSetIndex;
+};
+
+ve.dm.Document.prototype.getLength = function () {
+	return this.data.getLength();
 };
 
 /**
@@ -396,14 +399,6 @@ ve.dm.Document.prototype.getStore = function () {
 };
 
 /**
- * Get the document's internal list
- * @returns {ve.dm.InternalList} The document's internal list
- */
-ve.dm.Document.prototype.getInternalList = function () {
-	return this.internalList;
-};
-
-/**
  * Get the document's inner whitespace
  * @returns {Array} The document's inner whitespace
  */
@@ -413,8 +408,6 @@ ve.dm.Document.prototype.getInnerWhitespace = function () {
 
 /**
  * Clone a sub-document from a data slice of this document.
- *
- * The new document's internal list will be only contain references to data within the slice.
  *
  * @param {ve.Range} range Range of data to slice
  * @returns {ve.dm.DocumentSlice} New document
@@ -535,51 +528,26 @@ ve.dm.Document.prototype.cloneSliceFromRange = function ( range ) {
 		);
 	}
 
-	// Copy over the internal list
-	ve.batchSplice(
-		data.data, data.getLength(), 0,
-		this.getData( this.getInternalList().getListNode().getOuterRange(), true )
-	);
-
-	// The internalList is rebuilt by the document constructor
 	slice = new ve.dm.DocumentSlice(
-		data, undefined, undefined, this.getInternalList().clone(), originalRange, balancedRange
+		data, undefined, undefined, originalRange, balancedRange
 	);
 	return slice;
 };
 
 /**
- * Clone a sub-document from a range in this document. The new document's store and internal list will be
- * clones of the ones in this document.
- *
- * @param {ve.Range} range Range of data to clone
- * @returns {ve.dm.Document} New document
+ * @return {ve.dm.Document} New document
  */
-ve.dm.Document.prototype.cloneFromRange = function ( range ) {
-	var data, newDoc,
-		store = this.getStore().clone(),
-		listRange = this.getInternalList().getListNode().getOuterRange();
-
-	data = ve.copy( this.getFullData( range, true ) );
-	if ( range.start > listRange.start || range.end < listRange.end ) {
-		// The range does not include the entire internal list, so add it
-		data = data.concat( this.getFullData( listRange ) );
-	}
-	newDoc = new this.constructor(
-		new ve.dm.FlatLinearData( store, data ),
-		this.getHtmlDocument(), undefined, this.getInternalList(), undefined,
-		this.getLang(), this.getDir()
-	);
-	// Record the length of the internal list at the time the slice was created so we can
-	// reconcile additions properly
-	newDoc.origDoc = this;
-	newDoc.origInternalListLength = this.internalList.getItemNodeCount();
-	return newDoc;
-};
-
 ve.dm.Document.prototype.clone = function () {
 	// SUBDOCUMENT TODO: should not clone store separately for each document
-	return this.cloneFromRange( new ve.Range( 0, this.data.getLength() ) );
+	// SUBDOCUMENT TODO: is this used?
+	var newDoc, store = this.getStore().clone();
+
+	newDoc = new this.constructor(
+		new ve.dm.FlatLinearData( store, ve.copy( this.getFullData() ) ),
+		this.getHtmlDocument(), undefined, undefined,
+		this.getLang(), this.getDir()
+	);
+	return newDoc;
 };
 
 /**
@@ -1258,7 +1226,6 @@ ve.dm.Document.prototype.newFromHtml = function ( html, importRules ) {
 		}
 	}
 
-	data.remapInternalListKeys( this.getInternalList() );
 	// Initialize node tree
 	// BUG T75569: This shouldn't be needed
 	doc.buildNodeTree();
@@ -1279,7 +1246,7 @@ ve.dm.Document.prototype.findText = function ( query, caseSensitive, noOverlaps 
 		ranges = [],
 		text = this.data.getText(
 			true,
-			new ve.Range( 0, this.getInternalList().getListNode().getOuterRange().start )
+			new ve.Range( 0, this.data.getLength() )
 		);
 
 	if ( query instanceof RegExp ) {

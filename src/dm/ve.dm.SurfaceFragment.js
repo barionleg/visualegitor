@@ -359,7 +359,7 @@ ve.dm.SurfaceFragment.prototype.expandLinearSelection = function ( scope, type )
 			}
 			break;
 		case 'root':
-			newRange = new ve.Range( 0, this.getDocument().getInternalList().getListNode().getOuterRange().start );
+			newRange = new ve.Range( 0, this.getDocument().getLength() );
 			break;
 		case 'siblings':
 			// Grow range to cover all siblings
@@ -837,7 +837,7 @@ ve.dm.SurfaceFragment.prototype.delete = function ( directionAfterDelete ) {
 		return this;
 	}
 
-	var rangeAfterRemove, internalListRange, parentNode,
+	var rangeAfterRemove, parentNode,
 		tx, startNode, endNode, endNodeData, nodeToDelete,
 		rangeToRemove = this.getSelection( true ).getRange();
 
@@ -847,9 +847,8 @@ ve.dm.SurfaceFragment.prototype.delete = function ( directionAfterDelete ) {
 
 	// If selection spans entire document (selectAll) then
 	// replace with an empty paragraph
-	internalListRange = this.document.getInternalList().getListNode().getOuterRange();
-	if ( rangeToRemove.start === 0 && rangeToRemove.end >= internalListRange.start ) {
-		tx = ve.dm.Transaction.newFromReplacement( this.document, new ve.Range( 0, internalListRange.start ), [
+	if ( rangeToRemove.start === 0 && rangeToRemove.end === this.document.getLength() ) {
+		tx = ve.dm.Transaction.newFromReplacement( this.document, new ve.Range( 0, this.document.getLength() ), [
 			{ type: 'paragraph' },
 			{ type: '/paragraph' }
 		] );

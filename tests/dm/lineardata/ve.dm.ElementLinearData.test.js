@@ -1448,9 +1448,7 @@ QUnit.test( 'sanitize', function ( assert ) {
 				data: [
 					{ type: 'paragraph' },
 					'F', ['o', [0]], 'o',
-					{ type: '/paragraph' },
-					{ type: 'internalList' },
-					{ type: '/internalList' }
+					{ type: '/paragraph' }
 				],
 				store: [ bold ],
 				rules: { removeOriginalDomElements: true },
@@ -1461,9 +1459,7 @@ QUnit.test( 'sanitize', function ( assert ) {
 				data: [
 					{ type: 'paragraph' },
 					'B', 'r',
-					{ type: '/paragraph' },
-					{ type: 'internalList' },
-					{ type: '/internalList' }
+					{ type: '/paragraph' }
 				],
 				rules: { blacklist: ['alienInline', 'inlineImage'] },
 				msg: 'Blacklisted nodes removed'
@@ -1473,9 +1469,7 @@ QUnit.test( 'sanitize', function ( assert ) {
 				data: [
 					{ type: 'paragraph' },
 					'B', 'a', 'z',
-					{ type: '/paragraph' },
-					{ type: 'internalList' },
-					{ type: '/internalList' }
+					{ type: '/paragraph' }
 				],
 				plainText: true,
 				msg: 'Annotations removed in plainText mode'
@@ -1491,9 +1485,7 @@ QUnit.test( 'sanitize', function ( assert ) {
 					{ type: '/paragraph' },
 					{ type: 'paragraph' },
 					'Q', 'u', 'u', 'x',
-					{ type: '/paragraph' },
-					{ type: 'internalList' },
-					{ type: '/internalList' }
+					{ type: '/paragraph' }
 				],
 				plainText: true,
 				msg: 'Headings converted to paragraph is plainText mode'
@@ -1506,9 +1498,7 @@ QUnit.test( 'sanitize', function ( assert ) {
 					{ type: '/paragraph' },
 					{ type: 'paragraph' },
 					'B', 'a', 'r',
-					{ type: '/paragraph' },
-					{ type: 'internalList' },
-					{ type: '/internalList' }
+					{ type: '/paragraph' }
 				],
 				msg: 'Empty content nodes are stripped'
 			},
@@ -1517,9 +1507,7 @@ QUnit.test( 'sanitize', function ( assert ) {
 				data: [
 					{ type: 'paragraph' },
 					'F', 'o', 'o',
-					{ type: '/paragraph' },
-					{ type: 'internalList' },
-					{ type: '/internalList' }
+					{ type: '/paragraph' }
 				],
 				rules: { removeOriginalDomElements: true },
 				msg: 'Span stripped when removing original DOM elements'
@@ -1546,46 +1534,6 @@ QUnit.test( 'sanitize', function ( assert ) {
 			} );
 			assert.equalLinearData( actualStore, cases[i].store, cases[i].msg + ': store' );
 		}
-	}
-} );
-
-QUnit.test( 'countNonInternalElements', function ( assert ) {
-	var i, d,
-		cases = [
-			{
-				data: [
-					{ type: 'paragraph' },
-					'F', ['o', [0]], 'o',
-					{ type: '/paragraph' },
-					{ type: 'internalList' },
-					{ type: '/internalList' }
-				],
-				expected: 5,
-				msg: 'Counting non-internal elements - no internal data'
-			},
-			{
-				data: [
-					{ type: 'paragraph' },
-					'F', 'o',
-					{ type: '/paragraph' },
-					{ type: 'internalList' },
-					{ type: 'internalItem' },
-					{ type: 'paragraph' },
-					'a',
-					{ type: '/paragraph' },
-					{ type: '/internalItem' },
-					{ type: '/internalList' }
-				],
-				expected: 4,
-				msg: 'Counting non-internal elements'
-			}
-		];
-
-	QUnit.expect( cases.length );
-
-	for ( i = 0; i < cases.length; i++ ) {
-		d = new ve.dm.ElementLinearData( new ve.dm.IndexValueStore(), cases[i].data );
-		assert.strictEqual( d.countNonInternalElements(), cases[i].expected, cases[i].msg );
 	}
 } );
 
@@ -1774,6 +1722,4 @@ QUnit.test( 'remapStoreIndexes', function ( assert ) {
 // TODO: ve.dm.ElementLinearData#getCharacterData
 // TODO: ve.dm.ElementLinearData#getAnnotatedRangeFromSelection
 // TODO: ve.dm.ElementLinearData#getNearestContentOffset
-// TODO: ve.dm.ElementLinearData#remapInternalListIndexes
-// TODO: ve.dm.ElementLinearData#remapInternalListKeys
 // TODO: ve.dm.ElementLinearData#cloneElements

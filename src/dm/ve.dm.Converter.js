@@ -24,7 +24,6 @@ ve.dm.Converter = function VeDmConverter( modelRegistry, nodeFactory, annotation
 	this.doc = null;
 	this.documentData = null;
 	this.store = null;
-	this.internalList = null;
 	this.forClipboard = null;
 	this.fromClipboard = null;
 	this.contextStack = null;
@@ -349,9 +348,6 @@ ve.dm.Converter.prototype.getDomElementsFromDataElement = function ( dataElement
 	if ( !nodeClass ) {
 		throw new Error( 'Attempting to convert unknown data element type ' + dataElement.type );
 	}
-	if ( nodeClass.static.isInternal ) {
-		return false;
-	}
 	domElements = nodeClass.static.toDomElements( dataElements, doc, this, childDomElements );
 	if ( !Array.isArray( domElements ) && !( nodeClass.prototype instanceof ve.dm.Annotation ) ) {
 		throw new Error( 'toDomElements() failed to return an array when converting element of type ' + dataElement.type );
@@ -419,8 +415,7 @@ ve.dm.Converter.prototype.getDomElementFromDataAnnotation = function ( dataAnnot
 ve.dm.Converter.prototype.getModelFromDom = function ( doc, targetDoc, fromClipboard, lang, dir ) {
 	var linearData, refData, innerWhitespace, mainDocument, reservation,
 		documentSet = new ve.dm.DocumentSet( lang, dir ),
-		store = new ve.dm.IndexValueStore(),
-		internalList = new ve.dm.InternalList();
+		store = new ve.dm.IndexValueStore();
 
 	targetDoc = targetDoc || doc;
 
@@ -432,7 +427,6 @@ ve.dm.Converter.prototype.getModelFromDom = function ( doc, targetDoc, fromClipb
 	this.targetDoc = targetDoc;
 	this.fromClipboard = fromClipboard;
 	this.store = store;
-	this.internalList = internalList;
 	this.contextStack = [];
 	// Possibly do things with doc and the head in the future
 
@@ -441,8 +435,6 @@ ve.dm.Converter.prototype.getModelFromDom = function ( doc, targetDoc, fromClipb
 		store,
 		this.getDataFromDomSubtree( doc.body )
 	);
-	refData = this.internalList.convertToData( this, doc );
-	linearData.batchSplice( linearData.getLength(), 0, refData );
 	innerWhitespace = this.getInnerWhitespace( linearData );
 
 	// Clear the state
@@ -451,11 +443,10 @@ ve.dm.Converter.prototype.getModelFromDom = function ( doc, targetDoc, fromClipb
 	this.targetDoc = null;
 	this.fromClipboard = null;
 	this.store = null;
-	this.internalList = null;
 	this.contextStack = null;
 
 	// SUBDOCUMENT TODO: maybe have caller pass in DocumentSet?
-	mainDocument = new ve.dm.Document( linearData, doc, undefined, internalList, innerWhitespace );
+	mainDocument = new ve.dm.Document( linearData, doc, undefined, innerWhitespace );
 	reservation.fulfill( mainDocument );
 	return mainDocument;
 };
@@ -1011,7 +1002,7 @@ ve.dm.Converter.prototype.getInnerWhitespace = function ( data ) {
 				stack++;
 			} else if ( data.isOpenElementData( last ) ) {
 				stack--;
-				if ( stack === 0 && data.getType( last ) !== 'internalList' ) {
+				if ( stack === 0 ) {
 					break;
 				}
 			}
@@ -1050,7 +1041,6 @@ ve.dm.Converter.prototype.getDomSubtreeFromModel = function ( model, container, 
 	// Set up the converter state
 	this.documentData = model.getFullData();
 	this.store = model.getStore();
-	this.internalList = model.getInternalList();
 	this.documentSet = model.getParentSet();
 	this.forClipboard = !!forClipboard;
 
@@ -1059,7 +1049,6 @@ ve.dm.Converter.prototype.getDomSubtreeFromModel = function ( model, container, 
 	// Clear the state
 	this.documentData = null;
 	this.store = null;
-	this.internalList = null;
 	this.documentSet = null;
 	this.forClipboard = null;
 };
@@ -1148,35 +1137,6 @@ ve.dm.Converter.prototype.getDomSubtreeFromData = function ( data, container, in
 		}
 		return dataSlice;
 	}
-
-	function removeInternalNodes() {
-		var dataCopy, endOffset;
-		// See if there is an internalList in the data, and if there is one, remove it
-		// Removing it here prevents unwanted interactions with whitespace preservation
-		for ( i = 0; i < dataLen; i++ ) {
-			if (
-				data[i].type && data[i].type.charAt( 0 ) !== '/' &&
-				ve.dm.nodeFactory.lookup( data[i].type ) &&
-				ve.dm.nodeFactory.isNodeInternal( data[i].type )
-			) {
-				// Copy data if we haven't already done so
-				if ( !dataCopy ) {
-					dataCopy = data.slice();
-				}
-				endOffset = findEndOfNode( i );
-				// Remove this node's data from dataCopy
-				dataCopy.splice( i - ( dataLen - dataCopy.length ),  endOffset - i );
-				// Move i such that it will be at endOffset in the next iteration
-				i = endOffset - 1;
-			}
-		}
-		if ( dataCopy ) {
-			data = dataCopy;
-			dataLen = data.length;
-		}
-	}
-
-	removeInternalNodes();
 
 	for ( i = 0; i < dataLen; i++ ) {
 		if ( typeof data[i] === 'string' ) {
@@ -1420,9 +1380,7 @@ ve.dm.Converter.prototype.getDomSubtreeFromData = function ( data, container, in
 
 				delete domElement.veInternal;
 				delete domElement.lastOuterPost;
-				// Ascend to parent node, except if this is an internal node
-				// TODO: It's not covered with unit tests.
-				if ( !ve.dm.nodeFactory.lookup( type ) || !ve.dm.nodeFactory.isNodeInternal( type ) ) {
+				if ( !ve.dm.nodeFactory.lookup( type ) ) {
 					domElement = parentDomElement;
 				}
 			} else {

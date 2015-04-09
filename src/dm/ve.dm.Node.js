@@ -78,15 +78,6 @@ ve.dm.Node.static.handlesOwnChildren = false; // SUBDOCUMENT TODO: eradicate thi
 ve.dm.Node.static.ignoreChildren = false;
 
 /**
- * Whether this node type is internal. Internal node types are ignored by the converter.
- *
- * @static
- * @property {boolean}
- * @inheritable
- */
-ve.dm.Node.static.isInternal = false;
-
-/**
  * Whether this node type has a wrapping element in the linear model. Most node types are wrapped,
  * only special node types are not wrapped.
  *
@@ -224,37 +215,6 @@ ve.dm.Node.static.remapStoreIndexes = function () {
 };
 
 /**
- * Remap the internal list indexes stored in a linear model data element.
- *
- * The default implementation is empty. Nodes should override this if they store internal list
- * indexes in attributes. To remap, do something like
- * dataElement.attributes.foo = mapping[dataElement.attributes.foo];
- *
- * @static
- * @inheritable
- * @param {Object} dataElement Data element (opening) to remap. Will be modified.
- * @param {Object} mapping Object mapping old internal list indexes to new internal list indexes
- * @param {ve.dm.InternalList} internalList Internal list the indexes are being mapped into.
- *  Used for refreshing attribute values that were computed with getNextUniqueNumber().
- */
-ve.dm.Node.static.remapInternalListIndexes = function () {
-};
-
-/**
- * Remap the internal list keys stored in a linear model data element.
- *
- * The default implementation is empty. Nodes should override this if they store internal list
- * keys in attributes.
- *
- * @static
- * @inheritable
- * @param {Object} dataElement Data element (opening) to remap. Will be modified.
- * @param {ve.dm.InternalList} internalList Internal list the keys are being mapped into.
- */
-ve.dm.Node.static.remapInternalListKeys = function () {
-};
-
-/**
  * Determine if a hybrid element is inline and allowed to be inline in this context
  *
  * We generate block elements for block tags and inline elements for inline
@@ -350,16 +310,6 @@ ve.dm.Node.prototype.canHaveChildren = function () {
  */
 ve.dm.Node.prototype.canHaveChildrenNotContent = function () {
 	return ve.dm.nodeFactory.canNodeHaveChildrenNotContent( this.type );
-};
-
-/**
- * Check if the node is an internal node
- *
- * @method
- * @returns {boolean} Node is an internal node
- */
-ve.dm.Node.prototype.isInternal = function () {
-	return this.constructor.static.isInternal;
 };
 
 /**

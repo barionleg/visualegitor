@@ -73,8 +73,7 @@ QUnit.test( 'constructor', 12, function ( assert ) {
 	assert.equalNodeTree(
 		doc.getDocumentNode(),
 		new ve.dm.DocumentNode( [
-			new ve.dm.ParagraphNode( ve.dm.example.withMetaPlainData[0], [ new ve.dm.TextNode( 9 ) ] ),
-			new ve.dm.InternalListNode( ve.dm.example.withMetaPlainData[11] )
+			new ve.dm.ParagraphNode( ve.dm.example.withMetaPlainData[0], [ new ve.dm.TextNode( 9 ) ] )
 		] ),
 		'node tree does not contain metadata'
 	);
@@ -89,49 +88,6 @@ QUnit.test( 'getData', 1, function ( assert ) {
 QUnit.test( 'getFullData', 1, function ( assert ) {
 	var doc = ve.dm.example.createExampleDocument( 'withMeta' );
 	assert.deepEqualWithDomElements( doc.getFullData(), ve.dm.example.withMeta );
-} );
-
-QUnit.test( 'cloneFromRange', function ( assert ) {
-	var i, doc2, doc = ve.dm.example.createExampleDocument( 'internalData' ),
-		cases = [
-			{
-				msg: 'first internal item',
-				doc: 'internalData',
-				range: new ve.Range( 7, 12 ),
-				expectedData: doc.data.slice( 7, 12 ).concat( doc.data.slice( 5, 21 ) )
-			},
-			{
-				msg: 'second internal item',
-				doc: 'internalData',
-				range: doc.getInternalList().getItemNode( 1 ).getRange(),
-				expectedData: doc.data.slice( 14, 19 ).concat( doc.data.slice( 5, 21 ) )
-			},
-			{
-				msg: 'paragraph at the start',
-				doc: 'internalData',
-				range: new ve.Range( 0, 5 ),
-				expectedData: doc.data.slice( 0, 21 )
-			},
-			{
-				msg: 'paragraph at the end',
-				doc: 'internalData',
-				range: new ve.Range( 21, 27 ),
-				expectedData: doc.data.slice( 21, 27 ).concat( doc.data.slice( 5, 21 ) )
-			}
-		];
-	QUnit.expect( 4 * cases.length );
-	for ( i = 0; i < cases.length; i++ ) {
-		doc = ve.dm.example.createExampleDocument( cases[i].doc );
-		doc2 = doc.cloneFromRange( cases[i].range );
-		assert.deepEqual( doc2.data.data, cases[i].expectedData,
-			cases[i].msg + ': sliced data' );
-		assert.notStrictEqual( doc2.data[0], cases[i].expectedData[0],
-			cases[i].msg + ': data is cloned, not the same' );
-		assert.deepEqual( doc2.store, doc.store,
-			cases[i].msg + ': store is copied' );
-		assert.notStrictEqual( doc2.store, doc.store,
-			cases[i].msg + ': store is a clone, not the same' );
-	}
 } );
 
 QUnit.test( 'getRelativeOffset', function ( assert ) {
@@ -839,10 +795,6 @@ QUnit.test( 'cloneSliceFromRange', function ( assert ) {
 		doc = ve.dm.example.createExampleDocument( cases[i].doc );
 		expectedData = ve.dm.example.preprocessAnnotations( cases[i].expected.slice(), doc.getStore() ).getData();
 		range = new ve.Range( 0, cases[i].expected.length );
-		expectedData = expectedData.concat( [
-			{ type: 'internalList' },
-			{ type: '/internalList' }
-		] );
 		slice = doc.cloneSliceFromRange( cases[i].range );
 		assert.deepEqualWithDomElements(
 			slice.getData(),

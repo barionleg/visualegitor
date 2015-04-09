@@ -632,9 +632,7 @@ QUnit.test( 'onCopy', function ( assert ) {
 					'g',
 					{ type: '/paragraph' },
 					{ type: '/listItem' },
-					{ type: '/list' },
-					{ type: 'internalList' },
-					{ type: '/internalList' }
+					{ type: '/list' }
 				],
 				expectedOriginalRange: new ve.Range( 1, 6 ),
 				expectedBalancedRange: new ve.Range( 1, 6 ),
@@ -1172,7 +1170,7 @@ QUnit.test( 'getNearestCorrectOffset', function ( assert ) {
 } );
 
 QUnit.test( 'getRangeSelection', function ( assert ) {
-	var i, j, l, surface, selection, expectedNode, internlListNode, node, msg,
+	var i, j, l, surface, selection, expectedNode, node, msg,
 		expect = 0,
 		cases = [
 			{
@@ -1291,8 +1289,7 @@ QUnit.test( 'getRangeSelection', function ( assert ) {
 
 	for ( i = 0; i < cases.length; i++ ) {
 		surface = ve.test.utils.createSurfaceFromHtml( cases[i].html );
-		internlListNode = surface.getModel().getDocument().getInternalList().getListNode();
-		for ( j = 0, l = internlListNode.getOuterRange().start; j < l; j++ ) {
+		for ( j = 0, l = surface.getModel.getDocument().getLength(); j < l; j++ ) {
 			msg = ' at ' + j + ' in ' + cases[i].msg;
 			node = surface.getView().getDocument().getDocumentNode().getNodeFromOffset( j );
 			if ( node.isFocusable() ) {

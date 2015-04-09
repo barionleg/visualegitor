@@ -893,44 +893,6 @@ ve.dm.ElementLinearData.prototype.remapStoreIndexes = function ( mapping ) {
 };
 
 /**
- * Remap the internal list indexes used in this linear data.
- *
- * Calls remapInternalListIndexes() for each node.
- *
- * @method
- * @param {Object} mapping Mapping from internal list indexes to internal list indexes
- * @param {ve.dm.InternalList} internalList Internal list the indexes are being mapped into.
- *  Used for refreshing attribute values that were computed with getNextUniqueNumber().
- */
-ve.dm.ElementLinearData.prototype.remapInternalListIndexes = function ( mapping, internalList ) {
-	var i, ilen, nodeClass;
-	for ( i = 0, ilen = this.data.length; i < ilen; i++ ) {
-		if ( this.isOpenElementData( i ) ) {
-			nodeClass = ve.dm.nodeFactory.lookup( this.getType( i ) );
-			nodeClass.static.remapInternalListIndexes( this.data[i], mapping, internalList );
-		}
-	}
-};
-
-/**
- * Remap the internal list keys used in this linear data.
- *
- * Calls remapInternalListKeys() for each node.
- *
- * @method
- * @param {ve.dm.InternalList} internalList Internal list the keys are being mapped into.
- */
-ve.dm.ElementLinearData.prototype.remapInternalListKeys = function ( internalList ) {
-	var i, ilen, nodeClass;
-	for ( i = 0, ilen = this.data.length; i < ilen; i++ ) {
-		if ( this.isOpenElementData( i ) ) {
-			nodeClass = ve.dm.nodeFactory.lookup( this.getType( i ) );
-			nodeClass.static.remapInternalListKeys( this.data[i], internalList );
-		}
-	}
-};
-
-/**
  * Sanitize data according to a set of rules.
  *
  * @param {Object} rules Sanitization rules
@@ -981,7 +943,7 @@ ve.dm.ElementLinearData.prototype.sanitize = function ( rules, plainText, keepEm
 			// Remove blacklisted nodes
 			if (
 				( rules.blacklist && rules.blacklist.indexOf( type ) !== -1 ) ||
-				( plainText && type !== 'paragraph' && type !== 'internalList' )
+				( plainText && type !== 'paragraph' )
 			) {
 				this.splice( i, 1 );
 				// Make sure you haven't just unwrapped a wrapper paragraph
@@ -1038,28 +1000,4 @@ ve.dm.ElementLinearData.prototype.cloneElements = function ( preserveGenerated )
 			this.setData( i, ve.dm.Node.static.cloneElement( this.getData( i ), preserveGenerated ) );
 		}
 	}
-};
-
-/**
- * Counts all elements that aren't between internalList and /internalList
- *
- * @returns {number} Number of elements that aren't in an internalList
- */
-ve.dm.ElementLinearData.prototype.countNonInternalElements = function () {
-	var i, l, type,
-		internalDepth = 0,
-		count = 0;
-	for ( i = 0, l = this.getLength(); i < l; i++ ) {
-		type = this.getType( i );
-		if ( type && ve.dm.nodeFactory.isNodeInternal( type ) ) {
-			if ( this.isOpenElementData( i ) ) {
-				internalDepth++;
-			} else {
-				internalDepth--;
-			}
-		} else if ( !internalDepth ) {
-			count++;
-		}
-	}
-	return count;
 };

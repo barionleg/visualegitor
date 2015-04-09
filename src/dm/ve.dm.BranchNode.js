@@ -165,21 +165,14 @@ ve.dm.BranchNode.prototype.setupBlockSlugs = function () {
 		return;
 	}
 
-	// If this content branch no longer has any non-internal items, insert a slug to keep the node
+	// If this content branch no longer has any children, insert a slug to keep the node
 	// from becoming invisible/unfocusable. In Firefox, backspace after Ctrl+A leaves the document
 	// completely empty, so this ensures DocumentNode gets a slug.
-	if (
-		this.getLength() === 0 ||
-		( this.children.length === 1 && this.children[0].isInternal() )
-	) {
+	if ( this.getLength() === 0 ) {
 		this.slugPositions[0] = true;
 	} else {
 		// Iterate over all children of this branch and add slugs in appropriate places
 		for ( i = 0, len = this.children.length; i < len; i++ ) {
-			// Don't put slugs after internal nodes
-			if ( this.children[i].isInternal() ) {
-				continue;
-			}
 			// First sluggable child (left side)
 			if ( i === 0 && this.children[i].canHaveSlugBefore() ) {
 				this.slugPositions[i] = true;

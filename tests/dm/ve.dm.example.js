@@ -173,19 +173,6 @@ ve.dm.example.createExampleDocumentFromData = function ( data, store ) {
 	doc = new ve.dm.Document(
 		ve.dm.example.preprocessAnnotations( ve.copy( data ), store )
 	);
-	// HACK internalList isn't populated when creating a document from data
-	if ( data.internalItems ) {
-		for ( i = 0; i < data.internalItems.length; i++ ) {
-			doc.internalList.queueItemHtml(
-				data.internalItems[i].group,
-				data.internalItems[i].key,
-				data.internalItems[i].body
-			);
-		}
-	}
-	if ( data.internalListNextUniqueNumber ) {
-		doc.internalList.nextUniqueNumber = data.internalListNextUniqueNumber;
-	}
 	doc.buildNodeTree();
 	return doc;
 };
@@ -451,12 +438,7 @@ ve.dm.example.data = [
 	// 59 - Plain "m"
 	'm',
 	// 60 - End of paragraph
-	{ type: '/paragraph' },
-	// 61 - Beginning of internalList
-	{ type: 'internalList' },
-	// 62 - End of internalList
-	{ type: '/internalList' }
-	// 63 - End of document
+	{ type: '/paragraph' }
 ];
 
 ve.dm.example.alienData = [
@@ -474,10 +456,8 @@ ve.dm.example.alienData = [
 	{ type: '/paragraph' },
 	// 8
 	{ type: 'alienBlock', originalDomElements: $( '<foobar />' ).toArray() },
-	{ type: '/alienBlock' },
+	{ type: '/alienBlock' }
 	// 10
-	{ type: 'internalList' },
-	{ type: '/internalList' }
 ];
 
 ve.dm.example.alienWithEmptyData = [
@@ -491,48 +471,10 @@ ve.dm.example.alienWithEmptyData = [
 	{ type: 'alienInline', originalDomElements: $( '<foobar />' ).toArray() },
 	{ type: '/alienInline' },
 	// 6
-	{ type: '/paragraph' },
-	// 7
-	{ type: 'internalList' },
-	{ type: '/internalList' }
-];
-
-ve.dm.example.internalData = [
-	// 0
-	{ type: 'paragraph' },
-	'F', 'o', 'o',
-	{ type: '/paragraph' },
-	// 5
-	{ type: 'internalList' },
-	// 6
-	{ type: 'internalItem' },
-	// 7
-	{ type: 'paragraph', internal: { generated: 'wrapper' } },
-	'B', 'a', 'r',
-	{ type: '/paragraph' },
-	// 12
-	{ type: '/internalItem' },
-	// 13
-	{ type: 'internalItem' },
-	// 14
-	{ type: 'paragraph', internal: { generated: 'wrapper' } },
-	'B', 'a', 'z',
-	{ type: '/paragraph' },
-	// 19
-	{ type: '/internalItem' },
-	// 20
-	{ type: '/internalList' },
-	// 21
-	{ type: 'paragraph' },
-	'Q', 'u', 'u', 'x',
 	{ type: '/paragraph' }
-	// 27
+	// 7
 ];
 
-ve.dm.example.internalData.internalItems = [
-	{ group: 'test', key: 'bar', body: 'Bar' },
-	{ group: 'test', key: 'baz', body: 'Baz' }
-];
 
 ve.dm.example.withMeta = [
 	{
@@ -590,9 +532,7 @@ ve.dm.example.withMeta = [
 		type: 'alienMeta',
 		originalDomElements: $( '<meta typeof=bazquux" data-foo="foobar" />' ).toArray()
 	},
-	{ type: '/alienMeta' },
-	{ type: 'internalList' },
-	{ type: '/internalList' }
+	{ type: '/alienMeta' }
 ];
 
 ve.dm.example.withMetaPlainData = [
@@ -606,9 +546,7 @@ ve.dm.example.withMetaPlainData = [
 	'B',
 	'a',
 	'z',
-	{ type: '/paragraph' },
-	{ type: 'internalList' },
-	{ type: '/internalList' }
+	{ type: '/paragraph' }
 ];
 
 ve.dm.example.withMetaMetaData = [
@@ -977,9 +915,7 @@ ve.dm.example.mergedCells = [
 	{ type: '/tableCell' },
 	{ type: '/tableRow' },
 	{ type: '/tableSection' },
-	{ type: '/table' },
-	{ type: 'internalList' },
-	{ type: '/internalList' }
+	{ type: '/table' }
 ];
 
 ve.dm.example.complexTableHtml = '<table><caption>Foo</caption><thead><tr><th rowspan="">Bar</th></tr></thead>' +
@@ -1062,9 +998,7 @@ ve.dm.example.complexTable = [
 	{ type: '/tableCell' },
 	{ type: '/tableRow' },
 	{ type: '/tableSection' },
-	{ type: '/table' },
-	{ type: 'internalList' },
-	{ type: '/internalList' }
+	{ type: '/table' }
 ];
 
 ve.dm.example.inlineAtEdges = [
@@ -1081,17 +1015,13 @@ ve.dm.example.inlineAtEdges = [
 	// 7
 	{ type: '/alienInline' },
 	// 8
-	{ type: '/paragraph' },
+	{ type: '/paragraph' }
 	// 9
-	{ type: 'internalList' },
-	{ type: '/internalList' }
 ];
 
 ve.dm.example.emptyBranch = [
 	{ type: 'table' },
-	{ type: '/table' },
-	{ type: 'internalList' },
-	{ type: '/internalList' }
+	{ type: '/table' }
 ];
 
 /**
@@ -1172,8 +1102,7 @@ ve.dm.example.tree = new ve.dm.DocumentNode( [
 		] )
 	] ),
 	new ve.dm.ParagraphNode( ve.dm.example.data[55], [new ve.dm.TextNode( 1 )] ),
-	new ve.dm.ParagraphNode( ve.dm.example.data[58], [new ve.dm.TextNode( 1 )] ),
-	new ve.dm.InternalListNode( ve.dm.example.data[61] )
+	new ve.dm.ParagraphNode( ve.dm.example.data[58], [new ve.dm.TextNode( 1 )] )
 ] );
 
 ve.dm.example.domToDataCases = {
@@ -1184,9 +1113,7 @@ ve.dm.example.domToDataCases = {
 			'a',
 			'b',
 			'c',
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		]
 	},
 	'annotated text with bold, italic, underline formatting': {
@@ -1196,9 +1123,7 @@ ve.dm.example.domToDataCases = {
 			['a', [ ve.dm.example.bold ]],
 			['b', [ ve.dm.example.italic ]],
 			['c', [ ve.dm.example.underline ]],
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		]
 	},
 	'equivalent annotations': {
@@ -1211,9 +1136,7 @@ ve.dm.example.domToDataCases = {
 			'd',
 			['e', [ ve.dm.example.code ]],
 			['f', [ ve.dm.example.tt ]],
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		],
 		storeLength: 2,
 		fromDataBody: '<p><code>a</code>b<tt>c</tt>d<code>ef</code>'
@@ -1228,9 +1151,7 @@ ve.dm.example.domToDataCases = {
 			['d', [ ve.dm.example.bold ]],
 			['e', [ ve.dm.example.bold, ve.dm.example.bold ]],
 			['f', [ ve.dm.example.bold ]],
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		],
 		storeLength: 2
 	},
@@ -1241,9 +1162,7 @@ ve.dm.example.domToDataCases = {
 			['a', [ ve.dm.example.italic, ve.dm.example.big ]],
 			['b', [ ve.dm.example.italic, ve.dm.example.big, ve.dm.example.big, ve.dm.example.bold ]],
 			['c', [ ve.dm.example.italic, ve.dm.example.big, ve.dm.example.bold ]],
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		],
 		storeLength: 3
 	},
@@ -1258,9 +1177,7 @@ ve.dm.example.domToDataCases = {
 			['b', [ ve.dm.example.bold ]],
 			['a', [ ve.dm.example.bold ]],
 			['r', [ ve.dm.example.bold ]],
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		],
 		normalizedBody: '<p><i>Foo</i><b>bar</b></p>'
 	},
@@ -1277,9 +1194,7 @@ ve.dm.example.domToDataCases = {
 			{ type: '/heading' },
 			{ type: 'preformatted' },
 			' ', '\t', 'q', 'u', 'u', 'x',
-			{ type: '/preformatted' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/preformatted' }
 		],
 		normalizedBody: '<p>foo</p><p>bar</p><h2>baz</h2><pre> \tquux</pre>'
 	},
@@ -1289,17 +1204,12 @@ ve.dm.example.domToDataCases = {
 			{ type: 'paragraph', internal: { generated: 'wrapper' } },
 			ve.dm.example.image.data,
 			{ type: '/inlineImage' },
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		]
 	},
 	'block image': {
 		body: ve.dm.example.blockImage.html,
-		data: ve.dm.example.blockImage.data.concat( [
-			{ type: 'internalList' },
-			{ type: '/internalList' }
-		] )
+		data: ve.dm.example.blockImage.data
 	},
 	'paragraph with alienInline inside': {
 		body: '<p>a<foobar class="foo">b</foobar>c</p>',
@@ -1312,9 +1222,7 @@ ve.dm.example.domToDataCases = {
 			},
 			{ type: '/alienInline' },
 			'c',
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		]
 	},
 	'paragraphs with an alienBlock between them': {
@@ -1331,9 +1239,7 @@ ve.dm.example.domToDataCases = {
 			'd',
 			'e',
 			'f',
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		]
 	},
 	'annotated inline nodes': {
@@ -1361,9 +1267,7 @@ ve.dm.example.domToDataCases = {
 			{ type: '/break' },
 			['d', [ ve.dm.example.italic ]],
 			'e',
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		]
 	},
 	'annotated comments': {
@@ -1389,9 +1293,7 @@ ve.dm.example.domToDataCases = {
 				}
 			},
 			{ type: '/comment' },
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		],
 		clipboardBody: '<p><b><span rel="ve:Comment" data-ve-comment="foo"></span>bar<span rel="ve:Comment" data-ve-comment="baz"></span></b></p>'
 	},
@@ -1414,9 +1316,7 @@ ve.dm.example.domToDataCases = {
 				originalDomElements: $( '<meta />' ).toArray()
 			},
 			{ type: '/alienMeta' },
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		]
 	},
 	'annotated metadata in a wrapper': {
@@ -1448,9 +1348,7 @@ ve.dm.example.domToDataCases = {
 				originalDomElements: $( '<meta />' ).toArray()
 			},
 			{ type: '/alienMeta' },
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		]
 	},
 	'annotated element metadata in a wrapper with content': {
@@ -1472,9 +1370,7 @@ ve.dm.example.domToDataCases = {
 				originalDomElements: $( '<link />' ).toArray()
 			},
 			{ type: '/alienMeta' },
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		]
 	},
 	'metadata in a wrapper followed by annotated text': {
@@ -1492,9 +1388,7 @@ ve.dm.example.domToDataCases = {
 			[ 'B', [ ve.dm.example.bold ] ],
 			[ 'a', [ ve.dm.example.bold ] ],
 			[ 'z', [ ve.dm.example.bold ] ],
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		]
 	},
 	'wrapping of bare content': {
@@ -1504,9 +1398,7 @@ ve.dm.example.domToDataCases = {
 			'a',
 			'b',
 			'c',
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		]
 	},
 	'wrapping of bare content with inline node': {
@@ -1517,9 +1409,7 @@ ve.dm.example.domToDataCases = {
 			{ type: 'break' },
 			{ type: '/break' },
 			'2',
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		]
 	},
 	'wrapping of bare content starting with inline node': {
@@ -1530,9 +1420,7 @@ ve.dm.example.domToDataCases = {
 			{ type: '/inlineImage' },
 			'1',
 			'2',
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		]
 	},
 	'wrapping of bare content with inline alien': {
@@ -1546,9 +1434,7 @@ ve.dm.example.domToDataCases = {
 			},
 			{ type: '/alienInline' },
 			'2',
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		]
 	},
 	'wrapping of bare content with block alien': {
@@ -1564,9 +1450,7 @@ ve.dm.example.domToDataCases = {
 			{ type: '/alienBlock' },
 			{ type: 'paragraph', internal: { generated: 'wrapper' } },
 			'2',
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		]
 	},
 	'wrapping of bare content starting with inline alien': {
@@ -1581,9 +1465,7 @@ ve.dm.example.domToDataCases = {
 			'B',
 			'a',
 			'r',
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		]
 	},
 	'wrapping of bare content ending with inline alien': {
@@ -1598,9 +1480,7 @@ ve.dm.example.domToDataCases = {
 				originalDomElements: $( '<foobar class="bar">Bar</foobar>' ).toArray()
 			},
 			{ type: '/alienInline' },
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		]
 	},
 	'wrapping of bare content with about group': {
@@ -1614,9 +1494,7 @@ ve.dm.example.domToDataCases = {
 			},
 			{ type: '/alienInline' },
 			'2',
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		]
 	},
 	'wrapping of bare content between structural nodes': {
@@ -1630,9 +1508,7 @@ ve.dm.example.domToDataCases = {
 			'c',
 			{ type: '/paragraph' },
 			{ type: 'table' },
-			{ type: '/table' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/table' }
 		]
 	},
 	'wrapping of bare content between paragraphs': {
@@ -1649,9 +1525,7 @@ ve.dm.example.domToDataCases = {
 			'f',
 			{ type: '/paragraph' },
 			{ type: 'paragraph' },
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		]
 	},
 	'wrapping prevents empty list items': {
@@ -1662,18 +1536,14 @@ ve.dm.example.domToDataCases = {
 			{ type: 'paragraph', internal: { generated: 'empty' } },
 			{ type: '/paragraph' },
 			{ type: '/listItem' },
-			{ type: '/list' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/list' }
 		]
 	},
 	'empty document': {
 		body: '',
 		data: [
 			{ type: 'paragraph', internal: { generated: 'empty' } },
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		]
 	},
 	'empty document with meta': {
@@ -1685,9 +1555,7 @@ ve.dm.example.domToDataCases = {
 			},
 			{ type: '/alienMeta' },
 			{ type: 'paragraph', internal: { generated: 'empty' } },
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		]
 	},
 	'empty document with comment': {
@@ -1701,9 +1569,7 @@ ve.dm.example.domToDataCases = {
 				}
 			},
 			{ type: '/comment' },
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		],
 		clipboardBody: '<span rel="ve:Comment" data-ve-comment=" comment "></span>'
 	},
@@ -1713,9 +1579,7 @@ ve.dm.example.domToDataCases = {
 			'F',
 			'o',
 			'o',
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		],
 		normalizedBody: '<p>Foo</p>'
 	},
@@ -1729,9 +1593,7 @@ ve.dm.example.domToDataCases = {
 			'o',
 			{ type: '/paragraph' },
 			{ type: '/listItem' },
-			{ type: '/list' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/list' }
 		],
 		normalizedBody: '<ul><li><p>Foo</p></li></ul>'
 	},
@@ -1742,9 +1604,7 @@ ve.dm.example.domToDataCases = {
 			{ type: 'paragraph', internal: { generated: 'slug' } },
 			{ type: '/paragraph' },
 			{ type: 'table', internal: { whitespace: [ '\n' ] } },
-			{ type: '/table' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/table' }
 		],
 		normalizedBody: '<table></table>\n<table></table>'
 	},
@@ -1764,9 +1624,7 @@ ve.dm.example.domToDataCases = {
 			},
 			{ type: '/alienMeta' },
 			'B', 'a', 'r',
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		]
 	},
 	'empty annotation in wrapper paragraph': {
@@ -1780,9 +1638,7 @@ ve.dm.example.domToDataCases = {
 			},
 			{ type: '/alienMeta' },
 			'B', 'a', 'r',
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		]
 	},
 	'nested empty annotation': {
@@ -1796,9 +1652,7 @@ ve.dm.example.domToDataCases = {
 			},
 			{ type: '/alienMeta' },
 			'B', 'a', 'r',
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		]
 	},
 	'empty annotation inside nonempty annotation': {
@@ -1814,9 +1668,7 @@ ve.dm.example.domToDataCases = {
 				annotations: [ ve.dm.example.italic ]
 			},
 			{ type: '/alienMeta' },
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		]
 	},
 	'empty annotation with comment': {
@@ -1833,9 +1685,7 @@ ve.dm.example.domToDataCases = {
 			},
 			{ type: '/comment' },
 			'B', 'a', 'z',
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		],
 		clipboardBody: '<p>Foo<b><span rel="ve:Comment" data-ve-comment=" Bar "></span></b>Baz</p>'
 	},
@@ -1850,9 +1700,7 @@ ve.dm.example.domToDataCases = {
 			},
 			{ type: '/alienMeta' },
 			'B', 'a', 'z',
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		]
 	},
 	'adjacent identical annotations': {
@@ -1881,9 +1729,7 @@ ve.dm.example.domToDataCases = {
 			[ 'b', [ ve.dm.example.link( 'whee' ) ] ],
 			[ 'a', [ ve.dm.example.link( 'whee' ) ] ],
 			[ 'z', [ ve.dm.example.link( 'whee' ) ] ],
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		],
 		normalizedBody:
 			'<p><b>Foobar</b><strong>baz</strong></p>' +
@@ -1904,9 +1750,7 @@ ve.dm.example.domToDataCases = {
 			[ 'r', [ ve.dm.example.link( 'Foobar' ) ] ],
 			{ type: '/paragraph' },
 			{ type: '/listItem' },
-			{ type: '/list' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/list' }
 		]
 	},
 	'whitespace between unwrapped inline nodes': {
@@ -1935,9 +1779,7 @@ ve.dm.example.domToDataCases = {
 				originalDomElements: $( '<foobar>e</foobar>' ).toArray()
 			},
 			{ type: '/alienInline' },
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		]
 	},
 	'whitespace preservation in headings': {
@@ -1975,9 +1817,7 @@ ve.dm.example.domToDataCases = {
 			'u',
 			'u',
 			'x',
-			{ type: '/heading' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/heading' }
 		]
 	},
 	'whitespace preservation in list items': {
@@ -2016,9 +1856,7 @@ ve.dm.example.domToDataCases = {
 			'x',
 			{ type: '/paragraph' },
 			{ type: '/listItem' },
-			{ type: '/list' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/list' }
 		]
 	},
 	'whitespace preservation with annotations': {
@@ -2036,9 +1874,7 @@ ve.dm.example.domToDataCases = {
 			[ ' ', [ ve.dm.example.italic ] ],
 			[ ' ', [ ve.dm.example.italic ] ],
 			[ ' ', [ ve.dm.example.italic ] ],
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		]
 	},
 	'outer whitespace preservation in a list with bare text and a wrapper paragraph': {
@@ -2059,9 +1895,7 @@ ve.dm.example.domToDataCases = {
 			'P',
 			{ type: '/paragraph' },
 			{ type: '/listItem' },
-			{ type: '/list' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/list' }
 		],
 		innerWhitespace: [ '\n', '\t\n\t\n' ]
 	},
@@ -2085,9 +1919,7 @@ ve.dm.example.domToDataCases = {
 			{ type: '/listItem' },
 			{ type: '/list' },
 			{ type: '/listItem' },
-			{ type: '/list' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/list' }
 		]
 	},
 	'whitespace preservation leaves non-edge content whitespace alone': {
@@ -2128,9 +1960,7 @@ ve.dm.example.domToDataCases = {
 			' ',
 			' ',
 			'H',
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		],
 		innerWhitespace: [ undefined, '   ' ]
 	},
@@ -2166,9 +1996,7 @@ ve.dm.example.domToDataCases = {
 			'\n',
 			'\n',
 			'F',
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		]
 	},
 	'whitespace preservation with tightly nested annotations': {
@@ -2191,9 +2019,7 @@ ve.dm.example.domToDataCases = {
 			'\n',
 			'\n',
 			'D',
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		]
 	},
 	'whitespace preservation with nested annotations with whitespace on the left side': {
@@ -2218,9 +2044,7 @@ ve.dm.example.domToDataCases = {
 			'\n',
 			'\n',
 			'D',
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		]
 	},
 	'whitespace preservation with nested annotations with whitespace on the right side': {
@@ -2245,9 +2069,7 @@ ve.dm.example.domToDataCases = {
 			'\n',
 			'\n',
 			'D',
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		]
 	},
 	'whitespace preservation with aliens': {
@@ -2294,9 +2116,7 @@ ve.dm.example.domToDataCases = {
 					whitespace: [ '\t\n', undefined, undefined, ' \n ' ]
 				}
 			},
-			{ type: '/alienBlock' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/alienBlock' }
 		],
 		innerWhitespace: [ ' ', ' \n ' ]
 	},
@@ -2319,9 +2139,7 @@ ve.dm.example.domToDataCases = {
 			'\n',
 			'\n',
 			'\n',
-			{ type: '/preformatted' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/preformatted' }
 		],
 		innerWhitespace: [ '\n', '\n\n\n\n\n' ]
 	},
@@ -2344,9 +2162,7 @@ ve.dm.example.domToDataCases = {
 			{ type: '/tableCell' },
 			{ type: '/tableRow' },
 			{ type: '/tableSection' },
-			{ type: '/table' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/table' }
 		]
 	},
 	'whitespace preservation with wrapped text and metas': {
@@ -2390,9 +2206,7 @@ ve.dm.example.domToDataCases = {
 			'F',
 			'o',
 			'o',
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		]
 	},
 	'whitespace preservation with wrapped text and comments': {
@@ -2423,9 +2237,7 @@ ve.dm.example.domToDataCases = {
 			'F',
 			'o',
 			'o',
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		],
 		clipboardBody: '<span rel="ve:Comment" data-ve-comment=" Foo "></span> <span rel="ve:Comment" data-ve-comment=" Bar "></span>\nFoo'
 	},
@@ -2466,9 +2278,7 @@ ve.dm.example.domToDataCases = {
 			'q', 'u', 'u', 'x',
 			{ type: '/paragraph' },
 			{ type: '/listItem' },
-			{ type: '/list' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/list' }
 		],
 		clipboardBody: '<ul><li> bar<span rel="ve:Comment" data-ve-comment=" baz "></span>quux </li></ul>'
 	},
@@ -2507,9 +2317,7 @@ ve.dm.example.domToDataCases = {
 			'q', 'u', 'u', 'x',
 			{ type: '/paragraph' },
 			{ type: '/listItem' },
-			{ type: '/list' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/list' }
 		]
 	},
 	'whitespace preservation with meta at end of wrapper paragraph': {
@@ -2551,9 +2359,7 @@ ve.dm.example.domToDataCases = {
 			},
 			{ type: '/alienMeta' },
 			{ type: '/listItem' },
-			{ type: '/list' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/list' }
 		]
 	},
 	'whitespace preservation with multiple metas at end of wrapper paragraph': {
@@ -2611,9 +2417,7 @@ ve.dm.example.domToDataCases = {
 			},
 			{ type: '/alienMeta' },
 			{ type: '/listItem' },
-			{ type: '/list' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/list' }
 		]
 	},
 	'whitespace preservation with comment at start or end of element': {
@@ -2644,9 +2448,7 @@ ve.dm.example.domToDataCases = {
 				}
 			},
 			{ type: '/comment' },
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		],
 		clipboardBody: '<p> <span rel="ve:Comment" data-ve-comment=" foo "></span>bar<span rel="ve:Comment" data-ve-comment=" baz "></span> </p>'
 	},
@@ -2667,9 +2469,7 @@ ve.dm.example.domToDataCases = {
 			[ 'B', [ ve.dm.example.italic ] ],
 			[ 'a', [ ve.dm.example.italic ] ],
 			[ 'r', [ ve.dm.example.italic ] ],
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		]
 	},
 	'whitespace surrounding metadata in a wrapper followed by inline node': {
@@ -2691,18 +2491,14 @@ ve.dm.example.domToDataCases = {
 				originalDomElements: $( '<span rel="ve:Alien"></span>' ).toArray()
 			},
 			{ type: '/alienInline' },
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		]
 	},
 	'whitespace preservation in empty branch node': {
 		body: '<table>\n\n</table>',
 		data: [
 			{ type: 'table', internal: { whitespace: [ undefined, '\n\n' ] } },
-			{ type: '/table' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/table' }
 		]
 	},
 	'whitespace preservation in empty list item': {
@@ -2713,9 +2509,7 @@ ve.dm.example.domToDataCases = {
 			{ type: 'paragraph', internal: { generated: 'empty', whitespace: [ '\n\t' ] } },
 			{ type: '/paragraph' },
 			{ type: '/listItem' },
-			{ type: '/list' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/list' }
 		]
 	},
 	'whitespace preservation in body with only plain text': {
@@ -2723,9 +2517,7 @@ ve.dm.example.domToDataCases = {
 		data: [
 			{ type: 'paragraph', internal: { generated: 'wrapper', whitespace: [ '  ', undefined, undefined, '\n\t' ] } },
 			'H', 'e', 'l', 'l', 'o',
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		],
 		innerWhitespace: [ '  ', '\n\t' ]
 	},
@@ -2733,9 +2525,7 @@ ve.dm.example.domToDataCases = {
 		body: '\n\t',
 		data: [
 			{ type: 'paragraph', internal: { generated: 'empty', whitespace: [ '\n\t' ] } },
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		],
 		innerWhitespace: [ '\n\t', undefined ]
 	},
@@ -2754,9 +2544,7 @@ ve.dm.example.domToDataCases = {
 			{ type: 'paragraph', internal: { generated: 'empty' } },
 			{ type: '/paragraph' },
 			{ type: '/listItem' },
-			{ type: '/list' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/list' }
 		],
 		innerWhitespace: [ '\t', '\n' ],
 		normalizedBody: '<ul><li><p>\tA\n</p>  <p>B</p></li><li></li></ul>'
@@ -2791,9 +2579,7 @@ ve.dm.example.domToDataCases = {
 
 				]
 			],
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		]
 	},
 	'nested annotations are closed and reopened in the correct order': {
@@ -2810,9 +2596,7 @@ ve.dm.example.domToDataCases = {
 			[ 'b', [ ve.dm.example.italic ] ],
 			[ 'a', [ ve.dm.example.italic, ve.dm.example.underline ] ],
 			[ 'z', [ ve.dm.example.italic ] ],
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		]
 	},
 	'about grouping': {
@@ -2855,9 +2639,7 @@ ve.dm.example.domToDataCases = {
 				originalDomElements: $( '<foobar about="#vet3">Meh</foobar>' ).toArray()
 			},
 			{ type: '/alienInline' },
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		]
 	},
 	'whitespace preservation with an about group': {
@@ -2872,9 +2654,7 @@ ve.dm.example.domToDataCases = {
 					whitespace: [ ' ', undefined, undefined, '    ' ]
 				}
 			},
-			{ type: '/alienBlock' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/alienBlock' }
 		],
 		innerWhitespace: [ ' ', '    ' ]
 	},
@@ -2889,9 +2669,7 @@ ve.dm.example.domToDataCases = {
 				annotations: [ ve.dm.example.span ]
 			},
 			{ type: '/alienInline' },
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		]
 	},
 	'block node inside annotation node surrounded by tables': {
@@ -2909,9 +2687,7 @@ ve.dm.example.domToDataCases = {
 			{ type: '/alienInline' },
 			{ type: '/paragraph' },
 			{ type: 'table' },
-			{ type: '/table' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/table' }
 		]
 	},
 	'block node inside annotation node is alienated and continues wrapping': {
@@ -2931,9 +2707,7 @@ ve.dm.example.domToDataCases = {
 			'B',
 			'a',
 			'z',
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		]
 	},
 	'whitespace before meta node in wrapping mode': {
@@ -2967,9 +2741,7 @@ ve.dm.example.domToDataCases = {
 			{ type: '/tableCell' },
 			{ type: '/tableRow' },
 			{ type: '/tableSection' },
-			{ type: '/table' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/table' }
 		]
 	},
 	'table with merged cells': {
@@ -2991,9 +2763,7 @@ ve.dm.example.domToDataCases = {
 			['d', [ ve.dm.example.italic ]],
 			'e',
 			{ type: '/paragraph' },
-			{ type: '/div' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/div' }
 		],
 		fromDataBody: '<div><p>a<b>b</b>c<i>d</i>e</p></div>'
 	},
@@ -3003,9 +2773,7 @@ ve.dm.example.domToDataCases = {
 			{ type: 'paragraph' },
 			{ type: 'comment', attributes: { text: '-Foo-bar-->b&r-' } },
 			{ type: '/comment' },
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		],
 		clipboardBody: '<p><span rel="ve:Comment" data-ve-comment="-Foo-bar-->b&amp;r-"></span></p>'
 	},
@@ -3015,9 +2783,7 @@ ve.dm.example.domToDataCases = {
 			{ type: 'paragraph' },
 			{ type: 'comment', attributes: { text: '>Foo-bar-->b&r-' } },
 			{ type: '/comment' },
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		],
 		normalizedBody: '<p><!--&#62;Foo-bar-&#45;>b&#38;r&#45;--></p>',
 		clipboardBody: '<p><span rel="ve:Comment" data-ve-comment=">Foo-bar-->b&amp;r-"></span></p>'
@@ -3032,9 +2798,7 @@ ve.dm.example.domToDataCases = {
 			{ type: '/center' },
 			{ type: 'blockquote' },
 			'B', 'a', 'r',
-			{ type: '/blockquote' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/blockquote' }
 		]
 	}
 };
@@ -3200,10 +2964,8 @@ ve.dm.example.isolationData = [
 	'3',
 	{ type: '/paragraph' },
 	{ type: '/listItem' },
-	{ type: '/list' },
-	{ type: 'internalList' },
-	{ type: '/internalList' }
-	// 246
+	{ type: '/list' }
+	// 244
 ];
 
 ve.dm.example.RDFaDoc = ve.dm.converter.getModelFromDom( ve.createDocumentFromHtml(
@@ -3267,10 +3029,8 @@ ve.dm.example.annotationData = [
 	// 25
 	'a',
 	'z',
-	{ type: '/paragraph' },
-	{ type: 'internalList' },
-	{ type: '/internalList' }
-	// 30
+	{ type: '/paragraph' }
+	// 28
 ];
 
 ve.dm.example.selectNodesCases = [

@@ -106,9 +106,7 @@ QUnit.test( 'expandLinearSelection (annotation)', function ( assert ) {
 			['b', [ ve.dm.example.bold, ve.dm.example.italic ]],
 			['a', [ ve.dm.example.bold, ve.dm.example.italic ]],
 			['z', [ ve.dm.example.bold, ve.dm.example.italic ]],
-			{ type: '/paragraph' },
-			{ type: 'internalList' },
-			{ type: '/internalList' }
+			{ type: '/paragraph' }
 		] ),
 		surface = new ve.dm.Surface( doc ),
 		cases = [
