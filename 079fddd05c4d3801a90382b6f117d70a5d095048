@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_8dd527ec",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-04-09T16:33:50Z",
+      "side": 1,
+      "message": "move to stylesheet",
+      "revId": "079fddd05c4d3801a90382b6f117d70a5d095048",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_edc85b53",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-04-09T16:33:50Z",
+      "side": 1,
+      "message": "you could move this to the input debugging stylesheet",
+      "revId": "079fddd05c4d3801a90382b6f117d70a5d095048",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_cdcb1f4e",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-04-09T16:33:50Z",
+      "side": 1,
+      "message": "move to stylesheet",
+      "revId": "079fddd05c4d3801a90382b6f117d70a5d095048",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_2de733e1",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 779,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-04-09T16:33:50Z",
+      "side": 1,
+      "message": "I think this should happen when the model selection becomes null, which is an effect of blurring the document, but can be triggered by other things.",
+      "revId": "079fddd05c4d3801a90382b6f117d70a5d095048",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_8dbe87aa",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 2474,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-04-09T16:33:50Z",
+      "side": 1,
+      "message": "if insert always requires a remove, should we call remove from inside insert?",
+      "revId": "079fddd05c4d3801a90382b6f117d70a5d095048",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ed7b7b22",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 2942,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-04-09T16:33:50Z",
+      "side": 1,
+      "message": "branch?",
+      "revId": "079fddd05c4d3801a90382b6f117d70a5d095048",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_8da767a4",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 2944,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-04-09T16:33:50Z",
+      "side": 1,
+      "message": "we can just say selection, there\u0027s no conflicting variable",
+      "revId": "079fddd05c4d3801a90382b6f117d70a5d095048",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_2d997371",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 3166,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-04-09T16:33:50Z",
+      "side": 1,
+      "message": "doesn\u0027t return",
+      "revId": "079fddd05c4d3801a90382b6f117d70a5d095048",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
