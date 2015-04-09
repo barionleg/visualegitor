@@ -89,7 +89,6 @@ ve.ui.AnnotationInspector.prototype.getInsertionText = function () {
  *
  * @abstract
  * @returns {ve.dm.Annotation} Annotation to apply
- * @throws {Error} If not overridden in subclass
  */
 ve.ui.AnnotationInspector.prototype.getAnnotation = function () {
 	throw new Error(
@@ -103,7 +102,6 @@ ve.ui.AnnotationInspector.prototype.getAnnotation = function () {
  * @abstract
  * @param {ve.dm.SurfaceFragment} fragment Surface fragment
  * @returns {ve.dm.Annotation} Annotation
- * @throws {Error} If not overridden in a subclass
  */
 ve.ui.AnnotationInspector.prototype.getAnnotationFromFragment = function () {
 	throw new Error(
