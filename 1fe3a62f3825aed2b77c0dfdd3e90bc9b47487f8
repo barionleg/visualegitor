@@ -16,6 +16,24 @@
       "revId": "1fe3a62f3825aed2b77c0dfdd3e90bc9b47487f8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5c8a5f6f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-04-09T22:13:29Z",
+      "side": 1,
+      "message": "Yes and don\u0027t call me Shirley.",
+      "parentUuid": "6e7c4fa4_902ea088",
+      "revId": "1fe3a62f3825aed2b77c0dfdd3e90bc9b47487f8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
