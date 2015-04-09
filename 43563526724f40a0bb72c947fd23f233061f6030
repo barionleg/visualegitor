@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_7ca15b9e",
+        "filename": "src/ui/inspectors/ve.ui.AnnotationInspector.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-04-09T23:11:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_f069148a",
+      "revId": "43563526724f40a0bb72c947fd23f233061f6030",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_d06c189d",
         "filename": "src/ui/inspectors/ve.ui.AnnotationInspector.js",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2015-04-09T17:24:57Z",
       "side": 1,
       "message": "+@method",
+      "revId": "43563526724f40a0bb72c947fd23f233061f6030",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_9c9eb765",
+        "filename": "src/ui/inspectors/ve.ui.AnnotationInspector.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-04-09T23:11:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_d06c189d",
       "revId": "43563526724f40a0bb72c947fd23f233061f6030",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
