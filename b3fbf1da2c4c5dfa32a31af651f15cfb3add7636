@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_c76d41c9",
+        "filename": "src/ui/ve.ui.Toolbar.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 98
+      },
+      "writtenOn": "2015-04-09T10:57:28Z",
+      "side": 1,
+      "message": "would need documenting below \"@cfg {boolean} [floatable]\"",
+      "revId": "b3fbf1da2c4c5dfa32a31af651f15cfb3add7636",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
