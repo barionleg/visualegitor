@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_70d8a47f",
+        "filename": "src/ui/inspectors/ve.ui.AnnotationInspector.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-04-09T17:25:27Z",
+      "side": 0,
+      "message": "Bah, it was gone in one version of this.",
+      "parentUuid": "6e7c4fa4_d0df386c",
+      "revId": "2ac1ae14e4c559b815e2d76c04fb5a1070b46744",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_90e9c012",
         "filename": "src/ui/inspectors/ve.ui.AnnotationInspector.js",
         "patchSetId": 2
