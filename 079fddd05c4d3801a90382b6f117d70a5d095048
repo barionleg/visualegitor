@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_33e9d17e",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-04-10T09:31:20Z",
+      "side": 1,
+      "message": "We keep functional CSS in the stylesheet too, cf pasteTarget.",
+      "parentUuid": "6e7c4fa4_0de3579d",
+      "revId": "079fddd05c4d3801a90382b6f117d70a5d095048",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_edc85b53",
         "filename": "src/ce/ve.ce.Surface.js",
         "patchSetId": 6
