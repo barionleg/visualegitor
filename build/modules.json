@@ -96,10 +96,26 @@
 			"jquery"
 		]
 	},
+	"jquery.i18n.dist": {
+		"scripts": [
+			"dist/lib/jquery.i18n.js"
+		],
+		"dependencies": [
+			"jquery"
+		]
+	},
 	"jquery.uls.data": {
 		"scripts": [
 			"lib/jquery.uls/src/jquery.uls.data.js",
 			"lib/jquery.uls/src/jquery.uls.data.utils.js"
+		],
+		"dependencies": [
+			"jquery"
+		]
+	},
+	"jquery.uls.data.dist": {
+		"scripts": [
+			"dist/lib/jquery.uls.data.js"
 		],
 		"dependencies": [
 			"jquery"
@@ -128,6 +144,17 @@
 			"oojs-ui",
 			"jquery.i18n",
 			"jquery.uls.data",
+			"jquery.client",
+			"papaparse"
+		]
+	},
+	"baselibs.dist": {
+		"dependencies": [
+			"jquery",
+			"oojs",
+			"oojs-ui",
+			"jquery.i18n.dist",
+			"jquery.uls.data.dist",
 			"jquery.client",
 			"papaparse"
 		]
@@ -628,7 +655,8 @@
 			{ "file": "src/ui/styles/ve.ui.DebugBar.css", "debug": true }
 		],
 		"dependencies": [
-			"visualEditor.base.build"
+			"visualEditor.base.build",
+			"visualEditor.standalone.read"
 		]
 	},
 	"visualEditor.desktop.standalone": {
@@ -671,7 +699,7 @@
 			"demos/ve/demo.desktop.css"
 		],
 		"dependencies": [
-			"baselibs",
+			"baselibs.dist",
 			"oojs-ui-apex",
 			"visualEditor.dist",
 			"visualEditor.standalone.demo"
@@ -697,7 +725,7 @@
 			"demos/ve/demo.mobile.css"
 		],
 		"dependencies": [
-			"baselibs",
+			"baselibs.dist",
 			"oojs-ui-mediawiki",
 			"visualEditor.dist",
 			"visualEditor.standalone.demo"
