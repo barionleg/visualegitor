@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_04200995",
+        "filename": "demos/ve/demo.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2015-04-10T16:38:49Z",
+      "side": 1,
+      "message": "Taking itself as argument would be strange ;-) It doesn\u0027t take any parameters.",
+      "revId": "bee46a5eca338c2d1e1997a83246c06a988d68ea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
