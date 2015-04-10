@@ -731,6 +731,19 @@
 			"visualEditor.standalone.demo"
 		]
 	},
+	"visualEditor.minimal.standalone.demo.dist": {
+		"scripts": [
+			"demos/ve/demo.minimal.js"
+		],
+		"styles": [
+			"demos/ve/demo.minimal.css"
+		],
+		"dependencies": [
+			"baselibs.dist",
+			"oojs-ui-apex",
+			"visualEditor.dist"
+		]
+	},
 	"visualEditor.build": {
 		"dependencies": [
 			"visualEditor.standalone.build",
