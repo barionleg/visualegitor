@@ -46,16 +46,28 @@ module.exports = function ( grunt ) {
 			dist: [ 'dist/*', 'coverage/*' ]
 		},
 		concat: {
-			options: {
-				banner: grunt.file.read( 'build/banner.txt' )
-			},
 			js: {
+				options: {
+					banner: grunt.file.read( 'build/banner.txt' )
+				},
 				dest: 'dist/visualEditor.js',
 				src: coreBuildFiles.scripts
 			},
 			css: {
+				options: {
+					banner: grunt.file.read( 'build/banner.txt' )
+				},
 				dest: 'dist/visualEditor.css',
 				src: coreBuildFiles.styles
+			},
+			// HACK: Ideally these libraries would provide their own distribution files (T95667)
+			'jquery.i18n': {
+				dest: 'dist/lib/jquery.i18n.js',
+				src: modules['jquery.i18n'].scripts
+			},
+			'jquery.uls.data': {
+				dest: 'dist/lib/jquery.uls.data.js',
+				src: modules['jquery.uls.data'].scripts
 			}
 		},
 		cssjanus: {
@@ -80,6 +92,11 @@ module.exports = function ( grunt ) {
 		copy: {
 			i18n: {
 				src: 'i18n/*.json',
+				dest: 'dist/',
+				expand: true
+			},
+			lib: {
+				src: ['lib/**', '!**/jquery.i18n/**', '!**/jquery.uls/**'],
 				dest: 'dist/',
 				expand: true
 			}
