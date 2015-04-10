@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_86bd0100",
+        "filename": "Gruntfile.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2015-04-10T10:44:55Z",
+      "side": 1,
+      "message": "Matching !lib instead of !** might make more sense. I don\u0027t know the current state, but last I checked minimatch it would expand these fully and then negate them from the positive matches. It\u0027d be quite IO intensive.",
+      "revId": "86cacca9b5a5424a7cfc75249fd649d98511c0d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
