@@ -160,6 +160,17 @@ module.exports = function ( grunt ) {
 				indent: '\t\t',
 				placeholders: { menu: demoMenu }
 			},
+			minimalDemo: {
+				targetFile: 'demos/ve/minimal.html',
+				template: 'demos/ve/minimal.html.template',
+				modules: modules,
+				load: [ 'visualEditor.minimal.standalone.demo.dist' ],
+				pathPrefix: '../../',
+				i18n: [ 'dist/i18n/', 'lib/oojs-ui/i18n/' ],
+				indent: '\t\t',
+				bidi: false,
+				langList: false
+			},
 			test: {
 				targetFile: 'tests/index.html',
 				template: 'tests/index.html.template',
