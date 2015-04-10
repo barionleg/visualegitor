@@ -276,7 +276,7 @@ ve.demo.SurfaceContainer.prototype.getPageMenuItems = function () {
  * @return {jQuery.Promise} Promise which resolves when change is complete
  */
 ve.demo.SurfaceContainer.prototype.change = function ( mode, page ) {
-	var model, doc, html, closePromise,
+	var html, closePromise,
 		container = this,
 		currentDir = 'ltr';
 
@@ -290,10 +290,8 @@ ve.demo.SurfaceContainer.prototype.change = function ( mode, page ) {
 		case 've':
 			closePromise = this.$surfaceWrapper.slideUp().promise();
 			if ( !page ) {
-				model = this.surface.getModel().getDocument() ;
-				doc = ve.dm.converter.getDomFromModel( model );
-				html = ve.properInnerHtml( doc.body );
-				currentDir = model.getDir();
+				html = this.surface.getHtml( this.surface );
+				currentDir = this.surface.getModel().getDocument().getDir();
 			}
 			this.surface.destroy();
 			this.surface = null;
@@ -416,11 +414,7 @@ ve.demo.SurfaceContainer.prototype.reload = function ( lang, dir ) {
 	this.dir = dir;
 
 	this.change( 've' ).done( function () {
-		container.loadHtml( ve.properInnerHtml(
-			ve.dm.converter.getDomFromModel(
-				container.surface.getModel().getDocument()
-			).body
-		) );
+		container.loadHtml( container.surface.getHtml() );
 	} );
 };
 
