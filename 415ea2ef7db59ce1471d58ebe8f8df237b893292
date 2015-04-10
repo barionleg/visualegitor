@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_3390f1f6",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-04-10T09:35:47Z",
+      "side": 1,
+      "message": "indent all below",
+      "revId": "415ea2ef7db59ce1471d58ebe8f8df237b893292",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_f3b0398b",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-04-10T09:35:47Z",
+      "side": 1,
+      "message": "reply on ps6, think we should move still",
+      "revId": "415ea2ef7db59ce1471d58ebe8f8df237b893292",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_53956de5",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-04-10T09:35:47Z",
+      "side": 1,
+      "message": "indent all below",
+      "revId": "415ea2ef7db59ce1471d58ebe8f8df237b893292",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_53bc8d67",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 777,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-04-10T09:35:47Z",
+      "side": 1,
+      "message": "comment on ps6",
+      "revId": "415ea2ef7db59ce1471d58ebe8f8df237b893292",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_13b61586",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 2472,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-04-10T09:35:47Z",
+      "side": 1,
+      "message": "what if you renamed them update and clear, where update includes clear?",
+      "revId": "415ea2ef7db59ce1471d58ebe8f8df237b893292",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
