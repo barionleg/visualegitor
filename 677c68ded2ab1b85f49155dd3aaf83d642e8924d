@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_4052686c",
+        "filename": "demos/ve/demo.minimal.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2015-04-11T15:00:08Z",
+      "side": 1,
+      "message": "We shouldn\u0027t have to wait for dom-ready to call initialize(). From what I can see the only reason this is here is because buildloader puts the ve.init.platform.addMessagePath() call after loading this file. Let\u0027s swap that around.\n\nDone in https://gerrit.wikimedia.org/r/203537.",
+      "revId": "677c68ded2ab1b85f49155dd3aaf83d642e8924d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
