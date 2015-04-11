@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_63b76ef3",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-04-11T19:06:14Z",
+      "side": 1,
+      "message": "probably faster in any browser, not just V8\nhttp://jsperf.com/math-floor-divide-2-vs-bit-shift/3",
+      "revId": "98212e09c8ab528ee3ef123843c15f095b3c8971",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_83bacad8",
+        "filename": "tests/ve.test.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-04-11T19:06:14Z",
+      "side": 1,
+      "message": "test forInsertion in the middle?",
+      "revId": "98212e09c8ab528ee3ef123843c15f095b3c8971",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
