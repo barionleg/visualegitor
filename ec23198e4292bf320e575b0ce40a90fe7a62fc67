@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_403d8826",
+        "filename": "demos/ve/demo.minimal.css",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2015-04-11T15:00:03Z",
+      "side": 1,
+      "message": "Shouldn\u0027t be needed. VE works drop-in in any existing page, let\u0027s show this off.\n\nAdding font-family: sans-serif; would be nice though.",
+      "revId": "ec23198e4292bf320e575b0ce40a90fe7a62fc67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_004790c0",
+        "filename": "demos/ve/demo.minimal.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2015-04-11T15:00:03Z",
+      "side": 1,
+      "message": "Positional boolean and null arguments are quite bad. Not demo-material. They\u0027re also optional, so we can easily leave them off here to be more minimal.\n\nWe should probably change getModelFromDom (or another method) to take an options object instead.",
+      "revId": "ec23198e4292bf320e575b0ce40a90fe7a62fc67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
