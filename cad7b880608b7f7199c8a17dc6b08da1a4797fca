@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_20c5ec41",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2015-04-11T13:59:08Z",
+      "side": 1,
+      "message": "Results in blockquote. Either backtick, use English (\"above 0\"), or change line wrapping to have a word in front.",
+      "revId": "cad7b880608b7f7199c8a17dc6b08da1a4797fca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_40c02830",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2015-04-11T13:59:08Z",
+      "side": 1,
+      "message": "boolean*",
+      "revId": "cad7b880608b7f7199c8a17dc6b08da1a4797fca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
