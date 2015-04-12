@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_f183489a",
+        "filename": "Gruntfile.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-04-12T12:54:52Z",
+      "side": 1,
+      "message": "MediaWiki not Apex?",
+      "revId": "e345bc68845988e44aefa7367adb6c6771867b5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
