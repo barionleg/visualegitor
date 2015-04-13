@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_a94a4082",
+        "filename": "demos/ve/demo.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2015-04-13T15:33:04Z",
+      "side": 1,
+      "message": "Use \u003ca\u003e to create elements and \u003ca ..\u003e..\u003c/a\u003e (valid/balanced html) for parsing.",
+      "revId": "fa70026ee9d245c7fd4f3b08ded4a560f47aeedf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
