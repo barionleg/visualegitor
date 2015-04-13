@@ -16,6 +16,41 @@
       "revId": "679b94702245a567400ad3c432026bddd981cc7e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_26f2df65",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2015-04-13T13:47:57Z",
+      "side": 1,
+      "message": "They\u0027re not syntactically required, but help indicate it\u0027s special in some way. Similar to how we don\u0027t do this:\n\n obj.foo \u003d function ( x ) {\n     .. \n     return x;\n }( 42 );\n\nBut this:\n\n obj.foo \u003d ( function ( x ) {\n     ..\n     return x;\n }( 42 ) );\n\nIt\u0027d be confusing to see \"function\" on the right-hand of an assignment, and not have actually assigned. Parenthesis aren\u0027t much, but they\u0027re a subtle heads-up. For something more uncommon or exotic, parenthesis would  leave the reader none the wiser. (A comment would be better.) For this though, a pair of parentheses seems enough. We have many similar constructs like these without parenthesis. Reason being that there chained calls don\u0027t lose the jQuery object:\n\n obj.foo \u003d $(\u0027\u003cdiv\u003e\u0027)\n     .addClass( \u0027foo\u0027 );\n\nIn the case of cursorHolderTemplate, it calls get( 0 ), which is somewhat unexpected; assigning a raw DOM Node, not the jQuery object. If this exceeds the \"threshold of exoticness\", maybe we should write it like this:\n\n obj.foo \u003d ( function () {\n     var $div \u003d $( \u0027\u003cdiv\u003e\u0027 );\n     ..\n     return $div.get( 0 );\n }() );\n\nOr:\n\n ( function () {\n     var $div \u003d $( \u0027\u003cdiv\u003e\u0027 );\n     ..\n     obj.foo \u003d  $div.get( 0 );\n }() );",
+      "parentUuid": "6e7c4fa4_26f97fc1",
+      "revId": "679b94702245a567400ad3c432026bddd981cc7e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_667f77b9",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2015-04-13T13:47:57Z",
+      "side": 1,
+      "message": "Use .prop( \u0027contentEditable\u0027, \u0027true\u0027 ) instead. See also uses in VE for comparison.",
+      "revId": "679b94702245a567400ad3c432026bddd981cc7e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
