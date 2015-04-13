@@ -51,6 +51,23 @@
       "revId": "679b94702245a567400ad3c432026bddd981cc7e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_86b1738f",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 1378,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2015-04-13T13:51:09Z",
+      "side": 1,
+      "message": "Not all static methods in jQuery are public/supported, but jQuery.data is:\n\nhttps://api.jquery.com/jQuery.data/\n\nSaves instantiation of a jQuery object and the abstraction layer for methods that deal with the 0-or-more collection; in favour of a method that deals with the single node directly.",
+      "revId": "679b94702245a567400ad3c432026bddd981cc7e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
