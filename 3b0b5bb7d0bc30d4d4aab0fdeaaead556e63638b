@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_da9df35d",
+        "filename": "src/init/sa/ve.init.sa.Target.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-04-14T20:14:54Z",
+      "side": 1,
+      "message": "we\u0027re confusing constructed with initialized",
+      "revId": "3b0b5bb7d0bc30d4d4aab0fdeaaead556e63638b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
