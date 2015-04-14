@@ -16,6 +16,41 @@
       "revId": "b33342ac7545b6c395e22c93fd3eace7fc6f5298",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ffda217b",
+        "filename": "src/ce/ve.ce.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-04-14T17:44:40Z",
+      "side": 1,
+      "message": "I don\u0027t think we care about them or their contents, seems sensible...",
+      "parentUuid": "6e7c4fa4_8bc09355",
+      "revId": "b33342ac7545b6c395e22c93fd3eace7fc6f5298",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_9fe9ad12",
+        "filename": "tests/ce/ve.ce.test.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-04-14T17:44:40Z",
+      "side": 1,
+      "message": "neato",
+      "revId": "b33342ac7545b6c395e22c93fd3eace7fc6f5298",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
