@@ -22,6 +22,9 @@
 
 		<!-- example scripts -->
 		<script>
+			// Ensure ve.init.platform exists for use in examples
+			new ve.init.sa.Platform( ve.messagePaths );
+
 			function loadInlineExample( code, options, callback ) {
 				try {
 					eval( code );
