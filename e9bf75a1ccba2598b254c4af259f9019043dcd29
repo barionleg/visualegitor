@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_65ff6066",
+        "filename": "src/ui/widgets/ve.ui.PreviewWidget.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-04-14T21:15:49Z",
+      "side": 1,
+      "message": "Outdated function name",
+      "revId": "e9bf75a1ccba2598b254c4af259f9019043dcd29",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_652e80f9",
+        "filename": "src/ui/widgets/ve.ui.PreviewWidget.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-04-14T21:15:49Z",
+      "side": 1,
+      "message": "Instead, use:\n\n    promise \u003d $.Deferred(); // add var promise; somewhere\n    node.once( ... promise.resolve );\n    promises.push( promise );",
+      "revId": "e9bf75a1ccba2598b254c4af259f9019043dcd29",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
