@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_5f3235bd",
+        "filename": ".jsduck/eg-iframe.html.template",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-04-14T17:48:53Z",
+      "side": 1,
+      "message": "If we\u0027re magically providing the platform for @examples shouldn\u0027t we do platform.initialize here as well?",
+      "revId": "5b21511c121ce67d82e0f4cbc35e4d04774b05f5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
