@@ -33,6 +33,23 @@
       "revId": "a4f07e612c976f8da3c18f8cfa3f88010008704c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_ba127757",
+        "filename": "src/init/ve.init.Platform.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-04-14T19:01:27Z",
+      "side": 1,
+      "message": "Typoed \"whether\"",
+      "revId": "a4f07e612c976f8da3c18f8cfa3f88010008704c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
