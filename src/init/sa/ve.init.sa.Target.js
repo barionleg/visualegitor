@@ -7,6 +7,20 @@
 /**
  * Initialization Standalone target.
  *
+ * A platform must be initialized before a target can be created.
+ * See ve.init.sa.Platform for an example.
+ *
+ *     @example
+ *     ve.init.platform.initialize().done( function () {
+ *         var target = new ve.init.sa.Target();
+ *         target.addSurface(
+ *             ve.dm.converter.getModelFromDom(
+ *                 ve.createDocumentFromHtml( '<p>Hello, World!</p>' )
+ *             )
+ *         );
+ *         $( 'body' ).append( target.$element );
+ *     } );
+ *
  * @class
  * @extends ve.init.Target
  *
