@@ -8,7 +8,8 @@
  * Initialization Standalone platform.
  *
  *     @example
- *     ve.init.platform.initialize().done( function () {
+ *     var platform = new ve.init.sa.Platform( ve.messagePaths );
+ *     platform.initialize().done( function () {
  *         var target = new ve.init.sa.Target();
  *         target.addSurface(
  *             ve.dm.converter.getModelFromDom(
