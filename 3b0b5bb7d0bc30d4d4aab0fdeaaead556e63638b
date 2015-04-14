@@ -16,6 +16,24 @@
       "revId": "3b0b5bb7d0bc30d4d4aab0fdeaaead556e63638b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_808e2a31",
+        "filename": "src/init/sa/ve.init.sa.Target.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2015-04-14T22:17:08Z",
+      "side": 1,
+      "message": "Hm... Not sure but I think initialized is correct here. In all our code we always wait for initialize().done() before constructing Target.",
+      "parentUuid": "6e7c4fa4_da9df35d",
+      "revId": "3b0b5bb7d0bc30d4d4aab0fdeaaead556e63638b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
