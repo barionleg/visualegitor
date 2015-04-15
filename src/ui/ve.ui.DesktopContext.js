@@ -8,15 +8,15 @@
  * Context menu and inspectors.
  *
  * @class
- * @extends ve.ui.Context
+ * @extends ve.ui.LinearContext
  *
  * @constructor
  * @param {ve.ui.Surface} surface
  * @param {Object} [config] Configuration options
  */
-ve.ui.DesktopContext = function VeUiDesktopContext( surface, config ) {
+ve.ui.DesktopContext = function VeUiDesktopContext() {
 	// Parent constructor
-	ve.ui.DesktopContext.super.call( this, surface, config );
+	ve.ui.DesktopContext.super.apply( this, arguments );
 
 	// Properties
 	this.popup = new OO.ui.PopupWidget( { $container: this.surface.$element } );
@@ -52,7 +52,7 @@ ve.ui.DesktopContext = function VeUiDesktopContext( surface, config ) {
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.DesktopContext, ve.ui.Context );
+OO.inheritClass( ve.ui.DesktopContext, ve.ui.LinearContext );
 
 /* Methods */
 
