@@ -46,7 +46,6 @@ ve.ui.DesktopContext = function VeUiDesktopContext() {
 		.addClass( 've-ui-desktopContext' )
 		.append( this.popup.$element );
 	this.$group.addClass( 've-ui-desktopContext-menu' );
-	this.inspectors.$element.addClass( 've-ui-desktopContext-inspectors' );
 	this.popup.$body.append( this.$group, this.inspectors.$element );
 };
 
@@ -260,6 +259,24 @@ ve.ui.DesktopContext.prototype.updateDimensions = function () {
 	this.setPopupSize();
 
 	return this;
+};
+
+/**
+ * Check if the context menu for current content is embeddable.
+ *
+ * @return {boolean} Context menu is embeddable
+ */
+ve.ui.DesktopContext.prototype.isEmbeddable = function () {
+	var i, len,
+		sources = this.getRelatedSources();
+
+	for ( i = 0, len = sources.length; i < len; i++ ) {
+		if ( !sources[i].embeddable ) {
+			return false;
+		}
+	}
+
+	return true;
 };
 
 /**

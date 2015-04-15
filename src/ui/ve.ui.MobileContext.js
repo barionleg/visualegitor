@@ -30,7 +30,6 @@ ve.ui.MobileContext = function VeUiMobileContext() {
 	// Initialization
 	this.$element.addClass( 've-ui-mobileContext' );
 	this.$group.addClass( 've-ui-mobileContext-menu' );
-	this.inspectors.$element.addClass( 've-ui-mobileContext-inspectors' );
 	this.surface.getGlobalOverlay().$element.append( this.inspectors.$element );
 };
 

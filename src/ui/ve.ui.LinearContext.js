@@ -9,24 +9,17 @@
  *
  * @class
  * @abstract
- * @extends OO.ui.Element
- * @mixins OO.ui.GroupElement
+ * @extends ve.ui.Context
  *
  * @constructor
  * @param {ve.ui.Surface} surface
  * @param {Object} [config] Configuration options
  */
-ve.ui.LinearContext = function VeUiLinearContext( surface, config ) {
+ve.ui.LinearContext = function VeUiLinearContext() {
 	// Parent constructor
-	ve.ui.LinearContext.super.call( this, config );
-
-	// Mixin constructors
-	OO.ui.GroupElement.call( this, config );
+	ve.ui.LinearContext.super.apply( this, arguments );
 
 	// Properties
-	this.surface = surface;
-	this.visible = false;
-	this.choosing = false;
 	this.inspector = null;
 	this.inspectors = this.createInspectorWindowManager();
 	this.lastSelectedNode = null;
@@ -40,21 +33,11 @@ ve.ui.LinearContext = function VeUiLinearContext( surface, config ) {
 		documentUpdate: 'onDocumentUpdate'
 	} );
 	this.inspectors.connect( this, { opening: 'onInspectorOpening' } );
-
-	// Initialization
-	// Hide element using a class, not this.toggle, as child implementations
-	// of toggle may require the instance to be fully constructed before running.
-	this.$group.addClass( 've-ui-linearContext-menu' );
-	this.$element
-		.addClass( 've-ui-linearContext oo-ui-element-hidden' )
-		.append( this.$group );
-	this.inspectors.$element.addClass( 've-ui-linearContext-inspectors' );
 };
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.LinearContext, OO.ui.Element );
-OO.mixinClass( ve.ui.LinearContext, OO.ui.GroupElement );
+OO.inheritClass( ve.ui.LinearContext, ve.ui.Context );
 
 /* Static Property */
 
@@ -233,31 +216,7 @@ ve.ui.LinearContext.prototype.isInspectable = function () {
 };
 
 /**
- * Check if the context menu for current content is embeddable.
- *
- * @return {boolean} Context menu is embeddable
- */
-ve.ui.LinearContext.prototype.isEmbeddable = function () {
-	var i, len,
-		sources = this.getRelatedSources();
-
-	for ( i = 0, len = sources.length; i < len; i++ ) {
-		if ( !sources[i].embeddable ) {
-			return false;
-		}
-	}
-
-	return true;
-};
-
-/**
- * Get related item sources.
- *
- * Result is cached, and cleared when the model or selection changes.
- *
- * @returns {Object[]} List of objects containing `type`, `name` and `model` properties,
- *   representing each compatible type (either `item` or `tool`), symbolic name of the item or tool
- *   and the model the item or tool is compatible with
+ * @inheritdoc
  */
 ve.ui.LinearContext.prototype.getRelatedSources = function () {
 	var i, len, toolClass, items, tools, models, selectedModels;
@@ -299,15 +258,6 @@ ve.ui.LinearContext.prototype.getRelatedSources = function () {
 };
 
 /**
- * Get the surface the context is being used with.
- *
- * @return {ve.ui.Surface}
- */
-ve.ui.LinearContext.prototype.getSurface = function () {
-	return this.surface;
-};
-
-/**
  * Get inspector window set.
  *
  * @return {ve.ui.WindowManager}
@@ -326,107 +276,10 @@ ve.ui.LinearContext.prototype.getInspectors = function () {
 ve.ui.LinearContext.prototype.createInspectorWindowManager = null;
 
 /**
- * Toggle the menu.
- *
- * @param {boolean} [show] Show the menu, omit to toggle
- * @chainable
- */
-ve.ui.LinearContext.prototype.toggleMenu = function ( show ) {
-	show = show === undefined ? !this.choosing : !!show;
-
-	if ( show !== this.choosing ) {
-		this.choosing = show;
-		this.$element.toggleClass( 've-ui-linearContext-choosing', show );
-		if ( show ) {
-			this.setupMenuItems();
-		} else {
-			this.teardownMenuItems();
-		}
-	}
-
-	return this;
-};
-
-/**
- * Setup menu items.
- *
- * @protected
- * @chainable
- */
-ve.ui.LinearContext.prototype.setupMenuItems = function () {
-	var i, len, source,
-		sources = this.getRelatedSources(),
-		items = [];
-
-	for ( i = 0, len = sources.length; i < len; i++ ) {
-		source = sources[i];
-		if ( source.type === 'item' ) {
-			items.push( ve.ui.contextItemFactory.create(
-				sources[i].name, this, sources[i].model
-			) );
-		} else if ( source.type === 'tool' ) {
-			items.push( new ve.ui.ToolContextItem(
-				this, sources[i].model, ve.ui.toolFactory.lookup( sources[i].name )
-			) );
-		}
-	}
-
-	this.addItems( items );
-	for ( i = 0, len = items.length; i < len; i++ ) {
-		items[i].setup();
-	}
-
-	return this;
-};
-
-/**
- * Teardown menu items.
- *
- * @protected
- * @chainable
- */
-ve.ui.LinearContext.prototype.teardownMenuItems = function () {
-	var i, len;
-
-	for ( i = 0, len = this.items.length; i < len; i++ ) {
-		this.items[i].teardown();
-	}
-	this.clearItems();
-
-	return this;
-};
-
-/**
- * Toggle the visibility of the context.
- *
- * @param {boolean} [show] Show the context, omit to toggle
- * @return {jQuery.Promise} Promise resolved when context is finished showing/hiding
- */
-ve.ui.LinearContext.prototype.toggle = function ( show ) {
-	show = show === undefined ? !this.visible : !!show;
-	if ( show !== this.visible ) {
-		this.visible = show;
-		this.$element.toggleClass( 'oo-ui-element-hidden', !this.visible );
-	}
-	return $.Deferred().resolve().promise();
-};
-
-/**
- * Update the size and position of the context.
- *
- * @chainable
- */
-ve.ui.LinearContext.prototype.updateDimensions = function () {
-	// Override in subclass if context is positioned relative to content
-	return this;
-};
-
-/**
- * Destroy the context, removing all DOM elements.
+ * @inheritdoc
  */
 ve.ui.LinearContext.prototype.destroy = function () {
 	// Disconnect events
-	this.surface.getModel().disconnect( this );
 	this.inspectors.disconnect( this );
 
 	// Destroy inspectors WindowManager
@@ -435,6 +288,6 @@ ve.ui.LinearContext.prototype.destroy = function () {
 	// Stop timers
 	clearTimeout( this.afterContextChangeTimeout );
 
-	this.$element.remove();
-	return this;
+	// Parent method
+	return ve.ui.LinearContext.super.prototype.destroy.call( this );
 };
