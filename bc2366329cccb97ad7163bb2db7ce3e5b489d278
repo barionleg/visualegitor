@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e7c4fa4_771e3564",
+        "filename": "src/dm/ve.dm.Converter.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 1106,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2015-04-15T00:29:01Z",
+      "side": 1,
+      "message": "Note that textContent, like innerHTML, is a getter property that instructs the browser to recursively serialize children. It is not a value property. The value property would be Element.firstChild.value (or Element.childNodes[0].value), the text node value. But you probably don\u0027t want that as text nodes can be split. But just to keep in mind that this can be a somewhat expensive operation for the DOM to gather all elements and extract any text nodes.\n\nI\u0027m not sure if the loop body changes the origElement. if not, then we could maybe cache the value somehow if that\u0027s worth it. It\u0027ll make it even hackier though.",
+      "revId": "bc2366329cccb97ad7163bb2db7ce3e5b489d278",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_b7728da9",
+        "filename": "src/dm/ve.dm.Converter.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 1116,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2015-04-15T00:29:01Z",
+      "side": 1,
+      "message": "This else clause and the one below don\u0027t currently have any code between it and the outer block closing. However conceptually this might be easier to read if the if statement is negated and does a \u0027break\u0027 first. Allowing the  the \"expected\" path with those statements to be outdented by one level.",
+      "revId": "bc2366329cccb97ad7163bb2db7ce3e5b489d278",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
