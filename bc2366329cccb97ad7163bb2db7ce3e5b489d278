@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_d7bb8921",
+        "filename": "src/dm/ve.dm.Converter.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 1106,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-04-15T00:31:01Z",
+      "side": 1,
+      "message": "origElement is not a text node or even a container of text nodes. It can be just about anything.\n\nBut you\u0027re right, we should cache the value of origElement.textContent, since origElement is supposed to be immutable (not just by this function, but in general).",
+      "parentUuid": "6e7c4fa4_771e3564",
+      "revId": "bc2366329cccb97ad7163bb2db7ce3e5b489d278",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_b7728da9",
         "filename": "src/dm/ve.dm.Converter.js",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2015-04-15T00:29:01Z",
       "side": 1,
       "message": "This else clause and the one below don\u0027t currently have any code between it and the outer block closing. However conceptually this might be easier to read if the if statement is negated and does a \u0027break\u0027 first. Allowing the  the \"expected\" path with those statements to be outdented by one level.",
+      "revId": "bc2366329cccb97ad7163bb2db7ce3e5b489d278",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_f7b6c538",
+        "filename": "src/dm/ve.dm.Converter.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 1116,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-04-15T00:31:01Z",
+      "side": 1,
+      "message": "Good catch",
+      "parentUuid": "6e7c4fa4_b7728da9",
       "revId": "bc2366329cccb97ad7163bb2db7ce3e5b489d278",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
