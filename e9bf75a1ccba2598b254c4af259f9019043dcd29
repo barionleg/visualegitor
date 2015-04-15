@@ -33,6 +33,24 @@
       "revId": "e9bf75a1ccba2598b254c4af259f9019043dcd29",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_03b21f48",
+        "filename": "src/ui/widgets/ve.ui.PreviewWidget.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 798
+      },
+      "writtenOn": "2015-04-15T16:58:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7c4fa4_652e80f9",
+      "revId": "e9bf75a1ccba2598b254c4af259f9019043dcd29",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
