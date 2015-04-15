@@ -69,6 +69,24 @@
       "revId": "3b0b5bb7d0bc30d4d4aab0fdeaaead556e63638b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e7c4fa4_a850e836",
+        "filename": "src/init/sa/ve.init.sa.Target.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2015-04-15T16:27:57Z",
+      "side": 1,
+      "message": "Sure, but I\u0027m not sure that\u0027s relevant here. Saying that a platform must be constructed first would make it seem odd that the code below is also waiting for initialisation. I\u0027ll rephrase.",
+      "parentUuid": "6e7c4fa4_087a3cb9",
+      "revId": "3b0b5bb7d0bc30d4d4aab0fdeaaead556e63638b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
