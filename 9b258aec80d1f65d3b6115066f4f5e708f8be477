@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e76d7c5_bcbc05b3",
+        "filename": "src/ui/ve.ui.Context.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 88
+      },
+      "writtenOn": "2015-04-16T20:41:50Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be a no-op function or something?",
+      "revId": "9b258aec80d1f65d3b6115066f4f5e708f8be477",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
