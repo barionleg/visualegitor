@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e7c4fa4_e7efeaf4",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-04-16T02:02:31Z",
+      "side": 1,
+      "message": "https://bugzilla.mozilla.org/show_bug.cgi?id\u003d989012 is one of them (need an src or cursoring is weird) but I don\u0027t know what the other one (can cursor into ce\u003dfalse) is",
+      "parentUuid": "6e7c4fa4_c70e6e37",
+      "revId": "b33342ac7545b6c395e22c93fd3eace7fc6f5298",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e7c4fa4_8bc09355",
         "filename": "src/ce/ve.ce.js",
         "patchSetId": 11
