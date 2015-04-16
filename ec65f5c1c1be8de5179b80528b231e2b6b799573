@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e76d7c5_1ccdf934",
+        "filename": "src/ui/contextitems/ve.ui.TableContextItem.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-04-16T20:59:09Z",
+      "side": 1,
+      "message": "There\u0027s no need for OO.ui.deferMsg here, that\u0027s only needed for static definitions",
+      "revId": "ec65f5c1c1be8de5179b80528b231e2b6b799573",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
