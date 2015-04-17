@@ -2539,6 +2539,12 @@ ve.ce.Surface.prototype.onSurfaceObserverRangeChange = function ( oldRange, newR
 		this.decRenderLock();
 	}
 	this.checkUnicorns( false );
+	// Firefox lets you create multiple selections within a single paragraph
+	// which our model doesn't support, so detect and prevent these.
+	while ( this.nativeSelection.rangeCount > 1 ) {
+		// The current range is the last range, so remove ranges from the front
+		this.nativeSelection.removeRange( this.nativeSelection.getRangeAt( 0 ) );
+	}
 };
 
 /**
