@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e76d7c5_5f103e04",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 2543,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-04-17T13:58:34Z",
+      "side": 1,
+      "message": "As discussed earlier, we want to add a comment along the lines of:\n\"This cannot create problems with IME candidates: only an explicit mouse action can create a multiple selection, and we remove it immediately, so there can never be a multiple selection while the user is typing text; therefore the selection change will never commit IME candidates prematurely.\"",
+      "revId": "ab2b14407fc2e361c81c0081d59f88329ed7d1e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
