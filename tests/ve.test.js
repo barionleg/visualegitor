@@ -755,3 +755,124 @@ QUnit.test( 'getCommonAncestor', function ( assert ) {
 		);
 	}
 } );
+
+QUnit.test( 'walkDomTree', function ( assert ) {
+	var tests, i, len, test, points, options, value,
+		div = document.createElement( 'div' );
+
+	// In the following tests, the html is put inside the top-level div as innerHTML.
+	// Then ve.walkDomTree is called with the arguments given in the test, and default
+	// enterNode/leaveNode callbacks that log the current node.
+	// The 'path' properties are a list of descent offsets to find a particular descendant
+	// node from the top-level div. E.g. a path of [ 5, 7 ] refers to the node
+	// div.childNodes[ 5 ].childNodes[ 7 ] .
+	tests = [
+		{
+			title: 'Simple unconstrained walk',
+			html: '<p>x</p>',
+			direction: 1,
+			options: {},
+			points: [
+				{ path: [], type: 'enter' },
+				{ path: [ 0 ], type: 'enter' },
+				{ path: [ 0, 0 ], type: 'enter' },
+				{ path: [ 0, 0 ], type: 'leave' },
+				{ path: [ 0 ], type: 'leave' },
+				{ path: [], type: 'leave' }
+			],
+			returnNode: null
+		},
+		{
+			title: 'Filtered descent',
+			html: '<div class="x">foo</div><div class="y">bar</div>',
+			direction: 1,
+			options: { noDescend: '.x' },
+			points: [
+				{ path: [], type: 'enter' },
+				{ path: [ 0 ], type: 'enter' },
+				{ path: [ 0 ], type: 'leave' },
+				{ path: [ 1 ], type: 'enter' },
+				{ path: [ 1, 0 ], type: 'enter' },
+				{ path: [ 1, 0 ], type: 'leave' },
+				{ path: [ 1 ], type: 'leave' },
+				{ path: [], type: 'leave' }
+			],
+			returnNode: null
+		},
+		{
+			title: 'Walk to end of paragraph',
+			html: '<div><br/><p>foo <b>bar <i>baz</i></b></p></div>',
+			direction: 1,
+			options: { leaveNode: 'p' },
+			points: [
+				{ path: [], type: 'enter' },
+				{ path: [ 0 ], type: 'enter' },
+				{ path: [ 0, 0 ], type: 'enter' },
+				{ path: [ 0, 1 ], type: 'enter' },
+				{ path: [ 0, 1, 0 ], type: 'enter' },
+				{ path: [ 0, 1, 1 ], type: 'enter' },
+				{ path: [ 0, 1, 1, 0 ], type: 'enter' },
+				{ path: [ 0, 1, 1, 1 ], type: 'enter' },
+				{ path: [ 0, 1, 1, 1, 0 ], type: 'enter' }
+			],
+			returnNode: [ 0, 1 ]
+		},
+		{
+			title: 'Walk backwards',
+			html: '<div><br/><p>foo <b>bar <i>baz</i></b></p></div>',
+			direction: -1,
+			options: { leaveNode: 'p' },
+			points: [
+				{ path: [], type: 'enter' },
+				{ path: [ 0 ], type: 'enter' },
+				{ path: [ 0, 1 ], type: 'enter' },
+				{ path: [ 0, 1, 1 ], type: 'enter' },
+				{ path: [ 0, 1, 1, 1 ], type: 'enter' },
+				{ path: [ 0, 1, 1, 1, 0 ], type: 'enter' },
+				{ path: [ 0, 1, 1, 0 ], type: 'enter' },
+				{ path: [ 0, 1, 0 ], type: 'enter' }
+			],
+			returnNode: [ 0, 1 ]
+		}
+	];
+
+	QUnit.expect( 2 * tests.length );
+
+	function logEnter() {
+		log( 'enter', this );
+	}
+
+	function logLeave() {
+		log( 'leave', this );
+	}
+
+	function log( type, node ) {
+		points.push( {
+			path: ve.getOffsetPath( div, node, null ).slice( 0, -1 ),
+			type: type
+		} );
+	}
+	for ( i = 0, len = tests.length; i < len; i++ ) {
+		test = tests[i];
+		div.innerHTML = test.html;
+		points = [];
+		options = ve.copy( test.options );
+		if ( !options.hasOwnProperty( 'enterNode' ) ) {
+			options.enterNode = logEnter;
+		}
+		if ( !options.hasOwnProperty( 'leaveNode' ) ) {
+			options.leaveNode = logLeave;
+		}
+		value = ve.walkDomTree( test.direction, div, options );
+		assert.deepEqual(
+			points,
+			test.points,
+			test.title + ' (points)'
+		);
+		assert.deepEqual(
+			value && ve.getOffsetPath( div, value, null ).slice( 0, -1 ),
+			test.returnNode,
+			test.title + ' (return value)'
+		);
+	}
+} );
