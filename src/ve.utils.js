@@ -1345,3 +1345,49 @@ ve.compareDocumentOrder = function ( node1, offset1, node2, offset2 ) {
 ve.getSystemPlatform = function () {
 	return ( ve.init.platform && ve.init.platform.constructor || ve.init.Platform ).static.getSystemPlatform();
 };
+
+/**
+ * Walk DOM nodes in document order (forward or reverse)
+ *
+ * @param {number} direction Positive for forward, negative for reverse
+ * @param {Node} node Starting node
+ * @param {Function} onStart Callback (return true to stop walking, defined to stop descending)
+ * @param {Function} [onEnd] Callback (return true to stop walking)
+ */
+ve.walkDom = function ( direction, node, onStart, onEnd ) {
+	var stop,
+		forward = direction > 0;
+	while ( true ) {
+		// Descend as far as possible (calling onStart)
+		// Then ascend while no siblings (calling onEnd)
+		// Then step to sibling
+		// If onStart or onEnd returns a true value, stop walking
+		// Else if onStart returns a defined value, stop descending
+		while ( true ) {
+			stop = onStart( node );
+			if ( stop ) {
+				return;
+			}
+			if ( stop !== undefined && !node.firstChild ) {
+				break;
+			}
+			node = forward ? node.firstChild : node.lastChild;
+		}
+		while ( true ) {
+			if ( onEnd && onEnd( node ) ) {
+				return;
+			}
+			if ( forward ? node.nextSibling : node.previousSibling ) {
+				break;
+			}
+			node = node.parentNode;
+			if ( !node ) {
+				return;
+			}
+		}
+		if ( onEnd && onEnd( node ) ) {
+			return;
+		}
+		node = forward ? node.nextSibling : node.previousSibling;
+	}
+};
