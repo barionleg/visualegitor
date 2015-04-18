@@ -1345,3 +1345,62 @@ ve.compareDocumentOrder = function ( node1, offset1, node2, offset2 ) {
 ve.getSystemPlatform = function () {
 	return ( ve.init.platform && ve.init.platform.constructor || ve.init.Platform ).static.getSystemPlatform();
 };
+
+/**
+ * Walk DOM nodes in document order (forward or reverse)
+ *
+ * The walk is similar in intent to that of a DOM NodeIterator, but:
+ * - It can step above/beyond the starting point (to ancestors, siblings etc)
+ * - It can walk backwards (reverse document order)
+ * - jQuery selectors can control its path and give a stop condition
+ * - The selectors can be callbacks, giving an interface remeniscent of SAX
+ * - Alternatively, the return value can show whether/where the stop condition was reached
+ *
+ * @param {Node} node Starting node
+ * @param {number} direction +1 for forward, -1 for reverse
+ * @param {Object} [options]
+ * @param {Function|string} [options.noDescend] selector or function: test whether to descend into node
+ * @param {Function|string} [options.enterNode] selector or function: test whether to stop walking
+ * @param {Function|string} [options.leaveNode] selector or function: test whether to stop walking
+ * @return {Node|null} The node we stopped at (null if we fell off the tree without stopping)
+ */
+ve.walkDomTree = function ( node, direction, options ) {
+	options = options || {};
+	var forward = direction > 0,
+		noDescend = options.noDescend,
+		enterNode = options.enterNode,
+		leaveNode = options.leaveNode;
+
+	while ( true ) {
+		// Descend as far as possible (testing enterNode and noDescend);
+		// then ascend while no siblings (testing leaveNode);
+		// then step to sibling and loop.
+		// If at any point enterNode/leaveNode matches, return that node immediately;
+		// else return null when we fall off the tree.
+		while ( true ) {
+			if ( enterNode && $( node ).is( enterNode ) ) {
+				return node;
+			} else if (
+				node.firstChild &&
+				( !noDescend || !$( node ).is( noDescend ) )
+			) {
+				node = forward ? node.firstChild : node.lastChild;
+			} else {
+				break;
+			}
+		}
+		while ( true ) {
+			if ( leaveNode && $( node ).is( leaveNode ) ) {
+				return node;
+			}
+			if ( forward ? node.nextSibling : node.previousSibling ) {
+				break;
+			}
+			node = node.parentNode;
+			if ( node === null ) {
+				return null;
+			}
+		}
+		node = forward ? node.nextSibling : node.previousSibling;
+	}
+};
