@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_fbc28338",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 1355,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-04-18T03:03:09Z",
+      "side": 1,
+      "message": "The type juxtaposition is a bit horrible, as is the conflation of descent and termination conditions. I think an options object with various properties would be better.",
+      "revId": "eb911a951aca64c41b8c79602daf65344ac6ad4a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
