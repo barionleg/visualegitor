@@ -1458,3 +1458,107 @@ ve.highlightQuery = function ( text, query ) {
 	);
 	return $result.contents();
 };
+
+/**
+ * Get the closest DOM position in document order (forward or reverse)
+ *
+ * A DOM position is represented as an object with "node" and "offset" properties. The noDescend
+ * option can be used to exclude the positions inside certain element nodes; it is a jQuery
+ * selector/function ( used as a test by $node.is() - see http://api.jquery.com/is/ ).
+ *
+ * Distinct DOM positions may be treated equivalently for cursoring purposes, e.g. the positions
+ * just before/just after the boundary of a text element or an annotation element, or the
+ * start/the interior of certain grapheme clusters such as 'x\u0301'. Chromium normalizes cursor
+ * focus/offset, when they are set, to the start-most equivalent position in document order.
+ * Firefox does not normalize, but jumps when cursoring over positions that are equivalent to the
+ * start position.
+ *
+ * Even aside from equivalence, some DOM positions cannot actually hold the cursor; e.g. the start
+ * of the interior of a table node.
+ *
+ * @param {Object} position Start position
+ * @param {Node} position.node Start node
+ * @param {Node} position.offset Start offset
+ * @param {number} direction +1 for forward, -1 for reverse
+ * @param {Object} [options]
+ * @param {Function|string} [options.noDescend] Selector or function: nodes to skip over
+ * @param {boolean} [options.hardOnly] Skip "soft" positions equivalent to the start position
+ * @returns {Object} The adjacent DOM position encountered
+ * @returns.node {Node|null} The node, or null if we stepped past the root node
+ * @returns.offset {number|null} The offset, or null if we stepped past the root node
+ */
+ve.adjacentDomPosition = function ( position, direction, options ) {
+	options = options || {};
+	var forward, childNode, node, offset,
+		noDescend = options.noDescend,
+		hardOnly = !!options.hardOnly;
+
+	direction = direction < 0 ? -1 : 1;
+	forward = ( direction === 1 );
+
+	while ( true ) {
+		node = position.node;
+		offset = position.offset;
+		// If we're at the node's leading edge, move to the adjacent position in the parent node
+		if ( offset === ( forward ? node.length || node.childNodes.length : 0 ) ) {
+			if ( node.parentNode === null ) {
+				return { node: null, offset: null };
+			}
+			position = {
+				node: node.parentNode,
+				offset: Array.prototype.indexOf.call( node.parentNode.childNodes, node ) +
+					( forward ? 1 : 0 )
+			};
+			if ( !hardOnly || ve.hasHardCursorBoundaries( node ) ) {
+				return position;
+			}
+			// Else take another step
+			continue;
+		}
+
+		// If we're in a text node, move to the position in this node at the next offset
+		if ( node.nodeType === Node.TEXT_NODE ) {
+			return { node: node, offset: offset + ( forward ? 1 : -1 ) };
+		}
+
+		childNode = node.childNodes[ forward ? offset : offset - 1 ];
+
+		// If the child is an element matching noDescend, do not descend into it: instead,
+		// return the position just beyond it in the current node
+		if (
+			noDescend &&
+			childNode.nodeType === Node.ELEMENT_NODE &&
+			$( childNode ).is( noDescend )
+		) {
+			// TODO: What if nothing under childNode has hard cursor boundaries?
+			return { node: node, offset: offset + ( forward ? 1 : -1 ) };
+		}
+
+		// Go to the closest offset inside the child node
+		position = {
+			node: childNode,
+			offset: forward ? 0 : childNode.length || childNode.childNodes.length
+		};
+		if ( !hardOnly || ve.hasHardCursorBoundaries( childNode ) ) {
+			return position;
+		}
+	}
+};
+
+/**
+ * Test whether crossing a node's boundaries uses up a cursor press
+ *
+ * Essentially, this is true unless the node is a text node or an annotation node
+ *
+ * @param {Node} node The node
+ * @returns {boolean} Whether crossing the node's boundaries uses up a cursor press
+ */
+ve.hasHardCursorBoundaries = function ( node ) {
+	if ( node.nodeType === node.TEXT_NODE ) {
+		return false;
+	}
+	if ( [ 'b', 'i', 'a', 'span' ].indexOf( node.nodeName.toLowerCase() ) !== -1 ) {
+		return false;
+	}
+	return true;
+};
