@@ -1345,3 +1345,67 @@ ve.compareDocumentOrder = function ( node1, offset1, node2, offset2 ) {
 ve.getSystemPlatform = function () {
 	return ( ve.init.platform && ve.init.platform.constructor || ve.init.Platform ).static.getSystemPlatform();
 };
+
+/**
+ * Walk DOM nodes in document order (forward or reverse)
+ *
+ * @param {number} direction Positive for forward, negative for reverse
+ * @param {Node} node Starting node
+ * @param {Function|string} [descend] Callback (return true to stop walking, defined to stop descending) or class (stop descending if !hasClass)
+ * @param {Function|string} [ascend] Callback (return true to stop walking) or string (stop if hasClass)
+ * @return {Node|null} The node at which walking ended (null if we fell off the tree)
+ */
+ve.walkDom = function ( direction, node, descend, ascend ) {
+	var stop,
+		forward = direction > 0;
+	while ( true ) {
+		// Descend as far as possible (calling onStart)
+		// Then ascend while no siblings (calling onEnd)
+		// Then step to sibling
+		// If onStart or onEnd returns a true value, stop walking
+		// Else if onStart returns a defined value, stop descending
+		while ( true ) {
+			if ( typeof descend === 'function' ) {
+				stop = descend( node );
+				if ( stop ) {
+					return node;
+				}
+				stop = ( stop !== undefined );
+			} else if ( typeof descend === 'string' ) {
+				stop = (
+					node.nodeType !== Node.ELEMENT_NODE ||
+					!node.classList.contains( descend )
+				);
+			} else {
+				stop = node.nodeType !== Node.ELEMENT_NODE;
+			}
+			if ( stop || !node.firstChild ) {
+				break;
+			}
+			node = forward ? node.firstChild : node.lastChild;
+		}
+		while ( true ) {
+			if ( typeof ascend === 'function' ) {
+				stop = ascend( node );
+			} else if ( typeof ascend === 'string' ) {
+				stop = (
+					node.nodeType === Node.ELEMENT_NODE &&
+					node.classList.contains( ascend )
+				);
+			} else {
+				stop = false;
+			}
+			if ( stop ) {
+				return node;
+			}
+			if ( forward ? node.nextSibling : node.previousSibling ) {
+				break;
+			}
+			node = node.parentNode;
+			if ( !node ) {
+				return null;
+			}
+		}
+		node = forward ? node.nextSibling : node.previousSibling;
+	}
+};
