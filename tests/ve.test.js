@@ -755,3 +755,70 @@ QUnit.test( 'getCommonAncestor', function ( assert ) {
 		);
 	}
 } );
+
+QUnit.test( 'walkDomTree', function ( assert ) {
+	var tests, i, len, test, points, options, value,
+		div = document.createElement( 'div' );
+	tests = [
+		{
+			title: 'Simple unconstrained walk',
+			html: '<p>x</p>',
+			options: {},
+			points: [
+				{ path: [], type: 'start' },
+				{ path: [ 0 ], type: 'start' },
+				{ path: [ 0, 0 ], type: 'start' },
+				{ path: [ 0 ], type: 'end' },
+				{ path: [], type: 'end' }
+			],
+			returnValue: null
+		},
+		{
+			title: 'Filtered descent',
+			html: '<div class="x">foo</div><div class="y">bar</div>',
+			options: { noDescend: '.x' },
+			points: [
+				{ path: [], type: 'start' },
+				{ path: [ 0 ], type: 'start' },
+				{ path: [ 0 ], type: 'end' },
+				{ path: [ 1 ], type: 'start' },
+				{ path: [ 1, 0 ], type: 'start' },
+				{ path: [ 1 ], type: 'end' },
+				{ path: [], type: 'end' }
+			],
+			returnValue: null
+		}
+	];
+
+	QUnit.expect( 2 * tests.length );
+
+	function logStart() {
+		log( 'start', this );
+	}
+
+	function logEnd() {
+		log( 'end', this );
+	}
+
+	function log( type, node ) {
+		points.push( {
+			path: ve.getOffsetPath( div, node, null ).slice( 0, -1 ),
+			type: type
+		} );
+	}
+	for ( i = 0, len = tests.length; i < len; i++ ) {
+		test = tests[i];
+		div.innerHTML = test.html;
+		points = [];
+		options = ve.copy( test.options );
+		if ( !options.hasOwnProperty( 'atNodeStart' ) ) {
+			options.atNodeStart = logStart;
+		}
+		if ( !options.hasOwnProperty( 'atNodeEnd' ) ) {
+			options.atNodeEnd = logEnd;
+		}
+		value = ve.walkDomTree( 1, div, options );
+		assert.deepEqual( points, test.points, test.title + ' (points)' );
+		assert.strictEqual( value, test.returnValue, test.title + ' (return value)' );
+	}
+} );
