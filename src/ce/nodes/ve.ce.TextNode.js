@@ -71,27 +71,35 @@ ve.ce.TextNode.prototype.getAnnotatedHtml = function () {
 		// Replace spaces with &nbsp; where needed
 		// \u00a0 == &#160; == &nbsp;
 		if ( data.length > 0 ) {
-			// Leading space
-			if ( getChar( 0, data ) === ' ' ) {
+			// Leading space of a paragraph
+			if (
+				getChar( 0, data ) === ' ' &&
+				this.model.getParent().getOffset() + 1 ===
+					this.model.getOffset()
+			) {
 				setChar( '\u00a0', 0, data );
 			}
 		}
 		if ( data.length > 1 ) {
-			// Trailing space
-			if ( getChar( data.length - 1, data ) === ' ' ) {
+			// Trailing space of a paragraph
+			if (
+				getChar( data.length - 1, data ) === ' ' &&
+				this.model.getParent().getOffset() + this.model.getParent().getLength() - 1 ===
+					this.model.getOffset() + this.model.getLength()
+			) {
 				setChar( '\u00a0', data.length - 1, data );
 			}
 		}
 
-		for ( i = 0; i < data.length; i++ ) {
+		// For every pair of characters
+		for ( i = 0; i < data.length - 1; i++ ) {
 			chr = getChar( i, data );
 
 			// Replace any sequence of 2+ spaces with an alternating pattern
 			// (space-nbsp-space-nbsp-...).
-			// The leading and trailing space, if present, have already been converted
-			// to nbsp, so we know that i is between 1 and data.length - 2.
 			if ( chr === ' ' && getChar( i + 1, data ) === ' ' ) {
-				setChar( '\u00a0', i + 1, data );
+				// Never replace trailing space with nbsp, might cause unexpected lack of line breaking
+				setChar( '\u00a0', ( i === data.length - 2 ? i : i + 1 ), data );
 			}
 
 			// Show meaningful whitespace characters
