@@ -571,10 +571,10 @@ ve.dm.example.withMeta = [
 	'B',
 	'a',
 	{
-		type: 'alienMeta',
-		originalDomElements: $( '<!-- inline -->' ).toArray()
+		type: 'removableAlienMeta',
+		originalDomElements: $( '<b></b>' ).toArray()
 	},
-	{ type: '/alienMeta' },
+	{ type: '/removableAlienMeta' },
 	'z',
 	{ type: '/paragraph' },
 	{
@@ -648,8 +648,8 @@ ve.dm.example.withMetaMetaData = [
 	undefined,
 	[
 		{
-			type: 'alienMeta',
-			originalDomElements: $( '<!-- inline -->' ).toArray()
+			type: 'removableAlienMeta',
+			originalDomElements: $( '<b></b>' ).toArray()
 		}
 	],
 	undefined,
@@ -1878,10 +1878,10 @@ ve.dm.example.domToDataCases = {
 			{ type: 'paragraph' },
 			'F', 'o', 'o',
 			{
-				type: 'alienMeta',
+				type: 'removableAlienMeta',
 				originalDomElements: $( '<span id="anchorTarget"></span>' ).toArray()
 			},
-			{ type: '/alienMeta' },
+			{ type: '/removableAlienMeta' },
 			'B', 'a', 'r',
 			{ type: '/paragraph' },
 			{ type: 'internalList' },
@@ -1894,10 +1894,10 @@ ve.dm.example.domToDataCases = {
 			{ type: 'paragraph', internal: { generated: 'wrapper' } },
 			'F', 'o', 'o',
 			{
-				type: 'alienMeta',
+				type: 'removableAlienMeta',
 				originalDomElements: $( '<span id="anchorTarget"></span>' ).toArray()
 			},
-			{ type: '/alienMeta' },
+			{ type: '/removableAlienMeta' },
 			'B', 'a', 'r',
 			{ type: '/paragraph' },
 			{ type: 'internalList' },
@@ -1910,10 +1910,10 @@ ve.dm.example.domToDataCases = {
 			{ type: 'paragraph' },
 			'F', 'o', 'o',
 			{
-				type: 'alienMeta',
+				type: 'removableAlienMeta',
 				originalDomElements: $( '<i><b><u></u></b></i>' ).toArray()
 			},
-			{ type: '/alienMeta' },
+			{ type: '/removableAlienMeta' },
 			'B', 'a', 'r',
 			{ type: '/paragraph' },
 			{ type: 'internalList' },
@@ -1928,11 +1928,11 @@ ve.dm.example.domToDataCases = {
 			[ 'o', [ ve.dm.example.italic ] ],
 			[ 'o', [ ve.dm.example.italic ] ],
 			{
-				type: 'alienMeta',
+				type: 'removableAlienMeta',
 				originalDomElements: $( '<b></b>' ).toArray(),
 				annotations: [ ve.dm.example.italic ]
 			},
-			{ type: '/alienMeta' },
+			{ type: '/removableAlienMeta' },
 			{ type: '/paragraph' },
 			{ type: 'internalList' },
 			{ type: '/internalList' }

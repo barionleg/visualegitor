@@ -1184,7 +1184,7 @@ ve.dm.Transaction.prototype.pushReplace = function ( doc, offset, removeLength, 
 		return;
 	}
 
-	var extraMetadata,
+	var extraMetadata, i, l,
 		end = this.operations.length - 1,
 		lastOp = end >= 0 ? this.operations[end] : null,
 		penultOp = end >= 1 ? this.operations[ end - 1 ] : null,
@@ -1288,6 +1288,13 @@ ve.dm.Transaction.prototype.pushReplace = function ( doc, offset, removeLength, 
 	this.pushReplaceInternal( remove, insert, removeMetadata, insertMetadata, insertedDataOffset, insertedDataLength );
 
 	if ( extraMetadata !== undefined ) {
+		for ( i = 0, l = extraMetadata.length; i < l; i++ ) {
+			if ( ve.dm.metaItemFactory.isRemovable( extraMetadata[i].type ) ) {
+				extraMetadata.splice( i, 1 );
+				i--;
+				l--;
+			}
+		}
 		this.pushReplaceMetadata( [], extraMetadata );
 	}
 };
