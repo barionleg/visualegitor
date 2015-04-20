@@ -51,6 +51,7 @@ QUnit.test( 'onTransact', function ( assert ) {
 					[ 'pushRetain', 3 ],
 					[ 'pushReplace', doc, 4, 1, [] ],
 					[ 'pushRetain', 1 ],
+					// Removes a removable meta item
 					[ 'pushReplace', doc, 6, 4, [ '!' ] ],
 					[ 'pushRetain', 2 ]
 				],
@@ -102,6 +103,7 @@ QUnit.test( 'onTransact', function ( assert ) {
 				// delta: -9
 				calls: [
 					[ 'pushRetain', 1 ],
+					// Removes a removable meta item
 					[ 'pushReplace', doc, 1, 9, [] ],
 					[ 'pushRetain', 1 ]
 				],
@@ -132,7 +134,8 @@ QUnit.test( 'onTransact', function ( assert ) {
 		];
 	// HACK: This works because most transactions above don't change the document length, and the
 	// ones that do change it cancel out
-	QUnit.expect( cases.length * ( 8 * doc.metadata.getTotalDataLength() + 2 ) );
+	// Subtract 4*2 for the 2 removed meta items (only relevant for the first assert, not for the rollback)
+	QUnit.expect( cases.length * ( 8 * doc.metadata.getTotalDataLength() + 2 ) - 4 * 2 );
 
 	for ( i = 0; i < cases.length; i++ ) {
 		tx = new ve.dm.Transaction( doc );
