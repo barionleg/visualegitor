@@ -37,6 +37,21 @@ ve.dm.MetaItemFactory.prototype.getGroup = function ( type ) {
 	throw new Error( 'Unknown item type: ' + type );
 };
 
+/**
+ * Check if a given type is removable
+ *
+ * @method
+ * @param {string} type Meta item type
+ * @returns {boolean} The type is removable
+ * @throws {Error} Unknown item type
+ */
+ve.dm.MetaItemFactory.prototype.isRemovable = function ( type ) {
+	if ( Object.prototype.hasOwnProperty.call( this.registry, type ) ) {
+		return this.registry[type].static.removable;
+	}
+	throw new Error( 'Unknown item type: ' + type );
+};
+
 /* Initialization */
 
 ve.dm.metaItemFactory = new ve.dm.MetaItemFactory();

@@ -1203,7 +1203,7 @@ ve.dm.Transaction.prototype.pushReplaceInternal = function ( remove, insert, rem
  * @param {number} [insertedDataLength] Length of the originally inserted data in the resulting operation data
  */
 ve.dm.Transaction.prototype.pushReplace = function ( doc, offset, removeLength, insert, insertMetadata, insertedDataOffset, insertedDataLength ) {
-	var extraMetadata, end, lastOp, penultOp, range, remove, removeMetadata,
+	var i, l, extraMetadata, end, lastOp, penultOp, range, remove, removeMetadata,
 		isRemoveEmpty, isInsertEmpty, mergedMetadata;
 
 	if ( removeLength === 0 && insert.length === 0 ) {
@@ -1314,6 +1314,13 @@ ve.dm.Transaction.prototype.pushReplace = function ( doc, offset, removeLength, 
 	this.pushReplaceInternal( remove, insert, removeMetadata, insertMetadata, insertedDataOffset, insertedDataLength );
 
 	if ( extraMetadata !== undefined ) {
+		for ( i = 0, l = extraMetadata.length; i < l; i++ ) {
+			if ( ve.dm.metaItemFactory.isRemovable( extraMetadata[ i ].type ) ) {
+				extraMetadata.splice( i, 1 );
+				i--;
+				l--;
+			}
+		}
 		this.pushReplaceMetadata( [], extraMetadata );
 	}
 };

@@ -40,10 +40,19 @@ OO.mixinClass( ve.dm.MetaItem, OO.EventEmitter );
  * Symbolic name for the group this meta item type will be grouped in in ve.dm.MetaList.
  *
  * @static
- * @property
+ * @property {string}
  * @inheritable
  */
 ve.dm.MetaItem.static.group = 'misc';
+
+/**
+ * If the metaitem can be removed by regular remove operations
+ *
+ * @static
+ * @property {boolean}
+ * @inheritable
+ */
+ve.dm.MetaItem.static.removable = false;
 
 /* Methods */
 
