@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_fcf4b6cd",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 3697,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-04-20T00:18:48Z",
+      "side": 1,
+      "message": "The whole idea behind splitting handlesOwnChildren and ignoreChildren is that you\u0027d only have to look at ignoreChildren here",
+      "revId": "2622e451118de344715ad06edd6a5d073fb6f837",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
