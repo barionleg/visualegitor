@@ -16,6 +16,24 @@
       "revId": "2622e451118de344715ad06edd6a5d073fb6f837",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_0f6e1a2b",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 3697,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-04-20T11:08:19Z",
+      "side": 1,
+      "message": "Done, but I don\u0027t like that that rule is not enforced.",
+      "parentUuid": "0ed113e2_fcf4b6cd",
+      "revId": "2622e451118de344715ad06edd6a5d073fb6f837",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
