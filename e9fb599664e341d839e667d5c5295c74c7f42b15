@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_09f5af4c",
+        "filename": "src/ui/windowmanagers/ve.ui.MobileWindowManager.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-04-20T23:59:45Z",
+      "side": 1,
+      "message": "Add a blank line and an // Initialization comment, in keeping with the style of other constructors.",
+      "revId": "e9fb599664e341d839e667d5c5295c74c7f42b15",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
