@@ -18,6 +18,7 @@
 ve.ui.MobileWindowManager = function VeUiMobileWindowManager( surface, config ) {
 	// Parent constructor
 	ve.ui.MobileWindowManager.super.call( this, surface, config );
+	this.$element.addClass( 've-ui-mobileWindowManager' );
 };
 
 /* Inheritance */
