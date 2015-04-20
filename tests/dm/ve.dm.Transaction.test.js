@@ -666,23 +666,24 @@ QUnit.test( 'newFromRemoval', function ( assert ) {
 					{ type: 'retain', length: 6 }
 				]
 			},
-			'removing content spanning metadata': {
-				args: [metaDoc, new ve.Range( 7, 9 )],
+			'removing content spanning metadata and removable metadata': {
+				args: [metaDoc, new ve.Range( 7, 10 )],
 				ops: [
 					{ type: 'retain', length: 7 },
 					{
 						type: 'replace',
-						remove: ['B', 'a'],
+						remove: ['B', 'a', 'z'],
 						insert: [],
-						removeMetadata: metaDoc.getMetadata().slice( 7, 9 ),
+						removeMetadata: metaDoc.getMetadata().slice( 7, 10 ),
 						insertMetadata: []
 					},
 					{
 						type: 'replaceMetadata',
 						remove: [],
+						// Doesn't insert metadata at offset 10 as it is removable
 						insert: ve.dm.MetaLinearData.static.merge( metaDoc.getMetadata().slice( 7, 9 ) )[0]
 					},
-					{ type: 'retain', length: 4 }
+					{ type: 'retain', length: 3 }
 				]
 			},
 			'selection including internal nodes doesn\'t remove them': {
@@ -786,7 +787,7 @@ QUnit.test( 'newFromReplacement', function ( assert ) {
 				]
 			},
 			'replace, removing metadata': {
-				args: [metaDoc, new ve.Range( 1, 9 ), [ 'X', 'Y' ], true],
+				args: [metaDoc, new ve.Range( 1, 10 ), [ 'X', 'Y' ], true],
 				ops: [
 					{ type: 'retain', length: 1 },
 					{
@@ -798,7 +799,8 @@ QUnit.test( 'newFromReplacement', function ( assert ) {
 						],
 						insertedDataLength: 2,
 						insertedDataOffset: 0,
-						remove: [ 'F', 'o', 'o', 'B', 'a', 'r', 'B', 'a' ],
+						remove: [ 'F', 'o', 'o', 'B', 'a', 'r', 'B', 'a', 'z' ],
+						// Doesn't insert metadata at offset 10 as it is removable
 						removeMetadata: metaDoc.getMetadata().slice( 1, 9 )
 					},
 					{ type: 'retain', length: 4 }
