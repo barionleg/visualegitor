@@ -143,8 +143,12 @@ ve.ce.Document.prototype.getNodeAndOffsetUnadjustedForUnicorn = function ( offse
 	var node, startOffset, current, stack, item, $item, length, model,
 		countedNodes = [],
 		slug = this.getSlugAtOffset( offset );
-	// Check for a slug that is empty (apart from a chimera)
-	if ( slug && ( !slug.firstChild || $( slug.firstChild ).hasClass( 've-ce-chimera' ) ) ) {
+	// Check for a slug that is empty (apart from a chimera) or a block slug
+	if ( slug && (
+		!slug.firstChild ||
+		$( slug ).hasClass( 've-ce-branchNode-blockSlug' ) ||
+		$( slug.firstChild ).hasClass( 've-ce-chimera' )
+	) ) {
 		return { node: slug, offset: 0 };
 	}
 	node = this.getBranchNodeFromOffset( offset );
@@ -203,8 +207,11 @@ ve.ce.Document.prototype.getNodeAndOffsetUnadjustedForUnicorn = function ( offse
 						startOffset += length;
 					}
 				}
+			} else if ( $item.hasClass( 've-ce-branchNode-slug' ) ) {
+				// Skip contents without incrementing offset
+				current[1]++;
+				continue;
 			} else {
-				// Maybe ve-ce-branchNode-slug
 				stack.push( [$item.contents(), 0] );
 				current[1]++;
 				current = stack[stack.length - 1];
