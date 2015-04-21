@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_87ce63b8",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 1359,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-04-21T14:08:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_b5f2b401",
+      "revId": "d80841802373685e3e9eb314b006443d1e3eb167",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_9533f0bf",
         "filename": "src/ve.utils.js",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2015-04-21T11:08:00Z",
       "side": 1,
       "message": "IMO it feels like node should be the first parameter?",
+      "revId": "d80841802373685e3e9eb314b006443d1e3eb167",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_a7d36760",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 1360,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-04-21T14:08:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_9533f0bf",
       "revId": "d80841802373685e3e9eb314b006443d1e3eb167",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_47c87baa",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 1362,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-04-21T14:08:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_55cee8ba",
+      "revId": "d80841802373685e3e9eb314b006443d1e3eb167",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_d5ead804",
         "filename": "src/ve.utils.js",
         "patchSetId": 5
@@ -64,6 +118,24 @@
       "writtenOn": "2015-04-21T11:08:00Z",
       "side": 1,
       "message": "remove colon after ] (twice)",
+      "revId": "d80841802373685e3e9eb314b006443d1e3eb167",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_07c27388",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 1364,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-04-21T14:08:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_d5ead804",
       "revId": "d80841802373685e3e9eb314b006443d1e3eb167",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_27bf77f8",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 1369,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-04-21T14:08:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_15e14029",
+      "revId": "d80841802373685e3e9eb314b006443d1e3eb167",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_f5befcf9",
         "filename": "src/ve.utils.js",
         "patchSetId": 5
@@ -98,6 +188,24 @@
       "writtenOn": "2015-04-21T11:08:00Z",
       "side": 1,
       "message": "Give that empty string is not a meaningful selector you could just test for truthiness:\n\n enterNode \u0026\u0026 $( node ).is( enterNode )",
+      "revId": "d80841802373685e3e9eb314b006443d1e3eb167",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_c7330bbf",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 1380,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-04-21T14:08:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_f5befcf9",
       "revId": "d80841802373685e3e9eb314b006443d1e3eb167",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
