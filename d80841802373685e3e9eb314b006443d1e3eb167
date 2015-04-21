@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_b5f2b401",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 1359,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-04-21T11:08:00Z",
+      "side": 1,
+      "message": "We usually doc this as +/- 1. Could help us compare it to other directions, e.g. direction \u003d\u003d\u003d cursorDirection",
+      "revId": "d80841802373685e3e9eb314b006443d1e3eb167",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_9533f0bf",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 1360,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-04-21T11:08:00Z",
+      "side": 1,
+      "message": "IMO it feels like node should be the first parameter?",
+      "revId": "d80841802373685e3e9eb314b006443d1e3eb167",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_55cee8ba",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 1362,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-04-21T11:08:00Z",
+      "side": 1,
+      "message": "\u0027selector or function\u0027, selector syntax is allegedly not specific to jQuery",
+      "revId": "d80841802373685e3e9eb314b006443d1e3eb167",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_d5ead804",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 1364,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-04-21T11:08:00Z",
+      "side": 1,
+      "message": "remove colon after ] (twice)",
+      "revId": "d80841802373685e3e9eb314b006443d1e3eb167",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_15e14029",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 1369,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-04-21T11:08:00Z",
+      "side": 1,
+      "message": "if you add options \u003d options || {} at the top, you don\u0027t need to do three existence checks here.",
+      "revId": "d80841802373685e3e9eb314b006443d1e3eb167",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_f5befcf9",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 1380,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-04-21T11:08:00Z",
+      "side": 1,
+      "message": "Give that empty string is not a meaningful selector you could just test for truthiness:\n\n enterNode \u0026\u0026 $( node ).is( enterNode )",
+      "revId": "d80841802373685e3e9eb314b006443d1e3eb167",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
