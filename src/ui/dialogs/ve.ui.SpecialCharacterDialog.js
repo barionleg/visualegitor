@@ -154,9 +154,27 @@ ve.ui.SpecialCharacterDialog.prototype.buildButtonList = function () {
  * Handle the click event on the list
  */
 ve.ui.SpecialCharacterDialog.prototype.onListClick = function ( e ) {
-	var character = $( e.target ).data( 'character' );
+	var
+		character = $( e.target ).data( 'character' ),
+		fragment = this.surface.getModel().getFragment(),
+		toInsert = null,
+		toEncapsulate = null;
+
 	if ( character ) {
-		this.surface.getModel().getFragment().insertContent( character, true ).collapseToEnd().select();
+		if ( typeof character === 'string' ) {
+			toInsert = character;
+		} else if ( character.action.type === 'replace' ) {
+			toInsert = character.action.options.peri;
+		} else if ( character.action.type === 'encapsulate' ) {
+			toEncapsulate = [ character.action.options.pre, character.action.options.post ];
+		}
+	}
+
+	if ( toInsert ) {
+		fragment.insertContent( toInsert, true ).collapseToEnd().select();
+	} else if ( toEncapsulate ) {
+		fragment.collapseToStart().insertContent( toEncapsulate[0], true );
+		fragment.collapseToEnd().insertContent( toEncapsulate[1], true ).collapseToEnd().select();
 	}
 };
 
