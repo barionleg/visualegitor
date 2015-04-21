@@ -31,6 +31,7 @@ ve.ce.TextNode.static.name = 'text';
 ve.ce.TextNode.static.splitOnEnter = true;
 
 ve.ce.TextNode.whitespaceHtmlCharacters = {
+	'\u00a0': '\u00b7', // nbsp → &middot; / ·
 	'\n': '\u21b5', // &crarr; / ↵
 	'\t': '\u279e' // &#10142; / ➞
 };
