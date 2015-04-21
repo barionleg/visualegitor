@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_bab703d3",
+        "filename": "tests/dm/ve.dm.Transaction.test.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-04-21T09:18:42Z",
+      "side": 1,
+      "message": "Um, this is the removeMetadata property. Regardless of what gets re-inserted, we need to remove everything.",
+      "revId": "77ea0ab46be128169c89697e8d7e092366e2c1df",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
