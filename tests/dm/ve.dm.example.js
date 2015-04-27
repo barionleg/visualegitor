@@ -136,7 +136,14 @@ ve.dm.example.link = function ( href ) {
 	return { type: 'link', attributes: { href: href } };
 };
 ve.dm.example.language = function ( lang, dir ) {
-	return { type: 'meta/language', attributes: { lang: lang, dir: dir } };
+	var attributes = {};
+	if ( lang ) {
+		attributes.lang = lang;
+	}
+	if ( dir ) {
+		attributes.lang = dir;
+	}
+	return { type: 'meta/language', attributes: attributes };
 };
 
 /**
@@ -1268,15 +1275,20 @@ ve.dm.example.domToDataCases = {
 		normalizedBody: '<p><i>Foo</i><b>bar</b></p>'
 	},
 	'language annotation': {
-		body: '<p><span lang="fr" dir="ltr">dix</span><span lang="cy" dir="ltr">deg</span></p>',
+		body: '<p><span lang="en">ten</span><span lang="fr" dir="ltr">dix</span><span lang="cy" dir="ltr">deg</span><span dir="rtl">10</span></p>',
 		data: [
 			{ type: 'paragraph' },
+			['t', [ ve.dm.example.language( 'en', null ) ]],
+			['e', [ ve.dm.example.language( 'en', null ) ]],
+			['n', [ ve.dm.example.language( 'en', null ) ]],
 			['d', [ ve.dm.example.language( 'fr', 'ltr' ) ]],
 			['i', [ ve.dm.example.language( 'fr', 'ltr' ) ]],
 			['x', [ ve.dm.example.language( 'fr', 'ltr' ) ]],
 			['d', [ ve.dm.example.language( 'cy', 'ltr' ) ]],
 			['e', [ ve.dm.example.language( 'cy', 'ltr' ) ]],
 			['g', [ ve.dm.example.language( 'cy', 'ltr' ) ]],
+			['1', [ ve.dm.example.language( null, 'rtl' ) ]],
+			['0', [ ve.dm.example.language( null, 'rtl' ) ]],
 			{ type: '/paragraph' },
 			{ type: 'internalList' },
 			{ type: '/internalList' }
