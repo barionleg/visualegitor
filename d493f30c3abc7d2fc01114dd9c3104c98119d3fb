@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_1f65afdd",
+        "filename": "tests/ve.test.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2015-04-27T22:59:49Z",
+      "side": 1,
+      "message": "Hm.. this creates foreign nodes using the global document. I thought that required importNode normally.\n\nWe way wanna use doc.createElement here instead, or pass document context.",
+      "revId": "d493f30c3abc7d2fc01114dd9c3104c98119d3fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
