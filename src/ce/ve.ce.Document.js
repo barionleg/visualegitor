@@ -228,10 +228,6 @@ ve.ce.Document.prototype.getNodeAndOffsetUnadjustedForUnicorn = function ( offse
 						startOffset += length;
 					}
 				}
-			} else if ( $item.hasClass( 've-ce-branchNode-slug' ) ) {
-				// Skip contents without incrementing offset
-				current[1]++;
-				continue;
 			} else {
 				stack.push( [$item.contents(), 0] );
 				current[1]++;
