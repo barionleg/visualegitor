@@ -1985,6 +1985,7 @@ QUnit.test( 'pushRetain', 2, function ( assert ) {
 QUnit.test( 'pushReplace', function ( assert ) {
 	var doc = new ve.dm.Document( [{ type: 'paragraph' }, 'a', 'b', 'c', { type: '/paragraph' }] ),
 		doc2 = new ve.dm.Document( [{ type: 'paragraph' }, 'a', 'b', 'c', 'g', 'h', 'i', { type: '/paragraph' }] ),
+		metaDoc = ve.dm.example.createExampleDocument( 'withMeta' ),
 		cases = {
 			insert: {
 				calls: [
@@ -2088,6 +2089,21 @@ QUnit.test( 'pushReplace', function ( assert ) {
 					}
 				],
 				diff: 0
+			},
+			'replace removable meta item': {
+				calls: [
+					[ 'pushRetain', 1 ],
+					[ 'pushReplace', metaDoc, 1, 0, [ 'Q', 'u', 'u', 'x' ] ],
+					[ 'pushRetain', 3 ],
+					[ 'pushReplace', metaDoc, 4, 1, [] ],
+					[ 'pushRetain', 1 ],
+					// Removes a removable meta item
+					[ 'pushReplace', metaDoc, 6, 4, [ '!' ] ],
+					[ 'pushRetain', 2 ]
+				],
+				ops: [
+				],
+				diff: -1
 			}
 		};
 	QUnit.expect( Object.keys( cases ).length );
