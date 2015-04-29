@@ -122,6 +122,24 @@
       "revId": "c90a02c9ccfac5d74474805e4ffd9a0ce9289820",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_3f0c22f0",
+        "filename": "src/dm/ve.dm.ModelRegistry.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-04-29T18:04:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_7f02aabf",
+      "revId": "c90a02c9ccfac5d74474805e4ffd9a0ce9289820",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
