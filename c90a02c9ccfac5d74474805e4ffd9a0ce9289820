@@ -86,6 +86,24 @@
       "revId": "c90a02c9ccfac5d74474805e4ffd9a0ce9289820",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_df59562e",
+        "filename": "src/dm/ve.dm.ModelRegistry.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-04-29T17:20:36Z",
+      "side": 1,
+      "message": "Ok, but can we comment the fact that it should only happen once in this commit too? Because this commit adds more of the iffy code, and the class is already quite hard to read (with magic foo[0] vs foo[1] offsets and a key list as a tree index) without conceptual traps to throw in extra cognitive dissonance.",
+      "parentUuid": "0ed113e2_ad054b18",
+      "revId": "c90a02c9ccfac5d74474805e4ffd9a0ce9289820",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
