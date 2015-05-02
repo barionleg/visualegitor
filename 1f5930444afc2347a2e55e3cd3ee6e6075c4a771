@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_7ad85ff4",
+        "filename": "src/ui/widgets/ve.ui.LanguageResultWidget.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-05-02T11:45:29Z",
+      "side": 1,
+      "message": "you don\u0027t want \u0027new\u0027 here.",
+      "revId": "1f5930444afc2347a2e55e3cd3ee6e6075c4a771",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_1aefd383",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 1448,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-05-02T11:45:29Z",
+      "side": 1,
+      "message": "make this class name more generic (remove reference to language widget)\n\nwill require update to css.",
+      "revId": "1f5930444afc2347a2e55e3cd3ee6e6075c4a771",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
