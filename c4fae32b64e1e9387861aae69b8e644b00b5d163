@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_c2f8677c",
+        "filename": "src/ui/inspectors/ve.ui.LinkInspector.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 98
+      },
+      "writtenOn": "2015-05-05T20:58:06Z",
+      "side": 1,
+      "message": "href: text",
+      "revId": "c4fae32b64e1e9387861aae69b8e644b00b5d163",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_0232ef5b",
+        "filename": "src/ui/widgets/ve.ui.LinkAnnotationWidget.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 98
+      },
+      "writtenOn": "2015-05-05T20:58:06Z",
+      "side": 1,
+      "message": "this.input instead perhaps?",
+      "revId": "c4fae32b64e1e9387861aae69b8e644b00b5d163",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_42ec77b8",
+        "filename": "src/ui/widgets/ve.ui.LinkAnnotationWidget.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 98
+      },
+      "writtenOn": "2015-05-05T20:58:06Z",
+      "side": 1,
+      "message": "If we\u0027re expecting subclasses to override this maybe we should document it as returning OO.ui.InputWidget",
+      "revId": "c4fae32b64e1e9387861aae69b8e644b00b5d163",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
