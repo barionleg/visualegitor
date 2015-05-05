@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_2b66f9b8",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-05-05T01:05:16Z",
+      "side": 1,
+      "message": "… no?",
+      "revId": "9437db37003302fc68e1d858116344766d81edcd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
