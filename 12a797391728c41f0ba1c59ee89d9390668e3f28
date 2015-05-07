@@ -16,6 +16,24 @@
       "revId": "12a797391728c41f0ba1c59ee89d9390668e3f28",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_97a4d548",
+        "filename": "src/ui/inspectors/ve.ui.LinkInspector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2015-05-07T14:56:49Z",
+      "side": 1,
+      "message": "Nope, \u0027flags\u0027 are only ever CSS classes.",
+      "parentUuid": "0ed113e2_77c051e4",
+      "revId": "12a797391728c41f0ba1c59ee89d9390668e3f28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
