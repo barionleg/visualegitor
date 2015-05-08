@@ -289,11 +289,11 @@ ve.ui.AnnotationInspector.prototype.getTeardownProcess = function ( data ) {
 			}
 
 			if ( !remove ) {
+				if ( data.action !== 'done' ) {
+					surfaceModel.popStaging();
+					return;
+				}
 				if ( this.initialSelection.isCollapsed() ) {
-					if ( data.action !== 'done' ) {
-						surfaceModel.popStaging();
-						return;
-					}
 					insertText = true;
 				}
 				if ( annotation ) {
