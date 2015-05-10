@@ -31,6 +31,7 @@ ve.ce.FocusableNode = function VeCeFocusableNode( $focusable, config ) {
 	// Properties
 	this.focused = false;
 	this.highlighted = false;
+	this.contextOpened = false;
 	this.isFocusableSetup = false;
 	this.$highlights = $( '<div>' ).addClass( 've-ce-focusableNode-highlights' );
 	this.$focusable = $focusable || this.$element;
@@ -90,6 +91,7 @@ ve.ce.FocusableNode.prototype.createHighlight = function () {
 			.addClass( 've-ce-focusableNode-highlight-relocatable-marker' )
 			.attr( 'src', 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==' )
 			.on( {
+				mousedown: this.onFocusableMouseDown.bind( this ),
 				dragstart: this.onFocusableDragStart.bind( this ),
 				dragend: this.onFocusableDragEnd.bind( this )
 			} )
@@ -167,6 +169,7 @@ ve.ce.FocusableNode.prototype.onFocusableTeardown = function () {
  */
 ve.ce.FocusableNode.prototype.onFocusableMouseDown = function ( e ) {
 	var range,
+		node = this,
 		surfaceModel = this.focusableSurface.getModel(),
 		selection = surfaceModel.getSelection(),
 		nodeRange = this.model.getOuterRange();
@@ -174,6 +177,21 @@ ve.ce.FocusableNode.prototype.onFocusableMouseDown = function ( e ) {
 	if ( !this.isInContentEditable() ) {
 		return;
 	}
+	if ( e.which === 3 ) {
+		// Hide images, and select spans so right click menu shows 'copy', but not 'copy image'
+		this.$highlights.addClass( 've-ce-focusableNode-highlights-contextOpen' );
+		ve.selectElement( this.$highlights[0] );
+		setTimeout( function () {
+			// Images can be restored immediately
+			node.$highlights.removeClass( 've-ce-focusableNode-highlights-contextOpen' );
+		} );
+		this.contextOpened = true;
+	} else if ( this.contextOpened ) {
+		// Restore paste target selection on subsequent left click
+		this.focusableSurface.preparePasteTargetForCopy();
+		this.contextOpened = false;
+	}
+
 	// Wait for native selection to change before correcting
 	setTimeout( function () {
 		range = selection instanceof ve.dm.LinearSelection && selection.getRange();
@@ -545,7 +563,9 @@ ve.ce.FocusableNode.prototype.positionHighlights = function () {
 	var i, l;
 
 	this.calculateHighlights();
-	this.$highlights.empty();
+	this.$highlights.empty()
+		// Append something selectable for right-click copy
+		.append( $( '<span>' ).addClass( 've-ce-focusableNode-highlight-selectable' ).html( '&nbsp;' ) );
 
 	for ( i = 0, l = this.rects.length; i < l; i++ ) {
 		this.$highlights.append(
