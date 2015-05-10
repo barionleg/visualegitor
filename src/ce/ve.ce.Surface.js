@@ -120,7 +120,7 @@ ve.ce.Surface = function VeCeSurface( model, ui, options ) {
 	this.debounceFocusChange = ve.debounce( this.onFocusChange ).bind( this );
 	this.$document.on( 'mousedown', this.debounceFocusChange );
 
-	this.$pasteTarget.on( {
+	this.$pasteTarget.add( this.$highlights ).on( {
 		cut: this.onCut.bind( this ),
 		copy: this.onCopy.bind( this ),
 		paste: this.onPaste.bind( this )
@@ -653,7 +653,8 @@ ve.ce.Surface.prototype.onFocusChange = function () {
 	hasFocus = OO.ui.contains(
 		[
 			this.$documentNode[0],
-			this.$pasteTarget[0]
+			this.$pasteTarget[0],
+			this.$highlights[0]
 		],
 		this.nativeSelection.anchorNode,
 		true
@@ -1679,6 +1680,11 @@ ve.ce.Surface.prototype.onCopy = function ( e ) {
 
 			// Restore scroll position after changing focus
 			this.$window.scrollTop( scrollTop );
+
+			// If the range was in $highlights (right-click copy), don't restore it
+			if ( OO.ui.contains( this.$highlights[0], originalRange.startContainer, true ) ) {
+				return;
+			}
 
 			setTimeout( function () {
 				// Change focus back
@@ -2803,7 +2809,6 @@ ve.ce.Surface.prototype.onWindowResize = ve.debounce( function () {
  *
  * @see ve.ce.FocusableNode
  *
- * @method
  * @param {ve.ce.Node} node Node being relocated
  */
 ve.ce.Surface.prototype.startRelocation = function ( node ) {
@@ -2815,9 +2820,6 @@ ve.ce.Surface.prototype.startRelocation = function ( node ) {
  * Complete a relocation action.
  *
  * @see ve.ce.FocusableNode
- *
- * @method
- * @param {ve.ce.Node} node Node being relocated
  */
 ve.ce.Surface.prototype.endRelocation = function () {
 	if ( this.relocatingNode ) {
