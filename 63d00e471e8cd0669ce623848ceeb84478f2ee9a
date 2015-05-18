@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_aa884323",
+        "filename": "src/dm/ve.dm.APIResultsProvider.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-05-18T17:43:11Z",
+      "side": 1,
+      "message": "why not use setters here and below as well then?",
+      "revId": "63d00e471e8cd0669ce623848ceeb84478f2ee9a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
