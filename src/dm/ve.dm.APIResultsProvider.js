@@ -27,7 +27,7 @@ ve.dm.APIResultsProvider = function VeDmResourceProvider( apiurl, config ) {
 	config = config || {};
 
 	this.setAPIurl( apiurl );
-	this.fetchLimit = config.fetchLimit || 30;
+	this.setDefaultFetchLimit( config.fetchLimit || 30 );
 	this.lang = config.lang;
 	this.offset = config.offset || 0;
 	this.ajaxSettings = config.ajaxSettings || {};
@@ -103,7 +103,7 @@ ve.dm.APIResultsProvider.prototype.getStaticParams = function () {
 };
 
 /**
- * Get the user-inputted dybamic data parameters sent to the API
+ * Get the user-inputted dynamic data parameters sent to the API
  *
  * @returns {Object} Data parameters
  */
