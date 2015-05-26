@@ -24,6 +24,7 @@ ve.ce.ResizableNode = function VeCeResizableNode( $resizable, config ) {
 	// Properties
 	this.$resizable = $resizable || this.$element;
 	this.resizing = false;
+	this.enabled = !!this.$resizable.length;
 	this.$resizeHandles = $( '<div>' );
 	this.snapToGrid = config.snapToGrid !== undefined ? config.snapToGrid : 10;
 	this.outline = !!config.outline;
@@ -37,6 +38,9 @@ ve.ce.ResizableNode = function VeCeResizableNode( $resizable, config ) {
 	}
 	this.resizableOffset = null;
 	this.resizableSurface = null;
+	if (!this.enabled ) {
+		return;
+	}
 
 	// Events
 	this.connect( this, {
@@ -97,6 +101,9 @@ OO.initClass( ve.ce.ResizableNode );
  * @returns {Object} Position coordinates, containing top & left
  */
 ve.ce.ResizableNode.prototype.getResizableOffset = function () {
+	if (!this.enabled ) {
+		return;
+	}
 	if ( !this.resizableOffset ) {
 		this.resizableOffset = OO.ui.Element.static.getRelativePosition(
 			this.$resizable, this.resizableSurface.getSurface().$element
@@ -107,6 +114,10 @@ ve.ce.ResizableNode.prototype.getResizableOffset = function () {
 
 /** */
 ve.ce.ResizableNode.prototype.setOriginalDimensions = function ( dimensions ) {
+	if (!this.enabled ) {
+		return;
+	}
+
 	var scalable = this.model.getScalable();
 
 	scalable.setOriginalDimensions( dimensions );
@@ -121,7 +132,12 @@ ve.ce.ResizableNode.prototype.setOriginalDimensions = function ( dimensions ) {
  * Hide the size label
  */
 ve.ce.ResizableNode.prototype.hideSizeLabel = function () {
+	if (!this.enabled ) {
+		return;
+	}
+
 	var node = this;
+
 	// Defer the removal of this class otherwise other DOM changes may cause
 	// the opacity transition to not play out smoothly
 	setTimeout( function () {
@@ -137,6 +153,9 @@ ve.ce.ResizableNode.prototype.hideSizeLabel = function () {
  * Update the contents and position of the size label
  */
 ve.ce.ResizableNode.prototype.updateSizeLabel = function () {
+	if (!this.enabled ) {
+		return;
+	}
 	if ( !this.showSizeLabel && !this.canShowScaleLabel ) {
 		return;
 	}
@@ -187,6 +206,10 @@ ve.ce.ResizableNode.prototype.updateSizeLabel = function () {
  * @param {string[]} [handles] List of handles to show: 'nw', 'ne', 'sw', 'se'. Show all if undefined.
  */
 ve.ce.ResizableNode.prototype.showHandles = function ( handles ) {
+	if (!this.enabled ) {
+		return;
+	}
+
 	var i, len,
 		add = [],
 		remove = [],
@@ -407,6 +430,10 @@ ve.ce.ResizableNode.prototype.onResizeHandlesCornerMouseDown = function ( e ) {
  * @method
  */
 ve.ce.ResizableNode.prototype.setResizableHandlesSizeAndPosition = function () {
+	if (!this.enabled ) {
+		return;
+	}
+
 	var width = this.$resizable.width(),
 		height = this.$resizable.height();
 
@@ -439,6 +466,10 @@ ve.ce.ResizableNode.prototype.setResizableHandlesSizeAndPosition = function () {
  * @method
  */
 ve.ce.ResizableNode.prototype.setResizableHandlesPosition = function () {
+	if (!this.enabled ) {
+		return;
+	}
+
 	var offset = this.getResizableOffset();
 
 	this.$resizeHandles.css( {
@@ -561,7 +592,12 @@ ve.ce.ResizableNode.prototype.onDocumentMouseUp = function () {
  * @returns {Object} Attribute changes
  */
 ve.ce.ResizableNode.prototype.getAttributeChanges = function ( width, height ) {
+	if (!this.enabled ) {
+		return;
+	}
+
 	var attrChanges = {};
+
 	if ( this.model.getAttribute( 'width' ) !== width ) {
 		attrChanges.width = width;
 	}
