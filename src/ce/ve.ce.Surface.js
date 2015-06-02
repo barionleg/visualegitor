@@ -78,6 +78,12 @@ ve.ce.Surface = function VeCeSurface( model, ui, options ) {
 	// and therefore the offsets may come to point to places that are misleadingly different
 	// from when the selection was saved.
 	this.misleadingCursorStartSelection = null;
+
+	// Indicates which cursor position in ambiguous cases; see getEndBias
+	// XXX Variables like this one should have a name that indicates they are set at the
+	// previous keydown. But for IME, keydown alone is not enough.
+	this.focusEndBias = false;
+
 	this.cursorDirectionality = null;
 	this.unicorningNode = null;
 	this.setUnicorningRecursionGuard = false;
@@ -2660,7 +2666,14 @@ ve.ce.Surface.prototype.onSurfaceObserverContentChange = function ( node, previo
 		if ( lengthDiff > 0 && offsetDiff === lengthDiff && sameLeadingAndTrailing ) {
 			data = nextData.slice( previousStart, nextStart );
 			// Apply insertion annotations
-			annotations = node.unicornAnnotations || this.model.getInsertionAnnotations();
+			if ( node.unicornAnnotations ) {
+				annotations = node.unicornAnnotations;
+			} else if ( this.focusEndBias ) {
+				annotations = modelData.getAnnotationsFromOffset( previousStart + 1 );
+			} else {
+				annotations = this.model.getInsertionAnnotations();
+			}
+
 			if ( annotations.getLength() ) {
 				filterForWordbreak( annotations, new ve.Range( previous.range.start ) );
 				ve.dm.Document.static.addAnnotationsToData( data, annotations );
@@ -2852,7 +2865,7 @@ ve.ce.Surface.prototype.getActiveTableNode = function () {
 /*! Utilities */
 
 /**
- * Store the current selection range, and a key down event if relevant
+ * Store the current focus bias, and selection range and key down event if relevant
  *
  * @param {jQuery.Event|null} e Key down event
  */
@@ -2860,10 +2873,15 @@ ve.ce.Surface.prototype.storeKeyDownState = function ( e ) {
 	if ( this.nativeSelection.rangeCount === 0 ) {
 		this.cursorEvent = null;
 		this.misleadingCursorStartSelection = null;
+		this.focusEndBias = false;
 		return;
 	}
 	this.cursorEvent = e;
 	this.misleadingCursorStartSelection = null;
+	this.focusEndBias = this.getEndBias(
+		this.nativeSelection.focusNode,
+		this.nativeSelection.focusOffset
+	);
 	if (
 		e.keyCode === OO.ui.Keys.UP ||
 		e.keyCode === OO.ui.Keys.DOWN ||
@@ -2878,6 +2896,41 @@ ve.ce.Surface.prototype.storeKeyDownState = function ( e ) {
 			focusOffset: this.nativeSelection.focusOffset
 		};
 	}
+};
+
+/**
+ * Tests whether the DOM position is the end-most of multiple cursor-equivalent positions
+ *
+ * "Cursor-equivalent positions" are positions that the browser does not fully distinguish for
+ * cursoring purposes, e.g. 'a|&lt;b&gt;c' and 'a&lt;b&gt;|c'. They can have different effects
+ * when editing (in this case, whether the text appears bolded or not).
+ *
+ * In Chromium, cursor focus normalizes to the start-most of equivalent positions (at least in
+ * non-BIDI text). In Firefox, the user can cursor/click into either (the cursor lands in the
+ * closest to the click/cursor start location).
+ *
+ * @param {Node} node Position node
+ * @param {number} offset Position offset
+ * @return {boolean} Whether this is the end-most of multiple cursor-equivalent positions
+ */
+ve.ce.Surface.prototype.getEndBias = function ( node, offset ) {
+	var previousNode, nextNode;
+	if ( node.nodeType === Node.TEXT_NODE ) {
+		if ( offset > 0 ) {
+			return false;
+		}
+		offset = Array.prototype.indexOf.call( node.parentNode.childNodes, node );
+		node = node.parentNode;
+	}
+	if ( offset === 0 ) {
+		return ve.ce.isAnnotationNode( node );
+	}
+	previousNode = node.childNodes[ offset - 1 ];
+	nextNode = node.childNodes[ offset ];
+	if ( !previousNode || !ve.ce.isAnnotationNode( previousNode ) ) {
+		return false;
+	}
+	return !nextNode || !ve.ce.isAnnotationNode( nextNode );
 };
 
 /**

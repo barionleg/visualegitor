@@ -387,6 +387,18 @@ ve.ce.isShortcutKey = function ( e ) {
 };
 
 /**
+ * Tests whether a DOM node is an annotation node (b, u, span etc)
+ * @param {Node} node The node to test
+ * @returns {boolean} Whether the node is an annotation node
+ */
+ve.ce.isAnnotationNode = function ( node ) {
+	// XXX The annotation registry should do this properly, if there's not already a way.
+	return node && node.nodeType === Node.ELEMENT_NODE && node.nodeName.toLowerCase().match(
+		/^(a|abbr|b|big|code|dfn|font|i|kbd|mark|q|s|samp|small|span|sub|sup|time|u|var)$/
+	);
+};
+
+/**
  * Find the DM range of a DOM selection
  *
  * @param {Object} selection DOM-selection-like object
