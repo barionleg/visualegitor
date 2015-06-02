@@ -397,8 +397,8 @@ ve.ce.getOffsetOfSlug = function ( element ) {
  * @param {number} offset Position offset
  * @return {boolean} Whether this is the end-most of multiple cursor-equivalent positions
  */
-ve.ce.isAfterAnnotationBoundaries = function ( node, offset ) {
-	var previousNode, nextNode;
+ve.ce.isAfterAnnotationBoundary = function ( node, offset ) {
+	var previousNode;
 	if ( node.nodeType === Node.TEXT_NODE ) {
 		if ( offset > 0 ) {
 			return false;
@@ -409,12 +409,15 @@ ve.ce.isAfterAnnotationBoundaries = function ( node, offset ) {
 	if ( offset === 0 ) {
 		return ve.dm.modelRegistry.isAnnotation( node );
 	}
+
 	previousNode = node.childNodes[ offset - 1 ];
-	if ( !previousNode || !ve.dm.modelRegistry.isAnnotation( previousNode ) ) {
-		return false;
+	if (
+		previousNode.nodeType === Node.ELEMENT_NODE &&
+		previousNode.classList.contains( 've-ce-post-nail' )
+	) {
+		return true;
 	}
-	nextNode = node.childNodes[ offset ];
-	return !nextNode || !ve.dm.modelRegistry.isAnnotation( nextNode );
+	return ve.dm.modelRegistry.isAnnotation( previousNode );
 };
 
 /**
