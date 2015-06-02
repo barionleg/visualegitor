@@ -162,7 +162,7 @@ ve.ce.ContentBranchNode.prototype.setupBlockSlugs = function () {
  * @returns {Object} return.unicornInfo Unicorn information
  */
 ve.ce.ContentBranchNode.prototype.getRenderedContents = function () {
-	var i, ilen, j, jlen, item, itemAnnotations, ann, clone, dmSurface, dmSelection, relCursor,
+	var i, ilen, j, jlen, item, itemAnnotations, clone, dmSurface, dmSelection, relCursor,
 		unicorn, img1, img2, annotationsChanged, childLength, offset, htmlItem, ceSurface,
 		nextItemAnnotations, linkAnnotations,
 		store = this.model.doc.getStore(),
@@ -171,30 +171,51 @@ ve.ce.ContentBranchNode.prototype.getRenderedContents = function () {
 		doc = this.getElementDocument(),
 		wrapper = doc.createElement( 'div' ),
 		current = wrapper,
+		nodeStack = [],
 		unicornInfo = {},
 		buffer = '',
 		node = this;
 
 	function openAnnotation( annotation ) {
+		var ann;
 		annotationsChanged = true;
 		if ( buffer !== '' ) {
-			current.appendChild( doc.createTextNode( buffer ) );
+			if ( current.nodeType === Node.TEXT_NODE ) {
+				current.textContent += buffer;
+			} else {
+				current.appendChild( doc.createTextNode( buffer ) );
+			}
 			buffer = '';
 		}
 		// Create a new DOM node and descend into it
-		ann = ve.ce.annotationFactory.create( annotation.getType(), annotation, node ).$element[0];
-		current.appendChild( ann );
-		current = ann;
+		ann = ve.ce.annotationFactory.create( annotation.getType(), annotation, node );
+		if ( current.nodeType === Node.TEXT_NODE ) {
+			// Insert after. Works even if nextSibling is null
+			current.parentNode.insertBefore(
+				ann.$element[0],
+				current.nextSibling
+			);
+		} else {
+			current.appendChild( ann.$element[0] );
+		}
+		nodeStack.push( current );
+		current = ann.getContentNode();
 	}
 
-	function closeAnnotation() {
+	function closeAnnotation( annotation ) {
+		var ann;
 		annotationsChanged = true;
 		if ( buffer !== '' ) {
-			current.appendChild( doc.createTextNode( buffer ) );
+			if ( current.nodeType === Node.TEXT_NODE ) {
+				current.textContent += buffer;
+			} else {
+				current.appendChild( doc.createTextNode( buffer ) );
+			}
 			buffer = '';
 		}
 		// Traverse up
-		current = current.parentNode;
+		ann = ve.ce.annotationFactory.create( annotation.getType(), annotation, node );
+		current = nodeStack.pop();
 	}
 
 	// Gather annotated HTML from the child nodes
