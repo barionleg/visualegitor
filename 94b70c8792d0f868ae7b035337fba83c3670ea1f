@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_429b491b",
+        "filename": "src/ce/ve.ce.ResizableNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-06-02T19:57:52Z",
+      "side": 1,
+      "message": "space before ! (and duplicated below)",
+      "revId": "94b70c8792d0f868ae7b035337fba83c3670ea1f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_d574d532",
+        "filename": "src/ce/ve.ce.ResizableNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-06-02T19:57:52Z",
+      "side": 1,
+      "message": "shouldn\u0027t be used in a getter as it breaks the function signature (expects an object returned).",
+      "revId": "94b70c8792d0f868ae7b035337fba83c3670ea1f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_1531fde9",
+        "filename": "src/ce/ve.ce.ResizableNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-06-02T19:57:52Z",
+      "side": 1,
+      "message": "don\u0027t use in a getter",
+      "revId": "94b70c8792d0f868ae7b035337fba83c3670ea1f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
