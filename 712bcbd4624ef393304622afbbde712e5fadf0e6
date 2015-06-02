@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed113e2_b2bcca02",
+        "filename": "tests/ce/nodes/ve.ce.TableNode.test.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-06-02T16:04:10Z",
+      "side": 1,
+      "message": "Remaining methods:\n\nonTableDblClick\nonTableMouseDown with a few of the branches\nonTableMouseMove\nsetEditing\ngetEditingFragment \u0026 getEditingRange\nonSurfaceModelSelect on linear selections",
+      "revId": "712bcbd4624ef393304622afbbde712e5fadf0e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
