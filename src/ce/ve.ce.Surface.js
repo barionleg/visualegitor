@@ -78,6 +78,12 @@ ve.ce.Surface = function VeCeSurface( model, ui, options ) {
 	// and therefore the offsets may come to point to places that are misleadingly different
 	// from when the selection was saved.
 	this.misleadingCursorStartSelection = null;
+
+	// Indicates which cursor position in ambiguous cases; see ve.ce.getEndBias
+	// XXX Variables like this one should have a name that indicates they are set at the
+	// previous keydown. But for IME, keydown alone is not enough.
+	this.focusEndBias = false;
+
 	this.cursorDirectionality = null;
 	this.unicorningNode = null;
 	this.setUnicorningRecursionGuard = false;
@@ -2660,7 +2666,14 @@ ve.ce.Surface.prototype.onSurfaceObserverContentChange = function ( node, previo
 		if ( lengthDiff > 0 && offsetDiff === lengthDiff && sameLeadingAndTrailing ) {
 			data = nextData.slice( previousStart, nextStart );
 			// Apply insertion annotations
-			annotations = node.unicornAnnotations || this.model.getInsertionAnnotations();
+			if ( node.unicornAnnotations ) {
+				annotations = node.unicornAnnotations;
+			} else if ( this.focusEndBias ) {
+				annotations = modelData.getAnnotationsFromOffset( previousStart + 1 );
+			} else {
+				annotations = this.model.getInsertionAnnotations();
+			}
+
 			if ( annotations.getLength() ) {
 				filterForWordbreak( annotations, new ve.Range( previous.range.start ) );
 				ve.dm.Document.static.addAnnotationsToData( data, annotations );
@@ -2852,7 +2865,7 @@ ve.ce.Surface.prototype.getActiveTableNode = function () {
 /*! Utilities */
 
 /**
- * Store the current selection range, and a key down event if relevant
+ * Store the current focus bias, and selection range and key down event if relevant
  *
  * @param {jQuery.Event|null} e Key down event
  */
@@ -2860,10 +2873,15 @@ ve.ce.Surface.prototype.storeKeyDownState = function ( e ) {
 	if ( this.nativeSelection.rangeCount === 0 ) {
 		this.cursorEvent = null;
 		this.misleadingCursorStartSelection = null;
+		this.focusEndBias = false;
 		return;
 	}
 	this.cursorEvent = e;
 	this.misleadingCursorStartSelection = null;
+	this.focusEndBias = ve.ce.getEndBias(
+		this.nativeSelection.focusNode,
+		this.nativeSelection.focusOffset
+	);
 	if (
 		e.keyCode === OO.ui.Keys.UP ||
 		e.keyCode === OO.ui.Keys.DOWN ||

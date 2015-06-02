@@ -376,6 +376,42 @@ ve.ce.getOffsetOfSlug = function ( element ) {
 };
 
 /**
+ * Test whether the DOM position is the end-most of multiple cursor-equivalent positions
+ *
+ * "Cursor-equivalent positions" are positions that the browser does not fully distinguish for
+ * cursoring purposes, e.g. 'a|&lt;b&gt;c' and 'a&lt;b&gt;|c'. They can have different effects
+ * when editing (in this case, whether the text appears bolded or not).
+ *
+ * In Chromium, cursor focus normalizes to the start-most of equivalent positions (at least in
+ * non-BIDI text). In Firefox, the user can cursor/click into either (the cursor lands in the
+ * closest to the click/cursor start location).
+ *
+ * @param {Node} node Position node
+ * @param {number} offset Position offset
+ * @return {boolean} Whether this is the end-most of multiple cursor-equivalent positions
+ */
+ve.ce.getEndBias = function ( node, offset ) {
+	var previousNode, nextNode;
+	if ( node.nodeType === Node.TEXT_NODE ) {
+		if ( offset > 0 ) {
+			return false;
+		}
+		offset = Array.prototype.indexOf.call( node.parentNode.childNodes, node );
+		node = node.parentNode;
+	}
+	if ( offset === 0 ) {
+		return ve.dm.modelRegistry.isAnnotation( node );
+	}
+	previousNode = node.childNodes[ offset - 1 ];
+	nextNode = node.childNodes[ offset ];
+	if ( !previousNode || !ve.dm.modelRegistry.isAnnotation( previousNode ) ) {
+		return false;
+	}
+	return !nextNode || !ve.dm.modelRegistry.isAnnotation( nextNode );
+};
+
+
+/**
  * Check if keyboard shortcut modifier key is pressed.
  *
  * @method
