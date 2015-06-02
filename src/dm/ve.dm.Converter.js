@@ -83,6 +83,9 @@ ve.dm.Converter.openAndCloseAnnotations = function ( currentSet, targetSet, open
 	// Go through annotationStack from bottom to top (low to high),
 	// and find the first annotation that's not in annotations.
 	targetSetOpen = targetSet.clone();
+	if ( !currentSet.getLength ) {
+		debugger;
+	}
 	for ( i = 0, len = currentSet.getLength(); i < len; i++ ) {
 		index = currentSet.getIndex( i );
 		// containsComparableForSerialization is expensive,

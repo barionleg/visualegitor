@@ -77,6 +77,18 @@ ve.ce.Annotation.prototype.getModelHtmlDocument = function () {
 	return this.parentNode && this.parentNode.getModelHtmlDocument();
 };
 
+ve.ce.Annotation.prototype.appendChild = function ( childNode ) {
+	this.$element.append( childNode );
+};
+
+ve.ce.Annotation.prototype.getContentContainer = function () {
+	return this.$element[0];
+};
+
+ve.ce.Annotation.prototype.attachContents = function () {
+	// Do nothing; already attached
+};
+
 /**
  * Release all memory.
  */

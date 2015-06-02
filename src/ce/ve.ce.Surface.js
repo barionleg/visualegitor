@@ -76,7 +76,7 @@ ve.ce.Surface = function VeCeSurface( model, ui, options ) {
 	this.keyDownState = {
 		event: null,
 		selection: null,
-		focusIsAfterAnnotationBoundaries: null
+		focusIsAfterAnnotationBoundary: null
 	};
 
 	this.cursorDirectionality = null;
@@ -945,6 +945,7 @@ ve.ce.Surface.prototype.onDocumentSelectionChange = function () {
 		return;
 	}
 
+	this.fixupCursorPosition();
 	this.surfaceObserver.pollOnceSelection();
 };
 
@@ -1468,6 +1469,11 @@ ve.ce.Surface.prototype.afterDocumentKeyDown = function ( e ) {
 		this.decRenderLock();
 	}
 	this.checkUnicorns( fixupCursorForUnicorn );
+	if ( direction === undefined ) {
+		direction = getDirection();
+		if ( isArrow ) debugger;
+	}
+	this.fixupCursorPosition( direction );
 };
 
 /**
@@ -2536,6 +2542,7 @@ ve.ce.Surface.prototype.onSurfaceObserverRangeChange = function ( oldRange, newR
 		// Ignore when the newRange is just a flipped oldRange
 		return;
 	}
+
 	this.incRenderLock();
 	try {
 		this.changeModel(
@@ -2558,6 +2565,57 @@ ve.ce.Surface.prototype.onSurfaceObserverRangeChange = function ( oldRange, newR
 		// The current range is the last range, so remove ranges from the front
 		this.nativeSelection.removeRange( this.nativeSelection.getRangeAt( 0 ) );
 	}
+};
+
+/**
+ * Move cursor if it is between annotation nails
+ * @param {number} [direction] Direction of travel, +1 for forwards, -1 for backwards
+ *
+ * TODO: Improve name
+ */
+ve.ce.Surface.prototype.fixupCursorPosition = function ( direction ) {
+	var range, node, offset, previousNode, fixedPosition, nextNode;
+	// Default to moving start-wards, to mimic typical Chromium behaviour
+	direction = direction || -1;
+
+	if ( this.nativeSelection.rangeCount === 0 ) {
+		return;
+	}
+	range = this.nativeSelection.getRangeAt( 0 );
+
+	node = range.endContainer;
+	offset = range.endOffset;
+	if ( node.nodeType !== Node.ELEMENT_NODE ) {
+		return;
+	}
+	previousNode = node.childNodes[ offset - 1 ];
+	nextNode = node.childNodes[ offset ];
+
+	if (
+		(
+			previousNode &&
+			previousNode.nodeType === Node.ELEMENT_NODE &&
+			previousNode.classList.contains( 've-ce-pre-nail' )
+		) || (
+			nextNode &&
+			nextNode.nodeType === Node.ELEMENT_NODE &&
+			nextNode.classList.contains( 've-ce-post-nail' )
+		)
+	) {
+		fixedPosition = ve.adjacentDomPosition(
+			{ node: node, offset: offset },
+			direction,
+			{ noDescend: 'img', hardOnly: true }
+		);
+	} else {
+		return;
+	}
+	if ( range.collapsed ) {
+		range.setStart( fixedPosition.node, fixedPosition.offset );
+	}
+	range.setEnd( fixedPosition.node, fixedPosition.offset );
+	this.nativeSelection.removeAllRanges();
+	this.nativeSelection.addRange( range );
 };
 
 /**
@@ -2667,7 +2725,7 @@ ve.ce.Surface.prototype.onSurfaceObserverContentChange = function ( node, previo
 			// Apply insertion annotations
 			if ( node.unicornAnnotations ) {
 				annotations = node.unicornAnnotations;
-			} else if ( this.keyDownState.focusIsAfterAnnotationBoundaries ) {
+			} else if ( this.keyDownState.focusIsAfterAnnotationBoundary ) {
 				annotations = modelData.getAnnotationsFromOffset(
 					nodeOffset + previousStart + 1
 				);
@@ -2870,17 +2928,17 @@ ve.ce.Surface.prototype.getActiveTableNode = function () {
  * modified, because anchorNode/focusNode are live and mutable, and so the offsets may come to
  * point confusingly to different places than they did when the selection was saved).
  *
- * Annotation changes before the cursor focus are detected: see ve.ce.isAfterAnnotationBoundaries .
+ * Annotation changes before the cursor focus are detected: see ve.ce.isAfterAnnotationBoundary .
  *
  * @param {jQuery.Event|null} e Key down event; must be active when this call is made
  */
 ve.ce.Surface.prototype.storeKeyDownState = function ( e ) {
 	this.keyDownState.event = e;
 	this.keyDownState.selection = null;
-	this.keyDownState.focusIsAfterAnnotationBoundaries = null;
+	this.keyDownState.focusIsAfterAnnotationBoundary = null;
 
 	if ( this.nativeSelection.rangeCount > 0 ) {
-		this.keyDownState.focusIsAfterAnnotationBoundaries = ve.ce.isAfterAnnotationBoundaries(
+		this.keyDownState.focusIsAfterAnnotationBoundary = ve.ce.isAfterAnnotationBoundary(
 			this.nativeSelection.focusNode,
 			this.nativeSelection.focusOffset
 		);
