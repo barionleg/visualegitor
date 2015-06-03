@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_4474b1cc",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 2880,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-06-03T14:23:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_493ccc2d",
+      "revId": "4cf13c27a0674ef20a0ed6a9b48639cd5c5b68f8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_691670ae",
         "filename": "src/ce/ve.ce.js",
         "patchSetId": 5
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "0ed113e2_c60ae621",
+        "filename": "src/ce/ve.ce.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-06-03T14:23:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_691670ae",
+      "revId": "4cf13c27a0674ef20a0ed6a9b48639cd5c5b68f8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ed113e2_8932b459",
         "filename": "tests/ce/ve.ce.test.js",
         "patchSetId": 5
@@ -47,6 +83,24 @@
       "writtenOn": "2015-06-03T09:37:50Z",
       "side": 1,
       "message": "Duplicate",
+      "revId": "4cf13c27a0674ef20a0ed6a9b48639cd5c5b68f8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ed113e2_6619ba7d",
+        "filename": "tests/ce/ve.ce.test.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-06-03T14:23:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed113e2_8932b459",
       "revId": "4cf13c27a0674ef20a0ed6a9b48639cd5c5b68f8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
