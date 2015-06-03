@@ -1261,7 +1261,7 @@ ve.dm.Document.prototype.newFromHtml = function ( html, importRules ) {
  * @return {ve.Range[]} List of ranges where the string was found
  */
 ve.dm.Document.prototype.findText = function ( query, caseSensitive, noOverlaps ) {
-	var len, match, offset,
+	var i, l, len, match, offset, lineOffset, lines,
 		ranges = [],
 		text = this.data.getText(
 			true,
@@ -1273,15 +1273,17 @@ ve.dm.Document.prototype.findText = function ( query, caseSensitive, noOverlaps 
 			query = new RegExp( query.source, 'i' );
 		}
 		offset = 0;
-		while ( ( match = query.exec( text.substr( offset ) ) ) !== null ) {
-			offset = offset + match.index;
-			len = match[0].length;
-			// Newlines may match some expressions, but are not allowed
-			// as they represent elements
-			if ( match[0].indexOf( '\n' ) === -1 ) {
-				ranges.push( new ve.Range( offset, offset + len ) );
+		// Avoid multi-line matching by only matching within newlines
+		lines = text.split( '\n' );
+		for ( i = 0, l = lines.length; i < l; i++ ) {
+			lineOffset = 0;
+			while ( lines[i] && ( match = query.exec( lines[i].substr( lineOffset ) ) ) !== null ) {
+				lineOffset += match.index;
+				len = match[0].length;
+				ranges.push( new ve.Range( offset + lineOffset, offset + lineOffset + len ) );
+				lineOffset += noOverlaps ? len : 1;
 			}
-			offset += noOverlaps ? len : 1;
+			offset += lines[i].length + 1;
 		}
 	} else {
 		if ( !caseSensitive ) {
