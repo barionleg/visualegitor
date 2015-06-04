@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aedf27f1_23a9c2dc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-06-04T14:27:53Z",
+      "side": 1,
+      "message": "Need to fix the commit title again. :-)",
+      "revId": "ed63e50fc53230bd9facce7b54a91f7dac475610",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
