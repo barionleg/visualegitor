@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aedf27f1_beb9452b",
+        "filename": "src/dm/ve.dm.Document.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 1280,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-06-04T16:21:40Z",
+      "side": 1,
+      "message": "Hmm, yeah, it\u0027s sad that JavaScript makes you guard for a zero-width match.",
+      "revId": "b43b746147aee48a1cd19a34ed692ef0ffa3e9f8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
