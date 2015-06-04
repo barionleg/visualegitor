@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aedf27f1_928ebad4",
+        "filename": "src/dm/ve.dm.Document.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 1287,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-06-04T05:57:04Z",
+      "side": 1,
+      "message": "You can use a global (\u0027g\u0027) regex to avoid the substrings and some of the maths:\n\n  query \u003d new RegExp( query.source, caseSensitive ? \u0027g\u0027 : \u0027gi\u0027 );\n  ...\n  for ( ... ) {\n      while ( ... match \u003d query.exec( lines[i] ) ... ) {\n          ranges.push( new ve.Range( offset + match.index, offset + query.lastIndex ) );\n          if ( !noOverlaps ) {\n              query.lastIndex \u003d match.index + 1;\n          }\n      }\n      offset +\u003d lines[i].length + 1;\n      query.lastIndex \u003d 0;\n      ...\n  }",
+      "revId": "0455179d7d1b7cd3697dcacb61bfc20b517c09aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
