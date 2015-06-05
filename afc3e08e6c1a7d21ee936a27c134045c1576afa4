@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aedf27f1_b15bb356",
+        "filename": "src/dm/ve.dm.Document.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 1289,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-06-05T10:59:24Z",
+      "side": 1,
+      "message": "This is a non-empty match, so you could use query.lastIndex here, but it seems better not to propagate that pattern given the discrepancy described above.",
+      "revId": "afc3e08e6c1a7d21ee936a27c134045c1576afa4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
