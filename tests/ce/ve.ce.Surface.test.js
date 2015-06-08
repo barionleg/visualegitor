@@ -1131,6 +1131,116 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 
 } );
 
+QUnit.test( 'handleTableArrowKey', function ( assert ) {
+	var i, offsets, selection,
+		fn = function () {},
+		view = ve.test.utils.createSurfaceViewFromDocument(
+			ve.dm.example.createExampleDocument( 'mergedCells' )
+		),
+		model = view.getModel(),
+		doc = model.getDocument(),
+		tableRange = new ve.Range( 0, 171 ),
+		cases = [
+			{
+				msg: 'Simple move right',
+				key: 'RIGHT',
+				selectionOffsets: [ 0, 0 ],
+				expectedSelectionOffsets: [ 1, 0, 1, 0 ]
+			},
+			{
+				msg: 'Simple move end',
+				key: 'END',
+				selectionOffsets: [ 0, 0 ],
+				expectedSelectionOffsets: [ 5, 0, 5, 0 ]
+			},
+			{
+				msg: 'Simple move down',
+				key: 'DOWN',
+				selectionOffsets: [ 0, 0 ],
+				expectedSelectionOffsets: [ 0, 1, 0, 1 ]
+			},
+			{
+				msg: 'Simple move page down',
+				key: 'PAGEDOWN',
+				selectionOffsets: [ 0, 0 ],
+				expectedSelectionOffsets: [ 0, 6, 0, 6 ]
+			},
+			{
+				msg: 'Simple move left',
+				key: 'LEFT',
+				selectionOffsets: [ 5, 6 ],
+				expectedSelectionOffsets: [ 4, 6, 4, 6 ]
+			},
+			{
+				msg: 'Simple move home',
+				key: 'HOME',
+				selectionOffsets: [ 5, 6 ],
+				expectedSelectionOffsets: [ 0, 6, 0, 6 ]
+			},
+			{
+				msg: 'Simple move page up',
+				key: 'PAGEUP',
+				selectionOffsets: [ 5, 6 ],
+				expectedSelectionOffsets: [ 5, 0, 5, 0 ]
+			},
+			{
+				msg: 'Move left at start',
+				key: 'LEFT',
+				selectionOffsets: [ 0, 0 ],
+				expectedSelectionOffsets: [ 0, 0, 0, 0 ]
+			},
+			{
+				msg: 'Move up at start',
+				key: 'UP',
+				selectionOffsets: [ 0, 0 ],
+				expectedSelectionOffsets: [ 0, 0, 0, 0 ]
+			},
+			{
+				msg: 'Move right at end',
+				key: 'RIGHT',
+				selectionOffsets: [ 5, 6 ],
+				expectedSelectionOffsets: [ 5, 6, 5, 6 ]
+			},
+			{
+				msg: 'Move down at end',
+				key: 'DOWN',
+				selectionOffsets: [ 5, 6 ],
+				expectedSelectionOffsets: [ 5, 6, 5, 6 ]
+			},
+			{
+				msg: 'Move from merged cell to merged cell',
+				key: 'RIGHT',
+				selectionOffsets: [ 1, 1, 2, 1 ],
+				expectedSelectionOffsets: [ 3, 0, 3, 2 ]
+			},
+			{
+				msg: 'Shift-select through merged cells',
+				key: 'PAGEDOWN',
+				shiftKey: true,
+				selectionOffsets: [ 1, 0, 1, 0 ],
+				expectedSelectionOffsets: [ 1, 0, 3, 6 ]
+			}
+		];
+
+	QUnit.expect( cases.length );
+
+	for ( i = 0; i < cases.length; i++ ) {
+		offsets = cases[i].selectionOffsets;
+		model.setSelection( new ve.dm.TableSelection( doc, tableRange, offsets[0], offsets[1], offsets[2], offsets[3] ) );
+		view.handleTableArrowKey( {
+			keyCode: OO.ui.Keys[cases[i].key],
+			shiftKey: !!cases[i].shiftKey,
+			preventDefault: fn
+		} );
+		selection = model.getSelection();
+		assert.deepEqual(
+			[ selection.fromCol, selection.fromRow, selection.toCol, selection.toRow ],
+			cases[i].expectedSelectionOffsets,
+			cases[i].msg
+		);
+	}
+} );
+
 QUnit.test( 'onDocumentDragStart/onDocumentDrop', function ( assert ) {
 
 	var i,
@@ -1415,7 +1525,6 @@ QUnit.test( 'getRangeSelection', function ( assert ) {
 } );
 
 /* Methods with return values */
-// TODO: ve.ce.Surface#needsPawn
 // TODO: ve.ce.Surface#getSurface
 // TODO: ve.ce.Surface#getModel
 // TODO: ve.ce.Surface#getDocument
@@ -1456,7 +1565,6 @@ QUnit.test( 'getRangeSelection', function ( assert ) {
 // TODO: ve.ce.Surface#handleInsertion
 // TODO: ve.ce.Surface#handleLinearLeftOrRightArrowKey
 // TODO: ve.ce.Surface#handleLinearUpOrDownArrowKey
-// TODO: ve.ce.Surface#handleTableArrowKey
 // TODO: ve.ce.Surface#handleTableDelete
 // TODO: ve.ce.Surface#handleTableEditingEscape
 // TODO: ve.ce.Surface#handleTableEnter
