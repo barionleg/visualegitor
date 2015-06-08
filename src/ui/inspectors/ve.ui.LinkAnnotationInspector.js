@@ -58,7 +58,12 @@ ve.ui.LinkAnnotationInspector.prototype.updateActions = function () {
 		href = this.annotationInput.getHref();
 
 	this.actions.forEach( { actions: 'open' }, function ( action ) {
-		action.setHref( href ).setTarget( '_blank' );
+		action
+			// Remove the action event handler so preventDefault doesn't run
+			// and it behaves like a normal link
+			.off( 'click' )
+			// Open href in new window
+			.setHref( href ).setTarget( '_blank' );
 		// HACK: Chrome renders a dark outline around the action when it's a link, but causing it to
 		// re-render makes it magically go away; this is incredibly evil and needs further
 		// investigation
