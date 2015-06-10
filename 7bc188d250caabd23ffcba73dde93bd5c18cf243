@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_86cdfe64",
+        "filename": "src/ce/annotations/ve.ce.LinkAnnotation.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-06-10T12:57:00Z",
+      "side": 1,
+      "message": "this feature is now dead, no?",
+      "revId": "7bc188d250caabd23ffcba73dde93bd5c18cf243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_a6ca7a48",
+        "filename": "src/ce/ve.ce.Annotation.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-06-10T12:57:00Z",
+      "side": 1,
+      "message": "is this method ever overridden? is it necessary?",
+      "revId": "7bc188d250caabd23ffcba73dde93bd5c18cf243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
