@@ -37,18 +37,6 @@ ve.ce.AnnotationFactory.prototype.getDescription = function ( annotation ) {
 	throw new Error( 'Unknown annotation type: ' + type );
 };
 
-/**
- * Check if an annotation needs to force continuation
- * @param {string} type Annotation type
- * @returns {boolean} Whether the annotation needs to force continuation
- */
-ve.ce.AnnotationFactory.prototype.isAnnotationContinuationForced = function ( type ) {
-	if ( Object.prototype.hasOwnProperty.call( this.registry, type ) ) {
-		return this.registry[type].static.forceContinuation;
-	}
-	return false;
-};
-
 /* Initialization */
 
 // TODO: Move instantiation to a different file
