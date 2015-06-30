@@ -225,7 +225,7 @@ ve.ui.LinearContext.prototype.getRelatedSources = function () {
 	if ( !this.relatedSources ) {
 		this.relatedSources = [];
 		if ( this.surface.getModel().getSelection() instanceof ve.dm.LinearSelection ) {
-			selectedModels = this.surface.getModel().getFragment().getSelectedModels();
+			selectedModels = this.getSelectedModels();
 			models = [];
 			items = ve.ui.contextItemFactory.getRelatedItems( selectedModels );
 			for ( i = 0, len = items.length; i < len; i++ ) {
@@ -256,6 +256,23 @@ ve.ui.LinearContext.prototype.getRelatedSources = function () {
 	}
 
 	return this.relatedSources;
+};
+
+/**
+ * Get list of selected nodes and annotations.
+ *
+ * Exclude link annotations unless the CE focus is inside a link
+ * @param {boolean} [all] Include nodes and annotations which only cover some of the fragment
+ * @return {ve.dm.Model[]} Selected models
+ */
+ve.ui.LinearContext.prototype.getSelectedModels = function () {
+	var view = this.surface.getView();
+	return view.getModel().getFragment().getSelectedModels().filter( function( annModel ) {
+		return !(
+			annModel instanceof ve.dm.LinkAnnotation &&
+			!view.linkAnnotationAtFocus()
+		);
+	} );
 };
 
 /**
