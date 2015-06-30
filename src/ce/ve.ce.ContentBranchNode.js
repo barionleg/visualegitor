@@ -21,7 +21,8 @@ ve.ce.ContentBranchNode = function VeCeContentBranchNode( model, config ) {
 
 	// Properties
 	this.lastTransaction = null;
-	this.rendered = false;
+	// For clarity only: already set to true by the base constructor calling renderContents
+	this.rendered = !!this.rendered;
 	this.unicornAnnotations = null;
 	this.unicorns = null;
 	this.onClickHandler = this.onClick.bind( this );
@@ -358,6 +359,8 @@ ve.ce.ContentBranchNode.prototype.renderContents = function () {
 	// However we have to normalize to cope with consecutive text nodes. We can't normalize
 	// the attached version, because that would close IMEs. As an optimization, don't perform
 	// this checking if this node has never rendered before.
+
+	// Check carefully: called from the base constructor before this.rendered is defined
 	if ( this.rendered ) {
 		oldWrapper = this.$element[0].cloneNode( true );
 		newWrapper = this.$element[0].cloneNode( false );
