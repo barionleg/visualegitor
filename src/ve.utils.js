@@ -1458,3 +1458,177 @@ ve.highlightQuery = function ( text, query ) {
 	);
 	return $result.contents();
 };
+
+/**
+ * Get the closest DOM position in document order (forward or reverse)
+ *
+ * A DOM position is represented as an object with "node" and "offset" properties. The noDescend
+ * option can be used to exclude the positions inside certain element nodes; it is a jQuery
+ * selector/function ( used as a test by $node.is() - see http://api.jquery.com/is/ ).
+ *
+ * Distinct DOM positions may be treated equivalently for cursoring purposes, e.g. the positions
+ * just before/just after the boundary of a text element or an annotation element, or the
+ * start/the interior of certain grapheme clusters such as 'x\u0301'. Chromium normalizes cursor
+ * focus/offset, when they are set, to the start-most equivalent position in document order.
+ * Firefox does not normalize, but jumps when cursoring over positions that are equivalent to the
+ * start position.
+ *
+ * Even aside from equivalence, some DOM positions cannot actually hold the cursor; e.g. the start
+ * of the interior of a table node.
+ *
+ * @param {Object} position Start position
+ * @param {Node} position.node Start node
+ * @param {Node} position.offset Start offset
+ * @param {number} direction +1 for forward, -1 for reverse
+ * @param {Object} [options]
+ * @param {Function|string} [options.noDescend] Selector or function: nodes to skip over
+ * @param {boolean} [options.skipSoft] Skip "soft" element tags that don't expend a cursor press
+ * @returns {Object} The adjacent DOM position encountered
+ * @returns.node {Node|null} The node, or null if we stepped past the root node
+ * @returns.offset {number|null} The offset, or null if we stepped past the root node
+ * @returns.stepType {string} The type of content stepped over, text|hardTag|softTagOnly
+ */
+ve.adjacentDomPosition = function ( position, direction, options ) {
+	options = options || {};
+	var forward, childNode, isHard,
+		noDescend = options.noDescend,
+		skipSoft = !!options.skipSoft,
+		node = position.node,
+		offset = position.offset,
+		steps = [];
+
+	direction = direction < 0 ? -1 : 1;
+	forward = ( direction === 1 );
+
+	while ( true ) {
+		// If we're at the node's leading edge, move to the adjacent position in the parent node
+		if ( offset === ( forward ? node.length || node.childNodes.length : 0 ) ) {
+			steps.push( {
+				node: node,
+				type: 'leave'
+			} );
+			isHard = ve.hasHardCursorBoundaries( node );
+			if ( node.parentNode === null ) {
+				return {
+					node: null,
+					offset: null,
+					steps: steps,
+					stepType: isHard ? 'hardTag' : 'softTagOnly'
+				};
+			}
+			offset = Array.prototype.indexOf.call( node.parentNode.childNodes, node ) +
+				( forward ? 1 : 0 );
+			node = node.parentNode;
+			if ( !skipSoft || isHard ) {
+				return {
+					node: node,
+					offset: offset,
+					steps: steps,
+					stepType: isHard ? 'hardTag' : 'softOnly'
+				};
+			}
+			// Else take another step
+			continue;
+		}
+		// Else we're in the interior of a node
+
+		// If we're in a text node, move to the position in this node at the next offset
+		if ( node.nodeType === Node.TEXT_NODE ) {
+			steps.push( {
+				node: node,
+				type: 'internal',
+				offset: offset - ( forward ? 0 : 1 )
+			} );
+			return {
+				node: node,
+				offset: offset + direction,
+				steps: steps,
+				stepType: 'text'
+			};
+		}
+		// Else we're in the interior of an element node
+
+		childNode = node.childNodes[ forward ? offset : offset - 1 ];
+
+		// If the child is an element matching noDescend, do not descend into it: instead,
+		// return the position just beyond it in the current node
+		if (
+			noDescend &&
+			childNode.nodeType === Node.ELEMENT_NODE &&
+			$( childNode ).is( noDescend )
+		) {
+			steps.push( {
+				node: childNode,
+				type: 'cross'
+			} );
+			return {
+				node: node,
+				offset: offset + ( forward ? 1 : -1 ),
+				steps: steps,
+				// TODO: If childNode and its descendents all have hard cursor
+				// boundaries, then isn't this a soft boundary? Do we care?
+				stepType: 'hardTag'
+			};
+		}
+
+		// Go to the closest offset inside the child node
+		isHard = ve.hasHardCursorBoundaries( childNode );
+		node = childNode;
+		offset = forward ? 0 : node.length || node.childNodes.length;
+		steps.push( {
+			node: node,
+			type: 'enter'
+		} );
+		if ( !skipSoft || isHard ) {
+			return {
+				node: node,
+				offset: offset,
+				steps: steps,
+				stepType: (
+					node.nodeType === Node.TEXT_NODE ?
+					'text' :
+					( isHard ? 'hardTag' : 'softTagOnly' )
+				)
+			};
+		}
+	}
+};
+
+/**
+ * Test whether crossing a node's boundaries uses up a cursor press
+ *
+ * Essentially, this is true unless the node is a text node or an annotation node
+ *
+ * @param {Node} node Element node or text node
+ * @returns {boolean} Whether crossing the node's boundaries uses up a cursor press
+ */
+ve.hasHardCursorBoundaries = function ( node ) {
+	if ( node.nodeType === node.TEXT_NODE ) {
+		return false;
+	}
+	if ( [ 'b', 'i', 'a', 'span' ].indexOf( node.nodeName.toLowerCase() ) !== -1 ) {
+		return false;
+	}
+	return true;
+};
+
+/**
+ * Tests whether an adjacent cursor would be prevented from entering the node
+ *
+ * @param {Node} node Element node or text node
+ * @returns {boolean} Whether an adjacent cursor would be prevented from entering
+ */
+ve.rejectsCursor = function ( node ) {
+	if ( !node && this instanceof Node ) {
+		node = this;
+	}
+	if ( node.nodeType === node.TEXT_NODE ) {
+		return false;
+	}
+	if ( [ 'img', 'br' ].indexOf( node.nodeName.toLowerCase() ) !== -1 ) {
+		return true;
+	}
+	// We don't need to check whether the ancestor-nearest contenteditable tag is
+	// false, because if so then there can be no adjacent cursor.
+	return node.contentEditable === 'false';
+};
