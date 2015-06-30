@@ -16,15 +16,15 @@
  * @param {Object} [config] Configuration options
  */
 ve.ce.ContentBranchNode = function VeCeContentBranchNode( model, config ) {
-	// Parent constructor
-	ve.ce.BranchNode.call( this, model, config );
-
 	// Properties
 	this.lastTransaction = null;
 	this.rendered = false;
 	this.unicornAnnotations = null;
 	this.unicorns = null;
 	this.onClickHandler = this.onClick.bind( this );
+
+	// Parent constructor (after the above, because it will call back into this class)
+	ve.ce.BranchNode.call( this, model, config );
 
 	// Events
 	this.connect( this, { childUpdate: 'onChildUpdate' } );
