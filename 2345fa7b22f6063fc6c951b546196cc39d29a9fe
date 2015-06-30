@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_ee3bc633",
+        "filename": "src/ce/ve.ce.ContentBranchNode.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-06-30T19:20:08Z",
+      "side": 1,
+      "message": "Can\u0027t we just set it before the parent constructor call?",
+      "revId": "2345fa7b22f6063fc6c951b546196cc39d29a9fe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
