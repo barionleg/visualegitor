@@ -16,6 +16,24 @@
       "revId": "2345fa7b22f6063fc6c951b546196cc39d29a9fe",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_81a21394",
+        "filename": "src/ce/ve.ce.ContentBranchNode.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-06-30T19:37:09Z",
+      "side": 1,
+      "message": "Yes we can. But it needs commenting anyway (else it\u0027s extremely cryptic), so stylistically it seemed best to keep the usual construction order.",
+      "parentUuid": "8ec42329_ee3bc633",
+      "revId": "2345fa7b22f6063fc6c951b546196cc39d29a9fe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
