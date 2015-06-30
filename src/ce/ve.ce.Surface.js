@@ -52,6 +52,7 @@ ve.ce.Surface = function VeCeSurface( model, ui, config ) {
 	this.$deactivatedSelection = $( '<div>' );
 	this.activeTableNode = null;
 	this.contentBranchNodeChanged = false;
+	this.selectionLink = null;
 	this.$highlightsFocused = $( '<div>' );
 	this.$highlightsBlurred = $( '<div>' );
 	this.$highlights = $( '<div>' ).append(
@@ -75,7 +76,7 @@ ve.ce.Surface = function VeCeSurface( model, ui, config ) {
 	this.keyDownState = {
 		event: null,
 		selection: null,
-		focusIsAfterAnnotationBoundaries: null
+		focusIsAfterAnnotationBoundary: null
 	};
 
 	this.cursorDirectionality = null;
@@ -970,6 +971,8 @@ ve.ce.Surface.prototype.onDocumentSelectionChange = function () {
 		return;
 	}
 
+	this.fixupCursorPosition();
+	this.updateActiveLink();
 	this.surfaceObserver.pollOnceSelection();
 };
 
@@ -1517,6 +1520,10 @@ ve.ce.Surface.prototype.afterDocumentKeyDown = function ( e ) {
 		this.decRenderLock();
 	}
 	this.checkUnicorns( fixupCursorForUnicorn );
+	if ( direction === undefined ) {
+		direction = getDirection();
+	}
+	this.fixupCursorPosition( direction );
 };
 
 /**
@@ -1537,6 +1544,9 @@ ve.ce.Surface.prototype.checkUnicorns = function ( fixupCursor ) {
 	}
 	preUnicorn = this.unicorningNode.unicorns[ 0 ];
 	postUnicorn = this.unicorningNode.unicorns[ 1 ];
+	if ( !this.$document[0].contains( preUnicorn ) ) {
+		return;
+	}
 
 	if ( this.nativeSelection.rangeCount === 0 ) {
 		// XXX do we want to clear unicorns in this case?
@@ -2580,6 +2590,7 @@ ve.ce.Surface.prototype.onSurfaceObserverRangeChange = function ( oldRange, newR
 		// Ignore when the newRange is just a flipped oldRange
 		return;
 	}
+
 	this.incRenderLock();
 	try {
 		this.changeModel(
@@ -2602,6 +2613,71 @@ ve.ce.Surface.prototype.onSurfaceObserverRangeChange = function ( oldRange, newR
 		// The current range is the last range, so remove ranges from the front
 		this.nativeSelection.removeRange( this.nativeSelection.getRangeAt( 0 ) );
 	}
+};
+
+/**
+ * Move cursor if it is between annotation nails
+ * @param {number} [direction] Direction of travel, >0 for forwards, <0 for backwards
+ *
+ * TODO: Improve name
+ */
+ve.ce.Surface.prototype.fixupCursorPosition = function ( direction ) {
+	var range, node, offset, previousNode, fixedPosition, nextNode;
+	// Default to moving start-wards, to mimic typical Chromium behaviour
+	direction = direction > 0 ? 1 : -1;
+
+	if ( this.nativeSelection.rangeCount === 0 ) {
+		return;
+	}
+	range = this.nativeSelection.getRangeAt( 0 );
+
+	node = range.endContainer;
+	offset = range.endOffset;
+	if ( node.nodeType !== Node.ELEMENT_NODE ) {
+		return;
+	}
+	previousNode = node.childNodes[ offset - 1 ];
+	nextNode = node.childNodes[ offset ];
+
+	if (
+		!(
+			previousNode &&
+			previousNode.nodeType === Node.ELEMENT_NODE && (
+				previousNode.classList.contains( 've-ce-nail-pre-open' ) ||
+				previousNode.classList.contains( 've-ce-nail-pre-close' )
+			)
+		) && !(
+			nextNode &&
+			nextNode.nodeType === Node.ELEMENT_NODE && (
+				nextNode.classList.contains( 've-ce-nail-post-open' ) ||
+				nextNode.classList.contains( 've-ce-nail-post-close' )
+			)
+		)
+	) {
+		return;
+	}
+	// Between nails: cross the one in the specified direction
+	fixedPosition = ve.adjacentDomPosition( { node: node, offset: offset }, direction );
+	node = fixedPosition.node;
+	offset = fixedPosition.offset;
+	if ( direction === -1 ) {
+		// Moving startwards: left-bias the fixed position
+		// Avoids Firefox bug "cursor disappears at left of img inside link":
+		// https://bugzilla.mozilla.org/show_bug.cgi?id=1175495
+		fixedPosition = ve.adjacentDomPosition( fixedPosition, direction );
+		if ( fixedPosition.node.nodeType === Node.TEXT_NODE ) {
+			// Have crossed into a text node; go back to its end
+			node = fixedPosition.node;
+			offset = fixedPosition.node.length;
+		}
+	}
+
+	if ( range.collapsed ) {
+		range.setStart( node, offset );
+	}
+	range.setEnd( node, offset );
+	this.nativeSelection.removeAllRanges();
+	this.nativeSelection.addRange( range );
 };
 
 /**
@@ -2630,58 +2706,7 @@ ve.ce.Surface.prototype.onSurfaceObserverContentChange = function ( node, previo
 		nextData = next.text.split( '' ),
 		modelData = this.model.getDocument().data,
 		lengthDiff = next.text.length - previous.text.length,
-		nextDataString = new ve.dm.DataString( nextData ),
 		surface = this;
-
-	/**
-	 * Given a naïvely computed set of annotations to apply to the content we're about to insert,
-	 * this function will check if we're inserting at a word break, check if there are any
-	 * annotations in the set that need to be split at a word break, and remove those.
-	 *
-	 * @private
-	 * @param {ve.dm.AnnotationSet} annotations Annotations to apply. Will be modified.
-	 * @param {ve.Range} range Range covering removed content, or collapsed range at insertion offset.
-	 */
-	function filterForWordbreak( annotations, range ) {
-		var i, length, annotation, annotationIndex, annotationsLeft, annotationsRight,
-			left = range.start,
-			right = range.end,
-			// - nodeOffset - 1 to adjust from absolute to relative
-			// adjustment from prev to next not needed because we're before the replacement
-			breakLeft = unicodeJS.wordbreak.isBreak( nextDataString, left - nodeOffset - 1 ),
-			// - nodeOffset - 1 to adjust from absolute to relative
-			// + lengthDiff to adjust from prev to next
-			breakRight = unicodeJS.wordbreak.isBreak( nextDataString, right + lengthDiff - nodeOffset - 1 );
-
-		if ( !breakLeft && !breakRight ) {
-			// No word breaks either side, so nothing to do
-			return;
-		}
-
-		annotationsLeft = modelData.getAnnotationsFromOffset( left - 1 );
-		annotationsRight = modelData.getAnnotationsFromOffset( right );
-
-		for ( i = 0, length = annotations.getLength(); i < length; i++ ) {
-			annotation = annotations.get( i );
-			annotationIndex = annotations.getIndex( i );
-			if (
-				// This annotation splits on wordbreak, and...
-				annotation.constructor.static.splitOnWordbreak &&
-				(
-					// either we're at its right-hand boundary (its end is to our left) and
-					// there's a wordbreak to our left
-					( breakLeft && !annotationsRight.containsIndex( annotationIndex ) ) ||
-					// or we're at its left-hand boundary (its beginning is to our right) and
-					// there's a wordbreak to our right
-					( breakRight && !annotationsLeft.containsIndex( annotationIndex ) )
-				)
-			) {
-				annotations.removeAt( i );
-				i--;
-				length--;
-			}
-		}
-	}
 
 	if ( previous.range && next.range ) {
 		offsetDiff = ( previous.range.isCollapsed() && next.range.isCollapsed() ) ?
@@ -2711,7 +2736,7 @@ ve.ce.Surface.prototype.onSurfaceObserverContentChange = function ( node, previo
 			// Apply insertion annotations
 			if ( node.unicornAnnotations ) {
 				annotations = node.unicornAnnotations;
-			} else if ( this.keyDownState.focusIsAfterAnnotationBoundaries ) {
+			} else if ( this.keyDownState.focusIsAfterAnnotationBoundary ) {
 				annotations = modelData.getAnnotationsFromOffset(
 					nodeOffset + previousStart + 1
 				);
@@ -2720,7 +2745,6 @@ ve.ce.Surface.prototype.onSurfaceObserverContentChange = function ( node, previo
 			}
 
 			if ( annotations.getLength() ) {
-				filterForWordbreak( annotations, new ve.Range( previous.range.start ) );
 				ve.dm.Document.static.addAnnotationsToData( data, annotations );
 			}
 
@@ -2803,7 +2827,6 @@ ve.ce.Surface.prototype.onSurfaceObserverContentChange = function ( node, previo
 		annotations = modelData.getAnnotationsFromOffset( replacementRange.start - 1 );
 	}
 	if ( annotations.getLength() ) {
-		filterForWordbreak( annotations, replacementRange );
 		ve.dm.Document.static.addAnnotationsToData( data, annotations );
 	}
 	newRange = next.range;
@@ -2913,17 +2936,17 @@ ve.ce.Surface.prototype.getActiveTableNode = function () {
  * modified, because anchorNode/focusNode are live and mutable, and so the offsets may come to
  * point confusingly to different places than they did when the selection was saved).
  *
- * Annotation changes before the cursor focus are detected: see ve.ce.isAfterAnnotationBoundaries .
+ * Annotation changes before the cursor focus are detected: see ve.ce.isAfterAnnotationBoundary .
  *
  * @param {jQuery.Event|null} e Key down event; must be active when this call is made
  */
 ve.ce.Surface.prototype.storeKeyDownState = function ( e ) {
 	this.keyDownState.event = e;
 	this.keyDownState.selection = null;
-	this.keyDownState.focusIsAfterAnnotationBoundaries = null;
+	this.keyDownState.focusIsAfterAnnotationBoundary = null;
 
 	if ( this.nativeSelection.rangeCount > 0 ) {
-		this.keyDownState.focusIsAfterAnnotationBoundaries = ve.ce.isAfterAnnotationBoundaries(
+		this.keyDownState.focusIsAfterAnnotationBoundary = ve.ce.isAfterAnnotationBoundary(
 			this.nativeSelection.focusNode,
 			this.nativeSelection.focusOffset
 		);
@@ -3213,6 +3236,8 @@ ve.ce.Surface.prototype.handleLinearArrowKey = function ( e ) {
 				// The intended direction is clear, even if the cursor did not move
 				// or did something completely preposterous
 				afterDirection = e.keyCode === OO.ui.Keys.DOWN ? 1 : -1;
+			} else if ( !surface.$document[0].contains( startFocusNode ) ) {
+				afterDirection = 0;
 			} else {
 				// Observe which way the cursor moved
 				afterDirection = ve.compareDocumentOrder(
@@ -3238,6 +3263,7 @@ ve.ce.Surface.prototype.handleLinearArrowKey = function ( e ) {
 			newRange = new ve.Range( range.from, newRange.to );
 			surface.getModel().setLinearSelection( newRange );
 		}
+		surface.updateActiveLink();
 		surface.surfaceObserver.pollOnce();
 	} } );
 };
@@ -3626,7 +3652,7 @@ ve.ce.Surface.prototype.handleTableEnter = function ( e ) {
  * @return {boolean} Whether the content was removed by this method
  */
 ve.ce.Surface.prototype.handleLinearDelete = function ( e ) {
-	var docLength, startNode, tableEditingRange,
+	var docLength, startNode, tableEditingRange, position, skipNode, pairNode, linkNode, range,
 		documentModelSelectedNodes, i, node, nodeOuterRange, matrix,
 		direction = e.keyCode === OO.ui.Keys.DELETE ? 1 : -1,
 		unit = ( e.altKey === true || e.ctrlKey === true ) ? 'word' : 'character',
@@ -3635,23 +3661,104 @@ ve.ce.Surface.prototype.handleLinearDelete = function ( e ) {
 		documentModel = this.getModel().getDocument(),
 		data = documentModel.data;
 
-	if ( rangeToRemove.isCollapsed() ) {
-		// Use native behaviour then poll, unless we are adjacent to some element (or CTRL
-		// is down, in which case we can't reliably predict whether the native behaviour
-		// would delete far enough to remove some element)
-		offset = rangeToRemove.start;
-		if ( !e.ctrlKey && (
-			( direction === -1 && !data.isElementData( offset - 1 ) ) ||
-			( direction === 1 && !data.isElementData( offset ) )
-		) ) {
+	// Use native behaviour then poll if collapsed, unless we are adjacent to some hard tag
+	// (or CTRL is down, in which case we can't reliably predict whether the native behaviour
+	// would delete far enough to remove some element)
+	if ( rangeToRemove.isCollapsed() && !e.ctrlKey ) {
+		position = ve.adjacentDomPosition(
+			{
+				node: this.nativeSelection.focusNode,
+				offset: this.nativeSelection.focusOffset
+			},
+			direction
+		);
+		skipNode = position.steps[ position.steps.length - 1 ].node;
+		if ( skipNode.nodeType === Node.TEXT_NODE ) {
 			this.eventSequencer.afterOne( {
 				keydown: this.surfaceObserver.pollOnce.bind( this.surfaceObserver )
 			} );
 			return false;
 		}
 
-		// In case when the range is collapsed use the same logic that is used for cursor left and
-		// right movement in order to figure out range to remove.
+		// If the native action would delete an outside nail, move *two* cursor positions
+		// in the deletion direction, to get inside the link just past the inside nail,
+		// then preventDefault
+		if (
+			direction > 0 ?
+			skipNode.classList.contains( 've-ce-nail-pre-open' ) :
+			skipNode.classList.contains( 've-ce-nail-post-close' )
+		) {
+			position = ve.adjacentDomPosition( position, direction );
+			range = document.createRange();
+			range.setStart( position.node, position.offset );
+			this.nativeSelection.removeAllRanges();
+			this.nativeSelection.addRange( range );
+			this.updateActiveLink();
+			return true;
+		}
+
+		// If inside an empty link, delete it and preventDefault
+		if (
+			skipNode.classList &&
+			skipNode.classList.contains(
+				direction > 0 ?
+				've-ce-nail-pre-close' :
+				've-ce-nail-post-open'
+			) &&
+			( pairNode = (
+				direction > 0 ?
+				skipNode.previousSibling :
+				skipNode.nextSibling
+			) ) &&
+			pairNode.classList &&
+			pairNode.classList.contains(
+				direction > 0 ?
+				've-ce-nail-post-open' :
+				've-ce-nail-pre-close'
+			)
+		) {
+			linkNode = skipNode.parentNode;
+			range = document.createRange();
+			range.setStart(
+				linkNode.parentNode,
+				Array.prototype.indexOf.call(
+					linkNode.parentNode.childNodes,
+					linkNode
+				)
+			);
+			linkNode.remove();
+			this.nativeSelection.removeAllRanges();
+			this.nativeSelection.addRange( range );
+			this.updateActiveLink();
+			return true;
+		}
+
+		// If the native action would delete an inside nail, move *two* cursor positions
+		// in the deletion direction, to get outside the link just past the outside nail,
+		// then preventDefault
+		if (
+			direction > 0 ?
+			skipNode.classList.contains( 've-ce-nail-pre-close' ) :
+			skipNode.classList.contains( 've-ce-nail-post-open' )
+		) {
+			position = ve.adjacentDomPosition( position, direction );
+			range = document.createRange();
+			range.setStart( position.node, position.offset );
+			this.nativeSelection.removeAllRanges();
+			this.nativeSelection.addRange( range );
+			this.updateActiveLink();
+			return true;
+		}
+
+		this.eventSequencer.afterOne( {
+			keydown: this.surfaceObserver.pollOnce.bind( this.surfaceObserver )
+		} );
+		return false;
+	}
+
+	// Else range is uncollapsed or is adjacent to a non-nail element.
+	if ( rangeToRemove.isCollapsed() ) {
+		// Expand rangeToRemove
 		rangeToRemove = documentModel.getRelativeRange( rangeToRemove, direction, unit, true );
 		tableEditingRange = this.getActiveTableNode() ? this.getActiveTableNode().getEditingRange() : null;
 		if ( tableEditingRange && !tableEditingRange.containsRange( rangeToRemove ) ) {
@@ -3851,6 +3958,7 @@ ve.ce.Surface.prototype.showSelectionState = function ( selection ) {
 		newSel = selection;
 
 	if ( newSel.equalsSelection( sel ) ) {
+		this.updateActiveLink();
 		return false;
 	}
 
@@ -3873,6 +3981,7 @@ ve.ce.Surface.prototype.showSelectionState = function ( selection ) {
 			// Fallback: Apply the corresponding forward selection
 			newSel = newSel.flip();
 			if ( newSel.equalsSelection( sel ) ) {
+				this.updateActiveLink();
 				return false;
 			}
 		}
@@ -3894,7 +4003,37 @@ ve.ce.Surface.prototype.showSelectionState = function ( selection ) {
 			$( newSel.focusNode ).closest( '*' ).get( 0 )
 		);
 	}
+	this.updateActiveLink();
 	return true;
+};
+
+/**
+ * Update the activeLink property and apply CSS classes accordingly
+ */
+ve.ce.Surface.prototype.updateActiveLink = function () {
+	var activeLink = this.linkAnnotationAtFocus();
+	if ( activeLink === this.activeLink ) {
+		return;
+	}
+	if ( this.activeLink ) {
+		this.activeLink.classList.remove( 've-ce-linkAnnotation-active' );
+	}
+	this.activeLink = activeLink;
+	if ( activeLink ) {
+		this.activeLink.classList.add( 've-ce-linkAnnotation-active' );
+	}
+	this.model.emit( 'contextChange' );
+};
+
+/**
+ * Get the linkAnnotation node containing the cursor fous
+ *
+ * If there is no focus, or it is not inside a linkAnnotation, return null
+ * @return {Node|null} the linkAnnotation node containing the focus
+ *
+ */
+ve.ce.Surface.prototype.linkAnnotationAtFocus = function () {
+	return $( this.nativeSelection.focusNode ).closest( '.ve-ce-linkAnnotation' )[0] || null;
 };
 
 /**
@@ -4166,4 +4305,40 @@ ve.ce.Surface.prototype.setNotUnicorningAll = function ( node ) {
 		this.unicorningNode = null;
 	}
 	this.setUnicorning( null );
+};
+
+/**
+ * Get list of selected nodes and annotations.
+ *
+ * Exclude link annotations unless the CE focus is inside a link
+ * @param {boolean} [all] Include nodes and annotations which only cover some of the fragment
+ * @return {ve.dm.Model[]} Selected models
+ */
+ve.ce.Surface.prototype.getSelectedModels = function () {
+	var models, fragmentAfter;
+	if ( !( this.model.selection instanceof ve.dm.LinearSelection ) ) {
+		return [];
+	}
+	models = this.model.getFragment().getSelectedModels();
+
+	if ( this.model.selection.isCollapsed() ) {
+		fragmentAfter = this.model.getFragment( new ve.dm.LinearSelection(
+			this.model.getDocument(),
+			new ve.Range(
+				this.model.selection.range.start,
+				this.model.selection.range.start + 1
+			)
+		) );
+		models = OO.unique( [].concat(
+			models,
+			fragmentAfter.getSelectedModels()
+		) );
+	}
+
+	if ( this.activeLink ) {
+		return models;
+	}
+	return models.filter( function ( annModel ) {
+		return !( annModel instanceof ve.dm.LinkAnnotation );
+	} );
 };
