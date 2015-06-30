@@ -107,23 +107,30 @@ ve.ce.getDomText = function ( element ) {
  * @returns {string} Hash of DOM element
  */
 ve.ce.getDomHash = function ( element ) {
-	var nodeType = element.nodeType,
+	var $element,
+		nodeType = element.nodeType,
 		nodeName = element.nodeName,
 		hash = '';
 
 	if ( nodeType === Node.TEXT_NODE || nodeType === Node.CDATA_SECTION_NODE ) {
 		return '#';
 	} else if ( nodeType === Node.ELEMENT_NODE || nodeType === Node.DOCUMENT_NODE ) {
+		$element = $( element );
 		if ( !(
-			$( element ).hasClass( 've-ce-branchNode-blockSlug' ) ||
-			$( element ).hasClass( 've-ce-cursorHolder' )
+			$element.hasClass( 've-ce-branchNode-blockSlug' ) ||
+			$element.hasClass( 've-ce-cursorHolder' ) ||
+			$element.hasClass( 've-ce-nail' )
 		) ) {
-			hash += '<' + nodeName + '>';
+			if ( !$element.hasClass( 've-ce-linkAnnotation' ) ) {
+				hash += '<' + nodeName + '>';
+			}
 			// Traverse its children
 			for ( element = element.firstChild; element; element = element.nextSibling ) {
 				hash += ve.ce.getDomHash( element );
 			}
-			hash += '</' + nodeName + '>';
+			if ( !$element.hasClass( 've-ce-linkAnnotation' ) ) {
+				hash += '</' + nodeName + '>';
+			}
 		}
 		// Merge adjacent text node representations
 		hash = hash.replace( /##+/g, '#' );
@@ -397,8 +404,8 @@ ve.ce.getOffsetOfSlug = function ( element ) {
  * @param {number} offset Position offset
  * @return {boolean} Whether this is the end-most of multiple cursor-equivalent positions
  */
-ve.ce.isAfterAnnotationBoundaries = function ( node, offset ) {
-	var previousNode, nextNode;
+ve.ce.isAfterAnnotationBoundary = function ( node, offset ) {
+	var previousNode;
 	if ( node.nodeType === Node.TEXT_NODE ) {
 		if ( offset > 0 ) {
 			return false;
@@ -409,12 +416,15 @@ ve.ce.isAfterAnnotationBoundaries = function ( node, offset ) {
 	if ( offset === 0 ) {
 		return ve.dm.modelRegistry.isAnnotation( node );
 	}
+
 	previousNode = node.childNodes[ offset - 1 ];
-	if ( !previousNode || !ve.dm.modelRegistry.isAnnotation( previousNode ) ) {
-		return false;
+	if (
+		previousNode.nodeType === Node.ELEMENT_NODE &&
+		previousNode.classList.contains( 've-ce-post-nail' )
+	) {
+		return true;
 	}
-	nextNode = node.childNodes[ offset ];
-	return !nextNode || !ve.dm.modelRegistry.isAnnotation( nextNode );
+	return ve.dm.modelRegistry.isAnnotation( previousNode );
 };
 
 /**
