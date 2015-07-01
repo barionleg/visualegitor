@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_b570a9d9",
+        "filename": "src/dm/ve.dm.Surface.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 580,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-07-01T08:42:11Z",
+      "side": 1,
+      "message": "can it be falsey and not undefined? just check startLInk \u0026\u0026 endLInk",
+      "revId": "843c15546ce461cb83548174ed64fa0338055ef4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_75afa127",
+        "filename": "src/dm/ve.dm.Surface.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 598,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-07-01T08:42:11Z",
+      "side": 1,
+      "message": ";",
+      "revId": "843c15546ce461cb83548174ed64fa0338055ef4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
