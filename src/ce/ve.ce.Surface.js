@@ -1588,7 +1588,7 @@ ve.ce.Surface.prototype.onCut = function ( e ) {
  * @param {jQuery.Event} e Copy event
  */
 ve.ce.Surface.prototype.onCopy = function ( e ) {
-	var originalRange,
+	var originalSelection,
 		clipboardIndex, clipboardItem,
 		scrollTop, unsafeSelector, range, slice,
 		selection = this.getModel().getSelection(),
@@ -1668,10 +1668,16 @@ ve.ce.Surface.prototype.onCopy = function ( e ) {
 
 		// If direct clipboard editing is not allowed, we must use the pasteTarget to
 		// select the data we want to go in the clipboard
+		if ( this.getModel().getSelection() instanceof ve.dm.LinearSelection ) {
+			// We have a selection in the document; preserve it so it can restored
+			originalSelection = {
+				anchorNode: this.nativeSelection.anchorNode,
+				anchorOffset: this.nativeSelection.anchorOffset,
+				focusNode: this.nativeSelection.focusNode,
+				focusOffset: this.nativeSelection.focusOffset,
+				isCollapsed: this.nativeSelection.isCollapsed
+			};
 
-		// If we have a range in the document, preserve it so it can restored
-		originalRange = this.getNativeRange();
-		if ( originalRange ) {
 			// Save scroll position before changing focus to "offscreen" paste target
 			scrollTop = this.$window.scrollTop();
 
@@ -1684,11 +1690,10 @@ ve.ce.Surface.prototype.onCopy = function ( e ) {
 
 			setTimeout( function () {
 				// If the range was in $highlights (right-click copy), don't restore it
-				if ( !OO.ui.contains( view.$highlights[0], originalRange.startContainer, true ) ) {
+				if ( !OO.ui.contains( view.$highlights[0], originalSelection.focusNode, true ) ) {
 					// Change focus back
 					view.$documentNode[0].focus();
-					view.nativeSelection.removeAllRanges();
-					view.nativeSelection.addRange( originalRange.cloneRange() );
+					view.showRangeSelection( originalSelection );
 					// Restore scroll position
 					view.$window.scrollTop( scrollTop );
 				}
@@ -3768,7 +3773,7 @@ ve.ce.Surface.prototype.getViewportRange = function () {
 };
 
 /**
- * Show selection
+ * Show DM selection
  *
  * @method
  * @param {ve.dm.Selection} selection Selection to show
@@ -3788,80 +3793,141 @@ ve.ce.Surface.prototype.showSelection = function ( selection ) {
 		return;
 	}
 
-	var endRange, oldRange, $node,
-		range = selection.getRange(),
-		rangeSelection = this.getRangeSelection( range ),
-		nativeRange = this.getElementDocument().createRange();
+	this.showRangeSelection( this.getRangeSelection( selection.getRange() ) );
+};
 
-	nativeRange.setStart( rangeSelection.start.node, rangeSelection.start.offset );
-	if ( rangeSelection.end ) {
-		nativeRange.setEnd( rangeSelection.end.node, rangeSelection.end.offset );
+/**
+ * Show native-selection-like object
+ *
+ * @param {Object} rangeSelection A native-selection-like object
+ * @param {Node} rangeSelection.anchorNode Anchor node to show
+ * @param {number} rangeSelection.anchorOffset Anchor offset to show
+ * @param {Node} rangeSelection.focusNode Focus node to show
+ * @param {number} rangeSelection.focusOffset Focus offset to show
+ * @param {boolean} rangeSelection.isCollapsed Are focus and anchor equal?
+ * @param {boolean} [rangeSelection.isBackwards] Is focus before anchor? (Calculated if ommitted)
+ */
+ve.ce.Surface.prototype.showRangeSelection = function ( rangeSelection ) {
+	var range = document.createRange(),
+		sel = this.nativeSelection,
+		newSel = rangeSelection,
+		isBackwards = newSel.isBackwards;
+
+	/** Test whether the selection would change.
+	 * TODO: this gives false positives, because an apparent change can be normalized away
+	 * by the browser e.g. "abc<i>|def</i>" -> "abc|<i>def</i>" in Chromium.
+	 */
+	function isChanged() {
+		return sel.rangeCount === 0 ||
+			newSel.anchorNode !== sel.anchorNode ||
+			newSel.anchorOffset !== sel.anchorOffset ||
+			newSel.focusNode !== sel.focusNode ||
+			newSel.focusOffset !== sel.focusOffset;
 	}
-	if ( rangeSelection.end && rangeSelection.isBackwards && this.nativeSelection.extend ) {
-		endRange = nativeRange.cloneRange();
-		endRange.collapse( false );
-		this.nativeSelection.removeAllRanges();
-		this.nativeSelection.addRange( endRange );
-		try {
-			this.nativeSelection.extend( nativeRange.startContainer, nativeRange.startOffset );
-		} catch ( e ) {
-			// Firefox sometimes fails when nodes are different,
-			// see https://bugzilla.mozilla.org/show_bug.cgi?id=921444
-			this.nativeSelection.addRange( nativeRange );
-		}
-	} else if ( !(
-		this.nativeSelection.rangeCount > 0 &&
-		( oldRange = this.nativeSelection.getRangeAt( 0 ) ) &&
-		oldRange.startContainer === nativeRange.startContainer &&
-		oldRange.startOffset === nativeRange.startOffset &&
-		oldRange.endContainer === nativeRange.endContainer &&
-		oldRange.endOffset === nativeRange.endOffset
-	) ) {
-		// Genuine selection change: apply it.
-		// TODO: this is slightly too zealous, because a cursor position at a node edge
-		// can have more than one (container,offset) representation
-		this.nativeSelection.removeAllRanges();
-		this.nativeSelection.addRange( nativeRange );
-	} else {
-		// Not a selection change: don't needlessly reapply the same selection.
+
+	if ( !isChanged() ) {
 		return;
 	}
 
+	if ( isBackwards === undefined ) {
+		isBackwards = !newSel.isCollapsed && ve.compareDocumentOrder(
+			newSel.focusNode,
+			newSel.focusOffset,
+			newSel.anchorNode,
+			newSel.anchorOffset
+		) < 0;
+	}
+
+	if ( isBackwards ) {
+		if ( sel.extend ) {
+			range.setStart( newSel.anchorNode, newSel.anchorOffset );
+			sel.removeAllRanges();
+			sel.addRange( range );
+			try {
+				sel.extend( newSel.focusNode, newSel.focusOffset );
+				return;
+			} catch ( e ) {
+				// Firefox sometimes fails when nodes are different
+				// see https://bugzilla.mozilla.org/show_bug.cgi?id=921444
+			}
+		}
+		// Fallback: Apply the corresponding forward selection
+		newSel = this.flipRangeSelection( newSel );
+		if ( !isChanged() ) {
+			return;
+		}
+	}
+
+	// Forward selection
+	range.setStart( newSel.anchorNode, newSel.anchorOffset );
+	if ( !newSel.isCollapsed ) {
+		range.setEnd( newSel.focusNode, newSel.focusOffset );
+	}
+	sel.removeAllRanges();
+	sel.addRange( range );
+
 	// Setting a range doesn't give focus in all browsers so make sure this happens
 	// Also set focus after range to prevent scrolling to top
-	if ( !OO.ui.contains( this.getElementDocument().activeElement, rangeSelection.start.node, true ) ) {
-		$( rangeSelection.start.node ).closest( '[contenteditable=true]' ).focus();
+	if ( !OO.ui.contains( this.getElementDocument().activeElement, newSel.focusNode, true ) ) {
+		$( newSel.focusNode ).closest( '[contenteditable=true]' ).focus();
 	} else {
-		$node = $( rangeSelection.start.node ).closest( '*' );
 		// Scroll the node into view
-		OO.ui.Element.static.scrollIntoView( $node.get( 0 ) );
+		OO.ui.Element.static.scrollIntoView(
+			$( newSel.focusNode ).closest( '*' ).get( 0 )
+		);
 	}
 };
 
 /**
- * Get selection for a range.
+ * Get anchor and focus positions for a range.
  *
  * @method
  * @param {ve.Range} range Range to get selection for
- * @returns {Object} Object containing start and end node/offset selections, and an isBackwards flag.
+ * @returns {Object} The selection
+ * @returns.anchorNode {Node} The anchor node
+ * @returns.anchorOffset {number} The anchor offset
+ * @returns.focusNode {Node} The focus node
+ * @returns.focusOffset {number} The focus offset
+ * @returns.isCollapsed {boolean} True if the focus and anchor are in the same place
+ * @returns.isBackwards {boolean} True if the focus is before the anchor
  */
 ve.ce.Surface.prototype.getRangeSelection = function ( range ) {
-	range = new ve.Range(
-		this.getNearestCorrectOffset( range.from, -1 ),
-		this.getNearestCorrectOffset( range.to, 1 )
-	);
+	var anchor, focus;
 
-	if ( !range.isCollapsed() ) {
-		return {
-			start: this.documentView.getNodeAndOffset( range.start ),
-			end: this.documentView.getNodeAndOffset( range.end ),
-			isBackwards: range.isBackwards()
-		};
-	} else {
-		return {
-			start: this.documentView.getNodeAndOffset( range.start )
-		};
+	// Anchor/focus at the nearest correct position in the direction that grows the selection
+	anchor = this.documentView.getNodeAndOffset(
+		this.getNearestCorrectOffset( range.from, range.isBackwards() ? 1 : -1 )
+	);
+	focus = this.documentView.getNodeAndOffset(
+		this.getNearestCorrectOffset( range.to, range.isBackwards() ? -1 : 1 )
+	);
+	return {
+		anchorNode: anchor.node,
+		anchorOffset: anchor.offset,
+		focusNode: focus.node,
+		focusOffset: focus.offset,
+		isCollapsed: range.isCollapsed() && ( anchor.node === focus.node && anchor.offset === focus.offset ),
+		isBackwards: range.isBackwards()
+	};
+};
+
+/**
+ * Flips the selection if uncollapsed; otherwise returns it unchanged
+ *
+ * @param {Object} rangeSelection native-selection-like object
+ * @returns {Object} The selection with the anchor/focus swapped
+ */
+ve.ce.Surface.prototype.flipRangeSelection = function ( rangeSelection ) {
+	if ( rangeSelection.isCollapsed ) {
+		return rangeSelection;
 	}
+	return {
+		anchorNode: rangeSelection.focusNode,
+		anchorOffset: rangeSelection.focusOffset,
+		focusNode: rangeSelection.anchorNode,
+		focusOffset: rangeSelection.focusOffset,
+		isCollapsed: false
+	};
 };
 
 /**
@@ -3900,10 +3966,12 @@ ve.ce.Surface.prototype.getNativeRange = function ( range ) {
 
 	nativeRange = document.createRange();
 	rangeSelection = this.getRangeSelection( range );
-
-	nativeRange.setStart( rangeSelection.start.node, rangeSelection.start.offset );
-	if ( rangeSelection.end ) {
-		nativeRange.setEnd( rangeSelection.end.node, rangeSelection.end.offset );
+	if ( rangeSelection.isBackwards ) {
+		rangeSelection = this.flipRangeSelection( rangeSelection );
+	}
+	nativeRange.setStart( rangeSelection.anchorNode, rangeSelection.anchorOffset );
+	if ( !rangeSelection.isCollapsed ) {
+		nativeRange.setEnd( rangeSelection.focusNode, rangeSelection.focusOffset );
 	}
 	return nativeRange;
 };
