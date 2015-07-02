@@ -455,3 +455,170 @@ ve.ce.veRangeFromSelection = function ( selection ) {
 		return null;
 	}
 };
+
+/**
+ * Returns DOM selection, adjusted if necessary so it does not partially cover a link
+ *
+ * If direction is 1, all focus moves are forwards
+ * If direction is -1, all focus moves are backwards
+ * If direction is 0, all focus moves are away from the anchor (i.e. they grow the selection)
+ *
+ * @param {ve.SelectionState|Selection|Object} selection state
+ * @param {number} direction -1 for backwards, +1 for forwards, 0 for neither
+ * @return {ve.SelectionState} Adjusted selection; may be the same extent as the argument
+ */
+ve.ce.adjustLinkSelection = function ( selection, direction ) {
+	var link, sel, nailType, focusDir, newNode;
+
+	// The selection is expanded and may partially cover a link (or two links). Algorithm:
+	// - If the selection is null or collapsed, return it
+	// - Calculate the direction for focus moves (specified direction || away from anchor)
+	// - Ensure the focus is not between the link and nails (moving in the specified direction)
+	// - Ensure the anchor is not between the link and nails (moving away from focus)
+	// - If anchor is inside a link but focus is not, move anchor to select the whole link
+	// - If focus is inside a link but anchor is not, move focus to select the whole link
+
+	function getOffset( node ) {
+		return Array.prototype.indexOf.call( node.parentNode.childNodes, node );
+	}
+
+	function linkAt( node ) {
+		return $( node ).closest( '.ve-ce-linkAnnotation' )[ 0 ];
+	}
+
+	function nailTypeAt( node, offset ) {
+		var nodeAt;
+		if ( !node.childNodes ) {
+			return null;
+		}
+		nodeAt = node.childNodes[ offset ];
+		if ( !nodeAt || !nodeAt.classList || !nodeAt.classList.contains( 've-ce-nail' ) ) {
+			return null;
+		}
+		if ( nodeAt.classList.contains( 've-ce-nail-pre-open' ) ) {
+			return 'pre-open';
+		}
+		if ( nodeAt.classList.contains( 've-ce-nail-post-open' ) ) {
+			return 'post-open';
+		}
+		if ( nodeAt.classList.contains( 've-ce-nail-pre-close' ) ) {
+			return 'pre-close';
+		}
+		if ( nodeAt.classList.contains( 've-ce-nail-post-close' ) ) {
+			return 'post-close';
+		}
+		ve.error( 'Unexpected nail classes: ' + nodeAt.getAttribute( 'class' ) );
+		return null;
+	}
+
+	function nailTypeBefore( node, offset ) {
+		return nailTypeAt( node, offset - 1 );
+	}
+
+	sel = new ve.SelectionState( selection );
+	if ( sel.focusNode === null || sel.isCollapsed ) {
+		return sel;
+	}
+
+	// Calculate the direction for focus moves (specified direction || away from anchor)
+	focusDir = direction || ( sel.isBackwards ? -1 : 1 );
+
+	// If the focus is inside the link but not the inner nails, move it either inwards or outwards
+	// depending on direction
+	if (
+		( nailType = nailTypeAt( sel.focusNode, sel.focusOffset ) ) === 'post-open' ||
+		( nailType = nailTypeBefore( sel.focusNode, sel.focusOffset ) ) === 'pre-close'
+	) {
+		if (
+			( focusDir > 0 && nailType === 'post-open' ) ||
+			( focusDir < 0 && nailType === 'pre-close' )
+		) {
+			sel = sel.cloneChanged( { focusOffset: sel.focusOffset + focusDir } );
+		} else {
+			link = linkAt( sel.focusNode );
+			sel = sel.cloneChanged( {
+				focusNode: link.parentNode,
+				// Move past the link and the outer nail
+				focusOffset: getOffset( link ) + ( focusDir > 0 ? 2 : -1 )
+			} );
+		}
+	}
+
+	// If focus is inside the outer nails but not the link, move it either inwards or outwards
+	// depending on direction
+	if (
+		( nailType = nailTypeBefore( sel.focusNode, sel.focusOffset ) ) === 'pre-open' ||
+		( nailType = nailTypeAt( sel.focusNode, sel.focusOffset ) ) === 'post-close'
+	) {
+		if (
+			( focusDir < 0 && nailType === 'pre-open' ) ||
+			( focusDir > 0 && nailType === 'post-close' )
+		) {
+			sel = sel.cloneChanged( { focusOffset: sel.focusOffset + focusDir } );
+		} else if ( nailType === 'pre-open' ) {
+			newNode = sel.focusNode.childNodes[ sel.focusOffset ];
+			sel = sel.cloneChanged( {
+				focusNode: newNode,
+				focusOffset: 1
+			} );
+		} else if ( nailType === 'post-close' ) {
+			newNode = sel.focusNode.childNodes[ sel.focusOffset - 1 ];
+			sel = sel.cloneChanged( {
+				focusNode: newNode,
+				focusOffset: newNode.childNodes.length - 1
+			} );
+		}
+	}
+
+	// If the anchor is inside the link but not the inner nails, move it just outside the link
+	// (including past the outer nails) in the selection-expanding direction
+	if (
+		nailTypeAt( sel.anchorNode, sel.anchorOffset ) === 'post-open' ||
+		nailTypeBefore( sel.anchorNode, sel.anchorOffset ) === 'pre-close'
+	) {
+		link = linkAt( sel.anchorNode );
+		sel = sel.cloneChanged( {
+			anchorNode: link.parentNode,
+			// Move past the link and the outer nail
+			anchorOffset: getOffset( link ) + ( sel.isBackwards ? 2 : -1 )
+		} );
+	}
+
+	// If anchor is inside the outer nails but not the link, move it just outside the nails
+	if (
+		( nailType = nailTypeBefore( sel.anchorNode, sel.anchorOffset ) ) === 'pre-open' ||
+		( nailType = nailTypeAt( sel.anchorNode, sel.anchorOffset ) ) === 'post-close'
+	) {
+		sel = sel.cloneChanged( {
+			anchorOffset: sel.anchorOffset + ( nailType === 'pre-open' ? -1 : 1 )
+		} );
+	}
+
+	// If anchor is in the link but focus is not, move anchor to select the whole link
+	// (including the outer nails)
+	if (
+		( link = linkAt( sel.anchorNode ) ) &&
+		!link.contains( sel.focusNode )
+	) {
+		sel = sel.cloneChanged( {
+			anchorNode: link.parentNode,
+			// Move past the link and the outer nail
+			anchorOffset: getOffset( link ) + ( sel.isBackwards ? 2 : -1 )
+		} );
+	}
+
+	// If focus is in the link but anchor is not, move focus to select the whole link
+	// (including the outer nails)
+	if (
+		( link = linkAt( sel.focusNode ) ) &&
+		!link.contains( sel.anchorNode )
+	) {
+		sel = sel.cloneChanged( {
+			focusNode: link.parentNode,
+			// Move past the link and the outer nail
+			focusOffset: getOffset( link ) + ( focusDir > 0 ? 2 : -1 )
+		} );
+	}
+
+	return sel;
+};
