@@ -3227,10 +3227,10 @@ ve.ce.Surface.prototype.handleLinearArrowKey = function ( e ) {
 			} else {
 				// Observe which way the cursor moved
 				afterDirection = ve.compareDocumentOrder(
-					startFocusNode,
-					startFocusOffset,
 					surface.nativeSelection.focusNode,
-					surface.nativeSelection.focusOffset
+					surface.nativeSelection.focusOffset,
+					startFocusNode,
+					startFocusOffset
 				);
 			}
 			newRange = (
@@ -4262,7 +4262,7 @@ ve.ce.Surface.prototype.setNotUnicorningAll = function ( node ) {
 /**
  * Get list of selected nodes and annotations.
  *
- * Exclude link annotations unless the CE focus is inside a link
+ * tExclude link annotations unless the CE focus is inside a link
  * @param {boolean} [all] Include nodes and annotations which only cover some of the fragment
  * @return {ve.dm.Model[]} Selected models
  */
