@@ -448,3 +448,70 @@ ve.ce.veRangeFromSelection = function ( selection ) {
 		return null;
 	}
 };
+
+/**
+ * Adjusts a DOM selection so it does not partially cover a link
+ *
+ * If direction is 1, move nodes forwards
+ * If direction is -1, move nodes backwards
+ * If direction is 0, move nodes outwards (i.e. grow the selection)
+ *
+ * @param {ve.SelectionState|Selection|Object} selection state
+ * @param {number} direction -1 for backwards, +1 for forwards, 0 for neither
+ * @returns {ve.SelectionState} Adjusted selection; may be the same extent as the argument
+ */
+ve.ce.adjustLinkSelection = function ( selection, direction ) {
+	var link, newSelection;
+
+	if ( selection.focusNode === null || selection.isCollapsed ) {
+		if ( selection instanceof ve.SelectionState ) {
+			return selection;
+		}
+		return new ve.SelectionState( selection );
+	}
+
+	newSelection = {
+		anchorNode: selection.anchorNode,
+		anchorOffset: selection.anchorOffset,
+		focusNode: selection.focusNode,
+		focusOffset: selection.focusOffset,
+		isCollapsed: false,
+		isBackwards: ve.compareDocumentOrder(
+			selection.focusNode,
+			selection.focusOffset,
+			selection.anchorNode,
+			selection.anchorOffset
+		) < 0
+	};
+
+	if (
+		( link = $( selection.anchorNode ).closest( '.ve-ce-linkAnnotation' )[0] ) &&
+		!link.contains( selection.focusNode )
+	) {
+		// A selection out of the link: move the anchor node to select the whole link
+		newSelection.anchorNode = link.parentNode;
+		newSelection.anchorOffset = Array.prototype.indexOf.call(
+			link.parentNode.childNodes,
+			link
+		);
+		if ( newSelection.isBackwards ) {
+			newSelection.anchorOffset++;
+		}
+	}
+
+	if (
+		( link = $( selection.focusNode ).closest( '.ve-ce-linkAnnotation' )[0] ) &&
+		!link.contains( selection.anchorNode )
+	) {
+		// A selection into the link: move the focus node to select the whole link
+		newSelection.focusNode = link.parentNode;
+		newSelection.focusOffset = Array.prototype.indexOf.call(
+			link.parentNode.childNodes,
+			link
+		);
+		if ( direction > 0 || ( !direction && !newSelection.isBackwards ) ) {
+			newSelection.focusOffset++;
+		}
+	}
+	return new ve.SelectionState( newSelection );
+};
