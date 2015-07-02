@@ -3227,10 +3227,10 @@ ve.ce.Surface.prototype.handleLinearArrowKey = function ( e ) {
 			} else {
 				// Observe which way the cursor moved
 				afterDirection = ve.compareDocumentOrder(
-					startFocusNode,
-					startFocusOffset,
 					surface.nativeSelection.focusNode,
-					surface.nativeSelection.focusOffset
+					surface.nativeSelection.focusOffset,
+					startFocusNode,
+					startFocusOffset
 				);
 			}
 			newRange = (
