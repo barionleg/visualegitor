@@ -68,6 +68,25 @@ ve.SelectionState.static.newNullSelection = function () {
 /* Methods */
 
 /**
+ * Returns a clone of the selection, with specified replacements
+ * @param {Object} [replacements]
+ * @param {Node} [replacements.anchorNode] changed anchor node
+ * @param {number} [replacements.anchorOffset] changed anchor offset
+ * @param {Node} [replacements.focusNode] changed focus node
+ * @param {number} [replacements.focusOffset] changed focus offset
+ *
+ * @returns {ve.SelectionState} clone of the selection, with specified replacements
+ */
+ve.SelectionState.prototype.clone = function ( replacements ) {
+	return new ve.SelectionState( {
+		anchorNode: ( replacements && replacements.anchorNode ) || this.anchorNode,
+		anchorOffset: ( replacements && replacements.anchorOffset ) || this.anchorOffset,
+		focusNode: ( replacements && replacements.focusNode ) || this.focusNode,
+		focusOffset: ( replacements && replacements.focusOffset ) || this.focusOffset
+	} );
+};
+
+/**
  * Returns the selection with the anchor and focus swapped
  *
  * @returns {ve.SelectionState} selection with anchor/focus swapped. Object-identical to this if isCollapsed
