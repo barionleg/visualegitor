@@ -68,6 +68,30 @@ ve.SelectionState.static.newNullSelection = function () {
 /* Methods */
 
 /**
+ * Returns a clone of the selection, with specified changes
+ *
+ * @param {Object} [changes]
+ * @param {Node} [changes.anchorNode] changed anchor node
+ * @param {number} [changes.anchorOffset] changed anchor offset
+ * @param {Node} [changes.focusNode] changed focus node
+ * @param {number} [changes.focusOffset] changed focus offset
+ *
+ * @return {ve.SelectionState} clone of the selection, with specified changes
+ */
+ve.SelectionState.prototype.cloneChanged = function ( changes ) {
+	var selectionState = this;
+	function getDefault( prop ) {
+		return changes[ prop ] === undefined ? selectionState[ prop ] : changes[ prop ];
+	}
+	return new ve.SelectionState( {
+		anchorNode: getDefault( 'anchorNode' ),
+		anchorOffset: getDefault( 'anchorOffset' ),
+		focusNode: getDefault( 'focusNode' ),
+		focusOffset: getDefault( 'focusOffset' )
+	} );
+};
+
+/**
  * Returns the selection with the anchor and focus swapped
  *
  * @return {ve.SelectionState} selection with anchor/focus swapped. Object-identical to this if isCollapsed
