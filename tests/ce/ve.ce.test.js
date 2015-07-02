@@ -6,6 +6,16 @@
 
 QUnit.module( 've.ce' );
 
+// Returns the specified descendant of node
+// For example, getDescendant( node, [ 5, 7 ] ) returns node.childNodes[ 5 ].childNodes[ 7 ]
+function getDescendant( node, path ) {
+	var i, len;
+	for ( i = 0, len = path.length; i < len; i++ ) {
+		node = node.childNodes[ path[i] ];
+	}
+	return node;
+}
+
 /* Tests */
 
 QUnit.test( 'whitespacePattern', 4, function ( assert ) {
@@ -445,7 +455,7 @@ QUnit.test( 'fakeImes', function ( assert ) {
 } );
 
 QUnit.test( 'isAfterAnnotationBoundaries', function ( assert ) {
-	var tests, i, iLen, test, node, j, jLen,
+	var tests, i, len, test, node,
 		div = ve.createDocumentFromHtml( '' ).createElement( 'div' );
 
 	div.innerHTML = 'Q<b>R<i>S</i>T</b><s>U</s>V<u>W</u>';
@@ -489,16 +499,169 @@ QUnit.test( 'isAfterAnnotationBoundaries', function ( assert ) {
 
 	QUnit.expect( tests.length );
 
-	for ( i = 0, iLen = tests.length; i < iLen; i++ ) {
+	for ( i = 0, len = tests.length; i < len; i++ ) {
 		test = tests[i];
-		node = div;
-		for ( j = 0, jLen = test.path.length; j < jLen; j++ ) {
-			node = node.childNodes[ test.path[j] ];
-		}
+		node = getDescendant( div, test.path );
 		assert.strictEqual(
 			ve.ce.isAfterAnnotationBoundaries( node, test.offset ),
 			test.expected,
 			'node=' + test.path.join( ',' ) + ' offset=' + test.offset
 		);
+	}
+} );
+
+QUnit.test( 'adjustLinkSelection', function ( assert ) {
+	// Represent a selection as an array [ anchorPath, anchorOffset, focusPath, focusOffset ]
+	// The anchor/focus nodes are represented as offset paths from elt .
+	function getSelectionArray( sel ) {
+		return [
+			ve.getOffsetPath( elt, sel.anchorNode, 'dummy_offset' ).slice( 0, -1 ),
+			sel.anchorOffset,
+			ve.getOffsetPath( elt, sel.focusNode, 'dummy_offset' ).slice( 0, -1 ),
+			sel.focusOffset
+		];
+	}
+
+	var divHtml, div, ab, xNailPreOpen, cdLink, xNailPostOpen, cd, xNailPreClose,
+		xNailPostClose, ef, yNailPreOpen, ghLink, yNailPostOpen, gh,
+		yNailPreClose, yNailPostClose, tests, i, len, test, orig, elt;
+	divHtml = 'AB' +
+		'<img class="ve-ce-nail ve-ce-nail-pre-open">' +
+		'<a class="ve-ce-linkAnnotation" href="x">' +
+		'<img class="ve-ce-nail ve-ce-nail-post-open">' +
+		'CD' +
+		'<img class="ve-ce-nail ve-ce-nail-pre-close">' +
+		'</a>' +
+		'<img class="ve-ce-nail ve-ce-nail-post-close">' +
+		'EF' +
+		'<img class="ve-ce-nail ve-ce-nail-pre-open">' +
+		'<a class="ve-ce-linkAnnotation" href="y">' +
+		'<img class="ve-ce-nail ve-ce-nail-post-open">' +
+		'GH' +
+		'<img class="ve-ce-nail ve-ce-nail-pre-close">' +
+		'</a>' +
+		'<img class="ve-ce-nail ve-ce-nail-post-close">';
+
+	// Define paths, i.e. lists of descent offsets for getDescendant() to find a particular
+	// descendant node from the top-level div.
+	div = [];
+	ab = [ 0 ];
+	xNailPreOpen = [ 1 ];
+	cdLink = [ 2 ];
+	xNailPostOpen = [ 2, 0 ];
+	cd = [ 2, 1 ];
+	xNailPreClose = [ 2, 2 ];
+	xNailPostClose = [ 3 ];
+	ef = [ 4 ];
+	yNailPreOpen = [ 5 ];
+	ghLink = [ 6 ];
+	yNailPostOpen = [ 6, 0 ];
+	gh = [ 6, 1 ];
+	yNailPreClose = [ 6, 2 ];
+	yNailPostClose = [ 7 ];
+
+	// Each position array is startPath, startOffset, endPath, endOffset
+	tests = [
+		// Unchanging
+		{ orig: [ ab, 1, ab, 1 ], moved: [ ab, 1, ab, 1 ], msg: 'No link, text' },
+		{ orig: [ div, 0, div, 1 ], moved: [ div, 0, div, 1 ], msg: 'No link, div' },
+		{ orig: [ ab, 1, ef, 1 ], moved: [ ab, 1, ef, 1 ], msg: 'link inside, text' },
+		{ orig: [ div, 1, div, 4 ], moved: [ div, 1, div, 4 ], msg: 'link inside, div' },
+		{ orig: [ cd, 1, cd, 2 ], moved: [ cd, 1, cd, 2 ], msg: 'inside link, text' },
+		{ orig: [ cdLink, 1, cdLink, 2 ], moved: [ cdLink, 1, cdLink, 2 ], msg: 'inside link' },
+		// Changing
+		{ orig: [ ab, 1, cd, 1 ], moved: [ ab, 1, div, 4 ], msg: 'Grow end, link text' },
+		{ orig: [ ab, 1, cdLink, 1 ], moved: [ ab, 1, div, 4 ], msg: 'Grow end, link' },
+		{ orig: [ cd, 1, ef, 1 ], moved: [ div, 1, ef, 1 ], msg: 'Grow start, link text' },
+		{ orig: [ cdLink, 1, ef, 1 ], moved: [ div, 1, ef, 1 ], msg: 'Grow start, link' },
+		{ orig: [ cd, 1, gh, 1 ], moved: [ div, 1, div, 8 ], msg: 'Grow both, link text' },
+		{ orig: [ cdLink, 1, ghLink, 1 ], moved: [ div, 1, div, 8 ], msg: 'Grow both, link' },
+		// Nail selections
+		{ orig: [ div, 1, div, 2 ], moved: [ div, 1, div, 4 ], msg: 'Grow from pre-open nail' },
+		{ orig: [ cdLink, 0, cdLink, 1 ], moved: [ div, 1, div, 4 ], msg: 'Grow from post-open nail' },
+		{ orig: [ cdLink, 2, cdLink, 3 ], moved: [ div, 1, div, 4 ], msg: 'Grow from pre-close nail' },
+		{ orig: [ div, 3, div, 4 ], moved: [ div, 1, div, 4 ], msg: 'Grow from post-open nail' },
+		// Directed
+		{
+			orig: [ ab, 1, cd, 1 ],
+			direction: 1,
+			moved: [ ab, 1, div, 4 ],
+			msg: 'Grow right at focus'
+		},
+		{
+			orig: [ ab, 1, cd, 1 ],
+			direction: -1,
+			moved: [ ab, 1, div, 1 ],
+			msg: 'Shrink left at focus'
+		},
+		{
+			orig: [ ef, 1, cd, 1 ],
+			direction: -1,
+			moved: [ ef, 1, div, 1 ],
+			msg: 'Grow left at focus'
+		},
+		{
+			orig: [ ef, 1, cd, 1 ],
+			direction: 1,
+			moved: [ ef, 1, div, 4 ],
+			msg: 'Shrink right at focus'
+		},
+		{
+			orig: [ cd, 1, ab, 1 ],
+			direction: 1,
+			moved: [ div, 4, ab, 1 ],
+			msg: 'Grow right at anchor (right arrow)'
+		},
+		{
+			orig: [ cd, 1, ab, 1 ],
+			direction: -1,
+			moved: [ div, 4, ab, 1 ],
+			msg: 'Grow right at anchor (left arrow)'
+		},
+		{
+			orig: [ cd, 1, ef, 1 ],
+			direction: 1,
+			moved: [ div, 1, ef, 1 ],
+			msg: 'Grow left at anchor (right arrow)'
+		},
+		{
+			orig: [ cd, 1, ef, 1 ],
+			direction: -1,
+			moved: [ div, 1, ef, 1 ],
+			msg: 'Grow left at anchor (left arrow)'
+		}
+	];
+
+	QUnit.expect( tests.reduce( function ( total, test ) {
+		return total + ( test.direction === undefined ? 2 : 1 );
+	}, 0 ) );
+
+	elt = ve.createDocumentFromHtml( '' ).createElement( 'div' );
+	elt.innerHTML = divHtml;
+	for ( i = 0, len = tests.length; i < len; i++ ) {
+		test = tests[i];
+		orig = new ve.SelectionState( {
+			anchorNode: getDescendant( elt, test.orig[0] ),
+			anchorOffset: test.orig[1],
+			focusNode: getDescendant( elt, test.orig[2] ),
+			focusOffset: test.orig[3],
+			isCollapsed: (
+				test.orig[0] === test.orig[2] &&
+				test.orig[1] === test.orig[3]
+			)
+		} );
+		assert.deepEqual(
+			getSelectionArray( ve.ce.adjustLinkSelection( orig, test.direction ) ),
+			test.moved,
+			test.msg
+		);
+		if ( test.direction === undefined ) {
+			// Now test the reversed selection
+			assert.deepEqual(
+				getSelectionArray( ve.ce.adjustLinkSelection( orig.flip() ) ),
+				test.moved.slice( 2, 4 ).concat( test.moved.slice( 0, 2 ) ),
+				test.msg + ' (reversed)'
+			);
+		}
 	}
 } );
