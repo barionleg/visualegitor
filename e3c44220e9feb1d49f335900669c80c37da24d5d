@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_17d097f9",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 3887,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-07-02T15:08:04Z",
+      "side": 1,
+      "message": "We could just say \"Selection-like plain object with isBackwards flag\" - or we could make an actual class - having all the properties documented all over the place gets messy quickly",
+      "revId": "e3c44220e9feb1d49f335900669c80c37da24d5d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
