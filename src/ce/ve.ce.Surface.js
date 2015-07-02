@@ -3161,21 +3161,22 @@ ve.ce.Surface.prototype.handleLinearArrowKey = function ( e ) {
 			return;
 		}
 
+		if ( upOrDown ) {
+			// The intended direction is clear, even if the cursor did not move
+			// or did something completely preposterous
+			afterDirection = e.keyCode === OO.ui.Keys.DOWN ? 1 : -1;
+		} else {
+			// Observe which way the cursor moved
+			afterDirection = ve.compareDocumentOrder(
+				surface.nativeSelection.focusNode,
+				surface.nativeSelection.focusOffset,
+				startFocusNode,
+				startFocusOffset
+			);
+		}
+
 		if ( viewNode.isFocusable() ) {
 			// We've landed in a focusable node; fixup the range
-			if ( upOrDown ) {
-				// The intended direction is clear, even if the cursor did not move
-				// or did something completely preposterous
-				afterDirection = e.keyCode === OO.ui.Keys.DOWN ? 1 : -1;
-			} else {
-				// Observe which way the cursor moved
-				afterDirection = ve.compareDocumentOrder(
-					startFocusNode,
-					startFocusOffset,
-					surface.nativeSelection.focusNode,
-					surface.nativeSelection.focusOffset
-				);
-			}
 			newRange = (
 				afterDirection > 0 ?
 				viewNode.getOuterRange() :
