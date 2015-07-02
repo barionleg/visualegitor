@@ -448,3 +448,56 @@ ve.ce.veRangeFromSelection = function ( selection ) {
 		return null;
 	}
 };
+
+/**
+ * Grows a selection to cover links partially included at either end
+ *
+ * @param {ve.FrozenSelection} selection The selection to grow
+ * @returns {Object} Grown selection; may be the same extent as the argument
+ */
+ve.ce.growLinkSelection = function ( selection ) {
+	var link, newSelection;
+
+	if ( selection.focusNode === null || selection.isCollapsed ) {
+		return selection;
+	}
+
+	newSelection = {
+		anchorNode: selection.anchorNode,
+		anchorOffset: selection.anchorOffset,
+		focusNode: selection.focusNode,
+		focusOffset: selection.focusOffset,
+		isCollapsed: false,
+		isBackwards: ve.compareDocumentOrder(
+			selection.focusNode,
+			selection.focusOffset,
+			selection.anchorNode,
+			selection.anchorOffset
+		) < 0
+	};
+
+	if (
+		( link = $( selection.anchorNode ).closest( '.ve-ce-linkAnnotation' )[0] ) &&
+		!link.contains( selection.focusNode )
+	) {
+		// A selection out of the link: move the anchor node to select the whole link
+		newSelection.anchorNode = link.parentNode;
+		newSelection.anchorOffset = Array.prototype.indexOf.call(
+			link.parentNode.childNodes,
+			link
+		) + ( newSelection.isBackwards ? 1 : 0 );
+	}
+
+	if (
+		( link = $( selection.focusNode ).closest( '.ve-ce-linkAnnotation' )[0] ) &&
+		!link.contains( selection.anchorNode )
+	) {
+		// A selection into the link: move the focus node to select the whole link
+		newSelection.focusNode = link.parentNode;
+		newSelection.focusOffset = Array.prototype.indexOf.call(
+			link.parentNode.childNodes,
+			link
+		) + ( newSelection.isBackwards ? 0 : 1 );
+	}
+	return new ve.FrozenSelection( newSelection );
+};

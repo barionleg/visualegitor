@@ -6,6 +6,23 @@
 
 QUnit.module( 've.ce' );
 
+/**
+ * Returns the specified descendant of node
+ *
+ * For example, getDescendant( node, [ 5, 7 ] ) returns node.childNodes[ 5 ].childNodes[ 7 ]
+ *
+ * @param {Node} node The starting node
+ * @param {number[]} path List of descendant offsets
+ * @returns {Node} the descendant node
+ */
+function getDescendant( node, path ) {
+	var i, len;
+	for ( i = 0, len = path.length; i < len; i++ ) {
+		node = node.childNodes[ path[i] ];
+	}
+	return node;
+}
+
 /* Tests */
 
 QUnit.test( 'whitespacePattern', 4, function ( assert ) {
@@ -445,7 +462,7 @@ QUnit.test( 'fakeImes', function ( assert ) {
 } );
 
 QUnit.test( 'isAfterAnnotationBoundaries', function ( assert ) {
-	var tests, i, iLen, test, node, j, jLen,
+	var tests, i, len, test, node,
 		div = ve.createDocumentFromHtml( '' ).createElement( 'div' );
 
 	div.innerHTML = 'Q<b>R<i>S</i>T</b><s>U</s>V<u>W</u>';
@@ -489,16 +506,95 @@ QUnit.test( 'isAfterAnnotationBoundaries', function ( assert ) {
 
 	QUnit.expect( tests.length );
 
-	for ( i = 0, iLen = tests.length; i < iLen; i++ ) {
+	for ( i = 0, len = tests.length; i < len; i++ ) {
 		test = tests[i];
-		node = div;
-		for ( j = 0, jLen = test.path.length; j < jLen; j++ ) {
-			node = node.childNodes[ test.path[j] ];
-		}
+		node = getDescendant( div, test.path );
 		assert.strictEqual(
 			ve.ce.isAfterAnnotationBoundaries( node, test.offset ),
 			test.expected,
 			'node=' + test.path.join( ',' ) + ' offset=' + test.offset
+		);
+	}
+} );
+
+QUnit.test( 'growLinkSelection', function ( assert ) {
+	/**
+	 * Represent a selection as an array
+	 *
+	 * The anchor/focus nodes are represented as offset paths from elt .
+	 *
+	 * @param {FrozenSelection} sel The selection
+	 * @returns {Array} [ anchorPath, anchorOffset, focusPath, focusOffset ]
+	 */
+	function getSelectionArray( sel ) {
+		return [
+			ve.getOffsetPath( elt, sel.anchorNode, 'dummy_offset' ).slice( 0, -1 ),
+			sel.anchorOffset,
+			ve.getOffsetPath( elt, sel.focusNode, 'dummy_offset' ).slice( 0, -1 ),
+			sel.focusOffset
+		];
+	}
+
+	var html, ab, cd, cdSpan, ef, gh, tests, i, len, test, orig, grown, elt, observed, expected;
+	html = 'AB' +
+		'<span class="ve-ce-linkAnnotation"><img><a href="x"><img>CD<img></a><img></span>' +
+		'EF' +
+		'<span class="ve-ce-linkAnnotation"><img><a href="x"><img>GH<img></a><img></span>';
+
+	// Define paths, i.e. lists of descent offsets for getDescendant() to find a particular
+	// descendant node from the top-level div.
+	div = [];
+	ab = [ 0 ];
+	cdSpan = [ 1 ];
+	cd = [ 1, 1, 1 ];
+	ef = [ 2 ];
+	gh = [ 3, 1, 1 ];
+
+
+	// Each position array is startPath, startOffset, endPath, endOffset
+	tests = [
+		// Unchanging
+		{ orig: [ ab, 1, ab, 1 ], grown: [ ab, 1, ab, 1 ], msg: "No link, text" },
+		{ orig: [ div, 0, div, 1 ], grown: [ div, 0, div, 1 ], msg: "No link, div" },
+		{ orig: [ ab, 1, ef, 1 ], grown: [ ab, 1, ef, 1 ], msg: "link inside, text" },
+		{ orig: [ div, 1, div, 2 ], grown: [ div, 1, div, 2 ], msg: "link inside, div" },
+		{ orig: [ cd, 1, cd, 2 ], grown: [ cd, 1, cd, 2 ], msg: "inside link, text" },
+		{ orig: [ cdSpan, 1, cd, 2 ], grown: [ cdSpan, 1, cd, 2 ], msg: "inside link" },
+		// Changing
+		{ orig: [ ab, 1, cd, 1 ], grown: [ ab, 1, div, 2 ], msg: "Grow end, text" },
+		{ orig: [ ab, 1, cdSpan, 1 ], grown: [ ab, 1, div, 2 ], msg: "Grow end, span" },
+		{ orig: [ cd, 1, ef, 1 ], grown: [ div, 1, ef, 1 ], msg: "Grow start, text" },
+		{ orig: [ cdSpan, 1, ef, 1 ], grown: [ div, 1, ef, 1 ], msg: "Grow start, span" },
+		{ orig: [ cd, 1, gh, 1 ], grown: [ div, 1, div, 4 ], msg: "Grow both, text" },
+		{ orig: [ cdSpan, 1, gh, 1 ], grown: [ div, 1, div, 4 ], msg: "Grow both, span" }
+	];
+
+	QUnit.expect( tests.length * 2 );
+
+	elt = ve.createDocumentFromHtml( '' ).createElement( 'div' );
+	elt.innerHTML = html;
+	for ( i = 0, len = tests.length; i < len; i++ ) {
+		test = tests[i];
+		orig = new ve.FrozenSelection( {
+			anchorNode: getDescendant( elt, test.orig[0] ),
+			anchorOffset: test.orig[1],
+			focusNode: getDescendant( elt, test.orig[2] ),
+			focusOffset: test.orig[3],
+			isCollapsed: (
+				test.orig[0] === test.orig[2] &&
+				test.orig[1] === test.orig[3]
+			)
+		} );
+		assert.deepEqual(
+			getSelectionArray( ve.ce.growLinkSelection( orig ) ),
+			test.grown,
+			test.msg
+		);
+		// Now test the reversed selection
+		assert.deepEqual(
+			getSelectionArray( ve.ce.growLinkSelection( orig.flip() ) ),
+			test.grown.slice( 2, 4 ).concat( test.grown.slice( 0, 2 ) ),
+			test.msg + ' (reversed)'
 		);
 	}
 } );
