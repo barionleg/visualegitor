@@ -3201,6 +3201,16 @@ ve.ce.Surface.prototype.handleLinearArrowKey = function ( e ) {
 			surface.getModel().setLinearSelection( newRange );
 		}
 		surface.surfaceObserver.pollOnce();
+
+		// Adjust selection for links, re-polling if necessary
+		// TODO: This can trigger https://bugzilla.mozilla.org/show_bug.cgi?id=1180032
+		// (Left-arrow just before an element behaves as though the cursor started
+		// immediately after the element)
+		if ( surface.showFrozenSelection(
+			ve.ce.adjustLinkSelection( surface.nativeSelection, afterDirection )
+		) ) {
+			surface.surfaceObserver.pollOnce();
+		}
 	} } );
 };
 
