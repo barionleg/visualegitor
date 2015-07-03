@@ -908,10 +908,16 @@ ve.ce.Surface.prototype.onDocumentMouseUp = function ( e ) {
  * @param {ve.dm.Selection} selectionBefore Selection before the mouse event
  */
 ve.ce.Surface.prototype.afterDocumentMouseUp = function ( e, selectionBefore ) {
-	// TODO: guard with incRenderLock?
 	this.surfaceObserver.pollOnce();
 	if ( e.shiftKey ) {
 		this.fixShiftClickSelect( selectionBefore );
+	}
+	// Adjust selection for links, re-polling if necessary
+	// TODO: This can trigger https://bugzilla.mozilla.org/show_bug.cgi?id=1180032
+	// (Left-arrow just before an element behaves as though the cursor started
+	// immediately after the element)
+	if ( this.showSelectionState( ve.ce.adjustLinkSelection( this.nativeSelection ) ) ) {
+		this.surfaceObserver.pollOnce();
 	}
 	if ( !e.shiftKey && this.selecting ) {
 		this.emit( 'selectionEnd' );
@@ -3229,23 +3235,24 @@ ve.ce.Surface.prototype.handleLinearArrowKey = function ( e ) {
 			return;
 		}
 
+		if ( upOrDown ) {
+			// The intended direction is clear, even if the cursor did not move
+			// or did something completely preposterous
+			afterDirection = e.keyCode === OO.ui.Keys.DOWN ? 1 : -1;
+		} else if ( !surface.$document[ 0 ].contains( startFocusNode ) ) {
+			afterDirection = 0;
+		} else {
+			// Observe which way the cursor moved
+			afterDirection = ve.compareDocumentOrder(
+				surface.nativeSelection.focusNode,
+				surface.nativeSelection.focusOffset,
+				startFocusNode,
+				startFocusOffset
+			);
+		}
+
 		if ( viewNode.isFocusable() ) {
 			// We've landed in a focusable node; fixup the range
-			if ( upOrDown ) {
-				// The intended direction is clear, even if the cursor did not move
-				// or did something completely preposterous
-				afterDirection = e.keyCode === OO.ui.Keys.DOWN ? 1 : -1;
-			} else if ( !surface.$document[ 0 ].contains( startFocusNode ) ) {
-				afterDirection = 0;
-			} else {
-				// Observe which way the cursor moved
-				afterDirection = ve.compareDocumentOrder(
-					surface.nativeSelection.focusNode,
-					surface.nativeSelection.focusOffset,
-					startFocusNode,
-					startFocusOffset
-				);
-			}
 			newRange = (
 				afterDirection > 0 ?
 				viewNode.getOuterRange() :
@@ -3264,6 +3271,16 @@ ve.ce.Surface.prototype.handleLinearArrowKey = function ( e ) {
 		}
 		surface.updateActiveLink();
 		surface.surfaceObserver.pollOnce();
+
+		// Adjust selection for links, re-polling if necessary
+		// TODO: This can trigger https://bugzilla.mozilla.org/show_bug.cgi?id=1180032
+		// (Left-arrow just before an element behaves as though the cursor started
+		// immediately after the element)
+		if ( surface.showSelectionState(
+			ve.ce.adjustLinkSelection( surface.nativeSelection, afterDirection )
+		) ) {
+			surface.surfaceObserver.pollOnce();
+		}
 	} } );
 };
 
