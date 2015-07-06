@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_c3fa34b6",
+        "filename": "src/ve.EventSequencer.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-07-06T22:31:32Z",
+      "side": 1,
+      "message": "document this doesn\u0027t have to be a list anymore\n{Function|Function[]} listeners Listener, or list of listeners, ....",
+      "revId": "1d51236ffc1be725d93e0e1ba4206c4a4027bea7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
