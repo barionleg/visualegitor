@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_3d4c7b9f",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 3903,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-07-06T20:28:35Z",
+      "side": 1,
+      "message": "shouldn\u0027t we get the element document from the surface, rather than assume it\u0027s equal to window.document?",
+      "revId": "ad3e8187b1565271dcd5fa7737c2db1d84354d08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
