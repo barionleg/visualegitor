@@ -160,6 +160,9 @@ ve.EventSequencer.prototype.detach = function () {
  * @chainable
  */
 ve.EventSequencer.prototype.onLoop = function ( listeners ) {
+	if ( !Array.isArray( listeners ) ) {
+		listeners = [ listeners ];
+	}
 	ve.batchPush( this.onLoopListeners, listeners );
 	return this;
 };
@@ -335,13 +338,14 @@ ve.EventSequencer.prototype.doAfterLoop = function ( myTimeoutId ) {
 	afterLoopOneListeners = this.afterLoopOneListeners.slice();
 	this.afterLoopOneListeners.length = 0;
 
-	for ( i = 0, len = this.afterLoopListeners.length; i < len; i++ ) {
+	for ( i = 0, len = afterLoopListeners.length; i < len; i++ ) {
 		this.callListener( 'afterLoop', null, i, this.afterLoopListeners[i], null );
 	}
 
-	for ( i = 0, len = this.afterLoopOneListeners.length; i < len; i++ ) {
-		this.callListener( 'afterLoopOne', null, i, this.afterLoopOneListeners[i], null );
+	for ( i = 0, len = afterLoopOneListeners.length; i < len; i++ ) {
+		this.callListener( 'afterLoopOne', null, i, afterLoopOneListeners[i], null );
 	}
+	this.doneOnLoop = false;
 };
 
 /**
