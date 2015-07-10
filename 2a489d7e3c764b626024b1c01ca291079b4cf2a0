@@ -16,6 +16,24 @@
       "revId": "2a489d7e3c764b626024b1c01ca291079b4cf2a0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_b2d2b15b",
+        "filename": "src/ce/nodes/ve.ce.TableNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2015-07-10T16:06:25Z",
+      "side": 1,
+      "message": "No, the regression was introduced in 39. It was also in 40, 41 and 42 but those haven\u0027t been released to users yet, so the cause was reverted in those branches (40 is a beta release, and 41 and 42 are alphas (\"Aurora\" and \"nightly\", respectively)). Last I heard, Mozilla was still debating what to do about 39.\n\nBut regardless, we can be pretty confident (and fully confident by downloading the developer edition of Firefox, which is FF40) that 39 is the only version with this bug.",
+      "parentUuid": "8ec42329_ef3932f0",
+      "revId": "2a489d7e3c764b626024b1c01ca291079b4cf2a0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
