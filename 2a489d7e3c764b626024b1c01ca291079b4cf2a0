@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec42329_ef3932f0",
+        "filename": "src/ce/nodes/ve.ce.TableNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-07-10T15:21:43Z",
+      "side": 1,
+      "message": "Maybe \u003c\u003d \u002739\u0027?",
+      "revId": "2a489d7e3c764b626024b1c01ca291079b4cf2a0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
