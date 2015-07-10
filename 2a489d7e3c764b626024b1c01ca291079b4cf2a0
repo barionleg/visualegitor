@@ -34,6 +34,24 @@
       "revId": "2a489d7e3c764b626024b1c01ca291079b4cf2a0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_d2597d05",
+        "filename": "src/ce/nodes/ve.ce.TableNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-07-10T16:19:24Z",
+      "side": 1,
+      "message": "Good to know.",
+      "parentUuid": "8ec42329_b2d2b15b",
+      "revId": "2a489d7e3c764b626024b1c01ca291079b4cf2a0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
