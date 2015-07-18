@@ -16,6 +16,24 @@
       "revId": "35f881be8aaae464df22c81e3dda3f171c597503",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_6d30b5e5",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 1237,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-07-18T23:15:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ec42329_ad0f7d32",
+      "revId": "35f881be8aaae464df22c81e3dda3f171c597503",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
