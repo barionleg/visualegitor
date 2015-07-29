@@ -134,7 +134,7 @@ ve.dm.Model.static.matchFunction = null;
  * @method
  * @param {Node[]} domElements DOM elements to convert. Usually only one element
  * @param {ve.dm.Converter} converter Converter object
- * @returns {Object|Array|null} Linear model element, or array with linear model data, or null to alienate
+ * @return {Object|Array|null} Linear model element, or array with linear model data, or null to alienate
  */
 ve.dm.Model.static.toDataElement = function () {
 	return { type: this.name };
@@ -159,11 +159,11 @@ ve.dm.Model.static.toDataElement = function () {
  * @param {Object|Array} dataElement Linear model element or array of linear model data
  * @param {HTMLDocument} doc HTML document for creating elements
  * @param {ve.dm.Converter} converter Converter object to optionally call `getDomSubtreeFromData` on
- * @returns {Node[]} DOM elements
+ * @return {Node[]} DOM elements
  */
 ve.dm.Model.static.toDomElements = function ( dataElement, doc ) {
 	if ( this.matchTagNames && this.matchTagNames.length === 1 ) {
-		return [ doc.createElement( this.matchTagNames[0] ) ];
+		return [ doc.createElement( this.matchTagNames[ 0 ] ) ];
 	}
 	throw new Error( 've.dm.Model subclass must match a single tag name or implement toDomElements' );
 };
@@ -207,7 +207,7 @@ ve.dm.Model.static.preserveHtmlAttributes = true;
  *
  * @static
  * @param {Object} dataElement Data element
- * @returns {Object} Hash object
+ * @return {Object} Hash object
  */
 ve.dm.Model.static.getHashObject = function ( dataElement ) {
 	return {
@@ -224,7 +224,7 @@ ve.dm.Model.static.getHashObject = function ( dataElement ) {
  * Array of RDFa types that this model should be a match candidate for.
  *
  * @static
- * @returns {Array} Array of strings or regular expressions
+ * @return {Array} Array of strings or regular expressions
  */
 ve.dm.Model.static.getMatchRdfaTypes = function () {
 	return this.matchRdfaTypes;
@@ -234,7 +234,7 @@ ve.dm.Model.static.getMatchRdfaTypes = function () {
  * Extra RDFa types that the element is allowed to have.
  *
  * @static
- * @returns {Array} Array of strings or regular expressions
+ * @return {Array} Array of strings or regular expressions
  */
 ve.dm.Model.static.getAllowedRdfaTypes = function () {
 	return this.allowedRdfaTypes;
@@ -248,7 +248,7 @@ ve.dm.Model.static.getAllowedRdfaTypes = function () {
  * The default implementation always returns true. If your node type is uninspectable in certain
  * cases, you should override this function.
  *
- * @returns {boolean} Whether this node is inspectable
+ * @return {boolean} Whether this node is inspectable
  */
 ve.dm.Model.prototype.isInspectable = function () {
 	return true;
@@ -260,7 +260,7 @@ ve.dm.Model.prototype.isInspectable = function () {
  * The default implementation always returns true. If your node type is uneditable in certain
  * cases, you should override this function.
  *
- * @returns {boolean} Whether this node is editable
+ * @return {boolean} Whether this node is editable
  */
 ve.dm.Model.prototype.isEditable = function () {
 	return true;
@@ -270,7 +270,7 @@ ve.dm.Model.prototype.isEditable = function () {
  * Get a reference to the linear model element.
  *
  * @method
- * @returns {Object} Linear model element passed to the constructor, by reference
+ * @return {Object} Linear model element passed to the constructor, by reference
  */
 ve.dm.Model.prototype.getElement = function () {
 	return this.element;
@@ -280,7 +280,7 @@ ve.dm.Model.prototype.getElement = function () {
  * Get the symbolic name of this model's type.
  *
  * @method
- * @returns {string} Type name
+ * @return {string} Type name
  */
 ve.dm.Model.prototype.getType = function () {
 	return this.constructor.static.name;
@@ -293,10 +293,10 @@ ve.dm.Model.prototype.getType = function () {
  *
  * @method
  * @param {string} key Name of attribute to get
- * @returns {Mixed} Value of attribute, or undefined if no such attribute exists
+ * @return {Mixed} Value of attribute, or undefined if no such attribute exists
  */
 ve.dm.Model.prototype.getAttribute = function ( key ) {
-	return this.element && this.element.attributes ? this.element.attributes[key] : undefined;
+	return this.element && this.element.attributes ? this.element.attributes[ key ] : undefined;
 };
 
 /**
@@ -306,7 +306,7 @@ ve.dm.Model.prototype.getAttribute = function ( key ) {
  *
  * @method
  * @param {string} [prefix] Only return attributes with this prefix, and remove the prefix from them
- * @returns {Object} Attributes
+ * @return {Object} Attributes
  */
 ve.dm.Model.prototype.getAttributes = function ( prefix ) {
 	var key, filtered,
@@ -315,7 +315,7 @@ ve.dm.Model.prototype.getAttributes = function ( prefix ) {
 		filtered = {};
 		for ( key in attributes ) {
 			if ( key.indexOf( prefix ) === 0 ) {
-				filtered[key.slice( prefix.length )] = attributes[key];
+				filtered[ key.slice( prefix.length ) ] = attributes[ key ];
 			}
 		}
 		return filtered;
@@ -341,7 +341,7 @@ ve.dm.Model.prototype.getOriginalDomElements = function () {
  * @method
  * @param {string[]|Object} attributes Array of keys or object of keys and values
  * @param {boolean} strict Use strict comparison when checking if values match
- * @returns {boolean} Model has attributes
+ * @return {boolean} Model has attributes
  */
 ve.dm.Model.prototype.hasAttributes = function ( attributes, strict ) {
 	var key, i, len,
@@ -352,8 +352,8 @@ ve.dm.Model.prototype.hasAttributes = function ( attributes, strict ) {
 			if (
 				!( key in ourAttributes ) ||
 				( strict ?
-					attributes[key] !== ourAttributes[key] :
-					String( attributes[key] ) !== String( ourAttributes[key] )
+					attributes[ key ] !== ourAttributes[ key ] :
+					String( attributes[ key ] ) !== String( ourAttributes[ key ] )
 				)
 			) {
 				return false;
@@ -361,7 +361,7 @@ ve.dm.Model.prototype.hasAttributes = function ( attributes, strict ) {
 		}
 	} else if ( Array.isArray( attributes ) ) {
 		for ( i = 0, len = attributes.length; i < len; i++ ) {
-			if ( !( attributes[i] in ourAttributes ) ) {
+			if ( !( attributes[ i ] in ourAttributes ) ) {
 				return false;
 			}
 		}
@@ -374,7 +374,7 @@ ve.dm.Model.prototype.hasAttributes = function ( attributes, strict ) {
  *
  * The attributes object will be deep-copied.
  *
- * @returns {Object} Cloned element object
+ * @return {Object} Cloned element object
  */
 ve.dm.Model.prototype.getClonedElement = function () {
 	return ve.copy( this.element );
@@ -389,7 +389,7 @@ ve.dm.Model.prototype.getClonedElement = function () {
  * This is a custom hash function for OO#getHash.
  *
  * @method
- * @returns {Object} Hash object
+ * @return {Object} Hash object
  */
 ve.dm.Model.prototype.getHashObject = function () {
 	return this.constructor.static.getHashObject( this.element );

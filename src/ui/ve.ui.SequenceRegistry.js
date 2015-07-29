@@ -48,8 +48,8 @@ ve.ui.SequenceRegistry.prototype.register = function ( sequence ) {
 ve.ui.SequenceRegistry.prototype.findMatching = function ( data, offset ) {
 	var name, sequences = [];
 	for ( name in this.registry ) {
-		if ( this.registry[name].match( data, offset ) ) {
-			sequences.push( this.registry[name] );
+		if ( this.registry[ name ].match( data, offset ) ) {
+			sequences.push( this.registry[ name ] );
 		}
 	}
 	return sequences;
