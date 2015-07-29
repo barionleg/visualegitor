@@ -133,7 +133,7 @@ ve.ce.Surface = function VeCeSurface( model, ui, options ) {
 		.on( 'focus', 'a', function () {
 			// Opera <= 12 triggers 'blur' on document node before any link is
 			// focused and we don't want that
-			surface.$documentNode[0].focus();
+			surface.$documentNode[ 0 ].focus();
 		} );
 
 	if ( this.hasSelectionChangeEvents ) {
@@ -279,7 +279,7 @@ ve.ce.Surface.static.cursorHolderTemplate = (
  *
  * @param {jQuery} $elements Clipboard HTML
  * @param {Object} [beforePasteData] Paste information, including leftText and rightText to strip
- * @returns {string} Hash
+ * @return {string} Hash
  */
 ve.ce.Surface.static.getClipboardHash = function ( $elements, beforePasteData ) {
 	beforePasteData = beforePasteData || {};
@@ -396,7 +396,7 @@ ve.ce.Surface.prototype.getNodeClientRectFromRange = function ( range ) {
 
 	// We would use getBoundingClientRect(), but in iOS7 that's relative to the
 	// document rather than to the viewport
-	rect = node.getClientRects()[0];
+	rect = node.getClientRects()[ 0 ];
 	if ( !rect ) {
 		// FF can return null when focusNode is invisible
 		return null;
@@ -406,7 +406,7 @@ ve.ce.Surface.prototype.getNodeClientRectFromRange = function ( range ) {
 	adjacentNode = range.endContainer.childNodes[ range.endOffset ];
 	if ( range.collapsed && $( adjacentNode ).hasClass( 've-ce-unicorn' ) ) {
 		// We're next to a unicorn; use its left/right position
-		unicornRect = adjacentNode.getClientRects()[0];
+		unicornRect = adjacentNode.getClientRects()[ 0 ];
 		if ( !unicornRect ) {
 			return null;
 		}
@@ -430,7 +430,7 @@ ve.ce.Surface.prototype.getNodeClientRectFromRange = function ( range ) {
  *
  * @method
  * @param {ve.dm.Selection} [selection] Optional selection to get the rectangles for, defaults to current selection
- * @returns {Object[]|null} Selection rectangles
+ * @return {Object[]|null} Selection rectangles
  */
 ve.ce.Surface.prototype.getSelectionRects = function ( selection ) {
 	var i, l, range, nativeRange, surfaceRect, focusedNode, rect,
@@ -477,7 +477,7 @@ ve.ce.Surface.prototype.getSelectionRects = function ( selection ) {
 	}
 
 	for ( i = 0, l = rects.length; i < l; i++ ) {
-		relativeRects.push( ve.translateRect( rects[i], -surfaceRect.left, -surfaceRect.top ) );
+		relativeRects.push( ve.translateRect( rects[ i ], -surfaceRect.left, -surfaceRect.top ) );
 	}
 	return relativeRects;
 };
@@ -487,7 +487,7 @@ ve.ce.Surface.prototype.getSelectionRects = function ( selection ) {
  *
  * @method
  * @param {ve.dm.Selection} [selection] Optional selection to get the rectangles for, defaults to current selection
- * @returns {Object|null} Start and end selection rectangles
+ * @return {Object|null} Start and end selection rectangles
  */
 ve.ce.Surface.prototype.getSelectionStartAndEndRects = function ( selection ) {
 	var range, focusedNode;
@@ -514,7 +514,7 @@ ve.ce.Surface.prototype.getSelectionStartAndEndRects = function ( selection ) {
  *
  * @method
  * @param {ve.dm.Selection} [selection] Optional selection to get the rectangles for, defaults to current selection
- * @returns {Object|null} Selection rectangle, with keys top, bottom, left, right, width, height
+ * @return {Object|null} Selection rectangle, with keys top, bottom, left, right, width, height
  */
 ve.ce.Surface.prototype.getSelectionBoundingRect = function ( selection ) {
 	var range, nativeRange, boundingRect, surfaceRect, focusedNode;
@@ -571,8 +571,8 @@ ve.ce.Surface.prototype.initialize = function () {
 		// This is only needed in Gecko. In other engines, these properties are off by default,
 		// and turning them off again is expensive; see https://phabricator.wikimedia.org/T89928
 		try {
-			this.$document[0].execCommand( 'enableObjectResizing', false, false );
-			this.$document[0].execCommand( 'enableInlineTableEditing', false, false );
+			this.$document[ 0 ].execCommand( 'enableObjectResizing', false, false );
+			this.$document[ 0 ].execCommand( 'enableInlineTableEditing', false, false );
 		} catch ( e ) { /* Silently ignore */ }
 	}
 };
@@ -609,10 +609,10 @@ ve.ce.Surface.prototype.focus = function () {
 
 	// Focus the documentNode for text selections, or the pasteTarget for focusedNode selections
 	if ( this.focusedNode || selection instanceof ve.dm.TableSelection ) {
-		this.$pasteTarget[0].focus();
+		this.$pasteTarget[ 0 ].focus();
 	} else if ( selection instanceof ve.dm.LinearSelection ) {
 		node = this.getDocument().getNodeAndOffset( selection.getRange().start ).node;
-		$( node ).closest( '[contenteditable=true]' )[0].focus();
+		$( node ).closest( '[contenteditable=true]' )[ 0 ].focus();
 	} else if ( selection instanceof ve.dm.NullSelection ) {
 		this.getModel().selectFirstContentOffset();
 		return;
@@ -673,16 +673,16 @@ ve.ce.Surface.prototype.onFocusChange = function () {
 
 	hasFocus = OO.ui.contains(
 		[
-			this.$documentNode[0],
-			this.$pasteTarget[0],
-			this.$highlights[0]
+			this.$documentNode[ 0 ],
+			this.$pasteTarget[ 0 ],
+			this.$highlights[ 0 ]
 		],
 		this.nativeSelection.anchorNode,
 		true
 	);
 
 	if ( this.deactivated ) {
-		if ( OO.ui.contains( this.$documentNode[0], this.nativeSelection.anchorNode, true ) ) {
+		if ( OO.ui.contains( this.$documentNode[ 0 ], this.nativeSelection.anchorNode, true ) ) {
 			this.onDocumentFocus();
 		}
 	} else {
@@ -721,7 +721,7 @@ ve.ce.Surface.prototype.activate = function () {
 		this.deactivated = false;
 		this.updateDeactivatedSelection();
 		this.surfaceObserver.enable();
-		if ( OO.ui.contains( this.$documentNode[0], this.nativeSelection.anchorNode, true ) ) {
+		if ( OO.ui.contains( this.$documentNode[ 0 ], this.nativeSelection.anchorNode, true ) ) {
 			// The selection has been placed back in the document, either by the user clicking
 			// or by the closing window updating the model. Poll in case it was the user clicking.
 			this.surfaceObserver.clear();
@@ -756,10 +756,10 @@ ve.ce.Surface.prototype.updateDeactivatedSelection = function () {
 	if ( rects ) {
 		for ( i = 0, l = rects.length; i < l; i++ ) {
 			this.$deactivatedSelection.append( $( '<div>' ).css( {
-				top: rects[i].top,
-				left: rects[i].left,
-				width: rects[i].width,
-				height: rects[i].height
+				top: rects[ i ].top,
+				left: rects[ i ].left,
+				width: rects[ i ].width,
+				height: rects[ i ].height
 			} ) );
 		}
 	}
@@ -812,7 +812,7 @@ ve.ce.Surface.prototype.onDocumentBlur = function () {
 /**
  * Check if surface is focused.
  *
- * @returns {boolean} Surface is focused
+ * @return {boolean} Surface is focused
  */
 ve.ce.Surface.prototype.isFocused = function () {
 	return this.focused;
@@ -929,10 +929,11 @@ ve.ce.Surface.prototype.afterDocumentMouseUp = function ( e, selectionBefore ) {
  * @param {ve.dm.Selection} selectionBefore Selection before the mouse event
  */
 ve.ce.Surface.prototype.fixShiftClickSelect = function ( selectionBefore ) {
+	var newSelection;
 	if ( !( selectionBefore instanceof ve.dm.LinearSelection ) ) {
 		return;
 	}
-	var newSelection = this.getModel().getSelection();
+	newSelection = this.getModel().getSelection();
 	if ( newSelection.isCollapsed() && !newSelection.equals( selectionBefore ) ) {
 		this.getModel().setLinearSelection( new ve.Range( selectionBefore.getRange().from, newSelection.getRange().to ) );
 	}
@@ -992,11 +993,11 @@ ve.ce.Surface.prototype.onDocumentDragStart = function ( e ) {
  * @param {jQuery.Event} e Drag over event
  */
 ve.ce.Surface.prototype.onDocumentDragOver = function ( e ) {
+	var $target, $dropTarget, node, dropPosition, targetPosition, top, left,
+		nodeType, inIgnoreChildren;
 	if ( !this.relocatingNode ) {
 		return;
 	}
-	var $target, $dropTarget, node, dropPosition, targetPosition, top, left,
-		nodeType, inIgnoreChildren;
 
 	if ( !this.relocatingNode.isContent() ) {
 		e.preventDefault();
@@ -1271,7 +1272,7 @@ ve.ce.Surface.prototype.isBlockedTrigger = function ( trigger ) {
 			pc: [ 'ctrl+b', 'ctrl+i', 'ctrl+u', 'ctrl+z', 'ctrl+y', 'ctrl+shift+z' ]
 		};
 
-	return blocked[platformKey].indexOf( trigger.toString() ) !== -1;
+	return blocked[ platformKey ].indexOf( trigger.toString() ) !== -1;
 };
 
 /**
@@ -1330,7 +1331,7 @@ ve.ce.Surface.prototype.afterDocumentKeyDown = function ( e ) {
 	 * @param {Node} DOM node of cursor position
 	 * @param {number} offset Offset of cursor position
 	 * @param {number} direction Cursor motion direction (1=forward, -1=backward)
-	 * @returns {ve.ce.Node|null} node, or null if not in a focusable node
+	 * @return {ve.ce.Node|null} node, or null if not in a focusable node
 	 */
 	function getSurroundingFocusableNode( node, offset, direction ) {
 		var focusNode, $focusNode;
@@ -1358,7 +1359,7 @@ ve.ce.Surface.prototype.afterDocumentKeyDown = function ( e ) {
 	 * Even if the user pressed a cursor key in the interior of the document, there may not
 	 * be any movement: browser BIDI and ce=false handling can be quite quirky
 	 *
-	 * @returns {number|null} -1 for startwards, 1 for endwards, null for none
+	 * @return {number|null} -1 for startwards, 1 for endwards, null for none
 	 */
 	function getDirection() {
 		return (
@@ -1586,13 +1587,13 @@ ve.ce.Surface.prototype.checkUnicorns = function ( fixupCursor ) {
  * @fires selectionEnd
  */
 ve.ce.Surface.prototype.onDocumentKeyUp = function ( e ) {
+	var nativeRange, clientRect, scrollTo;
+
 	// Detect end of selecting by letting go of shift
 	if ( !this.dragging && this.selecting && e.keyCode === OO.ui.Keys.SHIFT ) {
 		this.selecting = false;
 		this.emit( 'selectionEnd' );
 	}
-
-	var nativeRange, clientRect, scrollTo;
 
 	if ( !this.surface.toolbarHeight ) {
 		return;
@@ -1645,7 +1646,7 @@ ve.ce.Surface.prototype.onCopy = function ( e ) {
 	if ( selection instanceof ve.dm.LinearSelection ||
 		( selection instanceof ve.dm.TableSelection && selection.isSingleCell() )
 	) {
-		range = selection.getRanges()[0];
+		range = selection.getRanges()[ 0 ];
 	} else {
 		return;
 	}
@@ -1655,7 +1656,7 @@ ve.ce.Surface.prototype.onCopy = function ( e ) {
 	// Clone the elements in the slice
 	slice.data.cloneElements( true );
 
-	ve.dm.converter.getDomSubtreeFromModel( slice, this.$pasteTarget[0], true );
+	ve.dm.converter.getDomSubtreeFromModel( slice, this.$pasteTarget[ 0 ], true );
 
 	// Some browsers strip out spans when they match the styling of the
 	// paste target (e.g. plain spans) so we must protect against this
@@ -1679,9 +1680,9 @@ ve.ce.Surface.prototype.onCopy = function ( e ) {
 
 		i = ua.length;
 		while ( i-- ) {
-			val = this.getAttribute( ua[i] );
+			val = this.getAttribute( ua[ i ] );
 			if ( val !== null ) {
-				attrs[ua[i]] = val;
+				attrs[ ua[ i ] ] = val;
 			}
 		}
 		this.setAttribute( 'data-ve-attributes', JSON.stringify( attrs ) );
@@ -1721,16 +1722,16 @@ ve.ce.Surface.prototype.onCopy = function ( e ) {
 
 			// Prevent surface observation due to native range changing
 			this.surfaceObserver.disable();
-			ve.selectElement( this.$pasteTarget[0] );
+			ve.selectElement( this.$pasteTarget[ 0 ] );
 
 			// Restore scroll position after changing focus
 			this.$window.scrollTop( scrollTop );
 
 			setTimeout( function () {
 				// If the range was in $highlights (right-click copy), don't restore it
-				if ( !OO.ui.contains( view.$highlights[0], originalSelection.focusNode, true ) ) {
+				if ( !OO.ui.contains( view.$highlights[ 0 ], originalSelection.focusNode, true ) ) {
 					// Change focus back
-					view.$documentNode[0].focus();
+					view.$documentNode[ 0 ].focus();
 					view.showSelectionState( originalSelection );
 					// Restore scroll position
 					view.$window.scrollTop( scrollTop );
@@ -1740,7 +1741,7 @@ ve.ce.Surface.prototype.onCopy = function ( e ) {
 			} );
 		} else {
 			// If nativeRange is null, the pasteTarget *should* already be selected...
-			ve.selectElement( this.$pasteTarget[0] );
+			ve.selectElement( this.$pasteTarget[ 0 ] );
 		}
 	}
 };
@@ -1791,7 +1792,7 @@ ve.ce.Surface.prototype.beforePaste = function ( e ) {
 	if ( selection instanceof ve.dm.LinearSelection ||
 		( selection instanceof ve.dm.TableSelection && selection.isSingleCell() )
 	) {
-		range = selection.getRanges()[0];
+		range = selection.getRanges()[ 0 ];
 	} else {
 		e.preventDefault();
 		return;
@@ -1818,7 +1819,7 @@ ve.ce.Surface.prototype.beforePaste = function ( e ) {
 		tx = ve.dm.Transaction.newFromRemoval( doc, range );
 		selection = selection.translateByTransaction( tx );
 		this.model.change( tx, selection );
-		range = selection.getRanges()[0];
+		range = selection.getRanges()[ 0 ];
 	}
 
 	// Save scroll position before changing focus to "offscreen" paste target
@@ -1856,7 +1857,7 @@ ve.ce.Surface.prototype.beforePaste = function ( e ) {
 			context.push( '☁' );
 			textEnd = 1;
 		}
-		context.push( { type: '/' + context[0].type } );
+		context.push( { type: '/' + context[ 0 ].type } );
 
 		// Throw away 'internal', specifically inner whitespace,
 		// before conversion as it can affect textStart/End offsets.
@@ -1867,16 +1868,16 @@ ve.ce.Surface.prototype.beforePaste = function ( e ) {
 				doc.getHtmlDocument(), undefined, doc.getInternalList(),
 				doc.getLang(), doc.getDir()
 			),
-			this.$pasteTarget[0]
+			this.$pasteTarget[ 0 ]
 		);
 
 		// Giving the paste target focus too late can cause problems in FF (!?)
 		// so do it up here.
-		this.$pasteTarget[0].focus();
+		this.$pasteTarget[ 0 ].focus();
 
 		nativeRange = this.getElementDocument().createRange();
 		// Assume that the DM node only generated one child
-		textNode = this.$pasteTarget.children().contents()[0];
+		textNode = this.$pasteTarget.children().contents()[ 0 ];
 		// Place the cursor between the placeholder characters
 		nativeRange.setStart( textNode, textStart );
 		nativeRange.setEnd( textNode, textEnd );
@@ -1889,7 +1890,7 @@ ve.ce.Surface.prototype.beforePaste = function ( e ) {
 	} else {
 		// If we're not in a content branch node, don't bother trying to do
 		// anything clever with paste context
-		this.$pasteTarget[0].focus();
+		this.$pasteTarget[ 0 ].focus();
 	}
 
 	// Restore scroll position after focusing the paste target
@@ -1922,7 +1923,7 @@ ve.ce.Surface.prototype.afterPaste = function () {
 	if ( selection instanceof ve.dm.LinearSelection ||
 		( selection instanceof ve.dm.TableSelection && selection.isSingleCell() )
 	) {
-		range = selection.getRanges()[0];
+		range = selection.getRanges()[ 0 ];
 	} else {
 		return;
 	}
@@ -1988,16 +1989,16 @@ ve.ce.Surface.prototype.afterPaste = function () {
 	// If we have a clipboard key, validate it and fetch data
 	if ( clipboardKey ) {
 		parts = clipboardKey.split( '-' );
-		clipboardId = parts[0];
-		clipboardIndex = parts[1];
-		if ( clipboardId === this.clipboardId && this.clipboard[clipboardIndex] ) {
+		clipboardId = parts[ 0 ];
+		clipboardIndex = parts[ 1 ];
+		if ( clipboardId === this.clipboardId && this.clipboard[ clipboardIndex ] ) {
 			// Hash validation: either text/xcustom was used or the hash must be
 			// equal to the hash of the pasted HTML to assert that the HTML
 			// hasn't been modified in another editor before being pasted back.
 			if ( beforePasteData.custom ||
-				this.clipboard[clipboardIndex].hash === clipboardHash
+				this.clipboard[ clipboardIndex ].hash === clipboardHash
 			) {
-				slice = this.clipboard[clipboardIndex].slice;
+				slice = this.clipboard[ clipboardIndex ].slice;
 			}
 		}
 	}
@@ -2163,7 +2164,7 @@ ve.ce.Surface.prototype.afterPaste = function () {
 	}
 
 	// Restore focus and scroll position
-	this.$documentNode[0].focus();
+	this.$documentNode[ 0 ].focus();
 	// Firefox sometimes doesn't change scrollTop immediately when pasting
 	// line breaks so wait until we fix it.
 	setTimeout( function () {
@@ -2191,20 +2192,20 @@ ve.ce.Surface.prototype.handleDataTransfer = function ( dataTransfer, isPaste, t
 
 	if ( dataTransfer.items ) {
 		for ( i = 0, l = dataTransfer.items.length; i < l; i++ ) {
-			if ( dataTransfer.items[i].kind !== 'string' ) {
-				items.push( ve.ui.DataTransferItem.static.newFromItem( dataTransfer.items[i] ) );
+			if ( dataTransfer.items[ i ].kind !== 'string' ) {
+				items.push( ve.ui.DataTransferItem.static.newFromItem( dataTransfer.items[ i ] ) );
 			}
 		}
 	} else if ( dataTransfer.files ) {
 		for ( i = 0, l = dataTransfer.files.length; i < l; i++ ) {
-			items.push( ve.ui.DataTransferItem.static.newFromBlob( dataTransfer.files[i] ) );
+			items.push( ve.ui.DataTransferItem.static.newFromBlob( dataTransfer.files[ i ] ) );
 		}
 	}
 
 	for ( i = 0, l = stringTypes.length; i < stringTypes.length; i++ ) {
-		stringData = dataTransfer.getData( stringTypes[i] );
+		stringData = dataTransfer.getData( stringTypes[ i ] );
 		if ( stringData ) {
-			items.push( ve.ui.DataTransferItem.static.newFromString( stringData, stringTypes[i] ) );
+			items.push( ve.ui.DataTransferItem.static.newFromString( stringData, stringTypes[ i ] ) );
 		}
 	}
 
@@ -2234,9 +2235,9 @@ ve.ce.Surface.prototype.handleDataTransferItems = function ( items, isPaste, tar
 	}
 
 	for ( i = 0, l = items.length; i < l; i++ ) {
-		name = ve.init.target.dataTransferHandlerFactory.getHandlerNameForItem( items[i], isPaste );
+		name = ve.init.target.dataTransferHandlerFactory.getHandlerNameForItem( items[ i ], isPaste );
 		if ( name ) {
-			ve.init.target.dataTransferHandlerFactory.create( name, this.surface, items[i] )
+			ve.init.target.dataTransferHandlerFactory.create( name, this.surface, items[ i ] )
 				.getInsertableData().done( insert );
 			handled = true;
 			break;
@@ -2383,8 +2384,8 @@ ve.ce.Surface.prototype.preparePasteTargetForCopy = function () {
 	// #onCopy will ignore this native selection and use the DM selection
 	if ( !ve.init.platform.constructor.static.isIos() ) {
 		this.$pasteTarget.text( ( this.focusedNode && this.focusedNode.$element.text().trim() ) || '☢' );
-		ve.selectElement( this.$pasteTarget[0] );
-		this.$pasteTarget[0].focus();
+		ve.selectElement( this.$pasteTarget[ 0 ] );
+		this.$pasteTarget[ 0 ].focus();
 	} else {
 		// Selecting the paste target fails on iOS:
 		// * The selection stays visible and causes scrolling
@@ -2403,10 +2404,11 @@ ve.ce.Surface.prototype.preparePasteTargetForCopy = function () {
  * @return {ve.ce.Node|null} Focused node
  */
 ve.ce.Surface.prototype.getFocusedNode = function ( range ) {
+	var selection;
 	if ( !range ) {
 		return this.focusedNode;
 	}
-	var selection = this.getModel().getSelection();
+	selection = this.getModel().getSelection();
 	if (
 		selection instanceof ve.dm.LinearSelection &&
 		range.equalsSelection( selection.getRange() )
@@ -2775,14 +2777,14 @@ ve.ce.Surface.prototype.onSurfaceObserverContentChange = function ( node, previo
 
 	len = Math.min( previousData.length, nextData.length );
 
-	while ( fromLeft < len && previousData[fromLeft] === nextData[fromLeft] ) {
+	while ( fromLeft < len && previousData[ fromLeft ] === nextData[ fromLeft ] ) {
 		++fromLeft;
 	}
 
 	while (
 		fromRight < len - fromLeft &&
-		previousData[previousData.length - 1 - fromRight] ===
-		nextData[nextData.length - 1 - fromRight]
+		previousData[ previousData.length - 1 - fromRight ] ===
+		nextData[ nextData.length - 1 - fromRight ]
 	) {
 		++fromRight;
 	}
@@ -2841,7 +2843,7 @@ ve.ce.Surface.prototype.checkSequences = function () {
 
 	// sequences.length will likely be 0 or 1 so don't cache
 	for ( i = 0; i < sequences.length; i++ ) {
-		executed = sequences[i].execute( this.surface ) || executed;
+		executed = sequences[ i ].execute( this.surface ) || executed;
 	}
 	if ( executed ) {
 		this.showModelSelection( model.getSelection() );
@@ -2968,7 +2970,7 @@ ve.ce.Surface.prototype.moveModelCursor = function ( offset ) {
 
 /**
  * Get the directionality at the current focused node
- * @returns {string} 'ltr' or 'rtl'
+ * @return {string} 'ltr' or 'rtl'
  */
 ve.ce.Surface.prototype.getFocusedNodeDirectionality = function () {
 	var cursorNode,
@@ -2994,7 +2996,7 @@ ve.ce.Surface.prototype.getFocusedNodeDirectionality = function () {
  * Restore the selection from the model if it is outside the active table node
  *
  * This is only useful if the DOM selection and the model selection are out of sync
- * @returns {boolean} Whether the selection was restored
+ * @return {boolean} Whether the selection was restored
  */
 ve.ce.Surface.prototype.restoreActiveTableNodeSelection = function () {
 	var activeTableNode, editingRange;
@@ -3024,7 +3026,7 @@ ve.ce.Surface.prototype.restoreActiveTableNodeSelection = function () {
  * up/downarrow (because of wrapping).
  *
  * @param {number} direction -1 for before the cursor, +1 for after
- * @returns {Node|null} Potentially cursor-adjacent uneditable branch node, or null
+ * @return {Node|null} Potentially cursor-adjacent uneditable branch node, or null
  */
 ve.ce.Surface.prototype.findAdjacentUneditableBranchNode = function ( direction ) {
 	var node,
@@ -3032,7 +3034,7 @@ ve.ce.Surface.prototype.findAdjacentUneditableBranchNode = function ( direction 
 
 	node = $( this.nativeSelection.focusNode ).closest(
 		'.ve-ce-branchNode,.ve-ce-leafNode,.ve-ce-surface-paste'
-	)[0];
+	)[ 0 ];
 	if ( !node || node.classList.contains( 've-ce-surface-paste' ) ) {
 		return null;
 	}
@@ -3363,20 +3365,20 @@ ve.ce.Surface.prototype.handleTableArrowKey = function ( e ) {
  * Handle insertion of content.
  */
 ve.ce.Surface.prototype.handleInsertion = function () {
+	var range, annotations, cellSelection, hasChanged, selection, documentModel;
+
 	// Don't allow a user to delete a focusable node just by typing
 	if ( this.focusedNode ) {
 		return;
 	}
 
-	var range, annotations,
-		cellSelection,
-		hasChanged = false,
-		selection = this.model.getSelection(),
-		documentModel = this.model.getDocument();
+	hasChanged = false;
+	selection = this.model.getSelection();
+	documentModel = this.model.getDocument();
 
 	if ( selection instanceof ve.dm.TableSelection ) {
 		cellSelection = selection.collapseToFrom();
-		annotations = documentModel.data.getAnnotationsFromRange( cellSelection.getRanges()[0] );
+		annotations = documentModel.data.getAnnotationsFromRange( cellSelection.getRanges()[ 0 ] );
 		this.model.setSelection( cellSelection );
 		this.handleTableDelete();
 		this.documentView.getBranchNodeFromOffset( selection.tableRange.start + 1 ).setEditing( true );
@@ -3538,7 +3540,7 @@ ve.ce.Surface.prototype.handleLinearEnter = function ( e ) {
 			// This is a list item
 			outermostNode.type === 'listItem' &&
 			// This is the last list item
-			outerParent.getChildren()[outerChildrenCount - 1] === outermostNode.getModel() &&
+			outerParent.getChildren()[ outerChildrenCount - 1 ] === outermostNode.getModel() &&
 			// There is one child
 			outermostNode.children.length === 1 &&
 			// The child is empty
@@ -3717,15 +3719,15 @@ ve.ce.Surface.prototype.handleTableDelete = function () {
 		cells = surfaceModel.getSelection().getMatrixCells();
 
 	for ( i = 0, l = cells.length; i < l; i++ ) {
-		if ( cells[i].node.isCellEditable() ) {
+		if ( cells[ i ].node.isCellEditable() ) {
 			// Create auto-updating fragments from ranges
-			fragments.push( surfaceModel.getLinearFragment( cells[i].node.getRange(), true ) );
+			fragments.push( surfaceModel.getLinearFragment( cells[ i ].node.getRange(), true ) );
 		}
 	}
 
 	for ( i = 0, l = fragments.length; i < l; i++ ) {
 		// Replace contents with empty wrapper paragraphs
-		fragments[i].insertContent( [
+		fragments[ i ].insertContent( [
 			{ type: 'paragraph', internal: { generated: 'wrapper' } },
 			{ type: '/paragraph' }
 		] );
@@ -3791,7 +3793,7 @@ ve.ce.Surface.prototype.getViewportRange = function () {
 			}
 
 			rect = surface.getSelectionBoundingRect( new ve.dm.LinearSelection( documentModel, new ve.Range( mid ) ) );
-			if ( rect[side] > offset ) {
+			if ( rect[ side ] > offset ) {
 				end = mid;
 				range = new ve.Range( range.start, end );
 			} else {
@@ -3813,7 +3815,7 @@ ve.ce.Surface.prototype.getViewportRange = function () {
  *
  * @method
  * @param {ve.dm.Selection} selection Selection to show
- * @returns {boolean} Whether the selection actually changed
+ * @return {boolean} Whether the selection actually changed
  */
 ve.ce.Surface.prototype.showModelSelection = function ( selection ) {
 	if ( this.deactivated ) {
@@ -3839,7 +3841,7 @@ ve.ce.Surface.prototype.showModelSelection = function ( selection ) {
  * If the browser cannot show a backward selection, fall back to the forward equivalent
  *
  * @param {ve.SelectionState} selection The selection state to show
- * @returns {boolean} Whether the selection actually changed
+ * @return {boolean} Whether the selection actually changed
  */
 ve.ce.Surface.prototype.showSelectionState = function ( selection ) {
 	var range,
@@ -3899,13 +3901,13 @@ ve.ce.Surface.prototype.showSelectionState = function ( selection ) {
  *
  * @method
  * @param {ve.Range} range Range to get selection for
- * @returns {Object} The selection
- * @returns.anchorNode {Node} The anchor node
- * @returns.anchorOffset {number} The anchor offset
- * @returns.focusNode {Node} The focus node
- * @returns.focusOffset {number} The focus offset
- * @returns.isCollapsed {boolean} True if the focus and anchor are in the same place
- * @returns.isBackwards {boolean} True if the focus is before the anchor
+ * @return {Object} The selection
+ * @return return.anchorNode {Node} The anchor node
+ * @return return.anchorOffset {number} The anchor offset
+ * @return return.focusNode {Node} The focus node
+ * @return return.focusOffset {number} The focus offset
+ * @return return.isCollapsed {boolean} True if the focus and anchor are in the same place
+ * @return return.isBackwards {boolean} True if the focus is before the anchor
  */
 ve.ce.Surface.prototype.getSelectionState = function ( range ) {
 	var anchor, focus;
@@ -3981,7 +3983,7 @@ ve.ce.Surface.prototype.appendHighlights = function ( $highlights, focused ) {
  * @method
  * @param {number} offset Offset to start looking at
  * @param {number} [direction=-1] Direction to look in, +1 or -1
- * @returns {number} Nearest offset a cursor can be placed at
+ * @return {number} Nearest offset a cursor can be placed at
  */
 ve.ce.Surface.prototype.getNearestCorrectOffset = function ( offset, direction ) {
 	var contentOffset, structuralOffset,
@@ -4024,7 +4026,7 @@ ve.ce.Surface.prototype.getNearestCorrectOffset = function ( offset, direction )
  * Get the top-level surface.
  *
  * @method
- * @returns {ve.ui.Surface} Surface
+ * @return {ve.ui.Surface} Surface
  */
 ve.ce.Surface.prototype.getSurface = function () {
 	return this.surface;
@@ -4034,7 +4036,7 @@ ve.ce.Surface.prototype.getSurface = function () {
  * Get the surface model.
  *
  * @method
- * @returns {ve.dm.Surface} Surface model
+ * @return {ve.dm.Surface} Surface model
  */
 ve.ce.Surface.prototype.getModel = function () {
 	return this.model;
@@ -4044,7 +4046,7 @@ ve.ce.Surface.prototype.getModel = function () {
  * Get the document view.
  *
  * @method
- * @returns {ve.ce.Document} Document view
+ * @return {ve.ce.Document} Document view
  */
 ve.ce.Surface.prototype.getDocument = function () {
 	return this.documentView;
@@ -4054,7 +4056,7 @@ ve.ce.Surface.prototype.getDocument = function () {
  * Check whether there are any render locks
  *
  * @method
- * @returns {boolean} Render is locked
+ * @return {boolean} Render is locked
  */
 ve.ce.Surface.prototype.isRenderingLocked = function () {
 	return this.renderLocks > 0;

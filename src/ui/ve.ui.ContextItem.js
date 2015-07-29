@@ -177,8 +177,9 @@ ve.ui.ContextItem.prototype.getCommand = function () {
  * @return {ve.dm.SurfaceFragment} Surface fragment
  */
 ve.ui.ContextItem.prototype.getFragment = function () {
+	var surfaceModel;
 	if ( !this.fragment ) {
-		var surfaceModel = this.context.getSurface().getModel();
+		surfaceModel = this.context.getSurface().getModel();
 		this.fragment = this.model && this.model instanceof ve.dm.Node ?
 			surfaceModel.getLinearFragment( this.model.getOuterRange() ) :
 			surfaceModel.getFragment();
