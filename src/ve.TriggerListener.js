@@ -37,13 +37,13 @@ ve.TriggerListener.prototype.setupCommands = function ( commands ) {
 	this.commands = commands;
 	if ( commands.length ) {
 		for ( i = this.commands.length - 1; i >= 0; i-- ) {
-			command = this.commands[i];
+			command = this.commands[ i ];
 			triggers = ve.ui.triggerRegistry.lookup( command );
 			if ( triggers ) {
 				for ( j = triggers.length - 1; j >= 0; j-- ) {
-					this.commandsByTrigger[triggers[j].toString()] = ve.ui.commandRegistry.lookup( command );
+					this.commandsByTrigger[ triggers[ j ].toString() ] = ve.ui.commandRegistry.lookup( command );
 				}
-				this.triggers[command] = triggers;
+				this.triggers[ command ] = triggers;
 			}
 		}
 	}
@@ -66,7 +66,7 @@ ve.TriggerListener.prototype.getCommands = function () {
  * @returns {ve.ui.Command|undefined} Command
  */
 ve.TriggerListener.prototype.getCommandByTrigger = function ( trigger ) {
-	return this.commandsByTrigger[trigger];
+	return this.commandsByTrigger[ trigger ];
 };
 
 /**
@@ -76,5 +76,5 @@ ve.TriggerListener.prototype.getCommandByTrigger = function ( trigger ) {
  * @returns {ve.ui.Trigger[]|undefined} Triggers
  */
 ve.TriggerListener.prototype.getTriggers = function ( name ) {
-	return this.triggers[name];
+	return this.triggers[ name ];
 };

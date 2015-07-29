@@ -34,7 +34,7 @@ OO.inheritClass( ve.dm.NodeFactory, ve.dm.ModelFactory );
 ve.dm.NodeFactory.prototype.getDataElement = function ( type, attributes ) {
 	var element = { type: type };
 	if ( Object.prototype.hasOwnProperty.call( this.registry, type ) ) {
-		attributes = ve.extendObject( {}, this.registry[type].static.defaultAttributes, attributes );
+		attributes = ve.extendObject( {}, this.registry[ type ].static.defaultAttributes, attributes );
 		if ( !ve.isEmptyObject( attributes ) ) {
 			element.attributes = ve.copy( attributes );
 		}
@@ -53,7 +53,7 @@ ve.dm.NodeFactory.prototype.getDataElement = function ( type, attributes ) {
  */
 ve.dm.NodeFactory.prototype.getChildNodeTypes = function ( type ) {
 	if ( Object.prototype.hasOwnProperty.call( this.registry, type ) ) {
-		return this.registry[type].static.childNodeTypes;
+		return this.registry[ type ].static.childNodeTypes;
 	}
 	throw new Error( 'Unknown node type: ' + type );
 };
@@ -68,7 +68,7 @@ ve.dm.NodeFactory.prototype.getChildNodeTypes = function ( type ) {
  */
 ve.dm.NodeFactory.prototype.getParentNodeTypes = function ( type ) {
 	if ( Object.prototype.hasOwnProperty.call( this.registry, type ) ) {
-		return this.registry[type].static.parentNodeTypes;
+		return this.registry[ type ].static.parentNodeTypes;
 	}
 	throw new Error( 'Unknown node type: ' + type );
 };
@@ -83,7 +83,7 @@ ve.dm.NodeFactory.prototype.getParentNodeTypes = function ( type ) {
  */
 ve.dm.NodeFactory.prototype.getSuggestedParentNodeTypes = function ( type ) {
 	if ( Object.prototype.hasOwnProperty.call( this.registry, type ) ) {
-		return this.registry[type].static.suggestedParentNodeTypes;
+		return this.registry[ type ].static.suggestedParentNodeTypes;
 	}
 	throw new Error( 'Unknown node type: ' + type );
 };
@@ -100,7 +100,7 @@ ve.dm.NodeFactory.prototype.canNodeHaveChildren = function ( type ) {
 	if ( Object.prototype.hasOwnProperty.call( this.registry, type ) ) {
 		// If childNodeTypes is null any child is allowed, if it's an array of at least one element
 		// than at least one kind of node is allowed
-		var types = this.registry[type].static.childNodeTypes;
+		var types = this.registry[ type ].static.childNodeTypes;
 		return types === null || ( Array.isArray( types ) && types.length > 0 );
 	}
 	throw new Error( 'Unknown node type: ' + type );
@@ -117,8 +117,8 @@ ve.dm.NodeFactory.prototype.canNodeHaveChildren = function ( type ) {
 ve.dm.NodeFactory.prototype.canNodeHaveChildrenNotContent = function ( type ) {
 	if ( Object.prototype.hasOwnProperty.call( this.registry, type ) ) {
 		return this.canNodeHaveChildren( type ) &&
-			!this.registry[type].static.canContainContent &&
-			!this.registry[type].static.isContent;
+			!this.registry[ type ].static.canContainContent &&
+			!this.registry[ type ].static.isContent;
 	}
 	throw new Error( 'Unknown node type: ' + type );
 };
@@ -133,7 +133,7 @@ ve.dm.NodeFactory.prototype.canNodeHaveChildrenNotContent = function ( type ) {
  */
 ve.dm.NodeFactory.prototype.isNodeWrapped = function ( type ) {
 	if ( Object.prototype.hasOwnProperty.call( this.registry, type ) ) {
-		return this.registry[type].static.isWrapped;
+		return this.registry[ type ].static.isWrapped;
 	}
 	throw new Error( 'Unknown node type: ' + type );
 };
@@ -148,7 +148,7 @@ ve.dm.NodeFactory.prototype.isNodeWrapped = function ( type ) {
  */
 ve.dm.NodeFactory.prototype.canNodeContainContent = function ( type ) {
 	if ( Object.prototype.hasOwnProperty.call( this.registry, type ) ) {
-		return this.registry[type].static.canContainContent;
+		return this.registry[ type ].static.canContainContent;
 	}
 	throw new Error( 'Unknown node type: ' + type );
 };
@@ -167,10 +167,10 @@ ve.dm.NodeFactory.prototype.canNodeTakeAnnotationType = function ( type, annotat
 		throw new Error( 'Unknown node type: ' + type );
 	}
 	var i, len,
-		blacklist = this.registry[type].static.blacklistedAnnotationTypes;
+		blacklist = this.registry[ type ].static.blacklistedAnnotationTypes;
 
 	for ( i = 0, len = blacklist.length; i < len; i++ ) {
-		if ( annotation instanceof ve.dm.annotationFactory.lookup( blacklist[i] ) ) {
+		if ( annotation instanceof ve.dm.annotationFactory.lookup( blacklist[ i ] ) ) {
 			return false;
 		}
 	}
@@ -187,7 +187,7 @@ ve.dm.NodeFactory.prototype.canNodeTakeAnnotationType = function ( type, annotat
  */
 ve.dm.NodeFactory.prototype.isNodeContent = function ( type ) {
 	if ( Object.prototype.hasOwnProperty.call( this.registry, type ) ) {
-		return this.registry[type].static.isContent;
+		return this.registry[ type ].static.isContent;
 	}
 	throw new Error( 'Unknown node type: ' + type );
 };
@@ -202,7 +202,7 @@ ve.dm.NodeFactory.prototype.isNodeContent = function ( type ) {
  */
 ve.dm.NodeFactory.prototype.isNodeFocusable = function ( type ) {
 	if ( Object.prototype.hasOwnProperty.call( this.registry, type ) ) {
-		return this.registry[type].static.isFocusable;
+		return this.registry[ type ].static.isFocusable;
 	}
 	throw new Error( 'Unknown node type: ' + type );
 };
@@ -219,7 +219,7 @@ ve.dm.NodeFactory.prototype.isNodeFocusable = function ( type ) {
  */
 ve.dm.NodeFactory.prototype.doesNodeHaveSignificantWhitespace = function ( type ) {
 	if ( Object.prototype.hasOwnProperty.call( this.registry, type ) ) {
-		return this.registry[type].static.hasSignificantWhitespace;
+		return this.registry[ type ].static.hasSignificantWhitespace;
 	}
 	throw new Error( 'Unknown node type: ' + type );
 };
@@ -234,7 +234,7 @@ ve.dm.NodeFactory.prototype.doesNodeHaveSignificantWhitespace = function ( type 
  */
 ve.dm.NodeFactory.prototype.doesNodeHandleOwnChildren = function ( type ) {
 	if ( Object.prototype.hasOwnProperty.call( this.registry, type ) ) {
-		return this.registry[type].static.handlesOwnChildren;
+		return this.registry[ type ].static.handlesOwnChildren;
 	}
 	throw new Error( 'Unknown node type: ' + type );
 };
@@ -249,7 +249,7 @@ ve.dm.NodeFactory.prototype.doesNodeHandleOwnChildren = function ( type ) {
  */
 ve.dm.NodeFactory.prototype.shouldIgnoreChildren = function ( type ) {
 	if ( Object.prototype.hasOwnProperty.call( this.registry, type ) ) {
-		return this.registry[type].static.ignoreChildren;
+		return this.registry[ type ].static.ignoreChildren;
 	}
 	throw new Error( 'Unknown node type: ' + type );
 };
@@ -264,7 +264,7 @@ ve.dm.NodeFactory.prototype.shouldIgnoreChildren = function ( type ) {
  */
 ve.dm.NodeFactory.prototype.isNodeInternal = function ( type ) {
 	if ( Object.prototype.hasOwnProperty.call( this.registry, type ) ) {
-		return this.registry[type].static.isInternal;
+		return this.registry[ type ].static.isInternal;
 	}
 	throw new Error( 'Unknown node type: ' + type );
 };

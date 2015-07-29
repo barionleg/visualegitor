@@ -181,7 +181,7 @@ ve.ce.FocusableNode.prototype.onFocusableMouseDown = function ( e ) {
 		this.$highlights.addClass( 've-ce-focusableNode-highlights-contextOpen' );
 		// Make ce=true so we get cut/paste options in context menu
 		this.$highlights.prop( 'contentEditable', 'true' );
-		ve.selectElement( this.$highlights[0] );
+		ve.selectElement( this.$highlights[ 0 ] );
 		setTimeout( function () {
 			// Undo everything as soon as the context menu is show
 			node.$highlights.removeClass( 've-ce-focusableNode-highlights-contextOpen' );
@@ -481,19 +481,19 @@ ve.ce.FocusableNode.prototype.calculateHighlights = function () {
 			contained = false;
 			for ( j = 0, jl = rects.length; j < jl; j++ ) {
 				// This rect is contained by an existing rect, discard
-				if ( contains( rects[j], clientRects[i] ) ) {
+				if ( contains( rects[ j ], clientRects[ i ] ) ) {
 					contained = true;
 					break;
 				}
 				// An existing rect is contained by this rect, discard the existing rect
-				if ( contains( clientRects[i], rects[j] ) ) {
+				if ( contains( clientRects[ i ], rects[ j ] ) ) {
 					rects.splice( j, 1 );
 					j--;
 					jl--;
 				}
 			}
 			if ( !contained ) {
-				rects.push( clientRects[i] );
+				rects.push( clientRects[ i ] );
 			}
 		}
 	}
@@ -501,7 +501,7 @@ ve.ce.FocusableNode.prototype.calculateHighlights = function () {
 	$set = this.$focusable.find( '*' ).addBack();
 	// Calling process() may change $set.length
 	for ( i = 0; i < $set.length; i++ ) {
-		process( $set[i] );
+		process( $set[ i ] );
 	}
 
 	// Elements with a width/height of 0 return a clientRect with a width/height of 1
@@ -521,23 +521,23 @@ ve.ce.FocusableNode.prototype.calculateHighlights = function () {
 
 	for ( i = 0, l = rects.length; i < l; i++ ) {
 		// Translate to relative
-		rects[i] = ve.translateRect( rects[i], -surfaceOffset.left, -surfaceOffset.top );
+		rects[ i ] = ve.translateRect( rects[ i ], -surfaceOffset.left, -surfaceOffset.top );
 		this.$highlights.append(
 			this.createHighlight().css( {
-				top: rects[i].top,
-				left: rects[i].left,
-				width: rects[i].width,
-				height: rects[i].height
+				top: rects[ i ].top,
+				left: rects[ i ].left,
+				width: rects[ i ].width,
+				height: rects[ i ].height
 			} )
 		);
 
 		if ( !this.boundingRect ) {
-			this.boundingRect = ve.copy( rects[i] );
+			this.boundingRect = ve.copy( rects[ i ] );
 		} else {
-			this.boundingRect.top = Math.min( this.boundingRect.top, rects[i].top );
-			this.boundingRect.left = Math.min( this.boundingRect.left, rects[i].left );
-			this.boundingRect.bottom = Math.max( this.boundingRect.bottom, rects[i].bottom );
-			this.boundingRect.right = Math.max( this.boundingRect.right, rects[i].right );
+			this.boundingRect.top = Math.min( this.boundingRect.top, rects[ i ].top );
+			this.boundingRect.left = Math.min( this.boundingRect.left, rects[ i ].left );
+			this.boundingRect.bottom = Math.max( this.boundingRect.bottom, rects[ i ].bottom );
+			this.boundingRect.right = Math.max( this.boundingRect.right, rects[ i ].right );
 		}
 	}
 	if ( this.boundingRect ) {
@@ -568,10 +568,10 @@ ve.ce.FocusableNode.prototype.positionHighlights = function () {
 	for ( i = 0, l = this.rects.length; i < l; i++ ) {
 		this.$highlights.append(
 			this.createHighlight().css( {
-				top: this.rects[i].top,
-				left: this.rects[i].left,
-				width: this.rects[i].width,
-				height: this.rects[i].height
+				top: this.rects[ i ].top,
+				left: this.rects[ i ].left,
+				width: this.rects[ i ].width,
+				height: this.rects[ i ].height
 			} )
 		);
 	}

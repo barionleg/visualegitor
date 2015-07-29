@@ -32,7 +32,7 @@ OO.inheritClass( ve.ce.AnnotationFactory, OO.Factory );
 ve.ce.AnnotationFactory.prototype.getDescription = function ( annotation ) {
 	var type = annotation.constructor.static.name;
 	if ( Object.prototype.hasOwnProperty.call( this.registry, type ) ) {
-		return this.registry[type].static.getDescription( annotation );
+		return this.registry[ type ].static.getDescription( annotation );
 	}
 	throw new Error( 'Unknown annotation type: ' + type );
 };
@@ -44,7 +44,7 @@ ve.ce.AnnotationFactory.prototype.getDescription = function ( annotation ) {
  */
 ve.ce.AnnotationFactory.prototype.isAnnotationContinuationForced = function ( type ) {
 	if ( Object.prototype.hasOwnProperty.call( this.registry, type ) ) {
-		return this.registry[type].static.forceContinuation;
+		return this.registry[ type ].static.forceContinuation;
 	}
 	return false;
 };

@@ -271,7 +271,7 @@ ve.ui.DesktopContext.prototype.isEmbeddable = function () {
 		sources = this.getRelatedSources();
 
 	for ( i = 0, len = sources.length; i < len; i++ ) {
-		if ( !sources[i].embeddable ) {
+		if ( !sources[ i ].embeddable ) {
 			return false;
 		}
 	}

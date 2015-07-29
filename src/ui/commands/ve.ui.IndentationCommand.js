@@ -40,7 +40,7 @@ ve.ui.IndentationCommand.prototype.isExecutable = function ( fragment ) {
 		nodes = fragment.getSelectedLeafNodes(),
 		any = false;
 	for ( i = 0, len = nodes.length; i < len; i++ ) {
-		if ( nodes[i].hasMatchingAncestor( 'listItem' ) ) {
+		if ( nodes[ i ].hasMatchingAncestor( 'listItem' ) ) {
 			any = true;
 			break;
 		}

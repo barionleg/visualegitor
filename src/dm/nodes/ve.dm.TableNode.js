@@ -63,8 +63,8 @@ ve.dm.TableNode.prototype.getMatrix = function () {
 ve.dm.TableNode.prototype.getCaptionNode = function () {
 	var i, l;
 	for ( i = 0, l = this.children.length; i < l; i++ ) {
-		if ( this.children[i] instanceof ve.dm.TableCaptionNode ) {
-			return this.children[i];
+		if ( this.children[ i ] instanceof ve.dm.TableCaptionNode ) {
+			return this.children[ i ];
 		}
 	}
 	return null;
@@ -171,7 +171,7 @@ ve.dm.TableNodeCellIterator.prototype.nextSection = function () {
 		return;
 	}
 	// Get the next node and make sure it's a section node (and not an alien node)
-	var sectionNode = this.table.children[this.sectionIndex];
+	var sectionNode = this.table.children[ this.sectionIndex ];
 	this.sectionIndex++;
 	this.rowIndex = 0;
 	if ( sectionNode instanceof ve.dm.TableSectionNode ) {
@@ -199,7 +199,7 @@ ve.dm.TableNodeCellIterator.prototype.nextRow = function () {
 		}
 	}
 	// Get the next node and make sure it's a row node (and not an alien node)
-	var rowNode = this.sectionNode.children[this.rowIndex];
+	var rowNode = this.sectionNode.children[ this.rowIndex ];
 	this.rowIndex++;
 	this.cellIndex = 0;
 	if ( rowNode instanceof ve.dm.TableRowNode ) {
@@ -233,7 +233,7 @@ ve.dm.TableNodeCellIterator.prototype.nextCell = function () {
 		}
 	}
 	// Get the next node and make sure it's a cell node (and not an alien node)
-	var cellNode = this.rowNode.children[this.cellIndex];
+	var cellNode = this.rowNode.children[ this.cellIndex ];
 	this.cellNode = cellNode instanceof ve.dm.TableCellNode ? cellNode : null;
 	this.cellIndex++;
 };

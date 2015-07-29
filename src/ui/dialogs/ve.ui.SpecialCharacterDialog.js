@@ -133,7 +133,7 @@ ve.ui.SpecialCharacterDialog.prototype.buildButtonList = function () {
 		this.pages.push(
 			new ve.ui.SpecialCharacterPage( category, {
 				label: category,
-				characters: this.characters[category]
+				characters: this.characters[ category ]
 			} )
 		);
 	}

@@ -40,9 +40,9 @@ ve.BranchNode.static.traverse = function ( node, callback ) {
 		children = node.getChildren();
 
 	for ( i = 0, len = children.length; i < len; i++ ) {
-		callback.call( this, children[i] );
-		if ( children[i] instanceof ve.ce.BranchNode ) {
-			this.traverse( children[i], callback );
+		callback.call( this, children[ i ] );
+		if ( children[ i ] instanceof ve.ce.BranchNode ) {
+			this.traverse( children[ i ], callback );
 		}
 	}
 };
@@ -94,7 +94,7 @@ ve.BranchNode.prototype.setRoot = function ( root ) {
 	}
 	this.root = root;
 	for ( var i = 0; i < this.children.length; i++ ) {
-		this.children[i].setRoot( root );
+		this.children[ i ].setRoot( root );
 	}
 };
 
@@ -112,7 +112,7 @@ ve.BranchNode.prototype.setDocument = function ( doc ) {
 	}
 	this.doc = doc;
 	for ( var i = 0; i < this.children.length; i++ ) {
-		this.children[i].setDocument( doc );
+		this.children[ i ].setDocument( doc );
 	}
 };
 
@@ -138,7 +138,7 @@ ve.BranchNode.prototype.getNodeFromOffset = function ( offset, shallow ) {
 		var i, length, nodeLength, childNode,
 			nodeOffset = 0;
 		for ( i = 0, length = this.children.length; i < length; i++ ) {
-			childNode = this.children[i];
+			childNode = this.children[ i ];
 			if ( offset === nodeOffset ) {
 				// The requested offset is right before childNode,
 				// so it's not inside any of this's children, but inside this

@@ -117,7 +117,7 @@ ve.dm.AnnotationSet.prototype.get = function ( offset ) {
  * @returns {number} Store index at specified offset
  */
 ve.dm.AnnotationSet.prototype.getIndex = function ( offset ) {
-	return this.storeIndexes[offset];
+	return this.storeIndexes[ offset ];
 };
 
 /**
@@ -184,7 +184,7 @@ ve.dm.AnnotationSet.prototype.containsAnyOf = function ( set ) {
 		setIndexes = set.getIndexes(),
 		thisIndexes = this.getIndexes();
 	for ( i = 0, length = setIndexes.length; i < length; i++ ) {
-		if ( thisIndexes.indexOf( setIndexes[i] ) !== -1 ) {
+		if ( thisIndexes.indexOf( setIndexes[ i ] ) !== -1 ) {
 			return true;
 		}
 	}
@@ -203,7 +203,7 @@ ve.dm.AnnotationSet.prototype.containsAllOf = function ( set ) {
 		setIndexes = set.getIndexes(),
 		thisIndexes = this.getIndexes();
 	for ( i = 0, length = setIndexes.length; i < length; i++ ) {
-		if ( thisIndexes.indexOf( setIndexes[i] ) === -1 ) {
+		if ( thisIndexes.indexOf( setIndexes[ i ] ) === -1 ) {
 			return false;
 		}
 	}
@@ -354,7 +354,7 @@ ve.dm.AnnotationSet.prototype.equalsInOrder = function ( set ) {
 		return false;
 	}
 	for ( i = 0, len = ourIndexes.length; i < len; i++ ) {
-		if ( ourIndexes[i] !== theirIndexes[i] ) {
+		if ( ourIndexes[ i ] !== theirIndexes[ i ] ) {
 			return false;
 		}
 	}

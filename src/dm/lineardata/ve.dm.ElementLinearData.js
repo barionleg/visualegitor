@@ -55,10 +55,10 @@ ve.dm.ElementLinearData.static.compareElements = function ( a, b ) {
 		bPlain = b;
 
 	if ( Array.isArray( a ) ) {
-		aPlain = a[0];
+		aPlain = a[ 0 ];
 	}
 	if ( Array.isArray( b ) ) {
-		bPlain = b[0];
+		bPlain = b[ 0 ];
 	}
 	if ( a && a.type ) {
 		aPlain = {
@@ -308,8 +308,8 @@ ve.dm.ElementLinearData.prototype.getAnnotationIndexesFromOffset = function ( of
 		return [];
 	} else if ( element.annotations ) {
 		return element.annotations.slice();
-	} else if ( element[1] ) {
-		return element[1].slice();
+	} else if ( element[ 1 ] ) {
+		return element[ 1 ].slice();
 	} else {
 		return [];
 	}
@@ -392,7 +392,7 @@ ve.dm.ElementLinearData.prototype.setAttributeAtOffset = function ( offset, key,
 	if ( value === undefined ) {
 		// Clear
 		if ( item.attributes ) {
-			delete item.attributes[key];
+			delete item.attributes[ key ];
 		}
 	} else {
 		// Automatically initialize attributes object
@@ -400,7 +400,7 @@ ve.dm.ElementLinearData.prototype.setAttributeAtOffset = function ( offset, key,
 			item.attributes = {};
 		}
 		// Set
-		item.attributes[key] = value;
+		item.attributes[ key ] = value;
 	}
 };
 
@@ -412,7 +412,7 @@ ve.dm.ElementLinearData.prototype.setAttributeAtOffset = function ( offset, key,
  */
 ve.dm.ElementLinearData.prototype.getCharacterData = function ( offset ) {
 	var item = this.getData( offset ),
-		data = Array.isArray( item ) ? item[0] : item;
+		data = Array.isArray( item ) ? item[ 0 ] : item;
 	return typeof data === 'string' ? data : '';
 };
 
@@ -860,9 +860,9 @@ ve.dm.ElementLinearData.prototype.getUsedStoreValues = function ( range ) {
 		indexes = this.getAnnotationIndexesFromOffset( i, true );
 		j = indexes.length;
 		while ( j-- ) {
-			index = indexes[j];
+			index = indexes[ j ];
 			if ( !Object.prototype.hasOwnProperty.call( valueStore, index ) ) {
-				valueStore[index] = this.getStore().value( index );
+				valueStore[ index ] = this.getStore().value( index );
 			}
 		}
 	}
@@ -882,12 +882,12 @@ ve.dm.ElementLinearData.prototype.remapStoreIndexes = function ( mapping ) {
 	for ( i = 0, ilen = this.data.length; i < ilen; i++ ) {
 		indexes = this.getAnnotationIndexesFromOffset( i, true );
 		for ( j = 0, jlen = indexes.length; j < jlen; j++ ) {
-			indexes[j] = mapping[indexes[j]];
+			indexes[ j ] = mapping[ indexes[ j ] ];
 		}
 		this.setAnnotationIndexesAtOffset( i, indexes );
 		if ( this.isOpenElementData( i ) ) {
 			nodeClass = ve.dm.nodeFactory.lookup( this.getType( i ) );
-			nodeClass.static.remapStoreIndexes( this.data[i], mapping );
+			nodeClass.static.remapStoreIndexes( this.data[ i ], mapping );
 		}
 	}
 };
@@ -907,7 +907,7 @@ ve.dm.ElementLinearData.prototype.remapInternalListIndexes = function ( mapping,
 	for ( i = 0, ilen = this.data.length; i < ilen; i++ ) {
 		if ( this.isOpenElementData( i ) ) {
 			nodeClass = ve.dm.nodeFactory.lookup( this.getType( i ) );
-			nodeClass.static.remapInternalListIndexes( this.data[i], mapping, internalList );
+			nodeClass.static.remapInternalListIndexes( this.data[ i ], mapping, internalList );
 		}
 	}
 };
@@ -925,7 +925,7 @@ ve.dm.ElementLinearData.prototype.remapInternalListKeys = function ( internalLis
 	for ( i = 0, ilen = this.data.length; i < ilen; i++ ) {
 		if ( this.isOpenElementData( i ) ) {
 			nodeClass = ve.dm.nodeFactory.lookup( this.getType( i ) );
-			nodeClass.static.remapInternalListKeys( this.data[i], internalList );
+			nodeClass.static.remapInternalListKeys( this.data[ i ], internalList );
 		}
 	}
 };
@@ -967,8 +967,8 @@ ve.dm.ElementLinearData.prototype.sanitize = function ( rules, plainText, keepEm
 		if ( this.isElementData( i ) ) {
 			type = this.getType( i );
 			// Apply type conversions
-			if ( rules.conversions && rules.conversions[type] ) {
-				type = rules.conversions[type];
+			if ( rules.conversions && rules.conversions[ type ] ) {
+				type = rules.conversions[ type ];
 				this.getData( i ).type = ( this.isCloseElementData( i ) ? '/' : '' ) + type;
 			}
 			// Convert content-containing non-paragraph nodes to paragraphs in plainText mode

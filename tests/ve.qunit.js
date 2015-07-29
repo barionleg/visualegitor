@@ -41,7 +41,7 @@
 			if ( !shallow ) {
 				summary.children = [];
 				for ( i = 0; i < numChildren; i++ ) {
-					summary.children.push( getNodeTreeSummary( node.children[i] ) );
+					summary.children.push( getNodeTreeSummary( node.children[ i ] ) );
 				}
 			}
 		}
@@ -69,13 +69,13 @@
 			summary.results = [];
 			for ( i = 0; i < selection.length; i++ ) {
 				summary.results.push( {
-					node: getNodeTreeSummary( selection[i].node, true ),
-					range: selection[i].range,
-					index: selection[i].index,
-					indexInNode: selection[i].indexInNode,
-					nodeRange: selection[i].nodeRange,
-					nodeOuterRange: selection[i].nodeOuterRange,
-					parentOuterRange: selection[i].parentOuterRange
+					node: getNodeTreeSummary( selection[ i ].node, true ),
+					range: selection[ i ].range,
+					index: selection[ i ].index,
+					indexInNode: selection[ i ].indexInNode,
+					nodeRange: selection[ i ].nodeRange,
+					nodeOuterRange: selection[ i ].nodeOuterRange,
+					parentOuterRange: selection[ i ].parentOuterRange
 				} );
 			}
 		}
@@ -151,7 +151,7 @@
 			expectedSummary = getNodeSelectionSummary( expected );
 
 		for ( i = 0; i < actual.length; i++ ) {
-			if ( expected[i] && expected[i].node !== actual[i].node ) {
+			if ( expected[ i ] && expected[ i ].node !== actual[ i ].node ) {
 				QUnit.push( false, actualSummary, expectedSummary,
 					message + ' (reference equality for selection[' + i + '].node)'
 				);
@@ -183,8 +183,8 @@
 			var i = 0,
 				len = arr.length;
 			for ( ; i < len; i++ ) {
-				if ( arr[i].originalDomElements ) {
-					delete arr[i].originalDomElements;
+				if ( arr[ i ].originalDomElements ) {
+					delete arr[ i ].originalDomElements;
 				}
 			}
 		}

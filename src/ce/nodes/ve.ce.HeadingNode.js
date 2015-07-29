@@ -46,7 +46,7 @@ ve.ce.HeadingNode.prototype.getTagName = function () {
 	if ( !Object.prototype.hasOwnProperty.call( types, level ) ) {
 		throw new Error( 'Invalid level' );
 	}
-	return types[level];
+	return types[ level ];
 };
 
 /**

@@ -45,7 +45,7 @@ ve.ui.TableCaptionCommand.prototype.isExecutable = function ( fragment ) {
 		hasCaptionNode = !!nodes.length;
 
 		for ( i = 0, len = nodes.length; i < len; i++ ) {
-			if ( !nodes[i].hasMatchingAncestor( 'tableCaption' ) ) {
+			if ( !nodes[ i ].hasMatchingAncestor( 'tableCaption' ) ) {
 				hasCaptionNode = false;
 				break;
 			}

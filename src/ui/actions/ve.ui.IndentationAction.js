@@ -60,7 +60,7 @@ ve.ui.IndentationAction.prototype.increase = function () {
 
 	// Build fragments from groups (we need their ranges since the nodes will be rebuilt on change)
 	for ( i = 0; i < groups.length; i++ ) {
-		group = groups[i];
+		group = groups[ i ];
 		if ( group.grandparent && group.grandparent.getType() === 'list' ) {
 			fragments.push( surfaceModel.getLinearFragment( group.parent.getRange(), true ) );
 			increased = true;
@@ -70,7 +70,7 @@ ve.ui.IndentationAction.prototype.increase = function () {
 	// Process each fragment (their ranges are automatically adjusted on change)
 	for ( i = 0; i < fragments.length; i++ ) {
 		this.indentListItem(
-			documentModel.getBranchNodeFromOffset( fragments[i].getSelection().getRange().start )
+			documentModel.getBranchNodeFromOffset( fragments[ i ].getSelection().getRange().start )
 		);
 	}
 
@@ -103,13 +103,13 @@ ve.ui.IndentationAction.prototype.decrease = function () {
 
 	// Build fragments from groups (we need their ranges since the nodes will be rebuilt on change)
 	for ( i = 0; i < groups.length; i++ ) {
-		group = groups[i];
+		group = groups[ i ];
 		if ( group.grandparent && group.grandparent.getType() === 'list' ) {
 			fragments.push( surfaceModel.getLinearFragment( group.parent.getRange(), true ) );
 			decreased = true;
 		} else if ( group.parent && group.parent.getType() === 'list' ) {
 			// In a slug, the node will be the listItem.
-			fragments.push( surfaceModel.getLinearFragment( group.nodes[0].getRange(), true ) );
+			fragments.push( surfaceModel.getLinearFragment( group.nodes[ 0 ].getRange(), true ) );
 			decreased = true;
 		}
 
@@ -118,7 +118,7 @@ ve.ui.IndentationAction.prototype.decrease = function () {
 	// Process each fragment (their ranges are automatically adjusted on change)
 	for ( i = 0; i < fragments.length; i++ ) {
 		this.unindentListItem(
-			documentModel.getBranchNodeFromOffset( fragments[i].getSelection().getRange().start )
+			documentModel.getBranchNodeFromOffset( fragments[ i ].getSelection().getRange().start )
 		);
 	}
 
@@ -288,7 +288,7 @@ ve.ui.IndentationAction.prototype.unindentListItem = function ( listItem ) {
 		// that they are not in a list
 		children = fragment.getSiblingNodes();
 		for ( i = 0, length = children.length; i < length; i++ ) {
-			child = children[i].node;
+			child = children[ i ].node;
 			if (
 				child.type === 'paragraph' &&
 				child.element.internal &&

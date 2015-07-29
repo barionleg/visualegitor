@@ -86,13 +86,13 @@
 	ve.test.utils.countGetModelFromDomTests = function ( cases ) {
 		var msg, n = 0;
 		for ( msg in cases ) {
-			if ( cases[msg].head !== undefined || cases[msg].body !== undefined ) {
+			if ( cases[ msg ].head !== undefined || cases[ msg ].body !== undefined ) {
 				n += 3;
-				if ( cases[msg].storeLength ) {
+				if ( cases[ msg ].storeLength ) {
 					n += 1;
 				}
-				if ( cases[msg].storeItems ) {
-					n += cases[msg].storeItems.length;
+				if ( cases[ msg ].storeItems ) {
+					n += cases[ msg ].storeItems.length;
 				}
 			}
 		}
@@ -126,10 +126,10 @@
 			// check storeItems have been added to store
 			if ( caseItem.storeItems ) {
 				for ( i = 0, length = caseItem.storeItems.length; i < length; i++ ) {
-					hash = caseItem.storeItems[i].hash || OO.getHash( caseItem.storeItems[i].value );
+					hash = caseItem.storeItems[ i ].hash || OO.getHash( caseItem.storeItems[ i ].value );
 					assert.deepEqualWithDomElements(
 						model.getStore().value( model.getStore().indexOfHash( hash ) ) || {},
-						caseItem.storeItems[i].value,
+						caseItem.storeItems[ i ].value,
 						msg + ': store item ' + i + ' found'
 					);
 				}
@@ -149,7 +149,7 @@
 		// Load storeItems into store
 		if ( caseItem.storeItems ) {
 			for ( i = 0, length = caseItem.storeItems.length; i < length; i++ ) {
-				store.index( caseItem.storeItems[i].value, caseItem.storeItems[i].hash );
+				store.index( caseItem.storeItems[ i ].value, caseItem.storeItems[ i ].hash );
 			}
 		}
 		model = new ve.dm.Document( ve.dm.example.preprocessAnnotations( caseItem.data, store ) );
@@ -290,7 +290,7 @@
 		node = document.createElement( data.type );
 		if ( data.children ) {
 			for ( i = 0; i < data.children.length; i++ ) {
-				node.appendChild( buildDom( data.children[i] ) );
+				node.appendChild( buildDom( data.children[ i ] ) );
 			}
 		}
 		return node;
@@ -349,7 +349,7 @@
 				if ( node === position.node && i === position.offset ) {
 					html.push( '|' );
 				}
-				add( node.childNodes[i] );
+				add( node.childNodes[ i ] );
 			}
 			if ( node === position.node && node.childNodes.length === position.offset ) {
 				html.push( '|' );

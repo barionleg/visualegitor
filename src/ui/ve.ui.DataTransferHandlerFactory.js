@@ -43,19 +43,19 @@ ve.ui.DataTransferHandlerFactory.prototype.register = function ( constructor ) {
 
 	if ( !kinds ) {
 		for ( j = 0, jlen = types.length; j < jlen; j++ ) {
-			this.handlerNamesByType[types[j]] = constructor.static.name;
+			this.handlerNamesByType[ types[ j ] ] = constructor.static.name;
 		}
 	} else {
 		for ( i = 0, ilen = kinds.length; i < ilen; i++ ) {
 			for ( j = 0, jlen = types.length; j < jlen; j++ ) {
-				this.handlerNamesByKindAndType[kinds[i]] = this.handlerNamesByKindAndType[kinds[i]] || {};
-				this.handlerNamesByKindAndType[kinds[i]][types[j]] = constructor.static.name;
+				this.handlerNamesByKindAndType[ kinds[ i ] ] = this.handlerNamesByKindAndType[ kinds[ i ] ] || {};
+				this.handlerNamesByKindAndType[ kinds[ i ] ][ types[ j ] ] = constructor.static.name;
 			}
 		}
 	}
 	if ( constructor.prototype instanceof ve.ui.FileTransferHandler ) {
 		for ( i = 0, ilen = extensions.length; i < ilen; i++ ) {
-			this.handlerNamesByExtension[extensions[i]] = constructor.static.name;
+			this.handlerNamesByExtension[ extensions[ i ] ] = constructor.static.name;
 		}
 	}
 };
@@ -71,17 +71,17 @@ ve.ui.DataTransferHandlerFactory.prototype.getHandlerNameForItem = function ( it
 	var constructor,
 		name =
 			// 1. Match by kind + type (e.g. 'file' + 'text/html')
-			( this.handlerNamesByKindAndType[item.kind] && this.handlerNamesByKindAndType[item.kind][item.type] ) ||
+			( this.handlerNamesByKindAndType[ item.kind ] && this.handlerNamesByKindAndType[ item.kind ][ item.type ] ) ||
 			// 2. Match by just type (e.g. 'image/jpeg')
-			this.handlerNamesByType[item.type] ||
+			this.handlerNamesByType[ item.type ] ||
 			// 3. Match by file extension (e.g. 'csv')
-			this.handlerNamesByExtension[item.getExtension()];
+			this.handlerNamesByExtension[ item.getExtension() ];
 
 	if ( !name ) {
 		return;
 	}
 
-	constructor = this.registry[name];
+	constructor = this.registry[ name ];
 
 	if ( isPaste && !constructor.static.handlesPaste ) {
 		return;

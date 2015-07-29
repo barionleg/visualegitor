@@ -68,7 +68,7 @@ ve.ui.FormatTool.prototype.onUpdateState = function ( fragment ) {
 		nodes = fragment.getSelectedLeafNodes();
 		all = !!nodes.length;
 		for ( i = 0, len = nodes.length; i < len; i++ ) {
-			if ( !nodes[i].hasMatchingAncestor( format.type, format.attributes ) ) {
+			if ( !nodes[ i ].hasMatchingAncestor( format.type, format.attributes ) ) {
 				all = false;
 				break;
 			}
@@ -77,7 +77,7 @@ ve.ui.FormatTool.prototype.onUpdateState = function ( fragment ) {
 		cells = selection.getMatrixCells();
 		all = true;
 		for ( i = cells.length - 1; i >= 0; i-- ) {
-			if ( !cells[i].node.matches( format.type, format.attributes ) ) {
+			if ( !cells[ i ].node.matches( format.type, format.attributes ) ) {
 				all = false;
 				break;
 			}

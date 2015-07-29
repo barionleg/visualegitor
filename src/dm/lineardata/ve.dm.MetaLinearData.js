@@ -54,9 +54,9 @@ ve.dm.MetaLinearData.static.merge = function ( data ) {
 		merged = [],
 		allUndefined = true;
 	for ( i = 0; i < data.length; i++ ) {
-		if ( data[i] !== undefined ) {
+		if ( data[ i ] !== undefined ) {
 			allUndefined = false;
-			merged = merged.concat( data[i] );
+			merged = merged.concat( data[ i ] );
 		}
 	}
 	return allUndefined ? [ undefined ] : [ merged ];
@@ -78,9 +78,9 @@ ve.dm.MetaLinearData.prototype.getData = function ( offset, metadataOffset ) {
 	if ( offset === undefined ) {
 		return this.data;
 	} else if ( metadataOffset === undefined ) {
-		return this.data[offset];
+		return this.data[ offset ];
 	} else {
-		return this.data[offset] === undefined ? undefined : this.data[offset][metadataOffset];
+		return this.data[ offset ] === undefined ? undefined : this.data[ offset ][ metadataOffset ];
 	}
 };
 
@@ -92,7 +92,7 @@ ve.dm.MetaLinearData.prototype.getData = function ( offset, metadataOffset ) {
  * @returns {number} Number of metadata elements at specified offset
  */
 ve.dm.MetaLinearData.prototype.getDataLength = function ( offset ) {
-	return this.data[offset] === undefined ? 0 : this.data[offset].length;
+	return this.data[ offset ] === undefined ? 0 : this.data[ offset ].length;
 };
 
 /**

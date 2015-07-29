@@ -77,14 +77,14 @@ ve.Range.static.newCoveringRange = function ( ranges, backwards ) {
 	if ( !ranges || ranges.length === 0 ) {
 		throw new Error( 'newCoveringRange() requires at least one range' );
 	}
-	minStart = ranges[0].start;
-	maxEnd = ranges[0].end;
+	minStart = ranges[ 0 ].start;
+	maxEnd = ranges[ 0 ].end;
 	for ( i = 1; i < ranges.length; i++ ) {
-		if ( ranges[i].start < minStart ) {
-			minStart = ranges[i].start;
+		if ( ranges[ i ].start < minStart ) {
+			minStart = ranges[ i ].start;
 		}
-		if ( ranges[i].end > maxEnd ) {
-			maxEnd = ranges[i].end;
+		if ( ranges[ i ].end > maxEnd ) {
+			maxEnd = ranges[ i ].end;
 		}
 	}
 	if ( backwards ) {

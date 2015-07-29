@@ -30,7 +30,7 @@ ve.ui.LanguageSearchWidget = function VeUiLanguageSearchWidget( config ) {
 		languageCodes = ve.init.platform.getLanguageCodes().sort();
 
 	for ( i = 0, l = languageCodes.length; i < l; i++ ) {
-		languageCode = languageCodes[i];
+		languageCode = languageCodes[ i ];
 		this.languageResultWidgets.push(
 			new ve.ui.LanguageResultWidget( {
 				data: {
@@ -79,7 +79,7 @@ ve.ui.LanguageSearchWidget.prototype.setAvailableLanguages = function ( availabl
 	this.filteredLanguageResultWidgets = [];
 
 	for ( i = 0, iLen = this.languageResultWidgets.length; i < iLen; i++ ) {
-		languageResult = this.languageResultWidgets[i];
+		languageResult = this.languageResultWidgets[ i ];
 		data = languageResult.getData();
 		if ( availableLanguages.indexOf( data.code ) !== -1 ) {
 			this.filteredLanguageResultWidgets.push( languageResult );
@@ -101,13 +101,13 @@ ve.ui.LanguageSearchWidget.prototype.addResults = function () {
 	this.results.clearItems();
 
 	for ( i = 0, iLen = this.filteredLanguageResultWidgets.length; i < iLen; i++ ) {
-		languageResult = this.filteredLanguageResultWidgets[i];
+		languageResult = this.filteredLanguageResultWidgets[ i ];
 		data = languageResult.getData();
 		matchedProperty = null;
 
 		for ( j = 0, jLen = matchProperties.length; j < jLen; j++ ) {
-			if ( matcher.test( data[matchProperties[j]] ) ) {
-				matchedProperty = matchProperties[j];
+			if ( matcher.test( data[ matchProperties[ j ] ] ) ) {
+				matchedProperty = matchProperties[ j ];
 				break;
 			}
 		}

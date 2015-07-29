@@ -72,7 +72,7 @@ ve.ce.getDomText = function ( element ) {
 				viewNode = $element.data( 'view' );
 				// Only return snowmen for the first element in a sibling group: otherwise
 				// we'll double-count this node
-				if ( viewNode && element === viewNode.$element[0] ) {
+				if ( viewNode && element === viewNode.$element[ 0 ] ) {
 					// \u2603 is the snowman character: ☃
 					return new Array( viewNode.getOuterLength() + 1 ).join( '\u2603' );
 				}
@@ -284,7 +284,7 @@ ve.ce.getOffset = function ( domNode, domOffset ) {
 		} else {
 			// Offset is right before childNodes[domOffset]. Set startNode to this node
 			// (i.e. the node right after the offset), then traverse back once.
-			startNode = domNode.childNodes[domOffset];
+			startNode = domNode.childNodes[ domOffset ];
 			node = traverse( startNode );
 		}
 	} else {

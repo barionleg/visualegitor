@@ -133,7 +133,7 @@ ve.ui.DebugBar.prototype.onLogRangeButtonClick = function () {
 	if ( selection instanceof ve.dm.LinearSelection || selection instanceof ve.dm.TableSelection ) {
 		ranges = selection.getRanges();
 		for ( i = 0; i < ranges.length; i++ ) {
-			ve.dir( this.getSurface().view.documentView.model.data.slice( ranges[i].start, ranges[i].end ) );
+			ve.dir( this.getSurface().view.documentView.model.data.slice( ranges[ i ].start, ranges[ i ].end ) );
 		}
 	}
 };
@@ -176,7 +176,7 @@ ve.ui.DebugBar.prototype.generateListFromLinearData = function ( linearData ) {
 	for ( i = 0; i < data.length; i++ ) {
 		$li = $( '<li>' );
 		$label = $( '<span>' );
-		element = data[i];
+		element = data[ i ];
 		annotations = null;
 		if ( linearData instanceof ve.dm.MetaLinearData ) {
 			if ( element && element.length ) {
@@ -191,8 +191,8 @@ ve.ui.DebugBar.prototype.generateListFromLinearData = function ( linearData ) {
 				annotations = element.annotations;
 			} else if ( Array.isArray( element ) ) {
 				$label.addClass( 've-ui-debugBar-dump-achar' );
-				text = element[0];
-				annotations = element[1];
+				text = element[ 0 ];
+				annotations = element[ 1 ];
 			} else {
 				$label.addClass( 've-ui-debugBar-dump-char' );
 				text = element;
@@ -229,20 +229,20 @@ ve.ui.DebugBar.prototype.generateListFromNode = function ( node ) {
 	for ( i = 0; i < node.children.length; i++ ) {
 		$li = $( '<li>' );
 		$label = $( '<span>' ).addClass( 've-ui-debugBar-dump-element' );
-		if ( node.children[i].length !== undefined ) {
+		if ( node.children[ i ].length !== undefined ) {
 			$li.append(
 				$label
-					.text( node.children[i].type )
+					.text( node.children[ i ].type )
 					.append(
-						$( '<span>' ).text( ' (' + node.children[i].length + ')' )
+						$( '<span>' ).text( ' (' + node.children[ i ].length + ')' )
 					)
 			);
 		} else {
-			$li.append( $label.text( node.children[i].type ) );
+			$li.append( $label.text( node.children[ i ].type ) );
 		}
 
-		if ( node.children[i].children ) {
-			$li.append( this.generateListFromNode( node.children[i] ) );
+		if ( node.children[ i ].children ) {
+			$li.append( this.generateListFromNode( node.children[ i ] ) );
 		}
 
 		$ol.append( $li );

@@ -91,7 +91,7 @@ ve.dm.Annotation.static.getHashObject = function ( dataElement ) {
 		attributes: dataElement.attributes,
 		// For uniqueness we are only concerned with the first node
 		originalDomElements: dataElement.originalDomElements &&
-			dataElement.originalDomElements[0].cloneNode( false ).outerHTML
+			dataElement.originalDomElements[ 0 ].cloneNode( false ).outerHTML
 	};
 };
 
@@ -131,9 +131,9 @@ ve.dm.Annotation.prototype.getComparableObject = function () {
  */
 ve.dm.Annotation.prototype.getComparableHtmlAttributes = function () {
 	var comparableAttributes, domElements = this.getOriginalDomElements();
-	if ( domElements[0] ) {
-		comparableAttributes = ve.getDomAttributes( domElements[0] );
-		delete comparableAttributes['data-parsoid'];
+	if ( domElements[ 0 ] ) {
+		comparableAttributes = ve.getDomAttributes( domElements[ 0 ] );
+		delete comparableAttributes[ 'data-parsoid' ];
 		return comparableAttributes;
 	}
 	return {};

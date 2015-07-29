@@ -115,7 +115,7 @@ ve.demo.SurfaceContainer.prototype.getPageMenuItems = function () {
 	for ( name in ve.demoPages ) {
 		items.push(
 			new OO.ui.MenuOptionWidget( {
-				data: ve.demoPages[name],
+				data: ve.demoPages[ name ],
 				label: name
 			} )
 		);
@@ -162,7 +162,7 @@ ve.demo.SurfaceContainer.prototype.change = function ( mode, page ) {
 		case 'read':
 			closePromise = this.$readView.slideUp().promise();
 			if ( !page ) {
-				html = ve.properInnerHtml( this.$readView[0] );
+				html = ve.properInnerHtml( this.$readView[ 0 ] );
 			}
 			break;
 

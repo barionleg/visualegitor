@@ -67,7 +67,7 @@ ve.dm.TableMatrix.prototype.update = function () {
 		row++;
 		col = -1;
 		// initialize a matrix row
-		matrix[row] = matrix[row] || [];
+		matrix[ row ] = matrix[ row ] || [];
 		// store the row node
 		rowNodes.push( rowNode );
 	} );
@@ -77,16 +77,16 @@ ve.dm.TableMatrix.prototype.update = function () {
 	while ( ( cellNode = iterator.next() ) !== undefined ) {
 		col++;
 		// skip placeholders
-		while ( matrix[row][col] ) {
+		while ( matrix[ row ][ col ] ) {
 			col++;
 		}
 		if ( !cellNode ) {
-			matrix[row][col] = null;
+			matrix[ row ][ col ] = null;
 			continue;
 		}
 		cell = new ve.dm.TableMatrixCell( cellNode, row, col );
 		// store the cell in the matrix
-		matrix[row][col] = cell;
+		matrix[ row ][ col ] = cell;
 		// add place holders for spanned cells
 		rowSpan = cellNode.getRowspan();
 		colSpan = cellNode.getColspan();
@@ -103,8 +103,8 @@ ve.dm.TableMatrix.prototype.update = function () {
 				r = row + i;
 				c = col + j;
 				// initialize the cell matrix row if not yet present
-				matrix[r] = matrix[r] || [];
-				matrix[r][c] = new ve.dm.TableMatrixCell( cellNode, r, c, cell );
+				matrix[ r ] = matrix[ r ] || [];
+				matrix[ r ][ c ] = new ve.dm.TableMatrixCell( cellNode, r, c, cell );
 			}
 		}
 	}
@@ -121,7 +121,7 @@ ve.dm.TableMatrix.prototype.update = function () {
  */
 ve.dm.TableMatrix.prototype.getCell = function ( row, col ) {
 	var matrix = this.getMatrix();
-	return matrix[row] ? matrix[row][col] : undefined;
+	return matrix[ row ] ? matrix[ row ][ col ] : undefined;
 };
 
 /**
@@ -135,7 +135,7 @@ ve.dm.TableMatrix.prototype.getColumn = function ( col ) {
 		matrix = this.getMatrix();
 	cells = [];
 	for ( row = 0; row < matrix.length; row++ ) {
-		cells.push( matrix[row][col] );
+		cells.push( matrix[ row ][ col ] );
 	}
 	return cells;
 };
@@ -148,7 +148,7 @@ ve.dm.TableMatrix.prototype.getColumn = function ( col ) {
  */
 ve.dm.TableMatrix.prototype.getRow = function ( row ) {
 	var matrix = this.getMatrix();
-	return matrix[row];
+	return matrix[ row ];
 };
 
 /**
@@ -159,7 +159,7 @@ ve.dm.TableMatrix.prototype.getRow = function ( row ) {
  */
 ve.dm.TableMatrix.prototype.getRowNode = function ( row ) {
 	var rowNodes = this.getRowNodes();
-	return rowNodes[row];
+	return rowNodes[ row ];
 };
 
 /**
@@ -209,7 +209,7 @@ ve.dm.TableMatrix.prototype.getRowCount = function () {
  */
 ve.dm.TableMatrix.prototype.getColCount = function ( row ) {
 	var matrix = this.getMatrix();
-	return matrix.length ? matrix[row || 0].length : 0;
+	return matrix.length ? matrix[ row || 0 ].length : 0;
 };
 
 /**
@@ -227,10 +227,10 @@ ve.dm.TableMatrix.prototype.lookupCell = function ( cellNode ) {
 	if ( row < 0 ) {
 		return null;
 	}
-	rowCells = matrix[row];
+	rowCells = matrix[ row ];
 	for ( col = 0, cols = rowCells.length; col < cols; col++ ) {
-		if ( rowCells[col] && rowCells[col].node === cellNode ) {
-			return rowCells[col];
+		if ( rowCells[ col ] && rowCells[ col ].node === cellNode ) {
+			return rowCells[ col ];
 		}
 	}
 	return null;
@@ -246,15 +246,15 @@ ve.dm.TableMatrix.prototype.findClosestCell = function ( cell ) {
 	var col, cols, rowCells,
 		matrix = this.getMatrix();
 
-	rowCells = matrix[cell.row];
+	rowCells = matrix[ cell.row ];
 	for ( col = cell.col; col >= 0; col-- ) {
-		if ( !rowCells[col].isPlaceholder() ) {
-			return rowCells[col];
+		if ( !rowCells[ col ].isPlaceholder() ) {
+			return rowCells[ col ];
 		}
 	}
 	for ( col = cell.col + 1, cols = rowCells.length; col < cols; col++ ) {
-		if ( !rowCells[col].isPlaceholder() ) {
-			return rowCells[col];
+		if ( !rowCells[ col ].isPlaceholder() ) {
+			return rowCells[ col ];
 		}
 	}
 	return null;

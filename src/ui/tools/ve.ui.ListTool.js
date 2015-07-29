@@ -55,7 +55,7 @@ ve.ui.ListTool.prototype.onUpdateState = function ( fragment ) {
 		all = !!nodes.length;
 
 	for ( i = 0, len = nodes.length; i < len; i++ ) {
-		if ( !nodes[i].hasMatchingAncestor( 'list', { style: style } ) ) {
+		if ( !nodes[ i ].hasMatchingAncestor( 'list', { style: style } ) ) {
 			all = false;
 			break;
 		}

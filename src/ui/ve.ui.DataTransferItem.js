@@ -45,7 +45,7 @@ ve.ui.DataTransferItem.static.newFromBlob = function ( blob ) {
  */
 ve.ui.DataTransferItem.static.newFromDataUri = function ( dataUri ) {
 	var parts = dataUri.split( ',' );
-	return new ve.ui.DataTransferItem( 'file', parts[0].match( /^data:([^;]+)/ )[1], { dataUri: parts[1] } );
+	return new ve.ui.DataTransferItem( 'file', parts[ 0 ].match( /^data:([^;]+)/ )[ 1 ], { dataUri: parts[ 1 ] } );
 };
 
 /**

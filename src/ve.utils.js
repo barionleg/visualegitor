@@ -18,8 +18,8 @@
 ve.isInstanceOfAny = function ( subject, classes ) {
 	var i = classes.length;
 
-	while ( classes[--i] ) {
-		if ( subject instanceof classes[i] ) {
+	while ( classes[ --i ] ) {
+		if ( subject instanceof classes[ i ] ) {
 			return true;
 		}
 	}
@@ -94,7 +94,7 @@ ve.isEqualDomElements = function ( domElements1, domElements2 ) {
 		return false;
 	}
 	for ( ; i < len; i++ ) {
-		if ( !domElements1[i].isEqualNode( domElements2[i] ) ) {
+		if ( !domElements1[ i ].isEqualNode( domElements2[ i ] ) ) {
 			return false;
 		}
 	}
@@ -197,9 +197,9 @@ ve.supportsSplice = ( function () {
 	// This returns false in Opera 12.15
 	a = [];
 	n = 256;
-	a[n] = 'a';
+	a[ n ] = 'a';
 	a.splice( n + 1, 0, 'b' );
-	if ( a[n] !== 'a' ) {
+	if ( a[ n ] !== 'a' ) {
 		return false;
 	}
 
@@ -346,7 +346,7 @@ ve.binarySearch = function ( arr, searchFunc, forInsertion ) {
 		// Equivalent to Math.floor( ( left + right ) / 2 ) but much faster
 		/*jshint bitwise:false */
 		mid = ( left + right ) >> 1;
-		cmpResult = searchFunc( arr[mid] );
+		cmpResult = searchFunc( arr[ mid ] );
 		if ( cmpResult < 0 ) {
 			right = mid;
 		} else if ( cmpResult > 0 ) {
@@ -560,7 +560,7 @@ ve.getHtmlAttributes = function ( attributes ) {
 	}
 
 	for ( attrName in attributes ) {
-		attrValue = attributes[attrName];
+		attrValue = attributes[ attrName ];
 		if ( attrValue === true ) {
 			// Convert name=true to name=name
 			attrValue = attrName;
@@ -601,7 +601,7 @@ ve.getDomAttributes = function ( element ) {
 	var i,
 		result = {};
 	for ( i = 0; i < element.attributes.length; i++ ) {
-		result[element.attributes[i].name] = element.attributes[i].value;
+		result[ element.attributes[ i ].name ] = element.attributes[ i ].value;
 	}
 	return result;
 };
@@ -625,10 +625,10 @@ ve.setDomAttributes = function ( element, attributes, whitelist ) {
 		if ( whitelist && whitelist.indexOf( key.toLowerCase() ) === -1 ) {
 			continue;
 		}
-		if ( attributes[key] === undefined || attributes[key] === null ) {
+		if ( attributes[ key ] === undefined || attributes[ key ] === null ) {
 			element.removeAttribute( key );
 		} else {
-			element.setAttribute( key, attributes[key] );
+			element.setAttribute( key, attributes[ key ] );
 		}
 	}
 };
@@ -660,13 +660,13 @@ ve.getDomElementSummary = function ( element, includeHtml ) {
 	// Gather attributes
 	if ( element.attributes ) {
 		for ( i = 0; i < element.attributes.length; i++ ) {
-			summary.attributes[element.attributes[i].name] = element.attributes[i].value;
+			summary.attributes[ element.attributes[ i ].name ] = element.attributes[ i ].value;
 		}
 	}
 	// Summarize children
 	if ( element.childNodes ) {
 		for ( i = 0; i < element.childNodes.length; i++ ) {
-			summary.children.push( ve.getDomElementSummary( element.childNodes[i], includeHtml ) );
+			summary.children.push( ve.getDomElementSummary( element.childNodes[ i ], includeHtml ) );
 		}
 	}
 	return summary;
@@ -861,14 +861,14 @@ ve.createDocumentFromHtmlUsingInnerHtml = function ( html ) {
 
 	// Preserve <html> attributes, if any
 	htmlAttributes = html.match( /<html([^>]*>)/i );
-	if ( htmlAttributes && htmlAttributes[1] ) {
+	if ( htmlAttributes && htmlAttributes[ 1 ] ) {
 		wrapper = document.createElement( 'div' );
-		wrapper.innerHTML = '<div ' + htmlAttributes[1] + '></div>';
+		wrapper.innerHTML = '<div ' + htmlAttributes[ 1 ] + '></div>';
 		attributes = wrapper.firstChild.attributes;
 		for ( i = 0; i < attributes.length; i++ ) {
 			newDocument.documentElement.setAttribute(
-				attributes[i].name,
-				attributes[i].value
+				attributes[ i ].name,
+				attributes[ i ].value
 			);
 		}
 	}
@@ -911,13 +911,13 @@ ve.resolveAttributes = function ( $elements, doc, attrs ) {
 	function resolveAttribute() {
 		var nodeInDoc = doc.createElement( this.nodeName );
 		nodeInDoc.setAttribute( attr, this.getAttribute( attr ) );
-		if ( nodeInDoc[attr] ) {
-			this.setAttribute( attr, nodeInDoc[attr] );
+		if ( nodeInDoc[ attr ] ) {
+			this.setAttribute( attr, nodeInDoc[ attr ] );
 		}
 	}
 
 	for ( i = 0, len = attrs.length; i < len; i++ ) {
-		attr = attrs[i];
+		attr = attrs[ i ];
 		$elements.find( '[' + attr + ']' ).each( resolveAttribute );
 		$elements.filter( '[' + attr + ']' ).each( resolveAttribute );
 	}
@@ -936,7 +936,7 @@ ve.resolveAttributes = function ( $elements, doc, attrs ) {
  * @param {string} [fallbackBase] Base URL to use if resolving the base URL fails or there is no <base> tag
  */
 ve.fixBase = function ( targetDoc, sourceDoc, fallbackBase ) {
-	var baseNode = targetDoc.getElementsByTagName( 'base' )[0];
+	var baseNode = targetDoc.getElementsByTagName( 'base' )[ 0 ];
 	if ( baseNode ) {
 		if ( !targetDoc.baseURI ) {
 			// <base> tag present but not valid, try resolving its URL
@@ -1048,9 +1048,9 @@ ve.fixupPreBug = function ( element ) {
 		var matches;
 		if ( this.firstChild && this.firstChild.nodeType === Node.TEXT_NODE ) {
 			matches = this.firstChild.data.match( /^(\r\n|\r|\n)/ );
-			if ( matches && matches[1] ) {
+			if ( matches && matches[ 1 ] ) {
 				// Prepend a newline exactly like the one we saw
-				this.firstChild.insertData( 0, matches[1] );
+				this.firstChild.insertData( 0, matches[ 1 ] );
 			}
 		}
 	} );
@@ -1106,8 +1106,8 @@ ve.transformStyleAttributes = function ( html, unmask ) {
 
 	// Go through and mask/unmask each attribute on all elements that have it
 	for ( i = 0, len = maskAttrs.length; i < len; i++ ) {
-		fromAttr = unmask ? 'data-ve-' + maskAttrs[i] : maskAttrs[i];
-		toAttr = unmask ? maskAttrs[i] : 'data-ve-' + maskAttrs[i];
+		fromAttr = unmask ? 'data-ve-' + maskAttrs[ i ] : maskAttrs[ i ];
+		toAttr = unmask ? maskAttrs[ i ] : 'data-ve-' + maskAttrs[ i ];
 		/*jshint loopfunc:true */
 		$( xmlDoc ).find( '[' + fromAttr + ']' ).each( function () {
 			var toAttrValue, fromAttrNormalized,
@@ -1273,22 +1273,22 @@ ve.getStartAndEndRects = function ( rects ) {
 		return null;
 	}
 	for ( i = 0, l = rects.length; i < l; i++ ) {
-		if ( !startRect || rects[i].top < startRect.top ) {
+		if ( !startRect || rects[ i ].top < startRect.top ) {
 			// Use ve.extendObject as ve.copy copies non-plain objects by reference
-			startRect = ve.extendObject( {}, rects[i] );
-		} else if ( rects[i].top === startRect.top ) {
+			startRect = ve.extendObject( {}, rects[ i ] );
+		} else if ( rects[ i ].top === startRect.top ) {
 			// Merge rects with the same top coordinate
-			startRect.left = Math.min( startRect.left, rects[i].left );
-			startRect.right = Math.max( startRect.right, rects[i].right );
+			startRect.left = Math.min( startRect.left, rects[ i ].left );
+			startRect.right = Math.max( startRect.right, rects[ i ].right );
 			startRect.width = startRect.right - startRect.left;
 		}
-		if ( !endRect || rects[i].bottom > endRect.bottom ) {
+		if ( !endRect || rects[ i ].bottom > endRect.bottom ) {
 			// Use ve.extendObject as ve.copy copies non-plain objects by reference
-			endRect = ve.extendObject( {}, rects[i] );
-		} else if ( rects[i].bottom === endRect.bottom ) {
+			endRect = ve.extendObject( {}, rects[ i ] );
+		} else if ( rects[ i ].bottom === endRect.bottom ) {
 			// Merge rects with the same bottom coordinate
-			endRect.left = Math.min( endRect.left, rects[i].left );
-			endRect.right = Math.max( endRect.right, rects[i].right );
+			endRect.left = Math.min( endRect.left, rects[ i ].left );
+			endRect.right = Math.max( endRect.right, rects[ i ].right );
 			endRect.width = startRect.right - startRect.left;
 		}
 	}
@@ -1387,8 +1387,8 @@ ve.getOffsetPath = function ( ancestor, node, nodeOffset ) {
 ve.compareTuples = function ( a, b ) {
 	var i, len;
 	for ( i = 0, len = Math.min( a.length, b.length ); i < len; i++ ) {
-		if ( a[i] !== b[i] ) {
-			return a[i] - b[i];
+		if ( a[ i ] !== b[ i ] ) {
+			return a[ i ] - b[ i ];
 		}
 	}
 	if ( a.length > b.length ) {

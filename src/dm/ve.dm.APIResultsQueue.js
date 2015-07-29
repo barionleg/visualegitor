@@ -97,14 +97,14 @@ ve.dm.APIResultsQueue.prototype.queryProviders = function ( howMany ) {
 		.then( function () {
 			// Abort previous requests
 			for ( i = 0, len = queue.providerPromises.length; i < len; i++ ) {
-				queue.providerPromises[i].abort();
+				queue.providerPromises[ i ].abort();
 			}
 			queue.providerPromises = [];
 			// Set up the query to all providers
 			for ( i = 0, len = queue.providers.length; i < len; i++ ) {
-				if ( !queue.providers[i].isDepleted() ) {
+				if ( !queue.providers[ i ].isDepleted() ) {
 					queue.providerPromises.push(
-						queue.providers[i].getResults( howMany )
+						queue.providers[ i ].getResults( howMany )
 					);
 				}
 			}
@@ -129,11 +129,11 @@ ve.dm.APIResultsQueue.prototype.setParams = function ( params ) {
 		this.queue = [];
 		// Reset promises
 		for ( i = 0, len = this.providerPromises.length; i < len; i++ ) {
-			this.providerPromises[i].abort();
+			this.providerPromises[ i ].abort();
 		}
 		// Change queries
 		for ( i = 0, len = this.providers.length; i < len; i++ ) {
-			this.providers[i].setUserParams( this.params );
+			this.providers[ i ].setUserParams( this.params );
 		}
 	}
 };

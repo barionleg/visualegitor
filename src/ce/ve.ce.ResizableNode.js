@@ -213,10 +213,10 @@ ve.ce.ResizableNode.prototype.showHandles = function ( handles ) {
 		allDirections = [ 'nw', 'ne', 'sw', 'se' ];
 
 	for ( i = 0, len = allDirections.length; i < len; i++ ) {
-		if ( handles === undefined || handles.indexOf( allDirections[i] ) !== -1 ) {
-			remove.push( 've-ce-resizableNode-hide-' + allDirections[i] );
+		if ( handles === undefined || handles.indexOf( allDirections[ i ] ) !== -1 ) {
+			remove.push( 've-ce-resizableNode-hide-' + allDirections[ i ] );
 		} else {
-			add.push( 've-ce-resizableNode-hide-' + allDirections[i] );
+			add.push( 've-ce-resizableNode-hide-' + allDirections[ i ] );
 		}
 	}
 
