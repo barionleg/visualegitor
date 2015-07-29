@@ -196,7 +196,7 @@ ve.ce.TableNode.prototype.onTableMouseMove = function ( e ) {
 			// Ignore multi-touch
 			return;
 		}
-		touch = e.originalEvent.touches[0];
+		touch = e.originalEvent.touches[ 0 ];
 		target = this.surface.getElementDocument().elementFromPoint( touch.clientX, touch.clientY );
 	} else {
 		target = e.target;
@@ -250,7 +250,7 @@ ve.ce.TableNode.prototype.setEditing = function ( isEditing, noSelect ) {
 			this.surface.getModel().setSelection( selection );
 		}
 		this.editingFragment = this.surface.getModel().getFragment( selection );
-		cell = this.getCellNodesFromSelection( selection )[0];
+		cell = this.getCellNodesFromSelection( selection )[ 0 ];
 		cell.setEditing( true );
 		if ( !noSelect ) {
 			cellRange = cell.getModel().getRange();
@@ -260,7 +260,7 @@ ve.ce.TableNode.prototype.setEditing = function ( isEditing, noSelect ) {
 			}
 		}
 	} else if ( this.editingFragment ) {
-		this.getCellNodesFromSelection( this.editingFragment.getSelection() )[0].setEditing( false );
+		this.getCellNodesFromSelection( this.editingFragment.getSelection() )[ 0 ].setEditing( false );
 		if ( !noSelect ) {
 			surfaceModel.setSelection( this.editingFragment.getSelection() );
 		}
@@ -295,7 +295,7 @@ ve.ce.TableNode.prototype.getEditingFragment = function () {
  */
 ve.ce.TableNode.prototype.getEditingRange = function () {
 	var fragment = this.getEditingFragment();
-	return fragment ? fragment.getSelection().getRanges()[0] : null;
+	return fragment ? fragment.getSelection().getRanges()[ 0 ] : null;
 };
 
 /**
@@ -309,7 +309,7 @@ ve.ce.TableNode.prototype.onSurfaceModelSelect = function ( selection ) {
 	var active = (
 			this.editingFragment !== null &&
 			selection instanceof ve.dm.LinearSelection &&
-			this.editingFragment.getSelection().getRanges()[0].containsRange( selection.getRange() )
+			this.editingFragment.getSelection().getRanges()[ 0 ].containsRange( selection.getRange() )
 		) ||
 		(
 			selection instanceof ve.dm.TableSelection &&
@@ -345,27 +345,28 @@ ve.ce.TableNode.prototype.onSurfaceModelSelect = function ( selection ) {
  * @param {boolean} selectionChanged The update was triggered by a selection change
  */
 ve.ce.TableNode.prototype.updateOverlay = function ( selectionChanged ) {
+	var i, l, nodes, cellOffset, anchorNode, anchorOffset, selectionOffset,
+		top, left, bottom, right, selection, tableOffset, surfaceOffset;
+
 	if ( !this.active || !this.root ) {
 		return;
 	}
 
-	var i, l, nodes, cellOffset, anchorNode, anchorOffset, selectionOffset,
-		top, left, bottom, right,
-		selection = this.editingFragment ?
-			this.editingFragment.getSelection() :
-			this.surface.getModel().getSelection(),
-		// getBoundingClientRect is more accurate but must be used consistently
-		// due to the iOS7 bug where it is relative to the document.
-		tableOffset = this.getFirstSectionNode().$element[0].getBoundingClientRect(),
-		surfaceOffset = this.surface.getSurface().$element[0].getBoundingClientRect();
+	selection = this.editingFragment ?
+		this.editingFragment.getSelection() :
+		this.surface.getModel().getSelection();
+	// getBoundingClientRect is more accurate but must be used consistently
+	// due to the iOS7 bug where it is relative to the document.
+	tableOffset = this.getFirstSectionNode().$element[ 0 ].getBoundingClientRect();
+	surfaceOffset = this.surface.getSurface().$element[ 0 ].getBoundingClientRect();
 
 	if ( !tableOffset ) {
 		return;
 	}
 
 	nodes = this.getCellNodesFromSelection( selection );
-	anchorNode = this.getCellNodesFromSelection( selection.collapseToFrom() )[0];
-	anchorOffset = ve.translateRect( anchorNode.$element[0].getBoundingClientRect(), -tableOffset.left, -tableOffset.top );
+	anchorNode = this.getCellNodesFromSelection( selection.collapseToFrom() )[ 0 ];
+	anchorOffset = ve.translateRect( anchorNode.$element[ 0 ].getBoundingClientRect(), -tableOffset.left, -tableOffset.top );
 
 	top = Infinity;
 	bottom = -Infinity;
@@ -374,7 +375,7 @@ ve.ce.TableNode.prototype.updateOverlay = function ( selectionChanged ) {
 
 	// Compute a bounding box for the given cell elements
 	for ( i = 0, l = nodes.length; i < l; i++ ) {
-		cellOffset = nodes[i].$element[0].getBoundingClientRect();
+		cellOffset = nodes[ i ].$element[ 0 ].getBoundingClientRect();
 
 		top = Math.min( top, cellOffset.top );
 		bottom = Math.max( bottom, cellOffset.bottom );
@@ -443,10 +444,10 @@ ve.ce.TableNode.prototype.updateOverlay = function ( selectionChanged ) {
  */
 ve.ce.TableNode.prototype.getFirstSectionNode = function () {
 	var i = 0;
-	while ( !( this.children[i] instanceof ve.ce.TableSectionNode ) ) {
+	while ( !( this.children[ i ] instanceof ve.ce.TableSectionNode ) ) {
 		i++;
 	}
-	return this.children[i];
+	return this.children[ i ];
 };
 
 /**
@@ -461,7 +462,7 @@ ve.ce.TableNode.prototype.getCellNodesFromSelection = function ( selection ) {
 		nodes = [];
 
 	for ( i = 0, l = cells.length; i < l; i++ ) {
-		cellModel = cells[i].node;
+		cellModel = cells[ i ].node;
 		cellView = this.getNodeFromOffset( cellModel.getOffset() - this.model.getOffset() );
 		nodes.push( cellView );
 	}

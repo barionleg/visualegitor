@@ -163,7 +163,7 @@ ve.dm.Model.static.toDataElement = function () {
  */
 ve.dm.Model.static.toDomElements = function ( dataElement, doc ) {
 	if ( this.matchTagNames && this.matchTagNames.length === 1 ) {
-		return [ doc.createElement( this.matchTagNames[0] ) ];
+		return [ doc.createElement( this.matchTagNames[ 0 ] ) ];
 	}
 	throw new Error( 've.dm.Model subclass must match a single tag name or implement toDomElements' );
 };
@@ -296,7 +296,7 @@ ve.dm.Model.prototype.getType = function () {
  * @returns {Mixed} Value of attribute, or undefined if no such attribute exists
  */
 ve.dm.Model.prototype.getAttribute = function ( key ) {
-	return this.element && this.element.attributes ? this.element.attributes[key] : undefined;
+	return this.element && this.element.attributes ? this.element.attributes[ key ] : undefined;
 };
 
 /**
@@ -315,7 +315,7 @@ ve.dm.Model.prototype.getAttributes = function ( prefix ) {
 		filtered = {};
 		for ( key in attributes ) {
 			if ( key.indexOf( prefix ) === 0 ) {
-				filtered[key.slice( prefix.length )] = attributes[key];
+				filtered[ key.slice( prefix.length ) ] = attributes[ key ];
 			}
 		}
 		return filtered;
@@ -352,8 +352,8 @@ ve.dm.Model.prototype.hasAttributes = function ( attributes, strict ) {
 			if (
 				!( key in ourAttributes ) ||
 				( strict ?
-					attributes[key] !== ourAttributes[key] :
-					String( attributes[key] ) !== String( ourAttributes[key] )
+					attributes[ key ] !== ourAttributes[ key ] :
+					String( attributes[ key ] ) !== String( ourAttributes[ key ] )
 				)
 			) {
 				return false;
@@ -361,7 +361,7 @@ ve.dm.Model.prototype.hasAttributes = function ( attributes, strict ) {
 		}
 	} else if ( Array.isArray( attributes ) ) {
 		for ( i = 0, len = attributes.length; i < len; i++ ) {
-			if ( !( attributes[i] in ourAttributes ) ) {
+			if ( !( attributes[ i ] in ourAttributes ) ) {
 				return false;
 			}
 		}

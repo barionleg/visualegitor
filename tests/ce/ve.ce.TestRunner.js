@@ -85,7 +85,7 @@ ve.ce.TestOffset.static.findTextOffset = function ( node, n, reversed ) {
 		childNodes.reverse();
 	}
 	for ( i = 0, len = childNodes.length; i < len; i++ ) {
-		childNode = node.childNodes[i];
+		childNode = node.childNodes[ i ];
 		found = ve.ce.TestOffset.static.findTextOffset( childNode, n - consumed, reversed );
 		if ( found.node ) {
 			return found;
@@ -93,7 +93,7 @@ ve.ce.TestOffset.static.findTextOffset = function ( node, n, reversed ) {
 		consumed += found.consumed;
 		// Extra boundary after element, if not followed by a text node
 		if ( childNode.nodeType === node.ELEMENT_NODE ) {
-			if ( i + 1 === len || childNodes[i + 1].nodeType !== node.TEXT_NODE ) {
+			if ( i + 1 === len || childNodes[ i + 1 ].nodeType !== node.TEXT_NODE ) {
 				consumed += 1;
 				if ( consumed === n ) {
 					// TODO: create a reasonable 'slice' string
@@ -130,11 +130,11 @@ ve.ce.TestRunner = function VeCeTestRunner( view ) {
 	// Take control of eventSequencer 'setTimeouts'
 	testRunner = this;
 	this.view.eventSequencer.postpone = function ( f ) {
-		testRunner.postponedCalls[++callId] = f;
+		testRunner.postponedCalls[ ++callId ] = f;
 		return callId;
 	};
 	this.view.eventSequencer.cancelPostponed = function ( callId ) {
-		delete testRunner.postponedCalls[callId];
+		delete testRunner.postponedCalls[ callId ];
 	};
 };
 
@@ -148,9 +148,9 @@ ve.ce.TestRunner = function VeCeTestRunner( view ) {
  */
 
 ve.ce.TestRunner.prototype.getParagraph = function () {
-	var p = this.view.$element.find( '.ve-ce-documentNode > p' )[0];
+	var p = this.view.$element.find( '.ve-ce-documentNode > p' )[ 0 ];
 	if ( p === undefined ) {
-		if ( this.view.$element.find( '.ve-ce-documentNode' )[0] === undefined ) {
+		if ( this.view.$element.find( '.ve-ce-documentNode' )[ 0 ] === undefined ) {
 			throw new Error( 'no CE div' );
 		}
 		throw new Error( 'CE div but no p' );
@@ -174,7 +174,7 @@ ve.ce.TestRunner.prototype.endLoop = function () {
 		check = false;
 		for ( callId in postponedCalls ) {
 			check = true;
-			postponedCalls[callId]();
+			postponedCalls[ callId ]();
 		}
 	}
 };
@@ -221,7 +221,7 @@ ve.ce.TestRunner.prototype.changeText = function ( text ) {
 	} else {
 		focusNode.insertBefore(
 			document.createTextNode( text ),
-			focusNode.childNodes[focusOffset]
+			focusNode.childNodes[ focusOffset ]
 		);
 	}
 	this.lastText = text;

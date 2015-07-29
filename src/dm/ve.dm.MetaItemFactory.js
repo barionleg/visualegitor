@@ -32,7 +32,7 @@ OO.inheritClass( ve.dm.MetaItemFactory, ve.dm.ModelFactory );
  */
 ve.dm.MetaItemFactory.prototype.getGroup = function ( type ) {
 	if ( Object.prototype.hasOwnProperty.call( this.registry, type ) ) {
-		return this.registry[type].static.group;
+		return this.registry[ type ].static.group;
 	}
 	throw new Error( 'Unknown item type: ' + type );
 };

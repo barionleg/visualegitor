@@ -46,9 +46,9 @@ ve.dm.TableCellNode.static.preserveHtmlAttributes = function ( attribute ) {
 /* Static Methods */
 
 ve.dm.TableCellNode.static.toDataElement = function ( domElements ) {
-	var attributes = { style: domElements[0].nodeName.toLowerCase() === 'th' ? 'header' : 'data' },
-		colspan = domElements[0].getAttribute( 'colspan' ),
-		rowspan = domElements[0].getAttribute( 'rowspan' );
+	var attributes = { style: domElements[ 0 ].nodeName.toLowerCase() === 'th' ? 'header' : 'data' },
+		colspan = domElements[ 0 ].getAttribute( 'colspan' ),
+		rowspan = domElements[ 0 ].getAttribute( 'rowspan' );
 
 	if ( colspan !== null ) {
 		attributes.originalColspan = colspan;

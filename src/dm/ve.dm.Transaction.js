@@ -170,14 +170,14 @@ ve.dm.Transaction.newFromDocumentInsertion = function ( doc, offset, newDoc, new
 	for ( i = 0, len = listMerge.newItemRanges.length; i < len; i++ ) {
 		linearData = new ve.dm.ElementLinearData(
 			doc.getStore(),
-			newDoc.getData( listMerge.newItemRanges[i], true )
+			newDoc.getData( listMerge.newItemRanges[ i ], true )
 		);
 		// Remap indexes in data coming from newDoc
 		linearData.remapStoreIndexes( storeMerge );
 		listData = listData.concat( linearData.data );
 		// We don't have to worry about merging metadata at the edges, because there can't be
 		// metadata between internal list items
-		listMetadata = listMetadata.concat( newDoc.getMetadata( listMerge.newItemRanges[i], true ) );
+		listMetadata = listMetadata.concat( newDoc.getMetadata( listMerge.newItemRanges[ i ], true ) );
 	}
 
 	tx = new ve.dm.Transaction( doc );
@@ -260,17 +260,17 @@ ve.dm.Transaction.newFromAttributeChanges = function ( doc, offset, attr ) {
 	var tx = new ve.dm.Transaction( doc ),
 		data = doc.getData();
 	// Verify element exists at offset
-	if ( data[offset].type === undefined ) {
+	if ( data[ offset ].type === undefined ) {
 		throw new Error( 'Cannot set attributes to non-element data' );
 	}
 	// Verify element is not a closing
-	if ( data[offset].type.charAt( 0 ) === '/' ) {
+	if ( data[ offset ].type.charAt( 0 ) === '/' ) {
 		throw new Error( 'Cannot set attributes on closing element' );
 	}
 	// Retain up to element
 	tx.pushRetain( offset );
 	// Change attributes
-	tx.pushAttributeChanges( attr, data[offset].attributes || {} );
+	tx.pushAttributeChanges( attr, data[ offset ].attributes || {} );
 	// Retain to end of document
 	tx.pushFinalRetain( doc, offset );
 	return tx;
@@ -482,13 +482,13 @@ ve.dm.Transaction.newFromMetadataElementReplacement = function ( doc, offset, in
 	var oldElement,
 		tx = new ve.dm.Transaction( doc ),
 		data = doc.getMetadata(),
-		elements = data[offset] || [];
+		elements = data[ offset ] || [];
 
 	if ( index >= elements.length ) {
 		throw new Error( 'Metadata index out of bounds' );
 	}
 
-	oldElement = elements[index];
+	oldElement = elements[ index ];
 
 	// Retain up to element
 	tx.pushRetain( offset );
@@ -532,7 +532,7 @@ ve.dm.Transaction.newFromContentBranchConversion = function ( doc, range, type, 
 	}
 	// Replace the wrappings of each content branch in the range
 	for ( i = 0; i < selection.length; i++ ) {
-		selected = selection[i];
+		selected = selection[ i ];
 		branch = selected.node.isContent() ? selected.node.getParent() : selected.node;
 		if ( branch.canContainContent() ) {
 			// Skip branches that are already of the target type and have all attributes in attr
@@ -618,7 +618,7 @@ ve.dm.Transaction.newFromWrap = function ( doc, range, unwrapOuter, wrapOuter, u
 			closings = [],
 			len = openings.length;
 		for ( i = 0; i < len; i++ ) {
-			closings[closings.length] = { type: '/' + openings[len - i - 1].type };
+			closings[ closings.length ] = { type: '/' + openings[ len - i - 1 ].type };
 		}
 		return closings;
 	}
@@ -640,9 +640,9 @@ ve.dm.Transaction.newFromWrap = function ( doc, range, unwrapOuter, wrapOuter, u
 		// Verify that wrapOuter matches the data at this position
 		unwrapOuterData = doc.data.slice( range.start - unwrapOuter.length, range.start );
 		for ( i = 0; i < unwrapOuterData.length; i++ ) {
-			if ( unwrapOuterData[i].type !== unwrapOuter[i].type ) {
+			if ( unwrapOuterData[ i ].type !== unwrapOuter[ i ].type ) {
 				throw new Error( 'Element in unwrapOuter does not match: expected ' +
-					unwrapOuter[i].type + ' but found ' + unwrapOuterData[i].type );
+					unwrapOuter[ i ].type + ' but found ' + unwrapOuterData[ i ].type );
 			}
 		}
 		// Instead of putting in unwrapOuter as given, put it in the
@@ -666,10 +666,10 @@ ve.dm.Transaction.newFromWrap = function ( doc, range, unwrapOuter, wrapOuter, u
 						// Verify that unwrapEach matches the data at this position
 						unwrapEachData = doc.data.slice( i, i + unwrapEach.length );
 						for ( j = 0; j < unwrapEachData.length; j++ ) {
-							if ( unwrapEachData[j].type !== unwrapEach[j].type ) {
+							if ( unwrapEachData[ j ].type !== unwrapEach[ j ].type ) {
 								throw new Error( 'Element in unwrapEach does not match: expected ' +
-									unwrapEach[j].type + ' but found ' +
-									unwrapEachData[j].type );
+									unwrapEach[ j ].type + ' but found ' +
+									unwrapEachData[ j ].type );
 							}
 						}
 						// Instead of putting in unwrapEach as given, put it in the
@@ -766,14 +766,14 @@ ve.dm.Transaction.prototype.clone = function () {
 ve.dm.Transaction.prototype.reversed = function () {
 	var i, len, op, newOp, reverse, prop, tx = new this.constructor();
 	for ( i = 0, len = this.operations.length; i < len; i++ ) {
-		op = this.operations[i];
+		op = this.operations[ i ];
 		newOp = ve.copy( op );
-		reverse = this.constructor.reversers[op.type] || {};
+		reverse = this.constructor.reversers[ op.type ] || {};
 		for ( prop in reverse ) {
-			if ( typeof reverse[prop] === 'string' ) {
-				newOp[prop] = op[reverse[prop]];
+			if ( typeof reverse[ prop ] === 'string' ) {
+				newOp[ prop ] = op[ reverse[ prop ] ];
 			} else {
-				newOp[prop] = reverse[prop][op[prop]];
+				newOp[ prop ] = reverse[ prop ][ op[ prop ] ];
 			}
 		}
 		tx.operations.push( newOp );
@@ -794,10 +794,10 @@ ve.dm.Transaction.prototype.isNoOp = function () {
 	if ( this.operations.length === 0 ) {
 		return true;
 	} else if ( this.operations.length === 1 ) {
-		return this.operations[0].type === 'retain';
+		return this.operations[ 0 ].type === 'retain';
 	} else if ( this.operations.length === 2 ) {
-		return this.operations[0].type === 'retain' &&
-			this.operations[1].type === 'retainMetadata';
+		return this.operations[ 0 ].type === 'retain' &&
+			this.operations[ 1 ].type === 'retainMetadata';
 	} else {
 		return false;
 	}
@@ -832,7 +832,7 @@ ve.dm.Transaction.prototype.getDocument = function () {
 ve.dm.Transaction.prototype.hasOperationWithType = function ( type ) {
 	var i, len;
 	for ( i = 0, len = this.operations.length; i < len; i++ ) {
-		if ( this.operations[i].type === type ) {
+		if ( this.operations[ i ].type === type ) {
 			return true;
 		}
 	}
@@ -908,7 +908,7 @@ ve.dm.Transaction.prototype.translateOffset = function ( offset, excludeInsertio
 		adjustment = 0;
 
 	for ( i = 0; i < this.operations.length; i++ ) {
-		op = this.operations[i];
+		op = this.operations[ i ];
 		if ( op.type === 'replace' ) {
 			insertLength = op.insert.length;
 			removeLength = op.remove.length;
@@ -984,7 +984,7 @@ ve.dm.Transaction.prototype.translateRange = function ( range, excludeInsertion 
 ve.dm.Transaction.prototype.getModifiedRange = function () {
 	var i, len, op, start, end, offset = 0;
 	for ( i = 0, len = this.operations.length; i < len; i++ ) {
-		op = this.operations[i];
+		op = this.operations[ i ];
 		switch ( op.type ) {
 			case 'retainMetadata':
 				continue;
@@ -1048,13 +1048,14 @@ ve.dm.Transaction.prototype.pushFinalRetain = function ( doc, offset, metaOffset
  * @throws {Error} Cannot retain backwards
  */
 ve.dm.Transaction.prototype.pushRetain = function ( length ) {
+	var end;
 	if ( length < 0 ) {
 		throw new Error( 'Invalid retain length, cannot retain backwards:' + length );
 	}
 	if ( length ) {
-		var end = this.operations.length - 1;
-		if ( this.operations.length && this.operations[end].type === 'retain' ) {
-			this.operations[end].length += length;
+		end = this.operations.length - 1;
+		if ( this.operations.length && this.operations[ end ].type === 'retain' ) {
+			this.operations[ end ].length += length;
 		} else {
 			this.operations.push( {
 				type: 'retain',
@@ -1073,13 +1074,14 @@ ve.dm.Transaction.prototype.pushRetain = function ( length ) {
  * @throws {Error} Cannot retain backwards
  */
 ve.dm.Transaction.prototype.pushRetainMetadata = function ( length ) {
+	var end;
 	if ( length < 0 ) {
 		throw new Error( 'Invalid retain length, cannot retain backwards:' + length );
 	}
 	if ( length ) {
-		var end = this.operations.length - 1;
-		if ( this.operations.length && this.operations[end].type === 'retainMetadata' ) {
-			this.operations[end].length += length;
+		end = this.operations.length - 1;
+		if ( this.operations.length && this.operations[ end ].type === 'retainMetadata' ) {
+			this.operations[ end ].length += length;
 		} else {
 			this.operations.push( {
 				type: 'retainMetadata',
@@ -1137,14 +1139,14 @@ ve.dm.Transaction.prototype.addSafeRemoveOps = function ( doc, removeStart, remo
  * @param {Array} insertMetadata Metadata to insert.
  */
 ve.dm.Transaction.prototype.pushReplaceInternal = function ( remove, insert, removeMetadata, insertMetadata, insertedDataOffset, insertedDataLength ) {
-	if ( remove.length === 0 && insert.length === 0 ) {
-		return; // no-op
-	}
 	var op = {
 		type: 'replace',
 		remove: remove,
 		insert: insert
 	};
+	if ( remove.length === 0 && insert.length === 0 ) {
+		return; // no-op
+	}
 	if ( removeMetadata !== undefined && insertMetadata !== undefined ) {
 		op.removeMetadata = removeMetadata;
 		op.insertMetadata = insertMetadata;
@@ -1179,23 +1181,25 @@ ve.dm.Transaction.prototype.pushReplaceInternal = function ( remove, insert, rem
  * @param {number} [insertedDataLength] Length of the originally inserted data in the resulting operation data
  */
 ve.dm.Transaction.prototype.pushReplace = function ( doc, offset, removeLength, insert, insertMetadata, insertedDataOffset, insertedDataLength ) {
+	var extraMetadata, end, lastOp, penultOp, range, remove, removeMetadata, isRemoveEmpty, isInsertEmpty,
+		mergedMetadata = [];
+
 	if ( removeLength === 0 && insert.length === 0 ) {
 		// Don't push no-ops
 		return;
 	}
 
-	var extraMetadata,
-		end = this.operations.length - 1,
-		lastOp = end >= 0 ? this.operations[end] : null,
-		penultOp = end >= 1 ? this.operations[ end - 1 ] : null,
-		range = new ve.Range( offset, offset + removeLength ),
-		remove = doc.getData( range ),
-		removeMetadata = doc.getMetadata( range ),
-		// ve.compare compares arrays as objects, so no need to check against
-		// an array of the same length for emptiness.
-		isRemoveEmpty = ve.compare( removeMetadata, [] ),
-		isInsertEmpty = insertMetadata && ve.compare( insertMetadata, [] ),
-		mergedMetadata = [];
+	end = this.operations.length - 1;
+	lastOp = end >= 0 ? this.operations[ end ] : null;
+	penultOp = end >= 1 ? this.operations[ end - 1 ] : null;
+	range = new ve.Range( offset, offset + removeLength );
+	remove = doc.getData( range );
+	removeMetadata = doc.getMetadata( range );
+	// ve.compare compares arrays as objects, so no need to check against
+	// an array of the same length for emptiness.
+	isRemoveEmpty = ve.compare( removeMetadata, [] );
+	isInsertEmpty = insertMetadata && ve.compare( insertMetadata, [] );
+	mergedMetadata = [];
 
 	if ( !insertMetadata && !isRemoveEmpty ) {
 		// if we are removing a range which includes metadata, we need to
@@ -1204,7 +1208,7 @@ ve.dm.Transaction.prototype.pushReplace = function ( doc, offset, removeLength, 
 		// collapsed metadata.
 		insertMetadata = ve.dm.MetaLinearData.static.merge( removeMetadata );
 		if ( insert.length === 0 ) {
-			extraMetadata = insertMetadata[0];
+			extraMetadata = insertMetadata[ 0 ];
 			insertMetadata = [];
 		} else {
 			// pad out at end so insert metadata is the same length as insert data
@@ -1337,8 +1341,8 @@ ve.dm.Transaction.prototype.pushReplaceElementAttribute = function ( key, from, 
 ve.dm.Transaction.prototype.pushAttributeChanges = function ( changes, oldAttrs ) {
 	var key;
 	for ( key in changes ) {
-		if ( oldAttrs[key] !== changes[key] ) {
-			this.pushReplaceElementAttribute( key, oldAttrs[key], changes[key] );
+		if ( oldAttrs[ key ] !== changes[ key ] ) {
+			this.pushReplaceElementAttribute( key, oldAttrs[ key ], changes[ key ] );
 		}
 	}
 };
@@ -1427,8 +1431,8 @@ ve.dm.Transaction.prototype.pushRemoval = function ( doc, currentOffset, range, 
 		// Empty selection? Something is wrong!
 		throw new Error( 'Invalid range, cannot remove from ' + range.start + ' to ' + range.end );
 	}
-	first = selection[0];
-	last = selection[selection.length - 1];
+	first = selection[ 0 ];
+	last = selection[ selection.length - 1 ];
 	// If the first and last node are mergeable, merge them
 	if ( first.node.canBeMergedWith( last.node ) ) {
 		if ( !first.range && !last.range ) {
@@ -1458,14 +1462,14 @@ ve.dm.Transaction.prototype.pushRemoval = function ( doc, currentOffset, range, 
 	// The selection wasn't mergeable, so remove nodes that are completely covered, and strip
 	// nodes that aren't
 	for ( i = 0; i < selection.length; i++ ) {
-		if ( !selection[i].range ) {
+		if ( !selection[ i ].range ) {
 			// Entire node is covered, remove it
-			nodeStart = selection[i].nodeOuterRange.start;
-			nodeEnd = selection[i].nodeOuterRange.end;
+			nodeStart = selection[ i ].nodeOuterRange.start;
+			nodeEnd = selection[ i ].nodeOuterRange.end;
 		} else {
 			// Part of the node is covered, remove that range
-			nodeStart = selection[i].range.start;
-			nodeEnd = selection[i].range.end;
+			nodeStart = selection[ i ].range.start;
+			nodeEnd = selection[ i ].range.end;
 		}
 
 		// Merge contiguous removals. Only apply a removal when a gap appears, or at the

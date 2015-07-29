@@ -330,7 +330,7 @@ ve.ui.AnnotationInspector.prototype.getTeardownProcess = function ( data ) {
 				// Clear all existing annotations
 				annotations = this.getMatchingAnnotations( fragment, true ).get();
 				for ( i = 0, len = annotations.length; i < len; i++ ) {
-					fragment.annotateContent( 'clear', annotations[i] );
+					fragment.annotateContent( 'clear', annotations[ i ] );
 				}
 			}
 			if ( replace ) {

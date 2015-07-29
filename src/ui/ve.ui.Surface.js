@@ -22,9 +22,9 @@
  * @cfg {string} [inDialog] The name of the dialog this surface is in
  */
 ve.ui.Surface = function VeUiSurface( dataOrDoc, config ) {
-	config = config || {};
-
 	var documentModel;
+
+	config = config || {};
 
 	// Parent constructor
 	OO.ui.Element.call( this, config );
@@ -221,7 +221,7 @@ ve.ui.Surface.prototype.setupDebugBar = function () {
 ve.ui.Surface.prototype.getBoundingClientRect = function () {
 	// We would use getBoundingClientRect(), but in iOS7 that's relative to the
 	// document rather than to the viewport
-	return this.$element[0].getClientRects()[0];
+	return this.$element[ 0 ].getClientRects()[ 0 ];
 };
 
 /**
@@ -403,7 +403,7 @@ ve.ui.Surface.prototype.execute = function ( triggerOrAction, method ) {
 		if ( ve.ui.actionFactory.doesActionSupportMethod( triggerOrAction, method ) ) {
 			// Create an action object and execute the method on it
 			obj = ve.ui.actionFactory.create( triggerOrAction, this );
-			ret = obj[method].apply( obj, Array.prototype.slice.call( arguments, 2 ) );
+			ret = obj[ method ].apply( obj, Array.prototype.slice.call( arguments, 2 ) );
 			return ret === undefined || !!ret;
 		}
 	}
@@ -497,7 +497,7 @@ ve.ui.Surface.prototype.initFilibuster = function () {
 			return selection.getDescription();
 		} )
 		.setObserver( 'DOM doc', function () {
-			return ve.serializeNodeDebug( surface.view.$element[0] );
+			return ve.serializeNodeDebug( surface.view.$element[ 0 ] );
 		} )
 		.setObserver( 'DOM selection', function () {
 			var nativeRange,

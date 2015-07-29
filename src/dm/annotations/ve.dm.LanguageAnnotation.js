@@ -41,8 +41,8 @@ ve.dm.LanguageAnnotation.static.toDataElement = function ( domElements ) {
 	return {
 		type: this.name,
 		attributes: {
-			lang: domElements[0].getAttribute( 'lang' ),
-			dir: domElements[0].getAttribute( 'dir' )
+			lang: domElements[ 0 ].getAttribute( 'lang' ),
+			dir: domElements[ 0 ].getAttribute( 'dir' )
 		}
 	};
 };

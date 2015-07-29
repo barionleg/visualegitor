@@ -41,13 +41,13 @@ ve.dm.IndexValueStore.prototype.index = function ( value, hash, overwrite ) {
 			index = this.valueStore.length;
 		}
 		if ( Array.isArray( value ) ) {
-			this.valueStore[index] = ve.copy( value );
+			this.valueStore[ index ] = ve.copy( value );
 		} else if ( typeof value === 'object' ) {
-			this.valueStore[index] = ve.cloneObject( value );
+			this.valueStore[ index ] = ve.cloneObject( value );
 		} else {
-			this.valueStore[index] = value;
+			this.valueStore[ index ] = value;
 		}
-		this.hashStore[hash] = index;
+		this.hashStore[ hash ] = index;
 	}
 	return index;
 };
@@ -62,7 +62,7 @@ ve.dm.IndexValueStore.prototype.index = function ( value, hash, overwrite ) {
  * @returns {number|null} The index of the value in the store, or undefined if it is not found
  */
 ve.dm.IndexValueStore.prototype.indexOfHash = function ( hash ) {
-	return hash in this.hashStore ? this.hashStore[hash] : null;
+	return hash in this.hashStore ? this.hashStore[ hash ] : null;
 };
 
 /**
@@ -77,7 +77,7 @@ ve.dm.IndexValueStore.prototype.indexOfHash = function ( hash ) {
 ve.dm.IndexValueStore.prototype.indexes = function ( values ) {
 	var i, length, indexes = [];
 	for ( i = 0, length = values.length; i < length; i++ ) {
-		indexes.push( this.index( values[i] ) );
+		indexes.push( this.index( values[ i ] ) );
 	}
 	return indexes;
 };
@@ -90,7 +90,7 @@ ve.dm.IndexValueStore.prototype.indexes = function ( values ) {
  * @returns {Object|undefined} Value at this index, or undefined if out of bounds
  */
 ve.dm.IndexValueStore.prototype.value = function ( index ) {
-	return this.valueStore[index];
+	return this.valueStore[ index ];
 };
 
 /**
@@ -105,7 +105,7 @@ ve.dm.IndexValueStore.prototype.value = function ( index ) {
 ve.dm.IndexValueStore.prototype.values = function ( indexes ) {
 	var i, length, values = [];
 	for ( i = 0, length = indexes.length; i < length; i++ ) {
-		values.push( this.value( indexes[i] ) );
+		values.push( this.value( indexes[ i ] ) );
 	}
 	return values;
 };
@@ -123,7 +123,7 @@ ve.dm.IndexValueStore.prototype.clone = function () {
 	var key, clone = new this.constructor();
 	clone.valueStore = this.valueStore.slice();
 	for ( key in this.hashStore ) {
-		clone.hashStore[key] = this.hashStore[key];
+		clone.hashStore[ key ] = this.hashStore[ key ];
 	}
 	return clone;
 };
@@ -144,10 +144,10 @@ ve.dm.IndexValueStore.prototype.merge = function ( other ) {
 	var key, index, mapping = {};
 	for ( key in other.hashStore ) {
 		if ( !Object.prototype.hasOwnProperty.call( this.hashStore, key ) ) {
-			index = this.valueStore.push( other.valueStore[other.hashStore[key]] ) - 1;
-			this.hashStore[key] = index;
+			index = this.valueStore.push( other.valueStore[ other.hashStore[ key ] ] ) - 1;
+			this.hashStore[ key ] = index;
 		}
-		mapping[other.hashStore[key]] = this.hashStore[key];
+		mapping[ other.hashStore[ key ] ] = this.hashStore[ key ];
 	}
 	return mapping;
 };

@@ -46,7 +46,7 @@ ve.ce.ListNode.prototype.getTagName = function () {
 	if ( !Object.prototype.hasOwnProperty.call( types, style ) ) {
 		throw new Error( 'Invalid style' );
 	}
-	return types[style];
+	return types[ style ];
 };
 
 /**

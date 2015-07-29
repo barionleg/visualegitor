@@ -208,7 +208,7 @@ ve.ui.MediaSizeWidget.prototype.onDimensionsChange = function ( type, value ) {
 	} else {
 		this.setSizeType( 'custom' );
 		if ( $.isNumeric( value ) ) {
-			dimensions[type] = Number( value );
+			dimensions[ type ] = Number( value );
 			this.setCurrentDimensions( dimensions );
 		} else {
 			this.validateDimensions();

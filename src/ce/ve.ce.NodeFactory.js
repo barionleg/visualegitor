@@ -32,7 +32,7 @@ OO.inheritClass( ve.ce.NodeFactory, OO.Factory );
 ve.ce.NodeFactory.prototype.getDescription = function ( node ) {
 	var type = node.constructor.static.name;
 	if ( Object.prototype.hasOwnProperty.call( this.registry, type ) ) {
-		return this.registry[type].static.getDescription( node );
+		return this.registry[ type ].static.getDescription( node );
 	}
 	throw new Error( 'Unknown node type: ' + type );
 };
@@ -46,7 +46,7 @@ ve.ce.NodeFactory.prototype.getDescription = function ( node ) {
  */
 ve.ce.NodeFactory.prototype.splitNodeOnEnter = function ( type ) {
 	if ( Object.prototype.hasOwnProperty.call( this.registry, type ) ) {
-		return this.registry[type].static.splitOnEnter;
+		return this.registry[ type ].static.splitOnEnter;
 	}
 	throw new Error( 'Unknown node type: ' + type );
 };
@@ -61,7 +61,7 @@ ve.ce.NodeFactory.prototype.splitNodeOnEnter = function ( type ) {
  */
 ve.ce.NodeFactory.prototype.getNodePrimaryCommandName = function ( type ) {
 	if ( Object.prototype.hasOwnProperty.call( this.registry, type ) ) {
-		return this.registry[type].static.primaryCommandName;
+		return this.registry[ type ].static.primaryCommandName;
 	}
 	throw new Error( 'Unknown node type: ' + type );
 };

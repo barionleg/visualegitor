@@ -182,15 +182,16 @@ ve.ui.DesktopContext.prototype.toggle = function ( show ) {
  * @inheritdoc
  */
 ve.ui.DesktopContext.prototype.updateDimensions = function () {
+	var startAndEndRects, position, embeddable, middle, boundingRect, rtl, surface, selection, focusedNode;
+
 	if ( !this.isVisible() ) {
 		return;
 	}
 
-	var startAndEndRects, position, embeddable, middle, boundingRect,
-		rtl = this.surface.getModel().getDocument().getDir() === 'rtl',
-		surface = this.surface.getView(),
-		selection = this.inspector && this.inspector.previousSelection,
-		focusedNode = surface.getFocusedNode();
+	rtl = this.surface.getModel().getDocument().getDir() === 'rtl';
+	surface = this.surface.getView();
+	selection = this.inspector && this.inspector.previousSelection;
+	focusedNode = surface.getFocusedNode();
 
 	boundingRect = surface.getSelectionBoundingRect( selection );
 
@@ -271,7 +272,7 @@ ve.ui.DesktopContext.prototype.isEmbeddable = function () {
 		sources = this.getRelatedSources();
 
 	for ( i = 0, len = sources.length; i < len; i++ ) {
-		if ( !sources[i].embeddable ) {
+		if ( !sources[ i ].embeddable ) {
 			return false;
 		}
 	}

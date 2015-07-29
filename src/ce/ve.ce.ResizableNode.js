@@ -111,11 +111,13 @@ ve.ce.ResizableNode.prototype.getResizableOffset = function () {
 
 /** */
 ve.ce.ResizableNode.prototype.setOriginalDimensions = function ( dimensions ) {
+	var scalable;
+
 	if ( !this.enabled ) {
 		return;
 	}
 
-	var scalable = this.model.getScalable();
+	scalable = this.model.getScalable();
 
 	scalable.setOriginalDimensions( dimensions );
 
@@ -129,11 +131,13 @@ ve.ce.ResizableNode.prototype.setOriginalDimensions = function ( dimensions ) {
  * Hide the size label
  */
 ve.ce.ResizableNode.prototype.hideSizeLabel = function () {
+	var node;
+
 	if ( !this.enabled ) {
 		return;
 	}
 
-	var node = this;
+	node = this;
 
 	// Defer the removal of this class otherwise other DOM changes may cause
 	// the opacity transition to not play out smoothly
@@ -150,6 +154,7 @@ ve.ce.ResizableNode.prototype.hideSizeLabel = function () {
  * Update the contents and position of the size label
  */
 ve.ce.ResizableNode.prototype.updateSizeLabel = function () {
+	var top, height, scalable, dimensions, offset, minWidth;
 	if ( !this.enabled ) {
 		return;
 	}
@@ -157,11 +162,10 @@ ve.ce.ResizableNode.prototype.updateSizeLabel = function () {
 		return;
 	}
 
-	var top, height,
-		scalable = this.model.getScalable(),
-		dimensions = scalable.getCurrentDimensions(),
-		offset = this.getResizableOffset(),
-		minWidth = ( this.showSizeLabel ? 100 : 0 ) + ( this.showScaleLabel ? 30 : 0 );
+	scalable = this.model.getScalable();
+	dimensions = scalable.getCurrentDimensions();
+	offset = this.getResizableOffset();
+	minWidth = ( this.showSizeLabel ? 100 : 0 ) + ( this.showScaleLabel ? 30 : 0 );
 
 	// Put the label on the outside when too narrow
 	if ( dimensions.width < minWidth ) {
@@ -203,20 +207,20 @@ ve.ce.ResizableNode.prototype.updateSizeLabel = function () {
  * @param {string[]} [handles] List of handles to show: 'nw', 'ne', 'sw', 'se'. Show all if undefined.
  */
 ve.ce.ResizableNode.prototype.showHandles = function ( handles ) {
-	if ( !this.enabled ) {
-		return;
-	}
-
 	var i, len,
 		add = [],
 		remove = [],
 		allDirections = [ 'nw', 'ne', 'sw', 'se' ];
 
+	if ( !this.enabled ) {
+		return;
+	}
+
 	for ( i = 0, len = allDirections.length; i < len; i++ ) {
-		if ( handles === undefined || handles.indexOf( allDirections[i] ) !== -1 ) {
-			remove.push( 've-ce-resizableNode-hide-' + allDirections[i] );
+		if ( handles === undefined || handles.indexOf( allDirections[ i ] ) !== -1 ) {
+			remove.push( 've-ce-resizableNode-hide-' + allDirections[ i ] );
 		} else {
-			add.push( 've-ce-resizableNode-hide-' + allDirections[i] );
+			add.push( 've-ce-resizableNode-hide-' + allDirections[ i ] );
 		}
 	}
 
@@ -427,12 +431,13 @@ ve.ce.ResizableNode.prototype.onResizeHandlesCornerMouseDown = function ( e ) {
  * @method
  */
 ve.ce.ResizableNode.prototype.setResizableHandlesSizeAndPosition = function () {
+	var width, height;
 	if ( !this.enabled ) {
 		return;
 	}
 
-	var width = this.$resizable.width(),
-		height = this.$resizable.height();
+	width = this.$resizable.width();
+	height = this.$resizable.height();
 
 	// Clear cached resizable offset position as it may have changed
 	this.resizableOffset = null;
@@ -463,11 +468,12 @@ ve.ce.ResizableNode.prototype.setResizableHandlesSizeAndPosition = function () {
  * @method
  */
 ve.ce.ResizableNode.prototype.setResizableHandlesPosition = function () {
+	var offset;
 	if ( !this.enabled ) {
 		return;
 	}
 
-	var offset = this.getResizableOffset();
+	offset = this.getResizableOffset();
 
 	this.$resizeHandles.css( {
 		top: offset.top,

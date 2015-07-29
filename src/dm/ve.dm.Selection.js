@@ -149,7 +149,7 @@ ve.dm.Selection.prototype.translateByTransaction = null;
 ve.dm.Selection.prototype.translateByTransactions = function ( txs, excludeInsertion ) {
 	var i, l, selection = this;
 	for ( i = 0, l = txs.length; i < l; i++ ) {
-		selection = selection.translateByTransaction( txs[i], excludeInsertion );
+		selection = selection.translateByTransaction( txs[ i ], excludeInsertion );
 	}
 	return selection;
 };

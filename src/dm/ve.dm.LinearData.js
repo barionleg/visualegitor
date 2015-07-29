@@ -87,7 +87,7 @@ ve.dm.LinearData.static.isCloseElementData = function ( item ) {
  * @returns {Object|Array} Data from index, or all data (by reference)
  */
 ve.dm.LinearData.prototype.getData = function ( offset ) {
-	return offset === undefined ? this.data : this.data[offset];
+	return offset === undefined ? this.data : this.data[ offset ];
 };
 
 /**
@@ -98,7 +98,7 @@ ve.dm.LinearData.prototype.getData = function ( offset ) {
  * @param {Object|string} value Value to store
  */
 ve.dm.LinearData.prototype.setData = function ( offset, value ) {
-	this.data[offset] = value;
+	this.data[ offset ] = value;
 };
 
 /**

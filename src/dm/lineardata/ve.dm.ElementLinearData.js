@@ -47,18 +47,18 @@ ve.dm.ElementLinearData.static.endWordRegExp = new RegExp(
  * @returns {boolean} Elements are comparable
  */
 ve.dm.ElementLinearData.static.compareElements = function ( a, b ) {
+	var aPlain = a,
+		bPlain = b;
+
 	if ( a === undefined || b === undefined ) {
 		return false;
 	}
 
-	var aPlain = a,
-		bPlain = b;
-
 	if ( Array.isArray( a ) ) {
-		aPlain = a[0];
+		aPlain = a[ 0 ];
 	}
 	if ( Array.isArray( b ) ) {
-		bPlain = b[0];
+		bPlain = b[ 0 ];
 	}
 	if ( a && a.type ) {
 		aPlain = {
@@ -97,13 +97,14 @@ ve.dm.ElementLinearData.static.compareElements = function ( a, b ) {
  * @returns {boolean} Content can be inserted at offset
  */
 ve.dm.ElementLinearData.prototype.isContentOffset = function ( offset ) {
+	var left, right, factory;
 	// Edges are never content
 	if ( offset === 0 || offset === this.getLength() ) {
 		return false;
 	}
-	var left = this.getData( offset - 1 ),
-		right = this.getData( offset ),
-		factory = ve.dm.nodeFactory;
+	left = this.getData( offset - 1 );
+	right = this.getData( offset );
+	factory = ve.dm.nodeFactory;
 	return (
 		// Data exists at offsets
 		( left !== undefined && right !== undefined ) &&
@@ -183,14 +184,15 @@ ve.dm.ElementLinearData.prototype.isContentOffset = function ( offset ) {
  * @returns {boolean} Structure can be inserted at offset
  */
 ve.dm.ElementLinearData.prototype.isStructuralOffset = function ( offset, unrestricted ) {
+	var left, right, factory;
 	// Edges are always structural
 	if ( offset === 0 || offset === this.getLength() ) {
 		return true;
 	}
 	// Offsets must be within range and both sides must be elements
-	var left = this.getData( offset - 1 ),
-		right = this.getData( offset ),
-		factory = ve.dm.nodeFactory;
+	left = this.getData( offset - 1 );
+	right = this.getData( offset );
+	factory = ve.dm.nodeFactory;
 	return (
 		(
 			left !== undefined &&
@@ -288,6 +290,7 @@ ve.dm.ElementLinearData.prototype.isContentData = function () {
  * @throws {Error} offset out of bounds
  */
 ve.dm.ElementLinearData.prototype.getAnnotationIndexesFromOffset = function ( offset, ignoreClose ) {
+	var element;
 	if ( offset < 0 || offset > this.getLength() ) {
 		throw new Error( 'offset ' + offset + ' out of bounds' );
 	}
@@ -302,14 +305,14 @@ ve.dm.ElementLinearData.prototype.getAnnotationIndexesFromOffset = function ( of
 		offset = this.getRelativeContentOffset( offset, -1 );
 	}
 
-	var element = this.getData( offset );
+	element = this.getData( offset );
 
 	if ( element === undefined || typeof element === 'string' ) {
 		return [];
 	} else if ( element.annotations ) {
 		return element.annotations.slice();
-	} else if ( element[1] ) {
-		return element[1].slice();
+	} else if ( element[ 1 ] ) {
+		return element[ 1 ].slice();
 	} else {
 		return [];
 	}
@@ -392,7 +395,7 @@ ve.dm.ElementLinearData.prototype.setAttributeAtOffset = function ( offset, key,
 	if ( value === undefined ) {
 		// Clear
 		if ( item.attributes ) {
-			delete item.attributes[key];
+			delete item.attributes[ key ];
 		}
 	} else {
 		// Automatically initialize attributes object
@@ -400,7 +403,7 @@ ve.dm.ElementLinearData.prototype.setAttributeAtOffset = function ( offset, key,
 			item.attributes = {};
 		}
 		// Set
-		item.attributes[key] = value;
+		item.attributes[ key ] = value;
 	}
 };
 
@@ -412,7 +415,7 @@ ve.dm.ElementLinearData.prototype.setAttributeAtOffset = function ( offset, key,
  */
 ve.dm.ElementLinearData.prototype.getCharacterData = function ( offset ) {
 	var item = this.getData( offset ),
-		data = Array.isArray( item ) ? item[0] : item;
+		data = Array.isArray( item ) ? item[ 0 ] : item;
 	return typeof data === 'string' ? data : '';
 };
 
@@ -722,12 +725,14 @@ ve.dm.ElementLinearData.prototype.getRelativeContentOffset = function ( offset, 
  * @returns {number} Nearest content offset or -1 if there are no valid offsets in data
  */
 ve.dm.ElementLinearData.prototype.getNearestContentOffset = function ( offset, direction ) {
+	var left, right;
+
 	if ( this.isContentOffset( offset ) ) {
 		return offset;
 	}
 	if ( direction === undefined ) {
-		var left = this.getRelativeContentOffset( offset, -1 ),
-			right = this.getRelativeContentOffset( offset, 1 );
+		left = this.getRelativeContentOffset( offset, -1 );
+		right = this.getRelativeContentOffset( offset, 1 );
 		return offset - left < right - offset ? left : right;
 	} else {
 		return this.getRelativeContentOffset( offset, direction > 0 ? 1 : -1 );
@@ -772,12 +777,13 @@ ve.dm.ElementLinearData.prototype.getRelativeStructuralOffset = function ( offse
  * @returns {number} Nearest structural offset
  */
 ve.dm.ElementLinearData.prototype.getNearestStructuralOffset = function ( offset, direction, unrestricted ) {
+	var left, right;
 	if ( this.isStructuralOffset( offset, unrestricted ) ) {
 		return offset;
 	}
 	if ( !direction ) {
-		var left = this.getRelativeStructuralOffset( offset, -1, unrestricted ),
-			right = this.getRelativeStructuralOffset( offset, 1, unrestricted );
+		left = this.getRelativeStructuralOffset( offset, -1, unrestricted );
+		right = this.getRelativeStructuralOffset( offset, 1, unrestricted );
 		return offset - left < right - offset ? left : right;
 	} else {
 		return this.getRelativeStructuralOffset( offset, direction > 0 ? 1 : -1, unrestricted );
@@ -860,9 +866,9 @@ ve.dm.ElementLinearData.prototype.getUsedStoreValues = function ( range ) {
 		indexes = this.getAnnotationIndexesFromOffset( i, true );
 		j = indexes.length;
 		while ( j-- ) {
-			index = indexes[j];
+			index = indexes[ j ];
 			if ( !Object.prototype.hasOwnProperty.call( valueStore, index ) ) {
-				valueStore[index] = this.getStore().value( index );
+				valueStore[ index ] = this.getStore().value( index );
 			}
 		}
 	}
@@ -882,12 +888,12 @@ ve.dm.ElementLinearData.prototype.remapStoreIndexes = function ( mapping ) {
 	for ( i = 0, ilen = this.data.length; i < ilen; i++ ) {
 		indexes = this.getAnnotationIndexesFromOffset( i, true );
 		for ( j = 0, jlen = indexes.length; j < jlen; j++ ) {
-			indexes[j] = mapping[indexes[j]];
+			indexes[ j ] = mapping[ indexes[ j ] ];
 		}
 		this.setAnnotationIndexesAtOffset( i, indexes );
 		if ( this.isOpenElementData( i ) ) {
 			nodeClass = ve.dm.nodeFactory.lookup( this.getType( i ) );
-			nodeClass.static.remapStoreIndexes( this.data[i], mapping );
+			nodeClass.static.remapStoreIndexes( this.data[ i ], mapping );
 		}
 	}
 };
@@ -907,7 +913,7 @@ ve.dm.ElementLinearData.prototype.remapInternalListIndexes = function ( mapping,
 	for ( i = 0, ilen = this.data.length; i < ilen; i++ ) {
 		if ( this.isOpenElementData( i ) ) {
 			nodeClass = ve.dm.nodeFactory.lookup( this.getType( i ) );
-			nodeClass.static.remapInternalListIndexes( this.data[i], mapping, internalList );
+			nodeClass.static.remapInternalListIndexes( this.data[ i ], mapping, internalList );
 		}
 	}
 };
@@ -925,7 +931,7 @@ ve.dm.ElementLinearData.prototype.remapInternalListKeys = function ( internalLis
 	for ( i = 0, ilen = this.data.length; i < ilen; i++ ) {
 		if ( this.isOpenElementData( i ) ) {
 			nodeClass = ve.dm.nodeFactory.lookup( this.getType( i ) );
-			nodeClass.static.remapInternalListKeys( this.data[i], internalList );
+			nodeClass.static.remapInternalListKeys( this.data[ i ], internalList );
 		}
 	}
 };
@@ -967,8 +973,8 @@ ve.dm.ElementLinearData.prototype.sanitize = function ( rules, keepEmptyContentB
 		if ( this.isElementData( i ) ) {
 			type = this.getType( i );
 			// Apply type conversions
-			if ( rules.conversions && rules.conversions[type] ) {
-				type = rules.conversions[type];
+			if ( rules.conversions && rules.conversions[ type ] ) {
+				type = rules.conversions[ type ];
 				this.getData( i ).type = ( this.isCloseElementData( i ) ? '/' : '' ) + type;
 			}
 			// Convert content-containing non-paragraph nodes to paragraphs in plainText mode
