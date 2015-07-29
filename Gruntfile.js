@@ -34,10 +34,10 @@ module.exports = function ( grunt ) {
 				files = grunt.file.expand( 'demos/ve/pages/*.html' );
 			files.forEach( function ( file ) {
 				var matches = file.match( /^.*(pages\/(.+).html)$/ ),
-					path = matches[1],
-					name = matches[2];
+					path = matches[ 1 ],
+					name = matches[ 2 ];
 
-				pages[name] = path;
+				pages[ name ] = path;
 			} );
 			return pages;
 		} )();
@@ -72,11 +72,11 @@ module.exports = function ( grunt ) {
 			// HACK: Ideally these libraries would provide their own distribution files (T95667)
 			'jquery.i18n': {
 				dest: 'dist/lib/jquery.i18n.js',
-				src: modules['jquery.i18n'].scripts
+				src: modules[ 'jquery.i18n' ].scripts
 			},
 			'jquery.uls.data': {
 				dest: 'dist/lib/jquery.uls.data.js',
-				src: modules['jquery.uls.data'].scripts
+				src: modules[ 'jquery.uls.data' ].scripts
 			}
 		},
 		cssjanus: {
@@ -240,6 +240,7 @@ module.exports = function ( grunt ) {
 			},
 			all: [
 				'*.js',
+				'{.jsduck,build,demos,src,tests}/*.js',
 				'{.jsduck,build,demos,src,tests}/**/*.js'
 			]
 		},

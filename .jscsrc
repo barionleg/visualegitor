@@ -1,3 +1,10 @@
 {
-	"preset": "wikimedia"
+	"preset": "wikimedia",
+
+	"checkAnnotations": {
+		"preset": "JSDuck5",
+		"extra": {
+			"source": true
+		}
+	}
 }

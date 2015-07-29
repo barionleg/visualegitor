@@ -10,7 +10,7 @@ function setTrigger( trigger ) {
 	parts = trigger.split( '+' );
 	$( '#trigger' ).text( trigger );
 	for ( i = 0, len = parts.length; i < len; i++ ) {
-		key = parts[i].replace( '\\', '\\\\' ).replace( '"', '\\"' );
+		key = parts[ i ].replace( '\\', '\\\\' ).replace( '"', '\\"' );
 		$( '.key[rel="' + key + '"]' ).addClass( 'active' );
 	}
 }
@@ -29,8 +29,8 @@ for ( i = 0, len = modifierKeys.length; i < len; i++ ) {
 	$modifiers.append(
 		$( '<li>' ).append(
 			$( '<span class="key"></span>' )
-				.text( modifierKeys[i] )
-				.attr( 'rel', modifierKeys[i] )
+				.text( modifierKeys[ i ] )
+				.attr( 'rel', modifierKeys[ i ] )
 		)
 	);
 }
@@ -38,8 +38,8 @@ for ( i = 0, len = primaryKeys.length; i < len; i++ ) {
 	$primary.append(
 		$( '<li>' ).append(
 			$( '<span class="key"></span>' )
-				.text( primaryKeys[i] )
-				.attr( 'rel', primaryKeys[i] )
+				.text( primaryKeys[ i ] )
+				.attr( 'rel', primaryKeys[ i ] )
 		)
 	);
 }
@@ -48,7 +48,7 @@ for ( key in keyAliases ) {
 		$( '<li>' )
 			.append( $( '<span class="key alias"></span>' ).text( key ) )
 			.append( '⇢' )
-			.append( $( '<span class="key"></span>' ).text( keyAliases[key] ) )
+			.append( $( '<span class="key"></span>' ).text( keyAliases[ key ] ) )
 	);
 }
 
