@@ -3694,11 +3694,13 @@ ve.ce.Surface.prototype.handleTableDelete = function () {
 	var i, l,
 		surfaceModel = this.getModel(),
 		fragments = [],
-		ranges = surfaceModel.getSelection().getRanges();
+		cells = surfaceModel.getSelection().getMatrixCells();
 
-	for ( i = 0, l = ranges.length; i < l; i++ ) {
-		// Create auto-updating fragments from ranges
-		fragments.push( surfaceModel.getLinearFragment( ranges[i], true ) );
+	for ( i = 0, l = cells.length; i < l; i++ ) {
+		if ( cells[i].node.isCellEditable() ) {
+			// Create auto-updating fragments from ranges
+			fragments.push( surfaceModel.getLinearFragment( cells[i].node.getRange(), true ) );
+		}
 	}
 
 	for ( i = 0, l = fragments.length; i < l; i++ ) {

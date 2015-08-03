@@ -249,8 +249,11 @@ ve.ce.TableNode.prototype.setEditing = function ( isEditing, noSelect ) {
 			selection = selection.collapseToFrom();
 			this.surface.getModel().setSelection( selection );
 		}
-		this.editingFragment = this.surface.getModel().getFragment( selection );
 		cell = this.getCellNodesFromSelection( selection )[0];
+		if ( !cell.isCellEditable() ) {
+			return;
+		}
+		this.editingFragment = this.surface.getModel().getFragment( selection );
 		cell.setEditing( true );
 		if ( !noSelect ) {
 			cellRange = cell.getModel().getRange();
@@ -351,6 +354,7 @@ ve.ce.TableNode.prototype.updateOverlay = function ( selectionChanged ) {
 
 	var i, l, nodes, cellOffset, anchorNode, anchorOffset, selectionOffset,
 		top, left, bottom, right,
+		editable = true,
 		selection = this.editingFragment ?
 			this.editingFragment.getSelection() :
 			this.surface.getModel().getSelection(),
@@ -380,6 +384,10 @@ ve.ce.TableNode.prototype.updateOverlay = function ( selectionChanged ) {
 		bottom = Math.max( bottom, cellOffset.bottom );
 		left = Math.min( left, cellOffset.left );
 		right = Math.max( right, cellOffset.right );
+
+		if ( editable && !nodes[i].isCellEditable() ) {
+			editable = false;
+		}
 	}
 
 	selectionOffset = ve.translateRect(
@@ -429,7 +437,8 @@ ve.ce.TableNode.prototype.updateOverlay = function ( selectionChanged ) {
 	// Classes
 	this.$selectionBox
 		.toggleClass( 've-ce-tableNodeOverlay-selection-box-fullRow', selection.isFullRow() )
-		.toggleClass( 've-ce-tableNodeOverlay-selection-box-fullCol', selection.isFullCol() );
+		.toggleClass( 've-ce-tableNodeOverlay-selection-box-fullCol', selection.isFullCol() )
+		.toggleClass( 've-ce-tableNodeOverlay-selection-box-notEditable', !editable );
 
 	if ( selectionChanged ) {
 		ve.scrollIntoView( this.$selectionBox.get( 0 ) );

@@ -55,6 +55,7 @@ ve.ce.AlienNode.static.getDescription = function () {
  *
  * @class
  * @extends ve.ce.AlienNode
+ * @mixins ve.ce.TableCellableNode
  *
  * @constructor
  * @param {ve.dm.AlienBlockNode} model
@@ -63,11 +64,16 @@ ve.ce.AlienNode.static.getDescription = function () {
 ve.ce.AlienBlockNode = function VeCeAlienBlockNode() {
 	// Parent constructor
 	ve.ce.AlienBlockNode.super.apply( this, arguments );
+
+	// Mixin constructor
+	ve.ce.TableCellableNode.call( this );
 };
 
 /* Inheritance */
 
 OO.inheritClass( ve.ce.AlienBlockNode, ve.ce.AlienNode );
+
+OO.mixinClass( ve.ce.AlienBlockNode, ve.ce.TableCellableNode );
 
 /* Static Properties */
 
