@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8ec42329_ae9cde5f",
+        "filename": ".jscsrc",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-08-03T20:56:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ec42329_595ae985",
+      "revId": "72d8fabc4166c5bd8c9d4e10a108d641555b8449",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ec42329_394b5db5",
         "filename": "Gruntfile.js",
         "patchSetId": 3
