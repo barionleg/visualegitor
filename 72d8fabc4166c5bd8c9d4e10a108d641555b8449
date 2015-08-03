@@ -33,6 +33,24 @@
       "revId": "72d8fabc4166c5bd8c9d4e10a108d641555b8449",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec42329_8bb55431",
+        "filename": "Gruntfile.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-08-03T19:41:15Z",
+      "side": 1,
+      "message": "Yes, but it wasn\u0027t executing on those files until I made this change.",
+      "parentUuid": "8ec42329_394b5db5",
+      "revId": "72d8fabc4166c5bd8c9d4e10a108d641555b8449",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
