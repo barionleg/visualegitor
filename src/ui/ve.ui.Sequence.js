@@ -12,7 +12,7 @@
  * @constructor
  * @param {string} name Symbolic name
  * @param {string} commandName Command name this sequence executes
- * @param {string|Array} data Data to match
+ * @param {string|Array|RegExp} data Data to match
  * @param {number} [strip] Number of data elements to strip after execution (from the right)
  */
 ve.ui.Sequence = function VeUiSequence( name, commandName, data, strip ) {
@@ -31,23 +31,28 @@ OO.initClass( ve.ui.Sequence );
 /**
  * Check if the sequence matches a given offset in the data
  *
- * @param {string|Array} data String or linear data
+ * @param {ve.dm.ElementLinearData} data String or linear data
  * @param {number} offset Offset
- * @return {boolean} Sequence matches
+ * @return {ve.Range|null} Range corresponding to the match, or else null
  */
-ve.ui.Sequence.prototype.match = function ( data, offset ) {
+ve.ui.Sequence.prototype.match = function ( data, offset, plaintext ) {
 	var i, j = offset - 1;
 
+	if ( this.data instanceof RegExp ) {
+		i = plaintext.search( this.data );
+		return ( i < 0 ) ? null :
+			new ve.Range( offset - plaintext.length + i, offset );
+	}
 	for ( i = this.data.length - 1; i >= 0; i--, j-- ) {
 		if ( typeof this.data[i] === 'string' ) {
 			if ( this.data[i] !== data.getCharacterData( j ) ) {
-				return false;
+				return null;
 			}
 		} else if ( !ve.compare( this.data[i], data.getData( j ), true ) ) {
-			return false;
+			return null;
 		}
 	}
-	return true;
+	return new ve.Range( offset - this.data.length, offset );
 };
 
 /**
@@ -57,7 +62,7 @@ ve.ui.Sequence.prototype.match = function ( data, offset ) {
  * @return {boolean} The command executed
  * @throws {Error} Command not found
  */
-ve.ui.Sequence.prototype.execute = function ( surface ) {
+ve.ui.Sequence.prototype.execute = function ( surface, range ) {
 	var range, executed, stripFragment,
 		surfaceModel = surface.getModel(),
 		command = ve.init.target.commandRegistry.lookup( this.getCommandName() );
@@ -72,6 +77,10 @@ ve.ui.Sequence.prototype.execute = function ( surface ) {
 	}
 
 	surfaceModel.breakpoint();
+
+	if ( this.setRange ) { // XXX
+		surfaceModel.setSelection( range ); // XXX
+	}
 
 	executed = command.execute( surface );
 
