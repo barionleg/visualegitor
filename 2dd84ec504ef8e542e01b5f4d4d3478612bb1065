@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_f0f13edb",
+        "filename": "src/ui/ve.ui.Sequence.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-08-07T18:34:59Z",
+      "side": 1,
+      "message": "instanceof RegExp?",
+      "revId": "2dd84ec504ef8e542e01b5f4d4d3478612bb1065",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
