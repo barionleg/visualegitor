@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_705f8ee9",
+        "filename": "src/ui/ve.ui.CommandRegistry.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-08-07T18:30:15Z",
+      "side": 1,
+      "message": "did you mean to add this action or is that WIP?",
+      "revId": "854b3b1376643e526d7a0bc51381e5925007d731",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
