@@ -16,6 +16,24 @@
       "revId": "854b3b1376643e526d7a0bc51381e5925007d731",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_702d4e41",
+        "filename": "src/ui/ve.ui.CommandRegistry.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 664
+      },
+      "writtenOn": "2015-08-07T18:35:25Z",
+      "side": 1,
+      "message": "Yeah, the WIP is I haven\u0027t written the \"link\" action yet.  Should be straight forward though, I hope!\n\n(The other WIP is I haven\u0027t figured out the best way to pass the matching Range from the sequence registry to the command.)\n\nI\u0027m thinking that VE has the Link#autolinkUrl command, and VE-MW adds Link#autolinkRFC and other magic words.  That might be MWLink extending Link or something, not sure exactly whether it\u0027s kosher to monkey patch the VE link class from VE-MW.",
+      "parentUuid": "6ec1af18_705f8ee9",
+      "revId": "854b3b1376643e526d7a0bc51381e5925007d731",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
