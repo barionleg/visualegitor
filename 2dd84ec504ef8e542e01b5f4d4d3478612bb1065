@@ -16,6 +16,41 @@
       "revId": "2dd84ec504ef8e542e01b5f4d4d3478612bb1065",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_50d7f228",
+        "filename": "src/ui/ve.ui.Sequence.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 664
+      },
+      "writtenOn": "2015-08-07T18:38:36Z",
+      "side": 1,
+      "message": "Let me research that.  I seem to recall that there are browser bugs here, which is why I was being safe by using the jquery helper.",
+      "parentUuid": "6ec1af18_f0f13edb",
+      "revId": "2dd84ec504ef8e542e01b5f4d4d3478612bb1065",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_30e6e614",
+        "filename": "src/ui/ve.ui.Sequence.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 664
+      },
+      "writtenOn": "2015-08-07T18:38:36Z",
+      "side": 1,
+      "message": "This seems to imply that we do actually need both `data` and `plaintext`, since some sequences are going to do a deep match on the `data` argument.",
+      "revId": "2dd84ec504ef8e542e01b5f4d4d3478612bb1065",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
