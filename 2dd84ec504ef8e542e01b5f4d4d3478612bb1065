@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_a784d6a4",
+        "filename": "src/ui/ve.ui.Sequence.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 664
+      },
+      "writtenOn": "2015-08-08T16:58:16Z",
+      "side": 1,
+      "message": "So, the problem with `instanceof RegExp` is that each iframe or popup window have different `RegExp` objects.  So this fails if objects are passed between frame or window contexts.  That\u0027s why jquery uses a different mechanism.  Filed https://phabricator.wikimedia.org/T108481 for discussion, but I\u0027ll change this patch to use `instanceof`.  If we switch to `$.type` we can apply the patch to all use sites at once.",
+      "parentUuid": "6ec1af18_50d9322b",
+      "revId": "2dd84ec504ef8e542e01b5f4d4d3478612bb1065",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_30e6e614",
         "filename": "src/ui/ve.ui.Sequence.js",
         "patchSetId": 2
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "hmm, so they way they are coded, we match to { type: \u0027paragraph\u0027 } as a substitue for a regex ^, but if we are passing the whole paragraph we can just change that to regex ^.",
       "parentUuid": "6ec1af18_30e6e614",
+      "revId": "2dd84ec504ef8e542e01b5f4d4d3478612bb1065",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_8753da42",
+        "filename": "src/ui/ve.ui.Sequence.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 664
+      },
+      "writtenOn": "2015-08-08T16:58:16Z",
+      "side": 1,
+      "message": "I\u0027m going to punt this issue for a follow-up patch, since it will touch other sequences unrelated to this.  The followup will move `plaintext` to the first argument, removing `data`, remove the `ve.compare` clause, and update all the sequences which currently use `{type: \u0027paragraph\u0027}` to to start-of-line matches instead.",
+      "parentUuid": "6ec1af18_90d6baf5",
       "revId": "2dd84ec504ef8e542e01b5f4d4d3478612bb1065",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
