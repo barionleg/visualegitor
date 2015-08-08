@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_42d2c0d6",
+        "filename": "src/ui/contexts/ve.ui.DesktopContext.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-08-08T20:00:57Z",
+      "side": 1,
+      "message": "Don\u0027t we need to do this on ve.ui.MobileContext.js too?",
+      "revId": "264304360223bd84059c31263f76211b51421c70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
