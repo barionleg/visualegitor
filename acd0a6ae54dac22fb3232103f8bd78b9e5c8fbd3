@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_e1f400bc",
+        "filename": "src/ui/ve.ui.ContextItem.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-08-10T22:07:15Z",
+      "side": 1,
+      "message": "We have a rule against icon-only buttons, don\u0027t we?",
+      "revId": "acd0a6ae54dac22fb3232103f8bd78b9e5c8fbd3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
