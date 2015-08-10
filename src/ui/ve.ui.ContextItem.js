@@ -45,10 +45,25 @@ ve.ui.ContextItem = function ( context, model, config ) {
 			classes: [ 've-ui-contextItem-editButton' ]
 		}
 	) );
+	this.deleteButton = new OO.ui.ButtonWidget( ve.extendObject(
+		this.context.getDefaultButtonConfig(),
+		{
+			icon: 'remove',
+			flags: [ 'destructive' ]
+		}
+	) );
+	this.actionButtons = new OO.ui.ButtonGroupWidget();
+	if ( this.isDeletable() ) {
+		this.actionButtons.addItems( [ this.deleteButton ] );
+	}
+	if ( this.isEditable() ) {
+		this.actionButtons.addItems( [ this.editButton ] );
+	}
 	this.fragment = null;
 
 	// Events
 	this.editButton.connect( this, { click: 'onEditButtonClick' } );
+	this.deleteButton.connect( this, { click: 'onDeleteButtonClick' } );
 	this.$element.on( 'mousedown', false );
 
 	// Initialization
@@ -63,7 +78,7 @@ ve.ui.ContextItem = function ( context, model, config ) {
 		.append( this.$icon, this.$label );
 	this.$actions
 		.addClass( 've-ui-contextItem-actions' )
-		.append( this.editButton.$element );
+		.append( this.actionButtons.$element );
 	this.$head
 		.addClass( 've-ui-contextItem-head' )
 		.append( this.$title, this.$info, this.$actions );
@@ -142,6 +157,13 @@ ve.ui.ContextItem.prototype.onEditButtonClick = function () {
 };
 
 /**
+ * Handle delete button click events.
+ */
+ve.ui.ContextItem.prototype.onDeleteButtonClick = function () {
+	this.getFragment().removeContent();
+};
+
+/**
  * Check if this item is compatible with a given model.
  *
  * @static
@@ -163,6 +185,24 @@ ve.ui.ContextItem.prototype.isEditable = function () {
 };
 
 /**
+ * Check if item is deletable.
+ *
+ * @return {boolean} Item is deletable
+ */
+ve.ui.ContextItem.prototype.isDeletable = function () {
+	return this.isNode() && this.context.showDeleteButton();
+};
+
+/**
+ * Check if model is a node
+ *
+ * @return {boolean} Model is a nodel
+ */
+ve.ui.ContextItem.prototype.isNode = function () {
+	return this.model && this.model instanceof ve.dm.Node;
+};
+
+/**
  * Get the command for this item.
  *
  * @return {ve.ui.Command} Command
@@ -179,7 +219,7 @@ ve.ui.ContextItem.prototype.getCommand = function () {
 ve.ui.ContextItem.prototype.getFragment = function () {
 	if ( !this.fragment ) {
 		var surfaceModel = this.context.getSurface().getModel();
-		this.fragment = this.model && this.model instanceof ve.dm.Node ?
+		this.fragment = this.isNode() ?
 			surfaceModel.getLinearFragment( this.model.getOuterRange() ) :
 			surfaceModel.getFragment();
 	}
@@ -222,8 +262,6 @@ ve.ui.ContextItem.prototype.renderDescription = function () {
  * @chainable
  */
 ve.ui.ContextItem.prototype.setup = function () {
-	this.editButton.toggle( this.isEditable() );
-
 	if ( this.context.shouldUseBasicRendering() ) {
 		this.renderDescription();
 	} else {
