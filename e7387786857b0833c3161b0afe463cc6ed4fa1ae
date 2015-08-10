@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_3b0b1adb",
+        "filename": "src/ce/styles/annotations/ve.ce.LinkAnnotation.css",
+        "patchSetId": 16
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-08-10T17:29:39Z",
+      "side": 1,
+      "message": "This is a bit strong. Maybe a 50% grey or something?",
+      "revId": "e7387786857b0833c3161b0afe463cc6ed4fa1ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
