@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "6ec1af18_8570ada4",
+        "filename": "src/init/sa/ve.init.sa.DesktopTarget.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 98
+      },
+      "writtenOn": "2015-08-10T13:02:48Z",
+      "side": 1,
+      "message": "desktop target",
+      "revId": "0601747e2eb5842de4718748270bd7fd2e375236",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_a575a994",
+        "filename": "src/init/sa/ve.init.sa.DesktopTarget.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 98
+      },
+      "writtenOn": "2015-08-10T13:02:48Z",
+      "side": 1,
+      "message": "desktop target",
+      "revId": "0601747e2eb5842de4718748270bd7fd2e375236",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_c52f9584",
         "filename": "src/init/sa/ve.init.sa.DesktopTarget.js",
         "patchSetId": 3
