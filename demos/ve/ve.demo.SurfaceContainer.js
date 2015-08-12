@@ -253,7 +253,6 @@ ve.demo.SurfaceContainer.prototype.loadHtml = function ( pageHtml ) {
 		),
 		{ placeholder: 'Start your document' }
 	);
-
 	this.target.setSurface( this.surface );
 
 	this.$surfaceWrapper.empty().append( this.surface.$element.parent() )

@@ -1321,11 +1321,21 @@ ve.dm.Document.prototype.getCompleteHistoryLength = function () {
 
 /**
  * Get all the items in the complete history stack since a specified pointer.
- * @param {number} pointer Pointer from where to start the slice
- * @returns {Array} Array of transaction objects with undo flag
+ * @param {number} start Pointer from where to start the slice
+ * @returns {ve.dm.Transaction[]} Array of transaction objects with undo flag
  */
-ve.dm.Document.prototype.getCompleteHistorySince = function ( pointer ) {
-	return this.completeHistory.slice( pointer );
+ve.dm.Document.prototype.getCompleteHistorySince = function ( start ) {
+	return this.completeHistory.slice( start );
+};
+
+/**
+ * Single change containing most recent transactions in history stack
+ *
+ * @param {number} start Pointer from where to start the slice
+ * @returns {ve.dm.Change} Single change containing transactions since pointer
+ */
+ve.dm.Document.prototype.getChangeSince = function ( start ) {
+	return new ve.dm.Change( start, this.completeHistory.slice( start ) );
 };
 
 /**
