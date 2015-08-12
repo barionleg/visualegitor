@@ -36,3 +36,24 @@ ve.dm.ModelFactory.prototype.createFromElement = function ( element ) {
 	}
 	throw new Error( 'Element must have a .type property' );
 };
+
+/**
+ * Create a new item from a hashed model element
+ *
+ * @param {Object} hashedElement Hashed model element
+ * @return {ve.dm.Model} Model
+ */
+ve.dm.ModelFactory.prototype.createFromHashedElement = function ( hashedElement ) {
+	return this.createFromElement( this.getElementFromHash( hashedElement ) );
+};
+
+/**
+ * Get a model element object from its hash
+ *
+ * @param {Object} hashedElement Hashed model element
+ * @return {Object} Model element object
+ */
+ve.dm.ModelFactory.prototype.getElementFromHash = function ( hashedElement ) {
+	var constructor = this.lookup( hashedElement.type );
+	return constructor.static.getElementFromHash( hashedElement );
+};
