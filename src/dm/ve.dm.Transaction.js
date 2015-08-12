@@ -19,6 +19,64 @@ ve.dm.Transaction = function VeDmTransaction( doc ) {
 /* Static Methods */
 
 /**
+ * Create a transaction from its hash
+ *
+ * @param {ve.dm.Document} doc Document
+ * @param {Object} hash Transaction hash object
+ * @return {ve.dm.Transaction} Transaction
+ */
+ve.dm.Transaction.newFromHash = function ( doc, hash ) {
+	var i, l, op, annotation, mapping2, insert, remove, storeHash,
+		combinedMapping = {},
+		mapping1 = {},
+		store = new ve.dm.IndexValueStore(),
+		tx = new ve.dm.Transaction( doc );
+
+	hash = ve.copy( hash );
+	storeHash = hash.store || {};
+
+	// Convert serialized store to real store
+	for ( i in storeHash ) {
+		if ( storeHash.hasOwnProperty( i ) ) {
+			// Everything is an annotation
+			annotation = storeHash[ i ];
+			mapping1[ i ] = store.index(
+				ve.dm.annotationFactory.createFromHashedElement( annotation )
+			);
+		}
+	}
+
+	mapping2 = doc.getStore().merge( store );
+
+	for ( i in mapping1 ) {
+		if ( storeHash.hasOwnProperty( i ) ) {
+			combinedMapping[ i ] = mapping2[ mapping1[ i ] ];
+		}
+	}
+
+	for ( i = 0, l = hash.operations.length; i < l; i++ ) {
+		op = hash.operations[ i ];
+		switch ( op.type ) {
+			case 'replace':
+				insert = ve.dm.ElementLinearData.static.newFromHash( store, op.insert );
+				remove = ve.dm.ElementLinearData.static.newFromHash( store, op.remove );
+				// Remap the store indexes in the data
+				insert.remapStoreIndexes( combinedMapping );
+				remove.remapStoreIndexes( combinedMapping );
+				op.insert = insert.getData();
+				op.remove = remove.getData();
+				break;
+			case 'annotate':
+				op.index = combinedMapping[ op.index ];
+				break;
+		}
+	}
+	tx.operations = hash.operations;
+
+	return tx;
+};
+
+/**
  * Generate a transaction that replaces data in a range.
  *
  * @method
@@ -747,6 +805,41 @@ ve.dm.Transaction.reversers = {
 };
 
 /* Methods */
+
+/**
+ * Get a serializable object describing the transaction
+ *
+ * @return {Object} Serializable object
+ */
+ve.dm.Transaction.prototype.toJSON = function () {
+	var i, l, op, hash,
+		operations = ve.copy( this.operations ),
+		store = this.getDocument().getStore(),
+		valueStore = {};
+
+	for ( i = 0, l = operations.length; i < l; i++ ) {
+		op = operations[ i ];
+		switch ( op.type ) {
+			case 'replace':
+				// Wrap insert/remove data as linear data so it has a toJSON method
+				op.insert = new ve.dm.ElementLinearData( store, op.insert );
+				op.remove = new ve.dm.ElementLinearData( store, op.remove );
+				// Add used store values in data to store hash
+				valueStore = ve.extendObject( valueStore, op.insert.getUsedStoreValues(), op.remove.getUsedStoreValues() );
+				break;
+			case 'annotate':
+				// Add the used annotation to the store hash
+				valueStore[ op.index ] = store.value( op.index );
+				break;
+		}
+	}
+
+	hash = { operations: operations };
+	if ( !ve.isEmptyObject( valueStore ) ) {
+		hash.store = valueStore;
+	}
+	return hash;
+};
 
 /**
  * Create a clone of this transaction.
