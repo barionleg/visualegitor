@@ -16,6 +16,24 @@
       "revId": "e7387786857b0833c3161b0afe463cc6ed4fa1ae",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_26b8c8c2",
+        "filename": "src/ce/styles/annotations/ve.ce.LinkAnnotation.css",
+        "patchSetId": 16
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-08-12T23:31:31Z",
+      "side": 1,
+      "message": "Scrap that. Playing with it briefly I think:\n    box-shadow: 0 0 0 0.125em rgba(22,55,200,0.75);\n    border-radius: 0.125em;\n… might be a start.",
+      "parentUuid": "6ec1af18_3b0b1adb",
+      "revId": "e7387786857b0833c3161b0afe463cc6ed4fa1ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
