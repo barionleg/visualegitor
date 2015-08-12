@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_a097c092",
+        "filename": "src/ui/datatransferhandlers/ve.ui.UrlStringTransferHandler.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-08-12T20:22:58Z",
+      "side": 1,
+      "message": "Don\u0027t need to dupe these do we? Just @inheritdoc?",
+      "revId": "6feadcbbd0ca988f3dc9193c389ff396fe9c38fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_20f3d008",
+        "filename": "src/ui/datatransferhandlers/ve.ui.UrlStringTransferHandler.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-08-12T20:22:58Z",
+      "side": 1,
+      "message": "Do we want to check if it\u0027s valid first? Just because it has the right type doesn\u0027t mean we don\u0027t have a malformed request, and it\u0027d be sad to fatal on that.",
+      "revId": "6feadcbbd0ca988f3dc9193c389ff396fe9c38fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
