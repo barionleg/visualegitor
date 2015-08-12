@@ -273,6 +273,7 @@ ve.demo.SurfaceContainer.prototype.loadHtml = function ( pageHtml ) {
 		),
 		{ placeholder: 'Start your document' }
 	);
+	this.surface.model.synchronizer.setLeader( ve.demo.isLeader );
 
 	this.target.setSurface( this.surface );
 
