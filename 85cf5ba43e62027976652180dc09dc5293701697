@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_cebd6465",
+        "filename": "tests/ui/ve.ui.DataTransferHandlerFactory.test.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-08-12T09:31:51Z",
+      "side": 1,
+      "message": "Instead of comments, put these descriptions as the msg argument of deepEqual. Then when they fail, we get useful messages instead of \"test 6 failed\".",
+      "revId": "85cf5ba43e62027976652180dc09dc5293701697",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
