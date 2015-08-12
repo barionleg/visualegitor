@@ -64,6 +64,7 @@
 					"ve.dm.*Selection",
 					"ve.dm.Transaction",
 					"ve.dm.Change",
+					"ve.dm.SurfaceSynchronizer",
 					"ve.dm.TransactionProcessor",
 					"ve.dm.TransactionProcessor.*"
 				]

@@ -58,8 +58,12 @@ ve.ce.Surface = function VeCeSurface( model, ui, config ) {
 	this.selectionLink = null;
 	this.$highlightsFocused = $( '<div>' );
 	this.$highlightsBlurred = $( '<div>' );
+	this.$highlightsUserSelections = $( '<div>' );
+	this.$highlightsUserCursors = $( '<div>' );
+	this.userSelectionOverlays = {};
 	this.$highlights = $( '<div>' ).append(
-		this.$highlightsFocused, this.$highlightsBlurred
+		this.$highlightsFocused, this.$highlightsBlurred,
+		this.$highlightsUserSelections, this.$highlightsUserCursors
 	);
 	this.$findResults = $( '<div>' );
 	this.$dropMarker = $( '<div>' ).addClass( 've-ce-surface-dropMarker oo-ui-element-hidden' );
@@ -94,11 +98,13 @@ ve.ce.Surface = function VeCeSurface( model, ui, config ) {
 	this.hasSelectionChangeEvents = 'onselectionchange' in this.getElementDocument();
 
 	// Events
+	this.connect( this, { position: 'onPosition' } );
 	this.model.connect( this, {
 		select: 'onModelSelect',
 		documentUpdate: 'onModelDocumentUpdate',
 		insertionAnnotationsChange: 'onInsertionAnnotationsChange'
 	} );
+	this.model.synchronizer.connect( this, { authorSelect: 'onSynchronizerAuthorSelect' } );
 
 	this.onDocumentMouseUpHandler = this.onDocumentMouseUp.bind( this );
 	this.$documentNode.on( {
@@ -183,6 +189,8 @@ ve.ce.Surface = function VeCeSurface( model, ui, config ) {
 	this.$highlightsFocused.addClass( 've-ce-surface-highlights-focused' );
 	this.$highlightsBlurred.addClass( 've-ce-surface-highlights-blurred' );
 	this.$deactivatedSelection.addClass( 've-ce-surface-deactivatedSelection' );
+	this.$highlightsUserSelections.addClass( 've-ce-surface-highlights-user-selections' );
+	this.$highlightsUserCursors.addClass( 've-ce-surface-highlights-user-cursors' );
 	this.$pasteTarget
 		.addClass( 've-ce-surface-paste' )
 		.prop( {
@@ -2603,6 +2611,88 @@ ve.ce.Surface.prototype.renderSelectedContentBranchNode = function () {
 		return false;
 	}
 	return ceNode.renderContents();
+};
+
+ve.ce.Surface.prototype.onSynchronizerAuthorSelect = function ( author ) {
+	try {
+		this.paintAuthor( author );
+	} catch ( error ) {
+		return;
+	}
+};
+
+ve.ce.Surface.prototype.paintAuthor = function ( author ) {
+	var i, l, rects, rect, overlays,
+		color = '#' +
+			( 8 * ( 1 - Math.sin( 5 * author ) ) ).toString( 16 ).slice( 0, 1 ) +
+			( 6 * ( 1 - Math.cos( 3 * author ) ) ).toString( 16 ).slice( 0, 1 ) +
+			'0',
+		selection = this.model.synchronizer.authorSelections[ author ];
+
+	if ( !this.userSelectionOverlays[ author ] ) {
+		this.userSelectionOverlays[ author ] = {
+			$cursor: $( '<div>' ),
+			$selection: $( '<div>' )
+		};
+	}
+	overlays = this.userSelectionOverlays[ author ];
+
+	if ( selection.isNull() ) {
+		overlays.$cursor.detach();
+		overlays.$selection.detach();
+		return;
+	}
+
+	overlays.$cursor.empty();
+	overlays.$selection.empty();
+
+	if ( !selection.isCollapsed() ) {
+		rects = ve.ce.Selection.static.newFromModel( selection, this ).getSelectionRects();
+		for ( i = 0, l = rects.length; i < l; i++ ) {
+			rect = rects[ i ];
+			overlays.$selection.append( $( '<div>' ).addClass( 've-ce-surface-highlights-user-selection' ).css( {
+				left: rect.left,
+				top: rect.top,
+				width: rect.width,
+				height: rect.height,
+				background: color
+			} ) );
+		}
+	}
+
+	if ( selection instanceof ve.dm.LinearSelection && this.getFocusedNode( selection.getRange() ) ) {
+		rect = ve.ce.Selection.static.newFromModel( selection, this ).getSelectionBoundingRect();
+	} else {
+		rect = ve.ce.Selection.static.newFromModel( selection.collapseToTo(), this ).getSelectionRects()[ 0 ];
+	}
+	overlays.$cursor.append(
+		$( '<div class="ve-ce-surface-highlights-user-cursor">' ).css( {
+			left: rect.left,
+			top: rect.top,
+			height: rect.height,
+			background: color
+		} ).append(
+			$( '<span>' )
+			.addClass( 've-ce-surface-highlights-user-cursor-label' )
+			.text( author )
+			.css( { background: color } )
+		)
+	);
+
+	this.$highlightsUserCursors.append( overlays.$cursor );
+	this.$highlightsUserSelections.append( overlays.$selection );
+};
+
+ve.ce.Surface.prototype.onPosition = function () {
+	var surface = this;
+	// Defer to allow surface synchronizer to adjust for transactions
+	setTimeout( function () {
+		var author,
+			authorSelections = surface.getModel().synchronizer.authorSelections;
+		for ( author in authorSelections ) {
+			surface.onSynchronizerAuthorSelect( author );
+		}
+	} );
 };
 
 /**
