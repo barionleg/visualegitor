@@ -9,6 +9,7 @@
  * @param {string} [data.dataUri] Data URI to convert to a blob
  * @param {Blob} [data.blob] File blob
  * @param {string} [data.stringData] String data
+ * @param {DataTransfer} [data.dataTransfer] Native data transfer object
  * @param {DataTransferItem} [data.item] Native data transfer item
  * @param {string} [name] Item's name, for types which support it, e.g. File
  */
@@ -30,43 +31,47 @@ OO.initClass( ve.ui.DataTransferItem );
 /**
  * Create a data transfer item from a file blob.
  *
+ * @param {DataTransfer} dataTransfer Native data transfer object
  * @param {Blob} blob File blob
  * @return {ve.ui.DataTransferItem} New data transfer item
  */
-ve.ui.DataTransferItem.static.newFromBlob = function ( blob ) {
-	return new ve.ui.DataTransferItem( 'file', blob.type, { blob: blob }, blob.name );
+ve.ui.DataTransferItem.static.newFromBlob = function ( dataTransfer, blob ) {
+	return new ve.ui.DataTransferItem( 'file', blob.type, { dataTransfer: dataTransfer, blob: blob }, blob.name );
 };
 
 /**
  * Create a data transfer item from a data URI.
  *
+ * @param {DataTransfer} dataTransfer Native data transfer object
  * @param {string} dataUri Data URI
  * @return {ve.ui.DataTransferItem} New data transfer item
  */
-ve.ui.DataTransferItem.static.newFromDataUri = function ( dataUri ) {
+ve.ui.DataTransferItem.static.newFromDataUri = function ( dataTransfer, dataUri ) {
 	var parts = dataUri.split( ',' );
-	return new ve.ui.DataTransferItem( 'file', parts[0].match( /^data:([^;]+)/ )[1], { dataUri: parts[1] } );
+	return new ve.ui.DataTransferItem( 'file', parts[0].match( /^data:([^;]+)/ )[1], { dataTransfer: dataTransfer, dataUri: parts[1] } );
 };
 
 /**
  * Create a data transfer item from string data.
  *
+ * @param {DataTransfer} dataTransfer Native data transfer object
  * @param {string} stringData String data
  * @param {string} type MIME type
  * @return {ve.ui.DataTransferItem} New data transfer item
  */
-ve.ui.DataTransferItem.static.newFromString = function ( stringData, type ) {
-	return new ve.ui.DataTransferItem( 'string', type || 'text/plain', { stringData: stringData } );
+ve.ui.DataTransferItem.static.newFromString = function ( dataTransfer, stringData, type ) {
+	return new ve.ui.DataTransferItem( 'string', type || 'text/plain', { dataTransfer: dataTransfer, stringData: stringData } );
 };
 
 /**
  * Create a data transfer item from a native data transfer item.
  *
+ * @param {DataTransfer} dataTransfer Native data transfer object
  * @param {DataTransferItem} item Native data transfer item
  * @return {ve.ui.DataTransferItem} New data transfer item
  */
-ve.ui.DataTransferItem.static.newFromItem = function ( item ) {
-	return new ve.ui.DataTransferItem( item.kind, item.type, { item: item }, item.getAsFile().name );
+ve.ui.DataTransferItem.static.newFromItem = function ( dataTransfer, item ) {
+	return new ve.ui.DataTransferItem( item.kind, item.type, { dataTransfer: dataTransfer, item: item }, item.getAsFile().name );
 };
 
 /**

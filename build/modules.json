@@ -426,6 +426,7 @@
 			"src/ui/datatransferhandlers/ve.ui.DSVFileTransferHandler.js",
 			"src/ui/datatransferhandlers/ve.ui.PlainTextFileTransferHandler.js",
 			"src/ui/datatransferhandlers/ve.ui.HTMLFileTransferHandler.js",
+			"src/ui/datatransferhandlers/ve.ui.UrlStringTransferHandler.js",
 			"src/ui/windowmanagers/ve.ui.ToolbarDialogWindowManager.js",
 			"src/ui/widgets/ve.ui.AlignWidget.js",
 			"src/ui/widgets/ve.ui.LanguageSearchWidget.js",
