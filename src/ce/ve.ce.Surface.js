@@ -1890,11 +1890,12 @@ ve.ce.Surface.prototype.beforePaste = function ( e ) {
  *
  * @param {jQuery.Event} e Paste event
  */
-ve.ce.Surface.prototype.afterPaste = function () {
+ve.ce.Surface.prototype.afterPaste = function ( e ) {
 	var clipboardKey, clipboardId, clipboardIndex, clipboardHash, range,
 		$elements, parts, pasteData, slice, tx, internalListRange,
 		data, doc, htmlDoc, $images, i,
 		context, left, right, contextRange,
+		clipboardData = e.originalEvent.clipboardData,
 		items = [],
 		importantElement = '[id],[typeof],[rel]',
 		importRules = !this.pasteSpecial ? this.getSurface().getImportRules() : { all: { plainText: true } },
@@ -2069,7 +2070,7 @@ ve.ce.Surface.prototype.afterPaste = function () {
 		$images = $( htmlDoc.body ).find( 'img[src^=data\\:]' );
 		if ( $images.length ) {
 			for ( i = 0; i < $images.length; i++ ) {
-				items.push( ve.ui.DataTransferItem.static.newFromDataUri( $images.eq( i ).attr( 'src' ) ) );
+				items.push( ve.ui.DataTransferItem.static.newFromDataUri( clipboardData, $images.eq( i ).attr( 'src' ) ) );
 			}
 			if ( this.handleDataTransferItems( items, true ) ) {
 				return;
@@ -2180,19 +2181,19 @@ ve.ce.Surface.prototype.handleDataTransfer = function ( dataTransfer, isPaste, t
 	if ( dataTransfer.items ) {
 		for ( i = 0, l = dataTransfer.items.length; i < l; i++ ) {
 			if ( dataTransfer.items[i].kind !== 'string' ) {
-				items.push( ve.ui.DataTransferItem.static.newFromItem( dataTransfer.items[i] ) );
+				items.push( ve.ui.DataTransferItem.static.newFromItem( dataTransfer, dataTransfer.items[i] ) );
 			}
 		}
 	} else if ( dataTransfer.files ) {
 		for ( i = 0, l = dataTransfer.files.length; i < l; i++ ) {
-			items.push( ve.ui.DataTransferItem.static.newFromBlob( dataTransfer.files[i] ) );
+			items.push( ve.ui.DataTransferItem.static.newFromBlob( dataTransfer, dataTransfer.files[i] ) );
 		}
 	}
 
 	for ( i = 0, l = stringTypes.length; i < stringTypes.length; i++ ) {
 		stringData = dataTransfer.getData( stringTypes[i] );
 		if ( stringData ) {
-			items.push( ve.ui.DataTransferItem.static.newFromString( stringData, stringTypes[i] ) );
+			items.push( ve.ui.DataTransferItem.static.newFromString( dataTransfer, stringData, stringTypes[i] ) );
 		}
 	}
 
