@@ -78,6 +78,50 @@ ve.dm.ElementLinearData.static.compareElements = function ( a, b ) {
 /* Methods */
 
 /**
+ * Make data JSON-serializable
+ *
+ * Converts open elements to dm.Model instances which have toJSON methods
+ *
+ * @return {Array} JSON serializable data
+ */
+ve.dm.ElementLinearData.prototype.toJSON = function () {
+	var i, l,
+		data = [],
+		factory = ve.dm.modelFactory;
+
+	for ( i = 0, l = this.getLength(); i < l; i++ ) {
+		if ( this.isOpenElementData( i ) ) {
+			data.push( factory.createFromElement( this.getData( i ) ) );
+		} else {
+			data.push( this.getData( i ) );
+		}
+	}
+	return data;
+};
+
+/**
+ * Create a new data object from a hash
+ *
+ * @param {ve.dm.IndexValueStore} store Index-value store
+ * @param {Array} hashedData Hashed data
+ * @return {ve.dm.ElementLinearData} Element linear data
+ */
+ve.dm.ElementLinearData.static.newFromHash = function ( store, hashedData ) {
+	var i, l,
+		data = [],
+		factory = ve.dm.modelFactory;
+
+	for ( i = 0, l = hashedData.length; i < l; i++ ) {
+		if ( this.isOpenElementData( hashedData[ i ] ) ) {
+			data.push( factory.getElementFromHash( hashedData[ i ] ) );
+		} else {
+			data.push( hashedData[ i ] );
+		}
+	}
+	return new ve.dm.ElementLinearData( store, data );
+};
+
+/**
  * Check if content can be inserted at an offset in document data.
  *
  * This method assumes that any value that has a type property that's a string is an element object.
