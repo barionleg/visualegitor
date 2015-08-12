@@ -220,6 +220,23 @@ ve.dm.Model.static.getHashObject = function ( dataElement ) {
 };
 
 /**
+ * Get a model element object from its hash
+ *
+ * @param {Object} hashedElement Hashed model element
+ * @return {Object} Model element object
+ */
+ve.dm.Model.static.getElementFromHash = function ( hashedElement ) {
+	var element = { type: hashedElement.type };
+	if ( hashedElement.attributes ) {
+		element.attributes = hashedElement.attributes;
+	}
+	if ( hashedElement.originalDomElements ) {
+		element.originalDomElements = $.parseHTML( hashedElement.originalDomElements );
+	}
+	return element;
+};
+
+/**
  * Array of RDFa types that this model should be a match candidate for.
  *
  * @static
@@ -394,3 +411,8 @@ ve.dm.Model.prototype.getClonedElement = function () {
 ve.dm.Model.prototype.getHashObject = function () {
 	return this.constructor.static.getHashObject( this.element );
 };
+
+/**
+ * Provide toJSON alias to for JSON.serialize
+ */
+ve.dm.Model.prototype.toJSON = ve.dm.Model.prototype.getHashObject;
