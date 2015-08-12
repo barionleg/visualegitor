@@ -5,7 +5,6 @@
  */
 
 new ve.init.sa.Platform( ve.messagePaths ).initialize().done( function () {
-
 	var $toolbar = $( '.ve-demo-targetToolbar' ),
 		$editor = $( '.ve-demo-editor' ),
 		target = new ve.demo.target(),
@@ -33,6 +32,8 @@ new ve.init.sa.Platform( ve.messagePaths ).initialize().done( function () {
 			new OO.ui.ButtonOptionWidget( { data: 'desktop', label: 'Desktop' } ),
 			new OO.ui.ButtonOptionWidget( { data: 'mobile', label: 'Mobile' } )
 		] );
+
+	ve.demo.isLeader = window.location.pathname.endsWith( '-leader.html' );
 
 	function updateStylesFromDir() {
 		var oldDir = currentDir === 'ltr' ? 'rtl' : 'ltr';
