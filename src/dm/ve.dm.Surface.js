@@ -37,6 +37,7 @@ ve.dm.Surface = function VeDmSurface( doc ) {
 	this.transacting = false;
 	this.queueingContextChanges = false;
 	this.contextChangeQueued = false;
+	this.synchronizer = new ve.dm.SurfaceSynchronizer( this );
 
 	// Events
 	this.getDocument().connect( this, {
