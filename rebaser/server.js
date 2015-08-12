@@ -39,7 +39,7 @@ app.post( '/applyChange', function ( req, res ) {
 			console.log( 'send ' + req.body.author + ' ' + summarize( parallel ) );
 		}
 		response = {
-			change: parallel.serialize()
+			change: parallel.serialize( true )
 		};
 	} catch ( error ) {
 		console.log( error.stack );
