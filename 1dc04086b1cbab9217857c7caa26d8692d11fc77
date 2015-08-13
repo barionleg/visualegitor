@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_1f8dc9fb",
+        "filename": "src/ui/datatransferhandlers/ve.ui.UrlStringTransferHandler.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-08-13T22:04:06Z",
+      "side": 1,
+      "message": "should we add this last one by concatting with the parent? otherwise what are you inheriting?",
+      "revId": "1dc04086b1cbab9217857c7caa26d8692d11fc77",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_ff10fdae",
+        "filename": "src/ui/datatransferhandlers/ve.ui.UrlStringTransferHandler.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-08-13T22:04:06Z",
+      "side": 1,
+      "message": "if we made getLinkAnnotation a static method, we could just lookup the constructor for \u0027link\u0027 instead of having to create a factory instance... TechDebt?\n\nUnless you think getLinkAnnotation might be contextual in the future?",
+      "revId": "1dc04086b1cbab9217857c7caa26d8692d11fc77",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_3f01a571",
+        "filename": "src/ui/datatransferhandlers/ve.ui.UrlStringTransferHandler.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-08-13T22:04:06Z",
+      "side": 1,
+      "message": "please indent lines 87 to 124",
+      "revId": "1dc04086b1cbab9217857c7caa26d8692d11fc77",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_dff18193",
+        "filename": "src/ui/datatransferhandlers/ve.ui.UrlStringTransferHandler.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-08-13T22:04:06Z",
+      "side": 1,
+      "message": "variable with two types. Please rename this to html, and use doc for the document.",
+      "revId": "1dc04086b1cbab9217857c7caa26d8692d11fc77",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_5f359141",
+        "filename": "src/ui/datatransferhandlers/ve.ui.UrlStringTransferHandler.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-08-13T22:04:06Z",
+      "side": 1,
+      "message": "except you don\u0027t use \u0027trim\u0027",
+      "revId": "1dc04086b1cbab9217857c7caa26d8692d11fc77",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
