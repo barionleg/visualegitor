@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_45daa022",
+        "filename": "src/ui/datatransferhandlers/ve.ui.UrlStringTransferHandler.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 664
+      },
+      "writtenOn": "2015-08-14T04:06:23Z",
+      "side": 1,
+      "message": "(also, if it\u0027s a static method then it\u0027s harder for MWLinkAction to override it.  The actionFactory here is allowing MWLinkAction to override LinkAction.)",
+      "parentUuid": "6ec1af18_6228f281",
+      "revId": "1dc04086b1cbab9217857c7caa26d8692d11fc77",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_3f01a571",
         "filename": "src/ui/datatransferhandlers/ve.ui.UrlStringTransferHandler.js",
         "patchSetId": 4
