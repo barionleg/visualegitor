@@ -50,7 +50,7 @@ ve.ui.LinkAction.static.methods = [ 'autolinkUrl' ];
  * @return {boolean} Action was executed
  */
 ve.ui.LinkAction.prototype.autolinkUrl = function () {
-	var range, rangeEnd, linktext, i,
+	var range, rangeEnd, linktext, punct, i,
 		surfaceModel = this.surface.getModel(),
 		documentModel = surfaceModel.getDocument(),
 		selection = surfaceModel.getSelection();
@@ -66,8 +66,24 @@ ve.ui.LinkAction.prototype.autolinkUrl = function () {
 	range = selection.getRange();
 	rangeEnd = range.end;
 
-	// Shrink range to eliminate trailing whitespace.
-	linktext = documentModel.data.getText( true, range ).replace( /\s+$/, '' );
+	linktext = documentModel.data.getText( true, range );
+
+	// Eliminate trailing whitespace.
+	linktext = linktext.replace( /\s+$/, '' );
+
+	// Eliminate trailing punctuation, like the PHP parser does:
+	// include ')' in punctuation set only if linktext doesn't have '('
+	punct = /\(/.test(linktext) ? /[,;.:!?]+$/ : /[,;.:!?)]+$/;
+	linktext = linktext.replace( punct, '' );
+
+	// Make sure we still have a real URL after trail removal, and not
+	// a bare protocol (or no protocol at all, if we stripped the last colon)
+	if ( !ve.ui.LinkAction.static.autolinkRegExp.test( linktext + ' ' ) ) {
+		// Don't autolink this.
+		return false;
+	}
+
+	// Shrink range to match new linktext.
 	range = range.truncate( linktext.length );
 
 	// Check that none of the range has an existing link annotation.
