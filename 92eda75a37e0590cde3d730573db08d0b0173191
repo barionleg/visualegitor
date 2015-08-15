@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_9c29ba9c",
+        "filename": "src/ui/actions/ve.ui.LinkAction.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-08-15T09:43:25Z",
+      "side": 1,
+      "message": "What\u0027s a PHP parser? What\u0027s a MediaWiki?",
+      "revId": "92eda75a37e0590cde3d730573db08d0b0173191",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
