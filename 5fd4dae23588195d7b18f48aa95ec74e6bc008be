@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_3c2206b2",
+        "filename": "src/ui/ve.ui.DataTransferItem.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-08-15T10:17:47Z",
+      "side": 1,
+      "message": "If all you are using is the HTML, just pass that in instead of the whole DT object (which I\u0027ve tried to abstract away because of cross browser issues). It would also allow you to construct a fake DTI more easily, like we do with Firefox image paste.",
+      "revId": "5fd4dae23588195d7b18f48aa95ec74e6bc008be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
