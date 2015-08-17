@@ -16,6 +16,24 @@
       "revId": "5fd4dae23588195d7b18f48aa95ec74e6bc008be",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_f49ece65",
+        "filename": "src/ui/ve.ui.DataTransferItem.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 664
+      },
+      "writtenOn": "2015-08-17T16:43:30Z",
+      "side": 1,
+      "message": "But then we incur the cost of `get(\u0027html\u0027)` for every paste, even those which have no need of HTML.  That could be costly, depending on the size of the paste.  Hm.",
+      "parentUuid": "6ec1af18_3c2206b2",
+      "revId": "5fd4dae23588195d7b18f48aa95ec74e6bc008be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
