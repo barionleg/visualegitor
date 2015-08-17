@@ -34,6 +34,24 @@
       "revId": "5fd4dae23588195d7b18f48aa95ec74e6bc008be",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_74997e70",
+        "filename": "src/ui/ve.ui.DataTransferItem.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-08-17T16:50:13Z",
+      "side": 1,
+      "message": "would it be slow? It\u0027s just reading it from memory. I imagine if it was that large this would be the least of our performance worries.\n\nAlternatively we evalulate lazily, e.g. dataTransfer.get.bind( \u0027html\u0027 ) (we could do the same with plaintext)",
+      "parentUuid": "6ec1af18_f49ece65",
+      "revId": "5fd4dae23588195d7b18f48aa95ec74e6bc008be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
