@@ -16,6 +16,24 @@
       "revId": "92eda75a37e0590cde3d730573db08d0b0173191",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_944aea5d",
+        "filename": "src/ui/actions/ve.ui.LinkAction.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 664
+      },
+      "writtenOn": "2015-08-17T15:40:45Z",
+      "side": 1,
+      "message": "s/PHP parser/Google docs/",
+      "parentUuid": "6ec1af18_9c29ba9c",
+      "revId": "92eda75a37e0590cde3d730573db08d0b0173191",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
