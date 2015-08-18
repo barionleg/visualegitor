@@ -24,7 +24,7 @@ ve.ui.AlienContextItem = function VeAlienContextItem( context, model, config ) {
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.AlienContextItem, ve.ui.ContextItem );
+OO.inheritClass( ve.ui.AlienContextItem, ve.ui.LinearContextItem );
 
 /* Static Properties */
 

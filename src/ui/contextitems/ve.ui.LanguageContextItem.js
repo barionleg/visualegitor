@@ -24,7 +24,7 @@ ve.ui.LanguageContextItem = function VeLanguageContextItem( context, model, conf
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.LanguageContextItem, ve.ui.ContextItem );
+OO.inheritClass( ve.ui.LanguageContextItem, ve.ui.LinearContextItem );
 
 /* Static Properties */
 

@@ -24,7 +24,7 @@ ve.ui.CommentContextItem = function VeCommentContextItem( context, model, config
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.CommentContextItem, ve.ui.ContextItem );
+OO.inheritClass( ve.ui.CommentContextItem, ve.ui.LinearContextItem );
 
 /* Static Properties */
 

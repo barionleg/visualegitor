@@ -32,7 +32,7 @@ ve.ui.AlignableContextItem = function VeAlignable( context, model, config ) {
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.AlignableContextItem, ve.ui.ContextItem );
+OO.inheritClass( ve.ui.AlignableContextItem, ve.ui.LinearContextItem );
 
 /* Static Properties */
 

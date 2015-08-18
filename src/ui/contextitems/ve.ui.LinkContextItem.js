@@ -24,7 +24,7 @@ ve.ui.LinkContextItem = function VeLinkContextItem( context, model, config ) {
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.LinkContextItem, ve.ui.ContextItem );
+OO.inheritClass( ve.ui.LinkContextItem, ve.ui.LinearContextItem );
 
 /* Static Properties */
 

@@ -24,7 +24,7 @@ ve.ui.MobileTableCellContextItem = function VeMobileTableCellContextItem() {
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.MobileTableCellContextItem, ve.ui.ContextItem );
+OO.inheritClass( ve.ui.MobileTableCellContextItem, ve.ui.LinearContextItem );
 
 /* Static Properties */
 
