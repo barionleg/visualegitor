@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_3d10b252",
+        "filename": "src/ui/contextitems/ve.ui.AlienContextItem.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-08-18T14:39:09Z",
+      "side": 1,
+      "message": "ve.ui.LinearContextItem",
+      "revId": "70ebdc065762b071090601ae58bc6fe5366277e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_5d0b3e26",
+        "filename": "src/ui/contextitems/ve.ui.AlignableContextItem.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-08-18T14:39:09Z",
+      "side": 1,
+      "message": "ve.ui.LinearContextItem",
+      "revId": "70ebdc065762b071090601ae58bc6fe5366277e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_dd264eb5",
+        "filename": "src/ui/contextitems/ve.ui.CommentContextItem.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-08-18T14:39:09Z",
+      "side": 1,
+      "message": "ve.ui.LinearContextItem",
+      "revId": "70ebdc065762b071090601ae58bc6fe5366277e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_1d15b640",
+        "filename": "src/ui/contextitems/ve.ui.LanguageContextItem.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-08-18T14:39:09Z",
+      "side": 1,
+      "message": "ve.ui.LinearContextItem",
+      "revId": "70ebdc065762b071090601ae58bc6fe5366277e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_9d09a631",
+        "filename": "src/ui/contextitems/ve.ui.LinearContextItem.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-08-18T14:39:09Z",
+      "side": 1,
+      "message": "ve.ui.ContextItem",
+      "revId": "70ebdc065762b071090601ae58bc6fe5366277e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_7d1dda65",
+        "filename": "src/ui/contextitems/ve.ui.LinkContextItem.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-08-18T14:39:09Z",
+      "side": 1,
+      "message": "ve.ui.LinearContextItem",
+      "revId": "70ebdc065762b071090601ae58bc6fe5366277e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_3d3752e2",
+        "filename": "src/ui/contextitems/ve.ui.MobileTableCellContextItem.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-08-18T14:39:09Z",
+      "side": 1,
+      "message": "ve.ui.LinearContextItem or ve.ui.TableContextItem",
+      "revId": "70ebdc065762b071090601ae58bc6fe5366277e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_9d20c697",
+        "filename": "src/ui/contextitems/ve.ui.MobileTableCellContextItem.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-08-18T14:39:09Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be a table context?",
+      "revId": "70ebdc065762b071090601ae58bc6fe5366277e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_5d325ef0",
+        "filename": "src/ui/contextitems/ve.ui.ToolContextItem.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-08-18T14:39:09Z",
+      "side": 1,
+      "message": "ve.ui.LinearContextItem",
+      "revId": "70ebdc065762b071090601ae58bc6fe5366277e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
