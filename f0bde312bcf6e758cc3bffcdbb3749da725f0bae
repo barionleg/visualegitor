@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_78cf28b6",
+        "filename": "Gruntfile.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 664
+      },
+      "writtenOn": "2015-08-18T17:22:16Z",
+      "side": 1,
+      "message": "Does /**/*.js not include *.js ?\n\u003cboggles\u003e",
+      "revId": "f0bde312bcf6e758cc3bffcdbb3749da725f0bae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_184dc43f",
+        "filename": "src/ce/ve.ce.ResizableNode.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 664
+      },
+      "writtenOn": "2015-08-18T17:22:16Z",
+      "side": 1,
+      "message": "This could be hoisted a bit more cleanly; no reason not to initialize node to this at the top.",
+      "revId": "f0bde312bcf6e758cc3bffcdbb3749da725f0bae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
