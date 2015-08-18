@@ -16,6 +16,24 @@
       "revId": "11919401e308a9f2ff49849b9df4363797a35e8f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_38720011",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 12
+      },
+      "lineNbr": 1201,
+      "author": {
+        "id": 664
+      },
+      "writtenOn": "2015-08-18T17:29:30Z",
+      "side": 1,
+      "message": "If you\u0027re talking about \u0027mergedMetadata\u0027, it looked a little bit better to me this way, with all the initializations together after the big no-op check up top, rather than having one lonely and likely-to-be-overlooked initialization in the first line.\n\nBut the real change in PS12 was that PS11 actually initialized mergedMetadata twice.  So: one way or the other, I don\u0027t care so much.  But not both. ;)",
+      "parentUuid": "6ec1af18_583fcc20",
+      "revId": "11919401e308a9f2ff49849b9df4363797a35e8f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
