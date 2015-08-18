@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_583fcc20",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 12
+      },
+      "lineNbr": 1201,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-08-18T17:23:47Z",
+      "side": 1,
+      "message": "Can\u0027t this be moved up?",
+      "revId": "11919401e308a9f2ff49849b9df4363797a35e8f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
