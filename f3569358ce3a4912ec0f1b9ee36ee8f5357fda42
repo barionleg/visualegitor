@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_3d11925f",
+        "filename": "src/ce/ve.ce.Document.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 664
+      },
+      "writtenOn": "2015-08-18T16:03:13Z",
+      "side": 1,
+      "message": "The syntax is actually:\n\n@return {Node} return.node location node\n\nI confirmed by running jsduck that the way you\u0027ve got it emits:\n\nReturns\n* Object\n  DOM location\n\n   * node :\n     {Node} location node\n   * offset :\n     {number} location offset within the node\n\nThat is, the type annotation is taken as the first part of the description string.",
+      "revId": "f3569358ce3a4912ec0f1b9ee36ee8f5357fda42",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
