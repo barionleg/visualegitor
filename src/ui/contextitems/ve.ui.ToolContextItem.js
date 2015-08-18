@@ -30,7 +30,7 @@ ve.ui.ToolContextItem = function VeUiToolContextItem( context, model, tool, conf
 
 /* Inheritance */
 
-OO.inheritClass( ve.ui.ToolContextItem, ve.ui.ContextItem );
+OO.inheritClass( ve.ui.ToolContextItem, ve.ui.LinearContextItem );
 
 /* Methods */
 
