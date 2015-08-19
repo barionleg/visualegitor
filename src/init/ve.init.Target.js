@@ -283,7 +283,7 @@ ve.init.Target.prototype.onToolbarResize = function () {
  * @method
  * @param {ve.dm.Document} dmDoc Document model
  * @param {Object} [config] Configuration options
- * @return {ve.ui.Surface}
+ * @return {ve.ui.DesktopSurface}
  */
 ve.init.Target.prototype.createSurface = function ( dmDoc, config ) {
 	config = ve.extendObject( {
