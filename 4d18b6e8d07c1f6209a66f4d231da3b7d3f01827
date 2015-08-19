@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_2d571707",
+        "filename": "src/dm/lineardata/ve.dm.ElementLinearData.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-08-19T15:05:06Z",
+      "side": 1,
+      "message": "also the type is ve.Range",
+      "parentUuid": "6ec1af18_a2a1d637",
+      "revId": "4d18b6e8d07c1f6209a66f4d231da3b7d3f01827",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_626beeee",
         "filename": "src/dm/lineardata/ve.dm.MetaLinearData.js",
         "patchSetId": 1
