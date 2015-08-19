@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_2de5d706",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-08-19T15:27:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ec1af18_ed5fcf12",
+      "revId": "4d18b6e8d07c1f6209a66f4d231da3b7d3f01827",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_a2a1d637",
         "filename": "src/dm/lineardata/ve.dm.ElementLinearData.js",
         "patchSetId": 1
@@ -54,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_0df81be1",
+        "filename": "src/dm/lineardata/ve.dm.ElementLinearData.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-08-19T15:27:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ec1af18_2d571707",
+      "revId": "4d18b6e8d07c1f6209a66f4d231da3b7d3f01827",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_626beeee",
         "filename": "src/dm/lineardata/ve.dm.MetaLinearData.js",
         "patchSetId": 1
@@ -82,6 +118,24 @@
       "writtenOn": "2015-08-19T15:17:54Z",
       "side": 1,
       "message": "or metadataIndex",
+      "parentUuid": "6ec1af18_626beeee",
+      "revId": "4d18b6e8d07c1f6209a66f4d231da3b7d3f01827",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_edc34f8b",
+        "filename": "src/dm/lineardata/ve.dm.MetaLinearData.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-08-19T15:27:08Z",
+      "side": 1,
+      "message": "Done Ed\u0027s suggestion. These are already standardised over this file, let\u0027s not confuse things by doing too many improvements rather than fixes in this patch.",
       "parentUuid": "6ec1af18_626beeee",
       "revId": "4d18b6e8d07c1f6209a66f4d231da3b7d3f01827",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
@@ -124,6 +178,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_8dc2cb86",
+        "filename": "src/dm/ve.dm.IndexValueStore.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-08-19T15:27:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ec1af18_424fd297",
+      "revId": "4d18b6e8d07c1f6209a66f4d231da3b7d3f01827",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_c262e205",
         "filename": "src/dm/ve.dm.InternalList.js",
         "patchSetId": 1
@@ -159,6 +231,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_ed426f10",
+        "filename": "src/dm/ve.dm.InternalList.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-08-19T15:27:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ec1af18_6df19ffd",
+      "revId": "4d18b6e8d07c1f6209a66f4d231da3b7d3f01827",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_2243a668",
         "filename": "src/ui/actions/ve.ui.WindowAction.js",
         "patchSetId": 1
@@ -176,6 +266,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_ad4c6744",
+        "filename": "src/ui/actions/ve.ui.WindowAction.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-08-19T15:27:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ec1af18_2243a668",
+      "revId": "4d18b6e8d07c1f6209a66f4d231da3b7d3f01827",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_82337a09",
         "filename": "src/ui/ve.ui.DataTransferItem.js",
         "patchSetId": 1
@@ -187,6 +295,24 @@
       "writtenOn": "2015-08-19T14:57:33Z",
       "side": 1,
       "message": "whoops, this one is my bad, i forgot to delete that @param after I rewrote the patch.",
+      "revId": "4d18b6e8d07c1f6209a66f4d231da3b7d3f01827",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_4d5b83fd",
+        "filename": "src/ui/ve.ui.DataTransferItem.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-08-19T15:27:08Z",
+      "side": 1,
+      "message": "Tsk. ;-)",
+      "parentUuid": "6ec1af18_82337a09",
       "revId": "4d18b6e8d07c1f6209a66f4d231da3b7d3f01827",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -228,6 +354,42 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_cd6e9393",
+        "filename": "src/ve.BranchNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-08-19T15:27:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ec1af18_02178a57",
+      "revId": "4d18b6e8d07c1f6209a66f4d231da3b7d3f01827",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_8d688b85",
+        "filename": "src/ve.BranchNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-08-19T15:27:08Z",
+      "side": 1,
+      "message": "That\u0027s fine, but see my other commit.",
+      "parentUuid": "6ec1af18_0dcfbbb6",
+      "revId": "4d18b6e8d07c1f6209a66f4d231da3b7d3f01827",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_e20b5e2c",
         "filename": "src/ve.utils.js",
         "patchSetId": 1
@@ -239,6 +401,24 @@
       "writtenOn": "2015-08-19T14:57:33Z",
       "side": 1,
       "message": "Either update this `dst` to `src` or change the below to `dst` to make consistent.",
+      "revId": "4d18b6e8d07c1f6209a66f4d231da3b7d3f01827",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_0d0c9bef",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-08-19T15:27:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ec1af18_e20b5e2c",
       "revId": "4d18b6e8d07c1f6209a66f4d231da3b7d3f01827",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -274,6 +454,24 @@
       "side": 1,
       "message": "This should be surface as without context \u0027view\u0027 isn\u0027t clear.",
       "parentUuid": "6ec1af18_6dff5ffd",
+      "revId": "4d18b6e8d07c1f6209a66f4d231da3b7d3f01827",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_edf02fd8",
+        "filename": "tests/ce/ve.ce.TestRunner.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-08-19T15:27:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ec1af18_adbd47ff",
       "revId": "4d18b6e8d07c1f6209a66f4d231da3b7d3f01827",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
