@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_32e533a0",
+        "filename": "src/init/ve.init.Target.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 664
+      },
+      "writtenOn": "2015-08-19T21:08:29Z",
+      "side": 1,
+      "message": "Yeah, I just didn\u0027t know whether this was meant to be an superclass, that might get extended with things which returned other types of surfaces.",
+      "parentUuid": "6ec1af18_f2d7abc2",
+      "revId": "5a48c98ea439875d9280401896d4ecba936a06ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_f271eb0b",
         "filename": "src/init/ve.init.Target.js",
         "patchSetId": 2
