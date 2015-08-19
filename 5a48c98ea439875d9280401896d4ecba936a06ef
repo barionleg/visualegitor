@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_126d972d",
+        "filename": "src/init/ve.init.Target.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 664
+      },
+      "writtenOn": "2015-08-19T21:04:51Z",
+      "side": 1,
+      "message": "This is perhaps more specific than you want to document in the API?",
+      "revId": "5a48c98ea439875d9280401896d4ecba936a06ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_f271eb0b",
+        "filename": "src/init/ve.init.Target.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 664
+      },
+      "writtenOn": "2015-08-19T21:04:51Z",
+      "side": 1,
+      "message": "If the above is a DesktopSurface, than this is too.",
+      "revId": "5a48c98ea439875d9280401896d4ecba936a06ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_52623f38",
+        "filename": "src/ve.Filibuster.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 664
+      },
+      "writtenOn": "2015-08-19T21:04:51Z",
+      "side": 1,
+      "message": "|null here (it\u0027s the only way you return null)",
+      "revId": "5a48c98ea439875d9280401896d4ecba936a06ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
