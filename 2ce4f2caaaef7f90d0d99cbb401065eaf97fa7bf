@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_fc71c20b",
+        "filename": "src/ui/actions/ve.ui.LinkAction.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-08-19T19:08:57Z",
+      "side": 1,
+      "message": "I\u0027d suggest a better name for this function if I could think of one, but I can\u0027t…",
+      "revId": "2ce4f2caaaef7f90d0d99cbb401065eaf97fa7bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
