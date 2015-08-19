@@ -12,10 +12,9 @@
  * @mixins OO.EventEmitter
  *
  * @constructor
- * @param {jQuery} $container
  * @param {ve.dm.Surface} model Surface model to observe
  * @param {ve.ui.Surface} ui Surface user interface
- * @param {Object} [config] Configuration options
+ * @param {Object} [options] Configuration options
  */
 ve.ce.Surface = function VeCeSurface( model, ui, options ) {
 	var surface = this;
@@ -4093,13 +4092,13 @@ ve.ce.Surface.prototype.decRenderLock = function () {
  * @param {ve.dm.Selection} selection New selection
  * @throws {Error} If calls to this method are nested
  */
-ve.ce.Surface.prototype.changeModel = function ( transaction, selection ) {
+ve.ce.Surface.prototype.changeModel = function ( transactions, selection ) {
 	if ( this.newModelSelection !== null ) {
 		throw new Error( 'Nested change of newModelSelection' );
 	}
 	this.newModelSelection = selection;
 	try {
-		this.model.change( transaction, selection );
+		this.model.change( transactions, selection );
 	} finally {
 		this.newModelSelection = null;
 	}

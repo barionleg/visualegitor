@@ -111,7 +111,7 @@ ve.ce.TestOffset.static.findTextOffset = function ( node, n, reversed ) {
  *
  * @class
  * @constructor
- * @param {ve.ce.Surface} surface The UI Surface
+ * @param {ve.ce.Surface} view The UI Surface
  */
 ve.ce.TestRunner = function VeCeTestRunner( view ) {
 	var testRunner,

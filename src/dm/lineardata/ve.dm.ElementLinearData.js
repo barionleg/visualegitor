@@ -453,7 +453,7 @@ ve.dm.ElementLinearData.prototype.getAnnotatedRangeFromOffset = function ( offse
  * Get the range of an annotation found within a range.
  *
  * @method
- * @param {number} offset Offset to begin looking forward and backward from
+ * @param {number} range Offset to begin looking forward and backward from
  * @param {ve.dm.Annotation} annotation Annotation to test for coverage with
  * @return {ve.Range|null} Range of content covered by annotation, or a copy of the range
  */
