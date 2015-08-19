@@ -50,6 +50,24 @@
       "revId": "0590b07a3382aec004e763da2d7255145ef15677",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_1c0cce44",
+        "filename": "tests/ce/ve.ce.TestRunner.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-08-19T19:34:35Z",
+      "side": 1,
+      "message": "Yeah…",
+      "parentUuid": "6ec1af18_3c174a58",
+      "revId": "0590b07a3382aec004e763da2d7255145ef15677",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
