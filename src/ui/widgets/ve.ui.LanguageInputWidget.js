@@ -28,9 +28,11 @@ ve.ui.LanguageInputWidget = function VeUiLanguageInputWidget( config ) {
 	// Properties
 	this.lang = null;
 	this.dir = null;
+
 	this.overlay = new ve.ui.Overlay( { classes: [ 've-ui-overlay-global' ] } );
 	this.dialogs = config.dialogManager || new ve.ui.WindowManager( { factory: ve.ui.windowFactory, isolate: true } );
 	this.availableLanguages = config.availableLanguages;
+
 	this.findLanguageButton = new OO.ui.ButtonWidget( {
 		classes: [ 've-ui-languageInputWidget-findLanguageButton' ],
 		label: ve.msg( 'visualeditor-languageinspector-widget-changelang' ),
@@ -42,14 +44,15 @@ ve.ui.LanguageInputWidget = function VeUiLanguageInputWidget( config ) {
 	this.directionSelect = new OO.ui.ButtonSelectWidget( {
 		classes: [ 've-ui-languageInputWidget-directionSelect' ]
 	} );
-	this.findLanguageField = new OO.ui.FieldLayout( this.findLanguageButton, {
-		align: 'left',
-		label: ve.msg( 'visualeditor-languageinspector-widget-label-language' )
-	} );
-	this.languageCodeField = new OO.ui.FieldLayout( this.languageCodeTextInput, {
-		align: 'left',
-		label: ve.msg( 'visualeditor-languageinspector-widget-label-langcode' )
-	} );
+
+	this.languageLayout = new OO.ui.ActionFieldLayout(
+		this.languageCodeTextInput,
+		this.findLanguageButton,
+		{
+			align: 'left',
+			label: ve.msg( 'visualeditor-languageinspector-widget-label-language' )
+		}
+	);
 	this.directionField = new OO.ui.FieldLayout( this.directionSelect, {
 		align: 'left',
 		label: ve.msg( 'visualeditor-languageinspector-widget-label-direction' )
@@ -86,8 +89,7 @@ ve.ui.LanguageInputWidget = function VeUiLanguageInputWidget( config ) {
 	this.$element
 		.addClass( 've-ui-languageInputWidget' )
 		.append(
-			this.findLanguageField.$element,
-			this.languageCodeField.$element,
+			this.languageLayout.$element,
 			this.directionField.$element
 		);
 };
