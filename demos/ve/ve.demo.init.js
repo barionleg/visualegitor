@@ -61,7 +61,7 @@ new ve.init.sa.Platform( ve.messagePaths ).initialize().done( function () {
 		languageInput.setLangAndDir( 'qqx', currentDir );
 	} );
 
-	languageInput.languageCodeField.$element.hide();
+	languageInput.languageLayout.$element.hide();
 
 	languageInput.setLangAndDir( currentLang, currentDir );
 	// Dir doesn't change on init but styles need to be set
