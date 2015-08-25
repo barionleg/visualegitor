@@ -1533,6 +1533,7 @@ ve.ce.Surface.prototype.afterDocumentKeyDown = function ( e ) {
 		direction = getDirection();
 	}
 	this.fixupCursorPosition( direction, e.shiftKey );
+	this.reflowNails();
 };
 
 /**
@@ -2720,6 +2721,8 @@ ve.ce.Surface.prototype.onSurfaceObserverContentChange = function ( node, previo
 		modelData = this.model.getDocument().data,
 		lengthDiff = next.text.length - previous.text.length,
 		surface = this;
+
+	this.reflowNails();
 
 	if ( previous.range && next.range ) {
 		offsetDiff = ( previous.range.isCollapsed() && next.range.isCollapsed() ) ?
@@ -4049,6 +4052,33 @@ ve.ce.Surface.prototype.updateActiveLink = function () {
 		this.activeLink.classList.add( 've-ce-linkAnnotation-active' );
 	}
 	this.model.emit( 'contextChange' );
+};
+
+/**
+ * Fix wrapping at nails
+ */
+ve.ce.Surface.prototype.reflowNails = function () {
+	var i, len, linkAnnotations, linkAnnotation, preOpenNail;
+	// Recall the link annotation structure is like this:
+	// <img class='ve-ce-nail-pre-open' />
+	// <a class='ve-ce-linkAnnotation' style='box-shadow: ...'>
+	//     <img class='ve-ce-nail-post-open' />
+	//     ...
+	//     <img class='ve-ce-nail-pre-close' />
+	// </a>
+	// <img class='ve-ce-nail-post-close' />
+	//
+	// Sometimes there is a line break straight after the ve-ce-nail-post-open, which causes
+	// a broken box shadow. Fix this by setting the ve-ce-nail-pre-open to block display.
+	linkAnnotations = this.$element.find( '.ve-ce-linkAnnotation' );
+	for ( i = 0, len = linkAnnotations.length; i < len; i++ ) {
+		linkAnnotation = linkAnnotations[ i ];
+		linkAnnotation.previousSibling.style.display = '';
+		if ( linkAnnotation.firstChild.offsetTop !== linkAnnotation.lastChild.offsetTop ) {
+			// Link contains a line break
+			linkAnnotation.previousSibling.style.display = 'block';
+		}
+	}
 };
 
 /**
