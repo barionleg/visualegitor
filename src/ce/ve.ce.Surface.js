@@ -1529,6 +1529,7 @@ ve.ce.Surface.prototype.afterDocumentKeyDown = function ( e ) {
 		direction = getDirection();
 	}
 	this.fixupCursorPosition( direction, e.shiftKey );
+	this.reflowNails();
 };
 
 /**
@@ -2707,6 +2708,175 @@ ve.ce.Surface.prototype.fixupCursorPosition = function ( direction, extend ) {
 };
 
 /**
+<<<<<<< HEAD
+=======
+ * Handle content change events.
+ *
+ * @see ve.ce.SurfaceObserver#pollOnce
+ *
+ * @method
+ * @param {ve.ce.Node} node CE node the change occurred in
+ * @param {Object} previous Old data
+ * @param {Object} previous.text Old plain text content
+ * @param {Object} previous.hash Old DOM hash
+ * @param {ve.Range} previous.range Old selection
+ * @param {Object} next New data
+ * @param {Object} next.text New plain text content
+ * @param {Object} next.hash New DOM hash
+ * @param {ve.Range} next.range New selection
+ */
+ve.ce.Surface.prototype.onSurfaceObserverContentChange = function ( node, previous, next ) {
+	var data, range, len, annotations, offsetDiff, sameLeadingAndTrailing,
+		previousStart, nextStart, newRange, replacementRange,
+		fromLeft = 0,
+		fromRight = 0,
+		nodeOffset = node.getModel().getOffset(),
+		previousData = previous.text.split( '' ),
+		nextData = next.text.split( '' ),
+		modelData = this.model.getDocument().data,
+		lengthDiff = next.text.length - previous.text.length,
+		surface = this;
+
+	this.reflowNails();
+
+	if ( previous.range && next.range ) {
+		offsetDiff = ( previous.range.isCollapsed() && next.range.isCollapsed() ) ?
+			next.range.start - previous.range.start : null;
+		previousStart = previous.range.start - nodeOffset - 1;
+		nextStart = next.range.start - nodeOffset - 1;
+		sameLeadingAndTrailing = offsetDiff !== null && (
+			(
+				lengthDiff > 0 &&
+				previous.text.slice( 0, previousStart ) ===
+					next.text.slice( 0, previousStart ) &&
+				previous.text.slice( previousStart ) ===
+					next.text.slice( nextStart )
+			) ||
+			(
+				lengthDiff < 0 &&
+				previous.text.slice( 0, nextStart ) ===
+					next.text.slice( 0, nextStart ) &&
+				previous.text.slice( previousStart - lengthDiff + offsetDiff ) ===
+					next.text.slice( nextStart )
+			)
+		);
+
+		// Simple insertion
+		if ( lengthDiff > 0 && offsetDiff === lengthDiff && sameLeadingAndTrailing ) {
+			data = nextData.slice( previousStart, nextStart );
+			// Apply insertion annotations
+			if ( node.unicornAnnotations ) {
+				annotations = node.unicornAnnotations;
+			} else if ( this.keyDownState.focusIsAfterAnnotationBoundary ) {
+				annotations = modelData.getAnnotationsFromOffset(
+					nodeOffset + previousStart + 1
+				);
+			} else {
+				annotations = this.model.getInsertionAnnotations();
+			}
+
+			if ( annotations.getLength() ) {
+				ve.dm.Document.static.addAnnotationsToData( data, annotations );
+			}
+
+			this.incRenderLock();
+			try {
+				this.changeModel(
+					ve.dm.Transaction.newFromInsertion(
+						this.documentView.model, previous.range.start, data
+					),
+					new ve.dm.LinearSelection( this.documentView.model, next.range )
+				);
+			} finally {
+				this.decRenderLock();
+			}
+			setTimeout( function () {
+				surface.checkSequences();
+			} );
+			return;
+		}
+
+		// Simple deletion
+		if ( ( offsetDiff === 0 || offsetDiff === lengthDiff ) && sameLeadingAndTrailing ) {
+			if ( offsetDiff === 0 ) {
+				range = new ve.Range( next.range.start, next.range.start - lengthDiff );
+			} else {
+				range = new ve.Range( next.range.start, previous.range.start );
+			}
+			this.incRenderLock();
+			try {
+				this.changeModel(
+					ve.dm.Transaction.newFromRemoval( this.documentView.model,
+						range ),
+					new ve.dm.LinearSelection( this.documentView.model, next.range )
+				);
+			} finally {
+				this.decRenderLock();
+			}
+			return;
+		}
+	}
+
+	// Complex change:
+	// 1. Count unchanged characters from left and right;
+	// 2. Assume that the minimal changed region indicates the replacement made by the user;
+	// 3. Hence guess how to map annotations.
+	// N.B. this logic can go wrong; e.g. this code will see slice->slide and
+	// assume that the user changed 'c' to 'd', but the user could instead have changed 'ic'
+	// to 'id', which would map annotations differently.
+
+	len = Math.min( previousData.length, nextData.length );
+
+	while ( fromLeft < len && previousData[ fromLeft ] === nextData[ fromLeft ] ) {
+		++fromLeft;
+	}
+
+	while (
+		fromRight < len - fromLeft &&
+		previousData[ previousData.length - 1 - fromRight ] ===
+		nextData[ nextData.length - 1 - fromRight ]
+	) {
+		++fromRight;
+	}
+	replacementRange = new ve.Range(
+		nodeOffset + 1 + fromLeft,
+		nodeOffset + 1 + previousData.length - fromRight
+	);
+	data = nextData.slice( fromLeft, nextData.length - fromRight );
+
+	if ( node.unicornAnnotations ) {
+		// This CBN is unicorned. Use the stored annotations.
+		annotations = node.unicornAnnotations;
+	} else if ( fromLeft + fromRight < previousData.length ) {
+		// Content is being removed, so guess that we want to use the annotations from the
+		// start of the removed content.
+		annotations = modelData.getAnnotationsFromOffset( replacementRange.start );
+	} else {
+		// No content is being removed, so guess that we want to use the annotations from
+		// just before the insertion (which means none at all if the insertion is at the
+		// start of a CBN).
+		annotations = modelData.getAnnotationsFromOffset( replacementRange.start - 1 );
+	}
+	if ( annotations.getLength() ) {
+		ve.dm.Document.static.addAnnotationsToData( data, annotations );
+	}
+	newRange = next.range;
+	if ( newRange.isCollapsed() ) {
+		newRange = new ve.Range( this.getNearestCorrectOffset( newRange.start, 1 ) );
+	}
+
+	this.changeModel(
+		ve.dm.Transaction.newFromReplacement( this.documentView.model, replacementRange, data ),
+		new ve.dm.LinearSelection( this.documentView.model, newRange )
+	);
+	this.queueCheckSequences = true;
+	setTimeout( function () {
+		surface.checkSequences();
+	} );
+};
+
+/**
+>>>>>>> WIP: Fix cartouche wrapping glitch with temporary block style on img
  * Check the current surface offset for sequence matches
  */
 ve.ce.Surface.prototype.checkSequences = function () {
@@ -3225,6 +3395,39 @@ ve.ce.Surface.prototype.updateActiveLink = function () {
 		this.activeLink.classList.add( 've-ce-linkAnnotation-active' );
 	}
 	this.model.emit( 'contextChange' );
+};
+
+/**
+ * Fix wrapping at nails
+ *
+ * Wrapping has strange effects on the link cartouche structure:
+ *
+ *   [img class='ve-ce-nail-pre-open']
+ *   [a class='ve-ce-linkAnnotation' style='box-shadow: ...']
+ *       [img class='ve-ce-nail-post-open']
+ *       ...
+ *       [img class='ve-ce-nail-pre-close']
+ *   [/a]
+ *   [img class='ve-ce-nail-post-close']
+ *
+ * Sometimes there is a line break straight after the ve-ce-nail-post-open, which causes an ugly
+ * "split cartouche" effect. The fix in this method is to set the img.ve-ce-nail-pre-open to
+ * block display, thereby causing a line break before the cartouche. This is conceptually
+ * strange (as the img becomes a block element inside an inline element) but appears to work
+ * correctly in practice.
+ */
+ve.ce.Surface.prototype.reflowNails = function () {
+	var i, len, linkAnnotations, linkAnnotation;
+
+	linkAnnotations = this.$element.find( '.ve-ce-linkAnnotation' );
+	for ( i = 0, len = linkAnnotations.length; i < len; i++ ) {
+		linkAnnotation = linkAnnotations[ i ];
+		linkAnnotation.previousSibling.style.display = '';
+		if ( linkAnnotation.firstChild.offsetTop !== linkAnnotation.lastChild.offsetTop ) {
+			// Link contains a line break
+			linkAnnotation.previousSibling.style.display = 'block';
+		}
+	}
 };
 
 /**
