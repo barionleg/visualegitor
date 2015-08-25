@@ -4,8 +4,32 @@
  * @copyright 2011-2015 VisualEditor Team and others; see http://ve.mit-license.org
  */
 
-.ve-ce-linkAnnotation-active {
+.ve-ce-linkAnnotation-active, .ve-ce-linkAnnotation {
 	box-shadow: 0 0 0 0.125em rgba(22,55,200,0.75);
 	border-radius: 0.125em;
 	text-decoration: none;
+}
+
+.ve-ce-nail {
+	width: 0;
+	height: 0;
+	margin: 0;
+	border: 0;
+	outline: 0;
+}
+
+.ve-ce-nail.ve-ce-nail-pre-open {
+	box-shadow : 0 0 0 0.125em  red;
+}
+
+.ve-ce-nail.ve-ce-nail-post-open {
+	box-shadow : 0 0 0 0.125em  #aa0;
+}
+
+.ve-ce-nail.ve-ce-nail-pre-close {
+	box-shadow : 0 0 0 0.125em  green;
+}
+
+.ve-ce-nail.ve-ce-nail-post-close {
+	box-shadow : 0 0 0 0.125em  purple;
 }
