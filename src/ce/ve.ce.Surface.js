@@ -1529,6 +1529,7 @@ ve.ce.Surface.prototype.afterDocumentKeyDown = function ( e ) {
 		direction = getDirection();
 	}
 	this.fixupCursorPosition( direction, e.shiftKey );
+	this.reflowNails();
 };
 
 /**
@@ -3225,6 +3226,39 @@ ve.ce.Surface.prototype.updateActiveLink = function () {
 		this.activeLink.classList.add( 've-ce-linkAnnotation-active' );
 	}
 	this.model.emit( 'contextChange' );
+};
+
+/**
+ * Fix wrapping at nails
+ *
+ * Wrapping has strange effects on the link cartouche structure:
+ *
+ *   [img class='ve-ce-nail-pre-open']
+ *   [a class='ve-ce-linkAnnotation' style='box-shadow: ...']
+ *       [img class='ve-ce-nail-post-open']
+ *       ...
+ *       [img class='ve-ce-nail-pre-close']
+ *   [/a]
+ *   [img class='ve-ce-nail-post-close']
+ *
+ * Sometimes there is a line break straight after the ve-ce-nail-post-open, which causes an ugly
+ * "split cartouche" effect. The fix in this method is to set the img.ve-ce-nail-pre-open to
+ * block display, thereby causing a line break before the cartouche. This is conceptually
+ * strange (as the img becomes a block element inside an inline element) but appears to work
+ * correctly in practice.
+ */
+ve.ce.Surface.prototype.reflowNails = function () {
+	var i, len, linkAnnotations, linkAnnotation;
+
+	linkAnnotations = this.$element.find( '.ve-ce-linkAnnotation' );
+	for ( i = 0, len = linkAnnotations.length; i < len; i++ ) {
+		linkAnnotation = linkAnnotations[ i ];
+		linkAnnotation.previousSibling.style.display = '';
+		if ( linkAnnotation.firstChild.offsetTop !== linkAnnotation.lastChild.offsetTop ) {
+			// Link contains a line break
+			linkAnnotation.previousSibling.style.display = 'block';
+		}
+	}
 };
 
 /**
