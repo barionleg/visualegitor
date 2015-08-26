@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_8b383cd1",
+        "filename": "src/ce/styles/annotations/ve.ce.LinkAnnotation.css",
+        "patchSetId": 21
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-08-26T17:45:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ec1af18_66ec42f3",
+      "revId": "b147e338acb79b044f38db7c5e45cb44589518dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_86e7ee0c",
         "filename": "src/ce/styles/annotations/ve.ce.LinkAnnotation.css",
         "patchSetId": 21
@@ -30,6 +48,24 @@
       "writtenOn": "2015-08-24T00:00:16Z",
       "side": 1,
       "message": "remove this. we can separate the outline from the text using:\n\npadding: 2px;\nmargin: -2px;\n\nAgain use px otherwise rounding errors cause text flow wobble.",
+      "revId": "b147e338acb79b044f38db7c5e45cb44589518dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_ab35f8d7",
+        "filename": "src/ce/styles/annotations/ve.ce.LinkAnnotation.css",
+        "patchSetId": 21
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-08-26T17:45:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ec1af18_86e7ee0c",
       "revId": "b147e338acb79b044f38db7c5e45cb44589518dc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
