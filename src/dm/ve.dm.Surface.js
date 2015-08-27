@@ -726,6 +726,21 @@ ve.dm.Surface.prototype.selectFirstContentOffset = function () {
 };
 
 /**
+ * Place the selection at the last content offset in the document.
+ */
+ve.dm.Surface.prototype.selectLastContentOffset = function () {
+	var data = this.getDocument().data,
+		lastOffset = this.getDocument().data.getNearestContentOffset( data.getLength(), -1 );
+	if ( lastOffset !== -1 ) {
+		// Found a content offset
+		this.setLinearSelection( new ve.Range( lastOffset ) );
+	} else {
+		// Document is full of structural nodes, just give up
+		this.setNullSelection();
+	}
+};
+
+/**
  * Apply a transactions and selection changes to the document.
  *
  * @param {ve.dm.Transaction|ve.dm.Transaction[]|null} transactions One or more transactions to
