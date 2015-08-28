@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_2a700f05",
+        "filename": "src/ui/dialogs/ve.ui.FindAndReplaceDialog.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-08-28T15:15:07Z",
+      "side": 1,
+      "message": "Is this an expensive call?",
+      "revId": "284cadf4431762ed86b6b22001af3db983a41102",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
