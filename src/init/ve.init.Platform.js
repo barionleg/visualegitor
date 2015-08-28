@@ -129,6 +129,16 @@ ve.init.Platform.prototype.getUnanchoredExternalLinkUrlProtocolsRegExp = null;
 ve.init.Platform.prototype.getConfig = null;
 
 /**
+ * Get a config value from the platform.
+ *
+ * @method
+ * @abstract
+ * @param {string|Object} keyOrValueMap Key to set value for, or object mapping keys to values
+ * @param {Mixed} [value] Value to set (optional, only in use when key is a string)
+ */
+ve.init.Platform.prototype.setConfig = null;
+
+/**
  * Add multiple messages to the localization system.
  *
  * @method

@@ -69,6 +69,39 @@ ve.init.sa.Platform.prototype.addMessages = function ( messages ) {
  */
 ve.init.sa.Platform.prototype.getMessage = $.i18n;
 
+/**
+ * @inheritdoc
+ */
+ve.init.sa.Platform.prototype.getConfig = function ( keys ) {
+	var i, l, values;
+	if ( Array.isArray( keys ) ) {
+		values = {};
+		for ( i = 0, l = keys.length; i < l; i++ ) {
+			values[keys[i]] = this.getConfig( keys[i] );
+		}
+	} else {
+		return JSON.parse( localStorage.getItem( 've-' + keys ) );
+	}
+	return values;
+};
+
+/**
+ * @inheritdoc
+ */
+ve.init.sa.Platform.prototype.setConfig = function ( keyOrValueMap, value ) {
+	var i;
+	if ( typeof keyOrValueMap === 'object' ) {
+		for ( i in keyOrValueMap ) {
+			if ( keyOrValueMap.hasOwnProperty( i ) ) {
+				this.setConfig( i, keyOrValueMap[i] );
+			}
+		}
+	} else {
+		localStorage.setItem( 've-' + keyOrValueMap, JSON.stringify( value ) );
+	}
+	return true;
+};
+
 /** @inheritdoc */
 ve.init.sa.Platform.prototype.addParsedMessages = function ( messages ) {
 	var key;
