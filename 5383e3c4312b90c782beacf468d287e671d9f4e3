@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_c4d60e54",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2015-08-31T22:14:22Z",
+      "side": 1,
+      "message": "Use arguments.length instead of comparing to undefined. jQuery learned this lesson the hard way, and we had a fair number of bugs in mediawiki with it as well.\n\n var val \u003d obj.notexistyish;\n ve.userConfig( key, val );\n\nShould always set, not get. No matter whether the value is undefined, null or some other bottom value. Especially if something changed its bottom value from null to undefined. And countless other scenarios. One may also want to consider dropping validation – also helps avoid forwarding garbage to the set function.",
+      "revId": "5383e3c4312b90c782beacf468d287e671d9f4e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
