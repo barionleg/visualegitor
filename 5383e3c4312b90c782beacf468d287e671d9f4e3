@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "6ec1af18_c4c04e57",
+        "filename": "src/init/ve.init.Platform.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 228
+      },
+      "writtenOn": "2015-08-31T22:45:35Z",
+      "side": 1,
+      "message": "I know it isn\u0027t mw but in mw context, \"user\" have different meaning: If someone logout and login with different user it is expected to have its own config not shared config. So maybe consider to rename it to deviceConfig (or maybe better name?) to avoid confusion",
+      "revId": "5383e3c4312b90c782beacf468d287e671d9f4e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_c4d60e54",
         "filename": "src/ve.utils.js",
         "patchSetId": 2
