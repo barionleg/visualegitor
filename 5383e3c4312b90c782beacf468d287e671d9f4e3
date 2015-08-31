@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_04a1769e",
+        "filename": "src/init/ve.init.Platform.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-08-31T22:50:36Z",
+      "side": 1,
+      "message": "No, in the MW implementation is this user, not device.",
+      "parentUuid": "6ec1af18_c4c04e57",
+      "revId": "5383e3c4312b90c782beacf468d287e671d9f4e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_c4d60e54",
         "filename": "src/ve.utils.js",
         "patchSetId": 2
