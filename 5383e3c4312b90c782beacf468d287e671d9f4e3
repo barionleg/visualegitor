@@ -51,6 +51,24 @@
       "revId": "5383e3c4312b90c782beacf468d287e671d9f4e3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_c48e0e33",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-08-31T22:50:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ec1af18_c4d60e54",
+      "revId": "5383e3c4312b90c782beacf468d287e671d9f4e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
