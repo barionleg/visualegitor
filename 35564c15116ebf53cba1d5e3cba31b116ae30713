@@ -16,6 +16,24 @@
       "revId": "35564c15116ebf53cba1d5e3cba31b116ae30713",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_a498a26d",
+        "filename": "src/ui/dialogs/ve.ui.FindAndReplaceDialog.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-08-31T23:00:29Z",
+      "side": 1,
+      "message": "That would be the key name in VE\u0027s demo, but in for example the VE-MW integration they go in straight: https://gerrit.wikimedia.org/r/#/c/234611/5/modules/ve-mw/init/ve.init.mw.Platform.js",
+      "parentUuid": "6ec1af18_64eabad7",
+      "revId": "35564c15116ebf53cba1d5e3cba31b116ae30713",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
