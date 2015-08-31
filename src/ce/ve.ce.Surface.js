@@ -3379,7 +3379,6 @@ ve.ce.Surface.prototype.handleInsertion = function () {
 		this.model.setSelection( cellSelection );
 		this.handleTableDelete();
 		this.documentView.getBranchNodeFromOffset( selection.tableRange.start + 1 ).setEditing( true );
-		this.model.setInsertionAnnotations( annotations );
 		selection = this.model.getSelection();
 	}
 
@@ -3407,7 +3406,6 @@ ve.ce.Surface.prototype.handleInsertion = function () {
 			this.surfaceObserver.clear();
 			range = this.model.getSelection().getRange();
 		}
-		this.model.setInsertionAnnotations( annotations );
 	}
 
 	if ( hasChanged ) {
