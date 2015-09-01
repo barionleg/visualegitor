@@ -69,6 +69,24 @@
       "revId": "5383e3c4312b90c782beacf468d287e671d9f4e3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_a47422cd",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2015-09-01T00:04:31Z",
+      "side": 1,
+      "message": "Ah, so James and I found out this isn\u0027t meant to validate the parameter for getUserConfig() as much as it disambiguates the signature.\n\nThis wouldn\u0027t be necessary except for the signature of \"set( Object )\" which has only one argument and yet is a setter, not getter. This may be a one of multiple reasons not to to mix getters and setters in one method, but oh well.",
+      "parentUuid": "6ec1af18_c4d60e54",
+      "revId": "5383e3c4312b90c782beacf468d287e671d9f4e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
