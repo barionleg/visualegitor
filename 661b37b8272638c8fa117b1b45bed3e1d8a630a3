@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6ec1af18_31a15191",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 23
+      },
+      "lineNbr": 2620,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-09-01T15:16:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ec1af18_9157e5cc",
+      "revId": "661b37b8272638c8fa117b1b45bed3e1d8a630a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_715279df",
         "filename": "src/ce/ve.ce.Surface.js",
         "patchSetId": 23
@@ -30,6 +48,24 @@
       "writtenOn": "2015-09-01T14:56:50Z",
       "side": 1,
       "message": "delete",
+      "revId": "661b37b8272638c8fa117b1b45bed3e1d8a630a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_519e5d59",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 23
+      },
+      "lineNbr": 3390,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-09-01T15:16:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ec1af18_715279df",
       "revId": "661b37b8272638c8fa117b1b45bed3e1d8a630a3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
