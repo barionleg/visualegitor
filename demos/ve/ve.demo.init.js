@@ -6,7 +6,8 @@
 
 new ve.init.sa.Platform( ve.messagePaths ).initialize().done( function () {
 
-	var $toolbar = $( '.ve-demo-targetToolbar' ),
+	var updateStylesFromDir, updateHash, addSurfaceContainer, createSurfacesFromHash,
+		$toolbar = $( '.ve-demo-targetToolbar' ),
 		$editor = $( '.ve-demo-editor' ),
 		target = new ve.demo.target(),
 
@@ -35,7 +36,7 @@ new ve.init.sa.Platform( ve.messagePaths ).initialize().done( function () {
 			new OO.ui.ButtonOptionWidget( { data: 'mobile', label: 'Mobile' } )
 		] );
 
-	function updateStylesFromDir() {
+	updateStylesFromDir = function updateStylesFromDir() {
 		var oldDir = currentDir === 'ltr' ? 'rtl' : 'ltr';
 
 		$( '.stylesheet-' + currentDir ).prop( 'disabled', false );
@@ -44,7 +45,7 @@ new ve.init.sa.Platform( ve.messagePaths ).initialize().done( function () {
 		$( 'body' ).css( 'direction', currentDir )
 			.addClass( 've-demo-dir-' + currentDir )
 			.removeClass( 've-demo-dir-' + oldDir );
-	}
+	};
 
 	// Initialization
 
@@ -112,7 +113,7 @@ new ve.init.sa.Platform( ve.messagePaths ).initialize().done( function () {
 
 	$editor.append( target.$element );
 
-	function updateHash() {
+	updateHash = function updateHash() {
 		var i, pages = [];
 		if ( history.replaceState ) {
 			for ( i = 0; i < ve.demo.surfaceContainers.length; i++ ) {
@@ -120,9 +121,9 @@ new ve.init.sa.Platform( ve.messagePaths ).initialize().done( function () {
 			}
 			history.replaceState( null, document.title, '#!' + pages.join( ',' ) );
 		}
-	}
+	};
 
-	function addSurfaceContainer( page ) {
+	addSurfaceContainer = function addSurfaceContainer( page ) {
 		var surfaceContainer;
 
 		if ( !page && ve.demo.surfaceContainers.length ) {
@@ -133,9 +134,9 @@ new ve.init.sa.Platform( ve.messagePaths ).initialize().done( function () {
 		surfaceContainer.on( 'changePage', updateHash );
 		updateHash();
 		target.$element.append( surfaceContainer.$element );
-	}
+	};
 
-	function createSurfacesFromHash( hash ) {
+	createSurfacesFromHash = function createSurfacesFromHash( hash ) {
 		var i, pages = [];
 		if ( /^#!pages\/.+$/.test( hash ) ) {
 			pages = hash.slice( 2 ).split( ',' );
@@ -147,7 +148,7 @@ new ve.init.sa.Platform( ve.messagePaths ).initialize().done( function () {
 		} else {
 			addSurfaceContainer( 'pages/simple.html' );
 		}
-	}
+	};
 
 	createSurfacesFromHash( location.hash );
 
