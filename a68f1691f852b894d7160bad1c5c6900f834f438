@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "6ec1af18_68b1ff40",
+        "filename": ".jsduck/categories.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-09-05T21:17:45Z",
+      "side": 1,
+      "message": "You need this still…",
+      "revId": "a68f1691f852b894d7160bad1c5c6900f834f438",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec1af18_2813f75d",
         "filename": "src/ui/ve.ui.NodeWindow.js",
         "patchSetId": 2
