@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_08bcfb18",
+        "filename": "src/ui/ve.ui.NodeWindow.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-09-05T21:17:32Z",
+      "side": 1,
+      "message": "This needs to be removed…",
+      "revId": "ff6b147d8fcdfcde04f5faac6f3dbfc1d992acfa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
