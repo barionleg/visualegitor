@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_2813f75d",
+        "filename": "src/ui/ve.ui.NodeWindow.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-09-05T20:36:12Z",
+      "side": 1,
+      "message": "What\u0027s NodeWindow meant to be inheriting from?",
+      "revId": "a68f1691f852b894d7160bad1c5c6900f834f438",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_c82593aa",
+        "filename": "src/ui/ve.ui.NodeWindow.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-09-05T20:36:12Z",
+      "side": 1,
+      "message": "Here too.",
+      "revId": "a68f1691f852b894d7160bad1c5c6900f834f438",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
