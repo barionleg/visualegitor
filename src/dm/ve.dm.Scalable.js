@@ -150,6 +150,27 @@ ve.dm.Scalable.static.getDimensionsFromValue = function ( dimensions, ratio ) {
 	return dimensions;
 };
 
+/**
+ * Check if an object is a dimensions object.
+ * Make sure that if width or height are set, they are not 'undefined'.
+ *
+ * @param {Object} dimensions A dimensions object to test
+ * @return {boolean} Valid or invalid dimensions object
+ */
+ve.dm.Scalable.static.isDimensionsObjectValid = function ( dimensions ) {
+	if (
+		dimensions &&
+		!$.isEmptyObject( dimensions ) &&
+		(
+			dimensions.width !== undefined ||
+			dimensions.height !== undefined
+		)
+	) {
+		return true;
+	}
+	return false;
+};
+
 /* Methods */
 
 /**
@@ -595,25 +616,4 @@ ve.dm.Scalable.prototype.isCurrentDimensionsValid = function () {
 		)
 	);
 	return this.valid;
-};
-
-/**
- * Check if an object is a dimensions object.
- * Make sure that if width or height are set, they are not 'undefined'.
- *
- * @param {Object} dimensions A dimensions object to test
- * @return {boolean} Valid or invalid dimensions object
- */
-ve.dm.Scalable.prototype.isDimensionsObjectValid = function ( dimensions ) {
-	if (
-		dimensions &&
-		!$.isEmptyObject( dimensions ) &&
-		(
-			dimensions.width !== undefined ||
-			dimensions.height !== undefined
-		)
-	) {
-		return true;
-	}
-	return false;
 };
