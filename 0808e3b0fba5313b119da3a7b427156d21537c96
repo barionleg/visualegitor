@@ -34,6 +34,24 @@
       "revId": "0808e3b0fba5313b119da3a7b427156d21537c96",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_53d48e4b",
+        "filename": "src/ui/actions/ve.ui.LinkAction.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 664
+      },
+      "writtenOn": "2015-09-18T14:37:52Z",
+      "side": 1,
+      "message": "To elaborate a bit -- the autolink helper is shared between the various link types.  We differentiate their handling using the function callbacks, but the inheritance hierarchy is the same for all types (we only have a since ve.ui.LinkAction object -- which is actually an instance of ve.ui.MWLinkAction, of course).\n\nSo using an instance method and the inheritance hierarchy doesn\u0027t really work here.  In order to do that, we\u0027d need to create a separate \"AutoLinkHelper\" object, move the autolink helper there, and then have the different link types create their own subclasses of AutoLinkHelper.  That\u0027s a lot of extra (and needless) code -- and further, the objects and classes it creates don\u0027t have a good home in the VE namespace, and the implementation would get spread out over multiple little bits of code buried in boilerplate, so it would also be code which is hard for future maintainers to find.\n\nOTOH, if you are complaining about the fact that the *callsite* for this API (over in https://gerrit.wikimedia.org/r/238608) passes anonymous functions instead of bound private methods -- well, that could be changed if you feel strongly about it.  But that\u0027s a review comment for the other patch, not this one.",
+      "parentUuid": "6ec1af18_73398b3d",
+      "revId": "0808e3b0fba5313b119da3a7b427156d21537c96",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
