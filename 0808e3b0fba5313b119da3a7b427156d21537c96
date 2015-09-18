@@ -16,6 +16,24 @@
       "revId": "0808e3b0fba5313b119da3a7b427156d21537c96",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec1af18_73398b3d",
+        "filename": "src/ui/actions/ve.ui.LinkAction.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 664
+      },
+      "writtenOn": "2015-09-18T12:40:49Z",
+      "side": 1,
+      "message": "Discussed in the phab ticket.",
+      "parentUuid": "6ec1af18_b39ff3b8",
+      "revId": "0808e3b0fba5313b119da3a7b427156d21537c96",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
