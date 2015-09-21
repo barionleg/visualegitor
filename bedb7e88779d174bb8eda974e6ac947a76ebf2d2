@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec1af18_a1e0eb93",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 1436,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-09-21T11:30:23Z",
+      "side": 1,
+      "message": "Should this be !instanceof ve.dm.LinearSelection instead?",
+      "revId": "bedb7e88779d174bb8eda974e6ac947a76ebf2d2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
