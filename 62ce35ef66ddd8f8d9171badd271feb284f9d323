@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ecb373e_7196b0f5",
+        "filename": "tests/dm/ve.dm.Scalable.test.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-09-22T18:36:53Z",
+      "side": 1,
+      "message": "the branch is to prevent the code emitting pointless change events, so assert that.\n\nAlso I noticed that clearDefaultDimensions and clearOriginalDimensions don\u0027t actually do this check.",
+      "revId": "62ce35ef66ddd8f8d9171badd271feb284f9d323",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
