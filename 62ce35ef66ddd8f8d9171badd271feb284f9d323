@@ -16,6 +16,24 @@
       "revId": "62ce35ef66ddd8f8d9171badd271feb284f9d323",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_744e9e74",
+        "filename": "tests/dm/ve.dm.Scalable.test.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-09-22T19:01:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ecb373e_7196b0f5",
+      "revId": "62ce35ef66ddd8f8d9171badd271feb284f9d323",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
