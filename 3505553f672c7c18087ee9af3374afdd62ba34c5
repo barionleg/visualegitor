@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ecb373e_8a6c3e07",
+        "filename": "tests/dm/ve.dm.Scalable.test.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-09-23T12:45:50Z",
+      "side": 1,
+      "message": "three identical assertions. code coverage good, but not useful tests.",
+      "revId": "3505553f672c7c18087ee9af3374afdd62ba34c5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_0a784ebe",
+        "filename": "tests/dm/ve.dm.Scalable.test.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-09-23T12:45:50Z",
+      "side": 1,
+      "message": "\u0027toggleDefault changes true to false\u0027",
+      "revId": "3505553f672c7c18087ee9af3374afdd62ba34c5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_6a4eb29d",
+        "filename": "tests/dm/ve.dm.Scalable.test.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-09-23T12:45:50Z",
+      "side": 1,
+      "message": "\u0027toggleDefault changes false to true\u0027",
+      "revId": "3505553f672c7c18087ee9af3374afdd62ba34c5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
