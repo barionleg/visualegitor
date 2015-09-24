@@ -283,12 +283,12 @@ module.exports = function ( grunt ) {
 				frameworks: [ 'qunit' ],
 				reporters: [ 'dots' ],
 				singleRun: true,
-				browserDisconnectTimeout: 5000,
+				browserDisconnectTimeout: 30000,
 				browserDisconnectTolerance: 2,
 				autoWatch: false
 			},
 			main: {
-				browsers: [ 'Chrome' ],
+				browsers: [ 'Firefox' ],
 				preprocessors: {
 					'src/**/*.js': [ 'coverage' ]
 				},
@@ -300,7 +300,7 @@ module.exports = function ( grunt ) {
 				] }
 			},
 			others: {
-				browsers: [ 'Firefox' ]
+				browsers: [ 'Chrome' ]
 			},
 			bg: {
 				browsers: [ 'Chrome', 'Firefox' ],
