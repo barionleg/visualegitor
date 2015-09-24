@@ -288,7 +288,7 @@ module.exports = function ( grunt ) {
 				autoWatch: false
 			},
 			main: {
-				browsers: [ 'Chrome' ],
+				browsers: [ 'Firefox' ],
 				preprocessors: {
 					'src/**/*.js': [ 'coverage' ]
 				},
@@ -300,7 +300,7 @@ module.exports = function ( grunt ) {
 				] }
 			},
 			others: {
-				browsers: [ 'Firefox' ]
+				browsers: [ 'Chrome' ]
 			},
 			bg: {
 				browsers: [ 'Chrome', 'Firefox' ],
