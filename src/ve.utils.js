@@ -636,10 +636,11 @@ ve.setDomAttributes = function ( element, attributes, whitelist ) {
  * @private
  * @param {HTMLElement} element Element to summarize
  * @param {boolean} [includeHtml=false] Include an HTML summary for element nodes
+ * @param {Function} [getAttributeSummary] Callback to modify the summary of an attribute, passed name and value as arguments.
  * @return {Object} Summary of element.
  */
-ve.getDomElementSummary = function ( element, includeHtml ) {
-	var i,
+ve.getDomElementSummary = function ( element, includeHtml, getAttributeSummary ) {
+	var i, name, value,
 		summary = {
 			type: element.nodeName.toLowerCase(),
 			text: element.textContent,
@@ -654,7 +655,9 @@ ve.getDomElementSummary = function ( element, includeHtml ) {
 	// Gather attributes
 	if ( element.attributes ) {
 		for ( i = 0; i < element.attributes.length; i++ ) {
-			summary.attributes[ element.attributes[ i ].name ] = element.attributes[ i ].value;
+			name = element.attributes[ i ].name;
+			value = element.attributes[ i ].value;
+			summary.attributes[ name ] = getAttributeSummary ? getAttributeSummary( name, value ) : value;
 		}
 	}
 	// Summarize children
