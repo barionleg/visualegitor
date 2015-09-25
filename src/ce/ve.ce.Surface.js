@@ -2282,17 +2282,18 @@ ve.ce.Surface.prototype.handleDataTransferItems = function ( items, isPaste, tar
  */
 ve.ce.Surface.prototype.selectAll = function () {
 	var internalListRange, range, matrix,
-		selection = this.getModel().getSelection();
+		selection = this.getModel().getSelection(),
+		dmDoc = this.getModel().getDocument();
 
 	if ( selection instanceof ve.dm.LinearSelection ) {
 		if ( this.getActiveTableNode() && this.getActiveTableNode().getEditingFragment() ) {
 			range = this.getActiveTableNode().getEditingRange();
 			range = new ve.Range( range.from + 1, range.to - 1 );
 		} else {
-			internalListRange = this.getModel().getDocument().getInternalList().getListNode().getOuterRange();
+			internalListRange = dmDoc.getInternalList().getListNode().getOuterRange();
 			range = new ve.Range(
-				this.getNearestCorrectOffset( 0, 1 ),
-				this.getNearestCorrectOffset( internalListRange.start, -1 )
+				dmDoc.getNearestCursorOffset( 0, 1 ),
+				dmDoc.getNearestCursorOffset( internalListRange.start, -1 )
 			);
 		}
 		this.getModel().setLinearSelection( range );
@@ -2566,24 +2567,28 @@ ve.ce.Surface.prototype.renderSelectedContentBranchNode = function () {
  */
 
 ve.ce.Surface.prototype.handleObservedChanges = function ( contentChange, branchNodeChange, rangeChange ) {
+	var insertsText = false;
 	if ( contentChange ) {
-		this.onObservedContentChange(
+		insertsText = this.handleObservedContentChange(
 			contentChange.node,
 			contentChange.previous,
 			contentChange.next
 		);
 	}
 	if ( branchNodeChange ) {
-		this.onObservedBranchNodeChange(
+		this.handleObservedBranchNodeChange(
 			branchNodeChange.oldBranchNode,
 			branchNodeChange.newBranchNode
 		);
 	}
 	if ( rangeChange ) {
-		this.onObservedRangeChange(
+		this.handleObservedRangeChange(
 			rangeChange.oldRange,
 			rangeChange.newRange
 		);
+	}
+	if ( insertsText ) {
+		this.checkSequences();
 	}
 	if ( branchNodeChange && branchNodeChange.newBranchNode ) {
 		this.updateCursorHolders();
@@ -2600,7 +2605,7 @@ ve.ce.Surface.prototype.handleObservedChanges = function ( contentChange, branch
  * @param {ve.ce.BranchNode} oldBranchNode Node from which the range anchor has just moved
  * @param {ve.ce.BranchNode} newBranchNode Node into which the range anchor has just moved
  */
-ve.ce.Surface.prototype.onObservedBranchNodeChange = function ( oldBranchNode ) {
+ve.ce.Surface.prototype.handleObservedBranchNodeChange = function ( oldBranchNode ) {
 	if ( oldBranchNode instanceof ve.ce.ContentBranchNode ) {
 		oldBranchNode.renderContents();
 	}
@@ -2649,7 +2654,7 @@ ve.ce.Surface.prototype.createSlug = function ( element ) {
  * @param {ve.Range|null} oldRange
  * @param {ve.Range|null} newRange
  */
-ve.ce.Surface.prototype.onObservedRangeChange = function ( oldRange, newRange ) {
+ve.ce.Surface.prototype.handleObservedRangeChange = function ( oldRange, newRange ) {
 	if ( newRange && !newRange.isCollapsed() && oldRange && oldRange.equalsSelection( newRange ) ) {
 		// Ignore when the newRange is just a flipped oldRange
 		return;
@@ -2750,6 +2755,8 @@ ve.ce.Surface.prototype.fixupCursorPosition = function ( direction, extend ) {
  * The DOM change is analysed heuristically to build a semantically meaningful Transaction
  * with the annotations the user intended.
  *
+ * TODO: move the analysis logic into a pure function, for readability and testing convenience
+ *
  * @see ve.ce.SurfaceObserver#pollOnce
  *
  * @method
@@ -2762,153 +2769,43 @@ ve.ce.Surface.prototype.fixupCursorPosition = function ( direction, extend ) {
  * @param {Object} next.text New plain text content
  * @param {Object} next.hash New DOM hash
  * @param {ve.Range} next.range New selection
+ *
+ * @return {boolean} Whether the transaction inserts text
  */
-ve.ce.Surface.prototype.onObservedContentChange = function ( node, previous, next ) {
-	var data, range, len, annotations, offsetDiff, sameLeadingAndTrailing,
-		previousStart, nextStart, newRange, replacementRange,
-		fromLeft = 0,
-		fromRight = 0,
-		nodeOffset = node.getModel().getOffset(),
-		previousData = previous.text.split( '' ),
-		nextData = next.text.split( '' ),
-		modelData = this.model.getDocument().data,
-		lengthDiff = next.text.length - previous.text.length,
-		surface = this;
+ve.ce.Surface.prototype.handleObservedContentChange = function ( node, previous, next ) {
+	var change;
 
-	if ( previous.range && next.range ) {
-		offsetDiff = ( previous.range.isCollapsed() && next.range.isCollapsed() ) ?
-			next.range.start - previous.range.start : null;
-		previousStart = previous.range.start - nodeOffset - 1;
-		nextStart = next.range.start - nodeOffset - 1;
-		sameLeadingAndTrailing = offsetDiff !== null && (
-			(
-				lengthDiff > 0 &&
-				previous.text.slice( 0, previousStart ) ===
-					next.text.slice( 0, previousStart ) &&
-				previous.text.slice( previousStart ) ===
-					next.text.slice( nextStart )
-			) ||
-			(
-				lengthDiff < 0 &&
-				previous.text.slice( 0, nextStart ) ===
-					next.text.slice( 0, nextStart ) &&
-				previous.text.slice( previousStart - lengthDiff + offsetDiff ) ===
-					next.text.slice( nextStart )
-			)
-		);
+	if ( !previous.range || !next.range ) {
+		// This makes no sense: if either selection was null, how did ve.ce.RangeState
+		// decide the selections were in the same branch node?
+		// TODO: remove this check once we're sure it's unnecessary (it reflects an
+		// incremental change from the old code)
+		ve.error( 'Both old and new selections should be non-null' );
+		return null;
+	}
 
-		// Simple insertion
-		if ( lengthDiff > 0 && offsetDiff === lengthDiff && sameLeadingAndTrailing ) {
-			data = nextData.slice( previousStart, nextStart );
-			// Apply insertion annotations
-			if ( node.unicornAnnotations ) {
-				annotations = node.unicornAnnotations;
-			} else if ( this.keyDownState.focusIsAfterAnnotationBoundary ) {
-				annotations = modelData.getAnnotationsFromOffset(
-					nodeOffset + previousStart + 1
-				);
-			} else {
-				annotations = this.model.getInsertionAnnotations();
-			}
+	change = ve.ce.dmChangeFromContentChange(
+		node,
+		previous,
+		next,
+		this.keyDownState.focusIsAfterAnnotationBoundary,
+		this.getModel()
+	);
 
-			if ( annotations.getLength() ) {
-				ve.dm.Document.static.addAnnotationsToData( data, annotations );
-			}
-
-			this.incRenderLock();
-			try {
-				this.changeModel(
-					ve.dm.Transaction.newFromInsertion(
-						this.documentView.model, previous.range.start, data
-					),
-					new ve.dm.LinearSelection( this.documentView.model, next.range )
-				);
-			} finally {
-				this.decRenderLock();
-			}
-			setTimeout( function () {
-				surface.checkSequences();
-			} );
-			return;
-		}
-
-		// Simple deletion
-		if ( ( offsetDiff === 0 || offsetDiff === lengthDiff ) && sameLeadingAndTrailing ) {
-			if ( offsetDiff === 0 ) {
-				range = new ve.Range( next.range.start, next.range.start - lengthDiff );
-			} else {
-				range = new ve.Range( next.range.start, previous.range.start );
-			}
-			this.incRenderLock();
-			try {
-				this.changeModel(
-					ve.dm.Transaction.newFromRemoval( this.documentView.model,
-						range ),
-					new ve.dm.LinearSelection( this.documentView.model, next.range )
-				);
-			} finally {
-				this.decRenderLock();
-			}
-			return;
+	if ( !change.rerender ) {
+		this.incRenderLock();
+	}
+	try {
+		this.changeModel( change.transaction, change.selection );
+	} finally {
+		if ( !change.rerender ) {
+			this.decRenderLock();
 		}
 	}
 
-	// Complex change:
-	// 1. Count unchanged characters from left and right;
-	// 2. Assume that the minimal changed region indicates the replacement made by the user;
-	// 3. Hence guess how to map annotations.
-	// N.B. this logic can go wrong; e.g. this code will see slice->slide and
-	// assume that the user changed 'c' to 'd', but the user could instead have changed 'ic'
-	// to 'id', which would map annotations differently.
-
-	len = Math.min( previousData.length, nextData.length );
-
-	while ( fromLeft < len && previousData[ fromLeft ] === nextData[ fromLeft ] ) {
-		++fromLeft;
-	}
-
-	while (
-		fromRight < len - fromLeft &&
-		previousData[ previousData.length - 1 - fromRight ] ===
-		nextData[ nextData.length - 1 - fromRight ]
-	) {
-		++fromRight;
-	}
-	replacementRange = new ve.Range(
-		nodeOffset + 1 + fromLeft,
-		nodeOffset + 1 + previousData.length - fromRight
-	);
-	data = nextData.slice( fromLeft, nextData.length - fromRight );
-
-	if ( node.unicornAnnotations ) {
-		// This CBN is unicorned. Use the stored annotations.
-		annotations = node.unicornAnnotations;
-	} else if ( fromLeft + fromRight < previousData.length ) {
-		// Content is being removed, so guess that we want to use the annotations from the
-		// start of the removed content.
-		annotations = modelData.getAnnotationsFromOffset( replacementRange.start );
-	} else {
-		// No content is being removed, so guess that we want to use the annotations from
-		// just before the insertion (which means none at all if the insertion is at the
-		// start of a CBN).
-		annotations = modelData.getAnnotationsFromOffset( replacementRange.start - 1 );
-	}
-	if ( annotations.getLength() ) {
-		ve.dm.Document.static.addAnnotationsToData( data, annotations );
-	}
-	newRange = next.range;
-	if ( newRange.isCollapsed() ) {
-		newRange = new ve.Range( this.getNearestCorrectOffset( newRange.start, 1 ) );
-	}
-
-	this.changeModel(
-		ve.dm.Transaction.newFromReplacement( this.documentView.model, replacementRange, data ),
-		new ve.dm.LinearSelection( this.documentView.model, newRange )
-	);
-	this.queueCheckSequences = true;
-	setTimeout( function () {
-		surface.checkSequences();
-	} );
+	return change.transaction.operations.filter( function ( op ) {
+		return op.type === 'replace' && op.insert.length;
+	} ).length > 0;
 };
 
 /**
@@ -4125,14 +4022,15 @@ ve.ce.Surface.prototype.linkAnnotationAtFocus = function () {
  * @return {boolean} return.isBackwards True if the focus is before the anchor
  */
 ve.ce.Surface.prototype.getSelectionState = function ( range ) {
-	var anchor, focus;
+	var anchor, focus,
+		dmDoc = this.getModel().getDocument();
 
 	// Anchor/focus at the nearest correct position in the direction that grows the selection
 	anchor = this.documentView.getNodeAndOffset(
-		this.getNearestCorrectOffset( range.from, range.isBackwards() ? 1 : -1 )
+		dmDoc.getNearestCursorOffset( range.from, range.isBackwards() ? 1 : -1 )
 	);
 	focus = this.documentView.getNodeAndOffset(
-		this.getNearestCorrectOffset( range.to, range.isBackwards() ? -1 : 1 )
+		dmDoc.getNearestCursorOffset( range.to, range.isBackwards() ? -1 : 1 )
 	);
 	return new ve.SelectionState( {
 		anchorNode: anchor.node,

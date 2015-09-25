@@ -494,7 +494,7 @@ QUnit.test( 'handleLinearEnter', function ( assert ) {
 	}
 } );
 
-QUnit.test( 'onObservedContentChange', function ( assert ) {
+QUnit.test( 'handleObservedContentChange', function ( assert ) {
 	var i,
 		cases = [
 			{
@@ -556,6 +556,46 @@ QUnit.test( 'onObservedContentChange', function ( assert ) {
 					]
 				],
 				msg: 'Replace into non-zero annotation next to word break'
+			},
+			{
+				prevHtml: '<p><b>X</b></p>',
+				prevRange: new ve.Range( 2 ),
+				nextHtml: '<p><b>XY</b></p>',
+				nextRange: new ve.Range( 3 ),
+				expectedOps: [
+					[
+						{ type: 'retain', length: 2 },
+						{
+							type: 'replace',
+							insert: [ 'Y', [ 1 ] ],
+							remove: [],
+							insertedDataOffset: 0,
+							insertedDataLength: 1
+						},
+						{ type: 'retain', length: 3 }
+					]
+				],
+				msg: 'Append into bold'
+			},
+			{
+				prevHtml: '<p><b>X</b></p>',
+				prevRange: new ve.Range( 2 ),
+				nextHtml: '<p><b>X</b>Y</p>',
+				nextRange: new ve.Range( 3 ),
+				expectedOps: [
+					[
+						{ type: 'retain', length: 2 },
+						{
+							type: 'replace',
+							insert: [ 'Y' ],
+							remove: [],
+							insertedDataOffset: 0,
+							insertedDataLength: 1
+						},
+						{ type: 'retain', length: 3 }
+					]
+				],
+				msg: 'Append outside bold'
 			}
 		];
 
@@ -579,7 +619,7 @@ QUnit.test( 'onObservedContentChange', function ( assert ) {
 				range: nextRange
 			};
 
-		view.onObservedContentChange( node, prev, next );
+		view.handleObservedContentChange( node, prev, next );
 		txs = model.getHistory()[ 0 ].transactions;
 		ops = [];
 		for ( i = 0; i < txs.length; i++ ) {
