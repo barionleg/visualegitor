@@ -27,6 +27,9 @@ ve.ce.RangeState = function VeCeRangeState( old, documentNode, selectionOnly ) {
 
 	/**
 	 * @property {boolean} contentChanged Whether the content changed
+	 *
+	 * This is only set to true if both the old and new states have the
+	 * same current branch node, whose content has changed
 	 */
 	this.contentChanged = false;
 
@@ -49,6 +52,11 @@ ve.ce.RangeState = function VeCeRangeState( old, documentNode, selectionOnly ) {
 	 * @property {string|null} DOM Hash of current branch node
 	 */
 	this.hash = null;
+
+	/**
+	 * @property {boolean|null} focusIsAfterAnnotationBoundary Focus lies after annotation tag
+	 */
+	this.focusIsAfterAnnotationBoundary = null;
 
 	this.saveState( old, documentNode, selectionOnly );
 };
@@ -132,6 +140,16 @@ ve.ce.RangeState.prototype.saveState = function ( old, documentNode, selectionOn
 			( old && old.hash ) !== this.hash ||
 			( old && old.text ) !== this.text
 		);
+
+	if ( this.selectionChanged || this.contentChanged ) {
+		this.focusIsAfterAnnotationBoundary = selection.focusNode &&
+			ve.ce.isAfterAnnotationBoundary(
+				selection.focusNode,
+				selection.focusOffset
+			);
+	} else {
+		this.focusIsAfterAnnotationBoundary = old.focusIsAfterAnnotationBoundary;
+	}
 
 	// Save selection for future comparisons. (But it is not properly frozen, because the nodes
 	// are live and mutable, and therefore the offsets may come to point to places that are

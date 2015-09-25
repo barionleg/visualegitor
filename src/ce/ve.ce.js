@@ -468,3 +468,154 @@ ve.ce.linkAt = function ( node ) {
 	}
 	return $( node ).closest( '.ve-ce-linkAnnotation' )[ 0 ];
 };
+
+/**
+ * Analyse a DOM content change to build a Transaction
+ *
+ * Annotations are inferred heuristically from plaintext to do what the user intended
+ *
+ * @method
+ * @param {ve.ce.Node} node CE node the change occurred in
+ * @param {Object} previous Old data
+ * @param {Object} previous.text Old plain text content
+ * @param {Object} previous.hash Old DOM hash
+ * @param {ve.Range} previous.range Old selection
+ * @param {boolean} previous.focusIsAfterAnnotationBoundary Old focus lies after annotation tag
+ * @param {Object} next New data
+ * @param {Object} next.text New plain text content
+ * @param {Object} next.hash New DOM hash
+ * @param {ve.Range} next.range New selection
+ * @param {boolean} next.focusIsAfterAnnotationBoundary New focus lies after annotation tag
+ * @param {ve.dm.Surface} dmSurface TODO: remove this
+ *
+ * @return {Object} Results of analysis
+ * @return {ve.dm.Transaction} return.transaction Transaction corresponding to the DOM content change
+ * @return {boolean} return.rerender Whether the DOM needs rerendering after applying the transaction
+ */
+ve.ce.dmChangeFromContentChange = function ( node, previous, next, dmSurface ) {
+	var data, range, len, annotations, bothCollapsed,
+		previousStart, nextStart, newRange, replacementRange,
+		fromLeft = 0,
+		fromRight = 0,
+		nodeOffset = node.getModel().getOffset(),
+		previousData = previous.text.split( '' ),
+		nextData = next.text.split( '' ),
+		dmDoc = node.getModel().getDocument(),
+		modelData = dmDoc.data,
+		lengthDiff = next.text.length - previous.text.length;
+
+	bothCollapsed = previous.range.isCollapsed() && next.range.isCollapsed();
+	previousStart = previous.range.start - nodeOffset - 1;
+	nextStart = next.range.start - nodeOffset - 1;
+
+	// If the only change is an insertion just before the new cursor, then apply a
+	// single insertion transaction, using the annotations from the old start
+	// position (accounting for whether the cursor was before or after an annotation
+	// boundary)
+	if (
+		bothCollapsed &&
+		lengthDiff > 0 &&
+		previous.text.slice( 0, previousStart ) === next.text.slice( 0, previousStart ) &&
+		previous.text.slice( previousStart ) === next.text.slice( nextStart )
+	) {
+		data = nextData.slice( previousStart, nextStart );
+		if ( node.unicornAnnotations ) {
+			annotations = node.unicornAnnotations;
+		} else if ( previous.focusIsAfterAnnotationBoundary ) {
+			annotations = modelData.getAnnotationsFromOffset(
+				nodeOffset + previousStart + 1
+			);
+		} else {
+			annotations = dmSurface.getInsertionAnnotations();
+		}
+
+		if ( annotations.getLength() ) {
+			ve.dm.Document.static.addAnnotationsToData( data, annotations );
+		}
+
+		return {
+			transaction: ve.dm.Transaction.newFromInsertion(
+				dmDoc,
+				previous.range.start,
+				data
+			),
+			selection: new ve.dm.LinearSelection( dmDoc, next.range ),
+			rerender: false
+		};
+	}
+
+	// If the only change is a removal touching the old cursor position, then apply
+	// a single removal transaction.
+	if (
+		bothCollapsed &&
+		lengthDiff < 0 &&
+		previous.text.slice( 0, nextStart ) === next.text.slice( 0, nextStart ) &&
+		previous.text.slice( nextStart - lengthDiff ) === next.text.slice( nextStart )
+	) {
+		range = new ve.Range( next.range.start, next.range.start - lengthDiff );
+		return {
+			transaction: ve.dm.Transaction.newFromRemoval( dmDoc, range ),
+			selection: new ve.dm.LinearSelection( dmDoc, next.range ),
+			rerender: false
+		};
+	}
+
+	// Complex change:
+	// 1. Count unchanged characters from left and right;
+	// 2. Assume that the minimal changed region indicates the replacement made by the user;
+	// 3. Hence guess how to map annotations.
+	// N.B. this logic can go wrong; e.g. this code will see slice->slide and
+	// assume that the user changed 'c' to 'd', but the user could instead have changed 'ic'
+	// to 'id', which would map annotations differently.
+
+	len = Math.min( previousData.length, nextData.length );
+
+	while ( fromLeft < len && previousData[ fromLeft ] === nextData[ fromLeft ] ) {
+		++fromLeft;
+	}
+
+	while (
+		fromRight < len - fromLeft &&
+		previousData[ previousData.length - 1 - fromRight ] ===
+		nextData[ nextData.length - 1 - fromRight ]
+	) {
+		++fromRight;
+	}
+	replacementRange = new ve.Range(
+		nodeOffset + 1 + fromLeft,
+		nodeOffset + 1 + previousData.length - fromRight
+	);
+	data = nextData.slice( fromLeft, nextData.length - fromRight );
+
+	if ( node.unicornAnnotations ) {
+		// This CBN is unicorned. Use the stored annotations.
+		annotations = node.unicornAnnotations;
+	} else if ( fromLeft + fromRight < previousData.length ) {
+		// Content is being removed, so guess that we want to use the annotations from the
+		// start of the removed content.
+		annotations = modelData.getAnnotationsFromOffset( replacementRange.start );
+	} else {
+		// No content is being removed, so guess that we want to use the annotations from
+		// just before the insertion (which means none at all if the insertion is at the
+		// start of a CBN).
+		annotations = modelData.getAnnotationsFromOffset( replacementRange.start - 1 );
+	}
+	if ( annotations.getLength() ) {
+		ve.dm.Document.static.addAnnotationsToData( data, annotations );
+	}
+	newRange = next.range;
+	if ( newRange.isCollapsed() ) {
+		// TODO: Remove this, or comment why it's necessary
+		// (When wouldn't we be at a cursor offset?)
+		newRange = new ve.Range( dmDoc.getNearestCursorOffset( newRange.start, 1 ) );
+	}
+	return {
+		transaction: ve.dm.Transaction.newFromReplacement(
+			dmDoc,
+			replacementRange,
+			data
+		),
+		selection: new ve.dm.LinearSelection( dmDoc, newRange ),
+		rerender: true
+	};
+};

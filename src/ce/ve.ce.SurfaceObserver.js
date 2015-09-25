@@ -179,8 +179,18 @@ ve.ce.SurfaceObserver.prototype.pollOnceInternal = function ( signalChanges, sel
 	if ( !selectionOnly && newState.node !== null && newState.contentChanged && signalChanges ) {
 		contentChange = {
 			node: newState.node,
-			previous: { text: oldState.text, hash: oldState.hash, range: oldState.veRange },
-			next: { text: newState.text, hash: newState.hash, range: newState.veRange }
+			previous: {
+				text: oldState.text,
+				hash: oldState.hash,
+				range: oldState.veRange,
+				focusIsAfterAnnotationBoundary: oldState.focusIsAfterAnnotationBoundary
+			},
+			next: {
+				text: newState.text,
+				hash: newState.hash,
+				range: newState.veRange,
+				focusIsAfterAnnotationBoundary: newState.focusIsAfterAnnotationBoundary
+			}
 		};
 	}
 
