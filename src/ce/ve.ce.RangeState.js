@@ -27,6 +27,9 @@ ve.ce.RangeState = function VeCeRangeState( old, documentNode, selectionOnly ) {
 
 	/**
 	 * @property {boolean} contentChanged Whether the content changed
+	 *
+	 * This is only set to true if both the old and new states have the
+	 * same current branch node, whose content has changed
 	 */
 	this.contentChanged = false;
 
