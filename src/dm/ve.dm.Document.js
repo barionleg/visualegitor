@@ -1349,3 +1349,50 @@ ve.dm.Document.prototype.getLang = function () {
 ve.dm.Document.prototype.getDir = function () {
 	return this.dir;
 };
+
+/**
+ * Get the insertion annotations that should apply to a range.
+ *
+ * TODO: This cannot match Firefox behaviour, which depends on the cursor's annotation
+ * boundary side; see https://phabricator.wikimedia.org/T113869
+ *
+ * @param {ve.Range} range The range into which text would be inserted
+ * @return {ve.dm.AnnotationSet} The insertion annotations that should apply
+ */
+ve.dm.Document.prototype.getInsertionAnnotations = function ( range ) {
+	var left, right, leftAnnotations, rightAnnotations;
+
+	if ( range.isCollapsed() ) {
+		// Get annotations from either side of the cursor
+		left = Math.max( 0, range.start - 1 );
+		if ( !this.data.isContentOffset( left ) ) {
+			left = -1;
+		}
+		right = Math.max( 0, range.start );
+		if ( !this.data.isContentOffset( right ) ) {
+			right = -1;
+		}
+	} else {
+		// Get annotations from the first character of the range
+		left = this.data.getNearestContentOffset( range.start );
+		right = this.data.getNearestContentOffset( range.end );
+	}
+	if ( left === -1 ) {
+		// No content offset to our left, use empty set
+		return new ve.dm.AnnotationSet( this.getStore() );
+	}
+
+	// Include each annotation on the left that either continues on the right
+	// or should get added to appended content
+	leftAnnotations = this.data.getAnnotationsFromOffset( left );
+	if ( right === -1 ) {
+		// TODO: "return leftAnnotations" would match prior behaviour. Was that a mistake?
+		rightAnnotations = new ve.dm.AnnotationSet( this.getStore() );
+	} else {
+		rightAnnotations = this.data.getAnnotationsFromOffset( right );
+	}
+	return leftAnnotations.filter( function ( annotation ) {
+		return annotation.constructor.static.applyToAppendedContent ||
+			rightAnnotations.containsComparable( annotation );
+	} );
+};
