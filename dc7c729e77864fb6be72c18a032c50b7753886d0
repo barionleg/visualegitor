@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ecb373e_4c1ddb65",
+        "filename": "src/dm/lineardata/ve.dm.ElementLinearData.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-09-28T18:59:09Z",
+      "side": 1,
+      "message": "Is it safe to assume that the nearest content offset (in an unspecified direction) has the correct annotations?\n\n(It seems this use of getNearestContentOffset was originally introduced in https://gerrit.wikimedia.org/r/25945/ , to fix an offset underflow error at the start of a document)",
+      "revId": "dc7c729e77864fb6be72c18a032c50b7753886d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
