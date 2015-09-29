@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ecb373e_8c4f4397",
+        "filename": "src/ce/ve.ce.SurfaceObserver.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-09-29T15:04:03Z",
+      "side": 1,
+      "message": "Is this TODO still appropriate here, or should it now move?",
+      "revId": "34214761b176b39e33c893533e7b65849a829b89",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_6c4c57a0",
+        "filename": "src/ce/ve.ce.SurfaceObserver.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-09-29T15:04:03Z",
+      "side": 1,
+      "message": "Ditto.",
+      "revId": "34214761b176b39e33c893533e7b65849a829b89",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
