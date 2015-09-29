@@ -16,6 +16,24 @@
       "revId": "dc7c729e77864fb6be72c18a032c50b7753886d0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ecb373e_15f82ae1",
+        "filename": "src/dm/lineardata/ve.dm.ElementLinearData.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-09-29T15:09:49Z",
+      "side": 1,
+      "message": "If it was written years ago it\u0027s probably safe to assume it\u0027s garbage now.",
+      "parentUuid": "2ecb373e_4c1ddb65",
+      "revId": "dc7c729e77864fb6be72c18a032c50b7753886d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
