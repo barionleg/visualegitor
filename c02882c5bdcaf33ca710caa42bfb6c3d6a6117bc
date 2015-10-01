@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ecb373e_84905399",
+        "filename": "src/ce/ve.ce.FocusableNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-10-01T16:50:58Z",
+      "side": 1,
+      "message": "this.generatedContentsValid is undefined (and therefore falsey) on non-GeneratedContentNodes (e.g. images, templates, comments etc.)",
+      "revId": "c02882c5bdcaf33ca710caa42bfb6c3d6a6117bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
