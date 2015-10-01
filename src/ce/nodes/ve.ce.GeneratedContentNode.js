@@ -205,12 +205,24 @@ ve.ce.GeneratedContentNode.prototype.validateGeneratedContents = function () {
  */
 ve.ce.GeneratedContentNode.prototype.update = function ( config ) {
 	var store = this.model.doc.getStore(),
-		index = store.indexOfHash( OO.getHash( [ this.model, config ] ) );
+		index = store.indexOfHash( OO.getHash( [ this.getHashObjectForRendering(), config ] ) );
 	if ( index !== null ) {
 		this.render( store.value( index ) );
 	} else {
 		this.forceUpdate( config );
 	}
+};
+
+/**
+ * Get as hash object that uniquely describes the rendering
+ *
+ * Sub-classes can simplify this hash if certain attributes
+ * don't affect the rendering.
+ *
+ * @return {Object} Hash object
+ */
+ve.ce.GeneratedContentNode.prototype.getHashObjectForRendering = function () {
+	return this.model.getHashObject();
 };
 
 /**
