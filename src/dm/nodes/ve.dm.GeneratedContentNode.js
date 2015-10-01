@@ -34,3 +34,17 @@ ve.dm.GeneratedContentNode.static.storeGeneratedContents = function ( dataElemen
 	var hash = OO.getHash( [ this.getHashObject( dataElement ), undefined ] );
 	return store.index( generatedContents, hash );
 };
+
+/* Methods */
+
+/**
+ * Get as hash object that uniquely describes the rendering
+ *
+ * Sub-classes can simplify this hash if certain attributes
+ * don't affect the rendering.
+ *
+ * @return {Object} Hash object
+ */
+ve.dm.GeneratedContentNode.prototype.getHashObjectForRendering = function () {
+	return this.getHashObject();
+};
