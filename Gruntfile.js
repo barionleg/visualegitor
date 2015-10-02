@@ -23,17 +23,19 @@ module.exports = function ( grunt ) {
 				pages[ name ] = path;
 			} );
 			return pages;
-		} )();
+		} )(),
+		fs = require( 'fs' ),
+		stylelintConfig = JSON.parse( fs.readFileSync( '.stylelintrc', 'utf8' ) );
 
 	grunt.loadNpmTasks( 'grunt-jsonlint' );
 	grunt.loadNpmTasks( 'grunt-banana-checker' );
 	grunt.loadNpmTasks( 'grunt-contrib-clean' );
 	grunt.loadNpmTasks( 'grunt-contrib-concat' );
 	grunt.loadNpmTasks( 'grunt-contrib-copy' );
-	grunt.loadNpmTasks( 'grunt-contrib-csslint' );
 	grunt.loadNpmTasks( 'grunt-contrib-jshint' );
 	grunt.loadNpmTasks( 'grunt-contrib-watch' );
 	grunt.loadNpmTasks( 'grunt-css-url-embed' );
+	grunt.loadNpmTasks( 'grunt-postcss' );
 	grunt.loadNpmTasks( 'grunt-cssjanus' );
 	grunt.loadNpmTasks( 'grunt-jscs' );
 	grunt.loadNpmTasks( 'grunt-karma' );
@@ -276,6 +278,26 @@ module.exports = function ( grunt ) {
 				'!node_modules/**'
 			]
 		},
+		postcss: {
+			options: {
+				map: false,
+				processors: [
+					require( 'stylelint' )( stylelintConfig )
+				]
+			},
+			code: [ {
+				expand: true,
+				flatten: true,
+				src: [ 'src/**/*.css' ],
+				dest: 'src/'
+			} ],
+			demos: [ {
+				expand: true,
+				flatten: true,
+				src: [ 'demos/**/*.css' ],
+				dest: 'demos/'
+			} ]
+		},
 		jsonlint: {
 			all: [
 				'**/*.json',
@@ -355,7 +377,7 @@ module.exports = function ( grunt ) {
 	} );
 
 	grunt.registerTask( 'build', [ 'clean', 'concat', 'cssjanus', 'cssUrlEmbed', 'copy', 'buildloader' ] );
-	grunt.registerTask( 'lint', [ 'tyops', 'jshint', 'jscs:main', 'csslint', 'jsonlint', 'banana' ] );
+	grunt.registerTask( 'lint', [ 'tyops', 'jshint', 'jscs:main', 'postcss', 'jsonlint', 'banana' ] );
 	grunt.registerTask( 'unit', [ 'karma:main' ] );
 	grunt.registerTask( 'fix', [ 'jscs:fix' ] );
 	grunt.registerTask( '_test', [ 'lint', 'git-build', 'build', 'unit' ] );
