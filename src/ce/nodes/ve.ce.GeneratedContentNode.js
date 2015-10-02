@@ -16,7 +16,6 @@ ve.ce.GeneratedContentNode = function VeCeGeneratedContentNode() {
 	// Properties
 	this.generatingPromise = null;
 	this.generatedContentsValid = false;
-	this.generatedContentsFirstRender = true;
 
 	// Events
 	this.model.connect( this, { update: 'onGeneratedContentNodeUpdate' } );
@@ -79,9 +78,11 @@ ve.ce.GeneratedContentNode.prototype.generateContents = null;
 
 /**
  * Handler for the update event
+ *
+ * @param {boolean} staged Update happened in staging mode
  */
-ve.ce.GeneratedContentNode.prototype.onGeneratedContentNodeUpdate = function () {
-	this.update();
+ve.ce.GeneratedContentNode.prototype.onGeneratedContentNodeUpdate = function ( staged ) {
+	this.update( undefined, staged );
 };
 
 /**
@@ -136,19 +137,17 @@ ve.ce.GeneratedContentNode.prototype.getRenderedDomElements = function ( domElem
  * Rerender the contents of this node.
  *
  * @param {Object|string|Array} generatedContents Generated contents, in the default case an HTMLElement array
+ * @param {boolean} [staged] Update happened in staging mode
  * @fires setup
  * @fires teardown
  */
-ve.ce.GeneratedContentNode.prototype.render = function ( generatedContents ) {
+ve.ce.GeneratedContentNode.prototype.render = function ( generatedContents, staged ) {
 	var $newElements;
 	if ( this.live ) {
 		this.emit( 'teardown' );
 	}
 	$newElements = $( this.getRenderedDomElements( ve.copyDomElements( generatedContents ) ) );
-	// Render if this is the first time rendering, regardless of whether there is an error; otherwise only
-	// render if there is no error
-	if ( this.generatedContentsFirstRender || this.validateGeneratedContents( $( generatedContents ) ) ) {
-		this.generatedContentsFirstRender = false;
+	if ( !staged || this.validateGeneratedContents( $( generatedContents ) ) ) {
 		this.generatedContentsValid = true;
 		if ( !this.$element[ 0 ].parentNode ) {
 			// this.$element hasn't been attached yet, so just overwrite it
@@ -206,14 +205,15 @@ ve.ce.GeneratedContentNode.prototype.validateGeneratedContents = function () {
  * model and config data has been rendered before, the cached rendering in the store will be used.
  *
  * @param {Object} [config] Optional additional data to pass to generateContents()
+ * @param {boolean} [staged] Update happened in staging mode
  */
-ve.ce.GeneratedContentNode.prototype.update = function ( config ) {
+ve.ce.GeneratedContentNode.prototype.update = function ( config, staged ) {
 	var store = this.model.doc.getStore(),
 		index = store.indexOfHash( OO.getHash( [ this.model, config ] ) );
 	if ( index !== null ) {
-		this.render( store.value( index ) );
+		this.render( store.value( index ), staged );
 	} else {
-		this.forceUpdate( config );
+		this.forceUpdate( config, staged );
 	}
 };
 
@@ -221,8 +221,9 @@ ve.ce.GeneratedContentNode.prototype.update = function ( config ) {
  * Force the contents to be updated. Like update(), but bypasses the store.
  *
  * @param {Object} [config] Optional additional data to pass to generateContents()
+ * @param {boolean} [staged] Update happened in staging mode
  */
-ve.ce.GeneratedContentNode.prototype.forceUpdate = function ( config ) {
+ve.ce.GeneratedContentNode.prototype.forceUpdate = function ( config, staged ) {
 	var promise, node = this;
 
 	if ( this.generatingPromise ) {
@@ -239,7 +240,7 @@ ve.ce.GeneratedContentNode.prototype.forceUpdate = function ( config ) {
 		// If this promise is no longer the currently pending one, ignore it completely
 		.done( function ( generatedContents ) {
 			if ( node.generatingPromise === promise ) {
-				node.doneGenerating( generatedContents, config );
+				node.doneGenerating( generatedContents, config, staged );
 			}
 		} )
 		.fail( function () {
@@ -287,8 +288,9 @@ ve.ce.GeneratedContentNode.prototype.abortGenerating = function () {
  * @method
  * @param {Object|string|Array} generatedContents Generated contents
  * @param {Object} [config] Config object passed to forceUpdate()
+ * @param {boolean} [staged] Update happened in staging mode
  */
-ve.ce.GeneratedContentNode.prototype.doneGenerating = function ( generatedContents, config ) {
+ve.ce.GeneratedContentNode.prototype.doneGenerating = function ( generatedContents, config, staged ) {
 	var store, hash;
 
 	// Because doneGenerating is invoked asynchronously, the model node may have become detached
@@ -301,7 +303,7 @@ ve.ce.GeneratedContentNode.prototype.doneGenerating = function ( generatedConten
 
 	this.$element.removeClass( 've-ce-generatedContentNode-generating' );
 	this.generatingPromise = null;
-	this.render( generatedContents );
+	this.render( generatedContents, staged );
 };
 
 /**
