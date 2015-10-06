@@ -4,10 +4,6 @@
  * @copyright 2011-2016 VisualEditor Team and others; see http://ve.mit-license.org
  */
 
-.ve-ui-mediaSizeWidget .oo-ui-fieldLayout > .oo-ui-fieldLayout-body > .oo-ui-labelElement-label {
-	width: 6em;
-}
-
 .ve-ui-mediaSizeWidget-section-sizetype {
 	margin-bottom: 1em;
 }
@@ -15,4 +11,9 @@
 .ve-ui-mediaSizeWidget-section-scale .oo-ui-fieldLayout-field > .oo-ui-textInputWidget input {
 	width: 5em;
 	margin-right: 0.5em;
+}
+
+.ve-ui-mediaSizeWidget-section-custom-proportional-field.oo-ui-fieldLayout.oo-ui-fieldLayout-align-inline {
+	margin-bottom: 0;
+	margin-top: 0.5em;
 }

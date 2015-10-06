@@ -7,6 +7,7 @@
 .ve-ui-dimensionsWidget,
 .ve-ui-dimensionsWidget > .oo-ui-textInputWidget {
 	display: inline-block;
+	width: 100%;
 }
 
 .ve-ui-dimensionsWidget .oo-ui-textInputWidget {
