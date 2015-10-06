@@ -16,7 +16,7 @@
  * @param {Object} [config] Configuration options
  */
 ve.ui.MediaSizeWidget = function VeUiMediaSizeWidget( scalable, config ) {
-	var fieldScale, fieldCustom, scalePercentLabel;
+	var fieldScale, fieldCustom, fieldUpdate, scalePercentLabel;
 
 	// Configuration
 	config = config || {};
@@ -60,6 +60,7 @@ ve.ui.MediaSizeWidget = function VeUiMediaSizeWidget( scalable, config ) {
 	} );
 
 	this.dimensionsWidget = new ve.ui.DimensionsWidget( { validate: this.isValid.bind( this ) } );
+	this.updateProportionalCheck = new OO.ui.CheckboxInputWidget( { selected: true, disabled: true } );
 
 	// Error label is available globally so it can be displayed and
 	// hidden as needed
@@ -74,6 +75,13 @@ ve.ui.MediaSizeWidget = function VeUiMediaSizeWidget( scalable, config ) {
 			// TODO: when upright is supported by Parsoid
 			// classes: ['ve-ui-mediaSizeWidget-section-scale'],
 			label: ve.msg( 'visualeditor-mediasizewidget-label-scale' )
+		}
+	);
+	fieldUpdate = new OO.ui.FieldLayout(
+		this.updateProportionalCheck, {
+			align: 'inline',
+			label: ve.msg( 'visualeditor-mediaSizeWidget-label-proportional' ),
+			help: ve.msg( 'visualeditor-mediaSizeWidget-label-proportional-help' )
 		}
 	);
 	// TODO: when upright is supported by Parsoid
@@ -97,6 +105,7 @@ ve.ui.MediaSizeWidget = function VeUiMediaSizeWidget( scalable, config ) {
 		.addClass( 've-ui-mediaSizeWidget' )
 		.append(
 			this.sizeTypeSelectWidget.$element,
+			fieldUpdate.$element,
 			// TODO: when upright is supported by Parsoid
 			// fieldScale.$element,
 			fieldCustom.$element,
@@ -210,6 +219,15 @@ ve.ui.MediaSizeWidget.prototype.onDimensionsChange = function ( type, value ) {
 		this.setSizeType( 'custom' );
 		if ( $.isNumeric( value ) ) {
 			dimensions[ type ] = Number( value );
+			// check, if the other dimension should be automatically calculated, too
+			if ( !this.updateProportionalCheck.isSelected() ) {
+				// fill the opposite value (height -> width; width -> height)
+				if ( type === 'height' ) {
+					dimensions.width = this.scalable.getCurrentDimensions().width;
+				} else {
+					dimensions.height = this.scalable.getCurrentDimensions().height;
+				}
+			}
 			this.setCurrentDimensions( dimensions );
 		} else {
 			this.validateDimensions();
@@ -251,11 +269,15 @@ ve.ui.MediaSizeWidget.prototype.onSizeTypeChoose = function ( item ) {
 	} else if ( selectedType === 'scale' ) {
 		// Disable the dimensions widget
 		this.dimensionsWidget.setDisabled( true );
+		// Disable the proportional checkbox
+		this.updateProportionalCheck.setDisabled( false );
 		// Enable the scale input
 		this.scaleInput.setDisabled( false );
 	} else if ( selectedType === 'custom' ) {
 		// Enable the dimensions widget
 		this.dimensionsWidget.setDisabled( false );
+		// Show the "Update proportional" checkbox
+		this.updateProportionalCheck.setDisabled( false );
 		// Disable the scale input
 		this.scaleInput.setDisabled( true );
 		// If we were default size before, set the current dimensions to the default size
