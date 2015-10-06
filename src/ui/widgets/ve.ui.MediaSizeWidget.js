@@ -16,7 +16,8 @@
  * @param {Object} [config] Configuration options
  */
 ve.ui.MediaSizeWidget = function VeUiMediaSizeWidget( scalable, config ) {
-	var fieldScale, fieldCustom, scalePercentLabel;
+	var fieldScale, fieldCustom, fieldUpdate, scalePercentLabel,
+		isFixedRatio = true;
 
 	// Configuration
 	config = config || {};
@@ -59,7 +60,15 @@ ve.ui.MediaSizeWidget = function VeUiMediaSizeWidget( scalable, config ) {
 		label: ve.msg( 'visualeditor-mediasizewidget-label-scale-percent' )
 	} );
 
+	if ( this.scalable instanceof ve.dm.Scalable ) {
+		isFixedRatio = this.scalable.isFixedRatio();
+	}
 	this.dimensionsWidget = new ve.ui.DimensionsWidget( { validate: this.isValid.bind( this ) } );
+	this.updateProportionalToggle = new OO.ui.ToggleButtonWidget( {
+		value: isFixedRatio,
+		disabled: true,
+		icon: 'link'
+	} );
 
 	// Error label is available globally so it can be displayed and
 	// hidden as needed
@@ -74,6 +83,13 @@ ve.ui.MediaSizeWidget = function VeUiMediaSizeWidget( scalable, config ) {
 			// TODO: when upright is supported by Parsoid
 			// classes: ['ve-ui-mediaSizeWidget-section-scale'],
 			label: ve.msg( 'visualeditor-mediasizewidget-label-scale' )
+		}
+	);
+	fieldUpdate = new OO.ui.FieldLayout(
+		this.updateProportionalToggle, {
+			align: 'inline',
+			label: ve.msg( 'visualeditor-mediasizewidget-label-proportional' ),
+			help: ve.msg( 'visualeditor-mediasizewidget-label-proportional-help' )
 		}
 	);
 	// TODO: when upright is supported by Parsoid
@@ -97,6 +113,7 @@ ve.ui.MediaSizeWidget = function VeUiMediaSizeWidget( scalable, config ) {
 		.addClass( 've-ui-mediaSizeWidget' )
 		.append(
 			this.sizeTypeSelectWidget.$element,
+			fieldUpdate.$element,
 			// TODO: when upright is supported by Parsoid
 			// fieldScale.$element,
 			fieldCustom.$element,
@@ -110,6 +127,9 @@ ve.ui.MediaSizeWidget = function VeUiMediaSizeWidget( scalable, config ) {
 	this.dimensionsWidget.connect( this, {
 		widthChange: [ 'onDimensionsChange', 'width' ],
 		heightChange: [ 'onDimensionsChange', 'height' ]
+	} );
+	this.updateProportionalToggle.connect( this, {
+		change: [ 'onProportionalChange' ]
 	} );
 	// TODO: when upright is supported by Parsoid
 	// this.scaleInput.connect( this, { change: 'onScaleChange' } );
@@ -210,6 +230,17 @@ ve.ui.MediaSizeWidget.prototype.onDimensionsChange = function ( type, value ) {
 		this.setSizeType( 'custom' );
 		if ( $.isNumeric( value ) ) {
 			dimensions[ type ] = Number( value );
+			// update the proportional update toggle button to represent the actual state
+			this.updateProportionalToggle.setValue( this.getScalable().isFixedRatio() );
+			// check, if the other dimension should be automatically calculated, too
+			if ( !this.getScalable().isFixedRatio() ) {
+				// fill the opposite value (height -> width; width -> height)
+				if ( type === 'height' ) {
+					dimensions.width = this.scalable.getCurrentDimensions().width;
+				} else {
+					dimensions.height = this.scalable.getCurrentDimensions().height;
+				}
+			}
 			this.setCurrentDimensions( dimensions );
 		} else {
 			this.validateDimensions();
@@ -251,11 +282,15 @@ ve.ui.MediaSizeWidget.prototype.onSizeTypeChoose = function ( item ) {
 	} else if ( selectedType === 'scale' ) {
 		// Disable the dimensions widget
 		this.dimensionsWidget.setDisabled( true );
+		// Disable the proportional checkbox
+		this.updateProportionalToggle.setDisabled( false );
 		// Enable the scale input
 		this.scaleInput.setDisabled( false );
 	} else if ( selectedType === 'custom' ) {
 		// Enable the dimensions widget
 		this.dimensionsWidget.setDisabled( false );
+		// Show the "Update proportional" checkbox
+		this.updateProportionalToggle.setDisabled( false );
 		// Disable the scale input
 		this.scaleInput.setDisabled( true );
 		// If we were default size before, set the current dimensions to the default size
@@ -267,6 +302,16 @@ ve.ui.MediaSizeWidget.prototype.onSizeTypeChoose = function ( item ) {
 
 	this.emit( 'changeSizeType', selectedType );
 	this.validateDimensions();
+};
+
+/**
+ * Respond to change of the proportional toggle button.
+ *
+ * @param {boolean} updateProportional If the scalable should scale proportional
+ */
+ve.ui.MediaSizeWidget.prototype.onProportionalChange = function ( updateProportional ) {
+	console.log(updateProportional);
+	this.scalable.setFixedRatio( updateProportional );
 };
 
 /**
