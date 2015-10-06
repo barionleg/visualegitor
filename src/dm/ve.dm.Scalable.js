@@ -500,6 +500,13 @@ ve.dm.Scalable.prototype.isFixedRatio = function () {
 };
 
 /**
+ * Set, if this Scalable has a fixed ratio or not.
+ */
+ve.dm.Scalable.prototype.setFixedRatio = function ( fixedRatio ) {
+	this.fixedRatio = fixedRatio;
+}
+
+/**
  * Get the current scale of the object
  *
  * @return {number|null} A scale (1=100%), or null if not applicable

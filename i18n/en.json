@@ -99,6 +99,8 @@
 	"visualeditor-listbutton-number-tooltip": "Numbered list",
 	"visualeditor-mediasizewidget-button-originaldimensions": "Make full size",
 	"visualeditor-mediasizewidget-label-custom": "Custom",
+	"visualeditor-mediasizewidget-label-proportional": "Proportional",
+	"visualeditor-mediasizewidget-label-proportional-help": "Should the image be scaled proportionally?",
 	"visualeditor-mediasizewidget-label-defaulterror": "Size values are invalid.",
 	"visualeditor-mediasizewidget-label-scale": "Scale",
 	"visualeditor-mediasizewidget-label-scale-percent": "% of thumbnail size",
