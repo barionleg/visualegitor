@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_49092f2e",
+        "filename": "src/ce/ve.ce.Document.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-10-16T16:54:38Z",
+      "side": 1,
+      "message": "duck typing may be quicker but it might be better to use a more explicit test for clarity and robustness:\n\n if ( node instanceof ve.ce.ContentBranchNode ) {",
+      "revId": "8759bcec3da1442aaec1e63fb26edebe2d0e7944",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
