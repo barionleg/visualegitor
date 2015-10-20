@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_ee849060",
+        "filename": ".mailmap",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-10-20T15:06:22Z",
+      "side": 1,
+      "message": "This won\u0027t work. You need to also map your existing e-mail over. See e.g. how Alex does it to re-credit his \"krenair@wikimedia.org\" work to \"krenair@gmail.com\".",
+      "revId": "28decab736c588f5f8068ee3f1e25944357984ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
