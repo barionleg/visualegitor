@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_9f7c20b6",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 1374,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2015-10-20T20:42:37Z",
+      "side": 0,
+      "message": "Property \u0027contenteditable\u0027 doesn\u0027t exist, but it worked because jQuery propFix maps contenteditable to contentEditable, as its a common mistake to assume attribute names (lowercase HTML) map directly to property names (camelcase DOM).",
+      "revId": "4393fcdb1830e2e3e8b86fa4c8cddb0af08baec1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
