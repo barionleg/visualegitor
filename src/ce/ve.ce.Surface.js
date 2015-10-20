@@ -1350,6 +1350,8 @@ ve.ce.Surface.prototype.afterDocumentKeyDown = function ( e ) {
 	 * If ce=false then we have landed inside the focusable node.
 	 * If we land in a non-text position, assume we should have hit the node
 	 * immediately after the position we hit (in the direction of motion)
+	 * If we land inside a sequence of grouped nodes, assume we should treat them as a
+	 * unit instead of letting the cursor slip inside them.
 
 	 * @private
 	 * @param {Node} DOM node of cursor position
@@ -1358,7 +1360,7 @@ ve.ce.Surface.prototype.afterDocumentKeyDown = function ( e ) {
 	 * @return {ve.ce.Node|null} node, or null if not in a focusable node
 	 */
 	function getSurroundingFocusableNode( node, offset, direction ) {
-		var focusNode, $focusNode;
+		var focusNode;
 		if ( node.nodeType === Node.TEXT_NODE ) {
 			focusNode = node;
 		} else if ( direction > 0 && offset < node.childNodes.length ) {
@@ -1368,13 +1370,10 @@ ve.ce.Surface.prototype.afterDocumentKeyDown = function ( e ) {
 		} else {
 			focusNode = node;
 		}
-		$focusNode = $( focusNode );
-		// If the first ancestor with contenteditable set is ce=true, then we are allowed
-		// to be inside this focusalbe node (e.g. editing a table cell or caption)
-		if ( $focusNode.closest( '[contenteditable]' ).prop( 'contenteditable' ) ) {
+		if ( ( focusNode.nodeType === Node.TEXT_NODE ? focusNode.parentNode : focusNode ).isContentEditable ) {
 			return null;
 		}
-		return $focusNode.closest( '.ve-ce-focusableNode, .ve-ce-tableNode' ).data( 'view' ) || null;
+		return $( focusNode ).closest( '.ve-ce-focusableNode, .ve-ce-tableNode' ).data( 'view' ) || null;
 	}
 
 	/**
