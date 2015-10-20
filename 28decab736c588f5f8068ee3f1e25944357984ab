@@ -16,6 +16,24 @@
       "revId": "28decab736c588f5f8068ee3f1e25944357984ab",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_8ea0748e",
+        "filename": ".mailmap",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-10-20T15:35:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_ee849060",
+      "revId": "28decab736c588f5f8068ee3f1e25944357984ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
