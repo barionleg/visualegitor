@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_7815ca3f",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 1379,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-10-20T08:20:12Z",
+      "side": 1,
+      "message": "Wait, I think your fix proves that the problem is actually with this line :-)\n\nThe expression $node.prop( \u0027contenteditable\u0027 ) actually returns a string, so we should really be checking for \u003d\u003d\u003d \u0027true\u0027 here. Then line 1382 below can run and everything should work.",
+      "revId": "bb5fadd0be5f58158adbc8f2a3bf6e423cf6c611",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
