@@ -1000,17 +1000,24 @@ ve.ce.Surface.prototype.onDocumentDragStart = function ( e ) {
  */
 ve.ce.Surface.prototype.onDocumentDragOver = function ( e ) {
 	var $target, $dropTarget, node, dropPosition, targetPosition, top, left,
-		nodeType, inIgnoreChildren;
-	if ( !this.relocatingNode ) {
+		isContent, nodeType, inIgnoreChildren;
+
+	if ( this.relocatingNode ) {
+		isContent = this.relocatingNode.isContent();
+		nodeType = this.relocatingNode.getType();
+	// dataTransfer.types is Array-like, but not an Array
+	} else if ( Array.prototype.indexOf.call( ve.getProp( e.originalEvent.dataTransfer, 'types' ) || [], 'Files' ) !== -1 ) {
+		isContent = false;
+		nodeType = 'alienBlock';
+	} else {
 		return;
 	}
 
-	if ( !this.relocatingNode.isContent() ) {
+	if ( !isContent ) {
 		e.preventDefault();
 		$target = $( e.target ).closest( '.ve-ce-branchNode, .ve-ce-leafNode' );
 		if ( $target.length ) {
 			// Find the nearest node which will accept this node type
-			nodeType = this.relocatingNode.getType();
 			node = $target.data( 'view' );
 			while ( node.parent && !node.parent.isAllowedChildNodeType( nodeType ) ) {
 				node = node.parent;
@@ -1089,7 +1096,7 @@ ve.ce.Surface.prototype.onDocumentDrop = function ( e ) {
 	e.preventDefault();
 
 	// Determine drop position
-	if ( this.relocatingNode && !this.relocatingNode.getModel().isContent() ) {
+	if ( $dropTarget ) {
 		// Block level drag and drop: use the lastDropTarget to get the targetOffset
 		if ( $dropTarget ) {
 			targetRange = $dropTarget.data( 'view' ).getModel().getOuterRange();
@@ -2783,11 +2790,11 @@ ve.ce.Surface.prototype.endRelocation = function () {
 	if ( this.relocatingNode ) {
 		this.emit( 'relocationEnd', this.relocatingNode );
 		this.relocatingNode = null;
-		if ( this.$lastDropTarget ) {
-			this.$dropMarker.addClass( 'oo-ui-element-hidden' );
-			this.$lastDropTarget = null;
-			this.lastDropPosition = null;
-		}
+	}
+	if ( this.$lastDropTarget ) {
+		this.$dropMarker.addClass( 'oo-ui-element-hidden' );
+		this.$lastDropTarget = null;
+		this.lastDropPosition = null;
 	}
 };
 
