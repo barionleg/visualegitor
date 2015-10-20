@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_f8ad3ae8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-10-20T09:05:13Z",
+      "side": 1,
+      "message": "Note that even when you have a proper contiguous ce\u003dfalse region, browsers don\u0027t always effectively prevent the cursor from entering. It\u0027s not always the \"police line do not cross\" that it should be.",
+      "revId": "a911a20869499ddd09ac40209fbfbbde777a8d98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
