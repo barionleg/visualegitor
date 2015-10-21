@@ -16,6 +16,23 @@
       "revId": "a911a20869499ddd09ac40209fbfbbde777a8d98",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_d1b044da",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 1373,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-10-21T17:51:40Z",
+      "side": 1,
+      "message": "let\u0027s stick with .prop(\u0027ce\u0027) \u003d\u003d\u003d \u0027true\u0027 and file a techdebt bug to fix all these in one go...",
+      "revId": "a911a20869499ddd09ac40209fbfbbde777a8d98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
