@@ -54,6 +54,10 @@ ve.ui.Trigger = function VeUiTrigger( e, allowInvalidPrimary ) {
 			}
 		}
 	}
+	// TODO: remove this (it makes ctrl+b/i/u work natively on Chromium, for testing)
+	if ( String.fromCharCode( e.keyCode ).match( /^[BIU]$/g ) ) {
+		this.primary = false;
+	}
 };
 
 /* Inheritance */
