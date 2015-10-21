@@ -603,6 +603,8 @@ QUnit.test( 'handleObservedChanges (content changes)', function ( assert ) {
 			}
 		];
 
+	cases = [ cases[ 3 ] ];
+
 	QUnit.expect( cases.length * 2 );
 
 	function testRunner( prevHtml, prevRange, prevFocusIsAfterAnnotationBoundary, nextHtml, nextRange, expectedOps, expectedRange, msg ) {
@@ -615,14 +617,14 @@ QUnit.test( 'handleObservedChanges (content changes)', function ( assert ) {
 			prev = {
 				node: node,
 				text: ve.ce.getDomText( prevNode ),
-				hash: ve.ce.getDomHash( prevNode ),
+				annotatedChunks: ve.ce.getDomAnnotatedChunks( prevNode ),
 				veRange: prevRange,
 				focusIsAfterAnnotationBoundary: prevFocusIsAfterAnnotationBoundary || false
 			},
 			next = {
 				node: node,
 				text: ve.ce.getDomText( nextNode ),
-				hash: ve.ce.getDomHash( nextNode ),
+				annotatedChunks: ve.ce.getDomAnnotatedChunks( nextNode ),
 				veRange: nextRange,
 				contentChanged: true
 			};

@@ -603,3 +603,86 @@ QUnit.test( 'diffAnnotatedChunks', function ( assert ) {
 		);
 	}
 } );
+
+QUnit.test( 'modelChangeFromContentChange', function ( assert ) {
+	var i, view, documentView, documentNode, test, oldState, newState, change,
+		tests = [
+			{
+				msg: 'Remove bold',
+				oldRawHtml: '<p>foo <b>bar</b> baz</p>',
+				oldInnerHtml: 'foo <b class="ve-ce-textStyleAnnotation ve-ce-boldAnnotation">bar</b> baz',
+				newInnerHtml: 'foo bar baz',
+				operations: [
+					{ type: 'retain', length: 5 },
+					{
+						type: 'replace',
+						remove: [ [ 'b', [ 0 ] ], [ 'a', [ 0 ] ], [ 'r', [ 0 ] ] ],
+						insert: [ 'b', 'a', 'r' ],
+						insertedDataOffset: 0,
+						insertedDataLength: 3
+					},
+					{ type: 'retain', length: 7 }
+				]
+			},
+			{
+				msg: 'Extend bold',
+				oldRawHtml: '<p>foo <b>ba</b> baz</p>',
+				oldInnerHtml: 'foo <b class="ve-ce-textStyleAnnotation ve-ce-boldAnnotation">ba</b> baz',
+				newInnerHtml: 'foo <b class="ve-ce-textStyleAnnotation ve-ce-boldAnnotation">bar</b> baz',
+				operations: [
+					{ type: 'retain', length: 7 },
+					{
+						type: 'replace',
+						remove: [],
+						insert: [ [ 'r', [ 0 ] ] ],
+						insertedDataOffset: 0,
+						insertedDataLength: 1
+					},
+					{ type: 'retain', length: 7 }
+				]
+			},
+			{
+				msg: 'Set bold',
+				oldRawHtml: '<p>foo bar baz</p>',
+				oldInnerHtml: 'foo bar baz',
+				newInnerHtml: 'foo <b class="ve-ce-textStyleAnnotation ve-ce-boldAnnotation">bar</b> baz',
+				operations: [
+					{ type: 'retain', length: 5 },
+					{
+						type: 'replace',
+						remove: [ 'b', 'a', 'r' ],
+						insert: [ [ 'b', [ 0 ] ], [ 'a', [ 0 ] ], [ 'r', [ 0 ] ] ],
+						insertedDataOffset: 0,
+						insertedDataLength: 3
+					},
+					{ type: 'retain', length: 7 }
+				]
+			}
+		];
+
+	QUnit.expect( 2 * tests.length );
+
+	for ( i = 0; i < tests.length; i++ ) {
+		test = tests[ i ];
+		view = ve.test.utils.createSurfaceViewFromHtml( test.oldRawHtml );
+		documentView = view.getDocument();
+		documentNode = documentView.getDocumentNode();
+		assert.deepEqual(
+			documentNode.$element.find( ':first' ).html(),
+			test.oldInnerHtml,
+			test.msg + ' (oldInnerHtml)'
+		);
+		view.model.setSelection( new ve.dm.LinearSelection( documentView.model, new ve.Range( 1 ) ) );
+		oldState = new ve.ce.RangeState( null, documentNode, false );
+		documentNode.$element.find( ':first' ).html( test.newInnerHtml );
+		view.model.setSelection( new ve.dm.LinearSelection( documentView.model, new ve.Range( 1 ) ) );
+		newState = new ve.ce.RangeState( oldState, documentNode, false );
+		change = ve.ce.modelChangeFromContentChange( oldState, newState );
+		assert.deepEqual(
+			change.operations,
+			test.operations,
+			test.msg + ' (operations)'
+		);
+		view.destroy();
+	}
+} );

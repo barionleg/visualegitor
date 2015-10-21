@@ -145,6 +145,10 @@ ve.ce.getDomAnnotatedChunks = function ( element ) {
 					// with the new element clone.
 					stackStates.push(
 						stackStates[ stackStates.length - 1 ].concat(
+							// TODO: do we actually need to clone here?
+							// Wouldn't it be better to keep the actual
+							// node object, for swifter sameness
+							// comparison in the unchanged case?
 							element.cloneNode( false )
 						)
 					);
@@ -567,147 +571,89 @@ ve.ce.linkAt = function ( node ) {
  * @param {ve.ce.RangeState} oldState The prior range state
  * @param {ve.ce.RangeState} newState The changed range state
  *
- * @return {Object} Results of analysis
- * @return {ve.dm.Transaction} return.transaction Transaction corresponding to the DOM content change
- * @return {ve.dm.Selection} return.selection Changed selection to apply (TODO: unsafe / useless?)
- * @return {boolean} return.rerender Whether the DOM needs rerendering after applying the transaction
+ * @return {ve.dm.Transaction} Transaction corresponding to the DOM content change
  */
 ve.ce.modelChangeFromContentChange = function ( oldState, newState ) {
-	var data, len, annotations, bothCollapsed, oldStart, newStart, replacementRange,
-		fromLeft = 0,
-		fromRight = 0,
+	var splices, tx, endOffset, adjust, i, iLen, splice, data, annotations, newAnnotations,
+		j, jLen, tag, modelClass, ann,
 		// It is guaranteed that oldState.node === newState.node , so just call it 'node'
 		node = newState.node,
 		nodeOffset = node.getModel().getOffset(),
-		oldText = oldState.text,
-		newText = newState.text,
-		oldRange = oldState.veRange,
-		newRange = newState.veRange,
-		oldData = oldText.split( '' ),
-		newData = newText.split( '' ),
-		lengthDiff = newText.length - oldText.length,
 		dmDoc = node.getModel().getDocument(),
 		modelData = dmDoc.data;
 
-	bothCollapsed = oldRange.isCollapsed() && newRange.isCollapsed();
-	oldStart = oldRange.start - nodeOffset - 1;
-	newStart = newRange.start - nodeOffset - 1;
-
-	// If the only change is an insertion just before the new cursor, then apply a
-	// single insertion transaction, using the annotations from the old start
-	// position (accounting for whether the cursor was before or after an annotation
-	// boundary)
-	if (
-		bothCollapsed &&
-		lengthDiff > 0 &&
-		oldText.slice( 0, oldStart ) === newText.slice( 0, oldStart ) &&
-		oldText.slice( oldStart ) === newText.slice( newStart )
-	) {
-		data = newData.slice( oldStart, newStart );
-		if ( node.unicornAnnotations ) {
-			annotations = node.unicornAnnotations;
-		} else {
-			annotations = modelData.getInsertionAnnotationsFromRange(
-				oldRange,
-				oldState.focusIsAfterAnnotationBoundary
+	splices = ve.ce.diffAnnotatedChunks( oldState.annotatedChunks, newState.annotatedChunks );
+	tx = new ve.dm.Transaction( dmDoc );
+	endOffset = 0;
+	adjust = 0;
+	for ( i = 0, iLen = splices.length; i < iLen; i++ ) {
+		splice = splices[ i ];
+		if ( splice.type === 'remove' ) {
+			endOffset = tx.pushRemoval(
+				dmDoc,
+				endOffset,
+				new ve.Range(
+					nodeOffset + 1 + splice.offset + adjust,
+					nodeOffset + 1 + splice.offset + splice.text.length + adjust
+				)
 			);
+			adjust += splice.text.length;
+		} else if ( splice.type === 'insert' ) {
+			data = splice.text.split( '' );
+			if ( splice.annotations ) {
+				if ( splice.annotations.offset === 'unicorn' ) {
+					if ( node.unicornAnnotations ) {
+						annotations = node.unicornAnnotations;
+					} else {
+						annotations = new ve.dm.AnnotationSet(
+							modelData.getStore()
+						);
+					}
+					// Else unicornAnnotations unexpectedly missing: do not annotate
+				} else {
+					annotations = modelData.getInsertionAnnotationsFromRange(
+						new ve.Range( nodeOffset + 1 + splice.annotations.offset ),
+						true
+					);
+				}
+				if ( splice.annotations.exact ) {
+					newAnnotations = annotations;
+				} else {
+					// Collect applicable old annotations in old order (to
+					// minimize browser-originated spurious ordering)
+					newAnnotations = new ve.dm.AnnotationSet(
+						modelData.getStore()
+					);
+					for ( j = 0, jLen = splice.tags.length; j < jLen; j++ ) {
+						tag = splice.tags[ j ];
+						modelClass = ve.dm.modelRegistry.lookup(
+							ve.dm.modelRegistry.matchElement( tag )
+						);
+						ann = ve.dm.annotationFactory.createFromElement(
+							ve.dm.converter.createDataElements(
+								modelClass,
+								[ tag ]
+							)[ 0 ]
+						);
+						if ( !( ann instanceof ve.dm.Annotation ) ) {
+							// Erroneous tag; nothing we can do with it
+							throw new Error( 'Weird class:' + modelClass );
+							// continue;
+						}
+						newAnnotations.add(
+							annotations.getComparable( ann ) || ann
+						);
+					}
+				}
+			}
+			ve.dm.Document.static.addAnnotationsToData( data, newAnnotations );
+			endOffset = tx.pushInsertion( dmDoc, endOffset, nodeOffset + 1 + splice.offset + adjust, data );
+		} else {
+			throw new Error( 'Unknown splice type: ' + splice.type );
 		}
-
-		if ( annotations.getLength() ) {
-			ve.dm.Document.static.addAnnotationsToData( data, annotations );
-		}
-
-		return {
-			transaction: ve.dm.Transaction.newFromInsertion(
-				dmDoc,
-				oldRange.start,
-				data
-			),
-			selection: new ve.dm.LinearSelection( dmDoc, newRange ),
-			rerender: false
-		};
 	}
-
-	// If the only change is a removal touching the old cursor position, then apply
-	// a single removal transaction.
-	if (
-		bothCollapsed &&
-		lengthDiff < 0 &&
-		oldText.slice( 0, newStart ) === newText.slice( 0, newStart ) &&
-		oldText.slice( newStart - lengthDiff ) === newText.slice( newStart )
-	) {
-		return {
-			transaction: ve.dm.Transaction.newFromRemoval(
-				dmDoc,
-				new ve.Range( newRange.start, newRange.start - lengthDiff )
-			),
-			selection: new ve.dm.LinearSelection( dmDoc, newRange ),
-			rerender: false
-		};
-	}
-
-	// Complex change (either removal+insertion or insertion not just before new cursor)
-	// 1. Count unchanged characters from left and right;
-	// 2. Assume that the minimal changed region indicates the replacement made by the user;
-	// 3. Hence guess how to map annotations.
-	// N.B. this logic can go wrong; e.g. this code will see slice->slide and
-	// assume that the user changed 'c' to 'd', but the user could instead have changed 'ic'
-	// to 'id', which would map annotations differently.
-
-	len = Math.min( oldData.length, newData.length );
-
-	while ( fromLeft < len && oldData[ fromLeft ] === newData[ fromLeft ] ) {
-		++fromLeft;
-	}
-
-	while (
-		fromRight < len - fromLeft &&
-		oldData[ oldData.length - 1 - fromRight ] ===
-		newData[ newData.length - 1 - fromRight ]
-	) {
-		++fromRight;
-	}
-	replacementRange = new ve.Range(
-		nodeOffset + 1 + fromLeft,
-		nodeOffset + 1 + oldData.length - fromRight
-	);
-	data = newData.slice( fromLeft, newData.length - fromRight );
-
-	if ( node.unicornAnnotations ) {
-		// This CBN is unicorned. Use the stored annotations.
-		annotations = node.unicornAnnotations;
-	} else {
-		// Guess the annotations from the (possibly empty) range being replaced.
-		//
-		// Still consider focusIsAfterAnnotationBoundary, even though the change is
-		// not necessarily at the cursor: assume the old focus was inside the same
-		// DOM text node as the insertion, and therefore has the same annotations.
-		// Otherwise, when using an IME that selects inserted text, this code path
-		// can cause an annotation discrepancy that triggers an unwanted re-render,
-		// closing the IME (For example, when typing at the start of <p><i>x</i></p>
-		// in Windows 8.1 Korean on IE11).
-		annotations = modelData.getInsertionAnnotationsFromRange(
-			replacementRange,
-			oldRange.isCollapsed() && oldState.focusIsAfterAnnotationBoundary
-		);
-	}
-	if ( annotations.getLength() ) {
-		ve.dm.Document.static.addAnnotationsToData( data, annotations );
-	}
-	if ( newRange.isCollapsed() ) {
-		// TODO: Remove this, or comment why it's necessary
-		// (When wouldn't we be at a cursor offset?)
-		newRange = new ve.Range( dmDoc.getNearestCursorOffset( newRange.start, 1 ) );
-	}
-	return {
-		transaction: ve.dm.Transaction.newFromReplacement(
-			dmDoc,
-			replacementRange,
-			data
-		),
-		selection: new ve.dm.LinearSelection( dmDoc, newRange ),
-		rerender: true
-	};
+	tx.pushFinalRetain( dmDoc, endOffset );
+	return tx;
 };
 
 ve.ce.diffAnnotatedChunks = function ( oldChunks, newChunks ) {
@@ -760,7 +706,10 @@ ve.ce.diffAnnotatedChunks = function ( oldChunks, newChunks ) {
 			return false;
 		}
 		for ( i = 0, len = newTags.length; i < len; i++ ) {
-			if ( !newTags[ i ].isEqualNode( oldTags[ i ] ) ) {
+			if (
+				newTags[ i ] !== oldTags[ i ] &&
+				!newTags[ i ].isEqualNode( oldTags[ i ] )
+			) {
 				return false;
 			}
 		}
