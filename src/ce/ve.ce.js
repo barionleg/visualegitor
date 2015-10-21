@@ -85,6 +85,103 @@ ve.ce.getDomText = function ( element ) {
 };
 
 /**
+ * Get text node list with linearized annotations.
+ *
+ * Work at a chunk level to help distinguish browser tag degradation (span->b) from real changes
+ */
+ve.ce.getDomAnnotatedChunks = function ( element ) {
+	var func, i,
+		// Copy-on-write stack of stack states. Each item is a stack of annotation tags in
+		// force that has one more element than the previous item. This means we can use
+		// the same stack state object for chunks that are inside the same annotation tags.
+		stackStates = [ [] ],
+		chunks = [];
+
+	func = function ( element ) {
+		var viewNode, child,
+			nodeType = element.nodeType,
+			$element = $( element );
+
+		if (
+			nodeType === Node.ELEMENT_NODE ||
+			nodeType === Node.DOCUMENT_NODE ||
+			nodeType === Node.DOCUMENT_FRAGMENT_NODE
+		) {
+			if ( $element.hasClass( 've-ce-branchNode-blockSlug' ) ) {
+				// Block slugs are not represented in the model at all, but they do
+				// contain a single nbsp/FEFF character in the DOM, so make sure
+				// that character isn't counted
+				return;
+			} else if ( $element.hasClass( 've-ce-cursorHolder' ) ) {
+				// Cursor holders do not exist in the model
+				return;
+			} else if ( $element.hasClass( 've-ce-leafNode' ) ) {
+				// For leaf nodes, don't return the content, but return
+				// the right number of placeholder characters so the offsets match up.
+				viewNode = $element.data( 'view' );
+				// Only return snowmen for the first element in a sibling group: otherwise
+				// we'll double-count this node
+				if ( viewNode && element === viewNode.$element[ 0 ] ) {
+					// \u2603 is the snowman character: ☃
+					chunks.push( {
+						text: new Array( viewNode.getOuterLength() + 1 )
+							.join( '\u2603' ),
+						tags: stackStates[ stackStates.length - 1 ]
+					} );
+				}
+				// Second or subsequent sibling, don't double-count
+			} else if ( $element.hasClass( 've-ce-unicorn' ) ) {
+				chunks.push( {
+					text: '',
+					type: 'unicorn',
+					tags: stackStates[ stackStates.length - 1 ]
+				} );
+			} else {
+				if ( !ve.isBlockElement( element ) ) {
+					// Take a shallow clone of the annotation element (inc.
+					// attributes but no child nodes) and effectively push it
+					// onto the stack in a copy-on-write manner. To be precise,
+					// push a new state that includes the old state together
+					// with the new element clone.
+					stackStates.push(
+						stackStates[ stackStates.length - 1 ].concat(
+							element.cloneNode( false )
+						)
+					);
+				}
+				for ( child = element.firstChild; child; child = child.nextSibling ) {
+					func( child );
+				}
+				if ( !ve.isBlockElement( element ) ) {
+					// Pop back to the state before this element was pushed
+					stackStates.pop();
+				}
+			}
+		} else if ( nodeType === Node.TEXT_NODE ) {
+			// The text, with non-breaking spaces replaced by spaces
+			chunks.push( {
+				text: element.data.replace( /\u00A0/g, ' ' ),
+				tags: stackStates[ stackStates.length - 1 ]
+			} );
+		}
+	};
+	func( element );
+	// Merge adjacent chunks with equal tags
+	for ( i = chunks.length - 1; i > 0; i-- ) {
+		if (
+			// Object equality is fine here because of the copy on write above
+			chunks[ i ].tags === chunks[ i - 1 ].tags &&
+			chunks[ i ].type === undefined &&
+			chunks[ i - 1 ].type === undefined
+		) {
+			chunks[ i - 1 ].text += chunks[ i ].text;
+			chunks.splice( i, 1 );
+		}
+	}
+	return chunks;
+};
+
+/**
  * Gets a hash of a DOM element's structure.
  *
  * In the returned string text nodes are represented as "#" and elements are represented as "<type>"
@@ -611,4 +708,215 @@ ve.ce.modelChangeFromContentChange = function ( oldState, newState ) {
 		selection: new ve.dm.LinearSelection( dmDoc, newRange ),
 		rerender: true
 	};
+};
+
+ve.ce.diffAnnotatedChunks = function ( oldChunks, newChunks ) {
+	var chunkChanges, before, after, beforeStart, afterStart, beforeEnd, afterEnd, chunk,
+		fromLeft, fromRight, replacementOffset, chunkOffset, i, iLen, j, jLen, text,
+		tags, annCandidateChunks, annotationMatches, matchOffset, bestMatchOffset,
+		bestMatchChunk,
+		missing, leastMissing,
+		splices = [];
+
+	/**
+	 * Count tags in newTags but not in oldTags (set difference)
+	 * Note this can return 0 even if newTags differs from oldTags
+	 *
+	 * @param {Node[]} newTags New annotation elements
+	 * @param {Node[]} oldTags Old annotation elements
+	 * @return {number} Number of tags in newTags but not in oldTags
+	 */
+	function countMissing( newTags, oldTags ) {
+		var i, iLen, j, jLen, jWrapped,
+			jGuess = 0,
+			missing = 0;
+		NEW_TAGS:
+		for ( i = 0, iLen = newTags.length; i < iLen; i++ ) {
+			// Search every oldTag. For faster results on same-ordered matching runs,
+			// start at jGuess (the index after the last match) and wrap round.
+			for ( j = 0, jLen = oldTags.length; j < jLen; j++ ) {
+				jWrapped = ( j + jGuess ) % jLen;
+				if ( newTags[ i ].isEqualNode( oldTags[ jWrapped ] ) ) {
+					jGuess = jWrapped + 1;
+					continue NEW_TAGS;
+				}
+			}
+			missing++;
+		}
+		return missing;
+	}
+
+	/**
+	 * Test whether two tag lists are exactly the same (including order).
+	 * This is fast, to short-circuit the slower checks in the common text input case.
+	 *
+	 * @param {Node[]} newTags New annotation elements
+	 * @param {Node[]} oldTags Old annotation elements
+	 * @return {boolean} Whether the tag lists are exactly the same
+	 */
+	function isSameTags( newTags, oldTags ) {
+		var i, len;
+		if ( newTags.length !== oldTags.length ) {
+			return false;
+		}
+		for ( i = 0, len = newTags.length; i < len; i++ ) {
+			if ( !newTags[ i ].isEqualNode( oldTags[ i ] ) ) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	// Find minimal range of chunks that have changed (either in text or tags)
+	chunkChanges = ve.diffSequences( oldChunks, newChunks, function ( x, y ) {
+		return x.text === y.text && isSameTags( x.tags, y.tags );
+	} );
+	before = chunkChanges.before;
+	after = chunkChanges.after;
+
+	// Find minimal range of text that has not changed annotation (only chunk)
+	fromLeft = 0;
+	fromRight = 0;
+
+	if (
+		( beforeStart = before[ 0 ] ) &&
+		( afterStart = after[ 0 ] ) &&
+		isSameTags( beforeStart.tags, afterStart.tags )
+	) {
+		while ( beforeStart.text[ fromLeft ] === afterStart.text[ fromLeft ] ) {
+			// This cannot exhaust both beforeStart and afterStart, as chunk is changed
+			fromLeft++;
+		}
+	}
+
+	if (
+		( beforeEnd = before[ before.length - 1 ] ) &&
+		( afterEnd = after[ after.length - 1 ] ) &&
+		isSameTags( beforeEnd.tags, afterEnd.tags )
+	) {
+		while (
+			// Extra check to ensure fromRight does not overlap with fromLeft in either
+			// the before chunks or the after chunks
+			( before.length > 1 || beforeEnd.text.length > fromLeft + fromRight ) &&
+			( after.length > 1 || afterEnd.text.length > fromLeft + fromRight ) &&
+			beforeEnd.text[ beforeEnd.text.length - 1 - fromRight ] ===
+				afterEnd.text[ afterEnd.text.length - 1 - fromRight ]
+		) {
+			// This cannot exhaust both beforeEnd and afterEnd, as chunk is changed
+			fromRight++;
+		}
+	}
+
+	// Find the model offset of the first replaced chunk
+	replacementOffset = oldChunks.slice( 0, chunkChanges.retainStart ).reduce( function ( total, chunk ) {
+		return total + chunk.text.length;
+	}, 0 );
+
+	// Build list of annotation candidate chunks: those replaced or adjacent to the change
+	annCandidateChunks = before.slice();
+	if ( fromLeft === 0 && chunkChanges.retainStart > 0 ) {
+		// The chunk before the replacement is adjacent to the change; prepend it
+		chunk = oldChunks[ chunkChanges.retainStart - 1 ];
+		annCandidateChunks.unshift( chunk );
+		// Move the offset to include this chunk
+		chunkOffset = replacementOffset - chunk.text.length;
+	} else {
+		chunkOffset = replacementOffset;
+	}
+
+	if ( fromRight === 0 && chunkChanges.retainEnd > 0 ) {
+		// The chunk after the replacement is adjacent to the change; append it
+		chunk = oldChunks[ oldChunks.length - chunkChanges.retainEnd ];
+		annCandidateChunks.push( chunk );
+	}
+
+	// For each new annotated chunk, find matching annotations in annCandidateChunks .
+	annotationMatches = [];
+	NEW_ANNOTATIONS:
+	for ( i = 0, iLen = after.length; i < iLen; i++ ) {
+		// O(n^2) is fine here: after.length is probably 0 or 1 (occasionally 2 or 3).
+		tags = after[ i ].tags;
+		// 1. Search for single chunk with identical tag list.
+		matchOffset = chunkOffset;
+		for ( j = 0, jLen = annCandidateChunks.length; j < jLen; j++ ) {
+			chunk = annCandidateChunks[ j ];
+			if ( isSameTags( chunk.tags, tags ) ) {
+				annotationMatches.push( {
+					offset: chunk.type === 'unicorn' ? 'unicorn' : matchOffset,
+					exact: true
+				} );
+				continue NEW_ANNOTATIONS;
+			}
+			matchOffset += chunk.text.length;
+		}
+		// 2. No such single chunk: find the chunk whose tag list covers best
+		// (chosing the startmost of any tying chunks)
+		bestMatchChunk = null;
+		bestMatchOffset = null;
+		leastMissing = Infinity;
+		matchOffset = chunkOffset;
+		for ( j = 0, jLen = annCandidateChunks.length; j < jLen; j++ ) {
+			chunk = annCandidateChunks[ j ];
+			missing = countMissing( tags, chunk.tags );
+			if ( missing < leastMissing ) {
+				leastMissing = missing;
+				bestMatchChunk = chunk;
+				bestMatchOffset = matchOffset;
+			}
+			if ( missing === 0 ) {
+				break;
+			}
+			matchOffset += chunk.text.length;
+		}
+		if ( bestMatchOffset !== null ) {
+			annotationMatches.push( {
+				offset: bestMatchChunk.type === 'unicorn' ? 'unicorn' : bestMatchOffset,
+				exact: false
+			} );
+		} else {
+			annotationMatches.push( null );
+		}
+	}
+
+	replacementOffset += fromLeft;
+
+	for ( i = 0, iLen = before.length; i < iLen; i++ ) {
+		text = before[ i ].text;
+		if ( i === 0 ) {
+			text = text.slice( fromLeft );
+		}
+		if ( i === iLen - 1 ) {
+			text = text.slice( 0, text.length - fromRight );
+		}
+		if ( text === '' ) {
+			continue;
+		}
+		splices.push( {
+			type: 'remove',
+			offset: replacementOffset,
+			text: text,
+			tags: before[ i ].tags
+		} );
+	}
+	for ( i = 0, iLen = after.length; i < iLen; i++ ) {
+		text = after[ i ].text;
+		if ( i === 0 ) {
+			text = text.slice( fromLeft );
+		}
+		if ( i === iLen - 1 ) {
+			text = text.slice( 0, text.length - fromRight );
+		}
+		if ( text === '' ) {
+			continue;
+		}
+		splices.push( {
+			type: 'insert',
+			offset: replacementOffset,
+			text: text,
+			tags: after[ i ].tags,
+			annotations: annotationMatches[ i ]
+		} );
+		replacementOffset += text.length;
+	}
+	return splices;
 };
