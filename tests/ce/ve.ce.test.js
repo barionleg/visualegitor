@@ -501,3 +501,186 @@ QUnit.test( 'isAfterAnnotationBoundary', function ( assert ) {
 		);
 	}
 } );
+
+QUnit.test( 'diffAnnotatedChunks', function ( assert ) {
+	var tests, i, len, test, surface, node, oldTextState, newTextState;
+	tests = [
+		{
+			msg: 'Insert at start of bold',
+			oldHtml: 'wx<b>y</b>',
+			newHtml: 'wx<b>zy</b>',
+			diff: [
+				{ type: 'insert', offset: 2, text: 'z', tags: 'b', annotations: { offset: 2, exact: true } }
+			]
+		},
+		{
+			msg: 'Insert at start of bold in italic',
+			oldHtml: '<i>wx<b>y</b></i>',
+			newHtml: '<i>wx<b>zy</b></i>',
+			diff: [
+				{ type: 'insert', offset: 2, text: 'z', tags: 'i b', annotations: { offset: 2, exact: true } }
+			]
+		},
+		{
+			msg: 'Insert before start of bold in italic',
+			oldHtml: '<i>wx<b>y</b></i>',
+			newHtml: '<i>wxz<b>y</b></i>',
+			diff: [
+				{ type: 'insert', offset: 2, text: 'z', tags: 'i', annotations: { offset: 0, exact: true } }
+			]
+		},
+		{
+			msg: 'Insert into insertion annotation',
+			oldHtml: '<i>wx<b><img class="ve-ce-unicorn ve-ce-pre-unicorn"><img class="ve-ce-unicorn ve-ce-post-unicorn"></b>z</i>',
+			newHtml: '<i>wx<b><img class="ve-ce-unicorn ve-ce-pre-unicorn">y<img class="ve-ce-unicorn ve-ce-post-unicorn"></b>z</i>',
+			diff: [
+				{ type: 'insert', offset: 2, text: 'y', tags: 'i b', annotations: { offset: 'unicorn', exact: true } }
+			]
+		},
+		{
+			msg: 'Turn text bold',
+			oldHtml: 'foo bar baz',
+			newHtml: 'foo <b>bar</b> baz',
+			diff: [
+				{ type: 'remove', offset: 4, text: 'bar', tags: '' },
+				{ type: 'insert', offset: 4, text: 'bar', tags: 'b', annotations: { offset: 0, exact: false } }
+			]
+		},
+		{
+			msg: 'Turn text unbold',
+			oldHtml: 'foo <b>bar</b> baz',
+			newHtml: 'foo bar baz',
+			diff: [
+				{ type: 'remove', offset: 4, text: 'bar', tags: 'b' },
+				{ type: 'insert', offset: 4, text: 'bar', tags: '', annotations: { offset: 0, exact: true } }
+			]
+		},
+		{
+			msg: 'Clone bold and normal from far away',
+			oldHtml: '<b>foo</b> <i>bar</i> baz',
+			newHtml: '<b>foo</b> bar <b>baz</b>',
+			diff: [
+				{ type: 'remove', offset: 4, text: 'bar', tags: 'i' },
+				{ type: 'remove', offset: 4, text: ' baz', tags: '' },
+				{ type: 'insert', offset: 4, text: 'bar ', tags: '', annotations: { offset: 3, exact: true } },
+				{ type: 'insert', offset: 8, text: 'baz', tags: 'b', annotations: { offset: 3, exact: false } }
+			]
+		},
+		{
+			msg: 'Turn text bold in italic underline',
+			oldHtml: '<i>foo bar<u>baz</u></i>',
+			newHtml: '<i>foo <u><b>bar</b>baz</u></i>',
+			diff: [
+				{ type: 'remove', offset: 4, text: 'bar', tags: 'i' },
+				{ type: 'insert', offset: 4, text: 'bar', tags: 'i u b', annotations: { offset: 7, exact: false } }
+			]
+		}
+	];
+
+	QUnit.expect( tests.length );
+
+	for ( i = 0, len = tests.length; i < len; i++ ) {
+		test = tests[ i ];
+		surface = ve.test.utils.createSurfaceFromHtml( test.oldHtml );
+		node = surface.view.$element[ 0 ].firstChild;
+		oldTextState = new ve.ce.TextState( node );
+		node.innerHTML = test.newHtml;
+		newTextState = new ve.ce.TextState( node );
+		assert.deepEqual(
+			newTextState.getChangeTransaction(
+				oldTextState,
+				surface.model.getDocument(),
+				$.data( node, 'view' ).getOffset()
+			).operations,
+			test.diff,
+			test.msg
+		);
+	}
+} );
+
+QUnit.test( 'modelChangeFromContentChange', function ( assert ) {
+	var i, view, documentView, documentNode, test, oldState, newState, change,
+		tests = [
+			{
+				msg: 'Remove bold',
+				oldRawHtml: '<p>foo <b>bar</b> baz</p>',
+				oldInnerHtml: 'foo <b class="ve-ce-textStyleAnnotation ve-ce-boldAnnotation">bar</b> baz',
+				newInnerHtml: 'foo bar baz',
+				operations: [
+					{ type: 'retain', length: 5 },
+					{
+						type: 'replace',
+						remove: [ [ 'b', [ 0 ] ], [ 'a', [ 0 ] ], [ 'r', [ 0 ] ] ],
+						insert: [ 'b', 'a', 'r' ],
+						insertedDataOffset: 0,
+						insertedDataLength: 3
+					},
+					{ type: 'retain', length: 7 }
+				]
+			},
+			{
+				msg: 'Extend bold',
+				oldRawHtml: '<p>foo <b>ba</b> baz</p>',
+				oldInnerHtml: 'foo <b class="ve-ce-textStyleAnnotation ve-ce-boldAnnotation">ba</b> baz',
+				newInnerHtml: 'foo <b class="ve-ce-textStyleAnnotation ve-ce-boldAnnotation">bar</b> baz',
+				operations: [
+					{ type: 'retain', length: 7 },
+					{
+						type: 'replace',
+						remove: [],
+						insert: [ [ 'r', [ 0 ] ] ],
+						insertedDataOffset: 0,
+						insertedDataLength: 1
+					},
+					{ type: 'retain', length: 7 }
+				]
+			},
+			{
+				msg: 'Set bold',
+				oldRawHtml: '<p>foo bar baz</p>',
+				oldInnerHtml: 'foo bar baz',
+				newInnerHtml: 'foo <b class="ve-ce-textStyleAnnotation ve-ce-boldAnnotation">bar</b> baz',
+				operations: [
+					{ type: 'retain', length: 5 },
+					{
+						type: 'replace',
+						remove: [ 'b', 'a', 'r' ],
+						insert: [ [ 'b', [ 0 ] ], [ 'a', [ 0 ] ], [ 'r', [ 0 ] ] ],
+						insertedDataOffset: 0,
+						insertedDataLength: 3
+					},
+					{ type: 'retain', length: 7 }
+				]
+			}
+		];
+
+	QUnit.expect( 2 * tests.length );
+
+	for ( i = 0; i < tests.length; i++ ) {
+		test = tests[ i ];
+		view = ve.test.utils.createSurfaceViewFromHtml( test.oldRawHtml );
+		documentView = view.getDocument();
+		documentNode = documentView.getDocumentNode();
+		assert.deepEqual(
+			documentNode.$element.find( ':first' ).html(),
+			test.oldInnerHtml,
+			test.msg + ' (oldInnerHtml)'
+		);
+		view.model.setSelection( new ve.dm.LinearSelection( documentView.model, new ve.Range( 1 ) ) );
+		oldState = new ve.ce.RangeState( null, documentNode, false );
+		documentNode.$element.find( ':first' ).html( test.newInnerHtml );
+		view.model.setSelection( new ve.dm.LinearSelection( documentView.model, new ve.Range( 1 ) ) );
+		newState = new ve.ce.RangeState( oldState, documentNode, false );
+		change = newState.textState.getChangeTransaction(
+			oldState.textState,
+			view.model.getDocument(),
+			newState.node.getOffset()
+		);
+		assert.deepEqual(
+			change.operations,
+			test.operations,
+			test.msg + ' (operations)'
+		);
+		view.destroy();
+	}
+} );
