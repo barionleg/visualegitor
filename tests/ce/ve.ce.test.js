@@ -501,3 +501,87 @@ QUnit.test( 'isAfterAnnotationBoundary', function ( assert ) {
 		);
 	}
 } );
+
+QUnit.test( 'diffAnnotatedChunks', function ( assert ) {
+	var tests, i, len, test, oldNode, newNode;
+	tests = [
+		{
+			msg: 'Insert at start of bold',
+			oldHtml: 'wx<b>y</b>',
+			newHtml: 'wx<b>zy</b>',
+			diff: [
+				{ type: 'insert', offset: 2, text: 'z', tags: 'b', oldAnnOffset: 2 }
+			]
+		},
+		{
+			msg: 'Insert at start of bold in italic',
+			oldHtml: '<i>wx<b>y</b></i>',
+			newHtml: '<i>wx<b>zy</b></i>',
+			diff: [
+				{ type: 'insert', offset: 2, text: 'z', tags: 'i b', oldAnnOffset: 2 }
+			]
+		},
+		{
+			msg: 'Insert before start of bold in italic',
+			oldHtml: '<i>wx<b>y</b></i>',
+			newHtml: '<i>wxz<b>y</b></i>',
+			diff: [
+				{ type: 'insert', offset: 2, text: 'z', tags: 'i', oldAnnOffset: 0 }
+			]
+		},
+		{
+			msg: 'Insert into insertion annotation',
+			oldHtml: '<i>wx<b><img class="ve-ce-unicorn ve-ce-pre-unicorn"><img class="ve-ce-unicorn ve-ce-post-unicorn"></b>z</i>',
+			newHtml: '<i>wx<b><img class="ve-ce-unicorn ve-ce-pre-unicorn">y<img class="ve-ce-unicorn ve-ce-post-unicorn"></b>z</i>',
+			diff: [
+				{ type: 'insert', offset: 2, text: 'y', tags: 'i b', oldAnnOffset: 'unicorn' }
+			]
+		},
+		{
+			msg: 'Turn text bold',
+			oldHtml: 'foo bar baz',
+			newHtml: 'foo <b>bar</b> baz',
+			diff: [
+				{ type: 'remove', offset: 4, text: 'bar', tags: '' },
+				{ type: 'insert', offset: 4, text: 'bar', tags: 'b', oldAnnOffset: null }
+			]
+		},
+		{
+			msg: 'Turn text unbold',
+			oldHtml: 'foo <b>bar</b> baz',
+			newHtml: 'foo bar baz',
+			diff: [
+				{ type: 'remove', offset: 4, text: 'bar', tags: 'b' },
+				{ type: 'insert', offset: 4, text: 'bar', tags: '', oldAnnOffset: 0 }
+			]
+		},
+		{
+			msg: 'Clone bold and normal from far away',
+			oldHtml: '<b>foo</b> <i>bar</i> baz',
+			newHtml: '<b>foo</b> bar <b>baz</b>',
+			diff: [
+				{ type: 'remove', offset: 4, text: 'bar', tags: 'i' },
+				{ type: 'remove', offset: 4, text: ' baz', tags: '' },
+				{ type: 'insert', offset: 4, text: 'bar ', tags: '', oldAnnOffset: 3 },
+				{ type: 'insert', offset: 8, text: 'baz', tags: 'b', oldAnnOffset: 0 }
+			]
+		}
+	];
+
+	QUnit.expect( tests.length );
+	for ( i = 0, len = tests.length; i < len; i++ ) {
+		test = tests[ i ];
+		oldNode = document.createElement( 'div' );
+		newNode = document.createElement( 'div' );
+		oldNode.innerHTML = test.oldHtml;
+		newNode.innerHTML = test.newHtml;
+		assert.deepEqual(
+			ve.ce.diffAnnotatedChunks(
+				ve.ce.getDomAnnotatedChunks( oldNode ),
+				ve.ce.getDomAnnotatedChunks( newNode )
+			),
+			test.diff,
+			test.msg
+		);
+	}
+} );
