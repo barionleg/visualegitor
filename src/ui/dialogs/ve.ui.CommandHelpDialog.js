@@ -52,7 +52,7 @@ ve.ui.CommandHelpDialog.prototype.getBodyHeight = function () {
  */
 ve.ui.CommandHelpDialog.prototype.initialize = function () {
 	var i, j, jLen, k, kLen, triggerList, commands, shortcut, platform, platformKey,
-		$list, $shortcut, commandGroups;
+		$list, $shortcut, commandGroups, sequence;
 
 	// Parent method
 	ve.ui.CommandHelpDialog.super.prototype.initialize.call( this );
@@ -76,14 +76,16 @@ ve.ui.CommandHelpDialog.prototype.initialize = function () {
 				triggerList = ve.ui.triggerRegistry.lookup( commands[ j ].trigger );
 			} else {
 				triggerList = [];
-				for ( k = 0, kLen = commands[ j ].shortcuts.length; k < kLen; k++ ) {
-					shortcut = commands[ j ].shortcuts[ k ];
-					triggerList.push(
-						new ve.ui.Trigger(
-							ve.isPlainObject( shortcut ) ? shortcut[ platformKey ] : shortcut,
-							true
-						)
-					);
+				if ( commands[ j ].shortcuts ) {
+					for ( k = 0, kLen = commands[ j ].shortcuts.length; k < kLen; k++ ) {
+						shortcut = commands[ j ].shortcuts[ k ];
+						triggerList.push(
+							new ve.ui.Trigger(
+								ve.isPlainObject( shortcut ) ? shortcut[ platformKey ] : shortcut,
+								true
+							)
+						);
+					}
 				}
 			}
 			$shortcut = $( '<dt>' );
@@ -91,6 +93,16 @@ ve.ui.CommandHelpDialog.prototype.initialize = function () {
 				$shortcut.append( $( '<kbd>' ).text(
 					triggerList[ k ].getMessage().replace( /\+/g, ' + ' )
 				) );
+			}
+			if ( commands[ j ].sequence ) {
+				for ( k = 0, kLen = commands[ j ].sequence.length; k < kLen; k++ ) {
+					sequence = ve.ui.sequenceRegistry.lookup( commands[ j ].sequence[ k ] );
+					if ( sequence ) {
+						$shortcut.append( $( '<kbd>' ).html(
+							sequence.toString().replace( / /g, '<span class="ve-ui-commandHelpDialog-symbol-space">space</span>' )
+						) );
+					}
+				}
 			}
 			$list.append(
 				$shortcut,
@@ -170,7 +182,9 @@ ve.ui.CommandHelpDialog.static.getCommandGroups = function () {
 				{ trigger: 'preformatted', msg: 'visualeditor-formatdropdown-format-preformatted' },
 				{ trigger: 'blockquote', msg: 'visualeditor-formatdropdown-format-blockquote' },
 				{ trigger: 'indent', msg: 'visualeditor-indentationbutton-indent-tooltip' },
-				{ trigger: 'outdent', msg: 'visualeditor-indentationbutton-outdent-tooltip' }
+				{ trigger: 'outdent', msg: 'visualeditor-indentationbutton-outdent-tooltip' },
+				{ sequence: [ 'bulletStar' ], msg: 'visualeditor-listbutton-bullet-tooltip' },
+				{ sequence: [ 'numberDot' ], msg: 'visualeditor-listbutton-number-tooltip' }
 			]
 		},
 		history: {
