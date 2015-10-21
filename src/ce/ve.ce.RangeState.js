@@ -53,6 +53,8 @@ ve.ce.RangeState = function VeCeRangeState( old, documentNode, selectionOnly ) {
 	 */
 	this.hash = null;
 
+	this.annotatedChunks = null;
+
 	/**
 	 * @property {boolean|null} focusIsAfterAnnotationBoundary Focus lies after annotation tag
 	 */
@@ -125,12 +127,19 @@ ve.ce.RangeState.prototype.saveState = function ( old, documentNode, selectionOn
 	if ( selectionOnly && !anchorNodeChanged ) {
 		this.text = old.text;
 		this.hash = old.hash;
+		this.annotatedChunks = old.annotatedChunks;
 	} else if ( !this.node ) {
 		this.text = null;
 		this.hash = null;
+		this.annotatedChunks = null;
 	} else {
 		this.text = ve.ce.getDomText( this.node.$element[ 0 ] );
 		this.hash = ve.ce.getDomHash( this.node.$element[ 0 ] );
+		this.annotatedChunks = ve.ce.getDomAnnotatedChunks( this.node.$element[ 0 ] );
+	}
+
+	if ( JSON.stringify( this.annotatedChunks ) !== JSON.stringify( old && old.annotatedChunks ) ) {
+		ve.log.apply( ve, [ 'annotatedChunks:' ].concat( this.annotatedChunks ) );
 	}
 
 	// Only set contentChanged if we're still in the same branch node
