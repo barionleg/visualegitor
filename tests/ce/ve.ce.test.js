@@ -501,3 +501,89 @@ QUnit.test( 'isAfterAnnotationBoundary', function ( assert ) {
 		);
 	}
 } );
+
+QUnit.test( 'diffAnnotatedChunks', function ( assert ) {
+	var tests, i, len, test, oldNode, newNode;
+	tests = [
+		{
+			msg: 'Insert at start of bold',
+			oldHtml: 'wx<b>y</b>',
+			newHtml: 'wx<b>zy</b>',
+			diff: [
+				[ 'retain', 2 ],
+				[ 'insert', 2, 'z', 'b', 2 ],
+				[ 'retain', 1 ]
+			]
+		},
+		{
+			msg: 'Insert at start of bold in italic',
+			oldHtml: '<i>wx<b>y</b></i>',
+			newHtml: '<i>wx<b>zy</b></i>',
+			diff: [
+				[ 'retain', 2 ],
+				[ 'insert', 2, 'z', 'i.b', 2 ],
+				[ 'retain', 1 ]
+			]
+		},
+		{
+			msg: 'Insert before start of bold in italic',
+			oldHtml: '<i>wx<b>y</b></i>',
+			newHtml: '<i>wxz<b>y</b></i>',
+			diff: [
+				[ 'retain', 2 ],
+				[ 'insert', 2, 'z', 'i', 0 ],
+				[ 'retain', 1 ]
+			]
+		},
+		{
+			msg: 'Turn text bold',
+			oldHtml: 'foo bar baz',
+			newHtml: 'foo <b>bar</b> baz',
+			diff: [
+				[ 'retain', 4 ],
+				[ 'remove', 4, 'bar', '' ],
+				[ 'insert', 4, 'bar', 'b', null ],
+				[ 'retain', 4 ]
+			]
+		},
+		{
+			msg: 'Turn text unbold',
+			oldHtml: 'foo <b>bar</b> baz',
+			newHtml: 'foo bar baz',
+			diff: [
+				[ 'retain', 4 ],
+				[ 'remove', 4, 'bar', 'b' ],
+				[ 'insert', 4, 'bar', '', 0 ],
+				[ 'retain', 4 ]
+			]
+		},
+		{
+			msg: 'Clone bold and normal from far away',
+			oldHtml: '<b>foo</b> <i>bar</i> baz',
+			newHtml: '<b>foo</b> bar <b>baz</b>',
+			diff: [
+				[ 'retain', 4 ],
+				[ 'remove', 4, 'bar', 'i' ],
+				[ 'remove', 4, ' baz', '' ],
+				[ 'insert', 4, 'bar ', '', 3 ],
+				[ 'insert', 8, 'baz', 'b', 0 ]
+			]
+		}
+	];
+	QUnit.expect( tests.length );
+	for ( i = 0, len = tests.length; i < len; i++ ) {
+		test = tests[ i ];
+		oldNode = document.createElement( 'div' );
+		newNode = document.createElement( 'div' );
+		oldNode.innerHTML = test.oldHtml;
+		newNode.innerHTML = test.newHtml;
+		assert.deepEqual(
+			ve.ce.diffAnnotatedChunks(
+				ve.ce.getDomAnnotatedChunks( oldNode ),
+				ve.ce.getDomAnnotatedChunks( newNode )
+			),
+			test.diff,
+			test.msg
+		);
+	}
+} );
