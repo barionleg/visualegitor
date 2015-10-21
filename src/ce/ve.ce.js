@@ -84,6 +84,74 @@ ve.ce.getDomText = function ( element ) {
 	return func( element ).replace( /\u00A0/g, ' ' );
 };
 
+ve.ce.getDomAnnotatedChunks = function ( element ) {
+	var func, i,
+		stack = [],
+		chunks = [];
+	func = function ( element, strings ) {
+		var viewNode, child,
+			nodeType = element.nodeType,
+			$element = $( element );
+
+		if (
+			nodeType === Node.ELEMENT_NODE ||
+			nodeType === Node.DOCUMENT_NODE ||
+			nodeType === Node.DOCUMENT_FRAGMENT_NODE
+		) {
+			if ( $element.hasClass( 've-ce-branchNode-blockSlug' ) ) {
+				// Block slugs are not represented in the model at all, but they do
+				// contain a single nbsp/FEFF character in the DOM, so make sure
+				// that character isn't counted
+				return;
+			} else if ( $element.hasClass( 've-ce-cursorHolder' ) ) {
+				// Cursor holders do not exist in the model
+				return;
+			} else if ( $element.hasClass( 've-ce-leafNode' ) ) {
+				// For leaf nodes, don't return the content, but return
+				// the right number of placeholder characters so the offsets match up.
+				viewNode = $element.data( 'view' );
+				// Only return snowmen for the first element in a sibling group: otherwise
+				// we'll double-count this node
+				if ( viewNode && element === viewNode.$element[ 0 ] ) {
+					// \u2603 is the snowman character: ☃
+					chunks.push( {
+						text: new Array( viewNode.getOuterLength() + 1 )
+							.join( '\u2603' ),
+						tags: stack.join( '.' )
+					} );
+				}
+				// Second or subsequent sibling, don't double-count
+			} else {
+				// Traverse its children
+				if ( !ve.isBlockElement( element ) ) {
+					stack.push( element.nodeName.toLowerCase() );
+				}
+				for ( child = element.firstChild; child; child = child.nextSibling ) {
+					func( child, chunks );
+				}
+				if ( !ve.isBlockElement( element ) ) {
+					stack.pop();
+				}
+			}
+		} else if ( nodeType === Node.TEXT_NODE ) {
+			// The text, with non-breaking spaces replaced by spaces
+			chunks.push( {
+				text: element.data.replace( /\u00A0/g, ' ' ),
+				tags: stack.join( '.' )
+			} );
+		}
+	};
+	func( element, chunks );
+	// Merge adjacent chunks with equal tags
+	for( i = chunks.length - 1; i > 0; i-- ) {
+		if ( chunks[ i ].tags === chunks[ i - 1 ].tags ) {
+			chunks[ i - 1 ].text += chunks[ i ].text;
+			chunks.splice( i, 1 );
+		}
+	}
+	return chunks;
+};
+
 /**
  * Gets a hash of a DOM element's structure.
  *
@@ -611,4 +679,99 @@ ve.ce.modelChangeFromContentChange = function ( oldState, newState ) {
 		selection: new ve.dm.LinearSelection( dmDoc, newRange ),
 		rerender: true
 	};
+};
+
+ve.ce.diffAnnotatedChunks = function ( oldChunks, newChunks ) {
+	var i, len, fromLeft, fromRight, splices, offset, splice;
+	Function.prototype.apply.call( console.log, console, [ 'oldChunks' ].concat( oldChunks ) );
+	Function.prototype.apply.call( console.log, console, [ 'newChunks' ].concat( newChunks ) );
+
+	// Find minimal range of changed chunks, ignoring text (i.e. matching on tags only)
+	len = Math.min( oldChunks.length, newChunks.length );
+	fromLeft = 0;
+	while( fromLeft < len && oldChunks[ fromLeft ].tags === newChunks[ fromLeft ].tags ) {
+		fromLeft++;
+	}
+	fromRight = 0;
+	while (
+		fromLeft + fromRight < len &&
+		oldChunks[ oldChunks.length - 1 - fromRight ].tags ===
+			newChunks[ newChunks.length - 1 - fromRight ].tags
+	) {
+		++fromRight;
+	}
+
+	splices = [];
+	offset = 0;
+	for( i = 0, len = fromLeft; i < len; i++ ) {
+		// Apply chunkwise diff on the initial sequence of matching chunks
+		splices.push.apply(
+			splices,
+			ve.ce.diffText(
+				oldChunks[ i ].text,
+				newChunks[ i ].text,
+				offset,
+				newChunks[ i ].tags
+			)
+		);
+		// After all splices so far are applied, the next oldChunk has the same start
+		// offset as the next newChunk, so we only need to track one offset.
+		offset += newChunks[ i ].text.length;
+	}
+
+	for ( i = fromLeft; i < oldChunks.length - fromRight; i++ ) {
+		// remove unmatching old chunks entirely
+		splices.push( [ offset, oldChunks[ i ].text.length, '', '' ] )
+	}
+
+	for ( i = fromLeft; i < newChunks.length - fromRight; i++ ) {
+		// insert unmatching new chunks entirely
+		splices.push( [ offset, 0, newChunks[ i ].text, newChunks[ i ].tags ] );
+		offset += newChunks[ i ].text.length;
+	}
+
+	for( i = fromRight; i > 0; i-- ) {
+		// Apply chunkwise diff on the final sequence of matching chunks
+		splices.push.apply(
+			splices,
+			ve.ce.diffText(
+				oldChunks[ oldChunks.length - 1 - i ].text,
+				newChunks[ newChunks.length - 1 - i ].text,
+				offset
+			)
+		);
+		offset += newChunks[ newChunks.length - 1 - i ].text.length;
+	}
+	return splices;
+};
+
+/**
+ * diff two chunks
+ */
+ve.ce.diffText = function ( oldText, newText, startOffset, tags ) {
+	var i, len, fromLeft, fromRight;
+	// Find minimal range of changed text
+	if ( oldText === newText ) {
+		return [];
+	}
+	len = Math.min( oldText.length, newText.length );
+	fromLeft = 0;
+	while( fromLeft < len && oldText[ fromLeft ] === newText[ fromLeft ] ) {
+		fromLeft++;
+	}
+	fromRight = 0;
+	while (
+		fromLeft + fromRight < len &&
+		oldText[ oldText.length - 1 - fromRight ] ===
+			newText[ newText.length - 1 - fromRight ]
+	) {
+		++fromRight;
+	}
+
+	return [ [
+		startOffset + fromLeft,
+		oldText.length - fromLeft - fromRight,
+		newText.substr( fromLeft, newText.length - fromRight ),
+		tags
+	] ];
 };
