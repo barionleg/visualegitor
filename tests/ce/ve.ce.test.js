@@ -501,3 +501,105 @@ QUnit.test( 'isAfterAnnotationBoundary', function ( assert ) {
 		);
 	}
 } );
+
+QUnit.test( 'diffAnnotatedChunks', function ( assert ) {
+	var tests, i, len, test, oldNode, newNode;
+	tests = [
+		{
+			msg: 'Insert at start of bold',
+			oldHtml: 'wx<b>y</b>',
+			newHtml: 'wx<b>zy</b>',
+			diff: [
+				{ type: 'insert', offset: 2, text: 'z', tags: 'b', annotations: { offset: 2, exact: true } }
+			]
+		},
+		{
+			msg: 'Insert at start of bold in italic',
+			oldHtml: '<i>wx<b>y</b></i>',
+			newHtml: '<i>wx<b>zy</b></i>',
+			diff: [
+				{ type: 'insert', offset: 2, text: 'z', tags: 'i b', annotations: { offset: 2, exact: true } }
+			]
+		},
+		{
+			msg: 'Insert before start of bold in italic',
+			oldHtml: '<i>wx<b>y</b></i>',
+			newHtml: '<i>wxz<b>y</b></i>',
+			diff: [
+				{ type: 'insert', offset: 2, text: 'z', tags: 'i', annotations: { offset: 0, exact: true } }
+			]
+		},
+		{
+			msg: 'Insert into insertion annotation',
+			oldHtml: '<i>wx<b><img class="ve-ce-unicorn ve-ce-pre-unicorn"><img class="ve-ce-unicorn ve-ce-post-unicorn"></b>z</i>',
+			newHtml: '<i>wx<b><img class="ve-ce-unicorn ve-ce-pre-unicorn">y<img class="ve-ce-unicorn ve-ce-post-unicorn"></b>z</i>',
+			diff: [
+				{ type: 'insert', offset: 2, text: 'y', tags: 'i b', annotations: { offset: 'unicorn', exact: true } }
+			]
+		},
+		{
+			msg: 'Turn text bold',
+			oldHtml: 'foo bar baz',
+			newHtml: 'foo <b>bar</b> baz',
+			diff: [
+				{ type: 'remove', offset: 4, text: 'bar', tags: '' },
+				{ type: 'insert', offset: 4, text: 'bar', tags: 'b', annotations: { offset: 0, exact: false } }
+			]
+		},
+		{
+			msg: 'Turn text unbold',
+			oldHtml: 'foo <b>bar</b> baz',
+			newHtml: 'foo bar baz',
+			diff: [
+				{ type: 'remove', offset: 4, text: 'bar', tags: 'b' },
+				{ type: 'insert', offset: 4, text: 'bar', tags: '', annotations: { offset: 0, exact: true } }
+			]
+		},
+		{
+			msg: 'Clone bold and normal from far away',
+			oldHtml: '<b>foo</b> <i>bar</i> baz',
+			newHtml: '<b>foo</b> bar <b>baz</b>',
+			diff: [
+				{ type: 'remove', offset: 4, text: 'bar', tags: 'i' },
+				{ type: 'remove', offset: 4, text: ' baz', tags: '' },
+				{ type: 'insert', offset: 4, text: 'bar ', tags: '', annotations: { offset: 3, exact: true } },
+				{ type: 'insert', offset: 8, text: 'baz', tags: 'b', annotations: { offset: 3, exact: false } }
+			]
+		},
+		{
+			msg: 'Turn text bold in italic underline',
+			oldHtml: '<i>foo bar<u>baz</u></i>',
+			newHtml: '<i>foo <u><b>bar</b>baz</u></i>',
+			diff: [
+				{ type: 'remove', offset: 4, text: 'bar', tags: 'i' },
+				{ type: 'insert', offset: 4, text: 'bar', tags: 'i u b', annotations: { offset: 7, exact: false } }
+			]
+		}
+	];
+
+	QUnit.expect( tests.length );
+
+	function plainChunk( chunk ) {
+		chunk = ve.cloneObject( chunk );
+		chunk.tags = chunk.tags.map( function ( tag ) {
+			return tag.nodeName.toLowerCase();
+		} ).join( ' ' );
+		return chunk;
+	}
+
+	for ( i = 0, len = tests.length; i < len; i++ ) {
+		test = tests[ i ];
+		oldNode = document.createElement( 'div' );
+		newNode = document.createElement( 'div' );
+		oldNode.innerHTML = test.oldHtml;
+		newNode.innerHTML = test.newHtml;
+		assert.deepEqual(
+			ve.ce.diffAnnotatedChunks(
+				ve.ce.getDomAnnotatedChunks( oldNode ),
+				ve.ce.getDomAnnotatedChunks( newNode )
+			).map( plainChunk ),
+			test.diff,
+			test.msg
+		);
+	}
+} );
