@@ -2557,6 +2557,7 @@ ve.ce.Surface.prototype.renderSelectedContentBranchNode = function () {
 
 ve.ce.Surface.prototype.handleObservedChanges = function ( oldState, newState ) {
 	var newSelection, dmContentChange,
+		surface = this,
 		dmDoc = this.getModel().getDocument(),
 		insertedText = false;
 
@@ -2623,7 +2624,9 @@ ve.ce.Surface.prototype.handleObservedChanges = function ( oldState, newState ) 
 	}
 
 	if ( insertedText ) {
-		this.checkSequences();
+		setTimeout( function () {
+			surface.checkSequences();
+		} );
 	}
 	if ( newState.branchNodeChanged && newState.node ) {
 		this.updateCursorHolders();
