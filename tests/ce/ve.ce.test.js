@@ -501,3 +501,206 @@ QUnit.test( 'isAfterAnnotationBoundary', function ( assert ) {
 		);
 	}
 } );
+
+QUnit.test( 'modelChangeFromContentChange', function ( assert ) {
+	var i, view, documentView, documentNode, test, oldState, newState, change, tests;
+	tests = [
+		{
+			msg: 'Clear bold',
+			oldRawHtml: '<p>foo <b>bar</b> baz</p>',
+			oldInnerHtml: 'foo <b class="ve-ce-textStyleAnnotation ve-ce-boldAnnotation">bar</b> baz',
+			newInnerHtml: 'foo bar baz',
+			operations: [
+				{ type: 'retain', length: 5 },
+				{
+					type: 'replace',
+					remove: [ [ 'b', [ 0 ] ], [ 'a', [ 0 ] ], [ 'r', [ 0 ] ] ],
+					insert: [ 'b', 'a', 'r' ],
+					insertedDataOffset: 0,
+					insertedDataLength: 3
+				},
+				{ type: 'retain', length: 7 }
+			]
+		},
+		{
+			msg: 'Extend bold',
+			oldRawHtml: '<p>foo <b>ba</b> baz</p>',
+			oldInnerHtml: 'foo <b class="ve-ce-textStyleAnnotation ve-ce-boldAnnotation">ba</b> baz',
+			newInnerHtml: 'foo <b class="ve-ce-textStyleAnnotation ve-ce-boldAnnotation">bar</b> baz',
+			operations: [
+				{ type: 'retain', length: 7 },
+				{
+					type: 'replace',
+					remove: [],
+					insert: [ [ 'r', [ 0 ] ] ],
+					insertedDataOffset: 0,
+					insertedDataLength: 1
+				},
+				{ type: 'retain', length: 7 }
+			]
+		},
+		{
+			msg: 'Set bold',
+			oldRawHtml: '<p>foo bar baz</p>',
+			oldInnerHtml: 'foo bar baz',
+			newInnerHtml: 'foo <b class="ve-ce-textStyleAnnotation ve-ce-boldAnnotation">bar</b> baz',
+			operations: [
+				{ type: 'retain', length: 5 },
+				{
+					type: 'replace',
+					remove: [ 'b', 'a', 'r' ],
+					insert: [ [ 'b', [ 0 ] ], [ 'a', [ 0 ] ], [ 'r', [ 0 ] ] ],
+					insertedDataOffset: 0,
+					insertedDataLength: 3
+				},
+				{ type: 'retain', length: 7 }
+			]
+		},
+		{
+			msg: 'Insert at start of bold',
+			oldRawHtml: 'wx<b>y</b>',
+			oldInnerHtml: 'wx<b class="ve-ce-textStyleAnnotation ve-ce-boldAnnotation">y</b>',
+			newInnerHtml: 'wx<b class="ve-ce-textStyleAnnotation ve-ce-boldAnnotation">zy</b>',
+			operations: [
+				{ type: 'retain', length: 3 },
+				{
+					type: 'replace',
+					remove: [],
+					insert: [ [ 'z', [ 0 ] ] ],
+					insertedDataOffset: 0,
+					insertedDataLength: 1
+				},
+				{ type: 'retain', length: 4 }
+			]
+		},
+		{
+			msg: 'Insert at start of bold in italic',
+			oldRawHtml: '<i>wx<b>y</b></i>',
+			oldInnerHtml: '<i class="ve-ce-textStyleAnnotation ve-ce-italicAnnotation">wx<b class="ve-ce-textStyleAnnotation ve-ce-boldAnnotation">y</b></i>',
+			newInnerHtml: '<i class="ve-ce-textStyleAnnotation ve-ce-italicAnnotation">wx<b class="ve-ce-textStyleAnnotation ve-ce-boldAnnotation">zy</b></i>',
+			operations: [
+				{ type: 'retain', length: 3 },
+				{
+					type: 'replace',
+					remove: [],
+					insert: [ [ 'z', [ 0, 1 ] ] ],
+					insertedDataOffset: 0,
+					insertedDataLength: 1
+				},
+				{ type: 'retain', length: 4 }
+			]
+		},
+		{
+			msg: 'Insert before start of bold in italic',
+			oldRawHtml: '<i>wx<b>y</b></i>',
+			oldInnerHtml: '<i class="ve-ce-textStyleAnnotation ve-ce-italicAnnotation">wx<b class="ve-ce-textStyleAnnotation ve-ce-boldAnnotation">y</b></i>',
+			newInnerHtml: '<i class="ve-ce-textStyleAnnotation ve-ce-italicAnnotation">wxz<b class="ve-ce-textStyleAnnotation ve-ce-boldAnnotation">y</b></i>',
+			operations: [
+				{ type: 'retain', length: 3 },
+				{
+					type: 'replace',
+					remove: [],
+					insert: [ [ 'z', [ 0 ] ] ],
+					insertedDataOffset: 0,
+					insertedDataLength: 1
+				},
+				{ type: 'retain', length: 4 }
+			]
+		},
+		{
+			msg: 'Insert into insertion annotation',
+			willFail: true,
+			oldRawHtml: '<i>wx<b><img class="ve-ce-unicorn ve-ce-pre-unicorn"><img class="ve-ce-unicorn ve-ce-post-unicorn"></b>z</i>',
+			oldInnerHtml: '<i class="ve-ce-textStyleAnnotation ve-ce-italicAnnotation">wx<b class="ve-ce-textStyleAnnotation ve-ce-boldAnnotation"><img class="ve-ce-unicorn ve-ce-pre-unicorn"><img class="ve-ce-unicorn ve-ce-post-unicorn"></b>z</i>',
+			newInnerHtml: '<i class="ve-ce-textStyleAnnotation ve-ce-italicAnnotation">wx<b class="ve-ce-textStyleAnnotation ve-ce-boldAnnotation"><img class="ve-ce-unicorn ve-ce-pre-unicorn">y<img class="ve-ce-unicorn ve-ce-post-unicorn"></b>z</i>',
+			operations: [
+				{ type: 'retain', length: 3 },
+				{
+					type: 'replace',
+					remove: [],
+					insert: [ [ 'y', [ 0, 1 ] ] ],
+					insertedDataOffset: 0,
+					insertedDataLength: 1
+				},
+				{ type: 'retain', length: 4 }
+			]
+		},
+		{
+			msg: 'Clone bold and normal from far away',
+			oldRawHtml: '<b>foo</b> <i>bar</i> baz',
+			oldInnerHtml: '<b class="ve-ce-textStyleAnnotation ve-ce-boldAnnotation">foo</b> <i class="ve-ce-textStyleAnnotation ve-ce-italicAnnotation">bar</i> baz',
+			newInnerHtml: '<b class="ve-ce-textStyleAnnotation ve-ce-boldAnnotation">foo</b> bar <b class="ve-ce-textStyleAnnotation ve-ce-boldAnnotation">baz</b>',
+			operations: [
+				{ type: 'retain', length: 5 },
+				{
+					type: 'replace',
+					remove: [ [ 'b', [ 1 ] ], [ 'a', [ 1 ] ], [ 'r', [ 1 ] ], ' ', 'b', 'a', 'z' ],
+					insert: [ 'b', 'a', 'r', ' ' ],
+					insertedDataOffset: 0,
+					insertedDataLength: 4
+				},
+				{
+					type: 'replace',
+					remove: [],
+					insert: [ [ 'b', [ 0 ] ], [ 'a', [ 0 ] ], [ 'z', [ 0 ] ] ],
+					insertedDataOffset: 0,
+					insertedDataLength: 3
+				},
+				{ type: 'retain', length: 3 }
+			]
+		},
+		{
+			msg: 'Turn text bold in italic underline',
+			oldRawHtml: '<i>foo bar<u>baz</u></i>',
+			oldInnerHtml: '<i class="ve-ce-textStyleAnnotation ve-ce-italicAnnotation">foo bar<u class="ve-ce-textStyleAnnotation ve-ce-underlineAnnotation">baz</u></i>',
+			newInnerHtml: '<i class="ve-ce-textStyleAnnotation ve-ce-italicAnnotation">foo <u class="ve-ce-textStyleAnnotation ve-ce-underlineAnnotation"><b class="ve-ce-textStyleAnnotation ve-ce-boldAnnotation">bar</b>baz</u></i>',
+			operations: [
+				{ type: 'retain', length: 5 },
+				{
+					type: 'replace',
+					remove: [ [ 'b', [ 0 ] ], [ 'a', [ 0 ] ], [ 'r', [ 0 ] ] ],
+					insert: [
+						[ 'b', [ 0, 1, 2 ] ],
+						[ 'a', [ 0, 1, 2 ] ],
+						[ 'r', [ 0, 1, 2 ] ]
+					],
+					insertedDataOffset: 0,
+					insertedDataLength: 3
+				},
+				{ type: 'retain', length: 6 }
+			]
+		}
+	];
+
+	QUnit.expect( 2 * tests.length );
+
+	for ( i = 0; i < tests.length; i++ ) {
+		test = tests[ i ];
+		view = ve.test.utils.createSurfaceViewFromHtml( test.oldRawHtml );
+		documentView = view.getDocument();
+		documentNode = documentView.getDocumentNode();
+		( test.willFail ? assert.notDeepEqual : assert.deepEqual ).call(
+			assert,
+			documentNode.$element.find( ':first' ).html(),
+			test.oldInnerHtml,
+			test.msg + ' (oldInnerHtml)'
+		);
+		view.model.setSelection( new ve.dm.LinearSelection( documentView.model, new ve.Range( 1 ) ) );
+		oldState = new ve.ce.RangeState( null, documentNode, false );
+		documentNode.$element.find( ':first' ).html( test.newInnerHtml );
+		view.model.setSelection( new ve.dm.LinearSelection( documentView.model, new ve.Range( 1 ) ) );
+		newState = new ve.ce.RangeState( oldState, documentNode, false );
+		change = newState.textState.getChangeTransaction(
+			oldState.textState,
+			view.model.getDocument(),
+			newState.node.getOffset()
+		);
+		( test.willFail ? assert.notDeepEqual : assert.deepEqual ).call(
+			assert,
+			change.operations,
+			test.operations,
+			test.msg + ' (operations)'
+		);
+		view.destroy();
+	}
+} );

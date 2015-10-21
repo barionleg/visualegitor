@@ -107,7 +107,9 @@
 					"ve.ce.NodeFactory",
 					"ve.ce.Surface",
 					"ve.ce.SurfaceObserver",
-					"ve.ce.RangeState"
+					"ve.ce.RangeState",
+					"ve.ce.TextState",
+					"ve.ce.TextStateChunk"
 				]
 			},
 			{
