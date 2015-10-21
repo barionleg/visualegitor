@@ -80,6 +80,11 @@ ve.ce.KeyDownHandlerFactory.prototype.executeHandlersForKey = function ( key, se
 	var i, acted,
 		handlers = this.lookupHandlersForKey( key, selectionName );
 
+	// TODO: remove this (it makes ctrl+b/i/u work natively on Chromium, for testing)
+	if ( String.fromCharCode( key ).match( /^[BIU]$/i ) ) {
+		return false;
+	}
+
 	// Length is likely to be 1 or 0 so don't cache
 	for ( i = 0; i < handlers.length; i++ ) {
 		if ( handlers[ i ].static.execute( surface, e ) ) {
