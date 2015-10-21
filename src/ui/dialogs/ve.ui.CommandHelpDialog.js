@@ -52,7 +52,7 @@ ve.ui.CommandHelpDialog.prototype.getBodyHeight = function () {
  */
 ve.ui.CommandHelpDialog.prototype.initialize = function () {
 	var i, j, jLen, k, kLen, triggerList, commands, shortcut, platform, platformKey,
-		$list, $shortcut, commandGroups;
+		$list, $shortcut, commandGroups, sequence;
 
 	// Parent method
 	ve.ui.CommandHelpDialog.super.prototype.initialize.call( this );
@@ -76,21 +76,37 @@ ve.ui.CommandHelpDialog.prototype.initialize = function () {
 				triggerList = ve.ui.triggerRegistry.lookup( commands[ j ].trigger );
 			} else {
 				triggerList = [];
-				for ( k = 0, kLen = commands[ j ].shortcuts.length; k < kLen; k++ ) {
-					shortcut = commands[ j ].shortcuts[ k ];
-					triggerList.push(
-						new ve.ui.Trigger(
-							ve.isPlainObject( shortcut ) ? shortcut[ platformKey ] : shortcut,
-							true
-						)
-					);
+				if ( commands[ j ].shortcuts ) {
+					for ( k = 0, kLen = commands[ j ].shortcuts.length; k < kLen; k++ ) {
+						shortcut = commands[ j ].shortcuts[ k ];
+						triggerList.push(
+							new ve.ui.Trigger(
+								ve.isPlainObject( shortcut ) ? shortcut[ platformKey ] : shortcut,
+								true
+							)
+						);
+					}
 				}
 			}
 			$shortcut = $( '<dt>' );
 			for ( k = 0, kLen = triggerList.length; k < kLen; k++ ) {
-				$shortcut.append( $( '<kbd>' ).text(
-					triggerList[ k ].getMessage().replace( /\+/g, ' + ' )
+				$shortcut.append( $( '<kbd>' ).append(
+					triggerList[ k ].getMessage( true ).map( ve.ui.CommandHelpDialog.static.buildKeyNode )
 				) );
+				$shortcut.find( 'span + span' ).before( '+' );
+			}
+			if ( commands[ j ].sequence ) {
+				for ( k = 0, kLen = commands[ j ].sequence.length; k < kLen; k++ ) {
+					sequence = ve.ui.sequenceRegistry.lookup( commands[ j ].sequence[ k ] );
+					if ( sequence ) {
+						$shortcut.append( $( '<kbd>' ).append(
+								$( '<span class="ve-ui-commandHelpDialog-sequence-notice">' ).text( ve.msg( 'visualeditor-shortcuts-sequence-notice' ) )
+							).append(
+								sequence.getMessage( true ).map( ve.ui.CommandHelpDialog.static.buildKeyNode
+							)
+						) );
+					}
+				}
 			}
 			$list.append(
 				$shortcut,
@@ -112,6 +128,22 @@ ve.ui.CommandHelpDialog.prototype.initialize = function () {
 };
 
 /* Static methods */
+
+/**
+ * Wrap a key (as provided by a Trigger) in a node, for display
+ *
+ * @static
+ * @return {jQuery} A jQuery <span> containing the key text
+ */
+ve.ui.CommandHelpDialog.static.buildKeyNode = function ( key ) {
+	if ( ve.isPlainObject( key ) ) {
+		return '';
+	}
+	if ( key === ' ' ) {
+		key = 'space';
+	}
+	return $( '<span class="ve-ui-commandHelpDialog-key">' ).text( key );
+};
 
 /**
  * Get the list of commands, grouped by type
@@ -166,11 +198,13 @@ ve.ui.CommandHelpDialog.static.getCommandGroups = function () {
 			title: 'visualeditor-shortcuts-formatting',
 			commands: [
 				{ trigger: 'paragraph', msg: 'visualeditor-formatdropdown-format-paragraph' },
-				{ shortcuts: [ 'ctrl+(1-6)' ], msg: 'visualeditor-formatdropdown-format-heading-label' },
+				{ shortcuts: [ 'ctrl+1-6' ], msg: 'visualeditor-formatdropdown-format-heading-label' },
 				{ trigger: 'preformatted', msg: 'visualeditor-formatdropdown-format-preformatted' },
 				{ trigger: 'blockquote', msg: 'visualeditor-formatdropdown-format-blockquote' },
 				{ trigger: 'indent', msg: 'visualeditor-indentationbutton-indent-tooltip' },
-				{ trigger: 'outdent', msg: 'visualeditor-indentationbutton-outdent-tooltip' }
+				{ trigger: 'outdent', msg: 'visualeditor-indentationbutton-outdent-tooltip' },
+				{ sequence: [ 'bulletStar' ], msg: 'visualeditor-listbutton-bullet-tooltip' },
+				{ sequence: [ 'numberDot' ], msg: 'visualeditor-listbutton-number-tooltip' }
 			]
 		},
 		history: {
