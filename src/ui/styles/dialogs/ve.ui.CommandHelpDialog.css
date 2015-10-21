@@ -59,6 +59,12 @@
 	margin-top: 0.2em;
 }
 
+.ve-ui-commandHelpDialog-symbol-space {
+	border: 1px solid #ccc;
+	padding: 0 2px;
+	text-transform: uppercase;
+}
+
 .ve-ui-commandHelpDialog-list dd,
 .ve-ui-commandHelpDialog-list dt {
 	line-height: 110%;

@@ -96,3 +96,26 @@ ve.ui.CommandHelpDialogTool.static.autoAddToCatchall = false;
 ve.ui.CommandHelpDialogTool.static.autoAddToGroup = false;
 ve.ui.CommandHelpDialogTool.static.commandName = 'commandHelp';
 ve.ui.toolFactory.register( ve.ui.CommandHelpDialogTool );
+
+/**
+ * Sequence help tool.
+ *
+ * @class
+ * @extends ve.ui.DialogTool
+ * @constructor
+ * @param {OO.ui.ToolGroup} toolGroup
+ * @param {Object} [config] Configuration options
+ */
+ve.ui.SequenceHelpDialogTool = function VeUiSequenceHelpDialogTool() {
+	ve.ui.SequenceHelpDialogTool.super.apply( this, arguments );
+};
+OO.inheritClass( ve.ui.SequenceHelpDialogTool, ve.ui.DialogTool );
+ve.ui.SequenceHelpDialogTool.static.name = 'sequenceHelp';
+ve.ui.SequenceHelpDialogTool.static.group = 'dialog';
+ve.ui.SequenceHelpDialogTool.static.icon = 'help';
+ve.ui.SequenceHelpDialogTool.static.title =
+	OO.ui.deferMsg( 'visualeditor-dialog-sequence-help-title' );
+ve.ui.SequenceHelpDialogTool.static.autoAddToCatchall = false;
+ve.ui.SequenceHelpDialogTool.static.autoAddToGroup = false;
+ve.ui.SequenceHelpDialogTool.static.commandName = 'sequenceHelp';
+ve.ui.toolFactory.register( ve.ui.SequenceHelpDialogTool );

@@ -141,6 +141,11 @@ ve.ui.commandRegistry.register(
 );
 ve.ui.commandRegistry.register(
 	new ve.ui.Command(
+		'sequenceHelp', 'window', 'open', { args: [ 'sequenceHelp' ] }
+	)
+);
+ve.ui.commandRegistry.register(
+	new ve.ui.Command(
 		'findAndReplace', 'window', 'toggle', { args: [ 'findAndReplace' ] }
 	)
 );
