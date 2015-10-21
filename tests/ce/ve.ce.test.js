@@ -501,3 +501,81 @@ QUnit.test( 'isAfterAnnotationBoundary', function ( assert ) {
 		);
 	}
 } );
+
+QUnit.test( 'diffAnnotatedChunks', function ( assert ) {
+	var tests, i, len, test, oldNode, newNode;
+	tests = [
+		{
+			msg: 'Insert at start of bold',
+			oldHtml: 'wx<b>y</b>',
+			newHtml: 'wx<b>zy</b>',
+			diff: [
+				[ 'retain', 2 ],
+				[ 'insert', 2, 'z', 'b' ],
+				[ 'retain', 1 ]
+			]
+		},
+		{
+			msg: 'Insert at start of bold in italic',
+			oldHtml: '<i>wx<b>y</b></i>',
+			newHtml: '<i>wx<b>zy</b></i>',
+			diff: [
+				[ 'retain', 2 ],
+				[ 'insert', 2, 'z', 'i.b' ],
+				[ 'retain', 1 ]
+			]
+		},
+		{
+			msg: 'Insert before start of bold in italic',
+			oldHtml: '<i>wx<b>y</b></i>',
+			newHtml: '<i>wxz<b>y</b></i>',
+			diff: [
+				[ 'retain', 2 ],
+				[ 'insert', 2, 'z', 'i' ],
+				[ 'retain', 1 ]
+			]
+		},
+		{
+			msg: 'Turn text bold',
+			oldHtml: 'foo bar baz',
+			newHtml: 'foo <b>bar</b> baz',
+			// TODO: this diff should be compressed to:
+			//  [ { start: 4, remove: [ 'bar', '' ], insert: [ 'bar', 'b' ] } ]
+			diff: [
+				[ 'retain', 4 ],
+				[ 'remove', 4, 'bar', '' ],
+				[ 'insert', 4, 'bar', 'b' ],
+				[ 'retain', 4 ]
+			]
+		},
+		{
+			msg: 'Turn text unbold',
+			oldHtml: 'foo <b>bar</b> baz',
+			newHtml: 'foo bar baz',
+			// TODO: this diff should be compressed to
+			//  [ { start: 4, remove: [ 'bar', 'b' ], insert: [ 'bar', '' ] } ]
+			diff: [
+				[ 'retain', 4 ],
+				[ 'remove', 4, 'bar', 'b' ],
+				[ 'insert', 4, 'bar', '' ],
+				[ 'retain', 4 ]
+			]
+		}
+	];
+	QUnit.expect( tests.length );
+	for ( i = 0, len = tests.length; i < len; i++ ) {
+		test = tests[ i ];
+		oldNode = document.createElement( 'div' );
+		newNode = document.createElement( 'div' );
+		oldNode.innerHTML = test.oldHtml;
+		newNode.innerHTML = test.newHtml;
+		assert.deepEqual(
+			ve.ce.diffAnnotatedChunks(
+				ve.ce.getDomAnnotatedChunks( oldNode ),
+				ve.ce.getDomAnnotatedChunks( newNode )
+			),
+			test.diff,
+			test.msg
+		);
+	}
+} );

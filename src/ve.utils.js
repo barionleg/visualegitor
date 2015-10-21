@@ -1644,3 +1644,48 @@ ve.rejectsCursor = function ( node ) {
 	// false, because if so then there can be no adjacent cursor.
 	return node.contentEditable === 'false';
 };
+
+/**
+ * Examine two sequences, and find the changing region
+ * TODO: Improve the argument names and property names
+ *
+ * @param {Array|string} before The original sequence
+ * @param {Array|string} after The modified sequence
+ * @param {Function} [equals] Two-argument comparison returning boolean (defaults to ===)
+ * @return {Object} Changes
+ * @return {number} return.retainStart Number of unchanged elements at the start
+ * @return {number} return.retainEnd Number of unchanged elements at the end
+ * @return {Array|string} return.before Minimal changed slice before
+ * @return {Array|string} return.after Minimal changed slice after
+ */
+ve.diffSequences = function ( before, after, equals ) {
+	var len, fromLeft, fromRight,
+		changes = {};
+	if ( !equals ) {
+		equals = function ( x, y ) {
+			return x === y;
+		};
+	}
+
+	len = Math.min( before.length, after.length );
+	// Find maximal matching left slice
+	for ( fromLeft = 0; fromLeft < len; fromLeft++ ) {
+		if ( !equals( before[ fromLeft ], after[ fromLeft ] ) ) {
+			break;
+		}
+	}
+	changes.retainStart = fromLeft;
+	// Find maximal matching right slice that doesn't overlap the left slice
+	for ( fromRight = 0; fromRight < len - fromLeft; fromRight++ ) {
+		if ( !equals(
+			before[ before.length - 1 - fromRight ],
+			after[ after.length - 1 - fromRight ]
+		) ) {
+			break;
+		}
+	}
+	changes.retainEnd = fromRight;
+	changes.before = before.slice( fromLeft, before.length - fromRight );
+	changes.after = after.slice( fromLeft, after.length - fromRight );
+	return changes;
+};
