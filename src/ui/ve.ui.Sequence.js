@@ -116,3 +116,20 @@ ve.ui.Sequence.prototype.getName = function () {
 ve.ui.Sequence.prototype.getCommandName = function () {
 	return this.commandName;
 };
+
+/**
+ * Get a string representation of the sequence.
+ *
+ * @return {string} string
+ */
+ve.ui.Sequence.prototype.getMessage = function ( explode ) {
+	var data;
+	if ( typeof this.data === 'string' ) {
+		data = this.data.split( '' );
+	} else if ( this.data instanceof RegExp ) {
+		data = [ this.data.toString() ];
+	} else {
+		data = this.data;
+	}
+	return explode ? data : data.join( '' );
+};
