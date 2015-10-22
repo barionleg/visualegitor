@@ -389,6 +389,7 @@ ve.ui.Surface.prototype.updatePlaceholder = function () {
 		if ( firstNode ) {
 			$wrapper = firstNode.$element.clone();
 			if ( ve.debug ) {
+				// In debug mode a background colour from the render animation may be present
 				$wrapper.removeAttr( 'style' );
 			}
 		} else {
