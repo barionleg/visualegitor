@@ -1331,7 +1331,7 @@ ve.ce.Surface.prototype.onDocumentKeyPress = function ( e ) {
  */
 ve.ce.Surface.prototype.afterDocumentKeyDown = function ( e ) {
 	var direction, focusableNode, startOffset, endOffset, offsetDiff, dmFocus, dmSelection,
-		ceNode, range, fixupCursorForUnicorn, matrix, $focusNode,
+		inNonSlug, ceSelection, ceNode, range, fixupCursorForUnicorn, matrix, $focusNode,
 		surface = this,
 		isArrow = (
 			e.keyCode === OO.ui.Keys.UP ||
@@ -1405,27 +1405,44 @@ ve.ce.Surface.prototype.afterDocumentKeyDown = function ( e ) {
 
 	if (
 		( e.keyCode === OO.ui.Keys.BACKSPACE || e.keyCode === OO.ui.Keys.DELETE ) &&
-		this.nativeSelection.focusNode &&
-		this.nativeSelection.focusNode.nodeType === Node.ELEMENT_NODE &&
-		!this.nativeSelection.focusNode.classList.contains( 've-ce-branchNode-inlineSlug' )
+		this.nativeSelection.focusNode
 	) {
-		// In a non-slug element. Sync the DM, then see if we need a slug.
-		this.incRenderLock();
-		try {
-			this.surfaceObserver.pollOnce();
-		} finally {
-			this.decRenderLock();
-		}
+		inNonSlug = this.nativeSelection.focusNode.nodeType === Node.ELEMENT_NODE &&
+			!this.nativeSelection.focusNode.classList.contains( 've-ce-branchNode-inlineSlug' );
+		if ( inNonSlug ) {
+			// In a non-slug element. Sync the DM, then see if we need a slug.
+			this.incRenderLock();
+			try {
+				this.surfaceObserver.pollOnce();
+			} finally {
+				this.decRenderLock();
+			}
 
-		dmSelection = surface.model.getSelection();
-		if ( dmSelection instanceof ve.dm.LinearSelection ) {
-			dmFocus = dmSelection.getRange().end;
-			ceNode = this.documentView.getBranchNodeFromOffset( dmFocus );
-			if ( ceNode && ceNode.getModel().hasSlugAtOffset( dmFocus ) ) {
-				ceNode.setupBlockSlugs();
+			dmSelection = surface.model.getSelection();
+			if ( dmSelection instanceof ve.dm.LinearSelection ) {
+				dmFocus = dmSelection.getRange().end;
+				ceNode = this.documentView.getBranchNodeFromOffset( dmFocus );
+				if ( ceNode && ceNode.getModel().hasSlugAtOffset( dmFocus ) ) {
+					ceNode.setupBlockSlugs();
+				}
 			}
 		}
-		return;
+
+		// Remove then re-set the selection, to clear any browser-native preannotations.
+		// This should be IME-safe because Delete/Backspace key events should only happen
+		// when there is no IME candidate window open.
+		// Note that if an IME removes text otherwise than by delete/backspace, then
+		// browser-native preannotations might possibly survive. But in order to remove
+		// all the text from inside a non-unicorned annotation tag, the IME would have
+		// to turn committed text back into candidate text, and then remove it all -
+		// which hopefully is pretty rare.
+		ceSelection = new ve.SelectionState( this.nativeSelection );
+		this.nativeSelection.removeAllRanges();
+		this.showSelectionState( ceSelection );
+
+		if ( inNonSlug ) {
+			return;
+		}
 	}
 
 	if ( e !== this.keyDownState.event ) {
