@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_da25aa57",
+        "filename": "src/ui/dialogs/ve.ui.CommandHelpDialog.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-10-23T20:32:45Z",
+      "side": 1,
+      "message": "\"space\" will need to come from the message store using ve.msg so it is translated",
+      "revId": "598294f1b85ef97a82684a7cff8a7b1f07aa7f46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
