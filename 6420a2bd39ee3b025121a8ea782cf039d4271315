@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_4b080a30",
+        "filename": "src/ui/dialogs/ve.ui.CommandHelpDialog.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-10-24T10:51:16Z",
+      "side": 1,
+      "message": "ve.msg() returns plain text, not HTML",
+      "revId": "6420a2bd39ee3b025121a8ea782cf039d4271315",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_6b05ce15",
+        "filename": "src/ui/dialogs/ve.ui.CommandHelpDialog.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-10-24T10:51:16Z",
+      "side": 1,
+      "message": "Needs documentation.\n\nAlso this method returns HTML, not a plain text string. To avoid confusion/misuse/escaping errors, whenever we return HTML we return it as a DOM node or an jQuery collection.",
+      "revId": "6420a2bd39ee3b025121a8ea782cf039d4271315",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
