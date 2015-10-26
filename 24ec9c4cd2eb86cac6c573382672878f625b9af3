@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_c2f37499",
+        "filename": "src/ui/styles/dialogs/ve.ui.CommandHelpDialog.css",
+        "patchSetId": 8
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-10-26T14:38:40Z",
+      "side": 1,
+      "message": "This feels a little cramped around the \u0027+\u0027 plusses. Maybe 0.3em? Might need to make the \u003cdt\u003e wider to allow for this?",
+      "revId": "24ec9c4cd2eb86cac6c573382672878f625b9af3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
