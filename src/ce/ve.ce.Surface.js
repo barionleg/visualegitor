@@ -184,14 +184,6 @@ OO.mixinClass( ve.ce.Surface, OO.EventEmitter );
 /* Events */
 
 /**
- * @event selectionStart
- */
-
-/**
- * @event selectionEnd
- */
-
-/**
  * @event relocationStart
  */
 
@@ -891,7 +883,6 @@ ve.ce.Surface.prototype.afterDocumentMouseDown = function ( e, selectionBefore )
  *
  * @method
  * @param {jQuery.Event} e Mouse up event
- * @fires selectionEnd
  */
 ve.ce.Surface.prototype.onDocumentMouseUp = function ( e ) {
 	this.$document.off( 'mouseup', this.onDocumentMouseUpHandler );
@@ -914,7 +905,6 @@ ve.ce.Surface.prototype.afterDocumentMouseUp = function ( e, selectionBefore ) {
 		this.fixShiftClickSelect( selectionBefore );
 	}
 	if ( !e.shiftKey && this.selecting ) {
-		this.emit( 'selectionEnd' );
 		this.selecting = false;
 	}
 	this.dragging = false;
@@ -949,13 +939,11 @@ ve.ce.Surface.prototype.fixShiftClickSelect = function ( selectionBefore ) {
  *
  * @method
  * @param {jQuery.Event} e Mouse move event
- * @fires selectionStart
  */
 ve.ce.Surface.prototype.onDocumentMouseMove = function () {
 	// Detect beginning of selection by moving mouse while dragging
 	if ( this.dragging && !this.selecting ) {
 		this.selecting = true;
-		this.emit( 'selectionStart' );
 	}
 };
 
@@ -1062,7 +1050,6 @@ ve.ce.Surface.prototype.onDocumentDragOver = function ( e ) {
 		}
 	}
 	if ( this.selecting ) {
-		this.emit( 'selectionEnd' );
 		this.selecting = false;
 		this.dragging = false;
 	}
@@ -1166,7 +1153,6 @@ ve.ce.Surface.prototype.onDocumentDrop = function ( e ) {
  *
  * @method
  * @param {jQuery.Event} e Key down event
- * @fires selectionStart
  */
 ve.ce.Surface.prototype.onDocumentKeyDown = function ( e ) {
 	var trigger, focusedNode, executed,
@@ -1200,7 +1186,6 @@ ve.ce.Surface.prototype.onDocumentKeyDown = function ( e ) {
 		case OO.ui.Keys.DOWN:
 			if ( !this.dragging && !this.selecting && e.shiftKey ) {
 				this.selecting = true;
-				this.emit( 'selectionStart' );
 			}
 
 			if ( selection instanceof ve.dm.LinearSelection ) {
@@ -1625,14 +1610,12 @@ ve.ce.Surface.prototype.checkUnicorns = function ( fixupCursor ) {
  *
  * @method
  * @param {jQuery.Event} e Key up event
- * @fires selectionEnd
  * @fires keyup
  */
 ve.ce.Surface.prototype.onDocumentKeyUp = function ( e ) {
 	// Detect end of selecting by letting go of shift
 	if ( !this.dragging && this.selecting && e.keyCode === OO.ui.Keys.SHIFT ) {
 		this.selecting = false;
-		this.emit( 'selectionEnd' );
 	}
 	this.emit( 'keyup' );
 };
