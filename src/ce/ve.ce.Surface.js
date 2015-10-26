@@ -1169,7 +1169,7 @@ ve.ce.Surface.prototype.onDocumentDrop = function ( e ) {
  * @fires selectionStart
  */
 ve.ce.Surface.prototype.onDocumentKeyDown = function ( e ) {
-	var trigger, focusedNode, executed,
+	var trigger, focusedNode, executed, handler,
 		selection = this.getModel().getSelection(),
 		updateFromModel = false;
 
@@ -1193,6 +1193,12 @@ ve.ce.Surface.prototype.onDocumentKeyDown = function ( e ) {
 
 	this.storeKeyDownState( e );
 
+	handler = ve.ce.keyDownHandlerFactory.lookupHandlerForKey( e.keyCode, selection.getName() );
+
+	if ( handler ) {
+		handler.static.execute( this, e );
+	}
+
 	switch ( e.keyCode ) {
 		case OO.ui.Keys.LEFT:
 		case OO.ui.Keys.RIGHT:
@@ -1204,7 +1210,7 @@ ve.ce.Surface.prototype.onDocumentKeyDown = function ( e ) {
 			}
 
 			if ( selection instanceof ve.dm.LinearSelection ) {
-				this.handleLinearArrowKey( e );
+				//this.handleLinearArrowKey( e );
 				updateFromModel = true;
 			} else if ( selection instanceof ve.dm.TableSelection ) {
 				this.handleTableArrowKey( e );
@@ -2975,176 +2981,6 @@ ve.ce.Surface.prototype.findAdjacentUneditableBranchNode = function ( direction 
 			node = forward ? node.firstChild : node.lastChild;
 		}
 	}
-};
-
-/**
- * Handle up or down arrow key events with a linear selection.
- *
- * @param {jQuery.Event} e Up or down key down event
- */
-ve.ce.Surface.prototype.handleLinearArrowKey = function ( e ) {
-	var nativeRange, collapseNode, collapseOffset, direction, directionality, upOrDown,
-		startFocusNode, startFocusOffset,
-		range = this.model.getSelection().getRange(),
-		surface = this;
-
-	// TODO: onDocumentKeyDown did this already
-	this.surfaceObserver.stopTimerLoop();
-	// TODO: onDocumentKeyDown did this already
-	this.surfaceObserver.pollOnce();
-
-	upOrDown = e.keyCode === OO.ui.Keys.UP || e.keyCode === OO.ui.Keys.DOWN;
-
-	if ( this.focusedBlockSlug ) {
-		// Block level selection, so directionality is just css directionality
-		if ( upOrDown ) {
-			direction = e.keyCode === OO.ui.Keys.DOWN ? 1 : -1;
-		} else {
-			directionality = $( this.focusedBlockSlug ).css( 'direction' );
-			/*jshint bitwise:false */
-			if ( e.keyCode === OO.ui.Keys.LEFT ^ directionality === 'rtl' ) {
-				// leftarrow in ltr, or rightarrow in rtl
-				direction = -1;
-			} else {
-				// leftarrow in rtl, or rightarrow in ltr
-				direction = 1;
-			}
-		}
-		range = this.model.getDocument().getRelativeRange(
-			range,
-			direction,
-			'character',
-			e.shiftKey,
-			this.getActiveTableNode() ? this.getActiveTableNode().getEditingRange() : null
-		);
-		this.model.setLinearSelection( range );
-		e.preventDefault();
-		return;
-	}
-
-	if ( this.focusedNode ) {
-		if ( upOrDown ) {
-			direction = e.keyCode === OO.ui.Keys.DOWN ? 1 : -1;
-		} else {
-			directionality = this.getFocusedNodeDirectionality();
-			/*jshint bitwise:false */
-			if ( e.keyCode === OO.ui.Keys.LEFT ^ directionality === 'rtl' ) {
-				// leftarrow in ltr, or rightarrow in rtl
-				direction = -1;
-			} else {
-				// leftarrow in rtl, or rightarrow in ltr
-				direction = 1;
-			}
-		}
-
-		if ( !this.focusedNode.isContent() ) {
-			// Block focusable node: move back/forward in DM (and DOM) and preventDefault
-			range = this.model.getDocument().getRelativeRange(
-				range,
-				direction,
-				'character',
-				e.shiftKey,
-				this.getActiveTableNode() ? this.getActiveTableNode().getEditingRange() : null
-			);
-			this.model.setLinearSelection( range );
-			e.preventDefault();
-			return;
-		}
-		// Else inline focusable node
-
-		if ( e.shiftKey ) {
-			// There is no DOM range to expand (because the selection is faked), so
-			// use "collapse to focus - observe - expand". Define "focus" to be the
-			// edge of the focusedNode in the direction of motion (so the selection
-			// always grows). This means that clicking on the focusableNode then
-			// modifying the selection will always include the node.
-			if ( direction === -1 ^ range.isBackwards() ) {
-				range = range.flip();
-			}
-			this.model.setLinearSelection( new ve.Range( range.to ) );
-		} else {
-			// Move to start/end of node in the model in DM (and DOM)
-			range = new ve.Range( direction === 1 ? range.end : range.start );
-			this.model.setLinearSelection( range );
-			if ( !upOrDown ) {
-				// un-shifted left/right: we've already moved so preventDefault
-				e.preventDefault();
-				return;
-			}
-			// Else keep going with the cursor in the new place
-		}
-	}
-	// Else keep DM range and DOM selection as-is
-
-	if ( e.shiftKey && !this.nativeSelection.extend && range.isBackwards() ) {
-		// If the browser doesn't support backwards selections, but the dm range
-		// is backwards, then use "collapse to anchor - observe - expand".
-		collapseNode = this.nativeSelection.anchorNode;
-		collapseOffset = this.nativeSelection.anchorOffset;
-	} else if ( e.shiftKey && !range.isCollapsed() && upOrDown ) {
-		// If selection is expanded and cursoring is up/down, use
-		// "collapse to focus - observe - expand" to work round quirks.
-		collapseNode = this.nativeSelection.focusNode;
-		collapseOffset = this.nativeSelection.focusOffset;
-	}
-	// Else don't collapse the selection
-
-	if ( collapseNode ) {
-		nativeRange = this.getElementDocument().createRange();
-		nativeRange.setStart( collapseNode, collapseOffset );
-		nativeRange.setEnd( collapseNode, collapseOffset );
-		this.nativeSelection.removeAllRanges();
-		this.nativeSelection.addRange( nativeRange );
-	}
-
-	startFocusNode = this.nativeSelection.focusNode;
-	startFocusOffset = this.nativeSelection.focusOffset;
-
-	// Re-expand (or fixup) the selection after the native action, if necessary
-	this.eventSequencer.afterOne( { keydown: function () {
-		var viewNode, newRange, afterDirection;
-
-		// Chrome bug lets you cursor into a multi-line contentEditable=false with up/down...
-		viewNode = $( surface.nativeSelection.focusNode ).closest( '.ve-ce-leafNode,.ve-ce-branchNode' ).data( 'view' );
-		if ( !viewNode ) {
-			// Irrelevant selection (or none)
-			return;
-		}
-
-		if ( viewNode.isFocusable() ) {
-			// We've landed in a focusable node; fixup the range
-			if ( upOrDown ) {
-				// The intended direction is clear, even if the cursor did not move
-				// or did something completely preposterous
-				afterDirection = e.keyCode === OO.ui.Keys.DOWN ? 1 : -1;
-			} else {
-				// Observe which way the cursor moved
-				afterDirection = ve.compareDocumentOrder(
-					surface.nativeSelection.focusNode,
-					surface.nativeSelection.focusOffset,
-					startFocusNode,
-					startFocusOffset
-				);
-			}
-			newRange = (
-				afterDirection > 0 ?
-				viewNode.getOuterRange() :
-				viewNode.getOuterRange().flip()
-			);
-		} else {
-			// Check where the range has moved to
-			surface.surfaceObserver.pollOnceNoCallback();
-			newRange = new ve.Range( surface.surfaceObserver.getRange().to );
-		}
-
-		// Adjust range to use old anchor, if necessary
-		if ( e.shiftKey ) {
-			newRange = new ve.Range( range.from, newRange.to );
-			surface.getModel().setLinearSelection( newRange );
-		}
-		surface.updateActiveLink();
-		surface.surfaceObserver.pollOnce();
-	} } );
 };
 
 /**
