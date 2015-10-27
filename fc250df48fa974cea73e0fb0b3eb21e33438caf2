@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_543dfbd9",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 1161,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-10-27T11:55:15Z",
+      "side": 1,
+      "message": "This means \"update the DOM from the model if any handlers were executed\" - is that correct behaviour? I imagine it could lead to artifacts due to the model being less granular than the view. Maybe make each handler return true if it needs the DOM to be updated from the model?",
+      "revId": "fc250df48fa974cea73e0fb0b3eb21e33438caf2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
