@@ -16,6 +16,24 @@
       "revId": "fc250df48fa974cea73e0fb0b3eb21e33438caf2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_363bac98",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 1161,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-10-27T13:14:54Z",
+      "side": 1,
+      "message": "Previously all the linear handlers did this. I didn\u0027t think it would hurt to do it on table handlers too.",
+      "parentUuid": "0ebaf39b_543dfbd9",
+      "revId": "fc250df48fa974cea73e0fb0b3eb21e33438caf2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
