@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_d1100ffa",
+        "filename": "src/ui/dialogs/ve.ui.CommandHelpDialog.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-10-28T16:50:46Z",
+      "side": 1,
+      "message": "not a \u0027span\u0027, although you don\u0027t necessarily have to go into that much detail",
+      "revId": "4db3a77b23da1961ba494bd5d97005aea00835e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_71d9235b",
+        "filename": "src/ui/dialogs/ve.ui.CommandHelpDialog.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-10-28T16:50:46Z",
+      "side": 1,
+      "message": "This should be in the static properties section further up",
+      "revId": "4db3a77b23da1961ba494bd5d97005aea00835e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_91c5b766",
+        "filename": "src/ui/dialogs/ve.ui.CommandHelpDialog.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-10-28T16:50:46Z",
+      "side": 1,
+      "message": "note you aren\u0027t specifying either the order of groups, or the order within groups as objects keys aren\u0027t required to stay in order (in practice they are in most JS implementations). We should probably make ordering more robust.",
+      "revId": "4db3a77b23da1961ba494bd5d97005aea00835e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_3185ebd3",
+        "filename": "src/ui/dialogs/ve.ui.CommandHelpDialog.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-10-28T16:50:46Z",
+      "side": 1,
+      "message": "{string[]} List of commands",
+      "revId": "4db3a77b23da1961ba494bd5d97005aea00835e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_114227b1",
+        "filename": "src/ui/dialogs/ve.ui.CommandHelpDialog.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-10-28T16:50:46Z",
+      "side": 1,
+      "message": "?",
+      "revId": "4db3a77b23da1961ba494bd5d97005aea00835e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_1129c7e0",
+        "filename": "src/ui/ve.ui.Sequence.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-10-28T16:50:46Z",
+      "side": 1,
+      "message": "capital S",
+      "revId": "4db3a77b23da1961ba494bd5d97005aea00835e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_9184d7d9",
+        "filename": "src/ui/ve.ui.Sequence.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-10-28T16:50:46Z",
+      "side": 1,
+      "message": "document explode",
+      "revId": "4db3a77b23da1961ba494bd5d97005aea00835e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_d11ecfbd",
+        "filename": "src/ui/ve.ui.Trigger.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-10-28T16:50:46Z",
+      "side": 1,
+      "message": "document explode",
+      "revId": "4db3a77b23da1961ba494bd5d97005aea00835e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
