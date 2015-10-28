@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_82db237b",
+        "filename": "src/ui/dialogs/ve.ui.CommandHelpDialog.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2015-10-28T20:13:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_d1100ffa",
+      "revId": "4db3a77b23da1961ba494bd5d97005aea00835e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_71d9235b",
         "filename": "src/ui/dialogs/ve.ui.CommandHelpDialog.js",
         "patchSetId": 9
@@ -30,6 +48,24 @@
       "writtenOn": "2015-10-28T16:50:46Z",
       "side": 1,
       "message": "This should be in the static properties section further up",
+      "revId": "4db3a77b23da1961ba494bd5d97005aea00835e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_22ccb7bf",
+        "filename": "src/ui/dialogs/ve.ui.CommandHelpDialog.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2015-10-28T20:13:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_71d9235b",
       "revId": "4db3a77b23da1961ba494bd5d97005aea00835e2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_42d1ab56",
+        "filename": "src/ui/dialogs/ve.ui.CommandHelpDialog.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2015-10-28T20:13:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_3185ebd3",
+      "revId": "4db3a77b23da1961ba494bd5d97005aea00835e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_114227b1",
         "filename": "src/ui/dialogs/ve.ui.CommandHelpDialog.js",
         "patchSetId": 9
@@ -104,6 +158,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_e2c9bfae",
+        "filename": "src/ui/ve.ui.Sequence.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2015-10-28T20:13:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_1129c7e0",
+      "revId": "4db3a77b23da1961ba494bd5d97005aea00835e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_9184d7d9",
         "filename": "src/ui/ve.ui.Sequence.js",
         "patchSetId": 9
@@ -121,6 +193,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_02c7339a",
+        "filename": "src/ui/ve.ui.Sequence.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2015-10-28T20:13:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_9184d7d9",
+      "revId": "4db3a77b23da1961ba494bd5d97005aea00835e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_d11ecfbd",
         "filename": "src/ui/ve.ui.Trigger.js",
         "patchSetId": 9
@@ -132,6 +222,24 @@
       "writtenOn": "2015-10-28T16:50:46Z",
       "side": 1,
       "message": "document explode",
+      "revId": "4db3a77b23da1961ba494bd5d97005aea00835e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_a2bf47f6",
+        "filename": "src/ui/ve.ui.Trigger.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2015-10-28T20:13:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_d11ecfbd",
       "revId": "4db3a77b23da1961ba494bd5d97005aea00835e2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
