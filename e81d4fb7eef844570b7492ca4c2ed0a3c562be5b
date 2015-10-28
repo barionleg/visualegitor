@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_2c5270de",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 1158,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-10-28T18:10:53Z",
+      "side": 1,
+      "message": "This remains here because it has to be called for every possible keypress, right? Note though that it\u0027s only any use with a linear selection. Might we want a mechanism to bind a \"wildcard\" keyDown handler to any key? (Maybe in a follow-up commit)",
+      "revId": "e81d4fb7eef844570b7492ca4c2ed0a3c562be5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_acbf40f6",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 1237,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-10-28T18:10:53Z",
+      "side": 1,
+      "message": "How much of this stuff can we put into keyDown handlers?\n\n(I mean is the KeyDownHandler structure right in principle - the actual work should probably be in a separate commit)",
+      "revId": "e81d4fb7eef844570b7492ca4c2ed0a3c562be5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_6c0388c2",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 1314,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-10-28T18:10:53Z",
+      "side": 1,
+      "message": "This block could be in LinearDeleteKeyDownHandler",
+      "revId": "e81d4fb7eef844570b7492ca4c2ed0a3c562be5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_ace8a00c",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 1365,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-10-28T18:10:53Z",
+      "side": 1,
+      "message": "This kind of \"restore and abort\" fixup imposes execution order constraints.",
+      "revId": "e81d4fb7eef844570b7492ca4c2ed0a3c562be5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_2c203046",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 1373,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-10-28T18:10:53Z",
+      "side": 1,
+      "message": "This stuff (all the way down to line 1460) could be in a LinearMotionKeyDownHandler.\n\nIn any case, it does selection fixups, so how does that interact with LinearArrowKeyHandler?",
+      "revId": "e81d4fb7eef844570b7492ca4c2ed0a3c562be5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_ecce985e",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 1467,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-10-28T18:10:53Z",
+      "side": 1,
+      "message": "This render-locked poll is pretty much the only thing we want to do after every keydown (unless some code above has aborted the action)",
+      "revId": "e81d4fb7eef844570b7492ca4c2ed0a3c562be5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_4cafa478",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 1471,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-10-28T18:10:53Z",
+      "side": 1,
+      "message": "The rest of this function could be in a LinearMotionKeyDownHandler",
+      "revId": "e81d4fb7eef844570b7492ca4c2ed0a3c562be5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
