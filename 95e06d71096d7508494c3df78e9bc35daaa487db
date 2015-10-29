@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_59843db4",
+        "filename": "src/ui/dialogs/ve.ui.CommandHelpDialog.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2015-10-29T17:07:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_33ede8ee",
+      "revId": "95e06d71096d7508494c3df78e9bc35daaa487db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_13f0e4c2",
         "filename": "src/ui/dialogs/ve.ui.CommandHelpDialog.js",
         "patchSetId": 10
@@ -30,6 +48,24 @@
       "writtenOn": "2015-10-29T16:16:45Z",
       "side": 1,
       "message": "why is there a registerCommand call here?",
+      "revId": "95e06d71096d7508494c3df78e9bc35daaa487db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_59fd1d36",
+        "filename": "src/ui/dialogs/ve.ui.CommandHelpDialog.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2015-10-29T17:07:26Z",
+      "side": 1,
+      "message": "Oops, I\u0027d changed my mind about whether to run all of the commands through the registration calls, or just have them all in the static data already. Didn\u0027t remove this.",
+      "parentUuid": "0ebaf39b_13f0e4c2",
       "revId": "95e06d71096d7508494c3df78e9bc35daaa487db",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_1980058d",
+        "filename": "src/ui/styles/dialogs/ve.ui.CommandHelpDialog.css",
+        "patchSetId": 10
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2015-10-29T17:07:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_53d17c24",
+      "revId": "95e06d71096d7508494c3df78e9bc35daaa487db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_d3ac8c9f",
         "filename": "src/ui/styles/dialogs/ve.ui.CommandHelpDialog.css",
         "patchSetId": 10
@@ -64,6 +118,24 @@
       "writtenOn": "2015-10-29T16:16:45Z",
       "side": 1,
       "message": "space after colon",
+      "revId": "95e06d71096d7508494c3df78e9bc35daaa487db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_b950d937",
+        "filename": "src/ui/styles/dialogs/ve.ui.CommandHelpDialog.css",
+        "patchSetId": 10
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2015-10-29T17:07:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_d3ac8c9f",
       "revId": "95e06d71096d7508494c3df78e9bc35daaa487db",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_d9558d27",
+        "filename": "src/ui/styles/dialogs/ve.ui.CommandHelpDialog.css",
+        "patchSetId": 10
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2015-10-29T17:07:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_339ba87a",
+      "revId": "95e06d71096d7508494c3df78e9bc35daaa487db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_53989c7a",
         "filename": "src/ui/styles/dialogs/ve.ui.CommandHelpDialog.css",
         "patchSetId": 10
@@ -104,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_7946e181",
+        "filename": "src/ui/styles/dialogs/ve.ui.CommandHelpDialog.css",
+        "patchSetId": 10
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2015-10-29T17:07:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_53989c7a",
+      "revId": "95e06d71096d7508494c3df78e9bc35daaa487db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_f3a0b09c",
         "filename": "src/ui/styles/dialogs/ve.ui.CommandHelpDialog.css",
         "patchSetId": 10
@@ -115,6 +223,24 @@
       "writtenOn": "2015-10-29T16:16:45Z",
       "side": 1,
       "message": "space inside brackets",
+      "revId": "95e06d71096d7508494c3df78e9bc35daaa487db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_994b9587",
+        "filename": "src/ui/styles/dialogs/ve.ui.CommandHelpDialog.css",
+        "patchSetId": 10
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2015-10-29T17:07:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_f3a0b09c",
       "revId": "95e06d71096d7508494c3df78e9bc35daaa487db",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
