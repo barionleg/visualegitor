@@ -867,21 +867,10 @@ ve.dm.SurfaceFragment.prototype.delete = function ( directionAfterDelete ) {
 		return this;
 	}
 
-	// If selection spans entire document (selectAll) then
-	// replace with an empty paragraph
-	internalListRange = this.document.getInternalList().getListNode().getOuterRange();
-	if ( rangeToRemove.start === 0 && rangeToRemove.end >= internalListRange.start ) {
-		tx = ve.dm.Transaction.newFromReplacement( this.document, new ve.Range( 0, internalListRange.start ), [
-			{ type: 'paragraph' },
-			{ type: '/paragraph' }
-		] );
-		this.change( tx );
-		rangeAfterRemove = new ve.Range( 1 );
-	} else {
-		tx = ve.dm.Transaction.newFromRemoval( this.document, rangeToRemove );
-		this.change( tx );
-		rangeAfterRemove = tx.translateRange( rangeToRemove );
-	}
+	tx = ve.dm.Transaction.newFromRemoval( this.document, rangeToRemove );
+	this.change( tx );
+	rangeAfterRemove = tx.translateRange( rangeToRemove );
+
 	if ( !rangeAfterRemove.isCollapsed() ) {
 		// If after processing removal transaction range is not collapsed it means that not
 		// everything got merged nicely (at this moment transaction processor is capable of merging
@@ -949,14 +938,24 @@ ve.dm.SurfaceFragment.prototype.delete = function ( directionAfterDelete ) {
 		}
 	}
 
-	// rangeAfterRemove is now guaranteed to be collapsed so make sure that it is a content offset
-	rangeAfterRemove = new ve.Range(
-		this.document.data.getNearestContentOffset(
-			rangeAfterRemove.start,
-			// If undefined (e.g. cut), default to backwards movement
-			directionAfterDelete || -1
-		)
-	);
+	// If the document was wiped out create an empty paragraph
+	if ( !this.document.data.countNonInternalElements( 1 ) ) {
+		tx = ve.dm.Transaction.newFromInsertion( this.document, 0, [
+			{ type: 'paragraph' },
+			{ type: '/paragraph' }
+		] );
+		this.change( tx );
+		rangeAfterRemove = new ve.Range( 1 );
+	} else {
+		// rangeAfterRemove is now guaranteed to be collapsed so make sure that it is a content offset
+		rangeAfterRemove = new ve.Range(
+			this.document.data.getNearestContentOffset(
+				rangeAfterRemove.start,
+				// If undefined (e.g. cut), default to backwards movement
+				directionAfterDelete || -1
+			)
+		);
+	}
 
 	this.change( [], new ve.dm.LinearSelection( this.getDocument(), rangeAfterRemove ) );
 
