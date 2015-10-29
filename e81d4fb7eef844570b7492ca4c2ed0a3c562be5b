@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "0ebaf39b_59cc3d65",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2015-10-29T16:38:49Z",
+      "side": 1,
+      "message": "separate",
+      "range": {
+        "startLine": 7,
+        "startChar": 31,
+        "endLine": 7,
+        "endChar": 39
+      },
+      "revId": "e81d4fb7eef844570b7492ca4c2ed0a3c562be5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_2c5270de",
         "filename": "src/ce/ve.ce.Surface.js",
         "patchSetId": 4
