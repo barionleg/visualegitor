@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_995715cd",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 1237,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-10-29T16:11:28Z",
+      "side": 1,
+      "message": "I think so, there might be some methods used across handlers that should stay in ve.ce.surface or ve.ce",
+      "parentUuid": "0ebaf39b_acbf40f6",
+      "revId": "e81d4fb7eef844570b7492ca4c2ed0a3c562be5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_6c0388c2",
         "filename": "src/ce/ve.ce.Surface.js",
         "patchSetId": 4
@@ -47,6 +65,24 @@
       "writtenOn": "2015-10-28T18:10:53Z",
       "side": 1,
       "message": "This block could be in LinearDeleteKeyDownHandler",
+      "revId": "e81d4fb7eef844570b7492ca4c2ed0a3c562be5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_596d1d94",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 1314,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-10-29T16:11:28Z",
+      "side": 1,
+      "message": "yes",
+      "parentUuid": "0ebaf39b_6c0388c2",
       "revId": "e81d4fb7eef844570b7492ca4c2ed0a3c562be5b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
