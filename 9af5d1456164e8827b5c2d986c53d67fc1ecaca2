@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_50cc07c0",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 1114,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2015-10-30T12:44:46Z",
+      "side": 1,
+      "message": "Document the new return value.",
+      "revId": "9af5d1456164e8827b5c2d986c53d67fc1ecaca2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
