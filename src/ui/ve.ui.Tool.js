@@ -81,7 +81,19 @@ ve.ui.Tool.prototype.onUpdateState = function ( fragment ) {
 ve.ui.Tool.prototype.onSelect = function () {
 	var command = this.getCommand();
 	if ( command instanceof ve.ui.Command ) {
-		command.execute( this.toolbar.getSurface() );
+		// Emit a selection event, to warn the context that it should close any inspectors
+		// that are open. This is needed because closing inspectors sometimes causes a
+		// popStaging call... which interacts poorly if the reason they're closing is that
+		// you just executed a command that made a change which it actually wants to stick
+		// around. (The "select" change fired by commiting a transaction will eventually
+		// close all inspectors if nothing else happens.)
+		this.toolbar.getSurface().getModel().emit( 'select', this.toolbar.getSurface().getModel().selection.clone() );
+		// The chain of events that results in the inspectors closing goes a few layers of
+		// async deep. So, throw a fairly long delay in here to avoid running until after
+		// they're all done.
+		setTimeout( function () {
+			command.execute( this.toolbar.getSurface() );
+		}.bind( this ), 100 );
 	}
 	if ( this.constructor.static.deactivateOnSelect ) {
 		this.setActive( false );
