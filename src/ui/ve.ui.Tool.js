@@ -79,9 +79,16 @@ ve.ui.Tool.prototype.onUpdateState = function ( fragment ) {
  * @inheritdoc
  */
 ve.ui.Tool.prototype.onSelect = function () {
-	var command = this.getCommand();
+	var command = this.getCommand(),
+		surface = this.toolbar.getSurface();
 	if ( command instanceof ve.ui.Command ) {
-		command.execute( this.toolbar.getSurface() );
+		if ( surface.context.inspector ) {
+			surface.context.inspector.close().done( function () {
+				command.execute( surface );
+			} );
+		} else {
+			command.execute( surface );
+		}
 	}
 	if ( this.constructor.static.deactivateOnSelect ) {
 		this.setActive( false );
