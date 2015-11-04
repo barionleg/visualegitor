@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_5e6079fb",
+        "filename": "src/ve.Scheduler.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2015-11-04T08:43:11Z",
+      "side": 1,
+      "message": "It\u0027s a bit redundant in naming, but something like `schedule` makes a crazy sort of sense.",
+      "parentUuid": "0ebaf39b_7ef9bd7c",
+      "revId": "3bde7ade94548c994a296941d464d6007f6a80b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_7e38dd39",
         "filename": "src/ve.Scheduler.js",
         "patchSetId": 2
@@ -65,6 +83,24 @@
       "writtenOn": "2015-11-04T07:11:59Z",
       "side": 1,
       "message": "I can\u0027t decide whether the looping should survive completionTest exceptions. I feel maybe it should, particularly because we\u0027re being so noncommittal about when, or even whether, completionTest will execute.\n\nAny exceptions thrown by completionTest, or by deferred.resolve (i.e. inside the then(...) callback), should not be caught but rather propagate as uncaught exceptions to the console, debugger etc.\n\n  complete \u003d false;\n  try {\n          complete \u003d completionTest();\n  } finally {\n          if ( !complete ) {\n                  setTimeout( testThenAct, delayHint || 0 );\n          }\n  }\n  if ( complete ) {\n          deferred.resolve();\n  }\n\n... maybe?? Either way we should comment our intent with respect to exceptions in both completionTest and deferred.resolve() (so if we go with the current formulation, we should comment that we intend completionTest exceptions to crash the looping).",
+      "revId": "3bde7ade94548c994a296941d464d6007f6a80b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_3e7ee5ad",
+        "filename": "src/ve.Scheduler.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2015-11-04T08:43:11Z",
+      "side": 1,
+      "message": "Well, since we have a promise, we could always do `deferred.reject()`... which could even be a useful part of the API. A test function that notices it\u0027s wedged into a state which will never complete, throws an exception, and then any necessary cleanup can happen in a `fail` callback on the promise.",
+      "parentUuid": "0ebaf39b_7e38dd39",
       "revId": "3bde7ade94548c994a296941d464d6007f6a80b4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
