@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_a19dd40e",
+        "filename": "src/ve.Scheduler.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-11-04T11:59:06Z",
+      "side": 1,
+      "message": "Should we be a little concerned that users might have a test function that never resolves in some weird edge case, and thus we end up with an infinite polling loop?",
+      "revId": "50b9562cb6ee8fa7c9af7a525c03a5b0d1321d5f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
