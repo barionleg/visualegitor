@@ -16,6 +16,24 @@
       "revId": "50b9562cb6ee8fa7c9af7a525c03a5b0d1321d5f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_522ce8a9",
+        "filename": "src/ve.Scheduler.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2015-11-04T17:57:57Z",
+      "side": 1,
+      "message": "It could be a problem. I could throw in some sort of time or number-of-tests requirement, and resolve the promise as rejected if it ever reaches that point. That\u0027d let the caller consider the possibility and clean stuff up, if they need to.",
+      "parentUuid": "0ebaf39b_a19dd40e",
+      "revId": "50b9562cb6ee8fa7c9af7a525c03a5b0d1321d5f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
