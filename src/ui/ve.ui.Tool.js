@@ -79,9 +79,22 @@ ve.ui.Tool.prototype.onUpdateState = function ( fragment ) {
  * @inheritdoc
  */
 ve.ui.Tool.prototype.onSelect = function () {
-	var command = this.getCommand();
+	var command = this.getCommand(),
+		surface = this.toolbar.getSurface();
 	if ( command instanceof ve.ui.Command ) {
-		command.execute( this.toolbar.getSurface() );
+		ve.scheduler.schedule(
+			function () {
+				if ( surface.context.inspector ) {
+					surface.context.inspector.close();
+				}
+			}, function () {
+				// Make sure the inspector has left the context, at which point
+				// all its cleanup should be done
+				return !surface.context.inspector;
+			}
+		).done( function () {
+			command.execute( surface );
+		} );
 	}
 	if ( this.constructor.static.deactivateOnSelect ) {
 		this.setActive( false );
