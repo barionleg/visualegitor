@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_de06a988",
+        "filename": "src/ve.Scheduler.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-11-04T07:11:59Z",
+      "side": 1,
+      "message": "I think the documentation should say that:\n- The condition to be met is always that immediateAction\u0027s setTimeouts have finished executing\n- The completionTest is just a hint\n- There\u0027s no guarantee the completionTest will be called at all\n\nOtherwise, we\u0027d be guaranteeing that the semantics are \"resolve promise when completionTest returns true\", so there\u0027d be no point passing immediateAction in at all - the caller could just do:\n\n  immediateAction();\n  ve.scheduler.call( completionTest ).then( whatever );",
+      "revId": "3bde7ade94548c994a296941d464d6007f6a80b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_7ef9bd7c",
+        "filename": "src/ve.Scheduler.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-11-04T07:11:59Z",
+      "side": 1,
+      "message": "I really like that you\u0027re returning a promise here. Therefore maybe rename \"call\" to \"completeCall\" or something suggestive and greppable like that. (The name \"call\" was my stupid idea in the Phabricator task, I know).",
+      "revId": "3bde7ade94548c994a296941d464d6007f6a80b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_7e38dd39",
+        "filename": "src/ve.Scheduler.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-11-04T07:11:59Z",
+      "side": 1,
+      "message": "I can\u0027t decide whether the looping should survive completionTest exceptions. I feel maybe it should, particularly because we\u0027re being so noncommittal about when, or even whether, completionTest will execute.\n\nAny exceptions thrown by completionTest, or by deferred.resolve (i.e. inside the then(...) callback), should not be caught but rather propagate as uncaught exceptions to the console, debugger etc.\n\n  complete \u003d false;\n  try {\n          complete \u003d completionTest();\n  } finally {\n          if ( !complete ) {\n                  setTimeout( testThenAct, delayHint || 0 );\n          }\n  }\n  if ( complete ) {\n          deferred.resolve();\n  }\n\n... maybe?? Either way we should comment our intent with respect to exceptions in both completionTest and deferred.resolve() (so if we go with the current formulation, we should comment that we intend completionTest exceptions to crash the looping).",
+      "revId": "3bde7ade94548c994a296941d464d6007f6a80b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
