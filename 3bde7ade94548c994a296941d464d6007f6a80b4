@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_3e2d85ee",
+        "filename": "src/ve.Scheduler.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-11-04T07:22:31Z",
+      "side": 1,
+      "message": "On the other hand, should we subsequently decide we *did* always want to call completionTest (perhaps only starting to call it when all immediateAction\u0027s known setTimeouts are complete), then adding that guarantee would be a narrowing of the interface and therefore not a breaking change.",
+      "parentUuid": "0ebaf39b_de06a988",
+      "revId": "3bde7ade94548c994a296941d464d6007f6a80b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_7ef9bd7c",
         "filename": "src/ve.Scheduler.js",
         "patchSetId": 2
@@ -47,6 +65,23 @@
       "writtenOn": "2015-11-04T07:11:59Z",
       "side": 1,
       "message": "I can\u0027t decide whether the looping should survive completionTest exceptions. I feel maybe it should, particularly because we\u0027re being so noncommittal about when, or even whether, completionTest will execute.\n\nAny exceptions thrown by completionTest, or by deferred.resolve (i.e. inside the then(...) callback), should not be caught but rather propagate as uncaught exceptions to the console, debugger etc.\n\n  complete \u003d false;\n  try {\n          complete \u003d completionTest();\n  } finally {\n          if ( !complete ) {\n                  setTimeout( testThenAct, delayHint || 0 );\n          }\n  }\n  if ( complete ) {\n          deferred.resolve();\n  }\n\n... maybe?? Either way we should comment our intent with respect to exceptions in both completionTest and deferred.resolve() (so if we go with the current formulation, we should comment that we intend completionTest exceptions to crash the looping).",
+      "revId": "3bde7ade94548c994a296941d464d6007f6a80b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_fe228dfa",
+        "filename": "src/ve.Scheduler.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-11-04T07:22:31Z",
+      "side": 1,
+      "message": "Wrap this setTimeout call in a method call, which can then be overridden in a unit test. See ve.EventSequencer#postpone for an example.\n\nThen you can write a unit test like the one in ve.EventSequencer.test.js .",
       "revId": "3bde7ade94548c994a296941d464d6007f6a80b4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
