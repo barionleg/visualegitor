@@ -70,6 +70,24 @@
       "revId": "be2615820d42ad236819f09fbaf54cc620945adc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_2a9c506f",
+        "filename": "src/ve.Scheduler.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-11-05T18:28:53Z",
+      "side": 1,
+      "message": "I was wondering about that. The downside would be forcing anything depending on the completion of *this* action to be more postponed than necessary (a slowness rat race). Overall I think I\u0027d be inclined to follow jQuery (i.e. keep things as they are) but that\u0027s just a personal hunch.",
+      "parentUuid": "0ebaf39b_afbb726f",
+      "revId": "be2615820d42ad236819f09fbaf54cc620945adc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
