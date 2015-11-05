@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_f4786127",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-11-05T15:36:07Z",
+      "side": 1,
+      "message": "Should it be deprecated and people in future call OO.binarySearch?",
+      "revId": "628dad81e69989d9b328142b9a60246f55e821b0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
