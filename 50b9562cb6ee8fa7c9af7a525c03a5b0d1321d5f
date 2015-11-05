@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "0ebaf39b_7ef9b2e3",
+        "filename": "src/ve.Scheduler.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-11-05T08:05:00Z",
+      "side": 1,
+      "message": "If we\u0027ll use rejection to signal errors (which makes sense) then we need to get in to the habit of using .done( ... ) and not .then( ... ) so the caller doesn\u0027t disregard the rejection.",
+      "revId": "50b9562cb6ee8fa7c9af7a525c03a5b0d1321d5f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_a19dd40e",
         "filename": "src/ve.Scheduler.js",
         "patchSetId": 3
@@ -31,6 +48,24 @@
       "side": 1,
       "message": "It could be a problem. I could throw in some sort of time or number-of-tests requirement, and resolve the promise as rejected if it ever reaches that point. That\u0027d let the caller consider the possibility and clean stuff up, if they need to.",
       "parentUuid": "0ebaf39b_a19dd40e",
+      "revId": "50b9562cb6ee8fa7c9af7a525c03a5b0d1321d5f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_9ef026fc",
+        "filename": "src/ve.Scheduler.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-11-05T08:05:00Z",
+      "side": 1,
+      "message": "For now, I think a timeout argument would be OK as long as it causes rejection as you say. I don\u0027t like maxTests because it feels more Heisenberg-y.\n\nIn the future, when every setTimeout goes through this class, we can schedule things to happen at the very end of the tick (when there are no Scheduler.setTimeouts pending and there is no other code running). That would be a good opportunity to reject still-pending deferrals (iteratively in some order that I\u0027ve yet to get my brain round). See ve.EventSequencer#afterLoop , ve.EventSequencer#doAfterLoop and ve.EventSequencer#resetAfterLoopTimeout for the same kind of idea.",
+      "parentUuid": "0ebaf39b_522ce8a9",
       "revId": "50b9562cb6ee8fa7c9af7a525c03a5b0d1321d5f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
