@@ -52,6 +52,24 @@
       "revId": "be2615820d42ad236819f09fbaf54cc620945adc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_afbb726f",
+        "filename": "src/ve.Scheduler.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2015-11-05T17:38:29Z",
+      "side": 1,
+      "message": "Think it might make sense to guarantee that testThenAct will be async? It\u0027d be more consistent.",
+      "parentUuid": "0ebaf39b_af94d2eb",
+      "revId": "be2615820d42ad236819f09fbaf54cc620945adc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
