@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_efbe4aaa",
+        "filename": "src/ve.Scheduler.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-11-05T17:29:06Z",
+      "side": 1,
+      "message": "Does it makes sense to reject *and* throw here? Perhaps return instead?",
+      "revId": "be2615820d42ad236819f09fbaf54cc620945adc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
