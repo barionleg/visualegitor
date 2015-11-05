@@ -34,6 +34,24 @@
       "revId": "be2615820d42ad236819f09fbaf54cc620945adc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_af94d2eb",
+        "filename": "src/ve.Scheduler.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-11-05T17:36:51Z",
+      "side": 1,
+      "message": "Ugh, that sounds like it would be a dark, dark night - but yeah you\u0027re right.\n\nAlso the first run of testThenAct is synchronous so throwing an exception here the first time round (a likely scenario if there\u0027s a typo) would prevent the .fail handler from ever running.",
+      "parentUuid": "0ebaf39b_6f5d7a7d",
+      "revId": "be2615820d42ad236819f09fbaf54cc620945adc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
