@@ -5,6 +5,7 @@
  */
 
 .ve-ui-commandHelpDialog-container {
+	margin-top: -2em;
 	-ms-column-count: 3;
 	-moz-column-count: 3;
 	-webkit-column-count: 3;
@@ -22,12 +23,8 @@
 
 .ve-ui-commandHelpDialog-section h3 {
 	text-align: center;
-	margin: 0;
+	margin: 2em 0 1em 0;
 	padding: 0;
-}
-
-.ve-ui-commandHelpDialog-list {
-	margin: 0.5em 0 1.5em 0;
 }
 
 .ve-ui-commandHelpDialog-list dd {
@@ -55,12 +52,13 @@
 }
 
 .ve-ui-commandHelpDialog-list dt > kbd {
+	white-space: nowrap;
 	display: block;
 	clear: right;
 }
 
 /* Enlarge vertical spacing in a list of shortcuts for one action */
-.ve-ui-commandHelpDialog-list dt kbd ~ kbd {
+.ve-ui-commandHelpDialog-list dt > kbd ~ kbd {
 	margin-top: 0.5em;
 }
 
@@ -79,11 +77,18 @@
 	text-align: center;
 }
 
-.ve-ui-commandHelpDialog-list dt kbd[ data-label ]::before {
-	content: attr( data-label );
+.ve-ui-commandHelpDialog-list dt > kbd::before {
 	font-weight: normal;
 	font-style: italic;
 	padding-right: 3px;
+}
+
+.ve-ui-commandHelpDialog-list dt > kbd[ data-label ]::before {
+	content: attr( data-label );
+}
+
+.ve-ui-commandHelpDialog-list dt > kbd[ data-separator ] ~ kbd::before {
+	content: attr( data-separator );
 }
 
 .ve-ui-commandHelpDialog-sequence kbd:not( [ data-key="space" ] ) {

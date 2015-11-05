@@ -118,9 +118,15 @@ ve.ui.CommandHelpDialog.prototype.initialize = function () {
 			}
 			$shortcut = $( '<dt>' );
 			for ( k = 0, kLen = triggerList.length; k < kLen; k++ ) {
-				$shortcut.append( $( '<kbd>' ).append(
-					triggerList[ k ].getMessage( true ).map( ve.ui.CommandHelpDialog.static.buildKeyNode )
-				).find( 'kbd + kbd' ).before( '+' ).end() );
+				$shortcut.append( $( '<kbd>' )
+					.append(
+						triggerList[ k ].getMessage( true ).map( ve.ui.CommandHelpDialog.static.buildKeyNode )
+					)
+					.attr( 'data-separator', ve.msg( 'visualeditor-shortcuts-separator' ) )
+					.find( 'kbd + kbd' )
+						.before( '+' )
+						.end()
+				);
 			}
 			if ( commands[ j ].sequences ) {
 				for ( k = 0, kLen = commands[ j ].sequences.length; k < kLen; k++ ) {
@@ -128,6 +134,7 @@ ve.ui.CommandHelpDialog.prototype.initialize = function () {
 					if ( sequence ) {
 						$shortcut.append( $( '<kbd class="ve-ui-commandHelpDialog-sequence">' )
 							.attr( 'data-label', ve.msg( 'visualeditor-shortcuts-sequence-notice' ) )
+							.attr( 'data-separator', ve.msg( 'visualeditor-shortcuts-sequence-separator' ) )
 							.append(
 								sequence.getMessage( true ).map( ve.ui.CommandHelpDialog.static.buildKeyNode )
 							)
