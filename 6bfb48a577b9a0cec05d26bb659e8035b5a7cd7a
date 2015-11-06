@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_b6fd03b0",
+        "filename": "src/ui/ve.ui.Tool.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-11-06T19:10:29Z",
+      "side": 1,
+      "message": "Conclusion following discussion:\n@Krinkle suggests hiding the scheduler use inside context.inspector.close() which can then return a promise, for ease of subsequent removal in the future when its call stack is refactored to return promises.\n\nBut @DLynch points out that method is inside ooui-js so for now it would be better to make a static method ve.ui.closeWindow that takes an OO.ui.Window and returns a promise (thereby still hiding the Scheduler use from the public interface).",
+      "revId": "6bfb48a577b9a0cec05d26bb659e8035b5a7cd7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_f645bbb9",
+        "filename": "tests/ve.Scheduler.test.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-11-06T19:10:29Z",
+      "side": 1,
+      "message": "On reflection, we should probably remove lines 11, 15, 16 and 17, since none of the tests currently need a script-controlled implementation of \"postpone\".\n\nAlternatively, copy methods .postpone and .runPostponed from ve.TestEventSequencer too (but that feels a little YAGNI)",
+      "revId": "6bfb48a577b9a0cec05d26bb659e8035b5a7cd7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_5697e73c",
+        "filename": "tests/ve.Scheduler.test.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-11-06T19:10:29Z",
+      "side": 1,
+      "message": "It would be better for ve.Scheduler to proxy Date.now() calls through a method .getTime() , then override (or patch) .getTime to not call Date.now() at all, but rather return a number that gets incremented by, say, 100 on each call (or by an amount passed into the ve.TestScheduler constructor).\n\nThat allows a less Heisenburgy test that also can finish faster than 0.1s .",
+      "revId": "6bfb48a577b9a0cec05d26bb659e8035b5a7cd7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_56e5a7d4",
+        "filename": "tests/ve.Scheduler.test.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-11-06T19:10:29Z",
+      "side": 1,
+      "message": "See above. You can assert that it should fail after the eleventh time it tests for completion (say).",
+      "revId": "6bfb48a577b9a0cec05d26bb659e8035b5a7cd7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
