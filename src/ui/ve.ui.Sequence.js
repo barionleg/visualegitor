@@ -76,7 +76,11 @@ ve.ui.Sequence.prototype.execute = function ( surface, range ) {
 
 	if ( this.strip ) {
 		stripRange = surfaceModel.getSelection().getRange();
-		stripFragment = surfaceModel.getLinearFragment( new ve.Range( stripRange.end, stripRange.end - this.strip ) );
+		stripFragment = surfaceModel.getLinearFragment(
+			new ve.Range( stripRange.end, stripRange.end - this.strip ),
+			true /* noAutoSelect */,
+			true /* excludeInsertions */
+		);
 	}
 
 	surfaceModel.breakpoint();
