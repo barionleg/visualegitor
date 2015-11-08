@@ -16,6 +16,24 @@
       "revId": "628dad81e69989d9b328142b9a60246f55e821b0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_f07618d3",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-11-08T17:21:42Z",
+      "side": 1,
+      "message": "Just using the pattern we use for all the other OO utils...",
+      "parentUuid": "0ebaf39b_f4786127",
+      "revId": "628dad81e69989d9b328142b9a60246f55e821b0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
