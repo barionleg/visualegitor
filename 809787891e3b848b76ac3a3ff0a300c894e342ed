@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_8a20c0a9",
+        "filename": "src/ui/ve.ui.Sequence.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-11-09T22:58:15Z",
+      "side": 1,
+      "message": "I don\u0027t think it likes the pre-comment and whitespace\n\ntry:\n  true, // noAutoSelect",
+      "revId": "809787891e3b848b76ac3a3ff0a300c894e342ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
