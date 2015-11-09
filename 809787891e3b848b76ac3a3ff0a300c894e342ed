@@ -34,6 +34,24 @@
       "revId": "809787891e3b848b76ac3a3ff0a300c894e342ed",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_053cc1bb",
+        "filename": "src/ui/ve.ui.Sequence.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-11-09T23:09:44Z",
+      "side": 1,
+      "message": "Fixed by moving to the other side of the value.",
+      "parentUuid": "0ebaf39b_8521919f",
+      "revId": "809787891e3b848b76ac3a3ff0a300c894e342ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
