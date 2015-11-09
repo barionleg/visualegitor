@@ -52,6 +52,24 @@
       "revId": "809787891e3b848b76ac3a3ff0a300c894e342ed",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_a574d597",
+        "filename": "src/ui/ve.ui.Sequence.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2015-11-09T23:11:54Z",
+      "side": 1,
+      "message": "Fixed differently by removing the space that was confusing JSCS. :)",
+      "parentUuid": "0ebaf39b_053cc1bb",
+      "revId": "809787891e3b848b76ac3a3ff0a300c894e342ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
