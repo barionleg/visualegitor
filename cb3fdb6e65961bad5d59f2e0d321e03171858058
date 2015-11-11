@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_720f7ae5",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 2737,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-11-11T00:22:53Z",
+      "side": 1,
+      "message": "onSurfaceObserverContentChange is no more so in the rebase this got deleted - not sure if that is logically sound...",
+      "revId": "cb3fdb6e65961bad5d59f2e0d321e03171858058",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
