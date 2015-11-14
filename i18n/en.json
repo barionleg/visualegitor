@@ -43,6 +43,7 @@
 	"visualeditor-content-select-all": "Select all",
 	"visualeditor-contextitemwidget-label-secondary": "Edit",
 	"visualeditor-contextitemwidget-label-remove": "Delete",
+	"visualeditor-contextitemwidget-label-clear": "Clear",
 	"visualeditor-dialog-action-apply": "Apply changes",
 	"visualeditor-dialog-action-cancel": "Cancel",
 	"visualeditor-dialog-action-done": "Done",
