@@ -2904,10 +2904,7 @@ ve.ce.Surface.prototype.getViewportRange = function () {
 	var surface = this,
 		documentModel = this.getModel().getDocument(),
 		data = documentModel.data,
-		surfaceRect = this.getSurface().getBoundingClientRect(),
-		padding = 50,
-		top = Math.max( this.surface.toolbarHeight - surfaceRect.top - padding, 0 ),
-		bottom = top + this.$window.height() - this.surface.toolbarHeight + ( padding * 2 ),
+		dimensions = this.surface.getViewportDimensions(),
 		documentRange = new ve.Range( 0, this.getModel().getDocument().getInternalList().getListNode().getOuterRange().start );
 
 	function highestIgnoreChildrenNode( childNode ) {
@@ -2951,8 +2948,8 @@ ve.ce.Surface.prototype.getViewportRange = function () {
 	}
 
 	return new ve.Range(
-		binarySearch( top, documentRange, 'bottom' ),
-		binarySearch( bottom, documentRange, 'top' )
+		binarySearch( dimensions.top, documentRange, 'bottom' ),
+		binarySearch( dimensions.bottom, documentRange, 'top' )
 	);
 };
 

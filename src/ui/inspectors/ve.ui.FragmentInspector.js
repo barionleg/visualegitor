@@ -171,3 +171,24 @@ ve.ui.FragmentInspector.prototype.getBodyHeight = function () {
 	// e.g. a disabled button.
 	return Math.ceil( this.container.$element[ 0 ].scrollHeight ) + 1;
 };
+
+/**
+ * @inheritdoc OO.ui.Window
+ */
+ve.ui.FragmentInspector.prototype.getSizeProperties = function () {
+	var surface = this.manager.getSurface(),
+		viewport = surface.getViewportDimensions(),
+		properties = ve.cloneObject( ve.ui.FragmentInspector.super.prototype.getSizeProperties.apply( this, arguments ) );
+	// We want to stop the inspector from possibly being bigger than the
+	// viewport. Limiting it to the window height would ignore toolbars and
+	// the find-replace dialog and suchlike. Therefore we set its max height
+	// to the surface's estimation of the actual viewport available to it. If
+	// we wanted to stop the inspector from going off the bottom of the
+	// visible area we could do something like this:
+	// `viewport.bottom - surface.getContext().$element.position().top`
+	// ...but that's probably not the desired behavior. It's okay if the
+	// inspector goes off the edge of the viewport, so long as it's possible
+	// to scroll and get it all in view.
+	properties.maxHeight = viewport.height - surface.getContext().$element.position().top;
+	return properties;
+};

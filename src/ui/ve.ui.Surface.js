@@ -110,6 +110,8 @@ OO.mixinClass( ve.ui.Surface, OO.EventEmitter );
  */
 ve.ui.Surface.static.isMobile = false;
 
+ve.ui.Surface.static.viewportPadding = 25;
+
 /* Methods */
 
 /**
@@ -243,6 +245,23 @@ ve.ui.Surface.prototype.getBoundingClientRect = function () {
 	// We would use getBoundingClientRect(), but in iOS7 that's relative to the
 	// document rather than to the viewport
 	return this.$element[ 0 ].getClientRects()[ 0 ];
+};
+
+/**
+ * Get measurements of the visible area of the surface viewport
+ *
+ * @return {Object}
+ */
+ve.ui.Surface.prototype.getViewportDimensions = function () {
+	var rect = this.getBoundingClientRect(),
+		padding = this.constructor.static.viewportPadding,
+		top = Math.max( this.toolbarHeight - rect.top - padding, 0 ),
+		bottom = top + $( this.getElementWindow() ).height() - ( this.toolbarHeight + ( padding  * 2 ) );
+	return {
+		top: top,
+		bottom: bottom,
+		height: bottom - top
+	};
 };
 
 /**
