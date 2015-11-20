@@ -135,8 +135,7 @@ ve.ui.CommentInspector.prototype.getTeardownProcess = function ( data ) {
 	return ve.ui.CommentInspector.super.prototype.getTeardownProcess.call( this, data )
 		.first( function () {
 			var surfaceModel = this.getFragment().getSurface(),
-				text = this.textWidget.getValue(),
-				innerText = this.textWidget.getInnerValue();
+				innerText = this.textWidget.getValue();
 
 			if ( data.action === 'remove' || innerText === '' ) {
 				surfaceModel.popStaging();
@@ -144,7 +143,7 @@ ve.ui.CommentInspector.prototype.getTeardownProcess = function ( data ) {
 				this.getFragment().removeContent();
 			} else {
 				// Edit comment node
-				this.getFragment().changeAttributes( { text: text } );
+				this.getFragment().changeAttributes( { text: this.textWidget.getValueAndWhitespace() } );
 				surfaceModel.applyStaging();
 			}
 
