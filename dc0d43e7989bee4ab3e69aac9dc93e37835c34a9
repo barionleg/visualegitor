@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_4cb5b277",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 3086,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-11-21T11:14:19Z",
+      "side": 1,
+      "message": "If this.activeLink.childNodes[1] is a text node, it would be better to step into it (there is a difference in Firefox). Perhaps use ve.ce.nextCursorOffset( this.activeLink.childNodes[ 0 ] ) .\n\nNote that in Chromium, the location will be left-normalized no matter what you specify.",
+      "revId": "dc0d43e7989bee4ab3e69aac9dc93e37835c34a9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_ecab4619",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 3089,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-11-21T11:14:19Z",
+      "side": 1,
+      "message": "Similarly, use ve.ce.previousCursorOffset( this.activeLink.childNodes[ this.activeLink.childNodes.length - 1 ] ) ?\n\nIn future nextCursorOffset and previousCursorOffset could also be improved to handle more esoteric cases like a bold annotation (which as currently written would get selected (and therefore overwritten) in Firefox) or a ce\u003dfalse span (which currently can cause Chromium\u0027s cursoring normalization to fail)",
+      "revId": "dc0d43e7989bee4ab3e69aac9dc93e37835c34a9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
