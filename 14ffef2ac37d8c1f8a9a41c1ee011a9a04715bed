@@ -16,6 +16,24 @@
       "revId": "14ffef2ac37d8c1f8a9a41c1ee011a9a04715bed",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_ecea66d6",
+        "filename": "src/ui/widgets/ve.ui.DimensionsWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-11-21T02:10:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_4cfa92db",
+      "revId": "14ffef2ac37d8c1f8a9a41c1ee011a9a04715bed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
