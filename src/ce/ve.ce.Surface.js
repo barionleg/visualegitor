@@ -3074,6 +3074,24 @@ ve.ce.Surface.prototype.updateActiveLink = function () {
 };
 
 /**
+ * Update the selection to contain the contents of the activeLink, if it exists
+ *
+ * @return {boolean} Whether the selection changed
+ */
+ve.ce.Surface.prototype.selectActiveLinkContents = function () {
+	if ( !this.activeLink ) {
+		return false;
+	}
+	return this.showSelectionState( new ve.SelectionState( {
+		anchorNode: this.activeLink,
+		anchorOffset: 1, // past the nail
+		focusNode: this.activeLink,
+		focusOffset: this.activeLink.childNodes.length - 1, // before the nail
+		isCollapsed: false
+	} ) );
+};
+
+/**
  * Get the linkAnnotation node containing the cursor fous
  *
  * If there is no focus, or it is not inside a linkAnnotation, return null
