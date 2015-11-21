@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_4cfa92db",
+        "filename": "src/ui/widgets/ve.ui.DimensionsWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-11-21T01:39:19Z",
+      "side": 1,
+      "message": "we should use $.isNumeric() as that\u0027s what we use in ve.dm.Scalable and MediaSizeWidget",
+      "revId": "14ffef2ac37d8c1f8a9a41c1ee011a9a04715bed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
