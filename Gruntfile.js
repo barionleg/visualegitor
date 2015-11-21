@@ -239,9 +239,11 @@ module.exports = function ( grunt ) {
 				jshintrc: true
 			},
 			all: [
-				'*.js',
-				'{.jsduck,build,demos,src,tests}/*.js',
-				'{.jsduck,build,demos,src,tests}/**/*.js'
+				'**/*.js',
+				'!dist/**',
+				'!docs/**',
+				'!lib/**',
+				'!node_modules/**'
 			]
 		},
 		jscs: {
@@ -263,11 +265,20 @@ module.exports = function ( grunt ) {
 			options: {
 				csslintrc: '.csslintrc'
 			},
-			all: '{.jsduck,build,demos,src,tests}/**/*.css'
+			all: [
+				'**/*.css',
+				'!dist/**',
+				'!docs/**',
+				'!lib/**',
+				'!node_modules/**'
+			]
 		},
 		jsonlint: {
 			all: [
 				'**/*.json',
+				'!dist/**',
+				'!docs/**',
+				'!lib/**',
 				'!node_modules/**'
 			]
 		},
