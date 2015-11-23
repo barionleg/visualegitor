@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_95e1672b",
+        "filename": "src/ui/ve.ui.Surface.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-11-23T19:35:41Z",
+      "side": 1,
+      "message": "document this property",
+      "revId": "b0a546d0df5ef7780e3d2091e0e10fcd499028ad",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
