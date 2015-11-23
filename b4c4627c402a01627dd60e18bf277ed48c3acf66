@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_15b337e9",
+        "filename": "Gruntfile.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2015-11-23T20:16:59Z",
+      "side": 1,
+      "message": "This should be reduced to \u0027.\u0027 and update jshintignore if it is outdated. Same for JSCS.\n\nAlso, I currently get warnings for `coverage/Chrome 46.0.2490 (Mac OS X 10.10.5)/prettify.js` when I run npm test locally.",
+      "revId": "b4c4627c402a01627dd60e18bf277ed48c3acf66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
