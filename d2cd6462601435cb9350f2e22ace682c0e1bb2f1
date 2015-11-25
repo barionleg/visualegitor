@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_1c5110dd",
+        "filename": "src/dm/ve.dm.SurfaceFragment.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 904,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-11-25T20:06:24Z",
+      "side": 1,
+      "message": "We should avoid mentioning nodes by name, and instead give them properties we check for.\n\nThis is an existing issue so doesn\u0027t have to be fixed in this commit.",
+      "revId": "d2cd6462601435cb9350f2e22ace682c0e1bb2f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_3c4c1443",
+        "filename": "tests/ce/ve.ce.Surface.test.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-11-25T20:06:24Z",
+      "side": 1,
+      "message": "wasn\u0027t this correct before? (backspace takes you left)",
+      "revId": "d2cd6462601435cb9350f2e22ace682c0e1bb2f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
