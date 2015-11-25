@@ -59,5 +59,6 @@ ve.ce.KeyDownHandler.static.supportedSelections = null;
  * @method
  * @param {ve.ce.Surface} surface Surface
  * @param {jQuery.Event} e Key down event
+ * @return {boolean} whether an action was tablen
  */
 ve.ce.KeyDownHandler.static.execute = null;

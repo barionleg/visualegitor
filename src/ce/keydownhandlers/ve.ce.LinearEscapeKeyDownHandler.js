@@ -42,6 +42,8 @@ ve.ce.LinearEscapeKeyDownHandler.static.execute = function ( surface, e ) {
 		e.preventDefault();
 		e.stopPropagation();
 		tableNode.setEditing( false );
+
+		return true;
 	}
 };
 
