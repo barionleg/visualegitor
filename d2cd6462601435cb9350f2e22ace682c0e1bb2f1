@@ -33,6 +33,24 @@
       "revId": "d2cd6462601435cb9350f2e22ace682c0e1bb2f1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_fc675c47",
+        "filename": "tests/ce/ve.ce.Surface.test.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-11-25T21:05:40Z",
+      "side": 1,
+      "message": "Oh wait - this isn\u0027t backspace necessarily. Confirmed backspace still works as expected.",
+      "parentUuid": "0ebaf39b_3c4c1443",
+      "revId": "d2cd6462601435cb9350f2e22ace682c0e1bb2f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
