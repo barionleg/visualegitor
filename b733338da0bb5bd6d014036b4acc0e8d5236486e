@@ -69,6 +69,24 @@
       "revId": "b733338da0bb5bd6d014036b4acc0e8d5236486e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_e1d00556",
+        "filename": "src/ce/keydownhandlers/ve.ce.TableArrowKeyDownHandler.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-11-29T08:17:09Z",
+      "side": 1,
+      "message": "I think of the use case for Tab as being typing data into cells sequentially (i.e. I\u0027d expect Tab to advance logically). Note that Backspace, Home/End and Shift+Left/Right in linear selections are all logical. (Table selection cursoring is always both logical and visual because the cell rendering arrangement follows the block directionality).",
+      "parentUuid": "0ebaf39b_61e5f531",
+      "revId": "b733338da0bb5bd6d014036b4acc0e8d5236486e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
