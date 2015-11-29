@@ -87,6 +87,24 @@
       "revId": "b733338da0bb5bd6d014036b4acc0e8d5236486e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_a1c68d9b",
+        "filename": "src/ce/keydownhandlers/ve.ce.TableArrowKeyDownHandler.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2015-11-29T08:19:42Z",
+      "side": 1,
+      "message": "That\u0027s a good point. Leaving it consistent with the Home/End stuff makes sense, if nothing else.",
+      "parentUuid": "0ebaf39b_e1d00556",
+      "revId": "b733338da0bb5bd6d014036b4acc0e8d5236486e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
