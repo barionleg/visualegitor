@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_81e2692c",
+        "filename": "src/ce/keydownhandlers/ve.ce.LinearTabKeyDownHandler.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2015-11-29T07:40:32Z",
+      "side": 1,
+      "message": "Fine, fine, I\u0027ll finally get spellcheck working in comments in my editor again.",
+      "parentUuid": "0ebaf39b_49049d1a",
+      "revId": "b733338da0bb5bd6d014036b4acc0e8d5236486e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_940dcc3b",
         "filename": "src/ce/keydownhandlers/ve.ce.TableArrowKeyDownHandler.js",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2015-11-28T09:50:29Z",
       "side": 1,
       "message": "I think we want checkDir to be false (because I\u0027d expect tab to move logically forwards, and shift+tab logically backwards)",
+      "revId": "b733338da0bb5bd6d014036b4acc0e8d5236486e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_61e5f531",
+        "filename": "src/ce/keydownhandlers/ve.ce.TableArrowKeyDownHandler.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2015-11-29T07:40:32Z",
+      "side": 1,
+      "message": "I\u0027m actually not sure here. If you enable RTL mode in a spreadsheet app (MS Office, Libreoffice Calc, etc), tab does move the cell to the left. Now, of course, it also mirrors all the cells such that this is logically equivalent to moving it to the right in LTR mode.\n\nCould make a case for moving right (maintaining the logical movement), or moving left (maintaining the visual movement that people using RTL expect).",
+      "parentUuid": "0ebaf39b_940dcc3b",
       "revId": "b733338da0bb5bd6d014036b4acc0e8d5236486e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
