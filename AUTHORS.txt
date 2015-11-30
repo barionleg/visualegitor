@@ -11,7 +11,6 @@ James D. Forrester  <jforrester@wikimedia.org>
 Moriel Schottlender <mschottlender@wikimedia.org>
 Roan Kattouw <roan@wikimedia.org>
 Rob Moen <rmoen@wikimedia.org>
-Sucheta Ghoshal <sghoshal@wikimedia.org>
 Timo Tijhof <krinklemail@gmail.com>
 Trevor Parscal <trevor@wikimedia.org>
 
@@ -50,6 +49,7 @@ Quim Gil <quimgil@gmail.com>
 rachel99 <rachelqa99@gmail.com>
 Steven Zhang <cro0016@gmail.com>
 Subramanya Sastry <ssastry@wikimedia.org>
+Sucheta Ghoshal <sghoshal@wikimedia.org>
 Thalia Chan <thalia.e.chan@googlemail.com>
 Tongbo Sui <beanixster@gmail.com>
 Yuki Shira <shirayuking@gmail.com>
