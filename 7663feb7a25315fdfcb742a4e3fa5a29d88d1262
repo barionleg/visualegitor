@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_ba08f6dc",
+        "filename": "src/ce/ve.ce.TextState.js",
+        "patchSetId": 20
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-11-30T15:43:43Z",
+      "side": 1,
+      "message": "probably just want to ignore these...",
+      "revId": "7663feb7a25315fdfcb742a4e3fa5a29d88d1262",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
