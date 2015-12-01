@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_37de5445",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 24
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2015-12-01T20:06:05Z",
+      "side": 1,
+      "message": "This is actually T63884.",
+      "revId": "82f1f92a7a454f7dc637ab1a26706bf12d61c62c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
