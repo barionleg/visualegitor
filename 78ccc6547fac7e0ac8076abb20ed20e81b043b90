@@ -37,6 +37,42 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_f151acd9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 23
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-12-01T16:52:11Z",
+      "side": 1,
+      "message": "Not yet (different testing mod from before) but I will do",
+      "parentUuid": "0ebaf39b_8b1effbc",
+      "revId": "78ccc6547fac7e0ac8076abb20ed20e81b043b90",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_5108b8dc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 23
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-12-01T16:52:11Z",
+      "side": 1,
+      "message": "Actually I hadn\u0027t fully committed my local change (sorry) - I was testing with Chromium native and also manual debugger-applied annotations in Firefox (because IME can potentially throw up such changes)",
+      "parentUuid": "0ebaf39b_ce83a5ab",
+      "revId": "78ccc6547fac7e0ac8076abb20ed20e81b043b90",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_8b759ff6",
         "filename": "/COMMIT_MSG",
         "patchSetId": 23
@@ -48,6 +84,24 @@
       "writtenOn": "2015-12-01T12:12:36Z",
       "side": 1,
       "message": "Created T119960 for you to tag.",
+      "revId": "78ccc6547fac7e0ac8076abb20ed20e81b043b90",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_f11f6c0d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 23
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-12-01T16:52:11Z",
+      "side": 1,
+      "message": "Thanks (done)",
+      "parentUuid": "0ebaf39b_8b759ff6",
       "revId": "78ccc6547fac7e0ac8076abb20ed20e81b043b90",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -71,6 +125,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_11e48009",
+        "filename": "src/ce/ve.ce.TextState.js",
+        "patchSetId": 23
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-12-01T16:52:11Z",
+      "side": 1,
+      "message": "Good point (this wasn\u0027t obviously worthwhile before because there were multiple insertions, but now there\u0027s only one, so I\u0027ll use newFromReplacement)",
+      "parentUuid": "0ebaf39b_ae8671bc",
+      "revId": "78ccc6547fac7e0ac8076abb20ed20e81b043b90",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_ebca1b1c",
         "filename": "src/ce/ve.ce.TextState.js",
         "patchSetId": 23
@@ -88,6 +160,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_d19d885c",
+        "filename": "src/ce/ve.ce.TextState.js",
+        "patchSetId": 23
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-12-01T16:52:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_ebca1b1c",
+      "revId": "78ccc6547fac7e0ac8076abb20ed20e81b043b90",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_4e98151f",
         "filename": "src/ce/ve.ce.TextState.js",
         "patchSetId": 23
@@ -99,6 +189,24 @@
       "writtenOn": "2015-12-01T15:39:07Z",
       "side": 1,
       "message": "What is this for?",
+      "revId": "78ccc6547fac7e0ac8076abb20ed20e81b043b90",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_714a9cca",
+        "filename": "src/ce/ve.ce.TextState.js",
+        "patchSetId": 23
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-12-01T16:52:11Z",
+      "side": 1,
+      "message": "This is the single pushInsertion for the multiple arrays of contiguous data that are the elements of newData. I\u0027ll replace this with a newFromReplacement (see above) and flatten the contents of newData to be less unintuitive.",
+      "parentUuid": "0ebaf39b_4e98151f",
       "revId": "78ccc6547fac7e0ac8076abb20ed20e81b043b90",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
