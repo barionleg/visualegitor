@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_8b1effbc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 23
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-12-01T12:12:36Z",
+      "side": 1,
+      "message": "todone",
+      "revId": "78ccc6547fac7e0ac8076abb20ed20e81b043b90",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_8b759ff6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 23
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-12-01T12:12:36Z",
+      "side": 1,
+      "message": "Created T119960 for you to tag.",
+      "revId": "78ccc6547fac7e0ac8076abb20ed20e81b043b90",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_ebca1b1c",
+        "filename": "src/ce/ve.ce.TextState.js",
+        "patchSetId": 23
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-12-01T12:12:36Z",
+      "side": 1,
+      "message": "Does it? Aren\u0027t the annotations only indexed when you call annotations.add?",
+      "revId": "78ccc6547fac7e0ac8076abb20ed20e81b043b90",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
