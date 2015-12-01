@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_ce83a5ab",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 23
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-12-01T15:39:07Z",
+      "side": 1,
+      "message": "Also the hack you had in place was doing \u0027return false\u0027 instead of \u0027return true\u0027 so it was letting triggers run, so any testing you did wasn\u0027t actually using native.",
+      "parentUuid": "0ebaf39b_8b1effbc",
+      "revId": "78ccc6547fac7e0ac8076abb20ed20e81b043b90",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_8b759ff6",
         "filename": "/COMMIT_MSG",
         "patchSetId": 23
@@ -36,6 +54,23 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_ae8671bc",
+        "filename": "src/ce/ve.ce.TextState.js",
+        "patchSetId": 23
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-12-01T15:39:07Z",
+      "side": 1,
+      "message": "We should use transaction builders.",
+      "revId": "78ccc6547fac7e0ac8076abb20ed20e81b043b90",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_ebca1b1c",
         "filename": "src/ce/ve.ce.TextState.js",
         "patchSetId": 23
@@ -47,6 +82,23 @@
       "writtenOn": "2015-12-01T12:12:36Z",
       "side": 1,
       "message": "Does it? Aren\u0027t the annotations only indexed when you call annotations.add?",
+      "revId": "78ccc6547fac7e0ac8076abb20ed20e81b043b90",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_4e98151f",
+        "filename": "src/ce/ve.ce.TextState.js",
+        "patchSetId": 23
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-12-01T15:39:07Z",
+      "side": 1,
+      "message": "What is this for?",
       "revId": "78ccc6547fac7e0ac8076abb20ed20e81b043b90",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
