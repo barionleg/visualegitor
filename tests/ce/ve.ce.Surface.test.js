@@ -260,7 +260,6 @@ QUnit.test( 'handleLinearDelete', function ( assert ) {
 					data.splice( 0, 2 );
 					data.splice( 2, 2 );
 				},
-				expectedRange: new ve.Range( 1 ),
 				expectedSelection: {
 					type: 'linear',
 					range: new ve.Range( 1 )
@@ -275,12 +274,23 @@ QUnit.test( 'handleLinearDelete', function ( assert ) {
 					data.splice( 5, 2 );
 					data.splice( 7, 2 );
 				},
-				expectedRange: new ve.Range( 5 ),
 				expectedSelection: {
 					type: 'linear',
 					range: new ve.Range( 6 )
 				},
 				msg: 'List at end of document unwrapped by delete'
+			},
+			{
+				html: '<p>foo</p>',
+				range: new ve.Range( 4 ),
+				operations: [ 'delete' ],
+				expectedData: function () {
+				},
+				expectedSelection: {
+					type: 'linear',
+					range: new ve.Range( 4 )
+				},
+				msg: 'Delete at end of last paragraph does nothing'
 			}
 		];
 
