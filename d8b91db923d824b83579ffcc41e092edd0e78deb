@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ceb37bc7_0bb861e1",
+        "filename": "src/ce/keydownhandlers/ve.ce.LinearDeleteKeyDownHandler.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2015-12-03T08:05:09Z",
+      "side": 1,
+      "message": "There might be a more concise way of putting this, which I\u0027d welcome. `startNode` can be a blend of various content / non-content / structural node types, as you can see here.",
+      "revId": "d8b91db923d824b83579ffcc41e092edd0e78deb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
