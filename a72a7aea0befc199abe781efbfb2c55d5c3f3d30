@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ceb37bc7_2f952a36",
+        "filename": "src/ui/ve.ui.Surface.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-12-03T23:13:46Z",
+      "side": 1,
+      "message": "document the return, e.g. Object containing vertical dimensions: top, bottom and height",
+      "revId": "a72a7aea0befc199abe781efbfb2c55d5c3f3d30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
