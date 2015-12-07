@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aeb807a7_7621beab",
+        "filename": "src/ui/tools/ve.ui.InspectorTool.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-12-07T14:35:13Z",
+      "side": 1,
+      "message": "when is this test ever false? why was it a reference check in your version?",
+      "revId": "9fc99aff1a3fb95b52a6c47d7a5a83ee4cb6e95f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
