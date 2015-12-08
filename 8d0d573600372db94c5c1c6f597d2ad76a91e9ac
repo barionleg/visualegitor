@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aeb807a7_1c3df7b8",
+        "filename": "src/ce/ve.ce.TextState.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-12-08T15:44:27Z",
+      "side": 1,
+      "message": "For consistency, Node should be changed to HTMLElement here too",
+      "revId": "8d0d573600372db94c5c1c6f597d2ad76a91e9ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aeb807a7_9c49e76c",
+        "filename": "src/ce/ve.ce.TextStateChunk.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-12-08T15:44:27Z",
+      "side": 1,
+      "message": "For consistency, Node should be changed to HTMLElement here too",
+      "revId": "8d0d573600372db94c5c1c6f597d2ad76a91e9ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aeb807a7_bc270bb1",
+        "filename": "src/ce/ve.ce.TextStateChunk.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-12-08T15:44:27Z",
+      "side": 1,
+      "message": "This should be singular (i.e. isEqualElement) because it tests whether one argument is equal to the other",
+      "revId": "8d0d573600372db94c5c1c6f597d2ad76a91e9ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
