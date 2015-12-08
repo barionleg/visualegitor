@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "aeb807a7_9c9fa7b9",
+        "filename": "src/ce/ve.ce.TextState.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-12-08T15:47:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aeb807a7_1c3df7b8",
+      "revId": "8d0d573600372db94c5c1c6f597d2ad76a91e9ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aeb807a7_9c49e76c",
         "filename": "src/ce/ve.ce.TextStateChunk.js",
         "patchSetId": 1
@@ -47,6 +65,24 @@
       "writtenOn": "2015-12-08T15:44:27Z",
       "side": 1,
       "message": "This should be singular (i.e. isEqualElement) because it tests whether one argument is equal to the other",
+      "revId": "8d0d573600372db94c5c1c6f597d2ad76a91e9ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aeb807a7_bc8b8b71",
+        "filename": "src/ce/ve.ce.TextStateChunk.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-12-08T15:47:22Z",
+      "side": 1,
+      "message": "I still don\u0027t get why the static method should be singular and the instance method should be plural...",
+      "parentUuid": "aeb807a7_bc270bb1",
       "revId": "8d0d573600372db94c5c1c6f597d2ad76a91e9ac",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
