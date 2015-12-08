@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aeb807a7_1fe16929",
+        "filename": "src/ui/tools/ve.ui.FragmentWindowTool.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2015-12-08T17:51:13Z",
+      "side": 1,
+      "message": "You renamed this.",
+      "revId": "1e66a0b02e035982609a9c4162058fabe4175d35",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
