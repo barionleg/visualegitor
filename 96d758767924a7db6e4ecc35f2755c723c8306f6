@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_d14e77c4",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 2859,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2015-12-13T17:49:53Z",
+      "side": 1,
+      "message": "Shurely \"to anchor cell\" (or \"to from cell\")?",
+      "revId": "96d758767924a7db6e4ecc35f2755c723c8306f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
