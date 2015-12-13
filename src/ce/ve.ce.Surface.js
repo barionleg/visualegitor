@@ -2981,11 +2981,7 @@ ve.ce.Surface.prototype.showModelSelection = function ( selection ) {
 		return false;
 	}
 
-	if (
-		!( selection instanceof ve.dm.LinearSelection ) ||
-		this.focusedNode ||
-		this.focusedBlockSlug
-	) {
+	if ( !selection.isNativeCursor() || this.focusedBlockSlug ) {
 		return false;
 	}
 
