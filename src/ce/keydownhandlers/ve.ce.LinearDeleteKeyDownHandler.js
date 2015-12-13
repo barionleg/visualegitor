@@ -250,7 +250,7 @@ ve.ce.LinearDeleteKeyDownHandler.static.execute = function ( surface, e ) {
 						if ( direction > 0 ) {
 							rangeToRemove = new ve.Range( rangeToRemove.start, nodeRange.end );
 						} else {
-							rangeToRemove = new ve.Range( nodeRange.start, rangeToRemove.start - 1 );
+							rangeToRemove = new ve.Range( nodeRange.start, Math.max( rangeToRemove.start, 0 ) );
 						}
 				}
 			}
