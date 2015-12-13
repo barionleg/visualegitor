@@ -2352,20 +2352,19 @@ ve.ce.Surface.prototype.onInsertionAnnotationsChange = function () {
  * @return {boolean} Whether a re-render actually happened
  */
 ve.ce.Surface.prototype.renderSelectedContentBranchNode = function () {
-	var selection, ceNode;
-	selection = this.model.getSelection();
-	if ( !( selection instanceof ve.dm.LinearSelection ) ) {
+	var viewNode,
+		selection = this.getSelection();
+
+	if ( !selection.isNativeCursor() ) {
 		return false;
 	}
-	ceNode = this.documentView.getBranchNodeFromOffset( selection.getRange().start );
-	if ( ceNode === null ) {
-		return false;
-	}
-	if ( !( ceNode instanceof ve.ce.ContentBranchNode ) ) {
+
+	viewNode = this.documentView.getBranchNodeFromOffset( selection.getModel().getRange().start );
+	if ( !( viewNode instanceof ve.ce.ContentBranchNode ) ) {
 		// not a content branch node
 		return false;
 	}
-	return ceNode.renderContents();
+	return viewNode.renderContents();
 };
 
 /**
