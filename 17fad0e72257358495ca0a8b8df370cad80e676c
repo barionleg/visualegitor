@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_7fcdfc33",
+        "filename": "src/ui/contextitems/ve.ui.AnnotationContextItem.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2015-12-15T12:13:58Z",
+      "side": 1,
+      "message": "if we just expanded the fragment, can\u0027t we use fragment.getAnnotations( true ) again?",
+      "revId": "17fad0e72257358495ca0a8b8df370cad80e676c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
