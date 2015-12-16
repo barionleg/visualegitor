@@ -49,12 +49,13 @@ ve.ce.Document.prototype.getSlugAtOffset = function ( offset ) {
  * Calculate the DOM location corresponding to a DM offset
  *
  * @param {number} offset Linear model offset
+ * @param {boolean} outsideNail Whether to jump outside nails if directly next to them
  * @return {Object} DOM location
  * @return {Node} return.node location node
  * @return {number} return.offset location offset within the node
  * @throws {Error} Offset could not be translated to a DOM element and offset
  */
-ve.ce.Document.prototype.getNodeAndOffset = function ( offset ) {
+ve.ce.Document.prototype.getNodeAndOffset = function ( offset, outsideNail ) {
 	var nao, currentNode, nextNode, previousNode;
 
 	// Get the un-unicorn-adjusted result. If it is:
@@ -150,6 +151,20 @@ ve.ce.Document.prototype.getNodeAndOffset = function ( offset ) {
 	) {
 		// At element offset just after the post unicorn; return the point just before it
 		return { node: nao.node, offset: nao.offset - 1 };
+	} else if ( outsideNail && (
+		previousNode &&
+		previousNode.nodeType === Node.ELEMENT_NODE &&
+		previousNode.classList.contains( 've-ce-nail-post-open' ) && nao.offset === 0 )
+	) {
+		// Being outside the nails requested and right next to the starting nail: jump outside
+		return ve.ce.previousCursorOffset( getPrevious( previousNode ) );
+	} else if ( outsideNail && (
+		nextNode &&
+		nextNode.nodeType === Node.ELEMENT_NODE &&
+		nextNode.classList.contains( 've-ce-nail-pre-close' ) && nao.offset === currentNode.length )
+	) {
+		// Being outside the nails requested and right next to the ending nail: jump outside
+		return ve.ce.nextCursorOffset( getNext( nextNode ) );
 	} else {
 		return nao;
 	}
