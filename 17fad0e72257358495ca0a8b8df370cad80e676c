@@ -16,6 +16,24 @@
       "revId": "17fad0e72257358495ca0a8b8df370cad80e676c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_cfa0f540",
+        "filename": "src/ui/contextitems/ve.ui.AnnotationContextItem.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2015-12-16T06:30:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6eaa8f54_7fcdfc33",
+      "revId": "17fad0e72257358495ca0a8b8df370cad80e676c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
