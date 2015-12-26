@@ -252,6 +252,13 @@
 	background-image:      -o-linear-gradient(transparent, transparent), url("themes/mediawiki/images/icons/bold-cyrl-zhe.png");
 }
 /* @noflip */
+.oo-ui-icon-bold:lang(uk) {
+	background-image: url("themes/mediawiki/images/icons/bold-cyrl-zhe.png");
+	background-image: -webkit-linear-gradient(transparent, transparent), /* @embed */ url("themes/mediawiki/images/icons/bold-cyrl-zhe.svg");
+	background-image:         linear-gradient(transparent, transparent), /* @embed */ url("themes/mediawiki/images/icons/bold-cyrl-zhe.svg");
+	background-image:      -o-linear-gradient(transparent, transparent), url("themes/mediawiki/images/icons/bold-cyrl-zhe.png");
+}
+/* @noflip */
 .oo-ui-icon-bold:lang(nl) {
 	background-image: url("themes/mediawiki/images/icons/bold-v.png");
 	background-image: -webkit-linear-gradient(transparent, transparent), /* @embed */ url("themes/mediawiki/images/icons/bold-v.svg");
@@ -455,6 +462,13 @@
 }
 /* @noflip */
 .oo-ui-icon-bold-invert:lang(ru) {
+	background-image: url("themes/mediawiki/images/icons/bold-cyrl-zhe-invert.png");
+	background-image: -webkit-linear-gradient(transparent, transparent), /* @embed */ url("themes/mediawiki/images/icons/bold-cyrl-zhe-invert.svg");
+	background-image:         linear-gradient(transparent, transparent), /* @embed */ url("themes/mediawiki/images/icons/bold-cyrl-zhe-invert.svg");
+	background-image:      -o-linear-gradient(transparent, transparent), url("themes/mediawiki/images/icons/bold-cyrl-zhe-invert.png");
+}
+/* @noflip */
+.oo-ui-icon-bold-invert:lang(uk) {
 	background-image: url("themes/mediawiki/images/icons/bold-cyrl-zhe-invert.png");
 	background-image: -webkit-linear-gradient(transparent, transparent), /* @embed */ url("themes/mediawiki/images/icons/bold-cyrl-zhe-invert.svg");
 	background-image:         linear-gradient(transparent, transparent), /* @embed */ url("themes/mediawiki/images/icons/bold-cyrl-zhe-invert.svg");

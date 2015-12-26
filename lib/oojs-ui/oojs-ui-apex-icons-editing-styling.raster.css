@@ -132,6 +132,10 @@
 	background-image: /* @embed */ url(themes/apex/images/icons/bold-cyrl-zhe.png);
 }
 /* @noflip */
+.oo-ui-icon-bold:lang(uk) {
+	background-image: /* @embed */ url(themes/apex/images/icons/bold-cyrl-zhe.png);
+}
+/* @noflip */
 .oo-ui-icon-bold:lang(nl) {
 	background-image: /* @embed */ url(themes/apex/images/icons/bold-v.png);
 }
@@ -216,6 +220,10 @@
 }
 /* @noflip */
 .oo-ui-icon-italic:lang(ru) {
+	background-image: /* @embed */ url(themes/apex/images/icons/italic-k.png);
+}
+/* @noflip */
+.oo-ui-icon-italic:lang(uk) {
 	background-image: /* @embed */ url(themes/apex/images/icons/italic-k.png);
 }
 /* @noflip */

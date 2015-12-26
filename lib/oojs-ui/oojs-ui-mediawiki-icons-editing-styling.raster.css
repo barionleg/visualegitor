@@ -144,6 +144,10 @@
 	background-image: /* @embed */ url(themes/mediawiki/images/icons/bold-cyrl-zhe.png);
 }
 /* @noflip */
+.oo-ui-icon-bold:lang(uk) {
+	background-image: /* @embed */ url(themes/mediawiki/images/icons/bold-cyrl-zhe.png);
+}
+/* @noflip */
 .oo-ui-icon-bold:lang(nl) {
 	background-image: /* @embed */ url(themes/mediawiki/images/icons/bold-v.png);
 }
@@ -260,6 +264,10 @@
 }
 /* @noflip */
 .oo-ui-icon-bold-invert:lang(ru) {
+	background-image: /* @embed */ url(themes/mediawiki/images/icons/bold-cyrl-zhe-invert.png);
+}
+/* @noflip */
+.oo-ui-icon-bold-invert:lang(uk) {
 	background-image: /* @embed */ url(themes/mediawiki/images/icons/bold-cyrl-zhe-invert.png);
 }
 /* @noflip */

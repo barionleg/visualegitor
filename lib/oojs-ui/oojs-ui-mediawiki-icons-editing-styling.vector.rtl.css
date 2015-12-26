@@ -144,6 +144,10 @@
 	background-image: /* @embed */ url(themes/mediawiki/images/icons/bold-cyrl-zhe.svg);
 }
 /* @noflip */
+.oo-ui-icon-bold:lang(uk) {
+	background-image: /* @embed */ url(themes/mediawiki/images/icons/bold-cyrl-zhe.svg);
+}
+/* @noflip */
 .oo-ui-icon-bold:lang(nl) {
 	background-image: /* @embed */ url(themes/mediawiki/images/icons/bold-v.svg);
 }
@@ -263,6 +267,10 @@
 	background-image: /* @embed */ url(themes/mediawiki/images/icons/bold-cyrl-zhe-invert.svg);
 }
 /* @noflip */
+.oo-ui-icon-bold-invert:lang(uk) {
+	background-image: /* @embed */ url(themes/mediawiki/images/icons/bold-cyrl-zhe-invert.svg);
+}
+/* @noflip */
 .oo-ui-icon-bold-invert:lang(nl) {
 	background-image: /* @embed */ url(themes/mediawiki/images/icons/bold-v-invert.svg);
 }
@@ -347,6 +355,10 @@
 }
 /* @noflip */
 .oo-ui-icon-italic:lang(ru) {
+	background-image: /* @embed */ url(themes/mediawiki/images/icons/italic-k.svg);
+}
+/* @noflip */
+.oo-ui-icon-italic:lang(uk) {
 	background-image: /* @embed */ url(themes/mediawiki/images/icons/italic-k.svg);
 }
 /* @noflip */
@@ -466,6 +478,10 @@
 }
 /* @noflip */
 .oo-ui-icon-italic-invert:lang(ru) {
+	background-image: /* @embed */ url(themes/mediawiki/images/icons/italic-k-invert.svg);
+}
+/* @noflip */
+.oo-ui-icon-italic-invert:lang(uk) {
 	background-image: /* @embed */ url(themes/mediawiki/images/icons/italic-k-invert.svg);
 }
 /* @noflip */
