@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_69366202",
+        "filename": "src/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 890
+      },
+      "writtenOn": "2015-12-28T16:20:18Z",
+      "side": 1,
+      "message": "This should allow to resize the Image when it\u0027s added to the page (with the mouse). But unfortunately, the scalable for the ResizeableNode seems to doesn\u0027t represent the one, that is used here, so the value is always true (the default). Therefore, actually resizing the image with the mouse would reset the proportional dimensions and the value for isFixedRatio :/ I\u0027m not sure, why the value isn\u0027t updated and would welcome any help to fix this. This seems to be the only problem remaining for this change. Once fixed, a user can resize the image unproportional, if set in the MediaDialog-MediaSizeWidget :]",
+      "revId": "2c8678782e29a906c44cd237646899fc086aa32c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
