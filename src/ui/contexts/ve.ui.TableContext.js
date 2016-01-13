@@ -55,8 +55,8 @@ OO.inheritClass( ve.ui.TableContext, ve.ui.Context );
 /* Static Properties */
 
 ve.ui.TableContext.static.groups = {
-	col: [ 'insertColumnBefore', 'insertColumnAfter', 'deleteColumn' ],
-	row: [ 'insertRowBefore', 'insertRowAfter', 'deleteRow' ]
+	col: [ 'insertColumnBefore', 'insertColumnAfter', 'moveColumnBefore', 'moveColumnAfter', 'deleteColumn' ],
+	row: [ 'insertRowBefore', 'insertRowAfter', 'moveRowBefore', 'moveRowAfter', 'deleteRow' ]
 };
 
 /* Methods */
