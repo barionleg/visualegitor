@@ -33,6 +33,23 @@
       "revId": "8b77516475fc2adf7ce591c61919d13c97d83662",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_c4ca811d",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 3134,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-01-13T17:11:43Z",
+      "side": 1,
+      "message": "\"appear move\"",
+      "revId": "8b77516475fc2adf7ce591c61919d13c97d83662",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
