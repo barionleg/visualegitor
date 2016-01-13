@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_a403c5c0",
+        "filename": "src/ce/ve.ce.Document.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-01-13T16:26:14Z",
+      "side": 1,
+      "message": "Should we check more specifically for a ve-ce-nail-post-open here? Also don\u0027t we need another version of the logic if currentNode.nodeType !\u003d\u003d Node.TEXT_NODE?",
+      "revId": "8b77516475fc2adf7ce591c61919d13c97d83662",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_64094ddf",
+        "filename": "src/ce/ve.ce.Document.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-01-13T16:26:14Z",
+      "side": 1,
+      "message": "See above but ve-ce-nail-pre-close in this case",
+      "revId": "8b77516475fc2adf7ce591c61919d13c97d83662",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
