@@ -22,7 +22,8 @@
 	opacity: 0.15;
 }
 
-.ve-ce-focusableNode {
+.ve-ce-focusableNode,
+.ve-ce-focusableNode a {
 	cursor: default;
 }
 
@@ -34,6 +35,12 @@
 	-moz-user-select: none;
 }
 /*csslint vendor-prefix: true, compatible-vendor-prefixes:true */
+
+.ve-ce-focusableNode a:hover,
+a.ve-ce-focusableNode:hover {
+	/* Don't look like we're a clickable link (e.g. a broken template link) */
+	text-decoration: none;
+}
 
 .ve-ce-focusableNode-highlight {
 	background: #6da9f7;
