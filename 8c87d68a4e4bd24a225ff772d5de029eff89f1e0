@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_4ee53931",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-01-16T14:00:14Z",
+      "side": 1,
+      "message": "*uncommon MediaWiki skins.\n\nI\u0027m not sure this fixing this minor graphical glitch is worth the requirement it puts on every other user (non-Vector skins, theoretical non MW implementations) to override this style.",
+      "revId": "8c87d68a4e4bd24a225ff772d5de029eff89f1e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
