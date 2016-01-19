@@ -1463,7 +1463,7 @@ ve.ce.Surface.prototype.onCut = function ( e ) {
 ve.ce.Surface.prototype.onCopy = function ( e ) {
 	var originalSelection,
 		clipboardIndex, clipboardItem,
-		scrollTop, unsafeSelector, range, slice,
+		scrollTop, unsafeSelector, slice,
 		selection = this.getModel().getSelection(),
 		view = this,
 		htmlDoc = this.getModel().getDocument().getHtmlDocument(),
@@ -1471,15 +1471,11 @@ ve.ce.Surface.prototype.onCopy = function ( e ) {
 
 	this.$pasteTarget.empty();
 
-	if ( selection instanceof ve.dm.LinearSelection ||
-		( selection instanceof ve.dm.TableSelection && selection.isSingleCell() )
-	) {
-		range = selection.getRanges()[ 0 ];
-	} else {
+	if ( selection instanceof ve.dm.NullSelection ) {
 		return;
 	}
 
-	slice = this.model.documentModel.shallowCloneFromRange( range );
+	slice = this.model.documentModel.shallowCloneFromSelection( selection );
 
 	// Clone the elements in the slice
 	slice.data.cloneElements( true );
@@ -1737,6 +1733,7 @@ ve.ce.Surface.prototype.afterPaste = function ( e ) {
 		$elements, parts, pasteData, slice, tx, internalListRange,
 		data, doc, htmlDoc, $images, i,
 		context, left, right, contextRange,
+		tableAction,
 		items = [],
 		importantElement = '[id],[typeof],[rel]',
 		importRules = !this.pasteSpecial ? this.getSurface().getImportRules() : { all: { plainText: true } },
@@ -1749,12 +1746,8 @@ ve.ce.Surface.prototype.afterPaste = function ( e ) {
 		return;
 	}
 
-	if ( selection instanceof ve.dm.LinearSelection ||
-		( selection instanceof ve.dm.TableSelection && selection.isSingleCell() )
-	) {
-		range = selection.getRanges()[ 0 ];
-	} else {
-		return;
+	if ( selection instanceof ve.dm.NullSelection ) {
+		return null;
 	}
 
 	// Remove style attributes. Any valid styles will be restored by data-ve-attributes.
@@ -1840,7 +1833,12 @@ ve.ce.Surface.prototype.afterPaste = function ( e ) {
 		}
 	}
 
-	if ( slice ) {
+	range = selection.getRanges()[ 0 ];
+
+	if ( selection instanceof ve.dm.TableSelection && slice instanceof ve.dm.TableSlice ) {
+		tableAction = new ve.ui.TableAction( this.getSurface() );
+		tableAction.importTable( slice.getTableNode() );
+	} else if ( slice ) {
 		// Internal paste
 		try {
 			// Try to paste in the original data
@@ -1950,57 +1948,68 @@ ve.ce.Surface.prototype.afterPaste = function ( e ) {
 		// Initialize node tree
 		doc.buildNodeTree();
 
-		// If the paste was given context, calculate the range of the inserted data
-		if ( beforePasteData.context ) {
-			internalListRange = doc.getInternalList().getListNode().getOuterRange();
-			context = new ve.dm.ElementLinearData(
-				doc.getStore(),
-				ve.copy( beforePasteData.context )
+		if (
+			selection instanceof ve.dm.TableSelection &&
+			doc.documentNode.children.length === 2 &&
+			doc.documentNode.children[ 0 ] instanceof ve.dm.TableNode
+		) {
+			// External table-into-table paste
+			tableAction = new ve.ui.TableAction( this.getSurface() );
+			tableAction.importTable( doc.documentNode.children[ 0 ] );
+		} else {
+
+			// If the paste was given context, calculate the range of the inserted data
+			if ( beforePasteData.context ) {
+				internalListRange = doc.getInternalList().getListNode().getOuterRange();
+				context = new ve.dm.ElementLinearData(
+					doc.getStore(),
+					ve.copy( beforePasteData.context )
+				);
+				if ( this.pasteSpecial ) {
+					// The context may have been sanitized, so sanitize here as well for comparison
+					context.sanitize( importRules, true );
+				}
+
+				// Remove matching context from the left
+				left = 0;
+				while (
+					context.getLength() &&
+					ve.dm.ElementLinearData.static.compareElements(
+						data.getData( left ),
+						data.isElementData( left ) ? context.getData( 0 ) : beforePasteData.leftText
+					)
+				) {
+					left++;
+					context.splice( 0, 1 );
+				}
+
+				// Remove matching context from the right
+				right = internalListRange.start;
+				while (
+					right > 0 &&
+					context.getLength() &&
+					ve.dm.ElementLinearData.static.compareElements(
+						data.getData( right - 1 ),
+						data.isElementData( right - 1 ) ? context.getData( context.getLength() - 1 ) : beforePasteData.rightText
+					)
+				) {
+					right--;
+					context.splice( context.getLength() - 1, 1 );
+				}
+				// HACK: Strip trailing linebreaks probably introduced by Chrome bug
+				while ( right > 0 && data.getType( right - 1 ) === 'break' ) {
+					right--;
+				}
+				contextRange = new ve.Range( left, right );
+			}
+
+			tx = ve.dm.Transaction.newFromDocumentInsertion(
+				this.documentView.model,
+				range.start,
+				doc,
+				contextRange
 			);
-			if ( this.pasteSpecial ) {
-				// The context may have been sanitized, so sanitize here as well for comparison
-				context.sanitize( importRules, true );
-			}
-
-			// Remove matching context from the left
-			left = 0;
-			while (
-				context.getLength() &&
-				ve.dm.ElementLinearData.static.compareElements(
-					data.getData( left ),
-					data.isElementData( left ) ? context.getData( 0 ) : beforePasteData.leftText
-				)
-			) {
-				left++;
-				context.splice( 0, 1 );
-			}
-
-			// Remove matching context from the right
-			right = internalListRange.start;
-			while (
-				right > 0 &&
-				context.getLength() &&
-				ve.dm.ElementLinearData.static.compareElements(
-					data.getData( right - 1 ),
-					data.isElementData( right - 1 ) ? context.getData( context.getLength() - 1 ) : beforePasteData.rightText
-				)
-			) {
-				right--;
-				context.splice( context.getLength() - 1, 1 );
-			}
-			// HACK: Strip trailing linebreaks probably introduced by Chrome bug
-			while ( right > 0 && data.getType( right - 1 ) === 'break' ) {
-				right--;
-			}
-			contextRange = new ve.Range( left, right );
 		}
-
-		tx = ve.dm.Transaction.newFromDocumentInsertion(
-			this.documentView.model,
-			range.start,
-			doc,
-			contextRange
-		);
 	}
 
 	// Restore focus and scroll position
@@ -2012,10 +2021,12 @@ ve.ce.Surface.prototype.afterPaste = function ( e ) {
 		view.$window.scrollTop( beforePasteData.scrollTop );
 	} );
 
-	selection = selection.translateByTransaction( tx );
-	this.model.change( tx, selection.collapseToStart() );
-	// Move cursor to end of selection
-	this.model.setSelection( selection.collapseToEnd() );
+	if ( tx ) {
+		selection = selection.translateByTransaction( tx );
+		this.model.change( tx, selection.collapseToStart() );
+		// Move cursor to end of selection
+		this.model.setSelection( selection.collapseToEnd() );
+	}
 };
 
 /**
