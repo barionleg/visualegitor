@@ -183,6 +183,39 @@ ve.dm.TableSelection.prototype.getRanges = function () {
 	return ranges;
 };
 
+ve.dm.TableSelection.prototype.getTableSliceRanges = function () {
+	var i, node,
+		ranges = [],
+		matrix = this.getTableNode().getMatrix();
+
+	// Arrays are non-overlapping so avoid duplication
+	// by indexing by range.start
+	function pushNode( node ) {
+		var range = node.getOuterRange();
+		ranges[ range.start ] = new ve.Range( range.start, range.start + 1 );
+		ranges[ range.end - 1 ] = new ve.Range( range.end - 1, range.end );
+	}
+
+	for ( i = this.startRow; i <= this.endRow; i++ ) {
+		node = matrix.getRowNode( i );
+		pushNode( node );
+		while ( ( node = node.getParent() ) && node ) {
+			pushNode( node );
+			if ( node instanceof ve.dm.TableNode ) {
+				break;
+			}
+		}
+	}
+
+	return ranges
+		// Condense sparse array
+		.filter( function ( r ) { return r; } )
+		// Add cell ranges
+		.concat( this.getOuterRanges() )
+		// Sort
+		.sort( function ( a, b ) { return a.start - b.start; } );
+};
+
 /**
  * Get outer ranges of the selected cells
  *
