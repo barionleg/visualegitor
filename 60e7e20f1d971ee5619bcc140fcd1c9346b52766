@@ -16,6 +16,24 @@
       "revId": "60e7e20f1d971ee5619bcc140fcd1c9346b52766",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_4cf998e3",
+        "filename": "build/modules.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-01-22T16:43:59Z",
+      "side": 1,
+      "message": "Left as an exercise to the reader.",
+      "parentUuid": "6eaa8f54_4cabd8d3",
+      "revId": "60e7e20f1d971ee5619bcc140fcd1c9346b52766",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
