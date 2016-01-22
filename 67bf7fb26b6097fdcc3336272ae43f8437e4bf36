@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_d12c45a9",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2016-01-22T16:31:04Z",
+      "side": 1,
+      "message": "Comment\u0027s out of date -- we\u0027re not checking for non-collapsed any more.",
+      "revId": "67bf7fb26b6097fdcc3336272ae43f8437e4bf36",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
