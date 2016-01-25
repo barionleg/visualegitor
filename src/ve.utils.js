@@ -701,6 +701,19 @@ ve.elementTypes = {
 };
 
 /**
+ * Check whether a given node is contentEditable
+ *
+ * Handles 'inherit', via checking isContentEditable. Knows to check for text
+ * nodes, and will return whether the text node's parent is contentEditable.
+ *
+ * @param  {HTMLElement}  node Node to check contenteditable status of
+ * @return {boolean}      Node is contenteditable
+ */
+ve.isContentEditable = function ( node ) {
+	return ( node.nodeType === Node.TEXT_NODE ? node.parentNode : node ).isContentEditable;
+};
+
+/**
  * Create an HTMLDocument from an HTML string.
  *
  * The html parameter is supposed to be a full HTML document with a doctype and an `<html>` tag.
@@ -1610,9 +1623,7 @@ ve.rejectsCursor = function ( node ) {
 	if ( ve.isVoidElement( node ) ) {
 		return true;
 	}
-	// We don't need to check whether the ancestor-nearest contenteditable tag is
-	// false, because if so then there can be no adjacent cursor.
-	return node.contentEditable === 'false';
+	return !ve.isContentEditable( node );
 };
 
 /**
