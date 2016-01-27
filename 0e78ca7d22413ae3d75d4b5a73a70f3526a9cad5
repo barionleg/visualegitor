@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_385d511b",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 1989,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-01-27T22:18:49Z",
+      "side": 1,
+      "message": "as do other spreadsheets, sometimes with a warning",
+      "parentUuid": "6eaa8f54_2ccbd776",
+      "revId": "0e78ca7d22413ae3d75d4b5a73a70f3526a9cad5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_8cf1abdc",
         "filename": "src/dm/selections/ve.dm.TableSelection.js",
         "patchSetId": 14
@@ -30,6 +48,24 @@
       "writtenOn": "2016-01-27T17:35:59Z",
       "side": 1,
       "message": "Needs documentation.",
+      "revId": "0e78ca7d22413ae3d75d4b5a73a70f3526a9cad5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_3846b155",
+        "filename": "src/dm/selections/ve.dm.TableSelection.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-01-27T22:18:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6eaa8f54_8cf1abdc",
       "revId": "0e78ca7d22413ae3d75d4b5a73a70f3526a9cad5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_b86941be",
+        "filename": "src/dm/ve.dm.Document.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-01-27T22:18:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6eaa8f54_2cfe77ac",
+      "revId": "0e78ca7d22413ae3d75d4b5a73a70f3526a9cad5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_ec27ff60",
         "filename": "src/dm/ve.dm.TableSlice.js",
         "patchSetId": 14
@@ -64,6 +118,24 @@
       "writtenOn": "2016-01-27T17:35:59Z",
       "side": 1,
       "message": "Needs documentation.",
+      "revId": "0e78ca7d22413ae3d75d4b5a73a70f3526a9cad5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_7863c9da",
+        "filename": "src/dm/ve.dm.TableSlice.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-01-27T22:18:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6eaa8f54_ec27ff60",
       "revId": "0e78ca7d22413ae3d75d4b5a73a70f3526a9cad5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
