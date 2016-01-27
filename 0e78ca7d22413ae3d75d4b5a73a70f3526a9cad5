@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_8cf1abdc",
+        "filename": "src/dm/selections/ve.dm.TableSelection.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2016-01-27T17:35:59Z",
+      "side": 1,
+      "message": "Needs documentation.",
+      "revId": "0e78ca7d22413ae3d75d4b5a73a70f3526a9cad5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_2cfe77ac",
+        "filename": "src/dm/ve.dm.Document.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2016-01-27T17:35:59Z",
+      "side": 1,
+      "message": "Needs documentation.",
+      "revId": "0e78ca7d22413ae3d75d4b5a73a70f3526a9cad5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_ec27ff60",
+        "filename": "src/dm/ve.dm.TableSlice.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2016-01-27T17:35:59Z",
+      "side": 1,
+      "message": "Needs documentation.",
+      "revId": "0e78ca7d22413ae3d75d4b5a73a70f3526a9cad5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
