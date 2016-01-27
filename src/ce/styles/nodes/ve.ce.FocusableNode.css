@@ -66,3 +66,7 @@
 	position: absolute;
 	top: -1000px;
 }
+
+.oo-ui-iconElement.ve-ce-focusableNode-invisibleIcon {
+	opacity: 0.5;
+}
