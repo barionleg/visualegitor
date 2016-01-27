@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "6eaa8f54_2ccbd776",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 1989,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2016-01-27T17:43:12Z",
+      "side": 1,
+      "message": "There\u0027s an argument for merging the selected cells and replacing all their content... but I checked Google Sheets, and it does what this currently does, so I suppose we might as well be consistent with other tools.",
+      "revId": "0e78ca7d22413ae3d75d4b5a73a70f3526a9cad5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_8cf1abdc",
         "filename": "src/dm/selections/ve.dm.TableSelection.js",
         "patchSetId": 14
