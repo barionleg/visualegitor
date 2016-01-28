@@ -16,6 +16,23 @@
       "revId": "9f72ddb55bf3cf5045553f2b96ff9fa9b19628d0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_1c7ac0e7",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 709,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2016-01-28T23:11:24Z",
+      "side": 1,
+      "message": "Text nodes aren\u0027t HTMLElement. This should probably be \"Node\" (parent of Element/HTMLElement, parent of Text) or \"HTMLElement|Text\".",
+      "revId": "9f72ddb55bf3cf5045553f2b96ff9fa9b19628d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
