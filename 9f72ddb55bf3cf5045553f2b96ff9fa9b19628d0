@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_cbb78083",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 1169,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2016-01-28T19:21:14Z",
+      "side": 1,
+      "message": "This comment is a bit odd now, as this justification is handled in isContentEditable()\u0027s docs, but can be left.",
+      "revId": "9f72ddb55bf3cf5045553f2b96ff9fa9b19628d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
