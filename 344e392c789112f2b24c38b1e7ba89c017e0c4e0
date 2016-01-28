@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_816ac97c",
+        "filename": "src/ce/styles/nodes/ve.ce.FocusableNode.css",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2016-01-28T20:50:01Z",
+      "side": 1,
+      "message": "Change this to `-0.4em` and it\u0027ll have the same visible line positioning as current comment nodes.",
+      "revId": "344e392c789112f2b24c38b1e7ba89c017e0c4e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_216755b6",
+        "filename": "src/ce/styles/nodes/ve.ce.FocusableNode.css",
+        "patchSetId": 5
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2016-01-28T20:50:01Z",
+      "side": 1,
+      "message": "...so long as this is also increased to `1.6em`, so the bottom of the puzzle icon isn\u0027t cut off.",
+      "revId": "344e392c789112f2b24c38b1e7ba89c017e0c4e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
