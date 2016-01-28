@@ -33,6 +33,24 @@
       "revId": "9f72ddb55bf3cf5045553f2b96ff9fa9b19628d0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_573573d6",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 709,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-01-28T23:40:36Z",
+      "side": 1,
+      "message": "probably the latter given we assume that non-text nodes have a parent node with an isContentEditable property?",
+      "parentUuid": "6eaa8f54_1c7ac0e7",
+      "revId": "9f72ddb55bf3cf5045553f2b96ff9fa9b19628d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
