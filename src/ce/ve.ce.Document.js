@@ -180,7 +180,7 @@ ve.ce.Document.prototype.getNodeAndOffsetUnadjustedForUnicorn = function ( offse
 	// - is between an empty unicorn pair: return inter-unicorn location
 	// At the desired offset:
 	// - If is a text node: return that node and the correct remainder offset
-	// - Else return the first maximally deep element at the offset
+	// - Else return a maximally deep element at the offset (the first such in document order)
 	// Otherwise, signal an error
 
 	// Unfortunately, there is no way to avoid slugless block nodes with no DM length: an
@@ -203,16 +203,21 @@ ve.ce.Document.prototype.getNodeAndOffsetUnadjustedForUnicorn = function ( offse
 	stack = [ current ];
 	while ( stack.length > 0 ) {
 		if ( current.offset >= current.$contents.length ) {
-			stack.pop();
-			current = stack[ stack.length - 1 ];
 			if ( current && startOffset === offset ) {
-				// The current node has no DOM children and no DM length (e.g.
-				// it is a browser-generated <br/> that doesn't have class
-				// ve-ce-leafNode), but the node itself is at the required DM
-				// offset. Return the first offset inside this node (even if
-				// it's a node type that cannot contain content, like br).
+				// The current node has no DM length (e.g. it is a browser
+				// generated <br/> that doesn't have class ve-ce-leafNode), and
+				// we have passed all its DOM children. But the node itself is
+				// at the required DM offset. Return the first offset inside
+				// this node (even if it's a node type that cannot contain
+				// content, like br).
+				// In fact, we can deduce that the node has no DOM children:
+				// otherwise it would have had a DOM child with no DM length at
+				// the required DM offset, so we would have already have
+				// returned.
 				return { node: current.$contents[ current.offset - 1 ], offset: 0 };
 			}
+			stack.pop();
+			current = stack[ stack.length - 1 ];
 			continue;
 		}
 		item = current.$contents[ current.offset ];
@@ -277,10 +282,13 @@ ve.ce.Document.prototype.getNodeAndOffsetUnadjustedForUnicorn = function ( offse
 				continue;
 			} else {
 				// Any other node type (e.g. b, inline slug, browser-generated br
-				// that doesn't have class ve-ce-leafNode): descend
-				stack.push( { $contents: $item.contents(), offset: 0 } );
+				// that doesn't have class ve-ce-leafNode)
 				current.offset++;
-				current = stack[ stack.length - 1 ];
+				if ( $item.contents().length > 0 ) {
+					// There are some contents: descend
+					stack.push( { $contents: $item.contents(), offset: 0 } );
+					current = stack[ stack.length - 1 ];
+				}
 				continue;
 			}
 		}
