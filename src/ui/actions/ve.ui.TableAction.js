@@ -356,6 +356,7 @@ ve.ui.TableAction.prototype.changeCellStyle = function ( style ) {
  */
 ve.ui.TableAction.prototype.mergeCells = function () {
 	var i, l, r, c, cell, cells, hasNonPlaceholders, contentData,
+		sectionNode, lastSectionNode,
 		txs = [],
 		surfaceModel = this.surface.getModel(),
 		documentModel = surfaceModel.getDocument(),
@@ -372,6 +373,9 @@ ve.ui.TableAction.prototype.mergeCells = function () {
 		this.unmergeCell( matrix, cells[ 0 ] );
 	} else {
 		// Merge
+		if ( !selection.isMergeable() ) {
+			return false;
+		}
 		cells = selection.getMatrixCells();
 		txs.push(
 			ve.dm.Transaction.newFromAttributeChanges(
@@ -382,6 +386,7 @@ ve.ui.TableAction.prototype.mergeCells = function () {
 				}
 			)
 		);
+
 		// Find first cell with content
 		for ( i = 0, l = cells.length; i < l; i++ ) {
 			contentData = new ve.dm.ElementLinearData(
@@ -396,6 +401,7 @@ ve.ui.TableAction.prototype.mergeCells = function () {
 				break;
 			}
 		}
+		// Remove placeholders
 		for ( i = cells.length - 1; i >= 1; i-- ) {
 			txs.push(
 				ve.dm.Transaction.newFromRemoval(
