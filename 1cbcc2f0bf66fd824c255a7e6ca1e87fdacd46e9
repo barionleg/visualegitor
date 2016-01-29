@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_d7e7220c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-01-29T02:52:38Z",
+      "side": 1,
+      "message": "Can you link to a (shortened) change ID instead?",
+      "revId": "1cbcc2f0bf66fd824c255a7e6ca1e87fdacd46e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
