@@ -82,7 +82,7 @@
 			},
 			{
 				"name": "Nodes and documents",
-				"classes": ["ve.dm.Document", "ve.dm.*Slice", "ve.dm.*Node"]
+				"classes": ["ve.dm.DocumentSet", "ve.dm.Document", "ve.dm.*Slice", "ve.dm.*Node"]
 			},
 			{
 				"name": "Linear data",
