@@ -66,7 +66,7 @@ OO.mixinClass( ve.dm.Node, OO.EventEmitter );
  * @property {boolean}
  * @inheritable
  */
-ve.dm.Node.static.handlesOwnChildren = false;
+ve.dm.Node.static.handlesOwnChildren = false; // SUBDOCUMENT TODO: eradicate this
 
 /**
  * Whether this node's children should be ignored. If true, this node will be treated as a leaf

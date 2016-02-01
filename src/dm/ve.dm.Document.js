@@ -35,10 +35,12 @@ ve.dm.Document = function VeDmDocument( data, htmlDocument, parentDocument, inte
 	// Initialization
 	split = true;
 	doc = parentDocument || this;
+	// SUBDOCUMENT TODO: set this back to doc.documentNode, Ed changed this in 29259669. Should make rebuilds faster
+	// Downside: maybe this results in onRoot not being fired at the right time?
 	root = this.documentNode;
 
-	this.lang = lang || 'en';
-	this.dir = dir || 'ltr';
+	this.lang = lang;
+	this.dir = dir;
 
 	this.documentNode.setRoot( root );
 	// ve.Document already called setDocument(), but it could be that doc !== this
@@ -48,7 +50,8 @@ ve.dm.Document = function VeDmDocument( data, htmlDocument, parentDocument, inte
 	this.innerWhitespace = innerWhitespace ? ve.copy( innerWhitespace ) : new Array( 2 );
 
 	// Properties
-	this.parentDocument = parentDocument;
+	this.parentSet = null;
+	this.parentDocument = parentDocument; // SUBDOCUMENT TODO improve this
 	this.completeHistory = [];
 	this.storeLengthAtHistoryLength = [ 0 ];
 	this.nodesByType = {};
@@ -320,6 +323,37 @@ ve.dm.Document.prototype.buildNodeTree = function () {
  */
 ve.dm.Document.prototype.getLength = function () {
 	return this.data.getLength();
+};
+
+/**
+ * Attach this document to a DocumentSet.
+ *
+ * This should only be called by ve.dm.DocumentSet code.
+ *
+ * @param {ve.dm.DocumentSet} set Set to attach this document to
+ * @param {number} index Index of this document in the set
+ */
+ve.dm.Document.prototype.attachToSet = function ( set, index ) {
+	this.parentSet = set;
+	this.parentSetIndex = index;
+};
+
+/**
+ * Get the parent DocumentSet.
+ *
+ * @return {ve.dm.DocumentSet} DocumentSet this document is a member of
+ */
+ve.dm.Document.prototype.getParentSet = function () {
+	return this.parentSet;
+};
+
+/**
+ * Get index within parent DocumentSet.
+ *
+ * @return {number} index Index of this document in the set
+ */
+ve.dm.Document.prototype.getParentSetIndex = function () {
+	return this.parentSetIndex;
 };
 
 /**
@@ -602,6 +636,9 @@ ve.dm.Document.prototype.shallowCloneFromRange = function ( range ) {
 	slice = new ve.dm.DocumentSlice(
 		linearData, undefined, undefined, this.getInternalList(), originalRange, balancedRange
 	);
+	// carry over the document set membership
+	slice.parentSet = this.parentSet;
+	slice.parentSetIndex = this.parentSetIndex;
 	return slice;
 };
 
@@ -658,6 +695,16 @@ ve.dm.Document.prototype.cloneWithData = function ( data, copyInternalList ) {
 		newDoc.origInternalListLength = this.internalList.getItemNodeCount();
 	}
 	return newDoc;
+};
+
+/**
+ * Create a copy of this document
+ *
+ * @return {ve.dm.Document} A clone of this document
+ */
+ve.dm.Document.prototype.clone = function () {
+	// SUBDOCUMENT TODO: should not clone store separately for each document
+	return this.cloneFromRange( new ve.Range( 0, this.data.getLength() ) );
 };
 
 /**
@@ -1581,7 +1628,7 @@ ve.dm.Document.prototype.getChangeSince = function ( start ) {
  * @return {string} Language code
  */
 ve.dm.Document.prototype.getLang = function () {
-	return this.lang;
+	return this.lang || ( this.parentSet && this.parentSet.getLang() ) || 'en';
 };
 
 /**
@@ -1590,5 +1637,5 @@ ve.dm.Document.prototype.getLang = function () {
  * @return {string} Directionality (ltr/rtl)
  */
 ve.dm.Document.prototype.getDir = function () {
-	return this.dir;
+	return this.dir || ( this.parentSet && this.parentSet.getDir() ) || 'ltr';
 };

@@ -242,6 +242,15 @@ ve.dm.Converter.prototype.getTargetHtmlDocument = function () {
 };
 
 /**
+ * Get the DocumentSet for the document we're converting
+ *
+ * @return {ve.dm.DocumentSet} Associated DocumentSet
+ */
+ve.dm.Converter.prototype.getDocumentSet = function () {
+	return this.documentSet;
+};
+
+/**
  * Is the current conversion for the clipboard
  *
  * @method
@@ -432,13 +441,18 @@ ve.dm.Converter.prototype.getDomElementFromDataAnnotation = function ( dataAnnot
  * @return {ve.dm.Document} Document model
  */
 ve.dm.Converter.prototype.getModelFromDom = function ( doc, options ) {
-	var linearData, refData, innerWhitespace,
+	var linearData, refData, innerWhitespace, mainDocument, reservation, documentSet,
 		store = new ve.dm.IndexValueStore(),
 		internalList = new ve.dm.InternalList();
 
 	options = options || {};
 
+	documentSet = new ve.dm.DocumentSet( options.lang, options.dir );
+
 	// Set up the converter state
+	// SUBDOCUMENT TODO: refactor into state object
+	reservation = documentSet.reserveIndex( 0 );
+	this.documentSet = documentSet;
 	this.doc = doc;
 	this.targetDoc = options.targetDoc || doc;
 	this.fromClipboard = options.fromClipboard;
@@ -457,6 +471,7 @@ ve.dm.Converter.prototype.getModelFromDom = function ( doc, options ) {
 	innerWhitespace = this.getInnerWhitespace( linearData );
 
 	// Clear the state
+	this.documentSet = null;
 	this.doc = null;
 	this.targetDoc = null;
 	this.fromClipboard = null;
@@ -464,7 +479,10 @@ ve.dm.Converter.prototype.getModelFromDom = function ( doc, options ) {
 	this.internalList = null;
 	this.contextStack = null;
 
-	return new ve.dm.Document( linearData, doc, undefined, internalList, innerWhitespace, options.lang, options.dir );
+	// SUBDOCUMENT TODO: maybe have caller pass in DocumentSet?
+	mainDocument = new ve.dm.Document( linearData, doc, undefined, internalList, innerWhitespace, options.lang, options.dir );
+	reservation.fulfill( mainDocument );
+	return mainDocument;
 };
 
 /**
@@ -841,6 +859,7 @@ ve.dm.Converter.prototype.getDataFromDomSubtree = function ( domElement, wrapper
 								// Else, WTF?!? This is not supposed to
 								// happen, but it's not worth
 								// throwing an exception over.
+								// SUBDOCUMENT TODO: this has to do with whitespace directly in the body
 							} else {
 								addWhitespace( prevElement, 3, text );
 							}
@@ -872,6 +891,7 @@ ve.dm.Converter.prototype.getDataFromDomSubtree = function ( domElement, wrapper
 									// Else, WTF?!? This is not supposed to
 									// happen, but it's not worth
 									// throwing an exception over.
+									// SUBDOCUMENT TODO: this has to do with whitespace directly in the body
 								} else {
 									addWhitespace( prevElement, 3, matches[ 1 ] );
 								}
@@ -1064,6 +1084,7 @@ ve.dm.Converter.prototype.getDomSubtreeFromModel = function ( model, container, 
 	this.documentData = model.getFullData();
 	this.store = model.getStore();
 	this.internalList = model.getInternalList();
+	this.documentSet = model.getParentSet();
 	this.forClipboard = !!forClipboard;
 
 	this.getDomSubtreeFromData( this.documentData, container, model.getInnerWhitespace() );
@@ -1072,6 +1093,7 @@ ve.dm.Converter.prototype.getDomSubtreeFromModel = function ( model, container, 
 	this.documentData = null;
 	this.store = null;
 	this.internalList = null;
+	this.documentSet = null;
 	this.forClipboard = null;
 };
 
