@@ -16,7 +16,10 @@
  */
 ve.ce.Document = function VeCeDocument( model, surface ) {
 	// Parent constructor
-	ve.Document.call( this, new ve.ce.DocumentNode( model.getDocumentNode(), surface ) );
+	ve.Document.call( this, new ve.ce.DocumentNode(
+		// SUBDOCUMENT TODO: HACK "it has to do with embedding ce.Documents in other places, so I don't think you need this yet"
+		model.getDocumentNode(), surface, { $: OO.ui.Element.static.getJQuery( document ) }
+	) );
 
 	this.getDocumentNode().$element.prop( {
 		lang: model.getLang(),
