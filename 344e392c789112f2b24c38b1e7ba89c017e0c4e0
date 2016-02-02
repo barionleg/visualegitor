@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "4ea78b8a_a42f029c",
+        "filename": "src/ce/styles/nodes/ve.ce.FocusableNode.css",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-02-02T13:41:08Z",
+      "side": 1,
+      "message": "the baselines look aligned with this value for comments. that will change for different icons, but this looks ok in most cases.",
+      "parentUuid": "6eaa8f54_816ac97c",
+      "revId": "344e392c789112f2b24c38b1e7ba89c017e0c4e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_216755b6",
         "filename": "src/ce/styles/nodes/ve.ce.FocusableNode.css",
         "patchSetId": 5
