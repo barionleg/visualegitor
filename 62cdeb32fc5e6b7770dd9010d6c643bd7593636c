@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_a45057da",
+        "filename": "demos/ve/ve.demo.SurfaceContainer.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-02-03T17:00:41Z",
+      "side": 1,
+      "message": "document",
+      "revId": "62cdeb32fc5e6b7770dd9010d6c643bd7593636c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_0444cb1b",
+        "filename": "demos/ve/ve.demo.SurfaceContainer.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-02-03T17:00:41Z",
+      "side": 1,
+      "message": "un-disable the item here.\n\nAlso clicking save triggers an unnecessary reload of the page",
+      "revId": "62cdeb32fc5e6b7770dd9010d6c643bd7593636c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
