@@ -742,6 +742,7 @@
 			"tests/ce/imetests/home-firefox-win7-none.js",
 			"tests/ce/imetests/input-chrome-mac-native-japanese-hiragana.js",
 			"tests/ce/imetests/input-chrome-mac-native-japanese-katakana.js",
+			"tests/ce/imetests/input-chrome-mac-native-korean.js",
 			"tests/ce/imetests/input-chrome-win7-chinese-traditional-handwriting.js",
 			"tests/ce/imetests/input-chrome-win7-greek.js",
 			"tests/ce/imetests/input-chrome-win7-polish.js",
@@ -753,6 +754,7 @@
 			"tests/ce/imetests/input-chromium-ubuntu-ibus-malayalam-swanalekha.js",
 			"tests/ce/imetests/input-firefox-mac-native-japanese-hiragana.js",
 			"tests/ce/imetests/input-firefox-mac-native-japanese-katakana.js",
+			"tests/ce/imetests/input-firefox-mac-native-korean.js",
 			"tests/ce/imetests/input-firefox-ubuntu-ibus-chinese-cantonese.js",
 			"tests/ce/imetests/input-firefox-ubuntu-ibus-japanese-anthy--hiraganaonly.js",
 			"tests/ce/imetests/input-firefox-ubuntu-ibus-japanese-mozc.js",
@@ -768,6 +770,7 @@
 			"tests/ce/imetests/input-ie11-win8.1-korean.js",
 			"tests/ce/imetests/input-safari-mac-native-japanese-hiragana.js",
 			"tests/ce/imetests/input-safari-mac-native-japanese-katakana.js",
+			"tests/ce/imetests/input-safari-mac-native-korean.js",
 			"tests/ce/imetests/leftarrow-chromium-ubuntu-none.js",
 			"tests/ce/imetests/leftarrow-firefox-ubuntu-none.js",
 			"tests/ce/imetests/leftarrow-ie9-win7-none.js"
