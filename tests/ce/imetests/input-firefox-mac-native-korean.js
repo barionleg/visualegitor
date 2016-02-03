@@ -1,0 +1,51 @@
+/*!
+ * VisualEditor IME test for Firefox on Mac OS X in Korean using OS native "New Romansing" IME.
+ *
+ * @copyright 2011-2016 VisualEditor Team and others; see http://ve.mit-license.org
+ */
+
+ve.ce.imetests.push( [ 'input-firefox-mac-native-korean', [
+	{ imeIdentifier: 'OS X "New Romansing" OS Korean IME on Firefox', userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:42.0) Gecko/20100101 Firefox/42.0', startDom: '' },
+	{ seq: 0, time: 4.246, action: 'sendEvent', args: [ 'keydown', { keyCode: 71 } ] },
+	{ seq: 1, time: 4.253, action: 'sendEvent', args: [ 'compositionstart', {} ] },
+	{ seq: 2, time: 4.264, action: 'changeText', args: [ 'ㄱ' ] },
+	{ seq: 3, time: 4.264, action: 'changeSel', args: [ 1, 1 ] },
+	{ seq: 4, time: 4.264, action: 'sendEvent', args: [ 'input', {} ] },
+	{ seq: 5, time: 4.294, action: 'endLoop', args: [] },
+	{ seq: 6, time: 4.543, action: 'changeText', args: [ '가' ] },
+	{ seq: 7, time: 4.543, action: 'sendEvent', args: [ 'input', {} ] },
+	{ seq: 8, time: 4.552, action: 'endLoop', args: [] },
+	{ seq: 9, time: 4.818, action: 'changeText', args: [ '간' ] },
+	{ seq: 10, time: 4.818, action: 'sendEvent', args: [ 'input', {} ] },
+	{ seq: 11, time: 4.853, action: 'endLoop', args: [] },
+	{ seq: 12, time: 5.008, action: 'changeText', args: [ '가' ] },
+	{ seq: 13, time: 5.008, action: 'sendEvent', args: [ 'input', {} ] },
+	{ seq: 14, time: 5.011, action: 'sendEvent', args: [ 'compositionend', {} ] },
+	{ seq: 15, time: 5.012, action: 'sendEvent', args: [ 'input', {} ] },
+	{ seq: 16, time: 5.014, action: 'sendEvent', args: [ 'compositionstart', {} ] },
+	{ seq: 17, time: 5.016, action: 'changeText', args: [ '가나' ] },
+	{ seq: 18, time: 5.016, action: 'changeSel', args: [ 2, 2 ] },
+	{ seq: 19, time: 5.016, action: 'sendEvent', args: [ 'input', {} ] },
+	{ seq: 20, time: 5.026, action: 'endLoop', args: [] },
+	{ seq: 21, time: 5.271, action: 'changeText', args: [ '가낟' ] },
+	{ seq: 22, time: 5.271, action: 'sendEvent', args: [ 'input', {} ] },
+	{ seq: 23, time: 5.275, action: 'endLoop', args: [] },
+	{ seq: 24, time: 5.455, action: 'changeText', args: [ '가나' ] },
+	{ seq: 25, time: 5.455, action: 'sendEvent', args: [ 'input', {} ] },
+	{ seq: 26, time: 5.459, action: 'sendEvent', args: [ 'compositionend', {} ] },
+	{ seq: 27, time: 5.46, action: 'sendEvent', args: [ 'input', {} ] },
+	{ seq: 28, time: 5.462, action: 'sendEvent', args: [ 'compositionstart', {} ] },
+	{ seq: 29, time: 5.464, action: 'changeText', args: [ '가나다' ] },
+	{ seq: 30, time: 5.464, action: 'changeSel', args: [ 3, 3 ] },
+	{ seq: 31, time: 5.464, action: 'sendEvent', args: [ 'input', {} ] },
+	{ seq: 32, time: 5.484, action: 'endLoop', args: [] },
+	{ seq: 33, time: 5.794, action: 'sendEvent', args: [ 'compositionend', {} ] },
+	{ seq: 34, time: 5.796, action: 'sendEvent', args: [ 'input', {} ] },
+	{ seq: 35, time: 5.799, action: 'sendEvent', args: [ 'keypress', { keyCode: 13 } ] },
+	{ seq: 36, time: 5.802, action: 'changeText', args: [ '가나다<br><br>' ] },
+	{ seq: 37, time: 5.802, action: 'changeSel', args: [ 2, 2 ] },
+	{ seq: 38, time: 5.802, action: 'sendEvent', args: [ 'input', {} ] },
+	{ seq: 39, time: 5.815, action: 'endLoop', args: [] },
+	{ seq: 40, time: 5.85, action: 'sendEvent', args: [ 'keyup', { keyCode: 13 } ] },
+	{ seq: 41, time: 5.862, action: 'endLoop', args: [] }
+] ] );
