@@ -16,6 +16,24 @@
       "revId": "ab5eeac4a03cc8d701e0882868c3c8b317ea1498",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_3f5470c9",
+        "filename": "demos/ve/ve.demo.SurfaceContainer.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2016-02-03T18:12:37Z",
+      "side": 1,
+      "message": "I put it in as `pages/` because ve.demo.init has some bits which expect it. Probably makes more sense to adjust those parts to be more flexible, I suppose.",
+      "parentUuid": "4ea78b8a_3f3d508b",
+      "revId": "ab5eeac4a03cc8d701e0882868c3c8b317ea1498",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
