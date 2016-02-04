@@ -34,6 +34,24 @@
       "revId": "8b2a5a2caf7b94b4479367c7e79d3ab8f26979c3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_8b351ff6",
+        "filename": "src/ce/ve.ce.FocusableNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 675,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-02-04T21:32:38Z",
+      "side": 1,
+      "message": "maybe add that as a comment",
+      "parentUuid": "4ea78b8a_f0435e41",
+      "revId": "8b2a5a2caf7b94b4479367c7e79d3ab8f26979c3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
