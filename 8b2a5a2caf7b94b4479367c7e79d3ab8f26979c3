@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_05fefe35",
+        "filename": "src/ce/ve.ce.FocusableNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 675,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-02-04T19:27:00Z",
+      "side": 1,
+      "message": "I think this only works on images...",
+      "revId": "8b2a5a2caf7b94b4479367c7e79d3ab8f26979c3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
