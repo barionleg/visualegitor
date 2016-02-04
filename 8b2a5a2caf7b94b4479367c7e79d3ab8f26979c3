@@ -16,6 +16,24 @@
       "revId": "8b2a5a2caf7b94b4479367c7e79d3ab8f26979c3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_f0435e41",
+        "filename": "src/ce/ve.ce.FocusableNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 675,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2016-02-04T19:54:18Z",
+      "side": 1,
+      "message": "That\u0027s the reason for keeping the jQuery path as well. The raw DOM access handles images early in their rendering pretty well, and doesn\u0027t fail on non-image nodes (it\u0027s just `undefined`, which compares false).",
+      "parentUuid": "4ea78b8a_05fefe35",
+      "revId": "8b2a5a2caf7b94b4479367c7e79d3ab8f26979c3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
