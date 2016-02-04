@@ -661,6 +661,10 @@ ve.ce.FocusableNode.prototype.getStartAndEndRects = function () {
 /**
  * Check if the rendering is visible
  *
+ * "Visible", in this case, is defined as any of:
+ *  * contains any non-whitespace text
+ *  * is greater than 8px x 8px in dimensions
+ *
  * @return {boolean} The node has a visible rendering
  */
 ve.ce.FocusableNode.prototype.hasRendering = function () {
@@ -670,7 +674,15 @@ ve.ce.FocusableNode.prototype.hasRendering = function () {
 	}
 	this.$element.each( function () {
 		var $this = $( this );
-		if ( $this.width() >= 8 && $this.height() >= 8 ) {
+		if (
+			( $this.width() >= 8 && $this.height() >= 8 ) ||
+			// jQuery handles disparate cases, but is prone to images which
+			// haven't experienced layout yet having 0 width / height. So,
+			// check the raw DOM width / height properties as well. If it's an
+			// image, this will work slightly more reliably. If it's not, this
+			// will be undefined and the comparison will thus just be false.
+			( this.width >= 8 && this.height >= 8 )
+		) {
 			visible = true;
 			return false;
 		}
