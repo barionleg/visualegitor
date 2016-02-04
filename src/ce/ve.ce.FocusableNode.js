@@ -118,6 +118,8 @@ ve.ce.FocusableNode.prototype.createHighlight = function () {
  * @method
  */
 ve.ce.FocusableNode.prototype.onFocusableSetup = function () {
+	var $images;
+
 	// Exit if already setup or not attached
 	if ( this.isFocusableSetup || !this.root ) {
 		return;
@@ -145,26 +147,58 @@ ve.ce.FocusableNode.prototype.onFocusableSetup = function () {
 		} );
 	}
 
-	if ( this.constructor.static.iconWhenInvisible ) {
-		if ( !this.hasRendering() ) {
-			if ( !this.icon ) {
-				this.icon = new OO.ui.IconWidget( {
-					classes: [ 've-ce-focusableNode-invisibleIcon' ],
-					icon: this.constructor.static.iconWhenInvisible
-				} );
-				// Add em space for selection highlighting
-				this.icon.$element.text( '\u2003' );
+	// Set up the invisible icon, and watch for its continued necessity if
+	// unloaded images are involved.
+	( new ve.Scheduler() ).schedule(
+		function () {
+			$images = this.$element
+				.find( 'img:not([width]),img:not([height])' )
+				.addBack( 'img:not([width]),img:not([height])' );
+			this.updateInvisibleIcon();
+		}.bind( this ),
+		function () {
+			var i;
+			if ( $images.length === 0 ) {
+				return true;
 			}
-			this.$element.first()
-				.addClass( 've-ce-focusableNode-invisible' )
-				.prepend( this.icon.$element );
-		} else if ( this.icon ) {
-			this.$element.first().removeClass( 've-ce-focusableNode-invisible' );
-			this.icon.$element.detach();
-		}
-	}
+			for ( i = $images.length - 1; i >= 0; i-- ) {
+				if ( !(
+					// Check if the image is loaded
+					$images[ i ].complete &&
+					$images[ i ].naturalWidth !== undefined &&
+					// ...and laid out
+					$images.eq( i ).width() !== 0
+				) ) {
+					return false;
+				}
+			}
+			return true;
+		}.bind( this )
+	).done( this.updateInvisibleIcon.bind( this ) );
 
 	this.isFocusableSetup = true;
+};
+
+ve.ce.FocusableNode.prototype.updateInvisibleIcon = function () {
+	if ( !this.constructor.static.iconWhenInvisible ) {
+		return;
+	}
+	if ( !this.hasRendering() ) {
+		if ( !this.icon ) {
+			this.icon = new OO.ui.IconWidget( {
+				classes: [ 've-ce-focusableNode-invisibleIcon' ],
+				icon: this.constructor.static.iconWhenInvisible
+			} );
+			// Add em space for selection highlighting
+			this.icon.$element.text( '\u2003' );
+		}
+		this.$element.first()
+			.addClass( 've-ce-focusableNode-invisible' )
+			.prepend( this.icon.$element );
+	} else if ( this.icon ) {
+		this.$element.first().removeClass( 've-ce-focusableNode-invisible' );
+		this.icon.$element.detach();
+	}
 };
 
 /**
@@ -660,6 +694,10 @@ ve.ce.FocusableNode.prototype.getStartAndEndRects = function () {
 
 /**
  * Check if the rendering is visible
+ *
+ * "Visible", in this case, is defined as any of:
+ *  * contains any non-whitespace text
+ *  * is greater than 8px x 8px in dimensions
  *
  * @return {boolean} The node has a visible rendering
  */
