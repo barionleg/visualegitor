@@ -670,7 +670,10 @@ ve.ce.FocusableNode.prototype.hasRendering = function () {
 	}
 	this.$element.each( function () {
 		var $this = $( this );
-		if ( $this.width() >= 8 && $this.height() >= 8 ) {
+		if (
+			( $this.width() >= 8 && $this.height() >= 8 ) ||
+			( this.width >= 8 && this.height >= 8 )
+		) {
 			visible = true;
 			return false;
 		}
