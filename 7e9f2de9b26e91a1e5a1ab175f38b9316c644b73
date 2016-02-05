@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_e25dcd1b",
+        "filename": "src/dm/nodes/ve.dm.BlockImageNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2016-02-05T19:10:44Z",
+      "side": 0,
+      "message": "This was here for MWBlockImageNodes, which don\u0027t allow you to link them. It was inappropriate in core.",
+      "revId": "7e9f2de9b26e91a1e5a1ab175f38b9316c644b73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
