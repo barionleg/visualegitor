@@ -1099,6 +1099,108 @@ ve.dm.example.inlineAtEdges = [
 	{ type: '/internalList' }
 ];
 
+ve.dm.example.annotatedTableHtml =
+	'<table>' +
+		'<tr><td><b>Foo</b></td><td><strong>Bar</strong></td><td><i>Baz</i></td></tr>' +
+		'<tr><td><b><i>Quux</i></b></td><td><b>Whee</b></td><td><strong>Yay</strong></td></tr>' +
+	'</table>';
+
+ve.dm.example.annotatedTable = [
+	{ type: 'table' },
+	{
+		type: 'tableSection',
+		attributes: { style: 'body' }
+	},
+	{ type: 'tableRow' },
+	{
+		type: 'tableCell',
+		attributes: { style: 'data' }
+	},
+	{
+		type: 'paragraph',
+		internal: { generated: 'wrapper' }
+	},
+	[ 'F', [ ve.dm.example.bold ] ],
+	[ 'o', [ ve.dm.example.bold ] ],
+	[ 'o', [ ve.dm.example.bold ] ],
+	{ type: '/paragraph' },
+	{ type: '/tableCell' },
+	{
+		type: 'tableCell',
+		attributes: { style: 'data' }
+	},
+	{
+		type: 'paragraph',
+		internal: { generated: 'wrapper' }
+	},
+	[ 'B', [ ve.dm.example.strong ] ],
+	[ 'a', [ ve.dm.example.strong ] ],
+	[ 'r', [ ve.dm.example.strong ] ],
+	{ type: '/paragraph' },
+	{ type: '/tableCell' },
+	{
+		type: 'tableCell',
+		attributes: { style: 'data' }
+	},
+	{
+		type: 'paragraph',
+		internal: { generated: 'wrapper' }
+	},
+	[ 'B', [ ve.dm.example.italic ] ],
+	[ 'a', [ ve.dm.example.italic ] ],
+	[ 'z', [ ve.dm.example.italic ] ],
+	{ type: '/paragraph' },
+	{ type: '/tableCell' },
+	{ type: '/tableRow' },
+	{ type: 'tableRow' },
+	{
+		type: 'tableCell',
+		attributes: { style: 'data' }
+	},
+	{
+		type: 'paragraph',
+		internal: { generated: 'wrapper' }
+	},
+	[ 'Q', [ ve.dm.example.bold, ve.dm.example.italic ] ],
+	[ 'u', [ ve.dm.example.bold, ve.dm.example.italic ] ],
+	[ 'u', [ ve.dm.example.bold, ve.dm.example.italic ] ],
+	[ 'x', [ ve.dm.example.bold, ve.dm.example.italic ] ],
+	{ type: '/paragraph' },
+	{ type: '/tableCell' },
+	{
+		type: 'tableCell',
+		attributes: { style: 'data' }
+	},
+	{
+		type: 'paragraph',
+		internal: { generated: 'wrapper' }
+	},
+	[ 'W', [ ve.dm.example.bold ] ],
+	[ 'h', [ ve.dm.example.bold ] ],
+	[ 'e', [ ve.dm.example.bold ] ],
+	[ 'e', [ ve.dm.example.bold ] ],
+	{ type: '/paragraph' },
+	{ type: '/tableCell' },
+	{
+		type: 'tableCell',
+		attributes: { style: 'data' }
+	},
+	{
+		type: 'paragraph',
+		internal: { generated: 'wrapper' }
+	},
+	[ 'Y', [ ve.dm.example.strong ] ],
+	[ 'a', [ ve.dm.example.strong ] ],
+	[ 'y', [ ve.dm.example.strong ] ],
+	{ type: '/paragraph' },
+	{ type: '/tableCell' },
+	{ type: '/tableRow' },
+	{ type: '/tableSection' },
+	{ type: '/table' },
+	{ type: 'internalList' },
+	{ type: '/internalList' }
+];
+
 ve.dm.example.emptyBranch = [
 	{ type: 'table' },
 	{ type: '/table' },
