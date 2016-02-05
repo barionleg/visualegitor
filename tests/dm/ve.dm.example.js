@@ -1099,6 +1099,61 @@ ve.dm.example.inlineAtEdges = [
 	{ type: '/internalList' }
 ];
 
+ve.dm.example.annotatedTableHtml = '<table><tr><td><b>Foo</b></td><td><strong>Bar</strong></td><td><i>Baz</i></td></tr></table>';
+
+ve.dm.example.annotatedTable = [
+	{ type: 'table' },
+	{
+		type: 'tableSection',
+		attributes: { style: 'body' }
+	},
+	{ type: 'tableRow' },
+	{
+		type: 'tableCell',
+		attributes: { style: 'data' }
+	},
+	{
+		type: 'paragraph',
+		internal: { generated: 'wrapper' }
+	},
+	[ 'F', [ ve.dm.example.bold ] ],
+	[ 'o', [ ve.dm.example.bold ] ],
+	[ 'o', [ ve.dm.example.bold ] ],
+	{ type: '/paragraph' },
+	{ type: '/tableCell' },
+	{
+		type: 'tableCell',
+		attributes: { style: 'data' }
+	},
+	{
+		type: 'paragraph',
+		internal: { generated: 'wrapper' }
+	},
+	[ 'B', [ ve.dm.example.strong ] ],
+	[ 'a', [ ve.dm.example.strong ] ],
+	[ 'r', [ ve.dm.example.strong ] ],
+	{ type: '/paragraph' },
+	{ type: '/tableCell' },
+	{
+		type: 'tableCell',
+		attributes: { style: 'data' }
+	},
+	{
+		type: 'paragraph',
+		internal: { generated: 'wrapper' }
+	},
+	[ 'B', [ ve.dm.example.italic ] ],
+	[ 'a', [ ve.dm.example.italic ] ],
+	[ 'z', [ ve.dm.example.italic ] ],
+	{ type: '/paragraph' },
+	{ type: '/tableCell' },
+	{ type: '/tableRow' },
+	{ type: '/tableSection' },
+	{ type: '/table' },
+	{ type: 'internalList' },
+	{ type: '/internalList' }
+];
+
 ve.dm.example.emptyBranch = [
 	{ type: 'table' },
 	{ type: '/table' },
