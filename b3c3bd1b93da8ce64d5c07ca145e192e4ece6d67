@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_f6511366",
+        "filename": "src/ce/ve.ce.FocusableNode.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-02-05T11:44:09Z",
+      "side": 1,
+      "message": "maybe skip this whole setup block too if iconWhenInvisible is null",
+      "revId": "b3c3bd1b93da8ce64d5c07ca145e192e4ece6d67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_56558751",
+        "filename": "src/ce/ve.ce.FocusableNode.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-02-05T11:44:09Z",
+      "side": 1,
+      "message": "document",
+      "revId": "b3c3bd1b93da8ce64d5c07ca145e192e4ece6d67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
