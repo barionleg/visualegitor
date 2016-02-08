@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_7e6e4a2c",
+        "filename": "src/dm/ve.dm.SurfaceFragment.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-02-08T17:13:54Z",
+      "side": 1,
+      "message": "I think you need to chuck out non-matching stuff from \u0027annotations\u0027. Something like:\n\nif ( matchingAnnotations.isEmpty() ) {\n        return matchingAnnotations;\n}\n// match in the other direction, to keep all distinct compatible annotations (e.g. both b and strong)\nannotations \u003d annotations.getComparableAnnotationsFromSet( rangeAnnotations );\nannotations.addSet( matchingAnnotations );",
+      "revId": "deb5b1cf7ba5709387f3cb4ded6b0e4133af3f51",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
