@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "4ea78b8a_b5f291dd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2016-02-09T22:55:30Z",
+      "side": 1,
+      "message": "s/only/on/ ?",
+      "revId": "ef46d210f2d7bdec8e56a2b0afbf53838b80c9a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea78b8a_75fc19b2",
         "filename": "src/ce/annotations/ve.ce.LinkAnnotation.js",
         "patchSetId": 1
