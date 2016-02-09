@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_75fc19b2",
+        "filename": "src/ce/annotations/ve.ce.LinkAnnotation.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2016-02-09T22:55:08Z",
+      "side": 1,
+      "message": "You can\u0027t chain appendChild, it causes nested nodes rather than siblings. So this code will cause the pre-close to be *inside* of the contentFragment, which would be inside of the post-open.",
+      "revId": "ef46d210f2d7bdec8e56a2b0afbf53838b80c9a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
