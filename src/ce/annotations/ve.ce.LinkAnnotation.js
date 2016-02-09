@@ -56,22 +56,22 @@ ve.ce.LinkAnnotation.static.getDescription = function ( model ) {
  * @return {HTMLElement} The new nail
  */
 ve.ce.LinkAnnotation.static.makeNail = function ( type ) {
-	var $nail = $( '<img>' )
-		.prop( 'src', ve.inputDebug ? ve.ce.nailImgDataUri : ve.ce.minImgDataUri )
-		// The following classes can be used here:
-		// ve-ce-nail-pre-open
-		// ve-ce-nail-pre-close
-		// ve-ce-nail-post-open
-		// ve-ce-nail-post-close
-		.addClass( 've-ce-nail ve-ce-nail-' + type );
-	if ( ve.inputDebug ) {
-		$nail.addClass( 've-ce-nail-debug' );
-	}
-	return $nail.get( 0 );
+	var nail = document.createElement( 'img' );
+	nail.src = ve.inputDebug ? ve.ce.nailImgDataUri : ve.ce.minImgDataUri;
+	// The following classes can be used here:
+	// ve-ce-nail-pre-open
+	// ve-ce-nail-pre-close
+	// ve-ce-nail-post-open
+	// ve-ce-nail-post-close
+	nail.className = 've-ce-nail ve-ce-nail-' + type + ( ve.inputDebug ? ' ve-ce-nail-debug' : '' );
+	return nail;
 };
 
 /* Methods */
 
+/**
+ * @inheritdoc
+ */
 ve.ce.LinkAnnotation.prototype.getContentContainer = function () {
 	return this.contentFragment;
 };
@@ -80,10 +80,10 @@ ve.ce.LinkAnnotation.prototype.getContentContainer = function () {
  * Attach contents to the annotation as descendent nodes, if not already attached
  */
 ve.ce.LinkAnnotation.prototype.attachContents = function () {
-	this.$anchor
-		.append( this.constructor.static.makeNail( 'post-open' ) )
-		.append( this.contentFragment )
-		.append( this.constructor.static.makeNail( 'pre-close' ) );
+	this.$anchor[ 0 ]
+		.appendChild( this.constructor.static.makeNail( 'post-open' ) )
+		.appendChild( this.contentFragment )
+		.appendChild( this.constructor.static.makeNail( 'pre-close' ) );
 };
 
 /**
