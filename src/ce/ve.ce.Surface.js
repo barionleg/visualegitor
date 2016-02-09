@@ -1111,6 +1111,25 @@ ve.ce.Surface.prototype.isBlockedTrigger = function ( trigger ) {
  * @param {jQuery.Event} e Key press event
  */
 ve.ce.Surface.prototype.onDocumentKeyPress = function ( e ) {
+	var selection;
+
+	// Handle the case where keyPress Enter is fired without a matching keyDown.
+	// This can happen with OS X "New Romanising" OS Korean IME on Firefox; see
+	// https://phabricator.wikimedia.org/T120156 . Behave as though keyDown Enter
+	// has been fired.
+	if (
+		e.keyCode === OO.ui.Keys.ENTER &&
+		!this.keyDownState.event &&
+		!( ( selection = this.getModel().getSelection() ) instanceof ve.dm.NullSelection )
+	) {
+		this.surfaceObserver.stopTimerLoop();
+		if ( ve.ce.keyDownHandlerFactory.executeHandlersForKey( e.keyCode, selection.getName(), this, e ) ) {
+			this.surfaceObserver.pollOnce();
+		}
+		this.surfaceObserver.startTimerLoop();
+		return;
+	}
+
 	// Filter out non-character keys. Doing this prevents:
 	// * Unexpected content deletion when selection is not collapsed and the user presses, for
 	//   example, the Home key (Firefox fires 'keypress' for it)
@@ -1135,8 +1154,9 @@ ve.ce.Surface.prototype.onDocumentKeyPress = function ( e ) {
  * @param {jQuery.Event} e keydown event
  */
 ve.ce.Surface.prototype.afterDocumentKeyDown = function ( e ) {
-	var direction, focusableNode, startOffset, endOffset, offsetDiff, dmFocus, dmSelection,
-		inNonSlug, ceSelection, ceNode, range, fixupCursorForUnicorn, matrix, col, row, $focusNode,
+	var keyDownEvent, keyDownSelection, direction, focusableNode, startOffset, endOffset,
+		offsetDiff, dmFocus, dmSelection, inNonSlug, ceSelection, ceNode, range,
+		fixupCursorForUnicorn, matrix, col, row, $focusNode,
 		surface = this,
 		isArrow = (
 			e.keyCode === OO.ui.Keys.UP ||
@@ -1201,11 +1221,18 @@ ve.ce.Surface.prototype.afterDocumentKeyDown = function ( e ) {
 			ve.compareDocumentOrder(
 				surface.nativeSelection.focusNode,
 				surface.nativeSelection.focusOffset,
-				surface.keyDownState.selection.focusNode,
-				surface.keyDownState.selection.focusOffset
+				keyDownSelection.focusNode,
+				keyDownSelection.focusOffset
 			)
 		) || null;
 	}
+
+	keyDownEvent = this.keyDownState.event;
+	keyDownSelection = this.keyDownState.selection;
+	if ( e !== keyDownEvent ) {
+		return;
+	}
+	this.clearKeyDownState();
 
 	if (
 		( e.keyCode === OO.ui.Keys.BACKSPACE || e.keyCode === OO.ui.Keys.DELETE ) &&
@@ -1249,10 +1276,6 @@ ve.ce.Surface.prototype.afterDocumentKeyDown = function ( e ) {
 		}
 	}
 
-	if ( e !== this.keyDownState.event ) {
-		return;
-	}
-
 	// Only fixup cursoring on linear selections.
 	if ( isArrow && !( surface.model.getSelection() instanceof ve.dm.LinearSelection ) ) {
 		return;
@@ -1284,7 +1307,7 @@ ve.ce.Surface.prototype.afterDocumentKeyDown = function ( e ) {
 		!e.ctrlKey &&
 		!e.altKey &&
 		!e.metaKey &&
-		this.keyDownState.selection.isCollapsed &&
+		keyDownSelection.isCollapsed &&
 		this.nativeSelection.isCollapsed &&
 		( direction = getDirection() ) !== null
 	) {
@@ -1298,8 +1321,8 @@ ve.ce.Surface.prototype.afterDocumentKeyDown = function ( e ) {
 			// Calculate the DM offsets of our motion
 			try {
 				startOffset = ve.ce.getOffset(
-					this.keyDownState.selection.focusNode,
-					this.keyDownState.selection.focusOffset
+					keyDownSelection.focusNode,
+					keyDownSelection.focusOffset
 				);
 				endOffset = ve.ce.getOffset(
 					this.nativeSelection.focusNode,
