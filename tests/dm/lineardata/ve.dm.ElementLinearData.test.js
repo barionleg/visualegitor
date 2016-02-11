@@ -1961,7 +1961,61 @@ QUnit.test( 'remapStoreIndexes', function ( assert ) {
 	}
 } );
 
-// TODO: ve.dm.ElementLinearData.static.compareElements
+QUnit.test( 'compareElements', function ( assert ) {
+	var i,
+		cases = [
+			{
+				a: '母',
+				b: '母',
+				comparison: true,
+				msg: 'Identical unannotated charaters are identical'
+			},
+			{
+				a: '다',
+				b: '가',
+				comparison: false,
+				msg: 'Non-identical unannotated charaters are not identical'
+			},
+			{
+				a: [
+					[ 'F', [ 0 ] ]
+				],
+				b: [
+					[ 'F', [ 0 ] ]
+				],
+				comparison: true,
+				msg: 'Identically-annotated identical charaters are identical'
+			},
+			{
+				a: [
+					[ 'F', [ 0 ] ]
+				],
+				b: [
+					[ 'F', [ 1 ] ]
+				],
+				comparison: false,
+				msg: 'Non-identically-annotated identical charaters are not identical'
+			},
+			{
+				a: 'F',
+				b: [
+					[ 'F', [ 0 ] ]
+				],
+				comparison: false,
+				msg: 'Identical chacaters, one annotated, one not, are not identical'
+			}
+		];
+
+	QUnit.expect( cases.length );
+	for ( i = 0; i < cases.length; i++ ) {
+		assert.equal(
+			ve.dm.ElementLinearData.static.compareElements( cases[ i ].a, cases[ i ].b ),
+			cases[ i ].comparison,
+			cases[ i ].msg
+		);
+	}
+} );
+
 // TODO: ve.dm.ElementLinearData#getAnnotationIndexesFromOffset
 // TODO: ve.dm.ElementLinearData#setAnnotationsAtOffset
 // TODO: ve.dm.ElementLinearData#getCharacterData
