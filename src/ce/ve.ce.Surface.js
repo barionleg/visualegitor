@@ -1965,6 +1965,16 @@ ve.ce.Surface.prototype.afterPaste = function ( e ) {
 				return;
 			}
 		}
+
+		// HACK: Fix invalid HTML from Google Docs nested lists (T98100).
+		// Converts
+		// <ul><li>A</li><ul><li>B</li></ul></ul>
+		// to
+		// <ul><li>A<ul><li>B</li></ul></li></ul>
+		$images = $( htmlDoc.body ).find( 'ul > ul, ul > ol, ol > ul, ol > ol' ).each( function () {
+			this.previousSibling.appendChild( this );
+		} );
+
 		// External paste
 		pastedDocumentModel = ve.dm.converter.getModelFromDom( htmlDoc, {
 			targetDoc: documentModel.getHtmlDocument(),

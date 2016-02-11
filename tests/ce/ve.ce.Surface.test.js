@@ -1497,6 +1497,37 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 					]
 				],
 				msg: 'Parsoid IDs stripped'
+			},
+			{
+				range: new ve.Range( 0 ),
+				pasteHtml: '<ul><li>A</li><ul><li>B</li></ul></ul>',
+				expectedRange: new ve.Range( 14 ),
+				expectedOps: [
+					[
+						{
+							type: 'replace',
+							insert: [
+								{ type: 'list', attributes: { style: 'bullet' } },
+								{ type: 'listItem' },
+								{ type: 'paragraph', internal: { generated: 'wrapper' } },
+								'A',
+								{ type: '/paragraph' },
+								{ type: 'list', attributes: { style: 'bullet' } },
+								{ type: 'listItem' },
+								{ type: 'paragraph', internal: { generated: 'wrapper' } },
+								'B',
+								{ type: '/paragraph' },
+								{ type: '/listItem' },
+								{ type: '/list' },
+								{ type: '/listItem' },
+								{ type: '/list' }
+							],
+							remove: []
+						},
+						{ type: 'retain', length: docLen }
+					]
+				],
+				msg: 'Broken nested lists (Google Docs style) are fixed'
 			}
 		];
 
