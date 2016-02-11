@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_8254eb02",
+        "filename": "src/ce/ve.ce.BranchNode.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2016-02-11T01:21:36Z",
+      "side": 1,
+      "message": "Given that this is overriding the parent\u0027s method, don\u0027t write documentation here, use @inheritdoc",
+      "revId": "80e994a962532ec40d870dba0a31560f74aab440",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_e24d9f76",
+        "filename": "src/ce/ve.ce.BranchNode.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2016-02-11T01:21:36Z",
+      "side": 1,
+      "message": "Use .super",
+      "revId": "80e994a962532ec40d870dba0a31560f74aab440",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_423ef3b6",
+        "filename": "src/ce/ve.ce.Document.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2016-02-11T01:21:36Z",
+      "side": 1,
+      "message": "I never explained what this hack was for, but it has to do with embedding ce.Documents in other places, so I don\u0027t think you need this yet. Also hopefully you\u0027ll find a way to not need this at all.",
+      "revId": "80e994a962532ec40d870dba0a31560f74aab440",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_0248fb5e",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 1505,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2016-02-11T01:21:36Z",
+      "side": 1,
+      "message": "Presumably shallowCloneFromSelection should set .parentSet? I forget why this is here.",
+      "revId": "80e994a962532ec40d870dba0a31560f74aab440",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_826b8bb4",
+        "filename": "src/dm/ve.dm.Converter.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2016-02-11T01:21:36Z",
+      "side": 1,
+      "message": "Document (if it was me who forgot to document this, I\u0027m sorry)",
+      "revId": "80e994a962532ec40d870dba0a31560f74aab440",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_025f9b14",
+        "filename": "src/dm/ve.dm.Converter.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 852,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2016-02-11T01:21:36Z",
+      "side": 1,
+      "message": "IIRC, I wrote this because I ended up having a lot of subdocuments that looked like \u003cbody\u003e foo \u003c/body\u003e (because of references and image captions), and in investigating why something happened I found that this code path was being followed. I don\u0027t remember what the bad behavior was though.",
+      "revId": "80e994a962532ec40d870dba0a31560f74aab440",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_e2a35ffb",
+        "filename": "src/dm/ve.dm.Document.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2016-02-11T01:21:36Z",
+      "side": 1,
+      "message": "Add method documentation",
+      "revId": "80e994a962532ec40d870dba0a31560f74aab440",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_a2ad67e9",
+        "filename": "src/dm/ve.dm.Document.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2016-02-11T01:21:36Z",
+      "side": 1,
+      "message": "Add method documentation",
+      "revId": "80e994a962532ec40d870dba0a31560f74aab440",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_42b4b333",
+        "filename": "src/dm/ve.dm.Document.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 634,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2016-02-11T01:21:36Z",
+      "side": 1,
+      "message": "Add method documentation",
+      "revId": "80e994a962532ec40d870dba0a31560f74aab440",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_62af6fdf",
+        "filename": "src/dm/ve.dm.Document.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 635,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2016-02-11T01:21:36Z",
+      "side": 1,
+      "message": "This will probably cause problems at some point",
+      "revId": "80e994a962532ec40d870dba0a31560f74aab440",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
