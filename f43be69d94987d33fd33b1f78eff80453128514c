@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_b2112efe",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 1975,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2016-02-11T20:17:13Z",
+      "side": 1,
+      "message": "What if this.previousSibling is null? E.g. \u003cul\u003e\u003cul\u003e...\u003c/ul\u003e\u003cli\u003e...\u003c/li\u003e\u003c/ul\u003e",
+      "revId": "f43be69d94987d33fd33b1f78eff80453128514c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
