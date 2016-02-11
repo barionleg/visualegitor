@@ -865,20 +865,59 @@ QUnit.test( 'getRelativeOffset', function ( assert ) {
 				return true;
 			},
 			expected: 2
+		},
+		{
+			msg: 'document with invalid offset inside an ignoreChildren node throws',
+			offset: 7,
+			distance: 3,
+			data: [
+				'a',
+				{ type: 'blockImage', attributes: {} },
+				{ type: 'imageCaption' },
+				{ type: 'paragraph', internal: { generated: 'wrapper' } },
+				'a', 'b', 'c',
+				{ type: '/paragraph' },
+				{ type: '/imageCaption' },
+				{ type: '/blockImage' },
+				'b'
+			],
+			callback: function () {
+				return true;
+			},
+			exception: /offset was inside an ignoreChildren node/
 		}
 	];
+
 	QUnit.expect( cases.length );
+
 	for ( i = 0; i < cases.length; i++ ) {
-		data = new ve.dm.ElementLinearData( new ve.dm.IndexValueStore(), cases[ i ].data );
-		assert.strictEqual(
-			data.getRelativeOffset(
-				cases[ i ].offset,
-				cases[ i ].distance,
-				cases[ i ].callback
-			),
-			cases[ i ].expected,
-			cases[ i ].msg
-		);
+		if ( 'expected' in cases[ i ] ) {
+			data = new ve.dm.ElementLinearData( new ve.dm.IndexValueStore(), cases[ i ].data );
+			assert.strictEqual(
+				data.getRelativeOffset(
+					cases[ i ].offset,
+					cases[ i ].distance,
+					cases[ i ].callback
+				),
+				cases[ i ].expected,
+				cases[ i ].msg
+			);
+		} else if ( 'exception' in cases[ i ] ) {
+			debugger;
+			assert.throws(
+				// jshint loopfunc:true
+				function () {
+					data.getRelativeOffset(
+						cases[ i ].offset,
+						cases[ i ].distance,
+						cases[ i ].callback
+					);
+				},
+				cases[ i ].exception,
+				cases[ i ].msg
+				// jshint loopfunc:false
+			);
+		}
 	}
 } );
 
