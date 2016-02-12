@@ -167,9 +167,16 @@ ve.ce.Document.prototype.getNodeAndOffset = function ( offset, outsideNail ) {
  * @return {number} return.offset location offset within the node
  */
 ve.ce.Document.prototype.getNodeAndOffsetUnadjustedForUnicorn = function ( offset ) {
-	var node, startOffset, current, stack, item, $item, length, model,
+	var branchNode, position, count, step, node, textLength, matchingPositions, model,
 		countedNodes = [],
 		slug = this.getSlugAtOffset( offset );
+
+	// Cleaner method:
+	// 1. Step with ve.adjacentDomPosition until we hit a position at the correct offset
+	// (which is guaranteed to be the first such position in document order).
+	// 2. Use ve.adjacentDomPosition( ..., { skipSoft: false } ) once to return all
+	// subsequent positions at the same offset.
+	// 3. Look at the possible positions and pick accordingly.
 
 	// If we're a block slug, or an empty inline slug, return its location
 	// Start at the current branch node; get its start offset
@@ -197,94 +204,73 @@ ve.ce.Document.prototype.getNodeAndOffsetUnadjustedForUnicorn = function ( offse
 	) ) {
 		return { node: slug, offset: 0 };
 	}
-	node = this.getBranchNodeFromOffset( offset );
-	startOffset = node.getOffset() + ( ( node.isWrapped() ) ? 1 : 0 );
-	current = { $contents: node.$element.contents(), offset: 0 };
-	stack = [ current ];
-	while ( stack.length > 0 ) {
-		if ( current.offset >= current.$contents.length ) {
-			stack.pop();
-			current = stack[ stack.length - 1 ];
-			if ( current && startOffset === offset ) {
-				// The current node has no DOM children and no DM length (e.g.
-				// it is a browser-generated <br/> that doesn't have class
-				// ve-ce-leafNode), but the node itself is at the required DM
-				// offset. Return the first offset inside this node (even if
-				// it's a node type that cannot contain content, like br).
-				return { node: current.$contents[ current.offset - 1 ], offset: 0 };
+	branchNode = this.getBranchNodeFromOffset( offset );
+	position = { node: branchNode.$element, offset: 0 };
+	count = branchNode.getOffset() + ( ( branchNode.isWrapped() ) ? 1 : 0 );
+
+	function noDescend() {
+		return this.classList.contains( 've-ce-branchNode-blockSlug' ) ||
+			ve.rejectsCursor( this );
+	}
+
+	while ( true ) {
+		if ( count === offset ) {
+			break;
+		}
+		position = ve.adjacentDomPosition( position, 1, { noDescend: noDescend } );
+		step = position.steps[ 0 ];
+		node = step.node;
+		if ( node.nodeType === Node.TEXT_NODE ) {
+			// this branch always breaks or skips over the text node; therefore it
+			// is guaranteed that this is the first time we encounter the text node,
+			// so step.type === 'enter' (we just stepped in)
+			// TODO: what about zero-length text nodes?
+			textLength = node.data.length;
+			if ( offset <= count + textLength ) {
+				// match the appropriate offset in the text node
+				matchingPositions.push( { node: node, offset: offset - count } );
+				break;
+			} else {
+				// skip over the text node
+				count += textLength;
+				position = { node: node, offset: textLength };
+				continue;
 			}
+		} // else is an element node (TODO: handle comment etc)
+
+		if ( !(
+			node.classList.contains( 've-ce-branchNode' ) ||
+			node.classList.contains( 've-ce-leafNode' )
+		) ) {
+			// Nodes like b, inline slug, browser-generated br that doesn't have
+			// class ve-ce-leafNode: continue walk without incrementing
 			continue;
 		}
-		item = current.$contents[ current.offset ];
-		if ( item.nodeType === Node.TEXT_NODE ) {
-			length = item.textContent.length;
-			if ( offset >= startOffset && offset <= startOffset + length ) {
-				return {
-					node: item,
-					offset: offset - startOffset
-				};
-			} else {
-				startOffset += length;
-			}
-		} else if ( item.nodeType === Node.ELEMENT_NODE ) {
-			$item = current.$contents.eq( current.offset );
-			if ( $item.hasClass( 've-ce-unicorn' ) ) {
-				if ( offset === startOffset ) {
-					// Return if empty unicorn pair at the correct offset
-					if ( $( $item[ 0 ].previousSibling ).hasClass( 've-ce-unicorn' ) ) {
-						return {
-							node: $item[ 0 ].parentNode,
-							offset: current.offset - 1
-						};
-					} else if ( $( $item[ 0 ].nextSibling ).hasClass( 've-ce-unicorn' ) ) {
-						return {
-							node: $item[ 0 ].parentNode,
-							offset: current.offset + 1
-						};
-					}
-					// Else algorithm will/did descend into unicorned range
-				}
-				// Else algorithm will skip this unicorn
-			} else if ( $item.is( '.ve-ce-branchNode, .ve-ce-leafNode' ) ) {
-				model = $item.data( 'view' ).model;
-				// DM nodes can render as multiple elements in the view, so check
-				// we haven't already counted it.
-				if ( countedNodes.indexOf( model ) === -1 ) {
-					length = model.getOuterLength();
-					countedNodes.push( model );
-					if ( offset >= startOffset && offset < startOffset + length ) {
-						stack.push( { $contents: $item.contents(), offset: 0 } );
-						current.offset++;
-						current = stack[ stack.length - 1 ];
-						continue;
-					} else {
-						startOffset += length;
-					}
-				}
-			} else if ( $item.hasClass( 've-ce-branchNode-blockSlug' ) ) {
-				// This is unusual: generated wrappers usually mean that the return
-				// value of getBranchNodeFromOffset will not have block slugs or
-				// block slug ancestors before the offset position. However, there
-				// are some counterexamples; e.g., if the DM offset is just before
-				// the internalList then the start node will be the document node.
-				//
-				// Skip contents without incrementing offset.
-				current.offset++;
-				continue;
-			} else if ( $item.hasClass( 've-ce-nail' ) ) {
-				// Skip contents without incrementing offset.
-				current.offset++;
-				continue;
-			} else {
-				// Any other node type (e.g. b, inline slug, browser-generated br
-				// that doesn't have class ve-ce-leafNode): descend
-				stack.push( { $contents: $item.contents(), offset: 0 } );
-				current.offset++;
-				current = stack[ stack.length - 1 ];
-				continue;
-			}
+
+		if ( step.type === 'leave' ) {
+			// Below we'll guarantee that .ve-ce-branchNode/.ve-ce-leafNode elements
+			// are only enteres if their open/close tags take up a model offset, so
+			// we can increment unconditionally here
+			count++;
+			continue;
+		} // else step.type === 'enter' || step.type === 'cross'
+
+		model = $.data( node, 'view' ).model;
+
+		if ( countedNodes.indexOf( model ) !== -1 ) {
+			// This DM node is rendered as multiple DOM elements, and we have already
+			// counted it as part of an earlier element. Skip past without incrementing
+			position = { node: node.parentNode, offset: ve.parentIndex( node ) + 1 };
+		} else if ( offset >= count + model.getOuterLength() ) {
+			// Offset doesn't lie inside the node. Skip past and count length
+			// skip past the whole node
+			position = { node: node.parentNode, offset: ve.parentIndex( node ) + 1 };
+			count += model.getOuterLength();
+		} else if ( step.type === 'cross' ) {
+			count += 2;
+		} else {
+			count += 1;
 		}
-		current.offset++;
 	}
 	throw new Error( 'Offset could not be translated to a DOM element and offset: ' + offset );
 };
