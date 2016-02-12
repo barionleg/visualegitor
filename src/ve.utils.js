@@ -1444,53 +1444,49 @@ ve.getSystemPlatform = function () {
 /**
  * Get the closest matching DOM position in document order (forward or reverse)
  *
- * A DOM position is represented as an object with "node" and "offset" properties. The noDescend
- * option can be used to exclude the positions inside certain element nodes; it is a jQuery
- * selector/function ( used as a test by $node.is() - see http://api.jquery.com/is/ ); it defaults
- * to ve.rejectsCursor . Void elements (those matching ve.isVoidElement) are always excluded.
+ * A DOM position is represented as an object with "node" and "offset" properties.
  *
- * If the skipSoft option is true (default), positions cursor-equivalent to the start position are
- * stepped over and the nearest non-equivalent position is returned. Cursor-equivalent positions
- * include just before/just after the boundary of a text element or an annotation element. So in
- * &lt;#text&gt;X&lt;/#text&gt;&lt;b&gt;&lt;#text&gt;y&lt;/#text&gt;&lt;/b&gt; there are four
- * cursor-equivalent positions between X and Y.
- * Chromium normalizes cursor focus/offset, when they are set, to the start-most equivalent
- * position in document order. Firefox does not normalize, but jumps when cursoring over positions
- * that are equivalent to the start position.
+ * The noDescend option can be used to exclude the positions inside certain element nodes; it is
+ * a jQuery selector/function ( used as a test by $node.is() - see http://api.jquery.com/is/ );
+ * it defaults to ve.rejectsCursor . Void elements (those matching ve.isVoidElement) are always
+ * excluded.
+ *
+ * The "stop" option can be a boolean-valued function for testing a matching DOM position's node.
+ * If it returns true, the position is returned; else the search continues to the next matching
+ * DOM position. One useful such function is ve.hasHardCursorBoundaries.
  *
  * As well as the end position, an array of the steps taken is returned. This will have length 1
- * unless skipSoft is true. Each step gives the node, the type of crossing (which can be
- * "enter", "leave", or "cross" for any node, or "internal" for a step over a
- * character in a text node), and the offset (defined for "internal" steps only).
- *
- * Limitation: skipSoft treats the interior of grapheme clusters as non-equivalent, but in fact
- * browser cursoring does skip over most grapheme clusters e.g. 'x\u0301' (though not all e.g.
- * '\u062D\u0627').
+ * unless the "stop" option is used. Each step gives the node, the type of crossing (which can be
+ * "enter", "leave", or "cross" for any node, or "internal" for a step over a character in a text
+ * node), and the offset (defined for "internal" steps only).
  *
  * Limitation: some DOM positions cannot actually hold the cursor; e.g. the start of the interior
- * of a table node.
+ * of a table node. Browser cursoring jumps over text node/annotation node boundaries as if they
+ * were invisible, and skips over most grapheme clusters e.g. 'x\u0301' (though not all e.g.
+ * '\u062D\u0627'). Also, Chromium normalizes cursor focus/offset, when they are set, to the
+ * start-most such cursor position (Firefox does not).
  *
  * @param {Object} position Start position
  * @param {Node} position.node Start node
  * @param {Node} position.offset Start offset
  * @param {number} direction +1 for forward, -1 for reverse
- * @param {Object} [options]
+ * @param {Object} options
  * @param {Function|string} [options.noDescend] Selector or function: nodes to skip over
- * @param {boolean} [options.skipSoft] Skip tags that don't expend a cursor press (default: true)
+ * @param {Function} options.stop Boolean-valued test function for stopping positions
  * @return {Object} The adjacent DOM position encountered
  * @return {Node|null} return.node The node, or null if we stepped past the root node
  * @return {number|null} return.offset The offset, or null if we stepped past the root node
  * @return {Object[]} return.steps Steps taken {node: x, type: leave|cross|enter|internal, offset: n}
+ * @see ve#hasHardCursorBoundaries
  */
 ve.adjacentDomPosition = function ( position, direction, options ) {
-	var forward, childNode, isHard, noDescend, skipSoft,
+	var forward, childNode, noDescend, stopTest, stop,
 		node = position.node,
 		offset = position.offset,
 		steps = [];
 
-	options = options || {};
 	noDescend = options.noDescend || ve.rejectsCursor;
-	skipSoft = 'skipSoft' in options ? options.skipSoft : true;
+	stopTest = options.stop;
 
 	direction = direction < 0 ? -1 : 1;
 	forward = ( direction === 1 );
@@ -1502,7 +1498,7 @@ ve.adjacentDomPosition = function ( position, direction, options ) {
 				node: node,
 				type: 'leave'
 			} );
-			isHard = ve.hasHardCursorBoundaries( node );
+			stop = stopTest( node );
 			if ( node.parentNode === null ) {
 				return {
 					node: null,
@@ -1512,7 +1508,7 @@ ve.adjacentDomPosition = function ( position, direction, options ) {
 			}
 			offset = ve.parentIndex( node ) + ( forward ? 1 : 0 );
 			node = node.parentNode;
-			if ( !skipSoft || isHard ) {
+			if ( stop ) {
 				return {
 					node: node,
 					offset: offset,
@@ -1551,22 +1547,27 @@ ve.adjacentDomPosition = function ( position, direction, options ) {
 				node: childNode,
 				type: 'cross'
 			} );
-			return {
-				node: node,
-				offset: offset + ( forward ? 1 : -1 ),
-				steps: steps
-			};
+			offset += forward ? 1 : -1;
+			if ( stopTest( childNode ) ) {
+				return {
+					node: node,
+					offset: offset,
+					steps: steps
+				};
+			}
+			// Else take another step
+			continue;
 		}
 
 		// Go to the closest offset inside the child node
-		isHard = ve.hasHardCursorBoundaries( childNode );
+		stop = stopTest( childNode );
 		node = childNode;
 		offset = forward ? 0 : node.length || node.childNodes.length;
 		steps.push( {
 			node: node,
 			type: 'enter'
 		} );
-		if ( !skipSoft || isHard ) {
+		if ( stop ) {
 			return {
 				node: node,
 				offset: offset,
@@ -1579,14 +1580,17 @@ ve.adjacentDomPosition = function ( position, direction, options ) {
 /**
  * Test whether crossing a node's boundaries uses up a cursor press
  *
- * Essentially, this is true unless the node is a text node or an annotation node
+ * Essentially, this is true unless the node is a contentEditable text/annotation node. For
+ * instance, in &lt;#text&gt;X&lt;/#text&gt;&lt;b&gt;&lt;#text&gt;y&lt;/#text&gt;&lt;/b&gt; , a
+ * single cursor press will jump from just after X to just after Y.
  *
  * @param {Node} node Element node or text node
  * @return {boolean} Whether crossing the node's boundaries uses up a cursor press
  */
 ve.hasHardCursorBoundaries = function ( node ) {
-	return node.nodeType === node.ELEMENT_NODE && (
-		ve.isBlockElement( node ) || ve.isVoidElement( node )
+	return ve.rejectsCursor( node ) || (
+		node.nodeType === node.ELEMENT_NODE &&
+		ve.isBlockElement( node )
 	);
 };
 
