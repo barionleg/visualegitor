@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_a6723b0e",
+        "filename": "src/ce/ve.ce.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-02-15T19:55:47Z",
+      "side": 1,
+      "message": "$.data( element, \u0027view\u0027 ) is allegedly faster",
+      "revId": "6c30eb7af4e82c403b5c4f79adc1e1060d13a680",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
