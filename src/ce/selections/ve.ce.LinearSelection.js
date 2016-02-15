@@ -207,6 +207,13 @@ ve.ce.LinearSelection.prototype.isNativeCursor = function () {
 	return !this.focusedNode;
 };
 
+/**
+ * @inheritdoc
+ */
+ve.ce.LinearSelection.prototype.getDirection = function () {
+	return this.getSurface().getDocument().getDirectionFromRange( this.getModel().getRange() );
+};
+
 /* Registration */
 
 ve.ce.selectionFactory.register( ve.ce.LinearSelection );

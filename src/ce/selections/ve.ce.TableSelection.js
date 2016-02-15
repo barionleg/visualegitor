@@ -110,6 +110,13 @@ ve.ce.TableSelection.prototype.isNativeCursor = function () {
 	return false;
 };
 
+/**
+ * @inheritdoc
+ */
+ve.ce.TableSelection.prototype.getDirection = function () {
+	return this.getSurface().getDocument().getDirectionFromRange( this.getModel().tableRange );
+};
+
 /* Registration */
 
 ve.ce.selectionFactory.register( ve.ce.TableSelection );
