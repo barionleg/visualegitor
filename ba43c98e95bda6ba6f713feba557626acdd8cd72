@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_a23224ed",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2016-02-15T23:37:05Z",
+      "side": 1,
+      "message": "Element nor Element.classList have no relation to ecmascript (the language). They\u0027re DOM.\n\nclassList was added as part of the DOM4 spec (currently in draft status).\n\nImplemented by Chrome 8, Edge, Firefox 3.6, IE10 and Safari 5.1. We should add this to our feature test (e.g. with !!document.documentElement.classList).\n\nI think we have some non-whitelisted browsers (\"greylist\"), especially mobile, that might not have this implemented and would fail fatally at run time.",
+      "revId": "ba43c98e95bda6ba6f713feba557626acdd8cd72",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
