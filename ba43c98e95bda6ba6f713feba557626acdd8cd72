@@ -34,6 +34,24 @@
       "revId": "ba43c98e95bda6ba6f713feba557626acdd8cd72",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_970c0047",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2016-02-16T19:24:29Z",
+      "side": 1,
+      "message": "First piece of fixing this is I27a8e7b.",
+      "parentUuid": "4ea78b8a_e2d25c5c",
+      "revId": "ba43c98e95bda6ba6f713feba557626acdd8cd72",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
