@@ -256,6 +256,9 @@ ve.init.Platform.prototype.getLanguageDirection = null;
  * @return {jQuery.Promise} Promise that will be resolved once initialization is done
  */
 ve.init.Platform.prototype.initialize = function () {
+	if ( !window.VisualEditorSupportCheck() ) {
+		return $.Deferred().reject().promise();
+	}
 	return $.Deferred().resolve().promise();
 };
 
