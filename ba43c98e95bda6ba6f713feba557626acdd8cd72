@@ -16,6 +16,24 @@
       "revId": "ba43c98e95bda6ba6f713feba557626acdd8cd72",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_e2d25c5c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2016-02-16T00:10:09Z",
+      "side": 1,
+      "message": "Agreed. Note that our white/black/grey list code is all in VE-MW, which is in and of itself a piece of tech debt.",
+      "parentUuid": "4ea78b8a_a23224ed",
+      "revId": "ba43c98e95bda6ba6f713feba557626acdd8cd72",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
