@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "4ea78b8a_234b84ce",
+        "filename": "build/modules.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2016-02-17T21:40:42Z",
+      "side": 1,
+      "message": "Module name convention is lowerCamelCase.lowerCamelCase, so this should be visualEditor.supportCheck",
+      "revId": "6215b37e2675db76e0fd0b5d50de4cb66ea2776f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea78b8a_c3af1077",
         "filename": "demos/ve/demo.minimal.js",
         "patchSetId": 4
