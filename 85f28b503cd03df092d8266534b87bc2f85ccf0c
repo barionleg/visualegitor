@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "4ea78b8a_3de64340",
+        "filename": "src/dm/ve.dm.Model.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2016-02-17T18:07:32Z",
+      "side": 1,
+      "message": "Re #1: we could of course fix the MW*Node classes to return the full originalDomElements value, but we\u0027d have to document better than anything that uses originalDomElements in toData/toDom needs to do that.",
+      "parentUuid": "4ea78b8a_fd774b99",
+      "revId": "85f28b503cd03df092d8266534b87bc2f85ccf0c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea78b8a_9d7e5766",
         "filename": "src/dm/ve.dm.Transaction.js",
         "patchSetId": 7
