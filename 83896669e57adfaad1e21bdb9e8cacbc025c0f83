@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_e8246baf",
+        "filename": "src/init/sa/ve.init.sa.Platform.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-02-17T19:35:41Z",
+      "side": 1,
+      "message": "document that the promise rejects if the platform is incompatible, either here or in the parent",
+      "revId": "83896669e57adfaad1e21bdb9e8cacbc025c0f83",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_68115b56",
+        "filename": "src/init/sa/ve.init.sa.Platform.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-02-17T19:35:41Z",
+      "side": 1,
+      "message": "Displaying an error message should be left to the user of the promise.",
+      "revId": "83896669e57adfaad1e21bdb9e8cacbc025c0f83",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_e888eb77",
+        "filename": "src/init/ve.init.Platform.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-02-17T19:35:41Z",
+      "side": 1,
+      "message": "why a separate file and function?\n\nIf the user needs to have loaded ve.init.Platform we can just put the checks as a method of ve.init.Platform.",
+      "revId": "83896669e57adfaad1e21bdb9e8cacbc025c0f83",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
