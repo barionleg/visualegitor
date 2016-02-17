@@ -67,6 +67,40 @@
       "revId": "85f28b503cd03df092d8266534b87bc2f85ccf0c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_9df5f7eb",
+        "filename": "tests/dm/ve.dm.Transaction.test.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 2502,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2016-02-17T18:06:21Z",
+      "side": 1,
+      "message": "As I said, I think this\u0027ll break for a few MW* types, but you can\u0027t test those in VE core.",
+      "revId": "85f28b503cd03df092d8266534b87bc2f85ccf0c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_ddefef19",
+        "filename": "tests/dm/ve.dm.Transaction.test.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 2547,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2016-02-17T18:06:21Z",
+      "side": 1,
+      "message": "There should be test cases involving metadata as well",
+      "revId": "85f28b503cd03df092d8266534b87bc2f85ccf0c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
