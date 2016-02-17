@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4ea78b8a_5dae9f2c",
+        "filename": "src/dm/lineardata/ve.dm.ElementLinearData.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-02-17T19:25:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea78b8a_9da73708",
+      "revId": "85f28b503cd03df092d8266534b87bc2f85ccf0c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea78b8a_bdac73ec",
         "filename": "src/dm/lineardata/ve.dm.ElementLinearData.js",
         "patchSetId": 7
@@ -30,6 +48,24 @@
       "writtenOn": "2016-02-17T18:05:36Z",
       "side": 1,
       "message": "Here too?",
+      "revId": "85f28b503cd03df092d8266534b87bc2f85ccf0c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_7dab5b1a",
+        "filename": "src/dm/lineardata/ve.dm.ElementLinearData.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-02-17T19:25:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea78b8a_bdac73ec",
       "revId": "85f28b503cd03df092d8266534b87bc2f85ccf0c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -71,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "4ea78b8a_5d121f65",
+        "filename": "src/dm/ve.dm.Model.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-02-17T19:25:37Z",
+      "side": 1,
+      "message": "sounds about right",
+      "parentUuid": "4ea78b8a_fd774b99",
+      "revId": "85f28b503cd03df092d8266534b87bc2f85ccf0c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea78b8a_9d7e5766",
         "filename": "src/dm/ve.dm.Transaction.js",
         "patchSetId": 7
@@ -82,6 +136,24 @@
       "writtenOn": "2016-02-17T18:05:36Z",
       "side": 1,
       "message": "removeMetadata and insertMetadata are not touched here; should they be? Or is it unnecessary to do so because there are no annotations there? Ditto for the replaceMetadata operation.",
+      "revId": "85f28b503cd03df092d8266534b87bc2f85ccf0c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_9d141753",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-02-17T19:25:37Z",
+      "side": 1,
+      "message": "yeah you could probably have store indexes in metadata.\n\nor we can kill all metadata!",
+      "parentUuid": "4ea78b8a_9d7e5766",
       "revId": "85f28b503cd03df092d8266534b87bc2f85ccf0c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
