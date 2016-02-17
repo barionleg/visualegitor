@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_9da73708",
+        "filename": "src/dm/lineardata/ve.dm.ElementLinearData.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2016-02-17T18:05:36Z",
+      "side": 1,
+      "message": "Shouldn\u0027t modelFactory be used here instead of nodeFactory? ElementLinearData can contain meta items, right?",
+      "revId": "85f28b503cd03df092d8266534b87bc2f85ccf0c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_bdac73ec",
+        "filename": "src/dm/lineardata/ve.dm.ElementLinearData.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2016-02-17T18:05:36Z",
+      "side": 1,
+      "message": "Here too?",
+      "revId": "85f28b503cd03df092d8266534b87bc2f85ccf0c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_fd774b99",
+        "filename": "src/dm/ve.dm.Model.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2016-02-17T18:05:36Z",
+      "side": 1,
+      "message": "I think this might be problematic, because:\n\n1) This loses information in originalHtml. getHashObject only returns the first node (with a comment justifying that that\u0027s all we need for uniqueness), but for certain node types toDomElements needs originalDomElements to be complete. AlienNode overrides getHashObject to return the full originalDomElements set (so it would be fine), but MWReferenceNode and MWReferencesListNode don\u0027t override it, and MWTransclusionNode and MWExtensionNode override it to only return the mw attribute (except one of them clones it and the other one doesn\u0027t, wtf). This makes me suspect those three types would break; at the very least in the sense that toDomElements(unserialize(serialize(X))) would contain dirty diffs that toDomElements(X) wouldn\u0027t contain, and possibly even in the sense that toDomElements(unserialize(serialize(X))) would return something invalid.\n\n2) This loses \"internal\" information such as whitespace. This, too, would result in whitespace diffs in toDomElements(unserialize(serialize(X))) that wouldn\u0027t be present in toDomElements(X)",
+      "revId": "85f28b503cd03df092d8266534b87bc2f85ccf0c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_9d7e5766",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2016-02-17T18:05:36Z",
+      "side": 1,
+      "message": "removeMetadata and insertMetadata are not touched here; should they be? Or is it unnecessary to do so because there are no annotations there? Ditto for the replaceMetadata operation.",
+      "revId": "85f28b503cd03df092d8266534b87bc2f85ccf0c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
