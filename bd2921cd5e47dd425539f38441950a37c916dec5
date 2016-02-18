@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_db3cd42f",
+        "filename": "tests/dm/lineardata/ve.dm.ElementLinearData.test.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 1998,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2016-02-18T02:03:29Z",
+      "side": 1,
+      "message": "Also put in a test case with elements with and without attributes (this is *Element*LinearData after all)",
+      "revId": "bd2921cd5e47dd425539f38441950a37c916dec5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
