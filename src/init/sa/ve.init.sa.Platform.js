@@ -110,7 +110,9 @@ ve.init.sa.Platform.prototype.setUserConfig = function ( keyOrValueMap, value ) 
 	return true;
 };
 
-/** @inheritdoc */
+/**
+ * @inheritdoc
+ */
 ve.init.sa.Platform.prototype.addParsedMessages = function ( messages ) {
 	var key;
 	for ( key in messages ) {
@@ -118,7 +120,9 @@ ve.init.sa.Platform.prototype.addParsedMessages = function ( messages ) {
 	}
 };
 
-/** @inheritdoc */
+/**
+ * @inheritdoc
+ */
 ve.init.sa.Platform.prototype.getParsedMessage = function ( key ) {
 	if ( Object.prototype.hasOwnProperty.call( this.parsedMessages, key ) ) {
 		return this.parsedMessages[ key ];
@@ -140,35 +144,38 @@ ve.init.sa.Platform.prototype.getParsedMessage = function ( key ) {
 	} );
 };
 
-/** @inheritdoc */
+/**
+ * @inheritdoc
+ */
 ve.init.sa.Platform.prototype.getLanguageCodes = function () {
 	return Object.keys( $.uls.data.getAutonyms() );
 };
 
 /**
- * @method
  * @inheritdoc
  */
 ve.init.sa.Platform.prototype.getLanguageName = $.uls.data.getAutonym;
 
 /**
- * @method
  * @inheritdoc
  */
 ve.init.sa.Platform.prototype.getLanguageAutonym = $.uls.data.getAutonym;
 
 /**
- * @method
  * @inheritdoc
  */
 ve.init.sa.Platform.prototype.getLanguageDirection = $.uls.data.getDir;
 
-/** @inheritdoc */
+/**
+ * @inheritdoc
+ */
 ve.init.sa.Platform.prototype.getUserLanguages = function () {
 	return this.userLanguages;
 };
 
-/** @inheritdoc */
+/**
+ * @inheritdoc
+ */
 ve.init.sa.Platform.prototype.initialize = function () {
 	var i, iLen, j, jLen, partialLocale, localeParts, filename, deferred,
 		messagePaths = this.getMessagePaths(),
