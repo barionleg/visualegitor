@@ -145,6 +145,7 @@
 	"visualeditor-key-space": "The common identifier of the space bar\n{{Related|Visualeditor-key}}",
 	"visualeditor-key-tab": "The common identifier of the tab key\n{{Related|Visualeditor-key}}",
 	"visualeditor-key-up": "The common identifier of the up arrow key\n{{Related|Visualeditor-key}}",
+	"visualeditor-labelbutton-tooltip": "Tooltip text for the edit label button. This sets the current selection to the entire contents of the link, so it can be easily edited.",
 	"visualeditor-language-search-input-placeholder": "Placeholder text for language search widget.",
 	"visualeditor-languageannotation-description": "Description of a language annotation\n\n* $1 - Language autonym",
 	"visualeditor-languageannotation-description-with-dir": "Description of a language annotation with overridden directionality\n\n* $1 - Language autonym\n* $2 - Overridden direction (either LTR or RTL)",
