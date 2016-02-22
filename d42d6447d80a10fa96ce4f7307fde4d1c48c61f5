@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ea41786_583dbf89",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 1118,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-02-22T00:17:12Z",
+      "side": 1,
+      "message": "we usually just but the bug ID, not the full URL",
+      "revId": "d42d6447d80a10fa96ce4f7307fde4d1c48c61f5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_b838739c",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 1123,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-02-22T00:17:12Z",
+      "side": 1,
+      "message": "are we doing this for all non-null selections, or just ve.ce.Selection#isNativeCursor (i.e. non-null selections which are not focusables or table cells)?",
+      "revId": "d42d6447d80a10fa96ce4f7307fde4d1c48c61f5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_f84d8b40",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 1230,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-02-22T00:17:12Z",
+      "side": 1,
+      "message": "do you need this local variable? looks like it\u0027s only used once",
+      "revId": "d42d6447d80a10fa96ce4f7307fde4d1c48c61f5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
