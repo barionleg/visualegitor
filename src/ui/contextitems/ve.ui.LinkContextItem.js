@@ -20,6 +20,24 @@ ve.ui.LinkContextItem = function VeUiLinkContextItem( context, model, config ) {
 
 	// Initialization
 	this.$element.addClass( 've-ui-linkContextItem' );
+
+	if ( !this.context.isMobile() ) {
+		this.labelButton = new OO.ui.ButtonWidget( {
+			title: OO.ui.deferMsg( 'visualeditor-labelbutton-tooltip' ),
+			icon: 'highlight',
+			flags: [ 'progressive' ]
+		} );
+	} else {
+		this.labelButton = new OO.ui.ButtonWidget( {
+			framed: false,
+			icon: 'highlight',
+			flags: [ 'progressive' ]
+		} );
+	}
+	if ( this.isClearable() ) {
+		this.actionButtons.addItems( [ this.labelButton ], 1 );
+	}
+	this.labelButton.connect( this, { click: 'onLabelButtonClick' } );
 };
 
 /* Inheritance */
@@ -65,6 +83,17 @@ ve.ui.LinkContextItem.prototype.renderBody = function () {
 				rel: 'noopener'
 			} )
 	);
+};
+
+/**
+ * Handle label-edit button click events.
+ *
+ * @localdoc Selects the contents of the link annotation
+ *
+ * @protected
+ */
+ve.ui.LinkContextItem.prototype.onLabelButtonClick = function () {
+	this.context.getSurface().getView().selectActiveLinkContents();
 };
 
 /* Registration */
