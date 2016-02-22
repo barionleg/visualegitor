@@ -20,6 +20,21 @@ ve.ui.LinkContextItem = function VeUiLinkContextItem( context, model, config ) {
 
 	// Initialization
 	this.$element.addClass( 've-ui-linkContextItem' );
+
+	this.labelPreview = new OO.ui.LabelWidget();
+
+	this.labelLayout = new OO.ui.HorizontalLayout( {
+		items: [
+			new OO.ui.IconWidget( { icon: 'quotes' } ),
+			new OO.ui.LabelWidget( { label: OO.ui.deferMsg( 'visualeditor-linkcontext-label-label' ) } ),
+			this.labelPreview,
+			new OO.ui.ButtonWidget( {
+				label: OO.ui.deferMsg( 'visualeditor-linkcontext-label-change' ),
+				framed: false,
+				flags: [ 'progressive' ]
+			} ).connect( this, { click: 'onLabelButtonClick' } )
+		]
+	} );
 };
 
 /* Inheritance */
@@ -63,8 +78,21 @@ ve.ui.LinkContextItem.prototype.renderBody = function () {
 				href: ve.resolveUrl( this.model.getHref(), htmlDoc ),
 				target: '_blank',
 				rel: 'noopener'
-			} )
+			} ),
+		this.labelLayout.$element
 	);
+	this.labelPreview.setLabel( this.context.getSurface().getView().activeLink.innerText.trim() || ve.msg( 'visualeditor-linkcontext-label-fallback' ) );
+};
+
+/**
+ * Handle label-edit button click events.
+ *
+ * @localdoc Selects the contents of the link annotation
+ *
+ * @protected
+ */
+ve.ui.LinkContextItem.prototype.onLabelButtonClick = function () {
+	this.context.getSurface().getView().selectActiveLinkContents();
 };
 
 /* Registration */
