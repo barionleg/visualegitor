@@ -9,3 +9,30 @@
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
+
+.ve-ui-linkContextItem .oo-ui-horizontalLayout {
+	margin-top: 0.7em;
+	padding-top: 0.5em;
+	border-top: 1px solid #ccc;
+}
+.ve-ui-linkContextItem .oo-ui-horizontalLayout > .oo-ui-widget {
+	margin-bottom: 0;
+}
+.ve-ui-linkContextItem .oo-ui-horizontalLayout > .oo-ui-iconWidget {
+	margin-bottom: 0.1em;
+}
+.ve-ui-linkContextItem .oo-ui-horizontalLayout > .oo-ui-iconWidget + .oo-ui-labelWidget {
+	font-weight: bold;
+	margin-left: 0.3em;
+}
+.ve-ui-linkContextItem .oo-ui-horizontalLayout > .oo-ui-labelWidget + .oo-ui-labelWidget {
+	max-width: 60%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	vertical-align: bottom;
+	color: #666;
+}
+.ve-ui-linkContextItem .oo-ui-horizontalLayout > .oo-ui-buttonWidget {
+	position: absolute;
+	right: 1em;
+}
