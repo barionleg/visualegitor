@@ -96,6 +96,7 @@
 	"visualeditor-indentationbutton-outdent-tooltip": "Tooltip text for list outdent button",
 	"visualeditor-inspector-close-tooltip": "{{Identical|Close}}",
 	"visualeditor-inspector-remove-tooltip": "Tooltip text for the button to remove an annotation in an inspector.\n{{Identical|Remove}}",
+	"visualeditor-labelbutton-tooltip": "Tooltip text for the edit label button. This sets the current selection to the entire contents of the link, so it can be easily edited.",
 	"visualeditor-language-search-input-placeholder": "Placeholder text for language search widget.",
 	"visualeditor-languageannotation-description": "Description of a language annotation\n\n* $1 - Language autonym",
 	"visualeditor-languageannotation-description-with-dir": "Description of a language annotation with overridden directionality\n\n* $1 - Language autonym\n* $2 - Overridden direction (either LTR or RTL)",

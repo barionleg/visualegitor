@@ -88,6 +88,7 @@
 	"visualeditor-indentationbutton-outdent-tooltip": "Decrease indentation",
 	"visualeditor-inspector-close-tooltip": "Close",
 	"visualeditor-inspector-remove-tooltip": "Remove",
+	"visualeditor-labelbutton-tooltip": "Edit label",
 	"visualeditor-language-search-input-placeholder": "Search by language name or code",
 	"visualeditor-languageannotation-description": "$1",
 	"visualeditor-languageannotation-description-with-dir": "$1 ($2)",
