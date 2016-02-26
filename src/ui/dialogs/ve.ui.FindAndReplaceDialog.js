@@ -192,6 +192,10 @@ ve.ui.FindAndReplaceDialog.prototype.getSetupProcess = function ( data ) {
 			this.surface.getModel().connect( this, { documentUpdate: this.updateFragmentsDebounced } );
 			this.surface.getView().connect( this, { position: this.renderFragmentsDebounced } );
 			this.surface.getView().$window.on( 'scroll', this.onWindowScrollDebounced );
+
+			// The model is about to have its selection set to null through observation,
+			// but do it early to ensure that ve.ce.Surface#getNativeRange works.
+			this.surface.getModel().setNullSelection();
 		}, this );
 };
 
