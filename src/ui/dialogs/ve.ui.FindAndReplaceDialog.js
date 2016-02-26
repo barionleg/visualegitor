@@ -198,16 +198,6 @@ ve.ui.FindAndReplaceDialog.prototype.getSetupProcess = function ( data ) {
 /**
  * @inheritdoc
  */
-ve.ui.FindAndReplaceDialog.prototype.getReadyProcess = function ( data ) {
-	return ve.ui.FindAndReplaceDialog.super.prototype.getReadyProcess.call( this, data )
-		.next( function () {
-			this.focus();
-		}, this );
-};
-
-/**
- * @inheritdoc
- */
 ve.ui.FindAndReplaceDialog.prototype.getTeardownProcess = function ( data ) {
 	return ve.ui.FindAndReplaceDialog.super.prototype.getTeardownProcess.call( this, data )
 		.next( function () {
