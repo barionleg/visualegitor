@@ -75,6 +75,61 @@ ve.copy = OO.copy;
 ve.debounce = OO.ui.debounce;
 
 /**
+ * Returns a function, that, when invoked, will only be triggered at most once
+ * during a given window of time. Normally, the throttled function will run as
+ * much as it can, without ever going more than once per `wait` duration; but if
+ * you’d like to disable the execution on the leading edge, pass `{leading:
+ * false}`. To disable execution on the trailing edge, ditto.
+ *
+ * Ported from: http://underscorejs.org/underscore.js
+ *
+ * @param {Function} func
+ * @param {number} wait
+ * @param {Object} [options]
+ * @param {boolean} [options.leading=true] whether to immediately run
+ * @param {boolean} [options.trailing=true] whether to run one last time after calls end
+ * @return {Function}
+ */
+ve.throttle = function ( func, wait, options ) {
+	var context, args, result,
+		timeout = null,
+		previous = 0,
+		later = function () {
+			previous = options.leading === false ? 0 : ve.now();
+			timeout = null;
+			result = func.apply( context, args );
+			if ( !timeout ) {
+				context = args = null;
+			}
+		};
+	options = options || {};
+	return function () {
+		var remaining,
+			now = ve.now();
+		if ( !previous && options.leading === false ) {
+			previous = now;
+		}
+		remaining = wait - ( now - previous );
+		context = this;
+		args = arguments;
+		if ( remaining <= 0 || remaining > wait ) {
+			if ( timeout ) {
+				clearTimeout( timeout );
+				timeout = null;
+			}
+			previous = now;
+			result = func.apply( context, args );
+			if ( !timeout ) {
+				context = args = null;
+			}
+		} else if ( !timeout && options.trailing !== false ) {
+			timeout = setTimeout( later, remaining );
+		}
+		return result;
+	};
+};
+
+/**
  * @method
  * @inheritdoc OO.ui.Element#scrollIntoView
  */
