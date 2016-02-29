@@ -75,6 +75,35 @@ ve.copy = OO.copy;
 ve.debounce = OO.ui.debounce;
 
 /**
+ * Returns a function, that, when invoked, will only be triggered at most once
+ * during a given window of time.
+ *
+ * @param {Function} func
+ * @param {number} wait
+ * @return {Function}
+ */
+ve.throttle = function ( func, wait ) {
+	var context, args, timeout,
+		previous = 0,
+		run = function () {
+			timeout = null;
+			previous = ve.now();
+			func.apply( context, args );
+		};
+	return function () {
+		var remaining = wait - ( ve.now() - previous );
+		context = this;
+		args = arguments;
+		if ( remaining <= 0 ) {
+			clearTimeout( timeout );
+			run();
+		} else if ( !timeout ) {
+			timeout = setTimeout( run, remaining );
+		}
+	};
+};
+
+/**
  * @method
  * @inheritdoc OO.ui.Element#scrollIntoView
  */
