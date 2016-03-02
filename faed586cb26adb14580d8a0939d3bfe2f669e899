@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ea41786_5fd23c5e",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 2724,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2016-03-02T15:58:44Z",
+      "side": 1,
+      "message": "This doesn\u0027t work in tests. Called too early?",
+      "revId": "faed586cb26adb14580d8a0939d3bfe2f669e899",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_3fcf40b7",
+        "filename": "src/ui/ve.ui.Tool.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2016-03-02T15:58:44Z",
+      "side": 1,
+      "message": "You want to remove this one…",
+      "revId": "faed586cb26adb14580d8a0939d3bfe2f669e899",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
