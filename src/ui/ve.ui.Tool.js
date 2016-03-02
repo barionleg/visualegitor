@@ -68,6 +68,20 @@ ve.ui.Tool.static.getCommandName = function () {
 	return this.commandName;
 };
 
+/**
+ * Get the command for this tool in a given surface context
+ *
+ * @param {ve.ui.Surface} surface Surface
+ * @return {ve.ui.Command|null|undefined} Undefined means command not found, null means no command set
+ */
+ve.ui.Tool.static.getCommand = function ( surface ) {
+	var commandName = this.getCommandName();
+	if ( commandName === null ) {
+		return null;
+	}
+	return surface.commandRegistry.lookup( commandName );
+};
+
 /* Methods */
 
 /**
@@ -113,8 +127,5 @@ ve.ui.Tool.prototype.onSelect = function () {
  * @return {ve.ui.Command|null|undefined} Undefined means command not found, null means no command set
  */
 ve.ui.Tool.prototype.getCommand = function () {
-	if ( this.constructor.static.commandName === null ) {
-		return null;
-	}
-	return ve.init.target.commandRegistry.lookup( this.constructor.static.commandName );
+	return this.constructor.static.getCommand( this.toolbar.getSurface() );
 };
