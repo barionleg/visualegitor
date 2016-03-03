@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2ea41786_a381d693",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 2724,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-03-03T11:22:21Z",
+      "side": 1,
+      "message": "no - we pass in a dummy UI surface for testing. will update.",
+      "parentUuid": "2ea41786_5fd23c5e",
+      "revId": "faed586cb26adb14580d8a0939d3bfe2f669e899",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ea41786_3fcf40b7",
         "filename": "src/ui/ve.ui.Tool.js",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2016-03-02T15:58:44Z",
       "side": 1,
       "message": "You want to remove this one…",
+      "revId": "faed586cb26adb14580d8a0939d3bfe2f669e899",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_237646d6",
+        "filename": "src/ui/ve.ui.Tool.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-03-03T11:22:21Z",
+      "side": 1,
+      "message": "why?",
+      "parentUuid": "2ea41786_3fcf40b7",
       "revId": "faed586cb26adb14580d8a0939d3bfe2f669e899",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
