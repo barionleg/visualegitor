@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ea41786_248bac21",
+        "filename": "src/ui/ve.ui.Tool.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2016-03-03T15:53:01Z",
+      "side": 1,
+      "message": "Deprecate this?",
+      "revId": "1d5efd2dc650feae17fe095a15c6389538dacd53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
