@@ -47,7 +47,8 @@
 			"lib/oojs-ui/oojs-ui-apex-icons-editing-core.css",
 			"lib/oojs-ui/oojs-ui-apex-icons-editing-advanced.css",
 			"lib/oojs-ui/oojs-ui-apex-icons-editing-styling.css",
-			"lib/oojs-ui/oojs-ui-apex-icons-editing-list.css"
+			"lib/oojs-ui/oojs-ui-apex-icons-editing-list.css",
+			"lib/oojs-ui/oojs-ui-apex-icons-interactions.css"
 		],
 		"dependencies": [
 			"oojs-ui"
@@ -107,6 +108,22 @@
 			"CLDRPluralRuleParser"
 		]
 	},
+	"rangy": {
+		"scripts": [
+			"lib/jquery.ime/libs/rangy/rangy-core.js"
+		]
+	},
+	"jquery.ime": {
+		"scripts": [
+			"lib/jquery.ime/src/jquery.ime.js",
+			"lib/jquery.ime/src/jquery.ime.selector.js",
+			"lib/jquery.ime/src/jquery.ime.preferences.js",
+			"lib/jquery.ime/src/jquery.ime.inputmethods.js"
+		],
+		"dependencies": [
+			"rangy"
+		]
+	},
 	"CLDRPluralRuleParser" : {
 		"scripts": [
 			"lib/jquery.i18n/libs/CLDRPluralRuleParser/src/CLDRPluralRuleParser.js"
@@ -159,6 +176,8 @@
 			"oojs",
 			"oojs-ui",
 			"jquery.i18n",
+			"rangy",
+			"jquery.ime",
 			"jquery.uls.data",
 			"jquery.client",
 			"papaparse"
@@ -170,6 +189,8 @@
 			"oojs",
 			"oojs-ui",
 			"jquery.i18n.dist",
+			"rangy",
+			"jquery.ime",
 			"jquery.uls.data.dist",
 			"jquery.client",
 			"papaparse"
@@ -476,6 +497,8 @@
 			"src/ui/widgets/ve.ui.LanguageResultWidget.js",
 			"src/ui/dialogs/ve.ui.LanguageSearchDialog.js",
 			"src/ui/widgets/ve.ui.LanguageInputWidget.js",
+			"src/ui/dialogs/ve.ui.InputMethodDialog.js",
+			"src/ui/dialogs/ve.ui.ImeDialog.js",
 			"src/ui/widgets/ve.ui.TargetWidget.js",
 			"src/ui/widgets/ve.ui.LinkAnnotationWidget.js",
 			"src/ui/widgets/ve.ui.ContextSelectWidget.js",
@@ -526,6 +549,8 @@
 			"src/ui/styles/tools/ve.ui.FormatTool.css",
 			"src/ui/styles/widgets/ve.ui.LanguageInputWidget.css",
 			"src/ui/styles/widgets/ve.ui.LanguageSearchWidget.css",
+			"src/ui/styles/dialogs/ve.ui.InputMethodDialog.css",
+			"src/ui/styles/dialogs/ve.ui.ImeDialog.css",
 			"src/ui/styles/widgets/ve.ui.ContextOptionWidget.css",
 			"src/ui/styles/widgets/ve.ui.ContextSelectWidget.css",
 			"src/ui/styles/widgets/ve.ui.DimensionsWidget.css",

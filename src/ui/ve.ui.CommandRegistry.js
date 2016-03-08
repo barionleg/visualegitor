@@ -112,6 +112,12 @@ ve.ui.commandRegistry.register(
 );
 ve.ui.commandRegistry.register(
 	new ve.ui.Command(
+		'ime', 'window', 'toggle',
+		{ args: [ 'ime' ], supportedSelections: [ 'linear', 'table' ] }
+	)
+);
+ve.ui.commandRegistry.register(
+	new ve.ui.Command(
 		'table', 'window', 'open',
 		{ args: [ 'table' ], supportedSelections: [ 'table' ] }
 	)
