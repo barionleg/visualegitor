@@ -292,12 +292,13 @@ module.exports = function ( grunt ) {
 			options: {
 				files: testFiles,
 				frameworks: [ 'qunit' ],
-				reporters: [ 'dots' ],
+				reporters: [ 'progress' ],
 				singleRun: true,
 				browserDisconnectTimeout: 5000,
 				browserDisconnectTolerance: 2,
 				browserNoActivityTimeout: 30000,
-				autoWatch: false
+				autoWatch: false,
+				logLevel: 'DEBUG'
 			},
 			main: {
 				browsers: [ 'Chrome' ],
