@@ -116,6 +116,12 @@
 	background-image:         linear-gradient(transparent, transparent), /* @embed */ url("themes/apex/images/icons/specialCharacter.svg");
 	background-image:      -o-linear-gradient(transparent, transparent), url("themes/apex/images/icons/specialCharacter.png");
 }
+.oo-ui-icon-ime {
+	background-image: url("themes/apex/images/icons/ime.png");
+	background-image: -webkit-linear-gradient(transparent, transparent), /* @embed */ url("themes/apex/images/icons/ime.svg");
+	background-image:         linear-gradient(transparent, transparent), /* @embed */ url("themes/apex/images/icons/ime.svg");
+	background-image:      -o-linear-gradient(transparent, transparent), url("themes/apex/images/icons/ime.png");
+}
 .oo-ui-icon-table {
 	background-image: url("themes/apex/images/icons/table.png");
 	background-image: -webkit-linear-gradient(transparent, transparent), /* @embed */ url("themes/apex/images/icons/table.svg");

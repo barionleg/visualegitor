@@ -72,3 +72,26 @@ ve.ui.SpecialCharacterDialogTool.static.autoAddToCatchall = false;
 ve.ui.SpecialCharacterDialogTool.static.autoAddToGroup = false;
 ve.ui.SpecialCharacterDialogTool.static.commandName = 'specialCharacter';
 ve.ui.toolFactory.register( ve.ui.SpecialCharacterDialogTool );
+
+/**
+ * IME tool.
+ *
+ * @class
+ * @extends ve.ui.ToolbarDialogTool
+ * @constructor
+ * @param {OO.ui.ToolGroup} toolGroup
+ * @param {Object} [config] Configuration options
+ */
+ve.ui.ImeDialogTool = function VeUiImeDialogTool() {
+	ve.ui.ImeDialogTool.super.apply( this, arguments );
+};
+OO.inheritClass( ve.ui.ImeDialogTool, ve.ui.ToolbarDialogTool );
+ve.ui.ImeDialogTool.static.name = 'ime';
+ve.ui.ImeDialogTool.static.group = 'dialog';
+ve.ui.ImeDialogTool.static.icon = 'ime';
+ve.ui.ImeDialogTool.static.title =
+	OO.ui.deferMsg( 'visualeditor-ime-button-tooltip' );
+ve.ui.ImeDialogTool.static.autoAddToCatchall = false;
+ve.ui.ImeDialogTool.static.autoAddToGroup = false;
+ve.ui.ImeDialogTool.static.commandName = 'ime';
+ve.ui.toolFactory.register( ve.ui.ImeDialogTool );

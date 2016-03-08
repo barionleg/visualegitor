@@ -117,6 +117,14 @@ ve.init.Target.static.toolbarGroups = [
 	{
 		header: OO.ui.deferMsg( 'visualeditor-toolbar-insert' ),
 		include: [ 'specialCharacter' ]
+	},
+	// IME toolbar
+	{
+		header: OO.ui.deferMsg( 'visualeditor-toolbar-ime' ),
+		icon: 'ime',
+		indicator: 'down',
+		title: OO.ui.deferMsg( 'visualeditor-toolbar-ime-tooltip' ),
+		include: [ 'ime' ]
 	}
 ];
 
