@@ -169,4 +169,10 @@ new ve.init.sa.Platform( ve.messagePaths ).initialize().done( function () {
 		createSurfacesFromHash( location.hash );
 		hashChanging = false;
 	} );
+
+	$.ime.setPath( '../../lib/jquery.ime/' );
+
+	$( 'body' ).on( 'focus.ime', '.ve-ce-documentNode', function () {
+		$( this ).ime();
+	} );
 } );

@@ -1,0 +1,27 @@
+/*!
+ * VisualEditor UserInterface ImeDialog styles.
+ *
+ * @copyright 2011-2016 VisualEditor Team and others; see http://ve.mit-license.org
+ */
+
+.ve-ui-imeDialog-row {
+	display: table;
+	min-width: 30em;
+	padding-bottom: 0.3em;
+}
+
+.ve-ui-imeDialog-row:last-child {
+	/* Extra pixel for button shadows */
+	padding-bottom: 1px;
+}
+
+.ve-ui-imeDialog-cell {
+	display: table-cell;
+	vertical-align: middle;
+	white-space: nowrap;
+	padding-right: 1em;
+}
+
+.ve-ui-imeDialog-cell:last-child {
+	padding-right: 0;
+}
