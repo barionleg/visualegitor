@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e2f53b6_66b934e6",
+        "filename": "src/ce/ve.ce.KeyDownHandlerFactory.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2016-03-10T15:27:47Z",
+      "side": 1,
+      "message": "Deregister?",
+      "revId": "32d0423504b59d824f2070e047a0aa7282b64174",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
