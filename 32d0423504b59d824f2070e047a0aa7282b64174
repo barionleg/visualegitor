@@ -34,6 +34,24 @@
       "revId": "32d0423504b59d824f2070e047a0aa7282b64174",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e2f53b6_66965444",
+        "filename": "src/ce/ve.ce.KeyDownHandlerFactory.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2016-03-10T15:45:44Z",
+      "side": 1,
+      "message": "Hmmph.",
+      "parentUuid": "0e2f53b6_e67a641e",
+      "revId": "32d0423504b59d824f2070e047a0aa7282b64174",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
