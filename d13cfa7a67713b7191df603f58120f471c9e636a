@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e2f53b6_1d28722e",
+        "filename": "i18n/en.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2016-03-11T07:06:30Z",
+      "side": 1,
+      "message": "Please remove title case and use sentence case. Also 3 times below.",
+      "revId": "d13cfa7a67713b7191df603f58120f471c9e636a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
