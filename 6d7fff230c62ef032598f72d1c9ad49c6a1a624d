@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee33df1d_6975a792",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 1921,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2016-03-14T23:35:24Z",
+      "side": 1,
+      "message": "Why is this here? This variable isn\u0027t used before the function returns two lines later.",
+      "revId": "6d7fff230c62ef032598f72d1c9ad49c6a1a624d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
