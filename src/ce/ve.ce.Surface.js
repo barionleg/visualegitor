@@ -1918,6 +1918,7 @@ ve.ce.Surface.prototype.afterPaste = function ( e ) {
 	// Internal table-into-table paste
 	if ( selection instanceof ve.dm.TableSelection && slice instanceof ve.dm.TableSlice ) {
 		tableAction = new ve.ui.TableAction( this.getSurface() );
+		internalListRange = slice.getInternalList().getListNode().getOuterRange();
 		tableAction.importTable( slice.getTableNode() );
 		return;
 	}
@@ -2059,7 +2060,7 @@ ve.ce.Surface.prototype.afterPaste = function ( e ) {
 		) {
 			// External table-into-table paste
 			tableAction = new ve.ui.TableAction( this.getSurface() );
-			tableAction.importTable( pastedDocumentModel.documentNode.children[ 0 ] );
+			tableAction.importTable( pastedDocumentModel.documentNode.children[ 0 ], true );
 			return;
 		}
 
