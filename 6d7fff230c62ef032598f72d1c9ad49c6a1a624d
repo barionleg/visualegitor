@@ -16,6 +16,24 @@
       "revId": "6d7fff230c62ef032598f72d1c9ad49c6a1a624d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_8900eb6e",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 1921,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-03-15T00:18:28Z",
+      "side": 1,
+      "message": "Most of the time I don\u0027t know what I\u0027m doing.",
+      "parentUuid": "ee33df1d_6975a792",
+      "revId": "6d7fff230c62ef032598f72d1c9ad49c6a1a624d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
