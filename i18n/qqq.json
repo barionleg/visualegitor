@@ -156,6 +156,7 @@
 	"visualeditor-languageinspector-widget-label-direction": "Label for the language inspector widget, to denote the text direction of the current element (left-to-right or right-to-left).\n{{Identical|Direction}}",
 	"visualeditor-languageinspector-widget-label-langcode": "Label for the language inspector widget, to denote the current block language code.\n{{Identical|Language code}}",
 	"visualeditor-languageinspector-widget-label-language": "Label for the language inspector widget, to denote the current block language.\n{{Identical|Language}}",
+	"visualeditor-linkinspector-edit-label": "Label for the edit label button. This sets the current selection to the entire contents of the link, so it can be easily edited.",
 	"visualeditor-linkinspector-title": "Title of the link inspector dialog.\n{{Identical|Link}}",
 	"visualeditor-listbutton-bullet-tooltip": "Tooltip text for the bullet list button",
 	"visualeditor-listbutton-number-tooltip": "Tooltip text for the numbered list button",

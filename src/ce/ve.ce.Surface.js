@@ -3777,7 +3777,7 @@ ve.ce.Surface.prototype.selectNodeContents = function ( node ) {
  * @return {boolean} Whether the selection changed
  */
 ve.ce.Surface.prototype.selectActiveLinkContents = function () {
-	return this.selectLinkContents( this.activeLink );
+	return this.selectNodeContents( this.activeLink );
 };
 
 /**

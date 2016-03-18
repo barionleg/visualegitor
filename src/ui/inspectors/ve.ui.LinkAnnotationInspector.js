@@ -30,6 +30,14 @@ ve.ui.LinkAnnotationInspector.static.title = OO.ui.deferMsg( 'visualeditor-linki
 
 ve.ui.LinkAnnotationInspector.static.modelClasses = [ ve.dm.LinkAnnotation ];
 
+ve.ui.LinkAnnotationInspector.static.actions = ve.ui.LinkAnnotationInspector.super.static.actions.concat( [
+	{
+		action: 'label',
+		label: OO.ui.deferMsg( 'visualeditor-linkinspector-edit-label' ),
+		modes: [ 'edit' ]
+	}
+] );
+
 /* Methods */
 
 /**
@@ -162,7 +170,28 @@ ve.ui.LinkAnnotationInspector.prototype.getTeardownProcess = function ( data ) {
 	return ve.ui.LinkAnnotationInspector.super.prototype.getTeardownProcess.call( this, data )
 		.next( function () {
 			this.annotationInput.setAnnotation( null );
+			if ( data && data.action === 'label' ) {
+				setTimeout( function () {
+					// Timeout needed so that selectActiveLinkContents happens
+					// after other dialog-closing selection fiddling, which
+					// would otherwise reset it so that it starts outside the
+					// link.
+					this.manager.getSurface().getView().selectActiveLinkContents();
+				}.bind( this ) );
+			}
 		}, this );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ui.LinkAnnotationInspector.prototype.getActionProcess = function ( action ) {
+	if ( action === 'label' ) {
+		return new OO.ui.Process( function () {
+			this.close( { action: action } );
+		}, this );
+	}
+	return ve.ui.LinkAnnotationInspector.super.prototype.getActionProcess.call( this, action );
 };
 
 /* Registration */
