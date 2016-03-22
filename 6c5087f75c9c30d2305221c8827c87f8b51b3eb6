@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee33df1d_5b1af673",
+        "filename": "src/ui/dialogs/ve.ui.SpecialCharacterDialog.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2016-03-22T15:30:15Z",
+      "side": 1,
+      "message": "Did you mean to replace this one?",
+      "revId": "6c5087f75c9c30d2305221c8827c87f8b51b3eb6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
