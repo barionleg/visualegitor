@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee33df1d_1b3eaeb5",
+        "filename": "src/ui/dialogs/ve.ui.SpecialCharacterDialog.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2016-03-22T15:33:44Z",
+      "side": 1,
+      "message": "Should we do something on failure?",
+      "revId": "603ed17c138cb5f7ff6ad8c59eafad998653b3e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
