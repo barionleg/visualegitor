@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee33df1d_f52ca447",
+        "filename": "src/ce/ve.ce.Document.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-03-25T16:29:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee33df1d_5f4f7097",
+      "revId": "39941724bf3d2c037ae4ff7b3851b399a64c68d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee33df1d_5f6810f2",
         "filename": "src/ve.utils.js",
         "patchSetId": 13
@@ -30,6 +48,24 @@
       "writtenOn": "2016-03-24T17:00:46Z",
       "side": 1,
       "message": "It feels a little wrong to put a required argument inside of options. Let it default to ve.isHardCursorStep perhaps?",
+      "revId": "39941724bf3d2c037ae4ff7b3851b399a64c68d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_951d5817",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 1477,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-03-25T16:29:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee33df1d_5f6810f2",
       "revId": "39941724bf3d2c037ae4ff7b3851b399a64c68d8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
