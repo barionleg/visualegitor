@@ -1303,12 +1303,12 @@ ve.dm.Document.prototype.fixupInsertion = function ( data, offset ) {
  * Create a document given an HTML string.
  *
  * @method
- * @param {string} html HTML to insert
+ * @param {string|HTMLDocument} html HTML string or document to insert
  * @param {Object} [importRules] The import rules with which to sanitize the HTML, if importing
  * @return {ve.dm.Document} New document
  */
 ve.dm.Document.prototype.newFromHtml = function ( html, importRules ) {
-	var htmlDoc = ve.createDocumentFromHtml( html ),
+	var htmlDoc = typeof html === 'string' ? ve.createDocumentFromHtml( html ) : html,
 		doc = ve.dm.converter.getModelFromDom( htmlDoc, {
 			targetDoc: this.getHtmlDocument(),
 			fromClipboard: !!importRules
