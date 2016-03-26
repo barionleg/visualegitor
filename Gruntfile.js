@@ -46,7 +46,8 @@ module.exports = function ( grunt ) {
 	grunt.initConfig( {
 		pkg: grunt.file.readJSON( 'package.json' ),
 		clean: {
-			dist: [ 'dist/*', 'coverage/*' ]
+			dist: [ 'dist/*', 'coverage/*' ],
+			demos: 'demos/{dist,src,lib,i18n}'
 		},
 		concat: {
 			js: {
@@ -115,6 +116,12 @@ module.exports = function ( grunt ) {
 				src: [ 'lib/**', '!lib/jquery.i18n/**', '!lib/jquery.uls/**' ],
 				dest: 'dist/',
 				expand: true
+			},
+			demos: {
+				// Make sure you update this if dependencies are added
+				src: '{dist/**/*,src/**/*,i18n/*.json,lib/**/*}',
+				dest: 'demos/',
+				expand: true
 			}
 		},
 		buildloader: {
@@ -143,7 +150,7 @@ module.exports = function ( grunt ) {
 				env: {
 					debug: true
 				},
-				pathPrefix: '../../',
+				pathPrefix: '../',
 				i18n: [ 'i18n/', 'lib/oojs-ui/i18n/' ],
 				indent: '\t\t',
 				demoPages: demoPages
@@ -157,7 +164,7 @@ module.exports = function ( grunt ) {
 					'visualEditor.standalone.read'
 				],
 				run: [ 'visualEditor.desktop.standalone.demo' ],
-				pathPrefix: '../../',
+				pathPrefix: '../',
 				i18n: [ 'dist/i18n/', 'lib/oojs-ui/i18n/' ],
 				indent: '\t\t',
 				demoPages: demoPages
@@ -174,7 +181,7 @@ module.exports = function ( grunt ) {
 				env: {
 					debug: true
 				},
-				pathPrefix: '../../',
+				pathPrefix: '../',
 				i18n: [ 'i18n/', 'lib/oojs-ui/i18n/' ],
 				indent: '\t\t',
 				demoPages: demoPages
@@ -188,7 +195,7 @@ module.exports = function ( grunt ) {
 					'visualEditor.standalone.read'
 				],
 				run: [ 'visualEditor.mobile.standalone.demo' ],
-				pathPrefix: '../../',
+				pathPrefix: '../',
 				i18n: [ 'dist/i18n/', 'lib/oojs-ui/i18n/' ],
 				indent: '\t\t',
 				demoPages: demoPages
@@ -202,7 +209,7 @@ module.exports = function ( grunt ) {
 					'visualEditor.standalone.read'
 				],
 				run: [ 'visualEditor.minimal.standalone.demo' ],
-				pathPrefix: '../../',
+				pathPrefix: '../',
 				i18n: [ 'dist/i18n/', 'lib/oojs-ui/i18n/' ],
 				indent: '\t\t',
 				dir: 'ltr',
@@ -217,7 +224,7 @@ module.exports = function ( grunt ) {
 					'visualEditor.standalone.read'
 				],
 				run: [ 'visualEditor.minimal.standalone.demo' ],
-				pathPrefix: '../../',
+				pathPrefix: '../',
 				i18n: [ 'dist/i18n/', 'lib/oojs-ui/i18n/' ],
 				indent: '\t\t',
 				dir: 'rtl',
@@ -245,6 +252,9 @@ module.exports = function ( grunt ) {
 				'!lib/**',
 				'!i18n/**',
 				'!{coverage,dist,docs,node_modules}/**',
+				'!demos/lib/**',
+				'!demos/src/**',
+				'!demos/dist/**',
 				'!.git/**'
 			]
 		},
@@ -354,13 +364,14 @@ module.exports = function ( grunt ) {
 		} );
 	} );
 
-	grunt.registerTask( 'build', [ 'clean', 'concat', 'cssjanus', 'cssUrlEmbed', 'copy', 'buildloader' ] );
+	grunt.registerTask( 'build', [ 'clean', 'concat', 'cssjanus', 'cssUrlEmbed', 'copy:i18n', 'copy:lib', 'buildloader' ] );
 	grunt.registerTask( 'lint', [ 'tyops', 'jshint', 'jscs:main', 'csslint', 'jsonlint', 'banana' ] );
 	grunt.registerTask( 'unit', [ 'karma:main' ] );
 	grunt.registerTask( 'fix', [ 'jscs:fix' ] );
 	grunt.registerTask( '_test', [ 'lint', 'git-build', 'build', 'unit' ] );
 	grunt.registerTask( 'ci', [ '_test', 'git-status' ] );
 	grunt.registerTask( 'watch', [ 'karma:bg:start', 'runwatch' ] );
+	grunt.registerTask( 'publish-build', [ 'clean:demos', 'concat', 'cssjanus', 'cssUrlEmbed', 'copy:demos', 'buildloader' ] );
 
 	if ( process.env.JENKINS_HOME ) {
 		grunt.registerTask( 'test', 'ci' );
