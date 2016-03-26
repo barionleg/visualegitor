@@ -793,6 +793,14 @@
 			"visualEditor.standalone.demo"
 		]
 	},
+	"visualEditor.main.demo": {
+		"styles": [
+			"demos/stylesheets/light.css",
+			"demos/stylesheets/normalize.css",
+			"demos/stylesheets/stylesheet.css"
+		],
+		"styleGroup": "read"
+	},
 	"visualEditor.mobile.standalone.demo": {
 		"scripts": [
 			"demos/ve/demo.mobile.js",

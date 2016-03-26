@@ -5,9 +5,10 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "test": "grunt test",
-    "prepublish": "grunt build",
-    "doc": "jsduck"
+    "test": "grunt test && grunt build",
+    "predoc": "grunt build",
+    "doc": "jsduck",
+    "demos": "grunt build"
   },
   "homepage": "https://www.mediawiki.org/wiki/VisualEditor",
   "repository": {
