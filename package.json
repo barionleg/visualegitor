@@ -5,7 +5,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "test": "grunt test",
+    "test": "grunt test && bin/create-index.sh",
     "prepublish": "grunt build",
     "doc": "jsduck"
   },
