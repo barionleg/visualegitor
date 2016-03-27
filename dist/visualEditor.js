@@ -6,7 +6,7 @@
  * Released under the MIT license
  * http://ve.mit-license.org
  *
- * Date: 2016-03-26T20:28:45Z
+ * Date: 2016-03-27T13:08:40Z
  */
 /*!
  * VisualEditor initialization support checker.
