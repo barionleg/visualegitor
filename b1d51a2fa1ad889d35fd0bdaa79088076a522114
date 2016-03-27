@@ -33,6 +33,24 @@
       "revId": "b1d51a2fa1ad889d35fd0bdaa79088076a522114",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_a34db541",
+        "filename": "bin/sync-gh-pages.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1665
+      },
+      "writtenOn": "2016-03-27T23:16:57Z",
+      "side": 1,
+      "message": "Because it was generated with GitHub pages. I doint know if we can remove this or legally have to keep it.",
+      "parentUuid": "ee33df1d_a3be55f8",
+      "revId": "b1d51a2fa1ad889d35fd0bdaa79088076a522114",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
