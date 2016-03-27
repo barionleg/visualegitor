@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee33df1d_033581a3",
+        "filename": "bin/sync-gh-pages.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2016-03-27T23:12:16Z",
+      "side": 1,
+      "message": "Why a custom font? Aside from gross privacy implications involved with attaching third-party resources to Wikimedia content, this font is not related to Wikimedia\u0027s type design, nor OOjs UI or VisualEditor. The standard font is fine here. (or rather, OOjs UI Apex\u0027s default font is fine, which was already applied)",
+      "revId": "b1d51a2fa1ad889d35fd0bdaa79088076a522114",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_a3be55f8",
+        "filename": "bin/sync-gh-pages.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2016-03-27T23:12:16Z",
+      "side": 1,
+      "message": "How is this relevant?",
+      "revId": "b1d51a2fa1ad889d35fd0bdaa79088076a522114",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
