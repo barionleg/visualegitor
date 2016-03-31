@@ -112,8 +112,13 @@ module.exports = function ( grunt ) {
 				expand: true
 			},
 			lib: {
-				src: [ 'lib/**', '!lib/jquery.i18n/**', '!lib/jquery.uls/**' ],
+				src: [ 'lib/**' ],
 				dest: 'dist/',
+				expand: true
+			},
+			demos: {
+				src: [ 'i18n/*.json', 'lib/**', 'src/**', 'node_modules/qunitjs/**', 'bin/index.html' ],
+				dest: '',
 				expand: true
 			}
 		},
@@ -354,13 +359,14 @@ module.exports = function ( grunt ) {
 		} );
 	} );
 
-	grunt.registerTask( 'build', [ 'clean', 'concat', 'cssjanus', 'cssUrlEmbed', 'copy', 'buildloader' ] );
+	grunt.registerTask( 'build', [ 'clean', 'concat', 'cssjanus', 'cssUrlEmbed', 'copy:i18n', 'copy:lib', 'buildloader' ] );
 	grunt.registerTask( 'lint', [ 'tyops', 'jshint', 'jscs:main', 'csslint', 'jsonlint', 'banana' ] );
 	grunt.registerTask( 'unit', [ 'karma:main' ] );
 	grunt.registerTask( 'fix', [ 'jscs:fix' ] );
 	grunt.registerTask( '_test', [ 'lint', 'git-build', 'build', 'unit' ] );
 	grunt.registerTask( 'ci', [ '_test', 'git-status' ] );
 	grunt.registerTask( 'watch', [ 'karma:bg:start', 'runwatch' ] );
+	grunt.registerTask( 'publish-build', [ 'clean', 'concat', 'cssjanus', 'cssUrlEmbed', 'copy:demos', 'buildloader' ] );
 
 	if ( process.env.JENKINS_HOME ) {
 		grunt.registerTask( 'test', 'ci' );
