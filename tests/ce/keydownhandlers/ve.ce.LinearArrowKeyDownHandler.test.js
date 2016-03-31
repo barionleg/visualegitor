@@ -199,6 +199,35 @@ QUnit.test( 'special key down: linear arrow keys', function ( assert ) {
 				expectedRangeOrSelection: new ve.Range( 19 ),
 				msg: 'Cursor page down off a block node'
 			},
+			// ...with shift
+			{
+				htmlOrDoc: blockImageDoc,
+				rangeOrSelection: new ve.Range( 5, 18 ),
+				keys: [ 'SHIFT+LEFT' ],
+				expectedRangeOrSelection: new ve.Range( 4, 18 ),
+				msg: 'Cursor left off a block node with shift'
+			},
+			{
+				htmlOrDoc: blockImageDoc,
+				rangeOrSelection: new ve.Range( 5, 18 ),
+				keys: [ 'SHIFT+UP' ],
+				expectedRangeOrSelection: new ve.Range( 4, 18 ),
+				msg: 'Cursor up off a block node with shift'
+			},
+			{
+				htmlOrDoc: blockImageDoc,
+				rangeOrSelection: new ve.Range( 5, 18 ),
+				keys: [ 'SHIFT+RIGHT' ],
+				expectedRangeOrSelection: new ve.Range( 5, 19 ),
+				msg: 'Cursor right off a block node with shift'
+			},
+			{
+				htmlOrDoc: blockImageDoc,
+				rangeOrSelection: new ve.Range( 5, 18 ),
+				keys: [ 'SHIFT+DOWN' ],
+				expectedRangeOrSelection: new ve.Range( 5, 19 ),
+				msg: 'Cursor down off a block node with shift'
+			},
 			// Cursoring onto a block node, which should focus it
 			// Again, these are forcibly moving the cursor, so it's not a perfect
 			// test; it's more checking how we fix up the selection afterwards.
