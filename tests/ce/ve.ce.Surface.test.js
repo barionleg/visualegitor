@@ -648,6 +648,39 @@ QUnit.test( 'special key down: linear arrow keys', function ( assert ) {
 				expectedData: function () {},
 				expectedRangeOrSelection: new ve.Range( 19 ),
 				msg: 'Cursor down off a block node'
+			},
+			// ...with shift
+			{
+				htmlOrDoc: blockImageDoc,
+				rangeOrSelection: new ve.Range( 5, 18 ),
+				keys: [ 'SHIFT+LEFT' ],
+				expectedData: function () {},
+				expectedRangeOrSelection: new ve.Range( 4, 18 ),
+				msg: 'Cursor left off a block node with shift'
+			},
+			{
+				htmlOrDoc: blockImageDoc,
+				rangeOrSelection: new ve.Range( 5, 18 ),
+				keys: [ 'SHIFT+UP' ],
+				expectedData: function () {},
+				expectedRangeOrSelection: new ve.Range( 4, 18 ),
+				msg: 'Cursor up off a block node with shift'
+			},
+			{
+				htmlOrDoc: blockImageDoc,
+				rangeOrSelection: new ve.Range( 5, 18 ),
+				keys: [ 'SHIFT+RIGHT' ],
+				expectedData: function () {},
+				expectedRangeOrSelection: new ve.Range( 5, 19 ),
+				msg: 'Cursor right off a block node with shift'
+			},
+			{
+				htmlOrDoc: blockImageDoc,
+				rangeOrSelection: new ve.Range( 5, 18 ),
+				keys: [ 'SHIFT+DOWN' ],
+				expectedData: function () {},
+				expectedRangeOrSelection: new ve.Range( 5, 19 ),
+				msg: 'Cursor down off a block node with shift'
 			}
 		];
 
