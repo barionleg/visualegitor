@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce38dbff_7db1f0db",
+        "filename": "Gruntfile.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2016-03-31T20:29:03Z",
+      "side": 1,
+      "message": "This task name is reserved for builds that relate to publishing. Specifically, the kind of publishing in the context of a package (e.g. npm-publish). VisualEditor is not published with npm, and the contents of this task are not about publishing, it\u0027s about demos.\n\nThis should probably just happen by default as part of regular build. We already do this for other demos in buildloader. So having a half-working demo wouldn\u0027t make sense.",
+      "revId": "fb387e85ae5a31a9e9730c38e51e1d9e9e0561a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
