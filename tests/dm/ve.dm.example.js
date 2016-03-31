@@ -309,6 +309,14 @@ ve.dm.example.blockImage = {
 	]
 };
 
+ve.dm.example.evilDoc = {
+	html: '<span typeof="ve:Alien"><a href="#"><span style="display:none;">[1]</span></a></span>',
+	data: [
+			{ type: 'alienInline', originalDomElements: $( '<span typeof="ve:Alien"><a href="#"><span style="display:none;">[1]</span></a></span>' ).toArray() },
+			{ type: '/alienInline' },
+	]
+};
+
 /**
  * Serialized HTML.
  *

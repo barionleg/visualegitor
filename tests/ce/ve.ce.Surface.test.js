@@ -677,6 +677,12 @@ QUnit.test( 'special key down: linear arrow keys', function ( assert ) {
 				[ { type: 'paragraph' }, 'B', 'a', 'r', { type: '/paragraph' } ]
 			)
 		),
+		evilDoc = ve.dm.example.createExampleDocumentFromData(
+			[ { type: 'paragraph' }, 'F', 'o', 'o' ]
+				.concat( ve.dm.example.evilDoc.data.slice() )
+				.concat( [ 'B', 'a', 'r', { type: '/paragraph' } ]
+			)
+		),
 		cases = [
 			// Within normal text. NOTE: these tests manually force the cursor to
 			// move, because we rely on native browser actions for that.
@@ -866,6 +872,23 @@ QUnit.test( 'special key down: linear arrow keys', function ( assert ) {
 				},
 				expectedRangeOrSelection: new ve.Range( 18, 5 ),
 				msg: 'Cursor up onto a block node'
+			},
+			// Alien inline double node cursoring (used downstream)
+			{
+				htmlOrDoc: evilDoc,
+				rangeOrSelection: new ve.Range( 4 ),
+				keys: [ 'RIGHT' ],
+				expectedData: function () {},
+				expectedRangeOrSelection: new ve.Range( 4, 6 ),
+				msg: 'Cursor right onto an alien inline double node'
+			},
+			{
+				htmlOrDoc: evilDoc,
+				rangeOrSelection: new ve.Range( 5 ),
+				keys: [ 'LEFT' ],
+				expectedData: function () {},
+				expectedRangeOrSelection: new ve.Range( 6, 4 ),
+				msg: 'Cursor left onto an alien inline double node'
 			}
 		];
 
