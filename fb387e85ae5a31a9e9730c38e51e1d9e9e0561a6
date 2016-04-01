@@ -33,6 +33,24 @@
       "revId": "fb387e85ae5a31a9e9730c38e51e1d9e9e0561a6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_8cd3e460",
+        "filename": "bin/index.html",
+        "patchSetId": 7
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1665
+      },
+      "writtenOn": "2016-04-01T11:12:33Z",
+      "side": 1,
+      "message": "I only copied it from the sh script.",
+      "parentUuid": "ce38dbff_0cba341e",
+      "revId": "fb387e85ae5a31a9e9730c38e51e1d9e9e0561a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
