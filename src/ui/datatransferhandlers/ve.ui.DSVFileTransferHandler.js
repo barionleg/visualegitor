@@ -31,21 +31,34 @@ ve.ui.DSVFileTransferHandler.static.types = [ 'text/csv', 'text/tab-separated-va
 
 ve.ui.DSVFileTransferHandler.static.extensions = [ 'csv', 'tsv' ];
 
+ve.ui.DSVFileTransferHandler.static.tableNodeType = 'table';
+
+ve.ui.DSVFileTransferHandler.static.tableClasses = [];
+
 /* Methods */
 
 /**
  * @inheritdoc
  */
 ve.ui.DSVFileTransferHandler.prototype.onFileLoad = function () {
-	var i, j, line,
+	var i, j, line, tableElement,
 		data = [],
 		input = Papa.parse( this.reader.result );
 
 	if ( input.meta.aborted || ( input.data.length <= 0 ) ) {
 		this.abort();
 	} else {
+		tableElement = { type: this.constructor.static.tableNodeType, attributes: {} };
+
+		for ( i = 0; i < this.constructor.static.tableClasses.length; i++) {
+			// TODO: Handle non-binary attributes via an Object.
+			if ( typeof this.constructor.static.tableClasses[i] === 'string' ) {
+				tableElement.attributes[ this.constructor.static.tableClasses[i] ] = true;
+			}
+		}
+
 		data.push(
-			{ type: 'table' },
+			tableElement,
 			{ type: 'tableSection', attributes: { style: 'body' } }
 		);
 
@@ -74,7 +87,7 @@ ve.ui.DSVFileTransferHandler.prototype.onFileLoad = function () {
 
 		data.push(
 			{ type: '/tableSection' },
-			{ type: '/table' }
+			{ type: '/' + this.constructor.static.tableNodeType }
 		);
 
 		this.resolve( data );
