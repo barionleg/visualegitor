@@ -33,6 +33,24 @@
       "revId": "fe4c2ed0ea4df9867b472cd9a94418e194fc5c5a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_1297df94",
+        "filename": "src/dm/nodes/ve.dm.SectionNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2016-04-02T12:18:12Z",
+      "side": 1,
+      "message": "I think this\u0027ll be fine; other ones we could support are: \n\u003caside\u003e \u003cdetails\u003e \u003cmain\u003e \u003cnav\u003e \u003csummary\u003e. Worth adding?",
+      "parentUuid": "ce38dbff_6ff80847",
+      "revId": "fe4c2ed0ea4df9867b472cd9a94418e194fc5c5a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
