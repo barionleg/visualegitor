@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce38dbff_cfd31460",
+        "filename": "src/ui/datatransferhandlers/ve.ui.DSVFileTransferHandler.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-04-02T10:29:17Z",
+      "side": 1,
+      "message": "why not just\n\n i \u003d\u003d\u003d input.data.length - 1 \u0026\u0026 line \u003d\u003d\u003d \u0027\u0027\n\nAlso remove quotes around \u0027empty\u0027",
+      "revId": "feefedaebeb818dca68ce451f75910e477f8994c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
