@@ -16,6 +16,23 @@
       "revId": "fe4c2ed0ea4df9867b472cd9a94418e194fc5c5a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_6ff80847",
+        "filename": "src/dm/nodes/ve.dm.SectionNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 125
+      },
+      "writtenOn": "2016-04-02T11:38:51Z",
+      "side": 1,
+      "message": "Our initial use case does have three sections (a header, a body, and a footer); but is there an immediately useful reason to match for three tags name that having three \u003csection/\u003es with (possibly) distinct styles cannot do?",
+      "revId": "fe4c2ed0ea4df9867b472cd9a94418e194fc5c5a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
