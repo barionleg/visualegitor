@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ce38dbff_28f556c8",
+        "filename": "src/ce/nodes/ve.ce.SectionNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-04-02T15:01:56Z",
+      "side": 1,
+      "message": "If you attach later you should emit setup again.",
+      "parentUuid": "ce38dbff_6fe12897",
+      "revId": "fe4c2ed0ea4df9867b472cd9a94418e194fc5c5a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce38dbff_6ff80847",
         "filename": "src/dm/nodes/ve.dm.SectionNode.js",
         "patchSetId": 1
@@ -48,6 +66,24 @@
       "side": 1,
       "message": "I think this\u0027ll be fine; other ones we could support are: \n\u003caside\u003e \u003cdetails\u003e \u003cmain\u003e \u003cnav\u003e \u003csummary\u003e. Worth adding?",
       "parentUuid": "ce38dbff_6ff80847",
+      "revId": "fe4c2ed0ea4df9867b472cd9a94418e194fc5c5a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_a8284633",
+        "filename": "src/dm/nodes/ve.dm.SectionNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-04-02T15:01:56Z",
+      "side": 1,
+      "message": "maybe another day, needs some consideration",
+      "parentUuid": "ce38dbff_1297df94",
       "revId": "fe4c2ed0ea4df9867b472cd9a94418e194fc5c5a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
