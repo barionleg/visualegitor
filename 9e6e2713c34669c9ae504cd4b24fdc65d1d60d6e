@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ce38dbff_824f1ac0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-04-03T11:50:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce38dbff_02af8ae1",
+      "revId": "9e6e2713c34669c9ae504cd4b24fdc65d1d60d6e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce38dbff_c2a48207",
         "filename": "src/dm/ve.dm.NodeFactory.js",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2016-04-03T09:58:55Z",
       "side": 1,
       "message": "This doesn\u0027t check .static.isWrapped, whereas ve.dm.Node#isUnwrappable does. This means that (new ve.dm.TextNode()).isUnwrappable() and ve.dm.nodeFactory.isNodeUnwrappable(\u0027text\u0027) return different results.",
+      "revId": "9e6e2713c34669c9ae504cd4b24fdc65d1d60d6e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_a2521e68",
+        "filename": "src/dm/ve.dm.NodeFactory.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-04-03T11:50:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce38dbff_c2a48207",
       "revId": "9e6e2713c34669c9ae504cd4b24fdc65d1d60d6e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
