@@ -27,6 +27,8 @@ OO.inheritClass( ve.dm.SectionNode, ve.dm.BranchNode );
 
 ve.dm.SectionNode.static.name = 'section';
 
+ve.dm.SectionNode.static.isDeletable = false;
+
 ve.dm.SectionNode.static.defaultAttributes = {
 	style: 'section'
 };
