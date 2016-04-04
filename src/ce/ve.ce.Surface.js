@@ -1696,9 +1696,9 @@ ve.ce.Surface.prototype.beforePaste = function ( e ) {
 		documentModel = surfaceModel.getDocument();
 
 	if ( selection instanceof ve.dm.LinearSelection ) {
-		range = selection.getRanges()[ 0 ];
+		range = selection.getCoveringRange();
 	} else if ( selection instanceof ve.dm.TableSelection ) {
-		range = new ve.Range( selection.getRanges()[ 0 ].start );
+		range = new ve.Range( selection.getCoveringRange().start );
 	} else {
 		e.preventDefault();
 		return;
@@ -1725,7 +1725,7 @@ ve.ce.Surface.prototype.beforePaste = function ( e ) {
 		tx = ve.dm.Transaction.newFromRemoval( documentModel, range );
 		selection = selection.translateByTransaction( tx );
 		surfaceModel.change( tx, selection );
-		range = selection.getRanges()[ 0 ];
+		range = selection.getCoveringRange();
 	}
 
 	// Save scroll position before changing focus to "offscreen" paste target
@@ -1940,7 +1940,7 @@ ve.ce.Surface.prototype.afterPaste = function ( e ) {
 		return;
 	}
 
-	range = selection.getRanges()[ 0 ];
+	range = selection.getCoveringRange();
 
 	if ( slice ) {
 		// Pasting non-table content into table: just replace the the first cell with the pasted content
@@ -2567,6 +2567,7 @@ ve.ce.Surface.prototype.renderSelectedContentBranchNode = function () {
 
 ve.ce.Surface.prototype.handleObservedChanges = function ( oldState, newState ) {
 	var newSelection, transaction, removedUnicorns,
+		activeNode, coveringRange, nodeRange, containsStart, containsEnd,
 		surface = this,
 		dmDoc = this.getModel().getDocument(),
 		insertedText = false;
@@ -2767,7 +2768,7 @@ ve.ce.Surface.prototype.checkSequences = function () {
 		return;
 	}
 
-	sequences = this.getSurface().sequenceRegistry.findMatching( model.getDocument().data, selection.getModel().getRanges()[ 0 ].end );
+	sequences = this.getSurface().sequenceRegistry.findMatching( model.getDocument().data, selection.getModel().getCoveringRange().end );
 
 	// sequences.length will likely be 0 or 1 so don't cache
 	for ( i = 0; i < sequences.length; i++ ) {
