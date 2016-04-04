@@ -10,6 +10,7 @@
 	padding: 2px;
 	margin: -2px;
 	background-color: #E6F1FF;
+	display: inline-block;
 }
 
 .ve-ce-nail:not( .ve-ce-nail-debug ) {
