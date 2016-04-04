@@ -2626,6 +2626,27 @@ ve.ce.Surface.prototype.handleObservedChanges = function ( oldState, newState ) 
 			this.surfaceObserver.pollOnceNoCallback();
 		}
 
+		// Ensure we don't observe a selection that spans an active node
+		activeNode = this.getActiveNode();
+		coveringRange = newSelection.getCoveringRange();
+		if ( activeNode && coveringRange ) {
+			nodeRange = activeNode.getRange();
+			// TODO: ranges[0] should be getCoveringRange from the selection (which doesn't exist yet)
+			containsStart = nodeRange.containsRange( new ve.Range( coveringRange.start ) );
+			containsEnd = nodeRange.containsRange( new ve.Range( coveringRange.end ) );
+			// If the range starts xor ends in the active node, but not both, then it must
+			// span an active node boundary, so fixup.
+			if ( containsStart ^ containsEnd ) {
+				newSelection = oldState && oldState.veRange ?
+					new ve.dm.LinearSelection( dmDoc, oldState.veRange ) :
+					new ve.dm.NullSelection( dmDoc );
+				setTimeout( function () {
+					surface.changeModel( null, newSelection );
+					surface .showModelSelection();
+				} );
+			}
+		}
+
 		// Firefox lets you create multiple selections within a single paragraph
 		// which our model doesn't support, so detect and prevent these.
 		// This shouldn't create problems with IME candidates as only an explicit user
