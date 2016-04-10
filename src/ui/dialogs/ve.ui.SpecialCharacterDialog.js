@@ -36,6 +36,11 @@ ve.ui.SpecialCharacterDialog.static.size = 'full';
 
 ve.ui.SpecialCharacterDialog.static.padded = false;
 
+ve.ui.SpecialCharacterDialog.static.position = 'side';
+
+ve.ui.SpecialCharacterDialog.static.size = 'medium';
+
+
 /* Methods */
 
 /**
@@ -115,7 +120,8 @@ ve.ui.SpecialCharacterDialog.prototype.buildButtonList = function () {
 
 	this.bookletLayout = new OO.ui.BookletLayout( {
 		outlined: true,
-		continuous: true
+		continuous: true,
+		menuPosition: 'top'
 	} );
 	this.pages = [];
 	for ( category in this.characters ) {
