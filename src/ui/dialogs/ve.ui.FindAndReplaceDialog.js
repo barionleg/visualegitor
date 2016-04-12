@@ -156,8 +156,21 @@ ve.ui.FindAndReplaceDialog.prototype.initialize = function () {
 	this.replaceAllButton.connect( this, { click: 'onReplaceAllButtonClick' } );
 	doneButton.connect( this, { click: 'close' } );
 
-	this.findText.$input.on( 'keydown', this.onFindTextKeyDown.bind( this ) );
-	this.replaceText.$input.on( 'keydown', this.onReplaceTextKeyDown.bind( this ) );
+	this.tabbableElements = new ve.ui.TabbableElements( {
+		// findText will be focused as part of the initialization
+		elements: [
+			this.findText.$input[ 0 ],
+			this.replaceText.$input[ 0 ],
+			this.replaceButton.$button[ 0 ],
+			this.replaceAllButton.$button[ 0 ],
+			doneButton.$button[ 0 ],
+			this.previousButton.$button[ 0 ],
+			this.nextButton.$button[ 0 ],
+			this.matchCaseToggle.$button[ 0 ],
+			this.regexToggle.$button[ 0 ],
+			this.wordToggle.$button[ 0 ]
+		]
+	} );
 
 	// Initialization
 	this.$content.addClass( 've-ui-findAndReplaceDialog-content' );
@@ -313,30 +326,6 @@ ve.ui.FindAndReplaceDialog.prototype.onFindReplaceTextEnter = function ( e ) {
 		this.findPrevious();
 	} else {
 		this.findNext();
-	}
-};
-
-/**
- * Handle keydown events on the find text input
- *
- * @param {jQuery.Event} e
- */
-ve.ui.FindAndReplaceDialog.prototype.onFindTextKeyDown = function ( e ) {
-	if ( e.which === OO.ui.Keys.TAB && !e.shiftKey ) {
-		this.replaceText.$input.focus();
-		e.preventDefault();
-	}
-};
-
-/**
- * Handle keydown events on the replace text input
- *
- * @param {jQuery.Event} e
- */
-ve.ui.FindAndReplaceDialog.prototype.onReplaceTextKeyDown = function ( e ) {
-	if ( e.which === OO.ui.Keys.TAB && e.shiftKey ) {
-		this.findText.$input.focus();
-		e.preventDefault();
 	}
 };
 
