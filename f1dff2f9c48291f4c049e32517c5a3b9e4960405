@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce38dbff_aab0fef1",
+        "filename": "src/ve.Range.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2016-04-12T15:19:51Z",
+      "side": 1,
+      "message": "What about if one of the ranges is backwards? [0,5] contains [3,1]…",
+      "revId": "f1dff2f9c48291f4c049e32517c5a3b9e4960405",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
