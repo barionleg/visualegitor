@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce38dbff_5f3db528",
+        "filename": "tests/dm/ve.dm.MetaList.test.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2016-04-12T01:48:28Z",
+      "side": 1,
+      "message": "This is incorrect, it needs to be 4*2 (subtract 4 for EACH OF the 2 removed meta items). I believe that the reason this doesn\u0027t match the actual assertion count is because of the bug exposed by the failing test case in the next patch (i.e. some removable meta items are not being removed).\n\nThis bug is subtle enough that it probably doesn\u0027t affect practical transactions, so I\u0027d be OK with leaving it in for now, provided that the comment clearly states that the assertion count is wrong because of a bug.",
+      "revId": "fe625f622bc01c5ecaa7833cf71776b19b2d6e0a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
