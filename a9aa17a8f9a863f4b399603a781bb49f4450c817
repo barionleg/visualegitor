@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e58336e_7afa9974",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 823,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2016-04-14T23:55:01Z",
+      "side": 1,
+      "message": "May wanna add a \"// Support: IE 9\" comment as extra line above this, or start the line with \"// Support IE 9: \". This makes it easier to find and identify when reviewing the code. As well as when looking for it through grep for stats or (later) removal.",
+      "revId": "a9aa17a8f9a863f4b399603a781bb49f4450c817",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
