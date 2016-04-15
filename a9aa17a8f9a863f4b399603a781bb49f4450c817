@@ -16,6 +16,24 @@
       "revId": "a9aa17a8f9a863f4b399603a781bb49f4450c817",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e58336e_8953e519",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 823,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-04-15T18:25:04Z",
+      "side": 1,
+      "message": "TechDebt. We should migrate all of our browser hack comments to this standard in one commit.",
+      "parentUuid": "0e58336e_7afa9974",
+      "revId": "a9aa17a8f9a863f4b399603a781bb49f4450c817",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
