@@ -124,6 +124,24 @@ ve.dm.Transaction.newFromDocumentInsertion = function ( doc, offset, newDoc, new
 	if ( newDocRange ) {
 		data = new ve.dm.ElementLinearData( doc.getStore(), newDoc.getData( newDocRange, true ) );
 		metadata = new ve.dm.MetaLinearData( doc.getStore(), newDoc.getMetadata( newDocRange, true ) );
+
+		// Apply surrounding annotations to the new data if they are identical
+		if (
+			Array.isArray( doc.getData( new ve.Range( newDocRange.from - 1, newDocRange.from ) ) ) &&
+			Array.isArray( doc.getData( new ve.Range( newDocRange.from, newDocRange.from + 1 ) ) ) &&
+			ve.compare(
+				doc.getData( new ve.Range( newDocRange.from - 1, newDocRange.from ) )[ 1 ],
+				doc.getData( new ve.Range( newDocRange.from, newDocRange.from + 1 ) )[ 1 ]
+			)
+		) {
+			newDoc.getStore().merge( doc.getStore() );
+			for ( i = 0, len = data.getLength(); i < len; i++ ) {
+				data.setData( i, [
+					data.getData( i ),
+					ve.copy( doc.getData( new ve.Range( newDocRange.from - 1, newDocRange.from ) )[ 0 ][ 1 ] )
+				] );
+			}
+		}
 	} else {
 		// Get the data and the metadata, but skip over the internal list
 		data = new ve.dm.ElementLinearData( doc.getStore(),
