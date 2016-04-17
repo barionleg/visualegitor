@@ -16,6 +16,24 @@
       "revId": "4f52afcf2a28a2a35afe6f2ad01f5281bb79e9f6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee5cbf65_7f8727dd",
+        "filename": "src/ce/ve.ce.BranchNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2016-04-17T17:12:54Z",
+      "side": 1,
+      "message": "Choosing not to care about IceWeasel. :-)",
+      "parentUuid": "ee5cbf65_bcfd4d3b",
+      "revId": "4f52afcf2a28a2a35afe6f2ad01f5281bb79e9f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
