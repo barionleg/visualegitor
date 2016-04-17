@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee5cbf65_3f7dafe5",
+        "filename": "bin/update-oojs-ui.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2016-04-17T17:11:09Z",
+      "side": 1,
+      "message": "Add \"Support: IE9\" here then?",
+      "revId": "8a52a7bc63db64db8d27f7147b2ed33713a2098b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
