@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee5cbf65_bcfd4d3b",
+        "filename": "src/ce/ve.ce.BranchNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2016-04-17T02:11:33Z",
+      "side": 1,
+      "message": "This will also match versions 38 of Firefox-forked browsers that share the Gecko engine but fly under a different browser name (E.g. Iceweasel).\n\nThat seems fine I guess since those share release numbers, but that might not be universally true. It may be better to use layoutVersion as cutoff instead. Alternatively, it could be limited to explicit Firefox only.\n\nEither way, current code is fine too.",
+      "revId": "4f52afcf2a28a2a35afe6f2ad01f5281bb79e9f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
