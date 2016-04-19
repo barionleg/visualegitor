@@ -1010,7 +1010,7 @@ ve.ce.Surface.prototype.onDocumentDrop = function ( e ) {
 		selectionJSON = dataTransfer.getData( 'application-x/VisualEditor' );
 	} catch ( err ) {
 		selectionJSON = dataTransfer.getData( 'text' );
-		if ( selectionJSON.slice( 0, 6 ) === '__ve__' ) {
+		if ( selectionJSON && selectionJSON.slice( 0, 6 ) === '__ve__' ) {
 			selectionJSON = selectionJSON.slice( 6 );
 		} else {
 			selectionJSON = null;
