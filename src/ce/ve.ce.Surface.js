@@ -65,6 +65,12 @@ ve.ce.Surface = function VeCeSurface( model, ui, config ) {
 	this.lastDropPosition = null;
 	this.$pasteTarget = $( '<div>' );
 	this.pasting = false;
+	this.fakePasting = false;
+	// Support: IE9
+	// Use paste triggered by CTRL+V in IE9, otherwise the event is too late to move the selection
+	/*jshint evil:true */
+	this.useFakePaste = !!( window.ActiveXObject && new Function( '/*@cc_on return @_jscript_version; @*/' )() <= 9 );
+	/*jshint evil:false */
 	this.copying = false;
 	this.pasteSpecial = false;
 	this.focusedBlockSlug = null;
@@ -122,7 +128,7 @@ ve.ce.Surface = function VeCeSurface( model, ui, config ) {
 	} );
 
 	this.$documentNode
-		// Bug 65714: MSIE possibly needs `beforepaste` to also be bound; to test.
+		// T67714: MSIE possibly needs `beforepaste` to also be bound; to test.
 		.on( 'paste', this.onPaste.bind( this ) )
 		.on( 'focus', 'a', function () {
 			// Opera <= 12 triggers 'blur' on document node before any link is
@@ -1091,6 +1097,10 @@ ve.ce.Surface.prototype.onDocumentKeyDown = function ( e ) {
 	} else {
 		trigger = new ve.ui.Trigger( e );
 		if ( trigger.isComplete() ) {
+			// Support: IE9
+			if ( this.useFakePaste && trigger.toString() === 'ctrl+v' ) {
+				this.onPaste( e, true );
+			}
 			executed = this.surface.execute( trigger );
 			if ( executed || this.isBlockedTrigger( trigger ) ) {
 				e.preventDefault();
@@ -1666,16 +1676,24 @@ ve.ce.Surface.prototype.onCopy = function ( e ) {
  * Handle native paste event
  *
  * @param {jQuery.Event} e Paste event
+ * @param {boolean} fakePaste Paste event is fake (i.e. a CTRL+V keydown event)
  */
-ve.ce.Surface.prototype.onPaste = function ( e ) {
+ve.ce.Surface.prototype.onPaste = function ( e, fakePaste ) {
 	var surface = this;
 	// Prevent pasting until after we are done
 	if ( this.pasting ) {
+		// Only prevent default if the first event wasn't fake
+		return this.fakePasting;
+	} else if ( this.useFakePaste && !fakePaste ) {
+		// The client requires fake paste, but the user triggered the
+		// paste without pressing CTRL+V (e.g. right click -> paste).
+		// We can't handle this case yet so just abort to avoid CE corruption.
 		return false;
 	}
 	this.beforePaste( e );
 	this.surfaceObserver.disable();
 	this.pasting = true;
+	this.fakePasting = !!fakePaste;
 	setTimeout( function () {
 		try {
 			if ( !e.isDefaultPrevented() ) {
@@ -1687,6 +1705,7 @@ ve.ce.Surface.prototype.onPaste = function ( e ) {
 
 			// Allow pasting again
 			surface.pasting = false;
+			surface.fakePasting = false;
 			surface.pasteSpecial = false;
 			surface.beforePasteData = null;
 		}
