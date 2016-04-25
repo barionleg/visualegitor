@@ -16,6 +16,24 @@
       "revId": "452c5d14424255d447c6efb8121275f7a2e7286d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_59585f8c",
+        "filename": "src/ui/inspectors/ve.ui.AnnotationInspector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-04-25T15:14:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae564743_f96fb3be",
+      "revId": "452c5d14424255d447c6efb8121275f7a2e7286d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
