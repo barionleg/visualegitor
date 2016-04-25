@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_9c1665f5",
+        "filename": "src/ce/selections/ve.ce.LinearSelection.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2016-04-25T15:58:14Z",
+      "side": 1,
+      "message": "Might be confusing for future maintainers to say \"use the parent\" and then get siblings. Explain the structure a little more so it\u0027s obvious why?",
+      "revId": "c8f96415b9512a871ce6bca6e0273a0bda7197c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_bcc36960",
+        "filename": "src/ce/selections/ve.ce.LinearSelection.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2016-04-25T15:58:14Z",
+      "side": 1,
+      "message": "Comment here to explain what this means? Height is set off deep in nested conditionals a page above this point, after all.",
+      "revId": "c8f96415b9512a871ce6bca6e0273a0bda7197c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
