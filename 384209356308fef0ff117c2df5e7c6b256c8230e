@@ -16,6 +16,24 @@
       "revId": "384209356308fef0ff117c2df5e7c6b256c8230e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_27aaa6d1",
+        "filename": "src/ce/nodes/ve.ce.TableNode.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-04-25T17:00:19Z",
+      "side": 1,
+      "message": "The third parameter (true) puts it in inclusive mode, so this will match e.target \u003d\u003d this.$overlay. I\u0027m not sure if that can happen but better to be safe...",
+      "parentUuid": "ae564743_5c296d99",
+      "revId": "384209356308fef0ff117c2df5e7c6b256c8230e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
