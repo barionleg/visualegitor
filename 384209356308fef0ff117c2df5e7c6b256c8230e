@@ -52,6 +52,24 @@
       "revId": "384209356308fef0ff117c2df5e7c6b256c8230e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_e7670e21",
+        "filename": "src/ce/nodes/ve.ce.TableNode.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-04-25T18:07:11Z",
+      "side": 1,
+      "message": "Oh, Node.contains, not $.contains. Yeah OO.ui.contains should use that, and we should possibly mass-migrate the simple uses later.",
+      "parentUuid": "ae564743_8791f29e",
+      "revId": "384209356308fef0ff117c2df5e7c6b256c8230e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
