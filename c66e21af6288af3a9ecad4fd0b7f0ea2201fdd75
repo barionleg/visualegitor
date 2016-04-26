@@ -16,6 +16,24 @@
       "revId": "c66e21af6288af3a9ecad4fd0b7f0ea2201fdd75",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_e14d319d",
+        "filename": "src/ui/ve.ui.TabbableElements.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2016-04-26T21:00:41Z",
+      "side": 1,
+      "message": "Oh, right, it should be. jQuery fixes it up, but I suppose there\u0027s always a chance of them deciding to stop doing that when updates happen.",
+      "parentUuid": "ae564743_818f15d1",
+      "revId": "c66e21af6288af3a9ecad4fd0b7f0ea2201fdd75",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
