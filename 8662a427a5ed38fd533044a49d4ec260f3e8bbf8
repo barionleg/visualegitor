@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_05f31008",
+        "filename": "src/ui/ve.ui.TabbableElements.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-04-26T21:31:21Z",
+      "side": 1,
+      "message": "we should probably have a teardown method in case the user wants to discard the tabbableElements object",
+      "revId": "8662a427a5ed38fd533044a49d4ec260f3e8bbf8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
