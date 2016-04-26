@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_3571270c",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 3261,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2016-04-26T15:26:34Z",
+      "side": 1,
+      "message": "Add \"// Support: Chrome\" here. New policy for tracking down browser-specific code.",
+      "revId": "dbc034717d8adf0b40431c2065a0f8209b265024",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
