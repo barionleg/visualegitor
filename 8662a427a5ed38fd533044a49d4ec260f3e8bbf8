@@ -16,6 +16,24 @@
       "revId": "8662a427a5ed38fd533044a49d4ec260f3e8bbf8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_0b4f9f6f",
+        "filename": "src/ui/ve.ui.TabbableElements.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2016-04-27T03:37:45Z",
+      "side": 1,
+      "message": "I could go full OO.ui.Process on the teardown, but that felt a bit overkill-y.",
+      "parentUuid": "ae564743_05f31008",
+      "revId": "8662a427a5ed38fd533044a49d4ec260f3e8bbf8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
