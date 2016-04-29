@@ -38,7 +38,7 @@ ve.ce.Surface = function VeCeSurface( model, ui, config ) {
 	// Window.getSelection returns a live singleton representing the document's selection
 	this.nativeSelection = this.getElementWindow().getSelection();
 	this.eventSequencer = new ve.EventSequencer( [
-		'keydown', 'keypress', 'keyup',
+		'keydown', 'keypress', 'keyup', 'touchend',
 		'compositionstart', 'compositionend',
 		'input', 'mousedown'
 	] );
@@ -165,6 +165,7 @@ ve.ce.Surface = function VeCeSurface( model, ui, config ) {
 		keydown: this.onDocumentKeyDown.bind( this ),
 		keyup: this.onDocumentKeyUp.bind( this ),
 		keypress: this.onDocumentKeyPress.bind( this ),
+		touchend: this.onDocumentTouchEnd.bind( this ),
 		input: this.onDocumentInput.bind( this ),
 		compositionstart: this.onDocumentCompositionStart.bind( this )
 	} ).after( {
@@ -818,6 +819,19 @@ ve.ce.Surface.prototype.onDocumentSelectionChange = function () {
 	this.fixupCursorPosition( 0, this.dragging );
 	this.updateActiveLink();
 	this.surfaceObserver.pollOnceSelection();
+};
+
+/**
+ * Handle touch end events.
+ *
+ * @method
+ * @param {jQuery.Event} e Touch end event
+ */
+ve.ce.Surface.prototype.onDocumentTouchEnd = function () {
+	var surface = this;
+	setTimeout( function () {
+		surface.updateActiveLink();
+	} );
 };
 
 /**
