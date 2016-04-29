@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_791a5fd1",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 833,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2016-04-29T15:53:14Z",
+      "side": 1,
+      "message": "Given this, would just putting it in the `after` section of the eventSequencer work?",
+      "revId": "831d5e1cd7fe4f09e7cace037cd78bb850db308b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
