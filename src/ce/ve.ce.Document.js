@@ -58,9 +58,8 @@ ve.ce.Document.prototype.getSlugAtOffset = function ( offset ) {
  * @throws {Error} Offset could not be translated to a DOM element and offset
  */
 ve.ce.Document.prototype.getNodeAndOffset = function ( offset ) {
-	var branchNode, position, count, step, node, model, steps,
-		countedNodes = [],
-		found = {};
+	var branchNode, position, count, step, node, model, steps, found, prevNode, $aboutGroup,
+		countedNodes = [];
 
 	// 1. Step with ve.adjacentDomPosition( ..., { stop: function () { return true; } } )
 	// until we hit a position at the correct offset (which is guaranteed to be the first
@@ -168,7 +167,21 @@ ve.ce.Document.prototype.getNodeAndOffset = function ( offset ) {
 		}
 	}
 	// Now "position" is the first DOM position (in document order) at the correct
-	// model offset. Find all DOM positions at the same model offset
+	// model offset.
+
+	// Jump past any about grouped nodes
+	prevNode = position.node.childNodes[ position.offset - 1 ];
+	if ( prevNode && prevNode.nodeType === Node.ELEMENT_NODE && (
+		prevNode.classList.contains( 've-ce-branchNode' ) ||
+		prevNode.classList.contains( 've-ce-leafNode' )
+	) ) {
+		$aboutGroup = $.data( prevNode, 'view' ).$element;
+		if ( $aboutGroup.length > 1 ) {
+			position.offset = 1 + ve.parentIndex( $aboutGroup.get( -1 ) );
+		}
+	}
+
+	// Find all subsequent DOM positions at the same model offset
 	found = {};
 	function stop( step ) {
 		var model;
