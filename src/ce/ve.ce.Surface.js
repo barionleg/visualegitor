@@ -1572,6 +1572,7 @@ ve.ce.Surface.prototype.onCut = function ( e ) {
 ve.ce.Surface.prototype.onCopy = function ( e ) {
 	var originalSelection, clipboardKey,
 		scrollTop, unsafeSelector, slice,
+		htmlClipboardKey = false,
 		profile = $.client.profile(),
 		selection = this.getModel().getSelection(),
 		view = this,
@@ -1638,6 +1639,7 @@ ve.ce.Surface.prototype.onCopy = function ( e ) {
 		this.$pasteTarget.prepend(
 			$( '<span>' ).attr( 'data-ve-clipboard-key', clipboardKey ).html( '&nbsp;' )
 		);
+		htmlClipboardKey = true;
 		// To ensure the contents with the clipboardKey isn't modified in an external editor,
 		// store a hash of the contents for later validation.
 		this.clipboard.hash = this.constructor.static.getClipboardHash( this.$pasteTarget.contents() );
@@ -1649,7 +1651,11 @@ ve.ce.Surface.prototype.onCopy = function ( e ) {
 		// Disable the default event so we can override the data
 		e.preventDefault();
 
-		clipboardData.setData( 'text/xcustom', clipboardKey );
+		// If we felt it necessary to  write the clipboard key to the HTML,
+		// don't try and write it here as well.
+		if ( !htmlClipboardKey ) {
+			clipboardData.setData( 'text/xcustom', clipboardKey );
+		}
 		clipboardData.setData( 'text/html', this.$pasteTarget.html() );
 		clipboardData.setData( 'text/plain', this.$pasteTarget.text() );
 	} else {
