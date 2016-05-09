@@ -16,6 +16,24 @@
       "revId": "28450340aa94812ec7991c068ee7f61ed5297c81",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_65155f40",
+        "filename": "src/ui/dialogs/ve.ui.FindAndReplaceDialog.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2016-05-09T17:32:54Z",
+      "side": 1,
+      "message": "As-is, once it moves off the edges it\u0027ll indeed return to natural order. The possible issues are if we use this to put things outside of the natural order, it\u0027ll perhaps make loops where you tab outside of the TabbableElements, and the natural order means that next you\u0027ll wind up back in them.\n\nActually... an alternative implementation occurs to me. We could have `new TabbableElements(rootElement)`, which would then build a list of everything focusable within the element and determine an appropriate order (possibly by extracting tabindex / data-tabindex attributes). That\u0027d let us avoid the whole global-scope-of-tabIndex issue, while not having to specify lists of elements like this. Thoughts?",
+      "parentUuid": "ae564743_aa33c45d",
+      "revId": "28450340aa94812ec7991c068ee7f61ed5297c81",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
