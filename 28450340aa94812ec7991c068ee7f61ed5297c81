@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_aa33c45d",
+        "filename": "src/ui/dialogs/ve.ui.FindAndReplaceDialog.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-05-09T17:09:25Z",
+      "side": 1,
+      "message": "Is there anyway to avoid having to specify every element in the dialog, so that once it leaves the explicitly ordered items it returns to natural order. Otherwise we will have to maintain this list of every focusable element in the dialog, which could get even larger.",
+      "revId": "28450340aa94812ec7991c068ee7f61ed5297c81",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
