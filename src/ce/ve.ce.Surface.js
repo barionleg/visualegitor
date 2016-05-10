@@ -2712,6 +2712,7 @@ ve.ce.Surface.prototype.handleObservedChanges = function ( oldState, newState ) 
 		// Use setTimeout to escape current renderLock
 		setTimeout( function () {
 			surface.checkSequences();
+			surface.maybeSetBreakpoint();
 		} );
 	}
 	if ( newState.branchNodeChanged && newState.node ) {
@@ -2846,6 +2847,41 @@ ve.ce.Surface.prototype.checkSequences = function () {
 	}
 	if ( executed ) {
 		this.showModelSelection();
+	}
+};
+
+/**
+ * See if the just-entered content fits our criteria for setting a history breakpoint
+ */
+ve.ce.Surface.prototype.maybeSetBreakpoint = function () {
+	var dataString, offset,
+		data = this.getModel().getDocument().getData(),
+		selection = this.getSelection();
+
+	if ( !selection.isNativeCursor() ) {
+		return;
+	}
+
+	dataString = new ve.dm.DataString( data );
+	offset = selection.getModel().getCoveringRange().end;
+
+	// We have just entered text, probably. We want to know whether we just
+	// created a word break. We can't check the current offset, since the
+	// common case is that being at the end of the string, which is inherently
+	// a word break. So, we check whether the previous offset is a word break,
+	// which should catch cases where we have hit space or added punctuation.
+	// We also make sure the previous-previous offset isn't a word break, as
+	// that'd catch e.g. the first character of all words.
+
+	// Note: Text input which isn't using line breaks, for whatever reason,
+	// will get breakpoints set by the fallback timer anyway. (This is the
+	// main reason to not debounce that timer here, as then a reasonable
+	// typist with such text would never get a breakpoint set. The compromise
+	// position here will occasionally get a breakpoint set in the middle of
+	// the first word typed.)
+
+	if ( unicodeJS.wordbreak.isBreak( dataString, offset - 1 ) && !unicodeJS.wordbreak.isBreak( dataString, offset - 2 ) ) {
+		this.getModel().breakpoint();
 	}
 };
 
