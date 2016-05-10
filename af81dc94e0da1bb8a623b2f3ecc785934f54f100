@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_d04b3d61",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2016-05-10T15:48:29Z",
+      "side": 1,
+      "message": "Unfinished sentence. :-)",
+      "revId": "af81dc94e0da1bb8a623b2f3ecc785934f54f100",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_303559d7",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 2872,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2016-05-10T15:48:29Z",
+      "side": 1,
+      "message": "Mode is set to 0 on line 2858 and not subsequently modified, surely?",
+      "revId": "af81dc94e0da1bb8a623b2f3ecc785934f54f100",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_702b5178",
+        "filename": "src/dm/ve.dm.Surface.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2016-05-10T15:48:29Z",
+      "side": 1,
+      "message": "Is this intentionally part of this change? Feels like a big enough thing we should note; this used to be a lot lower and was raised for performance, I think.",
+      "revId": "af81dc94e0da1bb8a623b2f3ecc785934f54f100",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
