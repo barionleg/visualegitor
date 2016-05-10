@@ -2712,6 +2712,7 @@ ve.ce.Surface.prototype.handleObservedChanges = function ( oldState, newState ) 
 		// Use setTimeout to escape current renderLock
 		setTimeout( function () {
 			surface.checkSequences();
+			surface.maybeSetBreakpoint();
 		} );
 	}
 	if ( newState.branchNodeChanged && newState.node ) {
@@ -2848,6 +2849,49 @@ ve.ce.Surface.prototype.checkSequences = function () {
 		this.showModelSelection();
 	}
 };
+
+/**
+ * See if the just-entered content fits our criteria for setting a history breakpoint
+ */
+ve.ce.Surface.prototype.maybeSetBreakpoint = function () {
+	var data, offset, textStart, plaintext,
+		mode = 0,
+		model = this.getModel(),
+		selection = this.getSelection();
+
+	if ( !selection.isNativeCursor() ) {
+		return;
+	}
+
+	// TODO: factor this out into something reusable for SequenceRegistry (and others?)
+
+	data = model.getDocument().data;
+	offset = selection.getModel().getCoveringRange().end;
+
+	for ( textStart = offset - 1; textStart >= 0 && ( offset - textStart ) <= 16; textStart-- ) {
+		if ( mode === 0 && !data.isOpenElementData( textStart ) ) {
+			mode++;
+		}
+		if ( mode === 1 && !data.isCloseElementData( textStart ) ) {
+			mode++;
+		}
+		if ( mode === 2 && data.isElementData( textStart ) ) {
+			break;
+		}
+	}
+
+	plaintext = data.getText( true, new ve.Range( textStart + 1, offset ) );
+
+	if ( plaintext && plaintext.match( /\w[\W]$/ ) ) {
+		// If the recent text ends with a word-character followed by a non-
+		// word character, set a breakpoint. This should cover most languages
+		// that use spaces and punctuation. Languages without these handy
+		// signposts for us will get breakpoints set by the fallback timer
+		// anyway.
+		this.getModel().breakpoint();
+	}
+};
+
 
 /**
  * Handle window resize event.
