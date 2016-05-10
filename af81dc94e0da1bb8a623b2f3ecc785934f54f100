@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_9045454a",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 2872,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2016-05-10T15:55:55Z",
+      "side": 1,
+      "message": "`mode++` directly below this.",
+      "parentUuid": "ae564743_303559d7",
+      "revId": "af81dc94e0da1bb8a623b2f3ecc785934f54f100",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_702b5178",
         "filename": "src/dm/ve.dm.Surface.js",
         "patchSetId": 3
@@ -47,6 +65,24 @@
       "writtenOn": "2016-05-10T15:48:29Z",
       "side": 1,
       "message": "Is this intentionally part of this change? Feels like a big enough thing we should note; this used to be a lot lower and was raised for performance, I think.",
+      "revId": "af81dc94e0da1bb8a623b2f3ecc785934f54f100",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_50660deb",
+        "filename": "src/dm/ve.dm.Surface.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2016-05-10T15:55:55Z",
+      "side": 1,
+      "message": "Raising it even higher like this is an intentional part of the change -- if it stays at 0.75s as it currently is, it\u0027s still fairly easy to have it add an extra breakpoint in the middle of a word (slow typers, long words). The full 3 seconds I\u0027ve upped it to made that fairly unlikely, since it\u0027s also resetting the interval whenever a breakpoint is added by a word-break.",
+      "parentUuid": "ae564743_702b5178",
       "revId": "af81dc94e0da1bb8a623b2f3ecc785934f54f100",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
