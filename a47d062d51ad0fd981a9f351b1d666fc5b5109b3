@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_502bad92",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 2883,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-05-10T17:02:53Z",
+      "side": 1,
+      "message": "This won\u0027t get triggered by a word that is a single code unit long (which in Chinese would be nearly all word-like text).",
+      "revId": "a47d062d51ad0fd981a9f351b1d666fc5b5109b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
