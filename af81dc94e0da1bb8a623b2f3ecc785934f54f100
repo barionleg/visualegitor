@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_f0ac81ed",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 2872,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2016-05-10T15:59:17Z",
+      "side": 1,
+      "message": "Umm. Yes. Yes, it is. Ignore me. :-)",
+      "parentUuid": "ae564743_9045454a",
+      "revId": "af81dc94e0da1bb8a623b2f3ecc785934f54f100",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_702b5178",
         "filename": "src/dm/ve.dm.Surface.js",
         "patchSetId": 3
@@ -83,6 +101,24 @@
       "side": 1,
       "message": "Raising it even higher like this is an intentional part of the change -- if it stays at 0.75s as it currently is, it\u0027s still fairly easy to have it add an extra breakpoint in the middle of a word (slow typers, long words). The full 3 seconds I\u0027ve upped it to made that fairly unlikely, since it\u0027s also resetting the interval whenever a breakpoint is added by a word-break.",
       "parentUuid": "ae564743_702b5178",
+      "revId": "af81dc94e0da1bb8a623b2f3ecc785934f54f100",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_b08de987",
+        "filename": "src/dm/ve.dm.Surface.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2016-05-10T15:59:17Z",
+      "side": 1,
+      "message": "Kk. I\u0027d like David C.\u0027s view on impact on non-keyboard (IME) languages.",
+      "parentUuid": "ae564743_50660deb",
       "revId": "af81dc94e0da1bb8a623b2f3ecc785934f54f100",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
