@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_1cb307fe",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 2881,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-05-11T14:53:06Z",
+      "side": 1,
+      "message": "we might want to do -2 here as sometimes the word break algorithm takes into account 2 chars to see if it is a break.\n\nCurrently if I type L\u0027enyclopedie, this detects a break after the L in L\u0027. If we wait until two chars have passed, it wouldn\u0027t check that location until you typed L\u0027e, which has no breaks.\n\nWould need to consider if this has adverse effects.",
+      "revId": "e41a919e9a8211e2210de442ad9416484b4be43b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
