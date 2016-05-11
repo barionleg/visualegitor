@@ -33,6 +33,24 @@
       "revId": "e41a919e9a8211e2210de442ad9416484b4be43b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_ff8e0532",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 2881,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2016-05-11T16:38:49Z",
+      "side": 1,
+      "message": "-2 gets us back to having breakpoints that hit after the first letter of a word, unfortunately.\n\nWe could make it more complicated in the future -- have characters that are definite breaks, and ones which are possible breaks, and distinguish between them.",
+      "parentUuid": "ae564743_1cb307fe",
+      "revId": "e41a919e9a8211e2210de442ad9416484b4be43b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
