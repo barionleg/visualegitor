@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "ae564743_1c8ae71b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-05-11T14:54:47Z",
+      "side": 1,
+      "message": "Needs updating.",
+      "revId": "e41a919e9a8211e2210de442ad9416484b4be43b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_1cb307fe",
         "filename": "src/ce/ve.ce.Surface.js",
         "patchSetId": 6
