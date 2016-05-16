@@ -107,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_3b1191fc",
+        "filename": ".stylelintrc",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 2604
+      },
+      "writtenOn": "2016-05-16T23:58:31Z",
+      "side": 1,
+      "message": "That sounds very reasonable to me, I\u0027ve collected other recommendations already at https://phabricator.wikimedia.org/T77949",
+      "parentUuid": "ae564743_1b380dcf",
+      "revId": "c4b773a2b64ee5c1cddad0091ddfa2527436ead1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_58e9eb0e",
         "filename": ".stylelintrc",
         "patchSetId": 1
@@ -171,6 +189,24 @@
       "side": 1,
       "message": "I don\u0027t know; it seemed strongly encouraged.",
       "parentUuid": "ae564743_38e6b73f",
+      "revId": "c4b773a2b64ee5c1cddad0091ddfa2527436ead1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_5b50c560",
+        "filename": ".stylelintrc",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 2604
+      },
+      "writtenOn": "2016-05-16T23:58:31Z",
+      "side": 1,
+      "message": "It\u0027s for not breaking parser which don\u0027t know about variables",
+      "parentUuid": "ae564743_1b3f6db2",
       "revId": "c4b773a2b64ee5c1cddad0091ddfa2527436ead1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -264,6 +300,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_9bc53d10",
+        "filename": ".stylelintrc",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 2604
+      },
+      "writtenOn": "2016-05-16T23:58:31Z",
+      "side": 1,
+      "message": "Yes, please! Out of non-ordering duplication of properties has happened (sure, there\u0027s a rule now to avoid that). A specific order makes orientation in the code so much faster. https://www.mediawiki.org/wiki/Manual_talk:Coding_conventions/CSS#CSS.2FLess_property_order_proposal Something for next FE dev group meeting?!",
+      "parentUuid": "ae564743_fb3b99c1",
+      "revId": "c4b773a2b64ee5c1cddad0091ddfa2527436ead1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_18cad3a2",
         "filename": ".stylelintrc",
         "patchSetId": 1
@@ -328,6 +382,24 @@
       "side": 1,
       "message": "We have this in jscs and phpcs.",
       "parentUuid": "ae564743_38bd17fe",
+      "revId": "c4b773a2b64ee5c1cddad0091ddfa2527436ead1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_dbcb351f",
+        "filename": ".stylelintrc",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 2604
+      },
+      "writtenOn": "2016-05-16T23:58:31Z",
+      "side": 1,
+      "message": "@Jforrester I\u0027m not convinced for that either.",
+      "parentUuid": "ae564743_3b42313f",
       "revId": "c4b773a2b64ee5c1cddad0091ddfa2527436ead1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
