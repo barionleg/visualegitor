@@ -18,7 +18,10 @@
 		"function-parentheses-newline-inside": [ "never-multi-line" ],
 		"function-parentheses-space-inside": [ "always" ],
 		"function-url-quotes": [ "none" ],
-		"function-whitespace-after": [ "always" ]
+		"function-whitespace-after": [ "always" ],
+
+		"string-no-newline": true,
+		"string-quotes": [ "single" ]
 
 	}
 }
