@@ -104,6 +104,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_58144bed",
+        "filename": ".stylelintrc",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-05-16T17:52:44Z",
+      "side": 1,
+      "message": "Yes - enabled with inline exceptions.",
+      "parentUuid": "ae564743_78db0f7c",
+      "revId": "c4b773a2b64ee5c1cddad0091ddfa2527436ead1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_b8d1275a",
         "filename": ".stylelintrc",
         "patchSetId": 1
@@ -183,6 +201,24 @@
       "writtenOn": "2016-05-16T17:38:45Z",
       "side": 1,
       "message": "some browsers we just don\u0027t care if they break a little (e.g. box-shadow in IE9) - can we do inline overrides?",
+      "revId": "c4b773a2b64ee5c1cddad0091ddfa2527436ead1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_98d9c35e",
+        "filename": ".stylelintrc",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-05-16T17:52:44Z",
+      "side": 1,
+      "message": "IE9 doesn\u0027t support any transitions either - we can:\n* Not use this rule\n* Bump IE to 10 for CSS support\n* Add a ton block exceptions",
+      "parentUuid": "ae564743_b840070b",
       "revId": "c4b773a2b64ee5c1cddad0091ddfa2527436ead1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
