@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_b8fac7d7",
+        "filename": ".stylelintrc",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-05-16T17:38:45Z",
+      "side": 1,
+      "message": "this one doesn\u0027t play nicely with vendor prefixes rules which don\u0027t necessarily support standard directions (\"to top\" vs \"bottom\")",
+      "revId": "c4b773a2b64ee5c1cddad0091ddfa2527436ead1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_98ef031b",
+        "filename": ".stylelintrc",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-05-16T17:38:45Z",
+      "side": 1,
+      "message": "Not sure about these three, they trade bytes vs readability:\n\n.3 vs 0.3, 0 vs 0px",
+      "revId": "c4b773a2b64ee5c1cddad0091ddfa2527436ead1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_f8df1f6a",
+        "filename": ".stylelintrc",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-05-16T17:38:45Z",
+      "side": 1,
+      "message": "This is no animations \u003c 80ms - which is more of a UI decision than code style",
+      "revId": "c4b773a2b64ee5c1cddad0091ddfa2527436ead1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_58e9eb0e",
+        "filename": ".stylelintrc",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-05-16T17:38:45Z",
+      "side": 1,
+      "message": "doesn\u0027t appear to think we need -moz/webkit-repeating-linear-gradient when caniuse says we do",
+      "revId": "c4b773a2b64ee5c1cddad0091ddfa2527436ead1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_38e6b73f",
+        "filename": ".stylelintrc",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-05-16T17:38:45Z",
+      "side": 1,
+      "message": "Seems harmless - is it necessary?",
+      "revId": "c4b773a2b64ee5c1cddad0091ddfa2527436ead1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_78db0f7c",
+        "filename": ".stylelintrc",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-05-16T17:38:45Z",
+      "side": 1,
+      "message": "This is used out of necessity is some places can we do inline overrides?",
+      "revId": "c4b773a2b64ee5c1cddad0091ddfa2527436ead1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_b8d1275a",
+        "filename": ".stylelintrc",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-05-16T17:38:45Z",
+      "side": 1,
+      "message": "changed to allow consecutive duplicates (e.g. vendor prefixed values)",
+      "revId": "c4b773a2b64ee5c1cddad0091ddfa2527436ead1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_d8ccdbc2",
+        "filename": ".stylelintrc",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-05-16T17:38:45Z",
+      "side": 1,
+      "message": "this seems a little too disruptive - some people prefer grouping by function for readability.",
+      "revId": "c4b773a2b64ee5c1cddad0091ddfa2527436ead1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_18cad3a2",
+        "filename": ".stylelintrc",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-05-16T17:38:45Z",
+      "side": 1,
+      "message": "these fail on comment lines I think..",
+      "revId": "c4b773a2b64ee5c1cddad0091ddfa2527436ead1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_38bd17fe",
+        "filename": ".stylelintrc",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-05-16T17:38:45Z",
+      "side": 1,
+      "message": "is this necessary? we don\u0027t have this in JSlint I think",
+      "revId": "c4b773a2b64ee5c1cddad0091ddfa2527436ead1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_b840070b",
+        "filename": ".stylelintrc",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-05-16T17:38:45Z",
+      "side": 1,
+      "message": "some browsers we just don\u0027t care if they break a little (e.g. box-shadow in IE9) - can we do inline overrides?",
+      "revId": "c4b773a2b64ee5c1cddad0091ddfa2527436ead1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
