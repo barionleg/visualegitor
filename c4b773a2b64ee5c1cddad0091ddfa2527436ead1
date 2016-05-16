@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_bb1f615d",
+        "filename": ".stylelintrc",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2016-05-16T18:49:44Z",
+      "side": 1,
+      "message": "Boo.",
+      "parentUuid": "ae564743_b8fac7d7",
+      "revId": "c4b773a2b64ee5c1cddad0091ddfa2527436ead1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_98ef031b",
         "filename": ".stylelintrc",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2016-05-16T17:38:45Z",
       "side": 1,
       "message": "Not sure about these three, they trade bytes vs readability:\n\n.3 vs 0.3, 0 vs 0px",
+      "revId": "c4b773a2b64ee5c1cddad0091ddfa2527436ead1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_db1a156e",
+        "filename": ".stylelintrc",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2016-05-16T18:49:44Z",
+      "side": 1,
+      "message": "I think 0.3px and 0 is most readable (also 0 not 0px is one of the few things csslint enforces).",
+      "parentUuid": "ae564743_98ef031b",
       "revId": "c4b773a2b64ee5c1cddad0091ddfa2527436ead1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_1b380dcf",
+        "filename": ".stylelintrc",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2016-05-16T18:49:44Z",
+      "side": 1,
+      "message": "Sure, but…",
+      "parentUuid": "ae564743_f8df1f6a",
+      "revId": "c4b773a2b64ee5c1cddad0091ddfa2527436ead1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_58e9eb0e",
         "filename": ".stylelintrc",
         "patchSetId": 1
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_fb3439dc",
+        "filename": ".stylelintrc",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2016-05-16T18:49:44Z",
+      "side": 1,
+      "message": "Meh.",
+      "parentUuid": "ae564743_58e9eb0e",
+      "revId": "c4b773a2b64ee5c1cddad0091ddfa2527436ead1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_38e6b73f",
         "filename": ".stylelintrc",
         "patchSetId": 1
@@ -81,6 +153,24 @@
       "writtenOn": "2016-05-16T17:38:45Z",
       "side": 1,
       "message": "Seems harmless - is it necessary?",
+      "revId": "c4b773a2b64ee5c1cddad0091ddfa2527436ead1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_1b3f6db2",
+        "filename": ".stylelintrc",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2016-05-16T18:49:44Z",
+      "side": 1,
+      "message": "I don\u0027t know; it seemed strongly encouraged.",
+      "parentUuid": "ae564743_38e6b73f",
       "revId": "c4b773a2b64ee5c1cddad0091ddfa2527436ead1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -156,6 +246,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_fb3b99c1",
+        "filename": ".stylelintrc",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2016-05-16T18:49:44Z",
+      "side": 1,
+      "message": "We could specify our own order as an array, I think. Consistent ordering would be helpful, at least.",
+      "parentUuid": "ae564743_d8ccdbc2",
+      "revId": "c4b773a2b64ee5c1cddad0091ddfa2527436ead1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_18cad3a2",
         "filename": ".stylelintrc",
         "patchSetId": 1
@@ -173,6 +281,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_5b456546",
+        "filename": ".stylelintrc",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2016-05-16T18:49:44Z",
+      "side": 1,
+      "message": "Eurgh. Fun.",
+      "parentUuid": "ae564743_18cad3a2",
+      "revId": "c4b773a2b64ee5c1cddad0091ddfa2527436ead1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_38bd17fe",
         "filename": ".stylelintrc",
         "patchSetId": 1
@@ -184,6 +310,24 @@
       "writtenOn": "2016-05-16T17:38:45Z",
       "side": 1,
       "message": "is this necessary? we don\u0027t have this in JSlint I think",
+      "revId": "c4b773a2b64ee5c1cddad0091ddfa2527436ead1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_3b42313f",
+        "filename": ".stylelintrc",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2016-05-16T18:49:44Z",
+      "side": 1,
+      "message": "We have this in jscs and phpcs.",
+      "parentUuid": "ae564743_38bd17fe",
       "revId": "c4b773a2b64ee5c1cddad0091ddfa2527436ead1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -219,6 +363,24 @@
       "side": 1,
       "message": "IE9 doesn\u0027t support any transitions either - we can:\n* Not use this rule\n* Bump IE to 10 for CSS support\n* Add a ton block exceptions",
       "parentUuid": "ae564743_b840070b",
+      "revId": "c4b773a2b64ee5c1cddad0091ddfa2527436ead1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_bb6da1c9",
+        "filename": ".stylelintrc",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2016-05-16T18:49:44Z",
+      "side": 1,
+      "message": "Meh. Yeah. Let\u0027s chat.",
+      "parentUuid": "ae564743_98d9c35e",
       "revId": "c4b773a2b64ee5c1cddad0091ddfa2527436ead1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
