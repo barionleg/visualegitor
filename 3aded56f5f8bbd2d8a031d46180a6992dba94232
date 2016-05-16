@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_f860bffd",
+        "filename": ".stylelintrc",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2016-05-16T18:43:58Z",
+      "side": 1,
+      "message": "Explorer should be \u003e\u003d 9.",
+      "revId": "3aded56f5f8bbd2d8a031d46180a6992dba94232",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
