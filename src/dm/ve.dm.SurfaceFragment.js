@@ -122,7 +122,7 @@ ve.dm.SurfaceFragment.prototype.change = function ( txs, selection ) {
 	}
 	this.surface.change(
 		txs,
-		!this.noAutoSelect && ( selection || this.getSelection( true ).translateByTransactions( txs, this.excludeInsertions ) )
+		!this.noAutoSelect && ( selection || this.getSelection().translateByTransactions( txs, this.excludeInsertions ) )
 	);
 	if ( selection ) {
 		// Overwrite the selection
@@ -156,12 +156,10 @@ ve.dm.SurfaceFragment.prototype.getDocument = function () {
  * This method also calls update to make sure the selection returned is current.
  *
  * @method
- * @param {boolean} noCopy Return the selection by reference, not a copy
- * @return {ve.dm.Selection} Surface selection
  */
-ve.dm.SurfaceFragment.prototype.getSelection = function ( noCopy ) {
+ve.dm.SurfaceFragment.prototype.getSelection = function () {
 	this.update();
-	return !noCopy ? this.selection.clone() : this.selection;
+	return this.selection;
 };
 
 /**
@@ -252,7 +250,7 @@ ve.dm.SurfaceFragment.prototype.adjustLinearSelection = function ( start, end ) 
 	if ( !( this.selection instanceof ve.dm.LinearSelection ) ) {
 		return this.clone();
 	}
-	oldRange = this.getSelection( true ).getRange();
+	oldRange = this.getSelection().getRange();
 	newRange = oldRange && new ve.Range( oldRange.start + ( start || 0 ), oldRange.end + ( end || 0 ) );
 	return this.clone( new ve.dm.LinearSelection( this.getDocument(), newRange ) );
 };
@@ -269,7 +267,7 @@ ve.dm.SurfaceFragment.prototype.truncateLinearSelection = function ( limit ) {
 	if ( !( this.selection instanceof ve.dm.LinearSelection ) ) {
 		return this.clone();
 	}
-	range = this.getSelection( true ).getRange();
+	range = this.getSelection().getRange();
 	return this.clone( new ve.dm.LinearSelection( this.getDocument(), range.truncate( limit ) ) );
 };
 
@@ -280,7 +278,7 @@ ve.dm.SurfaceFragment.prototype.truncateLinearSelection = function ( limit ) {
  * @return {ve.dm.SurfaceFragment} Collapsed fragment
  */
 ve.dm.SurfaceFragment.prototype.collapseToStart = function () {
-	return this.clone( this.getSelection( true ).collapseToStart() );
+	return this.clone( this.getSelection().collapseToStart() );
 };
 
 /**
@@ -290,7 +288,7 @@ ve.dm.SurfaceFragment.prototype.collapseToStart = function () {
  * @return {ve.dm.SurfaceFragment} Collapsed fragment
  */
 ve.dm.SurfaceFragment.prototype.collapseToEnd = function () {
-	return this.clone( this.getSelection( true ).collapseToEnd() );
+	return this.clone( this.getSelection().collapseToEnd() );
 };
 
 /**
@@ -304,7 +302,7 @@ ve.dm.SurfaceFragment.prototype.trimLinearSelection = function () {
 	if ( !( this.selection instanceof ve.dm.LinearSelection ) ) {
 		return this.clone();
 	}
-	oldRange = this.getSelection( true ).getRange();
+	oldRange = this.getSelection().getRange();
 	newRange = oldRange;
 
 	if ( this.getText().trim().length === 0 ) {
@@ -337,7 +335,7 @@ ve.dm.SurfaceFragment.prototype.expandLinearSelection = function ( scope, type )
 		return this.clone();
 	}
 
-	oldRange = this.getSelection( true ).getRange();
+	oldRange = this.getSelection().getRange();
 
 	switch ( scope || 'parent' ) {
 		case 'word':
@@ -455,7 +453,7 @@ ve.dm.SurfaceFragment.prototype.getText = function () {
  */
 ve.dm.SurfaceFragment.prototype.getAnnotations = function ( all ) {
 	var i, l, ranges, rangeAnnotations, matchingAnnotations,
-		selection = this.getSelection( true ),
+		selection = this.getSelection(),
 		annotations = new ve.dm.AnnotationSet( this.getDocument().getStore() );
 
 	if ( selection.isCollapsed() ) {
@@ -670,7 +668,7 @@ ve.dm.SurfaceFragment.prototype.changeAttributes = function ( attr, type ) {
 ve.dm.SurfaceFragment.prototype.annotateContent = function ( method, nameOrAnnotation, data ) {
 	var annotation, i, ilen, j, jlen, tx, range,
 		annotations = new ve.dm.AnnotationSet( this.getDocument().getStore() ),
-		ranges = this.getSelection( true ).getRanges(),
+		ranges = this.getSelection().getRanges(),
 		txs = [];
 
 	if ( nameOrAnnotation instanceof ve.dm.Annotation ) {
