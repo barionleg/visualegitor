@@ -5,10 +5,10 @@
  */
 
 .ve-ce-linkAnnotation-active {
-	box-shadow: 0 0 0 1px #c6e0ff;
-	border-radius: 0.2em;
-	padding: 2px;
 	margin: -2px;
+	padding: 2px;
+	border-radius: 0.2em;
+	box-shadow: 0 0 0 1px #c6e0ff;
 	background-color: #e6f1ff;
 }
 

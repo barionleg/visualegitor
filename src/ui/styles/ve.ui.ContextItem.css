@@ -6,9 +6,9 @@
 
 .ve-ui-contextItem {
 	/* Disable selection to avoid stealing focus from the surface */
-	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
+	-webkit-user-select: none;
 	user-select: none;
 	cursor: default;
 }

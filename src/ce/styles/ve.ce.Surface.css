@@ -16,10 +16,10 @@
 
 /* @noflip */
 .ve-ce-surface-deactivatedSelection {
+	opacity: 0.5;
 	position: absolute;
 	top: 0;
 	left: 0;
-	opacity: 0.5;
 	pointer-events: none;
 }
 
@@ -48,21 +48,21 @@
 }
 
 .ve-ce-surface-dropMarker {
+	position: absolute;
 	height: 1px;
 	background: #999;
 	pointer-events: none;
-	position: absolute;
 }
 
 .ve-ce-surface-paste {
+	opacity: 0;
+	overflow: hidden;
 	position: fixed;
 	/* FIXME T126024: Stop the viewport scrolling when the paste target is typed into */
 	top: 3em;
 	left: 0;
 	/* Try to avoid wrapping by not setting a width because of https://code.google.com/p/chromium/issues/detail?id=318925 */
 	height: 1px;
-	opacity: 0;
-	overflow: hidden;
 }
 
 .ve-ce-surface-paste * {
@@ -72,8 +72,8 @@
 /* Support: IE */
 /* Prevent IE from wrapping link text in <u> and <font color> tags */
 .ve-init-target-ie .ve-ce-surface-paste a {
-	text-decoration: underline !important; /* stylelint-disable-line declaration-no-important */
 	color: #06c;
+	text-decoration: underline !important; /* stylelint-disable-line declaration-no-important */
 }
 
 /* MediaWiki PHP Parser does not wrap text inside image captions in <p> but we do (cause we have to).

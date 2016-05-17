@@ -17,9 +17,9 @@
 
 .ve-ui-findAndReplaceDialog-cell {
 	display: table-cell;
+	padding-right: 1em;
 	vertical-align: middle;
 	white-space: nowrap;
-	padding-right: 1em;
 }
 
 .ve-ui-findAndReplaceDialog-cell:last-child {

@@ -10,18 +10,18 @@
 }
 
 .ve-ce-branchNode-blockSlug {
-	cursor: pointer;
 	opacity: 0;
-	-webkit-transition: opacity 200ms ease-out;
+	cursor: pointer;
 	-moz-transition: opacity 200ms ease-out;
 	-o-transition: opacity 200ms ease-out;
+	-webkit-transition: opacity 200ms ease-out;
 	transition: opacity 200ms ease-out;
 }
 
 .ve-ce-branchNode-blockSlug,
 .ve-ce-branchNode-newSlug {
-	margin: -0.3em 0 -0.1em 0;
 	outline: 1px dashed #ccc;
+	margin: -0.3em 0 -0.1em 0;
 	/* rgba( #f1f7fb, 0.5 ) */
 	background-color: rgba( 241, 247, 251, 0.75 );
 }
@@ -32,20 +32,20 @@
 }
 
 .ve-ce-branchNode-newSlug-open {
-	margin: 1em 0;
-	background-color: transparent;
 	outline-color: transparent;
 	outline-offset: 1em;
-	-webkit-transition: all 400ms ease-out;
+	margin: 1em 0;
+	background-color: transparent;
 	-moz-transition: all 400ms ease-out;
 	-o-transition: all 400ms ease-out;
+	-webkit-transition: all 400ms ease-out;
 	transition: all 400ms ease-out;
 }
 
 .ve-ce-branchNode-blockSlug > .oo-ui-buttonWidget {
-	margin-left: 0.25em;
 	opacity: 0.5;
 	display: block;
+	margin-left: 0.25em;
 }
 
 .ve-ce-branchNode-blockSlug > .oo-ui-buttonWidget > .oo-ui-buttonElement-button {
@@ -53,9 +53,9 @@
 }
 
 .ve-ce-branchNode-blockSlug > .oo-ui-buttonWidget > .oo-ui-buttonElement-button > .oo-ui-iconElement-icon {
+	background-size: auto;
 	width: 0.95em;
 	height: 0.95em;
-	background-size: auto;
 }
 
 .ve-ce-chimera {

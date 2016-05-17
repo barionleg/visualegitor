@@ -5,9 +5,9 @@
  */
 
 body {
+	overflow-y: scroll;
 	margin: 0;
 	padding: 0;
-	overflow-y: scroll;
 	background: #fff;
 	font: normal 0.8em/1.5 sans-serif;
 }
@@ -15,12 +15,12 @@ body {
 /* Demo */
 
 .ve-demo-logo {
-	float: right;
-	margin: 0.5em 0 0 0;
 	background: url( VisualEditor-logo.svg ) no-repeat;
 	background-size: contain;
+	float: right;
 	width: 10.75em;
 	height: 3.75em;
+	margin: 0.5em 0 0 0;
 }
 
 .ve-demo-surfaceToolbar-read {
@@ -61,11 +61,11 @@ body {
 .ve-demo-toolbar-commands > .oo-ui-widget,
 .ve-demo-toolbar-commands > .oo-ui-widget > .oo-ui-fieldLayout > .oo-ui-fieldLayout-body > .oo-ui-fieldLayout-field,
 .ve-demo-toolbar-divider {
-	width: auto;
-	float: none;
 	display: inline-block;
-	vertical-align: middle;
+	float: none;
+	width: auto;
 	margin-right: 1em;
+	vertical-align: middle;
 }
 
 .ve-demo-toolbar-commands > .oo-ui-widget:last-child,
@@ -82,8 +82,8 @@ body {
 }
 
 .ve-demo-toolbar-divider {
-	border-right: 1px solid #ddd;
 	width: 0;
+	border-right: 1px solid #ddd;
 }
 
 .ve-demo-source {
@@ -95,9 +95,9 @@ body {
 }
 
 .ve-demo-read {
+	clear: right;
 	/* Match document padding and surface font size */
 	padding: 0.75em 1.5em;
-	clear: right;
 }
 
 /* Editor */

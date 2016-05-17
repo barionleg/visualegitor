@@ -11,28 +11,28 @@
 
 .ve-ui-linearContextItem-title {
 	display: table-cell;
-	width: 1%;
-	text-align: left;
-	padding: 0.5em 1em;
 	overflow: hidden;
+	width: 1%;
+	padding: 0.5em 1em;
+	text-align: left;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
 
 .ve-ui-linearContextItem-icon {
-	display: inline-block;
-	vertical-align: middle;
-	width: 1.875em;
-	height: 1.875em;
 	background-position: center center;
 	background-repeat: no-repeat;
+	display: inline-block;
+	width: 1.875em;
+	height: 1.875em;
+	vertical-align: middle;
 }
 
 .ve-ui-linearContextItem-label {
-	min-width: 4em;
 	display: inline-block;
-	vertical-align: middle;
+	min-width: 4em;
 	margin-left: 0.5em;
+	vertical-align: middle;
 }
 
 .ve-ui-linearContextItem-info {
@@ -42,16 +42,16 @@
 }
 
 .ve-ui-linearContextItem-description {
+	color: #888;
+	overflow: hidden;
 	position: absolute;
 	top: 0;
-	right: 0;
 	left: 0;
 	bottom: 0;
+	right: 0;
 	line-height: 3.6em;
-	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	color: #888;
 }
 
 .ve-ui-linearContextItem-actions {
