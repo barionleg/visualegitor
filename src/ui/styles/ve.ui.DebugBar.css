@@ -11,9 +11,9 @@
 .ve-ui-debugBar-commands > .oo-ui-widget,
 .ve-ui-debugBar-commands-divider {
 	display: inline-block;
-	vertical-align: middle;
 	margin-right: 1em;
 	margin-bottom: 0.5em;
+	vertical-align: middle;
 }
 
 .ve-ui-debugBar-commands > .oo-ui-widget:last-child {
@@ -27,8 +27,8 @@
 }
 
 .ve-ui-debugBar-commands-divider {
-	border-right: 1px solid #ddd;
 	width: 0;
+	border-right: 1px solid #ddd;
 }
 
 .ve-ui-debugBar-dump {
@@ -36,13 +36,11 @@
 }
 
 .ve-ui-debugBar-dump > table {
-	font-size: 0.85em;
-	background-color: #f3f3f3;
 	width: 100%;
+	background-color: #f3f3f3;
 	border: 1px solid #ddd;
-	border-radius: 0;
-	border-top-right-radius: 0.25em;
-	border-top-left-radius: 0.25em;
+	border-radius: 0.25em 0.25em 0 0;
+	font-size: 0.85em;
 }
 
 .ve-ui-debugBar-dump > .oo-ui-buttonWidget {
@@ -61,24 +59,24 @@
 }
 
 .ve-ui-debugBar-dump th {
-	padding: 0.5em 1em;
 	color: #555;
+	padding: 0.5em 1em;
 	text-shadow: 0 1px 1px #fff;
 }
 
 .ve-ui-debugBar-dump ol {
-	padding-left: 1.5em;
 	color: #999;
+	padding-left: 1.5em;
 }
 
 .ve-ui-debugBar-dump li > span {
+	color: #000;
 	display: inline-block;
 	background-color: #f3f3f3;
-	border-radius: 0.3em;
 	margin: 0.25em 0 0.25em 0;
 	padding: 0.125em 0.5em;
+	border-radius: 0.3em;
 	text-shadow: 0 1px 1px #fff;
-	color: #000;
 }
 
 .ve-ui-debugBar-dump li > span > span {
@@ -103,15 +101,13 @@
 }
 
 .ve-ui-debugBar-filibuster {
-	font-size: 0.875em;
-	margin-top: 2em;
 	display: none;
-	background-color: #f3f3f3;
 	width: 100%;
+	margin-top: 2em;
+	background-color: #f3f3f3;
 	border: 1px solid #ddd;
-	border-radius: 0;
-	border-top-right-radius: 0.25em;
-	border-top-left-radius: 0.25em;
+	border-radius: 0.25em 0.25em 0 0;
+	font-size: 0.875em;
 }
 
 .ve-ui-debugBar-filibuster td {
@@ -121,7 +117,7 @@
 }
 
 .ve-ui-debugBar-filibuster th {
-	padding: 0.5em 1em;
 	color: #555;
+	padding: 0.5em 1em;
 	text-shadow: 0 1px 1px #fff;
 }

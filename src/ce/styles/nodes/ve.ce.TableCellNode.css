@@ -5,9 +5,9 @@
  */
 
 .ve-ce-tableCellNode {
-	border: 1px dotted #ccc;
-	padding: 0.25em 0.5em;
 	min-width: 1em;
+	padding: 0.25em 0.5em;
+	border: 1px dotted #ccc;
 }
 
 .ve-ce-tableCellNode-editing {

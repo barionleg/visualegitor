@@ -5,9 +5,9 @@
  */
 
 .ve-ui-languageInputWidget-findLanguageButton .oo-ui-buttonElement-button > .oo-ui-labelElement-label {
+	overflow: hidden;
 	width: 9.5em;
 	text-align: left;
-	overflow: hidden;
 	text-overflow: ellipsis;
 }
 

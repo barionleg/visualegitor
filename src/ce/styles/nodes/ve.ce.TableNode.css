@@ -15,9 +15,9 @@
 }
 
 .ve-ce-tableCaptionNode:focus {
+	margin-top: -1px;
 	border: 1px dotted #ccc;
 	border-bottom: 0;
-	margin-top: -1px;
 }
 
 .ve-ce-tableNodeOverlay {
@@ -30,13 +30,13 @@
 }
 
 .ve-ce-tableNodeOverlay-selection-box {
+	opacity: 0.6;
 	position: absolute;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
 	border: solid 0 #6da9f7;
 	background: rgba( 109, 169, 247, 0.3 ); /* #6da9f7 */
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-	opacity: 0.6;
 }
 
 .ve-ce-tableNodeOverlay-selection-box-fullCol {
@@ -57,10 +57,10 @@
 
 .ve-ce-tableNodeOverlay-selection-box-anchor {
 	position: absolute;
-	border: solid 1px #6da9f7;
-	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
+	border: solid 1px #6da9f7;
 }
 
 .ve-ce-tableNodeOverlay-editing .ve-ce-tableNodeOverlay-selection-box {
@@ -70,12 +70,12 @@
 
 .ve-ce-tableNodeOverlay-row-bracket,
 .ve-ce-tableNodeOverlay-column-bracket {
-	position: absolute;
-	border: solid 3px #6da9f7;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
 	opacity: 0.6;
+	position: absolute;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	border: solid 3px #6da9f7;
 }
 
 .ve-ce-tableNodeOverlay-row-bracket {
@@ -91,7 +91,7 @@
 }
 
 .ve-ce-tableNode-missingCell {
-	background-repeat: no-repeat;
 	background-position: center center;
+	background-repeat: no-repeat;
 	border: 0 !important; /* stylelint-disable-line declaration-no-important */
 }

@@ -5,8 +5,8 @@
  */
 
 .ve-ui-commandHelpDialog-container {
-	-ms-column-count: 3;
 	-moz-column-count: 3;
+	-ms-column-count: 3;
 	-webkit-column-count: 3;
 	column-count: 3;
 }
@@ -21,9 +21,9 @@
 }
 
 .ve-ui-commandHelpDialog-section h3 {
-	text-align: center;
 	margin: 0;
 	padding: 0;
+	text-align: center;
 }
 
 .ve-ui-commandHelpDialog-list {
@@ -32,20 +32,20 @@
 
 .ve-ui-commandHelpDialog-list dd {
 	display: inline-block;
-	vertical-align: top;
 	width: 45%;
 	margin: 0;
+	vertical-align: top;
 }
 
 .ve-ui-commandHelpDialog-list dt {
 	display: inline-block;
-	vertical-align: top;
-	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	width: 55%;
 	padding-right: 1em;
 	text-align: right;
+	vertical-align: top;
 }
 
 .ve-ui-commandHelpDialog-list dt kbd {
@@ -66,24 +66,24 @@
 
 .ve-ui-commandHelpDialog-list dt kbd > kbd {
 	background-color: #f7f7f7;
+	color: #333;
+	display: inline-block;
+	margin: -0.1em 0.3em 0;
+	padding: 0.1em 0.4em;
 	border: 1px solid #ccc;
 	border-radius: 3px;
 	box-shadow: 0 1px 0 rgba( 0, 0, 0, 0.2 ), 0 0 0 2px #fff inset;
-	color: #333;
-	display: inline-block;
 	line-height: 1.4;
-	padding: 0.1em 0.4em;
-	margin: -0.1em 0.3em 0;
+	text-align: center;
 	text-shadow: 0 1px 0 #fff;
 	text-transform: uppercase;
-	text-align: center;
 }
 
 .ve-ui-commandHelpDialog-list dt kbd[ data-label ]::before {
 	content: attr( data-label );
+	padding-right: 3px;
 	font-weight: normal;
 	font-style: italic;
-	padding-right: 3px;
 }
 
 .ve-ui-commandHelpDialog-sequence kbd:not( [ data-key='space' ] ) {
@@ -100,7 +100,7 @@
 
 .ve-ui-commandHelpDialog-list dd,
 .ve-ui-commandHelpDialog-list dt {
-	line-height: 1.4;
 	margin-top: 0.5em;
 	margin-bottom: 0.5em;
+	line-height: 1.4;
 }

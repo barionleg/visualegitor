@@ -19,11 +19,11 @@
 /*csslint vendor-prefix: true, compatible-vendor-prefixes:true */
 
 .ve-ce-focusableNode-highlight {
-	background: #6da9f7;
-	box-shadow: inset 0 0 0 1px #4c76ac;
-	position: absolute;
 	/* Clip extra span added for selectability */
 	overflow: hidden;
+	position: absolute;
+	background: #6da9f7;
+	box-shadow: inset 0 0 0 1px #4c76ac;
 }
 
 .ve-ce-focusableNode-highlight-error {
@@ -52,23 +52,23 @@
 
 .ve-ce-focusableNode-invisible {
 	display: inline-block;
-	vertical-align: middle;
-	/* Negative margins ensure icon height doesn't exceed line height in paragraphs */
-	margin: -6px 0 -2px 0;
 	width: 24px;
 	height: 24px;
+	/* Negative margins ensure icon height doesn't exceed line height in paragraphs */
+	margin: -6px 0 -2px 0;
+	vertical-align: middle;
 }
 
 .ve-ce-focusableNode-invisibleIcon.oo-ui-iconElement {
+	background-size: 24px 24px;
+	opacity: 0.5;
 	display: block;
 	/* Don't scale icon in headings etc. */
 	width: 24px;
 	height: 24px;
-	background-size: 24px 24px;
 	/* Make native selection match fake selection */
 	font-size: 24px;
 	line-height: 1em;
-	opacity: 0.5;
 }
 
 /* Highlights group opacity */

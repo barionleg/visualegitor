@@ -6,8 +6,8 @@
 
 .ve-ce-resizableNode-handles {
 	position: absolute;
-	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 }
 
@@ -17,34 +17,34 @@
 }
 
 .ve-ce-resizableNode-handles div {
+	background-repeat: no-repeat;
 	position: absolute;
 	width: 11px;
 	height: 11px;
-	background-repeat: no-repeat;
 }
 
 .ve-ce-resizableNode-nwHandle {
-	cursor: nw-resize;
-	left: -6px;
 	top: -6px;
+	left: -6px;
+	cursor: nw-resize;
 }
 
 .ve-ce-resizableNode-neHandle {
-	cursor: ne-resize;
-	right: -6px;
 	top: -6px;
+	right: -6px;
+	cursor: ne-resize;
 }
 
 .ve-ce-resizableNode-swHandle {
-	cursor: sw-resize;
-	bottom: -6px;
 	left: -6px;
+	bottom: -6px;
+	cursor: sw-resize;
 }
 
 .ve-ce-resizableNode-seHandle {
-	cursor: se-resize;
 	bottom: -6px;
 	right: -6px;
+	cursor: se-resize;
 }
 
 .ve-ce-resizableNode-nwHandle,
@@ -67,12 +67,12 @@
 }
 
 .ve-ce-resizableNode-sizeLabel {
+	opacity: 0;
 	position: absolute;
 	text-align: center;
-	opacity: 0;
-	-webkit-transition: opacity 200ms;
 	-moz-transition: opacity 200ms;
 	-o-transition: opacity 200ms;
+	-webkit-transition: opacity 200ms;
 	transition: opacity 200ms;
 }
 

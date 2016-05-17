@@ -17,7 +17,7 @@
 
 .ve-ui-progressDialog-row .oo-ui-buttonWidget {
 	display: table-cell;
-	vertical-align: bottom;
 	width: 1.9em;
 	padding-left: 1em;
+	vertical-align: bottom;
 }

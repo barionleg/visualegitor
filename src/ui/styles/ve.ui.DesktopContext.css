@@ -18,14 +18,14 @@
 }
 
 .ve-ui-desktopContext-menu .oo-ui-toolbar-bar {
-	white-space: nowrap;
 	border: none;
+	white-space: nowrap;
 	background: none;
 }
 
 .ve-ui-desktopContext-menu .oo-ui-toolGroup {
-	border: none;
 	margin: 0;
+	border: none;
 }
 
 .ve-ui-desktopContext-menu .oo-ui-tool,

@@ -23,8 +23,8 @@
 }
 
 .ve-ui-mobileSurface-overlay-global-enabled {
-	height: 100%;
 	overflow: hidden;
+	height: 100%;
 }
 
 /* inspector styles */

@@ -5,12 +5,12 @@
  */
 
 .ve-ui-overlay {
-	font-family: sans-serif;
 	position: absolute;
 	top: 0;
-	right: 0;
 	left: 0;
+	right: 0;
 	z-index: 1;
+	font-family: sans-serif;
 }
 
 .ve-ui-overlay > * {
