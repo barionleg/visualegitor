@@ -1544,12 +1544,12 @@ QUnit.test( 'sanitize', function ( assert ) {
 				html: '<p style="text-shadow: 0 0 1px #000;">F<b style="color:blue;">o</b>o</p>',
 				data: [
 					{ type: 'paragraph' },
-					'F', [ 'o', [ 0 ] ], 'o',
+					'F', [ 'o', [ 1 ] ], 'o',
 					{ type: '/paragraph' },
 					{ type: 'internalList' },
 					{ type: '/internalList' }
 				],
-				store: [ bold ],
+				store: [ bold, bold ],
 				rules: { removeOriginalDomElements: true },
 				msg: 'Original DOM elements removed'
 			},
