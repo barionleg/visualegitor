@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_fb01c208",
+        "filename": "tests/dm/lineardata/ve.dm.ElementLinearData.test.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 1552,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2016-05-19T10:31:08Z",
+      "side": 1,
+      "message": "Wouldn\u0027t we explicitly want to avoid having multiple identical annotations in the store?",
+      "revId": "27a48743abf7f450aaedeafd826e18959995ba8a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
