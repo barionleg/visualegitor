@@ -317,6 +317,25 @@ ve.ce.getOffset = function ( domNode, domOffset ) {
 
 	offset = view.getOffset();
 
+	function countInvisibleNodes( parent, nodeOffset, textOffset ) {
+		var nextSibling,
+			invisibleOffsets = 0,
+			modelOffset = 0;
+
+		while ( ( nextSibling = parent.children[ nodeOffset ] ) ) {
+			if ( nextSibling.constructor.static.invisible ) {
+				invisibleOffsets += nextSibling.getOuterLength();
+			} else {
+				modelOffset += nextSibling.getOuterLength();
+				if ( modelOffset > textOffset ) {
+					break;
+				}
+			}
+			nodeOffset++;
+		}
+		return invisibleOffsets;
+	}
+
 	if ( $.contains( node, startNode ) ) {
 		// node is an ancestor of startNode
 		if ( !view.getModel().isContent() ) {
@@ -326,6 +345,7 @@ ve.ce.getOffset = function ( domNode, domOffset ) {
 		if ( view.getModel().canContainContent() ) {
 			offset += lengthSum;
 		}
+		offset += countInvisibleNodes( view, 0, lengthSum );
 		// else: we're inside an alienated node: throw away all the text node lengths,
 		// because the alien's content has no DM width
 	} else if ( view.parent ) {
@@ -338,6 +358,7 @@ ve.ce.getOffset = function ( domNode, domOffset ) {
 			// needs to be counted.
 			offset += lengthSum;
 		}
+		offset += countInvisibleNodes( view.parent, view.parent.children.indexOf( view ) + 1, lengthSum );
 	} else {
 		throw new Error( 'Node is not in document' );
 	}

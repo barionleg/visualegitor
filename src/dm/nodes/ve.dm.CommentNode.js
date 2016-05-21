@@ -18,20 +18,22 @@ ve.dm.CommentNode = function VeDmCommentNode( element ) {
 	ve.dm.CommentNode.super.call( this, element );
 
 	// Mixin constructors
-	ve.dm.FocusableNode.call( this );
+	//ve.dm.FocusableNode.call( this );
 };
 
 /* Inheritance */
 
 OO.inheritClass( ve.dm.CommentNode, ve.dm.LeafNode );
 
-OO.mixinClass( ve.dm.CommentNode, ve.dm.FocusableNode );
+//OO.mixinClass( ve.dm.CommentNode, ve.dm.FocusableNode );
 
 /* Static Properties */
 
 ve.dm.CommentNode.static.isContent = true;
 
 ve.dm.CommentNode.static.preserveHtmlAttributes = false;
+
+ve.dm.CommentNode.static.isDeletable = false;
 
 ve.dm.CommentNode.static.toDataElement = function ( domElements, converter ) {
 	var text;
