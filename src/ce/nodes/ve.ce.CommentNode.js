@@ -20,16 +20,18 @@ ve.ce.CommentNode = function VeCeCommentNode( model, config ) {
 	ve.ce.CommentNode.super.call( this, model, config );
 
 	// Mixin constructors
-	ve.ce.FocusableNode.call( this, this.$element, config );
+//	ve.ce.FocusableNode.call( this, this.$element, config );
 
 	// DOM changes
 	this.$element.addClass( 've-ce-commentNode' );
+
+	this.$element = $( [] );
 };
 
 /* Inheritance */
 
 OO.inheritClass( ve.ce.CommentNode, ve.ce.LeafNode );
-OO.mixinClass( ve.ce.CommentNode, ve.ce.FocusableNode );
+//OO.mixinClass( ve.ce.CommentNode, ve.ce.FocusableNode );
 
 /* Static Properties */
 
@@ -38,6 +40,8 @@ ve.ce.CommentNode.static.name = 'comment';
 ve.ce.CommentNode.static.primaryCommandName = 'comment';
 
 ve.ce.CommentNode.static.iconWhenInvisible = 'notice';
+
+ve.ce.CommentNode.static.invisible = true;
 
 /* Static Methods */
 
