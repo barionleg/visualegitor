@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_cdb876c5",
+        "filename": "src/ce/ve.ce.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-05-22T10:04:34Z",
+      "side": 1,
+      "message": "At this point, the DOM can contain modifications that are not yet in the model (e.g. text inserted by typing), so the return value of this function call can be misleading.",
+      "revId": "510f3bbf10eb6ce049ec8e5e109e7a0b39d137db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
