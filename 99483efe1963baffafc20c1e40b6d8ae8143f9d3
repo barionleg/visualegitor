@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_74a8058a",
+        "filename": "src/ce/styles/nodes/ve.ce.TableNode.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2016-05-24T14:25:15Z",
+      "side": 1,
+      "message": "Surely \"0\", not \"0p\"?",
+      "revId": "99483efe1963baffafc20c1e40b6d8ae8143f9d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
