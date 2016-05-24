@@ -7,7 +7,8 @@
   "scripts": {
     "test": "grunt test",
     "prepublish": "grunt build",
-    "doc": "jsduck"
+    "predoc": "bundle install",
+    "doc": "bundle exec jsduck --config jsduck.json",
   },
   "homepage": "https://www.mediawiki.org/wiki/VisualEditor",
   "repository": {
