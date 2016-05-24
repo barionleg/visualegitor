@@ -68,6 +68,15 @@ ve.SelectionState.static.newNullSelection = function () {
 /* Methods */
 
 /**
+ * Whether the selection is null
+ *
+ * @return {boolean} true if the focusNode is null (in which case the anchorNode should be null too)
+ */
+ve.SelectionState.prototype.isNull = function () {
+	return this.focusNode === null;
+};
+
+/**
  * Returns the selection with the anchor and focus swapped
  *
  * @return {ve.SelectionState} selection with anchor/focus swapped. Object-identical to this if isCollapsed
@@ -87,16 +96,36 @@ ve.SelectionState.prototype.flip = function () {
 };
 
 /**
- * Whether the selection represents is the same range as another DOM Selection-like object
+ * Whether this and another DOM Selection-like object have the same anchor and the same focus
  *
  * @param {Object} other DOM Selection-like object
- * @return {boolean} True if the anchors/focuses are equal (including null)
+ * @return {boolean} True if the anchors and focuses are equal (including null)
  */
 ve.SelectionState.prototype.equalsSelection = function ( other ) {
 	return this.anchorNode === other.anchorNode &&
 		this.anchorOffset === other.anchorOffset &&
 		this.focusNode === other.focusNode &&
 		this.focusOffset === other.focusOffset;
+};
+
+/**
+ * Whether this and another DOM Selection-like object have the same anchor/focus (possibly flipped)
+ *
+ * @param {Object} other DOM Selection-like object
+ * @return {boolean} True if the anchors and focuses are equal (including null) or equal flipped
+ */
+ve.SelectionState.prototype.equalsRange = function ( other ) {
+	return (
+		this.anchorNode === other.anchorNode &&
+		this.anchorOffset === other.anchorOffset &&
+		this.focusNode === other.focusNode &&
+		this.focusOffset === other.focusOffset
+	) || (
+		this.anchorNode === other.focusNode &&
+		this.anchorOffset === other.focusOffset &&
+		this.focusNode === other.anchorNode &&
+		this.focusOffset === other.anchorOffset
+	);
 };
 
 /**
