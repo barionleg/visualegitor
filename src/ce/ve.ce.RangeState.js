@@ -34,11 +34,6 @@ ve.ce.RangeState = function VeCeRangeState( old, documentNode, selectionOnly ) {
 	this.contentChanged = false;
 
 	/**
-	 * @property {ve.Range|null} veRange The current selection range
-	 */
-	this.veRange = null;
-
-	/**
 	 * @property {ve.ce.BranchNode|null} node The current branch node
 	 */
 	this.node = null;
@@ -100,10 +95,8 @@ ve.ce.RangeState.prototype.saveState = function ( old, documentNode, selectionOn
 	if ( selection.equalsSelection( oldSelection ) ) {
 		// No change; use old values for speed
 		this.selectionChanged = false;
-		this.veRange = old && old.veRange;
 	} else {
 		this.selectionChanged = true;
-		this.veRange = ve.ce.veRangeFromSelection( selection );
 	}
 
 	anchorNodeChanged = oldSelection.anchorNode !== selection.anchorNode;
@@ -119,7 +112,6 @@ ve.ce.RangeState.prototype.saveState = function ( old, documentNode, selectionOn
 			// Check this node belongs to our document
 			if ( this.node && this.node.root !== documentNode ) {
 				this.node = null;
-				this.veRange = null;
 			}
 		}
 	}
@@ -166,4 +158,13 @@ ve.ce.RangeState.prototype.saveState = function ( old, documentNode, selectionOn
 	// are live and mutable, and therefore the offsets may come to point to places that are
 	// misleadingly different from when the selection was saved).
 	this.misleadingSelection = selection;
+};
+
+/**
+ * Whether the selection is null
+ *
+ * @return {boolean} Whether the selection is null
+ */
+ve.ce.RangeState.prototype.isNullSelection = function () {
+	return this.misleadingSelection.isNull();
 };

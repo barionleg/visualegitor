@@ -184,17 +184,3 @@ ve.ce.SurfaceObserver.prototype.pollOnceInternal = function ( signalChanges, sel
 ve.ce.SurfaceObserver.prototype.setTimeout = function ( callback, timeout ) {
 	return setTimeout( callback, timeout );
 };
-
-/**
- * Get the range last observed.
- *
- * Used when you have just polled, but don't want to wait for a 'rangeChange' event.
- *
- * @return {ve.Range|null} Range
- */
-ve.ce.SurfaceObserver.prototype.getRange = function () {
-	if ( !this.rangeState ) {
-		return null;
-	}
-	return this.rangeState.veRange;
-};

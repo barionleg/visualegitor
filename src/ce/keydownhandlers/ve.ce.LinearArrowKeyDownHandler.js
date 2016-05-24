@@ -186,7 +186,10 @@ ve.ce.LinearArrowKeyDownHandler.static.execute = function ( surface, e ) {
 		} else {
 			// Check where the range has moved to
 			surface.surfaceObserver.pollOnceNoCallback();
-			newRange = new ve.Range( surface.surfaceObserver.getRange().to );
+			newRange = new ve.Range( ve.ce.getOffset(
+				surface.nativeSelection.focusNode,
+				surface.nativeSelection.focusOffset
+			) );
 		}
 
 		// Adjust range to use old anchor, if necessary

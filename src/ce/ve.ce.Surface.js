@@ -2618,7 +2618,7 @@ ve.ce.Surface.prototype.renderSelectedContentBranchNode = function () {
  */
 
 ve.ce.Surface.prototype.handleObservedChanges = function ( oldState, newState ) {
-	var newSelection, transaction, removedUnicorns,
+	var newSelection, transaction, oldRange, removedUnicorns,
 		activeNode, coveringRange, nodeRange, containsStart, containsEnd,
 		surface = this,
 		dmDoc = this.getModel().getDocument(),
@@ -2632,6 +2632,7 @@ ve.ce.Surface.prototype.handleObservedChanges = function ( oldState, newState ) 
 			newState.node.unicornAnnotations
 		);
 		if ( transaction ) {
+			oldRange = ve.ce.veRangeFromSelection( oldState.misleadingSelection );
 			this.incRenderLock();
 			try {
 				this.changeModel( transaction );
@@ -2651,21 +2652,22 @@ ve.ce.Surface.prototype.handleObservedChanges = function ( oldState, newState ) 
 		oldState.node.root &&
 		oldState.node instanceof ve.ce.ContentBranchNode
 	) {
+		oldRange = ve.ce.veRangeFromSelection( oldState.misleadingSelection );
 		oldState.node.renderContents();
 	}
-
-	if ( newState.selectionChanged && !(
-		// Ignore when the newRange is just a flipped oldRange
-		oldState &&
-		oldState.veRange &&
-		newState.veRange &&
-		!newState.veRange.isCollapsed() &&
-		oldState.veRange.equalsSelection( newState.veRange )
-	) ) {
-		if ( newState.veRange ) {
-			newSelection = new ve.dm.LinearSelection( dmDoc, newState.veRange );
-		} else {
+	if (
+		newState.selectionChanged &&
+		// Ignore when the new range is just a flipped old range
+		newState.misleadingSelection &&
+		newState.misleadingSelection.equalsRange( oldState.misleadingSelection )
+	) {
+		if ( newState.isNullSelection() ) {
 			newSelection = new ve.dm.NullSelection( dmDoc );
+		} else {
+			newSelection = new ve.dm.LinearSelection(
+				dmDoc,
+				ve.ce.veRangeFromSelection( newState.misleadingSelection )
+			);
 		}
 		this.incRenderLock();
 		try {
@@ -2685,16 +2687,22 @@ ve.ce.Surface.prototype.handleObservedChanges = function ( oldState, newState ) 
 			nodeRange = activeNode.getRange();
 			containsStart = nodeRange.containsRange( new ve.Range( coveringRange.start ) );
 			containsEnd = nodeRange.containsRange( new ve.Range( coveringRange.end ) );
-			// If the range starts xor ends in the active node, but not both, then it must
-			// span an active node boundary, so fixup.
+			// If the range starts or ends in the active node, but not both, then it must
+			// span an active node boundary, so revert the selection.
 			/*jshint bitwise: false*/
 			if ( containsStart ^ containsEnd ) {
-				newSelection = oldState && oldState.veRange ?
-					new ve.dm.LinearSelection( dmDoc, oldState.veRange ) :
-					new ve.dm.NullSelection( dmDoc );
+				if ( oldState && !oldState.isNullSelection() ) {
+					if ( !oldRange ) {
+						oldRange = ve.ce.veRangeFromSelection( oldState.misleadingSelection );
+					}
+					// TODO translate oldRange if newState.contentChanged?
+					newSelection = new ve.dm.LinearSelection( dmDoc, oldRange );
+				} else {
+					newSelection = new ve.dm.NullSelection( dmDoc );
+				}
 				setTimeout( function () {
 					surface.changeModel( null, newSelection );
-					surface .showModelSelection();
+					surface.showModelSelection();
 				} );
 			}
 			/*jshint bitwise: true*/
