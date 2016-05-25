@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_e600e23a",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 2722,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-05-25T16:08:09Z",
+      "side": 1,
+      "message": "Some IME/browser combinations make repeated, seemingly pointless selection changes every time they change candidate text. (For instance you can see four occurrences of changeSel for every one occurrence of changeText in tests/ce/imetests/input-chromium-ubuntu-ibus-japanese-anthy--hiraganaonly.js ). So this might end up with pointless selection changes in the history. Is it important we store selection change history?",
+      "revId": "71ac91becb9e7aff6976c3000ffc320663332e3a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_c6fb1e42",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 2885,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-05-25T16:08:09Z",
+      "side": 1,
+      "message": "Good point about timer debouncing, but you could debounce here, inside the if-block.",
+      "revId": "71ac91becb9e7aff6976c3000ffc320663332e3a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_46f0ae61",
+        "filename": "src/dm/ve.dm.Surface.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-05-25T16:08:09Z",
+      "side": 1,
+      "message": "Ought we to be using a setTimeout loop rather than setInterval? (I guess we could change that in a separate commit)",
+      "revId": "71ac91becb9e7aff6976c3000ffc320663332e3a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
