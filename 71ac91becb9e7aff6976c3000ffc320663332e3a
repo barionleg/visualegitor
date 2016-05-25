@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_b13aa2bd",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 2722,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-05-25T16:39:04Z",
+      "side": 1,
+      "message": "You point out that we\u0027d sometimes miss completed words that are left via cursoring if we didn\u0027t perform this check.\n\nHmm, so we will record some IME jitter (though perhaps that\u0027s no worse than the arbitrary candidate text we were recording every 750ms before). The only way round this I can see would be to trigger the breakpoint check in a ve.EventSequencer afterLoop listener (because the jitter finishes by the end of the tick). But if we do decide to do this, perhaps it could be in a separate commit.",
+      "parentUuid": "ae564743_e600e23a",
+      "revId": "71ac91becb9e7aff6976c3000ffc320663332e3a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_c6fb1e42",
         "filename": "src/ce/ve.ce.Surface.js",
         "patchSetId": 10
