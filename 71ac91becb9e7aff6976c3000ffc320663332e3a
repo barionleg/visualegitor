@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_b1c58292",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 2722,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2016-05-25T16:57:46Z",
+      "side": 1,
+      "message": "I support waiting to rearrange all this in a different commit. :D",
+      "parentUuid": "ae564743_b13aa2bd",
+      "revId": "71ac91becb9e7aff6976c3000ffc320663332e3a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_c6fb1e42",
         "filename": "src/ce/ve.ce.Surface.js",
         "patchSetId": 10
@@ -54,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_f1e41a38",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 2885,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2016-05-25T16:57:46Z",
+      "side": 1,
+      "message": "Once it gets inside the if-block, the call to breakpoint is going to debounce it anyway.",
+      "parentUuid": "ae564743_c6fb1e42",
+      "revId": "71ac91becb9e7aff6976c3000ffc320663332e3a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_46f0ae61",
         "filename": "src/dm/ve.dm.Surface.js",
         "patchSetId": 10
@@ -65,6 +101,24 @@
       "writtenOn": "2016-05-25T16:08:09Z",
       "side": 1,
       "message": "Ought we to be using a setTimeout loop rather than setInterval? (I guess we could change that in a separate commit)",
+      "revId": "71ac91becb9e7aff6976c3000ffc320663332e3a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_d1491637",
+        "filename": "src/dm/ve.dm.Surface.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2016-05-25T16:57:46Z",
+      "side": 1,
+      "message": "Doesn\u0027t make a huge difference, I don\u0027t think -- the only case where we wouldn\u0027t cancel the previous timeout and start a new one here right away would be if tracking is disabled (and that should already be canceling the interval).",
+      "parentUuid": "ae564743_46f0ae61",
       "revId": "71ac91becb9e7aff6976c3000ffc320663332e3a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
