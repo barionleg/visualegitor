@@ -418,7 +418,6 @@ ve.init.Target.prototype.setupToolbar = function ( surface ) {
 	toolbar.$bar.append( surface.getToolbarDialogs().$element );
 	toolbar.$actions.append( actions.$element );
 	this.onContainerScroll();
-
 };
 
 /**
