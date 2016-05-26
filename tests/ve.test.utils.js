@@ -309,7 +309,8 @@
 					return view;
 				},
 				commandRegistry: ve.ui.commandRegistry,
-				sequenceRegistry: ve.ui.sequenceRegistry
+				sequenceRegistry: ve.ui.sequenceRegistry,
+				dataTransferHandlerFactory: ve.ui.dataTransferHandlerFactory
 			},
 			/* jshint -W003 */
 			model = new ve.dm.Surface( doc ),
