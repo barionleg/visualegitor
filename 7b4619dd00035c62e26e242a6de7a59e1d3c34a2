@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0efd9372_556fbec0",
+        "filename": "src/ui/ve.ui.TabIndexScope.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2016-06-01T17:07:39Z",
+      "side": 1,
+      "message": "It\u0027s unconcerned, really. It wants to be passed something-that-jQuery-will-accept. The use of it in the find/replace dialog is passing it a jQuery-wrapped node, which is probably why I used the $ naming scheme.",
+      "parentUuid": "0efd9372_d2062423",
+      "revId": "7b4619dd00035c62e26e242a6de7a59e1d3c34a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0efd9372_d22f449b",
         "filename": "src/ui/ve.ui.TabIndexScope.js",
         "patchSetId": 11
