@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0efd9372_d2062423",
+        "filename": "src/ui/ve.ui.TabIndexScope.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2016-06-01T16:51:25Z",
+      "side": 1,
+      "message": "Is this expected to be a single node, single node wrapped in jQuery, or a list of zero or more nodes? It appears all three are possible at one point or another depending on which part of the code I read.",
+      "revId": "7b4619dd00035c62e26e242a6de7a59e1d3c34a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_d22f449b",
+        "filename": "src/ui/ve.ui.TabIndexScope.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2016-06-01T16:51:25Z",
+      "side": 1,
+      "message": "The \"$\" name suggest it\u0027s already a jQuery object. if not, it should be renamed.",
+      "revId": "7b4619dd00035c62e26e242a6de7a59e1d3c34a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
