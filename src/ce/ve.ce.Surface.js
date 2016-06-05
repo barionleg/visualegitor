@@ -3295,7 +3295,7 @@ ve.ce.Surface.prototype.getViewportRange = function () {
  * @return {boolean} Whether the selection actually changed
  */
 ve.ce.Surface.prototype.showModelSelection = function () {
-	var selection, changed;
+	var selection, changed, modelRange;
 
 	if ( this.deactivated ) {
 		// Defer until view has updated
@@ -3306,9 +3306,25 @@ ve.ce.Surface.prototype.showModelSelection = function () {
 	selection = this.getSelection();
 
 	if ( selection.isNativeCursor() && !this.focusedBlockSlug ) {
-		changed = this.showSelectionState(
-			this.getSelectionState( selection.getModel().getRange() )
-		);
+		modelRange = selection.getModel().getRange();
+
+		if ( this.documentView.documentNode.$element.get( 0 ).contains(
+			this.nativeSelection.focusNode
+		) && modelRange.equals( new ve.Range(
+			ve.ce.getOffset(
+				this.nativeSelection.anchorNode,
+				this.nativeSelection.anchorOffset
+			),
+			ve.ce.getOffset(
+				this.nativeSelection.focusNode,
+				this.nativeSelection.focusOffset
+			)
+		) ) ) {
+			// Current surface selection fits model range; don't change
+			return;
+		}
+
+		changed = this.showSelectionState( this.getSelectionState( modelRange ) );
 		// Support: Chrome
 		// Fixes T131674, which is only triggered with Chromium-style ce=false cursoring
 		// restrictions (but other cases of non-updated cursor holders can probably occur
