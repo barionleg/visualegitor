@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0efd9372_bc5e9c15",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 3320,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-06-13T11:02:06Z",
+      "side": 1,
+      "message": "currentModelRange?",
+      "revId": "1ddc6e1a37cddd0c6941db6bbde9d57e5eed0704",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_9c5bd825",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 3328,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-06-13T11:02:06Z",
+      "side": 1,
+      "message": "maybe just newModelRange",
+      "revId": "1ddc6e1a37cddd0c6941db6bbde9d57e5eed0704",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_5c6170cf",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 3338,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-06-13T11:02:06Z",
+      "side": 1,
+      "message": "you already have this in a local var\n\ncurrentModelRange.equals( newModelRange )",
+      "revId": "1ddc6e1a37cddd0c6941db6bbde9d57e5eed0704",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
