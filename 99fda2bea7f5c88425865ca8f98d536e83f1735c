@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0efd9372_290528c5",
+        "filename": "src/ui/contexts/ve.ui.DesktopContext.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-06-20T12:44:42Z",
+      "side": 1,
+      "message": "looks like you\u0027ve kept floating to be a boolean, but we should use !!floating here because if you somehow end up with floating being undefined it\u0027s a really nasty bug.",
+      "revId": "99fda2bea7f5c88425865ca8f98d536e83f1735c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
