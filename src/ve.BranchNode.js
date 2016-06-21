@@ -26,7 +26,7 @@ ve.BranchNode = function VeBranchNode( children ) {
 
 OO.initClass( ve.BranchNode );
 
-/* Static Methods */
+/* Methods */
 
 /**
  * Traverse a branch node depth-first.
@@ -35,19 +35,17 @@ OO.initClass( ve.BranchNode );
  * @param {Function} callback Callback to execute for each traversed node
  * @param {ve.Node} callback.node Node being traversed
  */
-ve.BranchNode.static.traverse = function ( node, callback ) {
+ve.BranchNode.prototype.traverse = function ( node, callback ) {
 	var i, len,
 		children = node.getChildren();
 
 	for ( i = 0, len = children.length; i < len; i++ ) {
 		callback.call( this, children[ i ] );
-		if ( children[ i ] instanceof ve.ce.BranchNode ) {
-			this.traverse( children[ i ], callback );
+		if ( children[ i ].hasChildren() ) {
+			children[ i ].traverse( callback );
 		}
 	}
 };
-
-/* Methods */
 
 /**
  * Check if the node has children.
