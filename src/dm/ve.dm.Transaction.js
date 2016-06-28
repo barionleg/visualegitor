@@ -735,7 +735,8 @@ ve.dm.Transaction.reversers = {
 		insert: 'remove',
 		remove: 'insert',
 		insertMetadata: 'removeMetadata',
-		removeMetadata: 'insertMetadata'
+		removeMetadata: 'insertMetadata',
+		reversed: { true: false, false: true }
 	},
 	replaceMetadata: { insert: 'remove', remove: 'insert' } // swap .insert with .remove
 };
@@ -1171,7 +1172,8 @@ ve.dm.Transaction.prototype.pushReplaceInternal = function ( remove, insert, rem
 	var op = {
 		type: 'replace',
 		remove: remove,
-		insert: insert
+		insert: insert,
+		reversed: false
 	};
 	if ( remove.length === 0 && insert.length === 0 ) {
 		return; // no-op
