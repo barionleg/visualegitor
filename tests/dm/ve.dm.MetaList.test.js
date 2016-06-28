@@ -47,11 +47,11 @@ QUnit.test( 'onTransact', function ( assert ) {
 				// delta: 0
 				calls: [
 					[ 'pushRetain', 1 ],
-					[ 'pushReplace', doc, 1, 0, [ 'Q', 'u', 'u', 'x' ] ],
+					[ 'pushReplacement', doc, 1, 0, [ 'Q', 'u', 'u', 'x' ] ],
 					[ 'pushRetain', 3 ],
-					[ 'pushReplace', doc, 4, 1, [] ],
+					[ 'pushReplacement', doc, 4, 1, [] ],
 					[ 'pushRetain', 1 ],
-					[ 'pushReplace', doc, 6, 4, [ '!' ] ],
+					[ 'pushReplacement', doc, 6, 4, [ '!' ] ],
 					[ 'pushRetain', 2 ]
 				],
 				msg: 'Transaction inserting, replacing and removing text'
@@ -92,9 +92,9 @@ QUnit.test( 'onTransact', function ( assert ) {
 			{
 				// delta: 0
 				calls: [
-					[ 'pushReplace', doc, 0, 1, [ heading ] ],
+					[ 'pushReplacement', doc, 0, 1, [ heading ] ],
 					[ 'pushRetain', 9 ],
-					[ 'pushReplace', doc, 10, 1, [ { type: '/heading' } ] ]
+					[ 'pushReplacement', doc, 10, 1, [ { type: '/heading' } ] ]
 				],
 				msg: 'Transaction converting paragraph to heading'
 			},
@@ -102,7 +102,7 @@ QUnit.test( 'onTransact', function ( assert ) {
 				// delta: -9
 				calls: [
 					[ 'pushRetain', 1 ],
-					[ 'pushReplace', doc, 1, 9, [] ],
+					[ 'pushReplacement', doc, 1, 9, [] ],
 					[ 'pushRetain', 1 ]
 				],
 				msg: 'Transaction blanking paragraph'
@@ -111,7 +111,7 @@ QUnit.test( 'onTransact', function ( assert ) {
 				// delta: +11
 				calls: [
 					[ 'pushRetain', 11 ],
-					[ 'pushReplace', doc, 11, 0, ve.dm.example.withMetaPlainData ]
+					[ 'pushReplacement', doc, 11, 0, ve.dm.example.withMetaPlainData ]
 				],
 				msg: 'Transaction adding second paragraph at the end'
 			},
@@ -119,12 +119,12 @@ QUnit.test( 'onTransact', function ( assert ) {
 				// delta: -2
 				calls: [
 					[ 'pushRetain', 1 ],
-					[ 'pushReplace', doc, 1, 7, [] ],
+					[ 'pushReplacement', doc, 1, 7, [] ],
 					[ 'pushRetain', 1 ],
 					[ 'pushReplaceMetadata', [ ve.dm.example.withMetaMetaData[ 9 ][ 0 ] ], [] ],
 					[ 'pushRetain', 2 ],
 					// The two operations below have to be in this order because of bug 46138
-					[ 'pushReplace', doc, 11, 0, [ { type: 'paragraph' }, 'a', 'b', 'c', { type: '/paragraph' } ] ],
+					[ 'pushReplacement', doc, 11, 0, [ { type: 'paragraph' }, 'a', 'b', 'c', { type: '/paragraph' } ] ],
 					[ 'pushReplaceMetadata', [], [ comment ] ]
 				],
 				msg: 'Transaction adding and removing text and metadata'

@@ -199,6 +199,81 @@ ve.dm.Converter.static.renderHtmlAttributeList = function ( originalDomElements,
 	}
 };
 
+/**
+ * Modify linear model data in-place to move inline meta items out of content context
+ *
+ * All branch node start items must have item.internal.metaItems = []
+ * All inline meta items must have item.internal.isInlineMeta = true
+ *
+ * After the method completes, each inline meta item will be moved downward to the nearest
+ * block position (i.e. just after the close branch node item), and has these properties:
+ * item.internal.loadBranchNodeIndex - corresponding branchNode's item.originalDomElementsIndex
+ * item.internal.loadBranchNodeOffset - offset at load time within the branchNode (0 for start).
+ * Each meta item is appended to the corresponding branchNode's item.internal.metaItems .
+ *
+ * @param {Array} data Linear model data to modify in place
+ */
+ve.dm.Converter.static.moveInlineMetaItems = function ( data ) {
+	var i, item, branchNode, j, pending,
+		ancestors = [],
+		pendingMetaItems = [];
+
+	function isBranchNode( ancestor ) {
+		return !!ve.getProp( ancestor.item, 'internal', 'metaItems' );
+	}
+
+	for ( i = 0; i < data.length; i++ ) {
+		item = data[ i ];
+		if ( Array.isArray( item ) ) {
+			// Ignore annotations
+			item = item[ 0 ];
+		}
+		if ( !item.type ) {
+			// Item is not a node
+			continue;
+		}
+		if ( item.type.startsWith( '/' ) ) {
+			// Item is a node end
+			branchNode = ancestors.pop();
+			if ( isBranchNode( branchNode ) ) {
+				for ( j = 0; j < pendingMetaItems.length; j++ ) {
+					pending = pendingMetaItems[ j ];
+					if ( pending.branchNode.item !== branchNode.item ) {
+						continue;
+					}
+					pending.openItem.internal.loadBranchNodeIndex = branchNode.item.originalDomElementsIndex;
+					pending.openItem.internal.loadBranchNodeOffset = pending.offset;
+					pendingMetaItems.splice( j, 1 );
+					j--;
+					// TODO: what if the meta item was originally annotated?
+					data.splice( i + 1, 0, pending.openItem, pending.closeItem );
+					i += 2;
+				}
+			}
+		} else {
+			// Item is a node start
+			if ( ve.getProp( item, 'internal', 'isInlineMeta' ) ) {
+				// This is an inline meta item: move it
+				delete item.internal.isInlineMeta;
+				branchNode = ancestors.slice().reverse().find( isBranchNode );
+				branchNode.item.internal.metaItems.push( item );
+				pendingMetaItems.push( {
+					openItem: item,
+					closeItem: data[ i + 1 ],
+					branchNode: branchNode,
+					offset: i - branchNode.offset - 1
+				} );
+				// Remove this item and the immediately following close item
+				data.splice( i, 2 );
+				// Prepare to rescan this index
+				i--;
+			} else {
+				ancestors.push( { item: item, offset: i } );
+			}
+		}
+	}
+};
+
 /* Methods */
 
 /**
@@ -400,6 +475,10 @@ ve.dm.Converter.prototype.createDataElements = function ( modelClass, domElement
 	}
 	if ( dataElements.length ) {
 		dataElements[ 0 ].originalDomElementsIndex = this.store.index( domElements, domElements.map( ve.getNodeHtml ).join( '' ) );
+		if ( OO.isSubclass( modelClass, ve.dm.BranchNode ) ) {
+			ve.setProp( dataElements[ 0 ], 'internal', 'metaItems', [] );
+			ve.setProp( dataElements[ 0 ], 'internal', 'changesSinceLoad', 0 );
+		}
 	}
 	return dataElements;
 };
@@ -432,7 +511,7 @@ ve.dm.Converter.prototype.getDomElementFromDataAnnotation = function ( dataAnnot
  * @return {ve.dm.Document} Document model
  */
 ve.dm.Converter.prototype.getModelFromDom = function ( doc, options ) {
-	var linearData, refData, innerWhitespace,
+	var data, linearData, refData, innerWhitespace,
 		store = new ve.dm.IndexValueStore(),
 		internalList = new ve.dm.InternalList();
 
@@ -448,10 +527,10 @@ ve.dm.Converter.prototype.getModelFromDom = function ( doc, options ) {
 	// Possibly do things with doc and the head in the future
 
 	// Generate data
-	linearData = new ve.dm.FlatLinearData(
-		store,
-		this.getDataFromDomSubtree( doc.body )
-	);
+	data = this.getDataFromDomSubtree( doc.body );
+	this.constructor.static.moveInlineMetaItems( data );
+
+	linearData = new ve.dm.FlatLinearData( store, data );
 	refData = this.internalList.convertToData( this, doc );
 	linearData.batchSplice( linearData.getLength(), 0, refData );
 	innerWhitespace = this.getInnerWhitespace( linearData );
@@ -579,7 +658,7 @@ ve.dm.Converter.prototype.getDataFromDomSubtree = function ( domElement, wrapper
 		// us, so we can strip it on the way out
 		wrappingParagraph = {
 			type: 'paragraph',
-			internal: { generated: 'wrapper' }
+			internal: { generated: 'wrapper', metaItems: [] }
 		};
 		data.push( wrappingParagraph );
 		context.inWrapper = true;
@@ -653,6 +732,9 @@ ve.dm.Converter.prototype.getDataFromDomSubtree = function ( domElement, wrapper
 		data.push( wrapperElement );
 	}
 	// Add contents
+	function setInlineMeta( element ) {
+		ve.setProp( element, 'internal', 'isInlineMeta', true );
+	}
 	for ( i = 0; i < domElement.childNodes.length; i++ ) {
 		childNode = domElement.childNodes[ i ];
 		switch ( childNode.nodeType ) {
@@ -718,6 +800,10 @@ ve.dm.Converter.prototype.getDataFromDomSubtree = function ( domElement, wrapper
 				} else {
 					// Node or meta item
 					if ( modelClass.prototype instanceof ve.dm.MetaItem ) {
+						if ( context.expectingContent ) {
+							childDataElements.forEach( setInlineMeta );
+						}
+
 						// No additional processing needed
 						// Write to data and continue
 						if ( childDataElements.length === 1 ) {
@@ -1243,7 +1329,7 @@ ve.dm.Converter.prototype.getDomSubtreeFromData = function ( data, container, in
 			Array.isArray( data[ i ] ) ||
 			(
 				data[ i ].annotations !== undefined && (
-					this.metaItemFactory.lookup( data[ i ].type ) ||
+					ve.dm.LinearData.static.isMetaItem( data[ i ] ) ||
 					this.nodeFactory.isNodeContent( data[ i ].type )
 				)
 			)
@@ -1257,7 +1343,7 @@ ve.dm.Converter.prototype.getDomSubtreeFromData = function ( data, container, in
 					Array.isArray( data[ i ] ) ||
 					(
 						data[ i ].annotations !== undefined && (
-							this.metaItemFactory.lookup( data[ i ].type ) ||
+							ve.dm.LinearData.static.isMetaItem( data[ i ] ) ||
 							this.nodeFactory.isNodeContent( data[ i ].type )
 						)
 					)
