@@ -673,24 +673,62 @@ ve.dm.Document.prototype.cloneWithData = function ( data, copyInternalList ) {
  * @return {Array} Data with metadata interleaved
  */
 ve.dm.Document.prototype.getFullData = function ( range, edgeMetadata ) {
-	var j, jLen,
+	var j, jLen, item, metaItems, metaItem, offset,
+		insertedMetaItems = [],
+		insertions = {},
 		i = range ? range.start : 0,
 		iLen = range ? range.end : this.data.getLength(),
 		result = [];
 	if ( edgeMetadata === undefined ) {
 		edgeMetadata = !range;
 	}
-	while ( i <= iLen ) {
-		if ( this.metadata.getData( i ) && ( edgeMetadata || ( i !== range.start && i !== range.end ) ) ) {
-			for ( j = 0, jLen = this.metadata.getData( i ).length; j < jLen; j++ ) {
-				result.push( this.metadata.getData( i )[ j ] );
-				result.push( { type: '/' + this.metadata.getData( i )[ j ].type } );
+	for ( ; i < iLen; i++ ) {
+		item = this.data.getData( i );
+		if (
+			OO.isSubclass( ve.dm.modelRegistry.lookup( item.type ), ve.dm.MetaItem ) &&
+			insertedMetaItems.indexOf( item ) !== -1
+		) {
+			// Already inserted; skip this item and its matching close tag
+			i += 1;
+			continue;
+		}
+		metaItems = ve.getProp( item, 'internal', 'metaItems' ) || [];
+		if ( !ve.getProp( item, 'internal', 'changesSinceLoad' ) ) {
+			// No changes, so restore meta item offsets
+			for ( j = 0, jLen = metaItems.length; j < jLen; j++ ) {
+				metaItem = ve.cloneObject( metaItems[ j ] );
+				metaItem.internal = ve.cloneObject( metaItem.internal );
+				offset = i + metaItem.internal.loadBranchNodeOffset;
+				if ( !( offset in insertions ) ) {
+					insertions[ offset ] = [];
+				}
+				delete metaItem.internal.loadBranchIndex;
+				delete metaItem.internal.loadBranchOffset;
+				if ( Object.keys( metaItem.internal ).length === 0 ) {
+					delete metaItem.internal;
+				}
+				insertions[ offset ].push( metaItem );
+				insertedMetaItems.push( metaItems[ j ] );
 			}
 		}
-		if ( i < iLen ) {
-			result.push( this.data.getData( i ) );
+		if ( item.internal ) {
+			item = ve.cloneObject( item );
+			item.internal = ve.cloneObject( item.internal );
+			delete item.internal.branchIndex;
+			delete item.internal.changesSinceLoad;
+			delete item.internal.metaItems;
+			if ( Object.keys( item.internal ).length === 0 ) {
+				delete item.internal;
+			}
 		}
-		i++;
+		result.push( item );
+		if ( insertions[ i ] && ( edgeMetadata || i < range.end - 1 ) ) {
+			for ( j = 0, jLen = insertions[ i ].length; j < jLen; j++ ) {
+				metaItem = insertions[ i ][ j ];
+				result.push( metaItem );
+				result.push( { type: '/' + metaItem.type } );
+			}
+		}
 	}
 	return result;
 };

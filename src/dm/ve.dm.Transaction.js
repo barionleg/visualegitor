@@ -26,6 +26,7 @@ ve.dm.Transaction = function VeDmTransaction( operations ) {
 	this.operations = operations || [];
 	this.applied = false;
 	this.author = null;
+	this.isReversed = false;
 };
 
 /* Inheritance */
@@ -173,7 +174,10 @@ ve.dm.Transaction.prototype.clone = function () {
  * @return {ve.dm.Transaction} Reverse of this transaction
  */
 ve.dm.Transaction.prototype.reversed = function () {
-	var i, len, op, newOp, reverse, prop, tx = new this.constructor();
+	var i, len, op, newOp, reverse, prop,
+		tx = new this.constructor();
+
+	tx.isReversed = !this.isReversed;
 	for ( i = 0, len = this.operations.length; i < len; i++ ) {
 		op = this.operations[ i ];
 		newOp = ve.copy( op );
