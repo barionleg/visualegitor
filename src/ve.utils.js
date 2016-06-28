@@ -1827,3 +1827,16 @@ ve.repeatString = function ( str, n ) {
 ve.isUnmodifiedLeftClick = function ( e ) {
 	return e && e.which && e.which === OO.ui.MouseButtons.LEFT && !( e.shiftKey || e.altKey || e.ctrlKey || e.metaKey );
 };
+
+/**
+ * Test whether one class is a subclass of another (or equal to it).
+ *
+ * TODO: Update OOjs-core and use its version instead
+ *
+ * @param {Function|null|undefined} testFn The class to be tested
+ * @param {Function} baseFn The base class
+ * @return {boolean} Whether testFn is a subclass of baseFn (or equal to it)
+ */
+ve.isSubclass = function ( testFn, baseFn ) {
+	return testFn && ( testFn === baseFn || testFn.prototype instanceof baseFn );
+};
