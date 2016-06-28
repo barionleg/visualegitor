@@ -203,13 +203,18 @@ ve.ce.BranchNode.prototype.onSplice = function ( index ) {
 		removals[ i ].$element.detach();
 	}
 	if ( args.length >= 3 ) {
-		if ( index ) {
-			// Get the element before the insertion point
+		// Get the element before the insertion point, if any
+		while ( index > 0 ) {
 			$anchor = this.children[ index - 1 ].$element.last();
+			if ( $anchor.length > 0 ) {
+				break;
+			}
+			// Else this is a DOM-node-less element (e.g. a MetaItem); move to previous element
+			index--;
 		}
 		for ( i = args.length - 1; i >= 2; i-- ) {
 			args[ i ].attach( this );
-			if ( index ) {
+			if ( index > 0 ) {
 				// DOM equivalent of $anchor.after( args[i].$element );
 				afterAnchor = $anchor[ 0 ].nextSibling;
 				parentNode = $anchor[ 0 ].parentNode;
