@@ -28,14 +28,16 @@ OO.initClass( ve.dm.TransactionBuilder );
  * @param {ve.dm.Document} doc Document in pre-transaction state
  * @param {ve.Range} range Range of data to remove
  * @param {Array} data Data to insert
- * @param {boolean} [removeMetadata=false] Remove metadata instead of collapsing it
  * @return {ve.dm.Transaction} Transaction that replaces data
  * @throws {Error} Invalid range
  */
-ve.dm.TransactionBuilder.static.newFromReplacement = function ( doc, range, data, removeMetadata ) {
+ve.dm.TransactionBuilder.static.newFromReplacement = function ( doc, range, data ) {
 	var endOffset,
 		txBuilder = new ve.dm.TransactionBuilder();
-	endOffset = txBuilder.pushRemoval( doc, 0, range, removeMetadata );
+	if ( arguments.length > 3 ) {
+		throw new Error( 'removeMetadata argument is no longer supported' );
+	}
+	endOffset = txBuilder.pushRemoval( doc, 0, range );
 	endOffset = txBuilder.pushInsertion( doc, endOffset, endOffset, data );
 	txBuilder.pushFinalRetain( doc, endOffset );
 	return txBuilder.getTransaction();
@@ -80,13 +82,15 @@ ve.dm.TransactionBuilder.static.newFromInsertion = function ( doc, offset, data 
  * @method
  * @param {ve.dm.Document} doc Document in pre-transaction state
  * @param {ve.Range} range Range of data to remove
- * @param {boolean} [removeMetadata=false] Remove metadata instead of collapsing it
  * @return {ve.dm.Transaction} Transaction that removes data
  * @throws {Error} Invalid range
  */
-ve.dm.TransactionBuilder.static.newFromRemoval = function ( doc, range, removeMetadata ) {
+ve.dm.TransactionBuilder.static.newFromRemoval = function ( doc, range ) {
 	var txBuilder = new ve.dm.TransactionBuilder(),
-		endOffset = txBuilder.pushRemoval( doc, 0, range, removeMetadata );
+		endOffset = txBuilder.pushRemoval( doc, 0, range );
+	if ( arguments.length > 2 ) {
+		throw new Error( 'removeMetadata argument is no longer supported' );
+	}
 
 	// Ensure no transaction leaves the document in a completely empty state
 	if ( range.start === 0 && range.end >= doc.getInternalList().getListNode().getOuterRange().start ) {
@@ -116,7 +120,7 @@ ve.dm.TransactionBuilder.static.newFromRemoval = function ( doc, range, removeMe
  * @return {ve.dm.Transaction} Transaction that inserts the nodes and updates the internal list
  */
 ve.dm.TransactionBuilder.static.newFromDocumentInsertion = function ( doc, offset, newDoc, newDocRange ) {
-	var i, len, listMerge, data, metadata, listData, listMetadata, linearData,
+	var i, len, listMerge, data, listData, linearData,
 		oldEndOffset, newEndOffset, txBuilder, insertion, spliceItemRange, spliceListNodeRange,
 		listNode = doc.internalList.getListNode(),
 		listNodeRange = listNode.getRange(),
@@ -126,22 +130,13 @@ ve.dm.TransactionBuilder.static.newFromDocumentInsertion = function ( doc, offse
 
 	if ( newDocRange ) {
 		data = new ve.dm.ElementLinearData( doc.getStore(), newDoc.getData( newDocRange, true ) );
-		metadata = new ve.dm.MetaLinearData( doc.getStore(), newDoc.getMetadata( newDocRange, true ) );
 	} else {
-		// Get the data and the metadata, but skip over the internal list
+		// Get the data, but skip over the internal list
 		data = new ve.dm.ElementLinearData( doc.getStore(),
 			newDoc.getData( new ve.Range( 0, newListNodeOuterRange.start ), true ).concat(
 				newDoc.getData( new ve.Range( newListNodeOuterRange.end, newDoc.data.getLength() ), true )
 			)
 		);
-		metadata = new ve.dm.MetaLinearData( doc.getStore(),
-			newDoc.getMetadata( new ve.Range( 0, newListNodeOuterRange.start ), true ).concat(
-				newListNodeOuterRange.end < newDoc.data.getLength() ? newDoc.getMetadata(
-					new ve.Range( newListNodeOuterRange.end + 1, newDoc.data.getLength() ), true
-				) : []
-			)
-		);
-		// TODO deal with metadata right before and right after the internal list
 	}
 
 	// Merge the stores
@@ -168,12 +163,9 @@ ve.dm.TransactionBuilder.static.newFromDocumentInsertion = function ( doc, offse
 		);
 		listData = linearData.data
 			.concat( doc.getData( new ve.Range( oldEndOffset, listNodeRange.end ), true ) );
-		listMetadata = newDoc.getMetadata( new ve.Range( newListNodeRange.start, newEndOffset ), true )
-			.concat( doc.getMetadata( new ve.Range( oldEndOffset, listNodeRange.end ), true ) );
 	} else {
 		// newDoc is brand new, so use doc's internal list as a base
 		listData = doc.getData( listNodeRange, true );
-		listMetadata = doc.getMetadata( listNodeRange, true );
 	}
 	for ( i = 0, len = listMerge.newItemRanges.length; i < len; i++ ) {
 		linearData = new ve.dm.ElementLinearData(
@@ -181,9 +173,6 @@ ve.dm.TransactionBuilder.static.newFromDocumentInsertion = function ( doc, offse
 			newDoc.getData( listMerge.newItemRanges[ i ], true )
 		);
 		listData = listData.concat( linearData.data );
-		// We don't have to worry about merging metadata at the edges, because there can't be
-		// metadata between internal list items
-		listMetadata = listMetadata.concat( newDoc.getMetadata( listMerge.newItemRanges[ i ], true ) );
 	}
 
 	txBuilder = new ve.dm.TransactionBuilder();
@@ -195,10 +184,10 @@ ve.dm.TransactionBuilder.static.newFromDocumentInsertion = function ( doc, offse
 		// Fix up the node insertion
 		insertion = doc.fixupInsertion( data.data, offset );
 		txBuilder.pushRetain( insertion.offset );
-		txBuilder.pushReplace( doc, insertion.offset, insertion.remove, insertion.data, metadata.data );
+		txBuilder.pushReplace( doc, insertion.offset, insertion.remove, insertion.data );
 		txBuilder.pushRetain( listNodeRange.start - ( insertion.offset + insertion.remove ) );
 		txBuilder.pushReplace( doc, listNodeRange.start, listNodeRange.end - listNodeRange.start,
-			listData, listMetadata
+			listData
 		);
 		txBuilder.pushFinalRetain( doc, listNodeRange.end );
 	} else if ( offset >= listNodeRange.end ) {
@@ -209,10 +198,10 @@ ve.dm.TransactionBuilder.static.newFromDocumentInsertion = function ( doc, offse
 		insertion = doc.fixupInsertion( data.data, offset );
 		txBuilder.pushRetain( listNodeRange.start );
 		txBuilder.pushReplace( doc, listNodeRange.start, listNodeRange.end - listNodeRange.start,
-			listData, listMetadata
+			listData
 		);
 		txBuilder.pushRetain( insertion.offset - listNodeRange.end );
-		txBuilder.pushReplace( doc, insertion.offset, insertion.remove, insertion.data, metadata.data );
+		txBuilder.pushReplace( doc, insertion.offset, insertion.remove, insertion.data );
 		txBuilder.pushFinalRetain( doc, insertion.offset + insertion.remove );
 	} else if ( offset >= listNodeRange.start && offset <= listNodeRange.end ) {
 		// offset is within listNodeRange
@@ -237,12 +226,10 @@ ve.dm.TransactionBuilder.static.newFromDocumentInsertion = function ( doc, offse
 		}
 		ve.batchSplice( listData, spliceItemRange.start - spliceListNodeRange.start,
 			spliceItemRange.end - spliceItemRange.start, data.data );
-		ve.batchSplice( listMetadata, spliceItemRange.start - spliceListNodeRange.start,
-			spliceItemRange.end - spliceItemRange.start, metadata.data );
 
 		txBuilder.pushRetain( listNodeRange.start );
 		txBuilder.pushReplace( doc, listNodeRange.start, listNodeRange.end - listNodeRange.start,
-			listData, listMetadata
+			listData
 		);
 		txBuilder.pushFinalRetain( doc, listNodeRange.end );
 	}
@@ -387,127 +374,6 @@ ve.dm.TransactionBuilder.static.newFromAnnotation = function ( doc, range, metho
 		txBuilder.pushStopAnnotating( method, index );
 	}
 	txBuilder.pushFinalRetain( doc, range.end );
-	return txBuilder.getTransaction();
-};
-
-/**
- * Generate a transaction that inserts metadata elements.
- *
- * @static
- * @method
- * @param {ve.dm.Document} doc Document in pre-transaction state
- * @param {number} offset Offset of element
- * @param {number} index Index of metadata cursor within element
- * @param {Array} newElements New elements to insert
- * @return {ve.dm.Transaction} Transaction that inserts the metadata elements
- */
-ve.dm.TransactionBuilder.static.newFromMetadataInsertion = function ( doc, offset, index, newElements ) {
-	var txBuilder = new ve.dm.TransactionBuilder(),
-		data = doc.metadata,
-		elements = data.getData( offset ) || [];
-
-	if ( newElements.length === 0 ) {
-		return txBuilder.getTransaction(); // no-op
-	}
-
-	// Retain up to element
-	txBuilder.pushRetain( offset );
-	// Retain up to metadata element (second dimension)
-	txBuilder.pushRetainMetadata( index );
-	// Insert metadata elements
-	txBuilder.pushReplaceMetadata(
-		[], newElements
-	);
-	// Retain up to end of metadata elements (second dimension)
-	txBuilder.pushRetainMetadata( elements.length - index );
-	// Retain to end of document
-	txBuilder.pushFinalRetain( doc, offset, elements.length );
-	return txBuilder.getTransaction();
-};
-
-/**
- * Generate a transaction that removes metadata elements.
- *
- * @static
- * @method
- * @param {ve.dm.Document} doc Document in pre-transaction state
- * @param {number} offset Offset of element
- * @param {ve.Range} range Range of metadata to remove
- * @return {ve.dm.Transaction} Transaction that removes metadata elements
- * @throws {Error} Cannot remove metadata from empty list
- * @throws {Error} Range out of bounds
- */
-ve.dm.TransactionBuilder.static.newFromMetadataRemoval = function ( doc, offset, range ) {
-	var selection,
-		txBuilder = new ve.dm.TransactionBuilder(),
-		data = doc.metadata,
-		elements = data.getData( offset ) || [];
-
-	if ( !elements.length ) {
-		throw new Error( 'Cannot remove metadata from empty list' );
-	}
-
-	if ( range.start < 0 || range.end > elements.length ) {
-		throw new Error( 'Range out of bounds' );
-	}
-
-	selection = elements.slice( range.start, range.end );
-
-	if ( selection.length === 0 ) {
-		return txBuilder.getTransaction(); // no-op.
-	}
-
-	// Retain up to element
-	txBuilder.pushRetain( offset );
-	// Retain up to metadata element (second dimension)
-	txBuilder.pushRetainMetadata( range.start );
-	// Remove metadata elements
-	txBuilder.pushReplaceMetadata(
-		selection, []
-	);
-	// Retain up to end of metadata elements (second dimension)
-	txBuilder.pushRetainMetadata( elements.length - range.end );
-	// Retain to end of document (unless we're already off the end )
-	txBuilder.pushFinalRetain( doc, offset, elements.length );
-	return txBuilder.getTransaction();
-};
-
-/**
- * Generate a transaction that replaces a single metadata element.
- *
- * @static
- * @method
- * @param {ve.dm.Document} doc Document in pre-transaction state
- * @param {number} offset Offset of element
- * @param {number} index Index of metadata cursor within element
- * @param {Object} newElement New element to insert
- * @return {ve.dm.Transaction} Transaction that replaces a metadata element
- * @throws {Error} Metadata index out of bounds
- */
-ve.dm.TransactionBuilder.static.newFromMetadataElementReplacement = function ( doc, offset, index, newElement ) {
-	var oldElement,
-		txBuilder = new ve.dm.TransactionBuilder(),
-		data = doc.getMetadata(),
-		elements = data[ offset ] || [];
-
-	if ( index >= elements.length ) {
-		throw new Error( 'Metadata index out of bounds' );
-	}
-
-	oldElement = elements[ index ];
-
-	// Retain up to element
-	txBuilder.pushRetain( offset );
-	// Retain up to metadata element (second dimension)
-	txBuilder.pushRetainMetadata( index );
-	// Remove metadata elements
-	txBuilder.pushReplaceMetadata(
-		[ oldElement ], [ newElement ]
-	);
-	// Retain up to end of metadata elements (second dimension)
-	txBuilder.pushRetainMetadata( elements.length - index - 1 );
-	// Retain to end of document (unless we're already off the end )
-	txBuilder.pushFinalRetain( doc, offset, elements.length );
 	return txBuilder.getTransaction();
 };
 
@@ -734,19 +600,10 @@ ve.dm.TransactionBuilder.prototype.getTransaction = function () {
  * @method
  * @param {ve.dm.Document} doc The document in the state to which the transaction applies
  * @param {number} offset Final offset edited by the transaction up to this point.
- * @param {number} [metaOffset=0] Final metadata offset edited, if non-zero.
  */
-ve.dm.TransactionBuilder.prototype.pushFinalRetain = function ( doc, offset, metaOffset ) {
-	var data = doc.data,
-		metadata = doc.metadata,
-		finalMetadata = metadata.getData( data.getLength() );
+ve.dm.TransactionBuilder.prototype.pushFinalRetain = function ( doc, offset ) {
 	if ( offset < doc.data.getLength() ) {
 		this.pushRetain( doc.data.getLength() - offset );
-		metaOffset = 0;
-	}
-	// if there is trailing metadata, push a final retainMetadata
-	if ( finalMetadata !== undefined && finalMetadata.length > 0 ) {
-		this.transaction.pushRetainMetadata( finalMetadata.length - ( metaOffset || 0 ) );
 	}
 };
 
@@ -776,46 +633,15 @@ ve.dm.TransactionBuilder.prototype.pushRetain = function ( length ) {
 };
 
 /**
- * Add a retain metadata operation.
- * // TODO: this is a copy/paste of pushRetain (at the moment). Consider a refactor.
- *
- * @method
- * @param {number} length Length of content data to retain
- * @throws {Error} Cannot retain backwards
- */
-ve.dm.TransactionBuilder.prototype.pushRetainMetadata = function ( length ) {
-	var end;
-	if ( length < 0 ) {
-		throw new Error( 'Invalid retain length, cannot retain backwards:' + length );
-	}
-	if ( length ) {
-		end = this.transaction.operations.length - 1;
-		if (
-			this.transaction.operations.length &&
-			this.transaction.operations[ end ].type === 'retainMetadata'
-		) {
-			this.transaction.operations[ end ].length += length;
-		} else {
-			this.transaction.pushRetainMetadataOp( length );
-		}
-	}
-};
-
-/**
  * Adds a replace op to remove the desired range and, where required, splices in retain ops
  * to prevent the deletion of undeletable nodes.
- *
- * An extra `replaceMetadata` operation might be pushed at the end if the
- * affected region contains metadata; see
- * {@link ve.dm.TransactionBuilder#pushReplace} for details.
  *
  * @param {ve.dm.Document} doc The document in the state to which the transaction applies
  * @param {number} removeStart Offset to start removing from
  * @param {number} removeEnd Offset to remove to
- * @param {boolean} [removeMetadata=false] Remove metadata instead of collapsing it
  * @return {number} End offset of the removal
  */
-ve.dm.TransactionBuilder.prototype.addSafeRemoveOps = function ( doc, removeStart, removeEnd, removeMetadata ) {
+ve.dm.TransactionBuilder.prototype.addSafeRemoveOps = function ( doc, removeStart, removeEnd ) {
 	var i, queuedRetain,
 		retainStart = removeStart,
 		undeletableStackDepth = 0;
@@ -828,7 +654,7 @@ ve.dm.TransactionBuilder.prototype.addSafeRemoveOps = function ( doc, removeStar
 					if ( queuedRetain ) {
 						this.pushRetain( queuedRetain );
 					}
-					this.pushReplace( doc, removeStart, i - removeStart, [], removeMetadata ? [] : undefined );
+					this.pushReplace( doc, removeStart, i - removeStart, [] );
 					retainStart = i;
 				}
 				undeletableStackDepth++;
@@ -845,7 +671,7 @@ ve.dm.TransactionBuilder.prototype.addSafeRemoveOps = function ( doc, removeStar
 		if ( queuedRetain ) {
 			this.pushRetain( queuedRetain );
 		}
-		this.pushReplace( doc, removeStart, removeEnd - removeStart, [], removeMetadata ? [] : undefined );
+		this.pushReplace( doc, removeStart, removeEnd - removeStart, [] );
 		retainStart = removeEnd;
 	}
 	return retainStart;
@@ -858,169 +684,54 @@ ve.dm.TransactionBuilder.prototype.addSafeRemoveOps = function ( doc, removeStar
  * @method
  * @param {Array} remove Data removed.
  * @param {Array} insert Data to insert.
- * @param {Array|undefined} removeMetadata Metadata removed.
- * @param {Array} insertMetadata Metadata to insert.
  * @param {number} [insertedDataOffset] Inserted data offset
  * @param {number} [insertedDataLength] Inserted data length
  */
-ve.dm.TransactionBuilder.prototype.pushReplaceInternal = function ( remove, insert, removeMetadata, insertMetadata, insertedDataOffset, insertedDataLength ) {
+ve.dm.TransactionBuilder.prototype.pushReplaceInternal = function ( remove, insert, insertedDataOffset, insertedDataLength ) {
 	if ( remove.length === 0 && insert.length === 0 ) {
 		return; // no-op
 	}
-	this.transaction.pushReplaceOp( remove, insert, removeMetadata, insertMetadata, insertedDataOffset, insertedDataLength );
+	this.transaction.pushReplaceOp( remove, insert, insertedDataOffset, insertedDataLength );
 };
 
 /**
- * Add a replace operation, keeping metadata in sync if required.
- *
- * Note that metadata attached to removed content is moved so that it
- * attaches just before the inserted content.  If there is
- * metadata attached to the removed content but there is no inserted
- * content, then an extra `replaceMetadata` operation is pushed in order
- * to properly insert the merged metadata before the character immediately
- * after the removed content. (Note that there is an extra metadata element
- * after the final data element; if the removed region is at the very end of
- * the document, the inserted `replaceMetadata` operation targets this
- * final metadata element.)
+ * Add a replace operation
  *
  * @method
  * @param {ve.dm.Document} doc The document in the state to which the transaction applies
  * @param {number} offset Offset to start at
  * @param {number} removeLength Number of data items to remove
  * @param {Array} insert Data to insert
- * @param {Array} [insertMetadata] Overwrite the metadata with this data, rather than collapsing it
  * @param {number} [insertedDataOffset] Offset of the originally inserted data in the resulting operation data
  * @param {number} [insertedDataLength] Length of the originally inserted data in the resulting operation data
  */
-ve.dm.TransactionBuilder.prototype.pushReplace = function ( doc, offset, removeLength, insert, insertMetadata, insertedDataOffset, insertedDataLength ) {
-	var extraMetadata, end, lastOp, penultOp, range, remove, removeMetadata,
-		isRemoveEmpty, isInsertEmpty, mergedMetadata;
+ve.dm.TransactionBuilder.prototype.pushReplace = function ( doc, offset, removeLength, insert, insertedDataOffset, insertedDataLength ) {
+	var op, lastOp;
 
 	if ( removeLength === 0 && insert.length === 0 ) {
 		// Don't push no-ops
 		return;
 	}
 
-	end = this.transaction.operations.length - 1;
-	lastOp = end >= 0 ? this.transaction.operations[ end ] : null;
-	penultOp = end >= 1 ? this.transaction.operations[ end - 1 ] : null;
-	range = new ve.Range( offset, offset + removeLength );
-	remove = doc.getData( range );
-	removeMetadata = doc.getMetadata( range );
-	// ve.compare compares arrays as objects, so no need to check against
-	// an array of the same length for emptiness.
-	isRemoveEmpty = ve.compare( removeMetadata, [] );
-	isInsertEmpty = insertMetadata && ve.compare( insertMetadata, [] );
-	mergedMetadata = [];
-
-	if ( !insertMetadata && !isRemoveEmpty ) {
-		// if we are removing a range which includes metadata, we need to
-		// collapse it.  If there's nothing to insert, we also need to add
-		// an extra `replaceMetadata` operation later in order to insert the
-		// collapsed metadata.
-		insertMetadata = ve.dm.MetaLinearData.static.merge( removeMetadata );
-		if ( insert.length === 0 ) {
-			extraMetadata = insertMetadata[ 0 ];
-			insertMetadata = [];
-		} else {
-			// pad out at end so insert metadata is the same length as insert data
-			ve.batchSplice( insertMetadata, 1, 0, new Array( insert.length - 1 ) );
-		}
-		isInsertEmpty = ve.compare( insertMetadata, new Array( insertMetadata.length ) );
-	} else if ( isInsertEmpty && isRemoveEmpty ) {
-		// No metadata changes, don't pollute the transaction with [undefined, undefined, ...]
-		insertMetadata = undefined;
+	op = {
+		type: 'replace',
+		remove: doc.getData( new ve.Range( offset, offset + removeLength ) ),
+		insert: insert
+	};
+	if ( insertedDataOffset !== undefined && insertedDataLength !== undefined ) {
+		op.insertedDataOffset = insertedDataOffset;
+		op.insertedDataLength = insertedDataLength;
 	}
 
-	// simple replaces can be combined
-	// (but don't do this if there is metadata to be removed and the previous
-	// replace had a non-zero insertion, because that would shift the metadata
-	// location.  also skip this if the last replace deliberately removed
-	// metadata instead of merging it.)
-	if (
-		lastOp && lastOp.type === 'replaceMetadata' &&
-		lastOp.insert.length > 0 && lastOp.remove.length === 0 &&
-		penultOp && penultOp.type === 'replace' &&
-		penultOp.insert.length === 0 /* this is always true */
-	) {
-		mergedMetadata = [ lastOp.insert ];
+	// Merge with previous replace, if any
+	lastOp = this.transaction.operations[ this.transaction.operations.length - 1 ];
+	if ( lastOp && lastOp.type === 'replace' ) {
 		this.transaction.operations.pop();
-		lastOp = penultOp;
-		/* fall through */
+		op.remove = lastOp.remove.concat( op.remove );
+		op.insert = lastOp.insert.concat( op.insert );
+		// TODO: fixup insertedDataOffset and insertedDataLength ?
 	}
-	// merge, where extraMetadata will not be required
-	if (
-		lastOp && lastOp.type === 'replace' &&
-		!( lastOp.insert.length > 0 && insertMetadata !== undefined ) &&
-		lastOp.insertedDataOffset === undefined && !extraMetadata &&
-		// don't merge if we mergedMetadata and had to insert non-empty
-		// metadata as a result
-		!( mergedMetadata.length > 0 && insertMetadata !== undefined && !isInsertEmpty )
-	) {
-		lastOp = this.transaction.operations.pop();
-		this.pushReplace(
-			doc,
-			offset - lastOp.remove.length,
-			lastOp.remove.length + removeLength,
-			lastOp.insert.concat( insert ),
-			(
-				lastOp.insertMetadata || new Array( lastOp.insert.length )
-			).concat(
-				mergedMetadata
-			).concat(
-				( insertMetadata === undefined || isInsertEmpty ) ?
-				new Array( insert.length - mergedMetadata.length ) :
-				insertMetadata
-			),
-			insertedDataOffset,
-			insertedDataLength
-		);
-		return;
-	}
-	// merge a "remove after remove" (where extraMetadata will be required)
-	if (
-		lastOp && lastOp.type === 'replace' &&
-		lastOp.insert.length === 0 && insert.length === 0 &&
-		( lastOp.removeMetadata === undefined || mergedMetadata.length > 0 ) &&
-		( insertMetadata === undefined || extraMetadata )
-	) {
-		lastOp = this.transaction.operations.pop();
-		this.pushReplace(
-			doc,
-			offset - lastOp.remove.length,
-			lastOp.remove.length + removeLength,
-			[]
-		);
-		return;
-	}
-
-	if ( lastOp && lastOp.type === 'replaceMetadata' ) {
-		// `replace` operates on the metadata at the given offset; the transaction
-		// touches the same region twice if `replace` follows a `replaceMetadata`
-		// without a `retain` in between.
-		throw new Error( 'replace after replaceMetadata not allowed' );
-	}
-
-	this.transaction.pushReplaceOp( remove, insert, removeMetadata, insertMetadata, insertedDataOffset, insertedDataLength );
-
-	if ( extraMetadata !== undefined ) {
-		this.pushReplaceMetadata( [], extraMetadata );
-	}
-};
-
-/**
- * Add a replace metadata operation
- *
- * @method
- * @param {Array} remove Metadata to remove
- * @param {Array} insert Metadata to replace 'remove' with
- */
-ve.dm.TransactionBuilder.prototype.pushReplaceMetadata = function ( remove, insert ) {
-	if ( remove.length === 0 && insert.length === 0 ) {
-		// Don't push no-ops
-		return;
-	}
-	this.transaction.pushReplaceMetadataOp( remove, insert );
+	this.transaction.operations.push( op );
 };
 
 /**
@@ -1090,7 +801,7 @@ ve.dm.TransactionBuilder.prototype.pushInsertion = function ( doc, currentOffset
 	this.pushRetain( insertion.offset - currentOffset );
 	// Insert data
 	this.pushReplace(
-		doc, insertion.offset, insertion.remove, insertion.data, undefined,
+		doc, insertion.offset, insertion.remove, insertion.data,
 		insertion.insertedDataOffset, insertion.insertedDataLength
 	);
 	return insertion.offset + insertion.remove;
@@ -1104,10 +815,9 @@ ve.dm.TransactionBuilder.prototype.pushInsertion = function ( doc, currentOffset
  * @param {ve.dm.Document} doc The document in the state to which the transaction applies
  * @param {number} currentOffset Offset up to which the transaction has gone already
  * @param {ve.Range} range Range to remove
- * @param {boolean} [removeMetadata=false] Remove metadata instead of collapsing it
  * @return {number} End offset of the removal
  */
-ve.dm.TransactionBuilder.prototype.pushRemoval = function ( doc, currentOffset, range, removeMetadata ) {
+ve.dm.TransactionBuilder.prototype.pushRemoval = function ( doc, currentOffset, range ) {
 	var i, selection, first, last, nodeStart, nodeEnd,
 		offset = currentOffset,
 		removeStart = null,
@@ -1147,7 +857,7 @@ ve.dm.TransactionBuilder.prototype.pushRemoval = function ( doc, currentOffset, 
 			).end;
 		}
 		this.pushRetain( removeStart - currentOffset );
-		removeEnd = this.addSafeRemoveOps( doc, removeStart, removeEnd, removeMetadata );
+		removeEnd = this.addSafeRemoveOps( doc, removeStart, removeEnd );
 		// All done
 		return removeEnd;
 	}
@@ -1179,7 +889,7 @@ ve.dm.TransactionBuilder.prototype.pushRemoval = function ( doc, currentOffset, 
 
 			// Push the previous removal first
 			this.pushRetain( removeStart - offset );
-			offset = this.addSafeRemoveOps( doc, removeStart, removeEnd, removeMetadata );
+			offset = this.addSafeRemoveOps( doc, removeStart, removeEnd );
 
 			// Now start this removal
 			removeStart = nodeStart;
@@ -1189,7 +899,7 @@ ve.dm.TransactionBuilder.prototype.pushRemoval = function ( doc, currentOffset, 
 	// Apply the last removal, if any
 	if ( removeEnd !== null ) {
 		this.pushRetain( removeStart - offset );
-		offset = this.addSafeRemoveOps( doc, removeStart, removeEnd, removeMetadata );
+		offset = this.addSafeRemoveOps( doc, removeStart, removeEnd );
 	}
 	return offset;
 };
@@ -1202,8 +912,5 @@ ve.dm.Transaction.newFromRemoval = ve.dm.TransactionBuilder.static.newFromRemova
 ve.dm.Transaction.newFromDocumentInsertion = ve.dm.TransactionBuilder.static.newFromDocumentInsertion;
 ve.dm.Transaction.newFromAttributeChanges = ve.dm.TransactionBuilder.static.newFromAttributeChanges;
 ve.dm.Transaction.newFromAnnotation = ve.dm.TransactionBuilder.static.newFromAnnotation;
-ve.dm.Transaction.newFromMetadataInsertion = ve.dm.TransactionBuilder.static.newFromMetadataInsertion;
-ve.dm.Transaction.newFromMetadataRemoval = ve.dm.TransactionBuilder.static.newFromMetadataRemoval;
-ve.dm.Transaction.newFromMetadataElementReplacement = ve.dm.TransactionBuilder.static.newFromMetadataElementReplacement;
 ve.dm.Transaction.newFromContentBranchConversion = ve.dm.TransactionBuilder.static.newFromContentBranchConversion;
 ve.dm.Transaction.newFromWrap = ve.dm.TransactionBuilder.static.newFromWrap;
