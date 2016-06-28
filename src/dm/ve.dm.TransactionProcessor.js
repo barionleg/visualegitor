@@ -280,15 +280,35 @@ ve.dm.TransactionProcessor.prototype.applyAnnotations = function ( to ) {
  * @param {number} offset Offset to remove/insert at
  * @param {number} remove Number of elements to remove
  * @param {Array} [insert] Elements to insert
+ * @param {boolean} reversed Whether the transaction is reversed (i.e. an undo transaction)
  * @return {Function} Function that undoes the modification
  */
-ve.dm.TransactionProcessor.modifiers.splice = function ( type, offset, remove, insert ) {
-	var removed, data;
+ve.dm.TransactionProcessor.modifiers.splice = function ( type, offset, remove, insert, reversed ) {
+	var removed, data,
+		doc = this.document;
 	insert = insert || [];
-	data = type === 'metadata' ? this.document.metadata : this.document.data;
+	data = type === 'metadata' ? doc.metadata : doc.data;
+	if ( type === 'data' ) {
+		doc.selectNodes(
+			new ve.Range( offset, offset + remove ),
+			'branches'
+		).forEach( function ( selection ) {
+			data.data[ selection.nodeOuterRange.start ].internal.changesSinceLoad +=
+				( reversed ? -1 : 1 );
+		} );
+	}
 	removed = data.batchSplice( offset, remove, insert );
 	return function () {
 		data.batchSplice( offset, insert.length, removed );
+		if ( type === 'data' ) {
+			doc.selectNodes(
+				new ve.Range( offset, offset + remove ),
+				'branches'
+			).forEach( function ( selection ) {
+				data.data[ selection.nodeOuterRange.start ].internal.changesSinceLoad -=
+					( reversed ? -1 : 1 );
+			} );
+		}
 	};
 };
 
@@ -491,6 +511,7 @@ ve.dm.TransactionProcessor.processors.replace = function ( op ) {
 	var node, selection, range,
 		remove = op.remove,
 		insert = op.insert,
+		reversed = op.reversed,
 		removeMetadata = op.removeMetadata,
 		insertMetadata = op.insertMetadata,
 		removeLinearData = new ve.dm.ElementLinearData( this.document.getStore(), remove ),
@@ -518,7 +539,7 @@ ve.dm.TransactionProcessor.processors.replace = function ( op ) {
 		// Update the linear model
 		this.queueModification( {
 			type: 'splice',
-			args: [ 'data', this.cursor + this.adjustment, remove.length, insert ]
+			args: [ 'data', this.cursor + this.adjustment, remove.length, insert, reversed ]
 		} );
 		// Keep the meta linear model in sync
 		if ( removeMetadata !== undefined ) {
