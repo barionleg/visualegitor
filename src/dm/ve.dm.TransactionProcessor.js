@@ -29,7 +29,6 @@ ve.dm.TransactionProcessor = function VeDmTransactionProcessor( doc, transaction
 	// Linear model offset that we're currently at. Operations in the transaction are ordered, so
 	// the cursor only ever moves forward.
 	this.cursor = 0;
-	this.metadataCursor = 0;
 	// Adjustment that needs to be added to linear model offsets in the original linear model
 	// to get offsets in the half-updated linear model. This is needed when queueing modifications
 	// after other modifications that will cause offsets to shift.
@@ -135,7 +134,7 @@ ve.dm.TransactionProcessor.prototype.process = function ( presynchronizeHandler 
 /**
  * Queue a modification.
  *
- * For available method names, see ve.dm.ElementLinearData and ve.dm.MetaLinearData.
+ * For available method names, see ve.dm.ElementLinearData
  *
  * @param {Object} modification Object describing the modification
  * @param {string} modification.type Name of a method in ve.dm.TransactionProcessor.modifiers
@@ -184,7 +183,6 @@ ve.dm.TransactionProcessor.prototype.rollbackModifications = function () {
  */
 ve.dm.TransactionProcessor.prototype.advanceCursor = function ( increment ) {
 	this.cursor += increment;
-	this.metadataCursor = 0;
 };
 
 /**
@@ -201,7 +199,7 @@ ve.dm.TransactionProcessor.prototype.advanceCursor = function ( increment ) {
  * @throws {Error} Annotation to be cleared is not set
  */
 ve.dm.TransactionProcessor.prototype.applyAnnotations = function ( to ) {
-	var annotationsForOffset, setIndex, isElement, annotations, i, j, jlen;
+	var annotationsForOffset, setIndex, isElement, annotations, i;
 
 	function setAndClear( anns, set, clear, index ) {
 		if ( anns.containsAnyOf( set ) ) {
@@ -234,7 +232,7 @@ ve.dm.TransactionProcessor.prototype.applyAnnotations = function ( to ) {
 	for ( i = this.cursor; i < to; i++ ) {
 		isElement = this.document.data.isElementData( i );
 		if ( isElement ) {
-			if ( !ve.dm.nodeFactory.isNodeContent( this.document.data.getType( i ) ) ) {
+			if ( !ve.dm.nodeFactory.canNodeSerializeAsContent( this.document.data.getType( i ) ) ) {
 				throw new Error( 'Invalid transaction, cannot annotate a non-content element' );
 			}
 			if ( this.document.data.isCloseElementData( i ) ) {
@@ -249,17 +247,6 @@ ve.dm.TransactionProcessor.prototype.applyAnnotations = function ( to ) {
 			type: 'annotateData',
 			args: [ i + this.adjustment, annotations ]
 		} );
-	}
-	// Set/clear annotations on metadata, but not on the edges of the range
-	for ( i = this.cursor + 1; i < to; i++ ) {
-		for ( j = 0, jlen = this.document.metadata.getDataLength( i ); j < jlen; j++ ) {
-			annotations = this.document.metadata.getAnnotationsFromOffsetAndIndex( i, j );
-			setAndClear( annotations, this.set, this.clear );
-			this.queueModification( {
-				type: 'annotateMetadata',
-				args: [ i + this.adjustment, j, annotations ]
-			} );
-		}
 	}
 	// Notify the synchronizer
 	if ( this.cursor < to ) {
@@ -280,40 +267,52 @@ ve.dm.TransactionProcessor.prototype.applyAnnotations = function ( to ) {
  */
 
 /**
- * Splice data into / out of the data or metadata array.
+ * Splice data into / out of the data array.
  *
- * @param {string} type 'data' or 'metadata'
+ * @param {string} type Always 'data' ('metadata' is no longer used)
  * @param {number} offset Offset to remove/insert at
  * @param {number} remove Number of elements to remove
  * @param {Array} [insert] Elements to insert
  * @return {Function} Function that undoes the modification
  */
 ve.dm.TransactionProcessor.modifiers.splice = function ( type, offset, remove, insert ) {
-	var removed, data;
+	var removed,
+		isReversed = this.transaction.isReversed,
+		data = this.document.data;
+
+	// If offset is inside a ContentBranchNode with a change counter, adjust the counter
+	function adjustChangeCounter( adjustment ) {
+		var item,
+			i = offset - 1;
+		while ( i >= 0 ) {
+			item = data.getData( i-- );
+			if ( !ve.dm.LinearData.static.isElementData( item ) ) {
+				continue;
+			}
+			if ( !ve.isSubclass(
+				ve.dm.nodeFactory.lookup( ve.dm.LinearData.static.getType( item ) ),
+				ve.dm.BranchNode
+			) ) {
+				continue;
+			}
+			if ( item.internal && item.internal.changesSinceLoad !== undefined ) {
+				item.internal.changesSinceLoad += adjustment;
+			}
+			// This is a branch node boundary, so go no further
+			break;
+		}
+	}
+
+	if ( type === 'metadata' ) {
+		throw new Error( 'Type "metadata" is no longer used' );
+	}
+
 	insert = insert || [];
-	data = type === 'metadata' ? this.document.metadata : this.document.data;
 	removed = data.batchSplice( offset, remove, insert );
+	adjustChangeCounter( isReversed ? -1 : 1 );
 	return function () {
 		data.batchSplice( offset, insert.length, removed );
-	};
-};
-
-/**
- * Splice metadata into / out of the metadata array at a given offset.
- *
- * @param {number} offset Offset whose metadata array to modify
- * @param {number} index Index in that offset's metadata array to remove/insert at
- * @param {number} remove Number of elements to remove
- * @param {Array} [insert] Elements to insert
- * @return {Function} Function that undoes the modification
- */
-ve.dm.TransactionProcessor.modifiers.spliceMetadataAtOffset = function ( offset, index, remove, insert ) {
-	var removed, metadata;
-	insert = insert || [];
-	metadata = this.document.metadata;
-	removed = metadata.spliceMetadataAtOffset( offset, index, remove, insert );
-	return function () {
-		metadata.spliceMetadataAtOffset( offset, index, insert.length, removed );
+		adjustChangeCounter( isReversed ? 1 : -1 );
 	};
 };
 
@@ -330,23 +329,6 @@ ve.dm.TransactionProcessor.modifiers.annotateData = function ( offset, annotatio
 	data.setAnnotationsAtOffset( offset, annotations );
 	return function () {
 		data.setAnnotationsAtOffset( offset, oldAnnotations );
-	};
-};
-
-/**
- * Set annotations at a given metadata offset and index.
- *
- * @param {number} offset Offset to annotate at
- * @param {number} index Index in that offset's metadata array
- * @param {ve.dm.AnnotationSet} annotations New set of annotations; overwrites old set
- * @return {Function} Function that undoes the modification
- */
-ve.dm.TransactionProcessor.modifiers.annotateMetadata = function ( offset, index, annotations ) {
-	var metadata = this.document.metadata,
-		oldAnnotations = metadata.getAnnotationsFromOffsetAndIndex( offset, index );
-	metadata.setAnnotationsAtOffsetAndIndex( offset, index, annotations );
-	return function () {
-		metadata.setAnnotationsAtOffsetAndIndex( offset, index, oldAnnotations );
 	};
 };
 
@@ -393,21 +375,6 @@ ve.dm.TransactionProcessor.modifiers.setAttribute = function ( offset, key, valu
 ve.dm.TransactionProcessor.processors.retain = function ( op ) {
 	this.applyAnnotations( this.cursor + op.length );
 	this.advanceCursor( op.length );
-};
-
-/**
- * Execute a metadata retain operation.
- *
- * This method is called within the context of a transaction processor instance.
- *
- * This moves the metadata cursor by op.length.
- *
- * @method
- * @param {Object} op Operation object:
- * @param {number} op.length Number of elements to retain
- */
-ve.dm.TransactionProcessor.processors.retainMetadata = function ( op ) {
-	this.metadataCursor += op.length;
 };
 
 /**
@@ -500,8 +467,6 @@ ve.dm.TransactionProcessor.processors.replace = function ( op ) {
 	var node, selection, range,
 		remove = op.remove,
 		insert = op.insert,
-		removeMetadata = op.removeMetadata,
-		insertMetadata = op.insertMetadata,
 		removeLinearData = new ve.dm.ElementLinearData( this.document.getStore(), remove ),
 		insertLinearData = new ve.dm.ElementLinearData( this.document.getStore(), insert ),
 		removeIsContent = removeLinearData.isContentData(),
@@ -521,7 +486,7 @@ ve.dm.TransactionProcessor.processors.replace = function ( op ) {
 		scopeStart,
 		scopeEnd,
 		opAdjustment = 0,
-		opRemove, opInsert, opRemoveMetadata, opInsertMetadata;
+		opRemove, opInsert;
 	if ( removeIsContent && insertIsContent ) {
 		// Content replacement
 		// Update the linear model
@@ -529,27 +494,6 @@ ve.dm.TransactionProcessor.processors.replace = function ( op ) {
 			type: 'splice',
 			args: [ 'data', this.cursor + this.adjustment, remove.length, insert ]
 		} );
-		// Keep the meta linear model in sync
-		if ( removeMetadata !== undefined ) {
-			this.queueModification( {
-				type: 'splice',
-				args: [
-					'metadata',
-					this.cursor + this.adjustment,
-					removeMetadata.length,
-					insertMetadata
-				]
-			} );
-		} else {
-			this.queueModification( {
-				type: 'splice',
-				args: [
-					'metadata',
-					this.cursor + this.adjustment,
-					remove.length, new Array( insert.length )
-				]
-			} );
-		}
 		// Get the node containing the replaced content
 		selection = this.document.selectNodes(
 			new ve.Range(
@@ -601,35 +545,11 @@ ve.dm.TransactionProcessor.processors.replace = function ( op ) {
 			if ( operation.type === 'replace' ) {
 				opRemove = operation.remove;
 				opInsert = operation.insert;
-				opRemoveMetadata = operation.removeMetadata;
-				opInsertMetadata = operation.insertMetadata;
 				// Update the linear model
 				this.queueModification( {
 					type: 'splice',
 					args: [ 'data', this.cursor + this.adjustment, opRemove.length, opInsert ]
 				} );
-				// Keep the meta linear model in sync
-				if ( opRemoveMetadata !== undefined ) {
-					this.queueModification( {
-						type: 'splice',
-						args: [
-							'metadata',
-							this.cursor + this.adjustment,
-							opRemoveMetadata.length,
-							opInsertMetadata
-						]
-					} );
-				} else {
-					this.queueModification( {
-						type: 'splice',
-						args: [
-							'metadata',
-							this.cursor + this.adjustment,
-							opRemove.length,
-							new Array( opInsert.length )
-						]
-					} );
-				}
 				affectedRanges.push( new ve.Range(
 					this.cursor,
 					this.cursor + opRemove.length
@@ -723,22 +643,4 @@ ve.dm.TransactionProcessor.processors.replace = function ( op ) {
 			)
 		);
 	}
-};
-
-/**
- * Execute a metadata replace operation.
- *
- * This method is called within the context of a transaction processor instance.
- *
- * @method
- * @param {Object} op Operation object
- * @param {Array} op.remove Metadata to remove
- * @param {Array} op.insert Metadata to insert
- */
-ve.dm.TransactionProcessor.processors.replaceMetadata = function ( op ) {
-	this.queueModification( {
-		type: 'spliceMetadataAtOffset',
-		args: [ this.cursor + this.adjustment, this.metadataCursor, op.remove.length, op.insert ]
-	} );
-	this.metadataCursor += op.insert.length;
 };
