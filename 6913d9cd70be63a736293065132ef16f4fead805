@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce061b56_4500a86d",
+        "filename": "src/dm/ve.dm.SurfaceFragment.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 1120,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2016-07-11T19:55:34Z",
+      "side": 1,
+      "message": "These two examples are given for the same input and actions but different output, which is… a bit concerning. ;-(",
+      "revId": "6913d9cd70be63a736293065132ef16f4fead805",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
