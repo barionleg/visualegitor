@@ -1590,7 +1590,7 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 			{
 				rangeOrSelection: new ve.Range( 6 ),
 				pasteHtml: '<ul><li>Foo</li></ul>',
-				expectedRangeOrSelection: new ve.Range( 6 ),
+				expectedRangeOrSelection: new ve.Range( 16 ),
 				expectedOps: [
 					[
 						{ type: 'retain', length: 7 },
@@ -1773,7 +1773,7 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 						{ type: 'retain', length: docLen }
 					]
 				],
-				expectedRangeOrSelection: new ve.Range( 5 ),
+				expectedRangeOrSelection: new ve.Range( 4 ),
 				msg: 'Paste API HTML used if important attributes dropped'
 			},
 			{
