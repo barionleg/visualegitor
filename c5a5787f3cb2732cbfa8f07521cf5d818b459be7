@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e2673f8_00596f5d",
+        "filename": "src/ui/actions/ve.ui.IndentationAction.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2016-07-20T17:43:53Z",
+      "side": 1,
+      "message": "How much is this TODO now TODONE?",
+      "revId": "c5a5787f3cb2732cbfa8f07521cf5d818b459be7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
