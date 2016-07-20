@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e2673f8_271bedd5",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 1322,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-07-20T12:30:16Z",
+      "side": 1,
+      "message": "commonLengthLoop:\nwhile( true ) {",
+      "revId": "0974efc532576cc4f6eeb98ca5c47c61b196dd24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
