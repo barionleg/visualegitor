@@ -1890,7 +1890,7 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 					[
 						{ type: 'retain', length: 15 },
 						{ type: 'attribute', key: 'style', from: 'data', to: 'header' },
-						{ type: 'retain', length: 7 }
+						{ type: 'retain', length: docLen - 17 }
 					],
 					[
 						{ type: 'retain', length: 16 },
@@ -1956,7 +1956,7 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 							remove: [],
 							type: 'replace'
 						},
-						{ type: 'retain', length: 5 }
+						{ type: 'retain', length: docLen - 19 }
 					],
 					[
 						{ type: 'retain', length: 23 },
@@ -1986,7 +1986,7 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 							insertedDataOffset: 0,
 							remove: []
 						},
-						{ type: 'retain', length: 5 }
+						{ type: 'retain', length: docLen - 19 }
 					],
 					[
 						{ type: 'retain', length: 24 },
@@ -2003,7 +2003,7 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 							],
 							type: 'replace'
 						},
-						{ type: 'retain', length: 6 }
+						{ type: 'retain', length: docLen - 18 }
 					],
 					[
 						{ type: 'retain', length: 24 },
@@ -2021,7 +2021,7 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 							remove: [],
 							type: 'replace'
 						},
-						{ type: 'retain', length: 6 }
+						{ type: 'retain', length: docLen - 18 }
 					],
 					[
 						{ type: 'retain', length: 20 },
@@ -2038,7 +2038,7 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 							],
 							type: 'replace'
 						},
-						{ type: 'retain', length: 11 }
+						{ type: 'retain', length: docLen - 13 }
 					],
 					[
 						{ type: 'retain', length: 20 },
@@ -2056,7 +2056,7 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 							remove: [],
 							type: 'replace'
 						},
-						{ type: 'retain', length: 11 }
+						{ type: 'retain', length: docLen - 13 }
 					],
 					[
 						{ type: 'retain', length: 16 },
@@ -2073,7 +2073,7 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 							],
 							type: 'replace'
 						},
-						{ type: 'retain', length: 16 }
+						{ type: 'retain', length: docLen - 8 }
 					],
 					[
 						{ type: 'retain', length: 16 },
@@ -2091,7 +2091,7 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 							remove: [],
 							type: 'replace'
 						},
-						{ type: 'retain', length: 16 }
+						{ type: 'retain', length: docLen - 8 }
 					]
 				],
 				msg: 'Paste row of table cells onto table cell'
@@ -2144,7 +2144,7 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 							remove: [],
 							type: 'replace'
 						},
-						{ type: 'retain', length: 4 }
+						{ type: 'retain', length: docLen - 20 }
 					],
 					[
 						{ type: 'retain', length: 26 },
@@ -2174,7 +2174,7 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 							insertedDataOffset: 0,
 							remove: []
 						},
-						{ type: 'retain', length: 4 }
+						{ type: 'retain', length: docLen - 20 }
 					],
 					[
 						{ type: 'retain', length: 28 },
@@ -2191,7 +2191,7 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 							],
 							type: 'replace'
 						},
-						{ type: 'retain', length: 6 }
+						{ type: 'retain', length: docLen - 18 }
 					],
 					[
 						{ type: 'retain', length: 28 },
@@ -2209,7 +2209,7 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 							remove: [],
 							type: 'replace'
 						},
-						{ type: 'retain', length: 6 }
+						{ type: 'retain', length: docLen - 18 }
 					],
 					[
 						{ type: 'retain', length: 22 },
@@ -2226,7 +2226,7 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 							],
 							type: 'replace'
 						},
-						{ type: 'retain', length: 13 }
+						{ type: 'retain', length: docLen - 11 }
 					],
 					[
 						{ type: 'retain', length: 22 },
@@ -2244,7 +2244,7 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 							remove: [],
 							type: 'replace'
 						},
-						{ type: 'retain', length: 13 }
+						{ type: 'retain', length: docLen - 11 }
 					],
 					[
 						{ type: 'retain', length: 16 },
@@ -2261,7 +2261,7 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 							],
 							type: 'replace'
 						},
-						{ type: 'retain', length: 20 }
+						{ type: 'retain', length: docLen - 4 }
 					],
 					[
 						{ type: 'retain', length: 16 },
@@ -2279,7 +2279,7 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 							remove: [],
 							type: 'replace'
 						},
-						{ type: 'retain', length: 20 }
+						{ type: 'retain', length: docLen - 4 }
 					]
 				],
 				msg: 'Paste column of table cells onto table cell'
@@ -2319,7 +2319,7 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 							],
 							type: 'replace'
 						},
-						{ type: 'retain', length: 6 }
+						{ type: 'retain', length: docLen - 18 }
 					],
 					[
 						{ type: 'retain', length: 16 },
@@ -2361,7 +2361,7 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 							],
 							remove: []
 						},
-						{ type: 'retain', length: 6 }
+						{ type: 'retain', length: docLen - 18 }
 					]
 				],
 				msg: 'Paste paragraphs and a table into table cell'
