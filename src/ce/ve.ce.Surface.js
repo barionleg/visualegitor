@@ -2180,7 +2180,7 @@ ve.ce.Surface.prototype.afterPaste = function ( e ) {
 		}
 
 		if ( !handled ) {
-			targetFragment.insertDocument( pastedDocumentModel, contextRange );
+			targetFragment.insertDocument( pastedDocumentModel, contextRange, true );
 		}
 	}
 
