@@ -16,6 +16,24 @@
       "revId": "d00caf310727f3aad75b1af25541a7f3ef0b3338",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e130ba1_c7fb00b9",
+        "filename": "src/dm/ve.dm.Document.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-07-23T21:51:10Z",
+      "side": 1,
+      "message": "I think it\u0027s quite specific to extracting a node into a new context, which currently always uses this clone function. But if we find we need to use it somewhere else...",
+      "parentUuid": "4e130ba1_e4939aa4",
+      "revId": "d00caf310727f3aad75b1af25541a7f3ef0b3338",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
