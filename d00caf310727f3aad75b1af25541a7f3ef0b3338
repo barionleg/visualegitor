@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e130ba1_e4939aa4",
+        "filename": "src/dm/ve.dm.Document.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-07-23T12:30:02Z",
+      "side": 1,
+      "message": "This is quite a fundamental idea - should we put it into ve.Node ?",
+      "revId": "d00caf310727f3aad75b1af25541a7f3ef0b3338",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
