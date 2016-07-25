@@ -2016,7 +2016,7 @@ ve.ce.Surface.prototype.afterPaste = function ( e ) {
 			);
 
 			if ( importRules.all ) {
-				pasteData.sanitize( importRules.all );
+				sanitize( pasteData, true );
 			}
 
 			// Annotate
@@ -2037,7 +2037,7 @@ ve.ce.Surface.prototype.afterPaste = function ( e ) {
 			);
 
 			if ( importRules.all ) {
-				pasteData.sanitize( importRules.all );
+				sanitize( pasteData, true );
 			}
 
 			// Annotate
