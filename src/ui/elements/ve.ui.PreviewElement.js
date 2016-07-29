@@ -131,5 +131,15 @@ ve.ui.PreviewElement.prototype.updatePreview = function () {
  * @return {boolean} Still generating
  */
 ve.ui.PreviewElement.prototype.isGenerating = function () {
-	return !!( this.view && this.view.isGenerating && this.view.isGenerating() );
+	var isGenerating = false;
+
+	function checkGenerating( node ) {
+		isGenerating = isGenerating || !!( node && node.isGenerating && node.isGenerating() );
+	}
+	if ( this.view instanceof ve.ce.BranchNode ) {
+		this.view.traverse( checkGenerating );
+	} else {
+		checkGenerating( this.view );
+	}
+	return isGenerating;
 };
