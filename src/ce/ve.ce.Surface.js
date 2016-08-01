@@ -1870,7 +1870,7 @@ ve.ce.Surface.prototype.afterPaste = function ( e ) {
 		tableAction,
 		items = [],
 		importantElement = '[id],[typeof],[rel]',
-		importRules = !this.pasteSpecial ? this.getSurface().getImportRules() : { all: { plainText: true } },
+		importRules = !this.pasteSpecial ? this.getSurface().getImportRules() : { all: { plainText: true, keepEmptyContentBranches: true } },
 		beforePasteData = this.beforePasteData || {},
 		surfaceModel = this.getModel(),
 		fragment = surfaceModel.getFragment(),
@@ -1878,12 +1878,12 @@ ve.ce.Surface.prototype.afterPaste = function ( e ) {
 		documentModel = surfaceModel.getDocument(),
 		view = this;
 
-	function sanitize( linearData, keepEmptyContentBranches ) {
+	function sanitize( linearData ) {
 		// If the clipboardKey isn't set (paste from non-VE instance) use external import rules
 		if ( !clipboardKey ) {
-			linearData.sanitize( importRules.external || {}, keepEmptyContentBranches );
+			linearData.sanitize( importRules.external || {} );
 		}
-		linearData.sanitize( importRules.all || {}, keepEmptyContentBranches );
+		linearData.sanitize( importRules.all || {} );
 	}
 
 	// If the selection doesn't collapse after paste then nothing was inserted
@@ -2009,7 +2009,7 @@ ve.ce.Surface.prototype.afterPaste = function ( e ) {
 			);
 
 			if ( this.pasteSpecial ) {
-				sanitize( pasteData, true );
+				sanitize( pasteData );
 			}
 
 			// Insert content
@@ -2023,7 +2023,7 @@ ve.ce.Surface.prototype.afterPaste = function ( e ) {
 			);
 
 			if ( this.pasteSpecial ) {
-				sanitize( pasteData, true );
+				sanitize( pasteData );
 			}
 
 			// Insert content
@@ -2127,10 +2127,8 @@ ve.ce.Surface.prototype.afterPaste = function ( e ) {
 				pastedDocumentModel.getStore(),
 				ve.copy( beforePasteData.context )
 			);
-			if ( this.pasteSpecial ) {
-				// The context may have been sanitized, so sanitize here as well for comparison
-				sanitize( context, true );
-			}
+			// Sanitize context to match data
+			sanitize( context );
 
 			// Remove matching context from the left
 			left = 0;
