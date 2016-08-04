@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ebed7c6_c7ddae75",
+        "filename": "src/dm/ve.dm.SurfaceFragment.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 851,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-08-04T23:29:31Z",
+      "side": 1,
+      "message": "I think this ends up applying the surrounding content annotations on top of the new content\u0027s annotations, whereas you almost want to apply them underneath. E.g. when pasting linked text into italic text, you want the inserted content to have annotations [ italic, link ] whereas I think this code will give [ link, italic ].",
+      "revId": "a4dde9f26259294b6113860dda358146ebe2f844",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
