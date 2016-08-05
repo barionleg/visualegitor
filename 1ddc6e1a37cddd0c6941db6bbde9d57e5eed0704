@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "2ebed7c6_e218d87c",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 3320,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-08-05T00:37:21Z",
+      "side": 1,
+      "message": "On second thoughts (coming back to it with fresh eyes), I think modelRange is better because it is the unchanging reference value throughout the whole function; \"current\" made me presume it might change during the function.",
+      "parentUuid": "ae0ba75f_a3e7d20c",
+      "revId": "1ddc6e1a37cddd0c6941db6bbde9d57e5eed0704",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0efd9372_9c5bd825",
         "filename": "src/ce/ve.ce.Surface.js",
         "patchSetId": 4
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "0efd9372_9c5bd825",
+      "revId": "1ddc6e1a37cddd0c6941db6bbde9d57e5eed0704",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ebed7c6_621cc86b",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 3328,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-08-05T00:37:21Z",
+      "side": 1,
+      "message": "Similarly this isn\u0027t really \"new\" because under no circumstances does it ever get applied to the model.",
+      "parentUuid": "ae0ba75f_c3ead6d6",
       "revId": "1ddc6e1a37cddd0c6941db6bbde9d57e5eed0704",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
