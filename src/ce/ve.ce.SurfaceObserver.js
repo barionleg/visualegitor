@@ -123,6 +123,9 @@ ve.ce.SurfaceObserver.prototype.pollOnce = function () {
 
 /**
  * Poll to update SurfaceObserver, but don't signal any changes back to the Surface
+ * (except branch node changes)
+ *
+ * TODO: The method name is misleading because branch node changes are signalled
  *
  * @method
  */
@@ -146,7 +149,8 @@ ve.ce.SurfaceObserver.prototype.pollOnceSelection = function () {
  *
  * @method
  * @private
- * @param {boolean} signalChanges If there changes are observed, call Surface#handleObservedChange
+ * @param {boolean} signalChanges Call Surface#handleObservedChange if content/selection changes
+ * are observed (branch node changes are always signalled).
  * @param {boolean} selectionOnly Check for selection changes only
  */
 ve.ce.SurfaceObserver.prototype.pollOnceInternal = function ( signalChanges, selectionOnly ) {
@@ -164,13 +168,14 @@ ve.ce.SurfaceObserver.prototype.pollOnceInternal = function ( signalChanges, sel
 	);
 	this.rangeState = newState;
 
-	if ( signalChanges && (
-		newState.contentChanged ||
-		// TODO: The prior code signalled branchNode changes even if !signalChanges .
-		// Was this needed?
+	if (
+		// Signal branch node changes even if !signalChanges: see T122291.
 		newState.branchNodeChanged ||
-		newState.selectionChanged
-	) ) {
+		(
+			signalChanges &&
+			( newState.contentChanged || newState.selectionChanged )
+		)
+	) {
 		this.surface.handleObservedChanges( oldState, newState );
 	}
 };
