@@ -14,7 +14,7 @@
 ve.dm.LinearSelection = function VeDmLinearSelection( doc, range ) {
 	// Parent constructor
 	ve.dm.LinearSelection.super.call( this, doc );
-
+	this.created = performance.now();
 	this.range = range;
 };
 

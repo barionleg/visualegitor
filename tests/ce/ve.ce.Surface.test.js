@@ -9,7 +9,7 @@ QUnit.module( 've.ce.Surface' );
 /* Tests */
 
 ve.test.utils.runSurfaceHandleSpecialKeyTest = function ( assert, htmlOrDoc, rangeOrSelection, keys, expectedData, expectedRangeOrSelection, msg, forceSelection, fullEvents ) {
-	var i, e, selection, expectedSelection, key,
+	var i, e, selection, expectedSelection, key, created,
 		view = typeof htmlOrDoc === 'string' ?
 			ve.test.utils.createSurfaceViewFromHtml( htmlOrDoc ) :
 			( htmlOrDoc instanceof ve.ce.Surface ? htmlOrDoc : ve.test.utils.createSurfaceViewFromDocument( htmlOrDoc || ve.dm.example.createExampleDocument() ) ),
@@ -22,7 +22,11 @@ ve.test.utils.runSurfaceHandleSpecialKeyTest = function ( assert, htmlOrDoc, ran
 	selection = ve.test.utils.selectionFromRangeOrSelection( model.getDocument(), rangeOrSelection );
 
 	model.on( 'select', function ( s ) {
+		if ( created && created > s.created ) {
+			throw new Error( 'Time warp!' );
+		}
 		selection = s;
+		created = s.created;
 	} );
 
 	model.setSelection( selection );
