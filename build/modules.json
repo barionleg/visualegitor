@@ -21,6 +21,11 @@
 			{ "file": "lib/jsdifflib/diffview.css", "test": true }
 		]
 	},
+	"reconcile.js": {
+		"scripts": [
+			"lib/reconcile.js/reconcile.umd.js"
+		]
+	},
 	"oojs": {
 		"scripts": [
 			"lib/oojs/oojs.jquery.js"
@@ -171,7 +176,8 @@
 			"jquery.i18n",
 			"jquery.uls.data",
 			"jquery.client",
-			"papaparse"
+			"papaparse",
+			"reconcile.js"
 		]
 	},
 	"baselibs.dist": {
