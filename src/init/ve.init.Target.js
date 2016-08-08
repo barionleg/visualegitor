@@ -347,6 +347,8 @@ ve.init.Target.prototype.addSurface = function ( dmDoc, config ) {
 	surface.getView().connect( this, {
 		focus: this.onSurfaceViewFocus.bind( this, surface )
 	} );
+	this.oldDoc = dmDoc.cloneFromRange( new ve.Range( 0, dmDoc.data.getLength() ) );
+	this.oldDoc.rebuildTree();
 	return surface;
 };
 
