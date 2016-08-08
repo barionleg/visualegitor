@@ -21,6 +21,19 @@
 			{ "file": "lib/jsdifflib/diffview.css", "test": true }
 		]
 	},
+	"treeDiffer": {
+		"scripts": [
+			"lib/treeDiffer/diff.js",
+			"lib/treeDiffer/treeNode.js",
+			"lib/treeDiffer/tree.js",
+			"lib/treeDiffer/differ.js"
+		]
+	},
+	"diffMatchPatch": {
+		"scripts": [
+			"lib/diff-match-patch/diff_match_patch_uncompressed.js"
+		]
+	},
 	"oojs": {
 		"scripts": [
 			"lib/oojs/oojs.jquery.js"
@@ -212,7 +225,9 @@
 			"unicodejs",
 			"rangefix",
 			"spark-md5",
-			"dom-classlist-shim"
+			"dom-classlist-shim",
+			"treeDiffer",
+			"diffMatchPatch"
 		]
 	},
 	"visualEditor.core": {
@@ -272,6 +287,7 @@
 			"src/dm/ve.dm.DocumentSynchronizer.js",
 			"src/dm/ve.dm.IndexValueStore.js",
 			"src/dm/ve.dm.Converter.js",
+			"src/dm/ve.dm.VisualDiff.js",
 			"src/dm/selections/ve.dm.LinearSelection.js",
 			"src/dm/selections/ve.dm.NullSelection.js",
 			"src/dm/selections/ve.dm.TableSelection.js",
