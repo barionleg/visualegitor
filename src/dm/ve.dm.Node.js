@@ -323,6 +323,9 @@ ve.dm.Node.static.cloneElement = function ( element, store, preserveGenerated ) 
 		modified = false,
 		clone = ve.copy( element );
 
+	if ( clone.internal ) {
+		clone.internal.id =  've' + Math.floor( Math.random() * 100000 );
+	}
 	if ( !preserveGenerated && clone.internal ) {
 		delete clone.internal.generated;
 		if ( ve.isEmptyObject( clone.internal ) ) {

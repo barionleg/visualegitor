@@ -776,6 +776,9 @@ ve.dm.Converter.prototype.getDataFromDomSubtree = function ( domElement, wrapper
 						childDataElements[ 0 ].annotations = context.annotations.getIndexes().slice();
 					}
 
+					childDataElements[ 0 ].internal = childDataElements[ 0 ].internal || {};
+					childDataElements[ 0 ].internal.id = 've' + Math.floor( Math.random() * 100000 );
+
 					// Output child and process children if needed
 					if (
 						childDataElements.length === 1 &&
