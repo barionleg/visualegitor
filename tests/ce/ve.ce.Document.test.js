@@ -28,7 +28,7 @@ QUnit.test( 'Converter tests', function ( assert ) {
 			view = new ve.ce.Document( model );
 			$documentElement = view.getDocumentNode().$element;
 			// Simplify slugs
-			$documentElement.find( '.ve-ce-branchNode-slug' ).contents().remove();
+			$documentElement.find( '.ve-ce-branchNode-slug' ).removeAttr( 'contenteditable' ).contents().remove();
 			assert.equalDomElement(
 				// Wrap both in plain DIVs as we are only comparing the child nodes
 				$( '<div>' ).append( $documentElement.contents() )[ 0 ],
