@@ -100,6 +100,7 @@ ve.ce.BranchNode.inputDebugInlineSlugTemplate = $( '<span>' )
  * @property {HTMLElement}
  */
 ve.ce.BranchNode.blockSlugTemplate = $( '<div>' )
+	.prop( 'contentEditable', false )
 	.addClass( 've-ce-branchNode-slug ve-ce-branchNode-blockSlug' )
 	.get( 0 );
 
