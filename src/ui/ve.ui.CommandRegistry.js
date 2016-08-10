@@ -128,6 +128,12 @@ ve.ui.commandRegistry.register(
 );
 ve.ui.commandRegistry.register(
 	new ve.ui.Command(
+		'linkLabel', 'window', 'open',
+		{ args: [ 'link', { mode: 'label' } ], supportedSelections: [ 'linear' ] }
+	)
+);
+ve.ui.commandRegistry.register(
+	new ve.ui.Command(
 		'linkNoExpand', 'window', 'open',
 		{ args: [ 'link', { noExpand: true } ], supportedSelections: [ 'linear' ] }
 	)

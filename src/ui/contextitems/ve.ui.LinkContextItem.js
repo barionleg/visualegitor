@@ -143,13 +143,13 @@ ve.ui.LinkContextItem.prototype.updateLabelPreview = function () {
  * @protected
  */
 ve.ui.LinkContextItem.prototype.onLabelButtonClick = function () {
-	var surface = this.context.getSurface().getView(),
-		annotationView = this.getAnnotationView();
+	var command = this.context.getSurface().commandRegistry.lookup( 'linkLabel' );
 
-	surface.selectNodeContents(
-		annotationView.$element[ 0 ],
-		this.context.isMobile() ? 'end' : undefined
-	);
+	if ( command ) {
+		command.execute( this.context.getSurface(), undefined, 'context' );
+		this.emit( 'command' );
+	}
+
 	ve.track( 'activity.' + this.constructor.static.name, { action: 'context-label' } );
 };
 
