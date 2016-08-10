@@ -450,6 +450,20 @@ ve.dm.SurfaceFragment.prototype.getText = function ( maintainIndices ) {
 };
 
 /**
+ * Whether the fragment contains only text, allowing annotations
+ *
+ * @method
+ * @return {boolean} Whether there's only text
+ */
+ve.dm.SurfaceFragment.prototype.containsOnlyText = function () {
+	var range = this.getSelection().getCoveringRange();
+	if ( !range ) {
+		return true;
+	}
+	return this.document.data.isPlainText( range, false, false, false, true );
+};
+
+/**
  * Get annotations in fragment.
  *
  * By default, this will only get annotations that completely cover the fragment. Use the {all}
