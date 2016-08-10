@@ -98,6 +98,8 @@
 	"visualeditor-languageinspector-widget-label-direction": "Direction",
 	"visualeditor-languageinspector-widget-label-langcode": "Language code",
 	"visualeditor-languageinspector-widget-label-language": "Language",
+	"visualeditor-linkinspector-label": "Label",
+	"visualeditor-linkinspector-target": "Target",
 	"visualeditor-linkinspector-title": "Link",
 	"visualeditor-listbutton-bullet-tooltip": "Bullet list",
 	"visualeditor-listbutton-number-tooltip": "Numbered list",

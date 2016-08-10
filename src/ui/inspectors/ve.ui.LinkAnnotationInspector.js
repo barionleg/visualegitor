@@ -68,7 +68,7 @@ ve.ui.LinkAnnotationInspector.prototype.shouldRemoveAnnotation = function () {
  * @inheritdoc
  */
 ve.ui.LinkAnnotationInspector.prototype.getInsertionText = function () {
-	return this.annotationInput.getHref();
+	return this.labelInput.getValue().trim() || this.annotationInput.getHref();
 };
 
 /**
@@ -86,7 +86,7 @@ ve.ui.LinkAnnotationInspector.prototype.getAnnotationFromFragment = function ( f
 
 	return text ? new ve.dm.LinkAnnotation( {
 		type: 'link',
-		attributes: { href: fragment.getText() }
+		attributes: { href: text }
 	} ) : null;
 };
 
@@ -98,13 +98,24 @@ ve.ui.LinkAnnotationInspector.prototype.initialize = function () {
 	ve.ui.LinkAnnotationInspector.super.prototype.initialize.call( this );
 
 	// Properties
+	this.labelInput = this.createLabelInput();
 	this.annotationInput = this.createAnnotationInput();
 
 	// Events
 	this.annotationInput.connect( this, { change: 'onAnnotationInputChange' } );
 
 	// Initialization
+	this.form.$element.append( this.labelInput.$element );
 	this.form.$element.append( this.annotationInput.$element );
+};
+
+/**
+ * Create a link label widget
+ *
+ * @return {OO.ui.TextInputWidget} Link label widget
+ */
+ve.ui.LinkAnnotationInspector.prototype.createLabelInput = function () {
+	return new OO.ui.TextInputWidget( { label: OO.ui.deferMsg( 'visualeditor-linkinspector-label' ) } );
 };
 
 /**
@@ -119,11 +130,21 @@ ve.ui.LinkAnnotationInspector.prototype.createAnnotationInput = function () {
 /**
  * @inheritdoc
  */
+ve.ui.LinkAnnotationInspector.prototype.shouldInsertText = function () {
+	return ve.ui.LinkAnnotationInspector.super.prototype.shouldInsertText.call( this ) || !this.labelInput.isDisabled();
+};
+
+/**
+ * @inheritdoc
+ */
 ve.ui.LinkAnnotationInspector.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.LinkAnnotationInspector.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
+			var fragment = this.getFragment();
 			// Disable surface until animation is complete; will be reenabled in ready()
-			this.getFragment().getSurface().disable();
+			fragment.getSurface().disable();
+			this.labelInput.setDisabled( !fragment.containsOnlyText() );
+			this.labelInput.setValue( fragment.getText() );
 			this.annotationInput.setAnnotation( this.initialAnnotation );
 			this.updateActions();
 		}, this );
