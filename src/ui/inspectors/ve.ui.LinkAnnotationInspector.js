@@ -38,6 +38,11 @@ ve.ui.LinkAnnotationInspector.static.modelClasses = [ ve.dm.LinkAnnotation ];
  * @param {ve.dm.LinkAnnotation} annotation New link annotation value
  */
 ve.ui.LinkAnnotationInspector.prototype.onAnnotationInputChange = function () {
+	var newTarget = this.annotationInput.getHref();
+	if ( this.initialTarget === this.initialLabel && this.previousTarget === this.labelInput.getValue() ) {
+		this.labelInput.setValue( newTarget );
+	}
+	this.previousTarget = newTarget;
 	this.updateActions();
 };
 
@@ -68,7 +73,7 @@ ve.ui.LinkAnnotationInspector.prototype.shouldRemoveAnnotation = function () {
  * @inheritdoc
  */
 ve.ui.LinkAnnotationInspector.prototype.getInsertionText = function () {
-	return this.annotationInput.getHref();
+	return this.labelInput.getValue().trim() || this.annotationInput.getHref();
 };
 
 /**
@@ -86,7 +91,7 @@ ve.ui.LinkAnnotationInspector.prototype.getAnnotationFromFragment = function ( f
 
 	return text ? new ve.dm.LinkAnnotation( {
 		type: 'link',
-		attributes: { href: fragment.getText() }
+		attributes: { href: text }
 	} ) : null;
 };
 
@@ -98,13 +103,24 @@ ve.ui.LinkAnnotationInspector.prototype.initialize = function () {
 	ve.ui.LinkAnnotationInspector.super.prototype.initialize.call( this );
 
 	// Properties
+	this.labelInput = this.createLabelInput();
 	this.annotationInput = this.createAnnotationInput();
 
 	// Events
 	this.annotationInput.connect( this, { change: 'onAnnotationInputChange' } );
 
 	// Initialization
+	this.form.$element.append( this.labelInput.$element );
 	this.form.$element.append( this.annotationInput.$element );
+};
+
+/**
+ * Create a link label widget
+ *
+ * @return {OO.ui.TextInputWidget} Link label widget
+ */
+ve.ui.LinkAnnotationInspector.prototype.createLabelInput = function () {
+	return new OO.ui.TextInputWidget( { label: OO.ui.deferMsg( 'visualeditor-linkinspector-label' ) } );
 };
 
 /**
@@ -119,12 +135,36 @@ ve.ui.LinkAnnotationInspector.prototype.createAnnotationInput = function () {
 /**
  * @inheritdoc
  */
+ve.ui.LinkAnnotationInspector.prototype.shouldInsertText = function () {
+	if ( ve.ui.LinkAnnotationInspector.super.prototype.shouldInsertText.call( this ) ) {
+		// This mostly means "was there no initial-text?"
+		return true;
+	}
+	if ( this.labelInput.isDisabled() ) {
+		// If it's disabled, we've decided we're not competent to edit the label in this situation
+		return false;
+	}
+	if ( this.labelInput.getValue().trim() === this.initialLabel.trim() ) {
+		// Don't touch it if the plaintext value hasn't changed, to preserve internal annotations if possible
+		return false;
+	}
+	return true;
+};
+
+/**
+ * @inheritdoc
+ */
 ve.ui.LinkAnnotationInspector.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.LinkAnnotationInspector.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
+			var fragment = this.getFragment();
 			// Disable surface until animation is complete; will be reenabled in ready()
-			this.getFragment().getSurface().disable();
+			fragment.getSurface().disable();
+			this.initialLabel = fragment.getText();
+			this.labelInput.setDisabled( !fragment.containsOnlyText() );
+			this.labelInput.setValue( this.initialLabel );
 			this.annotationInput.setAnnotation( this.initialAnnotation );
+			this.initialTarget = this.previousTarget = this.annotationInput.getHref();
 			this.updateActions();
 		}, this );
 };
