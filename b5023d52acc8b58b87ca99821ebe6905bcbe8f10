@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee9d9f70_a1c87326",
+        "filename": "src/ce/ve.ce.BranchNode.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-08-10T15:56:35Z",
+      "side": 1,
+      "message": "For consistency, we should do .prop( \u0027contentEditable\u0027, \u0027true\u0027 ), on a line of its own",
+      "revId": "b5023d52acc8b58b87ca99821ebe6905bcbe8f10",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
