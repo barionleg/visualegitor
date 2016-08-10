@@ -655,14 +655,15 @@ ve.dm.ElementLinearData.prototype.trimOuterSpaceFromRange = function ( range ) {
 };
 
 /**
- * Check if the data is just plain (un-annotated) text
+ * Check if the data is just text
  *
  * @param {ve.Range} [range] Range to get the data for. The whole data set if not specified.
- * @param {boolean} [allowNonContentNodes] Include non-content nodes in the definition of plain text, e.g. paragraphs, headings, lists
- * @param {boolean} [allowedTypes] Only allow specific non-content types
- * @return {boolean} The data is plain text
+ * @param {boolean} [allowAnnotations] Include annotated text in the definition of plain text, e.g. paragraphs, headings, lists
+ * @param {boolean} [allowNonContentNodes] Include non-content nodes in the definition of text, e.g. paragraphs, headings, lists
+ * @param {Array} [allowedTypes] Allow specific non-content types included in this array
+ * @return {boolean} The data is text
  */
-ve.dm.ElementLinearData.prototype.isPlainText = function ( range, allowNonContentNodes, allowedTypes ) {
+ve.dm.ElementLinearData.prototype.isText = function ( range, allowAnnotations, allowNonContentNodes, allowedTypes ) {
 	var i, type;
 
 	range = range || new ve.Range( 0, this.getLength() );
@@ -670,20 +671,35 @@ ve.dm.ElementLinearData.prototype.isPlainText = function ( range, allowNonConten
 	for ( i = range.start; i < range.end; i++ ) {
 		if ( typeof this.data[ i ] === 'string' ) {
 			continue;
-		} else if ( ( allowNonContentNodes || allowedTypes ) && this.isElementData( i ) ) {
-			type = this.getType( i );
-			if ( allowedTypes && allowedTypes.indexOf( type ) !== -1 ) {
-				continue;
-			}
-			if ( allowNonContentNodes && !ve.dm.nodeFactory.isNodeContent( type ) ) {
-				continue;
+		} else if ( this.isElementData( i ) ) {
+			if ( ( allowNonContentNodes || allowedTypes ) ) {
+				type = this.getType( i );
+				if ( allowedTypes && allowedTypes.indexOf( type ) !== -1 ) {
+					continue;
+				}
+				if ( allowNonContentNodes && !ve.dm.nodeFactory.isNodeContent( type ) ) {
+					continue;
+				}
 			}
 			return false;
-		} else {
-			return false;
+		} else if ( allowAnnotations && this.data[ i ].length ) {
+			continue;
 		}
+		return false;
 	}
 	return true;
+};
+
+/**
+ * Check if the data is just plain (un-annotated) text
+ *
+ * @param {ve.Range} [range] Range to get the data for. The whole data set if not specified.
+ * @param {boolean} [allowNonContentNodes] Include non-content nodes in the definition of plain text, e.g. paragraphs, headings, lists
+ * @param {Array} [allowedTypes] Allow specific non-content types included in this array
+ * @return {boolean} The data is plain text
+ */
+ve.dm.ElementLinearData.prototype.isPlainText = function ( range, allowNonContentNodes, allowedTypes ) {
+	return this.isText( range, false, allowNonContentNodes, allowedTypes );
 };
 
 /**

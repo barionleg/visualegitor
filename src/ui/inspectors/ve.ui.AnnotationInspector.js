@@ -77,6 +77,19 @@ ve.ui.AnnotationInspector.prototype.shouldRemoveAnnotation = function () {
 };
 
 /**
+ * Work out whether the teardown process should replace the current text of the fragment.
+ *
+ * Default behavior is to only do so if nothing was selected initially, in which case we
+ * need *something* to apply the annotation to. If this returns true, getInsertionData had
+ * better produce something.
+ *
+ * @return {boolean} Whether to insert text on teardown
+ */
+ve.ui.AnnotationInspector.prototype.shouldInsertText = function () {
+	return this.initialSelection.isCollapsed();
+};
+
+/**
  * Get data to insert if nothing was selected when the inspector opened.
  *
  * Defaults to using #getInsertionText.
@@ -276,9 +289,7 @@ ve.ui.AnnotationInspector.prototype.getTeardownProcess = function ( data ) {
 					}
 					return;
 				}
-				if ( this.initialSelection.isCollapsed() ) {
-					insertText = true;
-				}
+				insertText = this.shouldInsertText();
 				if ( annotation ) {
 					// Check if the initial annotation has changed, or didn't cover the whole fragment
 					// to begin with

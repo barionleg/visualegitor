@@ -89,7 +89,7 @@ ve.ui.LinkAnnotationWidget.static.getTextFromAnnotation = function ( annotation 
  * @return {OO.ui.Widget} Text input widget
  */
 ve.ui.LinkAnnotationWidget.prototype.createInputWidget = function ( config ) {
-	return new OO.ui.TextInputWidget( $.extend( { validate: 'non-empty' }, config ) );
+	return new OO.ui.TextInputWidget( $.extend( { label: OO.ui.deferMsg( 'visualeditor-linkinspector-target' ), icon: 'link', validate: 'non-empty' }, config ) );
 };
 
 /**
