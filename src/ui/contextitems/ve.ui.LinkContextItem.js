@@ -130,8 +130,17 @@ ve.ui.LinkContextItem.prototype.renderBody = function () {
  * @protected
  */
 ve.ui.LinkContextItem.prototype.updateLabelPreview = function () {
-	var annotationView = this.getAnnotationView(),
-		label = annotationView && annotationView.$element[ 0 ].innerText.trim();
+	var label,
+		surfaceModel = this.context.getSurface().getModel(),
+		annotationView = this.getAnnotationView();
+
+	// annotationView is a potentially old view node from when the context was
+	// first focused in the document. If the annotation model has been changed
+	// as well, this may be a problem.
+	if ( annotationView ) {
+		label = surfaceModel.getFragment().expandLinearSelection( 'annotation', annotationView.getModel() ).getText();
+	}
+
 	this.labelPreview.setLabel( label || ve.msg( 'visualeditor-linkcontext-label-fallback' ) );
 };
 
@@ -143,13 +152,27 @@ ve.ui.LinkContextItem.prototype.updateLabelPreview = function () {
  * @protected
  */
 ve.ui.LinkContextItem.prototype.onLabelButtonClick = function () {
-	var surface = this.context.getSurface().getView(),
+	var command,
+		surface = this.context.getSurface(),
 		annotationView = this.getAnnotationView();
 
-	surface.selectNodeContents(
-		annotationView.$element[ 0 ],
-		this.context.isMobile() ? 'end' : undefined
-	);
+	if (
+		this.context.isMobile() &&
+		surface.getModel().getFragment().expandLinearSelection( 'annotation', annotationView.getModel() ).containsOnlyText()
+	) {
+		command = this.context.getSurface().commandRegistry.lookup( 'linkLabel' );
+
+		if ( command ) {
+			command.execute( this.context.getSurface(), undefined, 'context' );
+			this.emit( 'command' );
+		}
+	} else {
+		surface.getView().selectNodeContents(
+			annotationView.$element[ 0 ],
+			this.context.isMobile() ? 'end' : undefined
+		);
+	}
+
 	ve.track( 'activity.' + this.constructor.static.name, { action: 'context-label' } );
 };
 
