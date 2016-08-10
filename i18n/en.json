@@ -160,6 +160,8 @@
 	"visualeditor-linkcontext-label-fallback": "No preview",
 	"visualeditor-linkcontext-label-label": "Label",
 	"visualeditor-linkcontext-remove": "Remove link",
+	"visualeditor-linkinspector-label": "Label",
+	"visualeditor-linkinspector-link": "Link",
 	"visualeditor-linkinspector-title": "Link",
 	"visualeditor-linkinspector-title-add": "Add a link",
 	"visualeditor-linkinspector-title-edit": "Edit link",
