@@ -20,7 +20,7 @@ QUnit.test( 'getChangeTransaction', function ( assert ) {
 				{ type: 'retain', length: 5 },
 				{
 					type: 'replace',
-					remove: [ [ 'b', [ 0 ] ], [ 'a', [ 0 ] ], [ 'r', [ 0 ] ] ],
+					remove: [ [ 'b', [ 2 ] ], [ 'a', [ 2 ] ], [ 'r', [ 2 ] ] ],
 					insert: [ 'b', 'a', 'r' ],
 					insertedDataOffset: 0,
 					insertedDataLength: 3
@@ -38,7 +38,7 @@ QUnit.test( 'getChangeTransaction', function ( assert ) {
 				{
 					type: 'replace',
 					remove: [],
-					insert: [ [ 'r', [ 0 ] ] ],
+					insert: [ [ 'r', [ 2 ] ] ],
 					insertedDataOffset: 0,
 					insertedDataLength: 1
 				},
@@ -55,7 +55,7 @@ QUnit.test( 'getChangeTransaction', function ( assert ) {
 				{
 					type: 'replace',
 					remove: [ 'b', 'a', 'r' ],
-					insert: [ [ 'b', [ 0 ] ], [ 'a', [ 0 ] ], [ 'r', [ 0 ] ] ],
+					insert: [ [ 'b', [ 1 ] ], [ 'a', [ 1 ] ], [ 'r', [ 1 ] ] ],
 					insertedDataOffset: 0,
 					insertedDataLength: 3
 				},
@@ -72,7 +72,7 @@ QUnit.test( 'getChangeTransaction', function ( assert ) {
 				{
 					type: 'replace',
 					remove: [],
-					insert: [ [ 'z', [ 0 ] ] ],
+					insert: [ [ 'z', [ 1 ] ] ],
 					insertedDataOffset: 0,
 					insertedDataLength: 1
 				},
@@ -125,9 +125,9 @@ QUnit.test( 'getChangeTransaction', function ( assert ) {
 					type: 'replace',
 					remove: [ 'b', 'a', 'r' ],
 					insert: [
-						[ 'b', [ 0, 1 ] ],
-						[ 'a', [ 0, 1 ] ],
-						[ 'r', [ 0, 1 ] ]
+						[ 'b', [ 1, 2 ] ],
+						[ 'a', [ 1, 2 ] ],
+						[ 'r', [ 1, 2 ] ]
 					],
 					insertedDataOffset: 0,
 					insertedDataLength: 3
@@ -144,8 +144,8 @@ QUnit.test( 'getChangeTransaction', function ( assert ) {
 				{ type: 'retain', length: 5 },
 				{
 					type: 'replace',
-					remove: [ [ 'b', [ 0, 1 ] ], [ 'a', [ 0, 1 ] ], [ 'r', [ 0, 1 ] ] ],
-					insert: [ [ 'b', [ 0 ] ], [ 'a', [ 0 ] ], [ 'r', [ 0 ] ] ],
+					remove: [ [ 'b', [ 2, 4 ] ], [ 'a', [ 2, 4 ] ], [ 'r', [ 2, 4 ] ] ],
+					insert: [ [ 'b', [ 2 ] ], [ 'a', [ 2 ] ], [ 'r', [ 2 ] ] ],
 					insertedDataOffset: 0,
 					insertedDataLength: 3
 				},
@@ -162,7 +162,7 @@ QUnit.test( 'getChangeTransaction', function ( assert ) {
 				{
 					type: 'replace',
 					remove: [],
-					insert: [ [ 'r', [ 0, 1 ] ] ],
+					insert: [ [ 'r', [ 2, 4 ] ] ],
 					insertedDataOffset: 0,
 					insertedDataLength: 1
 				},
@@ -178,8 +178,8 @@ QUnit.test( 'getChangeTransaction', function ( assert ) {
 				{ type: 'retain', length: 5 },
 				{
 					type: 'replace',
-					remove: [ [ 'b', [ 0 ] ], [ 'a', [ 0 ] ], [ 'r', [ 0 ] ] ],
-					insert: [ [ 'b', [ 0, 1 ] ], [ 'a', [ 0, 1 ] ], [ 'r', [ 0, 1 ] ] ],
+					remove: [ [ 'b', [ 2 ] ], [ 'a', [ 2 ] ], [ 'r', [ 2 ] ] ],
+					insert: [ [ 'b', [ 2, 3 ] ], [ 'a', [ 2, 3 ] ], [ 'r', [ 2, 3 ] ] ],
 					insertedDataOffset: 0,
 					insertedDataLength: 3
 				},
@@ -196,7 +196,7 @@ QUnit.test( 'getChangeTransaction', function ( assert ) {
 				{
 					type: 'replace',
 					remove: [],
-					insert: [ [ 'z', [ 0, 1 ] ] ],
+					insert: [ [ 'z', [ 1, 3 ] ] ],
 					insertedDataOffset: 0,
 					insertedDataLength: 1
 				},
@@ -213,7 +213,7 @@ QUnit.test( 'getChangeTransaction', function ( assert ) {
 				{
 					type: 'replace',
 					remove: [],
-					insert: [ [ 'z', [ 0 ] ] ],
+					insert: [ [ 'z', [ 1 ] ] ],
 					insertedDataOffset: 0,
 					insertedDataLength: 1
 				},
@@ -247,11 +247,11 @@ QUnit.test( 'getChangeTransaction', function ( assert ) {
 				{ type: 'retain', length: 5 },
 				{
 					type: 'replace',
-					remove: [ [ 'b', [ 0 ] ], [ 'a', [ 0 ] ], [ 'r', [ 0 ] ] ],
+					remove: [ [ 'b', [ 1 ] ], [ 'a', [ 1 ] ], [ 'r', [ 1 ] ] ],
 					insert: [
-						[ 'b', [ 0, 1, 2 ] ],
-						[ 'a', [ 0, 1, 2 ] ],
-						[ 'r', [ 0, 1, 2 ] ]
+						[ 'b', [ 1, 3, 4 ] ],
+						[ 'a', [ 1, 3, 4 ] ],
+						[ 'r', [ 1, 3, 4 ] ]
 					],
 					insertedDataOffset: 0,
 					insertedDataLength: 3
@@ -272,7 +272,7 @@ QUnit.test( 'getChangeTransaction', function ( assert ) {
 					// TODO: Reuse bold 0 instead of creating a new bold 2?
 					// (Some annotation types may need specific rules as to
 					// when this can be done)
-					insert: [ [ 'b', [ 2 ] ], [ 'a', [ 2 ] ], [ 'z', [ 2 ] ] ],
+					insert: [ [ 'b', [ 1 ] ], [ 'a', [ 1 ] ], [ 'z', [ 1 ] ] ],
 					insertedDataOffset: 0,
 					insertedDataLength: 3
 				},
@@ -288,8 +288,8 @@ QUnit.test( 'getChangeTransaction', function ( assert ) {
 				{ type: 'retain', length: 3 },
 				{
 					type: 'replace',
-					remove: [ [ 'c', [ 0, 1 ] ], [ 'd', [ 0 ] ] ],
-					insert: [ [ 'c', [ 0, 1, 2 ] ], [ 'd', [ 0, 2 ] ] ],
+					remove: [ [ 'c', [ 1, 3 ] ], [ 'd', [ 1 ] ] ],
+					insert: [ [ 'c', [ 1, 3, 4 ] ], [ 'd', [ 1, 4 ] ] ],
 					insertedDataOffset: 0,
 					insertedDataLength: 2
 				},
@@ -309,9 +309,9 @@ QUnit.test( 'getChangeTransaction', function ( assert ) {
 					// a diff algorithm that matches common start/end items
 					// then replaces the entire interior. In real life usage
 					// there won't usually be two separate changed regions.
-					remove: [ [ 'b', [ 1 ] ], [ 'a', [ 1 ] ], [ 'r', [ 1 ] ], ' ', 'b', 'a', 'z' ],
+					remove: [ [ 'b', [ 3 ] ], [ 'a', [ 3 ] ], [ 'r', [ 3 ] ], ' ', 'b', 'a', 'z' ],
 					// The first insertion get
-					insert: [ 'b', 'a', 'r', ' ', [ 'b', [ 0 ] ], [ 'a', [ 0 ] ], [ 'z', [ 0 ] ] ],
+					insert: [ 'b', 'a', 'r', ' ', [ 'b', [ 1 ] ], [ 'a', [ 1 ] ], [ 'z', [ 1 ] ] ],
 					insertedDataOffset: 0,
 					insertedDataLength: 7
 				},
@@ -328,7 +328,7 @@ QUnit.test( 'getChangeTransaction', function ( assert ) {
 				{
 					type: 'replace',
 					remove: [],
-					insert: [ 'y', [ 'w', [ 0 ] ] ],
+					insert: [ 'y', [ 'w', [ 1 ] ] ],
 					insertedDataOffset: 0,
 					insertedDataLength: 2
 				},

@@ -47,6 +47,10 @@ ve.dm.example.preprocessAnnotations = function ( data, store ) {
 		if ( Array.isArray( data[ i ][ key ] ) && data[ i ][ key ][ 0 ].type ) {
 			data[ i ][ key ] = ve.dm.example.createAnnotationSet( store, data[ i ][ key ] ).getIndexes();
 		}
+		if ( data[ i ].originalDomElements ) {
+			data[ i ].originalDomElementsIndex = store.indexNoHash( data[ i ].originalDomElements );
+			delete data[ i ].originalDomElements;
+		}
 	}
 	return new ve.dm.FlatLinearData( store, data );
 };
@@ -72,10 +76,10 @@ ve.dm.example.postprocessAnnotations = function ( data, store, preserveDomElemen
 			data[ i ][ key ] = new ve.dm.AnnotationSet( store, data[ i ][ key ] ).get();
 			for ( j = 0; j < data[ i ][ key ].length; j++ ) {
 				data[ i ][ key ][ j ] = data[ i ][ key ][ j ].element;
-				if ( !preserveDomElements && data[ i ][ key ][ j ].originalDomElements ) {
+				if ( !preserveDomElements && data[ i ][ key ][ j ].originalDomElementsIndex ) {
 					// Make a shallow clone and remove .originalDomElements from it
 					data[ i ][ key ][ j ] = $.extend( {}, data[ i ][ key ][ j ] );
-					delete data[ i ][ key ][ j ].originalDomElements;
+					delete data[ i ][ key ][ j ].originalDomElementsIndex;
 				}
 			}
 		}
@@ -92,8 +96,8 @@ ve.dm.example.postprocessAnnotations = function ( data, store, preserveDomElemen
 ve.dm.example.removeOriginalDomElements = function ( data ) {
 	var i, len;
 	for ( i = 0, len = data.length; i < len; i++ ) {
-		if ( data[ i ].originalDomElements ) {
-			delete data[ i ].originalDomElements;
+		if ( data[ i ].originalDomElementsIndex ) {
+			delete data[ i ].originalDomElementsIndex;
 		}
 	}
 	return data;
@@ -104,10 +108,11 @@ ve.dm.example.removeOriginalDomElements = function ( data ) {
  *
  * @method
  * @param {Object} annotation Plain object with type and attributes properties
+ * @param {ve.dm.IndexValueStore} [store] Index value store
  * @return {ve.dm.Annotation} Instance of the right ve.dm.Annotation subclass
  */
-ve.dm.example.createAnnotation = function ( annotation ) {
-	return ve.dm.annotationFactory.createFromElement( annotation );
+ve.dm.example.createAnnotation = function ( annotation, store ) {
+	return ve.dm.annotationFactory.createFromElement( annotation, store );
 };
 
 /**
@@ -124,7 +129,7 @@ ve.dm.example.createAnnotation = function ( annotation ) {
 ve.dm.example.createAnnotationSet = function ( store, annotations ) {
 	var i;
 	for ( i = 0; i < annotations.length; i++ ) {
-		annotations[ i ] = ve.dm.example.createAnnotation( annotations[ i ] );
+		annotations[ i ] = ve.dm.example.createAnnotation( annotations[ i ], store );
 	}
 	return new ve.dm.AnnotationSet( store, store.indexes( annotations ) );
 };
@@ -1423,7 +1428,7 @@ ve.dm.example.domToDataCases = {
 			{ type: 'internalList' },
 			{ type: '/internalList' }
 		],
-		storeLength: 2,
+		storeLength: 4,
 		fromDataBody: '<p><code>a</code>b<tt>c</tt>d<code>ef</code></p>'
 	},
 	'additive annotations': {
@@ -1440,7 +1445,7 @@ ve.dm.example.domToDataCases = {
 			{ type: 'internalList' },
 			{ type: '/internalList' }
 		],
-		storeLength: 2
+		storeLength: 4
 	},
 	'additive annotations overlapping other annotations': {
 		body: '<p><i><big>a<big><b>b</b></big><b>c</b></big></i></p>',
@@ -1453,7 +1458,7 @@ ve.dm.example.domToDataCases = {
 			{ type: 'internalList' },
 			{ type: '/internalList' }
 		],
-		storeLength: 3
+		storeLength: 5
 	},
 	'annotations normalised on import': {
 		body: '<p><em>Foo</em><strong>bar</strong></p>',
@@ -2192,9 +2197,6 @@ ve.dm.example.domToDataCases = {
 			{ type: 'internalList' },
 			{ type: '/internalList' }
 		],
-		normalizedBody:
-			'<p><b>Foobar</b><strong>baz</strong></p>' +
-			'<p><a href="quux">Foobar</a><a href="whee">baz</a></p>',
 		fromDataBody:
 			'<p><b>Foobarbaz</b></p>' +
 			'<p><a href="quux">Foobar</a><a href="whee">baz</a></p>'

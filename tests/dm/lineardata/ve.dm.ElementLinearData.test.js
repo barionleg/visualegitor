@@ -1544,12 +1544,12 @@ QUnit.test( 'sanitize', function ( assert ) {
 				html: '<p style="text-shadow: 0 0 1px #000;">F<b style="color:blue;">o</b>o</p>',
 				data: [
 					{ type: 'paragraph' },
-					'F', [ 'o', [ 0 ] ], 'o',
+					'F', [ 'o', [ 2 ] ], 'o',
 					{ type: '/paragraph' },
 					{ type: 'internalList' },
 					{ type: '/internalList' }
 				],
-				store: [ bold ],
+				store: [ undefined, undefined, bold ],
 				rules: { removeOriginalDomElements: true },
 				msg: 'Original DOM elements removed'
 			},
@@ -1675,14 +1675,14 @@ QUnit.test( 'sanitize', function ( assert ) {
 				data: [
 					{ type: 'paragraph' },
 					'F', 'o', 'o', ' ', 'B', 'a', 'r', ' ',
-					[ 'B', [ 0 ] ],
-					[ 'a', [ 0 ] ],
-					[ 'z', [ 0 ] ],
-					[ ' ', [ 0 ] ],
-					[ 'Q', [ 0 ] ],
-					[ 'u', [ 0 ] ],
-					[ 'u', [ 0 ] ],
-					[ 'x', [ 0 ] ],
+					[ 'B', [ 2 ] ],
+					[ 'a', [ 2 ] ],
+					[ 'z', [ 2 ] ],
+					[ ' ', [ 2 ] ],
+					[ 'Q', [ 2 ] ],
+					[ 'u', [ 2 ] ],
+					[ 'u', [ 2 ] ],
+					[ 'x', [ 2 ] ],
 					{ type: '/paragraph' },
 					{ type: 'internalList' },
 					{ type: '/internalList' }
@@ -1898,11 +1898,15 @@ QUnit.test( 'getUsedStoreValues', function ( assert ) {
 			}
 		];
 
+	function getElement( ann ) {
+		return ann.element;
+	}
+
 	QUnit.expect( cases.length );
 	for ( i = 0; i < cases.length; i++ ) {
 		assert.deepEqual(
-			elementData.getUsedStoreValues( cases[ i ].range ),
-			cases[ i ].expected,
+			ve.copy( elementData.getUsedStoreValues( cases[ i ].range ), getElement ),
+			ve.copy( cases[ i ].expected, getElement ),
 			cases[ i ].msg
 		);
 	}
