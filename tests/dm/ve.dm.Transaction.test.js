@@ -26,7 +26,7 @@ function runConstructorTests( assert, constructor, cases, testRange ) {
 			tx = constructor.apply(
 				ve.dm.Transaction, cases[ msg ].args
 			);
-			assert.deepEqualWithDomElements( tx.getOperations(), cases[ msg ].ops, msg + ': operations match' );
+			assert.equalLinearDataWithDom( cases[ msg ].args[ 0 ].getStore(), tx.getOperations(), cases[ msg ].ops, msg + ': operations match' );
 			if ( testRange ) {
 				assert.equalRange(
 					tx.getModifiedRange(),
@@ -1072,6 +1072,7 @@ QUnit.test( 'newFromDocumentInsertion', function ( assert ) {
 			actualStoreItems[ j ] = doc.store.value( doc.store.indexOfHash(
 				OO.getHash( expectedStoreItems[ j ] )
 			) );
+			expectedStoreItems[ j ].store = store2;
 		}
 		assert.deepEqual( actualStoreItems, expectedStoreItems, cases[ i ].msg + ': store items' );
 	}
