@@ -117,7 +117,12 @@ RangeFix
  – MIT license
  – Ed Sanders and other contributors
 
+SparkMD5
+ – https://github.com/satazor/js-spark-md5
+ – MIT license
+ – Joseph Myers
+
 UnicodeJS
  – https://www.mediawiki.org/wiki/OOjs_UI
- – MIT license
+ – WTF2 & MIT licenses
  – UnicodeJS Team and other contributors
