@@ -4,6 +4,8 @@
  * @copyright 2011-2016 VisualEditor Team and others; see http://ve.mit-license.org
  */
 
+/* global SparkMD5 */
+
 /**
  * Index-value store
  *
@@ -13,8 +15,6 @@
 ve.dm.IndexValueStore = function VeDmIndexValueStore() {
 	// maps hashes to indexes
 	this.hashStore = {};
-	// maps indexes to values
-	this.valueStore = [];
 };
 
 /* Methods */
@@ -28,41 +28,37 @@ ve.dm.IndexValueStore = function VeDmIndexValueStore() {
  * @param {Object|string|Array} value Value to lookup or store
  * @param {string} [hash] Value hash. Uses OO.getHash( value ) if not provided.
  * @param {boolean} [overwrite=false] Overwrite the value in the store if the hash is already in use
- * @return {number} The index of the value in the store
+ * @return {string} The index (hash) of the value in the store
  */
 ve.dm.IndexValueStore.prototype.index = function ( value, hash, overwrite ) {
-	var index;
-	if ( typeof hash !== 'string' ) {
-		hash = OO.getHash( value );
-	}
-	index = this.indexOfHash( hash );
-	if ( index === null || overwrite ) {
-		if ( index === null ) {
-			index = this.valueStore.length;
-		}
+	hash = this.indexOfValue( value, hash );
+	if ( !this.hashStore[ hash ] || overwrite ) {
 		if ( Array.isArray( value ) ) {
-			this.valueStore[ index ] = ve.copy( value );
+			this.hashStore[ hash ] = ve.copy( value );
 		} else if ( typeof value === 'object' ) {
-			this.valueStore[ index ] = ve.cloneObject( value );
+			this.hashStore[ hash ] = ve.cloneObject( value );
 		} else {
-			this.valueStore[ index ] = value;
+			this.hashStore[ hash ] = value;
 		}
-		this.hashStore[ hash ] = index;
 	}
-	return index;
+
+	return hash;
 };
 
 /**
- * Get the index of a hash in the store.
- *
- * Returns null if the hash is not found.
+ * Get the index of a value without inserting it in the store
  *
  * @method
- * @param {Object|string|Array} hash Value hash.
- * @return {number|null} The index of the value in the store, or undefined if it is not found
+ * @param {Object|string|Array} value Value to lookup or store
+ * @param {string} [hash] Value hash. Uses OO.getHash( value ) if not provided.
+ * @return {string} The index (hash) of the value in the store
  */
-ve.dm.IndexValueStore.prototype.indexOfHash = function ( hash ) {
-	return hash in this.hashStore ? this.hashStore[ hash ] : null;
+ve.dm.IndexValueStore.prototype.indexOfValue = function ( value, hash ) {
+	if ( typeof hash !== 'string' ) {
+		hash = OO.getHash( value );
+	}
+	// Prefix with a letter to prevent all numeric hashes which seem dangerous.
+	return 'h' + SparkMD5.hash( hash ).slice( 0, 16 );
 };
 
 /**
@@ -72,7 +68,7 @@ ve.dm.IndexValueStore.prototype.indexOfHash = function ( hash ) {
  *
  * @method
  * @param {Object[]} values Values to lookup or store
- * @return {Array} The indexes of the values in the store
+ * @return {string[]} The indexes of the values in the store
  */
 ve.dm.IndexValueStore.prototype.indexes = function ( values ) {
 	var i, length, indexes = [];
@@ -86,32 +82,11 @@ ve.dm.IndexValueStore.prototype.indexes = function ( values ) {
  * Get the value at a particular index
  *
  * @method
- * @param {number} index Index to lookup
+ * @param {string} index Index to lookup
  * @return {Object|undefined} Value at this index, or undefined if out of bounds
  */
 ve.dm.IndexValueStore.prototype.value = function ( index ) {
-	return this.valueStore[ index ];
-};
-
-/**
- * Replace a value's stored hash, e.g. if the value has changed and you want to discard the old one.
- *
- * @param {string} oldHash The value's previously stored hash
- * @param {Object|string|Array} value New value
- * @throws {Error} Old hash not found
- */
-ve.dm.IndexValueStore.prototype.replaceHash = function ( oldHash, value ) {
-	var newHash = OO.getHash( value ),
-		index = this.hashStore[ oldHash ];
-
-	if ( index === undefined ) {
-		throw new Error( 'Old hash not found: ' + oldHash );
-	}
-
-	delete this.hashStore[ oldHash ];
-
-	this.hashStore[ newHash ] = index;
-	this.valueStore[ index ] = value;
+	return this.hashStore[ index ];
 };
 
 /**
@@ -120,7 +95,7 @@ ve.dm.IndexValueStore.prototype.replaceHash = function ( oldHash, value ) {
  * Same as value but with arrays.
  *
  * @method
- * @param {number[]} indexes Indices to lookup
+ * @param {string[]} indexes Indices to lookup
  * @return {Array} Values at these indexes, or undefined if out of bounds
  */
 ve.dm.IndexValueStore.prototype.values = function ( indexes ) {
@@ -142,7 +117,6 @@ ve.dm.IndexValueStore.prototype.values = function ( indexes ) {
  */
 ve.dm.IndexValueStore.prototype.clone = function () {
 	var key, clone = new this.constructor();
-	clone.valueStore = this.valueStore.slice();
 	for ( key in this.hashStore ) {
 		clone.hashStore[ key ] = this.hashStore[ key ];
 	}
@@ -159,16 +133,13 @@ ve.dm.IndexValueStore.prototype.clone = function () {
  * Objects added to the store are added by reference, not cloned like in .index()
  *
  * @param {ve.dm.IndexValueStore} other Store to merge into this one
- * @return {Object} Object in which the keys are indexes in other and the values are the corresponding keys in this
  */
 ve.dm.IndexValueStore.prototype.merge = function ( other ) {
-	var key, index, mapping = {};
+	var key;
+
 	for ( key in other.hashStore ) {
 		if ( !Object.prototype.hasOwnProperty.call( this.hashStore, key ) ) {
-			index = this.valueStore.push( other.valueStore[ other.hashStore[ key ] ] ) - 1;
-			this.hashStore[ key ] = index;
+			this.hashStore[ key ] = other.hashStore[ key ];
 		}
-		mapping[ other.hashStore[ key ] ] = this.hashStore[ key ];
 	}
-	return mapping;
 };
