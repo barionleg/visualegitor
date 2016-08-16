@@ -937,6 +937,7 @@ ve.dm.ElementLinearData.prototype.getWordRange = function ( offset ) {
  */
 ve.dm.ElementLinearData.prototype.getUsedStoreValues = function ( range ) {
 	var i, index, indexes, j,
+		store = this.getStore(),
 		valueStore = {};
 
 	range = range || new ve.Range( 0, this.data.length );
@@ -949,8 +950,11 @@ ve.dm.ElementLinearData.prototype.getUsedStoreValues = function ( range ) {
 		while ( j-- ) {
 			index = indexes[ j ];
 			if ( !Object.prototype.hasOwnProperty.call( valueStore, index ) ) {
-				valueStore[ index ] = this.getStore().value( index );
+				valueStore[ index ] = store.value( index );
 			}
+		}
+		if ( this.data[ i ].originalDomElementsIndex !== undefined ) {
+			valueStore[ this.data[ i ].originalDomElementsIndex ] = store.value( this.data[ i ].originalDomElementsIndex );
 		}
 	}
 	return valueStore;
@@ -1032,7 +1036,7 @@ ve.dm.ElementLinearData.prototype.remapInternalListKeys = function ( internalLis
  */
 ve.dm.ElementLinearData.prototype.sanitize = function ( rules ) {
 	var i, len, annotations, emptySet, setToRemove, type,
-		canContainContent, contentElement, isOpen, nodeClass, ann, oldHash,
+		canContainContent, contentElement, isOpen, nodeClass, ann,
 		store = this.getStore(),
 		allAnnotations = this.getAnnotationsFromRange( new ve.Range( 0, this.getLength() ), true );
 
@@ -1043,10 +1047,8 @@ ve.dm.ElementLinearData.prototype.sanitize = function ( rules ) {
 			// Remove originalDomElements from annotations
 			for ( i = 0, len = allAnnotations.getLength(); i < len; i++ ) {
 				ann = allAnnotations.get( i );
-				if ( ann.element.originalDomElements ) {
-					oldHash = OO.getHash( ann );
-					delete allAnnotations.get( i ).element.originalDomElements;
-					store.replaceHash( oldHash, ann );
+				if ( ann.element.originalDomElementsIndex ) {
+					delete allAnnotations.get( i ).element.originalDomElementsIndex;
 				}
 			}
 		}
@@ -1168,7 +1170,7 @@ ve.dm.ElementLinearData.prototype.sanitize = function ( rules ) {
 			}
 			if ( rules.removeOriginalDomElements ) {
 				// Remove originalDomElements from nodes
-				delete this.getData( i ).originalDomElements;
+				delete this.getData( i ).originalDomElementsIndex;
 			}
 		}
 	}
