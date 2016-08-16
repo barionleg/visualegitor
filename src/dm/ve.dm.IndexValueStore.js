@@ -15,6 +15,7 @@ ve.dm.IndexValueStore = function VeDmIndexValueStore() {
 	this.hashStore = {};
 	// maps indexes to values
 	this.valueStore = [];
+	this.noHashIndexes = [];
 };
 
 /* Methods */
@@ -49,6 +50,18 @@ ve.dm.IndexValueStore.prototype.index = function ( value, hash, overwrite ) {
 		}
 		this.hashStore[ hash ] = index;
 	}
+	return index;
+};
+
+/**
+ * Add a value to the store with no hash
+ *
+ * @param {Object|string|Array} value Value to store
+ * @return {number} The index of the value in the store
+ */
+ve.dm.IndexValueStore.prototype.indexNoHash = function ( value ) {
+	var index = this.valueStore.push( value ) - 1 ;
+	this.noHashIndexes.push( index );
 	return index;
 };
 
@@ -162,13 +175,31 @@ ve.dm.IndexValueStore.prototype.clone = function () {
  * @return {Object} Object in which the keys are indexes in other and the values are the corresponding keys in this
  */
 ve.dm.IndexValueStore.prototype.merge = function ( other ) {
-	var key, index, mapping = {};
+	var key, index, i, l, value,
+		values = [],
+		mapping = {};
+
 	for ( key in other.hashStore ) {
 		if ( !Object.prototype.hasOwnProperty.call( this.hashStore, key ) ) {
-			index = this.valueStore.push( other.valueStore[ other.hashStore[ key ] ] ) - 1;
+			value = other.valueStore[ other.hashStore[ key ] ];
+			index = this.valueStore.push( value ) - 1;
 			this.hashStore[ key ] = index;
+			values.push( value );
 		}
 		mapping[ other.hashStore[ key ] ] = this.hashStore[ key ];
 	}
+	for ( i = 0, l = other.noHashIndexes.length; i < l; i++ ) {
+		value = other.value( other.noHashIndexes[ i ] );
+		index = this.indexNoHash( value );
+		mapping[ other.noHashIndexes[ i ] ] = index;
+		values.push( value );
+	}
+	// Items in the index may contain pointers to other items in the index
+	// In these cases they should contain a remapStoreIndexes method (e.g. ve.dm.Annotation)
+	values.forEach( function ( value ) {
+		if ( value.remapStoreIndexes ) {
+			value.remapStoreIndexes( mapping );
+		}
+	} );
 	return mapping;
 };

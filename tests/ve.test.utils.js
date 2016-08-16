@@ -182,7 +182,7 @@
 			assert.equalLinearData( actualData, caseItem.data, msg + ': data' );
 			assert.deepEqual( model.getInnerWhitespace(), caseItem.innerWhitespace || new Array( 2 ), msg + ': inner whitespace' );
 			if ( caseItem.storeLength !== undefined ) {
-				assert.strictEqual( model.getStore().valueStore.length, caseItem.storeLength, msg + ': store length matches' );
+				assert.strictEqual( Object.keys( model.getStore().hashStore ).length, caseItem.storeLength, msg + ': store length matches' );
 			}
 			// check storeItems have been added to store
 			if ( caseItem.storeItems ) {

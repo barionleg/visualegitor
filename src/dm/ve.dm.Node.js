@@ -257,7 +257,10 @@ ve.dm.Node.static.sanitize = function () {
  * @param {Object} dataElement Data element (opening) to remap. Will be modified.
  * @param {Object} mapping Object mapping old store indexes to new store indexes
  */
-ve.dm.Node.static.remapStoreIndexes = function () {
+ve.dm.Node.static.remapStoreIndexes = function ( dataElement, mapping ) {
+	if ( dataElement.originalDomElementsIndex !== undefined ) {
+		dataElement.originalDomElementsIndex = mapping[ dataElement.originalDomElementsIndex ];
+	}
 };
 
 /**

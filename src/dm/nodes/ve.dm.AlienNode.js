@@ -57,8 +57,8 @@ ve.dm.AlienNode.static.toDataElement = function ( domElements, converter ) {
 	return element;
 };
 
-ve.dm.AlienNode.static.toDomElements = function ( dataElement, doc ) {
-	return ve.copyDomElements( dataElement.originalDomElements, doc );
+ve.dm.AlienNode.static.toDomElements = function ( dataElement, doc, converter ) {
+	return ve.copyDomElements( converter.getStore().value( dataElement.originalDomElementsIndex ) || [], doc );
 };
 
 /**

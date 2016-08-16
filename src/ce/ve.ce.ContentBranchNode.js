@@ -206,6 +206,7 @@ ve.ce.ContentBranchNode.prototype.getRenderedContents = function () {
 			buffer = '';
 		}
 		// Create a new DOM node and descend into it
+		annotation.doc = node.model.doc;
 		ann = ve.ce.annotationFactory.create( annotation.getType(), annotation, node );
 		ann.appendTo( current );
 		annotationStack.push( ann );
