@@ -88,17 +88,6 @@ ve.dm.Annotation.static.toDomElements = null;
 /* Methods */
 
 /**
- * Remap the store indexes stored in a linear model data element.
- *
- * @param {Object} mapping Index mapping
- */
-ve.dm.Annotation.prototype.remapStoreIndexes = function ( mapping ) {
-	if ( this.element.originalDomElementsIndex !== undefined ) {
-		this.element.originalDomElementsIndex = mapping[ this.element.originalDomElementsIndex ];
-	}
-};
-
-/**
  * Get an object containing comparable annotation properties.
  *
  * This is used by the converter to merge adjacent annotations.

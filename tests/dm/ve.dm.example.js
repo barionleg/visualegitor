@@ -30,7 +30,7 @@ ve.dm.example = {};
  * @throws {Error} Example data passed to preprocessAnnotations by reference
  */
 ve.dm.example.preprocessAnnotations = function ( data, store ) {
-	var i, key;
+	var i, key, originalDomElements;
 
 	// Sanity check to make sure ve.dm.example data has not been passed in
 	// by reference. Always use ve#copy.
@@ -47,8 +47,9 @@ ve.dm.example.preprocessAnnotations = function ( data, store ) {
 		if ( Array.isArray( data[ i ][ key ] ) && data[ i ][ key ][ 0 ].type ) {
 			data[ i ][ key ] = ve.dm.example.createAnnotationSet( store, data[ i ][ key ] ).getIndexes();
 		}
-		if ( data[ i ].originalDomElements ) {
-			data[ i ].originalDomElementsIndex = store.indexNoHash( data[ i ].originalDomElements );
+		originalDomElements = data[ i ].originalDomElements;
+		if ( originalDomElements ) {
+			data[ i ].originalDomElementsIndex = store.index( originalDomElements, originalDomElements.map( ve.getNodeHtml ).join( '' ) );
 			delete data[ i ].originalDomElements;
 		}
 	}
@@ -149,6 +150,27 @@ ve.dm.example.link = function ( href ) {
 ve.dm.example.language = function ( lang, dir ) {
 	return { type: 'meta/language', attributes: { lang: lang, dir: dir } };
 };
+
+ve.dm.example.annIndex = function ( tagName, text ) {
+	var ann = ve.copy( {
+			b: ve.dm.example.bold,
+			i: ve.dm.example.italic,
+			u: ve.dm.example.underline
+		}[ tagName ] );
+
+	ann.originalDomElementsIndex = ve.dm.IndexValueStore.prototype.indexOfValue( null, '<' + tagName + '>' + text + '</' + tagName + '>' );
+	return ve.dm.IndexValueStore.prototype.indexOfValue( ann );
+};
+
+// index = store.indexOfValue( ve.dm.example.bold )
+ve.dm.example.boldIndex = 'h49981eab0f8056ff';
+ve.dm.example.italicIndex = 'hefd27ef3bf2041dd';
+ve.dm.example.underlineIndex = 'hf214c680fbc361da';
+ve.dm.example.strongIndex = 'ha5aaf526d1c3af54';
+
+ve.dm.example.domBoldIndex = 'ha17878c4224059d6';
+ve.dm.example.domItalicIndex = 'h818fb55eaa1f5676';
+ve.dm.example.domUnderlineIndex = 'h6d4db1ae2f34b4b7';
 
 ve.dm.example.inlineSlug = '<span class="ve-ce-branchNode-slug ve-ce-branchNode-inlineSlug"></span>';
 ve.dm.example.blockSlug = '<div class="ve-ce-branchNode-slug ve-ce-branchNode-blockSlug"></div>';
@@ -1428,7 +1450,6 @@ ve.dm.example.domToDataCases = {
 			{ type: 'internalList' },
 			{ type: '/internalList' }
 		],
-		storeLength: 4,
 		fromDataBody: '<p><code>a</code>b<tt>c</tt>d<code>ef</code></p>'
 	},
 	'additive annotations': {
@@ -1444,8 +1465,7 @@ ve.dm.example.domToDataCases = {
 			{ type: '/paragraph' },
 			{ type: 'internalList' },
 			{ type: '/internalList' }
-		],
-		storeLength: 4
+		]
 	},
 	'additive annotations overlapping other annotations': {
 		body: '<p><i><big>a<big><b>b</b></big><b>c</b></big></i></p>',
@@ -1457,8 +1477,7 @@ ve.dm.example.domToDataCases = {
 			{ type: '/paragraph' },
 			{ type: 'internalList' },
 			{ type: '/internalList' }
-		],
-		storeLength: 5
+		]
 	},
 	'annotations normalised on import': {
 		body: '<p><em>Foo</em><strong>bar</strong></p>',
@@ -2062,8 +2081,7 @@ ve.dm.example.domToDataCases = {
 	},
 	'example document': {
 		body: ve.dm.example.html,
-		data: ve.dm.example.data,
-		storeLength: 2
+		data: ve.dm.example.data
 	},
 	'empty annotation': {
 		body: '<p>Foo<span id="anchorTarget"></span>Bar</p>',
