@@ -246,24 +246,6 @@ ve.dm.Node.static.sanitize = function () {
 };
 
 /**
- * Remap the store indexes stored in a linear model data element.
- *
- * The default implementation is empty. Nodes should override this if they store store indexes in
- * attributes. To remap, do something like
- * dataElement.attributes.foo = mapping[dataElement.attributes.foo];
- *
- * @static
- * @inheritable
- * @param {Object} dataElement Data element (opening) to remap. Will be modified.
- * @param {Object} mapping Object mapping old store indexes to new store indexes
- */
-ve.dm.Node.static.remapStoreIndexes = function ( dataElement, mapping ) {
-	if ( dataElement.originalDomElementsIndex !== undefined ) {
-		dataElement.originalDomElementsIndex = mapping[ dataElement.originalDomElementsIndex ];
-	}
-};
-
-/**
  * Remap the internal list indexes stored in a linear model data element.
  *
  * The default implementation is empty. Nodes should override this if they store internal list

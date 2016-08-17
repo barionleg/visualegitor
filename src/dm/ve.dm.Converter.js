@@ -395,7 +395,8 @@ ve.dm.Converter.prototype.createDataElements = function ( modelClass, domElement
 		dataElements = [ dataElements ];
 	}
 	if ( dataElements.length ) {
-		dataElements[ 0 ].originalDomElementsIndex = this.store.indexNoHash( domElements );
+		// TODO: If this model type never needs deep orignalDomElements, then only store a shallow copy of the DOM node(s) in the store.
+		dataElements[ 0 ].originalDomElementsIndex = this.store.index( domElements, domElements.map( ve.getNodeHtml ).join( '' ) );
 	}
 	return dataElements;
 };
