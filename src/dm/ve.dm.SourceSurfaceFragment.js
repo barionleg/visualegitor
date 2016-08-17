@@ -90,14 +90,20 @@ ve.dm.SourceSurfaceFragment.prototype.insertDocument = function ( doc, newDocRan
 		return ve.dm.SourceSurfaceFragment.super.prototype.insertContent.call( this, doc.data.getDataSlice( newDocRange ) );
 	}
 
-	conversionPromise = this.convertDocument( doc ).always( function ( source ) {
-		fragment.removeContent();
+	conversionPromise = this.convertDocument( doc )
+		.done( function ( source ) {
+			fragment.removeContent();
 
-		if ( source ) {
+			if ( source ) {
+				// Parent method
+				ve.dm.SourceSurfaceFragment.super.prototype.insertContent.call( fragment, source.trim() );
+			}
+		} )
+		.fail( function () {
+			fragment.removeContent();
 			// Parent method
-			ve.dm.SourceSurfaceFragment.super.prototype.insertContent.call( fragment, source.trim() );
-		}
-	} );
+			ve.dm.SourceSurfaceFragment.super.prototype.insertContent.call( fragment, 'ERROR' );
+		} );
 
 	return this;
 };
