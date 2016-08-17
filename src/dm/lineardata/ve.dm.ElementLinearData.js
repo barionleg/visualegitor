@@ -961,29 +961,6 @@ ve.dm.ElementLinearData.prototype.getUsedStoreValues = function ( range ) {
 };
 
 /**
- * Remap the store indexes used in this linear data.
- *
- * Remaps annotations and calls remapStoreIndexes() on each node.
- *
- * @method
- * @param {Object} mapping Mapping from store indexes to store indexes
- */
-ve.dm.ElementLinearData.prototype.remapStoreIndexes = function ( mapping ) {
-	var i, ilen, j, jlen, indexes, nodeClass;
-	for ( i = 0, ilen = this.data.length; i < ilen; i++ ) {
-		indexes = this.getAnnotationIndexesFromOffset( i, true );
-		for ( j = 0, jlen = indexes.length; j < jlen; j++ ) {
-			indexes[ j ] = mapping[ indexes[ j ] ];
-		}
-		this.setAnnotationIndexesAtOffset( i, indexes );
-		if ( this.isOpenElementData( i ) ) {
-			nodeClass = ve.dm.nodeFactory.lookup( this.getType( i ) );
-			nodeClass.static.remapStoreIndexes( this.data[ i ], mapping );
-		}
-	}
-};
-
-/**
  * Remap the internal list indexes used in this linear data.
  *
  * Calls remapInternalListIndexes() for each node.
