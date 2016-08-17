@@ -4,6 +4,8 @@
  * @copyright 2011-2016 VisualEditor Team and others; see http://ve.mit-license.org
  */
 
+/* global SparkMD5 */
+
 /**
  * Index-value store
  *
@@ -13,9 +15,6 @@
 ve.dm.IndexValueStore = function VeDmIndexValueStore() {
 	// maps hashes to indexes
 	this.hashStore = {};
-	// maps indexes to values
-	this.valueStore = [];
-	this.noHashIndexes = [];
 };
 
 /* Methods */
@@ -32,50 +31,26 @@ ve.dm.IndexValueStore = function VeDmIndexValueStore() {
  * @return {number} The index of the value in the store
  */
 ve.dm.IndexValueStore.prototype.index = function ( value, hash, overwrite ) {
-	var index;
+	hash = this.indexOfValue( value, hash );
+	if ( !this.hashStore[ hash ] || overwrite ) {
+		if ( Array.isArray( value ) ) {
+			this.hashStore[ hash ] = ve.copy( value );
+		} else if ( typeof value === 'object' ) {
+			this.hashStore[ hash ] = ve.cloneObject( value );
+		} else {
+			this.hashStore[ hash ] = value;
+		}
+	}
+
+	return hash;
+};
+
+ve.dm.IndexValueStore.prototype.indexOfValue = function ( value, hash ) {
 	if ( typeof hash !== 'string' ) {
 		hash = OO.getHash( value );
 	}
-	index = this.indexOfHash( hash );
-	if ( index === null || overwrite ) {
-		if ( index === null ) {
-			index = this.valueStore.length;
-		}
-		if ( Array.isArray( value ) ) {
-			this.valueStore[ index ] = ve.copy( value );
-		} else if ( typeof value === 'object' ) {
-			this.valueStore[ index ] = ve.cloneObject( value );
-		} else {
-			this.valueStore[ index ] = value;
-		}
-		this.hashStore[ hash ] = index;
-	}
-	return index;
-};
-
-/**
- * Add a value to the store with no hash
- *
- * @param {Object|string|Array} value Value to store
- * @return {number} The index of the value in the store
- */
-ve.dm.IndexValueStore.prototype.indexNoHash = function ( value ) {
-	var index = this.valueStore.push( value ) - 1 ;
-	this.noHashIndexes.push( index );
-	return index;
-};
-
-/**
- * Get the index of a hash in the store.
- *
- * Returns null if the hash is not found.
- *
- * @method
- * @param {Object|string|Array} hash Value hash.
- * @return {number|null} The index of the value in the store, or undefined if it is not found
- */
-ve.dm.IndexValueStore.prototype.indexOfHash = function ( hash ) {
-	return hash in this.hashStore ? this.hashStore[ hash ] : null;
+	// Prefix with a letter to prevent all numeric hashes which seem dangerous.
+	return 'h' + SparkMD5.hash( hash ).slice( 0, 16 );
 };
 
 /**
@@ -103,7 +78,7 @@ ve.dm.IndexValueStore.prototype.indexes = function ( values ) {
  * @return {Object|undefined} Value at this index, or undefined if out of bounds
  */
 ve.dm.IndexValueStore.prototype.value = function ( index ) {
-	return this.valueStore[ index ];
+	return this.hashStore[ index ];
 };
 
 /**
@@ -134,7 +109,6 @@ ve.dm.IndexValueStore.prototype.values = function ( indexes ) {
  */
 ve.dm.IndexValueStore.prototype.clone = function () {
 	var key, clone = new this.constructor();
-	clone.valueStore = this.valueStore.slice();
 	for ( key in this.hashStore ) {
 		clone.hashStore[ key ] = this.hashStore[ key ];
 	}
@@ -151,34 +125,13 @@ ve.dm.IndexValueStore.prototype.clone = function () {
  * Objects added to the store are added by reference, not cloned like in .index()
  *
  * @param {ve.dm.IndexValueStore} other Store to merge into this one
- * @return {Object} Object in which the keys are indexes in other and the values are the corresponding keys in this
  */
 ve.dm.IndexValueStore.prototype.merge = function ( other ) {
-	var key, index, i, l, value,
-		values = [],
-		mapping = {};
+	var key;
 
 	for ( key in other.hashStore ) {
 		if ( !Object.prototype.hasOwnProperty.call( this.hashStore, key ) ) {
-			value = other.valueStore[ other.hashStore[ key ] ];
-			index = this.valueStore.push( value ) - 1;
-			this.hashStore[ key ] = index;
-			values.push( value );
+			this.hashStore[ key ] = other.hashStore[ key ];
 		}
-		mapping[ other.hashStore[ key ] ] = this.hashStore[ key ];
 	}
-	for ( i = 0, l = other.noHashIndexes.length; i < l; i++ ) {
-		value = other.value( other.noHashIndexes[ i ] );
-		index = this.indexNoHash( value );
-		mapping[ other.noHashIndexes[ i ] ] = index;
-		values.push( value );
-	}
-	// Items in the index may contain pointers to other items in the index
-	// In these cases they should contain a remapStoreIndexes method (e.g. ve.dm.Annotation)
-	values.forEach( function ( value ) {
-		if ( value.remapStoreIndexes ) {
-			value.remapStoreIndexes( mapping );
-		}
-	} );
-	return mapping;
 };

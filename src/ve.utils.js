@@ -608,6 +608,17 @@ ve.setDomAttributes = function ( element, attributes, whitelist ) {
 	}
 };
 
+ve.getNodeHtml = function ( node ) {
+	var div;
+	if ( node.nodeType === Node.ELEMENT_NODE ) {
+		return node.outerHTML;
+	} else {
+		div = document.createElement( 'div' );
+		div.appendChild( node.cloneNode( true ) );
+		return div.innerHTML;
+	}
+};
+
 /**
  * Build a summary of an HTML element.
  *

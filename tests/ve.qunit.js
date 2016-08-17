@@ -208,8 +208,8 @@
 
 		actual = ve.copy( actual );
 		expected = ve.copy( expected );
-		actual = ve.copy( actual, null, addOriginalDomElements );
-		expected = ve.copy( expected, null, addOriginalDomElements );
+		actual = ve.copy( actual, ve.convertDomElements, addOriginalDomElements );
+		expected = ve.copy( expected, ve.convertDomElements, addOriginalDomElements );
 
 		QUnit.push( QUnit.equiv( actual, expected ), actual, expected, message );
 	};

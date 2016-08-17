@@ -912,6 +912,7 @@ QUnit.test( 'special key down: linear enter', function ( assert ) {
 
 QUnit.test( 'handleObservedChanges (content changes)', function ( assert ) {
 	var i,
+		linkIndex = 'h4601de4ee174fedd',
 		cases = [
 			{
 				prevHtml: '<p></p>',
@@ -963,8 +964,8 @@ QUnit.test( 'handleObservedChanges (content changes)', function ( assert ) {
 						{ type: 'retain', length: 5 },
 						{
 							type: 'replace',
-							insert: [ [ 'B', [ 4 ] ] ],
-							remove: [ [ 'X', [ 4 ] ] ],
+							insert: [ [ 'B', [ linkIndex ] ] ],
+							remove: [ [ 'X', [ linkIndex ] ] ],
 							insertedDataLength: 1,
 							insertedDataOffset: 0
 						},
@@ -983,7 +984,7 @@ QUnit.test( 'handleObservedChanges (content changes)', function ( assert ) {
 						{ type: 'retain', length: 2 },
 						{
 							type: 'replace',
-							insert: [ [ 'Y', [ 2 ] ] ],
+							insert: [ [ 'Y', [ 'h3f03d2abae6ddc0d' ] ] ],
 							remove: [],
 							insertedDataOffset: 0,
 							insertedDataLength: 1
@@ -1126,6 +1127,7 @@ QUnit.test( 'handleObservedChanges (content changes)', function ( assert ) {
 
 QUnit.test( 'handleDataTransfer/handleDataTransferItems', function ( assert )  {
 	var i,
+		linkIndex = 'h7906822d6cc6feb7',
 		view = ve.test.utils.createSurfaceViewFromHtml( '' ),
 		model = view.getModel(),
 		fragment = model.getLinearFragment( new ve.Range( 1 ) ),
@@ -1145,20 +1147,20 @@ QUnit.test( 'handleDataTransfer/handleDataTransferItems', function ( assert )  {
 				},
 				isPaste: true,
 				expectedData: [
-					[ 'h', [ 0 ] ],
-					[ 't', [ 0 ] ],
-					[ 't', [ 0 ] ],
-					[ 'p', [ 0 ] ],
-					[ ':', [ 0 ] ],
-					[ '/', [ 0 ] ],
-					[ '/', [ 0 ] ],
-					[ 'f', [ 0 ] ],
-					[ 'o', [ 0 ] ],
-					[ 'o', [ 0 ] ],
-					[ '.', [ 0 ] ],
-					[ 'c', [ 0 ] ],
-					[ 'o', [ 0 ] ],
-					[ 'm', [ 0 ] ]
+					[ 'h', [ linkIndex ] ],
+					[ 't', [ linkIndex ] ],
+					[ 't', [ linkIndex ] ],
+					[ 'p', [ linkIndex ] ],
+					[ ':', [ linkIndex ] ],
+					[ '/', [ linkIndex ] ],
+					[ '/', [ linkIndex ] ],
+					[ 'f', [ linkIndex ] ],
+					[ 'o', [ linkIndex ] ],
+					[ 'o', [ linkIndex ] ],
+					[ '.', [ linkIndex ] ],
+					[ 'c', [ linkIndex ] ],
+					[ 'o', [ linkIndex ] ],
+					[ 'm', [ linkIndex ] ]
 				]
 			}
 		];
@@ -1375,14 +1377,14 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 							type: 'annotate',
 							method: 'set',
 							bias: 'start',
-							index: 9
+							index: ve.dm.example.annIndex( 'b', 'Quux' )
 						},
 						{ type: 'retain', length: 3 },
 						{
 							type: 'annotate',
 							method: 'set',
 							bias: 'stop',
-							index: 9
+							index: ve.dm.example.annIndex( 'b', 'Quux' )
 						},
 						{ type: 'retain', length: 5 }
 					]
