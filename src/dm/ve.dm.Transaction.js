@@ -1535,3 +1535,131 @@ ve.dm.Transaction.prototype.pushRemoval = function ( doc, currentOffset, range, 
 	}
 	return offset;
 };
+
+/**
+ * Rebase this to happen after other
+ *
+ * @param {other} Transaction that acts on the document in the same start state as this
+ * @returns {other|null}
+ */
+ve.dm.Transaction.prototype.rebaseOnto( other ) {
+	var i, len, r, range, opEnd,
+		changedRanges = other.getChangedRanges(),
+		// changedRange pointer
+		r = 0,
+		// cumulative range length diff
+		diff = 0,
+		tx = this.clone();
+
+	opLoop:
+	for ( i = 0, len = tx.operations.length; i < len; i++ ) {
+		op = tx.operations[ i ];
+		while ( true ) {
+			if ( r >= changedRanges.length ) {
+				op.start += diff;
+				continue opLoop;
+			}
+			range = changedRanges[ r ];
+			if ( range.end < op.start ) {
+				diff += range.diff;
+				r++;
+				continue;
+			}
+			break;
+		}
+		// Else op.start <= range.end
+
+		opEnd = ( op.type === 'replace' ? op.remove : op.type === 'retain' ? op.length : 1 );
+		if ( opEnd < range.start ) {
+			op.start += diff;
+			continue;
+		}
+		// Else [ range.start, range.end ] overlaps with [ op.start, op.end ]
+
+		if ( op.type === 'retain' && op.start <= range.start && opEnd >= range.end ) {
+			op.start += diff;
+			op.length += range.diff;
+		}
+
+		// Else conflict
+		debugger;
+		console.log( 'Conflict:', [ range.start, range.end ], [ op.start, opEnd ] );
+		return null;
+	}
+	return tx;
+};
+
+
+/**
+ * @returns {Object[]} List of { start: x, end: x, diff: x } sorted by start
+ */
+ve.dm.Transaction.prototype.getChangedRanges = function () {
+	var i, len, op,
+		// List of { start: x, end: x, diff: x }
+		changedRanges = [],
+		// Number of annotation changes in force
+		annotating = 0,
+		// Data pointer
+		d = 0,
+		// Cumulative range length diff
+		diff = 0,
+		// Data pointer at the start of this run of annotation changes
+		annStart = null,
+		// Length diff at the start of this run of annotation changes
+		annStartDiff = null;
+
+	for ( i = 0, len = this.operations.length; i < len; i++ ) {
+		op = this.operations[ i ];
+		if ( op.type === 'retain' ) {
+			d += op.length;
+		} else if ( op.type === 'replaceMetadata' ) {
+			// Mark the current item as modified
+			if ( !annotating ) {
+				changedRanges.push( {
+					start: d,
+					end: d + 1,
+					diff: 0
+				} );
+			}
+		} else if ( op.type === 'replace' ) {
+			if ( !annotating ) {
+				changedRanges.push( {
+					start: d,
+					end: d + op.remove.length,
+					diff: op.insert.length - op.remove.length
+				} );
+			}
+			d += op.remove.length;
+			diff += op.insert.length - op.remove.length;
+		} else if ( op.type === 'attribute' ) {
+			if ( !annotating ) {
+				changedRanges.push( {
+					start: d,
+					end: d + 1,
+					diff: 0
+				} );
+			}
+		} else if ( op.type === 'annotate' && ob.bias === 'start' ) {
+			if ( !annotating ) {
+				annStart = d;
+				annStartDiff = diff;
+			}
+			annotating++;
+		} else if ( op.type === 'annotate' && ob.bias === 'stop' ) {
+			annotating--;
+			if ( !annotating ) {
+				changedRanges.push( {
+					start: annStart,
+					end: d,
+					diff: diff - annStartDiff
+				} );
+				annStart = null;
+				annStartDiff = null;
+			}
+		} else {
+			debugger;
+			throw new Error( 'Weird operator', op );
+		}
+	}
+	return changedRanges;
+};
