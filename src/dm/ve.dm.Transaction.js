@@ -1535,3 +1535,148 @@ ve.dm.Transaction.prototype.pushRemoval = function ( doc, currentOffset, range, 
 	}
 	return offset;
 };
+
+/**
+ * Rebase this transaction to be applicable after another one
+ *
+ * The returned transaction is equivalent to this, but with operation ranges remapped in
+ * accordance with the length changes made by other. If operations overlap with those in other,
+ * then a conflict is signalled by returning null.
+ *
+ * @param {ve.dm.Transaction} other Transaction acting on the same document state as this
+ * @return {ve.dm.Transaction|null} Rebased transaction, or null if changed ranges conflict
+ */
+ve.dm.Transaction.prototype.rebaseOnto = function ( other ) {
+	var i, len, op, range,
+		changedRanges = other.getChangedRanges(),
+		// Operation start pointer
+		opStart = null,
+		// Operation end pointer
+		opEnd = 0,
+		// changedRange pointer
+		r = 0,
+		tx = this.clone();
+
+	opLoop:
+	for ( i = 0, len = tx.operations.length; i < len; i++ ) {
+		// Calculate operation start and end
+		op = tx.operations[ i ];
+		opStart = opEnd;
+		opEnd += (
+			op.type === 'replace' ?  op.remove.length :
+			op.type === 'retain' ?  op.length :
+			0
+		);
+		// Pass any ranges that are before this change
+		// Loop through any ranges that start before opEnd
+		while ( true ) {
+			if ( r >= changedRanges.length ) {
+				// All ranges have ended; no more modifications needed
+				break opLoop;
+			}
+			range = changedRanges[ r ];
+			if ( range.end < opStart ) {
+				// This range ends before op starts; it has no effect on op nor
+				// on any subsequent operations, so move to next range.
+				r++;
+				continue;
+			}
+			if ( opEnd < range.start ) {
+				// This range starts after op ends; move to the next operation
+				continue opLoop;
+			}
+
+			// Else this range overlaps with op
+
+			if ( op.type === 'retain' && opStart <= range.start && opEnd >= range.end ) {
+				// Retain op contains whole modified range. Adjust op length
+				// and continue to the next range.
+				op.length += range.diff;
+				r++;
+				continue;
+			}
+
+			// Else conflict: because *either* the op is not a retain (so there's a
+			// conflict) *or* the modified range extends beyond the retain op (in
+			// which case an adjacent non-retain op conflicts, because we do not
+			// allow two adjacent retain ops).
+			return null;
+		}
+	}
+	return tx;
+};
+
+/**
+ * Get a list of ranges this transaction modifies, with corresponding length differences
+ *
+ * @return {Object[]} List of { start: x, end: x, diff: x } sorted by start
+ */
+ve.dm.Transaction.prototype.getChangedRanges = function () {
+	var i, len, op,
+		// List of { start: x, end: x, diff: x }
+		changedRanges = [],
+		// Number of annotation changes in force
+		annotating = 0,
+		// Data pointer
+		d = 0,
+		// Cumulative range length diff
+		diff = 0,
+		// Data pointer at the start of this run of annotation changes
+		annStart = null,
+		// Length diff at the start of this run of annotation changes
+		annStartDiff = null;
+
+	for ( i = 0, len = this.operations.length; i < len; i++ ) {
+		op = this.operations[ i ];
+		if ( op.type === 'retain' ) {
+			d += op.length;
+		} else if ( op.type === 'replaceMetadata' ) {
+			// Mark the current item as modified
+			if ( !annotating ) {
+				changedRanges.push( {
+					start: d,
+					end: d + 1,
+					diff: 0
+				} );
+			}
+		} else if ( op.type === 'replace' ) {
+			if ( !annotating ) {
+				changedRanges.push( {
+					start: d,
+					end: d + op.remove.length,
+					diff: op.insert.length - op.remove.length
+				} );
+			}
+			d += op.remove.length;
+			diff += op.insert.length - op.remove.length;
+		} else if ( op.type === 'attribute' ) {
+			if ( !annotating ) {
+				changedRanges.push( {
+					start: d,
+					end: d + 1,
+					diff: 0
+				} );
+			}
+		} else if ( op.type === 'annotate' && op.bias === 'start' ) {
+			if ( !annotating ) {
+				annStart = d;
+				annStartDiff = diff;
+			}
+			annotating++;
+		} else if ( op.type === 'annotate' && op.bias === 'stop' ) {
+			annotating--;
+			if ( !annotating ) {
+				changedRanges.push( {
+					start: annStart,
+					end: d,
+					diff: diff - annStartDiff
+				} );
+				annStart = null;
+				annStartDiff = null;
+			}
+		} else {
+			throw new Error( 'Weird operator', op );
+		}
+	}
+	return changedRanges;
+};
