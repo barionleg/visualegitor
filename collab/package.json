@@ -1,0 +1,15 @@
+{
+	"name": "ve-collab",
+	"description": "Collab server for VisualEditor",
+	"version": "0.0.1",
+	"dependencies": {
+		"express": "4.x"
+	},
+	"devDependencies": {},
+	"scripts": {
+		"start": "node server.js"
+	},
+	"repository": {
+		"type": "git"
+	}
+}
