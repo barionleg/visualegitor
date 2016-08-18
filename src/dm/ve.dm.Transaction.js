@@ -742,6 +742,219 @@ ve.dm.Transaction.reversers = {
 	replaceMetadata: { insert: 'remove', remove: 'insert' } // swap .insert with .remove
 };
 
+/**
+ * Rebase parallel transactions transcationA and transactionB onto each other
+ *
+ * If ordering is ambiguous (e.g. two inserts at the same location), put A's operation before B's.
+ *
+ * @param {ve.dm.Transaction} transactionA Transaction A
+ * @param {ve.dm.Transaction} transactionB Transaction B
+ * @return {Mixed[]} [ aRebasedOntoB, bRebasedOntoA ], or [ null, null ] if conflicting
+ */
+ve.dm.Transaction.rebaseTransactions = function ( transactionA, transactionB ) {
+	var nextA, nextB, a, b;
+
+	function infoIter( opList ) {
+		var i, iLen, op, start, len, annStart, annEnd,
+			annotations = 0,
+			end = 0,
+			info = [];
+		for ( i = 0, iLen = opList.length; i < iLen; i++ ) {
+			op = opList[ i ];
+			if ( op.type === 'annotate' && op.bias === 'stop' ) {
+				annotations--;
+			}
+			start = end;
+			len = (
+				op.type === 'replace' ? op.remove.length :
+				op.type === 'retain' ? op.length :
+				0
+			);
+			end = start + len;
+			info.push( {
+				i: i,
+				op: op,
+				start: start,
+				len: len,
+				end: end,
+				diff: ( op.type === 'replace' ?
+					op.insert.length - op.remove.length :
+					0 ),
+				annotating: ( annotations > 0 )
+			} );
+			if ( op.type === 'annotate' && op.bias === 'start' ) {
+				annotations++;
+			}
+		}
+		// Mark operations inside annotation but at annotation start / annotation end
+		annStart = null;
+		for ( i = 0, len = opList.length - 1; i < len; i++ ) {
+			if ( !info[ i ].annotating && info[ i + 1 ].annotating ) {
+				annStart = info[ i + 1 ].start;
+			}
+			info[ i ].isAnnStart = ( info[ i ].start === annStart );
+		}
+		annEnd = null;
+		for ( i = opList.length - 2; i >= 0; i-- ) {
+			if ( !info[ i + 1 ].annotating && info[ i ].annotating ) {
+				annEnd = info[ i ].end;
+			}
+			info[ i ].isAnnEnd = ( info[ i ].end === annEnd );
+		}
+		i = 0;
+		return function () {
+			return info[ i++ ];
+		};
+	}
+
+	/**
+	 * Adjust the retain length inside an operations list
+	 *
+	 * @param {Object[]} operations Operations list to adjust
+	 * @param {number} i Adjust operation before/after i or insert at i
+	 * @param {number} diff Length adjustment
+	 * @return {boolean} Whether the adjustment succeeded (i.e. adjusted length >= 0)
+	 */
+	function adjustRetain( operations, i, diff ) {
+		var j, jLen,
+			op = null;
+
+		if ( diff === 0 ) {
+			return true;
+		}
+		// Step backwards over zero-start-length operations until we find a retain
+		for ( j = i - 1; j >= 0; j-- ) {
+			if ( operations[ j ].type === 'retain' ) {
+				op = operations[ j ];
+				break;
+			}
+			if (
+				operations[ j ].type !== 'replace' ||
+				operations[ j ].remove.length > 0
+			) {
+				break;
+			}
+		}
+
+		if ( op === null ) {
+			// Step forwards over zero-start-length operations until we find a retain
+			for ( j = i, jLen = operations.length; j < jLen; j++ ) {
+				if ( operations[ j ].type === 'retain' ) {
+					op = operations[ j ];
+					break;
+				}
+				if (
+					operations[ j ].type !== 'replace' ||
+					operations[ j ].remove.length > 0
+				) {
+					break;
+				}
+			}
+		}
+
+		if ( op === null ) {
+			// No retains touch this offset, so make one
+			op = { type: 'retain', length: 0 };
+			operations.splice( i, 0, op );
+		}
+		op.length += diff;
+		return op.length >= 0;
+	}
+
+	transactionA = transactionA.clone();
+	transactionB = transactionB.clone();
+	nextA = infoIter( transactionA.operations );
+	nextB = infoIter( transactionB.operations );
+	a = nextA();
+	b = nextB();
+
+	while ( true ) {
+		if ( !a || !b ) {
+			break;
+		}
+		if ( a.end < b.start ) {
+			a = nextA();
+			continue;
+		}
+		if ( b.end < a.start ) {
+			b = nextB();
+			continue;
+		}
+		// Else a and b touch.
+
+		// Conflict if any part of a or b is non-retain and touches the interior of an
+		// annotation operation in the other
+		if (
+			( a.annotating && a.len && b.op.type !== 'retain' && (
+				// a.end touches b, and it lies in the interior of either
+				// the annotation or b
+				( a.end <= b.end && ( a.end > b.start || !a.isAnnEnd ) ) ||
+				// a.start touches b, and it lies in the interior of either
+				// the annotation or b
+				( a.start >= b.start && ( a.start < b.end || !a.isAnnStart ) )
+			) ) ||
+			( b.annotating && b.len && a.op.type !== 'retain' && (
+				// b.end touches a, and it lies in the interior of either
+				// the annotation or a
+				( b.end <= a.end && ( b.end > a.start || !b.isAnnEnd ) ) ||
+				// b.start touches a, and it lies in the interior of either
+				// the annotation or a
+				( b.start >= a.start && ( b.start < a.end || !b.isAnnStart ) )
+			) )
+		) {
+			return [ null, null ];
+		}
+
+		if ( b.end === a.start ) {
+			// b just touches the start of a.
+			// This includes the case where both a and b have length zero
+			// Modify b's original operations list (doesn't affect infoIters)
+			if ( !adjustRetain( transactionB.operations, b.i + 1, a.diff ) ) {
+				return [ null, null ];
+			}
+			b = nextB();
+			a.diff = 0;
+			continue;
+		}
+		if ( a.end === b.start ) {
+			// b just touches the end of a.
+			// Modify a's original operations list (doesn't affect infoIters)
+			if ( !adjustRetain( transactionA.operations, a.i, b.diff ) ) {
+				return [ null, null ];
+			}
+			a = nextA();
+			b.diff = 0;
+			continue;
+		}
+
+		// Else a and b overlap (not just touch)
+		if ( a.op.type !== 'retain' && b.op.type !== 'retain' ) {
+			return [ null, null ];
+		}
+
+		if ( a.op.type !== 'retain' ) {
+			// Either a covers b, or an adjacent (so non-retain) operation overlaps
+			// with b and will cause a conflict in a different iteration.
+			b.op.length += a.diff;
+		} else if ( b.op.type !== 'retain' ) {
+			// Either b covers a, or an adjacent (so non-retain) operation overlaps
+			// with a and will cause a conflict in a different iteration
+			a.op.length += b.diff;
+		}
+		// Else both a and b are retains: no adjustment needed
+
+		if ( a.end <= b.end ) {
+			// This includes the case where the ends are equal, in which case
+			// we advance through the a list first (so in cases of ambiguity,
+			// b's operations get moved forward)
+			a = nextA();
+		} else {
+			b = nextB();
+		}
+	}
+	return [ transactionA, transactionB ];
+};
+
 /* Methods */
 
 /**
@@ -1539,4 +1752,23 @@ ve.dm.Transaction.prototype.pushRemoval = function ( doc, currentOffset, range, 
 		offset = this.addSafeRemoveOps( doc, removeStart, removeEnd, removeMetadata );
 	}
 	return offset;
+};
+
+/**
+ * Rebase this transaction to be applicable after another one
+ *
+ * The returned transaction is equivalent to this, but with operation ranges remapped in
+ * accordance with the length changes made by other. If operations overlap with those in other,
+ * then a conflict is signalled by returning null.
+ *
+ * @param {ve.dm.Transaction} other Transaction acting on the same document state as this
+ * @param {boolean} [startmost] If ambiguous, operations from this come startmost (default: endmost)
+ * @return {ve.dm.Transaction|null} Rebased transaction, or null if changed ranges conflict
+ */
+ve.dm.Transaction.prototype.rebasedOnto = function ( other, startmost ) {
+	if ( startmost ) {
+		return this.constructor.rebaseTransactions( this, other )[ 0 ];
+	} else {
+		return this.constructor.rebaseTransactions( other, this )[ 1 ];
+	}
 };
