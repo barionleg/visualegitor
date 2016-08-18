@@ -740,6 +740,280 @@ ve.dm.Transaction.reversers = {
 	replaceMetadata: { insert: 'remove', remove: 'insert' } // swap .insert with .remove
 };
 
+/**
+ * Rebase parallel transactions transactionA and transactionB onto each other
+ *
+ * If ordering is ambiguous (e.g. two inserts at the same location), put A's operation before B's.
+ *
+ * @param {ve.dm.Transaction} transactionA Transaction A
+ * @param {ve.dm.Transaction} transactionB Transaction B
+ * @return {Mixed[]} [ aRebasedOntoB, bRebasedOntoA ], or [ null, null ] if conflicting
+ */
+ve.dm.Transaction.rebaseTransactions = function ( transactionA, transactionB ) {
+	var wrappedOpsA, wrappedOpsB, aPtr, bPtr, a, b;
+
+	/**
+	 * Create an array of wrappers of operations with precalculated information
+	 *
+	 * @param {Object[]} operations An array of operations
+	 * @return {Object[]} An array of info wrappers about the operations
+	 * @return {Object} return.n Info wrapper for the nth operation
+	 * @return {number} return.n.i The operation's index in operations
+	 * @return {Object} return.n.op The operation
+	 * @return {number} return.n.start The operation's start offset
+	 * @return {number} return.n.len The operation's length
+	 * @return {number} return.n.end The operation's end offset (i.e. start+len)
+	 * @return {number} return.n.diff The operation's length change
+	 * @return {number} return.n.annotating Number of annotation changes currently in force
+	 */
+	function getWrappedOps( operations ) {
+		var i, iLen, op, start, len,
+			annotating = 0,
+			end = 0,
+			wrappedOps = [];
+		for ( i = 0, iLen = operations.length; i < iLen; i++ ) {
+			op = operations[ i ];
+			if ( op.type === 'annotate' && op.bias === 'stop' ) {
+				annotating--;
+			}
+			start = end;
+			len = (
+				op.type === 'replace' ? op.remove.length :
+				op.type === 'retain' ? op.length :
+				0
+			);
+			end = start + len;
+			wrappedOps.push( {
+				i: i,
+				op: op,
+				start: start,
+				len: len,
+				end: end,
+				diff: ( op.type === 'replace' ?
+					op.insert.length - op.remove.length :
+					0
+				),
+				annotating: annotating
+			} );
+			if ( op.type === 'annotate' && op.bias === 'start' ) {
+				annotating++;
+			}
+		}
+		// Fix up operations
+
+		// Move one unit of length to an attribute change if there is an immediately
+		// following retain.
+		// TODO: decide whether to handle multiple consecutive attribute ops
+		for ( i = wrappedOps.length - 1; i >= 0; i-- ) {
+			if (
+				wrappedOps[ i ].op.type === 'attribute' &&
+				wrappedOps[ i + 1 ].op.type === 'retain'
+			) {
+				wrappedOps[ i ].end += 1;
+				if ( wrappedOps[ i + 1 ].op.length === 0 ) {
+					throw new Error( 'Need retain after attribute' );
+				}
+				wrappedOps[ i + 1 ].start += 1;
+			}
+		}
+		return wrappedOps;
+	}
+
+	/**
+	 * Add retain length inside an operations list
+	 *
+	 * An index i is given into the operations list; the adjustment takes place at the
+	 * document position reached by the operations 0..i-1 (i.e. their cumulative lengths).
+	 * The adjustment may be achieved either by enlarging an existing retain operation
+	 * at that document position, or by inserting a new retain operation.
+	 *
+	 * @param {Object[]} operations Bare operations list
+	 * @param {Object[]} wrappedOps Wrapped operations, i.e. getWrappedOps(operations)
+	 * @param {number} i Adjust operation after i in wrappedOps (or insert at i)
+	 * @param {number} length Length to add
+	 * @param {string} bias Which side retain to prefer, prev|next
+	 */
+	function addRetain( operations, wrappedOps, i, length, bias ) {
+		var j, jLen, wrappedOp, prevWrappedOp, nextWrappedOp, op;
+
+		// Step backwards over zero-start-length ops to find a retain
+		for ( j = i - 1; j >= 0; j-- ) {
+			wrappedOp = wrappedOps[ j ];
+			if ( wrappedOp.op.type === 'retain' ) {
+				prevWrappedOp = wrappedOp;
+				break;
+			}
+			if ( wrappedOp.op.type !== 'replace' || wrappedOp.op.length > 0 ) {
+				break;
+			}
+		}
+
+		// Step forwards over zero-start-length ops to find a retain
+		for ( j = i, jLen = wrappedOps.length; j < jLen; j++ ) {
+			wrappedOp = wrappedOps[ j ];
+			if ( wrappedOp.op.type === 'retain' ) {
+				nextWrappedOp = wrappedOp;
+				break;
+			}
+			if ( wrappedOp.op.type !== 'replace' || wrappedOp.op.length > 0 ) {
+				break;
+			}
+		}
+
+		// TODO: this should add a new retain if it would be less annotated
+		if ( nextWrappedOp && (
+			!prevWrappedOp ||
+			nextWrappedOp.annotating < prevWrappedOp.annotating ||
+			(
+				bias === 'next' &&
+				nextWrappedOp.annotating === prevWrappedOp.annotating
+			)
+		) ) {
+			op = nextWrappedOp.op;
+		} else if ( prevWrappedOp ) {
+			op = prevWrappedOp.op;
+		} else {
+			// No retains touch this offset: splice new one into bare operations list
+			op = { type: 'retain', length: 0 };
+			operations.splice( wrappedOps[ i ].i, 0, op );
+		}
+		op.length += length;
+	}
+
+	// Step through pairs of retain/replace operations a and b of transactionsA and
+	// transactionsB respectively that touch (i.e. at least one offset in the original
+	// document is touched by the "before" ranges of both a and b). Rebase the a's by
+	// adjusting the lengths of retain operations to account for the length differences
+	// from b's that are replace operations, and vice versa.
+	//
+	// Operation types:
+	// retain: length=op.length, assume length > 0
+	// replace: length=op.remove.length, diff=op.insert.length-op.remove.length
+	// attribute: length=1 diff=0
+	// retainMetadata: length=0 diff=0
+	// replaceMetadata: length=0 diff=0 (but conflicts with replaceMetadata)
+	// annotation: length=0 diff=0 (but used to inc/decrement .annotating for other ops)
+	//
+	// Conflict if there is a pair of operations a, b in transactionsA, transactionsB
+	// respectively such that one of the following holds:
+	// 1. a and b overlap, and neither a nor b are retain
+	// 2. a and b overlap, and both a and b are annotating
+	// 3. a and b touch, and both are retainMetadata
+	// 4. One of a and b is retainMetadata, the other is retain, and the former touches
+	// the end of the latter.
+
+	transactionA = transactionA.clone();
+	transactionB = transactionB.clone();
+	wrappedOpsA = getWrappedOps( transactionA.operations );
+	wrappedOpsB = getWrappedOps( transactionB.operations );
+	aPtr = bPtr = 0;
+	a = wrappedOpsA[ 0 ];
+	b = wrappedOpsB[ 0 ];
+	while ( true ) {
+		if ( !a || !b ) {
+			break;
+		}
+		// Inductive hypothesis: a and b touch (a.end >= b.start && b.end >= a.start ),
+
+		// TODO: what if there are insertions at the end of the doc? It's not
+		// currently possible but it's a hole in the logic
+
+		if ( a.op.type === 'replaceMetadata' && b.op.type === 'replaceMetadata' ) {
+			return [ null, null ];
+		}
+
+		// Case: a just touches the start of b (including when both have length 0)
+		if ( a.end === b.start ) {
+			if ( a.op.type === 'replace' && a.op.remove.length === 0 ) {
+				// Insertion: add retain length in b
+				addRetain(
+					transactionB.operations,
+					wrappedOpsB,
+					bPtr,
+					a.op.insert.length,
+					'previous'
+				);
+			} else if (
+				b.op.type === 'replaceMetadata' &&
+				( a.op.type === 'replace' || a.op.type === 'replaceMetadata' )
+			) {
+				return [ null, null ];
+			}
+
+			// Else a is either zero-length and ignorable, or positive length and
+			// overlapped some prior b. So move forward
+
+			if ( !a.len && !b.len && wrappedOpsB[ b + 1 ] && !wrappedOpsB[ b + 1 ].len ) {
+				// Move to another zero width match if possible
+				b = wrappedOpsB[ ++bPtr ];
+				continue;
+			}
+
+			a = wrappedOpsA[ ++aPtr ];
+			continue;
+		}
+
+		// Case: b just touches the start of a
+		if ( b.end === a.start ) {
+			if ( b.op.type === 'replace' && b.op.remove.length === 0 ) {
+				// Insertion: add retain length in a
+				addRetain(
+					transactionA.operations,
+					wrappedOpsA,
+					aPtr,
+					b.op.insert.length,
+					'next'
+				);
+			}
+			// Else b is either zero-length and ignorable, or positive length and
+			// overlapped some prior a. So move forward
+			b = wrappedOpsB[ ++bPtr ];
+			continue;
+		}
+
+		// Else one of the operations touches the interior of the other
+
+		// Conflict if neither operation is a retain, or both are annotating
+		if (
+			( a.op.type !== 'retain' && b.op.type !== 'retain' ) ||
+			( a.annotating && b.annotating )
+		) {
+			return [ null, null ];
+		}
+
+		if ( a.op.type !== 'retain' ) {
+			if ( b.start > a.start || b.end < a.end ) {
+				// Conflict: one of b's adjacent siblings makes changes within a's
+				// interior (as there cannot be two adjacent inactive operations)
+				return [ null, null ];
+			}
+			// Else b covers a
+			if ( a.op.type === 'replace' ) {
+				b.op.length += a.diff;
+			}
+		}
+
+		if ( b.op.type !== 'retain' ) {
+			if ( a.start > b.start || a.end < b.end ) {
+				// Conflict: one of a's adjacent siblings makes changes within b's
+				// interior (as there cannot be two adjacent inactive operations)
+				return [ null, null ];
+			}
+			// Else a covers b
+			a.op.length += b.diff;
+		}
+		// Else both a and b are retains: no adjustment needed
+
+		// Move either a or b forwards, so that a and b still touch
+		if ( a.end <= b.end ) {
+			a = wrappedOpsA[ ++aPtr ];
+		} else {
+			b = wrappedOpsB[ ++bPtr ];
+		}
+	}
+	return [ transactionA, transactionB ];
+};
+
 /* Methods */
 
 /**
@@ -1528,4 +1802,23 @@ ve.dm.Transaction.prototype.pushRemoval = function ( doc, currentOffset, range, 
 		offset = this.addSafeRemoveOps( doc, removeStart, removeEnd, removeMetadata );
 	}
 	return offset;
+};
+
+/**
+ * Rebase this transaction to be applicable after another one
+ *
+ * The returned transaction is equivalent to this, but with operation ranges remapped in
+ * accordance with the length changes made by other. If operations overlap with those in other,
+ * then a conflict is signalled by returning null.
+ *
+ * @param {ve.dm.Transaction} other Transaction acting on the same document state as this
+ * @param {boolean} [startmost] If ambiguous, operations from this come startmost (default: endmost)
+ * @return {ve.dm.Transaction|null} Rebased transaction, or null if changed ranges conflict
+ */
+ve.dm.Transaction.prototype.rebasedOnto = function ( other, startmost ) {
+	if ( startmost ) {
+		return this.constructor.rebaseTransactions( this, other )[ 0 ];
+	} else {
+		return this.constructor.rebaseTransactions( other, this )[ 1 ];
+	}
 };
