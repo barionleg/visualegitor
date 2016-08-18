@@ -1,3 +1,13 @@
+( function ( createClass ) {
+	if ( typeof window !== 'undefined' ) {
+		// Browser.
+		createClass( window.ve );
+	} else {
+		// Node. ve={dm:{}}; require( 'thisFile' )( ve );
+		module.exports = createClass;
+	}
+} ( function ( ve ) {
+
 /*!
  * VisualEditor DataModel Change class.
  *
@@ -296,3 +306,5 @@ ve.dm.Change.prototype.addToHistory = function ( history ) {
 ve.dm.Change.prototype.serialize = function () {
 	return { start: this.start, transactions: this.transactions };
 };
+
+} ) );
