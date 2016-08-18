@@ -1,3 +1,13 @@
+( function ( createClass ) {
+	if ( typeof window !== 'undefined' ) {
+		// Browser
+		createClass( window.ve );
+	} else {
+		// Node. ve={dm:{}}; require( 'thisFile' )( ve );
+		module.exports = createClass;
+	}
+} ( function ( ve ) {
+
 /*!
  * VisualEditor IndexValueStore class.
  *
@@ -172,3 +182,5 @@ ve.dm.IndexValueStore.prototype.merge = function ( other ) {
 	}
 	return mapping;
 };
+
+} ) );
