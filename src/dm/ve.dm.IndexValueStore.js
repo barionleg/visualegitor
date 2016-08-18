@@ -198,3 +198,26 @@ ve.dm.IndexValueStore.prototype.merge = function ( other ) {
 		}
 	}
 };
+
+/**
+ * Clone this store excluding certain values, like a set difference operation
+ *
+ * @param {ve.dm.IndexValueStore|Object} omit Store of values to omit, or object whose keys are hashes to emit
+ * @return {ve.dm.IndexValueStore} All values in this that do not appear in other
+ */
+ve.dm.IndexValueStore.prototype.difference = function ( omit ) {
+	var i, len, hash,
+		store = this.constructor();
+
+	if ( omit instanceof ve.dm.IndexValueStore ) {
+		omit = omit.hashStore;
+	}
+	for ( i = 0, len = this.hashes.length; i < len; i++ ) {
+		hash = this.hashes[ i ];
+		if ( !Object.prototype.hasOwnProperty.call( omit, hash ) ) {
+			store.hashes.push( hash );
+			store.hashStore[ hash ] = this.hashStore[ hash ];
+		}
+	}
+	return store;
+};
