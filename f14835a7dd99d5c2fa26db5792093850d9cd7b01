@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e89af39_c19ae465",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 1542,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-08-18T02:22:27Z",
+      "side": 1,
+      "message": "{ve.dm.Transaction} other",
+      "range": {
+        "startLine": 1542,
+        "startChar": 11,
+        "endLine": 1542,
+        "endChar": 16
+      },
+      "revId": "f14835a7dd99d5c2fa26db5792093850d9cd7b01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e89af39_e19e0059",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 1543,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-08-18T02:22:27Z",
+      "side": 1,
+      "message": "{ve.dm.Transaction|null}",
+      "range": {
+        "startLine": 1543,
+        "startChar": 0,
+        "endLine": 1543,
+        "endChar": 24
+      },
+      "revId": "f14835a7dd99d5c2fa26db5792093850d9cd7b01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
