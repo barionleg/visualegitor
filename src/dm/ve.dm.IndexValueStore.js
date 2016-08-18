@@ -1,3 +1,13 @@
+( function ( createClass ) {
+	if ( typeof window !== 'undefined' ) {
+		// Browser
+		createClass( window.ve );
+	} else {
+		// Node. ve={dm:{}}; require( 'thisFile' )( ve );
+		module.exports = createClass;
+	}
+} ( function ( ve ) {
+
 /*!
  * VisualEditor IndexValueStore class.
  *
@@ -29,6 +39,21 @@ ve.dm.IndexValueStore = function VeDmIndexValueStore() {
 	this.hashStore = {};
 	// Hashes in order of insertion (used for slicing)
 	this.hashes = [];
+};
+
+/* Static methods */
+
+ve.dm.IndexValueStore.static = {};
+
+/**
+ * @param {Object} ob Serialized store
+ * @returns {ve.dm.IndexValueStore} Deserialized store
+ */
+ve.dm.IndexValueStore.static.deserialize = function ( ob ) {
+	var store = new ve.dm.IndexValueStore();
+	store.hashStore = ob.hashStore;
+	store.hashes = ob.hashes;
+	return store;
 };
 
 /* Methods */
@@ -217,6 +242,46 @@ ve.dm.IndexValueStore.prototype.difference = function ( omit ) {
 		if ( !Object.prototype.hasOwnProperty.call( omit, hash ) ) {
 			store.hashes.push( hash );
 			store.hashStore[ hash ] = this.hashStore[ hash ];
+		}
+	}
+	return store;
+};
+
+/**
+ * @param {ve.dm.Transaction[]} transactions List of transactions
+ * @return {string[]} The stored hashes that occur in the transactions, in the order they occur
+ */
+ve.dm.IndexValueStore.prototype.filter = function ( transactions ) {
+	var t, tLen, operations, o, oLen, op, hash, e, eLen, annotations, a, aLen,
+		store = new ve.dm.IndexValueStore();
+
+	for ( t = 0, tLen = transactions.length; t < tLen; t++ ) {
+		operations = transactions[ t ].operations;
+		for ( o = 0, oLen = operations.length; o < oLen; o++ ) {
+			op = operations[ o ];
+			if ( op.type === 'annotate' && op.bias === 'start' ) {
+				hash = op.index;
+				if ( !Object.prototype.hasOwnProperty.call( store.hashSet, hash ) ) {
+					store.hashSet[ hash ] = this.hashSet[ hash ];
+					store.hashes.push( hash );
+				}
+			}
+			if ( op.type !== 'replace' ) {
+				continue;
+			}
+			for ( e = 0, eLen = op.insert.length; e < eLen; e++ ) {
+				annotations = op.insert[ e ][ 1 ];
+				if ( !annotations ) {
+					continue;
+				}
+				for ( a = 0, aLen = annotations.length; a < aLen; a++ ) {
+					hash = annotations[ a ];
+					if ( !Object.prototype.hasOwnProperty.call( store.hashSet, hash ) ) {
+						store.hashSet[ hash ] = this.hashSet[ hash ];
+						store.hashes.push( hash );
+					}
+				}
+			}
 		}
 	}
 	return store;

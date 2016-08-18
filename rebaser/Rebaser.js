@@ -1,0 +1,32 @@
+Rebaser = function () {
+	this.changeForDoc = new Map();
+};
+
+/**
+ */
+Rebaser.prototype.applyChange = function ( doc, author, remote ) {
+	var txs, local, resolved;
+
+	if ( !this.changeForDoc.has( doc ) ) {
+		this.changeForDoc.set( doc, new remote.constructor(
+			0,
+			[],
+			0,
+			new remote.store.constructor()
+		) );
+	}
+	change = this.changeForDoc.get( doc );
+
+	if ( remote.start > change.transactions.length ) {
+		throw new Error( 'Remote start ' + remote.start + ' is beyond committed history' );
+	}
+	local = change.mostRecent( remote.transactionStart, remote.storeStart );
+	resolved = remote.rebaseOnto( local );
+	if ( resolved ) {
+		change.store.merge( resolved.store );
+		Array.prototype.push.apply( change.transactions, resolved.transactions );
+	}
+	return local;
+};
+
+module.exports = Rebaser;
