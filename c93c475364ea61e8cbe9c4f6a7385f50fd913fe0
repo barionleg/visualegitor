@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e89af39_9353c942",
+        "filename": "src/dm/ve.dm.Change.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2016-08-19T20:40:34Z",
+      "side": 1,
+      "message": "D2",
+      "range": {
+        "startLine": 48,
+        "startChar": 29,
+        "endLine": 48,
+        "endChar": 31
+      },
+      "revId": "c93c475364ea61e8cbe9c4f6a7385f50fd913fe0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
