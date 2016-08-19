@@ -22,6 +22,24 @@
       "revId": "c93c475364ea61e8cbe9c4f6a7385f50fd913fe0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e89af39_9191009f",
+        "filename": "src/dm/ve.dm.Change.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-08-19T22:12:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e89af39_9353c942",
+      "revId": "c93c475364ea61e8cbe9c4f6a7385f50fd913fe0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
