@@ -18,9 +18,9 @@
  * @constructor
  * @param {Object} element Linear model annotation
  */
-ve.dm.Annotation = function VeDmAnnotation( element ) {
+ve.dm.Annotation = function VeDmAnnotation() {
 	// Parent constructor
-	ve.dm.Model.call( this, element );
+	ve.dm.Annotation.super.apply( this, arguments );
 	// Properties
 	this.name = this.constructor.static.name; // For ease of filtering
 };
