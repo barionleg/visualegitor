@@ -14,9 +14,9 @@
  * @param {OO.ui.ToolGroup} toolGroup
  * @param {Object} [config] Configuration options
  */
-ve.ui.ListTool = function VeUiListTool( toolGroup, config ) {
+ve.ui.ListTool = function VeUiListTool() {
 	// Parent constructor
-	ve.ui.Tool.call( this, toolGroup, config );
+	ve.ui.ListTool.super.apply( this, arguments );
 
 	// Properties
 	this.method = null;
@@ -49,7 +49,7 @@ ve.ui.ListTool.prototype.onUpdateState = function ( fragment ) {
 	var i, len, nodes, style, all;
 
 	// Parent method
-	ve.ui.Tool.prototype.onUpdateState.apply( this, arguments );
+	ve.ui.ListTool.super.prototype.onUpdateState.apply( this, arguments );
 
 	nodes = fragment ? fragment.getSelectedLeafNodes() : [];
 	style = this.constructor.static.style;

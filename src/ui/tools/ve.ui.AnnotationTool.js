@@ -14,9 +14,9 @@
  * @param {OO.ui.ToolGroup} toolGroup
  * @param {Object} [config] Configuration options
  */
-ve.ui.AnnotationTool = function VeUiAnnotationTool( toolGroup, config ) {
+ve.ui.AnnotationTool = function VeUiAnnotationTool() {
 	// Parent constructor
-	ve.ui.Tool.call( this, toolGroup, config );
+	ve.ui.AnnotationTool.super.apply( this, arguments );
 };
 
 /* Inheritance */
@@ -44,7 +44,7 @@ ve.ui.AnnotationTool.static.deactivateOnSelect = false;
  */
 ve.ui.AnnotationTool.prototype.onUpdateState = function ( fragment ) {
 	// Parent method
-	ve.ui.Tool.prototype.onUpdateState.apply( this, arguments );
+	ve.ui.AnnotationTool.super.prototype.onUpdateState.apply( this, arguments );
 
 	this.setActive(
 		fragment && fragment.getAnnotations().hasAnnotationWithName( this.constructor.static.annotation.name )
