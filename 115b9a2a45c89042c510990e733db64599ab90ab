@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e96ab59_bb6d1330",
+        "filename": "src/dm/ve.dm.IndexValueStore.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-08-24T18:45:19Z",
+      "side": 1,
+      "message": "Hashes",
+      "range": {
+        "startLine": 30,
+        "startChar": 4,
+        "endLine": 30,
+        "endChar": 10
+      },
+      "revId": "115b9a2a45c89042c510990e733db64599ab90ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e96ab59_9b705709",
+        "filename": "src/dm/ve.dm.IndexValueStore.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-08-24T18:45:19Z",
+      "side": 1,
+      "message": "deleteme",
+      "revId": "115b9a2a45c89042c510990e733db64599ab90ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
