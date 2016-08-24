@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e96ab59_f3325f05",
+        "filename": "src/dm/ve.dm.Change.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-08-24T23:32:59Z",
+      "side": 1,
+      "message": "inserted hashes",
+      "revId": "64a4110609d7f045208d8114919a93a299944e90",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e96ab59_931bdb81",
+        "filename": "src/dm/ve.dm.Change.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-08-24T23:32:59Z",
+      "side": 1,
+      "message": "+replaceMetadata",
+      "range": {
+        "startLine": 116,
+        "startChar": 3,
+        "endLine": 116,
+        "endChar": 4
+      },
+      "revId": "64a4110609d7f045208d8114919a93a299944e90",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e96ab59_36fbf512",
+        "filename": "src/dm/ve.dm.Change.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-08-24T23:32:59Z",
+      "side": 1,
+      "message": ".slice() \u003d\u003d\u003d .clone()?",
+      "revId": "64a4110609d7f045208d8114919a93a299944e90",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
