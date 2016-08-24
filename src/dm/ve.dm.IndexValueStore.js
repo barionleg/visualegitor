@@ -22,8 +22,10 @@
  * @constructor
  */
 ve.dm.IndexValueStore = function VeDmIndexValueStore() {
-	// maps values to hashes
+	// Maps values to hashes
 	this.hashStore = {};
+	// Oredered list of hashses for taking time based slices
+	this.hashList = [];
 };
 
 /* Methods */
@@ -47,6 +49,7 @@ ve.dm.IndexValueStore.prototype.index = function ( value, stringified, overwrite
 		} else {
 			this.hashStore[ hash ] = value;
 		}
+		this.hashList.push( hash );
 	}
 
 	return hash;
@@ -122,6 +125,34 @@ ve.dm.IndexValueStore.prototype.values = function ( hashes ) {
 };
 
 /**
+ * Get the length of the store, i.e. the number of hashes
+ *
+ * @return {number} Store length
+ */
+ve.dm.IndexValueStore.prototype.getLength = function () {
+	return this.hashList.length;
+};
+
+/**
+ * Take a slice of the store, based on when hashes were added
+ *
+ * @param {number} [start=0] Start offset
+ * @param {number} [end] End offset, slices to end if undefined
+ * @return {ve.dm.IndexValueStore} Slice store
+ */
+ve.dm.IndexValueStore.prototype.slice = function ( start, end ) {
+	var i, l, hash,
+		slicedStore = new this.constructor();
+
+	slicedStore.hashList = this.hashList.slice( start, end );
+	for ( i = 0, l = slicedStore.hashList.length; i < l; i++ ) {
+		hash = slicedStore.hashList[ i ];
+		slicedStore.hashStore[ hash ] = this.hashStore[ hash ];
+	}
+	return slicedStore;
+};
+
+/**
  * Clone a store.
  *
  * The returned clone is shallow: the valueStore array and the hashStore array are cloned, but
@@ -131,10 +162,15 @@ ve.dm.IndexValueStore.prototype.values = function ( hashes ) {
  * @return {ve.dm.IndexValueStore} New store with the same contents as this one
  */
 ve.dm.IndexValueStore.prototype.clone = function () {
-	var hash, clone = new this.constructor();
+	var hash,
+		clone = new this.constructor();
+
+	clone.hashList = this.hashList;
+
 	for ( hash in this.hashStore ) {
 		clone.hashStore[ hash ] = this.hashStore[ hash ];
 	}
+
 	return clone;
 };
 
@@ -155,6 +191,7 @@ ve.dm.IndexValueStore.prototype.merge = function ( other ) {
 	for ( hash in other.hashStore ) {
 		if ( !Object.prototype.hasOwnProperty.call( this.hashStore, hash ) ) {
 			this.hashStore[ hash ] = other.hashStore[ hash ];
+			this.hashList.push( hash );
 		}
 	}
 };
