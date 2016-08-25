@@ -122,6 +122,10 @@ ve.ui.DataTransferHandlerFactory.prototype.getHandlerNameForItem = function ( it
 		name = names[ i ];
 		constructor = this.registry[ name ];
 
+		if ( !constructor ) {
+			continue;
+		}
+
 		if ( isPasteSpecial && !constructor.static.handlesPasteSpecial ) {
 			continue;
 		}
