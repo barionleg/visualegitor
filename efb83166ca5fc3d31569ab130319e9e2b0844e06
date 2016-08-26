@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e96ab59_f33970cc",
+        "filename": "src/ui/ve.ui.DataTransferHandlerFactory.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2016-08-26T18:29:20Z",
+      "side": 1,
+      "message": "Not from OO.Factory…",
+      "range": {
+        "startLine": 53,
+        "startChar": 4,
+        "endLine": 53,
+        "endChar": 14
+      },
+      "revId": "efb83166ca5fc3d31569ab130319e9e2b0844e06",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
