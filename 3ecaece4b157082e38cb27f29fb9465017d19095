@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e96ab59_dfbd4b65",
+        "filename": "src/dm/lineardata/ve.dm.ElementLinearData.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 1117,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-08-29T21:20:13Z",
+      "side": 1,
+      "message": "!ve.dm.nodeFactory.doesNodeHaveSignificantWhitespace( type )",
+      "range": {
+        "startLine": 1117,
+        "startChar": 47,
+        "endLine": 1117,
+        "endChar": 51
+      },
+      "revId": "3ecaece4b157082e38cb27f29fb9465017d19095",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
