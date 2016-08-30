@@ -619,7 +619,7 @@ ve.dm.Document.prototype.cloneFromRange = function ( range ) {
  */
 ve.dm.Document.prototype.cloneWithData = function ( data, copyInternalList ) {
 	var newDoc,
-		store = this.getStore().clone();
+		store = this.getStore()/*.clone();*/
 
 	newDoc = new this.constructor(
 		new ve.dm.FlatLinearData( store, data ),

@@ -88,83 +88,12 @@ ve.demo.SurfaceContainer = function VeDemoSurfaceContainer( target, page, lang, 
 		console.log( diff.sort( sortChangeBase ) );
 	} );
 	treeDiffButton.on( 'click', function () {
-		var diff, differ, root1, root2, tree1, tree2;
-		diff = window.diff;
+		var oldDoc = ve.init.target.oldDoc,
+			newDoc = ve.init.target.surface.model.documentModel,
+			visualDiff = new ve.dm.VisualDiff( oldDoc, newDoc );
 
-		// Wraps each node of a tree in a treeNode
-		function wrapNodes( parentNode ) {
-			var i, ilen, childNode;
+		console.log( visualDiff.getDiff() );
 
-			if ( parentNode.node.children ) {
-				for ( i = 0, ilen = parentNode.node.children.length; i < ilen; i++ ) {
-
-					// Wrap this node
-					childNode = new diff.treeNode( parentNode.node.children[ i ] );
-					parentNode.addChild( childNode );
-
-					// Wrap this node's children
-					wrapNodes( childNode );
-
-				}
-			}
-
-		}
-
-		// Logs descriptions of the minimum diff transactions
-		function logTransactionDescriptions( transactions ) {
-			var i, ilen = transactions.length;
-
-			// Log number of transactions
-			console.log( ilen + ' transaction(s)' );
-
-			// Log type of transactions
-			for ( i = 0; i < ilen; i++ ) {
-				if ( transactions[i][0] === null ) {
-					console.log( 'insert', tree2.orderedNodes[ transactions[ i ][ 1 ] ] );
-				} else if ( transactions[ i ][ 1 ] === null ) {
-					console.log( 'remove', tree1.orderedNodes[ transactions[ i ][ 0 ] ] );
-				} else {
-					console.log(
-						'change', tree1.orderedNodes[ transactions[ i ][ 0 ] ],
-						'to', tree2.orderedNodes[ transactions[ i ][ 1 ] ]
-					);
-				}
-			}
-
-		}
-
-		// isEqual override - should put somewhere else
-		diff.treeNode.prototype.isEqual = function( otherNode ) {
-
-			// Nodes are considered equal if they have the same types and element.attributes
-			// Document nodes and text nodes don't have elements so are checked separately
-			if ( this.node.type === 'document' && otherNode.node.type === 'document' ) {
-				return true;
-			} else if ( this.node.type === 'document' || otherNode.node.type === 'document' ) {
-				return false;
-			} else if ( this.node.type === 'text' && otherNode.node.type === 'text' ) {
-				return true; // Eventually run a text differ here
-			} else if ( this.node.type === 'text' || otherNode.node.type === 'text' ) {
-				return false;
-			} else {
-				return ( this.node.element.type === otherNode.node.element.type &&
-					ve.compare( this.node.element.attributes, otherNode.node.element.attributes ) );
-			}
-
-		};
-
-		root1 = new diff.treeNode( ve.init.target.oldDoc.documentNode );
-		root2 = new diff.treeNode( ve.init.target.surface.model.documentModel.documentNode );
-
-		wrapNodes( root1 );
-		wrapNodes( root2 );
-
-		tree1 = new diff.tree( root1 );
-		tree2 = new diff.tree( root2 );
-
-		differ = new diff.differ( tree1, tree2 );
-
-		logTransactionDescriptions( differ.transactions[ tree1.orderedNodes.length - 1 ][ tree2.orderedNodes.length - 1 ] );
 	} );
 
 	this.$element.addClass( 've-demo-surfaceContainer' ).append(
