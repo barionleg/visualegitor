@@ -186,7 +186,7 @@ ve.ce.Document.prototype.getNodeAndOffset = function ( offset ) {
 	// Find all subsequent DOM positions at the same model offset
 	found = {};
 	function stop( step ) {
-		var model;
+		var view, model;
 		if ( step.node.nodeType === Node.TEXT_NODE ) {
 			return step.type === 'internal';
 		}
@@ -195,6 +195,10 @@ ve.ce.Document.prototype.getNodeAndOffset = function ( offset ) {
 			step.node.classList.contains( 've-ce-branchNode' ) ||
 			step.node.classList.contains( 've-ce-leafNode' )
 		) {
+			view = $.data( step.node, 'view' );
+			if ( !view ) {
+				return false;
+			}
 			model = $.data( step.node, 'view' ).model;
 			if ( countedNodes.indexOf( model ) !== -1 ) {
 				return false;
