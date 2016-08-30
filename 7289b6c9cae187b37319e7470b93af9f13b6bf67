@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e96ab59_86137704",
+        "filename": "src/dm/ve.dm.IndexValueStore.js",
+        "patchSetId": 12
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-08-30T19:30:32Z",
+      "side": 1,
+      "message": "this is the same as this.indexes( values )?",
+      "range": {
+        "startLine": 35,
+        "startChar": 20,
+        "endLine": 35,
+        "endChar": 26
+      },
+      "revId": "7289b6c9cae187b37319e7470b93af9f13b6bf67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
