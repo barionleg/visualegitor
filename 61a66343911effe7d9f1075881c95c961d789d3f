@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e93376b_85b476e6",
+        "filename": "src/ce/nodes/ve.ce.TableRowNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-08-31T19:09:41Z",
+      "side": 1,
+      "message": "We should just go one level up and invert this:\n\n setTimeout( function () {\n   if(this.getRoot()) this.setupMissingCell\n } )\n\nThen the fix is closer to the problem.",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 51
+      },
+      "revId": "61a66343911effe7d9f1075881c95c961d789d3f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
