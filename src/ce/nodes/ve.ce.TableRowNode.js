@@ -59,10 +59,15 @@ ve.ce.TableRowNode.prototype.onSplice = function () {
  * Setup a slug for a missing cell, if this row contains fewer cells than the table
  */
 ve.ce.TableRowNode.prototype.setupMissingCell = function () {
-	var row,
-		matrix = this.findParent( ve.ce.TableNode ).getModel().getMatrix(),
-		maxColCount = matrix.getMaxColCount();
+	var row, matrix, maxColCount;
 
+	if ( !this.getRoot() ) {
+		// It's possible for this to have been removed from the model since this was scheduled
+		return;
+	}
+
+	matrix = this.findParent( ve.ce.TableNode ).getModel().getMatrix();
+	maxColCount = matrix.getMaxColCount();
 	row = matrix.getRowNodes().indexOf( this.model );
 	if ( maxColCount > matrix.getColCount( row ) ) {
 		if ( !this.$missingCell ) {
