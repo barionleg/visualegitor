@@ -49,10 +49,14 @@ ve.ce.TableRowNode.prototype.onSplice = function () {
 	// Parent method
 	ve.ce.TableRowNode.super.prototype.onSplice.apply( this, arguments );
 
-	if ( this.getRoot() ) {
-		// Defer call until after other changes in this cycle have been made
-		setTimeout( this.setupMissingCell.bind( this ) );
-	}
+	// Defer call until after other changes in this cycle have been made
+	setTimeout( function () {
+		if ( this.getRoot() ) {
+			// It's possible for this to have been removed from the model in the last tick
+			// This mostly seems to happen during cell merges
+			this.setupMissingCell();
+		}
+	}.bind( this ) );
 };
 
 /**
