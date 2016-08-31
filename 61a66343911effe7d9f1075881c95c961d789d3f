@@ -22,6 +22,30 @@
       "revId": "61a66343911effe7d9f1075881c95c961d789d3f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_4590ce46",
+        "filename": "src/ce/nodes/ve.ce.TableRowNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2016-08-31T19:13:11Z",
+      "side": 1,
+      "message": "I see the appeal of just entirely removing this getroot check here, and relying on setupMissingCell to always make sure it\u0027s valid for it to proceed.",
+      "parentUuid": "2e93376b_85b476e6",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 51
+      },
+      "revId": "61a66343911effe7d9f1075881c95c961d789d3f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
