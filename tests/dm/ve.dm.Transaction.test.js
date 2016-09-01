@@ -35,7 +35,7 @@ function runConstructorTests( assert, constructor, cases, testRange ) {
 				);
 			}
 		} else if ( cases[ msg ].exception ) {
-			/*jshint loopfunc:true */
+			/* jshint loopfunc:true */
 			assert.throws( function () {
 				constructor.apply(
 					ve.dm.Transaction, cases[ msg ].args

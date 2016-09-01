@@ -4,6 +4,8 @@
  * @copyright 2011-2016 VisualEditor Team and others; see http://ve.mit-license.org
  */
 
+/* eslint-ecmaVersion 3443 */
+
 // jshint esversion: 3
 
 ( function () {

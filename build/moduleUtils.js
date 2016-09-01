@@ -4,7 +4,8 @@
  * Code shared with the OOjs UI project
  */
 
-/*jshint node:true */
+/* eslint-env node */
+/* jshint node:true */
 
 var self = module.exports = {
 	/**

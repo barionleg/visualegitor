@@ -4,7 +4,8 @@
  * @package VisualEditor
  */
 
-/*jshint node:true */
+/* jshint node:true */
+/* eslint-env node */
 module.exports = function ( grunt ) {
 	var modules = grunt.file.readJSON( 'build/modules.json' ),
 		moduleUtils = require( './build/moduleUtils' ),
@@ -34,6 +35,7 @@ module.exports = function ( grunt ) {
 	grunt.loadNpmTasks( 'grunt-contrib-watch' );
 	grunt.loadNpmTasks( 'grunt-css-url-embed' );
 	grunt.loadNpmTasks( 'grunt-cssjanus' );
+	grunt.loadNpmTasks( 'grunt-eslint' );
 	grunt.loadNpmTasks( 'grunt-jscs' );
 	grunt.loadNpmTasks( 'grunt-karma' );
 	grunt.loadNpmTasks( 'grunt-stylelint' );
@@ -263,6 +265,12 @@ module.exports = function ( grunt ) {
 			},
 			main: '.'
 		},
+		eslint: {
+			dev: [
+				'*.js',
+				'{bin,build,demos,src,tests}/**/*.js'
+			]
+		},
 		stylelint: {
 			all: [
 				'**/*.css',
@@ -275,6 +283,7 @@ module.exports = function ( grunt ) {
 		},
 		jsonlint: {
 			all: [
+				'.eslintrc.json',
 				'**/*.json',
 				'!dist/**',
 				'!docs/**',
@@ -359,11 +368,13 @@ module.exports = function ( grunt ) {
 	grunt.registerTask( 'ci', [ '_test', 'git-status' ] );
 	grunt.registerTask( 'watch', [ 'karma:bg:start', 'runwatch' ] );
 
+	/* eslint-disable no-process-env */
 	if ( process.env.JENKINS_HOME ) {
 		grunt.registerTask( 'test', 'ci' );
 	} else {
 		grunt.registerTask( 'test', '_test' );
 	}
+	/* eslint-enable no-process-env */
 
 	grunt.registerTask( 'default', 'test' );
 };

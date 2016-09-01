@@ -95,6 +95,7 @@ ve.ui.DataTransferItem.prototype.getAsFile = function () {
 		for ( i = 0; i < binary.length; i++ ) {
 			array.push( binary.charCodeAt( i ) );
 		}
+		/* global Uint8Array */
 		this.blob = new Blob(
 			[ new Uint8Array( array ) ],
 			{ type: this.type }

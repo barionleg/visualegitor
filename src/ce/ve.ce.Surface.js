@@ -2665,7 +2665,7 @@ ve.ce.Surface.prototype.handleObservedChanges = function ( oldState, newState ) 
 			containsEnd = nodeRange.containsRange( new ve.Range( coveringRange.end ) );
 			// If the range starts xor ends in the active node, but not both, then it must
 			// span an active node boundary, so fixup.
-			/*jshint bitwise: false*/
+			/* jshint bitwise: false*/
 			if ( containsStart ^ containsEnd ) {
 				newSelection = oldState && oldState.veRange ?
 					new ve.dm.LinearSelection( dmDoc, oldState.veRange ) :
@@ -2676,7 +2676,7 @@ ve.ce.Surface.prototype.handleObservedChanges = function ( oldState, newState ) 
 					surface .showModelSelection();
 				} );
 			}
-			/*jshint bitwise: true*/
+			/* jshint bitwise: true*/
 		}
 
 		// Support: Firefox

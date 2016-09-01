@@ -691,6 +691,8 @@ QUnit.test( 'transformStyleAttributes', function ( assert ) {
 			ve.normalizeAttributeValue = oldNormalizeAttributeValue;
 		}
 	}
+
+	ve.isStyleAttributeBroken = wasStyleAttributeBroken;
 } );
 
 QUnit.test( 'normalizeNode', function ( assert ) {
