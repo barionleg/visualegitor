@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e93376b_636cdd06",
+        "filename": "src/ce/nodes/ve.ce.TableRowNode.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-09-01T18:41:44Z",
+      "side": 1,
+      "message": "for some reason we don\u0027t use bind for anonymous functions, so use var node \u003d this outside.",
+      "range": {
+        "startLine": 59,
+        "startChar": 3,
+        "endLine": 59,
+        "endChar": 7
+      },
+      "revId": "b2139e3f2b61fdaf9d9a96127a576bf2fc511189",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
