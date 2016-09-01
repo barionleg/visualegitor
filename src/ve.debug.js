@@ -1,4 +1,4 @@
-/*global console */
+/* global console */
 /*!
  * VisualEditor debugging methods.
  *

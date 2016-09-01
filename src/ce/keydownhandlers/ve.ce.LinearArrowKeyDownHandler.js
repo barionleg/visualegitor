@@ -4,6 +4,8 @@
  * @copyright 2011-2016 VisualEditor Team and others; see http://ve.mit-license.org
  */
 
+/* eslint-disable no-bitwise */
+
 /**
  * Arrow key down handler for linear selections.
  *
@@ -52,7 +54,6 @@ ve.ce.LinearArrowKeyDownHandler.static.execute = function ( surface, e ) {
 			direction = e.keyCode === OO.ui.Keys.DOWN ? 1 : -1;
 		} else {
 			directionality = $( surface.focusedBlockSlug ).css( 'direction' );
-			/*jshint bitwise:false */
 			if ( e.keyCode === OO.ui.Keys.LEFT ^ directionality === 'rtl' ) {
 				// leftarrow in ltr, or rightarrow in rtl
 				direction = -1;
@@ -78,7 +79,6 @@ ve.ce.LinearArrowKeyDownHandler.static.execute = function ( surface, e ) {
 			direction = e.keyCode === OO.ui.Keys.DOWN ? 1 : -1;
 		} else {
 			directionality = surface.getFocusedNodeDirectionality();
-			/*jshint bitwise:false */
 			if ( e.keyCode === OO.ui.Keys.LEFT ^ directionality === 'rtl' ) {
 				// leftarrow in ltr, or rightarrow in rtl
 				direction = -1;
