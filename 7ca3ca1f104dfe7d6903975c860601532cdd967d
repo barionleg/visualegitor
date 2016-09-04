@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e93376b_b01c376c",
+        "filename": "src/ui/dialogs/ve.ui.ProgressDialog.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 98
+      },
+      "writtenOn": "2016-09-04T23:24:51Z",
+      "side": 1,
+      "message": "would prefer we got rid of the cancellable variable and just this.actions.setMode( \u0027cancellable\u0027 ) in the if, with an else { this.actions.setMode( \u0027default\u0027 ); }",
+      "range": {
+        "startLine": 92,
+        "startChar": 5,
+        "endLine": 94,
+        "endChar": 68
+      },
+      "revId": "7ca3ca1f104dfe7d6903975c860601532cdd967d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
