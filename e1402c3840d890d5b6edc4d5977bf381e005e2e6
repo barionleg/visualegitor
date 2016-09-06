@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_031142b1",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 746,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-09-06T08:00:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e96ab59_08716a0b",
+      "revId": "e1402c3840d890d5b6edc4d5977bf381e005e2e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e96ab59_68782eee",
         "filename": "src/dm/ve.dm.Transaction.js",
         "patchSetId": 11
@@ -30,6 +48,24 @@
       "writtenOn": "2016-08-27T02:27:44Z",
       "side": 1,
       "message": "You should write a doc comment for this function, especially since it does some non-trivial things and returns something strange.",
+      "revId": "e1402c3840d890d5b6edc4d5977bf381e005e2e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_6355a652",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 757,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-09-06T08:00:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e96ab59_68782eee",
       "revId": "e1402c3840d890d5b6edc4d5977bf381e005e2e6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_7e5e1919",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 806,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-09-06T08:00:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e96ab59_c89be219",
+      "revId": "e1402c3840d890d5b6edc4d5977bf381e005e2e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e96ab59_48e1b296",
         "filename": "src/dm/ve.dm.Transaction.js",
         "patchSetId": 11
@@ -64,6 +118,24 @@
       "writtenOn": "2016-08-27T02:27:44Z",
       "side": 1,
       "message": "Write some more about what this does conceptually, it\u0027s difficult to understand that",
+      "revId": "e1402c3840d890d5b6edc4d5977bf381e005e2e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_9e5bc525",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 811,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-09-06T08:00:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e96ab59_48e1b296",
       "revId": "e1402c3840d890d5b6edc4d5977bf381e005e2e6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_be9fa1b8",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 832,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-09-06T08:00:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e96ab59_286e262b",
+      "revId": "e1402c3840d890d5b6edc4d5977bf381e005e2e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e96ab59_487b72eb",
         "filename": "src/dm/ve.dm.Transaction.js",
         "patchSetId": 11
@@ -98,6 +188,24 @@
       "writtenOn": "2016-08-27T02:27:44Z",
       "side": 1,
       "message": "Note from IRL discussion: going backwards first and then forwards introduces a left-bias in cases where e.g. you have a retain, then an annotationStart/Stop, then another retain.",
+      "revId": "e1402c3840d890d5b6edc4d5977bf381e005e2e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_dea46d07",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 839,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-09-06T08:00:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e96ab59_487b72eb",
       "revId": "e1402c3840d890d5b6edc4d5977bf381e005e2e6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_5e279d0d",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 912,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-09-06T08:00:07Z",
+      "side": 1,
+      "message": "Done, by making adjustRetain pick the least annotatey retain",
+      "parentUuid": "4e96ab59_e8e97e7c",
+      "revId": "e1402c3840d890d5b6edc4d5977bf381e005e2e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e96ab59_8891dafd",
         "filename": "src/dm/ve.dm.Transaction.js",
         "patchSetId": 11
@@ -132,6 +258,24 @@
       "writtenOn": "2016-08-27T02:27:44Z",
       "side": 1,
       "message": "Shouldn\u0027t a.i be a.i + 1? That\u0027s the only asymmetry between this block and lines 908-918.",
+      "revId": "e1402c3840d890d5b6edc4d5977bf381e005e2e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_7e245908",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 922,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-09-06T08:00:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e96ab59_8891dafd",
       "revId": "e1402c3840d890d5b6edc4d5977bf381e005e2e6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_9e2105f9",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 936,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-09-06T08:00:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e96ab59_6882ee98",
+      "revId": "e1402c3840d890d5b6edc4d5977bf381e005e2e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e96ab59_a853f641",
         "filename": "src/dm/ve.dm.Transaction.js",
         "patchSetId": 11
@@ -172,6 +334,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_fe8769da",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 937,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-09-06T08:00:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e96ab59_a853f641",
+      "revId": "e1402c3840d890d5b6edc4d5977bf381e005e2e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e96ab59_68a3ce3f",
         "filename": "src/dm/ve.dm.Transaction.js",
         "patchSetId": 11
@@ -183,6 +363,24 @@
       "writtenOn": "2016-08-27T02:27:44Z",
       "side": 1,
       "message": "I think the logic in the comment above is sound, but I\u0027d be more comfortable if you explicitly checked if b covers a, and throw a conflict right here if it doesn\u0027t. That means you also guarantee that this line won\u0027t make b.op.length negative, because if b covers a, then b.op.length \u003e a.op.length and a.diff \u003e\u003d -a.op.length (\u003e -b.op.length).",
+      "revId": "e1402c3840d890d5b6edc4d5977bf381e005e2e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_1e8d15fc",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 938,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-09-06T08:00:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e96ab59_68a3ce3f",
       "revId": "e1402c3840d890d5b6edc4d5977bf381e005e2e6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
