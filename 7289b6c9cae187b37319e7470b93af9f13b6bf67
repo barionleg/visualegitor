@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_c922f9a1",
+        "filename": "src/dm/ve.dm.Change.js",
+        "patchSetId": 12
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-09-06T08:18:08Z",
+      "side": 1,
+      "message": "Good point; I\u0027ve now put an explanation in the method doc",
+      "parentUuid": "4e96ab59_7cf53a4c",
+      "revId": "7289b6c9cae187b37319e7470b93af9f13b6bf67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e96ab59_e6afdb8f",
         "filename": "src/dm/ve.dm.Change.js",
         "patchSetId": 12
@@ -54,6 +72,24 @@
         "endLine": 108,
         "endChar": 34
       },
+      "revId": "7289b6c9cae187b37319e7470b93af9f13b6bf67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_69974594",
+        "filename": "src/dm/ve.dm.Change.js",
+        "patchSetId": 12
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-09-06T08:18:08Z",
+      "side": 1,
+      "message": "That seems like a good idea ultimately, but I\u0027ll leave it right now because including ve.dm.ElementLinearData will pull in a whole load of tricky dependencies for the WIP rebaser server.",
+      "parentUuid": "4e96ab59_e6afdb8f",
       "revId": "7289b6c9cae187b37319e7470b93af9f13b6bf67",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -83,6 +119,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_a9912d9e",
+        "filename": "src/dm/ve.dm.Change.js",
+        "patchSetId": 12
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-09-06T08:18:08Z",
+      "side": 1,
+      "message": "Done ... though it does mean empty arrays are serialized as { type: \u0027plain\u0027, value: [] } , which is slightly inconsistent but not a show stopper",
+      "parentUuid": "4e96ab59_5ceebeb2",
+      "revId": "7289b6c9cae187b37319e7470b93af9f13b6bf67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e96ab59_86137704",
         "filename": "src/dm/ve.dm.IndexValueStore.js",
         "patchSetId": 12
@@ -100,6 +154,24 @@
         "endLine": 35,
         "endChar": 26
       },
+      "revId": "7289b6c9cae187b37319e7470b93af9f13b6bf67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_690ca53e",
+        "filename": "src/dm/ve.dm.IndexValueStore.js",
+        "patchSetId": 12
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-09-06T08:18:08Z",
+      "side": 1,
+      "message": "Yes, good point",
+      "parentUuid": "4e96ab59_86137704",
       "revId": "7289b6c9cae187b37319e7470b93af9f13b6bf67",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
