@@ -915,7 +915,7 @@ ve.dm.Transaction.rebaseTransactions = function ( transactionA, transactionB ) {
  */
 ve.dm.Transaction.prototype.clone = function () {
 	var tx = new this.constructor();
-	tx.operations = ve.copy( this.operations );
+	tx.operations = JSON.parse( JSON.stringify( this.operations ) );
 	tx.author = this.author;
 	return tx;
 };

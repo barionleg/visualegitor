@@ -394,6 +394,23 @@ ve.dm.Change.prototype.mostRecent = function ( transactionStart, storeStart ) {
 };
 
 /**
+ * Create a new change with no transactions on top of this change.
+ *
+ * Typically used as a placeholder to concat other changes to later.
+ *
+ * @return {ve.dm.Change} Empty change based on top of this change
+ */
+ve.dm.Change.prototype.end = function () {
+	// TODO come up with a better name
+	return new ve.dm.Change(
+		this.transactionStart,
+		[],
+		this.storeStart,
+		new ve.dm.IndexValueStore()
+	);
+};
+
+/**
  * Apply change to surface
  *
  * @param {ve.dm.Surface} surface Surface with same ve.dm.Document as the transactions
