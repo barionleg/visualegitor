@@ -4,8 +4,9 @@
 var rebaser,
 	port = 8081,
 	express = require( 'express' ),
-	bodyParser = require( 'body-parser' ),
 	app = express(),
+	http = require( 'http' ).Server( app ),
+	io = require( 'socket.io' )( http ),
 	/*jshint -W079 */
 	ve = { dm: {} },
 	/*jshint +W079 */
@@ -30,29 +31,28 @@ function summarize( change ) {
 
 rebaser = new Rebaser();
 app.use( express.static( __dirname + '/..' ) );
-app.use( bodyParser.json() );
-app.post( '/applyChange', function ( req, res ) {
-	var change, parallel, response;
-	try {
-		change = ve.dm.Change.static.deserialize( req.body.change, true );
-		parallel = rebaser.applyChange(
-			req.body.doc,
-			req.body.author,
-			change
-		);
-		if ( change.transactions.length > 0 || parallel.transactions.length > 0 ) {
-			console.log( 'recv ' + req.body.author + ' ' + summarize( change ) );
-			console.log( 'send ' + req.body.author + ' ' + summarize( parallel ) );
+
+io.on( 'connection', function ( socket ) {
+	socket.on( 'submitChange', function ( data ) {
+		var change, applied;
+		try {
+			change = ve.dm.Change.static.deserialize( data.change, true );
+			console.log( '[socket] ' + data.author + ' recv ' + summarize( change ) );
+			applied = rebaser.applyChange( data.doc, data.author, change );
+			if ( applied ) {
+				console.log( '[socket] ' + data.author + ' applied ' + summarize( applied ) );
+				// TODO we need a group for each document
+				io.emit( 'newChange', { doc: data.doc, author: data.author, change: applied } );
+			} else {
+				console.log( '[socket] ' + data.author + ' conflict' );
+				socket.emit( 'rejectedChange', { doc: data.doc, transactionStart: change.transactionStart } );
+			}
+		} catch ( error ) {
+			console.error( error.stack );
+			socket.emit( 'rejectedChange', { doc: data.doc, error: error.toString() } );
 		}
-		response = {
-			change: parallel.serialize( true )
-		};
-	} catch ( error ) {
-		console.log( error.stack );
-		response = { error: error.toString() };
-	}
-	res.setHeader( 'Content-Type', 'application/json' );
-	res.end( JSON.stringify( response ) );
+	} );
 } );
-app.listen( port );
+
+http.listen( port );
 console.log( 'Listening on ' + port );
