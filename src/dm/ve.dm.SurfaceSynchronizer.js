@@ -33,16 +33,22 @@ ve.dm.SurfaceSynchronizer = function VeDmSurfaceSynchronizer( surface ) {
 	if ( window.QUnit ) {
 		return;
 	}
+
+	this.socket = io();
+	this.socket.on( 'newChange', this.onNewChange.bind( this ) );
+
 	// Events
 	this.doc.connect( this, {
 		transact: 'onDocumentTransact'
 	} );
-	this.doc.connect( this, {
+
+	this.sendChangeDebounced = ve.debounce( this.sendChange.bind( this ), 1000 );
+	/*this.doc.connect( this, {
 		select: this.syncDebounced
 	} );
 
 	this.syncInterval = 5000;
-	this.sync();
+	this.sync();*/
 };
 
 /* Inheritance */
@@ -60,8 +66,49 @@ ve.dm.SurfaceSynchronizer.prototype.onDocumentTransact = function ( tx ) {
 	for ( userId in this.userSelections ) {
 		this.userSelections[ userId ].selection = this.userSelections[ userId ].selection.translateByTransaction( tx );
 	}
-	this.syncDebounced();
+	//this.syncDebounced();
+	this.sendChangeDebounced();
 };
+
+ve.dm.SurfaceSynchronizer.prototype.sendChange = function () {
+	var documentModel = this.getSurface().getDocument(),
+		sync = this,
+		change = documentModel.getChangeSince( this.transactionCommitLength, this.storeCommitLength );
+	if ( change.transactions.length === 0 ) {
+		return;
+	}
+	this.socket.emit( 'submitChange', {
+		doc: this.documentId,
+		author: this.authorId,
+		change: change.serialize()
+	} );
+	console.log( 'sendChange', change.serialize() );
+	// TODO freeze new changes
+	this.socket.once( 'receivedChange', function( data ) {
+		console.log( 'receivedChange', data );
+		if ( data.applied ) {
+			// TODO reconcile
+			sync.transactionCommitLength = sync.doc.completeHistory.length;
+		}
+	} );
+};
+
+ve.dm.SurfaceSynchronizer.prototype.onNewChange = function ( data ) {
+	if ( data.author === this.authorId ) {
+		return;
+	}
+	console.log( 'newChange', data );
+
+	var change = ve.dm.Change.static.deserialize( data.change );
+	// TODO rebase unsent changes etc
+	change.applyTo( this.surface );
+	this.transactionCommitLength = this.doc.completeHistory.length;
+};
+
+
+
+// Old stuff below here
+// --------------------------------------------------------------------------
 
 ve.dm.SurfaceSynchronizer.prototype.sync = function () {
 	var selection = JSON.stringify( this.getSurface().getSelection() ),

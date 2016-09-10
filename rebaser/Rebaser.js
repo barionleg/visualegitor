@@ -26,7 +26,7 @@ Rebaser.prototype.applyChange = function ( doc, author, remote ) {
 		change.store.merge( resolved.store );
 		Array.prototype.push.apply( change.transactions, resolved.transactions );
 	}
-	return local;
+	return [ local, resolved ];
 };
 
 module.exports = Rebaser;
