@@ -1,4 +1,9 @@
 {
+	"socket.io": {
+		"scripts": [
+			"node_modules/socket.io-client/socket.io.js"
+		]
+	},
 	"jquery": {
 		"scripts": [
 			"lib/jquery/jquery.js"
@@ -171,7 +176,8 @@
 			"jquery.i18n",
 			"jquery.uls.data",
 			"jquery.client",
-			"papaparse"
+			"papaparse",
+			"socket.io"
 		]
 	},
 	"baselibs.dist": {
