@@ -244,7 +244,7 @@ module.exports = function ( grunt ) {
 				'!build/typos.json',
 				'!lib/**',
 				'!i18n/**',
-				'!{coverage,dist,docs,node_modules}/**',
+				'!{coverage,dist,docs,node_modules,rebaser/node_modules}/**',
 				'!.git/**'
 			]
 		},
