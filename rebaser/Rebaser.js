@@ -5,6 +5,9 @@ var Rebaser = function () {
 };
 
 /**
+ * @param {string} doc
+ * @param {string} author
+ * @param {ve.dm.Change} remote
  */
 Rebaser.prototype.applyChange = function ( doc, author, remote ) {
 	var change, local, resolved;
@@ -28,7 +31,7 @@ Rebaser.prototype.applyChange = function ( doc, author, remote ) {
 		change.store.merge( resolved.store );
 		Array.prototype.push.apply( change.transactions, resolved.transactions );
 	}
-	return local;
+	return resolved;
 };
 
 module.exports = Rebaser;
