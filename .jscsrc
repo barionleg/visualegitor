@@ -23,6 +23,7 @@
 		"dist/**",
 		"docs/**",
 		"lib/**",
-		"node_modules/**"
+		"node_modules/**",
+		"rebaser/node_modules/**"
 	]
 }
