@@ -25,7 +25,7 @@ ve.dm.SurfaceSynchronizer = function VeDmSurfaceSynchronizer( surface ) {
 	this.storeCommitLength = this.store.getLength();
 	this.userSelections = {};
 	this.syncDebounced = ve.debounce( this.sync.bind( this ), 5000 );
-	this.documentId = 'EXAMPLE';
+	this.documentId = ve.docName; // HACK
 	this.submittedChange = null;
 	this.pendingChange = null;
 	this.authorId = Math.random();
@@ -36,7 +36,7 @@ ve.dm.SurfaceSynchronizer = function VeDmSurfaceSynchronizer( surface ) {
 		return;
 	}
 
-	this.socket = io();
+	this.socket = io( '/' + this.documentId );
 	this.socket.on( 'newChange', this.onNewChange.bind( this ) );
 	this.socket.on( 'rejectedChange', this.onRejectedChange.bind( this ) );
 
@@ -45,7 +45,7 @@ ve.dm.SurfaceSynchronizer = function VeDmSurfaceSynchronizer( surface ) {
 		transact: 'onDocumentTransact'
 	} );
 
-	this.submitChangeDebounced = ve.debounce( this.submitChange.bind( this ), 3000 );
+	this.submitChangeDebounced = ve.debounce( this.submitChange.bind( this ), 1000 );
 	/*this.doc.connect( this, {
 		select: this.syncDebounced
 	} );
