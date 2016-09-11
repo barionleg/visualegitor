@@ -97,7 +97,14 @@ ve.dm.SurfaceSynchronizer.prototype.sendChange = function ( backtrack, change ) 
  * @inheritdoc
  */
 ve.dm.SurfaceSynchronizer.prototype.applyChange = function ( change ) {
+	var author;
+	// Author selections are superseded by change.selections, so no need to translate them
+	for ( author in change.selections ) {
+		author = parseInt( author );
+		delete this.authorSelections[ author ];
+	}
 	change.applyTo( this.surface );
+	this.applyNewSelections( change.selections );
 };
 
 /**
@@ -159,6 +166,7 @@ ve.dm.SurfaceSynchronizer.prototype.applyNewSelections = function ( newSelection
 		change = changeOrTx instanceof ve.dm.Change ? changeOrTx : null,
 		tx = changeOrTx instanceof ve.dm.Transaction ? changeOrTx : null;
 	for ( author in newSelections ) {
+		author = parseInt( author );
 		if ( author === this.author ) {
 			continue;
 		}
