@@ -5,9 +5,25 @@ var Rebaser = function () {
 };
 
 /**
- * @param {string} doc
- * @param {string} author
- * @param {ve.dm.Change} remote
+ * Get the history of a document by name.
+ *
+ * @param {string} name Name of a document
+ * @return {ve.dm.Change|null} History (as one big Change object), or null if no such document
+ */
+Rebaser.prototype.getDoc = function ( name ) {
+	if ( !this.changeForDoc.has( name ) ) {
+		return null;
+	}
+	return this.changeForDoc.get( name );
+};
+
+/**
+ * Attempt to apply a (possibly outdated) change to a document.
+ *
+ * @param {string} doc Document name
+ * @param {string} author Author ID
+ * @param {ve.dm.Change} remote Change to apply
+ * @return {ve.dm.Change|null} Rebased version of the applied change, or null if conflict
  */
 Rebaser.prototype.applyChange = function ( doc, author, remote ) {
 	var change, local, resolved;
