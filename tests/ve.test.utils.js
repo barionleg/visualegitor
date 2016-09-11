@@ -5,10 +5,26 @@
  */
 
 ( function () {
-	// Create a standalone platform and target so ve.init.platform/target are available
+	// Create a dummy platform and target so ve.init.platform/target are available
+	function DummyPlatform() {
+		DummyPlatform.super.apply( this, arguments );
+	}
+	OO.inheritClass( DummyPlatform, ve.init.Platform );
+	DummyPlatform.prototype.getUserLanguages = function () { return [ 'en' ]; };
+	DummyPlatform.prototype.getMessage = function ( msg ) { return msg; };
+	DummyPlatform.prototype.getLanguageName = function () { return 'English'; };
+	DummyPlatform.prototype.getLanguageDirection = function () { return 'ltr'; };
+	DummyPlatform.prototype.getExternalLinkUrlProtocolsRegExp = function () { return /^https?\:\/\//i; };
+	DummyPlatform.prototype.getUnanchoredExternalLinkUrlProtocolsRegExp = function () { return /https?\:\/\//i; };
+
+	function DummyTarget() {
+		DummyTarget.super.apply( this, arguments );
+	}
+	OO.inheritClass( DummyTarget, ve.init.Target );
+
 	/* eslint-disable no-new */
-	new ve.init.sa.Platform();
-	new ve.init.sa.Target();
+	new DummyPlatform();
+	new DummyTarget();
 	/* eslint-enable no-new */
 
 	// Disable scroll animatinos
@@ -294,7 +310,7 @@
 					return {};
 				},
 				getImportRules: function () {
-					return ve.init.sa.Target.static.importRules;
+					return ve.init.Target.static.importRules;
 				},
 				getModel: function () {
 					return model;
