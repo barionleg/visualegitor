@@ -104,7 +104,7 @@ ve.ce.Surface = function VeCeSurface( model, ui, config ) {
 		documentUpdate: 'onModelDocumentUpdate',
 		insertionAnnotationsChange: 'onInsertionAnnotationsChange'
 	} );
-	this.model.synchronizer.connect( this, { userSelect: 'onSynchronizerUserSelect' } );
+	this.model.synchronizer.connect( this, { authorSelect: 'onSynchronizerAuthorSelect' } );
 
 	this.onDocumentMouseUpHandler = this.onDocumentMouseUp.bind( this );
 	this.$documentNode.on( {
@@ -2599,15 +2599,29 @@ ve.ce.Surface.prototype.renderSelectedContentBranchNode = function () {
 	return ceNode.renderContents();
 };
 
-ve.ce.Surface.prototype.onSynchronizerUserSelect = function ( userSelection ) {
-	var i, l, rects, rect, overlays,
-		selection = userSelection.selection;
+ve.ce.Surface.prototype.onSynchronizerAuthorSelect = function ( author ) {
+	try {
+		this.paintAuthor( author );
+	} catch ( error ) {
+		return;
+	}
+};
 
-	overlays = this.userSelectionOverlays[ userSelection.userId ] || {
-		$cursor: $( '<div>' ),
-		$selection: $( '<div>' )
-	};
-	this.userSelectionOverlays[ userSelection.userId ] = overlays;
+ve.ce.Surface.prototype.paintAuthor = function ( author ) {
+	var i, l, rects, rect, overlays,
+		color = '#' +
+			( 8 * ( 1 - Math.sin( 5 * author ) ) ).toString( 16 ).slice( 0, 1 ) +
+			( 6 * ( 1 - Math.cos( 3 * author ) ) ).toString( 16 ).slice( 0, 1 ) +
+			'0',
+		selection = this.model.synchronizer.authorSelections[ author ];
+
+	if ( !this.userSelectionOverlays[ author ] ) {
+		this.userSelectionOverlays[ author ] = {
+			$cursor: $( '<div>' ),
+			$selection: $( '<div>' )
+		};
+	}
+	overlays = this.userSelectionOverlays[ author ];
 
 	if ( selection.isNull() ) {
 		overlays.$cursor.detach();
@@ -2619,29 +2633,36 @@ ve.ce.Surface.prototype.onSynchronizerUserSelect = function ( userSelection ) {
 	overlays.$selection.empty();
 
 	if ( !selection.isCollapsed() ) {
-		rects = this.getSelectionRects( selection );
+		rects = ve.ce.Selection.static.newFromModel( selection, this ).getSelectionRects();
 		for ( i = 0, l = rects.length; i < l; i++ ) {
 			rect = rects[ i ];
 			overlays.$selection.append( $( '<div>' ).addClass( 've-ce-surface-highlights-user-selection' ).css( {
 				left: rect.left,
 				top: rect.top,
 				width: rect.width,
-				height: rect.height
+				height: rect.height,
+				background: color
 			} ) );
 		}
 	}
 
 	if ( selection instanceof ve.dm.LinearSelection && this.getFocusedNode( selection.getRange() ) ) {
-		rect = this.getSelectionBoundingRect( selection );
+		rect = ve.ce.Selection.static.newFromModel( selection, this ).getSelectionBoundingRect();
 	} else {
-		rect = this.getSelectionRects( selection.collapseToTo() )[ 0 ];
+		rect = ve.ce.Selection.static.newFromModel( selection.collapseToTo(), this ).getSelectionRects()[ 0 ];
 	}
 	overlays.$cursor.append(
 		$( '<div class="ve-ce-surface-highlights-user-cursor">' ).css( {
 			left: rect.left,
 			top: rect.top,
-			height: rect.height
-		} ).append( $( '<span>' ).addClass( 've-ce-surface-highlights-user-cursor-label' ).text( 'Anon' /*userSelection.userId*/ ) )
+			height: rect.height,
+			background: color
+		} ).append(
+			$( '<span>' )
+			.addClass( 've-ce-surface-highlights-user-cursor-label' )
+			.text( author )
+			.css( { background: color } )
+		)
 	);
 
 	this.$highlightsUserCursors.append( overlays.$cursor );
@@ -2652,9 +2673,10 @@ ve.ce.Surface.prototype.onPosition = function () {
 	var surface = this;
 	// Defer to allow surface synchronizer to adjust for transactions
 	setTimeout( function () {
-		var userId, userSelections = surface.getModel().synchronizer.userSelections;
-		for ( userId in userSelections ) {
-			surface.onSynchronizerUserSelect( userSelections[ userId ] );
+		var author,
+			authorSelections = surface.getModel().synchronizer.authorSelections;
+		for ( author in authorSelections ) {
+			surface.onSynchronizerAuthorSelect( author );
 		}
 	} );
 };
