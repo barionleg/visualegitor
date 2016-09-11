@@ -1538,7 +1538,8 @@ ve.dm.Document.prototype.getCompleteHistorySince = function ( start ) {
 /**
  * Single change containing most recent transactions in history stack
  *
- * @param {number} start Pointer from where to start the slice
+ * @param {number} transactionStart Pointer from where to start slicing transactions
+ * @param {number} storeStart Pointer from where to start slicing the store
  * @returns {ve.dm.Change} Single change containing transactions since pointer
  */
 ve.dm.Document.prototype.getChangeSince = function ( transactionStart, storeStart ) {
