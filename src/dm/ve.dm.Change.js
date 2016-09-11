@@ -436,15 +436,16 @@ ve.dm.Change.prototype.applyTo = function ( surface ) {
 /**
  * Append change transactions to history
  *
- * @param {ve.dm.Transaction[]} history History
+ * @param {ve.dm.Document} documentModel
  * @throws {Error} If this change does not start at the top of the history
  */
-ve.dm.Change.prototype.addToHistory = function ( history ) {
-	if ( this.transactionStart !== history.length ) {
+ve.dm.Change.prototype.addToHistory = function ( documentModel ) {
+	if ( this.transactionStart !== documentModel.completeHistory.length ) {
 		throw new Error( 'this starts at ' + this.transactionStart +
-			' but history ends at ' + history.length );
+			' but history ends at ' + documentModel.completeHistory.length );
 	}
-	ve.batchPush( history, this.transactions );
+	documentModel.store.merge( this.store );
+	ve.batchPush( documentModel.completeHistory, this.transactions );
 };
 
 /**
