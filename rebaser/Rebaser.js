@@ -2,6 +2,13 @@ Rebaser = function () {
 	this.changeForDoc = new Map();
 };
 
+Rebaser.prototype.getDoc = function ( name ) {
+	if ( !this.changeForDoc.has( name ) ) {
+		return null;
+	}
+	return this.changeForDoc.get( name );
+};
+
 /**
  * @param {string} doc
  * @param {string} author

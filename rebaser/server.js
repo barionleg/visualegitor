@@ -24,29 +24,58 @@ function summarize( change ) {
 }
 
 rebaser = new Rebaser();
-app.use( express.static( __dirname + '/..' ) );
+docNamespaces = new Map();
 
-io.on( 'connection', function( socket ) {
-	socket.on( 'submitChange', function ( data ) {
-		var change, applied;
-		try {
-			change = ve.dm.Change.static.deserialize( data.change, true );
-			console.log( '[socket] ' + data.author + ' recv ' + summarize( change ) );
-			applied = rebaser.applyChange( data.doc, data.author, change );
-			if ( applied ) {
-				console.log( '[socket] ' + data.author + ' applied ' + summarize( applied ) );
-				// TODO we need a group for each document
-				io.emit( 'newChange', { doc: data.doc, author: data.author, change: applied } );
-			} else {
-				console.log( '[socket] ' + data.author + ' conflict' );
-				socket.emit( 'rejectedChange', { doc: data.doc, transactionStart: change.transactionStart } );
-			}
-		} catch ( error ) {
-			console.error( error.stack );
-			socket.emit( 'rejectedChange', { doc: data.doc, error: error.toString() } );
+function makeConnectionHandler( docName ) {
+	return function handleConnection( socket ) {
+		// HACK Catch the client up on the current state by sending it the entire history
+		// TODO replace with sending just the current state
+		console.log( 'new client for ' + docName );
+		var existingDoc = rebaser.getDoc( docName );
+		if ( existingDoc ) {
+			socket.emit( 'newChange', {change: existingDoc } );
 		}
-	})
+		socket.on( 'submitChange', function ( data ) {
+			var change, applied;
+			try {
+				change = ve.dm.Change.static.deserialize( data.change, true );
+				console.log( '[socket] ' + data.author + ' recv ' + summarize( change ) );
+				applied = rebaser.applyChange( docName, data.author, change );
+				if ( applied ) {
+					console.log( '[socket] ' + data.author + ' applied ' + summarize( applied ) );
+					docNamespaces.get( docName ).emit( 'newChange', { author: data.author, change: applied } );
+				} else {
+					console.log( '[socket] ' + data.author + ' conflict' );
+					socket.emit( 'rejectedChange', { transactionStart: change.transactionStart } );
+				}
+			} catch ( error ) {
+				console.error( error.stack );
+				socket.emit( 'rejectedChange', { error: error.toString() } );
+			}
+		})
+	};
+}
+
+app.use( express.static( __dirname + '/..' ) );
+app.set( 'view engine', 'ejs' );
+
+app.get( '/doc/edit/:docName', function ( req, res ) {
+	var nsp,
+		docName = req.params.docName;
+	if ( !docNamespaces.has( docName ) ) {
+		nsp = io.of( '/' + docName );
+		docNamespaces.set( docName, nsp );
+		nsp.on( 'connection', makeConnectionHandler( docName ) );
+	}
+	res.render( 'editor', { docName: docName } );
 } );
+
+app.get( '/doc/raw/:docName', function ( req, res ) {
+	// TODO return real data
+	res.send( '' );
+} );
+
+
 
 http.listen( port );
 console.log( 'Listening on ' + port );
