@@ -25,9 +25,10 @@ ve.dm.SurfaceSynchronizer = function VeDmSurfaceSynchronizer( surface ) {
 	this.storeCommitLength = this.store.getLength();
 	this.userSelections = {};
 	this.syncDebounced = ve.debounce( this.sync.bind( this ), 5000 );
-	this.documentId = 'EXAMPLE';
+	this.documentId = ve.docName; // HACK
 	this.submittedChange = null;
 	this.pendingChange = null;
+	this.applying = false;
 	this.authorId = Math.random();
 	document.body.insertBefore( document.createTextNode( this.authorId ), document.body.firstChild );
 	this.prevSelection = null;
@@ -36,7 +37,7 @@ ve.dm.SurfaceSynchronizer = function VeDmSurfaceSynchronizer( surface ) {
 		return;
 	}
 
-	this.socket = io();
+	this.socket = io( '/' + this.documentId );
 	this.socket.on( 'newChange', this.onNewChange.bind( this ) );
 	this.socket.on( 'rejectedChange', this.onRejectedChange.bind( this ) );
 
@@ -45,7 +46,7 @@ ve.dm.SurfaceSynchronizer = function VeDmSurfaceSynchronizer( surface ) {
 		transact: 'onDocumentTransact'
 	} );
 
-	this.submitChangeDebounced = ve.debounce( this.submitChange.bind( this ), 3000 );
+	this.submitChangeThrottled = ve.throttle( this.submitChange.bind( this ), 250 );
 	/*this.doc.connect( this, {
 		select: this.syncDebounced
 	} );
@@ -65,12 +66,16 @@ ve.dm.SurfaceSynchronizer.prototype.getSurface = function () {
 };
 
 ve.dm.SurfaceSynchronizer.prototype.onDocumentTransact = function ( tx ) {
+	if ( this.applying ) {
+		// Ignore our own synchronization transactions
+		return;
+	}
+	// TODO deal with staged transactions somehow
 	var userId;
 	for ( userId in this.userSelections ) {
 		this.userSelections[ userId ].selection = this.userSelections[ userId ].selection.translateByTransaction( tx );
 	}
-	//this.syncDebounced();
-	this.submitChangeDebounced();
+	this.submitChangeThrottled();
 };
 
 ve.dm.SurfaceSynchronizer.prototype.submitChange = function () {
@@ -101,6 +106,8 @@ ve.dm.SurfaceSynchronizer.prototype.onNewChange = function ( data ) {
 
 	var pendingOnSubmitted, submittedOnPending, unsent, rebases, unsentRebased, incoming, canonicalHistory,
 		change = ve.dm.Change.static.deserialize( data.change );
+
+	this.applying = true;
 
 	if ( this.submittedChange ) {
 		if ( data.author === this.authorId ) {
@@ -148,10 +155,6 @@ ve.dm.SurfaceSynchronizer.prototype.onNewChange = function ( data ) {
 				// Add u/(p\s) to the history
 				this.store.merge( unsentRebased.store );
 				unsentRebased.addToHistory( this.doc.completeHistory );
-				if ( unsentRebased.transactions.length > 0 ) {
-					// Submit the unsent changes now
-					this.submitChange();
-				}
 			} else {
 				// The unsent changes conflict with the pending changes, so discard the unsent changes.
 				// Our current state is s + u, so we will apply -u + p\s which gets us to s + p\s.
@@ -179,6 +182,7 @@ ve.dm.SurfaceSynchronizer.prototype.onNewChange = function ( data ) {
 			}
 			this.submittedChange = null;
 			this.pendingChange = null;
+
 		} else {
 			// Someone else made a change while we have a change in flight
 			// Queue it up and apply it when our change is accepted or rejected
@@ -219,11 +223,6 @@ ve.dm.SurfaceSynchronizer.prototype.onNewChange = function ( data ) {
 				// Add u/c to the history
 				this.store.merge( unsentRebased.store );
 				unsentRebased.addToHistory( this.doc.completeHistory );
-
-				if ( unsentRebased.transactions.length > 0 ) {
-					// Submit the unsent changes now
-					this.submitChange();
-				}
 			} else {
 				// The unsent changes conflict with the new changes, so discard the unsent changes
 				console.log( this.authorId, 'conflict, discarding unsent change', unsent );
@@ -244,6 +243,13 @@ ve.dm.SurfaceSynchronizer.prototype.onNewChange = function ( data ) {
 				this.storeCommitLength = this.store.getLength();
 			}
 		}
+	}
+
+	this.applying = false;
+
+	if ( unsentRebased && unsentRebased.transactions.length > 0 ) {
+		// Schedule submission of the unsent changes
+		this.submitChangeThrottled();
 	}
 };
 
