@@ -2,12 +2,12 @@
 ( function ( createClass ) {
 	if ( typeof window !== 'undefined' ) {
 		// Browser
-		createClass( window.ve );
+		createClass( window.ve, window.OO );
 	} else {
-		// Node. ve={dm:{}}; require( 'thisFile' )( ve );
+		// Node. ve={dm:{}}; require( 'thisFile' )( ve, oo );
 		module.exports = createClass;
 	}
-}( function ( ve ) {
+}( function ( ve, OO ) {
 
 /*!
  * VisualEditor IndexValueStore class.
