@@ -1,0 +1,129 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e93376b_e4bdeefe",
+        "filename": "src/dm/ve.dm.Change.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-09-12T18:42:06Z",
+      "side": 1,
+      "message": "linebreak before @return",
+      "range": {
+        "startLine": 384,
+        "startChar": 4,
+        "endLine": 384,
+        "endChar": 10
+      },
+      "revId": "7e1d9e73a64c878200b6ed20da73c7cfbb754de8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_a442060f",
+        "filename": "src/dm/ve.dm.SurfaceSynchronizer.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-09-12T18:42:06Z",
+      "side": 1,
+      "message": "add /* global io */ to page",
+      "revId": "7e1d9e73a64c878200b6ed20da73c7cfbb754de8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_c451d2de",
+        "filename": "src/dm/ve.dm.SurfaceSynchronizer.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-09-12T18:42:06Z",
+      "side": 1,
+      "message": "onSocketNewChange?",
+      "revId": "7e1d9e73a64c878200b6ed20da73c7cfbb754de8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_e4632ea5",
+        "filename": "src/dm/ve.dm.SurfaceSynchronizer.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-09-12T18:42:06Z",
+      "side": 1,
+      "message": "ve.throttle, reduce to 1000, and make it a local constant or got-value (e.g. getSubmitDelay, should probably be a config var in MW)",
+      "revId": "7e1d9e73a64c878200b6ed20da73c7cfbb754de8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_84f50aca",
+        "filename": "src/dm/ve.dm.SurfaceSynchronizer.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-09-12T18:42:06Z",
+      "side": 1,
+      "message": "doc",
+      "revId": "7e1d9e73a64c878200b6ed20da73c7cfbb754de8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_a4f046d7",
+        "filename": "src/dm/ve.dm.SurfaceSynchronizer.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-09-12T18:42:06Z",
+      "side": 1,
+      "message": "vars at the top",
+      "revId": "7e1d9e73a64c878200b6ed20da73c7cfbb754de8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_44232254",
+        "filename": "src/dm/ve.dm.SurfaceSynchronizer.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-09-12T18:42:06Z",
+      "side": 1,
+      "message": "doc",
+      "revId": "7e1d9e73a64c878200b6ed20da73c7cfbb754de8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
