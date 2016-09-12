@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e93376b_c4f552b7",
+        "filename": "rebaser/server.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-09-12T18:46:59Z",
+      "side": 1,
+      "message": "technically this also depends on SparkMD5, but if is never used that can be documented.",
+      "revId": "a3a91cacbdf383aa4bb4e1cd44b9cc43dbe62d01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
