@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e82f318_5fac0f85",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 976,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-09-14T22:34:10Z",
+      "side": 1,
+      "message": "This causes noncommutativity. Suppose (say) a \u003d \"insert \u0027foo\u0027 at 3\" and b \u003d \"set bold from 2 to 5\". Then applying b followed by a/b gives a bolded foo, whereas applying a followed by b\\a gives a non-bolded foo.\n\nMaking this consistent isn\u0027t just a matter of rebasing: it\u0027s also a question whether continuing insertions after rebasing should have an insertion annotation applied. That could get very complicated as the correct answer probably depends on the annotation stack.",
+      "revId": "1de244ba950b28c2e2769cda0d672449ad7e9234",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
