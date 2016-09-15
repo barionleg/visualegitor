@@ -16,6 +16,24 @@
       "revId": "1de244ba950b28c2e2769cda0d672449ad7e9234",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_b1c53f44",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 976,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2016-09-15T00:12:34Z",
+      "side": 1,
+      "message": "In chatting with Roan, I said semi-off-hand that these shouldn\u0027t conflict; bolded foo is what\u0027s probably wanted (particularly with more complex annotations like links). But maybe I\u0027m wrong?",
+      "parentUuid": "0e82f318_5fac0f85",
+      "revId": "1de244ba950b28c2e2769cda0d672449ad7e9234",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
