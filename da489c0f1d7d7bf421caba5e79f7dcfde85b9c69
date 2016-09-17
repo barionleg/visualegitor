@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e82f318_f3b24947",
+        "filename": "src/dm/lineardata/ve.dm.ElementLinearData.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-09-17T19:01:22Z",
+      "side": 1,
+      "message": "You could document that \"same annotations\" is as determined by ve.dm.AnnotationSet#compareTo .\n\n(That function ignores order, whereas at other times we do consider order).",
+      "revId": "da489c0f1d7d7bf421caba5e79f7dcfde85b9c69",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_d358e537",
+        "filename": "src/dm/lineardata/ve.dm.ElementLinearData.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-09-17T19:01:22Z",
+      "side": 1,
+      "message": "[bStore] with square brackets to mark it as optional",
+      "revId": "da489c0f1d7d7bf421caba5e79f7dcfde85b9c69",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_f33c09bf",
+        "filename": "src/dm/lineardata/ve.dm.ElementLinearData.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-09-17T19:01:22Z",
+      "side": 1,
+      "message": "bStore \u003d bStore || aStore;",
+      "revId": "da489c0f1d7d7bf421caba5e79f7dcfde85b9c69",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_53ba351f",
+        "filename": "tests/dm/lineardata/ve.dm.ElementLinearData.test.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-09-17T19:01:22Z",
+      "side": 1,
+      "message": "You could add some tests for compareElements (particularly helpful because ve.dm.AnnotationSet#compareTo will get tested by them too)",
+      "revId": "da489c0f1d7d7bf421caba5e79f7dcfde85b9c69",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
