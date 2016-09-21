@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e82f318_7ecfe482",
+        "filename": "src/ce/ve.ce.ContentBranchNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-09-21T19:19:46Z",
+      "side": 1,
+      "message": "document",
+      "range": {
+        "startLine": 358,
+        "startChar": 6,
+        "endLine": 358,
+        "endChar": 23
+      },
+      "revId": "c314cb69e9a73ce6dcfb69c3178778906759fb63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_bec95c7d",
+        "filename": "src/ce/ve.ce.ContentBranchNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-09-21T19:19:46Z",
+      "side": 1,
+      "message": "can it be anything else? I think we usually just check that it is truthy",
+      "revId": "c314cb69e9a73ce6dcfb69c3178778906759fb63",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
