@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e82f318_acb927e8",
+        "filename": "src/init/ve.init.Target.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2016-09-22T22:58:35Z",
+      "side": 1,
+      "message": "This doesn\u0027t work as it will throw an uncaught ReferenceError before reaching  the fallback.\n\nUse instead:\n\n rAF \u003d window.requestAnimationFrame || setTimeout.\n\nWhich will silently yield undefined and fallback as intended.",
+      "range": {
+        "startLine": 430,
+        "startChar": 8,
+        "endLine": 430,
+        "endChar": 29
+      },
+      "revId": "3ca658ed1649aef9b179a471d23e8b4935c230db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
