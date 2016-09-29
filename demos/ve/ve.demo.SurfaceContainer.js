@@ -12,7 +12,7 @@
  * @param {string} dir Directionality
  */
 ve.demo.SurfaceContainer = function VeDemoSurfaceContainer( target, page, lang, dir ) {
-	var pageDropdown, pageLabel, removeButton, saveButton, $exitReadButton,
+	var pageDropdown, pageLabel, removeButton, saveButton, diffButton, $exitReadButton,
 		container = this;
 
 	// Parent constructor
@@ -38,6 +38,9 @@ ve.demo.SurfaceContainer = function VeDemoSurfaceContainer( target, page, lang, 
 	} );
 	saveButton = new OO.ui.ButtonWidget( {
 		label: 'Save HTML'
+	} );
+	diffButton = new OO.ui.ButtonWidget( {
+		label: 'Get diff'
 	} );
 	$exitReadButton = $( '<a href="#">' ).text( 'Back to editor' ).on( 'click', function () {
 		container.change( 've' );
@@ -77,6 +80,19 @@ ve.demo.SurfaceContainer = function VeDemoSurfaceContainer( target, page, lang, 
 	} );
 	removeButton.on( 'click', this.destroy.bind( this ) );
 	saveButton.on( 'click', this.save.bind( this ) );
+	diffButton.on( 'click', function () {
+		var oldDoc = ve.init.target.oldDoc,
+			newDoc = ve.init.target.surface.model.documentModel,
+			visualDiff = new ve.dm.VisualDiff( oldDoc, newDoc ),
+			diff = visualDiff.getDiff(),
+			diffElement = new ve.ui.DiffElement( diff, oldDoc, newDoc );
+
+		console.log( diff );
+		console.log( diffElement.diffHtml );
+
+
+
+	} );
 
 	this.$element.addClass( 've-demo-surfaceContainer' ).append(
 		$( '<div>' ).addClass( 've-demo-toolbar ve-demo-surfaceToolbar-edit' ).append(
@@ -88,7 +104,9 @@ ve.demo.SurfaceContainer = function VeDemoSurfaceContainer( target, page, lang, 
 				$( '<span class="ve-demo-toolbar-divider">&nbsp;</span>' ),
 				removeButton.$element,
 				$( '<span class="ve-demo-toolbar-divider">&nbsp;</span>' ),
-				saveButton.$element
+				saveButton.$element,
+				$( '<span class="ve-demo-toolbar-divider">&nbsp;</span>' ),
+				diffButton.$element
 			)
 		),
 		$( '<div>' ).addClass( 've-demo-toolbar-commands ve-demo-surfaceToolbar-read' ).append(
