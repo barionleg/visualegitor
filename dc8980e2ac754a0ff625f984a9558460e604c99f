@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e82f318_dac42614",
+        "filename": "lib/treeDiffer/abstractNode.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-09-30T17:19:04Z",
+      "side": 1,
+      "message": "shouldn\u0027t this be in treeNode.js?",
+      "revId": "dc8980e2ac754a0ff625f984a9558460e604c99f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_daeb4675",
+        "filename": "lib/treeDiffer/tree.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-09-30T17:19:04Z",
+      "side": 1,
+      "message": "/If/ you want to use VE style you should use block quotes, and capital letters for classes (treeDiff.Tree)",
+      "range": {
+        "startLine": 5,
+        "startChar": 8,
+        "endLine": 5,
+        "endChar": 9
+      },
+      "revId": "dc8980e2ac754a0ff625f984a9558460e604c99f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_7afa5a41",
+        "filename": "src/dm/ve.dm.VisualDiff.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-09-30T17:19:04Z",
+      "side": 1,
+      "message": "maybe make 0.5 a constant at the top of the file",
+      "range": {
+        "startLine": 336,
+        "startChar": 55,
+        "endLine": 336,
+        "endChar": 56
+      },
+      "revId": "dc8980e2ac754a0ff625f984a9558460e604c99f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
