@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e82f318_9c20ebf3",
+        "filename": "src/dm/ve.dm.VisualDiff.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-09-30T20:56:24Z",
+      "side": 1,
+      "message": "As the DM is inherently not visual (that\u0027s the ve.ui namespace) I\u0027d suggest DocumentDiff / TreeDiff / DocumentTreeDiff / ModelTreeDiff?",
+      "revId": "d158c487987f22ee8cf30e99c9cbaffb59fdd21e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
