@@ -1724,9 +1724,9 @@ ve.dm.example.domToDataCases = {
 		ceHtml: '<p class="ve-ce-branchNode ve-ce-contentBranchNode ve-ce-paragraphNode">' +
 			'<b class="ve-ce-textStyleAnnotation ve-ce-boldAnnotation">' +
 				ve.dm.example.inlineSlug +
-				'<span class="ve-ce-leafNode ve-ce-focusableNode ve-ce-commentNode" contenteditable="false"></span>' +
+				'<span class="ve-ce-leafNode ve-ce-focusableNode ve-ce-commentNode" contenteditable="false"><span class="ve-ce-commentNode-text"></span></span>' +
 				'bar' +
-				'<span class="ve-ce-leafNode ve-ce-focusableNode ve-ce-commentNode" contenteditable="false"></span>' +
+				'<span class="ve-ce-leafNode ve-ce-focusableNode ve-ce-commentNode" contenteditable="false"><span class="ve-ce-commentNode-text"></span></span>' +
 			'</b>' +
 			ve.dm.example.inlineSlug +
 		'</p>'
