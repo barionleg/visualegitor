@@ -2764,6 +2764,12 @@ ve.ce.Surface.prototype.onModelSelect = function () {
 
 		focusedNode = this.findFocusedNode( selection.getRange() );
 
+		if ( OO.ui.isMobile() && !blockSlug && !focusedNode ) {
+			// On mobile, preparePasteTargetForCopy deactivates the surface, so
+			// reactivate it here (no-op if already active). See T147304
+			this.activate();
+		}
+
 		// If focus has changed, update nodes and this.focusedNode
 		if ( focusedNode !== this.focusedNode ) {
 			if ( this.focusedNode ) {
