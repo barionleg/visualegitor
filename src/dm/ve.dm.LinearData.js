@@ -87,7 +87,7 @@ ve.dm.LinearData.static.isCloseElementData = function ( item ) {
  */
 ve.dm.LinearData.static.isMetaItem = function ( item ) {
 	// This correctly returns false if item is a string, an Array or undefined
-	return OO.isSubclass(
+	return !!item && OO.isSubclass(
 		ve.dm.nodeFactory.lookup( ve.dm.LinearData.static.getType( item ) ),
 		ve.dm.MetaItem
 	);

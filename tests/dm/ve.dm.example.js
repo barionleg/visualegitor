@@ -715,22 +715,6 @@ ve.dm.example.withMeta = [
 	{ type: '/internalList' }
 ];
 
-ve.dm.example.listWithoutMeta = [
-	{ type: 'list' },
-	{ type: 'listItem', attributes: { styles: [ 'bullet' ] } },
-	{ type: 'paragraph' },
-	'a',
-	{ type: '/paragraph' },
-	{ type: '/listItem' },
-	{ type: 'listItem', attributes: { styles: [ 'bullet' ] } },
-	{ type: 'paragraph' },
-	'b',
-	{ type: '/paragraph' },
-	{ type: '/listItem' },
-	{ type: '/list' },
-	{ type: 'internalList' },
-	{ type: '/internalList' }
-]
 ve.dm.example.listWithMeta = [
 	//  0 - Beginning of list
 	{
