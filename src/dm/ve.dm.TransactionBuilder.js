@@ -476,7 +476,7 @@ ve.dm.TransactionBuilder.static.newFromContentBranchConversion = function ( doc,
  * @return {ve.dm.Transaction}
  */
 ve.dm.TransactionBuilder.static.newFromWrap = function ( doc, range, unwrapOuter, wrapOuter, unwrapEach, wrapEach ) {
-	var i, startOffset, closingUnwrapEach, closingWrapEach, endOffset, ptr,
+	var i, startOffset, closingUnwrapEach, closingWrapEach, ptr,
 		txBuilder = new ve.dm.TransactionBuilder(),
 		depth = 0;
 
@@ -504,11 +504,18 @@ ve.dm.TransactionBuilder.static.newFromWrap = function ( doc, range, unwrapOuter
 			step = -1;
 		}
 		for ( i = start; i !== stop; i += step ) {
-			offset += step;
-			item = doc.data.data[ offset ];
-			if ( item.type !== matchList[ i ].type ) {
+			// Move to next item, skipping MetaItems
+			while ( true ) {
+				offset += step;
+				item = doc.data.data[ offset ];
+				if ( !ve.dm.LinearData.static.isMetaItem( item ) ) {
+					// This includes the case where item is undefined
+					break;
+				}
+			}
+			if ( !item || item.type !== matchList[ i ].type ) {
 				throw new Error( 'Unmatched item ' + matchList[ i ].type + ' in ' +
-					matchName + ' (found ' + item.type + ')' );
+					matchName + ' (found ' + ( item && item.type ) + ')' );
 			}
 		}
 		if ( direction === 'forwards' ) {
@@ -537,13 +544,15 @@ ve.dm.TransactionBuilder.static.newFromWrap = function ( doc, range, unwrapOuter
 	// Verify the data before range.start matches unwrapOuter, and find where to retain up to
 	ptr = match( 'backwards', range.start, unwrapOuter, 'unwrapOuter' );
 	txBuilder.pushRetain( ptr );
-	// Replace wrapper
-	txBuilder.pushReplace( doc, ptr, range.start - ptr, ve.copy( wrapOuter ) );
+	// Replace wrapper (retaining any metadata)
+	txBuilder.pushReplacement( doc, ptr, range.start - ptr, ve.copy( wrapOuter ) );
+	ptr = range.start;
 
 	if ( wrapEach.length === 0 && unwrapEach.length === 0 ) {
 		// There is no wrapEach/unwrapEach to be done, just retain
 		// up to the end of the range
 		txBuilder.pushRetain( range.end - range.start );
+		ptr = range.end;
 	} else {
 		// Visit each top-level child and wrap/unwrap it
 		// TODO figure out if we should use the tree/node functions here
@@ -554,44 +563,47 @@ ve.dm.TransactionBuilder.static.newFromWrap = function ( doc, range, unwrapOuter
 			}
 			if ( doc.data.isOpenElementData( i ) ) {
 				depth++;
-				if ( depth !== 1 ) {
+				if (
+					depth !== 1 ||
+					ve.dm.LinearData.static.isMetaItem( doc.data.data[ i ] )
+				) {
 					continue;
 				}
+				// Retain any outstanding top level items (which must be MetaItems)
+				txBuilder.pushRetain( i - ptr );
 				// This is the start of a top-level element
 				ptr = match( 'forwards', i, unwrapEach, 'unwrapEach' );
-				// Replace wrapper
-				txBuilder.pushReplace( doc, i, ptr - i, ve.copy( wrapEach ) );
+				// Replace wrapper (retaining any metadata)
+				txBuilder.pushReplacement( doc, i, ptr - i, ve.copy( wrapEach ) );
 				startOffset = ptr;
-				// Goto end of wrapper
-				if ( ptr > i ) {
-					i = ptr - 1;
-				}
 				continue;
 			}
 			// Else this is a closing element
 			depth--;
-			if ( depth !== 0 ) {
+			if (
+				depth !== 0 ||
+				ve.dm.LinearData.static.isMetaItem( doc.data.data[ i ] )
+			) {
 				continue;
 			}
 			// This is the end of a top-level element
-			ptr = match( 'forwards', i, closingUnwrapEach, 'closingUnwrapEach' );
-			endOffset = ( ptr > i ) ? i : i + 1;
-			// Retain the contents that we're wrapping
-			txBuilder.pushRetain( endOffset - startOffset );
-			// Replace the closing elements
-			txBuilder.pushReplace( doc, endOffset, ptr - i, ve.copy( closingWrapEach ) );
-			// Goto end of wrapper
-			if ( ptr > i ) {
-				i = ptr - 1;
-			}
+			ptr = match( 'backwards', i + 1, closingUnwrapEach, 'closingUnwrapEach' );
+			// ptr is the range end of the unwrapped data (i.e. the offset after it)
+			txBuilder.pushRetain( ptr - startOffset );
+			// Replace the closing elements (retaining any metadata)
+			txBuilder.pushReplacement( doc, ptr, i + 1 - ptr, ve.copy( closingWrapEach ) );
+			ptr = i + 1;
 		}
 	}
 
-	// this is a no-op if unwrapOuter.length===0 and wrapOuter.length===0
-	txBuilder.pushReplace( doc, range.end, unwrapOuter.length, closingArray( wrapOuter ) );
+	// Retain any outstanding top level items (which must be MetaItems)
+	txBuilder.pushRetain( range.end - ptr );
+
+	ptr = match( 'forwards', range.end, closingArray( unwrapOuter ), 'unwrapOuter' );
+	txBuilder.pushReplacement( doc, range.end, ptr - range.end, closingArray( wrapOuter ) );
 
 	// Retain up to the end of the document
-	txBuilder.pushFinalRetain( doc, range.end + unwrapOuter.length );
+	txBuilder.pushFinalRetain( doc, ptr );
 
 	return txBuilder.getTransaction();
 };

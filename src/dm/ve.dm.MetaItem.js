@@ -20,12 +20,6 @@ ve.dm.MetaItem = function VeDmMetaItem() {
 	ve.dm.MetaItem.super.apply( this, arguments );
 	// Mixin
 	OO.EventEmitter.call( this );
-
-	// Properties
-	this.list = null;
-	this.offset = null;
-	this.index = null;
-	this.move = null;
 };
 
 /* Inheritance */
@@ -38,6 +32,8 @@ OO.mixinClass( ve.dm.MetaItem, OO.EventEmitter );
 
 ve.dm.MetaItem.static.isContent = false;
 
+ve.dm.MetaItem.static.canSerializeAsContent = true;
+
 /**
  * Symbolic name for the group this meta item type will be grouped in in ve.dm.MetaList.
  *
@@ -48,6 +44,17 @@ ve.dm.MetaItem.static.isContent = false;
 ve.dm.MetaItem.static.group = 'misc';
 
 /* Methods */
+
+/**
+ * Replace item with another in-place.
+ *
+ * Pass a plain object rather than a MetaItem into this function unless you know what you're doing.
+ *
+ * @param {Object|ve.dm.MetaItem} item Item to replace this item with
+ */
+ve.dm.MetaItem.prototype.replaceWith = function ( /* item */ ) {
+	throw new Error( 'Not implemented: replaceWith' );
+};
 
 /**
  * Get the group this meta item belongs to.
