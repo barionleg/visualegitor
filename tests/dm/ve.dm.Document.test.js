@@ -42,9 +42,7 @@ QUnit.test( 'constructor', 9, function ( assert ) {
 		new ve.dm.DocumentNode( [ new ve.dm.TextNode( 4 ) ] ),
 		'plain text input is handled correctly'
 	);
-	assert.deepEqualWithDomElements( doc.getMetadata(), new Array( 5 ),
-		'sparse metadata array is created'
-	);
+	assert.strictEqual( doc.getMetadata().join( ',' ), ',,,', 'Empty metadata array' );
 	assert.strictEqual( doc.getHtmlDocument().body.innerHTML, '', 'Empty HTML document is created' );
 
 	htmlDoc = ve.createDocumentFromHtml( 'abcd' );

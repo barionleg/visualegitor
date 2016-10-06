@@ -401,7 +401,6 @@ QUnit.test( 'commit', function ( assert ) {
 				data: ve.dm.example.withMeta,
 				calls: [
 					[ 'pushRetain', 11 ],
-					[ 'pushReplaceMetadata', ve.dm.example.withMetaMetaData[ 11 ], [] ],
 					[ 'pushRetain', 1 ]
 				],
 				expected: function ( data ) {
@@ -413,7 +412,6 @@ QUnit.test( 'commit', function ( assert ) {
 				calls: [
 					[ 'pushRetain', 11 ],
 					[ 'pushRetainMetadata', 1 ],
-					[ 'pushReplaceMetadata', ve.dm.example.withMetaMetaData[ 11 ].slice( 1, 3 ), [] ],
 					[ 'pushRetainMetadata', 1 ],
 					[ 'pushRetain', 1 ]
 				],
@@ -426,7 +424,6 @@ QUnit.test( 'commit', function ( assert ) {
 				calls: [
 					[ 'pushRetain', 11 ],
 					[ 'pushRetainMetadata', 3 ],
-					[ 'pushReplaceMetadata', [ ve.dm.example.withMetaMetaData[ 11 ][ 3 ] ], [ metaElementInsert ] ],
 					[ 'pushRetain', 1 ]
 				],
 				expected: function ( data ) {
@@ -438,9 +435,7 @@ QUnit.test( 'commit', function ( assert ) {
 				calls: [
 					[ 'pushRetain', 11 ],
 					[ 'pushRetainMetadata', 1 ],
-					[ 'pushReplaceMetadata', [ ve.dm.example.withMetaMetaData[ 11 ][ 1 ] ], [ metaElementInsert ] ],
 					[ 'pushRetainMetadata', 1 ],
-					[ 'pushReplaceMetadata', [ ve.dm.example.withMetaMetaData[ 11 ][ 3 ] ], [ metaElementInsert ] ],
 					[ 'pushRetain', 1 ]
 				],
 				expected: function ( data ) {
@@ -599,59 +594,6 @@ QUnit.test( 'commit', function ( assert ) {
 					data.splice( 17, 1 ); // remove '/listItem'
 					data.splice( 5, 1 ); // remove 'listItem'
 					data.splice( 2, 1 ); // remove 'list'
-				}
-			},
-			'inserting trailing metadata (1)': {
-				data: ve.dm.example.listWithMeta,
-				calls: [
-					[ 'newFromMetadataInsertion', 12, 0, [
-						{
-							type: 'alienMeta',
-							originalDomElements: $( '<meta property="fourteen" />' ).toArray()
-						}
-					] ]
-				],
-				expected: function ( data ) {
-					ve.batchSplice( data, data.length - 4, 0, [
-						{
-							type: 'alienMeta',
-							originalDomElements: $( '<meta property="fourteen" />' ).toArray()
-						},
-						{
-							type: '/alienMeta'
-						}
-					] );
-				}
-			},
-			'inserting trailing metadata (2)': {
-				data: ve.dm.example.listWithMeta,
-				calls: [
-					[ 'newFromMetadataInsertion', 12, 1, [
-						{
-							type: 'alienMeta',
-							originalDomElements: $( '<meta property="fourteen" />' ).toArray()
-						}
-					] ]
-				],
-				expected: function ( data ) {
-					ve.batchSplice( data, data.length - 2, 0, [
-						{
-							type: 'alienMeta',
-							originalDomElements: $( '<meta property="fourteen" />' ).toArray()
-						},
-						{
-							type: '/alienMeta'
-						}
-					] );
-				}
-			},
-			'removing trailing metadata': {
-				data: ve.dm.example.listWithMeta,
-				calls: [
-					[ 'newFromMetadataRemoval', 12, new ve.Range( 0, 1 ) ]
-				],
-				expected: function ( data ) {
-					ve.batchSplice( data, data.length - 4, 2, [] );
 				}
 			},
 			'preserves trailing metadata': {
