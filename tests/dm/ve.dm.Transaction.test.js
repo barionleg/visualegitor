@@ -50,7 +50,6 @@ QUnit.test( 'newFromInsertion', function ( assert ) {
 		doc = ve.dm.example.createExampleDocument(),
 		isolationDoc = ve.dm.example.createExampleDocument( 'isolationData' ),
 		complexTableDoc = ve.dm.example.createExampleDocument( 'complexTable' ),
-		listWithMetaDoc = ve.dm.example.createExampleDocument( 'listWithMeta' ),
 		doc2 = new ve.dm.Document(
 			ve.dm.example.preprocessAnnotations( [ { type: 'paragraph' }, { type: '/paragraph' }, { type: 'internalList' }, { type: '/internalList' } ] )
 		),
@@ -385,20 +384,6 @@ QUnit.test( 'newFromInsertion', function ( assert ) {
 					{ type: 'retain', length: 13 }
 				],
 				range: new ve.Range( 43, 48 )
-			},
-			'preserving trailing metadata': {
-				args: [ listWithMetaDoc, 4, [ 'b' ] ],
-				ops: [
-					{ type: 'retain', length: 4 },
-					{
-						type: 'replace',
-						remove: [],
-						insert: [ 'b' ],
-						insertedDataOffset: 0,
-						insertedDataLength: 1
-					},
-					{ type: 'retain', length: 10 }
-				]
 			}
 			// TODO test cases for unclosed openings
 			// TODO test cases for (currently failing) unopened closings use case
@@ -423,7 +408,6 @@ QUnit.test( 'newFromRemoval', function ( assert ) {
 		doc = ve.dm.example.createExampleDocument( 'data' ),
 		alienDoc = ve.dm.example.createExampleDocument( 'alienData' ),
 		alienWithEmptyDoc = ve.dm.example.createExampleDocument( 'alienWithEmptyData' ),
-		metaDoc = ve.dm.example.createExampleDocument( 'withMeta' ),
 		internalDoc = ve.dm.example.createExampleDocument( 'internalData' ),
 		cases = {
 			'content in first element': {
@@ -665,25 +649,6 @@ QUnit.test( 'newFromRemoval', function ( assert ) {
 					{ type: 'retain', length: 6 }
 				]
 			},
-			'removing content spanning metadata': {
-				args: [ metaDoc, new ve.Range( 7, 9 ) ],
-				ops: [
-					{ type: 'retain', length: 7 },
-					{
-						type: 'replace',
-						remove: [ 'B', 'a' ],
-						insert: [],
-						removeMetadata: metaDoc.getMetadata().slice( 7, 9 ),
-						insertMetadata: []
-					},
-					{
-						type: 'replaceMetadata',
-						remove: [],
-						insert: ve.dm.MetaLinearData.static.merge( metaDoc.getMetadata().slice( 7, 9 ) )[ 0 ]
-					},
-					{ type: 'retain', length: 4 }
-				]
-			},
 			'selection including internal nodes doesn\'t remove them': {
 				args: [ internalDoc, new ve.Range( 2, 24 ) ],
 				ops: [
@@ -763,29 +728,8 @@ QUnit.test( 'newFromReplacement', function ( assert ) {
 		doc = ve.dm.example.createExampleDocument(),
 		metaDoc = ve.dm.example.createExampleDocument( 'withMeta' ),
 		cases = {
-			'replace, preserving metadata': {
-				args: [ metaDoc, new ve.Range( 1, 9 ), [ 'X', 'Y' ] ],
-				ops: [
-					{ type: 'retain', length: 1 },
-					{
-						type: 'replace',
-						insert: [ 'X', 'Y' ],
-						insertMetadata: [
-							metaDoc.getMetadata()[ 4 ].concat(
-								metaDoc.getMetadata()[ 7 ]
-							),
-							undefined
-						],
-						insertedDataLength: 2,
-						insertedDataOffset: 0,
-						remove: [ 'F', 'o', 'o', 'B', 'a', 'r', 'B', 'a' ],
-						removeMetadata: metaDoc.getMetadata().slice( 1, 9 )
-					},
-					{ type: 'retain', length: 4 }
-				]
-			},
 			'replace, removing metadata': {
-				args: [ metaDoc, new ve.Range( 1, 9 ), [ 'X', 'Y' ], true ],
+				args: [ metaDoc, new ve.Range( 1, 9 ), [ 'X', 'Y' ] ],
 				ops: [
 					{ type: 'retain', length: 1 },
 					{
@@ -797,8 +741,7 @@ QUnit.test( 'newFromReplacement', function ( assert ) {
 						],
 						insertedDataLength: 2,
 						insertedDataOffset: 0,
-						remove: [ 'F', 'o', 'o', 'B', 'a', 'r', 'B', 'a' ],
-						removeMetadata: metaDoc.getMetadata().slice( 1, 9 )
+						remove: [ 'F', 'o', 'o', 'B', 'a', 'r', 'B', 'a' ]
 					},
 					{ type: 'retain', length: 4 }
 				]
@@ -1601,7 +1544,6 @@ QUnit.test( 'newFromContentBranchConversion', function ( assert ) {
 QUnit.test( 'newFromWrap', function ( assert ) {
 	var i, key,
 		doc = ve.dm.example.createExampleDocument(),
-		metaDoc = ve.dm.example.createExampleDocument( 'withMeta' ),
 		listMetaDoc = ve.dm.example.createExampleDocument( 'listWithMeta' ),
 		listDoc = ve.dm.example.createExampleDocumentFromObject( 'listDoc', null, { listDoc: listMetaDoc.getData() } ),
 		cases = {
@@ -1691,61 +1633,6 @@ QUnit.test( 'newFromWrap', function ( assert ) {
 					},
 					{ type: 'retain', length: 3 },
 					{ type: 'replace', remove: [], insert: [ { type: '/definitionListItem' }, { type: '/definitionList' } ] },
-					{ type: 'retain', length: 2 }
-				]
-			},
-			'metadata is preserved on wrap': {
-				args: [ metaDoc, new ve.Range( 1, 10 ), [ { type: 'paragraph' } ], [ { type: 'heading', level: 1 } ], [], [] ],
-				ops: [
-					{ type: 'replace',
-						remove: [ { type: 'paragraph' } ],
-						insert: [ { type: 'heading', level: 1 } ],
-						insertMetadata: metaDoc.getMetadata().slice( 0, 1 ),
-						removeMetadata: metaDoc.getMetadata().slice( 0, 1 )
-					},
-					{ type: 'retain', length: 9 },
-					{ type: 'replace',
-						remove: [ { type: '/paragraph' } ],
-						insert: [ { type: '/heading' } ]
-					},
-					{ type: 'retain', length: 2 }
-				]
-			},
-			'metadata is preserved on unwrap': {
-				args: [ listMetaDoc, new ve.Range( 1, 11 ), [ { type: 'list' } ], [], [ { type: 'listItem', attributes: { styles: [ 'bullet' ] } } ], [] ],
-				ops: [
-					{ type: 'replace',
-						remove: [ { type: 'list' }, { type: 'listItem', attributes: { styles: [ 'bullet' ] } } ],
-						insert: [],
-						insertMetadata: [],
-						removeMetadata: listMetaDoc.getMetadata().slice( 0, 2 )
-					},
-					{ type: 'replaceMetadata',
-						insert: ve.dm.MetaLinearData.static.merge( listMetaDoc.getMetadata().slice( 0, 2 ) )[ 0 ],
-						remove: []
-					},
-					{ type: 'retain', length: 3 },
-					{ type: 'replace',
-						remove: [ { type: '/listItem' }, { type: 'listItem', attributes: { styles: [ 'bullet' ] } } ],
-						insert: [],
-						insertMetadata: [],
-						removeMetadata: listMetaDoc.getMetadata().slice( 5, 7 )
-					},
-					{ type: 'replaceMetadata',
-						insert: ve.dm.MetaLinearData.static.merge( listMetaDoc.getMetadata().slice( 5, 7 ) )[ 0 ],
-						remove: []
-					},
-					{ type: 'retain', length: 3 },
-					{ type: 'replace',
-						remove: [ { type: '/listItem' }, { type: '/list' } ],
-						insert: [],
-						insertMetadata: [],
-						removeMetadata: listMetaDoc.getMetadata().slice( 10, 12 )
-					},
-					{ type: 'replaceMetadata',
-						insert: ve.dm.MetaLinearData.static.merge( listMetaDoc.getMetadata().slice( 10, 12 ) )[ 0 ],
-						remove: []
-					},
 					{ type: 'retain', length: 2 }
 				]
 			},
@@ -2292,132 +2179,17 @@ QUnit.test( 'newFromMetadataInsertion', function ( assert ) {
 	runConstructorTests( assert, ve.dm.Transaction.newFromMetadataInsertion, cases );
 } );
 
-QUnit.test( 'newFromMetadataRemoval', function ( assert ) {
-	var doc = ve.dm.example.createExampleDocument( 'withMeta' ),
-		listWithMetaDoc = ve.dm.example.createExampleDocument( 'listWithMeta' ),
-		allElements = ve.dm.example.withMetaMetaData[ 11 ],
-		someElements = allElements.slice( 1, 3 ),
-		cases = {
-			'removing all metadata elements from metadata list': {
-				args: [ doc, 11, new ve.Range( 0, 4 ) ],
-				ops: [
-					{ type: 'retain', length: 11 },
-					{
-						type: 'replaceMetadata',
-						remove: allElements,
-						insert: []
-					},
-					{ type: 'retain', length: 2 }
-				]
-			},
-			'removing some metadata elements from metadata list': {
-				args: [ doc, 11, new ve.Range( 1, 3 ) ],
-				ops: [
-					{ type: 'retain', length: 11 },
-					{ type: 'retainMetadata', length: 1 },
-					{
-						type: 'replaceMetadata',
-						remove: someElements,
-						insert: []
-					},
-					{ type: 'retainMetadata', length: 1 },
-					{ type: 'retain', length: 2 }
-				]
-			},
-			'removing trailing metadata': {
-				args: [ listWithMetaDoc, 12, new ve.Range( 0, 1 ) ],
-				ops: [
-					{ type: 'retain', length: 12 },
-					{
-						type: 'replaceMetadata',
-						remove: [
-							{
-								type: 'alienMeta',
-								originalDomElements: $( '<meta property="thirteen" />' ).toArray()
-							}
-						],
-						insert: []
-					},
-					{ type: 'retain', length: 2 }
-				]
-			},
-			'checks metadata at offset is non-empty': {
-				args: [ doc, 5, new ve.Range( 1, 3 ) ],
-				exception: Error
-			},
-			'checks range is valid for metadata at offset': {
-				args: [ doc, 11, new ve.Range( 1, 5 ) ],
-				exception: Error
-			}
-		};
-	QUnit.expect( Object.keys( cases ).length );
-	runConstructorTests( assert, ve.dm.Transaction.newFromMetadataRemoval, cases );
-} );
-
-QUnit.test( 'newFromMetadataElementReplacement', function ( assert ) {
-	var doc = ve.dm.example.createExampleDocument( 'withMeta' ),
-		listWithMetaDoc = ve.dm.example.createExampleDocument( 'listWithMeta' ),
-		newElement = {
-			type: 'alienMeta',
-			attributes: {
-				style: 'comment',
-				text: ' inline '
-			}
-		},
-		oldElement = ve.dm.example.withMetaMetaData[ 11 ][ 3 ],
-		cases = {
-			'replacing metadata at end of list': {
-				args: [ doc, 11, 3, newElement ],
-				ops: [
-					{ type: 'retain', length: 11 },
-					{ type: 'retainMetadata', length: 3 },
-					{
-						type: 'replaceMetadata',
-						remove: [ oldElement ],
-						insert: [ newElement ]
-					},
-					{ type: 'retain', length: 2 }
-				]
-			},
-			'replacing trailing metadata': {
-				args: [ listWithMetaDoc, 12, 0, newElement ],
-				ops: [
-					{ type: 'retain', length: 12 },
-					{
-						type: 'replaceMetadata',
-						remove: [ listWithMetaDoc.metadata.getData( 12 )[ 0 ] ],
-						insert: [ newElement ]
-					},
-					{ type: 'retain', length: 2 }
-				]
-			},
-			'checks offset is in bounds': {
-				args: [ doc, 15, 0, newElement ],
-				exception: Error
-			},
-			'checks metadata index is in bounds': {
-				args: [ doc, 11, 5, newElement ],
-				exception: Error
-			}
-		};
-	QUnit.expect( Object.keys( cases ).length );
-	runConstructorTests( assert, ve.dm.Transaction.newFromMetadataElementReplacement, cases );
-} );
-
 QUnit.test( 'isNoOp', function ( assert ) {
 	var tx,
 		doc = ve.dm.example.createExampleDocument(),
 		metaDoc = ve.dm.example.createExampleDocument( 'withMeta' ),
 		listMetaDoc = ve.dm.example.createExampleDocument( 'listWithMeta' );
 
-	QUnit.expect( 3 * 8 - 2 );
+	QUnit.expect( 3 * 6 - 1 );
 	[ doc, metaDoc, listMetaDoc ].forEach( function ( d, i ) {
-		var isDoc = ( i === 0 ),
-			isListMetaDoc = ( i === 2 );
+		var isListMetaDoc = ( i === 2 );
 
-		tx = ve.dm.Transaction.newFromReplacement(
-			d, new ve.Range( 1 ), [], false
-		);
+		tx = ve.dm.Transaction.newFromReplacement( d, new ve.Range( 1 ), [] );
 		assert.strictEqual( tx.isNoOp(), true );
 
 		tx = ve.dm.Transaction.newFromInsertion(
@@ -2425,9 +2197,7 @@ QUnit.test( 'isNoOp', function ( assert ) {
 		);
 		assert.strictEqual( tx.isNoOp(), true );
 
-		tx = ve.dm.Transaction.newFromRemoval(
-			d, new ve.Range( 1 ), false
-		);
+		tx = ve.dm.Transaction.newFromRemoval( d, new ve.Range( 1 ) );
 		assert.strictEqual( tx.isNoOp(), true );
 
 		if ( !isListMetaDoc ) {
@@ -2439,7 +2209,7 @@ QUnit.test( 'isNoOp', function ( assert ) {
 		}
 
 		tx = ve.dm.Transaction.newFromAttributeChanges(
-			d, isListMetaDoc ? 1 : 0, {}
+			d, isListMetaDoc ? 2 : 0, {}
 		);
 		assert.strictEqual( tx.isNoOp(), true );
 
@@ -2447,20 +2217,6 @@ QUnit.test( 'isNoOp', function ( assert ) {
 			d, new ve.Range( 1 ), 'set', new ve.dm.ItalicAnnotation()
 		);
 		assert.strictEqual( tx.isNoOp(), true );
-
-		tx = ve.dm.Transaction.newFromMetadataInsertion(
-			d, 1, 0, []
-		);
-		assert.strictEqual( tx.isNoOp(), true );
-
-		if ( !isDoc ) {
-			tx = ve.dm.Transaction.newFromMetadataRemoval(
-				d, 0, new ve.Range( 1 )
-			);
-			assert.strictEqual( tx.isNoOp(), true );
-		}
-
-		// metadata replacement never creates no-op
 	} );
 } );
 

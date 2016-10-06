@@ -1049,7 +1049,8 @@ QUnit.test( 'handleObservedChanges (content changes)', function ( assert ) {
 							insert: [ 'A' ],
 							remove: [],
 							insertedDataOffset: 0,
-							insertedDataLength: 1
+							insertedDataLength: 1,
+							reversed: false
 						},
 						{ type: 'retain', length: 3 }
 					]
@@ -1069,7 +1070,8 @@ QUnit.test( 'handleObservedChanges (content changes)', function ( assert ) {
 							insert: [ 'B' ],
 							remove: [ 'A' ],
 							insertedDataLength: 1,
-							insertedDataOffset: 0
+							insertedDataOffset: 0,
+							reversed: false
 						},
 						{ type: 'retain', length: 3 }
 					]
@@ -1089,7 +1091,8 @@ QUnit.test( 'handleObservedChanges (content changes)', function ( assert ) {
 							insert: [ [ 'B', [ linkIndex ] ] ],
 							remove: [ [ 'X', [ linkIndex ] ] ],
 							insertedDataLength: 1,
-							insertedDataOffset: 0
+							insertedDataOffset: 0,
+							reversed: false
 						},
 						{ type: 'retain', length: 4 }
 					]
@@ -1109,7 +1112,8 @@ QUnit.test( 'handleObservedChanges (content changes)', function ( assert ) {
 							insert: [ [ 'Y', [ 'h3f03d2abae6ddc0d' ] ] ],
 							remove: [],
 							insertedDataOffset: 0,
-							insertedDataLength: 1
+							insertedDataLength: 1,
+							reversed: false
 						},
 						{ type: 'retain', length: 3 }
 					]
@@ -1130,7 +1134,8 @@ QUnit.test( 'handleObservedChanges (content changes)', function ( assert ) {
 							insert: [ 'Y' ],
 							remove: [],
 							insertedDataOffset: 0,
-							insertedDataLength: 1
+							insertedDataLength: 1,
+							reversed: false
 						},
 						{ type: 'retain', length: 3 }
 					]
@@ -1150,7 +1155,8 @@ QUnit.test( 'handleObservedChanges (content changes)', function ( assert ) {
 							insert: [ ' ' ],
 							remove: [],
 							insertedDataOffset: 0,
-							insertedDataLength: 1
+							insertedDataLength: 1,
+							reversed: false
 						},
 						{ type: 'retain', length: 3 }
 					]
@@ -1169,7 +1175,8 @@ QUnit.test( 'handleObservedChanges (content changes)', function ( assert ) {
 						{
 							type: 'replace',
 							insert: [],
-							remove: [ 'o' ]
+							remove: [ 'o' ],
+							reversed: false
 						},
 						{ type: 'retain', length: 3 }
 					]
@@ -1501,7 +1508,8 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 							],
 							insertedDataLength: 3,
 							insertedDataOffset: 0,
-							remove: []
+							remove: [],
+							reversed: false
 						},
 						{ type: 'retain', length: docLen - 25 }
 					]

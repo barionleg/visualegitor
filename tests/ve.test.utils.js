@@ -46,6 +46,10 @@
 		};
 	}() );
 
+	function getSerializableData( model ) {
+		return model.getFullData( undefined, true );
+	}
+
 	/**
 	 * @class
 	 * @singleton
@@ -59,17 +63,17 @@
 			surface = new ve.dm.Surface( doc ),
 			fragment = surface.getLinearFragment( range );
 
-		data = ve.copy( doc.getFullData() );
+		data = ve.copy( getSerializableData( doc ) );
 		fragment.isolateAndUnwrap( type );
 		expected( data );
 
-		assert.deepEqual( doc.getFullData(), data, label );
+		assert.deepEqual( getSerializableData( doc ), data, label );
 	};
 
 	ve.test.utils.runFormatConverterTest = function ( assert, range, type, attributes, expectedRange, expectedData, msg ) {
 		var surface = ve.test.utils.createModelOnlySurfaceFromHtml( ve.dm.example.isolationHtml ),
 			formatAction = new ve.ui.FormatAction( surface ),
-			data = ve.copy( surface.getModel().getDocument().getFullData() ),
+			data = ve.copy( getSerializableData( surface.getModel().getDocument() ) ),
 			originalData = ve.copy( data );
 
 		expectedData( data );
@@ -77,12 +81,12 @@
 		surface.getModel().setLinearSelection( range );
 		formatAction.convert( type, attributes );
 
-		assert.equalLinearData( surface.getModel().getDocument().getFullData(), data, msg + ': data models match' );
+		assert.equalLinearData( getSerializableData( surface.getModel().getDocument() ), data, msg + ': data models match' );
 		assert.equalRange( surface.getModel().getSelection().getRange(), expectedRange, msg + ': ranges match' );
 
 		surface.getModel().undo();
 
-		assert.equalLinearData( surface.getModel().getDocument().getFullData(), originalData, msg + ' (undo): data models match' );
+		assert.equalLinearData( getSerializableData( surface.getModel().getDocument() ), originalData, msg + ' (undo): data models match' );
 		assert.equalRange( surface.getModel().getSelection().getRange(), range, msg + ' (undo): ranges match' );
 	};
 
@@ -103,7 +107,7 @@
 				ve.test.utils.createViewOnlySurfaceFromHtml( html || ve.dm.example.html ) :
 				ve.test.utils.createModelOnlySurfaceFromHtml( html || ve.dm.example.html ),
 			action = ve.ui.actionFactory.create( actionName, surface ),
-			data = ve.copy( surface.getModel().getDocument().getFullData() ),
+			data = ve.copy( getSerializableData( surface.getModel().getDocument() ) ),
 			documentModel = surface.getModel().getDocument(),
 			selection = ve.test.utils.selectionFromRangeOrSelection( documentModel, rangeOrSelection ),
 			expectedSelection = options.expectedRangeOrSelection && ve.test.utils.selectionFromRangeOrSelection( documentModel, options.expectedRangeOrSelection );
@@ -121,7 +125,7 @@
 		surface.getModel().setSelection( selection );
 		action[ method ].apply( action, args || [] );
 
-		actualData = surface.getModel().getDocument().getFullData();
+		actualData = getSerializableData( surface.getModel().getDocument() );
 		ve.dm.example.postprocessAnnotations( actualData, surface.getModel().getDocument().getStore() );
 		assert.equalLinearData( actualData, data, msg + ': data models match' );
 		if ( expectedSelection ) {
@@ -135,7 +139,7 @@
 
 			surface.getModel().undo();
 
-			assert.equalLinearData( surface.getModel().getDocument().getFullData(), originalData, msg + ' (undo): data models match' );
+			assert.equalLinearData( getSerializableData( surface.getModel().getDocument() ), originalData, msg + ' (undo): data models match' );
 			if ( expectedSelection ) {
 				expectedOriginalRangeOrSelection = options.expectedOriginalRangeOrSelection &&
 					ve.test.utils.selectionFromRangeOrSelection( documentModel, options.expectedOriginalRangeOrSelection );
@@ -166,7 +170,7 @@
 			html = '<head>' + ( caseItem.head || defaultHead ) + '</head><body>' + caseItem.body + '</body>';
 			htmlDoc = ve.createDocumentFromHtml( html );
 			model = ve.dm.converter.getModelFromDom( htmlDoc, { fromClipboard: !!caseItem.fromClipboard } );
-			actualData = model.getFullData();
+			actualData = getSerializableData( model );
 			// Round-trip here, check round-trip later
 			if ( caseItem.modify ) {
 				actualData = ve.copy( actualData );
@@ -218,7 +222,7 @@
 		var originalData, model, html, fromDataBody, clipboardHtml;
 
 		model = ve.test.utils.getModelFromTestCase( caseItem );
-		originalData = ve.copy( model.getFullData() );
+		originalData = ve.copy( getSerializableData( model ) );
 		fromDataBody = caseItem.fromDataBody || caseItem.normalizedBody || caseItem.body;
 		html = '<body>' + fromDataBody + '</body>';
 		clipboardHtml = '<body>' + ( caseItem.clipboardBody || fromDataBody ) + '</body>';
@@ -232,7 +236,7 @@
 			ve.createDocumentFromHtml( clipboardHtml ),
 			msg + ' (clipboard mode)'
 		);
-		assert.deepEqualWithDomElements( model.getFullData(), originalData, msg + ' (data hasn\'t changed)' );
+		assert.deepEqualWithDomElements( getSerializableData( model ), originalData, msg + ' (data hasn\'t changed)' );
 	};
 
 	/**
