@@ -229,27 +229,3 @@ QUnit.test( 'insertMeta', 6, function ( assert ) {
 	list.insertMeta( new ve.dm.AlienMetaItem( insert ), 1 );
 	assert.deepEqual( doc.metadata.getData( 1 ), [ insert, insert ], 'Passing a MetaItem rather than an element' );
 } );
-
-QUnit.test( 'removeMeta', 4, function ( assert ) {
-	var expected,
-		doc = ve.dm.example.createExampleDocument( 'withMeta' ),
-		surface = new ve.dm.Surface( doc ),
-		list = new ve.dm.MetaList( surface );
-
-	list.removeMeta( list.getItemAt( 4, 0 ) );
-	assert.deepEqual( doc.metadata.getData( 4 ), [], 'Removing the only item at offset 4' );
-
-	expected = doc.metadata.getData( 0 ).slice( 0 );
-	expected.splice( 1, 1 );
-	list.removeMeta( list.getItemAt( 0, 1 ) );
-	assert.deepEqual( doc.metadata.getData( 0 ), expected, 'Removing the item at (0,1)' );
-
-	expected = doc.metadata.getData( 11 ).slice( 0 );
-	expected.splice( 0, 1 );
-	list.getItemAt( 11, 0 ).remove();
-	assert.deepEqual( doc.metadata.getData( 11 ), expected, 'Removing (11,0) using .remove()' );
-
-	expected.splice( 1, 1 );
-	list.getItemAt( 11, 1 ).remove();
-	assert.deepEqual( doc.metadata.getData( 11 ), expected, 'Removing (11,1) (formerly (11,2)) using .remove()' );
-} );

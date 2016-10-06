@@ -14,14 +14,12 @@
  * @param {ve.dm.ModelRegistry} modelRegistry
  * @param {ve.dm.NodeFactory} nodeFactory
  * @param {ve.dm.AnnotationFactory} annotationFactory
- * @param {ve.dm.MetaItemFactory} metaItemFactory
  */
-ve.dm.Converter = function VeDmConverter( modelRegistry, nodeFactory, annotationFactory, metaItemFactory ) {
+ve.dm.Converter = function VeDmConverter( modelRegistry, nodeFactory, annotationFactory ) {
 	// Properties
 	this.modelRegistry = modelRegistry;
 	this.nodeFactory = nodeFactory;
 	this.annotationFactory = annotationFactory;
-	this.metaItemFactory = metaItemFactory;
 	this.doc = null;
 	this.documentData = null;
 	this.store = null;
@@ -203,22 +201,22 @@ ve.dm.Converter.static.renderHtmlAttributeList = function ( originalDomElements,
  * Modify linear model data in-place to move inline meta items out of content context
  *
  * All branch node start items must have item.internal.metaItems = []
- * All inline meta items must have item.internal.isInlineMeta = true
+ * All inline meta items must have item.internal.isInlineMeta set to true
  *
- * After the method completes, each inline meta item will be moved downward to the nearest
- * block position (i.e. just after the close branch node item), and has these properties:
- * item.internal.loadBranchNodeIndex - corresponding branchNode's item.originalDomElementsIndex
- * item.internal.loadBranchNodeOffset - offset at load time within the branchNode (0 for start).
- * Each meta item is appended to the corresponding branchNode's item.internal.metaItems .
+ * After the method completes, each inline meta item will be moved downward to the nearest legal
+ * block position (i.e. just after the close meta parent item), and has these properties:
+ * item.internal.loadMetaParentIndex - corresponding meta parent's item.originalDomElementsIndex
+ * item.internal.loadMetaParentOffset - offset at load time within the meta parent (0 for start).
+ * Each meta item is appended to the corresponding meta parent's item.internal.metaItems .
  *
  * @param {Array} data Linear model data to modify in place
  */
 ve.dm.Converter.static.moveInlineMetaItems = function ( data ) {
-	var i, item, branchNode, j, pending,
+	var i, item, metaParent, j, pending,
 		ancestors = [],
 		pendingMetaItems = [];
 
-	function isBranchNode( ancestor ) {
+	function isMetaParent( ancestor ) {
 		return !!ve.getProp( ancestor.item, 'internal', 'metaItems' );
 	}
 
@@ -234,19 +232,19 @@ ve.dm.Converter.static.moveInlineMetaItems = function ( data ) {
 		}
 		if ( item.type.startsWith( '/' ) ) {
 			// Item is a node end
-			branchNode = ancestors.pop();
-			if ( isBranchNode( branchNode ) ) {
+			metaParent = ancestors.pop();
+			if ( isMetaParent( metaParent ) ) {
 				for ( j = 0; j < pendingMetaItems.length; j++ ) {
 					pending = pendingMetaItems[ j ];
-					if ( pending.branchNode.item !== branchNode.item ) {
+					if ( pending.metaParent.item !== metaParent.item ) {
 						continue;
 					}
-					pending.openItem.internal.loadBranchNodeIndex = branchNode.item.originalDomElementsIndex;
-					pending.openItem.internal.loadBranchNodeOffset = pending.offset;
+					pending.item.internal.loadMetaParentIndex = metaParent.item.originalDomElementsIndex;
+					pending.item.internal.loadMetaParentOffset = pending.offset;
 					pendingMetaItems.splice( j, 1 );
 					j--;
 					// TODO: what if the meta item was originally annotated?
-					data.splice( i + 1, 0, pending.openItem, pending.closeItem );
+					data.splice( i + 1, 0, pending.item, pending.closeItem );
 					i += 2;
 				}
 			}
@@ -255,13 +253,13 @@ ve.dm.Converter.static.moveInlineMetaItems = function ( data ) {
 			if ( ve.getProp( item, 'internal', 'isInlineMeta' ) ) {
 				// This is an inline meta item: move it
 				delete item.internal.isInlineMeta;
-				branchNode = ancestors.slice().reverse().find( isBranchNode );
-				branchNode.item.internal.metaItems.push( item );
+				metaParent = ancestors.slice().reverse().find( isMetaParent );
+				metaParent.item.internal.metaItems.push( item );
 				pendingMetaItems.push( {
-					openItem: item,
+					item: item,
 					closeItem: data[ i + 1 ],
-					branchNode: branchNode,
-					offset: i - branchNode.offset - 1
+					metaParent: metaParent,
+					offset: i - metaParent.offset - 1
 				} );
 				// Remove this item and the immediately following close item
 				data.splice( i, 2 );
@@ -475,7 +473,8 @@ ve.dm.Converter.prototype.createDataElements = function ( modelClass, domElement
 	}
 	if ( dataElements.length ) {
 		dataElements[ 0 ].originalDomElementsIndex = this.store.index( domElements, domElements.map( ve.getNodeHtml ).join( '' ) );
-		if ( OO.isSubclass( modelClass, ve.dm.BranchNode ) ) {
+		if ( OO.isSubclass( modelClass, ve.dm.BranchNode ) && modelClass.static.childNodeTypes === null ) {
+			// Set this item up as a meta parent
 			ve.setProp( dataElements[ 0 ], 'internal', 'metaItems', [] );
 			ve.setProp( dataElements[ 0 ], 'internal', 'changesSinceLoad', 0 );
 		}
@@ -658,7 +657,7 @@ ve.dm.Converter.prototype.getDataFromDomSubtree = function ( domElement, wrapper
 		// us, so we can strip it on the way out
 		wrappingParagraph = {
 			type: 'paragraph',
-			internal: { generated: 'wrapper' }
+			internal: { generated: 'wrapper', metaItems: [] }
 		};
 		data.push( wrappingParagraph );
 		context.inWrapper = true;
@@ -834,7 +833,7 @@ ve.dm.Converter.prototype.getDataFromDomSubtree = function ( domElement, wrapper
 						break;
 					}
 
-					childIsContent = this.nodeFactory.isNodeContent( childDataElements[ 0 ].type );
+					childIsContent = this.nodeFactory.canNodeSerializeAsContent( childDataElements[ 0 ].type );
 
 					// If childIsContent isn't what we expect, adjust
 					if ( !context.expectingContent && childIsContent ) {
@@ -849,7 +848,7 @@ ve.dm.Converter.prototype.getDataFromDomSubtree = function ( domElement, wrapper
 							childNodes = modelClass.static.enableAboutGrouping ?
 								aboutGroup : [ childNode ];
 							childDataElements = this.createDataElements( modelClass, childNodes );
-							childIsContent = this.nodeFactory.isNodeContent( childDataElements[ 0 ].type );
+							childIsContent = this.nodeFactory.canNodeSerializeAsContent( childDataElements[ 0 ].type );
 						}
 					}
 
@@ -1147,7 +1146,7 @@ ve.dm.Converter.prototype.getDomFromNode = function ( node, forClipboard ) {
  */
 ve.dm.Converter.prototype.getDomSubtreeFromModel = function ( model, container, forClipboard ) {
 	// Set up the converter state
-	this.documentData = model.getFullData();
+	this.documentData = model.getFullData( undefined, true );
 	this.store = model.getStore();
 	this.internalList = model.getInternalList();
 	this.forClipboard = !!forClipboard;
@@ -1328,10 +1327,8 @@ ve.dm.Converter.prototype.getDomSubtreeFromData = function ( data, container, in
 		} else if (
 			Array.isArray( data[ i ] ) ||
 			(
-				data[ i ].annotations !== undefined && (
-					this.metaItemFactory.lookup( data[ i ].type ) ||
-					this.nodeFactory.isNodeContent( data[ i ].type )
-				)
+				data[ i ].annotations !== undefined &&
+				this.nodeFactory.canNodeSerializeAsContent( data[ i ].type )
 			)
 		) {
 			// Annotated text, nodes or meta
@@ -1342,10 +1339,8 @@ ve.dm.Converter.prototype.getDomSubtreeFromData = function ( data, container, in
 				data[ i ] !== undefined && (
 					Array.isArray( data[ i ] ) ||
 					(
-						data[ i ].annotations !== undefined && (
-							this.metaItemFactory.lookup( data[ i ].type ) ||
-							this.nodeFactory.isNodeContent( data[ i ].type )
-						)
+						data[ i ].annotations !== undefined &&
+						this.nodeFactory.canNodeSerializeAsContent( data[ i ].type )
 					)
 				)
 			) {
@@ -1403,12 +1398,8 @@ ve.dm.Converter.prototype.getDomSubtreeFromData = function ( data, container, in
 				// Close element
 				parentDomElement = domElement.parentNode;
 				type = data[ i ].type.slice( 1 );
-				if ( this.metaItemFactory.lookup( type ) ) {
-					isContentNode = canContainContentStack[ canContainContentStack.length - 1 ];
-				} else {
-					isContentNode = this.nodeFactory.isNodeContent( type );
-					canContainContentStack.pop();
-				}
+				isContentNode = this.nodeFactory.isNodeContent( type );
+				canContainContentStack.pop();
 				// Process whitespace
 				// whitespace = [ outerPre, innerPre, innerPost, outerPost ]
 				oldLastOuterPost = parentDomElement.lastOuterPost;
@@ -1497,7 +1488,6 @@ ve.dm.Converter.prototype.getDomSubtreeFromData = function ( data, container, in
 									// Document ends when we encounter the internal list
 									(
 										data[ i + 1 ].type &&
-										!this.metaItemFactory.lookup( data[ i + 1 ].type ) &&
 										this.nodeFactory.isNodeInternal( data[ i + 1 ].type )
 									)
 								)
@@ -1556,19 +1546,16 @@ ve.dm.Converter.prototype.getDomSubtreeFromData = function ( data, container, in
 				}
 			} else {
 				// Create node from data
-				if ( this.metaItemFactory.lookup( data[ i ].type ) ) {
-					isContentNode = canContainContentStack[ canContainContentStack.length - 1 ];
-				} else if ( this.nodeFactory.isNodeInternal( data[ i ].type ) ) {
+				if ( this.nodeFactory.isNodeInternal( data[ i ].type ) ) {
 					// Reached the internal list, finish
 					break;
-				} else {
-					canContainContentStack.push(
-						// if the last item was true then this item must inherit it
-						canContainContentStack[ canContainContentStack.length - 1 ] ||
-						this.nodeFactory.canNodeContainContent( data[ i ].type )
-					);
-					isContentNode = this.nodeFactory.isNodeContent( data[ i ].type );
 				}
+				canContainContentStack.push(
+					// if the last item was true then this item must inherit it
+					canContainContentStack[ canContainContentStack.length - 1 ] ||
+					this.nodeFactory.canNodeContainContent( data[ i ].type )
+				);
+				isContentNode = this.nodeFactory.isNodeContent( data[ i ].type );
 
 				dataElementOrSlice = getDataElementOrSlice();
 				childDomElements = this.getDomElementsFromDataElement( dataElementOrSlice, doc );
@@ -1673,4 +1660,4 @@ ve.dm.Converter.prototype.getDomSubtreeFromData = function ( data, container, in
 
 /* Initialization */
 
-ve.dm.converter = new ve.dm.Converter( ve.dm.modelRegistry, ve.dm.nodeFactory, ve.dm.annotationFactory, ve.dm.metaItemFactory );
+ve.dm.converter = new ve.dm.Converter( ve.dm.modelRegistry, ve.dm.nodeFactory, ve.dm.annotationFactory );
