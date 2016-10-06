@@ -2128,8 +2128,6 @@ ve.ce.Surface.prototype.afterPaste = function () {
 			fromClipboard: true
 		} );
 		data = pastedDocumentModel.data;
-		// Clear metadata
-		pastedDocumentModel.metadata = new ve.dm.MetaLinearData( pastedDocumentModel.getStore(), new Array( 1 + data.getLength() ) );
 		// Clone again
 		data.cloneElements( true );
 		// Sanitize

@@ -24,6 +24,11 @@
  */
 ve.dm.Transaction = function VeDmTransaction( operations ) {
 	this.operations = operations || [];
+	this.operations.forEach( function ( op ) {
+		if ( op.type && op.type.match( /meta/i ) ) {
+			throw new Error( 'Metadata ops are no longer supported' );
+		}
+	} );
 	this.applied = false;
 	this.author = null;
 	this.isReversed = false;
@@ -55,11 +60,8 @@ ve.dm.Transaction.static.reversers = {
 	attribute: { from: 'to', to: 'from' }, // swap .from with .to
 	replace: { // swap .insert with .remove and .insertMetadata with .removeMetadata
 		insert: 'remove',
-		remove: 'insert',
-		insertMetadata: 'removeMetadata',
-		removeMetadata: 'insertMetadata'
-	},
-	replaceMetadata: { insert: 'remove', remove: 'insert' } // swap .insert with .remove
+		remove: 'insert'
+	}
 };
 
 /* Static Methods */
@@ -209,9 +211,6 @@ ve.dm.Transaction.prototype.isNoOp = function () {
 		return true;
 	} else if ( this.operations.length === 1 ) {
 		return this.operations[ 0 ].type === 'retain';
-	} else if ( this.operations.length === 2 ) {
-		return this.operations[ 0 ].type === 'retain' &&
-			this.operations[ 1 ].type === 'retainMetadata';
 	} else {
 		return false;
 	}
@@ -422,9 +421,6 @@ ve.dm.Transaction.prototype.getModifiedRange = function ( doc, includeInternalLi
 	for ( i = 0, len = this.operations.length; i < len; i++ ) {
 		op = this.operations[ i ];
 		switch ( op.type ) {
-			case 'retainMetadata':
-				continue;
-
 			case 'retain':
 				if ( oldOffset + op.length > docEndOffset ) {
 					break opLoop;
