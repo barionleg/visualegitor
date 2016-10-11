@@ -2534,15 +2534,16 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 				],
 				msg: 'Paste paragraphs and a table into table cell'
 			},
-			{
-				documentHtml: '<p></p>',
-				rangeOrSelection: new ve.Range( 1 ),
-				pasteHtml: '<img src="null" id="mwAB"><img src="null" id="useful">',
-				fromVe: true,
-				expectedRangeOrSelection: new ve.Range( 5 ),
-				expectedHtml: '<p><img src="null"><img src="null" id="useful"></p>',
-				msg: 'Parsoid IDs stripped'
-			},
+			// TODO: Move this test to MW tests
+			// {
+			// 	documentHtml: '<p></p>',
+			// 	rangeOrSelection: new ve.Range( 1 ),
+			// 	pasteHtml: '<img src="null" id="mwAB"><img src="null" id="useful">',
+			// 	fromVe: true,
+			// 	expectedRangeOrSelection: new ve.Range( 5 ),
+			// 	expectedHtml: '<p><img src="null"><img src="null" id="useful"></p>',
+			// 	msg: 'RESTBase IDs stripped'
+			// },
 			{
 				rangeOrSelection: new ve.Range( 0 ),
 				pasteHtml: '<ul><li>A</li><ul><li>B</li></ul></ul>',
