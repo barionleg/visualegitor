@@ -1427,25 +1427,12 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 						{ type: 'retain', length: 25 },
 						{
 							type: 'replace',
-							insert: [ 'F', 'o', 'o' ],
+							insert: [
+								[ 'F', [ bold ] ],
+								[ 'o', [ bold ] ],
+								[ 'o', [ bold ] ]
+							],
 							remove: []
-						},
-						{ type: 'retain', length: docLen - 25 }
-					],
-					[
-						{ type: 'retain', length: 25 },
-						{
-							type: 'annotate',
-							method: 'set',
-							bias: 'start',
-							index: ve.dm.example.annIndex( 'b', 'Quux' )
-						},
-						{ type: 'retain', length: 3 },
-						{
-							type: 'annotate',
-							method: 'set',
-							bias: 'stop',
-							index: ve.dm.example.annIndex( 'b', 'Quux' )
 						},
 						{ type: 'retain', length: docLen - 25 }
 					]
@@ -1475,25 +1462,12 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 						{ type: 'retain', length: 23 },
 						{
 							type: 'replace',
-							insert: [ 'F', 'o', 'o' ],
+							insert: [
+								[ 'F', [ bold ] ],
+								[ 'o', [ bold ] ],
+								[ 'o', [ bold ] ]
+							],
 							remove: []
-						},
-						{ type: 'retain', length: docLen - 27 }
-					],
-					[
-						{ type: 'retain', length: 23 },
-						{
-							type: 'annotate',
-							method: 'set',
-							bias: 'start',
-							index: ve.dm.example.annIndex( 'b', 'Quux' )
-						},
-						{ type: 'retain', length: 3 },
-						{
-							type: 'annotate',
-							method: 'set',
-							bias: 'stop',
-							index: ve.dm.example.annIndex( 'b', 'Quux' )
 						},
 						{ type: 'retain', length: docLen - 27 }
 					]
