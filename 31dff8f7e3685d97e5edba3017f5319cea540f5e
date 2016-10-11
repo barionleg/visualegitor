@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e6f8b3b_facb0673",
+        "filename": "src/dm/ve.dm.SurfaceFragment.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 882,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-10-11T05:05:34Z",
+      "side": 1,
+      "message": "@Esanders , what\u0027s your view about the best approach here?",
+      "revId": "31dff8f7e3685d97e5edba3017f5319cea540f5e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
