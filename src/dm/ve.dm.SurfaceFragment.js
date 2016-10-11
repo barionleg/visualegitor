@@ -851,7 +851,7 @@ ve.dm.SurfaceFragment.prototype.insertHtml = function ( html, importRules ) {
  * @chainable
  */
 ve.dm.SurfaceFragment.prototype.insertDocument = function ( newDoc, newDocRange, annotate ) {
-	var tx, newRange, annotations, offset,
+	var tx, newRange, annotations, offset, i, item,
 		range = this.getSelection().getCoveringRange(),
 		doc = this.getDocument();
 
@@ -877,17 +877,35 @@ ve.dm.SurfaceFragment.prototype.insertDocument = function ( newDoc, newDocRange,
 			.getAnnotationsFromOffset( offset === 0 ? 0 : offset - 1 );
 	}
 
-	tx = ve.dm.Transaction.newFromDocumentInsertion( doc, offset, newDoc, newDocRange );
+	if ( annotations && annotations.getLength() > 0 ) {
+		// Backup newDoc.data.data, to restore below
+		// TODO: clone newDoc instead? Or just let this method modify newDoc?
+		newDoc.data.origData = newDoc.data.slice();
+		for ( i = newDocRange.start; i < newDocRange.end; i++ ) {
+			item = newDoc.data.data[ i ];
+			if ( Array.isArray( item ) ) {
+				newDoc.data.data[ i ] = [
+					item[ 0 ],
+					annotations.storeIndexes.concat( item[ 1 ] )
+				];
+			} else {
+				newDoc.data.data[ i ] = [ item, annotations.storeIndexes.slice() ];
+			}
+		}
+	}
+	try {
+		tx = ve.dm.Transaction.newFromDocumentInsertion( doc, offset, newDoc, newDocRange );
+	} finally {
+		// Restore newDoc.data.data
+		newDoc.data.data = newDoc.data.origData;
+		delete newDoc.data.origData;
+	}
 	if ( !tx.isNoOp() ) {
 		// Set the range to cover the inserted content; the offset translation will be wrong
 		// if newFromInsertion() decided to move the insertion point
 		newRange = tx.getModifiedRange( doc );
 		this.change( tx, newRange ? new ve.dm.LinearSelection( doc, newRange ) : new ve.dm.NullSelection( doc ) );
-		if ( annotations && annotations.getLength() > 0 ) {
-			this.annotateContent( 'set', annotations );
-		}
 	}
-
 	return this;
 };
 
