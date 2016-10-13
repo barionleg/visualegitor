@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e6c1747_8221cf9c",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 2849
+      },
+      "writtenOn": "2016-10-13T19:39:11Z",
+      "side": 1,
+      "message": "[...] holes in data remain holes in arr. [...] ?",
+      "revId": "3a481c95899755fbae4c21b03789ebf5a899f603",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e6c1747_0244ff49",
+        "filename": "tests/ve.test.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 2849
+      },
+      "writtenOn": "2016-10-13T19:39:11Z",
+      "side": 1,
+      "message": "middle hole",
+      "revId": "3a481c95899755fbae4c21b03789ebf5a899f603",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e6c1747_22701ba3",
+        "filename": "tests/ve.test.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 2849
+      },
+      "writtenOn": "2016-10-13T19:39:11Z",
+      "side": 1,
+      "message": "leading hole",
+      "revId": "3a481c95899755fbae4c21b03789ebf5a899f603",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e6c1747_e25d231c",
+        "filename": "tests/ve.test.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 2849
+      },
+      "writtenOn": "2016-10-13T19:39:11Z",
+      "side": 1,
+      "message": "[ [ 0, , 4 ], 3, 0, [ 1, , 3 ], [], [ 0, , 4, 1, , 3 ], \u0027insert end\u0027 ],",
+      "revId": "3a481c95899755fbae4c21b03789ebf5a899f603",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
