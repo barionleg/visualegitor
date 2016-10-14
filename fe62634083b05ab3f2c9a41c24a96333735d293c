@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e97535f_b7ad9ae9",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 16
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2016-10-14T23:13:46Z",
+      "side": 1,
+      "message": "It\u0027s more idiomatic to say {number} [return.start] instead.",
+      "range": {
+        "startLine": 803,
+        "startChar": 20,
+        "endLine": 803,
+        "endChar": 29
+      },
+      "revId": "fe62634083b05ab3f2c9a41c24a96333735d293c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e97535f_976e1692",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 16
+      },
+      "lineNbr": 849,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2016-10-14T23:13:46Z",
+      "side": 1,
+      "message": "You say that, but you don\u0027t check, and there are obscure cases where this could be violated, for example:\n\n    [\n        { type: \u0027retain\u0027, length: 3 },\n        { type: \u0027annotate\u0027, bias: \u0027start\u0027 },\n        { type: \u0027annotate\u0027, bias: \u0027stop\u0027 },\n        { type: \u0027retain\u0027, length: 4 },\n        ....\n    ]\n\nIt\u0027s reasonable to want to subtract 5 from the start here (and in fact the start offset of the active range will be detected to be 7 or greater), but that will result in a negative retain.\n\n(This kind of transaction is obviously unreasonable though.)",
+      "range": {
+        "startLine": 849,
+        "startChar": 37,
+        "endLine": 849,
+        "endChar": 74
+      },
+      "revId": "fe62634083b05ab3f2c9a41c24a96333735d293c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
