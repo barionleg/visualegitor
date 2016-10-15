@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e97535f_4cfc80b1",
+        "filename": "src/ui/dialogs/ve.ui.DiffDialog.js",
+        "patchSetId": 12
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-10-15T19:15:31Z",
+      "side": 1,
+      "message": "atm we use .super.call in VE and .parent call in OOUI (because IE8) support. They\u0027re identical, but we should keep it consistent until we sort it out.",
+      "revId": "09c3632b8e13fc42a0bd8ccd2bd2cebf3734e119",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e97535f_8cf288de",
+        "filename": "src/ui/dialogs/ve.ui.DiffDialog.js",
+        "patchSetId": 12
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-10-15T19:15:31Z",
+      "side": 1,
+      "message": "static.size \u003d \u0027larger\u0027;",
+      "revId": "09c3632b8e13fc42a0bd8ccd2bd2cebf3734e119",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e97535f_6cff44a8",
+        "filename": "src/ui/styles/elements/ve.ui.DiffElement.css",
+        "patchSetId": 12
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-10-15T19:15:31Z",
+      "side": 1,
+      "message": "padding-left: 5px;\nmargin-left: -10px;",
+      "revId": "09c3632b8e13fc42a0bd8ccd2bd2cebf3734e119",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
