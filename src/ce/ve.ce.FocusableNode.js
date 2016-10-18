@@ -158,7 +158,7 @@ ve.ce.FocusableNode.prototype.onFocusableSetup = function () {
 			.find( 'img:not([width]),img:not([height])' )
 			.addBack( 'img:not([width]),img:not([height])' )
 			.on( 'load', this.updateInvisibleIcon.bind( this ) );
-		rAF( this.updateInvisibleIcon.bind( this ) );
+		this.updateInvisibleIcon();
 	}
 
 	this.isFocusableSetup = true;
@@ -177,17 +177,24 @@ ve.ce.FocusableNode.prototype.updateInvisibleIcon = function () {
 	if ( !this.constructor.static.iconWhenInvisible ) {
 		return;
 	}
-	if ( !this.hasRendering() ) {
-		if ( !this.$icon ) {
-			this.$icon = this.createInvisibleIcon();
+
+	var showIcon = !this.hasRendering(),
+		rAF = window.requestAnimationFrame || setTimeout,
+		node = this;
+
+	rAF( function () {
+		if ( showIcon ) {
+			if ( !node.$icon ) {
+				node.$icon = node.createInvisibleIcon();
+			}
+			node.$element.first()
+				.addClass( 've-ce-focusableNode-invisible' )
+				.prepend( node.$icon );
+		} else if ( node.$icon ) {
+			node.$element.first().removeClass( 've-ce-focusableNode-invisible' );
+			node.$icon.detach();
 		}
-		this.$element.first()
-			.addClass( 've-ce-focusableNode-invisible' )
-			.prepend( this.$icon );
-	} else if ( this.$icon ) {
-		this.$element.first().removeClass( 've-ce-focusableNode-invisible' );
-		this.$icon.detach();
-	}
+	} );
 };
 
 /**
