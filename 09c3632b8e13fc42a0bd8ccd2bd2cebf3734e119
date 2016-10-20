@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "cea0dbb8_6691989c",
+        "filename": "src/ui/dialogs/ve.ui.DiffDialog.js",
+        "patchSetId": 12
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 2849
+      },
+      "writtenOn": "2016-10-20T23:07:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e97535f_4cfc80b1",
+      "revId": "09c3632b8e13fc42a0bd8ccd2bd2cebf3734e119",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e97535f_8cf288de",
         "filename": "src/ui/dialogs/ve.ui.DiffDialog.js",
         "patchSetId": 12
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "cea0dbb8_06f76cf3",
+        "filename": "src/ui/dialogs/ve.ui.DiffDialog.js",
+        "patchSetId": 12
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 2849
+      },
+      "writtenOn": "2016-10-20T23:07:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e97535f_8cf288de",
+      "revId": "09c3632b8e13fc42a0bd8ccd2bd2cebf3734e119",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e97535f_6cff44a8",
         "filename": "src/ui/styles/elements/ve.ui.DiffElement.css",
         "patchSetId": 12
@@ -47,6 +83,24 @@
       "writtenOn": "2016-10-15T19:15:31Z",
       "side": 1,
       "message": "padding-left: 5px;\nmargin-left: -10px;",
+      "revId": "09c3632b8e13fc42a0bd8ccd2bd2cebf3734e119",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea0dbb8_c69aa4bd",
+        "filename": "src/ui/styles/elements/ve.ui.DiffElement.css",
+        "patchSetId": 12
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 2849
+      },
+      "writtenOn": "2016-10-20T23:07:09Z",
+      "side": 1,
+      "message": "Done - also wrapped in a div to avoid problems with e.g. ul",
+      "parentUuid": "0e97535f_6cff44a8",
       "revId": "09c3632b8e13fc42a0bd8ccd2bd2cebf3734e119",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
