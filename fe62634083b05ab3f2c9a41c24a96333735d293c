@@ -25,6 +25,24 @@
     },
     {
       "key": {
+        "uuid": "cea0dbb8_9bc2b587",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 16
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-10-20T22:27:54Z",
+      "side": 1,
+      "message": "I feel like [return.start] suggests that the returned object might not have a \u0027start\u0027 key, whereas in fact it definitely has a \u0027start\u0027 key but one whose corresponding value might be undefined. If you tell me you strongly disagree then I\u0027ll change it. (It seems jsduck accepts either version).",
+      "parentUuid": "0e97535f_b7ad9ae9",
+      "revId": "fe62634083b05ab3f2c9a41c24a96333735d293c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e97535f_976e1692",
         "filename": "src/dm/ve.dm.Transaction.js",
         "patchSetId": 16
@@ -42,6 +60,24 @@
         "endLine": 849,
         "endChar": 74
       },
+      "revId": "fe62634083b05ab3f2c9a41c24a96333735d293c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea0dbb8_bb6e9928",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 16
+      },
+      "lineNbr": 849,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-10-20T22:27:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e97535f_976e1692",
       "revId": "fe62634083b05ab3f2c9a41c24a96333735d293c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
