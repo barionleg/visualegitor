@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cea0dbb8_e6624837",
+        "filename": "src/dm/ve.dm.SurfaceFragment.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 883,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-10-21T01:03:27Z",
+      "side": 1,
+      "message": "I think newDocRange can still be undefined. It only gets defaulted inside newFromDocumentInsertion.",
+      "revId": "c90e35dac361c3069d1d51b5762cf7b8413de43c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
