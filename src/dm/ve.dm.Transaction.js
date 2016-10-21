@@ -25,6 +25,7 @@
 ve.dm.Transaction = function VeDmTransaction( operations ) {
 	this.operations = operations || [];
 	this.applied = false;
+	this.author = null;
 };
 
 /* Static Methods */
@@ -904,15 +905,6 @@ ve.dm.Transaction.rebaseTransactions = function ( transactionA, transactionB ) {
 /* Methods */
 
 /**
- * Get a serializable object describing the transaction
- *
- * @return {Object} Serializable object
- */
-ve.dm.Transaction.prototype.toJSON = function () {
-	return this.operations;
-};
-
-/**
  * Get a human-readable summary
  *
  * @return {string} Human-readable summary
@@ -932,7 +924,7 @@ ve.dm.Transaction.prototype.summarize = function () {
 			}
 		} ).join( '' ) + '\'';
 	}
-	return '(' + this.operations.map( function ( op ) {
+	return '(' + this.author + ' ' + this.operations.map( function ( op ) {
 		if ( op.type === 'retain' ) {
 			return ( annotations ? 'annotate ' : 'retain ' ) + op.length;
 		} else if ( op.type === 'replace' ) {
@@ -970,6 +962,7 @@ ve.dm.Transaction.prototype.summarize = function () {
 ve.dm.Transaction.prototype.clone = function () {
 	var tx = new this.constructor();
 	tx.operations = ve.copy( this.operations );
+	tx.author = this.author;
 	return tx;
 };
 
@@ -997,6 +990,7 @@ ve.dm.Transaction.prototype.reversed = function () {
 		}
 		tx.operations.push( newOp );
 	}
+	tx.author = this.author;
 	return tx;
 };
 
