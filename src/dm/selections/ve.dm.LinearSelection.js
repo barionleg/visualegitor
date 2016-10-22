@@ -106,6 +106,13 @@ ve.dm.Selection.prototype.translateByTransaction = function ( tx, excludeInserti
 /**
  * @inheritdoc
  */
+ve.dm.Selection.prototype.translateByTransactionWithBias = function ( tx, bias ) {
+	return new this.constructor( this.getDocument(), tx.translateRangeWithBias( this.getRange(), bias ) );
+};
+
+/**
+ * @inheritdoc
+ */
 ve.dm.LinearSelection.prototype.getRanges = function () {
 	return [ this.range ];
 };

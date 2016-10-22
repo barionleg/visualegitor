@@ -140,6 +140,17 @@ ve.dm.Selection.prototype.isCollapsed = null;
 ve.dm.Selection.prototype.translateByTransaction = null;
 
 /**
+ * Apply translations from a transaction
+ *
+ * @abstract
+ * @method
+ * @param {ve.dm.Transaction} tx Transaction
+ * @param {string} [bias] The bias, forward|backward
+ * @return {ve.dm.Selection} A new translated selection
+ */
+ve.dm.Selection.prototype.translateByTransactionWithBias = null;
+
+/**
  * Apply translations from a set of transactions
  *
  * @param {ve.dm.Transaction[]} txs Transactions
