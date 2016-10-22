@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cea0dbb8_52b767d3",
+        "filename": "src/ce/ve.ce.FocusableNode.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-10-22T07:25:48Z",
+      "side": 1,
+      "message": "var must be first statement, fails jscs",
+      "range": {
+        "startLine": 179,
+        "startChar": 1,
+        "endLine": 179,
+        "endChar": 4
+      },
+      "revId": "4e4bf14ec14fd729af4897e94e228c13d1b3dc3b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
