@@ -36,6 +36,16 @@ ve.dm.NullSelection.static.newFromHash = function ( doc ) {
 /**
  * @inheritdoc
  */
+ve.dm.NullSelection.prototype.equals = function ( other ) {
+	return this === other || (
+		!!other &&
+		other.constructor === this.constructor
+	);
+};
+
+/**
+ * @inheritdoc
+ */
 ve.dm.NullSelection.prototype.toJSON = function () {
 	return {
 		type: this.constructor.static.name
@@ -72,6 +82,8 @@ ve.dm.NullSelection.prototype.isCollapsed = function () {
 };
 
 ve.dm.NullSelection.prototype.translateByTransaction = ve.dm.NullSelection.prototype.clone;
+
+ve.dm.NullSelection.prototype.translateByTransactionWithAuthor = ve.dm.NullSelection.prototype.clone;
 
 /**
  * @inheritdoc
