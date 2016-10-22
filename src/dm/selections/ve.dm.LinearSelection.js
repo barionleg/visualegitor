@@ -40,6 +40,17 @@ ve.dm.LinearSelection.static.newFromHash = function ( doc, hash ) {
 /**
  * @inheritdoc
  */
+ve.dm.LinearSelection.prototype.equals = function ( other ) {
+	return this === other || (
+		!!other &&
+		other.constructor === this.constructor &&
+		this.range.equals( other.range )
+	);
+};
+
+/**
+ * @inheritdoc
+ */
 ve.dm.LinearSelection.prototype.toJSON = function () {
 	return {
 		type: this.constructor.static.name,
@@ -101,6 +112,13 @@ ve.dm.LinearSelection.prototype.isCollapsed = function () {
  */
 ve.dm.LinearSelection.prototype.translateByTransaction = function ( tx, excludeInsertion ) {
 	return new this.constructor( this.getDocument(), tx.translateRange( this.getRange(), excludeInsertion ) );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.dm.Selection.prototype.translateByTransactionWithAuthor = function ( tx, author ) {
+	return new this.constructor( this.getDocument(), tx.translateRangeWithAuthor( this.getRange(), author ) );
 };
 
 /**
