@@ -303,6 +303,21 @@ ve.dm.TableSelection.prototype.translateByTransaction = function ( tx, excludeIn
 };
 
 /**
+ * @inheritdoc
+ */
+ve.dm.TableSelection.prototype.translateByTransactionWithBias = function ( tx, bias ) {
+	var newRange = tx.translateRangeWithBias( this.tableRange, bias );
+
+	if ( newRange.isCollapsed() ) {
+		return new ve.dm.NullSelection( this.getDocument() );
+	}
+	return new this.constructor(
+		this.getDocument(), newRange,
+		this.fromCol, this.fromRow, this.toCol, this.toRow
+	);
+};
+
+/**
  * Check if the selection spans a single cell
  *
  * @return {boolean} The selection spans a single cell

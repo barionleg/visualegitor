@@ -73,6 +73,8 @@ ve.dm.NullSelection.prototype.isCollapsed = function () {
 
 ve.dm.NullSelection.prototype.translateByTransaction = ve.dm.NullSelection.prototype.clone;
 
+ve.dm.NullSelection.prototype.translateByTransactionWithBias = ve.dm.NullSelection.prototype.clone;
+
 /**
  * @inheritdoc
  */

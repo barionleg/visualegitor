@@ -1114,7 +1114,7 @@ ve.dm.Transaction.prototype.translateOffset = function ( offset, excludeInsertio
 };
 
 /**
- * Translate a range based on a transaction.
+ * Translate a range based on the transaction, with grow/shrink preference at changes
  *
  * This is useful when you want to anticipate what a selection will be after a transaction is
  * processed.
@@ -1129,6 +1129,20 @@ ve.dm.Transaction.prototype.translateOffset = function ( offset, excludeInsertio
 ve.dm.Transaction.prototype.translateRange = function ( range, excludeInsertion ) {
 	var start = this.translateOffset( range.start, !excludeInsertion ),
 		end = this.translateOffset( range.end, excludeInsertion );
+	return range.isBackwards() ? new ve.Range( end, start ) : new ve.Range( start, end );
+};
+
+/**
+ * Translate a range based on the transaction, with forward/backward preference at changes
+ *
+ * @see #translateOffset
+ * @param {ve.Range} range Range in the linear model before the transaction has been processed
+ * @param {string} bias Preference for moving range boundaries at insertions: forward|backward
+ * @return {ve.Range} Translated range, as it will be after processing transaction
+ */
+ve.dm.Transaction.prototype.translateRangeWithBias = function ( range, bias ) {
+	var start = this.translateOffset( range.start, bias === 'backward' ),
+		end = this.translateOffset( range.end, bias === 'backward' );
 	return range.isBackwards() ? new ve.Range( end, start ) : new ve.Range( start, end );
 };
 
