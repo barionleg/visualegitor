@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "aea567c8_2886ca6a",
+        "filename": "src/dm/selections/ve.dm.LinearSelection.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-10-24T23:36:40Z",
+      "side": 1,
+      "message": "rebase on Ia6bac1682038",
+      "parentUuid": "aea567c8_685e1219",
+      "range": {
+        "startLine": 113,
+        "startChar": 6,
+        "endLine": 113,
+        "endChar": 15
+      },
+      "revId": "e1f3c357f91886055a64e3c9898b73095005e857",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aea567c8_485b4e27",
         "filename": "src/dm/selections/ve.dm.LinearSelection.js",
         "patchSetId": 3
