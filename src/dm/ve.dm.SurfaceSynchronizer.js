@@ -44,7 +44,7 @@ ve.dm.SurfaceSynchronizer = function VeDmSurfaceSynchronizer( surface ) {
 	// Whether we are currently synchronizing the model
 	this.applying = false;
 
-	if ( window.QUnit ) {
+	if ( window.QUnit || !window.io ) {
 		return;
 	}
 
@@ -233,7 +233,7 @@ ve.dm.SurfaceSynchronizer.prototype.onRegistered = function ( author ) {
 	this.surface.setAuthor( this.author );
 	// HACK
 	if ( !window.QUnit ) {
-		document.body.insertBefore( document.createTextNode( this.author ), document.body.firstChild );
+		$( '.ve-demo-editor' ).prepend( $( '<span style="position: absolute; top: 1.5em;">' ).text( this.author ) );
 	}
 };
 
