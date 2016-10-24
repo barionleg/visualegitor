@@ -7,7 +7,6 @@
 new ve.init.sa.Platform( ve.messagePaths ).initialize().done( function () {
 	var
 		$editor = $( '.ve-demo-editor' ),
-		// $toolbar = $( '.ve-demo-targetToolbar' ),
 		target = new ve.demo.target();
 
 	$editor.append( target.$element );
