@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8eaa6398_018c0c39",
+        "filename": "src/dm/ve.dm.SurfaceFragment.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 892,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-10-25T20:08:30Z",
+      "side": 1,
+      "message": "do we need to clone close tags?",
+      "revId": "8d0bff6e89f39748670cf2130e131b1b029afa03",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
