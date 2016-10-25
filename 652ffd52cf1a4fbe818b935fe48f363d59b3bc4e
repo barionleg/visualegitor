@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8eaa6398_a199d873",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 1186,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-10-25T20:11:39Z",
+      "side": 1,
+      "message": "if we\u0027re doing comparisons we should probably make the IDs explicitly numbers, otherwise we get into the murky area of string ordering",
+      "range": {
+        "startLine": 1186,
+        "startChar": 43,
+        "endLine": 1186,
+        "endChar": 49
+      },
+      "revId": "652ffd52cf1a4fbe818b935fe48f363d59b3bc4e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
