@@ -16,6 +16,24 @@
       "revId": "8d0bff6e89f39748670cf2130e131b1b029afa03",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ea7efd1_86f5d0c9",
+        "filename": "src/dm/ve.dm.SurfaceFragment.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 892,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-10-26T02:55:02Z",
+      "side": 1,
+      "message": "I just feel icky about leaving them referenced in two places. If you strongly feel we should just reference them, then let me know and I\u0027ll change it.",
+      "parentUuid": "8eaa6398_018c0c39",
+      "revId": "8d0bff6e89f39748670cf2130e131b1b029afa03",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
