@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4eb4ebfb_b057e004",
+        "filename": "src/init/ve.init.SupportCheck.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2016-10-26T21:29:34Z",
+      "side": 1,
+      "message": "!",
+      "range": {
+        "startLine": 7,
+        "startChar": 22,
+        "endLine": 7,
+        "endChar": 26
+      },
+      "revId": "5dedc1bc9e03fc6376c31a679d46161cde5ed6bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_903d04bb",
+        "filename": "src/ui/actions/ve.ui.LinkAction.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2016-10-26T21:29:34Z",
+      "side": 1,
+      "message": "This isn\u0027t needed now?",
+      "revId": "5dedc1bc9e03fc6376c31a679d46161cde5ed6bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_50477c50",
+        "filename": "src/ui/ve.ui.DataTransferItem.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2016-10-26T21:29:34Z",
+      "side": 1,
+      "message": "Put at top of file?",
+      "revId": "5dedc1bc9e03fc6376c31a679d46161cde5ed6bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
