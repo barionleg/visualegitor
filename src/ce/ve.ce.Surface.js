@@ -882,10 +882,12 @@ ve.ce.Surface.prototype.onDocumentDragOver = function ( e ) {
 						break;
 					}
 				}
-			// Support: Firefox
-			// If we have no metadata (e.g. in Firefox) assume it is droppable
-			} else if ( Array.prototype.indexOf.call( dataTransfer.types || [], 'Files' ) !== -1 ) {
-				this.allowedFile = true;
+			} else {
+				// Support: Firefox
+				// If we have no metadata (e.g. in Firefox) assume it is droppable
+				} if ( Array.prototype.indexOf.call( dataTransfer.types || [], 'Files' ) !== -1 ) {
+					this.allowedFile = true;
+				}
 			}
 		}
 		// this.allowedFile is cached until the next dragleave event
@@ -1868,7 +1870,7 @@ ve.ce.Surface.prototype.beforePaste = function ( e ) {
  * @param {jQuery.Event} e Paste event
  */
 ve.ce.Surface.prototype.afterPaste = function () {
-	// jshint unused:false
+	// jshint unused:false (awaiting eslint replacement; T149267)
 	var clipboardKey, clipboardHash,
 		$elements, pasteData, slice, internalListRange,
 		data, pastedDocumentModel, htmlDoc, $body, $images, i,
