@@ -36,6 +36,7 @@ ve.dm.SurfaceSynchronizer = function VeDmSurfaceSynchronizer( surface ) {
 	// All changes from others that have arrived while submittedChange was in flight, concated together
 	// TODO: this needs to track updates too
 	this.pendingChange = null;
+	this.pendingSelections = {};
 
 	// Whether we are currently synchronizing the model
 	this.applying = false;
@@ -263,6 +264,7 @@ ve.dm.SurfaceSynchronizer.prototype.onNewUpdate = function ( data ) {
 	var author, pendingOnSubmitted, submittedOnPending, unsent, rebases, unsentRebased,
 		incoming, canonicalHistory,
 		selections = {},
+		singleSelection = {},
 		change = ve.dm.Change.static.deserialize( data.change );
 
 	for ( author in data.selections ) {
@@ -325,6 +327,25 @@ ve.dm.SurfaceSynchronizer.prototype.onNewUpdate = function ( data ) {
 			this.submittedChange = null;
 			this.pendingChange = null;
 
+			// Merge selections and pendingSelections
+			for ( author in selections ) {
+				this.pendingSelections[ author ] = {
+					selection: selections[ author ],
+					transactionStart: change.transactionStart + change.transactions.length,
+					storeStart: change.storeStart + change.store.getLength()
+				};
+			}
+			// Apply pending selections
+			for ( author in this.pendingSelections ) {
+				singleSelection = {};
+				singleSelection[ author ] = this.pendingSelections[ author ].selection;
+				this.applyNewSelections( singleSelection, this.doc.getChangeSince(
+					this.pendingSelections[ author ].transactionStart,
+					this.pendingSelections[ author ].storeStart
+				) );
+			}
+			this.pendingSelections = {};
+
 		} else {
 			// Someone else made a change while we have a change in flight
 			// Queue it up and apply it when our change is accepted or rejected
@@ -333,6 +354,16 @@ ve.dm.SurfaceSynchronizer.prototype.onNewUpdate = function ( data ) {
 				this.pendingChange = this.pendingChange.concat( change );
 			} else {
 				this.pendingChange = change;
+			}
+			// Queue up selection changes too; they're based on transactions that we haven't
+			// applied locally yet.
+			for ( author in selections ) {
+				// FIXME: Explore making selections part of Change so that we don't need to do this
+				this.pendingSelections[ author ] = {
+					selection: selections[ author ],
+					transactionStart: change.transactionStart + change.transactions.length,
+					storeStart: change.storeStart + change.store.getLength()
+				};
 			}
 		}
 	} else {
