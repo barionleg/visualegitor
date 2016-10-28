@@ -36,10 +36,6 @@ ve.dm.SurfaceSynchronizer = function VeDmSurfaceSynchronizer( surface ) {
 	this.lastSubmittedSelection = null;
 	// Change that we have submitted and are waiting to hear back about, or null if no change in flight
 	this.submittedChange = null;
-	// All changes from others that have arrived while submittedChange was in flight, concated together
-	// TODO: this needs to track updates too
-	this.pendingChange = null;
-	this.pendingSelections = {};
 
 	// Whether we are currently synchronizing the model
 	this.applying = false;
@@ -102,32 +98,29 @@ ve.dm.SurfaceSynchronizer.prototype.getUncommittedChange = function () {
 };
 
 /**
- * Get the unsent local changes, i.e. changes that exist locally but have not been submitted to the
- * server. If a submitted change is in flight, #getUncommittedChange will return both the submitted
- * and any unsubmitted changes, whereas this will only return the unsubmitted changes. If no change
- * is in flight, this returns the same as #getUncommittedChange.
- *
- * @return {ve.dm.Change} Unsent changes
+ * Get the submitted changes. this.submittedChange is the change as it was submitted to the server;
+ * this method extracts the submitted changes from the history stack, so it returns a possibly
+ * rebased version of this.submittedChange.
+ * @return {ve.dm.Change} Submitted changes
  */
-ve.dm.SurfaceSynchronizer.prototype.getUnsentChange = function () {
-	var change, i, len, tx;
-	if ( this.submittedChange ) {
-		change = this.doc.getChangeSince(
-			this.submittedChange.transactionStart + this.submittedChange.transactions.length,
-			this.submittedChange.storeStart + this.submittedChange.store.getLength()
-		);
-	} else {
-		change = this.getUncommittedChange();
-	}
-	for ( i = 0, len = change.transactions.length; i < len; i++ ) {
-		tx = change.transactions[ i ];
-		tx.author = this.author;
-	}
-	return change;
+ve.dm.SurfaceSynchronizer.prototype.getRebasedSubmittedChange = function () {
+	return this.getUncommittedChange().truncate(
+		this.submittedChange ? this.submittedChange.transactions.length : 0,
+		this.submittedChange ? this.submittedChange.store.getLength() : 0
+	);
 };
 
-ve.dm.SurfaceSynchronizer.prototype.onSurfaceSelect = function () {
-	this.submitUpdateThrottled();
+/**
+ * Get the unsubmitted changes, i.e. changes that exist locally and have not been submitted to the server.
+ * If there is no change in flight, the unsubmitted and uncommitted changes are the same; if there
+ * is a change in flight, the unsubmitted changes are a subset of the uncommitted changes.
+ * @return {ve.dm.Change} unsubmitted changes
+ */
+ve.dm.SurfaceSynchronizer.prototype.getUnsubmittedChange = function () {
+	return this.doc.getChangeSince(
+		this.transactionCommitLength + this.submittedChange ? this.submittedChange.transactions.length : 0,
+		this.storeCommitLength + this.submittedChange ? this.submittedChange.store.getLength() : 0
+	);
 };
 
 /**
@@ -144,10 +137,16 @@ ve.dm.SurfaceSynchronizer.prototype.rewindToBefore = function ( change ) {
 /**
  * Mark the current history position as synchronized with the server,
  * i.e. we and the server agree on history up to this point.
+ * @param {ve.dm.Change} [change] If set, mark the history position at the end of this change
+ *  as synced; if not set, mark the current history position as synced.
  */
-ve.dm.SurfaceSynchronizer.prototype.markSynced = function () {
-	this.transactionCommitLength = this.doc.completeHistory.length;
-	this.storeCommitLength = this.store.getLength();
+ve.dm.SurfaceSynchronizer.prototype.markSynced = function ( change ) {
+	this.transactionCommitLength = change ?
+		change.transactionStart + change.transactions.length :
+		this.doc.completeHistory.length;
+	this.storeCommitLength = change ?
+		change.storeStart + change.store.getLength() :
+		this.store.getLength();
 };
 
 /**
@@ -161,8 +160,19 @@ ve.dm.SurfaceSynchronizer.prototype.onDocumentTransact = function ( tx ) {
 		// Ignore our own synchronization transactions
 		return;
 	}
+	// HACK annotate transaction with authorship information
+	// This relies on being able to access the transaction object by reference;
+	// we should probably set the author deeper in dm.Surface or dm.Document instead.
+	tx.author = this.author;
 	// TODO deal with staged transactions somehow
 	this.applyNewSelections( this.authorSelections, tx );
+	this.submitUpdateThrottled();
+};
+
+/**
+ * Respond to selection changes.
+ */
+ve.dm.SurfaceSynchronizer.prototype.onSurfaceSelect = function () {
 	this.submitUpdateThrottled();
 };
 
@@ -186,7 +196,6 @@ ve.dm.SurfaceSynchronizer.prototype.submitUpdate = function () {
 	}
 	this.lastSubmittedSelection = selection;
 	this.submittedChange = change;
-	this.pendingChange = change.end();
 	this.socket.emit( 'submitUpdate', {
 		doc: this.documentId,
 		author: this.author,
@@ -257,10 +266,8 @@ ve.dm.SurfaceSynchronizer.prototype.onRegistered = function ( author ) {
  * @param {string} data.author Author ID of the client that submitted the change
  */
 ve.dm.SurfaceSynchronizer.prototype.onNewUpdate = function ( data ) {
-	var author, pendingOnSubmitted, submittedOnPending, unsent, rebases, unsentRebased,
-		incoming, canonicalHistory,
+	var author, localChange, rebases, localRebased, incoming,
 		selections = {},
-		singleSelection = {},
 		change = ve.dm.Change.static.deserialize( data.change );
 
 	for ( author in data.selections ) {
@@ -271,136 +278,65 @@ ve.dm.SurfaceSynchronizer.prototype.onNewUpdate = function ( data ) {
 	// the state of the document
 	this.applying = true;
 
-	if ( this.submittedChange ) {
-		if ( data.author === this.author ) {
-			// Server accepted our change
-			console.log( this.author, 'server accepted our change', change );
-			// Let p = pendingChange and s = submittedChange.
-			// The server has sent us submittedOnPending = s/p. Compute pendingOnSubmitted = p\s.
-			submittedOnPending = change;
-			pendingOnSubmitted = ve.dm.Change.static.rebaseChanges( this.pendingChange, this.submittedChange )[ 0 ];
-			// TODO maybe sanity-check/assert that change is equal to the [1] of this rebase?
-			canonicalHistory = this.pendingChange.concat( submittedOnPending ); // p + s/p
-
-			// Get the unsent local changes (= u)
-			unsent = this.getUnsentChange();
-			// Compute the rebases of u over p\s
-			rebases = ve.dm.Change.static.rebaseChanges( pendingOnSubmitted, unsent );
-			incoming = rebases[ 0 ]; // (p\s) \ u
-			unsentRebased = rebases[ 1 ]; // u / (p\s)
-			if ( unsentRebased ) {
-				// Apply incoming (= (p\s) \ u) to the existing state, obtaining s + u + (p\s)\u,
-				// but rewrite the history to p + s/p + u/(p\s). These two are equivalent:
-				//     u + (p\s)\u = p\s + u/(p\s)       (rebase axiom)
-				// s + u + (p\s)\u = s + p\s + u/(p\s)   (pre-concat s)
-				// s + u + (p\s)\u = p + s/p + u/(p\s)   (s + p\s = p + s/p by rebase axiom)
-
-				if ( unsent.transactions.length > 0 ) {
-					console.log( this.author, 'rebasing unsent change', unsent );
-				}
-				// Apply incoming
-				incoming.applyTo( this.surface );
-				// Rewind history to before s
-				this.rewindToBefore( this.submittedChange );
-				// Add p + s/p to the history
-				canonicalHistory.addToHistory( this.doc );
-				this.markSynced();
-				// Add u/(p\s) to the history
-				unsentRebased.addToHistory( this.doc );
-			} else {
-				// The unsent changes conflict with the pending changes, so discard the unsent changes.
-				// Our current state is s + u, so we will apply -u + p\s which gets us to s + p\s.
-				// We'll rewrite the history to p + s/p, which is equivalent.
-				console.log( this.author, 'conflict, discarding unsent change', unsent );
+	if ( data.author !== this.author ) {
+		console.log( this.author, 'applying change', change );
+		localChange = this.getUncommittedChange();
+		// Let c=change and l=localChange. Rebase c over l.
+		rebases = ve.dm.Change.static.rebaseChanges( change, localChange );
+		incoming = rebases[ 0 ]; // c\l
+		localRebased = rebases[ 1 ]; // l/c
+		if ( !localRebased ) {
+			console.log( 'conflict detected locally' );
+			// c conflicts with l, but l = s + u where s is the submitted part and u is the unsubmitted part.
+			// Try rebasing c over just s.
+			// (If there is no change in flight, s will be empty, and the rebase will succeed.)
+			rebases = ve.dm.Change.static.rebaseChanges( change, this.getRebasedSubmittedChange() );
+			incoming = rebases[ 0 ]; // c\s
+			localRebased = rebases[ 1 ]; // s/c
+			if ( localRebased ) {
+				// Rebasing c over s worked. Discard u, and let s take the place of l below
+				console.log( 'discarding unsubmitted change', this.getUnsubmittedChange() );
 				// Apply -u
-				unsent.reversed().applyTo( this.surface );
-				// Rewind history to before s
-				this.rewindToBefore( this.submittedChange );
-				// Add p + s/p to the history
-				canonicalHistory.addToHistory( this.doc );
-				this.markSynced();
+				this.getUnsubmittedChange().reversed().applyTo( this.surface );
+				// No need to rewind history because we're about to do that anyway
 			}
-			this.submittedChange = null;
-			this.pendingChange = null;
+		}
 
-			// Merge selections and pendingSelections
-			for ( author in selections ) {
-				this.pendingSelections[ author ] = {
-					selection: selections[ author ],
-					transactionStart: change.transactionStart + change.transactions.length,
-					storeStart: change.storeStart + change.store.getLength()
-				};
+		// If we managed to rebase either l or s above, reconcile
+		if ( localRebased ) {
+			// Apply c\l to the current state, but rewrite the history to c + l/c
+			if ( localChange.transactions.length > 0 ) {
+				console.log( this.author, 'rebased local change', localRebased );
 			}
-			// Apply pending selections
-			for ( author in this.pendingSelections ) {
-				singleSelection = {};
-				singleSelection[ author ] = this.pendingSelections[ author ].selection;
-				this.applyNewSelections( singleSelection, this.doc.getChangeSince(
-					this.pendingSelections[ author ].transactionStart,
-					this.pendingSelections[ author ].storeStart
-				) );
-			}
-			this.pendingSelections = {};
-
+			// Apply c\l
+			incoming.applyTo( this.surface );
+			// Rewind history to before l
+			this.rewindToBefore( localChange );
+			// Add c to the history
+			change.addToHistory( this.doc );
+			this.markSynced();
+			// Add l/c to the history
+			localRebased.addToHistory( this.doc );
+			this.applyNewSelections( selections, localRebased );
 		} else {
-			// Someone else made a change while we have a change in flight
-			// Queue it up and apply it when our change is accepted or rejected
-			console.log( this.author, 'queueing change', change );
-			if ( this.pendingChange ) {
-				this.pendingChange = this.pendingChange.concat( change );
-			} else {
-				this.pendingChange = change;
-			}
-			// Queue up selection changes too; they're based on transactions that we haven't
-			// applied locally yet.
-			for ( author in selections ) {
-				// FIXME: Explore making selections part of Change so that we don't need to do this
-				this.pendingSelections[ author ] = {
-					selection: selections[ author ],
-					transactionStart: change.transactionStart + change.transactions.length,
-					storeStart: change.storeStart + change.store.getLength()
-				};
-			}
+			// c conflicts with both l and s, so discard all of l.
+			console.log( 'discarding all local changes', localChange );
+			// Apply -l
+			localChange.reversed().applyTo( this.surface );
+			// Rewind history to before l
+			this.rewindToBefore( localChange );
+			// Apply c
+			change.applyTo( this.surface );
+			this.applyNewSelections( selections );
+			this.markSynced();
 		}
 	} else {
-		if ( data.author === this.author ) {
-			// WTF?! This should never happen
-			console.warn( 'Server unexpectedly sent us our own change', change );
-		} else {
-			console.log( this.author, 'applying change', change );
-			unsent = this.getUnsentChange();
-			// Let c=change and u=unsent. Rebase c over u.
-			rebases = ve.dm.Change.static.rebaseChanges( change, unsent );
-			incoming = rebases[ 0 ]; // c\u
-			unsentRebased = rebases[ 1 ]; // u/c
-			if ( unsentRebased ) {
-				// Apply c\u to the current state, but rewrite the history to c + u/c
-				if ( unsent.transactions.length > 0 ) {
-					console.log( this.author, 'rebasing onto unsent change', unsent );
-				}
-				// Apply c\u
-				incoming.applyTo( this.surface );
-				// Rewind history to before u
-				this.rewindToBefore( unsent );
-				// Add c to the history
-				change.addToHistory( this.doc );
-				this.markSynced();
-				// Add u/c to the history
-				unsentRebased.addToHistory( this.doc );
-				this.applyNewSelections( selections, unsentRebased );
-			} else {
-				// The unsent changes conflict with the new changes, so discard the unsent changes
-				console.log( this.author, 'conflict, discarding unsent change', unsent );
-				// Apply -u
-				unsent.reversed().applyTo( this.surface );
-				// Rewind history to before u
-				this.rewindToBefore( unsent );
-				// Apply c
-				change.applyTo( this.surface );
-				this.applyNewSelections( selections );
-				this.markSynced();
-			}
-		}
+		// The server accepted our change; we've already rebased it as needed so we don't need
+		// to apply anything. We also don't need to rewrite our history because it's already
+		// correct.
+		this.applyNewSelections( selections );
+		this.markSynced( change );
+		this.submittedChange = null;
 	}
 
 	this.applying = false;
@@ -414,23 +350,42 @@ ve.dm.SurfaceSynchronizer.prototype.onNewUpdate = function ( data ) {
  * Roll back our local changes (both submitted and unsubmitted),
  * and apply any changes we may have buffered while this change
  * was in flight.
+ *
+ * @param {Object} data Data from the server
+ * @param {number} [data.transactionStart] Start point of the rejected change
+ * @param {string} [data.error] Error message
  */
-ve.dm.SurfaceSynchronizer.prototype.onRejectedUpdate = function () {
-	// Undo our local changes and remove them from the history
+ve.dm.SurfaceSynchronizer.prototype.onRejectedUpdate = function ( data ) {
+	// TODO conflict notifications from the server are probably redundant; I don't think there's
+	// any case where the client wouldn't already have detected the conflict itself, because the
+	// conflicting change must arrive before the conflict notification. If this is true, then
+	// we could clear this.submittedChange in the conflict handling code in onNewUpdate and
+	// delete most of this function (except for handling data.error).
 	var localChange = this.getUncommittedChange();
-	console.log( this.author, 'conflict, undoing local change', localChange );
-	this.applying = true;
-	localChange.reversed().applyTo( this.surface );
-	this.rewindToBefore( this.submittedChange );
-
-	// Apply pending changes
-	if ( this.pendingChange ) {
-		console.log( this.author, 'applying pending change', this.pendingChange );
-		this.pendingChange.applyTo( this.surface );
-		this.pendingChange = null;
+	console.log( this.author, 'conflict notification from server for ', data.transactionStart );
+	if ( data.transactionStart !== undefined && localChange.transactionStart > data.transactionStart ) {
+		// This is a notification about a conflict that we've already detected locally, ignore.
+		// Note that we can't mistake one conflict notification for another, because we can
+		// never submit two changes with the same transactionStart. Say we submit a change A, then
+		// later submit a change B. If A is accepted, then B will be based on A, so B.tS > A.tS.
+		// If A is rejected, then it conflicted with some change C, and B will be based on C,
+		// so B.tS > C.tS. But A was not based on C, so A.tS <= C.tS. From B.tS > C.tS >= A.tS
+		// it follows that B.tS > A.tS.
+		console.log( 'conflict already handled, ignoring' );
+	} else {
+		console.log( '!!!conflict was not locally detected!!! undoing local change', localChange );
+		// Undo our local changes and remove them from the history
+		this.applying = true;
+		localChange.reversed().applyTo( this.surface );
+		this.rewindToBefore( localChange );
+		this.markSynced();
+		this.applying = false;
 	}
+	// TODO if data.error is set, we may have to resync from scratch
 
-	this.markSynced();
+	// Allow new changes to be submitted
 	this.submittedChange = null;
-	this.applying = false;
+	// Submit any changes that haven't been submitted yet (there can be unsubmitted changes if we
+	// ignored this event, and even if we just rolled back there can be a selection change)
+	this.submitUpdateThrottled();
 };

@@ -378,11 +378,11 @@ ve.dm.Change.prototype.concatRebased = function ( other ) {
 };
 
 /**
- * Build a change from the most recent transactions and store values
+ * Build a change from the last (most recent) transactions and store values
  *
  * @param {number} transactionStart Start offset for transactions
  * @param {number} storeStart Start offset for store values
- * @return {ve.dm.Change} Change with the most recent transactions and store values
+ * @return {ve.dm.Change} Subset of this change with only the most recent transactions and store values
  */
 ve.dm.Change.prototype.mostRecent = function ( transactionStart, storeStart ) {
 	return new ve.dm.Change(
@@ -394,19 +394,18 @@ ve.dm.Change.prototype.mostRecent = function ( transactionStart, storeStart ) {
 };
 
 /**
- * Create a new change with no transactions on top of this change.
+ * Build a change from the first (least recent) transactions and store values of this change.
  *
- * Typically used as a placeholder to concat other changes to later.
- *
- * @return {ve.dm.Change} Empty change based on top of this change
+ * @param {number} transactionLength Number of transactions
+ * @param {number} storeLength Number of store values
+ * @return {ve.dm.Change} Subset of this change with only the least recent transactions and store values
  */
-ve.dm.Change.prototype.end = function () {
-	// TODO come up with a better name
+ve.dm.Change.prototype.truncate = function ( transactionLength, storeLength ) {
 	return new ve.dm.Change(
 		this.transactionStart,
-		[],
+		this.transactions.slice( 0, transactionLength ),
 		this.storeStart,
-		new ve.dm.IndexValueStore()
+		this.store.slice( 0, storeLength )
 	);
 };
 
