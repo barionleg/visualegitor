@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4eb4ebfb_c2d734c3",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 16
+      },
+      "lineNbr": 918,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-10-28T22:05:17Z",
+      "side": 1,
+      "message": "this deserves a comment.",
+      "revId": "5768ef1bd60d31dab3cae83771e1ff03ac0c9262",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
