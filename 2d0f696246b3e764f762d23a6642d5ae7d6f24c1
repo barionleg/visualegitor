@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4eb4ebfb_22c81825",
+        "filename": "src/dm/ve.dm.Selection.js",
+        "patchSetId": 28
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-10-28T22:02:38Z",
+      "side": 1,
+      "message": "number",
+      "revId": "2d0f696246b3e764f762d23a6642d5ae7d6f24c1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
