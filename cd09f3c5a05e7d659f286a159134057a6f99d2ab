@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4eb4ebfb_5d91c59b",
+        "filename": "src/init/ve.init.Target.js",
+        "patchSetId": 15
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-10-28T23:03:04Z",
+      "side": 1,
+      "message": "we probably shouldn\u0027t merge this part just yet - as it is creating a clone of the document on load, which takes time.",
+      "revId": "cd09f3c5a05e7d659f286a159134057a6f99d2ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
