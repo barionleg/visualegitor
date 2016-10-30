@@ -22,6 +22,30 @@
       "revId": "3fd7629c2e2ebadc610a3bfb77505a99eb922276",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_38f724f4",
+        "filename": "demos/ve/demo.css",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2016-10-30T18:42:31Z",
+      "side": 1,
+      "message": "It\u0027s a workaround for a behavior where some browsers will use smaller font size for text if \"font-family\" is set to exactly \"monospace\". We have a documentation for this workaround in MediaWiki core, where it\u0027s also used: https://rawgit.com/wikimedia/mediawiki/master/docs/uidesign/monospace.html Screenshot of that page on my machine (Chromium, Windows 10): https://i.imgur.com/YCx62tj.png",
+      "parentUuid": "4eb4ebfb_b8bd7418",
+      "range": {
+        "startLine": 95,
+        "startChar": 25,
+        "endLine": 95,
+        "endChar": 34
+      },
+      "revId": "3fd7629c2e2ebadc610a3bfb77505a99eb922276",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
