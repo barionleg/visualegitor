@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4eb4ebfb_b8bd7418",
+        "filename": "demos/ve/demo.css",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-10-30T16:58:25Z",
+      "side": 1,
+      "message": "wat?",
+      "range": {
+        "startLine": 95,
+        "startChar": 25,
+        "endLine": 95,
+        "endChar": 34
+      },
+      "revId": "3fd7629c2e2ebadc610a3bfb77505a99eb922276",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
