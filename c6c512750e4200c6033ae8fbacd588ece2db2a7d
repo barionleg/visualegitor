@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4eb4ebfb_84f251cc",
+        "filename": "demos/ve/desktop.html",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-10-31T15:20:35Z",
+      "side": 1,
+      "message": "this doesn\u0027t look good - VE might be overriding OOUI styles without increased specificity.",
+      "revId": "c6c512750e4200c6033ae8fbacd588ece2db2a7d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
