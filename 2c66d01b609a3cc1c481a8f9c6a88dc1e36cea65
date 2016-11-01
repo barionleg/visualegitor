@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4eb4ebfb_49a0dd3e",
+        "filename": "src/ve.Range.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2016-11-01T16:52:05Z",
+      "side": 1,
+      "message": "Should be clear that unlike touchesRange won\u0027t return true for [1,2] \u0026 [2,4].",
+      "revId": "2c66d01b609a3cc1c481a8f9c6a88dc1e36cea65",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
