@@ -62,6 +62,16 @@ function makeConnectionHandler( docName ) {
 				change = ve.dm.Change.static.deserialize( data.change, true );
 				selection = ve.dm.Selection.static.newFromJSON( null, data.selection );
 				console.log( 'receive ' + summarize( data.author, change, selection ) );
+				if ( data.continuation ) {
+					change = rebaser.continueChange( docName, data.author, change );
+					if ( !change ) {
+						console.log( 'continuation failed' );
+						// TODO ensure this message isn't ambiguous
+						socket.emit( 'rejectedUpdate', { transactionStart: data.change.transactionStart, continuation: true } );
+						return;
+					}
+					console.log( 'continuation successful ' + summarize( data.author, change, selection ) );
+				}
 				applied = rebaser.applyChange( docName, data.author, change, selection );
 				if ( applied ) {
 					console.log( 'applied ' + summarize( data.author, applied.change, applied.selection ) );
