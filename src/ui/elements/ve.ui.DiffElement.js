@@ -313,8 +313,10 @@ ve.ui.DiffElement.prototype.getChangedNodeHtml = function ( oldNodeIndex, move )
 				insertIndex = newPreviousNodeRange.from - nodeRange.from;
 			}
 			// Splice in the subnode's annotated data just after the new node's open tag
-			ve.batchSplice( nodeData, 0, insertIndex, outerNodeData );
+			ve.batchSplice( nodeData, insertIndex, 0, outerNodeData );
 		}
+
+		alreadyProcessed[ action ].push( nodeIndex );
 
 	}
 
