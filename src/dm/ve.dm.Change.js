@@ -193,8 +193,8 @@ ve.dm.Change.static.deserializeValue = function ( serialized ) {
  * rebased onto a1 * ... * aN . Iteratively we can take the same approach to rebase over
  * b2,...,bM, giving both rebased lists as required.
  *
- * If any of the transaction rebases conflict, then we immediately return a conflict for the
- * whole change rebase.
+ * If any of the transaction rebases conflict, then we return all of a1,...,aN rebased onto
+ * the largest non-conflicting initial segment b1,...,bK (where clearly K < M).
  *
  * If ordering is ambiguous (two inserts at the same location), the insert for the transaction
  * with the highest author ID is put first (Javascript less-than is used, so comparisons with
@@ -203,11 +203,14 @@ ve.dm.Change.static.deserializeValue = function ( serialized ) {
  *
  * @param {ve.dm.Change} changeA A change
  * @param {ve.dm.Change} changeB Another change
- * @return {ve.dm.Change[]} [ changeAOnChangeB, changeBOnChangeA ], or [ null, null ] if conflict
- * @throws {Error} If changeA and changeB have different starts
+ * @return {Object} Rebased changeA and (the largest non-conflicting initial segment of) changeB
+ * @return {ve.dm.Change} return.a All of changeA rebased onto an initial segment of changeB
+ * @return {ve.dm.Change} return.b An initial segment of changeB rebased onto all of changeA
+ * @return {boolean} return.conflict Whether part of changeB was rejected due to conflict
  */
 ve.dm.Change.static.rebaseChanges = function ( changeA, changeB ) {
-	var i, iLen, b, j, jLen, a, rebases,
+	var i, iLen, b, j, jLen, a, rebases, rebasedTransactionsA,
+		conflict = false,
 		transactionsA = changeA.transactions.slice(),
 		transactionsB = changeB.transactions.slice();
 
@@ -234,9 +237,11 @@ ve.dm.Change.static.rebaseChanges = function ( changeA, changeB ) {
 	//
 	// These identities hold if all the rebases work; if any of them fail, the entire
 	// rebase fails and we return null values.
+	bLoop:
 	for ( i = 0, iLen = transactionsB.length; i < iLen; i++ ) {
 		b = transactionsB[ i ];
 		// Rebase transactions list onto otherTx
+		rebasedTransactionsA = [];
 		for ( j = 0, jLen = transactionsA.length; j < jLen; j++ ) {
 			a = transactionsA[ j ];
 			if ( a.author < b.author ) {
@@ -244,30 +249,34 @@ ve.dm.Change.static.rebaseChanges = function ( changeA, changeB ) {
 			} else {
 				rebases = ve.dm.Transaction.rebaseTransactions( a, b );
 			}
-			transactionsA[ j ] = rebases[ 0 ];
-			b = rebases[ 1 ];
-			if ( b === null ) {
-				return [ null, null ];
+			if ( rebases[ 0 ] === null ) {
+				conflict = true;
+				transactionsB.length = i;
+				break bLoop;
 			}
+			rebasedTransactionsA[ j ] = rebases[ 0 ];
+			b = rebases[ 1 ];
 		}
+		transactionsA = rebasedTransactionsA;
 		transactionsB[ i ] = b;
 	}
 
-	return [
+	return {
 		// These length calculations assume no removal of empty rebased transactions
-		new ve.dm.Change(
-			changeA.transactionStart + changeB.transactions.length,
+		a: new ve.dm.Change(
+			changeA.transactionStart + transactionsB.length,
 			transactionsA,
 			changeB.storeStart + changeB.store.getLength(),
 			changeA.store.difference( changeB.store )
 		),
-		new ve.dm.Change(
-			changeB.transactionStart + changeA.transactions.length,
+		b: new ve.dm.Change(
+			changeB.transactionStart + transactionsA.length,
 			transactionsB,
 			changeA.storeStart + changeA.store.getLength(),
 			changeB.store.difference( changeA.store )
-		)
-	];
+		),
+		conflict: conflict
+	};
 };
 
 /* Methods */
@@ -312,10 +321,13 @@ ve.dm.Change.prototype.reversed = function () {
  * @throws {Error} If this change and other have different starts
  */
 ve.dm.Change.prototype.rebasedOnto = function ( other, startmost ) {
+	var rebases;
 	if ( startmost ) {
-		return this.constructor.static.rebaseChanges( this, other )[ 0 ];
+		rebases = this.constructor.static.rebaseChanges( this, other );
+		return rebases.conflict ? null : rebases.a;
 	} else {
-		return this.constructor.static.rebaseChanges( other, this )[ 1 ];
+		rebases = this.constructor.static.rebaseChanges( other, this );
+		return rebases.conflict ? null : rebases.b;
 	}
 };
 

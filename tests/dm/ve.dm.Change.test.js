@@ -120,7 +120,11 @@ QUnit.test( 'Change operations', 8, function ( assert ) {
 		'Apply (insert1 then insert2*replace2 then underline3) reversed'
 	);
 
-	assert.strictEqual( replace2.rebasedOnto( remove2 ), null, 'Rebase replace2 onto remove2' );
+	assert.deepEqual(
+		ve.dm.Change.static.rebaseChanges( remove2, replace2 ).b.transactions,
+		[],
+		'Conflict rebasing replace2 onto remove2'
+	);
 } );
 
 QUnit.test( 'Serialize/deserialize', 4, function ( assert ) {
