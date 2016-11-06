@@ -2660,7 +2660,7 @@ ve.ce.Surface.prototype.handleObservedChanges = function ( oldState, newState ) 
 			this.surfaceObserver.pollOnceNoCallback();
 		}
 
-		// Ensure we don't observe a selection that spans an active node
+		// Ensure we don't observe a selection that breaks out of the active node
 		activeNode = this.getActiveNode();
 		coveringRange = newSelection.getCoveringRange();
 		if ( activeNode && coveringRange ) {
@@ -2677,7 +2677,7 @@ ve.ce.Surface.prototype.handleObservedChanges = function ( oldState, newState ) 
 				// TODO: setTimeout: document purpose
 				setTimeout( function () {
 					surface.changeModel( null, newSelection );
-					surface .showModelSelection();
+					surface.showModelSelection();
 				} );
 			}
 		}
