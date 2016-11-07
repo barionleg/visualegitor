@@ -16,6 +16,24 @@
       "revId": "d7c7802ef211ca89e239b1dcd895ac0e9114a9fe",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_113ad333",
+        "filename": "src/ui/elements/ve.ui.PreviewElement.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-11-07T19:46:39Z",
+      "side": 1,
+      "message": "See line 63",
+      "parentUuid": "4eb4ebfb_7ba2183d",
+      "revId": "d7c7802ef211ca89e239b1dcd895ac0e9114a9fe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
