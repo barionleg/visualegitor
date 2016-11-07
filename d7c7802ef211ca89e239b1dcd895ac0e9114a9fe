@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4eb4ebfb_7ba2183d",
+        "filename": "src/ui/elements/ve.ui.PreviewElement.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2016-11-07T16:17:51Z",
+      "side": 1,
+      "message": "Could you add a comment mentioning the reason for avoiding jQuery here? This bit, in particular, looks like it\u0027ll trigger random \"oh, I can make this easier to read by switching it to jQuery\" impulses.",
+      "revId": "d7c7802ef211ca89e239b1dcd895ac0e9114a9fe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
