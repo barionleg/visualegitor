@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4eb4ebfb_de3ebab4",
+        "filename": "src/dm/ve.dm.Converter.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 1406,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2016-11-07T16:32:14Z",
+      "side": 1,
+      "message": "If this `undefined` check is ever true, we\u0027ll already have thrown an exception by trying to access properties on it one line above. Should switch the order around, at least.\n\n(The assumption that if there is a next data item it will have a type property was pre-existing, so I\u0027ll trust that it\u0027s valid.)",
+      "revId": "b41c912b53835e83df3a035d826248a68aacf45a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
