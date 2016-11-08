@@ -120,6 +120,7 @@ ve.ui.LinkAnnotationWidget.prototype.setDisabled = function () {
  */
 ve.ui.LinkAnnotationWidget.prototype.onTextChange = function ( value ) {
 	var isExt,
+		isValid,
 		widget = this;
 
 	// RTL/LTR check
@@ -130,10 +131,12 @@ ve.ui.LinkAnnotationWidget.prototype.onTextChange = function ( value ) {
 		this.getTextInputWidget().setDir( isExt ? 'ltr' : 'rtl' );
 	}
 
-	this.getTextInputWidget().isValid().done( function ( valid ) {
-		// Keep annotation in sync with value
-		widget.setAnnotation( valid ? widget.constructor.static.getAnnotationFromText( value ) : null, true );
-	} );
+	this.getTextInputWidget().getValidity()
+		.then( function () { isValid = true; }, function () {} )
+		.then( function () {
+			// Keep annotation in sync with value
+			widget.setAnnotation( isValid ? widget.constructor.static.getAnnotationFromText( value ) : null, true );
+		} );
 };
 
 // eslint-disable-next-line valid-jsdoc
