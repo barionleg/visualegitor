@@ -16,6 +16,24 @@
       "revId": "5f569e4aac6b8bf69b41df3adb901d24d218ad79",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_1b541b54",
+        "filename": "src/init/ve.init.Target.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-11-10T18:41:47Z",
+      "side": 0,
+      "message": "Yes, but that would be cast to a bold annotation by the converter, so I don\u0027t think this comment is that correct or useful.",
+      "parentUuid": "4eb4ebfb_fb760f38",
+      "revId": "5f569e4aac6b8bf69b41df3adb901d24d218ad79",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
