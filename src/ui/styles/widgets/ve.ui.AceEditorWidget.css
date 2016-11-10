@@ -1,0 +1,24 @@
+/*!
+ * VisualEditor UserInterface AceEditorWidget styles.
+ *
+ * @copyright 2011-2016 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+.ve-ui-aceEditorWidget .ace_editor {
+	border: 1px solid #ccc;
+	margin: 1px;
+	font-family: monospace, 'Courier';
+	font-size: inherit;
+	line-height: 1.5;
+}
+
+.ve-ui-aceEditorWidget .ace_focus {
+	/* HACK: Make border grow out as inset doesn't overlap absolute positioned children */
+	border-width: 2px;
+	margin: 0;
+}
+
+.ve-ui-aceEditorWidget.oo-ui-widget-enabled.oo-ui-flaggedElement-invalid .ace_editor {
+	border-color: #f00;
+}

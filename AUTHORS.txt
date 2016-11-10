@@ -66,6 +66,11 @@ Yuki Shira <shirayuking@gmail.com>
 
 Libraries used (alphabetically)
 
+Ace editor
+ – https://github.com/ajaxorg/ace
+ – BSD license
+ – Ajax.org B.V.
+
 classList.js
  – https://github.com/eligrey/classList.js/
  – Dedicated to the public domain
