@@ -16,6 +16,24 @@
       "revId": "b620dc034a86e84ce1d045044be55fe1858b2094",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb4ebfb_324edbc4",
+        "filename": "src/dm/ve.dm.Surface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2016-11-10T14:30:01Z",
+      "side": 1,
+      "message": "Good point. I think it\u0027ll work, with a few tweaks.",
+      "parentUuid": "4eb4ebfb_37bc8db0",
+      "revId": "b620dc034a86e84ce1d045044be55fe1858b2094",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
