@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4eb4ebfb_ef365bae",
+        "filename": "src/ce/nodes/ve.ce.ActiveNode.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-11-10T15:59:12Z",
+      "side": 1,
+      "message": "I understand this class is intended for mixing in, so it should probably just be:\n\n OO.initClass( ve.ce.ActiveNode );\n\nKind of a pity not to specify that the mixin target should be a subclass of ve.ce.BranchNode , though ... OO.inheritClass( ve.ce.ActiveNode, ve.ce.BranchNode ) would read quite nicely.",
+      "revId": "ff646f52057f7f69d97e236478ddf60f8b1937f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
