@@ -181,11 +181,14 @@ ve.init.Target.static.importRules = {
 	external: {
 		blacklist: [
 			// Annotations
-			// TODO: allow spans
 			'textStyle/span', 'textStyle/font',
 			// Nodes
-			'alienInline', 'alienBlock', 'comment'
+			'alienInline', 'alienBlock', 'comment', 'div'
 		],
+		htmlBlacklist: {
+			// remove: [ 'selectorToRemove' ]
+			unwrap: [ 'fieldset', 'legend' ]
+		},
 		nodeSanitization: true
 	},
 	all: null
