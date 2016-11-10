@@ -76,6 +76,11 @@ Yuki Shira <shirayuking@gmail.com>
 
 Libraries used (alphabetically)
 
+Ace editor
+ – https://github.com/ajaxorg/ace
+ – BSD license
+ – Ajax.org B.V.
+
 Diff Match and Patch
  – https://code.google.com/p/google-diff-match-patch/
  – Apache license 2.0
