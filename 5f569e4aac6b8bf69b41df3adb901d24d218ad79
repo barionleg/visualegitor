@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4eb4ebfb_fb760f38",
+        "filename": "src/init/ve.init.Target.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2016-11-10T18:18:56Z",
+      "side": 0,
+      "message": "Isn\u0027t this TODO still wanted? We want to accept \u003cspan style\u003d\"font-weight:bold\"\u003eFoo\u003c/span\u003e, as Foo for now, and later as \u003cb\u003eFoo\u003c/b\u003e?",
+      "revId": "5f569e4aac6b8bf69b41df3adb901d24d218ad79",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
