@@ -490,7 +490,8 @@ ve.init.Target.prototype.setupToolbar = function ( surface ) {
  * Attach the toolbar to the DOM
  */
 ve.init.Target.prototype.attachToolbar = function () {
-	this.getToolbar().$element.insertBefore( this.getToolbar().getSurface().$element );
-	this.getToolbar().initialize();
+	var toolbar = this.getToolbar();
+	toolbar.$element.insertBefore( toolbar.getSurface().$element );
+	toolbar.initialize();
 	this.getActions().initialize();
 };
