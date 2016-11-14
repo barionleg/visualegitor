@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2eb1770d_3deba2a2",
+        "filename": "src/ui/contextitems/ve.ui.MergeCellsContextItem.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2016-11-14T16:46:02Z",
+      "side": 1,
+      "message": "Surely, TableContextItem?",
+      "range": {
+        "startLine": 11,
+        "startChar": 18,
+        "endLine": 11,
+        "endChar": 35
+      },
+      "revId": "bccd17947e72a591f18850cd45350b1f9466c9ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
