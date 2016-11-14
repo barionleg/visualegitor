@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2eb1770d_dd5dde7f",
+        "filename": "src/init/ve.init.Target.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2016-11-14T17:00:05Z",
+      "side": 1,
+      "message": "You need to update the ve.dm.ElementLinearData.prototype.sanitize comment to describe the new key here, since that\u0027s where the comment points to for documentation of it, even though that\u0027s not where this one is actually acting.\n\nIt\u0027s probably worth it, there, spelling out that this doesn\u0027t only apply to HTML elements which don\u0027t have a corresponding model for blacklist to act on. (I can tell, but only because I read what ve.ce.Surface is doing, and I think either interpretation would be reasonable.)",
+      "revId": "af21125f9742edaec176aae42c5f8e712386eb1c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
