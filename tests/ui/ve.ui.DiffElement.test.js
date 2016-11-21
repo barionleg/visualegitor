@@ -64,6 +64,18 @@ QUnit.test( 'Diffing', function ( assert ) {
 					'</div>' +
 					'<p class="ve-ui-diffElement-none">bar</p>' +
 					spacer
+			},
+			{
+				msg: 'Wrapper paragraphs are made concrete',
+				oldDoc: 'foo',
+				newDoc: 'boo',
+				expected:
+					'<div class="ve-ui-diffElement-doc-child-change">' +
+						'<p class="ve-ui-diffElement-remove">foo</p>' +
+					'</div>' +
+					'<div class="ve-ui-diffElement-doc-child-change">' +
+						'<p class="ve-ui-diffElement-insert">boo</p>' +
+					'</div>'
 			}
 		];
 
