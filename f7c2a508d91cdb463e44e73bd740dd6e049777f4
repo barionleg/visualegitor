@@ -16,6 +16,24 @@
       "revId": "f7c2a508d91cdb463e44e73bd740dd6e049777f4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ceb9bbfa_7eeb570a",
+        "filename": "tests/ce/ve.ce.Surface.test.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 774,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-11-21T22:00:48Z",
+      "side": 1,
+      "message": "I posed a question to @divec about what he wants to do with these on PS4.",
+      "parentUuid": "ceb9bbfa_4dc34f0b",
+      "revId": "f7c2a508d91cdb463e44e73bd740dd6e049777f4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
