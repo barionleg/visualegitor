@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ceb9bbfa_4dc34f0b",
+        "filename": "tests/ce/ve.ce.Surface.test.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 774,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2016-11-21T17:31:52Z",
+      "side": 1,
+      "message": "Either fix the tests or leave a comment explaining why they\u0027re commented out. Big blocks of disabled tests with no explanation are confusing.",
+      "revId": "f7c2a508d91cdb463e44e73bd740dd6e049777f4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
