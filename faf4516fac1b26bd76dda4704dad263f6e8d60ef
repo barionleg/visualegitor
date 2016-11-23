@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ceb9bbfa_1d9a1376",
+        "filename": "build/modules.json",
+        "patchSetId": 31
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-11-23T17:52:21Z",
+      "side": 1,
+      "message": "I feel like files to do with rebasing should be kept in a spearate module.",
+      "range": {
+        "startLine": 273,
+        "startChar": 14,
+        "endLine": 273,
+        "endChar": 16
+      },
+      "revId": "faf4516fac1b26bd76dda4704dad263f6e8d60ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ceb9bbfa_7d910f52",
+        "filename": "src/dm/ve.dm.IndexValueStore.js",
+        "patchSetId": 31
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-11-23T17:52:21Z",
+      "side": 1,
+      "message": "instead of doing this, just wrap the this.indexes() call in an if(values). No point call it with an empty array in the majority of cases.",
+      "revId": "faf4516fac1b26bd76dda4704dad263f6e8d60ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ceb9bbfa_3d8b9722",
+        "filename": "src/dm/ve.dm.IndexValueStore.js",
+        "patchSetId": 31
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-11-23T17:52:21Z",
+      "side": 1,
+      "message": "nope, returns a IVStore",
+      "range": {
+        "startLine": 220,
+        "startChar": 12,
+        "endLine": 220,
+        "endChar": 18
+      },
+      "revId": "faf4516fac1b26bd76dda4704dad263f6e8d60ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ceb9bbfa_ddcc9b8e",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 31
+      },
+      "lineNbr": 918,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-11-23T17:52:21Z",
+      "side": 1,
+      "message": "If the rebase server includes OO core then it includes OO.isPlainObject, either via jQuery or polyfill.",
+      "range": {
+        "startLine": 918,
+        "startChar": 35,
+        "endLine": 918,
+        "endChar": 41
+      },
+      "revId": "faf4516fac1b26bd76dda4704dad263f6e8d60ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
