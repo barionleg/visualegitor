@@ -11,7 +11,7 @@
 	"--external": "HTMLDocument,Window,Node,Text,Set,Range,Selection,ClientRect,File,Blob,DataTransfer,DataTransferItem,KeyboardEvent,MouseEvent",
 	"--": [
 		".jsduck/external.js",
-		"lib/oojs",
+		"node_modules/oojs/dist",
 		"lib/oojs-ui",
 		"lib/unicodejs",
 		"lib/treeDiffer",
