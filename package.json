@@ -21,7 +21,8 @@
     }
   ],
   "dependencies": {
-    "jquery": "1.11.3"
+    "jquery": "1.11.3",
+    "oojs": "1.1.10"
   },
   "devDependencies": {
     "eslint-config-wikimedia": "0.3.0",
