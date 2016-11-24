@@ -157,6 +157,24 @@
       "revId": "faf4516fac1b26bd76dda4704dad263f6e8d60ef",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aebe47e0_5a27910d",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 31
+      },
+      "lineNbr": 918,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-11-24T02:46:32Z",
+      "side": 1,
+      "message": "I suggest we proceed with JSON.parse ∘ JSON.stringify for now, then replace with ve.copy once https://gerrit.wikimedia.org/r/323353 is merged.",
+      "parentUuid": "aebe47e0_5ac3113e",
+      "revId": "faf4516fac1b26bd76dda4704dad263f6e8d60ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
