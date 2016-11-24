@@ -25,6 +25,24 @@
     },
     {
       "key": {
+        "uuid": "aebe47e0_dadde118",
+        "filename": "build/modules.json",
+        "patchSetId": 31
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-11-24T01:50:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ceb9bbfa_1d9a1376",
+      "revId": "faf4516fac1b26bd76dda4704dad263f6e8d60ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ceb9bbfa_7d910f52",
         "filename": "src/dm/ve.dm.IndexValueStore.js",
         "patchSetId": 31
@@ -36,6 +54,24 @@
       "writtenOn": "2016-11-23T17:52:21Z",
       "side": 1,
       "message": "instead of doing this, just wrap the this.indexes() call in an if(values). No point call it with an empty array in the majority of cases.",
+      "revId": "faf4516fac1b26bd76dda4704dad263f6e8d60ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aebe47e0_1abd99ad",
+        "filename": "src/dm/ve.dm.IndexValueStore.js",
+        "patchSetId": 31
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-11-24T01:50:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ceb9bbfa_7d910f52",
       "revId": "faf4516fac1b26bd76dda4704dad263f6e8d60ef",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -65,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "aebe47e0_3ac05d2f",
+        "filename": "src/dm/ve.dm.IndexValueStore.js",
+        "patchSetId": 31
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-11-24T01:50:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ceb9bbfa_3d8b9722",
+      "revId": "faf4516fac1b26bd76dda4704dad263f6e8d60ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ceb9bbfa_ddcc9b8e",
         "filename": "src/dm/ve.dm.Transaction.js",
         "patchSetId": 31
@@ -82,6 +136,24 @@
         "endLine": 918,
         "endChar": 41
       },
+      "revId": "faf4516fac1b26bd76dda4704dad263f6e8d60ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aebe47e0_5ac3113e",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 31
+      },
+      "lineNbr": 918,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-11-24T01:50:03Z",
+      "side": 1,
+      "message": "But the canned version of oojs in lib/oojs only has the jQuery version. (It looks like JSON.parse ∘ JSON.stringify is actually slightly faster than ve.copy BTW, which sounds implausible but perhaps the overhead of recursive javascript function calls outweighs the time taken to stringify)",
+      "parentUuid": "ceb9bbfa_ddcc9b8e",
       "revId": "faf4516fac1b26bd76dda4704dad263f6e8d60ef",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
