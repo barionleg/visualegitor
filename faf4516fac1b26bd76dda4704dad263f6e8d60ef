@@ -175,6 +175,24 @@
       "revId": "faf4516fac1b26bd76dda4704dad263f6e8d60ef",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aebe47e0_6682c0ab",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 31
+      },
+      "lineNbr": 918,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-11-25T00:06:06Z",
+      "side": 1,
+      "message": "I can believe it is faster. We also shouldn\u0027t be making reference to the rebaser here. You can just comment that this is a faster way to copy plain, serialisable objects.",
+      "parentUuid": "aebe47e0_5a27910d",
+      "revId": "faf4516fac1b26bd76dda4704dad263f6e8d60ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
