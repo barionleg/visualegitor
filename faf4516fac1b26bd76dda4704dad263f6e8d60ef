@@ -193,6 +193,24 @@
       "revId": "faf4516fac1b26bd76dda4704dad263f6e8d60ef",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aebe47e0_c6b18c8f",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 31
+      },
+      "lineNbr": 918,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-11-25T00:11:20Z",
+      "side": 1,
+      "message": "But also, doesn\u0027t the rebase server already use an npm version?",
+      "parentUuid": "aebe47e0_6682c0ab",
+      "revId": "faf4516fac1b26bd76dda4704dad263f6e8d60ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
