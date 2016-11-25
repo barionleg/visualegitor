@@ -211,6 +211,24 @@
       "revId": "faf4516fac1b26bd76dda4704dad263f6e8d60ef",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aebe47e0_a37b25bd",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 31
+      },
+      "lineNbr": 918,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-11-25T23:17:06Z",
+      "side": 1,
+      "message": "Yes, but relying on another copy of oojs makes the rebaser.build package uglier (less self-contained) here: https://gerrit.wikimedia.org/r/#/c/309812/24/build/modules.json . I\u0027ll modify the comment as you suggest.",
+      "parentUuid": "aebe47e0_c6b18c8f",
+      "revId": "faf4516fac1b26bd76dda4704dad263f6e8d60ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
