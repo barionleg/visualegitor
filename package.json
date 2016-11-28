@@ -20,6 +20,9 @@
       "url": "https://phabricator.wikimedia.org/diffusion/GVED/browse/master/LICENSE.txt"
     }
   ],
+  "dependencies": {
+    "jquery": "1.11.3"
+  },
   "devDependencies": {
     "eslint-config-wikimedia": "0.3.0",
     "grunt": "1.0.1",
