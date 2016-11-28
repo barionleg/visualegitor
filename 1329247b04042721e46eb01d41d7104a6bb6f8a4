@@ -16,6 +16,40 @@
       "revId": "1329247b04042721e46eb01d41d7104a6bb6f8a4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aebe47e0_0ccd5934",
+        "filename": "src/dm/ve.dm.RebaseClient.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-11-28T18:29:14Z",
+      "side": 1,
+      "message": "indubitably",
+      "revId": "1329247b04042721e46eb01d41d7104a6bb6f8a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aebe47e0_acfb0d44",
+        "filename": "src/dm/ve.dm.RebaseServer.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-11-28T18:29:14Z",
+      "side": 1,
+      "message": "Is this supposed to be server-side only code? I notice you load it in the client for unit testing.\n\nIf so you should use /* eslint-env node */\n\nAlso if it using es6 you can use\n\n/* eslint-env es6 */\n\ninstead of declaring Map a global, or\n\n/* eslint-env node, es6 */\n\nfor both. Unless you just using es5 with a Map polyfill...",
+      "revId": "1329247b04042721e46eb01d41d7104a6bb6f8a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
