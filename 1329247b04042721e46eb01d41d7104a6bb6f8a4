@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aebe47e0_2ceffd83",
+        "filename": "src/dm/ve.dm.RebaseClient.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2016-11-28T18:20:17Z",
+      "side": 1,
+      "message": "These aren\u0027t used any more, right?",
+      "revId": "1329247b04042721e46eb01d41d7104a6bb6f8a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
