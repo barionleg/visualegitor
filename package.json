@@ -22,7 +22,8 @@
   ],
   "dependencies": {
     "jquery": "1.11.3",
-    "oojs": "1.1.10"
+    "oojs": "1.1.10",
+    "oojs-ui": "0.18.0"
   },
   "devDependencies": {
     "eslint-config-wikimedia": "0.3.0",

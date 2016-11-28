@@ -127,7 +127,7 @@ module.exports = function ( grunt ) {
 					'visualEditor.standalone.read'
 				],
 				pathPrefix: '../',
-				i18n: [ 'i18n/', 'lib/oojs-ui/i18n/' ],
+				i18n: [ 'i18n/', 'node_modules/oojs-ui/dist/i18n/' ],
 				indent: '\t\t',
 				dir: 'ltr'
 			},
@@ -144,7 +144,7 @@ module.exports = function ( grunt ) {
 					debug: true
 				},
 				pathPrefix: '../../',
-				i18n: [ 'i18n/', 'lib/oojs-ui/i18n/' ],
+				i18n: [ 'i18n/', 'node_modules/oojs-ui/dist/i18n/' ],
 				indent: '\t\t',
 				demoPages: demoPages
 			},
@@ -158,7 +158,7 @@ module.exports = function ( grunt ) {
 				],
 				run: [ 'visualEditor.desktop.standalone.demo' ],
 				pathPrefix: '../../',
-				i18n: [ 'dist/i18n/', 'lib/oojs-ui/i18n/' ],
+				i18n: [ 'dist/i18n/', 'node_modules/oojs-ui/dist/i18n/' ],
 				indent: '\t\t',
 				demoPages: demoPages
 			},
@@ -175,7 +175,7 @@ module.exports = function ( grunt ) {
 					debug: true
 				},
 				pathPrefix: '../../',
-				i18n: [ 'i18n/', 'lib/oojs-ui/i18n/' ],
+				i18n: [ 'i18n/', 'node_modules/oojs-ui/dist/i18n/' ],
 				indent: '\t\t',
 				demoPages: demoPages
 			},
@@ -189,7 +189,7 @@ module.exports = function ( grunt ) {
 				],
 				run: [ 'visualEditor.mobile.standalone.demo' ],
 				pathPrefix: '../../',
-				i18n: [ 'dist/i18n/', 'lib/oojs-ui/i18n/' ],
+				i18n: [ 'dist/i18n/', 'node_modules/oojs-ui/dist/i18n/' ],
 				indent: '\t\t',
 				demoPages: demoPages
 			},
@@ -203,7 +203,7 @@ module.exports = function ( grunt ) {
 				],
 				run: [ 'visualEditor.minimal.standalone.demo' ],
 				pathPrefix: '../../',
-				i18n: [ 'dist/i18n/', 'lib/oojs-ui/i18n/' ],
+				i18n: [ 'dist/i18n/', 'node_modules/oojs-ui/dist/i18n/' ],
 				indent: '\t\t',
 				dir: 'ltr',
 				langList: false
@@ -218,7 +218,7 @@ module.exports = function ( grunt ) {
 				],
 				run: [ 'visualEditor.minimal.standalone.demo' ],
 				pathPrefix: '../../',
-				i18n: [ 'dist/i18n/', 'lib/oojs-ui/i18n/' ],
+				i18n: [ 'dist/i18n/', 'node_modules/oojs-ui/dist/i18n/' ],
 				indent: '\t\t',
 				dir: 'rtl',
 				langList: false

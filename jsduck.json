@@ -12,7 +12,7 @@
 	"--": [
 		".jsduck/external.js",
 		"node_modules/oojs/dist/oojs.jquery.js",
-		"lib/oojs-ui",
+		"node_modules/oojs-ui/dist/oojs-ui.js",
 		"lib/unicodejs",
 		"lib/treeDiffer",
 		"src",

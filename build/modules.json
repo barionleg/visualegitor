@@ -38,10 +38,10 @@
 	},
 	"oojs-ui": {
 		"scripts": [
-			"lib/oojs-ui/oojs-ui-core.js",
-			"lib/oojs-ui/oojs-ui-widgets.js",
-			"lib/oojs-ui/oojs-ui-toolbars.js",
-			"lib/oojs-ui/oojs-ui-windows.js"
+			"node_modules/oojs-ui/dist/oojs-ui-core.js",
+			"node_modules/oojs-ui/dist/oojs-ui-widgets.js",
+			"node_modules/oojs-ui/dist/oojs-ui-toolbars.js",
+			"node_modules/oojs-ui/dist/oojs-ui-windows.js"
 		],
 		"dependencies": [
 			"oojs",
@@ -50,14 +50,14 @@
 	},
 	"oojs-ui-apex": {
 		"scripts": [
-			"lib/oojs-ui/oojs-ui-apex.js"
+			"node_modules/oojs-ui/dist/oojs-ui-apex.js"
 		],
 		"styles": [
-			"lib/oojs-ui/oojs-ui-apex.css",
-			"lib/oojs-ui/oojs-ui-apex-icons-editing-core.css",
-			"lib/oojs-ui/oojs-ui-apex-icons-editing-advanced.css",
-			"lib/oojs-ui/oojs-ui-apex-icons-editing-styling.css",
-			"lib/oojs-ui/oojs-ui-apex-icons-editing-list.css"
+			"node_modules/oojs-ui/dist/oojs-ui-apex.css",
+			"node_modules/oojs-ui/dist/oojs-ui-apex-icons-editing-core.css",
+			"node_modules/oojs-ui/dist/oojs-ui-apex-icons-editing-advanced.css",
+			"node_modules/oojs-ui/dist/oojs-ui-apex-icons-editing-styling.css",
+			"node_modules/oojs-ui/dist/oojs-ui-apex-icons-editing-list.css"
 		],
 		"dependencies": [
 			"oojs-ui"
@@ -65,14 +65,14 @@
 	},
 	"oojs-ui-mediawiki": {
 		"scripts": [
-			"lib/oojs-ui/oojs-ui-mediawiki.js"
+			"node_modules/oojs-ui/dist/oojs-ui-mediawiki.js"
 		],
 		"styles": [
-			"lib/oojs-ui/oojs-ui-mediawiki.css",
-			"lib/oojs-ui/oojs-ui-mediawiki-icons-editing-core.css",
-			"lib/oojs-ui/oojs-ui-mediawiki-icons-editing-advanced.css",
-			"lib/oojs-ui/oojs-ui-mediawiki-icons-editing-styling.css",
-			"lib/oojs-ui/oojs-ui-mediawiki-icons-editing-list.css"
+			"node_modules/oojs-ui/dist/oojs-ui-mediawiki.css",
+			"node_modules/oojs-ui/dist/oojs-ui-mediawiki-icons-editing-core.css",
+			"node_modules/oojs-ui/dist/oojs-ui-mediawiki-icons-editing-advanced.css",
+			"node_modules/oojs-ui/dist/oojs-ui-mediawiki-icons-editing-styling.css",
+			"node_modules/oojs-ui/dist/oojs-ui-mediawiki-icons-editing-list.css"
 		],
 		"dependencies": [
 			"oojs-ui"
