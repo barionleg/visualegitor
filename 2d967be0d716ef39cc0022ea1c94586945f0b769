@@ -16,6 +16,24 @@
       "revId": "2d967be0d716ef39cc0022ea1c94586945f0b769",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ed34346_99141fa2",
+        "filename": "src/ui/ve.ui.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-11-30T19:22:41Z",
+      "side": 1,
+      "message": "It\u0027s not really optional, but I wasn\u0027t in the mood for changing the function signature.",
+      "parentUuid": "aebe47e0_4863273c",
+      "revId": "2d967be0d716ef39cc0022ea1c94586945f0b769",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
