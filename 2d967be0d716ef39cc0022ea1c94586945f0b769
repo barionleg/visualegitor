@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aebe47e0_4863273c",
+        "filename": "src/ui/ve.ui.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2016-11-30T16:47:08Z",
+      "side": 1,
+      "message": "As this is optional, should we comment in the doc what the behaviour would be (default for target)?",
+      "revId": "2d967be0d716ef39cc0022ea1c94586945f0b769",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
