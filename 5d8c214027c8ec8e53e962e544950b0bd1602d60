@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ed34346_1c5b5d28",
+        "filename": "src/dm/ve.dm.SourceSurfaceFragment.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2016-11-30T19:54:53Z",
+      "side": 1,
+      "message": "What, us, hacks? ;-)",
+      "revId": "5d8c214027c8ec8e53e962e544950b0bd1602d60",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
