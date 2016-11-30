@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aebe47e0_68af0b92",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-11-30T16:17:16Z",
+      "side": 1,
+      "message": "One goal is to make this file not depend on ve.dm.TransactionBuilder.js, which is why I perform the aliasing in that file rather than in this one.\n\nThat way, for a use case that doesn\u0027t need transaction building (say, a rebaser), we can just omit ve.dm.TransactionBuilder.js (and indeed ve.dm.Document.js).",
+      "revId": "1b64611621d19222232d76dbc795e8b9210eb53e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
