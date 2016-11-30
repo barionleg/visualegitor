@@ -135,7 +135,7 @@ QUnit.test( 'onTransact', function ( assert ) {
 	QUnit.expect( cases.length * ( 8 * doc.metadata.getTotalDataLength() + 2 ) );
 
 	for ( i = 0; i < cases.length; i++ ) {
-		tx = new ve.dm.Transaction();
+		tx = new ve.dm.TransactionBuilder();
 		for ( j = 0; j < cases[ i ].calls.length; j++ ) {
 			tx[ cases[ i ].calls[ j ][ 0 ] ].apply( tx, cases[ i ].calls[ j ].slice( 1 ) );
 		}
@@ -143,9 +143,9 @@ QUnit.test( 'onTransact', function ( assert ) {
 		surface = new ve.dm.Surface( doc );
 		list = new ve.dm.MetaList( surface );
 		// Test both the transaction-via-surface and transaction-via-document flows
-		surface.change( tx );
+		surface.change( tx.getTransaction() );
 		assertItemsMatchMetadata( assert, doc.metadata, list, cases[ i ].msg, true );
-		surface.change( tx.reversed() );
+		surface.change( tx.getTransaction().reversed() );
 		assertItemsMatchMetadata( assert, doc.metadata, list, cases[ i ].msg + ' (rollback)', true );
 	}
 } );
