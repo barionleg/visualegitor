@@ -50,6 +50,23 @@
       "revId": "1329247b04042721e46eb01d41d7104a6bb6f8a4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ed34346_9c43ed67",
+        "filename": "src/dm/ve.dm.RebaseServer.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2016-11-30T20:53:31Z",
+      "side": 1,
+      "message": "You can\u0027t have two @return directives (unless you\u0027re documenting subproperties of the returned object). Reading the code suggests Object|null is wrong and ve.dm.Change is right.",
+      "revId": "1329247b04042721e46eb01d41d7104a6bb6f8a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
