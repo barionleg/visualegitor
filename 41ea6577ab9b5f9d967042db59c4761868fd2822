@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "aebe47e0_e8943b8f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-11-30T16:07:40Z",
+      "side": 1,
+      "message": "Oh yeah, that\u0027s a good idea - and if we don\u0027t even deprecate that usage then we can make this patch far simpler.",
+      "parentUuid": "aebe47e0_82c36061",
+      "revId": "41ea6577ab9b5f9d967042db59c4761868fd2822",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aebe47e0_c2f278cd",
         "filename": "src/dm/ve.dm.TransactionBuilder.js",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2016-11-30T12:26:06Z",
       "side": 1,
       "message": "we shouldn\u0027t call this tx, maybe tb, builder or txBuilder?",
+      "revId": "41ea6577ab9b5f9d967042db59c4761868fd2822",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aebe47e0_88dc9f4c",
+        "filename": "src/dm/ve.dm.TransactionBuilder.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-11-30T16:07:40Z",
+      "side": 1,
+      "message": "Ok ... I\u0027ve changed it and the similarity between the old ve.dm.Transaction.js and this ve.dm.TransactionBuilder.js is still *just* over 50% (so git with default arguments will detect it as a copy).",
+      "parentUuid": "aebe47e0_c2f278cd",
       "revId": "41ea6577ab9b5f9d967042db59c4761868fd2822",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
