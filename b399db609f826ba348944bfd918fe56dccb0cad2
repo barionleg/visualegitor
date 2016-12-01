@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ed34346_93c6334d",
+        "filename": "build/modules.json",
+        "patchSetId": 44
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-12-01T16:13:20Z",
+      "side": 1,
+      "message": "this should only be loaded in collab environments, baselibs ships everywhere.",
+      "revId": "b399db609f826ba348944bfd918fe56dccb0cad2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
