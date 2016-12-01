@@ -16,6 +16,24 @@
       "revId": "b399db609f826ba348944bfd918fe56dccb0cad2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ed34346_f3044782",
+        "filename": "build/modules.json",
+        "patchSetId": 44
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2016-12-01T16:16:56Z",
+      "side": 1,
+      "message": "Well spotted. There\u0027s some other dependency issues we need to fix too, like the part where ve.dm.Surface creates a SurfaceSynchronizer from its constructor.",
+      "parentUuid": "8ed34346_93c6334d",
+      "revId": "b399db609f826ba348944bfd918fe56dccb0cad2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
