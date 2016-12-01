@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ed34346_a53d682b",
+        "filename": "src/ui/ve.ui.DebugBar.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2016-12-01T00:22:58Z",
+      "side": 1,
+      "message": "Oh, right, these... Meh. Next time.",
+      "revId": "83800c059233686b190a05910a646333fabd2c05",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
