@@ -36,6 +36,11 @@
 			"lib/diff-match-patch/diff_match_patch_uncompressed.js"
 		]
 	},
+	"dompurify": {
+		"scripts": [
+			"lib/dompurify/purify.js"
+		]
+	},
 	"oojs": {
 		"scripts": [
 			"lib/oojs/oojs.jquery.js"
@@ -621,7 +626,8 @@
 			"src/dm/ve.dm.SurfaceSynchronizer.js"
 		],
 		"dependencies": [
-			"visualEditor.core.build"
+			"visualEditor.core.build",
+			"dompurify"
 		]
 	},
 	"visualEditor.test": {
