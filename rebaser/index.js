@@ -19,4 +19,6 @@ $( function () {
 
 	$( '.ve-demo-index' ).append( documentNameField.$element );
 
+	documentNameInput.focus();
+
 } );
