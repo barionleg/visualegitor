@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ed52f32_0191bafb",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 3416,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2016-12-08T20:58:02Z",
+      "side": 1,
+      "message": "This should say \"Support: \" in front of it to match all the other use cases (I think the idea is that when we drop support for a browser version we can quickly find all such hacks and kill them :-)).",
+      "revId": "822a3b9dd761ee87cadcd408bf9c2db2c65b8c78",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
