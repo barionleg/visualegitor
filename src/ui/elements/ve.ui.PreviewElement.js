@@ -67,17 +67,19 @@ ve.ui.PreviewElement.prototype.setModel = function ( model ) {
 ve.ui.PreviewElement.prototype.replaceWithModelDom = function () {
 	var htmlDocument = ve.dm.converter.getDomFromNode( this.model, true ),
 		body = htmlDocument.body,
-		element = this.$element[ 0 ];
+		element = this.$element[ 0 ],
+		modelHtmlDoc = this.model.getDocument().getHtmlDocument();
 
 	// Resolve attributes
 	ve.resolveAttributes(
 		body,
-		this.model.getDocument().getHtmlDocument(),
+		modelHtmlDoc,
 		ve.dm.Converter.static.computedAttributes
 	);
 
 	// Make all links open in a new window (sync view)
 	Array.prototype.forEach.call( body.querySelectorAll( 'a[href]' ), function ( el ) {
+		el.setAttribute( 'href', ve.resolveUrl( el.getAttribute( 'href' ), modelHtmlDoc ) );
 		el.setAttribute( 'target', '_blank' );
 	} );
 
