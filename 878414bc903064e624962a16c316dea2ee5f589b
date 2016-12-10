@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2edfb757_74b39e4d",
+        "filename": "src/ui/elements/ve.ui.PreviewElement.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2016-12-10T18:32:28Z",
+      "side": 1,
+      "message": "hasn\u0027t resolveAttributes already done this?",
+      "revId": "878414bc903064e624962a16c316dea2ee5f589b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
