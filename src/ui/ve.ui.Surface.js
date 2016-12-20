@@ -79,7 +79,7 @@ ve.ui.Surface = function VeUiSurface( dataOrDoc, config ) {
 	} );
 
 	// Events
-	this.getView().connect( this, { keyup: 'scrollCursorIntoView' } );
+	this.getModel().connect( this, { select: 'scrollCursorIntoView' } );
 	this.getModel().getDocument().connect( this, { transact: 'onDocumentTransact' } );
 
 	// Initialization
@@ -464,16 +464,14 @@ ve.ui.Surface.prototype.onDocumentTransact = function () {
 };
 
 /**
- * Scroll the cursor into view.
+ * Scroll the cursor into view
+ *
+ * Called in response to selection events.
  *
  * This is required when the cursor disappears under the floating toolbar.
  */
 ve.ui.Surface.prototype.scrollCursorIntoView = function () {
-	var view, nativeRange, clientRect, cursorTop, scrollTo, toolbarBottom;
-
-	if ( !this.toolbarHeight ) {
-		return;
-	}
+	var view, nativeRange, clientRect, cursorTop, cursorBottom, scrollTo, bottomBound, topBound;
 
 	view = this.getView();
 
@@ -488,14 +486,28 @@ ve.ui.Surface.prototype.scrollCursorIntoView = function () {
 
 	clientRect = RangeFix.getBoundingClientRect( nativeRange );
 	if ( !clientRect ) {
+		// If we're at the end of the document, the selection being in an empty paragraph will fail here.
+		if ( nativeRange.collapsed && nativeRange.startContainer.classList.contains( 've-ce-branchNode-slug' ) ) {
+			// Fortunately, we can fall back in this case to just using the node's position
+			clientRect = nativeRange.startContainer.getBoundingClientRect();
+		}
+	}
+	if ( !clientRect ) {
 		return;
 	}
 
-	cursorTop = clientRect.top - 5;
-	toolbarBottom = this.toolbarHeight;
+	// TODO: this has some long-standing assumptions that we're going to be in
+	// the context we expect. If we get VE in a scrollable div or suchlike,
+	// we'd no longer be able to make these assumptions about top/bottom of
+	// window.
+	topBound = this.toolbarHeight; // top of the window + height of the toolbar
+	bottomBound = window.innerHeight; // bottom of the window
 
-	if ( cursorTop < toolbarBottom ) {
-		scrollTo = this.$scrollContainer.scrollTop() + cursorTop - toolbarBottom;
+	cursorTop = clientRect.top - 5;
+	cursorBottom = clientRect.bottom + 5;
+
+	if ( cursorTop < topBound || cursorBottom > bottomBound ) {
+		scrollTo = this.$scrollContainer.scrollTop() + ( cursorTop - topBound );
 		this.scrollTo( scrollTo );
 	}
 };
