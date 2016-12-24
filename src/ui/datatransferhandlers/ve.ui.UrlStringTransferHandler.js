@@ -102,8 +102,8 @@ ve.ui.UrlStringTransferHandler.prototype.process = function () {
 			// When Chrome uses this mime type the link titles can
 			// be extracted from the 'text/html' version of the item.
 			// Let's try that.
-			if ( this.item.data.htmlStringData ) {
-				html = this.item.data.htmlStringData;
+			if ( this.item.data.extraData && this.item.data.extraData[ 'text/html' ] ) {
+				html = this.item.data.extraData[ 'text/html' ];
 				doc = ve.createDocumentFromHtml( html );
 				links = $.makeArray( doc.querySelectorAll( 'a[href]' ) )
 					.map( function ( a ) {

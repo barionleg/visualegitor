@@ -98,13 +98,32 @@ QUnit.test( 'paste', function ( assert ) {
 			},
 			{
 				msg: 'DnD standard URI list with HTML',
-				pasteString: '#comment\nhttp://example.com\n',
+				pasteString: '#comment\nhttp://example.com/foo\n',
 				pasteType: 'text/uri-list',
-				pasteHtml: '<a href="http://example.com/foo">Foo</a>',
+				pasteHtml: '<a href="http://example.com/foo">Title will get ignored</a>',
 				expectedData: function ( makeAnnotation ) {
 					var a = makeAnnotation( 'http://example.com/foo' );
 					return [
-						[ 'F', [ a ] ],
+						[ 'h', [ a ] ],
+						[ 't', [ a ] ],
+						[ 't', [ a ] ],
+						[ 'p', [ a ] ],
+						[ ':', [ a ] ],
+						[ '/', [ a ] ],
+						[ '/', [ a ] ],
+						[ 'e', [ a ] ],
+						[ 'x', [ a ] ],
+						[ 'a', [ a ] ],
+						[ 'm', [ a ] ],
+						[ 'p', [ a ] ],
+						[ 'l', [ a ] ],
+						[ 'e', [ a ] ],
+						[ '.', [ a ] ],
+						[ 'c', [ a ] ],
+						[ 'o', [ a ] ],
+						[ 'm', [ a ] ],
+						[ '/', [ a ] ],
+						[ 'f', [ a ] ],
 						[ 'o', [ a ] ],
 						[ 'o', [ a ] ]
 					];
