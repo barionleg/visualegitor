@@ -2264,23 +2264,28 @@ ve.ce.Surface.prototype.afterPaste = function () {
  * @return {boolean} One more items was handled
  */
 ve.ce.Surface.prototype.handleDataTransfer = function ( dataTransfer, isPaste, targetFragment ) {
-	var i, l, pushItemToBack,
-		items = [],
-		htmlStringData = dataTransfer.getData( 'text/html' );
+	var i, l, stringData, extraData, item,
+		items = [];
+
+	// Always provide common types, e.g. URL string handler sometimes uses text/html.
+	extraData = {
+		'text/html': dataTransfer.getData( 'text/html' ),
+		'text/plain': dataTransfer.getData( 'text/plain' )
+	};
 
 	// Only look for files if HTML is not available:
 	//  - If a file is pasted/dropped it is unlikely it will have HTML fallback (it will have plain text fallback though)
 	//  - HTML generated from some clients has an image fallback(!) that is a screenshot of the HTML snippet (e.g. LibreOffice Calc)
-	if ( !htmlStringData ) {
+	if ( !extraData[ 'text/html' ] ) {
 		if ( dataTransfer.items ) {
 			for ( i = 0, l = dataTransfer.items.length; i < l; i++ ) {
 				if ( dataTransfer.items[ i ].kind !== 'string' ) {
-					items.push( ve.ui.DataTransferItem.static.newFromItem( dataTransfer.items[ i ], htmlStringData ) );
+					items.push( ve.ui.DataTransferItem.static.newFromItem( dataTransfer.items[ i ], extraData ) );
 				}
 			}
 		} else if ( dataTransfer.files ) {
 			for ( i = 0, l = dataTransfer.files.length; i < l; i++ ) {
-				items.push( ve.ui.DataTransferItem.static.newFromBlob( dataTransfer.files[ i ], htmlStringData ) );
+				items.push( ve.ui.DataTransferItem.static.newFromBlob( dataTransfer.files[ i ], extraData ) );
 			}
 		}
 	}
@@ -2288,16 +2293,11 @@ ve.ce.Surface.prototype.handleDataTransfer = function ( dataTransfer, isPaste, t
 	if ( dataTransfer.items ) {
 		// Extract "string" types.
 		for ( i = 0, l = dataTransfer.items.length; i < l; i++ ) {
-			if (
-				dataTransfer.items[ i ].kind === 'string' &&
-				dataTransfer.items[ i ].type.substr( 0, 5 ) === 'text/'
-			) {
+			item = dataTransfer.items[ i ];
+			if ( item.kind === 'string' && item.type.slice( 0, 5 ) === 'text/' ) {
 				items.push( ve.ui.DataTransferItem.static.newFromString(
-					dataTransfer.getData( dataTransfer.items[ i ].type ),
-					dataTransfer.items[ i ].type,
-					htmlStringData
+					dataTransfer.getData( item.type ), item.type, extraData
 				) );
-			}
 		}
 	}
 
@@ -2306,7 +2306,7 @@ ve.ce.Surface.prototype.handleDataTransfer = function ( dataTransfer, isPaste, t
 	// be in the fallback order we'd prefer. In practice, this just means that
 	// we want to text/html and text/plain to be at the end of the list, as
 	// they tend to show up as common fallbacks.
-	pushItemToBack = function ( array, type ) {
+	moveItemToBack = function ( array, type ) {
 		var i, l;
 		for ( i = 0, l = array.length; i < l; i++ ) {
 			if ( array[ i ].type === type ) {
@@ -2314,8 +2314,8 @@ ve.ce.Surface.prototype.handleDataTransfer = function ( dataTransfer, isPaste, t
 			}
 		}
 	};
-	pushItemToBack( items, 'text/html' );
-	pushItemToBack( items, 'text/plain' );
+	moveItemToBack( items, 'text/html' );
+	moveItemToBack( items, 'text/plain' );
 
 	return this.handleDataTransferItems( items, isPaste, targetFragment );
 };
