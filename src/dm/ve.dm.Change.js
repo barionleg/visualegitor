@@ -145,7 +145,6 @@ ve.dm.Change.static.deserializeValue = function ( serialized ) {
 		return ve.dm.annotationFactory.createFromElement( serialized.value );
 	} else if ( serialized.type === 'domNodeArray' ) {
 		rdfaAttrs = [ 'about', 'rel', 'resource', 'property', 'content', 'datatype', 'typeof' ];
-
 		return serialized.value.map( function ( nodeHtml ) {
 			// Support: IE9
 			// DOMPurify.sanitize will return html strings in incompatible browsers
@@ -156,10 +155,16 @@ ve.dm.Change.static.deserializeValue = function ( serialized ) {
 				RETURN_DOM_FRAGMENT: true
 			} );
 			if ( typeof fragmentOrHtml === 'string' ) {
+				if ( fragmentOrHtml === '' ) {
+					return undefined;
+				}
 				return $.parseHTML( fragmentOrHtml )[ 0 ];
 			} else {
 				return fragmentOrHtml.childNodes[ 0 ];
 			}
+		} ).filter( function ( node ) {
+			// Nodes can be sanitized to nothing
+			return node !== undefined && node !== '';
 		} );
 	} else if ( serialized.type === 'plain' ) {
 		return serialized.value;
