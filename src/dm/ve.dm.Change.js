@@ -160,6 +160,9 @@ ve.dm.Change.static.deserializeValue = function ( serialized ) {
 			} else {
 				return fragmentOrHtml.childNodes[ 0 ];
 			}
+		} ).filter( function ( node ) {
+			// Nodes can be sanitized to nothing
+			return node !== undefined && node !== '';
 		} );
 	} else if ( serialized.type === 'plain' ) {
 		return serialized.value;
