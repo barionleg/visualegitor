@@ -27,8 +27,6 @@ OO.inheritClass( ve.dm.BlockquoteNode, ve.dm.BranchNode );
 
 ve.dm.BlockquoteNode.static.name = 'blockquote';
 
-ve.dm.BlockquoteNode.static.canContainContent = true;
-
 ve.dm.BlockquoteNode.static.matchTagNames = [ 'blockquote' ];
 
 /* Registration */
