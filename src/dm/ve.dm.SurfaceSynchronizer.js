@@ -14,8 +14,12 @@
  *
  * @constructor
  * @param {ve.dm.Surface} surface Surface model to synchronize
+ * @param {Object} [config] Configuration options
+ * @cfg {string} [server] IO server
  */
-ve.dm.SurfaceSynchronizer = function VeDmSurfaceSynchronizer( surface ) {
+ve.dm.SurfaceSynchronizer = function VeDmSurfaceSynchronizer( surface, config ) {
+	config = config || {};
+
 	// Mixin constructors
 	OO.EventEmitter.call( this );
 	ve.dm.RebaseClient.call( this );
@@ -36,7 +40,7 @@ ve.dm.SurfaceSynchronizer = function VeDmSurfaceSynchronizer( surface ) {
 	}
 
 	// HACK
-	this.socket = io( '/' + this.documentId );
+	this.socket = io( ( config.server || '' ) + '/' + this.documentId );
 	this.socket.on( 'registered', this.onRegistered.bind( this ) );
 	this.socket.on( 'newChange', this.onNewChange.bind( this ) );
 
