@@ -35,11 +35,6 @@ ve.dm.SurfaceSynchronizer = function VeDmSurfaceSynchronizer( surface, documentI
 	// Whether we are currently synchronizing the model
 	this.applying = false;
 
-	// HACK: Disable in unit tests
-	if ( window.QUnit ) {
-		return;
-	}
-
 	// HACK
 	this.socket = io( ( config.server || '' ) + '/' + this.documentId );
 	this.socket.on( 'registered', this.onRegistered.bind( this ) );
