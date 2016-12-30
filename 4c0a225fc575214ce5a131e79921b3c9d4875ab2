@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_b53f7cd2",
+        "filename": "src/dm/ve.dm.Change.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2016-12-30T06:29:40Z",
+      "side": 1,
+      "message": "$.parseHTML( \u0027\u0027 )[ 0 ] will give a TypeError",
+      "revId": "4c0a225fc575214ce5a131e79921b3c9d4875ab2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
