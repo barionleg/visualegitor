@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_51edeaec",
+        "filename": "src/ui/ve.ui.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-01-01T15:03:39Z",
+      "side": 1,
+      "message": "couldn\u0027t we just use surface.getView().getSelection().getBoundingClientRect() which has all these fallbacks?",
+      "range": {
+        "startLine": 488,
+        "startChar": 10,
+        "endLine": 488,
+        "endChar": 11
+      },
+      "revId": "ef22c9f923e8a298626770b92d1690678226294c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
