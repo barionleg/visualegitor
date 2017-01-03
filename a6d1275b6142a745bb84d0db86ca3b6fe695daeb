@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e0e73b5_643dbf28",
+        "filename": "src/ce/metaitems/ve.ce.AlienMetaItem.js",
+        "patchSetId": 12
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2017-01-03T19:31:31Z",
+      "side": 1,
+      "message": "2017 now. :-)",
+      "revId": "a6d1275b6142a745bb84d0db86ca3b6fe695daeb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
