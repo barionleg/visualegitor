@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee12ffd6_1728d731",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2017-01-05T20:15:47Z",
+      "side": 1,
+      "message": "Add a TODO for \"remove this Backwards-Incompatibility check\"? :-)",
+      "revId": "afda6bc90f717f54aa69244b962d758e6666f3eb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
