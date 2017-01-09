@@ -21,22 +21,43 @@ OO.initClass( ve.dm.RebaseServer );
 /**
  * Get the state of a document by name.
  *
- * @param {string} name Name of a document
- * @return {Object} Document state (history and selections)
- * @return {ve.dm.Change} return.history History as one big Change
+ * @param {string} doc Name of a document
+ * @return {Promise<Object>} Document state (history and selections)
+ * @return {ve.dm.Change} return.history History as one big Change TODO: async return types
  * @return {Map.<number,ve.dm.Change>} return.continueBases Per-author transposed history for rebasing
  * @return {Map.<number,number>} return.rejections Per-author count of unacknowledged rejections
  */
-ve.dm.RebaseServer.prototype.getStateForDoc = function ( name ) {
-	if ( !this.stateForDoc.has( name ) ) {
-		this.stateForDoc.set( name, {
+ve.dm.RebaseServer.prototype.getStateForDoc = function getStateForDoc( doc ) {
+	if ( !this.stateForDoc.has( doc ) ) {
+		this.stateForDoc.set( doc, {
 			history: new ve.dm.Change( 0, [], [], {} ),
 			continueBases: new Map(),
 			rejections: new Map()
 		} );
 	}
-	return this.stateForDoc.get( name );
+	return Promise.resolve( this.stateForDoc.get( doc ) );
 };
+
+/**
+ * Get the history for a doc as one big Change
+ *
+ * @param {string} doc Name of a document
+ * @return {Promise<ve.dm.Change>} The history
+ */
+ve.dm.RebaseServer.prototype.getHistoryForDoc = ve.async( function* getHistoryForDoc( doc ) {
+	return ( yield this.getStateForDoc( doc ) ).history;
+} );
+
+/**
+ * Append to the history of a doc
+ *
+ * @param {string} doc Name of a document
+ * @param {ve.dm.Change} The history to append
+ * @return {Promise<undefined>}
+ */
+ve.dm.RebaseServer.prototype.appendHistoryForDoc = ve.async( function* appendHistoryForDoc( doc, change ) {
+	( yield this.getStateForDoc( doc ) ).history.push( change );
+} );
 
 /**
  * Attempt to rebase and apply a change to a document.
@@ -49,11 +70,11 @@ ve.dm.RebaseServer.prototype.getStateForDoc = function ( name ) {
  * @param {number} author Author ID
  * @param {number} backtrack How many transactions are backtracked from the previous submission
  * @param {ve.dm.Change} change Change to apply
- * @return {ve.dm.Change} Accepted change (or initial segment thereof), as rebased
+ * @return {Promise<ve.dm.Change>} Accepted change (or initial segment thereof), as rebased
  */
-ve.dm.RebaseServer.prototype.applyChange = function ( doc, author, backtrack, change ) {
+ve.dm.RebaseServer.prototype.applyChange = ve.async( function* applyChange( doc, author, backtrack, change ) {
 	var base, rejections, result,
-		state = this.getStateForDoc( doc );
+		state = yield this.getStateForDoc( doc );
 
 	base = state.continueBases.get( author ) || change.truncate( 0 );
 	rejections = state.rejections.get( author ) || 0;
@@ -80,7 +101,7 @@ ve.dm.RebaseServer.prototype.applyChange = function ( doc, author, backtrack, ch
 	state.continueBases.set( author, result.transposedHistory );
 
 	if ( result.rebased.getLength() ) {
-		state.history.push( result.rebased );
+		yield this.appendHistoryForDoc( doc, result.rebased );
 	}
 	return result.rebased;
-};
+} );
