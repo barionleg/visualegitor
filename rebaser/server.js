@@ -32,6 +32,12 @@ function summarize( author, backtrack, change ) {
 	return summary.join( ', ' );
 }
 
+function wait( timeout ) {
+	return new Promise( function ( resolve ) {
+		setTimeout( resolve, timeout );
+	} );
+}
+
 rebaseServer = new ve.dm.RebaseServer();
 docNamespaces = new Map();
 lastAuthorForDoc = new Map();
@@ -39,7 +45,7 @@ artificialDelay = parseInt( process.argv[ 2 ] ) || 0;
 
 function makeConnectionHandler( docName ) {
 	return function handleConnection( socket ) {
-		var history = rebaseServer.getStateForDoc( docName ).history,
+		var gotHistory = rebaseServer.getHistoryForDoc( docName ),
 			author = 1 + ( lastAuthorForDoc.get( docName ) || 0 );
 		lastAuthorForDoc.set( docName, author );
 		console.log( 'new client ' + author + ' for ' + docName );
@@ -49,14 +55,17 @@ function makeConnectionHandler( docName ) {
 		// comments in the /raw handler. Keeping an updated linmod on the server could be
 		// feasible if TransactionProcessor was modified to have a "don't sync, just apply"
 		// mode and ve.dm.Document was faked with { data: ..., metadata: ..., store: ... }
-		console.log( 'Sending full history: ' + summarize( null, 0, history ) );
-		socket.emit( 'newChange', history.serialize( true ) );
-		socket.on( 'submitChange', setTimeout.bind( null, function ( data ) {
+		gotHistory.then( function ( history ) {
+			socket.emit( 'newChange', history.serialize( true ) );
+		} );
+		socket.on( 'submitChange', ve.async( function* onSubmitChange( data ) {
 			var change, applied;
+			yield gotHistory;
+			yield wait( artificialDelay );
 			try {
 				change = ve.dm.Change.static.deserialize( data.change, null, true );
 				console.log( 'receive ' + summarize( author, data.backtrack, change ) );
-				applied = rebaseServer.applyChange( docName, author, data.backtrack, change );
+				applied = yield rebaseServer.applyChange( docName, author, data.backtrack, change );
 				if ( !applied.isEmpty() ) {
 					console.log( 'applied ' + summarize( author, 0, applied ) );
 					docNamespaces.get( docName ).emit(
@@ -70,7 +79,7 @@ function makeConnectionHandler( docName ) {
 			} catch ( error ) {
 				console.error( error.stack );
 			}
-		}, artificialDelay ) );
+		} ) );
 	};
 }
 

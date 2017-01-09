@@ -621,6 +621,7 @@
 	},
 	"visualEditor.rebase": {
 		"scripts": [
+			"src/ve.utils-es6.js",
 			"src/dm/ve.dm.Change.js",
 			"src/dm/ve.dm.RebaseServer.js",
 			"src/dm/ve.dm.RebaseClient.js",
@@ -907,6 +908,7 @@
 	},
 	"rebaser.build": {
 		"scripts": [
+			"src/ve.utils-es6.js",
 			"src/dm/ve.dm.IndexValueStore.js",
 			"src/dm/ve.dm.Transaction.js",
 			"src/dm/ve.dm.Change.js",

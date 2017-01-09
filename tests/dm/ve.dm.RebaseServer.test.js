@@ -57,9 +57,9 @@ ve.dm.TestRebaseServer = function VeDmRebaseServer() {
 
 OO.inheritClass( ve.dm.TestRebaseServer, ve.dm.RebaseServer );
 
-ve.dm.TestRebaseServer.prototype.historySummary = function () {
-	return ve.dm.testHistorySummary( this.stateForDoc.get( 'foo' ).history );
-};
+ve.dm.TestRebaseServer.prototype.historySummary = ve.async( function* historySummary() {
+	return ve.dm.testHistorySummary( yield this.getHistoryForDoc( 'foo' ) );
+} );
 
 ve.dm.TestRebaseClient = function VeDmTestRebaseClient( server, sharedIncoming ) {
 	ve.dm.RebaseClient.apply( this );
@@ -111,21 +111,22 @@ ve.dm.TestRebaseClient.prototype.removeFromHistory = function ( change ) {
 	this.history = this.history.truncate( change.start );
 };
 
-ve.dm.TestRebaseClient.prototype.deliverOne = function () {
+ve.dm.TestRebaseClient.prototype.deliverOne = ve.async( function* deliverOne() {
 	var item, rebased;
 	item = this.outgoing[ this.outgoingPointer++ ];
-	rebased = this.server.applyChange( 'foo', this.getAuthor(), item.backtrack, item.change );
+	rebased = yield this.server.applyChange( 'foo', this.getAuthor(), item.backtrack, item.change );
 	if ( !rebased.isEmpty() ) {
 		this.sharedIncoming.push( rebased );
 	}
-};
+} );
 
 ve.dm.TestRebaseClient.prototype.receiveOne = function () {
 	this.acceptChange( this.sharedIncoming[ this.incomingPointer++ ] );
 };
 
-QUnit.test( 'Rebase', 43, function ( assert ) {
-	var origData = [ { type: 'paragraph' }, { type: '/paragraph' } ],
+QUnit.test( 'Rebase', 43, assert => ve.spawn( function* () {
+	var done = assert.async(),
+		origData = [ { type: 'paragraph' }, { type: '/paragraph' } ],
 		newSurface = function () {
 			return new ve.dm.Surface(
 				ve.dm.example.createExampleDocumentFromData( origData )
@@ -185,8 +186,8 @@ QUnit.test( 'Rebase', 43, function ( assert ) {
 	assert.equal( client1.historySummary(), 'abc!', '1apply0' );
 	client1.submitChange();
 	assert.equal( client1.historySummary(), 'abc?', '1submit0' );
-	client1.deliverOne();
-	assert.equal( server.historySummary(), 'abc', '1deliver0' );
+	yield client1.deliverOne();
+	assert.equal( yield server.historySummary(), 'abc', '1deliver0' );
 
 	client2.applyChange( new ve.dm.Change( 0, [
 		txInsert( 1, [ 'A' ], 3 ),
@@ -194,8 +195,8 @@ QUnit.test( 'Rebase', 43, function ( assert ) {
 	], [ noVals, noVals ], { 2: newSel( 3 ) } ) );
 	assert.equal( client2.historySummary(), 'AB!', '2apply0' );
 	client2.submitChange();
-	client2.deliverOne();
-	assert.equal( server.historySummary(), 'abcAB', '2deliver0' );
+	yield client2.deliverOne();
+	assert.equal( yield server.historySummary(), 'abcAB', '2deliver0' );
 
 	client1.applyChange( new ve.dm.Change( 3, [
 		txInsert( 4, [ [ 'd', bIndex ] ], 3 ),
@@ -207,8 +208,8 @@ QUnit.test( 'Rebase', 43, function ( assert ) {
 	assert.equal( client1.historySummary(), 'abc/def!', '1receive0' );
 	client1.submitChange();
 	assert.equal( client1.historySummary(), 'abc/def?', '1receive1' );
-	client1.deliverOne();
-	assert.equal( server.historySummary(), 'abcABdef', '1deliver1' );
+	yield client1.deliverOne();
+	assert.equal( yield server.historySummary(), 'abcABdef', '1deliver1' );
 
 	client2.applyChange( new ve.dm.Change( 2, [
 		txInsert( 3, [ [ 'C', uIndex ] ], 3 ),
@@ -222,8 +223,8 @@ QUnit.test( 'Rebase', 43, function ( assert ) {
 
 	client2.submitChange();
 	assert.equal( client2.historySummary(), 'abcAB/CD?', '2submit1' );
-	client2.deliverOne();
-	assert.equal( server.historySummary(), 'abcABdefCD', '2deliver1' );
+	yield client2.deliverOne();
+	assert.equal( yield server.historySummary(), 'abcABdefCD', '2deliver1' );
 
 	client1.receiveOne();
 	assert.equal( client1.historySummary(), 'abcAB/def?', '1receive1' );
@@ -238,8 +239,8 @@ QUnit.test( 'Rebase', 43, function ( assert ) {
 	assert.equal( client1.historySummary(), 'abcABdef/ghi!', '1apply3' );
 	client1.submitChange();
 	assert.equal( client1.historySummary(), 'abcABdef/ghi?', '1submit3' );
-	client1.deliverOne();
-	assert.equal( server.historySummary(), 'abcABdefCDghi', '1deliver3' );
+	yield client1.deliverOne();
+	assert.equal( yield server.historySummary(), 'abcABdefCDghi', '1deliver3' );
 	client1.receiveOne();
 	assert.equal( client1.historySummary(), 'abcABdefCD/ghi?', '1receive3' );
 	client1.receiveOne();
@@ -265,8 +266,8 @@ QUnit.test( 'Rebase', 43, function ( assert ) {
 	assert.equal( client1.historySummary(), 'abcABdefCDghi/-(Bd)?/-(cA)!', '1apply6' );
 	client1.submitChange();
 	assert.equal( client1.historySummary(), 'abcABdefCDghi/-(Bd)-(cA)?', '1submit6' );
-	client1.deliverOne();
-	assert.equal( server.historySummary(), 'abcABdefCDghi-(Bd)', '1deliver5' );
+	yield client1.deliverOne();
+	assert.equal( yield server.historySummary(), 'abcABdefCDghi-(Bd)', '1deliver5' );
 	client1.receiveOne();
 	assert.equal( client1.historySummary(), 'abcABdefCDghi-(Bd)/-(cA)?', '1receive5' );
 
@@ -293,12 +294,12 @@ QUnit.test( 'Rebase', 43, function ( assert ) {
 	client2.submitChange();
 	assert.equal( client2.historySummary(), 'abcABdefCDghi-(Bd)/WXV?', '2submit7' );
 
-	client1.deliverOne();
-	assert.equal( server.historySummary(), 'abcABdefCDghi-(Bd)-(cA)', '1deliver6' );
+	yield client1.deliverOne();
+	assert.equal( yield server.historySummary(), 'abcABdefCDghi-(Bd)-(cA)', '1deliver6' );
 
-	client2.deliverOne();
-	client2.deliverOne();
-	assert.equal( server.historySummary(), 'abcABdefCDghi-(Bd)-(cA)W', '2deliver5' );
+	yield client2.deliverOne();
+	yield client2.deliverOne();
+	assert.equal( yield server.historySummary(), 'abcABdefCDghi-(Bd)-(cA)W', '2deliver5' );
 	client2.receiveOne();
 	assert.equal( client2.historySummary(), 'abcABdefCDghi-(Bd)-(cA)/W?', '2receive6' );
 
@@ -308,11 +309,14 @@ QUnit.test( 'Rebase', 43, function ( assert ) {
 	assert.equal( client2.historySummary(), 'abcABdefCDghi-(Bd)-(cA)/W?/P!', '2apply8' );
 	client2.submitChange();
 	assert.equal( client2.historySummary(), 'abcABdefCDghi-(Bd)-(cA)/WP?', '2submit8' );
-	client2.deliverOne();
-	assert.equal( server.historySummary(), 'abcABdefCDghi-(Bd)-(cA)WP', '2deliver8' );
+	yield client2.deliverOne();
+	assert.equal( yield server.historySummary(), 'abcABdefCDghi-(Bd)-(cA)WP', '2deliver8' );
 
 	client2.receiveOne();
 	assert.equal( client2.historySummary(), 'abcABdefCDghi-(Bd)-(cA)W/P?', '2receive7' );
 	client2.receiveOne();
 	assert.equal( client2.historySummary(), 'abcABdefCDghi-(Bd)-(cA)WP', '2receive8' );
-} );
+	done();
+} () ).catch( function ( err ) {
+	console.error( err );
+} ) );
