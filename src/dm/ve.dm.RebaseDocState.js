@@ -28,3 +28,13 @@ ve.dm.RebaseDocState = function VeDmRebaseDocState() {
 /* Inheritance */
 
 OO.initClass( ve.dm.RebaseDocState );
+
+ve.dm.RebaseDocState.prototype.getActiveNames = function () {
+	var result = {};
+	this.authors.forEach( function ( authorData, authorId ) {
+		if ( authorData.active ) {
+			result[ authorId ] = authorData.displayName;
+		}
+	} );
+	return result;
+};

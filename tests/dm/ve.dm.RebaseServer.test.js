@@ -4,9 +4,11 @@
  * @copyright 2011-2017 VisualEditor Team and others; see http://ve.mit-license.org
  */
 
+/* eslint-env es6 */
+
 QUnit.module( 've.dm.RebaseServer' );
 
-QUnit.test( 'Rebase', function ( assert ) {
+QUnit.test( 'Rebase', assert => ve.spawn( function* () {
 	var cases = [
 		{
 			name: 'Concurrent insertions',
@@ -189,7 +191,7 @@ QUnit.test( 'Rebase', function ( assert ) {
 				[ '2', 'assertHist', '-(Bd)-(cA)WP' ]
 			]
 		} ],
-		i, j, op, server, client, clients, action, txs;
+		i, j, op, server, client, clients, action, txs, summary;
 
 	function makeTransaction( doc, data ) {
 		var i, method,
@@ -214,13 +216,17 @@ QUnit.test( 'Rebase', function ( assert ) {
 		return builder.getTransaction();
 	}
 
+	QUnit.stop();
+
 	for ( i = 0; i < cases.length; i++ ) {
 		server = new ve.dm.TestRebaseServer();
-		clients = { server: server };
+		clients = {};
 		for ( j = 0; j < cases[ i ].clients.length; j++ ) {
 			client = new ve.dm.TestRebaseClient( server, cases[ i ].initialData );
 			client.setAuthor( cases[ i ].clients[ j ] );
 			clients[ cases[ i ].clients[ j ] ] = client;
+			// Initialize
+			server.updateDocState( ve.dm.TestRebaseServer.static.fakeDocName, cases[ i ].clients[ j ] );
 		}
 
 		for ( j = 0; j < cases[ i ].ops.length; j++ ) {
@@ -241,14 +247,23 @@ QUnit.test( 'Rebase', function ( assert ) {
 					client.applyChange( ve.dm.Change.static.deserialize( op[ 2 ] ) );
 				}
 			} else if ( action === 'assertHist' ) {
-				assert.equal( client.getHistorySummary(), op[ 2 ], cases[ i ].name + ': ' + ( op[ 3 ] || j ) );
+				if ( op[ 0 ] === 'server' ) {
+					summary = yield server.getHistorySummary();
+				} else {
+					summary = client.getHistorySummary();
+				}
+				assert.equal( summary, op[ 2 ], cases[ i ].name + ': ' + ( op[ 3 ] || j ) );
 			} else if ( action === 'submit' ) {
 				client.submitChange();
 			} else if ( action === 'deliver' ) {
-				client.deliverOne();
+				yield client.deliverOne();
 			} else if ( action === 'receive' ) {
 				client.receiveOne();
 			}
 		}
 	}
-} );
+}() ).catch( function ( err ) {
+	assert.ok( false, err.stack );
+} ).then( function () {
+	QUnit.start();
+} ) );
