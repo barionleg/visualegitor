@@ -106,7 +106,6 @@
 				"classes": [
 					"ve.dm.Change",
 					"ve.dm.RebaseDocState",
-					"ve.dm.RebaseServer",
 					"ve.dm.RebaseClient",
 					"ve.dm.SurfaceSynchronizer"
 				]
@@ -248,13 +247,6 @@
 				"classes": [
 					"ve.ce.TestOffset",
 					"ve.ce.TestRunner"
-				]
-			},
-			{
-				"name": "Rebaser",
-				"classes": [
-					"ve.dm.TestRebaseClient",
-					"ve.dm.TestRebaseServer"
 				]
 			}
 		]
