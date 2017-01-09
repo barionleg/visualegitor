@@ -1,6 +1,13 @@
-/* eslint-disable no-console */
+/*!
+ * VisualEditor rebase server script.
+ *
+ * @copyright 2011-2017 VisualEditor Team and others; see http://ve.mit-license.org
+ */
 
-var rebaseServer, docNamespaces, lastAuthorForDoc, artificialDelay,
+/* eslint-disable no-console */
+/* eslint-env es6 */
+
+var rebaseServer, docNamespaces, lastAuthorForDoc, artificialDelay, onSubmitChange,
 	port = 8081,
 	express = require( 'express' ),
 	app = express(),
@@ -32,6 +39,16 @@ function summarize( author, backtrack, change ) {
 	return summary.join( ', ' );
 }
 
+function wait( timeout ) {
+	return new Promise( function ( resolve ) {
+		setTimeout( resolve, timeout );
+	} );
+}
+
+function logError( err ) {
+	console.log( err.stack );
+}
+
 rebaseServer = new ve.dm.RebaseServer();
 docNamespaces = new Map();
 lastAuthorForDoc = new Map();
@@ -39,8 +56,7 @@ artificialDelay = parseInt( process.argv[ 2 ] ) || 0;
 
 function makeConnectionHandler( docName ) {
 	return function handleConnection( socket ) {
-		var history = rebaseServer.getDocState( docName ).history,
-			author = 1 + ( lastAuthorForDoc.get( docName ) || 0 );
+		var author = 1 + ( lastAuthorForDoc.get( docName ) || 0 );
 		lastAuthorForDoc.set( docName, author );
 		console.log( 'new client ' + author + ' for ' + docName );
 		socket.emit( 'registered', author );
@@ -49,30 +65,28 @@ function makeConnectionHandler( docName ) {
 		// comments in the /raw handler. Keeping an updated linmod on the server could be
 		// feasible if TransactionProcessor was modified to have a "don't sync, just apply"
 		// mode and ve.dm.Document was faked with { data: ..., metadata: ..., store: ... }
-		console.log( 'Sending full history: ' + summarize( null, 0, history ) );
-		socket.emit( 'newChange', history.serialize( true ) );
-		socket.on( 'submitChange', setTimeout.bind( null, function ( data ) {
-			var change, applied;
-			try {
-				change = ve.dm.Change.static.deserialize( data.change, null, true );
-				console.log( 'receive ' + summarize( author, data.backtrack, change ) );
-				applied = rebaseServer.applyChange( docName, author, data.backtrack, change );
-				if ( !applied.isEmpty() ) {
-					console.log( 'applied ' + summarize( author, 0, applied ) );
-					docNamespaces.get( docName ).emit(
-						'newChange',
-						applied.serialize( true )
-					);
-				}
-				if ( applied.getLength() < change.getLength() ) {
-					console.log( author + ' rejected ' + ( applied.getLength() - change.getLength() ) );
-				}
-			} catch ( error ) {
-				console.error( error.stack );
-			}
-		}, artificialDelay ) );
+		ve.spawn( function* sendHistory() {
+			var state = yield rebaseServer.getDocState( docName );
+			socket.emit( 'newChange', state.history.serialize( true ) );
+			socket.on( 'submitChange', onSubmitChange.bind( docName, author ) );
+		} ).catch( logError );
 	};
 }
+
+onSubmitChange = ( docName, author, data ) => ve.spawn( function* onSubmitChange() {
+	var change, applied;
+	yield wait( artificialDelay );
+	change = ve.dm.Change.static.deserialize( data.change, null, true );
+	console.log( 'receive ' + summarize( author, data.backtrack, change ) );
+	applied = yield rebaseServer.applyChange( docName, author, data.backtrack, change );
+	if ( !applied.isEmpty() ) {
+		console.log( 'applied ' + summarize( author, 0, applied ) );
+		docNamespaces.get( docName ).emit( 'newChange', applied.serialize( true ) );
+	}
+	if ( applied.getLength() < change.getLength() ) {
+		console.log( author + ' rejected ' + ( applied.getLength() - change.getLength() ) );
+	}
+} ).catch( logError );
 
 app.use( express.static( __dirname + '/..' ) );
 app.set( 'view engine', 'ejs' );
