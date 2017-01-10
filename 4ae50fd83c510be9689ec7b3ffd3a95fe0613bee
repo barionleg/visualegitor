@@ -16,6 +16,24 @@
       "revId": "4ae50fd83c510be9689ec7b3ffd3a95fe0613bee",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_04a676a7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2017-01-10T23:58:56Z",
+      "side": 1,
+      "message": "When we\u0027re doing the paste handling, which handler gets used in cases with multiple mime types is dependent on the order we\u0027ve written them down in. There\u0027s not (that I saw) an equivalent order available by interrogating dataTransferHandlerFactory, and taking them randomly risks the text/html order winding up being used when there\u0027s a more-specific one available.\n\nAn alternative that I actually kinda wrote into this patch is the one used for no-stringTypes-given in ve.ce.Surface, which just takes the first handled type it finds by looping over dataTransfer.items. I couldn\u0027t, however, see anything specifying the order those had to be in, so I don\u0027t know if it\u0027s actually reliable.\n\nI could maybe do something with either of these to make it generate the list of types, and then just push `text/plain`/`text/html` to the end of the list. In practice, that\u0027d probably work.\n\nThoughts?",
+      "parentUuid": "4efb0bce_e4591a06",
+      "revId": "4ae50fd83c510be9689ec7b3ffd3a95fe0613bee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
