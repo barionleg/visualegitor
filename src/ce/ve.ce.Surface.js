@@ -2267,7 +2267,7 @@ ve.ce.Surface.prototype.handleDataTransfer = function ( dataTransfer, isPaste, t
 	var i, l, stringData,
 		items = [],
 		htmlStringData = dataTransfer.getData( 'text/html' ),
-		stringTypes = [ 'text/x-moz-url', 'text/uri-list', 'text/x-uri', 'text/html', 'text/plain' ];
+		stringTypes = this.surface.pasteStringTypes;
 
 	// Only look for files if HTML is not available:
 	//  - If a file is pasted/dropped it is unlikely it will have HTML fallback (it will have plain text fallback though)
@@ -2286,10 +2286,20 @@ ve.ce.Surface.prototype.handleDataTransfer = function ( dataTransfer, isPaste, t
 		}
 	}
 
-	for ( i = 0, l = stringTypes.length; i < stringTypes.length; i++ ) {
-		stringData = dataTransfer.getData( stringTypes[ i ] );
-		if ( stringData ) {
-			items.push( ve.ui.DataTransferItem.static.newFromString( stringData, stringTypes[ i ], htmlStringData ) );
+	if ( dataTransfer.items ) {
+		if ( stringTypes ) {
+			for ( i = 0, l = stringTypes.length; i < stringTypes.length; i++ ) {
+				stringData = dataTransfer.getData( stringTypes[ i ] );
+				if ( stringData ) {
+					items.push( ve.ui.DataTransferItem.static.newFromString( stringData, stringTypes[ i ], htmlStringData ) );
+				}
+			}
+		} else {
+			for ( i = 0, l = dataTransfer.items.length; i < l; i++ ) {
+				if ( dataTransfer.items[ i ].kind === 'string' ) {
+					items.push( ve.ui.DataTransferItem.static.newFromString( dataTransfer.getData( dataTransfer.items[ i ].type ), dataTransfer.items[ i ].type, htmlStringData ) );
+				}
+			}
 		}
 	}
 
