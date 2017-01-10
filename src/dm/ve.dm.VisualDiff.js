@@ -495,7 +495,7 @@ ve.dm.VisualDiff.prototype.getDocChildDiff = function ( oldDocChild, newDocChild
 	}
 
 	// Only return the diff if enough content has changed
-	if ( keepLength < 0.5 * diffLength ) {
+	if ( diffLength === 0 || keepLength < 0.5 * diffLength ) {
 		return false;
 	}
 	return {
