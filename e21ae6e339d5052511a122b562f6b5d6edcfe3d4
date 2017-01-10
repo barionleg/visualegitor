@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e01838a_f7477c7a",
+        "filename": "src/dm/ve.dm.RebaseServer.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-01-10T18:05:53Z",
+      "side": 1,
+      "message": "eslint complains that this generator has no yield",
+      "revId": "e21ae6e339d5052511a122b562f6b5d6edcfe3d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e01838a_d715a34e",
+        "filename": "src/ve.utils-es6.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-01-10T18:05:53Z",
+      "side": 1,
+      "message": "@example?",
+      "revId": "e21ae6e339d5052511a122b562f6b5d6edcfe3d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e01838a_977848c1",
+        "filename": "src/ve.utils-es6.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-01-10T18:05:53Z",
+      "side": 1,
+      "message": "you need something like \n/* eslint-env es6 */",
+      "revId": "e21ae6e339d5052511a122b562f6b5d6edcfe3d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e01838a_775cac4e",
+        "filename": "tests/dm/ve.dm.RebaseServer.test.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-01-10T18:05:53Z",
+      "side": 1,
+      "message": "Also needs /* eslint-env es6 */",
+      "revId": "e21ae6e339d5052511a122b562f6b5d6edcfe3d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
