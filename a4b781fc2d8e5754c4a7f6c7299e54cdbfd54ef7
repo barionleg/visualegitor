@@ -34,6 +34,24 @@
       "revId": "a4b781fc2d8e5754c4a7f6c7299e54cdbfd54ef7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e01838a_3a229ba3",
+        "filename": "src/ce/ve.ce.ContentBranchNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-01-10T18:25:52Z",
+      "side": 1,
+      "message": "Good point, we should document this at pattern at a higher level somewhere (I created https://phabricator.wikimedia.org/T155021 ).",
+      "parentUuid": "8e01838a_f2266db4",
+      "revId": "a4b781fc2d8e5754c4a7f6c7299e54cdbfd54ef7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
