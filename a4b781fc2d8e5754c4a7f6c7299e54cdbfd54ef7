@@ -16,6 +16,24 @@
       "revId": "a4b781fc2d8e5754c4a7f6c7299e54cdbfd54ef7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e01838a_f2266db4",
+        "filename": "src/ce/ve.ce.ContentBranchNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2017-01-10T01:04:26Z",
+      "side": 1,
+      "message": "Worth a \"// Support: Chrome\" comment?",
+      "parentUuid": "8e01838a_f7953fe7",
+      "revId": "a4b781fc2d8e5754c4a7f6c7299e54cdbfd54ef7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
