@@ -21,6 +21,7 @@
  * @cfg {ve.ui.DataTransferHandlerFactory} [dataTransferHandlerFactory] Data transfer handler factory to use
  * @cfg {string[]|null} [includeCommands] List of commands to include, null for all registered commands
  * @cfg {string[]} [excludeCommands] List of commands to exclude
+ * @cfg {string[]} [pasteStringTypes] List of string types to consider when accepting pasted content
  * @cfg {Object} [importRules] Import rules
  * @cfg {string} [placeholder] Placeholder text to display when the surface is empty
  * @cfg {string} [inDialog] The name of the dialog this surface is in
@@ -47,6 +48,7 @@ ve.ui.Surface = function VeUiSurface( dataOrDoc, config ) {
 	this.commandRegistry = config.commandRegistry || ve.ui.commandRegistry;
 	this.sequenceRegistry = config.sequenceRegistry || ve.ui.sequenceRegistry;
 	this.dataTransferHandlerFactory = config.dataTransferHandlerFactory || ve.ui.dataTransferHandlerFactory;
+	this.pasteStringTypes = config.pasteStringTypes;
 	this.commands = OO.simpleArrayDifference(
 		config.includeCommands || this.commandRegistry.getNames(), config.excludeCommands || []
 	);

@@ -173,6 +173,17 @@ ve.init.Target.static.includeCommands = null;
 ve.init.Target.static.excludeCommands = [];
 
 /**
+ * List of string types to consider when pasting data into a surface, in the
+ * order of consideration
+ *
+ * If this is null, all clipboardData items whose "kind" is "string" will be
+ * considered. To allow no string types, set to an empty array.
+ *
+ * @type {string[]|null} List of mime types
+ */
+ve.init.Target.static.pasteStringTypes = [ 'text/x-moz-url', 'text/uri-list', 'text/x-uri', 'text/html', 'text/plain' ];
+
+/**
  * Surface import rules
  *
  * One set for external (non-VE) paste sources and one for all paste sources.
@@ -388,6 +399,7 @@ ve.init.Target.prototype.getSurfaceConfig = function ( config ) {
 		commandRegistry: ve.ui.commandRegistry,
 		sequenceRegistry: ve.ui.sequenceRegistry,
 		dataTransferHandlerFactory: ve.ui.dataTransferHandlerFactory,
+		pasteStringTypes: this.constructor.static.pasteStringTypes,
 		includeCommands: this.constructor.static.includeCommands,
 		excludeCommands: OO.simpleArrayUnion(
 			this.constructor.static.excludeCommands,
