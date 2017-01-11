@@ -1602,7 +1602,6 @@ ve.ce.Surface.prototype.onCut = function ( e ) {
 ve.ce.Surface.prototype.onCopy = function ( e ) {
 	var originalSelection, clipboardKey, supportsCustomMimeType,
 		scrollTop, unsafeSelector, slice,
-		profile = $.client.profile(),
 		selection = this.getModel().getSelection(),
 		view = this,
 		htmlDoc = this.getModel().getDocument().getHtmlDocument(),
@@ -1658,13 +1657,7 @@ ve.ce.Surface.prototype.onCopy = function ( e ) {
 	// Support: IE, Firefox<48
 	// Writing the key to text/xcustom won't work in IE & Firefox<48, so write
 	// it to the HTML instead
-	supportsCustomMimeType = !!clipboardData && (
-		// Chrome
-		clipboardData.items ||
-		// Firefox >= 48 (but not Firefox Android, which has name='android' and doesn't support this feature)
-		( profile.name === 'firefox' && profile.versionNumber >= 48 )
-	);
-	if ( !supportsCustomMimeType ) {
+	if ( !ve.isClipboardMimeTypeSupported( e ) ) {
 		this.$pasteTarget.prepend(
 			$( '<span>' ).attr( 'data-ve-clipboard-key', clipboardKey ).html( '&nbsp;' )
 		);
@@ -1683,7 +1676,7 @@ ve.ce.Surface.prototype.onCopy = function ( e ) {
 
 		// Only write a custom mime type if we think the browser supports it, otherwise
 		// we will have already written a key to the HTML above.
-		if ( supportsCustomMimeType ) {
+		if ( ve.isClipboardMimeTypeSupported( e, true ) ) {
 			clipboardData.setData( 'text/xcustom', clipboardKey );
 		}
 		clipboardData.setData( 'text/html', this.$pasteTarget.html() );
