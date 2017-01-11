@@ -1776,3 +1776,34 @@ ve.repeatString = function ( str, n ) {
 ve.isUnmodifiedLeftClick = function ( e ) {
 	return e && e.which && e.which === OO.ui.MouseButtons.LEFT && !( e.shiftKey || e.altKey || e.ctrlKey || e.metaKey );
 };
+
+/**
+ * Are custom mime types on clipboardData supported?
+ *
+ * If you want to use unknown mime types, an additional check for whether we're
+ * on MS Edge needs to be made, as that only supports standard mime types.
+ *
+ * @param {jQuery.Event} e A jQuery event object for a copy/paste event
+ * @param {boolean} [customTypes] Whether non-standard types
+ * @return {boolean} Whether custom mime types are supported
+ */
+ve.isClipboardMimeTypeSupported = function ( e, customTypes ) {
+	var profile, clipboardData,
+		cacheKey = customTypes ? 'cachedCustom' : 'cached';
+
+	if ( ve.isClipboardMimeTypeSupported[ cacheKey ] === undefined ) {
+		profile = $.client.profile();
+		clipboardData = e.originalEvent.clipboardData;
+		ve.isClipboardMimeTypeSupported[ cacheKey ] = !!(
+			clipboardData &&
+			( !customTypes || profile.name !== 'edge' ) && (
+				// Chrome
+				clipboardData.items ||
+				// Firefox >= 48 (but not Firefox Android, which has name='android' and doesn't support this feature)
+				( profile.name === 'firefox' && profile.versionNumber >= 48 )
+			)
+		);
+	}
+
+	return ve.isClipboardMimeTypeSupported[ cacheKey ];
+};
