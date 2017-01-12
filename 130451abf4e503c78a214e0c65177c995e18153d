@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4efb0bce_55940b8d",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 1781,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-01-12T18:36:40Z",
+      "side": 1,
+      "message": "text/html isn\u0027t a \u0027custom\u0027 mime type. In basic mode it\u0027s just can we write any mime type.",
+      "revId": "130451abf4e503c78a214e0c65177c995e18153d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_75970794",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 1787,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-01-12T18:36:40Z",
+      "side": 1,
+      "message": "finish the sentence?",
+      "revId": "130451abf4e503c78a214e0c65177c995e18153d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efb0bce_35918f9d",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 1788,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-01-12T18:36:40Z",
+      "side": 1,
+      "message": "same as comment #1",
+      "revId": "130451abf4e503c78a214e0c65177c995e18153d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
