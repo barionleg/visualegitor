@@ -241,7 +241,7 @@ ve.ui.DiffElement.prototype.getChangedNodeHtml = function ( oldNodeIndex, move )
 
 		// If previous node was found among siblings, insert the removed subtree just
 		// after its corresponding node in the new document. Otherwise insert the
-		// removed subtree just inside its parent node's correspondign node.
+		// removed subtree just inside its parent node's corresponding node.
 		if ( newPreviousNodeIndex ) {
 			insertIndex = newNodes[ newPreviousNodeIndex ].node.getRange().to - nodeRange.from;
 		} else {
@@ -288,27 +288,38 @@ ve.ui.DiffElement.prototype.getChangedNodeHtml = function ( oldNodeIndex, move )
 	 * Mark this node as changed and, if it is a content branch node, splice in
 	 * the diff data.
 	 *
-	 * @param {number} nodeIndex The index of this node in the subtree rooted at
-	 * this document child
+	 * @param {number} newNodeIndex The index of the new node in the subtree rooted at
+	 * the new document child
+	 * @param {number} oldNodeIndex The index of the old node in the subtree rooted at
+	 * the old document child
 	 */
-	function highlightChangedSubTree( nodeIndex ) {
-		var subTreeRootNode, subTreeRootNodeRangeStart, subTreeRootNodeData, annotatedData;
+	function highlightChangedSubTree( newNodeIndex, oldNodeIndex ) {
+		var subTreeRootNode, subTreeRootNodeRangeStart, subTreeRootNodeData, annotatedData,
+			subTreeDiffInfo = diffInfo[ k ];
 
 		// The new node was changed.
 		// Get data for this node
-		subTreeRootNode = newNodes[ nodeIndex ];
+		subTreeRootNode = newNodes[ newNodeIndex ];
 		subTreeRootNodeRangeStart = subTreeRootNode.node.getOuterRange().from - nodeRange.from;
 
-		if ( subTreeRootNode.node instanceof ve.dm.ContentBranchNode ) {
-			// If node is a CBN, splice in the annotated diff
-			subTreeRootNodeData = diffInfo[ k ].linearDiff;
+		if ( subTreeDiffInfo.linearDiff ) {
+			// If there is a content change, splice it in
+			subTreeRootNodeData = subTreeDiffInfo.linearDiff;
 			annotatedData = this.annotateNode( subTreeRootNodeData );
 			ve.batchSplice( nodeData, subTreeRootNodeRangeStart + 1, subTreeRootNode.node.length, annotatedData );
 		} else {
-			// If node is a BN, add change class
+			// If there is no content change, just add change class
 			nodeData[ subTreeRootNodeRangeStart ] = this.addClassesToNode(
 				nodeData[ subTreeRootNodeRangeStart ], this.newDoc, 'change'
 			);
+		}
+
+		// TODO: display type and attribute changes. Just log for now.
+		if ( subTreeDiffInfo.typeChange ) {
+			console.log( 'Type change: ', oldNodes[ oldNodeIndex ].node.type, ' to ', newNodes[ newNodeIndex ].node.type );
+		}
+		if ( subTreeDiffInfo.attributeChange ) {
+			console.log( 'Attribute change: ', oldNodes[ oldNodeIndex ].node.getAttributes(), ' to ', newNodes[ newNodeIndex ].node.getAttributes() );
 		}
 	}
 
@@ -343,7 +354,18 @@ ve.ui.DiffElement.prototype.getChangedNodeHtml = function ( oldNodeIndex, move )
 					if ( !( jModified in alreadyProcessed.remove ) &&
 						!( iModified in alreadyProcessed.insert ) ) {
 
-						highlightChangedSubTree.call( this, iModified );
+						if ( diffInfo[ k ].replacement ) {
+
+							// We are treating these nodes as removed and inserted
+							this.getNodeHtml( oldNodes[ jModified ].node, 'remove' );
+							this.getNodeHtml( newNodes[ iModified ].node, 'insert' );
+
+						} else {
+
+							// There could be any combination of content, attribute and type changes
+							highlightChangedSubTree.call( this, iModified, jModified );
+
+						}
 
 					}
 				}
