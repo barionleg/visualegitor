@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_a9abf96c",
+        "filename": "tests/ui/ve.ui.DiffElement.test.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 2849
+      },
+      "writtenOn": "2017-01-25T22:36:55Z",
+      "side": 1,
+      "message": "Repetition",
+      "revId": "d33976fa47db58c60f1d21d42fa6cc6e20519ec8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
