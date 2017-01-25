@@ -121,6 +121,14 @@ QUnit.test( 'Diffing', function ( assert ) {
 					'<div class="ve-ui-diffElement-doc-child-change">' +
 						'<div rel="ve:Alien" class="ve-ui-diffElement-remove">Alien</div>' +
 					'</div>'
+			},
+			{
+				msg: 'Paragraphs moved',
+				oldDoc: '<p>foo</p><p>bar</p>',
+				newDoc: '<p>bar</p><p>foo</p>',
+				expected:
+					'<p class="ve-ui-diffElement-none ve-ui-diffElement-up">bar</p>' +
+					'<p class="ve-ui-diffElement-none ve-ui-diffElement-down">foo</p>'
 			}
 		];
 
