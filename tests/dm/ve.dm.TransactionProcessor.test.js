@@ -373,6 +373,88 @@ QUnit.test( 'commit', function ( assert ) {
 					data.splice( 3, 1 );
 				}
 			},
+			'merging a nested element': {
+				calls: [
+					[ 'pushRetain', 47 ],
+					[ 'pushReplace', 47, 4, [] ]
+				],
+				expected: function ( data ) {
+					data.splice( 47, 4 );
+				}
+			},
+			'merging an element that also has a content insertion': {
+				calls: [
+					[ 'pushRetain', 56 ],
+					[ 'pushReplace', 56, 0, [ 'x' ] ],
+					[ 'pushRetain', 1 ],
+					[ 'pushReplace', 57, 2, [] ]
+				],
+				expected: function ( data ) {
+					data.splice( 57, 2 );
+					data.splice( 56, 0, [ 'x' ] );
+				}
+			},
+			'merging a nested element that also has a structural insertion': {
+				calls: [
+					[ 'pushRetain', 45 ],
+					[ 'pushReplace', 45, 0, [ { type: 'paragraph' }, 'x', { type: '/paragraph' } ] ],
+					[ 'pushRetain', 2 ],
+					[ 'pushReplace', 47, 4, [] ]
+				],
+				expected: function ( data ) {
+					data.splice( 47, 4 );
+					data.splice( 45, 0, { type: 'paragraph' }, 'x', { type: '/paragraph' } );
+				}
+			},
+			'merging the same element from both sides at once': {
+				data: [
+					{ type: 'paragraph' },
+					'a',
+					{ type: '/paragraph' },
+					{ type: 'paragraph' },
+					'b',
+					{ type: '/paragraph' },
+					{ type: 'paragraph' },
+					'c',
+					{ type: '/paragraph' },
+					{ type: 'paragraph' },
+					'd',
+					{ type: '/paragraph' }
+				],
+				calls: [
+					[ 'pushRetain', 2 ],
+					[ 'pushReplace', 2, 2, [] ],
+					[ 'pushRetain', 1 ],
+					[ 'pushReplace', 5, 2, [] ]
+				],
+				expected: function ( data ) {
+					data.splice( 5, 2 );
+					data.splice( 2, 2 );
+				}
+			},
+			'deleting images on both sides of a text node at once': {
+				data: [
+					{ type: 'paragraph' },
+					'a',
+					{ type: 'inlineImage' },
+					{ type: '/inlineImage' },
+					'b',
+					{ type: 'inlineImage' },
+					{ type: '/inlineImage' },
+					'c',
+					{ type: '/paragraph' }
+				],
+				calls: [
+					[ 'pushRetain', 2 ],
+					[ 'pushReplace', 2, 2, [] ],
+					[ 'pushRetain', 1 ],
+					[ 'pushReplace', 5, 2, [] ]
+				],
+				expected: function ( data ) {
+					data.splice( 5, 2 );
+					data.splice( 2, 2 );
+				}
+			},
 			'applying a link across an existing annotation boundary': {
 				data: [
 					{ type: 'paragraph' },
