@@ -14,7 +14,8 @@ var rebaseServer, docNamespaces, lastAuthorForDoc, pendingForDoc, artificialDela
 	url = require( 'url' ),
 	http = require( 'http' ).Server( app ),
 	io = require( 'socket.io' )( http ),
-	ve = require( '../dist/ve-rebaser.js' );
+	ve = require( '../dist/ve-rebaser.js' ),
+	MongoStateStore = require( './MongoStateStore.js' ).MongoStateStore;
 
 function summarize( author, backtrack, change ) {
 	var storeCount = 0,
@@ -49,7 +50,7 @@ function logError( err ) {
 	console.log( err.stack );
 }
 
-rebaseServer = new ve.dm.RebaseServer();
+rebaseServer = null;
 docNamespaces = new Map();
 lastAuthorForDoc = new Map();
 pendingForDoc = new Map();
@@ -131,5 +132,11 @@ io.on( 'connection', function ( socket ) {
 	}
 } );
 
-http.listen( port );
-console.log( 'Listening on ' + port + ' (artificial delay ' + artificialDelay + ' ms)' );
+MongoStateStore.static.connect( 'mongodb://localhost:27017/test' ).then( function ( store ) {
+	rebaseServer = store;
+	http.listen( port );
+	console.log( 'Listening on ' + port + ' (artificial delay ' + artificialDelay + ' ms)' );
+} ).catch( function ( err ) {
+	console.error( err.stack );
+	rebaseServer.db.close();
+} );
