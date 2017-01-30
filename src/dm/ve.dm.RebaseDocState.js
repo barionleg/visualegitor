@@ -36,3 +36,17 @@ ve.dm.RebaseDocState = function VeDmRebaseDocState( history, continueBases, reje
 /* Inheritance */
 
 OO.initClass( ve.dm.RebaseDocState );
+
+ve.dm.RebaseDocState.static.deserialize = function ( data ) {
+	var history, continueBases, author, rejections;
+	history = ve.dm.Change.static.deserialize( data.history );
+	continueBases = new Map();
+	for ( author in data.continueBases ) {
+		continueBases.set( author, ve.dm.Change.static.deserialize( data.continueBases[ author ] ) );
+	}
+	rejections = new Map();
+	for ( author in data.rejections ) {
+		rejections.set( author, data.rejections[ author ] );
+	}
+	return new ve.dm.RebaseDocState( history, continueBases, rejections );
+};
