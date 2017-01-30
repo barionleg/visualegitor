@@ -139,9 +139,9 @@ ve.dm.DocumentSynchronizer.synchronizers.insertTextNode = function ( action ) {
  */
 ve.dm.DocumentSynchronizer.synchronizers.rebuild = function ( action ) {
 	var firstNode, parent, index, numNodes,
-		// Find the nodes contained by oldRange
-		adjustedOldRange = action.oldRange.translate( this.adjustment ),
-		selection = this.document.selectNodes( adjustedOldRange, 'siblings' );
+		// Find the nodes contained by the range
+		adjustedRange = action.range.translate( this.adjustment ),
+		selection = this.document.selectNodes( adjustedRange, 'siblings' );
 
 	// If the document is empty, selection[0].node will be the document (so no parent)
 	// but we won't get indexInNode either. Detect this and use index=0 in that case.
@@ -158,11 +158,11 @@ ve.dm.DocumentSynchronizer.synchronizers.rebuild = function ( action ) {
 		numNodes = selection.length;
 	}
 	// Perform rebuild in tree
-	this.document.rebuildNodes( parent, index, numNodes, adjustedOldRange.from,
-		action.newRange.getLength()
+	this.document.rebuildNodes( parent, index, numNodes, adjustedRange.from,
+		adjustedRange.getLength() + action.lengthChange
 	);
 	// Update adjustment
-	this.adjustment += action.newRange.getLength() - adjustedOldRange.getLength();
+	this.adjustment += action.lengthChange;
 };
 
 /* Methods */
@@ -253,17 +253,21 @@ ve.dm.DocumentSynchronizer.prototype.pushInsertTextNode = function ( parentNode,
  * Add a rebuild action to the queue.
  *
  * When a range of data has been changed arbitrarily this can be used to drop the nodes that
- * represented the original range and replace them with new nodes that represent the new range.
+ * represented that range and replace them with new nodes that represent the new data.
+ *
+ * This can also be used to build nodes for newly inserted data by passing in
+ * a zero-length range at the start of the new data, and setting lengthChange to the length
+ * of the new data.
  *
  * @method
- * @param {ve.Range} oldRange Range of old nodes to be dropped
- * @param {ve.Range} newRange Range for new nodes to be built from
+ * @param {ve.Range} range Range of old nodes to be dropped
+ * @param {number} lengthChange Difference between the length of the new data and the old data
  */
-ve.dm.DocumentSynchronizer.prototype.pushRebuild = function ( oldRange, newRange ) {
+ve.dm.DocumentSynchronizer.prototype.pushRebuild = function ( range, lengthChange ) {
 	this.actionQueue.push( {
 		type: 'rebuild',
-		oldRange: oldRange,
-		newRange: newRange
+		range: range,
+		lengthChange: lengthChange
 	} );
 };
 
