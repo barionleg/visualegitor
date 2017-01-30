@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_ad776534",
+        "filename": "src/dm/lineardata/ve.dm.ElementLinearData.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 2849
+      },
+      "writtenOn": "2017-01-30T21:13:20Z",
+      "side": 1,
+      "message": "bType doesn\u0027t need to be a variable here",
+      "range": {
+        "startLine": 102,
+        "startChar": 1,
+        "endLine": 102,
+        "endChar": 6
+      },
+      "revId": "8b4a9deb4b89c7aba73b5cbdde77a930be388771",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_0da0b98c",
+        "filename": "src/dm/lineardata/ve.dm.ElementLinearData.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 2849
+      },
+      "writtenOn": "2017-01-30T21:13:20Z",
+      "side": 1,
+      "message": "We already know a \u003d\u003d\u003d b is false by now",
+      "revId": "8b4a9deb4b89c7aba73b5cbdde77a930be388771",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
