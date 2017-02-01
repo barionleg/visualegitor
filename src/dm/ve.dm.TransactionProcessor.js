@@ -474,7 +474,8 @@ ve.dm.TransactionProcessor.processors.attribute = function ( op ) {
 		this.document.getDocumentNode().getNodeFromOffset( this.cursor + 1 ),
 		op.key,
 		op.from,
-		op.to
+		op.to,
+		this.cursor
 	);
 };
 
@@ -566,15 +567,39 @@ ve.dm.TransactionProcessor.processors.replace = function ( op ) {
 		) {
 			// Text-only replacement
 			// Queue a resize for the text node
-			this.synchronizer.pushResize( node, insert.length - remove.length );
+			this.synchronizer.pushResize(
+				node,
+				insert.length - remove.length,
+				selection[ 0 ].nodeOuterRange
+			);
 		} else if (
 			!removeHasStructure && !insertHasStructure && remove.length === 0 && insert.length > 0 &&
 			selection.length === 1 && node && node.canContainContent() &&
 			( selection[ 0 ].indexInNode !== undefined || node.getLength() === 0 )
 		) {
 			// Text-only addition where a text node didn't exist before. Create one
-			this.synchronizer.pushInsertTextNode( node, selection[ 0 ].indexInNode || 0, insert.length - remove.length );
+			this.synchronizer.pushInsertTextNode(
+				node,
+				selection[ 0 ].indexInNode || 0,
+				insert.length,
+				this.cursor
+			);
 		} else {
+			// <p>ab[c<img/>d]ef</p>
+			// <p>[abc<img/>def]</p> --> <p>[abef]</p>
+
+			// <p>abc<img/>def</p>
+			// A: <p>ab[c<img/>]ef</p> --> rebuild text1+image,-3
+			// B: <p>[a]bc<img/>def</p> --> resize text1,-1
+
+			// <p>abc</p><p>def</p>
+			// A: <p>[a]bc</p><p>def</p> --> resize text1,-1
+			// B: <p>abc[</p><p>]def</p> --> rebuild p1+p2,-2
+
+			// <p>abcdef</p>
+			// A: <p>abc[+<img>+]def</p> --> rebuild text, +2
+			// B: <p>abcde[f]</p> --> resize text, -1
+
 			// Replacement is not exclusively text
 			// Rebuild all covered nodes
 			range = new ve.Range(

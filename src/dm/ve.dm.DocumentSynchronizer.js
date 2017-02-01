@@ -11,11 +11,8 @@
  * steps as the linear model is modified by a transaction processor and then processing those queued
  * actions when the transaction is done being processed.
  *
- * IMPORTANT NOTE: It is assumed that:
- *
- *   - The linear model has already been updated for the pushed actions
- *   - Actions are pushed in increasing offset order
- *   - Actions are non-overlapping
+ * Ranges and offsets passed to this class refer to the linear model as it was before the
+ * transaction was processed.
  *
  * @class
  * @constructor
@@ -61,7 +58,7 @@ ve.dm.DocumentSynchronizer.synchronizers = {};
 ve.dm.DocumentSynchronizer.synchronizers.annotation = function ( action ) {
 	// Queue events for all leaf nodes covered by the range
 	var i,
-		adjustedRange = action.range.translate( this.adjustment ),
+		adjustedRange = action.range,
 		selection = this.document.selectNodes( adjustedRange, 'leaves' );
 	for ( i = 0; i < selection.length; i++ ) {
 		// No tree synchronization needed
@@ -115,8 +112,6 @@ ve.dm.DocumentSynchronizer.synchronizers.resize = function ( action ) {
 		// FIXME however, any queued update event will still be emitted, resulting in a duplicate
 		node.adjustLength( action.adjustment );
 	}
-	// Update adjustment
-	this.adjustment += action.adjustment;
 };
 
 /**
@@ -129,13 +124,12 @@ ve.dm.DocumentSynchronizer.synchronizers.resize = function ( action ) {
  * @param {Object} action
  * @param {ve.dm.Node} action.parentNode
  * @param {number} action.index
- * @param {number} action.length
+ * @param {number} action.adjustment
  */
 ve.dm.DocumentSynchronizer.synchronizers.insertTextNode = function ( action ) {
 	var textNode = new ve.dm.TextNode();
-	textNode.setLength( action.length );
+	textNode.setLength( action.adjustment );
 	action.parentNode.splice( action.index, 0, textNode );
-	this.adjustment += action.length;
 };
 
 /**
@@ -147,12 +141,18 @@ ve.dm.DocumentSynchronizer.synchronizers.insertTextNode = function ( action ) {
  * @method
  * @param {Object} action
  * @param {ve.Range} action.range
- * @param {number} action.lengthChange
+ * @param {number} action.adjustment
  */
 ve.dm.DocumentSynchronizer.synchronizers.rebuild = function ( action ) {
+	// TODO consider if we want rebuilds to be node-based rather than range-based;
+	// this seems scary with merged/overlapping rebuilds; we'd have to skip rebuilds
+	// of already-rebuilt (detached) parents and somehow adjust child indexes when
+	// the same parent is touched by multiple rebuilds
+	// TODO also consider if TransactionProcessor and DocumentSynchronizer could be merged or
+	// more tightly integrated such that tree sync is done on the fly rather than afterwards,
 	var firstNode, parent, index, numNodes,
 		// Find the nodes contained by the range
-		adjustedRange = action.range.translate( this.adjustment ),
+		adjustedRange = action.range,
 		selection = this.document.selectNodes( adjustedRange, 'siblings' );
 
 	// If the document is empty, selection[0].node will be the document (so no parent)
@@ -171,10 +171,8 @@ ve.dm.DocumentSynchronizer.synchronizers.rebuild = function ( action ) {
 	}
 	// Perform rebuild in tree
 	this.document.rebuildNodes( parent, index, numNodes, adjustedRange.from,
-		adjustedRange.getLength() + action.lengthChange
+		adjustedRange.getLength() + action.adjustment
 	);
-	// Update adjustment
-	this.adjustment += action.lengthChange;
 };
 
 /* Methods */
@@ -215,10 +213,12 @@ ve.dm.DocumentSynchronizer.prototype.pushAnnotation = function ( range ) {
  * @param {string} key Key of the attribute that changed
  * @param {Mixed} from Old value of the attribute
  * @param {Mixed} to New value of the attribute
+ * @param {number} offset Start offset of node
  */
-ve.dm.DocumentSynchronizer.prototype.pushAttributeChange = function ( node, key, from, to ) {
+ve.dm.DocumentSynchronizer.prototype.pushAttributeChange = function ( node, key, from, to, offset ) {
 	this.actionQueue.push( {
 		type: 'attributeChange',
+		range: new ve.Range( offset ),
 		node: node,
 		key: key,
 		from: from,
@@ -234,10 +234,12 @@ ve.dm.DocumentSynchronizer.prototype.pushAttributeChange = function ( node, key,
  * @method
  * @param {ve.dm.TextNode} node Node to resize
  * @param {number} adjustment Length adjustment to apply to the node
+ * @param {ve.Range} nodeOuterRange Outer range of node
  */
-ve.dm.DocumentSynchronizer.prototype.pushResize = function ( node, adjustment ) {
+ve.dm.DocumentSynchronizer.prototype.pushResize = function ( node, adjustment, nodeOuterRange ) {
 	this.actionQueue.push( {
 		type: 'resize',
+		range: nodeOuterRange,
 		node: node,
 		adjustment: adjustment
 	} );
@@ -251,13 +253,15 @@ ve.dm.DocumentSynchronizer.prototype.pushResize = function ( node, adjustment ) 
  * @param {ve.dm.Node} parentNode Node to insert text node into
  * @param {number} index Index in parentNode to insert text node at
  * @param {number} length Length of new text node
+ * @param {number} offset Offset to insert text node at
  */
-ve.dm.DocumentSynchronizer.prototype.pushInsertTextNode = function ( parentNode, index, length ) {
+ve.dm.DocumentSynchronizer.prototype.pushInsertTextNode = function ( parentNode, index, length, offset ) {
 	this.actionQueue.push( {
 		type: 'insertTextNode',
+		range: new ve.Range( offset ),
 		parentNode: parentNode,
 		index: index,
-		length: length
+		adjustment: length
 	} );
 };
 
@@ -279,7 +283,7 @@ ve.dm.DocumentSynchronizer.prototype.pushRebuild = function ( range, lengthChang
 	this.actionQueue.push( {
 		type: 'rebuild',
 		range: range,
-		lengthChange: lengthChange
+		adjustment: lengthChange
 	} );
 };
 
@@ -328,17 +332,78 @@ ve.dm.DocumentSynchronizer.prototype.queueEvent = function ( node ) {
  * @method
  */
 ve.dm.DocumentSynchronizer.prototype.synchronize = function () {
-	var action,
-		event,
-		i;
+	var i, j, action, nextAction, event;
+
+	// Sort the action queue by start offset, and break ties by reverse end offset
+	this.actionQueue.sort( function ( a, b ) {
+		return a.range.start !== b.range.start ?
+			a.range.start - b.range.start :
+			b.range.end - a.range.end;
+	} );
+
+	// TODO what if nextAction touches action? At least in the case of two adjacent zero-length
+	// rebuilds we have to either merge them or guarantee that they won't be misordered
+
+	// Collapse any actions nested inside of rebuild actions
+	for ( i = 0; i < this.actionQueue.length; i++ ) {
+		action = this.actionQueue[ i ];
+		if ( !Object.prototype.hasOwnProperty.call( ve.dm.DocumentSynchronizer.synchronizers, action.type ) ) {
+			throw new Error( 'Invalid action type ' + action.type );
+		}
+		// If action.type is:
+		// - 'annotation', then we can leave it alone, it doesn't interfere with anything else;
+		//    it might emit annotate events on some nodes that were just rebuilt, but because they're
+		//    freshly rebuilt nodes nobody can be listening for events on them anyway;
+		// - 'attributeChange' or 'insertTextNode', then nothing can be inside it because it's zero-length;
+		// - 'rebuild', then just about anything could be inside it, but can be merged in
+		// - 'resize', then a zero-length rebuild could be "inside" it (coincide with the start)
+		//   or a rebuild could overlap with it precisely (rebuilding the same text node that's
+		//   being resized), and in both cases we can merge the resize and the rebuild into a rebuild;
+		//   apart from those cases and 'annotation' actions (which we can leave alone), nothing else
+		//   can be inside a resize.
+		if ( action.type !== 'rebuild' && action.type !== 'resize' ) {
+			continue;
+		}
+
+		for ( j = i + 1; j < this.actionQueue.length; j++ ) {
+			nextAction = this.actionQueue[ j ];
+			if ( nextAction.range.start >= action.range.end ) {
+				break;
+			}
+
+			// If nextAction is entirely contained within action, then:
+			// - if its type is 'annotate' then we leave it alone, see above
+			// - if its type is 'attributeChange or 'insertTextNode' then we remove it
+			// - if its type is 'resize' or 'rebuild', then we merge it with action
+			// If nextAction partially overlaps with action and continues past it, then:
+			// - it can't be zero-length, so its type can't be 'attributeChange' or 'insertTextNode';
+			// - it can't be a 'resize' because a rebuild can't end in the middle of a text node;
+			// - if it's an 'annotate' then we leave it alone, see above
+			// - if it's a 'rebuild' then we merge it with action
+			// In conclusion, we leave nextAction alone if it's an 'annotate', and merge it in
+			// if it's anything else.
+			if ( nextAction.type !== 'annotate' ) {
+				// Add in nextAction's adjustment, if any
+				action.adjustment += nextAction.adjustment || 0;
+				// Merge the ranges
+				action.range = ve.Range.static.newCoveringRange( action.range, nextAction.range );
+				// Force the merged action to be a rebuild if it was previously a resize
+				action.type = 'rebuild';
+				// Remove nextAction
+				this.actionQueue.splice( j, 1 );
+				j--;
+			}
+		}
+	}
+
 	// Execute the actions in the queue
 	for ( i = 0; i < this.actionQueue.length; i++ ) {
 		action = this.actionQueue[ i ];
-		if ( Object.prototype.hasOwnProperty.call( ve.dm.DocumentSynchronizer.synchronizers, action.type ) ) {
-			ve.dm.DocumentSynchronizer.synchronizers[ action.type ].call( this, action );
-		} else {
-			throw new Error( 'Invalid action type ' + action.type );
-		}
+		// action.range is based on the pre-modification data and tree, adjust it for things we have synchronized
+		// thus far
+		action.range = action.range.translateRange( this.adjustment );
+		ve.dm.DocumentSynchronizer.synchronizers[ action.type ].call( this, action );
+		this.adjustment += action.adjustment;
 	}
 	// Emit events in the event queue
 	for ( i = 0; i < this.eventQueue.length; i++ ) {
