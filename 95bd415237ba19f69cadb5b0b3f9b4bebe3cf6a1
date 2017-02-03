@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_f6bd1317",
+        "filename": "src/dm/ve.dm.VisualDiff.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 2849
+      },
+      "writtenOn": "2017-02-03T11:05:15Z",
+      "side": 1,
+      "message": "Don\u0027t think we need this",
+      "revId": "95bd415237ba19f69cadb5b0b3f9b4bebe3cf6a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
