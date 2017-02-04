@@ -26,13 +26,6 @@ ve.ce.TableCellNode = function VeCeTableCellNode() {
 	rowspan = this.model.getRowspan();
 	colspan = this.model.getColspan();
 
-	// DOM changes
-	this.$element
-		// The following classes can be used here:
-		// ve-ce-tableCellNode-data
-		// ve-ce-tableCellNode-header
-		.addClass( 've-ce-tableCellNode ve-ce-tableCellNode-' + this.model.getAttribute( 'style' ) );
-
 	// Set attributes (keep in sync with #onSetup)
 	if ( rowspan > 1 ) {
 		this.$element.attr( 'rowspan', rowspan );
@@ -109,10 +102,11 @@ ve.ce.TableCellNode.prototype.onUpdate = function () {
 /**
  * @inheritdoc
  */
-ve.ce.TableCellNode.prototype.onSetup = function () {
+ve.ce.TableCellNode.prototype.initialize = function () {
 	var rowspan, colspan;
+
 	// Parent method
-	ve.ce.TableCellNode.super.prototype.onSetup.call( this );
+	ve.ce.TableCellNode.super.prototype.initialize.call( this );
 
 	rowspan = this.model.getRowspan();
 	colspan = this.model.getColspan();
@@ -127,6 +121,12 @@ ve.ce.TableCellNode.prototype.onSetup = function () {
 	} else {
 		this.$element.removeAttr( 'colspan' );
 	}
+
+	this.$element
+		// The following classes can be used here:
+		// ve-ce-tableCellNode-data
+		// ve-ce-tableCellNode-header
+		.addClass( 've-ce-tableCellNode ve-ce-tableCellNode-' + this.model.getAttribute( 'style' ) );
 };
 
 /**
