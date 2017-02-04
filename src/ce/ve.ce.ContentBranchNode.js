@@ -28,9 +28,6 @@ ve.ce.ContentBranchNode = function VeCeContentBranchNode() {
 
 	this.onClickHandler = this.onClick.bind( this );
 
-	// DOM changes (keep in sync with #onSetup)
-	this.$element.addClass( 've-ce-contentBranchNode' );
-
 	// Events
 	this.connect( this, { childUpdate: 'onChildUpdate' } );
 	this.model.connect( this, { detach: 'onModelDetach' } );
@@ -89,11 +86,10 @@ ve.ce.ContentBranchNode.static.appendRenderedContents = function ( container, wr
 /**
  * @inheritdoc
  */
-ve.ce.ContentBranchNode.prototype.onSetup = function () {
+ve.ce.ContentBranchNode.prototype.initialise = function () {
 	// Parent method
-	ve.ce.ContentBranchNode.super.prototype.onSetup.apply( this, arguments );
+	ve.ce.ContentBranchNode.super.prototype.initialise.apply( this, arguments );
 
-	// DOM changes (duplicated from constructor in case this.$element is replaced)
 	this.$element.addClass( 've-ce-contentBranchNode' );
 };
 
