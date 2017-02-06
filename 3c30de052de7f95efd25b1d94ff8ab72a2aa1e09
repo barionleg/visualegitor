@@ -1,0 +1,163 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_a5f19adc",
+        "filename": "src/dm/ve.dm.TransactionProcessor.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-02-06T16:22:31Z",
+      "side": 1,
+      "message": "Ought we to add \u0027node.queuedEventHashes \u003d null\u0027 in ve.dm.Node?",
+      "revId": "3c30de052de7f95efd25b1d94ff8ab72a2aa1e09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_8500deb0",
+        "filename": "src/dm/ve.dm.TransactionProcessor.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-02-06T16:22:31Z",
+      "side": 1,
+      "message": "I think this cleanup (whether using delete or setting to null) should be in the finally block of .process . Otherwise we might leave queued events lying around if an exception is thrown.",
+      "revId": "3c30de052de7f95efd25b1d94ff8ab72a2aa1e09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_85a45eb0",
+        "filename": "src/dm/ve.dm.TransactionProcessor.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-02-06T16:22:31Z",
+      "side": 1,
+      "message": "\"Data to insert; for efficiency, objects are inserted without cloning\"",
+      "revId": "3c30de052de7f95efd25b1d94ff8ab72a2aa1e09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_a5187a24",
+        "filename": "src/dm/ve.dm.TransactionProcessor.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-02-06T16:22:31Z",
+      "side": 1,
+      "message": "\u003cp\u003e",
+      "range": {
+        "startLine": 326,
+        "startChar": 104,
+        "endLine": 326,
+        "endChar": 105
+      },
+      "revId": "3c30de052de7f95efd25b1d94ff8ab72a2aa1e09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_14cf7db6",
+        "filename": "src/dm/ve.dm.TransactionProcessor.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-02-06T16:22:31Z",
+      "side": 1,
+      "message": "(relies on the splice operation objects being unchanged)",
+      "revId": "3c30de052de7f95efd25b1d94ff8ab72a2aa1e09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_85aa1e6c",
+        "filename": "src/dm/ve.dm.TransactionProcessor.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-02-06T16:22:31Z",
+      "side": 1,
+      "message": "new ve.dm.FlatLinearData(...) ?",
+      "revId": "3c30de052de7f95efd25b1d94ff8ab72a2aa1e09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_c54496bf",
+        "filename": "src/dm/ve.dm.TransactionProcessor.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-02-06T16:22:31Z",
+      "side": 1,
+      "message": "This won\u0027t catch cases like \u003cp\u003e[+some text+]\u003cimg/\u003e\u003c/p\u003e , right? Should we just check for adjacent text?",
+      "revId": "3c30de052de7f95efd25b1d94ff8ab72a2aa1e09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_c0ada42f",
+        "filename": "src/dm/ve.dm.TransactionProcessor.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-02-06T16:22:31Z",
+      "side": 1,
+      "message": "It\u0027s very pretty how the offsets work out right :)",
+      "revId": "3c30de052de7f95efd25b1d94ff8ab72a2aa1e09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_b4c2e937",
+        "filename": "src/dm/ve.dm.TransactionProcessor.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 781,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-02-06T16:22:31Z",
+      "side": 1,
+      "message": "On reflection, I think this is necessary but not sufficient. For example, consider the following change:\n[+\u003cdiv\u003e+]\u003cp\u003efoo[+\u003c/p\u003e+][-bar-][+\u003cp\u003e+]baz\u003c/p\u003e[+\u003c/div\u003e+]\n\nthis.replaceInsertLevel will return to zero at the [+\u003c/p\u003e+], but the replacement up to that point is not balanced.",
+      "revId": "3c30de052de7f95efd25b1d94ff8ab72a2aa1e09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
