@@ -252,6 +252,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_037501c8",
+        "filename": "src/dm/ve.dm.TransactionProcessor.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2017-02-07T11:31:36Z",
+      "side": 1,
+      "message": "It turns out that rollbacks were also fundamentally broken: if a modifier function throws an exception halfway through, it can\u0027t also return a function that undoes its modifications. So I removed the return-a-function mechanism and instead added pushUndoFunction(). Because splice does so many things that can go wrong, I had it add an undo function all the way at the start which then undoes whichever splice operations ended up executing.\n\nAfter all this (and discovering that the s variable wasn\u0027t declared in the function but came from the outer scope, oops!) I was finally able to reproduce the unadjusted offset failure and fix it. All this code (and a test case) is in PS3.",
+      "parentUuid": "2ef897d1_c3afe9dc",
+      "revId": "3c30de052de7f95efd25b1d94ff8ab72a2aa1e09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_b4c2e937",
         "filename": "src/dm/ve.dm.TransactionProcessor.js",
         "patchSetId": 2
