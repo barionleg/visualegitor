@@ -128,3 +128,14 @@ ve.ui.commandHelpRegistry.register( 'other', 'findNext', { trigger: 'findNext', 
 ve.ui.commandHelpRegistry.register( 'other', 'findPrevious', { trigger: 'findPrevious', label: OO.ui.deferMsg( 'visualeditor-find-and-replace-previous-button' ) } );
 ve.ui.commandHelpRegistry.register( 'other', 'selectAll', { trigger: 'selectAll', label: OO.ui.deferMsg( 'visualeditor-content-select-all' ) } );
 ve.ui.commandHelpRegistry.register( 'other', 'commandHelp', { trigger: 'commandHelp', label: OO.ui.deferMsg( 'visualeditor-dialog-command-help-title' ) } );
+ve.ui.commandHelpRegistry.register( 'other', 'dialogCancel', {
+	shortcuts: [ 'escape' ],
+	label: OO.ui.deferMsg( 'visualeditor-command-dialog-cancel' )
+} );
+ve.ui.commandHelpRegistry.register( 'other', 'dialogConfirm', {
+	shortcuts: [ {
+		mac: 'cmd+enter',
+		pc: 'ctrl+enter'
+	} ],
+	label: OO.ui.deferMsg( 'visualeditor-command-dialog-confirm' )
+} );

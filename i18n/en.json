@@ -39,6 +39,8 @@
 	"visualeditor-clipboard-cut": "Cut",
 	"visualeditor-clipboard-paste": "Paste",
 	"visualeditor-clipboard-paste-special": "Paste as plain text",
+	"visualeditor-command-dialog-cancel": "Cancel a popup dialog",
+	"visualeditor-command-dialog-confirm": "Confirm a popup dialog",
 	"visualeditor-commentinspector-edit": "Edit comment",
 	"visualeditor-commentinspector-title": "Comment",
 	"visualeditor-commentinspector-tooltip": "Comment",
