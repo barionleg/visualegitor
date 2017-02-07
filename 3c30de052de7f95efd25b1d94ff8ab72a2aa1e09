@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_3ed8107f",
+        "filename": "src/dm/ve.dm.TransactionProcessor.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2017-02-07T11:57:22Z",
+      "side": 1,
+      "message": "PS4 cleans this up by changing the duplicate filtering code completely.",
+      "parentUuid": "2ef897d1_236b5db7",
+      "revId": "3c30de052de7f95efd25b1d94ff8ab72a2aa1e09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_8500deb0",
         "filename": "src/dm/ve.dm.TransactionProcessor.js",
         "patchSetId": 2
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "Good point, I\u0027ll move it to a separate function.",
       "parentUuid": "2ef897d1_8500deb0",
+      "revId": "3c30de052de7f95efd25b1d94ff8ab72a2aa1e09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_1ecf94b6",
+        "filename": "src/dm/ve.dm.TransactionProcessor.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2017-02-07T11:57:22Z",
+      "side": 1,
+      "message": "PS4 makes this moot by changing the duplicate filtering code completely.",
+      "parentUuid": "2ef897d1_036e21c4",
       "revId": "3c30de052de7f95efd25b1d94ff8ab72a2aa1e09",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
