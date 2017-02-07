@@ -158,6 +158,24 @@
       "revId": "3c30de052de7f95efd25b1d94ff8ab72a2aa1e09",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_add3bcd6",
+        "filename": "src/dm/ve.dm.TransactionProcessor.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 781,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-02-07T00:03:08Z",
+      "side": 1,
+      "message": "Furthermore, I think the following example shows that in some quirkier cases, it won\u0027t suffice to observe replaced tags (without observing retained tags too):\n\n[+\u003cdiv\u003e+]\u003cul\u003e\u003cli\u003e\u003cdiv\u003e\u003cp\u003efoo\u003c/p\u003e[+\u003c/div\u003e+]\u003cp\u003ebar\u003c/p\u003e[+\u003cdiv\u003e+]\u003cp\u003ebaz\u003c/p\u003e\u003c/div\u003e\u003c/li\u003e\u003c/ul\u003e[+\u003c/div\u003e+]",
+      "parentUuid": "2ef897d1_b4c2e937",
+      "revId": "3c30de052de7f95efd25b1d94ff8ab72a2aa1e09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
