@@ -175,7 +175,7 @@ QUnit.test( 'Diffing', function ( assert ) {
 				newDoc: '<p>foo <b>bar</b> baz</p>',
 				expected:
 					'<div class="ve-ui-diffElement-doc-child-change">' +
-						'<p>foo <del class="ve-ui-diffElement-remove">bar</del>  <ins class="ve-ui-diffElement-insert"><b>bar</b></ins> baz</p>' +
+						'<p>foo <span class="ve-ui-diffElement-change-remove">bar</span>  <span class="ve-ui-diffElement-change-insert"><b>bar</b></span> baz</p>' +
 					'</div>'
 			},
 			{
@@ -184,7 +184,7 @@ QUnit.test( 'Diffing', function ( assert ) {
 				newDoc: '<p>foo bar baz</p>',
 				expected:
 					'<div class="ve-ui-diffElement-doc-child-change">' +
-						'<p>foo <del class="ve-ui-diffElement-remove"><b>bar</b></del>  <ins class="ve-ui-diffElement-insert">bar</ins> baz</p>' +
+						'<p>foo <span class="ve-ui-diffElement-change-remove"><b>bar</b></span>  <span class="ve-ui-diffElement-change-insert">bar</span> baz</p>' +
 					'</div>'
 			}
 		];
