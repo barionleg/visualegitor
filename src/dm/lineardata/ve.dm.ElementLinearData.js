@@ -476,6 +476,20 @@ ve.dm.ElementLinearData.prototype.getCharacterData = function ( offset ) {
 };
 
 /**
+ * Get character data from some linear data
+ *
+ * @param {Array} linearData Linear data from which to get character
+ * @return {string} Character data
+ */
+ve.dm.ElementLinearData.static.getCharacterDataFromLinearData = function ( linearData ) {
+	var i, ilen, data = '';
+	for ( i = 0, ilen = linearData.length; i < ilen; i++ ) {
+		data += Array.isArray( linearData[ i ] ) ? linearData[ i ][ 0 ] : linearData[ i ];
+	}
+	return data.length > 0 ? data : '';
+};
+
+/**
  * Gets the range of content surrounding a given offset that's covered by a given annotation.
  *
  * @method
