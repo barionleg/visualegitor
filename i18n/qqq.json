@@ -47,6 +47,8 @@
 	"visualeditor-clipboard-cut": "Label for cut command.\n{{Identical|Cut}}",
 	"visualeditor-clipboard-paste": "Label for paste command.\n{{Identical|Paste}}",
 	"visualeditor-clipboard-paste-special": "Label for paste as plain text command",
+	"visualeditor-command-dialog-cancel": "Label for the command to close a window and discard its changes",
+	"visualeditor-command-dialog-confirm": "Label for the command to close a window and make its changes",
 	"visualeditor-commentinspector-edit": "Label for the edit button in the comment inspector.\nSee [https://i.imgur.com/OFQvrZo.png screenshot].",
 	"visualeditor-commentinspector-title": "Label for the title in the comment inspector.\nSee [https://i.imgur.com/OFQvrZo.png screenshot].\n{{Identical|Comment}}",
 	"visualeditor-commentinspector-tooltip": "Tooltip text for comment button.\n{{Related|Visualeditor-annotationbutton}}\n{{Identical|Comment}}",
