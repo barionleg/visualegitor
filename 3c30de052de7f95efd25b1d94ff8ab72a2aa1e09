@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_236b5db7",
+        "filename": "src/dm/ve.dm.TransactionProcessor.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2017-02-07T08:28:04Z",
+      "side": 1,
+      "message": "I guess that would be cleaner, maybe? OTOH I\u0027m not too sure how much I want nodes to know about a random bit of code in TransactionProcessor. If we had ES6 Set then this wouldn\u0027t be necessary. (This code actually dates back to 2012, but it was a hack then and it\u0027s a hack now.)",
+      "parentUuid": "2ef897d1_a5f19adc",
+      "revId": "3c30de052de7f95efd25b1d94ff8ab72a2aa1e09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_8500deb0",
         "filename": "src/dm/ve.dm.TransactionProcessor.js",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2017-02-06T16:22:31Z",
       "side": 1,
       "message": "I think this cleanup (whether using delete or setting to null) should be in the finally block of .process . Otherwise we might leave queued events lying around if an exception is thrown.",
+      "revId": "3c30de052de7f95efd25b1d94ff8ab72a2aa1e09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_036e21c4",
+        "filename": "src/dm/ve.dm.TransactionProcessor.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2017-02-07T08:28:04Z",
+      "side": 1,
+      "message": "Good point, I\u0027ll move it to a separate function.",
+      "parentUuid": "2ef897d1_8500deb0",
       "revId": "3c30de052de7f95efd25b1d94ff8ab72a2aa1e09",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -93,6 +129,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_e36545de",
+        "filename": "src/dm/ve.dm.TransactionProcessor.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2017-02-07T08:28:04Z",
+      "side": 1,
+      "message": "Whoops, yes. I\u0027ll just add that to the sentence on line 317.",
+      "parentUuid": "2ef897d1_14cf7db6",
+      "revId": "3c30de052de7f95efd25b1d94ff8ab72a2aa1e09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_85aa1e6c",
         "filename": "src/dm/ve.dm.TransactionProcessor.js",
         "patchSetId": 2
@@ -104,6 +158,24 @@
       "writtenOn": "2017-02-06T16:22:31Z",
       "side": 1,
       "message": "new ve.dm.FlatLinearData(...) ?",
+      "revId": "3c30de052de7f95efd25b1d94ff8ab72a2aa1e09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_c36009cf",
+        "filename": "src/dm/ve.dm.TransactionProcessor.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2017-02-07T08:28:04Z",
+      "side": 1,
+      "message": "Yeah, might as well",
+      "parentUuid": "2ef897d1_85aa1e6c",
       "revId": "3c30de052de7f95efd25b1d94ff8ab72a2aa1e09",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -127,6 +199,24 @@
     },
     {
       "key": {
+        "uuid": "2ef897d1_43a3f9fd",
+        "filename": "src/dm/ve.dm.TransactionProcessor.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2017-02-07T08:28:04Z",
+      "side": 1,
+      "message": "Yes it does:\n\n    \u003e d \u003d new ve.dm.Document([{type: \u0027paragraph\u0027 }, { type: \u0027inlineImage\u0027 }, { type: \u0027/inlineImage\u0027 }, { type: \u0027/paragraph\u0027 }]);\n    \u003e d.selectNodes(new ve.Range(1), \u0027leaves\u0027)[0].indexInNode\n    0\n\nGenerally speaking, if you feed a zero-length range to selectNodes, one of the following will be true:\n\n- node will be a text node; or\n- indexInNode will be set; or\n- node will be empty (not sure why we don\u0027t set indexInNode\u003d0 here)",
+      "parentUuid": "2ef897d1_c54496bf",
+      "revId": "3c30de052de7f95efd25b1d94ff8ab72a2aa1e09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ef897d1_c0ada42f",
         "filename": "src/dm/ve.dm.TransactionProcessor.js",
         "patchSetId": 2
@@ -138,6 +228,24 @@
       "writtenOn": "2017-02-06T16:22:31Z",
       "side": 1,
       "message": "It\u0027s very pretty how the offsets work out right :)",
+      "revId": "3c30de052de7f95efd25b1d94ff8ab72a2aa1e09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_c3afe9dc",
+        "filename": "src/dm/ve.dm.TransactionProcessor.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2017-02-07T08:28:04Z",
+      "side": 1,
+      "message": "Actually, wait, did I screw up offset adjustments here? s.offset does not include lengthDiffs[s.data], so how could code possibly work? Let me see if I can come up with a failing test case.",
+      "parentUuid": "2ef897d1_c0ada42f",
       "revId": "3c30de052de7f95efd25b1d94ff8ab72a2aa1e09",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -173,6 +281,24 @@
       "side": 1,
       "message": "Furthermore, I think the following example shows that in some quirkier cases, it won\u0027t suffice to observe replaced tags (without observing retained tags too):\n\n[+\u003cdiv\u003e+]\u003cul\u003e\u003cli\u003e\u003cdiv\u003e\u003cp\u003efoo\u003c/p\u003e[+\u003c/div\u003e+]\u003cp\u003ebar\u003c/p\u003e[+\u003cdiv\u003e+]\u003cp\u003ebaz\u003c/p\u003e\u003c/div\u003e\u003c/li\u003e\u003c/ul\u003e[+\u003c/div\u003e+]",
       "parentUuid": "2ef897d1_b4c2e937",
+      "revId": "3c30de052de7f95efd25b1d94ff8ab72a2aa1e09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef897d1_23811d50",
+        "filename": "src/dm/ve.dm.TransactionProcessor.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 781,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2017-02-07T08:28:04Z",
+      "side": 1,
+      "message": "Hmm... So your first example is invalid because it relies on directly adjacent replace operations (which get merged by pushReplace), but your second example is valid. It\u0027s a crazy combination of a wrap containing a split containing an unwrap, but it\u0027s legal. I suppose I\u0027ll have to keep a depth stack of retained data (adding retained depths to both insertDepth and removeDepth).",
+      "parentUuid": "2ef897d1_add3bcd6",
       "revId": "3c30de052de7f95efd25b1d94ff8ab72a2aa1e09",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
