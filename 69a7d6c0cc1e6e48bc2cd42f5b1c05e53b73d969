@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_d76afae9",
+        "filename": "src/dm/ve.dm.TransactionProcessor.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 799,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-02-08T15:16:25Z",
+      "side": 1,
+      "message": "This has the sightly curious effect of passing negative zero as an argument :) I don\u0027t think that actually matters, though you could ||0 it for tidiness",
+      "range": {
+        "startLine": 799,
+        "startChar": 36,
+        "endLine": 799,
+        "endChar": 63
+      },
+      "revId": "69a7d6c0cc1e6e48bc2cd42f5b1c05e53b73d969",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
