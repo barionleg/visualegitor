@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef897d1_b82081a9",
+        "filename": "src/ce/ve.ce.MetaItem.js",
+        "patchSetId": 25
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2017-02-09T21:55:40Z",
+      "side": 1,
+      "message": "Don\u0027t modify the config object passed in by the caller, instead do:\n\n    $.extend( {}, config, { $element: $() } )",
+      "revId": "4c973340f456fff44f9654f7a34baad87a8b5718",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
