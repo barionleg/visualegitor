@@ -24,7 +24,6 @@ ve.dm.Surface = function VeDmSurface( doc, config ) {
 	// Properties
 	this.documentModel = doc;
 	this.sourceMode = !!config.sourceMode;
-	this.metaList = new ve.dm.MetaList( this );
 	this.selection = new ve.dm.NullSelection( this.getDocument() );
 	this.selectionBefore = new ve.dm.NullSelection( this.getDocument() );
 	this.translatedSelection = null;
@@ -443,15 +442,6 @@ ve.dm.Surface.prototype.hasBeenModified = function () {
  */
 ve.dm.Surface.prototype.getDocument = function () {
 	return this.documentModel;
-};
-
-/**
- * Get the meta list.
- *
- * @return {ve.dm.MetaList} Meta list of the surface
- */
-ve.dm.Surface.prototype.getMetaList = function () {
-	return this.metaList;
 };
 
 /**

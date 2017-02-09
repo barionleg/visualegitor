@@ -50,7 +50,6 @@
 					"ve.dm.ModelRegistry",
 					"ve.dm.ModelFactory",
 					"ve.dm.AnnotationFactory",
-					"ve.dm.MetaItemFactory",
 					"ve.dm.NodeFactory",
 					"ve.dm.Converter",
 					"ve.dm.DataString",
@@ -73,7 +72,7 @@
 			},
 			{
 				"name": "Meta items",
-				"classes": ["ve.dm.*MetaItem", "ve.dm.MetaList"]
+				"classes": ["ve.dm.*MetaItem" ]
 			},
 			{
 				"name": "Internal list",
@@ -132,6 +131,10 @@
 			{
 				"name": "Annotations",
 				"classes": ["ve.ce.*Annotation"]
+			},
+			{
+				"name": "Meta items",
+				"classes": ["ve.ce.MetaItem"]
 			},
 			{
 				"name": "Factories",
