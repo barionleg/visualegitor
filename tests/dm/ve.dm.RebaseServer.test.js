@@ -190,13 +190,13 @@ QUnit.test( 'Rebase', function ( assert ) {
 		if ( data[ 0 ] === 'insert' ) {
 			data = [
 				[ 'pushRetain', data[ 1 ] ],
-				[ 'pushReplace', doc, data[ 1 ], 0, data[ 2 ] ],
+				[ 'pushReplacement', doc, data[ 1 ], 0, data[ 2 ] ],
 				[ 'pushRetain', data[ 3 ] ]
 			];
 		} else if ( data[ 0 ] === 'remove' ) {
 			data = [
 				[ 'pushRetain', data[ 1 ] ],
-				[ 'pushReplace', doc, data[ 1 ], data[ 2 ], [] ],
+				[ 'pushReplacement', doc, data[ 1 ], data[ 2 ], [] ],
 				[ 'pushRetain', data[ 3 ] ]
 			];
 		}
