@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee375f69_c07f1362",
+        "filename": "src/dm/ve.dm.VisualDiff.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-02-13T22:16:39Z",
+      "side": 1,
+      "message": "You can use ve.dm.ElementLinearData.static.compareElementsUnannotated(a,b)",
+      "revId": "cb8b1c2c855c4a2b193d206b61ba2c84e145f5b5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee375f69_e0201799",
+        "filename": "src/ui/elements/ve.ui.DiffElement.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-02-13T22:16:39Z",
+      "side": 1,
+      "message": "stray parentheses",
+      "range": {
+        "startLine": 521,
+        "startChar": 37,
+        "endLine": 521,
+        "endChar": 49
+      },
+      "revId": "cb8b1c2c855c4a2b193d206b61ba2c84e145f5b5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee375f69_803d8bba",
+        "filename": "tests/ui/ve.ui.DiffElement.test.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-02-13T22:16:39Z",
+      "side": 1,
+      "message": "we should test \u003cb\u003efoo\u003c/b\u003e -\u003e \u003ci\u003ebar\u003c/i\u003e or something",
+      "revId": "cb8b1c2c855c4a2b193d206b61ba2c84e145f5b5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
