@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_9a973d93",
+        "filename": "src/dm/ve.dm.VisualDiff.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 2849
+      },
+      "writtenOn": "2017-02-14T23:10:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce3c5b53_8f7861c1",
+      "revId": "3c69a722b97e3f910718cdb7fad57bc11e32228f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_0f53f144",
         "filename": "src/dm/ve.dm.VisualDiff.js",
         "patchSetId": 4
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_3a94f18c",
+        "filename": "src/dm/ve.dm.VisualDiff.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 2849
+      },
+      "writtenOn": "2017-02-14T23:10:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce3c5b53_0f53f144",
+      "revId": "3c69a722b97e3f910718cdb7fad57bc11e32228f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_43823899",
         "filename": "src/dm/ve.dm.VisualDiff.js",
         "patchSetId": 4
@@ -47,6 +83,24 @@
       "writtenOn": "2017-02-14T17:28:01Z",
       "side": 1,
       "message": "eslint is complaining about having a function in a for loop",
+      "revId": "3c69a722b97e3f910718cdb7fad57bc11e32228f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_5a91b59b",
+        "filename": "src/dm/ve.dm.VisualDiff.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 2849
+      },
+      "writtenOn": "2017-02-14T23:10:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce3c5b53_43823899",
       "revId": "3c69a722b97e3f910718cdb7fad57bc11e32228f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
