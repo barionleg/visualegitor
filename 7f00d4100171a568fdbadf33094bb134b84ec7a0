@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_5bcc548c",
+        "filename": "tests/ui/datatransferhandlers/ve.ui.UrlStringTransferHandler.test.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 664
+      },
+      "writtenOn": "2017-02-15T20:11:36Z",
+      "side": 1,
+      "message": "I don\u0027t think this is right.  The intent of the test (as I recall) was to say that if html is included in addition to a text/uri-list type, *ignore the text/uri-list* and use the HTML, since the HTML includes a title for the link while the standard text/uri-list does not.  In this test case the pasteHTML deliberately uses a different URI, to make it clear(er) that the pasteString is completely ignored and the resulting expectedData is coming solely from the pasteHtml.\n\nThe next test refines this: if we get a text/x-moz-url (mozilla\u0027s extension), then use that directly, since Mozilla\u0027s extended format contains the desired title.\n\nThe previous case says that a bare text/uri-list, without corresponding HTML, should be treated like a wikitext barelink; that is, the title is the url.\n\nI clearly should have written better comments for these test cases.",
+      "range": {
+        "startLine": 101,
+        "startChar": 4,
+        "endLine": 101,
+        "endChar": 15
+      },
+      "revId": "7f00d4100171a568fdbadf33094bb134b84ec7a0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
