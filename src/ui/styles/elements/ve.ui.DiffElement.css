@@ -17,18 +17,23 @@
 	border-radius: 0.15em;
 }
 
-/* -change-insert will have a different background color eventually */
-.ve-ui-diffElement-insert,
-.ve-ui-diffElement-change-insert {
+.ve-ui-diffElement-insert {
 	background-color: #7fd7c4 !important; /* stylelint-disable-line declaration-no-important */
 	box-shadow: 0 0 0 0.1em #7fd7c4;
 }
 
-/* -change-remove may not be visible eventually */
-.ve-ui-diffElement-remove,
-.ve-ui-diffElement-change-remove {
+.ve-ui-diffElement-change-insert {
+	background-color: #8ab4e8 !important; /* stylelint-disable-line declaration-no-important */
+	box-shadow: 0 0 0 0.1em #8ab4e8;
+}
+
+.ve-ui-diffElement-remove {
 	background-color: #e88e89 !important; /* stylelint-disable-line declaration-no-important */
 	box-shadow: 0 0 0 0.1em #e88e89;
+}
+
+.ve-ui-diffElement-change-remove {
+	display: none;
 }
 
 .ve-ui-diffElement-remove + .ve-ui-diffElement-insert,
