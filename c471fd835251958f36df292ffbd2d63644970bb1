@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_63c39f62",
+        "filename": "src/dm/ve.dm.MetaList.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2017-02-18T02:25:42Z",
+      "side": 0,
+      "message": "Why are you getting rid of groups? These are needed for categories and references in VE-MW – can we retain this functionality?",
+      "revId": "c471fd835251958f36df292ffbd2d63644970bb1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
