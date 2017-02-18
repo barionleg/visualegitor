@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_a3f207cc",
+        "filename": "src/dm/ve.dm.MetaItem.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2017-02-18T02:21:04Z",
+      "side": 1,
+      "message": "It\u0027d be handy to implement this.",
+      "revId": "b966d59e5cb36bda1a65dd6b61f764ad2463c8e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
