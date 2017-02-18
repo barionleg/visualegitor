@@ -19,6 +19,8 @@
 
 /* -change-insert will have a different background color eventually */
 .ve-ui-diffElement-insert,
+/* figcaptions are display:table-caption so need separate backgrounds */
+figure.ve-ui-diffElement-insert > figcaption,
 .ve-ui-diffElement-change-insert {
 	background-color: #7fd7c4 !important; /* stylelint-disable-line declaration-no-important */
 	box-shadow: 0 0 0 0.1em #7fd7c4;
@@ -26,6 +28,8 @@
 
 /* -change-remove may not be visible eventually */
 .ve-ui-diffElement-remove,
+/* figcaptions are display:table-caption so need separate backgrounds */
+figure.ve-ui-diffElement-remove > figcaption,
 .ve-ui-diffElement-change-remove {
 	background-color: #e88e89 !important; /* stylelint-disable-line declaration-no-important */
 	box-shadow: 0 0 0 0.1em #e88e89;
