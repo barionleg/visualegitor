@@ -89,14 +89,13 @@ ve.init.Target.static.modes = [ 'visual' ];
 ve.init.Target.static.toolbarGroups = [
 	// History
 	{
-		header: OO.ui.deferMsg( 'visualeditor-toolbar-history' ),
 		include: [ 'undo', 'redo' ]
 	},
 	// Format
 	{
 		header: OO.ui.deferMsg( 'visualeditor-toolbar-paragraph-format' ),
-		type: 'menu',
 		title: OO.ui.deferMsg( 'visualeditor-toolbar-format-tooltip' ),
+		type: 'menu',
 		include: [ { group: 'format' } ],
 		promote: [ 'paragraph' ],
 		demote: [ 'preformatted', 'blockquote' ]
@@ -109,30 +108,28 @@ ve.init.Target.static.toolbarGroups = [
 	},
 	// Link
 	{
-		header: OO.ui.deferMsg( 'visualeditor-linkinspector-title' ),
 		include: [ 'link' ]
 	},
 	// Structure
 	{
 		header: OO.ui.deferMsg( 'visualeditor-toolbar-structure' ),
+		title: OO.ui.deferMsg( 'visualeditor-toolbar-structure' ),
 		type: 'list',
 		icon: 'listBullet',
-		title: OO.ui.deferMsg( 'visualeditor-toolbar-structure' ),
 		include: [ { group: 'structure' } ],
 		demote: [ 'outdent', 'indent' ]
 	},
 	// Insert
 	{
 		header: OO.ui.deferMsg( 'visualeditor-toolbar-insert' ),
+		title: OO.ui.deferMsg( 'visualeditor-toolbar-insert' ),
 		type: 'list',
 		icon: 'add',
 		label: '',
-		title: OO.ui.deferMsg( 'visualeditor-toolbar-insert' ),
 		include: '*'
 	},
 	// Special character toolbar
 	{
-		header: OO.ui.deferMsg( 'visualeditor-toolbar-insert' ),
 		include: [ 'specialCharacter' ]
 	}
 ];
