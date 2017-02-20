@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_9000606f",
+        "filename": "src/ui/styles/dialogs/ve.ui.CommandHelpDialog.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-02-20T11:27:28Z",
+      "side": 1,
+      "message": "This seems wrong, we don\u0027t have un-spaced parentheses of any type elsewhere in our style guide.",
+      "revId": "a507dcb840190e15bb8a47cdd8631750bc41e01a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
