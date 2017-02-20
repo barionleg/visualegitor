@@ -16,6 +16,24 @@
       "revId": "a507dcb840190e15bb8a47cdd8631750bc41e01a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_e6c6d34d",
+        "filename": "src/ui/styles/dialogs/ve.ui.CommandHelpDialog.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2017-02-20T23:56:39Z",
+      "side": 1,
+      "message": "Thanks for the upstream fix.",
+      "parentUuid": "ce3c5b53_9000606f",
+      "revId": "a507dcb840190e15bb8a47cdd8631750bc41e01a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
