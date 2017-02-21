@@ -1,12 +1,12 @@
 /*!
- * OOjs UI v0.19.2
+ * OOjs UI v0.19.3-pre (72b81a54a7)
  * https://www.mediawiki.org/wiki/OOjs_UI
  *
  * Copyright 2011–2017 OOjs UI Team and other contributors.
  * Released under the MIT license
  * http://oojs.mit-license.org
  *
- * Date: 2017-02-14T22:47:25Z
+ * Date: 2017-02-21T22:25:56Z
  */
 .oo-ui-draggableElement-handle,
 .oo-ui-draggableElement-handle.oo-ui-widget {
@@ -40,12 +40,6 @@
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
           box-sizing: border-box;
-}
-.oo-ui-bookletLayout-stackLayout > .oo-ui-panelLayout-scrollable {
-  overflow-y: auto;
-}
-.oo-ui-bookletLayout-stackLayout > .oo-ui-panelLayout-padded {
-  padding: 2em;
 }
 .oo-ui-bookletLayout-outlinePanel-editable > .oo-ui-outlineSelectWidget {
   position: absolute;
@@ -563,7 +557,7 @@
   background-color: #f3f3f3;
   color: #ccc;
   border-color: #ddd;
-  text-shadow: 0 -1px 1px #fff;
+  text-shadow: 0 1px 1px #fff;
 }
 .oo-ui-selectFileWidget.oo-ui-widget-disabled .oo-ui-selectFileWidget-info,
 .oo-ui-selectFileWidget-empty.oo-ui-widget-disabled .oo-ui-selectFileWidget-info,
@@ -571,7 +565,7 @@
   background-color: #f3f3f3;
   color: #ccc;
   border-color: #ddd;
-  text-shadow: 0 -1px 1px #fff;
+  text-shadow: 0 1px 1px #fff;
 }
 .oo-ui-selectFileWidget.oo-ui-widget-disabled .oo-ui-selectFileWidget-info > .oo-ui-iconElement-icon,
 .oo-ui-selectFileWidget-empty.oo-ui-widget-disabled .oo-ui-selectFileWidget-info > .oo-ui-iconElement-icon,
@@ -619,7 +613,7 @@
 }
 .oo-ui-selectWidget-depressed .oo-ui-outlineOptionWidget.oo-ui-optionWidget-selected {
   background-color: #a7dcff;
-  text-shadow: 0 -1px 1px rgba(255, 255, 255, 0.5);
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
 }
 .oo-ui-outlineOptionWidget.oo-ui-flaggedElement-important {
   font-weight: bold;
@@ -769,7 +763,7 @@
   vertical-align: middle;
 }
 .oo-ui-capsuleMultiselectWidget-handle > .oo-ui-capsuleMultiselectWidget-content > input:focus {
-  outline: none;
+  outline: 0;
 }
 .oo-ui-capsuleMultiselectWidget.oo-ui-indicatorElement .oo-ui-capsuleMultiselectWidget-handle {
   padding-left: 2.4875em;
@@ -792,7 +786,7 @@
 }
 .oo-ui-capsuleMultiselectWidget.oo-ui-widget-disabled .oo-ui-capsuleMultiselectWidget-handle {
   color: #ccc;
-  text-shadow: 0 -1px 1px #fff;
+  text-shadow: 0 1px 1px #fff;
   border-color: #ddd;
   background-color: #f3f3f3;
   cursor: default;
@@ -836,7 +830,7 @@
   cursor: text;
 }
 .oo-ui-capsuleItemWidget:focus {
-  outline: none;
+  outline: 0;
   border-color: #087ecc;
 }
 .oo-ui-capsuleItemWidget.oo-ui-widget-disabled {

@@ -1,12 +1,12 @@
 /*!
- * OOjs UI v0.19.2
+ * OOjs UI v0.19.3-pre (72b81a54a7)
  * https://www.mediawiki.org/wiki/OOjs_UI
  *
  * Copyright 2011–2017 OOjs UI Team and other contributors.
  * Released under the MIT license
  * http://oojs.mit-license.org
  *
- * Date: 2017-02-14T22:47:25Z
+ * Date: 2017-02-21T22:25:56Z
  */
 .oo-ui-draggableElement-handle,
 .oo-ui-draggableElement-handle.oo-ui-widget {
@@ -40,12 +40,6 @@
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
           box-sizing: border-box;
-}
-.oo-ui-bookletLayout-stackLayout > .oo-ui-panelLayout-scrollable {
-  overflow-y: auto;
-}
-.oo-ui-bookletLayout-stackLayout > .oo-ui-panelLayout-padded {
-  padding: 2em;
 }
 .oo-ui-bookletLayout-outlinePanel-editable > .oo-ui-outlineSelectWidget {
   position: absolute;
@@ -603,15 +597,12 @@
 .oo-ui-selectFileWidget-notsupported.oo-ui-indicatorElement .oo-ui-selectFileWidget-label {
   right: 2em;
 }
-.oo-ui-selectFileWidget-supported.oo-ui-widget-enabled.oo-ui-selectFileWidget-canDrop.oo-ui-selectFileWidget-dropTarget {
-  background-color: #eaf3ff;
-}
 .oo-ui-selectFileWidget-dropTarget {
   background-color: #fff;
   border: 1px solid #a2a9b1;
+  border-radius: 2px;
   vertical-align: middle;
   overflow: hidden;
-  border-radius: 2px;
 }
 .oo-ui-selectFileWidget-dropTarget .oo-ui-selectFileWidget-selectButton > .oo-ui-buttonElement-button {
   border-radius: 2px;
@@ -622,8 +613,18 @@
   white-space: normal;
 }
 .oo-ui-selectFileWidget-empty.oo-ui-widget-enabled.oo-ui-selectFileWidget-dropTarget {
-  background-color: #eee;
+  background-color: #fff;
   border-style: dashed;
+  -webkit-transition: background-color 200ms cubic-bezier(0.39, 0.575, 0.565, 1), color 200ms cubic-bezier(0.39, 0.575, 0.565, 1), border-color 200ms cubic-bezier(0.39, 0.575, 0.565, 1);
+     -moz-transition: background-color 200ms cubic-bezier(0.39, 0.575, 0.565, 1), color 200ms cubic-bezier(0.39, 0.575, 0.565, 1), border-color 200ms cubic-bezier(0.39, 0.575, 0.565, 1);
+          transition: background-color 200ms cubic-bezier(0.39, 0.575, 0.565, 1), color 200ms cubic-bezier(0.39, 0.575, 0.565, 1), border-color 200ms cubic-bezier(0.39, 0.575, 0.565, 1);
+}
+.oo-ui-selectFileWidget-empty.oo-ui-widget-enabled.oo-ui-selectFileWidget-dropTarget:hover {
+  border-color: #72777d;
+}
+.oo-ui-selectFileWidget-supported.oo-ui-widget-enabled.oo-ui-selectFileWidget-canDrop.oo-ui-selectFileWidget-dropTarget {
+  background-color: #eaf3ff;
+  color: #36c;
 }
 .oo-ui-selectFileWidget.oo-ui-widget-disabled.oo-ui-selectFileWidget-dropTarget,
 .oo-ui-selectFileWidget-empty.oo-ui-widget-disabled.oo-ui-selectFileWidget-dropTarget,
@@ -918,20 +919,18 @@
   display: inline-block;
   cursor: default;
   white-space: nowrap;
-  width: auto;
-  max-width: 100%;
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
           box-sizing: border-box;
-  vertical-align: middle;
+  width: auto;
+  max-width: 100%;
   height: 1.7em;
-  line-height: 1.7;
-  background-color: #eee;
-  color: #222;
   margin: 0.1em;
   border: 1px solid #a2a9b1;
   border-radius: 2px;
   padding: 0 0.4em;
+  line-height: 1.7;
+  vertical-align: middle;
 }
 .oo-ui-capsuleItemWidget.oo-ui-labelElement .oo-ui-labelElement-label {
   display: inline-block;
@@ -939,22 +938,23 @@
   overflow: hidden;
   cursor: text;
 }
-.oo-ui-capsuleItemWidget:focus {
-  outline: 0;
+.oo-ui-capsuleItemWidget.oo-ui-widget-enabled {
+  background-color: #f8f9fa;
+  color: #222;
+  padding-right: 1.5375em;
+  -webkit-transition: background-color 100ms, color 100ms, border-color 100ms, box-shadow 100ms;
+     -moz-transition: background-color 100ms, color 100ms, border-color 100ms, box-shadow 100ms;
+          transition: background-color 100ms, color 100ms, border-color 100ms, box-shadow 100ms;
+}
+.oo-ui-capsuleItemWidget.oo-ui-widget-enabled:hover {
+  background-color: #fff;
+  color: #444;
+  border-color: #a2a9b1;
+}
+.oo-ui-capsuleItemWidget.oo-ui-widget-enabled:focus {
   border-color: #36c;
   box-shadow: inset 0 0 0 1px #36c;
-}
-.oo-ui-capsuleItemWidget.oo-ui-widget-disabled {
-  background-color: #eaecf0;
-  color: #72777d;
-  border-color: #c8ccd1;
-  text-shadow: 0 1px 1px #fff;
-}
-.oo-ui-capsuleItemWidget > .oo-ui-buttonElement {
-  display: none;
-}
-.oo-ui-capsuleItemWidget.oo-ui-widget-enabled {
-  padding-right: 1.5375em;
+  outline: 0;
 }
 .oo-ui-capsuleItemWidget.oo-ui-widget-enabled > .oo-ui-buttonElement {
   display: block;
@@ -974,6 +974,15 @@
   right: 0.3em;
   bottom: 0;
   height: auto;
+}
+.oo-ui-capsuleItemWidget.oo-ui-widget-disabled {
+  background-color: #eaecf0;
+  color: #72777d;
+  border-color: #c8ccd1;
+  text-shadow: 0 1px 1px #fff;
+}
+.oo-ui-capsuleItemWidget.oo-ui-widget-disabled > .oo-ui-buttonElement {
+  display: none;
 }
 .oo-ui-searchWidget-query {
   position: absolute;

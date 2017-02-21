@@ -1,12 +1,12 @@
 /*!
- * OOjs UI v0.19.2
+ * OOjs UI v0.19.3-pre (72b81a54a7)
  * https://www.mediawiki.org/wiki/OOjs_UI
  *
  * Copyright 2011–2017 OOjs UI Team and other contributors.
  * Released under the MIT license
  * http://oojs.mit-license.org
  *
- * Date: 2017-02-14T22:47:25Z
+ * Date: 2017-02-21T22:25:56Z
  */
 .oo-ui-element-hidden {
   display: none !important;
@@ -67,7 +67,7 @@
 }
 .oo-ui-buttonElement-frameless > .oo-ui-buttonElement-button:hover,
 .oo-ui-buttonElement-frameless > .oo-ui-buttonElement-button:focus {
-  outline: none;
+  outline: 0;
 }
 .oo-ui-buttonElement-frameless > .oo-ui-buttonElement-button:hover > .oo-ui-iconElement-icon,
 .oo-ui-buttonElement-frameless > .oo-ui-buttonElement-button:focus > .oo-ui-iconElement-icon {
@@ -109,7 +109,7 @@
 .oo-ui-buttonElement-framed > .oo-ui-buttonElement-button {
   padding: 0.2em 0.8em;
   border-radius: 0.3em;
-  text-shadow: 0 -1px 1px rgba(255, 255, 255, 0.5);
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
   border: 1px #c9c9c9 solid;
   -webkit-transition: border-color 100ms ease;
      -moz-transition: border-color 100ms ease;
@@ -124,7 +124,7 @@
 .oo-ui-buttonElement-framed > .oo-ui-buttonElement-button:hover,
 .oo-ui-buttonElement-framed > .oo-ui-buttonElement-button:focus {
   border-color: #aaa;
-  outline: none;
+  outline: 0;
 }
 .oo-ui-buttonElement-framed > input.oo-ui-buttonElement-button,
 .oo-ui-buttonElement-framed.oo-ui-labelElement > .oo-ui-buttonElement-button > .oo-ui-labelElement-label {
@@ -807,7 +807,7 @@ body:not( :-moz-handler-blocked ) .oo-ui-fieldsetLayout {
 .oo-ui-dropdownInputWidget.oo-ui-widget-enabled select:hover,
 .oo-ui-dropdownInputWidget.oo-ui-widget-enabled select:focus {
   border-color: rgba(0, 0, 0, 0.2);
-  outline: none;
+  outline: 0;
 }
 .oo-ui-dropdownInputWidget.oo-ui-widget-disabled select {
   color: #ccc;
@@ -936,7 +936,7 @@ body:not( :-moz-handler-blocked ) .oo-ui-fieldsetLayout {
 }
 .oo-ui-textInputWidget.oo-ui-widget-enabled input:focus,
 .oo-ui-textInputWidget.oo-ui-widget-enabled textarea:focus {
-  outline: none;
+  outline: 0;
   border-color: #a7dcff;
   box-shadow: 0 0 0.3em #a7dcff, 0 0 0 #fff;
 }
@@ -951,7 +951,7 @@ body:not( :-moz-handler-blocked ) .oo-ui-fieldsetLayout {
 .oo-ui-textInputWidget.oo-ui-widget-disabled input,
 .oo-ui-textInputWidget.oo-ui-widget-disabled textarea {
   color: #ccc;
-  text-shadow: 0 -1px 1px #fff;
+  text-shadow: 0 1px 1px #fff;
   border-color: #ddd;
   background-color: #f3f3f3;
 }
@@ -961,7 +961,7 @@ body:not( :-moz-handler-blocked ) .oo-ui-fieldsetLayout {
 }
 .oo-ui-textInputWidget.oo-ui-widget-disabled .oo-ui-labelElement-label {
   color: #ddd;
-  text-shadow: 0 -1px 1px #fff;
+  text-shadow: 0 1px 1px #fff;
 }
 .oo-ui-textInputWidget.oo-ui-iconElement input,
 .oo-ui-textInputWidget.oo-ui-iconElement textarea {
@@ -1092,7 +1092,7 @@ body:not( :-moz-handler-blocked ) .oo-ui-fieldsetLayout {
 }
 .oo-ui-dropdownWidget.oo-ui-widget-disabled .oo-ui-dropdownWidget-handle {
   color: #ccc;
-  text-shadow: 0 -1px 1px #fff;
+  text-shadow: 0 1px 1px #fff;
   border-color: #ddd;
   background-color: #f3f3f3;
 }

@@ -1,12 +1,12 @@
 /*!
- * OOjs UI v0.19.2
+ * OOjs UI v0.19.3-pre (72b81a54a7)
  * https://www.mediawiki.org/wiki/OOjs_UI
  *
  * Copyright 2011–2017 OOjs UI Team and other contributors.
  * Released under the MIT license
  * http://oojs.mit-license.org
  *
- * Date: 2017-02-14T22:47:25Z
+ * Date: 2017-02-21T22:25:56Z
  */
 .oo-ui-element-hidden {
   display: none !important;
@@ -1368,7 +1368,7 @@ body:not( :-moz-handler-blocked ) .oo-ui-fieldsetLayout {
 .oo-ui-textInputWidget.oo-ui-widget-disabled textarea {
   background-color: #eaecf0;
   color: #72777d;
-  text-shadow: 0 -1px 1px #fff;
+  text-shadow: 0 1px 1px #fff;
   border-color: #c8ccd1;
 }
 .oo-ui-textInputWidget.oo-ui-widget-disabled .oo-ui-iconElement-icon,
@@ -1377,7 +1377,7 @@ body:not( :-moz-handler-blocked ) .oo-ui-fieldsetLayout {
 }
 .oo-ui-textInputWidget.oo-ui-widget-disabled .oo-ui-labelElement-label {
   color: #72777d;
-  text-shadow: 0 -1px 1px #fff;
+  text-shadow: 0 1px 1px #fff;
 }
 .oo-ui-textInputWidget.oo-ui-iconElement input,
 .oo-ui-textInputWidget.oo-ui-iconElement textarea {
@@ -1561,7 +1561,7 @@ body:not( :-moz-handler-blocked ) .oo-ui-fieldsetLayout {
 }
 .oo-ui-dropdownWidget.oo-ui-widget-disabled .oo-ui-dropdownWidget-handle {
   color: #72777d;
-  text-shadow: 0 -1px 1px #fff;
+  text-shadow: 0 1px 1px #fff;
   border-color: #c8ccd1;
   background-color: #eaecf0;
 }
@@ -1750,14 +1750,14 @@ body:not( :-moz-handler-blocked ) .oo-ui-fieldsetLayout {
 }
 
 /*!
- * OOjs UI v0.19.2
+ * OOjs UI v0.19.3-pre (72b81a54a7)
  * https://www.mediawiki.org/wiki/OOjs_UI
  *
  * Copyright 2011–2017 OOjs UI Team and other contributors.
  * Released under the MIT license
  * http://oojs.mit-license.org
  *
- * Date: 2017-02-14T22:47:25Z
+ * Date: 2017-02-21T22:25:56Z
  */
 .oo-ui-draggableElement-handle,
 .oo-ui-draggableElement-handle.oo-ui-widget {
@@ -1791,12 +1791,6 @@ body:not( :-moz-handler-blocked ) .oo-ui-fieldsetLayout {
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
           box-sizing: border-box;
-}
-.oo-ui-bookletLayout-stackLayout > .oo-ui-panelLayout-scrollable {
-  overflow-y: auto;
-}
-.oo-ui-bookletLayout-stackLayout > .oo-ui-panelLayout-padded {
-  padding: 2em;
 }
 .oo-ui-bookletLayout-outlinePanel-editable > .oo-ui-outlineSelectWidget {
   position: absolute;
@@ -2354,15 +2348,12 @@ body:not( :-moz-handler-blocked ) .oo-ui-fieldsetLayout {
 .oo-ui-selectFileWidget-notsupported.oo-ui-indicatorElement .oo-ui-selectFileWidget-label {
   left: 2em;
 }
-.oo-ui-selectFileWidget-supported.oo-ui-widget-enabled.oo-ui-selectFileWidget-canDrop.oo-ui-selectFileWidget-dropTarget {
-  background-color: #eaf3ff;
-}
 .oo-ui-selectFileWidget-dropTarget {
   background-color: #fff;
   border: 1px solid #a2a9b1;
+  border-radius: 2px;
   vertical-align: middle;
   overflow: hidden;
-  border-radius: 2px;
 }
 .oo-ui-selectFileWidget-dropTarget .oo-ui-selectFileWidget-selectButton > .oo-ui-buttonElement-button {
   border-radius: 2px;
@@ -2373,8 +2364,18 @@ body:not( :-moz-handler-blocked ) .oo-ui-fieldsetLayout {
   white-space: normal;
 }
 .oo-ui-selectFileWidget-empty.oo-ui-widget-enabled.oo-ui-selectFileWidget-dropTarget {
-  background-color: #eee;
+  background-color: #fff;
   border-style: dashed;
+  -webkit-transition: background-color 200ms cubic-bezier(0.39, 0.575, 0.565, 1), color 200ms cubic-bezier(0.39, 0.575, 0.565, 1), border-color 200ms cubic-bezier(0.39, 0.575, 0.565, 1);
+     -moz-transition: background-color 200ms cubic-bezier(0.39, 0.575, 0.565, 1), color 200ms cubic-bezier(0.39, 0.575, 0.565, 1), border-color 200ms cubic-bezier(0.39, 0.575, 0.565, 1);
+          transition: background-color 200ms cubic-bezier(0.39, 0.575, 0.565, 1), color 200ms cubic-bezier(0.39, 0.575, 0.565, 1), border-color 200ms cubic-bezier(0.39, 0.575, 0.565, 1);
+}
+.oo-ui-selectFileWidget-empty.oo-ui-widget-enabled.oo-ui-selectFileWidget-dropTarget:hover {
+  border-color: #72777d;
+}
+.oo-ui-selectFileWidget-supported.oo-ui-widget-enabled.oo-ui-selectFileWidget-canDrop.oo-ui-selectFileWidget-dropTarget {
+  background-color: #eaf3ff;
+  color: #36c;
 }
 .oo-ui-selectFileWidget.oo-ui-widget-disabled.oo-ui-selectFileWidget-dropTarget,
 .oo-ui-selectFileWidget-empty.oo-ui-widget-disabled.oo-ui-selectFileWidget-dropTarget,
@@ -2388,7 +2389,7 @@ body:not( :-moz-handler-blocked ) .oo-ui-fieldsetLayout {
   background-color: #eaecf0;
   color: #72777d;
   border-color: #c8ccd1;
-  text-shadow: 0 -1px 1px #fff;
+  text-shadow: 0 1px 1px #fff;
 }
 .oo-ui-selectFileWidget.oo-ui-widget-disabled .oo-ui-selectFileWidget-info > .oo-ui-iconElement-icon,
 .oo-ui-selectFileWidget-empty.oo-ui-widget-disabled .oo-ui-selectFileWidget-info > .oo-ui-iconElement-icon,
@@ -2654,7 +2655,7 @@ body:not( :-moz-handler-blocked ) .oo-ui-fieldsetLayout {
 }
 .oo-ui-capsuleMultiselectWidget.oo-ui-widget-disabled .oo-ui-capsuleMultiselectWidget-handle {
   color: #72777d;
-  text-shadow: 0 -1px 1px #fff;
+  text-shadow: 0 1px 1px #fff;
   border-color: #c8ccd1;
   background-color: #eaecf0;
 }
@@ -2669,20 +2670,18 @@ body:not( :-moz-handler-blocked ) .oo-ui-fieldsetLayout {
   display: inline-block;
   cursor: default;
   white-space: nowrap;
-  width: auto;
-  max-width: 100%;
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
           box-sizing: border-box;
-  vertical-align: middle;
+  width: auto;
+  max-width: 100%;
   height: 1.7em;
-  line-height: 1.7;
-  background-color: #eee;
-  color: #222;
   margin: 0.1em;
   border: 1px solid #a2a9b1;
   border-radius: 2px;
   padding: 0 0.4em;
+  line-height: 1.7;
+  vertical-align: middle;
 }
 .oo-ui-capsuleItemWidget.oo-ui-labelElement .oo-ui-labelElement-label {
   display: inline-block;
@@ -2690,22 +2689,23 @@ body:not( :-moz-handler-blocked ) .oo-ui-fieldsetLayout {
   overflow: hidden;
   cursor: text;
 }
-.oo-ui-capsuleItemWidget:focus {
-  outline: 0;
+.oo-ui-capsuleItemWidget.oo-ui-widget-enabled {
+  background-color: #f8f9fa;
+  color: #222;
+  padding-left: 1.5375em;
+  -webkit-transition: background-color 100ms, color 100ms, border-color 100ms, box-shadow 100ms;
+     -moz-transition: background-color 100ms, color 100ms, border-color 100ms, box-shadow 100ms;
+          transition: background-color 100ms, color 100ms, border-color 100ms, box-shadow 100ms;
+}
+.oo-ui-capsuleItemWidget.oo-ui-widget-enabled:hover {
+  background-color: #fff;
+  color: #444;
+  border-color: #a2a9b1;
+}
+.oo-ui-capsuleItemWidget.oo-ui-widget-enabled:focus {
   border-color: #36c;
   box-shadow: inset 0 0 0 1px #36c;
-}
-.oo-ui-capsuleItemWidget.oo-ui-widget-disabled {
-  background-color: #eaecf0;
-  color: #72777d;
-  border-color: #c8ccd1;
-  text-shadow: 0 -1px 1px #fff;
-}
-.oo-ui-capsuleItemWidget > .oo-ui-buttonElement {
-  display: none;
-}
-.oo-ui-capsuleItemWidget.oo-ui-widget-enabled {
-  padding-left: 1.5375em;
+  outline: 0;
 }
 .oo-ui-capsuleItemWidget.oo-ui-widget-enabled > .oo-ui-buttonElement {
   display: block;
@@ -2725,6 +2725,15 @@ body:not( :-moz-handler-blocked ) .oo-ui-fieldsetLayout {
   left: 0.3em;
   bottom: 0;
   height: auto;
+}
+.oo-ui-capsuleItemWidget.oo-ui-widget-disabled {
+  background-color: #eaecf0;
+  color: #72777d;
+  border-color: #c8ccd1;
+  text-shadow: 0 1px 1px #fff;
+}
+.oo-ui-capsuleItemWidget.oo-ui-widget-disabled > .oo-ui-buttonElement {
+  display: none;
 }
 .oo-ui-searchWidget-query {
   position: absolute;
@@ -2795,14 +2804,14 @@ body:not( :-moz-handler-blocked ) .oo-ui-fieldsetLayout {
 }
 
 /*!
- * OOjs UI v0.19.2
+ * OOjs UI v0.19.3-pre (72b81a54a7)
  * https://www.mediawiki.org/wiki/OOjs_UI
  *
  * Copyright 2011–2017 OOjs UI Team and other contributors.
  * Released under the MIT license
  * http://oojs.mit-license.org
  *
- * Date: 2017-02-14T22:47:25Z
+ * Date: 2017-02-21T22:25:56Z
  */
 .oo-ui-tool.oo-ui-widget-enabled {
   -webkit-transition: background-color 100ms;
@@ -3228,14 +3237,14 @@ body:not( :-moz-handler-blocked ) .oo-ui-fieldsetLayout {
 }
 
 /*!
- * OOjs UI v0.19.2
+ * OOjs UI v0.19.3-pre (72b81a54a7)
  * https://www.mediawiki.org/wiki/OOjs_UI
  *
  * Copyright 2011–2017 OOjs UI Team and other contributors.
  * Released under the MIT license
  * http://oojs.mit-license.org
  *
- * Date: 2017-02-14T22:47:25Z
+ * Date: 2017-02-21T22:25:56Z
  */
 .oo-ui-window {
   background: transparent;
@@ -3494,22 +3503,22 @@ body:not( :-moz-handler-blocked ) .oo-ui-fieldsetLayout {
 .oo-ui-processDialog-actions-primary .oo-ui-actionWidget.oo-ui-buttonElement-frameless:active {
   background-color: rgba(0, 0, 0, 0.1);
 }
-.oo-ui-processDialog-actions-safe .oo-ui-actionWidget.oo-ui-buttonElement-frameless.oo-ui-flaggedElement-progressive .oo-ui-processDialog-actions-safe .oo-ui-actionWidget.oo-ui-buttonElement-frameless.oo-ui-flaggedElement-constructive:hover,
-.oo-ui-processDialog-actions-safe .oo-ui-actionWidget.oo-ui-buttonElement-frameless.oo-ui-flaggedElement-progressive .oo-ui-processDialog-actions-primary .oo-ui-actionWidget.oo-ui-buttonElement-frameless.oo-ui-flaggedElement-constructive:hover,
-.oo-ui-processDialog-actions-primary .oo-ui-actionWidget.oo-ui-buttonElement-frameless.oo-ui-flaggedElement-progressive .oo-ui-processDialog-actions-safe .oo-ui-actionWidget.oo-ui-buttonElement-frameless.oo-ui-flaggedElement-constructive:hover,
-.oo-ui-processDialog-actions-primary .oo-ui-actionWidget.oo-ui-buttonElement-frameless.oo-ui-flaggedElement-progressive .oo-ui-processDialog-actions-primary .oo-ui-actionWidget.oo-ui-buttonElement-frameless.oo-ui-flaggedElement-constructive:hover {
+.oo-ui-processDialog-actions-safe .oo-ui-actionWidget.oo-ui-buttonElement-frameless.oo-ui-flaggedElement-progressive:hover,
+.oo-ui-processDialog-actions-primary .oo-ui-actionWidget.oo-ui-buttonElement-frameless.oo-ui-flaggedElement-progressive:hover,
+.oo-ui-processDialog-actions-safe .oo-ui-actionWidget.oo-ui-buttonElement-frameless.oo-ui-flaggedElement-constructive:hover,
+.oo-ui-processDialog-actions-primary .oo-ui-actionWidget.oo-ui-buttonElement-frameless.oo-ui-flaggedElement-constructive:hover {
   background-color: rgba(8, 126, 204, 0.05);
 }
-.oo-ui-processDialog-actions-safe .oo-ui-actionWidget.oo-ui-buttonElement-frameless.oo-ui-flaggedElement-progressive .oo-ui-processDialog-actions-safe .oo-ui-actionWidget.oo-ui-buttonElement-frameless.oo-ui-flaggedElement-constructive:active,
-.oo-ui-processDialog-actions-safe .oo-ui-actionWidget.oo-ui-buttonElement-frameless.oo-ui-flaggedElement-progressive .oo-ui-processDialog-actions-primary .oo-ui-actionWidget.oo-ui-buttonElement-frameless.oo-ui-flaggedElement-constructive:active,
-.oo-ui-processDialog-actions-primary .oo-ui-actionWidget.oo-ui-buttonElement-frameless.oo-ui-flaggedElement-progressive .oo-ui-processDialog-actions-safe .oo-ui-actionWidget.oo-ui-buttonElement-frameless.oo-ui-flaggedElement-constructive:active,
-.oo-ui-processDialog-actions-primary .oo-ui-actionWidget.oo-ui-buttonElement-frameless.oo-ui-flaggedElement-progressive .oo-ui-processDialog-actions-primary .oo-ui-actionWidget.oo-ui-buttonElement-frameless.oo-ui-flaggedElement-constructive:active {
+.oo-ui-processDialog-actions-safe .oo-ui-actionWidget.oo-ui-buttonElement-frameless.oo-ui-flaggedElement-progressive:active,
+.oo-ui-processDialog-actions-primary .oo-ui-actionWidget.oo-ui-buttonElement-frameless.oo-ui-flaggedElement-progressive:active,
+.oo-ui-processDialog-actions-safe .oo-ui-actionWidget.oo-ui-buttonElement-frameless.oo-ui-flaggedElement-constructive:active,
+.oo-ui-processDialog-actions-primary .oo-ui-actionWidget.oo-ui-buttonElement-frameless.oo-ui-flaggedElement-constructive:active {
   background-color: rgba(8, 126, 204, 0.1);
 }
-.oo-ui-processDialog-actions-safe .oo-ui-actionWidget.oo-ui-buttonElement-frameless.oo-ui-flaggedElement-progressive .oo-ui-processDialog-actions-safe .oo-ui-actionWidget.oo-ui-buttonElement-frameless.oo-ui-flaggedElement-constructive .oo-ui-labelElement-label,
-.oo-ui-processDialog-actions-safe .oo-ui-actionWidget.oo-ui-buttonElement-frameless.oo-ui-flaggedElement-progressive .oo-ui-processDialog-actions-primary .oo-ui-actionWidget.oo-ui-buttonElement-frameless.oo-ui-flaggedElement-constructive .oo-ui-labelElement-label,
-.oo-ui-processDialog-actions-primary .oo-ui-actionWidget.oo-ui-buttonElement-frameless.oo-ui-flaggedElement-progressive .oo-ui-processDialog-actions-safe .oo-ui-actionWidget.oo-ui-buttonElement-frameless.oo-ui-flaggedElement-constructive .oo-ui-labelElement-label,
-.oo-ui-processDialog-actions-primary .oo-ui-actionWidget.oo-ui-buttonElement-frameless.oo-ui-flaggedElement-progressive .oo-ui-processDialog-actions-primary .oo-ui-actionWidget.oo-ui-buttonElement-frameless.oo-ui-flaggedElement-constructive .oo-ui-labelElement-label {
+.oo-ui-processDialog-actions-safe .oo-ui-actionWidget.oo-ui-buttonElement-frameless.oo-ui-flaggedElement-progressive .oo-ui-labelElement-label,
+.oo-ui-processDialog-actions-primary .oo-ui-actionWidget.oo-ui-buttonElement-frameless.oo-ui-flaggedElement-progressive .oo-ui-labelElement-label,
+.oo-ui-processDialog-actions-safe .oo-ui-actionWidget.oo-ui-buttonElement-frameless.oo-ui-flaggedElement-constructive .oo-ui-labelElement-label,
+.oo-ui-processDialog-actions-primary .oo-ui-actionWidget.oo-ui-buttonElement-frameless.oo-ui-flaggedElement-constructive .oo-ui-labelElement-label {
   font-weight: bold;
 }
 .oo-ui-processDialog-actions-safe .oo-ui-actionWidget.oo-ui-buttonElement-frameless.oo-ui-flaggedElement-destructive:hover,
@@ -3617,14 +3626,14 @@ body:not( :-moz-handler-blocked ) .oo-ui-fieldsetLayout {
 }
 
 /*!
- * OOjs UI v0.19.2
+ * OOjs UI v0.19.3-pre (72b81a54a7)
  * https://www.mediawiki.org/wiki/OOjs_UI
  *
  * Copyright 2011–2017 OOjs UI Team and other contributors.
  * Released under the MIT license
  * http://oojs.mit-license.org
  *
- * Date: 2017-02-14T22:47:25Z
+ * Date: 2017-02-21T22:25:56Z
  */
 .oo-ui-icon-add {
   background-image: url('themes/mediawiki/images/icons/add.png');
