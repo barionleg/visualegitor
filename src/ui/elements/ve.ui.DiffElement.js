@@ -170,7 +170,9 @@ ve.ui.DiffElement.prototype.getNodeHtml = function ( node, action, move ) {
 	// Get the html for the linear model with classes
 	// Doc is always the new doc when inserting into the store
 	documentSlice.getStore().merge( this.newDoc.getStore() );
-	nodeHtml = ve.dm.converter.getDomFromModel( documentSlice ).body.innerHTML;
+
+	// forClipboard is true, so that we can render otherwise invisible nodes
+	nodeHtml = ve.dm.converter.getDomFromModel( documentSlice, true ).body.innerHTML;
 
 	if ( action !== 'none' ) {
 		nodeHtml = $( '<div>' ).addClass( this.classPrefix + 'doc-child-change' ).append( nodeHtml );
@@ -395,7 +397,9 @@ ve.ui.DiffElement.prototype.getChangedNodeHtml = function ( oldNodeIndex, move )
 	}
 
 	documentSlice.getStore().merge( this.newDoc.getStore() );
-	nodeHtml = ve.dm.converter.getDomFromModel( documentSlice ).body.innerHTML;
+
+	// forClipboard is true, so that we can render otherwise invisible nodes
+	nodeHtml = ve.dm.converter.getDomFromModel( documentSlice, true ).body.innerHTML;
 
 	// The following classes are used here:
 	// * ve-ui-diffElement-doc-child-change
