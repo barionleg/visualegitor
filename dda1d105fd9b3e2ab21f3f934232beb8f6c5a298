@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_7ab480e4",
+        "filename": "tests/ui/ve.ui.DiffElement.test.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2017-02-23T18:13:28Z",
+      "side": 1,
+      "message": "In this patch?",
+      "revId": "dda1d105fd9b3e2ab21f3f934232beb8f6c5a298",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
