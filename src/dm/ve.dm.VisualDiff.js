@@ -239,6 +239,8 @@ ve.dm.VisualDiff.prototype.getDocChildDiff = function ( oldDocChild, newDocChild
 		newDocChildTree,
 		removeLength,
 		insertLength,
+		oldStore = this.oldDoc.getStore(),
+		newStore = this.newDoc.getStore(),
 		diffLength = 0,
 		keepLength = 0,
 		diffInfo = [];
@@ -307,6 +309,7 @@ ve.dm.VisualDiff.prototype.getDocChildDiff = function ( oldDocChild, newDocChild
 	function getCleanDiff( diff ) {
 		var i, ilen, action, data, firstWordbreak, lastWordbreak,
 			start, end, aItem, bItem, aAction, bAction, aData, bData,
+			aAnnotations, bAnnotations, annotationChanges,
 			previousData = null,
 			previousAction = null,
 			cleanDiff = [],
@@ -443,6 +446,30 @@ ve.dm.VisualDiff.prototype.getDocChildDiff = function ( oldDocChild, newDocChild
 			) {
 				cleanDiff[ i ][ 0 ] = aAction === -1 ? -2 : 2;
 				cleanDiff[ i + 1 ][ 0 ] = bAction === -1 ? -2 : 2;
+				aAnnotations = new ve.dm.ElementLinearData( oldStore, aData ).getAnnotationsFromRange( new ve.Range( 0, aData.length ), true );
+				bAnnotations = new ve.dm.ElementLinearData( newStore, bData ).getAnnotationsFromRange( new ve.Range( 0, bData.length ), true );
+
+				/* eslint-disable no-loop-func */
+				annotationChanges = [];
+				aAnnotations.get().forEach( function ( a ) {
+					if ( !bAnnotations.hasAnnotationWithName( a.name ) ) {
+						// Removed annotation
+						annotationChanges.push( { oldAnnotation: a } );
+					}
+				} );
+				bAnnotations.get().forEach( function ( b ) {
+					var sameName = aAnnotations.getAnnotationsByName( b.name );
+					if ( !sameName.getLength() ) {
+						// Inserted annotation
+						annotationChanges.push( { newAnnotation: b } );
+					} else if ( !aAnnotations.containsComparable( b ) ) {
+						// Annotations which have the same type, but are non-comparable, e.g. link with a different href
+						annotationChanges.push( { oldAnnotation: sameName.get( 0 ), newAnnotation: b } );
+					}
+				} );
+
+				/* eslint-enable no-loop-func */
+				cleanDiff[ i + 1 ].annotationChanges = annotationChanges;
 				// No need to check bItem against the following item
 				i += 1;
 			}
@@ -478,7 +505,12 @@ ve.dm.VisualDiff.prototype.getDocChildDiff = function ( oldDocChild, newDocChild
 				// There is no content change
 				diffInfo[ i ] = {
 					typeChange: oldNode.type !== newNode.type,
-					attributeChange: !ve.compare( oldNode.getAttributes(), newNode.getAttributes() )
+					attributeChange: !ve.compare( oldNode.getAttributes(), newNode.getAttributes() ) ?
+						{
+							oldAttributes: oldNode.getAttributes(),
+							newAttributes: newNode.getAttributes()
+						} :
+					false
 				};
 				continue;
 
