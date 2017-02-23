@@ -26,6 +26,28 @@ OO.mixinClass( ve.dm.ImageNode, ve.dm.FocusableNode );
 
 OO.mixinClass( ve.dm.ImageNode, ve.dm.ResizableNode );
 
+/* Static Methods */
+
+/**
+ * @inheritdoc
+ */
+ve.dm.ImageNode.static.describeChanges = function ( attributeChanges ) {
+	var key, descriptions = [];
+	if ( 'width' in attributeChanges || 'height' in attributeChanges ) {
+		descriptions.push(
+			'Size changed from ' +
+			attributeChanges.width.from + '×' + attributeChanges.height.from + ' to ' +
+			attributeChanges.width.to + '×' + attributeChanges.height.to
+		);
+	}
+	for ( key in attributeChanges ) {
+		if ( key !== 'width' && key !== 'height' ) {
+			descriptions.push( this.describeChange( key, attributeChanges[ key ] ) );
+		}
+	}
+	return descriptions;
+};
+
 /* Methods */
 
 /**

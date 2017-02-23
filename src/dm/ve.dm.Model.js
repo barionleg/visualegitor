@@ -241,6 +241,26 @@ ve.dm.Model.static.getAllowedRdfaTypes = function () {
 	return this.allowedRdfaTypes;
 };
 
+ve.dm.Model.static.describeChanges = function ( attributeChanges ) {
+	var key, descriptions = [];
+	for ( key in attributeChanges ) {
+		descriptions.push( this.describeChange( key, attributeChanges[ key ] ) );
+	}
+	return descriptions;
+};
+
+ve.dm.Model.static.describeChange = function ( key, change ) {
+	if ( ( typeof change.from === 'object' && change.from !== null ) || ( typeof change.to === 'object' && change.to !== null ) ) {
+		return key + ' changed';
+	} else if ( change.from === undefined ) {
+		return key + ' set to ' + change.to;
+	} else if ( change.to === undefined ) {
+		return key + ' unset from ' + change.from;
+	} else {
+		return key + ' changed from ' + change.from + ' to ' + change.to;
+	}
+};
+
 /* Methods */
 
 /**
