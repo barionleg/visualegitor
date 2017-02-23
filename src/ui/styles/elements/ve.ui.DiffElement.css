@@ -6,7 +6,53 @@
  */
 
 .ve-ui-diffElement {
+	position: relative;
+}
+
+.ve-ui-diffElement-content {
 	margin-left: 15px;
+}
+
+.ve-ui-diffElement-hasDescriptions .ve-ui-diffElement-content {
+	margin-right: 16em;
+	padding-right: 1em;
+	border-right: 1px solid #ccc;
+}
+
+.ve-ui-diffElement-hasDescriptions .ve-ui-diffElement-sidebar {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 15em;
+}
+
+.ve-ui-diffElement-overlays {
+	position: absolute;
+	opacity: 0.5;
+	z-index: 1;
+}
+
+.ve-ui-changeDescriptionsSelectWidget > .oo-ui-optionWidget {
+	cursor: default;
+}
+
+.ve-ui-changeDescriptionsSelectWidget > .oo-ui-optionWidget-highlighted {
+	background: #b6d4fb; /* #6da9f7 at 50% opacity */
+}
+
+.ve-ui-diffElement-highlight {
+	position: absolute;
+	background: #6da9f7;
+	/* TODO: Support IE9 with JS mouse events */
+	pointer-events: none; /* stylelint-disable-line no-unsupported-browser-features */
+}
+
+.ve-ui-diffElement-attributeChange {
+	color: #72777d;
+}
+
+.ve-ui-diffElement-attributeChange.oo-ui-labelElement .oo-ui-labelElement-label {
+	white-space: normal;
 }
 
 [data-diff-action='insert'],
