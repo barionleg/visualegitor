@@ -44,6 +44,14 @@ ve.dm.LinkAnnotation.static.toDomElements = function ( dataElement, doc ) {
 	return [ domElement ];
 };
 
+ve.dm.LinkAnnotation.static.describeChange = function ( key, change ) {
+	if ( key === 'href' ) {
+		return 'Link changed from ' + change.from + ' to ' + change.to;
+	}
+	// Parent method
+	return ve.dm.LinkAnnotation.parent.static.describeChange.apply( this, arguments );
+};
+
 /**
  * Get the link href from linear data. Helper function for toDomElements.
  *

@@ -270,6 +270,6 @@ QUnit.test( 'Diffing', function ( assert ) {
 		newDoc.getStore().merge( oldDoc.getStore() );
 		visualDiff = new ve.dm.VisualDiff( oldDoc, newDoc );
 		diffElement = new ve.ui.DiffElement( visualDiff );
-		assert.strictEqual( diffElement.$element.html(), cases[ i ].expected, cases[ i ].msg );
+		assert.strictEqual( diffElement.$document.html(), cases[ i ].expected, cases[ i ].msg );
 	}
 } );
