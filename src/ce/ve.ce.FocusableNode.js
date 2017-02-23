@@ -539,24 +539,40 @@ ve.ce.FocusableNode.prototype.redrawHighlights = function () {
 	this.createHighlights();
 };
 
-/**
- * Calculate position of highlights
- */
 ve.ce.FocusableNode.prototype.calculateHighlights = function () {
-	var i, l, $set, columnCount, columnWidth, surfaceOffset,
-		rects = [],
-		filteredRects = [],
-		webkitColumns = 'webkitColumnCount' in document.createElement( 'div' ).style;
+	var allRects, surfaceOffset;
 
 	// Protect against calling before/after surface setup/teardown
 	if ( !this.focusableSurface ) {
+		this.rects = [];
 		this.boundingRect = null;
 		this.startAndEndRects = null;
-		this.rects = [];
 		return;
 	}
 
 	surfaceOffset = this.focusableSurface.getSurface().getBoundingClientRect();
+
+	allRects = this.constructor.static.getRectsForElement( this.$focusable, surfaceOffset );
+
+	this.rects = allRects.rects;
+	this.boundingRect = allRects.boundingRect;
+	// startAndEndRects is lazily evaluated in getStartAndEndRects from rects
+	this.startAndEndRects = null;
+};
+
+/**
+ * Calculate position of highlights
+ *
+ * @param {jQuery} $element Element to get highlights
+ * @param {Object} [relativeRect] Rect with top & left to get position relative to
+ * @return {Object} Object containing rects and boundingRect
+ */
+ve.ce.FocusableNode.static.getRectsForElement = function ( $element, relativeRect ) {
+	var i, l, $set, columnCount, columnWidth,
+		boundingRect = null,
+		rects = [],
+		filteredRects = [],
+		webkitColumns = 'webkitColumnCount' in document.createElement( 'div' ).style;
 
 	function contains( rect1, rect2 ) {
 		return rect2.left >= rect1.left &&
@@ -629,7 +645,7 @@ ve.ce.FocusableNode.prototype.calculateHighlights = function () {
 		}
 	}
 
-	$set = this.$focusable.find( '*' ).addBack();
+	$set = $element.find( '*' ).addBack();
 	// Calling process() may change $set.length
 	for ( i = 0; i < $set.length; i++ ) {
 		process( $set[ i ] );
@@ -646,37 +662,31 @@ ve.ce.FocusableNode.prototype.calculateHighlights = function () {
 		rects = filteredRects;
 	}
 
-	this.boundingRect = null;
-	// startAndEndRects is lazily evaluated in getStartAndEndRects from rects
-	this.startAndEndRects = null;
+	boundingRect = null;
 
 	for ( i = 0, l = rects.length; i < l; i++ ) {
 		// Translate to relative
-		rects[ i ] = ve.translateRect( rects[ i ], -surfaceOffset.left, -surfaceOffset.top );
-		this.$highlights.append(
-			this.createHighlight().css( {
-				top: rects[ i ].top,
-				left: rects[ i ].left,
-				width: rects[ i ].width,
-				height: rects[ i ].height
-			} )
-		);
-
-		if ( !this.boundingRect ) {
-			this.boundingRect = ve.copy( rects[ i ] );
+		if ( relativeRect ) {
+			rects[ i ] = ve.translateRect( rects[ i ], -relativeRect.left, -relativeRect.top );
+		}
+		if ( !boundingRect ) {
+			boundingRect = ve.copy( rects[ i ] );
 		} else {
-			this.boundingRect.top = Math.min( this.boundingRect.top, rects[ i ].top );
-			this.boundingRect.left = Math.min( this.boundingRect.left, rects[ i ].left );
-			this.boundingRect.bottom = Math.max( this.boundingRect.bottom, rects[ i ].bottom );
-			this.boundingRect.right = Math.max( this.boundingRect.right, rects[ i ].right );
+			boundingRect.top = Math.min( boundingRect.top, rects[ i ].top );
+			boundingRect.left = Math.min( boundingRect.left, rects[ i ].left );
+			boundingRect.bottom = Math.max( boundingRect.bottom, rects[ i ].bottom );
+			boundingRect.right = Math.max( boundingRect.right, rects[ i ].right );
 		}
 	}
-	if ( this.boundingRect ) {
-		this.boundingRect.width = this.boundingRect.right - this.boundingRect.left;
-		this.boundingRect.height = this.boundingRect.bottom - this.boundingRect.top;
+	if ( boundingRect ) {
+		boundingRect.width = boundingRect.right - boundingRect.left;
+		boundingRect.height = boundingRect.bottom - boundingRect.top;
 	}
 
-	this.rects = rects;
+	return {
+		rects: rects,
+		boundingRect: boundingRect
+	};
 };
 
 /**
