@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_ee6d282e",
+        "filename": "src/dm/ve.dm.Document.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 1524,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-02-26T13:51:33Z",
+      "side": 1,
+      "message": "what happens if the user doesn\u0027t have the locale data available for the wiki they are editing?",
+      "parentUuid": "ce3c5b53_2e3d5029",
+      "range": {
+        "startLine": 1524,
+        "startChar": 58,
+        "endLine": 1524,
+        "endChar": 67
+      },
+      "revId": "1154471e226fb9ff4353fc777df52e0066e59297",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_6e04b880",
         "filename": "src/ve.utils.js",
         "patchSetId": 1
