@@ -1038,3 +1038,165 @@ QUnit.test( 'Selection equality', function ( assert ) {
 		}
 	}
 } );
+
+QUnit.test( 'Find text', function ( assert ) {
+	var i, ranges,
+		doc = ve.test.utils.createModelOnlySurfaceFromHtml(
+				// 1
+				'<p>Foo bar fooq.</p>' +
+				'<p>baz foob</p>' +
+				// 25
+				'<p>Liberté, Égalité, Fraternité.</p>' +
+				// 56
+				'<p>ééé</p>'
+			).getModel().getDocument(),
+		cases = [
+			{
+				msg: 'Simple case insensitive',
+				query: 'Foo',
+				options: {
+					noOverlaps: true
+				},
+				ranges: [
+					new ve.Range( 1, 4 ),
+					new ve.Range( 9, 12 ),
+					new ve.Range( 20, 23 )
+				]
+			},
+			{
+				msg: 'Simple case sensitive',
+				query: 'Foo',
+				options: {
+					noOverlaps: true,
+					caseSensitiveString: true
+				},
+				matchCase: true,
+				ranges: [
+					new ve.Range( 1, 4 )
+				]
+			},
+			{
+				msg: 'Case insensitive regex',
+				query: /fo[^ ]+/gi,
+				options: {
+					noOverlaps: true
+				},
+				ranges: [
+					new ve.Range( 1, 4 ),
+					new ve.Range( 9, 14 ),
+					new ve.Range( 20, 24 )
+				]
+			},
+			{
+				msg: 'Case sensitive regex',
+				query: /fo[^ ]+/g,
+				options: {
+					noOverlaps: true
+				},
+				ranges: [
+					new ve.Range( 9, 14 ),
+					new ve.Range( 20, 24 )
+				]
+			},
+			{
+				msg: 'Regex to end of line',
+				query: /q.*/g,
+				options: {
+					noOverlaps: true
+				},
+				ranges: [
+					new ve.Range( 12, 14 )
+				]
+			},
+			{
+				msg: 'Overlapping regex',
+				query: /.*/g,
+				options: {
+					noOverlaps: true
+				},
+				ranges: [
+					new ve.Range( 1, 14 ),
+					new ve.Range( 16, 24 ),
+					new ve.Range( 26, 55 ),
+					new ve.Range( 57, 60 )
+				]
+			},
+			{
+				msg: 'Diacritic insensitive & case sensitive match',
+				query: 'Egalite',
+				options: {
+					diacriticInsensitiveString: true,
+					caseSensitiveString: true
+				},
+				ranges: [
+					new ve.Range( 35, 42 )
+				]
+			},
+			{
+				msg: 'Diacritic insensitive but failing case sensitive',
+				query: 'egalite',
+				options: {
+					diacriticInsensitiveString: true,
+					caseSensitiveString: true
+				},
+				ranges: []
+			},
+			{
+				msg: 'Diacritic insensitive case insensitive match',
+				query: 'egalite',
+				options: {
+					diacriticInsensitiveString: true
+				},
+				ranges: [
+					new ve.Range( 35, 42 )
+				]
+			},
+			{
+				msg: 'Diacritic insensitive & whole word match',
+				query: 'Egalite',
+				options: {
+					diacriticInsensitiveString: true,
+					wholeWord: true
+				},
+				ranges: [
+					new ve.Range( 35, 42 )
+				]
+			},
+			{
+				msg: 'Diacritic insensitive & whole word fail',
+				query: 'Egal',
+				options: {
+					diacriticInsensitiveString: true,
+					wholeWord: true
+				},
+				ranges: []
+			},
+			{
+				msg: 'Diacritic insensitive with overlaps',
+				query: 'ee',
+				options: {
+					diacriticInsensitiveString: true
+				},
+				ranges: [
+					new ve.Range( 57, 59 ),
+					new ve.Range( 58, 60 )
+				]
+			},
+			{
+				msg: 'Diacritic insensitive without overlaps',
+				query: 'ee',
+				options: {
+					diacriticInsensitiveString: true,
+					noOverlaps: true
+				},
+				ranges: [
+					new ve.Range( 57, 59 )
+				]
+			}
+		];
+
+	for ( i = 0; i < cases.length; i++ ) {
+		ranges = doc.findText( cases[ i ].query, cases[ i ].options );
+		assert.deepEqual( ranges, cases[ i ].ranges, cases[ i ].msg );
+	}
+} );
