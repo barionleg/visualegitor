@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_2e3d5029",
+        "filename": "src/dm/ve.dm.Document.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 1524,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-02-26T13:16:21Z",
+      "side": 1,
+      "message": "Would it be reasonable to use this.lang here? I don\u0027t really like the thought of using the browser runtime\u0027s default locale - we\u0027ll end up with some weird bug detectable only to Scandinavian editors of German Wikipedia (say).\n\nI also guess that the document language is most appropriate, because this will help you find all those little snippets of text whose accents don\u0027t exist in the document language. \n\nThat is, if you\u0027re editing English Wikipedia then you probably want:\n\n  \u0027Erdős\u0027.localeCompare(\u0027Erdos\u0027, \u0027en\u0027, { sensitivity: \u0027base\u0027 }); // returns 0\n\nWhereas if you\u0027re editing Hungarian Wikipedia then you probably want o-doubleacute to be treated as a separate letter:\n\n  \u0027Erdős\u0027.localeCompare(\u0027Erdos\u0027, \u0027hu\u0027, { sensitivity: \u0027base\u0027 }); // returns 1",
+      "range": {
+        "startLine": 1524,
+        "startChar": 58,
+        "endLine": 1524,
+        "endChar": 67
+      },
+      "revId": "1154471e226fb9ff4353fc777df52e0066e59297",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_6e04b880",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-02-26T13:16:21Z",
+      "side": 1,
+      "message": "There could conceivably be a locale where \u0027e\u0027 and \u0027é\u0027 are different base letters (in the future if not now). So maybe \u0027en\u0027 instead of undefined?",
+      "range": {
+        "startLine": 195,
+        "startChar": 58,
+        "endLine": 195,
+        "endChar": 67
+      },
+      "revId": "1154471e226fb9ff4353fc777df52e0066e59297",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_ee3f681e",
+        "filename": "tests/dm/ve.dm.Document.test.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 1053,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-02-26T13:16:21Z",
+      "side": 1,
+      "message": "Maybe also test Erdős/Erdos in English and Hungarian, and Malmö/Malmo in German and Swedish.",
+      "range": {
+        "startLine": 1053,
+        "startChar": 2,
+        "endLine": 1053,
+        "endChar": 7
+      },
+      "revId": "1154471e226fb9ff4353fc777df52e0066e59297",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
