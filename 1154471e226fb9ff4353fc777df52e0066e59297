@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "ce3c5b53_8a6a457d",
+        "filename": "src/dm/ve.dm.Document.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 1524,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-02-27T03:12:35Z",
+      "side": 1,
+      "message": "Then it will default to the browser runtime\u0027s default locale. Alternatively we could use a locale array like this:\n\n \u0027föö\u0027.localeCompare( \u0027foo\u0027, [ this.lang, \u0027en\u0027 ], { sensitivity: \u0027base\u0027 } ); // defaults to \u0027en\u0027 behaviour\n\nThat would reduce the scope for unreproducible bugs, at a cost of imposing our own arbitrarily guessed default locale instead of the browser\u0027s.",
+      "parentUuid": "ce3c5b53_ee6d282e",
+      "range": {
+        "startLine": 1524,
+        "startChar": 58,
+        "endLine": 1524,
+        "endChar": 67
+      },
+      "revId": "1154471e226fb9ff4353fc777df52e0066e59297",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3c5b53_6e04b880",
         "filename": "src/ve.utils.js",
         "patchSetId": 1
