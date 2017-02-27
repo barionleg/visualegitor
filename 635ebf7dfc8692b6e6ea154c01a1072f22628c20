@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_79f0f98e",
+        "filename": "src/dm/ve.dm.Node.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2017-02-27T20:43:44Z",
+      "side": 1,
+      "message": "(Doc!)",
+      "revId": "635ebf7dfc8692b6e6ea154c01a1072f22628c20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_f903a977",
+        "filename": "src/dm/ve.dm.Node.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2017-02-27T20:43:44Z",
+      "side": 1,
+      "message": "Won\u0027t we also need this for ve.dm.annotation?\n\njsduck\u0027s complaining about the lack of inheritable documentation (as would I).",
+      "revId": "635ebf7dfc8692b6e6ea154c01a1072f22628c20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce3c5b53_99fa9d72",
+        "filename": "src/dm/ve.dm.Node.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2017-02-27T20:43:44Z",
+      "side": 1,
+      "message": "Obviously this\u0027ll need i18n-ing.",
+      "revId": "635ebf7dfc8692b6e6ea154c01a1072f22628c20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
