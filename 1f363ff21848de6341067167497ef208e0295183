@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_e9c74913",
+        "filename": "src/ui/elements/ve.ui.DiffElement.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-03-01T23:12:46Z",
+      "side": 1,
+      "message": "you could merge the first two branches into one test with an OR as they return the same thing",
+      "revId": "1f363ff21848de6341067167497ef208e0295183",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
