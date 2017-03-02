@@ -327,7 +327,8 @@ ve.ui.DiffElement.prototype.getChangedNodeElements = function ( oldNodeIndex, mo
 			subTreeRootNodeData = subTreeDiffInfo.linearDiff;
 			annotatedData = this.annotateNode( subTreeRootNodeData );
 			ve.batchSplice( nodeData, subTreeRootNodeRangeStart + 1, subTreeRootNode.node.length, annotatedData );
-		} else {
+		}
+		if ( subTreeDiffInfo.attributeChange ) {
 			// If there is no content change, just add change class
 			nodeData[ subTreeRootNodeRangeStart ] = this.addAttributesToNode(
 				nodeData[ subTreeRootNodeRangeStart ], this.newDoc, { 'data-diff-action': 'change' }
