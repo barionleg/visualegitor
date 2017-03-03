@@ -471,7 +471,7 @@ ve.ui.DiffElement.prototype.addAttributesToNode = function ( nodeData, nodeDoc, 
 ve.ui.DiffElement.prototype.annotateNode = function ( linearDiff ) {
 	var i, ilen, range, type, typeAsString, annType, domElementType,
 		start = 0, // The starting index for a range for building an annotation
-		end, transaction, annotatedLinearDiff,
+		end, annotations, annotatedLinearDiff,
 		domElement, domElements, originalDomElementsIndex,
 		diffDoc, diffDocData;
 
@@ -519,17 +519,35 @@ ve.ui.DiffElement.prototype.annotateNode = function ( linearDiff ) {
 					domElements,
 					domElements.map( ve.getNodeHtml ).join( '' )
 				);
-				transaction = ve.dm.TransactionBuilder.static.newFromAnnotation(
-					diffDoc, range, 'set',
+				annotations = diffDoc.data.getAnnotationsFromRange( range );
+				/* eslint-disable no-loop-func */
+				// Remove existing annotations so the change annotation can be applied as the outer annotation
+				annotations.get().forEach( function ( ann ) {
+					diffDoc.commit(
+						ve.dm.TransactionBuilder.static.newFromAnnotation(
+							diffDoc, range, 'clear', ann
+						)
+					);
+				} );
+				// Make the del/ins the outer annotation before re-applying everything
+				annotations.add(
 					ve.dm.annotationFactory.create(
 						annType,
 						{
 							type: annType,
 							originalDomElementsIndex: originalDomElementsIndex
 						}
-					)
+					), 0
 				);
-				diffDoc.commit( transaction );
+				// Re-apply all annotations
+				annotations.get().forEach( function ( ann ) {
+					diffDoc.commit(
+						ve.dm.TransactionBuilder.static.newFromAnnotation(
+							diffDoc, range, 'set', ann
+						)
+					);
+				} );
+				/* eslint-enable no-loop-func */
 			}
 		}
 		start = end;
