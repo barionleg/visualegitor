@@ -272,12 +272,10 @@ ve.dm.VisualDiff.prototype.getDocChildDiff = function ( oldDocChild, newDocChild
 				// There is no content change
 				diffInfo[ i ] = {
 					typeChange: oldNode.type !== newNode.type,
-					attributeChange: !ve.compare( oldNode.getAttributes(), newNode.getAttributes() ) ?
-					{
+					attributeChange: !ve.compare( oldNode.getAttributes(), newNode.getAttributes() ) ? {
 						oldAttributes: oldNode.getAttributes(),
 						newAttributes: newNode.getAttributes()
-					} :
-					false
+					} : false
 				};
 				continue;
 
@@ -309,12 +307,10 @@ ve.dm.VisualDiff.prototype.getDocChildDiff = function ( oldDocChild, newDocChild
 				diffInfo[ i ] = {
 					linearDiff: linearDiff,
 					typeChange: oldNode.type !== newNode.type,
-					attributeChange: !ve.compare( oldNode.getAttributes(), newNode.getAttributes() ) ?
-					{
+					attributeChange: !ve.compare( oldNode.getAttributes(), newNode.getAttributes() ) ? {
 						oldAttributes: oldNode.getAttributes(),
 						newAttributes: newNode.getAttributes()
-					} :
-					false
+					} : false
 				};
 
 				if ( linearDiff ) {
