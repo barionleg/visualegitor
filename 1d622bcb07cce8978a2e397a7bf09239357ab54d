@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce3c5b53_97531d6e",
+        "filename": "src/ui/actions/ve.ui.LinkAction.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2017-03-06T16:11:15Z",
+      "side": 1,
+      "message": "I\u0027m not sure if this condition can be removed?",
+      "range": {
+        "startLine": 108,
+        "startChar": 2,
+        "endLine": 108,
+        "endChar": 47
+      },
+      "revId": "1d622bcb07cce8978a2e397a7bf09239357ab54d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
