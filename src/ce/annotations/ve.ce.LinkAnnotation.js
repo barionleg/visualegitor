@@ -13,15 +13,18 @@
  * @param {ve.dm.LinkAnnotation} model Model to observe
  * @param {ve.ce.ContentBranchNode} [parentNode] Node rendering this annotation
  * @param {Object} [config] Configuration options
+ * @cfg {jQuery} [$anchor] Element used to render link, a new anchor by default
  */
-ve.ce.LinkAnnotation = function VeCeLinkAnnotation() {
+ve.ce.LinkAnnotation = function VeCeLinkAnnotation( model, parentNode, config ) {
+	config = config || {};
+
 	// Parent constructor
 	ve.ce.LinkAnnotation.super.apply( this, arguments );
 
 	// Initialization
 	this.contentFragment = document.createDocumentFragment();
 
-	this.$anchor = $( '<a>' )
+	this.$anchor = ( config.$anchor || $( '<a>' ) )
 		.addClass( 've-ce-linkAnnotation' )
 		.prop( {
 			href: ve.resolveUrl( this.model.getHref(), this.getModelHtmlDocument() ),
