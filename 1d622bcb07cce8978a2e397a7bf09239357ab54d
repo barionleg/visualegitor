@@ -22,6 +22,30 @@
       "revId": "1d622bcb07cce8978a2e397a7bf09239357ab54d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_383079e5",
+        "filename": "src/ui/actions/ve.ui.LinkAction.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2017-03-08T19:14:52Z",
+      "side": 1,
+      "message": "Well, does getText explode when you ask for a range that extends outside of the document, or overlaps the internal list?",
+      "parentUuid": "ce3c5b53_97531d6e",
+      "range": {
+        "startLine": 108,
+        "startChar": 2,
+        "endLine": 108,
+        "endChar": 47
+      },
+      "revId": "1d622bcb07cce8978a2e397a7bf09239357ab54d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
