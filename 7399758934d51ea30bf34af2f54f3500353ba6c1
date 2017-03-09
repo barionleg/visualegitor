@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e46e3ee_aa27440c",
+        "filename": "src/ce/annotations/ve.ce.LinkAnnotation.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2017-03-09T21:39:04Z",
+      "side": 1,
+      "message": "Attributes on arbitrary elements is fine in HTML, but setting properties is a bit odd I think since they don\u0027t exist in the object and will become user/expando properties instead.\n\nIsn\u0027t this redundant with the patch that adds a.mw-selflink styling?",
+      "range": {
+        "startLine": 30,
+        "startChar": 3,
+        "endLine": 30,
+        "endChar": 7
+      },
+      "revId": "7399758934d51ea30bf34af2f54f3500353ba6c1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
