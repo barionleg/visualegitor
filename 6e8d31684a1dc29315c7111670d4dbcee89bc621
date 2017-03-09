@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_4f0a522b",
+        "filename": "src/dm/annotations/ve.dm.BoldAnnotation.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-03-09T20:18:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e46e3ee_b31b4a73",
+      "range": {
+        "startLine": 34,
+        "startChar": 28,
+        "endLine": 34,
+        "endChar": 39
+      },
+      "revId": "6e8d31684a1dc29315c7111670d4dbcee89bc621",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_532d268a",
         "filename": "src/dm/annotations/ve.dm.LinkAnnotation.js",
         "patchSetId": 8
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "8e46e3ee_6f070e20",
+        "filename": "src/dm/annotations/ve.dm.LinkAnnotation.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-03-09T20:18:59Z",
+      "side": 1,
+      "message": "Yes - we should, maybe word-break:break...",
+      "parentUuid": "8e46e3ee_532d268a",
+      "range": {
+        "startLine": 49,
+        "startChar": 15,
+        "endLine": 49,
+        "endChar": 22
+      },
+      "revId": "6e8d31684a1dc29315c7111670d4dbcee89bc621",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e46e3ee_73eb82dc",
         "filename": "src/ui/elements/ve.ui.DiffElement.js",
         "patchSetId": 8
@@ -59,6 +107,30 @@
       "writtenOn": "2017-03-08T21:43:51Z",
       "side": 1,
       "message": "Since we iterate backwards over the content when splicing the diff doc together, these changes are in backwards order, so we should add them from last to first here",
+      "range": {
+        "startLine": 553,
+        "startChar": 18,
+        "endLine": 553,
+        "endChar": 25
+      },
+      "revId": "6e8d31684a1dc29315c7111670d4dbcee89bc621",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_aa0c243e",
+        "filename": "src/ui/elements/ve.ui.DiffElement.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 553,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-03-09T20:18:59Z",
+      "side": 1,
+      "message": "Actually this loop is for when a single node returns multiple changes, but your point is valid, and we should addItems to the front of the queue on line 556.",
+      "parentUuid": "8e46e3ee_73eb82dc",
       "range": {
         "startLine": 553,
         "startChar": 18,
