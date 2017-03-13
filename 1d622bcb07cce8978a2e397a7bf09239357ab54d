@@ -46,6 +46,30 @@
       "revId": "1d622bcb07cce8978a2e397a7bf09239357ab54d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e46e3ee_9844144c",
+        "filename": "src/ui/actions/ve.ui.LinkAction.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2017-03-13T20:04:04Z",
+      "side": 1,
+      "message": "It doesn\u0027t look like it\u0027d quite explode, but it doesn\u0027t seem to handle that case. I\u0027m wondering if user selections can actually trigger this case.",
+      "parentUuid": "8e46e3ee_383079e5",
+      "range": {
+        "startLine": 108,
+        "startChar": 2,
+        "endLine": 108,
+        "endChar": 47
+      },
+      "revId": "1d622bcb07cce8978a2e397a7bf09239357ab54d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
