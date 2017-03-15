@@ -59,6 +59,17 @@ ve.dm.LanguageAnnotation.static.toDomElements = function ( dataElement, doc ) {
 	return [ domElement ];
 };
 
+ve.dm.LanguageAnnotation.static.describeChange = function ( key, change ) {
+	if ( key === 'lang' ) {
+		return 'Language changed from ' +
+			ve.init.platform.getLanguageName( change.from.toLowerCase() ) +
+			' to ' +
+			ve.init.platform.getLanguageName( change.to.toLowerCase() );
+	}
+	// Parent method
+	return ve.dm.LinkAnnotation.parent.static.describeChange.apply( this, arguments );
+};
+
 /* Methods */
 
 /**
