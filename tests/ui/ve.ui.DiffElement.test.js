@@ -90,7 +90,7 @@ QUnit.test( 'Diffing', function ( assert ) {
 				newDoc: '<figure><img src="boo.jpg"><figcaption>bar</figcaption></figure>',
 				expected:
 					'<div class="ve-ui-diffElement-doc-child-change">' +
-						'<figure data-diff-action="structural-change"><img src="boo.jpg" width="0" height="0" alt="null"><figcaption>bar</figcaption></figure>' +
+						'<figure data-diff-action="structural-change" data-diff-id="0"><img src="boo.jpg" width="0" height="0" alt="null"><figcaption>bar</figcaption></figure>' +
 					'</div>'
 			},
 			{
@@ -99,7 +99,7 @@ QUnit.test( 'Diffing', function ( assert ) {
 				newDoc: '<figure class="ve-align-right"><img src="boo.jpg"><figcaption>bar</figcaption></figure>',
 				expected:
 					'<div class="ve-ui-diffElement-doc-child-change">' +
-						'<figure class="ve-align-right" data-diff-action="structural-change"><img src="boo.jpg" width="0" height="0" alt="null"><figcaption>bar</figcaption></figure>' +
+						'<figure class="ve-align-right" data-diff-action="structural-change" data-diff-id="0"><img src="boo.jpg" width="0" height="0" alt="null"><figcaption>bar</figcaption></figure>' +
 					'</div>'
 			},
 			{
@@ -210,7 +210,7 @@ QUnit.test( 'Diffing', function ( assert ) {
 				newDoc: '<p>foo <b>bar</b> baz</p>',
 				expected:
 					'<div class="ve-ui-diffElement-doc-child-change">' +
-						'<p>foo <span data-diff-action="change-remove">bar</span><span data-diff-action="change-insert"><b>bar</b></span> baz</p>' +
+						'<p>foo <del data-diff-action="remove">bar</del><ins data-diff-action="insert"><b>bar</b></ins> baz</p>' +
 					'</div>'
 			},
 			{
@@ -219,7 +219,16 @@ QUnit.test( 'Diffing', function ( assert ) {
 				newDoc: '<p>foo bar baz</p>',
 				expected:
 					'<div class="ve-ui-diffElement-doc-child-change">' +
-						'<p>foo <span data-diff-action="change-remove"><b>bar</b></span><span data-diff-action="change-insert">bar</span> baz</p>' +
+						'<p>foo <del data-diff-action="remove"><b>bar</b></del><ins data-diff-action="insert">bar</ins> baz</p>' +
+					'</div>'
+			},
+			{
+				msg: 'Annotation attribute change',
+				oldDoc: '<p>foo <a href="quuz">bar</a> baz</p>',
+				newDoc: '<p>foo <a href="whee">bar</a> baz</p>',
+				expected:
+					'<div class="ve-ui-diffElement-doc-child-change">' +
+						'<p>foo <span data-diff-action="change-remove"><a href="quuz">bar</a></span><span data-diff-action="change-insert" data-diff-id="0"><a href="whee">bar</a></span> baz</p>' +
 					'</div>'
 			},
 			{
@@ -325,6 +334,6 @@ QUnit.test( 'Diffing', function ( assert ) {
 		newDoc.getStore().merge( oldDoc.getStore() );
 		visualDiff = new ve.dm.VisualDiff( oldDoc, newDoc );
 		diffElement = new ve.ui.DiffElement( visualDiff );
-		assert.strictEqual( diffElement.$element.html(), cases[ i ].expected, cases[ i ].msg );
+		assert.strictEqual( diffElement.$document.html(), cases[ i ].expected, cases[ i ].msg );
 	}
 } );
