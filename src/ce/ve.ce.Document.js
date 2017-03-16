@@ -18,10 +18,11 @@ ve.ce.Document = function VeCeDocument( model, surface ) {
 	// Parent constructor
 	ve.ce.Document.super.call( this, new ve.ce.DocumentNode( model.getDocumentNode(), surface ) );
 
-	this.getDocumentNode().$element.prop( {
-		lang: model.getLang(),
-		dir: model.getDir()
-	} );
+	this.lang = null;
+	this.dir = null;
+
+	this.setLang( model.getLang() );
+	this.setDir( model.getDir() );
 
 	// Properties
 	this.model = model;
@@ -32,6 +33,44 @@ ve.ce.Document = function VeCeDocument( model, surface ) {
 OO.inheritClass( ve.ce.Document, ve.Document );
 
 /* Methods */
+
+/**
+ * Set the document view language
+ *
+ * @param {string} lang Language code
+ */
+ve.ce.Document.prototype.setLang = function ( lang ) {
+	this.getDocumentNode().$element.prop( 'lang', lang );
+	this.lang = lang;
+};
+
+/**
+ * Set the document view directionality
+ *
+ * @param {string} dir Directionality (ltr/rtl)
+ */
+ve.ce.Document.prototype.setDir = function ( dir ) {
+	this.getDocumentNode().$element.prop( 'dir', dir );
+	this.dir = dir;
+};
+
+/**
+ * Get the document view language
+ *
+ * @return {string} Language code
+ */
+ve.ce.Document.prototype.getLang = function () {
+	return this.lang;
+};
+
+/**
+ * Get the document view directionality
+ *
+ * @return {string} Directionality (ltr/rtl)
+ */
+ve.ce.Document.prototype.getDir = function () {
+	return this.dir;
+};
 
 /**
  * Get a slug at an offset.
