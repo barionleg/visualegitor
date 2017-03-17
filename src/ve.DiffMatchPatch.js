@@ -110,15 +110,6 @@ ve.DiffMatchPatch.prototype.getCleanDiff = function () {
 	 * (with no retains) to look like one continuous removal and one continuous
 	 * insert.
 	 *
-	 * TODO: Clean up cases like:
-	 * - insert "word1"
-	 * - retain " "
-	 * - remove "word2"
-	 * - retain " "
-	 * - insert "word3"
-	 * - retain " "
-	 * - remove "word4"
-	 *
 	 * Additionally clean up mistakes made by the linear differ, such as removing
 	 * and inserting identical content (insetead of retaining it) and removing,
 	 * inserting or retaining an empty content array.
