@@ -59,6 +59,28 @@ QUnit.test( 'Diffing', function ( assert ) {
 					'</div>'
 			},
 			{
+				msg: 'Consecutive word changes',
+				oldDoc: '<p>foo bar baz word1 word2 quux whee</p>',
+				newDoc: '<p>foo bar baz word3 word4 quux whee</p>',
+				expected:
+					'<div class="ve-ui-diffElement-doc-child-change">' +
+						'<p>' +
+							'foo bar baz ' +
+							'<del data-diff-action="remove">word1</del>' +
+							'<ins data-diff-action="insert">word3</ins>' +
+							' ' +
+							'<del data-diff-action="remove">word2</del>' +
+							'<ins data-diff-action="insert">word4</ins>' +
+							' quux whee' +
+						'</p>' +
+					'</div>'
+				// TODO: The two changes should be merged as they are separated only by whitespace (T160740), so the diff should be:
+				// 'foo bar baz ' +
+				// '<del data-diff-action="remove">word1 word2</del>' +
+				// '<ins data-diff-action="insert">word3 word4</ins>' +
+				// ' quux whee' +
+			},
+			{
 				msg: 'Only change-adjacent paragraphs are shown',
 				oldDoc: '<p>foo</p><p>bar</p><p>baz</p>',
 				newDoc: '<p>boo</p><p>bar</p><p>baz</p>',
