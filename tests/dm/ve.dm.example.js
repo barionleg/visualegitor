@@ -156,14 +156,14 @@ ve.dm.example.language = function ( lang, dir ) {
 	return { type: 'meta/language', attributes: { lang: lang, dir: dir } };
 };
 
-ve.dm.example.annIndex = function ( tagName, text ) {
+ve.dm.example.annIndex = function ( tagName ) {
 	var ann = ve.copy( {
 		b: ve.dm.example.bold,
 		i: ve.dm.example.italic,
 		u: ve.dm.example.underline
 	}[ tagName ] );
 
-	ann.originalDomElementsIndex = ve.dm.IndexValueStore.prototype.indexOfValue( null, '<' + tagName + '>' + text + '</' + tagName + '>' );
+	ann.originalDomElementsIndex = ve.dm.IndexValueStore.prototype.indexOfValue( null, '<' + tagName + '>' + '</' + tagName + '>' );
 	return ve.dm.IndexValueStore.prototype.indexOfValue( ann );
 };
 
@@ -173,9 +173,8 @@ ve.dm.example.italicIndex = 'hefd27ef3bf2041dd';
 ve.dm.example.underlineIndex = 'hf214c680fbc361da';
 ve.dm.example.strongIndex = 'ha5aaf526d1c3af54';
 
-ve.dm.example.domBoldIndex = 'ha17878c4224059d6';
-ve.dm.example.domItalicIndex = 'h818fb55eaa1f5676';
-ve.dm.example.domUnderlineIndex = 'h6d4db1ae2f34b4b7';
+ve.dm.example.domBoldIndex = 'hd72ee073faddca4e';
+ve.dm.example.domItalicIndex = 'h56094449474a0517';
 
 ve.dm.example.inlineSlug = '<span class="ve-ce-branchNode-slug ve-ce-branchNode-inlineSlug"></span>';
 ve.dm.example.blockSlug = '<div class="ve-ce-branchNode-slug ve-ce-branchNode-blockSlug"></div>';
@@ -2209,6 +2208,9 @@ ve.dm.example.domToDataCases = {
 		body:
 			'<p><b>Foo</b><b>bar</b><strong>baz</strong></p>' +
 			'<p><a href="quux">Foo</a><a href="quux">bar</a><a href="whee">baz</a></p>',
+		normalizedBody:
+			'<p><b>Foobar</b><strong>baz</strong></p>' +
+			'<p><a href="quux">Foobar</a><a href="whee">baz</a></p>',
 		data: [
 			{ type: 'paragraph' },
 			[ 'F', [ ve.dm.example.bold ] ],
@@ -2238,6 +2240,19 @@ ve.dm.example.domToDataCases = {
 		fromDataBody:
 			'<p><b>Foobarbaz</b></p>' +
 			'<p><a href="quux">Foobar</a><a href="whee">baz</a></p>'
+	},
+	'adjacent identical annotations with identical content': {
+		body: '<p><b>x</b><b>x</b></p>',
+		normalizedBody: '<p><b>xx</b></p>',
+		data: [
+			{ type: 'paragraph' },
+			[ 'x', [ ve.dm.example.bold ] ],
+			[ 'x', [ ve.dm.example.bold ] ],
+			{ type: '/paragraph' },
+			{ type: 'internalList' },
+			{ type: '/internalList' }
+		],
+		fromDataBody: '<p><b>xx</b></p>'
 	},
 	'list item with space followed by link': {
 		body: '<ul><li><p> <a href="Foobar">bar</a></p></li></ul>',
