@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e46e3ee_c577eccd",
+        "filename": "tests/dm/ve.dm.Converter.test.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-03-20T10:34:14Z",
+      "side": 1,
+      "message": "You don\u0027t need a separate runner for this test, you can encode it in ve.dm.example.domToDataCases using the \u0027modify\u0027 property which is a function that is given the document model as an argument. There lots of examples of this in ve.dm.mwExample, but not core yet.",
+      "revId": "ff34ab0bc793230ea682c4c7a63ab2ab18345688",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
