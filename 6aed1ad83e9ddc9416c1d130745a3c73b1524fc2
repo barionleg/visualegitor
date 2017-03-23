@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e436fe2_f7fa200d",
+        "filename": "src/dm/ve.dm.Document.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-03-23T17:57:58Z",
+      "side": 1,
+      "message": "This looks good for starters. Can we put the logic into a new method ve.dm.AnnotationSet#filterForContext( otherAnnotationSet ) or something? We can make that method more sophisticated in the future.",
+      "range": {
+        "startLine": 190,
+        "startChar": 4,
+        "endLine": 192,
+        "endChar": 8
+      },
+      "revId": "6aed1ad83e9ddc9416c1d130745a3c73b1524fc2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
