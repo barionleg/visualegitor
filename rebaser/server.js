@@ -9,6 +9,7 @@ var rebaseServer, docNamespaces, lastAuthorForDoc, artificialDelay,
 	io = require( 'socket.io' )( http ),
 	ve = require( '../dist/ve-rebaser.js' );
 
+/*
 function summarize( author, backtrack, change ) {
 	var storeCount = 0,
 		summary = [];
@@ -31,8 +32,25 @@ function summarize( author, backtrack, change ) {
 	} );
 	return summary.join( ', ' );
 }
+*/
 
-rebaseServer = new ve.dm.RebaseServer();
+function logEvent( event ) {
+	// TODO write to a file; different files for different docs; make logging disableable
+	console.log( JSON.stringify( event ) );
+}
+
+function logServerEvent( event ) {
+	var key;
+	for ( key in event ) {
+		if ( event[ key ] instanceof ve.dm.Change ) {
+			event[ key ] = event[ key ].serialize( true );
+		}
+	}
+	event.clientId = 'server';
+	logEvent( event );
+}
+
+rebaseServer = new ve.dm.RebaseServer( logServerEvent );
 docNamespaces = new Map();
 lastAuthorForDoc = new Map();
 artificialDelay = parseInt( process.argv[ 2 ] ) || 0;
@@ -42,36 +60,51 @@ function makeConnectionHandler( docName ) {
 		var history = rebaseServer.getDocState( docName ).history,
 			author = 1 + ( lastAuthorForDoc.get( docName ) || 0 );
 		lastAuthorForDoc.set( docName, author );
-		console.log( 'new client ' + author + ' for ' + docName );
+		// console.log( 'new client ' + author + ' for ' + docName );
+		logServerEvent( {
+			type: 'newClient',
+			doc: docName,
+			author: author
+		} );
 		socket.emit( 'registered', author );
 		// HACK Catch the client up on the current state by sending it the entire history
 		// Ideally we'd be able to initialize the client using HTML, but that's hard, see
 		// comments in the /raw handler. Keeping an updated linmod on the server could be
 		// feasible if TransactionProcessor was modified to have a "don't sync, just apply"
 		// mode and ve.dm.Document was faked with { data: ..., metadata: ..., store: ... }
-		console.log( 'Sending full history: ' + summarize( null, 0, history ) );
+		// console.log( 'Sending full history: ' + summarize( null, 0, history ) );
 		socket.emit( 'newChange', history.serialize( true ) );
 		socket.on( 'submitChange', setTimeout.bind( null, function ( data ) {
 			var change, applied;
 			try {
 				change = ve.dm.Change.static.deserialize( data.change, null, true );
-				console.log( 'receive ' + summarize( author, data.backtrack, change ) );
+				// console.log( 'receive ' + summarize( author, data.backtrack, change ) );
 				applied = rebaseServer.applyChange( docName, author, data.backtrack, change );
 				if ( !applied.isEmpty() ) {
-					console.log( 'applied ' + summarize( author, 0, applied ) );
+					// console.log( 'applied ' + summarize( author, 0, applied ) );
 					docNamespaces.get( docName ).emit( 'newChange', applied.serialize( true ) );
 				}
 				if ( applied.getLength() < change.getLength() ) {
-					console.log( author + ' rejected ' + ( applied.getLength() - change.getLength() ) );
+					// console.log( author + ' rejected ' + ( applied.getLength() - change.getLength() ) );
 				}
 			} catch ( error ) {
 				console.error( error.stack );
 			}
 		}, artificialDelay ) );
+		socket.on( 'logEvent', function ( event ) {
+			event.clientId = author;
+			event.doc = docName;
+			logEvent( event );
+		} );
 		socket.on( 'disconnect', function () {
 			var change = rebaseServer.applyUnselect( docName, author );
 			docNamespaces.get( docName ).emit( 'newChange', change.serialize( true ) );
-			console.log( 'disconnect', author, docName );
+			// console.log( 'disconnect', author, docName );
+			logServerEvent( {
+				type: 'disconnect',
+				doc: docName,
+				author: author
+			} );
 		} );
 	};
 }

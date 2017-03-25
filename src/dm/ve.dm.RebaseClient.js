@@ -8,6 +8,9 @@
  * DataModel rebase client
  *
  * @class
+ *
+ * @constructor
+ * @param {Function} [logCallback]
  */
 ve.dm.RebaseClient = function VeDmRebaseClient() {
 	/**
@@ -29,7 +32,6 @@ ve.dm.RebaseClient = function VeDmRebaseClient() {
 	 * @property {number} backtrack Number of transactions backtracked (i.e. rejected) since the last send
 	 */
 	this.backtrack = 0;
-
 };
 
 /* Inheritance */
@@ -85,6 +87,12 @@ ve.dm.RebaseClient.prototype.addToHistory = null;
  */
 ve.dm.RebaseClient.prototype.removeFromHistory = null;
 
+/**
+ * Add an event to the log
+ * @param {Object} event Event data
+ */
+ve.dm.RebaseClient.prototype.logEvent = function () {};
+
 /* Methods */
 
 /**
@@ -108,13 +116,22 @@ ve.dm.RebaseClient.prototype.setAuthor = function ( author ) {
  * by the server.
  */
 ve.dm.RebaseClient.prototype.submitChange = function () {
-	var change = this.getChangeSince( this.sentLength, true );
+	var change = this.getChangeSince( this.sentLength, true ),
+		oldBacktrack = this.backtrack;
 	if ( change.isEmpty() ) {
 		return;
 	}
 	this.sendChange( this.backtrack, change );
 	this.backtrack = 0;
 	this.sentLength += change.getLength();
+
+	// TODO do we need this or is it redundant with the server's logging of received events?
+	// I guess we might need it to record that the client updated sentLength?
+	this.logEvent( {
+		type: 'submitChange',
+		change: change,
+		backtrack: oldBacktrack
+	} );
 };
 
 /**
@@ -132,12 +149,13 @@ ve.dm.RebaseClient.prototype.submitChange = function () {
  * @param {ve.dm.Change} change The committed change from the server
  */
 ve.dm.RebaseClient.prototype.acceptChange = function ( change ) {
-	var uncommitted, result,
+	var uncommitted, unsent, result,
 		author = change.firstAuthor();
 	if ( !author ) {
 		return;
 	}
 
+	unsent = this.getChangeSince( this.sentLength, false );
 	if ( author !== this.getAuthor() ) {
 		uncommitted = this.getChangeSince( this.commitLength, false );
 		result = ve.dm.Change.static.rebaseUncommittedChange( change, uncommitted );
@@ -162,4 +180,15 @@ ve.dm.RebaseClient.prototype.acceptChange = function ( change ) {
 		this.sentLength += change.getLength();
 	}
 	this.commitLength += change.getLength();
+
+	this.logEvent( {
+		type: 'acceptChange',
+		author: author,
+		change: change,
+		unsent: unsent,
+		// The below are undefined if it's our own change
+		rebased: result && result.rebased,
+		transposedHistory: result && result.transposedHistory,
+		rejected: result && result.rejected
+	} );
 };
