@@ -650,7 +650,27 @@ ve.dm.Change.prototype.truncate = function ( length ) {
 		this.start,
 		this.transactions.slice( 0, length ),
 		this.stores.slice( 0, length ),
-		length < this.stores.length ? {} : OO.cloneObject( this.selections )
+		length < this.getLength() ? {} : OO.cloneObject( this.selections )
+	);
+};
+
+/**
+ * Pop a number of transactions off the end of this change.
+ *
+ * changeB = changeA.pop( length ); is equivalent to:
+ * changeB = changeA.mostRecent( changeA.getLength() - length );
+ * changeA = changeA.truncate( changeA.getLength() - length );
+ *
+ * @param {number} length Number of changes to remove from the end
+ * @return {ve.dm.Change} Subset of this change that was removed from the end
+ */
+ve.dm.Change.prototype.pop = function ( length ) {
+	var newEnd = this.start + this.getLength() - length;
+	return new ve.dm.Change(
+		newEnd,
+		this.transactions.splice( newEnd, length ),
+		this.stores.splice( newEnd, length ),
+		length < this.getLength() ? {} : OO.cloneObject( this.selections )
 	);
 };
 

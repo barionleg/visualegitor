@@ -49,7 +49,7 @@ ve.dm.SurfaceSynchronizer = function VeDmSurfaceSynchronizer( surface, documentI
 		select: 'onSurfaceSelect'
 	} );
 
-	this.submitChangeThrottled = ve.debounce( ve.throttle( this.submitChange.bind( this ), 250 ), 0 );
+	this.submitChangeThrottled = ve.debounce( ve.throttle( this.submitChange.bind( this ), 2500 ), 0 );
 };
 
 /* Inheritance */
@@ -124,6 +124,20 @@ ve.dm.SurfaceSynchronizer.prototype.addToHistory = function ( change ) {
  */
 ve.dm.SurfaceSynchronizer.prototype.removeFromHistory = function ( change ) {
 	change.removeFromHistory( this.doc );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.dm.SurfaceSynchronizer.prototype.logEvent = function ( event ) {
+	var key;
+	for ( key in event ) {
+		if ( event[ key ] instanceof ve.dm.Change ) {
+			event[ key ] = event[ key ].serialize();
+		}
+	}
+
+	this.socket.emit( 'logEvent', event );
 };
 
 /**
