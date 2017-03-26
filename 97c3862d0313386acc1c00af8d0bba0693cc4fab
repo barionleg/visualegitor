@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e436fe2_f4e3f09a",
+        "filename": "src/dm/ve.dm.Change.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-03-26T02:44:44Z",
+      "side": 1,
+      "message": "Except that this mutates the existing change object in-place. We should discuss whether having mutable Changes is a good idea (it may well be).",
+      "range": {
+        "startLine": 660,
+        "startChar": 36,
+        "endLine": 660,
+        "endChar": 52
+      },
+      "revId": "97c3862d0313386acc1c00af8d0bba0693cc4fab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_14e9bc7b",
+        "filename": "src/dm/ve.dm.RebaseClient.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-03-26T02:44:44Z",
+      "side": 1,
+      "message": "I guess it could also be useful if it makes the server crash and burn before logging somehow",
+      "range": {
+        "startLine": 128,
+        "startChar": 4,
+        "endLine": 129,
+        "endChar": 74
+      },
+      "revId": "97c3862d0313386acc1c00af8d0bba0693cc4fab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_b4fec833",
+        "filename": "tests/dm/ve.dm.TestRebaseClient.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-03-26T02:44:44Z",
+      "side": 1,
+      "message": "TODO: Delete the copy of this class in tests/dm/ve.dm.RebaseServer.test.js",
+      "range": {
+        "startLine": 18,
+        "startChar": 6,
+        "endLine": 18,
+        "endChar": 22
+      },
+      "revId": "97c3862d0313386acc1c00af8d0bba0693cc4fab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
