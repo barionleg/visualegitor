@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6e436fe2_9fe1652c",
+        "filename": "src/dm/ve.dm.Document.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2017-03-26T16:17:18Z",
+      "side": 1,
+      "message": "I\u0027ll switch it to a boolean prepend, since you\u0027re right that the offset actually isn\u0027t really knowable.",
+      "parentUuid": "6e436fe2_9f3de5ba",
+      "range": {
+        "startLine": 188,
+        "startChar": 4,
+        "endLine": 188,
+        "endChar": 61
+      },
+      "revId": "2e7daa455c67c33b7d7707e2c207a5b94aa92ef8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_bf3a21bf",
         "filename": "src/dm/ve.dm.Document.js",
         "patchSetId": 1
