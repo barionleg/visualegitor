@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e436fe2_9f3de5ba",
+        "filename": "src/dm/ve.dm.Document.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-03-26T14:26:58Z",
+      "side": 1,
+      "message": "There\u0027s a problem with this: offset might not be meaningful, or even valid, once you\u0027ve removed some items from newAnnotationSet. Unless of course offset \u003d\u003d\u003d 0 for \"prepend\" (which I realise is the only case you actually care about) or offset \u003d\u003d\u003d undefined for \"append\".\n\nPerhaps document this as a requirement and/or coerce offset to ( offset \u0026\u0026 0 ) .",
+      "range": {
+        "startLine": 188,
+        "startChar": 4,
+        "endLine": 188,
+        "endChar": 61
+      },
+      "revId": "2e7daa455c67c33b7d7707e2c207a5b94aa92ef8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_bf3a21bf",
+        "filename": "src/dm/ve.dm.Document.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-03-26T14:26:58Z",
+      "side": 1,
+      "message": "Same again with regard to offset",
+      "range": {
+        "startLine": 204,
+        "startChar": 3,
+        "endLine": 204,
+        "endChar": 60
+      },
+      "revId": "2e7daa455c67c33b7d7707e2c207a5b94aa92ef8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
