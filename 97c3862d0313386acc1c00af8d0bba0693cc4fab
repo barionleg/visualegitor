@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6e436fe2_d48274a9",
+        "filename": "src/dm/ve.dm.Change.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-03-26T04:36:09Z",
+      "side": 1,
+      "message": "Oh, \"mutable\" isn\u0027t the right word (we already have #push) ... I envisaged them as being append-only (so they represent a timeline with immutable history), but maybe we don\u0027t actually need that guarantee for anything.",
+      "parentUuid": "6e436fe2_f4e3f09a",
+      "range": {
+        "startLine": 660,
+        "startChar": 36,
+        "endLine": 660,
+        "endChar": 52
+      },
+      "revId": "97c3862d0313386acc1c00af8d0bba0693cc4fab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_14e9bc7b",
         "filename": "src/dm/ve.dm.RebaseClient.js",
         "patchSetId": 1
