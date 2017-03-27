@@ -179,7 +179,7 @@ QUnit.test( 'commit', function ( assert ) {
 					[ 'pushStartAnnotating', 'clear', store.index( bold ) ],
 					[ 'pushRetain', 2 ],
 					[ 'pushStopAnnotating', 'clear', store.index( bold ) ],
-					[ 'pushRetain', 6 ]
+					[ 'pushRetain', 1 ]
 				],
 				expected: function ( data ) {
 					data[ 2 ] = 'b';
