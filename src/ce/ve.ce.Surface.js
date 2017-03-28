@@ -2286,6 +2286,7 @@ ve.ce.Surface.prototype.afterPaste = function () {
 	// If orignal selection was linear, switch to end of pasted text
 	if ( fragment.getSelection() instanceof ve.dm.LinearSelection ) {
 		targetFragment.collapseToEnd().select();
+		this.checkSequences();
 	}
 };
 
