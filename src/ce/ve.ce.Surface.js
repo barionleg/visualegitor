@@ -209,6 +209,7 @@ ve.ce.Surface = function VeCeSurface( model, ui, config ) {
 	this.$element.append( this.$documentNode, this.$pasteTarget );
 	this.surface.$blockers.append( this.$highlights );
 	this.surface.$selections.append( this.$deactivatedSelection );
+	this.enable();
 };
 
 /* Inheritance */
@@ -457,6 +458,8 @@ ve.ce.Surface.prototype.initialize = function () {
  * @method
  */
 ve.ce.Surface.prototype.enable = function () {
+	this.disabled = false;
+	this.$element.addClass( 've-ce-surface-enabled' );
 	this.documentView.getDocumentNode().enable();
 };
 
@@ -466,6 +469,8 @@ ve.ce.Surface.prototype.enable = function () {
  * @method
  */
 ve.ce.Surface.prototype.disable = function () {
+	this.disabled = true;
+	this.$element.removeClass( 've-ce-surface-enabled' );
 	this.documentView.getDocumentNode().disable();
 };
 
@@ -3503,6 +3508,10 @@ ve.ce.Surface.prototype.showSelectionState = function ( selection ) {
 		extendedBackwards = false,
 		sel = this.nativeSelection,
 		newSel = selection;
+
+	if ( this.disabled ) {
+		return false;
+	}
 
 	if ( newSel.equalsSelection( sel ) ) {
 		this.updateActiveLink();
