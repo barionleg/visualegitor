@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e436fe2_b585465c",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 2947,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-03-30T18:17:23Z",
+      "side": 1,
+      "message": "Are you expecting other modes? Elsewhere we use an isPaste boolean (e.g. the converter).",
+      "revId": "43557df0dccdd77475dd9b2c23c30869948af0e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
