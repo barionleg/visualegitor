@@ -16,6 +16,23 @@
       "revId": "43557df0dccdd77475dd9b2c23c30869948af0e7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_55e2c22f",
+        "filename": "src/ui/ve.ui.Sequence.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-03-30T18:20:02Z",
+      "side": 1,
+      "message": "what a hideous function signature! We should use an options object for all the optional configs. Tech debt.",
+      "revId": "43557df0dccdd77475dd9b2c23c30869948af0e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
