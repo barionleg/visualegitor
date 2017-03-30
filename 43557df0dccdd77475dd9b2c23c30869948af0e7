@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e436fe2_c335b8f4",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 2947,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2017-03-30T21:54:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e436fe2_b585465c",
+      "revId": "43557df0dccdd77475dd9b2c23c30869948af0e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_55e2c22f",
         "filename": "src/ui/ve.ui.Sequence.js",
         "patchSetId": 4
