@@ -43,12 +43,13 @@ ve.ui.SequenceRegistry.prototype.register = function ( sequence ) {
  *
  * @param {ve.dm.ElementLinearData} data Linear data
  * @param {number} offset Offset
+ * @param {string|undefined} mode 'paste' or undefined
  * @return {{sequence:ve.ui.Sequence,range:ve.Range}[]}
  *   Array of matching sequences, and the corresponding range of the match
  *   for each.
  */
-ve.ui.SequenceRegistry.prototype.findMatching = function ( data, offset ) {
-	var textStart, plaintext, name, range,
+ve.ui.SequenceRegistry.prototype.findMatching = function ( data, offset, mode ) {
+	var textStart, plaintext, name, range, sequence,
 		mode = 0,
 		sequences = [];
 
@@ -78,10 +79,14 @@ ve.ui.SequenceRegistry.prototype.findMatching = function ( data, offset ) {
 	plaintext = data.getText( true, new ve.Range( textStart + 1, offset ) );
 	// Now search through the registry.
 	for ( name in this.registry ) {
-		range = this.registry[ name ].match( data, offset, plaintext );
+		sequence = this.registry[ name ];
+		if ( mode === 'paste' && !sequence.checkOnPaste ) {
+			continue;
+		}
+		range = sequence.match( data, offset, plaintext );
 		if ( range !== null ) {
 			sequences.push( {
-				sequence: this.registry[ name ],
+				sequence: sequence,
 				range: range
 			} );
 		}
