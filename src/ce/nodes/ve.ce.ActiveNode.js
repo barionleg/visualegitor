@@ -25,14 +25,13 @@ ve.ce.ActiveNode = function VeCeActiveNode() {
 	} );
 
 	// DOM changes
-	this.$element
-		.addClass( 've-ce-activeNode' )
-		.prop( { contentEditable: 'true', spellcheck: true } );
+	this.$element.addClass( 've-ce-activeNode' );
 };
 
 /* Inheritance */
 
-OO.initClass( ve.ce.ActiveNode );
+OO.inheritClass( ve.ce.ActiveNode, ve.ce.ContentEditableNode );
+// The user of the mixin has to mixin ve.ce.ContentEditableNode then ve.ce.ActiveNode
 
 /* Methods */
 
