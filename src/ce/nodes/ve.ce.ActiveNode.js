@@ -37,6 +37,15 @@ OO.initClass( ve.ce.ActiveNode );
 /* Methods */
 
 /**
+ * Enable or disable editing on this node
+ *
+ * @param {boolean} disabled Whether to disable editing
+ */
+ve.ce.ActiveNode.prototype.setDisabled = function ( disabled ) {
+	this.$element.prop( 'contentEditable', disabled ? 'false' : 'true' );
+};
+
+/**
  * Handle node setup
  */
 ve.ce.ActiveNode.prototype.onActiveNodeSetup = function () {
