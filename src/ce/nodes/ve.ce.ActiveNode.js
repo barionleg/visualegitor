@@ -25,14 +25,13 @@ ve.ce.ActiveNode = function VeCeActiveNode() {
 	} );
 
 	// DOM changes
-	this.$element
-		.addClass( 've-ce-activeNode' )
-		.prop( { contentEditable: 'true', spellcheck: true } );
+	this.$element.addClass( 've-ce-activeNode' );
 };
 
 /* Inheritance */
 
 OO.initClass( ve.ce.ActiveNode );
+// Assumes ve.ce.ContentEditableNode as a mixed-in class
 
 /* Methods */
 

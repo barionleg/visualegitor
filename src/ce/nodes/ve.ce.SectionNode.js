@@ -9,6 +9,7 @@
  *
  * @class
  * @extends ve.ce.BranchNode
+ * @mixins ve.ce.ContentEditableNode
  * @mixins ve.ce.ActiveNode
  * @constructor
  * @param {ve.dm.SectionNode} model Model to observe
@@ -22,6 +23,7 @@ ve.ce.SectionNode = function VeCeSectionNode() {
 	this.model.connect( this, { update: 'onUpdate' } );
 
 	// Mixin constructors
+	ve.ce.ContentEditableNode.call( this );
 	ve.ce.ActiveNode.call( this );
 
 	// DOM changes
@@ -32,6 +34,7 @@ ve.ce.SectionNode = function VeCeSectionNode() {
 
 OO.inheritClass( ve.ce.SectionNode, ve.ce.BranchNode );
 
+OO.mixinClass( ve.ce.SectionNode, ve.ce.ContentEditableNode );
 OO.mixinClass( ve.ce.SectionNode, ve.ce.ActiveNode );
 
 /* Static Properties */
