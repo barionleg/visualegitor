@@ -67,6 +67,7 @@ ve.ce.DocumentNode.prototype.getSurface = function () {
  * @method
  */
 ve.ce.DocumentNode.prototype.disable = function () {
+	this.setDescendantsEditable( false );
 	this.$element.prop( 'contentEditable', 'false' );
 };
 
@@ -77,6 +78,21 @@ ve.ce.DocumentNode.prototype.disable = function () {
  */
 ve.ce.DocumentNode.prototype.enable = function () {
 	this.$element.prop( 'contentEditable', 'true' );
+	this.setDescendantsEditable( true );
+};
+
+/**
+ * Enable or disable editing on descendant ActiveNodes
+ * @private
+ * @param {boolean} isEditable
+ */
+ve.ce.DocumentNode.prototype.setDescendantsEditable = function ( isEditable ) {
+	var editable = isEditable ? 'true' : 'false';
+	this.traverse( function ( node ) {
+		if ( node.activeNodeSurface !== undefined ) {
+			node.$element.prop( 'contentEditable', editable );
+		}
+	} );
 };
 
 /* Registration */
