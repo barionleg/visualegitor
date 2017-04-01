@@ -20,6 +20,7 @@ ve.ce.DocumentNode = function VeCeDocumentNode( model, surface, config ) {
 
 	// Properties
 	this.surface = surface;
+	this.disabled = false;
 
 	// Set root
 	this.setRoot( this );
@@ -32,6 +33,12 @@ ve.ce.DocumentNode = function VeCeDocumentNode( model, surface, config ) {
 /* Inheritance */
 
 OO.inheritClass( ve.ce.DocumentNode, ve.ce.BranchNode );
+
+/* Events */
+
+/**
+ * @event setDisabled
+ */
 
 /* Static Properties */
 
@@ -67,6 +74,8 @@ ve.ce.DocumentNode.prototype.getSurface = function () {
  * @method
  */
 ve.ce.DocumentNode.prototype.disable = function () {
+	this.disabled = true;
+	this.emit( 'setDisabled' );
 	this.$element.prop( 'contentEditable', 'false' );
 };
 
@@ -77,6 +86,17 @@ ve.ce.DocumentNode.prototype.disable = function () {
  */
 ve.ce.DocumentNode.prototype.enable = function () {
 	this.$element.prop( 'contentEditable', 'true' );
+	this.disabled = false;
+	this.emit( 'setDisabled' );
+};
+
+/**
+ * Get disabledness state
+ *
+ * @return {boolean} Whether the document node is disabled
+ */
+ve.ce.DocumentNode.prototype.isDisabled = function () {
+	return this.disabled;
 };
 
 /* Registration */

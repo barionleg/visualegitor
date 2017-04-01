@@ -1840,3 +1840,26 @@ ve.isClipboardDataFormatsSupported = function ( e, customTypes ) {
 
 	return ve.isClipboardDataFormatsSupported[ cacheKey ];
 };
+
+/**
+ * Get the method that another method directly overrides
+ *
+ * Works even if the overriding method is a mixin, but not if the mixin class is applied twice.
+ *
+ * @param {Function} cls A derived class
+ * @param {string} methodName The property name of the method in cls
+ * @param {Function} method A method of the derived class or one of its base classes or a mixin
+ * @return {Function|undefined} The directly overridden method
+ */
+ve.getSuperMethod = function ( cls, methodName, method ) {
+	// Step up through base classes until method is found
+	while ( cls && !(
+		Object.hasOwnProperty.call( cls.prototype, methodName ) &&
+		cls.prototype[ methodName ] === method
+	) ) {
+		cls = cls.super;
+	}
+	// Take one more step
+	cls = cls && cls.super;
+	return cls && cls.prototype[ methodName ];
+};

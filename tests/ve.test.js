@@ -1079,3 +1079,33 @@ QUnit.test( 'adjacentDomPosition', function ( assert ) {
 		}
 	}
 } );
+
+QUnit.test( 'getSuperMethod', function ( assert ) {
+	var A = function A() {},
+		B = function B() {},
+		C = function C() {},
+		M = function M() {},
+		D = function D() {},
+		E = function E() {};
+
+	OO.initClass( A );
+	OO.inheritClass( B, A );
+	B.prototype.foo = function Bfoo() {};
+
+	OO.inheritClass( C, B );
+	C.prototype.foo = function Cfoo() {};
+
+	OO.initClass( M );
+	M.prototype.foo = function Mfoo() {};
+
+	OO.inheritClass( D, C );
+	OO.mixinClass( D, M );
+
+	OO.inheritClass( E, D );
+	E.prototype.foo = function Efoo() {};
+
+	assert.strictEqual( ve.getSuperMethod( E, 'foo', E.prototype.foo ).name, 'Mfoo' );
+	assert.strictEqual( ve.getSuperMethod( E, 'foo', M.prototype.foo ).name, 'Cfoo' );
+	assert.strictEqual( ve.getSuperMethod( E, 'foo', C.prototype.foo ).name, 'Bfoo' );
+	assert.strictEqual( ve.getSuperMethod( E, 'foo', B.prototype.foo ), undefined );
+} );

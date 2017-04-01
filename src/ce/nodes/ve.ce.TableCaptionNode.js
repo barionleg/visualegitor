@@ -9,6 +9,8 @@
  *
  * @class
  * @extends ve.ce.BranchNode
+ * @mixins ve.ce.ContentEditableNode
+ * @mixins ve.ce.ActiveNode
  * @constructor
  * @param {ve.dm.TableCaptionNode} model Model to observe
  * @param {Object} [config] Configuration options
@@ -18,18 +20,18 @@ ve.ce.TableCaptionNode = function VeCeTableCaptionNode() {
 	ve.ce.TableCaptionNode.super.apply( this, arguments );
 
 	// Mixin constructor
+	ve.ce.ContentEditableNode.call( this );
 	ve.ce.ActiveNode.call( this );
 
 	// DOM changes
-	this.$element
-		.addClass( 've-ce-tableCaptionNode' )
-		.prop( { contentEditable: 'true', spellcheck: true } );
+	this.$element.addClass( 've-ce-tableCaptionNode' );
 };
 
 /* Inheritance */
 
 OO.inheritClass( ve.ce.TableCaptionNode, ve.ce.BranchNode );
 
+OO.mixinClass( ve.ce.TableCaptionNode, ve.ce.ContentEditableNode );
 OO.mixinClass( ve.ce.TableCaptionNode, ve.ce.ActiveNode );
 
 /* Static Properties */
