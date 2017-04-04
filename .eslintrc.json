@@ -5,6 +5,9 @@
 		"jquery": true,
 		"qunit": true
 	},
+	"parserOptions": {
+		"ecmaVersion": 5
+	},
 	"globals": {
 		"ve": true,
 		"VisualEditorSupportCheck": false,
