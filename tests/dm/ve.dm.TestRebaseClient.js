@@ -12,16 +12,17 @@
  *
  * @constructor
  * @param {ve.dm.TestRebaseServer} server Rebase server
+ * @param {ve.dm.Document} doc Document
  */
-ve.dm.TestRebaseClient = function VeDmTestRebaseClient( server ) {
+ve.dm.TestRebaseClient = function VeDmTestRebaseClient( server, initialData ) {
 	ve.dm.RebaseClient.apply( this );
 
 	this.server = server;
 	this.incomingPointer = 0;
 	this.outgoing = [];
 	this.outgoingPointer = 0;
-	this.history = new ve.dm.Change( 0, [], [], {} );
-	this.trueHistory = [];
+	this.doc = new ve.dm.Document( OO.copy( initialData ) );
+	this.surface = new ve.dm.Surface( this.doc );
 };
 
 OO.initClass( ve.dm.TestRebaseClient );
@@ -73,11 +74,11 @@ ve.dm.TestRebaseClient.static.historySummary = function ( change, commitLength, 
 };
 
 ve.dm.TestRebaseClient.prototype.getHistorySummary = function () {
-	return this.constructor.static.historySummary( this.history, this.commitLength, this.sentLength );
+	return this.constructor.static.historySummary( this.getChangeSince( 0 ), this.commitLength, this.sentLength );
 };
 
 ve.dm.TestRebaseClient.prototype.getChangeSince = function ( start ) {
-	return this.history.mostRecent( start );
+	return this.doc.getChangeSince( start );
 };
 
 ve.dm.TestRebaseClient.prototype.sendChange = function ( backtrack, change ) {
@@ -85,27 +86,29 @@ ve.dm.TestRebaseClient.prototype.sendChange = function ( backtrack, change ) {
 };
 
 ve.dm.TestRebaseClient.prototype.applyChange = function ( change ) {
+	change.applyTo( this.surface );
+};
+
+ve.dm.TestRebaseClient.prototype.applyTransactions = function( txs ) {
 	var author = this.getAuthor();
-	change.transactions.forEach( function ( transaction ) {
+	txs.forEach( function ( transaction ) {
 		if ( transaction.author === null ) {
 			transaction.author = author;
 		}
 	} );
-	this.history.push( change );
-	this.trueHistory.push( { change: change, reversed: false } );
+	this.surface.change( txs );
 };
 
 ve.dm.TestRebaseClient.prototype.unapplyChange = function ( change ) {
-	this.history = this.history.truncate( change.start );
-	this.trueHistory.push( { change: change, reversed: true } );
+	change.unapplyTo( this.surface );
 };
 
 ve.dm.TestRebaseClient.prototype.addToHistory = function ( change ) {
-	this.history.push( change );
+	change.addToHistory( this.doc );
 };
 
 ve.dm.TestRebaseClient.prototype.removeFromHistory = function ( change ) {
-	this.history = this.history.truncate( change.start );
+	change.removeFromHistory( this.doc );
 };
 
 ve.dm.TestRebaseClient.prototype.deliverOne = function () {
