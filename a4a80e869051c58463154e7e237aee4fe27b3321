@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e436fe2_668616c0",
+        "filename": ".eslintrc.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2017-04-05T15:47:24Z",
+      "side": 1,
+      "message": "Yes, but I wanted to be specific. However, I\u0027m chatting with Timo about putting it into the eslint preset. Will remove it from here.",
+      "parentUuid": "6e436fe2_281a1e7f",
+      "revId": "a4a80e869051c58463154e7e237aee4fe27b3321",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e436fe2_e80c3647",
         "filename": "bin/update-oojs-ui.sh",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2017-04-05T07:24:26Z",
       "side": 1,
       "message": "is images/*/*.png all subfolders?",
+      "revId": "a4a80e869051c58463154e7e237aee4fe27b3321",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_a6b2de90",
+        "filename": "bin/update-oojs-ui.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2017-04-05T15:47:24Z",
+      "side": 1,
+      "message": "Good spot, this is what we were using before but it was either wrong or changed.",
+      "parentUuid": "6e436fe2_e80c3647",
       "revId": "a4a80e869051c58463154e7e237aee4fe27b3321",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
