@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e436fe2_281a1e7f",
+        "filename": ".eslintrc.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-04-05T07:24:26Z",
+      "side": 1,
+      "message": "The default is 5 http://eslint.org/docs/user-guide/configuring",
+      "revId": "a4a80e869051c58463154e7e237aee4fe27b3321",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e436fe2_e80c3647",
+        "filename": "bin/update-oojs-ui.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-04-05T07:24:26Z",
+      "side": 1,
+      "message": "is images/*/*.png all subfolders?",
+      "revId": "a4a80e869051c58463154e7e237aee4fe27b3321",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
