@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e506ba4_954dc1e2",
+        "filename": "src/ce/nodes/ve.ce.ContentEditableNode.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-04-10T15:38:27Z",
+      "side": 1,
+      "message": "Admirable, but ttis seems like a lot of work to override setRoot. Would probably be easier just to connect to our own root events, similar to what we do on ce.FocusableNode.",
+      "revId": "e2e8f5259325df402ac5956e5ac91995cefd866a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
