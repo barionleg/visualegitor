@@ -16,6 +16,24 @@
       "revId": "e2e8f5259325df402ac5956e5ac91995cefd866a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_1fe8eaae",
+        "filename": "src/ce/nodes/ve.ce.ContentEditableNode.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-04-11T02:01:46Z",
+      "side": 1,
+      "message": "The problem with that approach is that by the time root/unroot is emitted, you\u0027ve lost the old root. So it\u0027s not easy to call oldRoot.disconnect. This kind of timing issue is why I\u0027m an emit-sceptic ;-)\n\n- We could make new ve.Node events called preRoot/preUnroot or something.\n\n- Or this class could maintain another property called this.emittedRoot (or something), which would be a copy of this.root but updated slightly later (by the root/unroot listener).\n\nI think either of those approaches make the code more confusing, but let me know what you think.",
+      "parentUuid": "4e506ba4_954dc1e2",
+      "revId": "e2e8f5259325df402ac5956e5ac91995cefd866a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
