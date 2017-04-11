@@ -34,6 +34,24 @@
       "revId": "e2e8f5259325df402ac5956e5ac91995cefd866a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_401c526a",
+        "filename": "src/ce/nodes/ve.ce.ContentEditableNode.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-04-11T10:10:13Z",
+      "side": 1,
+      "message": "Oooh, I hadn\u0027t noticed, but ve.BranchNode#setRoot overrides ve.Node#setRoot without calling it, and therefore a ve.BranchNode never emits \u0027root\u0027 or \u0027unroot\u0027. (Instead it recursively calls setRoot on its children).\n\n(From git archaeology I see the recursive setRoot predates the emitted events; see Ia3e90ccfdab88f352b89992b90554e5f03ff9952 ).",
+      "parentUuid": "4e506ba4_1fe8eaae",
+      "revId": "e2e8f5259325df402ac5956e5ac91995cefd866a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
