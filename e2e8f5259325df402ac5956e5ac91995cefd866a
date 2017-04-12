@@ -52,6 +52,24 @@
       "revId": "e2e8f5259325df402ac5956e5ac91995cefd866a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_c3eb8c08",
+        "filename": "src/ce/nodes/ve.ce.ContentEditableNode.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-04-12T15:57:48Z",
+      "side": 1,
+      "message": "Seems like that should be fixed...\n\nI think in most places we bind to \u0027setup\u0027 and then check if it is rooted.",
+      "parentUuid": "4e506ba4_401c526a",
+      "revId": "e2e8f5259325df402ac5956e5ac91995cefd866a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
