@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e506ba4_bdf5344e",
+        "filename": "src/ce/nodes/ve.ce.ActiveNode.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-04-12T15:57:48Z",
+      "side": 1,
+      "message": "can we not have activenode inherit from cenode?",
+      "revId": "c34ff10da9f5abb9c99915f98d07d51e72ce2a47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
