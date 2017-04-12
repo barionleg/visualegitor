@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e506ba4_2c86d418",
+        "filename": "src/init/sa/styles/ve.init.sa.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-04-12T23:22:41Z",
+      "side": 1,
+      "message": "this should be 0.5 1.5 as paragraphs have 1em of vertical margin",
+      "revId": "8da2950d82530085648b6b8e1748a5bd0d0a1fcc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
