@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e506ba4_7bea5475",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2017-04-12T19:44:16Z",
+      "side": 1,
+      "message": "Bug: T162808",
+      "revId": "67cdee7516378b1fa3ef1f533b0419c0aa4b4fdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_dbde08de",
+        "filename": "src/dm/lineardata/ve.dm.ElementLinearData.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 1234,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2017-04-12T19:44:16Z",
+      "side": 1,
+      "message": "Need to declare this as a local variable, otherwise it\u0027s window.start which is not what you want.",
+      "range": {
+        "startLine": 1234,
+        "startChar": 4,
+        "endLine": 1234,
+        "endChar": 8
+      },
+      "revId": "67cdee7516378b1fa3ef1f533b0419c0aa4b4fdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
