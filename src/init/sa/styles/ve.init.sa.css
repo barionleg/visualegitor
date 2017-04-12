@@ -31,3 +31,8 @@ figcaption {
 	margin: 0.5em auto 1em auto;
 	display: table;
 }
+
+.ve-init-sa-target .ve-ce-documentNode,
+.ve-init-sa-target .ve-ui-surface-placeholder {
+	padding: 0.75em 1.5em;
+}
