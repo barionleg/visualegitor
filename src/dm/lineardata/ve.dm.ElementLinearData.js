@@ -1100,6 +1100,7 @@ ve.dm.ElementLinearData.prototype.remapAnnotationIndex = function ( oldIndex, ne
  * @param {boolean} [rules.preserveHtmlWhitespace] Preserve non-semantic HTML whitespace
  * @param {boolean} [rules.nodeSanitization] Apply per-type node sanitizations via ve.dm.Node#sanitize
  * @param {boolean} [rules.keepEmptyContentBranches] Preserve empty content branch nodes
+ * @param {boolean} [rules.singleLine] Don't allow more that one ContentBranchNode
  */
 ve.dm.ElementLinearData.prototype.sanitize = function ( rules ) {
 	var i, len, annotations, emptySet, setToRemove, type, oldHash, newHash,
@@ -1226,6 +1227,16 @@ ve.dm.ElementLinearData.prototype.sanitize = function ( rules ) {
 						delete this.getData( i ).internal;
 					}
 				}
+			}
+
+			if ( canContainContent && !isOpen && rules.singleLine ) {
+				i++;
+				start = i;
+				while ( i < len && !( this.isOpenElementData( i ) && this.getType( i ) === 'internalList' ) ) {
+					i++;
+				}
+				this.splice( start, i - start );
+				break;
 			}
 
 			// Store the current contentElement for splitting
