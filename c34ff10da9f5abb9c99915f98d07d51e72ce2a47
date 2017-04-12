@@ -16,6 +16,24 @@
       "revId": "c34ff10da9f5abb9c99915f98d07d51e72ce2a47",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_e09f9353",
+        "filename": "src/ce/nodes/ve.ce.ActiveNode.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-04-12T17:11:29Z",
+      "side": 1,
+      "message": "Sadly we cannot: https://phabricator.wikimedia.org/T92540",
+      "parentUuid": "4e506ba4_bdf5344e",
+      "revId": "c34ff10da9f5abb9c99915f98d07d51e72ce2a47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
