@@ -16,6 +16,24 @@
       "revId": "8da2950d82530085648b6b8e1748a5bd0d0a1fcc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_4ce800b0",
+        "filename": "src/init/sa/styles/ve.init.sa.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2017-04-12T23:32:54Z",
+      "side": 1,
+      "message": "I have directly copied this from https://gerrit.wikimedia.org/r/#/c/347576/1/demos/ve/demo.minimal.css , but okay.",
+      "parentUuid": "4e506ba4_2c86d418",
+      "revId": "8da2950d82530085648b6b8e1748a5bd0d0a1fcc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
