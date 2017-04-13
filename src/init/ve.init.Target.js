@@ -43,7 +43,11 @@ ve.init.Target = function VeInitTarget( config ) {
 	this.toolbarScrollOffset = 0;
 
 	this.modes = config.modes || this.constructor.static.modes;
-	this.setDefaultMode( config.defaultMode );
+
+	if ( !config.doNotSetDefaultMode ) {
+		// HACK QUACK: T162810
+		this.setDefaultMode( config.defaultMode );
+	}
 
 	this.setupTriggerListeners();
 
