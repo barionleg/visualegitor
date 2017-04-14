@@ -26,10 +26,18 @@
 			/* contentEditable */
 			!!( 'contentEditable' in document.createElement( 'div' ) ) &&
 
+			/* createElementNS */
+			!!document.createElementNS &&
+
+			/* classList */
+			!!(
+				( 'classList' in document.createElement( '_' ) ) ||
+				( 'classList' in document.createElementNS( 'http://www.w3.org/2000/svg ', 'g' ) )
+			) &&
+
 			/* SVG */
 			!!(
-				document.createElementNS &&
-				document.createElementNS( 'http://www.w3.org/2000/svg', 'svg' ).createSVGRect
+				( 'createSVGRect' in document.createElementNS( 'http://www.w3.org/2000/svg', 'svg' ) )
 			)
 		);
 	};
