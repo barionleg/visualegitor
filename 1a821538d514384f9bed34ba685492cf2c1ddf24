@@ -16,6 +16,24 @@
       "revId": "1a821538d514384f9bed34ba685492cf2c1ddf24",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e506ba4_b9645a46",
+        "filename": "tests/ve.test.utils.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-04-14T11:44:08Z",
+      "side": 1,
+      "message": "This just stops other unit tests from fataling.",
+      "parentUuid": "4e506ba4_2cced4b9",
+      "revId": "1a821538d514384f9bed34ba685492cf2c1ddf24",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
