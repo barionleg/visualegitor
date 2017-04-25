@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e506ba4_259c5b11",
+        "filename": "src/dm/ve.dm.Document.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2017-04-25T15:03:00Z",
+      "side": 1,
+      "message": "You don\u0027t assert the types the documentation say you allow; a defensive switch/if might be necessary? Alternatively, this could just be paragraphType || \u0027empty\u0027.",
+      "revId": "d6349a43282aa9bdda0cebf29c660a2274011c9c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
