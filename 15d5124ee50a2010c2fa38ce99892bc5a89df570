@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e4df70f_0486776a",
+        "filename": "tests/dm/ve.dm.TransactionBuilder.test.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 2272,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-04-26T18:05:59Z",
+      "side": 1,
+      "message": "why the extra S?",
+      "revId": "15d5124ee50a2010c2fa38ce99892bc5a89df570",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
