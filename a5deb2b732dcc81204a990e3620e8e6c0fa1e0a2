@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "2e4df70f_76a60452",
+        "filename": "tests/ui/ve.ui.DiffElement.test.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2017-04-27T23:13:38Z",
+      "side": 1,
+      "message": "Actually, I think it is. The other test in this file doesn\u0027t either.",
+      "parentUuid": "2e4df70f_56de6815",
+      "range": {
+        "startLine": 479,
+        "startChar": 1,
+        "endLine": 479,
+        "endChar": 30
+      },
+      "revId": "a5deb2b732dcc81204a990e3620e8e6c0fa1e0a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e4df70f_96c9507e",
         "filename": "tests/ui/ve.ui.DiffElement.test.js",
         "patchSetId": 5
@@ -84,6 +108,30 @@
       "side": 1,
       "message": "Not yet updated the pattern in this repo. Out of scope for this change.",
       "parentUuid": "2e4df70f_96c9507e",
+      "range": {
+        "startLine": 481,
+        "startChar": 7,
+        "endLine": 481,
+        "endChar": 42
+      },
+      "revId": "a5deb2b732dcc81204a990e3620e8e6c0fa1e0a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_b6ac8c33",
+        "filename": "tests/ui/ve.ui.DiffElement.test.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2017-04-27T23:13:38Z",
+      "side": 1,
+      "message": "Okay.",
+      "parentUuid": "2e4df70f_f6e214d0",
       "range": {
         "startLine": 481,
         "startChar": 7,
