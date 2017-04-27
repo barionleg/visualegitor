@@ -1,0 +1,131 @@
+The rebaser uses a star topology: there is one central server, to which many clients send
+updates. The server resolves the updates to build a definitive history, which it broadcasts to
+every client. The communication channels have latency but messages between a given source and
+destination are guaranteed to arrive in the order they were sent.
+
+
+THE CHANGE OBJECT
+
+Essentially a change is a list of consecutive transactions, together with a history length at
+which the transactions start:
+
+  ve.dm.Change
+  @property {number} start Length of the history stack at change start
+  @property {ve.dm.Transaction[]} transactions Transactions to apply
+  @property {ve.dm.IndexValueStore[]} stores For each transaction, a collection of new store items
+  @property {Object} selections For each author ID (key), latest ve.dm.Selection
+
+
+SERVER STATE
+
+For each document, the server maintains a ve.dm.RebaseDocState object:
+
+  ve.dm.RebaseDocState
+  @property {ve.dm.Change} history History as one big change
+  @property {Map.<number,ve.dm.Change>} continueBases Per-author transposed history for rebasing
+  @property {Map.<number,number>} Per-author count of unacknowledged rejections
+
+
+CLIENT STATE
+
+The client maintains a local history as a ve.dm.Change object, and the following counts:
+
+  ve.dm.RebaseClient
+  @property {number} commitLength Offset up to which we know we have no differences with the
+server
+  @property {number} sentLength Offset up to which we have no unsent changes
+  @property {number} backtrack Number of transactions backtracked (i.e. rejected) since the last
+send
+
+
+MESSAGES
+
+The server sends only one type of message to the clients:
+
+- newChange: sent to every client whenever the history grows, consisting of the appended history
+
+If a new client connects to a session after the history has begun, then it receives a newChange
+message containing the entire history up to that point.
+
+Each client sends only one type of message to the server:
+
+- submitChange: sent when the client would like to add to the history
+
+
+There is no message directly signalling a change has been rejected. Instead the client can
+detect conflicts indirectly, as it rebases its own changes onto the history received from the
+server.
+
+
+MESSAGE DETAILS
+
+
+A newChange message is broadcast to every client whenever the history is appended:
+
+  newChange
+  @property {ve.dm.Change} change The new history that has been appended
+
+It is implicit that the change applies directly on top of the previous change sent by the server
+(or on top of empty history if it is the first change received). The change contains a list of
+transactions; each transaction has an author ID, and a given author's accepted
+transactions are always appended to the history in the order they were submitted.
+
+On the other hand, a transactions is rejected if an only if it, or one of the prior transactions
+on which it is built, conflicts with the confirmed history. This logic means the client can
+determine rejections just by receiving the broadcast history and trying to rebase outstanding
+transactions on top of it.
+
+This means when a client receives a newChange transaction with its own author ID, it knows it is
+confirmation of the acceptance of its earliest-sent unconfirmed transaction. Here "unconfirmed"
+means the client has neither received confirmation of the transaction's acceptance nor
+determined that it must be rejected.
+
+  submitChange
+  @property {number} backtrack The number of previously-sent transactions detected to be rejected
+  @property {ve.dm.Change} change The change being submitted
+
+Note that change.start is the length of the local history on top of which the submission is
+meant to be applied. This will be equal to the length of (the received committed history plus
+the sent-but-unconfirmed transactions) at the time of submission.
+
+However, this is not sufficient for the server to determine the client's history state. For
+example, suppose the received history has length 6 and the sent-but-unconfirmed transactions
+have length 3. Then suppose the client receives a single transaction, which causes the rejection
+of one of the sent-but-unconfirmed transactions; now the received history will have length 7 and
+the sent-but-unconfirmed transactions will have length 2. A change sent with length 9 = 6 + 3 =
+7 + 2 could have been sent either before or after receiving the transaction, and for rebasing
+purposes it matters which. Therefore, submitChange contains another property, backtrack, that
+tells the server how many transactions have been rejected since the last submission. Now the two
+cases can be distinguished: the former will have start: 9, backtrack: 0, whereas the latter will
+have start: 9, backtrack: 1 .
+
+
+SERVER ACTION
+
+On receiving a submitChange message, the server reduces rejected[ author ] by msg.backtrack. If
+the result is positive, then msg.change is built on some outstanding rejected transactions, so
+it is rejected in its entirety.
+
+Otherwise, the change is built on transactions that have been accepted into the history. The
+continue base is updated so it reflects all transactions the client had not seen when forming the
+change, then the change is rebased over it, appended to the history, and broadcast to all
+clients. If some transaction in the change is rejected, then transactions in the change are
+rejected from that point onwards and are not broadcast; rejected[ author ] increased accordingly.
+
+
+CLIENT ACTION
+
+On receiving a newChange message, the client first looks at the author ID. If it matches its
+own, it increases the commitLength pointer on its history by msg.change.transactions.length .
+
+Otherwise, the transactions from msg.change are spliced into the history at commitLength.  (Note
+it is guaranteed that msg.change.start === commitLength). All transactions above this point are
+rebased over msg.change.
+
+If the rebasing process produces any rejections, then all such rejections are at the end of the
+history. They are reverted from the history and unapplied to the local document. If any rejected
+transactions were unsent then backtrack is increased accordingly.
+
+The rebasing process also produces msg.change transposed over all non-conflicting uncommitted
+transactions. This transposed change is applied to the document but not added to the history.
+Commutativity implies the document state now matches the history.
