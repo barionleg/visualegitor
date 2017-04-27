@@ -1,0 +1,50 @@
+Docserver uses a star topology is used: there is one central server, to which many clients send updates. The server resolves the updates to build a definitive history, which it broadcasts to every client. The communication channels have latency but messages between a given source and destination are guaranteed to arrive in the order they were sent.
+
+Server state
+
+For each document, the server maintains:
+
+- history, an append-only definitive list (initially empty) of committed transactions accepted from authors.
+
+- continueBase[ author ], a version of the end segment of history that in-transit updates from authors could potentially be based below, rebased onto the latest transaction accepted from the client.
+
+Messages
+
+The server can send two types of message to the clients:
+
+- newUpdate: sent to every client whenever the history has been appended to.
+- rejectedUpdate: sent to a single client when its submitted transaction is rejected.
+
+Each client can send two types of message to the server:
+
+- submitUpdate: to submit changes that start immediately after the known committed history
+- continueUpdate: to submit changes immediately on top of the previous submitUpdate/continueUpdate
+
+Message details
+
+newUpdate
+@param {number} start A starting point in the history
+@param {ve.dm.Transaction[]} transactions Current latest history (sliced at start)
+
+A newUpdate message is sent to every client whenever the history is appended. A newUpdate message
+with start 0 (i.e. the full history) is sent to a client when it connects.
+
+submitUpdate
+
+@param {ve.dm.Transaction[]} transactions Some new transactions
+@param {number} start The transaction start point in the committed history
+
+In a submitUpdate message, the transactions start immediately above some committed history. Therefore the client can only send submitUpdate when it knows there are no in-flight transactions from it (or none that the server could possibly accept).
+
+continueUpdate
+
+@param {ve.dm.Transaction[]} transactions Some new transactions
+@param {number} start The transaction start point; see below
+
+In a continueUpdate message, the transactions start immediately above the transactions of the prior submitUpdate/continueUpdate message. Those however may have been rebased further along the committed history since they were sent, which will be indicated by a start point that is later than otherwise expected.
+
+rejectedUpdate
+@param {number} start The point in the history at which the transactions would apply
+
+A rejectedUpdate message is sent to a single client, indicating that a transaction has been rejected because it conflicts with the committed history. It indicates that any subsequent transactions in the submitUpdate message, or any following continueUpdate messages, will be rejected too.
+
