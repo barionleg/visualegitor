@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e4df70f_2eb7cad4",
+        "filename": "tests/dm/ve.dm.LinkAnnotation.test.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-04-27T16:01:41Z",
+      "side": 1,
+      "message": "update msg",
+      "revId": "9418427094f3dbc13683504455913d5d358e8ef7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_ceabc66c",
+        "filename": "tests/dm/ve.dm.LinkAnnotation.test.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-04-27T16:01:41Z",
+      "side": 1,
+      "message": "update msg",
+      "revId": "9418427094f3dbc13683504455913d5d358e8ef7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
