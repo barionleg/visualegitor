@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>The mathematics of VisualEditor</title>
+<script type='text/x-mathjax-config'>
+	MathJax.Hub.Config( {
+		tex2jax: { inlineMath: [ [ '$', '$' ], [ '\\(', '\\)' ] ] }
+	} );
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML-full'></script>
+<style>
+body { max-width: 66em; margin: 0 auto }
+h1 { text-align: center }
+h2.nocount { counter-increment: none; }
+h2.nocount:before { content: ""; }
+h2 { counter-increment: h2; counter-reset: h3; counter-reset: figure }
+h3 { counter-increment: h3; }
+h2:before { content: counter(h2) ". "; }
+h3:before { content: counter(h2) "." counter(h3) ". "; }
+figure { counter-increment: figure }
+figcaption { font-weight: bold }
+figcaption:before { content: "Figure " counter(h2) "." counter(figure) ". "; }
+li { margin-bottom: 0.7em }
+</style>
+</head>
+<body>
+<h1>The mathematics of VisualEditor</h1>
+
+<h2 class="nocount">Abstract</h2>
+<h2 class="nocount">Introduction</h2>
+
+<h2>The linear model and transactions</h2>
+
+<h3>The linear model</h3>
+
+<p>[XXX blah blah blah blah blah]</p>
+
+<h3>Transactions</h3>
+
+<p>Transactions are instances of the class <code>ve.dm.Transaction</code>. In essence a
+transaction consists of a list of operations:</p>
+<figure>
+<figcaption>Transaction replacing some text</figcaption>
+<pre>[
+	{ type: 'retain', length: 10 },
+	{ type: 'replace', remove: [ 'a', 'b' ], insert: [ 'x' ] },
+	{ type: 'retain', length: 17 }
+]</pre>
+</figure>
+<p>As the user edits, transactions are built to modify the linear model state to match the user
+modifications. Transactions can also represent structural changes.</p>
+<figure>
+<figcaption>Transaction changing a paragraph into a heading</figcaption>
+<pre>[
+	{ type: 'retain', length: 2 },
+	{
+		type: 'replace',
+		remove: [ { type: 'paragraph' } ],
+		insert: [ { type: 'heading', attributes: { level: 1 } } ]
+	},
+	{ type: 'retain', length: 20 },
+	{
+		type: 'replace',
+		remove: [ { type: '/paragraph' } ],
+		insert: [ { type: '/heading' } ]
+	},
+	{ type: 'retain', length: 5 }
+]</pre>
+</figure>
+
+<p>A transaction is applied by walking a cursor through the linear model once, and applying the
+operations in the order specified. It is required that any unmodified content at the end of the
+linear model be covered by a final retain (so both example transactions above apply to a linear
+model state of length 29).</p>
+
+Types of operations include:</p>
+<ul>
+<li><code>retain</code>, which steps past content unmodified</li>
+<li><code>replace</code>, which splices content at the cursor</li>
+<li><code>attribute</code>, which changes attributes on an open tag at the cursor</li>
+<li><code>annotate</code>, which sets or clears annotations on content.</li>
+</ul>
+
+<details>
+Actually <code>annotate</code> does nothing by itself, but modifies the behaviour of
+<code>retain</code>
+</details>
+
+
+<p>Transactions have a number of important properties:</p>
+<ol>
+<li>Transactions are built to apply to a particular <i>initial state</i> of the linear model.
+Applying the transaction to the initial state transforms the linear model to another state, the
+<i>final state</i>. Transactions are not intended to be applied to any other state (at least,
+not directly; see Rebasing below).</li>
+
+<li>Transactions preserve tree validity (when applied to the intended linear model state). This is
+important because in general linear operations may not do so (e.g. removing just an open tag
+will obviously break tree validity). Note each individual operation may not preserve tree
+validity when applied in isolation. Therefore the transaction is the <i>basic unit of
+tree-validity-preserving change</i>.</li>
+
+<li>Transactions are <i>reversible</i>. This is because the operations they contain are
+reversible. (To reverse replace operation, just swap the <code>remove</code> and
+<code>insert</code> values). The reverse transaction will transform the linear model from the
+original transaction's final state to the initial state.</li>
+
+<li>Reversibility implies the edit history can be stored as a list of transactions in the order
+they were applied. Undo can be implemented by popping a transaction from the history and
+applying its reverse.</li>
+
+</ol>
+
+<h2>Real-time collaborative editing</h2>
+
+<p>The basic communication model for real-time collaborative editing is as follows:</p>
+
+<ol>
+<li>Multiple editor clients $E_1, \ldots, E_n$ modify a document simultaneously, starting from a
+shared document state. This creates concurrent transactions $f, g, \ldots$ etc.</li>
+
+<li>Clients continually submit their transactions to a central server. A given client sends all
+its transactions over a single web socket, meaning they arrive in the order they were sent.
+However, their order with respect to other clients' transactions depends on network delay.</li>
+
+<li>When a transaction $f$ is applied it changes the document state. Therefore any parallel
+transaction $g$ (i.e. a transaction applying to the original state) can no longer be applied.
+However, there is a way to <i>rebase</i> $g$ over $f$, giving a transaction $g'$ applicable
+on top of $f$. Sometimes there a transaction cannot usefully be rebased, in which case there is
+a <i>rebase conflict</i>.</li>
+
+<li>As the server receives transactions, it either rejects them and broadcasts nothing (but
+keeps count internally of the number of rejected transactions), or it rebases them and
+broadcasts the rebased result to all clients. Thus all clients receive an identical transaction
+sequence (history) from the server. Indeed the server's sole purpose is to maintain and
+broadcast this canonical history.</li>
+
+<li>As each client receives the canonical history, it can confirm how its own submitted
+transactions have been rebased (or rejected), and rebase unconfirmed transactions onto
+the canonical history in exactly the same way as concurrently happens on the server, yielding
+exactly the same rebase results. It modifies its copy of the document to match the canonical
+history plus its local unconfirmed transactions.</li>
+
+<li>If the client finds that an unconfirmed transaction is rejected, then it knows the same
+transaction will be rejected concurently on the server too. It reverts that transaction and all
+other transactions after it in the local history whether in-flight (sent but unacknowledged) or
+unsent. That is, it reverts everything in the local history beyond a certain point.</li>
+
+<li>When the client reverts in-flight transactions, it tracks the number of such reversions, and
+includes this "backtrack" count in the next server submission. The server on receiving the
+submission will subtrack the backtrack count from its rejected transaction count for this. If
+the rejection count is still greater than zero, that means there is a rejected transaction for
+which the server still has not received acknowledgement, so it rejects the whole of the next
+submission (because the client is sure to revert it when it learns about the rejection).
+.</li></ol>
+
+<p>This communication model uses a star topology (clients communicate only with a central
+server). The only communication to clients is the canonical transaction history. This makes it
+immune to divergence and causality violation, regardless of how rebase is defined.</p>
+
+<h3>Data flows</h3>
+
+<p>In essence, the client maintains the following data:</p>
+
+<figure>
+<figcaption>Data maintained by the client</figcaption>
+<pre>{
+	history: [ <i>tx_1, tx_2, ..., tx_n</i> ],
+	commitLength: <i>c</i>,
+	sentLength: <i>s</i>,
+	backtrack: <i>b</i>
+}</pre>
+</figure>
+
+<p>Periodically it submits outstanding changes over the web socket:</p>
+
+<figure>
+<figcaption>A client submission</figcaption>
+<pre>{
+	backtrack: <i>b</i>,
+	start: <i>s</i>,
+	transactions: [ <i>tx_s, ..., tx_n</i> ]
+}</pre>
+</figure>
+
+<p>then sets <code>backtrack = 0; start = transactions.length</code>.</p>
+
+<p>The server maintains the following data:</p>
+
+<figure>
+<figcaption>Data maintained by the server</figcaption>
+<pre>{
+	history: [ <i>tx_1, tx_2, ..., tx_n</i> ],
+	continueBases: {
+		<i>authorId</i>: [ <i>c_1, ..., c_m</i> ],
+		...
+	},
+	rejections: {
+		<i>authorId</i>: r,
+		...
+	}
+}</pre>
+</figure>
+
+<p>When the server receives a submission, <code>s</code>, it subtracts <code>s.backtrack</code>
+from <code>rejections[ <i>authorId</i> ]</code>. If the latter is greater than zero then the
+server rejects the entire submission, adds <code>s.transactions.length</code> to
+<code>rejections[ <i>authorId</i> ]</code> and broadcasts nothing. Else if there is a rebase
+conflict at some <code>tx_i</code>, then the server rejects <code>tx_i, tx_i+1, ...,</code>.
+If any transactions were successfully rebased, then the server adds the rebased versions to the
+committed history and broadcasts the additions.</p>
+
+<p>The array <code>continueBases[ <i>authorId</i> ]</code> essentially contains the latest
+consecutive transactions from that client that diverge from the canonical history. The next
+submission from that client might be based on top of this array.</p>
+
+<p>The number <code>rejections[ <i>authorId</i> ]</code> counts rejected transactions which the
+client has not yet acknowledged.</p>
+
+<figure>
+<figcaption>Data broadcast by the server</figcaption>
+<pre>{
+	start: <i>s</i>,
+	author: <i>authorId</i>,
+	transactions: [ <i>tx_1, tx_2, ..., tx_n</i> ],
+}</pre>
+</figure>
+
+<p>When the client receives a broadcast message <code>s</code>, it looks at
+<code>s.authorId</code>. If the ID is its own, it knows that the transactions in
+<code>history.slice( s.start, s.transactions.length )</code> have just been confirmed, so it
+simply adds <code>s.transactions.length</code> to <code>commitLength</code>.</p>
+
+<p>On the other hand, if the <code>s.authorId</code> is someone else's ID, then
+<code>history.slice( commitLength )</code> is rebased over <code>s.transactions</code>. If any
+transaction <code>tx_i</code> has a rebase conflict, then all transactions <code>tx_i, tx_i+1,
+...</code> are rejected and backtrack is increased accordingly. Optionally, the client can also
+reapply the conflicting transactions after transforming them in some way. There are few
+restrictions because the transformation will only ever take place on the client, once.</p>
+
+<p>XXX see http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.53.933&rep=rep1&type=pdf
+</p>
+
+<p>XXX rewrite using Changes (sequences of transactions)</p>
+
+<h3>More complicated client-only rebasing</h3>
+
+Stops you losing data from a rebase conflict. Easier on the client cos the data isn't parallel with anything.
+
+<h2>Rebasing and operational transformation</h2>
+
+<p>The basic idea of real-time collaborative editing is that two editors $E_1$ and $E_2$ may
+create parallel transactions (i.e. transactions applying to the same initial state) $t_1$ and
+$t_2$. The transactions then need to be applied in sequence: e.g. $t_1$ then $t_2$. However,
+when $t_1$ applies, it changes the document state, so $t_2$ can no longer be applied directly.
+We need to <i>rebase $t_2$ over $t_1$</i> to obtain some $t_2'$ that can be applied in the new
+state.  In some cases rebasing will not be usefully possible, in which case we say the
+transactions <i>conflict</i>.</p>
+
+<p>For most of this section, we will disregard rich-text features, drop the term "linear model",
+and treat a document state simply as an array of unicode codepoints, e.g.  <code>[ 'a', 'b', 'c'
+]</code>.  Accordingly the only operations we need consider are <code>retain</code> and
+<code>replace</code>; and clearly <code>retain</code> does not do very much. Therefore our focus
+will be on how to transform two parallel <code>replace</code> operations so that they can be
+applied sequentially. This is known as operational transformation.</p>
+
+<p>XXX references: OT and CRDT Talk about requirements.</p>
+
+
+
+<p>Nevertheless, our end goal is to rebase transactions, i.e. minimal tree-validity-preserving
+lists of operations. For tree validity reasons, we will sometimes say two transactions conflict
+even though their individual operations can be transformed. We use different terms ("rebase"
+for transactions, "transform" for operations) partly to emphasize this distinction.</p>
+
+<h3>What is a <code>replace</code> operation?</h3>
+
+<p>In order to reason about operations, it is important to understand how to model them
+mathematically. Recall the essential structure of our <code>ve.dm.Transaction</code>
+objects:
+
+<figure>
+<figcaption>Recap: transaction replacing some text</figcaption>
+<pre>[
+	{ type: 'retain', length: 10 },
+	{ type: 'replace', remove: [ 'a', 'b' ], insert: [ 'x' ] },
+	{ type: 'retain', length: 17 }
+]</pre>
+</figure>
+
+<p>We can donate a transaction containing a single <code>replace</code> operation as</p>
+
+\[ (n, r \mapsto i, m) \]
+
+<p>(meaning preserve the content at offsets $0$ to $n$, then remove string $r$ and insert string
+$i$; then preserve the content at offsets $n + r$ to $n + r + m$) with the obvious mapping back
+to its Javascript object within a list of operations.</p>
+
+<p>A document state is an array of Unicode code units, so if \(A\) is the set of Unicode
+code units, we can say the set of document states is</p>
+
+\[ S = A^* = \{\ (a_1, \ldots, a_n)\ |\ a_i \in A \} \]
+
+<p>A <code>replace</code> operation $f$ maps a definite start string $x \in S$ to a definite end
+string $y \in S$ (i.e. it changes the document state from the string $x$ to the string $y$). So
+is tempting to say $f$ is <i>the</i> map from $x$ to $y$. (XXX mention papers that take this
+approach). However, it turns out this is not sufficiently discriminating.  For example, consider
+the case $x = \text{'aba'}, y = \text{'ababa'}$. Then all of the following transactions map from
+$x$ to $y$:</p>
+
+\begin{align}
+f_1 &amp;= (0, \text{''} \mapsto \text{'ab'}, 3) \\
+f_2 &amp;= (3, \text{''} \mapsto \text{'ba'}, 0) \\
+f_3 &amp;= (1, \text{'b'} \mapsto \text{'bab'}, 2) \\
+f_4 &amp;= (0, \text{'aba'} \mapsto \text{'ababa'}, 0) \\
+&amp;\cdots
+\end{align}
+
+<p>We really want to treat all these cases separately. If, in parallel, another editor has
+performed operation $(2, \text{''} \mapsto \text{'q'}, 1)$ (mapping $\text{'aba'}$ to
+$\text{'abqa'}$), then the
+resulting document ought to be $\text{'ababqa'}$ if we performed $f_1$, but $\text{'abqaba'}$ if
+we performed $f_2$; and perhaps there should be a conflict if we performed $f_4$.  Therefore
+the start string and end string do not uniquely define the operation. Equivalently, <b>we
+cannot determine an operation just by diffing the start and end strings</b>. It is important
+which part of the string is modified, and which parts are unmodified, in determining how the
+operation should be transformed.</p>
+
+<p>With this in mind, we consider how the operation $(n, r \mapsto i, m)$ could be applied to a
+string $s \in S$ other than the one for which it was designed. Clearly it would fail if $s$ does
+not have $r$ at offset $n$, or if $s$ has length less than $n$. Otherwise, it could be applied.
+Considering an operation in this way, we have the following:
+
+<p><b>Observation</b>. A transaction with one <code>replace</code> operation $f = (n, r \mapsto
+i, m)$ can be considered as a partial function $S \rightharpoonup S$, defined on its preimage:
+
+\[ X = \{ s \in S\ |\ \text{$s$ matches $r$ at offset $n$ and }\mathrm{len}(s) = n +
+\mathrm{len}(r) + m \} \]
+
+This is specific enough to define $f$ uniquely (XXX prove by considering $g$ with the same
+partial function, and then by considering changed and unchanged ranges within the elements of $s
+\in X$, show that $g$ must have the same form as $f$. Alternative: $(n, r \mapsto i)$ is a map
+taking $(n, \emptyset \mapsto r)$ to $(n, \emptyset \mapsto i)$).</p>
+
+<p>For an operation $f$, the <i>reverse operation</i> $f^* = (n, i \mapsto r)$ satisfies:
+
+\begin{align}
+	f^* \circ f &amp;= \left\{\ (s, s)\ \big|\ s \in f^{-1}(S)\ \right\} \text{ , and } \\
+	f \circ f^* &amp;= \left\{\ (s, s)\ \big|\ s \in f(S)\ \right\}
+\end{align}
+
+Reversal is not quite inversion, because $f^* \circ f$ is not the identity function: it is a
+partial function that is the restriction of the identity function to the preimage of $f$.
+Likewise $f \circ f^*$ is the restriction of the identity function to the image of $f$.</p>
+
+<p>[Interesting aside: the preimage of $f = (n, r \mapsto i)$ is the image of $g = (n, \text{''}
+\mapsto r)$, which is defined on $\{ s \in S\ |\ \mathrm{len}(s) \ge n \}$, and
+$f^* \circ f \circ g = g$. So we could instead regard $f$ as the map from the operation
+$(n, \text{''}, r)$ to the operation $(n, r, i)$] and $f^*$ as its inverse.]</p>
+
+<p>More generally we can consider <i>edits</i> consisting of multiple replace operations that
+have non-overlapping remove ranges, written as
+
+\[ (n_0, r_0 \mapsto i_0, n_1, r_1 \mapsto i_1, \ldots, n_k, r_k \mapsto i_k, n_{k+1}) \]
+
+<p>[XXX shouldn't <code>{replace 'a' with 'A'; replace 'b' with 'BB' }</code> should rebase
+differently to <code>{replace 'ab' with 'ABB'}</code>? In the code we actually don't need this
+because any offset interleave kills the rebase of the entire *transaction*.]</p>
+
+Like a single replace operation, an edit is obviously a partial function $S \rightharpoonup S$
+restricted to strings with the required length and remove ranges, with a reverse edit obtained
+by swapping the $r$'s and $i$'s.  It is clear from the structure that a
+<code>ve.dm.Transaction</code> always defines an edit, but the reverse is not true because we
+require transactions to preserve tree validity.</p> </p>
+
+<p>Another way of looking at an operation is to ignore the <i>content</i> of the replace and
+insert arrays, considering only their length. We see an operation $(n, r, i)$ induces an
+injective monotonic partial function $\phi : \mathbb{N} \rightharpoonup \mathbb{N}$ defined by:
+
+\begin{equation}
+\phi(x) \mapsto
+\begin{cases}
+x &amp;\text{ if } x \lt n \\
+x + \mathrm{len}(i) - \mathrm{len}(r) &amp;\text{ if } x \ge n + \mathrm{len}(r) \\
+\text{undefined} &amp;\text{otherwise}
+\end{cases}
+\end{equation}
+
+This is a total function if $\mathrm{len}(r) = 0$.
+
+
+<p>Then $\phi : \mathbb{N} \rightharpoonup \mathbb{N}$ induces a partial relation on $S \times S$:
+
+\[ \left\{ ((s_i),(t_i)) : s_i = t_{\phi(i)} \text{ for all } i \in \mathrm{preimage(\phi)}
+\right\} \]
+
+which is a superset of $f$ (it is "$f$ with the requirements about the contents of $r$ and $i$
+dropped").</p>
+
+<h3>Transforming operations</h3>
+
+<p>Consider two operations $f = (n_f, r_f \mapsto i_f)$ and $g = (n_g, r_g \mapsto i_g)$, both authored for the same document start state. Define <i>$g$ transformed by $f$</i> as
+
+\begin{equation}
+g/f =
+\begin{cases}
+g &amp;\text{ if } n_g \le n_f \\
+(n_g + \mathrm{len}(i_f) - \mathrm{len}(r_f), r_g \mapsto i_g) &amp;\text{ if } n_g \ge n_f + \mathrm{len}(r_f) \\
+\emptyset &amp; otherwise
+\end{cases}
+\end{equation}
+
+Here $\emptyset$, the empty partial function, represents the case where g and f "conflict". The resulting transformed operation has empty preimage.</p>
+
+<p>More generally, for two edits $f, g$, define <i>$g$ transformed by $f$</i> in the same way,
+with conflict if there is any overlap of modified ranges at all. XXX spell out more clearly.</p>
+
+<p><b>Observation</b>. $g$ transformed by $f$ is a superset of $f \circ g \circ f^*$ (but
+defined on strings that don't conform to $f$ in the range transformed by $f$). XXX clearer and
+proof. Given $f = (n, r \mapsto i, m), g, h = (n, i \mapsto \text{''}, m)$, we have:
+
+\[ h \circ f \circ g \circ f* \circ h^* = f \circ g/f \circ f^* \]
+
+XXX so what?</p>
+
+<p>XXX it's interesting that we don't do the lattice thing from <code>ve.dm.Change</code>. Talk
+about that a bit.</p>
+
+<h1>... XXX still rough below here ...</h1>
+
+<p>Nice properties: ... XXX this does not yet obey f * g/f = g * f/g, for two inserts. We fix that at the transaction level by considering author ID.</p>
+
+<h3>Rebasing transactions</h3>
+
+<p>Define two parallel transactions $t_1, t_2$ as conflicting if their affected ranges overlap. If they don't conflict, then applying $t_1$ cannot alter tree structure assumed by $t_2$ (else $t_1$ would alter a tag both before and after $t_2$, contradicting the nonoverlapping ranges).</p>
+
+<p>Define $t_1/t_2$ operation-wise, considering author ID to disambiguate order in the case of two inserts. This is tree-validity-preserving for the reason given above.</p>
+
+<p>For the two-editor case, in real life this works quite well, except we might like a special case for structural change rebasing over text change. It would in general break in the p2p three-editor case.</p>
+
+<h2>Conclusion</h2>
+
+Works brilliantly.
+
+<h2 class="nocount">Appendix A: the beautiful 20-line core of ve.dm.Change#rebaseTransactions</h2>
+<pre>
+	transactionA = transactionA.clone();
+	transactionB = transactionB.clone();
+	infoA = getActiveRangeAndLengthDiff( transactionA );
+	infoB = getActiveRangeAndLengthDiff( transactionB );
+
+	if ( infoA.start === undefined || infoB.start === undefined ) {
+		// One of the transactions is a no-op: only need to adjust its retain length.
+		// We can safely adjust both, because the no-op must have diff 0
+		adjustRetain( transactionA.operations, 'start', infoB.diff );
+		adjustRetain( transactionB.operations, 'start', infoA.diff );
+	} else if ( infoA.end &lt;= infoB.start ) {
+		// This includes the case where both transactions are insertions at the same
+		// point
+		adjustRetain( transactionB.operations, 'start', infoA.diff );
+		adjustRetain( transactionA.operations, 'end', infoB.diff );
+	} else if ( infoB.end &lt;= infoA.start ) {
+		adjustRetain( transactionA.operations, 'start', infoB.diff );
+		adjustRetain( transactionB.operations, 'end', infoA.diff );
+	} else {
+		// The active ranges overlap: conflict
+		return [ null, null ];
+	}
+	return [ transactionA, transactionB ];
+</pre>
+
+<h2 class="nocount">Appendix B: the beautiful 26-line core of ve.dm.RebaseServer#applyChange</h2>
+<pre>
+	base = state.continueBases.get( author ) || change.truncate( 0 );
+	rejections = state.rejections.get( author ) || 0;
+	if ( rejections &gt; backtrack ) {
+		// Follow-on does not fully acknowledge outstanding conflicts: reject entirely
+		rejections = rejections - backtrack + change.transactions.length;
+		this.updateDocState( doc, author, null, rejections, null );
+		return change.truncate( 0 );
+	}
+	if ( rejections &lt; backtrack ) {
+		throw new Error( 'Backtrack=' + backtrack + ' &gt; ' + rejections + '=rejections' );
+	}
+
+	if ( change.start &gt; base.start ) {
+		// Remote has rebased some committed changes into its history since base was built.
+		// They are guaranteed to be equivalent to the start of base.
+		base = base.mostRecent( change.start );
+	}
+	base = base.concat( state.history.mostRecent( base.start + base.getLength() ) );
+
+	result = ve.dm.Change.static.rebaseUncommittedChange( base, change );
+	rejections = result.rejected ? result.rejected.getLength() : 0;
+	this.updateDocState( doc, author, result.rebased, rejections, result.transposedHistory );
+	return result.rebased;
+</pre>
+
+<h2 class="nocount">References</h2>
+</body>
+</html>
