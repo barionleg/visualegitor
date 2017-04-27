@@ -47,7 +47,7 @@ QUnit.test( 'getFragment', function ( assert ) {
 					type: 'link',
 					attributes: { href: 'https://www.example.org/##foo' }
 				} ),
-				expected: ''
+				expected: '#foo'
 			},
 			{
 				msg: 'Multi-fragment returns first one',
@@ -55,7 +55,7 @@ QUnit.test( 'getFragment', function ( assert ) {
 					type: 'link',
 					attributes: { href: 'https://www.example.org/#foo#bar' }
 				} ),
-				expected: 'foo'
+				expected: 'foo#bar'
 			}
 		];
 
