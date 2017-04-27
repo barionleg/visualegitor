@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2e4df70f_56de6815",
+        "filename": "tests/ui/ve.ui.DiffElement.test.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2017-04-27T22:39:22Z",
+      "side": 1,
+      "message": "Not yet updated the pattern in this repo. Out of scope for this change.",
+      "parentUuid": "2e4df70f_76ccc48c",
+      "range": {
+        "startLine": 479,
+        "startChar": 1,
+        "endLine": 479,
+        "endChar": 30
+      },
+      "revId": "a5deb2b732dcc81204a990e3620e8e6c0fa1e0a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e4df70f_96c9507e",
         "filename": "tests/ui/ve.ui.DiffElement.test.js",
         "patchSetId": 5
@@ -36,6 +60,30 @@
       "writtenOn": "2017-04-27T22:23:23Z",
       "side": 1,
       "message": "use i \u003d 0; i \u003c .length; i++ directly, this is an old pattern optimisation that actually works against the optimiser now. Either way not worth it.",
+      "range": {
+        "startLine": 481,
+        "startChar": 7,
+        "endLine": 481,
+        "endChar": 42
+      },
+      "revId": "a5deb2b732dcc81204a990e3620e8e6c0fa1e0a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_f6e214d0",
+        "filename": "tests/ui/ve.ui.DiffElement.test.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2017-04-27T22:39:22Z",
+      "side": 1,
+      "message": "Not yet updated the pattern in this repo. Out of scope for this change.",
+      "parentUuid": "2e4df70f_96c9507e",
       "range": {
         "startLine": 481,
         "startChar": 7,
