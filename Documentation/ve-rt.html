@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>The mathematics of VisualEditor</title>
+<script type='text/x-mathjax-config'>
+	MathJax.Hub.Config( {
+		tex2jax: { inlineMath: [ [ '$', '$' ], [ '\\(', '\\)' ] ] }
+	} );
+</script>
+<script src='MathJax/MathJax.js?config=TeX-AMS_HTML-full'></script>
+<style>
+body { max-width: 66em; margin: 0 auto }
+h1 { text-align: center }
+h2.nocount { counter-increment: none; }
+h2.nocount:before { content: ""; }
+h2 { counter-increment: h2; counter-reset: h3; counter-reset: figure }
+h3 { counter-increment: h3; }
+h2:before { content: counter(h2) ". "; }
+h3:before { content: counter(h2) "." counter(h3) ". "; }
+figure { counter-increment: figure }
+figcaption { font-weight: bold }
+figcaption:before { content: "Figure " counter(h2) "." counter(figure) ". "; }
+li { margin-bottom: 0.7em }
+</style>
+</head>
+<body>
+<h1>The mathematics of VisualEditor</h1>
+
+<h2 class="nocount">Abstract</h2>
+<h2 class="nocount">Introduction</h2>
+
+<h2>The linear model and transactions</h2>
+
+<h3>The linear model</h3>
+
+<p>[XXX blah blah blah blah blah]</p>
+
+<h3>Transactions</h3>
+
+<p>Transactions are instances of the class <code>ve.dm.Transaction</code>. In essence a
+transaction consists of a list of operations:</p>
+<figure>
+<figcaption>Transaction replacing some text</figcaption>
+<pre>[
+	{ type: 'retain', length: 10 },
+	{ type: 'replace', remove: [ 'a', 'b' ], insert: [ 'x' ] },
+	{ type: 'retain', length: 17 }
+]</pre>
+</figure>
+<p>As the user edits, transactions are built to modify the linear model state to match the user
+modifications. Transactions can also represent structural changes.</p>
+<figure>
+<figcaption>Transaction changing a paragraph into a heading</figcaption>
+<pre>[
+	{ type: 'retain', length: 2 },
+	{
+		type: 'replace',
+		remove: [ { type: 'paragraph' } ],
+		insert: [ { type: 'heading', attributes: { level: 1 } } ]
+	},
+	{ type: 'retain', length: 20 },
+	{
+		type: 'replace',
+		remove: [ { type: '/paragraph' } ],
+		insert: [ { type: '/heading' } ]
+	},
+	{ type: 'retain', length: 5 }
+]</pre>
+</figure>
+
+<p>A transaction is applied by walking a cursor through the linear model once, and applying the
+operations in the order specified. It is required that any unmodified content at the end of the
+linear model be covered by a final retain (so both example transactions above apply to a linear
+model state of length 29).</p>
+
+Types of operations include:</p>
+<ul>
+<li><code>retain</code>, which steps past content unmodified</li>
+<li><code>replace</code>, which splices content at the cursor</li>
+<li><code>attribute</code>, which changes attributes on an open tag at the cursor</li>
+<li><code>annotate</code>, which sets or clears annotations on content.</li>
+</ul>
+
+<details>
+Actually <code>annotate</code> does nothing by itself, but modifies the behaviour of
+<code>retain</code>
+</details>
+
+
+<p>Transactions have a number of important properties:</p>
+<ol>
+<li>Transactions are built to apply to a particular <i>initial state</i> of the linear model.
+Applying the transaction to the initial state transforms the linear model to another state, the
+<i>final state</i>. Transactions are not intended to be applied to any other state (at least,
+not directly; see Rebasing below).</li>
+
+<li>Transactions preserve tree validity (when applied to the intended linear model state). This is
+important because in general linear operations may not do so (e.g. removing just an open tag
+will obviously break tree validity). Note each individual operation may not preserve tree
+validity when applied in isolation. Therefore the transaction is the <i>basic unit of
+tree-validity-preserving change</i>.</li>
+
+<li>Transactions are <i>reversible</i>. This is because the operations they contain are
+reversible. (To reverse replace operation, just swap the <code>remove</code> and
+<code>insert</code> values). The reverse transaction will transform the linear model from the
+original transaction's final state to the initial state.</li>
+
+<li>Reversibility implies the edit history can be stored as a list of transactions in the order
+they were applied. Undo can be implemented by popping a transaction from the history and
+applying its reverse.</li>
+
+</ol>
+
+<h2>Real-time collaborative editing</h2>
+
+<p>The basic communication model for real-time collaborative editing is as follows:</p>
+
+<ol>
+<li>Multiple editor clients $E_1, \ldots, E_n$ modify a document simultaneously, starting from a
+shared document state. This creates concurrent transactions $f, g, \ldots$ etc.</li>
+
+<li>Clients continually submit their transactions to a central server. A given client sends all
+its transactions over a single web socket, meaning they arrive in the order they were sent.
+However, their order with respect to other clients' transactions depends on network delay.</li>
+
+<li>When a transaction $f$ is applied it changes the document state. Therefore any parallel
+transaction $g$ (i.e. a transaction applying to the original state) can no longer be applied.
+However, there is a way to <i>rebase</i> $g$ over $f$, giving a transaction $g'$ applicable
+on top of $f$. Sometimes there a transaction cannot usefully be rebased, in which case there is
+a <i>rebase conflict</i>.</li>
+
+<li>As the server receives transactions, it either rejects them and broadcasts nothing (but
+keeps count internally of the number of rejected transactions), or it rebases them and
+broadcasts the rebased result to all clients. Thus all clients receive an identical transaction
+sequence (history) from the server. Indeed the server's sole purpose is to maintain and
+broadcast this canonical history.</li>
+
+<li>As each client receives the canonical history, it can confirm how its own submitted
+transactions have been rebased (or rejected), and rebase unconfirmed transactions onto
+the canonical history in exactly the same way as concurrently happens on the server, yielding
+exactly the same rebase results. It modifies its copy of the document to match the canonical
+history plus its local unconfirmed transactions.</li>
+
+<li>If the client finds that an unconfirmed transaction is rejected, then it knows the same
+transaction will be rejected concurently on the server too. It reverts that transaction and all
+other transactions after it in the local history whether in-flight (sent but unacknowledged) or
+unsent. That is, it reverts everything in the local history beyond a certain point.</li>
+
+<li>When the client reverts in-flight transactions, it tracks the number of such reversions, and
+includes this "backtrack" count in the next server submission. The server on receiving the
+submission will subtrack the backtrack count from its rejected transaction count for this. If
+the rejection count is still greater than zero, that means there is a rejected transaction for
+which the server still has not received acknowledgement, so it rejects the whole of the next
+submission (because the client is sure to revert it when it learns about the rejection).
+.</li></ol>
+
+<p>This communication model uses a star topology (clients communicate only with a central
+server). The only communication to clients is the canonical transaction history. This makes it
+immune to divergence and causality violation, regardless of how rebase is defined.</p>
+
+<h3>Data flows</h3>
+
+<p>In essence, the client maintains the following data:</p>
+
+<figure>
+<figcaption>Data maintained by the client</figcaption>
+<pre>{
+	history: [ <i>tx_1, tx_2, ..., tx_n</i> ],
+	commitLength: <i>c</i>,
+	sentLength: <i>s</i>,
+	backtrack: <i>b</i>
+}</pre>
+</figure>
+
+<p>Periodically it submits outstanding changes over the web socket:</p>
+
+<figure>
+<figcaption>A client submission</figcaption>
+<pre>{
+	backtrack: <i>b</i>,
+	start: <i>s</i>,
+	transactions: [ <i>tx_s, ..., tx_n</i> ]
+}</pre>
+</figure>
+
+<p>then sets <code>backtrack = 0; start = transactions.length</code>.</p>
+
+<p>The server maintains the following data:</p>
+
+<figure>
+<figcaption>Data maintained by the server</figcaption>
+<pre>{
+	history: [ <i>tx_1, tx_2, ..., tx_n</i> ],
+	continueBases: {
+		<i>authorId</i>: [ <i>c_1, ..., c_m</i> ],
+		...
+	},
+	rejections: {
+		<i>authorId</i>: r,
+		...
+	}
+}</pre>
+</figure>
+
+<p>When the server receives a submission, <code>s</code>, it subtracts <code>s.backtrack</code>
+from <code>rejections[ <i>authorId</i> ]</code>. If the latter is greater than zero then the
+server rejects the entire submission, adds <code>s.transactions.length</code> to
+<code>rejections[ <i>authorId</i> ]</code> and broadcasts nothing. Else if there is a rebase
+conflict at some <code>tx_i</code>, then the server rejects <code>tx_i, tx_i+1, ...,</code>.
+If any transactions were successfully rebased, then the server adds the rebased versions to the
+committed history and broadcasts the additions.</p>
+
+<p>The array <code>continueBases[ <i>authorId</i> ]</code> essentially contains the latest
+consecutive transactions from that client that diverge from the canonical history. The next
+submission from that client might be based on top of this array.</p>
+
+<p>The number <code>rejections[ <i>authorId</i> ]</code> counts rejected transactions which the
+client has not yet acknowledged.</p>
+
+<figure>
+<figcaption>Data broadcast by the server</figcaption>
+<pre>{
+	start: <i>s</i>,
+	author: <i>authorId</i>,
+	transactions: [ <i>tx_1, tx_2, ..., tx_n</i> ],
+}</pre>
+</figure>
+
+<p>When the client receives a broadcast message <code>s</code>, it looks at
+<code>s.authorId</code>. If the ID is its own, it knows that the transactions in
+<code>history.slice( s.start, s.transactions.length )</code> have just been confirmed, so it
+simply adds <code>s.transactions.length</code> to <code>commitLength</code>.</p>
+
+<p>On the other hand, if the <code>s.authorId</code> is someone else's ID, then
+<code>history.slice( commitLength )</code> is rebased over <code>s.transactions</code>. If any
+transaction <code>tx_i</code> has a rebase conflict, then all transactions <code>tx_i, tx_i+1,
+...</code> are rejected and backtrack is increased accordingly. Optionally, the client can also
+reapply the conflicting transactions after transforming them in some way. There are few
+restrictions because the transformation will only ever take place on the client, once.</p>
+
+<p>XXX see http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.53.933&rep=rep1&type=pdf
+</p>
+
+<p>XXX rewrite using Changes (sequences of transactions)</p>
+
+<h3>More complicated client-only rebasing</h3>
+
+Stops you losing data from a rebase conflict. Easier on the client cos the data isn't parallel with anything.
+
+<h2>Rebasing and operational transformation</h2>
+
+<p>The basic idea of real-time collaborative editing is that two editors $E_1$ and $E_2$ may
+create parallel transactions (i.e. transactions applying to the same initial state) $t_1$ and
+$t_2$. The transactions then need to be applied in sequence: e.g. $t_1$ then $t_2$. However,
+when $t_1$ applies, it changes the document state, so $t_2$ can no longer be applied directly.
+We need to <i>rebase $t_2$ over $t_1$</i> to obtain some $t_2'$ that can be applied in the new
+state.  In some cases rebasing will not be usefully possible, in which case we say the
+transactions <i>conflict</i>.</p>
+
+<h3>What is a transaction?</h3>
+
+<p>We can say a document state is an array of items (tags, characters or annotated characters).
+If $\Sigma$ is the set of those items, we can say the set of document states is</p>
+
+\[ \Sigma^* = \{\ (a_1, \ldots, a_n)\ |\ a_i \in \Sigma \} \]
+
+<p>A <code>replace</code> operation $f$ maps a definite start string $x \in \Sigma^*$ to a
+definite end string $y \in \Sigma^*$ (i.e. it changes the document state from the string $x$ to
+the string $y$). So is tempting to say $f$ is <i>the</i> map from $x$ to $y$. (XXX mention
+papers that take this approach). However, it turns out this is not sufficiently discriminating.
+For example, consider the case $x = \text{'aba'}, y = \text{'ababa'}$. Then all of the following
+transactions map from $x$ to $y$:</p>
+
+\begin{align}
+f_1 &amp;= (0, \text{''} \mapsto \text{'ab'}, 3) \\
+f_2 &amp;= (3, \text{''} \mapsto \text{'ba'}, 0) \\
+f_3 &amp;= (1, \text{'b'} \mapsto \text{'bab'}, 2) \\
+f_4 &amp;= (0, \text{'aba'} \mapsto \text{'ababa'}, 0) \\
+&amp;\cdots
+\end{align}
+
+<p>We really want to treat all these cases separately. If, in parallel, another editor has
+performed operation $(2, \text{''} \mapsto \text{'q'}, 1)$ (mapping $\text{'aba'}$ to
+$\text{'abqa'}$), then the resulting document ought to be $\text{'ababqa'}$ if we performed
+$f_1$, but $\text{'abqaba'}$ if we performed $f_2$; and perhaps there should be a conflict if we
+performed $f_4$.  Therefore the start string and end string do not uniquely define the
+operation. Equivalently, <b>we cannot determine an operation just by diffing the start and end
+strings</b>. It is important which part of the string is modified, and which parts are
+unmodified, in determining how the operation should be transformed.</p>
+
+<p>With this in mind, we consider how the operation $(n, r \mapsto i, m)$ could be applied to a
+string $s \in \Sigma^*$ other than the one for which it was designed. Clearly it would fail if
+$s$ does not have $r$ at offset $n$, or if $s$ has length less than $n$. Otherwise, it could be
+applied.
+
+<h3>A transaction as a partial function</h3>
+
+<p>In order to reason about operations, it is important to understand how to model them
+mathematically. Recall <code>retain</code> and <code>replace</code> operations in a
+<code>ve.dm.Transaction</code> look like this:</p>
+
+<figure>
+<figcaption>Recap: transaction replacing some text</figcaption>
+<pre>[
+	{ type: 'retain', length: 10 },
+	{ type: 'replace', remove: [ 'a', 'b' ], insert: [ 'x' ] },
+	{ type: 'retain', length: 17 },
+	{ type: 'replace', remove: [], insert: [ 'p', 'q', 'r' ] },
+	{ type: 'retain', length: 25 }
+]</pre>
+</figure>
+
+<p>We can write $n$ for <code>{ type: 'retain': length: n }</code>, and
+$x \rightarrow y$ for <code>{ type: 'replace', remove: x, insert: y }</code>,
+and regard a transaction as a list of alternating <code>retain</code> and <code>replace</code>
+operations:</p>
+
+<figure>
+<code>( 10, 'ab' => 'x', 17, '' => 'pqr', 25 )</code>
+</figure>
+
+<p>There is an additional rule in VisualEditor that a transaction must preserve tree validity,
+e.g. it cannot make tag changes that break HTML well-formedness, such as the following:
+<figure>
+<code>[ '&lt;p&gt;', 'x', '&lt;/p&gt;', '&lt;p&gt;', 'y', '&lt;/p&gt;' ]</code>
+$\mapsto$
+<code>[ '&lt;h1&gt;', 'x', '&lt;/p&gt;', '&lt;p&gt;', 'y', '&lt;/h1&gt;' ]</code>.
+</figure>
+
+<p>However, for most of this section, we will disregard tags and tree structure (and other rich
+text features such as bold annotations), drop the term "linear model", and treat a document
+state simply as a string of items from fixed set, e.g.  <code>[ 'a', 'b', 'c' ]</code>.
+(Accordingly the only operations we need consider are <code>retain</code> and
+<code>replace</code>.) We will use the term <i>edits</i> to refer to arbitrary alternating lists
+of <code>retain</code> and <code>replace</code> operations, without regard to whether they
+preserve tree validity. (We will return to tree validity later on).
+
+<p>We can regard each of these edits as an injective partial function
+$f : S^i \rightharpoonup S^j$ (where $S^i$ means "the set of all strings of length $i$"),
+defined on "compatible" strings (i.e. those that have the correct length and content that
+matches the "remove" content at the required offsets). Composing two edits
+$f : S^i \rightharpoonup S^j$ and $g : S^j \rightharpoonup S^k$ gives an injective partial
+function $g \circ f : S^i \rightharpoonup S^k$ which is either another edit (if the image of the
+first transaction contains strings compatible with the second transaction) or the empty partial
+function from $S^i$ to $S^k$ (otherwise). There are four key insights here:</p>
+
+<ol>
+<li>The total start length and induced length change determine $i$ and $j$.</li>
+
+<li>The content at the removed ranges acts as a constraint determining
+$\mathrm{preimage}(f) \subset S^i$.</li>
+
+<li>The remaining unspecified (retained) content of total length $m$ is "unconstrained". We will
+see below that it gives rise to an injective total function $a : S^m \rightarrow S^i$ such that
+$\mathrm{preimage}(f) = \mathrm{image}(a)$, i.e. $f \circ a$ is an injective total function.</li>
+
+<li>If $g \circ f \circ a$ is also an injective total function, then applying $g$ after $f$ does
+not "lose any information".</li>
+</ol>
+
+<p>Therefore we can consider the <i>category of edits</i> $C$ which has object set
+$\mathrm{Ob}(C) = \left\{ S^0, S^1, ... \right\}$ and where each morphism set $Hom(S^i, S^j)$ is
+the set of edits $S^i \rightharpoonup S^j$ together with the empty partial function from
+$S^i \rightharpoonup S^j$.
+
+</p>
+
+<h3>An example of rebasing</h3>
+
+<p>Let</p>
+
+<figure>
+$f =$ <code>( 10, 'ab' => 'ABCDE', 5 )</code>,<br>
+$g =$ <code>( 2, 'xyz' => 'XY', 12 )</code>.
+</figure>
+
+<p>Then $f$ is defined on those strings that have length 17 that have <code>'ab'</code> at
+position 10, and $g$ is defined on those strings that have length 17 and <code>'xyz'</code> at
+position 2. So can see that $f$ and $g$ are injective partial functions
+$S^{17} \rightharpoonup S^{20}$ and $S^{17} \rightharpoonup S^{16}$ respectively.</p>
+
+<figure>
+<pre>	     f
+	S17 ---> S20
+	 |
+       g |
+	 v
+	S16</pre>
+</figure>
+
+<p>Another way to think it is that f and g are defined on the image of,
+respectively,</p>
+
+<figure>
+$a =$ <code>( 10, '' => 'ab', 5 )</code> and<br>
+$b =$ <code>( 2, '' => 'xyz', 12 )</code>,
+</figure>
+
+<p>which are injective (total) functions $S^{15} \rightarrow S^{17}$ and $S^{14} \rightarrow
+S^{17}$ respectively.</p>
+
+<figure>
+<pre>		S15
+		 |
+	       a |
+	    b    v
+       S14 ---> S17</pre>
+</figure>
+
+<p>Intuitively, $f \circ a$ is applicable on any document of length 15, by inserting
+<code>'ab'</code> at position 10 and then applying $f$. Similarly for $g * b$. We can define
+$\mathrm{Pull}(a, b) = (p_1, p_2)$ where $p_1 : S^{12} \rightarrow S^{15}$ and
+$p_2 : S^{12} \rightarrow S^{14}$, defined by
+
+<figure>
+$p_1 =$ <code>( 2, '' => 'xyz', 10 )</code>,<br>
+$p_2 =$ <code>( 7, '' => 'ab', 5 )</code>.
+</figure>
+
+This satisfies $a \circ p_1 = b \circ p_2$. (XXX if we prove universality, that will show it is
+a pullback). In fact this composition is
+
+<figure>
+$c =$ <code>( 2, '' => 'xyz', 5, '' => 'ab', 5 )</code>,
+</figure>
+
+an injective total function $S^{12} \rightarrow S^{17}$.
+
+<figure>
+<pre>	    p1
+       S12 ---> S15
+	|  \     |
+     p2 | c \  a |
+	|    \   |
+	v   b v  v
+       S14 ---> S17</pre>
+</figure>
+
+Then $f \circ c$ and $g \circ c$ are injective total functions $S^{12} \rightarrow S^{20}$ and
+$S^{12} \rightarrow S^{16}$ respectively.
+
+<figure>
+<pre>	    f*c
+	S12 ---> S20
+	 |
+     g*c |
+	 v
+	S16</pre>
+</figure>
+
+We can also define $\mathrm{Push}(f \circ c, g \circ c) = (q_1, q_2)$, where
+$q_1 : S^{20} \rightarrow S^{19}$ and $q2 : S^{16} \rightarrow S^{19}$, defined by
+
+<figure>
+$q_1 =$ <code>( 2, 'xyz' => 'XY', 15 )</code>,
+$q_2 =$ <code>( 9, 'ab' => 'ABCDE', 5 )</code>.
+</figure>
+
+This satisfies $q1 \circ f \circ c = q2 \circ g \circ c$. (XXX if we prove universality, that
+will show it is a pushback). In fact it is
+
+<figure>
+$d =$ <code>( 2, '' => 'XY', 5, '' => 'ABCDE', 5 )</code>,
+</figure>
+
+an injective total function $S^{12} \rightarrow S^{19}$.
+
+<figure>
+<pre>	   f*c
+       S12 ---> S20
+	|  \     |
+    g*c | d \ q1 |
+	|    \   |
+	v  q2 v  v
+       S16 ---> S19</pre>
+</figure>
+
+<h3>General definition of rebasing</h3>
+
+<p>Consider any category $C$ with object set $\mathrm{Ob}(C) = \left\{ S^0, S^1, ... \right\}$
+(where $S^i$ means "the set of all strings of length $i$"), and where each morphism set
+$\mathrm{Hom}(S^i, S^j)$ is some set consisting of injective partial functions $S^i
+\rightharpoonup S^j$ together with the empty partial function from $S^i \rightharpoonup
+S^j$.</p>
+
+<p>Suppose that for all $f \in \mathrm{Hom}(S^i, S^j)$ there exists a unique maximal $k \in
+\mathbb{Z}^+, a \in Hom(S^k,S^i)$, $a$ a total function, such that the preimage of $f$ is the
+image of $a$. Call $a$ the <i>preparator of $f$</i>, and write $a = \mathrm{prep}(f)$.</p>
+
+<p>(XXX Do we need another restriction here? Should we ban, say, rotations on strings e.g.
+$f : S^3 \rightarrow S^3, f((c_0,c_1,c_2)) = (c_1,c_2,c_0)$? Or is this not a
+problem?)</p>
+
+<p>Let $f \in \mathrm{Hom}(S^i, S^j)$, $g \in \mathrm{Hom}(S^i, S^k)$. Suppose $c$ is a pullback
+of $\mathrm{prep}(f)$ and $\mathrm{prep}(g)$.</p>
+
+<p>Given $m \in \mathbb{Z}^+$, $q_1 \in \mathrm{Hom}(S^j, S^m)$, $q_2 \in \mathrm{Hom}(S^k,
+S^m)$, say that $(q_1,q_2)$ is a <i>rebasing of $(f,g)$</i> if $(q_1,q_2)$ is a pushout of
+$f \circ c$ and $g \circ c$.</p>
+
+
+<b>NOTES FOR THIS DRAFT:</b>
+
+<ul>
+<li>I expect we need $f \circ c, g \circ c, d$ to be total functions so that we get the
+universality required in the definition of pushback / pullout.</li>
+
+<li>In the case of two insertions in the same place, a, b and c will be identity maps, and there
+will be two different definitions of q1 and q2 that work (both being pushouts because there is
+an isomorphism between them).</li>
+
+<li>There can be weird rebasings even if the edits "conflict", e.g. if
+$f : S^{10} \rightarrow S^8$ is <code>( 2, 'abc' => 'z', 5 )</code>, and
+$g : S^{10} \rightarrow S^{11}$ is <code>( 3, 'b' => 'xy', 6 )</code>, then
+$a =$ <code>( 2, '' => 'abc', 5 )</code> and
+$b =$ <code>( 3, '' => 'b', 6 )</code>. Then
+$c =$ <code>( 2, '' => 'abc', 5 )</code>.
+(XXX is this right? Shouldn't it be $c =$ <code>( 2, '' => 'a', 1, '' => 'c', 5 )</code>?
+In which case $f \circ c$ and $g \circ c$ are not total functions).
+$q_1 =$ <code>( 8 )</code> and $q_2 =$ <code>( 2, 'axyc' => 'z', 6 )</code>. Here $(q_1,q_2)$
+essentially means "keep $f$ unchanged and revert $g$".</li>
+
+<li>Insert mention that the injective partial function $f : S^{17} \rightarrow S^{20}$ defined by
+<code>(10, 'ab' => 'ABCDE', 5)</code> has only 15 unconstrained characters, so it makes sense
+that it gives rise to an injective total function $S^{15} \rightarrow S^{20}$. This is the sense
+in which all our edits are injective and therefore reversible. Even a "total deletion"
+like <code>('blah', => '')</code> gives rise to an injective total function
+$S^0 \rightarrow S^0$ which just maps '' to ''.</li>
+</ul>
+
+<h3>A simple chosen rebasing</h3>
+
+<p>Consider two edits with a single replace, $a = (n_a, x_a \mapsto y_a, m_a)$ and
+$b = (n_b, x_b \mapsto y_b, m_b)$, with
+$n_a + \mathrm{len}(x_a) + m_a = n_b + \mathrm{len}(x_b) + m_b$. Let
+$d_a = \mathrm{len}(y_a) - \mathrm{len}(x_a)$ and
+$d_b = \mathrm{len}(y_b) - \mathrm{len}(x_b)$. $Define <i>$b$ (left-)rebased over $a$</i> as
+
+\begin{equation}
+b/a =
+\begin{cases}
+(n_b + d_a, x_b \mapsto y_b, m_b) &amp;\text{ if } n_b \le n_a + \mathrm{len}(x_a) \text{ , else} \\
+(n_b, x_b \mapsto y_b, m_b + d_a) &amp;\text{ if } n_b + \mathrm{len}(x_b) \le n_a \text{ , else} \\
+\emptyset &amp; \text{ otherwise }
+\end{cases}
+\end{equation}
+
+Here $\emptyset$, the empty partial function, represents the case where b and a "conflict"
+because their removed ranges overlap. The resulting rebased edit has empty preimage.</p>
+
+Notice that if $\mathrm{len}(x_a) = \mathrm{len}(x_b) = 0$ then the first case is chosen. This
+means if $a$ and $b$ are two inserts at the same offset, then $b$ gets moved to be after $a$.
+For symmetry we can reverse the cases to give <i>$b$ right-rebased over $a$</i>:
+
+\begin{equation}
+b\backslash a =
+\begin{cases}
+(n_b, x_b \mapsto y_b, m_b + d_a) &amp;\text{ if } n_b + \mathrm{len}(x_b) \le n_a \text{ , else} \\
+(n_b + d_a, x_b \mapsto y_b, m_b) &amp;\text{ if } n_b \le n_a + \mathrm{len}(x_a) \text{ , else} \\
+\emptyset &amp; \text{ otherwise }
+\end{cases}
+\end{equation}
+
+<p><b>Observation</b>. This is actually a rebasing in the sense defined above. XXX proof.</p>
+
+<p>More generally, for two edits $f: S^i \rightharpoonup S^j$ and $g : S^i \rightharpoonup S^k$
+We can define $g$ rebased over $f$ in the same way, conflicting if the changed ranges overlap at
+all, else resizing the first retain (if $f$'s changes come before $g$'s) or the last retain (if
+$f$'s changes come after $g$'s).
+
+<h3>Tree validity</h3>
+
+<p>But for rich text editing, we want to work not with edits, but with transactions (i.e. edits
+that preserve tree validity on a particular document). Therefore, we need to consider the
+well-formed HTML tag structure represented within a linear document. In VisualEditor the
+transactions we create always preserve tree validity on the document for which they were
+created, but not necessarily on another document that is "compatible" in the sense that its
+length and retained ranges match the transaction.</p>
+
+<p>We need to know that rebasing will not break tree validity. That is, if $s$ is well-formed
+and $f(s)$ and $g(s)$ are both well-formed, then we need to know that $g/f$ will also be well
+formed.</p>
+
+<p>This can be seen by considering the tree structure at any offset in the linear document, i.e.
+the tree path from that offset to the document root. In a well-formed linear document, the path
+can be determined in two ways. Firstly, by walking backwards through the linear document and
+observing which open tags are encountered (ignoring any that cancel out an encountered).
+Secondly, by walking forwards through the linear document and observing which (uncancelled)
+close tags are encountered.</p>
+
+<p>But $g/f$ is $g$ with either the first or last retain resized. If the former, then at any
+offset modified by $g$, $(g/f)(s)$ is the same as $g(s)$ from that offset forwards right to the
+end of the document. If the latter, then $(g/f)(s)$ is the same as $g(s)$ from that offset
+backwards right to the start of the document. XXXXX continue</p>
+
+<p>XXX it's interesting that we don't do the lattice thing from <code>ve.dm.Change</code>. Talk
+about that a bit.</p>
+
+<h2>Conclusion</h2>
+
+Works brilliantly.
+
+<h2 class="nocount">Appendix A: the beautiful 20-line core of ve.dm.Change#rebaseTransactions</h2>
+<pre>
+	transactionA = transactionA.clone();
+	transactionB = transactionB.clone();
+	infoA = getActiveRangeAndLengthDiff( transactionA );
+	infoB = getActiveRangeAndLengthDiff( transactionB );
+
+	if ( infoA.start === undefined || infoB.start === undefined ) {
+		// One of the transactions is a no-op: only need to adjust its retain length.
+		// We can safely adjust both, because the no-op must have diff 0
+		adjustRetain( transactionA.operations, 'start', infoB.diff );
+		adjustRetain( transactionB.operations, 'start', infoA.diff );
+	} else if ( infoA.end &lt;= infoB.start ) {
+		// This includes the case where both transactions are insertions at the same
+		// point
+		adjustRetain( transactionB.operations, 'start', infoA.diff );
+		adjustRetain( transactionA.operations, 'end', infoB.diff );
+	} else if ( infoB.end &lt;= infoA.start ) {
+		adjustRetain( transactionA.operations, 'start', infoB.diff );
+		adjustRetain( transactionB.operations, 'end', infoA.diff );
+	} else {
+		// The active ranges overlap: conflict
+		return [ null, null ];
+	}
+	return [ transactionA, transactionB ];
+</pre>
+
+<h2 class="nocount">Appendix B: the beautiful 26-line core of ve.dm.RebaseServer#applyChange</h2>
+<pre>
+	base = state.continueBases.get( author ) || change.truncate( 0 );
+	rejections = state.rejections.get( author ) || 0;
+	if ( rejections &gt; backtrack ) {
+		// Follow-on does not fully acknowledge outstanding conflicts: reject entirely
+		rejections = rejections - backtrack + change.transactions.length;
+		this.updateDocState( doc, author, null, rejections, null );
+		return change.truncate( 0 );
+	}
+	if ( rejections &lt; backtrack ) {
+		throw new Error( 'Backtrack=' + backtrack + ' &gt; ' + rejections + '=rejections' );
+	}
+
+	if ( change.start &gt; base.start ) {
+		// Remote has rebased some committed changes into its history since base was built.
+		// They are guaranteed to be equivalent to the start of base.
+		base = base.mostRecent( change.start );
+	}
+	base = base.concat( state.history.mostRecent( base.start + base.getLength() ) );
+
+	result = ve.dm.Change.static.rebaseUncommittedChange( base, change );
+	rejections = result.rejected ? result.rejected.getLength() : 0;
+	this.updateDocState( doc, author, result.rebased, rejections, result.transposedHistory );
+	return result.rebased;
+</pre>
+
+<h2 class="nocount">References</h2>
+</body>
+</html>
