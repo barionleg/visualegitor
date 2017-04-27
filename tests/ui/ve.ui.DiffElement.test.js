@@ -404,3 +404,94 @@ QUnit.test( 'Diffing', function ( assert ) {
 		assert.strictEqual( diffElement.$document.html(), cases[ i ].expected, cases[ i ].msg );
 	}
 } );
+
+QUnit.test( 'describeChange', function ( assert ) {
+	var	i, l, key,
+		cases = [
+			{
+				msg: 'LinkAnnotation: Random attribute test (fallback)',
+				testedClass: ve.dm.LinkAnnotation.static,
+				testedKey: 'foo',
+				before: new ve.dm.LinkAnnotation( {
+					type: 'link',
+					attributes: { href: 'https://www.example.org/foo' }
+				} ),
+				after: new ve.dm.LinkAnnotation( {
+					type: 'link',
+					foo: '!!',
+					attributes: { href: 'https://www.example.org/foo' }
+				} ),
+				expected: 'visualeditor-changedesc-set'
+			},
+			{
+				msg: 'LinkAnnotation: Href change',
+				testedClass: ve.dm.LinkAnnotation.static,
+				testedKey: 'href',
+				before: new ve.dm.LinkAnnotation( {
+					type: 'link',
+					attributes: { href: 'https://www.example.org/foo' }
+				} ),
+				after: new ve.dm.LinkAnnotation( {
+					type: 'link',
+					attributes: { href: 'https://www.example.org/bar' }
+				} ),
+				expected: 'visualeditor-changedesc-link-href'
+			},
+			{
+				msg: 'LinkAnnotation: Href fragment change',
+				testedClass: ve.dm.LinkAnnotation.static,
+				testedKey: 'href',
+				before: new ve.dm.LinkAnnotation( {
+					type: 'link',
+					attributes: { href: 'https://www.example.org/foo#bar' }
+				} ),
+				after: new ve.dm.LinkAnnotation( {
+					type: 'link',
+					attributes: { href: 'https://www.example.org/foo#baz' }
+				} ),
+				expected: 'visualeditor-changedesc-link-href'
+			},
+			{
+				msg: 'LanguageAnnotation: Lang change',
+				testedClass: ve.dm.LanguageAnnotation.static,
+				testedKey: 'lang',
+				before: new ve.dm.LanguageAnnotation( {
+					type: 'meta/language',
+					attributes: { lang: 'en', dir: 'ltr' }
+				} ),
+				after: new ve.dm.LanguageAnnotation( {
+					type: 'meta/language',
+					attributes: { lang: 'fr', dir: 'ltr' }
+				} ),
+				expected: 'visualeditor-changedesc-language'
+			},
+			{
+				msg: 'LanguageAnnotation: Dir change (fallback)',
+				testedClass: ve.dm.LanguageAnnotation.static,
+				testedKey: 'dir',
+				before: new ve.dm.LanguageAnnotation( {
+					type: 'meta/language',
+					attributes: { lang: 'en', dir: 'ltr' }
+				} ),
+				after: new ve.dm.LanguageAnnotation( {
+					type: 'meta/language',
+					attributes: { lang: 'en', dir: 'rtl' }
+				} ),
+				expected: 'visualeditor-changedesc-changed'
+			}
+		];
+
+	QUnit.expect( cases.length );
+
+	for ( i = 0, l = cases.length; i < l; i++ ) {
+		key = cases[ i ].testedKey;
+		assert.equal(
+			cases[ i ].testedClass.describeChange(
+				key,
+				{ from: cases[ i ].before.getAttribute( key ), to: cases[ i ].after.getAttribute( key ) }
+			),
+			cases[ i ].expected,
+			cases[ i ].msg
+		);
+	}
+} );
