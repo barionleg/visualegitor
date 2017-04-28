@@ -2034,76 +2034,91 @@ QUnit.test( 'getUsedStoreValues', function ( assert ) {
 
 } );
 
-QUnit.test( 'compareElementsUnannotated', function ( assert ) {
+QUnit.test( 'compareElements and compareElementsUnannotated', function ( assert ) {
 	var i,
+		boldHash = 'h49981eab0f8056ff',
+		italicHash = 'hefd27ef3bf2041dd',
 		cases = [
 			{
 				a: '母',
 				b: '母',
 				comparison: true,
-				msg: 'Identical unannotated characters are identical'
+				msg: 'Identical unannotated characters'
 			},
 			{
 				a: '다',
 				b: '가',
 				comparison: false,
-				msg: 'Non-identical unannotated characters are not identical'
+				msg: 'Non-identical unannotated characters'
 			},
 			{
-				a: [ 'F', [ 0 ] ],
-				b: [ 'F', [ 0 ] ],
+				a: [ 'F', [ boldHash ] ],
+				b: [ 'F', [ boldHash ] ],
 				comparison: true,
-				msg: 'Identically-annotated identical characters are identical'
+				msg: 'Identically-annotated identical characters'
 			},
 			{
-				a: [ 'F', [ 0 ] ],
-				b: [ 'F', [ 1 ] ],
-				comparison: true,
-				msg: 'Identical characters, non-identically-annotated, are identical (!)'
+				a: [ 'F', [ boldHash ] ],
+				b: [ 'F', [ italicHash ] ],
+				comparison: false,
+				comparisonUnannotated: true,
+				msg: 'Identical characters, non-identically-annotated'
 			},
 			{
 				a: 'F',
-				b: [ 'F', [ 0 ] ],
+				b: [ 'F', [ boldHash ] ],
+				comparison: false,
+				comparisonUnannotated: true,
+				msg: 'Identical characters, one annotated, one not'
+			},
+			{
+				a: { type: 'paragraph' },
+				b: { type: 'paragraph' },
 				comparison: true,
-				msg: 'Identical characters, one annotated, one not, are identical (!)'
+				msg: 'Identical opening paragraphs'
 			},
 			{
 				a: { type: 'heading' },
 				b: { type: 'heading' },
 				comparison: true,
-				msg: 'Identical opening elements are identical'
+				msg: 'Identical opening elements'
 			},
 			{
 				a: { type: 'heading' },
 				b: { type: '/heading' },
 				comparison: false,
-				msg: 'Matching opening and closing elements are not identical'
+				msg: 'Matching opening and closing elements'
 			},
 			{
 				a: { type: 'heading', attributes: { level: 3 } },
 				b: { type: 'heading', attributes: { level: 3 } },
 				comparison: true,
-				msg: 'Identical elements with identical attributes are identical'
+				msg: 'Identical elements with identical attributes'
 			},
 			{
 				a: { type: 'heading', attributes: { level: 3 } },
 				b: { type: 'heading', attributes: { level: 2 } },
 				comparison: false,
-				msg: 'Identical elements with non-identical attributes are not identical'
+				msg: 'Identical elements with non-identical attributes'
 			},
 			{
 				a: { type: 'heading', attributes: { level: 3 } },
 				b: { type: 'heading' },
 				comparison: false,
-				msg: 'Identical elements, one without an attribute, are not identical'
+				msg: 'Identical elements, one without an attribute'
 			}
 		];
 
 	for ( i = 0; i < cases.length; i++ ) {
 		assert.equal(
-			ve.dm.ElementLinearData.static.compareElementsUnannotated( cases[ i ].a, cases[ i ].b ),
+			ve.dm.ElementLinearData.static.compareElements( cases[ i ].a, cases[ i ].b ),
 			cases[ i ].comparison,
 			cases[ i ].msg
+		);
+		assert.equal(
+			ve.dm.ElementLinearData.static.compareElementsUnannotated( cases[ i ].a, cases[ i ].b ),
+			cases[ i ].comparisonUnannotated || cases[ i ].comparison,
+			cases[ i ].msg + ' (unannotated)'
 		);
 	}
 } );

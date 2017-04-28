@@ -87,12 +87,10 @@ ve.dm.ElementLinearData.static.compareElementsUnannotated = function ( a, b ) {
  *
  * @param {Object|Array|string} a First element
  * @param {Object|Array|string} b Second element
- * @param {ve.dm.IndexValueStore} aStore First element's store
- * @param {ve.dm.IndexValueStore} [bStore] Second element's store, if different
  * @return {boolean} Elements are comparable
  */
-ve.dm.ElementLinearData.static.compareElements = function ( a, b, aStore, bStore ) {
-	var aType, aSet, bSet, aAnnotations, bAnnotations;
+ve.dm.ElementLinearData.static.compareElements = function ( a, b ) {
+	var aType, aAnnotations, bAnnotations, annotation;
 
 	if ( a === b ) {
 		return true;
@@ -125,10 +123,27 @@ ve.dm.ElementLinearData.static.compareElements = function ( a, b, aStore, bStore
 		bAnnotations = b.annotations;
 	}
 
-	aSet = new ve.dm.AnnotationSet( aStore, aAnnotations || [] );
-	bSet = new ve.dm.AnnotationSet( bStore || aStore, bAnnotations || [] );
-
-	return aSet.compareTo( bSet );
+	if ( !aAnnotations && !bAnnotations ) {
+		// Neither is annotated
+		return true;
+	}
+	// eslint-disable-next-line no-bitwise
+	if ( aAnnotations ^ bAnnotations ) {
+		// One is annotated, the other isn't
+		return false;
+	}
+	if ( aAnnotations.length !== bAnnotations.length ) {
+		// One is more annotated
+		return false;
+	}
+	for ( annotation in aAnnotations ) {
+		if ( bAnnotations.indexOf( aAnnotations[ annotation ] ) === -1 ) {
+			// One lacks an annotation another has
+			return false;
+		}
+	}
+	// Elements are equal without annotations, and the annotation arrays are equal
+	return true;
 };
 
 /* Methods */
