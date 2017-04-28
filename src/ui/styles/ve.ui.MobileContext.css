@@ -38,3 +38,7 @@
 	padding: 0.625em 0.5em;
 	vertical-align: top;
 }
+
+.ve-ui-mobileContext .ve-ui-linearContextItem-actions .oo-ui-buttonWidget:not( .oo-ui-labelWidget ) .oo-ui-buttonElement-button {
+	padding: 1.5em 0.5em;
+}
