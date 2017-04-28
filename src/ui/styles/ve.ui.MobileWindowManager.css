@@ -1,0 +1,9 @@
+/*!
+ * VisualEditor UserInterface MobileContext styles.
+ *
+ * @copyright 2011-2017 VisualEditor Team and others; see http://ve.mit-license.org
+ */
+
+.ve-ui-mobileWindowManager .oo-ui-processDialog-navigation .oo-ui-buttonWidget:not( .oo-ui-labelWidget ) .oo-ui-buttonElement-button {
+	padding: 1.6em 1em;
+}
