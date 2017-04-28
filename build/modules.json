@@ -809,7 +809,8 @@
 			"src/ui/windowmanagers/ve.ui.MobileWindowManager.js"
 		],
 		"styles": [
-			"src/ui/styles/ve.ui.MobileContext.css"
+			"src/ui/styles/ve.ui.MobileContext.css",
+			"src/ui/styles/ve.ui.MobileWindowManager.css"
 		],
 		"dependencies": [
 			"visualEditor.core.build"
