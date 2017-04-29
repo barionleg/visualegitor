@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e4df70f_4f648645",
+        "filename": "Documentation/collab-protocol.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2017-04-29T04:16:27Z",
+      "side": 1,
+      "message": "Called submitChange in our current code",
+      "revId": "5999156f9b03a69cb85ef9bedac36107873eec72",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_af78aaee",
+        "filename": "Documentation/collab-protocol.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2017-04-29T04:16:27Z",
+      "side": 1,
+      "message": "continueUpdate doesn\u0027t actually exist in the code, didn\u0027t we squash it into submitChange?",
+      "revId": "5999156f9b03a69cb85ef9bedac36107873eec72",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
