@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e4df70f_aff2eacb",
+        "filename": "src/ui/styles/ve.ui.MobileContext.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2017-04-29T01:19:16Z",
+      "side": 1,
+      "message": "Should this be in the MobileWindowManager file?",
+      "range": {
+        "startLine": 46,
+        "startChar": 12,
+        "endLine": 46,
+        "endChar": 24
+      },
+      "revId": "2255849544e3d75a11bcdf16e0b5832136123fa1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
