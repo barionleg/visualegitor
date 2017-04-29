@@ -52,6 +52,10 @@ ve.dm.Document = function VeDmDocument( data, htmlDocument, parentDocument, inte
 	this.completeHistory = [];
 	this.storeLengthAtHistoryLength = [ 0 ];
 	this.nodesByType = {};
+	this.changeListeners = {};
+
+	// FIXME: DEBUG CODE
+	this.registerListener( 'heading', function() { window.alert( arguments[ 0 ] + ': ' + arguments[ 1 ] ); } );
 
 	if ( data instanceof ve.dm.ElementLinearData ) {
 		// Pre-split ElementLinearData
@@ -384,10 +388,12 @@ ve.dm.Document.prototype.commit = function ( transaction, isStaging ) {
 	if ( transaction.hasBeenApplied() ) {
 		throw new Error( 'Cannot commit a transaction that has already been committed' );
 	}
+	this.alertListenersOnRemoves( transaction );
 	this.emit( 'precommit', transaction );
 	new ve.dm.TransactionProcessor( this, transaction, isStaging ).process();
 	this.completeHistory.push( transaction );
 	this.storeLengthAtHistoryLength[ this.completeHistory.length ] = this.store.getLength();
+	this.alertListenersOnInserts( transaction );
 	this.emit( 'transact', transaction );
 };
 
@@ -1663,4 +1669,151 @@ ve.dm.Document.prototype.getLang = function () {
  */
 ve.dm.Document.prototype.getDir = function () {
 	return this.dir;
+};
+
+/**
+ * Register a function to be executed on changes to this document of nodes of the given type.
+ *
+ * @param {string} nodeType Node type
+ * @param {Function} listener Node type
+ */
+ve.dm.Document.prototype.registerListener = function ( nodeType, listener ) {
+	if ( !this.changeListeners.hasOwnProperty( nodeType ) ) {
+		this.changeListeners[ nodeType ] = [];
+	}
+	this.changeListeners[ nodeType ].push( listener );
+};
+
+/**
+ * De-register a function from execution on changes to this document of nodes of the given type.
+ *
+ * @param {string} nodeType Node type
+ * @param {Function} listener Node type
+ */
+ve.dm.Document.prototype.deregisterListener = function ( nodeType, listener ) {
+	this.changeListeners[ nodeType ].splice( this.changeListeners[ nodeType ].indexOf( listener ) );
+};
+
+/**
+ * Execute listener functions on changes to this document of nodes of the given type.
+ *
+ * @param {ve.dm.Transaction} tx Transaction that was applied to the document
+ */
+ve.dm.Document.prototype.alertListenersOnRemoves = function ( tx ) {
+	var operations, operation, i, ilen, j, jlen, type, k, klen,
+		listeners = [];
+
+	if ( !Object.keys( this.changeListeners ).length ) {
+		return;
+	}
+
+	operations = tx.getOperations();
+	for ( i = 0, ilen = operations.length; i < ilen; i++ ) {
+		operation = operations[ i ];
+		switch ( operation.type ) {
+			case 'retain':
+			case 'retainMetadata':
+				// No-op
+				continue;
+			case 'annotate':
+				// FIXME: Implement this.
+				continue;
+			case 'attribute':
+				// We only care about this in the after-transact case.
+				continue;
+			case 'replace':
+				for ( j = 0, jlen = operation.remove.length; j < jlen; j++ ) {
+					type = operation.remove[ j ].type;
+					if ( !type || !this.changeListeners.hasOwnProperty( type ) ) {
+						// Do nothing for text node changes, or if no-one's registered for this type
+						continue;
+					}
+					for ( k = 0, klen = this.changeListeners[ type ].length; k < klen; k++ ) {
+						listeners.push( [ this.changeListeners[ type ][ k ], 'remove', operation.remove[ j ] ] );
+					}
+				}
+				break;
+			case 'replaceMetadata':
+				// FIXME: Implement this.
+				continue;
+			default:
+				throw new Error( 'Unrecognised operation type: ' + operation );
+
+		}
+
+	}
+
+	if ( !listeners.length ) {
+		return;
+	}
+
+	for ( i = 0, ilen = listeners.length; i < ilen; i++ ) {
+		listeners[ i ][ 0 ]( listeners[ i ][ 1 ], listeners[ i ][ 2 ] );
+	}
+};
+
+/**
+ * Execute listener functions on changes to this document of nodes of the given type.
+ *
+ * @param {ve.dm.Transaction} tx Transaction that was applied to the document
+ */
+ve.dm.Document.prototype.alertListenersOnInserts = function ( tx ) {
+	var operations, operation, i, ilen, j, jlen, type, k, klen,
+		listeners = [];
+
+	if ( !Object.keys( this.changeListeners ).length ) {
+		return;
+	}
+
+	operations = tx.getOperations();
+	for ( i = 0, ilen = operations.length; i < ilen; i++ ) {
+		operation = operations[ i ];
+		switch ( operation.type ) {
+			case 'retain':
+			case 'retainMetadata':
+				// No-op
+				continue;
+			case 'annotate':
+				// FIXME: Implement this.
+				continue;
+			case 'attribute':
+				// FIXME: We don't have a reference to the object to pass on to listeners
+				type = 'heading';
+				if ( !type || !this.changeListeners.hasOwnProperty( type ) ) {
+					// Do nothing for text node changes, or if no-one's registered for this type
+					continue;
+				}
+				for ( k = 0, klen = this.changeListeners[ type ].length; k < klen; k++ ) {
+					listeners.push( [ this.changeListeners[ type ][ k ], operation.type, { from: operation.from, to: operation.to } ] );
+				}
+				break;
+			case 'replace':
+				for ( j = 0, jlen = operation.insert.length; j < jlen; j++ ) {
+					type = operation.insert[ j ].type;
+					if ( !type || !this.changeListeners.hasOwnProperty( type ) ) {
+						// Do nothing for text node changes, or if no-one's registered for this type
+						continue;
+					}
+					for ( k = 0, klen = this.changeListeners[ type ].length; k < klen; k++ ) {
+						listeners.push( [ this.changeListeners[ type ][ k ], 'insert', operation.insert[ j ] ] );
+					}
+				}
+				break;
+			case 'replaceMetadata':
+				// FIXME: Implement this.
+				continue;
+			default:
+				throw new Error( 'Unrecognised operation type: ' + operation );
+
+		}
+
+	}
+
+	if ( !listeners.length ) {
+		return;
+	}
+
+	for ( i = 0, ilen = listeners.length; i < ilen; i++ ) {
+		listeners[ i ][ 0 ]( listeners[ i ][ 1 ], listeners[ i ][ 2 ] );
+	}
 };

@@ -1269,3 +1269,13 @@ QUnit.test( 'Find text', function ( assert ) {
 		}
 	}
 } );
+
+QUnit.test( 'listening to transactions', function () {
+	var testDocument = ve.dm.example.createExampleDocument(),
+		txBuilder = new ve.dm.TransactionBuilder();
+	txBuilder.pushRetain( 1 );
+	txBuilder.pushReplace( testDocument, 1, 0, [ 'H', 'e', 'l', 'l', 'o' ] );
+	// FIXME: WRITEME
+	testDocument.commit( txBuilder.getTransaction() );
+	// FIXME: WRITEME
+} );
