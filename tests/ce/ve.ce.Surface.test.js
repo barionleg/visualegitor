@@ -2204,6 +2204,44 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 					fromCol: 0,
 					fromRow: 0
 				},
+				pasteHtml: '<table><tbody><tr><td rel="ve:Alien">X</td></tr></table>',
+				fromVe: true,
+				expectedRangeOrSelection: {
+					type: 'table',
+					tableRange: new ve.Range( 12, 20 ),
+					fromCol: 0,
+					fromRow: 0
+				},
+				expectedOps: [
+					[
+						{ type: 'retain', length: 15 },
+						{
+							type: 'replace',
+							insert: [
+								{ type: 'alienTableCell', attributes: { cellable: true, style: 'data' } },
+								{ type: '/alienTableCell' }
+							],
+							remove: [
+								{ type: 'tableCell', attributes: { style: 'data' } },
+								{ type: 'paragraph', internal: { generated: 'empty' } },
+								{ type: '/paragraph' },
+								{ type: '/tableCell' }
+							],
+							insertedDataLength: 2,
+							insertedDataOffset: 0
+						},
+						{ type: 'retain', length: docLen - 19 }
+					]
+				],
+				msg: 'Paste alien cell onto table cell'
+			},
+			{
+				rangeOrSelection: {
+					type: 'table',
+					tableRange: new ve.Range( 12, 22 ),
+					fromCol: 0,
+					fromRow: 0
+				},
 				pasteHtml: '<table><tbody><tr><td>X</td><td>Y</td><td>Z</td></tr></table>',
 				fromVe: true,
 				expectedRangeOrSelection: {
