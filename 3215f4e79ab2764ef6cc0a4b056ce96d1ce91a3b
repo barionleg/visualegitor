@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e4df70f_e54ece3b",
+        "filename": "src/ui/styles/ve.ui.MobileWindowManager.css",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-05-01T21:26:42Z",
+      "side": 1,
+      "message": "labelElement no? This is changing the padding of the done button.",
+      "revId": "3215f4e79ab2764ef6cc0a4b056ce96d1ce91a3b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
