@@ -142,7 +142,13 @@ ve.ui.UrlStringTransferHandler.prototype.process = function () {
 			result.push( ' ' );
 		}
 
-		ve.dm.Document.static.addAnnotationsToData( content, annotationSet );
+		if ( surface.mode !== 'source' || link.href !== title ) {
+			// Optimization: we can skip adding the annotation, with an
+			// attendant server-fetch, in certain circumstances: if we're in
+			// source mode and the title and href don't differ, If so, we're
+			// just going to get the equivalent plain text back anyway.
+			ve.dm.Document.static.addAnnotationsToData( content, annotationSet );
+		}
 		for ( i = 0; i < content.length; i++ ) {
 			result.push( content[ i ] );
 		}
