@@ -102,7 +102,31 @@ OO.inheritClass( ve.ce.AlienInlineNode, ve.ce.AlienNode );
 
 ve.ce.AlienInlineNode.static.name = 'alienInline';
 
+/**
+ * ContentEditable alien block node.
+ *
+ * @class
+ * @extends ve.ce.AlienNode
+ *
+ * @constructor
+ * @param {ve.dm.AlienTableCellNode} model
+ * @param {Object} [config]
+ */
+ve.ce.AlienTableCellNode = function VeCeAlienTableCellNode() {
+	// Parent constructor
+	ve.ce.AlienTableCellNode.super.apply( this, arguments );
+};
+
+/* Inheritance */
+
+OO.inheritClass( ve.ce.AlienTableCellNode, ve.ce.AlienNode );
+
+/* Static Properties */
+
+ve.ce.AlienTableCellNode.static.name = 'alienTableCell';
+
 /* Registration */
 
 ve.ce.nodeFactory.register( ve.ce.AlienBlockNode );
 ve.ce.nodeFactory.register( ve.ce.AlienInlineNode );
+ve.ce.nodeFactory.register( ve.ce.AlienTableCellNode );
