@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2e4df70f_147c46b3",
+        "filename": "src/ui/styles/ve.ui.MobileContext.css",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2017-05-02T16:41:25Z",
+      "side": 1,
+      "message": "It still affects context items with labels, such as the table properties.",
+      "parentUuid": "2e4df70f_8e1cc77d",
+      "revId": "34c848faee589029fe28493c568f4995f1d7a399",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e4df70f_ae2183ae",
         "filename": "src/ui/styles/ve.ui.MobileContext.css",
         "patchSetId": 4
