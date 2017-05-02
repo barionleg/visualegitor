@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e4df70f_d4c25e88",
+        "filename": "src/dm/annotations/ve.dm.InsertAnnotation.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2017-05-02T14:38:31Z",
+      "side": 1,
+      "message": "DiffInsertAnnotation, right?",
+      "range": {
+        "startLine": 32,
+        "startChar": 28,
+        "endLine": 32,
+        "endChar": 34
+      },
+      "revId": "851b05f2bc7279d6443408444b5435082ef095bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
