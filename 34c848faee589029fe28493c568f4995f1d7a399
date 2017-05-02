@@ -2,6 +2,57 @@
   "comments": [
     {
       "key": {
+        "uuid": "2e4df70f_8e1cc77d",
+        "filename": "src/ui/styles/ve.ui.MobileContext.css",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-05-02T10:28:33Z",
+      "side": 1,
+      "message": "This rule doesn\u0027t really do anything anymore",
+      "revId": "34c848faee589029fe28493c568f4995f1d7a399",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_ae2183ae",
+        "filename": "src/ui/styles/ve.ui.MobileContext.css",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-05-02T10:28:33Z",
+      "side": 1,
+      "message": "Also labelElement",
+      "revId": "34c848faee589029fe28493c568f4995f1d7a399",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e4df70f_4e16bf5b",
+        "filename": "src/ui/styles/ve.ui.MobileContext.css",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-05-02T10:28:33Z",
+      "side": 1,
+      "message": "And what about buttons that are labelElements, e.g. TableCellProperties?",
+      "revId": "34c848faee589029fe28493c568f4995f1d7a399",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e4df70f_8816ffaa",
         "filename": "src/ui/styles/ve.ui.MobileWindowManager.css",
         "patchSetId": 4
