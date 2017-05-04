@@ -180,6 +180,83 @@ QUnit.test( 'create / insert / mergeCells / delete / changeCellStyle / moveRelat
 				msg: 'insert column at middle of table with sparse row'
 			},
 			{
+				html: '<table>' +
+						'<tr><th>A</th><th>B</th><th>C</th></tr>' +
+						'<tr><td>D</td><td>E</td><td>F</td></tr>' +
+					'</table>',
+				rangeOrSelection: {
+					type: 'table',
+					tableRange: new ve.Range( 0, 52 ),
+					fromCol: 0,
+					fromRow: 0,
+					toCol: 0,
+					toRow: 0
+				},
+				method: 'insert',
+				args: [ 'col', 'after' ],
+				expectedData: function ( data ) {
+					data.splice( 8, 0, { type: 'tableCell', attributes: { colspan: 1, rowspan: 1, style: 'header' } } );
+					data.splice( 9, 0, { type: 'paragraph', internal: { generated: 'wrapper' } } );
+					data.splice( 10, 0, { type: '/paragraph' } );
+					data.splice( 11, 0, { type: '/tableCell' } );
+
+					data.splice( 29, 0, { type: 'tableCell', attributes: { colspan: 1, rowspan: 1, style: 'data' } } );
+					data.splice( 30, 0, { type: 'paragraph', internal: { generated: 'wrapper' } } );
+					data.splice( 31, 0, { type: '/paragraph' } );
+					data.splice( 32, 0, { type: '/tableCell' } );
+				},
+				expectedRangeOrSelection: {
+					type: 'table',
+					tableRange: new ve.Range( 0, 60 ),
+					fromCol: 0,
+					fromRow: 0,
+					toCol: 0,
+					toRow: 0
+				},
+				msg: 'insert column in the middle of a table with some headings'
+			},
+			{
+				html: '<table>' +
+						'<tr><th>A</th><td>B</td><td>C</td></tr>' +
+						'<tr><th>D</th><td>E</td><td>F</td></tr>' +
+					'</table>',
+				rangeOrSelection: {
+					type: 'table',
+					tableRange: new ve.Range( 0, 52 ),
+					fromCol: 0,
+					fromRow: 0,
+					toCol: 0,
+					toRow: 0
+				},
+				method: 'insert',
+				args: [ 'row', 'after' ],
+				expectedData: function ( data ) {
+					data.splice( 19, 0, { type: 'tableRow' } );
+					data.splice( 20, 0, { type: 'tableCell', attributes: { colspan: 1, rowspan: 1, style: 'header' } } );
+					data.splice( 21, 0, { type: 'paragraph', internal: { generated: 'wrapper' } } );
+					data.splice( 22, 0, { type: '/paragraph' } );
+					data.splice( 23, 0, { type: '/tableCell' } );
+					data.splice( 24, 0, { type: 'tableCell', attributes: { colspan: 1, rowspan: 1, style: 'data' } } );
+					data.splice( 25, 0, { type: 'paragraph', internal: { generated: 'wrapper' } } );
+					data.splice( 26, 0, { type: '/paragraph' } );
+					data.splice( 27, 0, { type: '/tableCell' } );
+					data.splice( 28, 0, { type: 'tableCell', attributes: { colspan: 1, rowspan: 1, style: 'data' } } );
+					data.splice( 29, 0, { type: 'paragraph', internal: { generated: 'wrapper' } } );
+					data.splice( 30, 0, { type: '/paragraph' } );
+					data.splice( 31, 0, { type: '/tableCell' } );
+					data.splice( 32, 0, { type: '/tableRow' } );
+				},
+				expectedRangeOrSelection: {
+					type: 'table',
+					tableRange: new ve.Range( 0, 60 ),
+					fromCol: 0,
+					fromRow: 0,
+					toCol: 0,
+					toRow: 0
+				},
+				msg: 'insert row in the middle of a table with some headings'
+			},
+			{
 				html: '<table><tr></tr><tr><td>A</td><td>B</td></tr></table>',
 				rangeOrSelection: {
 					type: 'table',
