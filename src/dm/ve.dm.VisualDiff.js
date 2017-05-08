@@ -4,7 +4,7 @@
  * @copyright 2011-2018 VisualEditor Team and others; see http://ve.mit-license.org
  */
 
-/* global treeDiffer */
+/* global treeDiffer, daff */
 
 /**
  * VisualDiff
@@ -343,14 +343,46 @@ ve.dm.VisualDiff.prototype.compareRootChildren = function ( oldRootChild, newRoo
 ve.dm.VisualDiff.prototype.findModifiedRootChildren = function ( oldIndices, newIndices, oldRootChildren, newRootChildren, diff ) {
 	var diffResults, i, j,
 		ilen = oldIndices.length,
-		jlen = newIndices.length;
+		jlen = newIndices.length,
+		// For daff diff
+		oldRootChild, newRootChild, oldTableView, newTableView, compareTables,
+		align, dataDiff, tableDiff, flags, highlighter;
+
+	function getDataMatrix( tableNode ) {
+		var doc = tableNode.getDocument();
+		return tableNode.getMatrix().getMatrix().map( function ( row ) {
+			return row.map( function ( cell ) {
+				return doc.getData( cell.getOwner().node.getRange() );
+			} );
+		} );
+	}
 
 	for ( i = 0; i < ilen; i++ ) {
 		for ( j = 0; j < jlen; j++ ) {
 
 			if ( oldIndices[ i ] !== null && newIndices[ j ] !== null ) {
 
-				diffResults = this.getDocChildDiff( oldRootChildren[ oldIndices[ i ] ], newRootChildren[ newIndices[ j ] ] );
+				oldRootChild = oldRootChildren[ oldIndices[ i ] ];
+				newRootChild = newRootChildren[ newIndices[ i ] ];
+
+				if (
+					oldRootChild instanceof ve.dm.TableNode &&
+					newRootChild instanceof ve.dm.TableNode
+				) {
+					oldTableView = new daff.TableView( getDataMatrix( oldRootChild ) );
+					newTableView = new daff.TableView( getDataMatrix( newRootChild ) );
+					compareTables = daff.compareTables( oldTableView, newTableView );
+					align = compareTables.align();
+					dataDiff = [];
+					tableDiff = new daff.TableView( dataDiff );
+					flags = new daff.CompareFlags();
+					highlighter = new daff.TableDiff( align, flags );
+
+					highlighter.hilite( tableDiff );
+					// console.log( tableDiff );
+				} else {
+					diffResults = this.getDocChildDiff( oldRootChildren[ oldIndices[ i ] ], newRootChildren[ newIndices[ j ] ] );
+				}
 
 				if ( diffResults ) {
 					diff.rootChildrenOldToNew[ oldIndices[ i ] ] = {

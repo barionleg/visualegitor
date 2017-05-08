@@ -31,6 +31,11 @@
 			"lib/treeDiffer/treeDiffer-dist.js"
 		]
 	},
+	"daff": {
+		"scripts": [
+			"lib/daff/daff.js"
+		]
+	},
 	"diffMatchPatch": {
 		"scripts": [
 			"lib/diff-match-patch/diff_match_patch_uncompressed.js"
@@ -628,7 +633,8 @@
 		"dependencies": [
 			"visualEditor.core.build",
 			"treeDiffer",
-			"diffMatchPatch"
+			"diffMatchPatch",
+			"daff"
 		]
 	},
 	"visualEditor.diffing.standalone": {
