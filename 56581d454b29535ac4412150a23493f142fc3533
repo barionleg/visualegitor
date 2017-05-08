@@ -16,6 +16,24 @@
       "revId": "56581d454b29535ac4412150a23493f142fc3533",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_befea833",
+        "filename": "tests/dm/lineardata/ve.dm.ElementLinearData.test.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 2114,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-05-08T21:15:05Z",
+      "side": 1,
+      "message": "or you could create an example ve.dm.Document and slice data out of it.",
+      "parentUuid": "0e1cb3f9_3eea9874",
+      "revId": "56581d454b29535ac4412150a23493f142fc3533",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
