@@ -4,7 +4,7 @@
  * @copyright 2011-2017 VisualEditor Team and others; see http://ve.mit-license.org
  */
 
-/* global treeDiffer */
+/* global treeDiffer, daff */
 
 /**
  * VisualDiff
@@ -159,20 +159,42 @@ ve.dm.VisualDiff.prototype.compareDocChildren = function ( oldDocChild, newDocCh
  * identical partners in the old document
  */
 ve.dm.VisualDiff.prototype.findModifiedDocChildren = function ( oldDocChildren, newDocChildren ) {
-	var diff, i, j,
+	var diff, i, j, oldDocChild, newDocChild,
 		ilen = oldDocChildren.length,
 		jlen = newDocChildren.length;
+
+	function getDataMatrix( tableNode ) {
+		var doc = tableNode.getDocument();
+		return tableNode.getMatrix().getMatrix().map( function ( row ) {
+			return row.map( function ( cell ) {
+				return doc.getData( cell.getOwner().node.getRange() );
+			} );
+		} );
+	}
 
 	for ( i = 0; i < ilen; i++ ) {
 		for ( j = 0; j < jlen; j++ ) {
 
 			if ( oldDocChildren[ i ] !== null && newDocChildren[ j ] !== null ) {
+				oldDocChild = this.oldDocChildren[ oldDocChildren[ i ] ];
+				newDocChild = this.newDocChildren[ newDocChildren[ i ] ];
+				if (
+					oldDocChild instanceof ve.dm.TableNode &&
+					newDocChild instanceof ve.dm.TableNode
+				) {
+					var oldTableView = new daff.TableView( getDataMatrix( oldDocChild ) ),
+						newTableView = new daff.TableView( getDataMatrix( newDocChild ) ),
+						compareTables = daff.compareTables( oldTableView, newTableView ),
+						align = compareTables.align(),
+						flags = new daff.CompareFlags(),
+						output = [];
 
-				// Try to diff the nodes. If they are too different, diff will be false
-				diff = this.getDocChildDiff(
-					this.oldDocChildren[ oldDocChildren[ i ] ],
-					this.newDocChildren[ newDocChildren[ j ] ]
-				);
+					( new daff.TableDiff( align, flags ) ).hilite( output );
+					console.log( output );
+				} else {
+					// Try to diff the nodes. If they are too different, diff will be false
+					diff = this.getDocChildDiff( oldDocChild, newDocChild );
+				}
 
 				if ( diff ) {
 					this.diff.docChildrenOldToNew[ oldDocChildren[ i ] ] = {
