@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_3eedb822",
+        "filename": "lib/treeDiffer/treeDiffer-dist.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2017-05-08T20:38:37Z",
+      "side": 1,
+      "message": "Tut, unit or go home. But upstream so…",
+      "range": {
+        "startLine": 192,
+        "startChar": 40,
+        "endLine": 192,
+        "endChar": 46
+      },
+      "revId": "8be4543cbbfda20cce86a7d6f1ee6783e45e01ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
