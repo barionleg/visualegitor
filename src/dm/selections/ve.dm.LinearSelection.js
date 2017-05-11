@@ -32,7 +32,7 @@ ve.dm.LinearSelection.static.name = 'linear';
  * @inheritdoc
  */
 ve.dm.LinearSelection.static.newFromHash = function ( doc, hash ) {
-	return new ve.dm.LinearSelection( doc, ve.Range.static.newFromHash( hash.range ) );
+	return new ve.dm.LinearSelection( doc, new ve.Range( hash.range[ 0 ], hash.range[ 1 ] ) );
 };
 
 /* Methods */
@@ -43,7 +43,7 @@ ve.dm.LinearSelection.static.newFromHash = function ( doc, hash ) {
 ve.dm.LinearSelection.prototype.toJSON = function () {
 	return {
 		type: this.constructor.static.name,
-		range: this.range
+		range: [ this.range.from, this.range.to ]
 	};
 };
 
