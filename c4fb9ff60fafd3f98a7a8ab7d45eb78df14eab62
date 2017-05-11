@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_1ef3fbd2",
+        "filename": "src/ce/ve.ce.TableCellableNode.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-05-11T17:36:25Z",
+      "side": 1,
+      "message": "deleteme",
+      "range": {
+        "startLine": 50,
+        "startChar": 10,
+        "endLine": 50,
+        "endChar": 13
+      },
+      "revId": "c4fb9ff60fafd3f98a7a8ab7d45eb78df14eab62",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
