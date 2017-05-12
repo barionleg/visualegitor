@@ -15,8 +15,9 @@
  * @param {ve.dm.Change} history History as one big change
  * @param {Map.<number,ve.dm.Change>} continueBases Per-author transposed history for rebasing
  * @param {Map.<number,number>} rejections Per-author count of unacknowledged rejections
+ * @param {Map.<number,string>} authorNames Display name of each author
  */
-ve.dm.RebaseDocState = function VeDmRebaseDocState( history, continueBases, rejections ) {
+ve.dm.RebaseDocState = function VeDmRebaseDocState( history, continueBases, rejections, authorNames ) {
 	/**
 	 * @property {ve.dm.Change} history History as one big change
 	 */
@@ -31,6 +32,8 @@ ve.dm.RebaseDocState = function VeDmRebaseDocState( history, continueBases, reje
 	 * @property {Map.<number,number>} Per-author count of unacknowledged rejections
 	 */
 	this.rejections = rejections || new Map();
+
+	this.authorNames = authorNames || new Map();
 };
 
 /* Inheritance */

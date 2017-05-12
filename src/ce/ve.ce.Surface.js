@@ -3971,15 +3971,18 @@ ve.ce.Surface.prototype.setSynchronizer = function ( synchronizer ) {
 		this.synchronizer.disconnect( this );
 	}
 	this.synchronizer = synchronizer;
-	this.synchronizer.connect( this, { authorSelect: 'onSynchronizerAuthorSelect' } );
+	this.synchronizer.connect( this, {
+		authorSelect: 'onSynchronizerAuthorUpdate',
+		authorNameChange: 'onSynchronizerAuthorUpdate'
+	} );
 };
 
 /**
- * Called when the synchronizer receives a remote author selection change
+ * Called when the synchronizer receives a remote author selection or name change
  *
  * @param {number} author The author ID
  */
-ve.ce.Surface.prototype.onSynchronizerAuthorSelect = function ( author ) {
+ve.ce.Surface.prototype.onSynchronizerAuthorUpdate = function ( author ) {
 	try {
 		this.paintAuthor( author );
 	} catch ( error ) {
@@ -4045,7 +4048,7 @@ ve.ce.Surface.prototype.paintAuthor = function ( author ) {
 		} ).append(
 			$( '<span>' )
 			.addClass( 've-ce-surface-highlights-user-cursor-label' )
-			.text( author )
+			.text( this.synchronizer.authorNames[ author ] )
 			.css( { background: color } )
 		)
 	);
@@ -4067,7 +4070,7 @@ ve.ce.Surface.prototype.onPosition = function () {
 		var author,
 			authorSelections = surface.synchronizer.authorSelections;
 		for ( author in authorSelections ) {
-			surface.onSynchronizerAuthorSelect( author );
+			surface.onSynchronizerAuthorUpdate( author );
 		}
 	} );
 };

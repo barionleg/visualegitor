@@ -57,6 +57,25 @@ ve.dm.RebaseServer.prototype.updateDocState = function ( doc, author, newHistory
 	}
 };
 
+ve.dm.RebaseServer.prototype.getAuthorName = function ( doc, authorId ) {
+	var state = this.getDocState( doc );
+	return state.authorNames.get( authorId );
+};
+
+ve.dm.RebaseServer.prototype.setAuthorName = function ( doc, authorId, authorName ) {
+	var state = this.getDocState( doc );
+	state.authorNames.set( authorId, authorName );
+};
+
+ve.dm.RebaseServer.prototype.getAllNames = function ( doc ) {
+	var result = {},
+		state = this.getDocState( doc );
+	state.authorNames.forEach( function ( authorName, authorId ) {
+		result[ authorId ] = authorName;
+	} );
+	return result;
+};
+
 /**
  * Attempt to rebase and apply a change to a document.
  *

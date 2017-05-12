@@ -43,13 +43,25 @@ function makeConnectionHandler( docName ) {
 			doc: docName,
 			author: author
 		} );
-		socket.emit( 'registered', author );
+		socket.emit( 'registered', { authorId: author, authorName: 'Anonymous coward ' + author } );
+		rebaseServer.setAuthorName( docName, author, 'Anonymous coward ' + author );
+		docNamespaces.get( docName ).emit( 'nameChange', { authorId: author, authorName: 'Anonymous coward ' + author } );
 		// HACK Catch the client up on the current state by sending it the entire history
 		// Ideally we'd be able to initialize the client using HTML, but that's hard, see
 		// comments in the /raw handler. Keeping an updated linmod on the server could be
 		// feasible if TransactionProcessor was modified to have a "don't sync, just apply"
 		// mode and ve.dm.Document was faked with { data: ..., metadata: ..., store: ... }
-		socket.emit( 'initDoc', history.serialize( true ) );
+		socket.emit( 'initDoc', { history: history.serialize( true ), names: rebaseServer.getAllNames( docName ) } );
+		socket.on( 'changeName', function ( newName ) {
+			logServerEvent( {
+				type: 'nameChange',
+				doc: docName,
+				author: author,
+				newName: newName
+			} );
+			rebaseServer.setAuthorName( docName, author, newName );
+			docNamespaces.get( docName ).emit( 'nameChange', { authorId: author, authorName: newName } );
+		} );
 		socket.on( 'submitChange', setTimeout.bind( null, function ( data ) {
 			var change, applied;
 			try {
