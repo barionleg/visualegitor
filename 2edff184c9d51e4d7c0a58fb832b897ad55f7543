@@ -396,6 +396,30 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_5c05edc2",
+        "filename": "tests/dm/ve.dm.TreeModifier.test.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2017-05-15T15:52:08Z",
+      "side": 1,
+      "message": "I\u0027m content to be ES6 in tests.",
+      "parentUuid": "0e1cb3f9_7c5f9113",
+      "range": {
+        "startLine": 16,
+        "startChar": 17,
+        "endLine": 16,
+        "endChar": 23
+      },
+      "revId": "2edff184c9d51e4d7c0a58fb832b897ad55f7543",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_dcafbddc",
         "filename": "tests/dm/ve.dm.TreeModifier.test.js",
         "patchSetId": 6
