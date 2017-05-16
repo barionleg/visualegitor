@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_29e55606",
+        "filename": "src/dm/ve.dm.TreeCursor.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-05-16T03:25:00Z",
+      "side": 1,
+      "message": "Oops, I forgot to delete skipIgnored after moving the code here",
+      "parentUuid": "0e1cb3f9_7631f0e8",
+      "revId": "2edff184c9d51e4d7c0a58fb832b897ad55f7543",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_f653c018",
         "filename": "src/dm/ve.dm.TreeCursor.js",
         "patchSetId": 6
@@ -30,6 +48,30 @@
       "writtenOn": "2017-05-15T15:09:00Z",
       "side": 1,
       "message": "stePPing",
+      "range": {
+        "startLine": 95,
+        "startChar": 3,
+        "endLine": 95,
+        "endChar": 10
+      },
+      "revId": "2edff184c9d51e4d7c0a58fb832b897ad55f7543",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_c9ecdaf4",
+        "filename": "src/dm/ve.dm.TreeCursor.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-05-16T03:25:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e1cb3f9_f653c018",
       "range": {
         "startLine": 95,
         "startChar": 3,
@@ -88,6 +130,30 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_29bc76d4",
+        "filename": "src/dm/ve.dm.TreeModifier.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-05-16T03:25:00Z",
+      "side": 1,
+      "message": "Can\u0027t get the staff",
+      "parentUuid": "0e1cb3f9_568aac6f",
+      "range": {
+        "startLine": 59,
+        "startChar": 8,
+        "endLine": 59,
+        "endChar": 18
+      },
+      "revId": "2edff184c9d51e4d7c0a58fb832b897ad55f7543",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_3687f867",
         "filename": "src/dm/ve.dm.TreeModifier.js",
         "patchSetId": 6
@@ -99,6 +165,24 @@
       "writtenOn": "2017-05-15T15:09:00Z",
       "side": 1,
       "message": "TODONE? You\u0027ve already fixed this in non-test code in a bunch of places",
+      "revId": "2edff184c9d51e4d7c0a58fb832b897ad55f7543",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_49a68abf",
+        "filename": "src/dm/ve.dm.TreeModifier.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-05-16T03:25:00Z",
+      "side": 1,
+      "message": "Actually I made the fixes because some tests were failing even with this method in place (because the final retain length was too long).\n\nI think this TODO should be fixed, but in a subsequent commit as it might have wider effects (e.g. in ve-mw).",
+      "parentUuid": "0e1cb3f9_3687f867",
       "revId": "2edff184c9d51e4d7c0a58fb832b897ad55f7543",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -128,6 +212,30 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_69a90e8d",
+        "filename": "src/dm/ve.dm.TreeModifier.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-05-16T03:25:00Z",
+      "side": 1,
+      "message": "I\u0027ll comment this to make it clearer that it forces the retainLength to be a minimum of 1 (i.e. to cut through the cognitive dissonance caused by the word \"max\").",
+      "parentUuid": "0e1cb3f9_56f14cfd",
+      "range": {
+        "startLine": 109,
+        "startChar": 22,
+        "endLine": 109,
+        "endChar": 29
+      },
+      "revId": "2edff184c9d51e4d7c0a58fb832b897ad55f7543",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_b6e2282d",
         "filename": "src/dm/ve.dm.TreeModifier.js",
         "patchSetId": 6
@@ -139,6 +247,24 @@
       "writtenOn": "2017-05-15T15:09:00Z",
       "side": 1,
       "message": "Wouldn\u0027t a nested deletion result in node.parent being null for the inner deletion?",
+      "revId": "2edff184c9d51e4d7c0a58fb832b897ad55f7543",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_09b092f0",
+        "filename": "src/dm/ve.dm.TreeModifier.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-05-16T03:25:00Z",
+      "side": 1,
+      "message": "I think the reverse iteration order ensures parent cannot be null, because deletions is in document order (deletions are added by the remover crossing open tags). I\u0027ll comment this.",
+      "parentUuid": "0e1cb3f9_b6e2282d",
       "revId": "2edff184c9d51e4d7c0a58fb832b897ad55f7543",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -162,6 +288,24 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_89a4a2b0",
+        "filename": "src/dm/ve.dm.TreeModifier.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-05-16T03:25:00Z",
+      "side": 1,
+      "message": "Oops, this is buggy - if the previous node is the text node, it should step into the end of it, not the start. Fixed and documented better",
+      "parentUuid": "0e1cb3f9_91bcceb2",
+      "revId": "2edff184c9d51e4d7c0a58fb832b897ad55f7543",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_11e75ee0",
         "filename": "src/dm/ve.dm.TreeModifier.js",
         "patchSetId": 6
@@ -173,6 +317,24 @@
       "writtenOn": "2017-05-15T15:09:00Z",
       "side": 1,
       "message": "It\u0027s worth documenting this function because what it does doesn\u0027t precisely match its name: it may leave the cursor in between two text nodes.",
+      "revId": "2edff184c9d51e4d7c0a58fb832b897ad55f7543",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_4930ca53",
+        "filename": "src/dm/ve.dm.TreeModifier.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-05-16T03:25:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e1cb3f9_11e75ee0",
       "revId": "2edff184c9d51e4d7c0a58fb832b897ad55f7543",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -196,6 +358,24 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_a99f2661",
+        "filename": "src/dm/ve.dm.TreeModifier.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-05-16T03:25:00Z",
+      "side": 1,
+      "message": "Oh yeah; thanks :)",
+      "parentUuid": "0e1cb3f9_d1c9e656",
+      "revId": "2edff184c9d51e4d7c0a58fb832b897ad55f7543",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_31014272",
         "filename": "src/dm/ve.dm.TreeModifier.js",
         "patchSetId": 6
@@ -207,6 +387,24 @@
       "writtenOn": "2017-05-15T15:09:00Z",
       "side": 1,
       "message": "...uh-huh",
+      "revId": "2edff184c9d51e4d7c0a58fb832b897ad55f7543",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_c9c7fa48",
+        "filename": "src/dm/ve.dm.TreeModifier.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-05-16T03:25:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e1cb3f9_31014272",
       "revId": "2edff184c9d51e4d7c0a58fb832b897ad55f7543",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -236,6 +434,30 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_698fce26",
+        "filename": "src/dm/ve.dm.TreeModifier.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-05-16T03:25:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e1cb3f9_b1f55281",
+      "range": {
+        "startLine": 193,
+        "startChar": 32,
+        "endLine": 193,
+        "endChar": 47
+      },
+      "revId": "2edff184c9d51e4d7c0a58fb832b897ad55f7543",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_d1f00691",
         "filename": "src/dm/ve.dm.TreeModifier.js",
         "patchSetId": 6
@@ -247,6 +469,24 @@
       "writtenOn": "2017-05-15T15:09:00Z",
       "side": 1,
       "message": "TODONE? Does ensureNotTextNode not take care of splitting text nodes already?",
+      "revId": "2edff184c9d51e4d7c0a58fb832b897ad55f7543",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_29b0f6d7",
+        "filename": "src/dm/ve.dm.TreeModifier.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-05-16T03:25:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e1cb3f9_d1f00691",
       "revId": "2edff184c9d51e4d7c0a58fb832b897ad55f7543",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -276,6 +516,30 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_298a361d",
+        "filename": "src/dm/ve.dm.TreeModifier.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-05-16T03:25:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e1cb3f9_71efbaad",
+      "range": {
+        "startLine": 266,
+        "startChar": 46,
+        "endLine": 266,
+        "endChar": 50
+      },
+      "revId": "2edff184c9d51e4d7c0a58fb832b897ad55f7543",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_31eb8279",
         "filename": "src/dm/ve.dm.TreeModifier.js",
         "patchSetId": 6
@@ -287,6 +551,24 @@
       "writtenOn": "2017-05-15T15:09:00Z",
       "side": 1,
       "message": "This is kind of deceptive: the stepOut() calls look really simple, but they are potentially destructive and cause interesting behavior to happen in later steps. This is documented on the phab task, but I think it\u0027s also worth calling out here, if only briefly.",
+      "revId": "2edff184c9d51e4d7c0a58fb832b897ad55f7543",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_e9c2fe38",
+        "filename": "src/dm/ve.dm.TreeModifier.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-05-16T03:25:00Z",
+      "side": 1,
+      "message": "True. I\u0027ll document it in processInsert (as you suggested below), since by the time we get to this line of code, the cursors already have different paths",
+      "parentUuid": "0e1cb3f9_31eb8279",
       "revId": "2edff184c9d51e4d7c0a58fb832b897ad55f7543",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -316,6 +598,30 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_89c10236",
+        "filename": "src/dm/ve.dm.TreeModifier.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-05-16T03:25:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e1cb3f9_b172320f",
+      "range": {
+        "startLine": 311,
+        "startChar": 15,
+        "endLine": 311,
+        "endChar": 25
+      },
+      "revId": "2edff184c9d51e4d7c0a58fb832b897ad55f7543",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_d16d662e",
         "filename": "src/dm/ve.dm.TreeModifier.js",
         "patchSetId": 6
@@ -327,6 +633,24 @@
       "writtenOn": "2017-05-15T15:09:00Z",
       "side": 1,
       "message": "This potentially splits the text node later on, right? This looks like it might be another deceptively simple stepOut() call that actually has interesting consequences down the line.",
+      "revId": "2edff184c9d51e4d7c0a58fb832b897ad55f7543",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_09e412da",
+        "filename": "src/dm/ve.dm.TreeModifier.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-05-16T03:25:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e1cb3f9_d16d662e",
       "revId": "2edff184c9d51e4d7c0a58fb832b897ad55f7543",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -350,6 +674,24 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_29e796e0",
+        "filename": "src/dm/ve.dm.TreeModifier.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-05-16T03:25:00Z",
+      "side": 1,
+      "message": "Oops_2 - this should have been removed, as it\u0027s now integrated into removeLastCrossText",
+      "parentUuid": "0e1cb3f9_f1166a59",
+      "revId": "2edff184c9d51e4d7c0a58fb832b897ad55f7543",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_5c264db6",
         "filename": "src/dm/ve.dm.TreeModifier.js",
         "patchSetId": 6
@@ -361,6 +703,30 @@
       "writtenOn": "2017-05-15T15:09:00Z",
       "side": 1,
       "message": "Shouldn\u0027t this be the length of the text that was passed in? Other functions that take a linmod item or array can take multiple text items. However, this particular function is never called with text AFAICT, so this branch would seem to be dead code.",
+      "range": {
+        "startLine": 465,
+        "startChar": 35,
+        "endLine": 465,
+        "endChar": 36
+      },
+      "revId": "2edff184c9d51e4d7c0a58fb832b897ad55f7543",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_c9ce1a5f",
+        "filename": "src/dm/ve.dm.TreeModifier.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-05-16T03:25:00Z",
+      "side": 1,
+      "message": "Oh yeah, I moved it into insertText. Thanks. Done.",
+      "parentUuid": "0e1cb3f9_5c264db6",
       "range": {
         "startLine": 465,
         "startChar": 35,
