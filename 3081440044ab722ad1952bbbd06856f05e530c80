@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_7fd3f5d7",
+        "filename": "rebaser/demo.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-05-18T17:10:21Z",
+      "side": 1,
+      "message": "Lol. ActionFieldLayout?",
+      "revId": "3081440044ab722ad1952bbbd06856f05e530c80",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
