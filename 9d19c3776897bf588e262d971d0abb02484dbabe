@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_2d81d0c8",
+        "filename": "rebaser/logToTestCase.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2017-05-19T11:14:02Z",
+      "side": 1,
+      "message": "A comment would be nice.",
+      "range": {
+        "startLine": 58,
+        "startChar": 8,
+        "endLine": 58,
+        "endChar": 38
+      },
+      "revId": "9d19c3776897bf588e262d971d0abb02484dbabe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
