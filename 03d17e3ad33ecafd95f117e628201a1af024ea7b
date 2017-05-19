@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "0e1cb3f9_cb535c19",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2017-05-19T14:20:55Z",
+      "side": 1,
+      "message": "Bug: T152464",
+      "revId": "03d17e3ad33ecafd95f117e628201a1af024ea7b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_0725f202",
         "filename": "rebaser/MongoStateStore.js",
         "patchSetId": 3
