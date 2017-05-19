@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_ba7c381c",
+        "filename": "src/dm/ve.dm.TreeCursor.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2017-05-19T10:24:22Z",
+      "side": 1,
+      "message": "Correct me if I\u0027m wrong, but crosstext doesn\u0027t pass any children, but instead passes over a number of characters, right?",
+      "revId": "18f9fb79e2e2542cbbcc296af21d7bcb4cf052a0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_8d3edcb3",
+        "filename": "src/dm/ve.dm.TreeModifier.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2017-05-19T10:24:22Z",
+      "side": 1,
+      "message": ".charAt( 0 )",
+      "range": {
+        "startLine": 359,
+        "startChar": 27,
+        "endLine": 359,
+        "endChar": 37
+      },
+      "revId": "18f9fb79e2e2542cbbcc296af21d7bcb4cf052a0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
