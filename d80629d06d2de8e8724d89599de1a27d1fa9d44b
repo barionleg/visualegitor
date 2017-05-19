@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_8b3ec4b3",
+        "filename": "tests/ui/ve.ui.DiffElement.test.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 2849
+      },
+      "writtenOn": "2017-05-19T14:22:11Z",
+      "side": 1,
+      "message": "We\u0027re expecting \u0027foo\u0027, not \u0027foo \u0027",
+      "range": {
+        "startLine": 51,
+        "startChar": 15,
+        "endLine": 51,
+        "endChar": 18
+      },
+      "revId": "d80629d06d2de8e8724d89599de1a27d1fa9d44b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
