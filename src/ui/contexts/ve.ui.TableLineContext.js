@@ -33,7 +33,8 @@ ve.ui.TableLineContext = function VeUiTableLineContext( tableNode, itemGroup, co
 	} );
 	this.popup = new OO.ui.PopupWidget( {
 		classes: [ 've-ui-tableLineContext-menu' ],
-		$container: this.surface.$element,
+		$floatableContainer: this.indicator.$element,
+		position: itemGroup === 'col' ? 'below' : 'after',
 		width: 180
 	} );
 

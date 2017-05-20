@@ -26,6 +26,11 @@
 	pointer-events: none;
 }
 
+.ve-ce-tableNodeOverlay-lineContexts {
+	/* Ensure it is placed above the table context */
+	z-index: 2;
+}
+
 .ve-ce-tableNodeOverlay .ve-ui-tableLineContext {
 	pointer-events: auto;
 }
