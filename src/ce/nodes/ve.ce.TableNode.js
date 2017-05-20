@@ -482,17 +482,11 @@ ve.ce.TableNode.prototype.updateOverlay = function ( selectionChanged ) {
 	this.colContext.indicator.$element.css( {
 		width: selectionOffset.width
 	} );
-	this.colContext.popup.$element.css( {
-		'margin-left': selectionOffset.width / 2
-	} );
 	this.rowContext.$element.css( {
 		top: selectionOffset.top
 	} );
 	this.rowContext.indicator.$element.css( {
 		height: selectionOffset.height
-	} );
-	this.rowContext.popup.$element.css( {
-		'margin-top': selectionOffset.height / 2
 	} );
 
 	// Classes

@@ -34,10 +34,3 @@
 	margin-left: -1.2em;
 	border-right: 0;
 }
-
-/* Position the row context menu popup anchor below the center of the indicator */
-.ve-ui-tableLineContext-row .oo-ui-popupWidget {
-	/* Gap + half context width: 0.2em + 1em/2 */
-	left: -0.7em;
-	top: 0.4em;
-}
