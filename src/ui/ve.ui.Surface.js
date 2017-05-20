@@ -738,6 +738,9 @@ ve.ui.Surface.prototype.createProgress = function ( progressCompletePromise, lab
 	return progressBarDeferred.promise();
 };
 
+/**
+ * Show all current progress bars
+ */
 ve.ui.Surface.prototype.showProgress = function () {
 	var dialogs = this.dialogs,
 		progresses = this.progresses;

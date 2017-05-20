@@ -128,7 +128,9 @@ ve.ui.ProgressDialog.prototype.getActionProcess = function ( action ) {
 ve.ui.ProgressDialog.prototype.progressComplete = function ( $row, failed ) {
 	this.inProgress--;
 	if ( !this.inProgress ) {
-		this.close();
+		// Don't try to close while opening
+		// TODO: This should be fixed upstream.
+		this.getManager().opening.then( this.close.bind( this ) );
 	}
 	if ( failed ) {
 		$row.remove();
