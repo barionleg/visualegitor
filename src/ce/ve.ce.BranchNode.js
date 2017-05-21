@@ -367,6 +367,8 @@ ve.ce.BranchNode.prototype.destroy = function () {
 		this.children[ i ].destroy();
 	}
 
+	this.model.disconnect( this );
+
 	// Parent method
 	ve.ce.BranchNode.super.prototype.destroy.call( this );
 };
