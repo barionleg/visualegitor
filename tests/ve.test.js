@@ -973,6 +973,16 @@ QUnit.test( 'getCommonStartSequenceLength', function ( assert ) {
 			test.title
 		);
 	}
+
+	// Test error case
+	assert.throws(
+		function () {
+			ve.getCommonStartSequenceLength( [] );
+		},
+		new Error( 'Need at least one sequence' ),
+		'Empty sequence throws'
+	);
+
 } );
 
 QUnit.test( 'adjacentDomPosition', function ( assert ) {
