@@ -335,6 +335,9 @@ ve.ce.ContentBranchNode.prototype.getRenderedContents = function () {
 				unicornInfo.unicorns = null;
 			}
 		} else {
+			if ( item.length === undefined ) {
+				throw new Error( 'Unexpected item type' );
+			}
 			if ( buffer !== '' ) {
 				current.appendChild( doc.createTextNode( buffer ) );
 				buffer = '';

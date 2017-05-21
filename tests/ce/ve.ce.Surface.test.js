@@ -179,6 +179,22 @@ ve.test.utils.TestEvent = function TestEvent( data ) {
 	this.preventDefault = this.stopPropagation = function () {};
 };
 
+QUnit.test( 'Transaction with two removals in the same CBN', function ( assert ) {
+	var tx,
+		view = ve.test.utils.createSurfaceViewFromHtml( '<p>abc<img>defghijklmnop</p><p>x</p>' ),
+		doc = view.model.documentModel,
+		txBuilder = new ve.dm.TransactionBuilder();
+
+	txBuilder.pushRetain( 1 );
+	txBuilder.pushReplace( doc, 1, 3, [] );
+	txBuilder.pushRetain( 4 );
+	txBuilder.pushReplace( doc, 8, 11, [] );
+	txBuilder.pushRetain( 4 );
+	tx = txBuilder.getTransaction();
+	view.model.change( tx );
+	assert.ok( true, 'No crash' );
+} );
+
 QUnit.test( 'special key down: backspace/delete', function ( assert ) {
 	var i,
 		emptyList = '<ul><li><p></p></li></ul>',
