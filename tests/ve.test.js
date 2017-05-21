@@ -924,6 +924,15 @@ QUnit.test( 'getCommonAncestor', function ( assert ) {
 			test.nodes + ' -> ' + test.ancestor
 		);
 	}
+
+	// Test error case
+	assert.throws(
+		function () {
+			ve.getCommonAncestor();
+		},
+		new Error( 'Need at least one node' ),
+		'No nodes throws'
+	);
 } );
 
 QUnit.test( 'getCommonStartSequenceLength', function ( assert ) {
