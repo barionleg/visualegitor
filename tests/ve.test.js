@@ -1012,6 +1012,17 @@ QUnit.test( 'adjacentDomPosition', function ( assert ) {
 			]
 		},
 		{
+			title: 'Simple p node, no stop function',
+			html: '<p>x</p>',
+			options: {},
+			expectedOffsetPaths: [
+				[ 0 ],
+				[ 0, 0 ],
+				[ 0, 0, 1 ],
+				[ 1 ]
+			]
+		},
+		{
 			title: 'Filtered descent',
 			html: '<div class="x">foo</div><div class="y">bar</div>',
 			options: { stop: function () { return true; }, noDescend: '.x' },
