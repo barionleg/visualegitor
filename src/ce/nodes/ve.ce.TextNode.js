@@ -45,9 +45,11 @@ ve.ce.TextNode.static.whitespaceHtmlCharacters = {
  */
 ve.ce.TextNode.prototype.getAnnotatedHtml = function () {
 	var i, chr,
-		data = this.model.getDocument().getDataFromNode( this.model ),
+		doc = this.model.getDocument(),
+		data = doc ? doc.getDataFromNode( this.model ) : [],
 		whitespaceHtmlChars = this.constructor.static.whitespaceHtmlCharacters,
-		significantWhitespace = this.getModel().getParent().hasSignificantWhitespace();
+		parent = this.getModel().getParent(),
+		significantWhitespace = parent && parent.hasSignificantWhitespace();
 
 	function setChar( chr, index, data ) {
 		if ( Array.isArray( data[ index ] ) ) {

@@ -32,7 +32,7 @@ ve.ce.BranchNode = function VeCeBranchNode( model ) {
 	this.slugNodes = [];
 
 	// Events
-	this.model.connect( this, { splice: 'onSplice' } );
+	this.model.connect( this, { splice: 'onSplicePostponed' } );
 
 	// Initialization
 	this.onSplice.apply( this, [ 0, 0 ].concat( model.getChildren() ) );
@@ -162,6 +162,14 @@ ve.ce.BranchNode.prototype.updateTagName = function () {
  */
 ve.ce.BranchNode.prototype.onModelUpdate = function ( transaction ) {
 	this.emit( 'childUpdate', transaction );
+};
+
+ve.ce.BranchNode.prototype.onSplicePostponed = function () {
+	var branchNode = this,
+		args = arguments;
+	setTimeout( function () {
+		branchNode.onSplice.apply( branchNode, args );
+	} );
 };
 
 /**
