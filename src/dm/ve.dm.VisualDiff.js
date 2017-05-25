@@ -21,16 +21,18 @@ ve.dm.VisualDiff = function VeDmVisualDiff( oldDoc, newDoc, timeout ) {
 
 	this.oldDoc = oldDoc.cloneFromRange();
 	this.newDoc = newDoc.cloneFromRange();
-	this.oldDocNode = oldDoc.getDocumentNode();
-	this.newDocNode = newDoc.getDocumentNode();
+	this.oldDocNode = this.oldDoc.getDocumentNode();
+	this.newDocNode = this.newDoc.getDocumentNode();
 	this.oldDocChildren = this.oldDocNode.children;
 	this.newDocChildren = this.newDocNode.children;
+	this.oldDocInternalListNode = this.oldDoc.getInternalList().getListNode();
+	this.newDocInternalListNode = this.newDoc.getInternalList().getListNode();
 	this.treeDiffer = treeDiffer;
 	// eslint-disable-next-line camelcase,new-cap
 	this.linearDiffer = new ve.DiffMatchPatch( this.oldDoc.getStore(), this.newDoc.getStore() );
 	this.endTime = new Date().getTime() + ( timeout || 1000 );
 
-	this.diff = this.getDiff();
+	this.computeDiff();
 };
 
 /**
@@ -41,11 +43,8 @@ ve.dm.VisualDiff = function VeDmVisualDiff( oldDoc, newDoc, timeout ) {
  * document nodes remain unpaired, decide whether they are an old child that has
  * been removed, a new child that has been inserted, or a pair in which the old
  * child was changed into the new child.
- *
- * @return {Object} Diff object containing all the information needed to display
- * the diff.
  */
-ve.dm.VisualDiff.prototype.getDiff = function () {
+ve.dm.VisualDiff.prototype.computeDiff = function () {
 	var i, ilen, j, jlen,
 		oldDocChildrenToDiff = [],
 		newDocChildrenToDiff = [];
@@ -54,7 +53,8 @@ ve.dm.VisualDiff.prototype.getDiff = function () {
 		docChildrenOldToNew: {},
 		docChildrenNewToOld: {},
 		docChildrenRemove: [],
-		docChildrenInsert: []
+		docChildrenInsert: [],
+		internalListDiff: this.getInternalListDiffInfo()
 	};
 
 	// STEP 1: Find identical document-node children
@@ -103,8 +103,6 @@ ve.dm.VisualDiff.prototype.getDiff = function () {
 
 		}
 	}
-
-	return this.diff;
 };
 
 /**
@@ -229,9 +227,10 @@ ve.dm.VisualDiff.prototype.findModifiedDocChildren = function ( oldDocChildren, 
  *
  * @param {ve.dm.Node} oldDocChild Child of the old document node
  * @param {ve.dm.Node} newDocChild Child of the new document node
+ * @param {number} [threshold=0.5] minimum retained : changed ratio allowed
  * @return {Array|boolean} The diff, or false if the children are too different
  */
-ve.dm.VisualDiff.prototype.getDocChildDiff = function ( oldDocChild, newDocChild ) {
+ve.dm.VisualDiff.prototype.getDocChildDiff = function ( oldDocChild, newDocChild, threshold ) {
 	var i, ilen, j, jlen,
 		treeDiff, linearDiff,
 		oldNode, newNode,
@@ -244,6 +243,8 @@ ve.dm.VisualDiff.prototype.getDocChildDiff = function ( oldDocChild, newDocChild
 		diffInfo = [],
 		DIFF_DELETE = ve.DiffMatchPatch.static.DIFF_DELETE,
 		DIFF_INSERT = ve.DiffMatchPatch.static.DIFF_INSERT;
+
+	threshold = threshold === undefined ? 0.5 : threshold;
 
 	oldDocChildTree = new this.treeDiffer.Tree( oldDocChild, ve.DiffTreeNode );
 	newDocChildTree = new this.treeDiffer.Tree( newDocChild, ve.DiffTreeNode );
@@ -361,9 +362,10 @@ ve.dm.VisualDiff.prototype.getDocChildDiff = function ( oldDocChild, newDocChild
 	}
 
 	// Only return the diff if enough content has changed
-	if ( keepLength < 0.5 * diffLength ) {
+	if ( keepLength < threshold * diffLength ) {
 		return false;
 	}
+
 	return {
 		treeDiff: treeDiff,
 		diffInfo: diffInfo,
@@ -371,4 +373,83 @@ ve.dm.VisualDiff.prototype.getDocChildDiff = function ( oldDocChild, newDocChild
 		newTree: newDocChildTree
 	};
 
+};
+
+/*
+ * Get the diff between the old document's internal list and the new document's
+ * internal list. The diff is grouped by list group, and each node in each list
+ * group is marked as removed, inserted, the same, or changed (in which case the
+ * linear diff is given).
+ *
+ * @return {Object} Internal list diff object
+ */
+ve.dm.VisualDiff.prototype.getInternalListDiffInfo = function () {
+	var i, ilen, diff,
+		group, groupIndexOrder, nodeIndex,
+		oldDocNodeGroups = this.oldDoc.getInternalList().getNodeGroups(),
+		newDocNodeGroups = this.newDoc.getInternalList().getNodeGroups(),
+		retainedInternalListItems = {},
+		removedInternalListItems = {},
+		internalListDiffInfo = {};
+
+	// Find all nodes referenced by the new document's internal list
+	for ( group in newDocNodeGroups ) {
+		groupIndexOrder = newDocNodeGroups[ group ].indexOrder;
+		internalListDiffInfo[ group ] = {};
+		for ( i = 0, ilen = groupIndexOrder.length; i < ilen; i++ ) {
+			nodeIndex = groupIndexOrder[ i ];
+			retainedInternalListItems[ nodeIndex ] = group;
+			internalListDiffInfo[ group ] = {
+				changes: false
+			};
+		}
+	}
+
+	// Find all nodes referenced by the old document's internal list
+	for ( group in oldDocNodeGroups ) {
+		groupIndexOrder = oldDocNodeGroups[ group ].indexOrder;
+		for ( i = 0, ilen = groupIndexOrder.length; i < ilen; i++ ) {
+			nodeIndex = groupIndexOrder[ i ];
+			if ( retainedInternalListItems[ nodeIndex ] ) {
+				continue;
+			}
+			removedInternalListItems[ nodeIndex ] = group;
+			// TODO: Work out what should happen if the whole list group was removed
+			internalListDiffInfo[ group ] = {
+				changes: false
+			};
+		}
+	}
+
+	for ( i = 0, ilen = this.newDocInternalListNode.children.length; i < ilen; i++ ) {
+		nodeIndex = i;
+		group = retainedInternalListItems[ nodeIndex ] || removedInternalListItems[ nodeIndex ];
+		if ( i > this.oldDocInternalListNode.children.length - 1 ) {
+			// Item was inserted
+			internalListDiffInfo[ group ][ nodeIndex ] = 1;
+			internalListDiffInfo[ group ].changes = true;
+		} else if ( i in removedInternalListItems ) {
+			// Item was removed
+			internalListDiffInfo[ group ][ nodeIndex ] = -1;
+			internalListDiffInfo[ group ].changes = true;
+		} else {
+			// Item corresponds to the item in the old document's internal list with
+			// the same index. They could be the same or changed.
+			diff = this.getDocChildDiff(
+				this.oldDocInternalListNode.children[ i ],
+				this.newDocInternalListNode.children[ i ],
+				0
+			);
+			if ( diff.diffInfo && diff.diffInfo.length > 0 ) {
+				// Item was changed from an old item
+				internalListDiffInfo[ group ][ nodeIndex ] = diff;
+				internalListDiffInfo[ group ].changes = true;
+			} else {
+				// Item is unchanged from an old item
+				internalListDiffInfo[ group ][ nodeIndex ] = 0;
+			}
+		}
+	}
+
+	return internalListDiffInfo;
 };
