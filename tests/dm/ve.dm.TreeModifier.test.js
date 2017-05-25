@@ -8,27 +8,37 @@ ve.dm.TreeModifier.prototype.dump = function () {
 	var lines = [],
 		del = this.deletions,
 		ins = this.insertions;
-	function nodeTag( node ) {
-		// eslint-disable-next-line no-bitwise
-		return ~del.indexOf( node ) ? 'DEL ' : ~ins.indexOf( node ) ? 'INS ' : '';
+	function nodeTag( idx, node ) {
+		return ( idx === undefined ? '' : idx + ' ' ) + (
+			del.indexOf( node ) !== -1 ? 'DEL ' :
+			ins.indexOf( node ) !== -1 ? 'INS ' :
+			''
+		);
 	}
-	function appendNodeLines( indent, node ) {
+	function appendNodeLines( indent, node, idx ) {
 		var sp = '-\t'.repeat( indent );
 		if ( node instanceof ve.dm.TextNode ) {
-			lines.push( sp + nodeTag( node ) + 'VeDmTextNode(' + node.getLength() + ')' );
+			lines.push( sp + nodeTag( idx, node ) + 'VeDmTextNode(' + node.getOuterLength() + ')' );
 			return;
 		}
-		lines.push( sp + nodeTag( node ) + node.constructor.name + '(' +
+		lines.push( sp + nodeTag( idx, node ) + node.constructor.name + '(' +
 			node.getOuterLength() + ')' );
 		if ( node.hasChildren() ) {
-			node.children.forEach( appendNodeLines.bind( null, indent + 1 ) );
+			node.children.forEach( function ( child, i ) {
+				appendNodeLines( indent + 1, child, i );
+			} );
 		}
 	}
 	appendNodeLines( 0, this.document.documentNode );
 	lines.push( 'inserter: { path: [ ' + this.inserter.path.join( ', ' ) +
-			' ], offset: ' + this.inserter.offset + ' }' );
+			' ], offset: ' + this.inserter.offset + ' }, ' +
+			this.inserter.linearOffset );
 	lines.push( 'remover:  { path: [ ' + this.remover.path.join( ', ' ) +
-			' ], offset: ' + this.remover.offset + ' }' );
+			' ], offset: ' + this.remover.offset + ' }, ' +
+			this.remover.linearOffset );
+	ve.batchSplice( lines, lines.length, 0, this.data.data.map( function ( item, i ) {
+		return i + ':' + JSON.stringify( item ) + ',';
+	} ) );
 	return lines.join( '\n' );
 };
 
