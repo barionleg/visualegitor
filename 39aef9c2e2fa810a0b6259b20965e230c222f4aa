@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_271a1d70",
+        "filename": "src/dm/ve.dm.VisualDiff.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-05-26T15:56:37Z",
+      "side": 1,
+      "message": "use this.oldDoc.getInternalList().getListNode()",
+      "revId": "39aef9c2e2fa810a0b6259b20965e230c222f4aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_0736f9e2",
+        "filename": "src/dm/ve.dm.VisualDiff.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-05-26T15:56:37Z",
+      "side": 1,
+      "message": "this call should probably be inside getDiff to keep the API simple",
+      "revId": "39aef9c2e2fa810a0b6259b20965e230c222f4aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_e73f45af",
+        "filename": "src/dm/ve.dm.VisualDiff.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-05-26T15:56:37Z",
+      "side": 1,
+      "message": "so add here:\n\n internalListDiff: this.getInternalListDiffInfo()",
+      "revId": "39aef9c2e2fa810a0b6259b20965e230c222f4aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_4756310a",
+        "filename": "src/dm/ve.dm.VisualDiff.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-05-26T15:56:37Z",
+      "side": 1,
+      "message": "use getters and associated naming:\n\n oldDocNodeGroups \u003d this.oldDoc.getInternalList().getNodeGroups()",
+      "revId": "39aef9c2e2fa810a0b6259b20965e230c222f4aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_c742413f",
+        "filename": "src/ui/elements/ve.ui.DiffElement.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-05-26T15:56:37Z",
+      "side": 1,
+      "message": "i18n",
+      "revId": "39aef9c2e2fa810a0b6259b20965e230c222f4aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
