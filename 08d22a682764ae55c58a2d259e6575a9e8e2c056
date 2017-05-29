@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_fe1fcbb7",
+        "filename": "tests/ve.test.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-05-29T15:10:24Z",
+      "side": 1,
+      "message": "use strictEqual",
+      "revId": "08d22a682764ae55c58a2d259e6575a9e8e2c056",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
