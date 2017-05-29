@@ -16,6 +16,24 @@
       "revId": "75e9eeaee083d335c1545f61b8ce3911d8212fa5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_bebf135b",
+        "filename": "tests/ve.test.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 933,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-05-29T15:33:43Z",
+      "side": 1,
+      "message": "So replace \"throw new Error( \u0027Need at least one node\u0027 );\" with \"return null;\" ?",
+      "parentUuid": "0e1cb3f9_1e463fc6",
+      "revId": "75e9eeaee083d335c1545f61b8ce3911d8212fa5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
