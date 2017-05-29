@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e1cb3f9_3e2a23d7",
+        "filename": "tests/ve.test.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 978,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-05-29T15:09:41Z",
+      "side": 1,
+      "message": "Again, I would drop the error, if nothing is passed, we should just return 0.",
+      "revId": "d137ecfaa7bdcdea550e561702c20a9506993bcb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
