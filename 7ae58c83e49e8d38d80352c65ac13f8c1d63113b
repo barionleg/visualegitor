@@ -22,6 +22,30 @@
       "revId": "7ae58c83e49e8d38d80352c65ac13f8c1d63113b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_6e51be10",
+        "filename": "src/ui/styles/elements/ve.ui.DiffElement.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2017-05-30T23:07:01Z",
+      "side": 1,
+      "message": "I was going to make it a question for Ed and Thalia. It\u0027s not for the VE MW extension, because it\u0027d be in a different repo.",
+      "parentUuid": "0e1cb3f9_ae24b6ad",
+      "range": {
+        "startLine": 2,
+        "startChar": 3,
+        "endLine": 2,
+        "endChar": 27
+      },
+      "revId": "7ae58c83e49e8d38d80352c65ac13f8c1d63113b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
