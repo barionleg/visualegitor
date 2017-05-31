@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce153bd1_d832adbc",
+        "filename": "src/ui/dialogs/ve.ui.ProgressDialog.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2017-05-31T21:30:06Z",
+      "side": 1,
+      "message": ".opening and .lifecycle are both internal, so ideally we won\u0027t use that here.",
+      "range": {
+        "startLine": 133,
+        "startChar": 19,
+        "endLine": 133,
+        "endChar": 27
+      },
+      "revId": "d037b543f1fb8ebb35f3d1d4f1abda85d04de7f7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
