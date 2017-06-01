@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce153bd1_d557cb03",
+        "filename": "src/ui/actions/ve.ui.WindowAction.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2017-06-01T22:30:31Z",
+      "side": 1,
+      "message": "I was able to deduce this because I\u0027m amazing. See 3122891518e256fa907102840afb536b89d6093a.",
+      "range": {
+        "startLine": 134,
+        "startChar": 0,
+        "endLine": 136,
+        "endChar": 85
+      },
+      "revId": "c7017795253b40dc5b4ac27193d4a3ce2ab425b5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce153bd1_b5525715",
+        "filename": "src/ui/widgets/ve.ui.LanguageInputWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2017-06-01T22:30:31Z",
+      "side": 1,
+      "message": "So, how long ago did we remove window isolation? ;)",
+      "revId": "c7017795253b40dc5b4ac27193d4a3ce2ab425b5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
