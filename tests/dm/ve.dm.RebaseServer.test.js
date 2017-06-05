@@ -11,7 +11,12 @@ QUnit.test( 'Rebase', function ( assert ) {
 		cases = [
 			{
 				name: 'Concurrent insertions',
-				initialData: [ { type: 'paragraph' }, { type: '/paragraph' } ],
+				initialData: [
+					{ type: 'paragraph' },
+					{ type: '/paragraph' },
+					{ type: 'internalList' },
+					{ type: '/internalList' }
+				],
 				clients: [ '1', '2' ],
 				ops: [
 					// Client 1 submits abc
@@ -109,7 +114,9 @@ QUnit.test( 'Rebase', function ( assert ) {
 				initialData: [
 					{ type: 'paragraph' },
 					'a', 'b', 'c', 'A', 'B', 'd', 'e', 'f', 'C', 'D', 'g', 'h', 'i',
-					{ type: '/paragraph' }
+					{ type: '/paragraph' },
+					{ type: 'internalList' },
+					{ type: '/internalList' }
 				],
 				clients: [ '1', '2' ],
 				ops: [
