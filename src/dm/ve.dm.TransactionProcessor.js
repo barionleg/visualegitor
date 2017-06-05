@@ -101,6 +101,7 @@ ve.dm.TransactionProcessor.prototype.process = function () {
 	// Apply the queued modifications
 	try {
 		completed = false;
+		this.treeModifier = null;
 		this.applyModifications();
 		this.treeModifier = new ve.dm.TreeModifier( this.document, this.transaction );
 		this.treeModifier.process();
@@ -110,6 +111,9 @@ ve.dm.TransactionProcessor.prototype.process = function () {
 		// Don't catch and re-throw errors so that they are reported properly
 		if ( !completed ) {
 			// Restore the linear model to its original state
+			if ( this.treeModifier ) {
+				this.treeModifier.undoLinearSplices();
+			}
 			this.rollbackModifications();
 			// The tree may have been left in some sort of half-baked state, so rebuild it
 			// from scratch
@@ -689,10 +693,10 @@ ve.dm.TransactionProcessor.processors.replace = function ( op ) {
 
 	if ( this.replaceRemoveLevel === 0 && this.replaceInsertLevel === 0 && this.retainDepth === 0 ) {
 		// Things are balanced again, flush the queue
-		this.queueModification( {
-			type: 'splice',
-			args: [ this.replaceSpliceQueue, -this.replaceMinInsertLevel ]
-		} );
+		// this.queueModification( {
+		//	type: 'splice',
+		//	args: [ this.replaceSpliceQueue, -this.replaceMinInsertLevel ]
+		// } );
 		this.replaceSpliceQueue = [];
 		this.replaceMinInsertLevel = 0;
 	}
