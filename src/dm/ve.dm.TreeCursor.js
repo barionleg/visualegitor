@@ -15,8 +15,9 @@
  * @constructor
  * @param {ve.dm.Node} root A document node or a branch root within which to walk
  * @param {ve.dm.Node[]} liveIgnoreNodes Live array of nodes to ignore (cross without counting)
+ * @param {number} [linearOffset] The first linear model offset inside root; default 0
  */
-ve.dm.TreeCursor = function VeDmTreeCursor( root, liveIgnoreNodes ) {
+ve.dm.TreeCursor = function VeDmTreeCursor( root, liveIgnoreNodes, linearOffset ) {
 	this.root = root;
 	this.liveIgnoreNodes = liveIgnoreNodes;
 	this.path = [];
@@ -24,6 +25,10 @@ ve.dm.TreeCursor = function VeDmTreeCursor( root, liveIgnoreNodes ) {
 	this.nodes = [ root ];
 	this.node = root;
 	this.lastStep = null;
+	if ( linearOffset === undefined ) {
+		linearOffset = 0;
+	}
+	this.linearOffset = linearOffset;
 };
 
 /* Inheritance */
@@ -60,6 +65,7 @@ ve.dm.TreeCursor.prototype.normalize = function ( tooShort ) {
 		this.liveIgnoreNodes.indexOf( item ) !== -1
 	) {
 		this.offset++;
+		this.linearOffset += item.getOuterLength();
 	}
 	// If at the start of long enough text node, step in
 	if (
@@ -72,6 +78,27 @@ ve.dm.TreeCursor.prototype.normalize = function ( tooShort ) {
 		this.nodes.push( item );
 		this.path.push( this.offset );
 		this.offset = 0;
+	}
+};
+
+ve.dm.TreeCursor.prototype.checkLinearOffset = function () {
+	var expected = this.node.getOffset();
+	if ( this.node instanceof ve.dm.TextNode ) {
+		expected += this.offset;
+	} else {
+		if ( this.node !== this.root ) {
+			// Add 1 for the open tag
+			expected += 1;
+		}
+		if ( this.node.hasChildren() ) {
+			// Add the outer length of each crossed child
+			this.node.children.slice( 0, this.offset ).forEach( function ( child ) {
+				expected += child.getOuterLength();
+			} );
+		}
+	}
+	if ( expected !== this.linearOffset ) {
+		throw new Error( 'Linear offset does not match tree position' );
 	}
 };
 
@@ -99,6 +126,7 @@ ve.dm.TreeCursor.prototype.stepAtMost = function ( maxLength ) {
 		this.lastStep = undefined;
 		return undefined;
 	}
+	this.checkLinearOffset();
 	this.normalize( maxLength );
 	if ( this.node instanceof ve.dm.TextNode ) {
 		// We cannot be the end, because we just normalized
@@ -113,6 +141,7 @@ ve.dm.TreeCursor.prototype.stepAtMost = function ( maxLength ) {
 		};
 		this.offset += step.length;
 		this.lastStep = step;
+		this.linearOffset += length;
 		return step;
 	}
 	// Else not a text node
@@ -129,9 +158,10 @@ ve.dm.TreeCursor.prototype.stepAtMost = function ( maxLength ) {
 		return this.stepIn();
 	}
 	// Else step across this item
+	length = item.getOuterLength();
 	step = {
 		type: 'cross',
-		length: item.getOuterLength(),
+		length: length,
 		path: this.path.slice(),
 		node: this.node,
 		offset: this.offset,
@@ -139,6 +169,7 @@ ve.dm.TreeCursor.prototype.stepAtMost = function ( maxLength ) {
 	};
 	this.offset++;
 	this.lastStep = step;
+	this.linearOffset += length;
 	return step;
 };
 
@@ -148,31 +179,39 @@ ve.dm.TreeCursor.prototype.stepAtMost = function ( maxLength ) {
  * @param {number[]} path The path to the node in which the insertion/deletion occurs
  * @param {number} offset The offset at which the insertion/deletion occurs
  * @param {number} adjustment The number of nodes inserted (if > 0) or deleted (if < 0)
+ * @param {number} linearAdjustment The linear adjustment made at the offset
  */
-ve.dm.TreeCursor.prototype.adjustPath = function ( path, offset, adjustment ) {
+ve.dm.TreeCursor.prototype.adjustPath = function ( path, offset, adjustment, linearAdjustment ) {
 	var i, len;
-	if ( this.path.length < path.length ) {
-		// Adjusted node is deeper than own position, so cannot contain it
+
+	len = path.length;
+	// Find the first offset i where this.path[ i ] is undefined or differs from path[ i ]
+	// If there is such an offset, then own position lies outside the adjusted node
+	for ( i = 0; i < len; i++ ) {
+		if ( this.path[ i ] === path[ i ] ) {
+			continue;
+		}
+		if ( path[ i ] < ( i === this.path.length ? this.offset : this.path[ i ] ) ) {
+			// Own position lies after the adjusted node
+			this.linearOffset += linearAdjustment;
+		}
 		return;
 	}
-	len = path.length;
-	for ( i = 0; i < len; i++ ) {
-		if ( this.path[ i ] !== path[ i ] ) {
-			// Own position does not lie within the adjusted node
-			return;
-		}
-	}
+	// Else own position is in the adjusted node or one of its children
 
 	// Temporarily push offset onto path to simplify the logic
 	this.path.push( this.offset );
+
 	if ( this.path[ len ] > offset || (
-		adjustment > 0 && this.path[ len ] === offset
+		this.path[ len ] === offset && ( adjustment || linearAdjustment ) > 0
 	) ) {
-		// Own position lies after the adjustment
+		// Own position lies inside the adjusted node, after the adjustment
 		if ( this.path[ len ] + adjustment < offset ) {
 			throw new Error( 'Cursor lies within deleted range' );
 		}
 		this.path[ len ] += adjustment;
+		// Need not adjust this.nodes, because the actual node object is unchanged
+		this.linearOffset += linearAdjustment;
 	}
 	// Restore offset
 	this.offset = this.path.pop();
@@ -184,7 +223,7 @@ ve.dm.TreeCursor.prototype.adjustPath = function ( path, offset, adjustment ) {
  * @return {Object} The step
  */
 ve.dm.TreeCursor.prototype.stepIn = function () {
-	var item, step;
+	var item, length, step;
 	if (
 		this.node instanceof ve.dm.TextNode ||
 		!this.node.hasChildren() ||
@@ -193,9 +232,10 @@ ve.dm.TreeCursor.prototype.stepIn = function () {
 		throw new Error( 'No node to step into' );
 	}
 	item = this.node.children[ this.offset ];
+	length = item instanceof ve.dm.TextNode ? 0 : 1;
 	step = {
 		type: 'open',
-		length: item instanceof ve.dm.TextNode ? 0 : 1,
+		length: length,
 		path: this.path.slice(),
 		node: this.node,
 		offset: this.offset,
@@ -206,6 +246,7 @@ ve.dm.TreeCursor.prototype.stepIn = function () {
 	this.node = item;
 	this.offset = 0;
 	this.lastStep = step;
+	this.linearOffset += length;
 	return step;
 };
 
@@ -214,7 +255,9 @@ ve.dm.TreeCursor.prototype.stepIn = function () {
  * @return {Object} The step
  */
 ve.dm.TreeCursor.prototype.stepOut = function () {
-	var item, step;
+	var item, step,
+		treeCursor = this,
+		priorOffset = this.offset;
 	item = this.nodes.pop();
 	this.node = this.nodes[ this.nodes.length - 1 ];
 	this.offset = this.path.pop();
@@ -222,6 +265,18 @@ ve.dm.TreeCursor.prototype.stepOut = function () {
 		// Stepped out of the root
 		this.lastStep = undefined;
 		return undefined;
+	}
+	if ( item instanceof ve.dm.TextNode ) {
+		this.linearOffset += item.getLength() - priorOffset;
+	} else {
+		if ( item.hasChildren() ) {
+			// Increase linearOffset by the length of each child
+			item.children.slice( priorOffset ).forEach( function ( child ) {
+				treeCursor.linearOffset += child.getOuterLength();
+			} );
+		}
+		// Increase linearOffset for the close tag
+		this.linearOffset++;
 	}
 	step = {
 		type: 'close',

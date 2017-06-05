@@ -46,7 +46,7 @@ ve.dm.TransactionProcessor = function VeDmTransactionProcessor( doc, transaction
 	this.replaceInsertLevel = 0;
 	this.replaceMinInsertLevel = 0;
 	this.retainDepth = 0;
-	this.replaceSpliceQueue = [];
+	this.balanced = true;
 	this.treeModifier = null;
 };
 
@@ -94,13 +94,14 @@ ve.dm.TransactionProcessor.prototype.process = function () {
 	for ( i = 0; i < this.operations.length; i++ ) {
 		this.executeOperation( this.operations[ i ] );
 	}
-	if ( this.replaceSpliceQueue.length > 0 ) {
+	if ( !this.balanced ) {
 		throw new Error( 'Unbalanced set of replace operations found' );
 	}
 
 	// Apply the queued modifications
 	try {
 		completed = false;
+		this.treeModifier = null;
 		this.applyModifications();
 		this.treeModifier = new ve.dm.TreeModifier( this.document, this.transaction );
 		this.treeModifier.process();
@@ -110,6 +111,9 @@ ve.dm.TransactionProcessor.prototype.process = function () {
 		// Don't catch and re-throw errors so that they are reported properly
 		if ( !completed ) {
 			// Restore the linear model to its original state
+			if ( this.treeModifier ) {
+				this.treeModifier.undoLinearSplices();
+			}
 			this.rollbackModifications();
 			// The tree may have been left in some sort of half-baked state, so rebuild it
 			// from scratch
@@ -503,7 +507,7 @@ ve.dm.TransactionProcessor.modifiers.setAttribute = function ( offset, key, valu
  */
 ve.dm.TransactionProcessor.processors.retain = function ( op ) {
 	var i, type, retainedData;
-	if ( this.replaceSpliceQueue.length > 0 ) {
+	if ( !this.balanced ) {
 		// Track the depth of retained data when in the middle of an unbalanced replace
 		retainedData = this.document.getData( new ve.Range( this.cursor, this.cursor + op.length ) );
 		for ( i = 0; i < retainedData.length; i++ ) {
@@ -596,30 +600,7 @@ ve.dm.TransactionProcessor.processors.attribute = function ( op ) {
 };
 
 /**
- * Execute a replace operation.
- *
- * This method is called within the context of a transaction processor instance.
- *
- * This replaces a range of linear model data with another at this.cursor, and either queues up
- * splice modifications for this immediately, or stores these modification in a buffer until
- * a later replace operation restores nesting balance, at which point all buffered splices
- * are added to the queue as one big multi-splice modification.
- *
- * Counting from the start of a replacement, nesting balance is considered lost when there is a
- * non-zero net nesting change (i.e. open tag count minus close tag count) in either inserted data
- * or removed data; for instance `[+<p>+][-<h1>-]` causes nesting balance to be lost. Nesting
- * balance is then considered restored when the cumulative nesting change returns to zero for all
- * of: inserted data, removed data, and retained data. For instance,
- * `[+<div>+]<ul><li><div><p>foo</p>[+</div>+]<p>bar</p>[+<div>+]<p>baz</p></div></li></ul>[+</div>+]`
- * is a minimal operation sequence causing a loss then restoration of nesting balance. For most
- * plausible operation sequences, this criterion is sufficient to ensure that the multi-splice
- * modification as a whole preserves tree validity of the linear model data; however, for certain
- * sequences such as `<p>foo[+</p><h1>+]bar[+</h1><p>+]baz</p>` it is not sufficient.
- *
- * op.remove isn't checked against the actual data (instead, op.remove.length things are removed
- * starting at this.cursor), but it's used instead of op.insert in reverse mode. So if
- * op.remove is incorrect but of the right length, the transaction will commit fine, but won't roll
- * back correctly.
+ * Verify a replace operation (the actual processing is now done in ve.dm.TreeModifier)
  *
  * @method
  * @param {Object} op Operation object
@@ -629,13 +610,7 @@ ve.dm.TransactionProcessor.processors.attribute = function ( op ) {
 ve.dm.TransactionProcessor.processors.replace = function ( op ) {
 	var i, type;
 
-	// It's possible that multiple replace operations are needed before the
-	// model is back in a consistent state. In this case, we want to enqueue
-	// a single multi-splice modification that applies all these replacements
-	// at once, so that the code executing that modification has enough information
-	// to synchronize the tree. We perform this grouping by buffering unbalanced
-	// replacements in this.replaceSpliceQueue until we encounter a balancing replace,
-	// at which point we flush this buffer.
+	// Track balancedness for verification purposes only
 
 	// Walk through the remove and insert data
 	// and keep track of the element depth change (level)
@@ -659,43 +634,18 @@ ve.dm.TransactionProcessor.processors.replace = function ( op ) {
 			if ( type.charAt( 0 ) === '/' ) {
 				// Closing element
 				this.replaceInsertLevel--;
-				// Keep track of the lowest (most negative) insert level
-				if ( this.replaceInsertLevel < this.replaceMinInsertLevel ) {
-					this.replaceMinInsertLevel = this.replaceInsertLevel;
-				}
 			} else {
 				// Opening element
 				this.replaceInsertLevel++;
 			}
 		}
 	}
-	// Queue up splice operations
-	this.replaceSpliceQueue.push(
-		{
-			type: 'data',
-			offset: this.cursor,
-			removeLength: op.remove.length,
-			insert: op.insert
-		},
-		{
-			type: 'metadata',
-			offset: this.cursor,
-			removeLength: ( op.removeMetadata || op.remove ).length,
-			insert: op.insertMetadata || new Array( op.insert.length )
-		}
-	);
-
 	this.advanceCursor( op.remove.length );
 
-	if ( this.replaceRemoveLevel === 0 && this.replaceInsertLevel === 0 && this.retainDepth === 0 ) {
-		// Things are balanced again, flush the queue
-		this.queueModification( {
-			type: 'splice',
-			args: [ this.replaceSpliceQueue, -this.replaceMinInsertLevel ]
-		} );
-		this.replaceSpliceQueue = [];
-		this.replaceMinInsertLevel = 0;
-	}
+	this.balanced =
+		this.replaceRemoveLevel === 0 &&
+		this.replaceInsertLevel === 0 &&
+		this.retainDepth === 0;
 };
 
 /**
