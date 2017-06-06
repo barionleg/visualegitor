@@ -6,6 +6,67 @@
 
 QUnit.module( 've.dm.Change' );
 
+// ve.dm.Change#serialize wrapped with automatic round-trip checking
+ve.dm.Change.prototype.serialize = ( function ( serialize ) {
+	return function ( preserveStoreValues ) {
+		var serialized = serialize.call( this, preserveStoreValues ),
+			// HACK: get doc because it's checked during selection equality testing
+			author = Object.keys( this.selections )[ 0 ],
+			doc = author && this.selections[ author ].getDocument();
+
+		if ( !this.equals( ve.dm.Change.static.deserialize( serialized, doc ) ) ) {
+			throw new Error( 'Serialization round trip error' );
+		}
+		return serialized;
+	};
+}( ve.dm.Change.prototype.serialize ) );
+
+// Equality function suitable for testing serialization/deserialization round trips.
+// A looser definition of equality might be useful in non-testing contexts
+ve.dm.Change.prototype.equals = function ( other ) {
+	var i, len, a, b;
+	if ( this === other ) {
+		return true;
+	}
+	if ( !other || other.constructor !== this.constructor ) {
+		return false;
+	}
+	if ( this.start !== other.start ) {
+		return false;
+	}
+	if ( this.transactions.length !== other.transactions.length ) {
+		return false;
+	}
+	for ( i = 0, len = this.transactions.length; i < len; i++ ) {
+		if ( this.transactions[ i ].author !== other.transactions[ i ].author ||
+			JSON.stringify( this.transactions[ i ].operations ) !==
+			JSON.stringify( other.transactions[ i ].operations )
+		) {
+			return false;
+		}
+	}
+	if ( this.stores.length !== other.stores.length ) {
+		return false;
+	}
+	for ( i = 0, len = this.stores.length; i < len; i++ ) {
+		if ( JSON.stringify( this.stores[ i ].hashes ) !==
+			JSON.stringify( other.stores[ i ].hashes ) ) {
+			return false;
+		}
+	}
+	a = Object.keys( this.selections );
+	b = Object.keys( other.selections );
+	if ( JSON.stringify( a ) !== JSON.stringify( b ) ) {
+		return false;
+	}
+	for ( i = 0, len = a.length; i < len; i++ ) {
+		if ( !this.selections[ a[ i ] ].equals( other.selections[ b[ i ] ] ) ) {
+			return false;
+		}
+	}
+	return true;
+};
+
 QUnit.test( 'rebaseTransactions', function ( assert ) {
 	var rebased,
 		doc = ve.dm.example.createExampleDocument(),
@@ -299,50 +360,27 @@ QUnit.test( 'Serialize/deserialize', function ( assert ) {
 			transactions: [
 				{
 					author: null,
-					operations: [
-						{ type: 'retain', length: 1 },
-						{
-							type: 'replace',
-							remove: [],
-							insert: [ [ 'f', bIndex ] ],
-							insertedDataOffset: 0,
-							insertedDataLength: 1
-						},
-						{ type: 'retain', length: 4 }
-					]
+					operations: [ 1, [ '+', [ [ 'f', bIndex ] ] ], 4 ]
 				},
 				{
 					author: null,
-					operations: [
-						{ type: 'retain', length: 2 },
-						{
-							type: 'replace',
-							remove: [],
-							insert: [ [ 'u', bIndex ] ],
-							insertedDataOffset: 0,
-							insertedDataLength: 1
-						},
-						{ type: 'retain', length: 4 }
-					]
+					operations: [ 2, [ '+', [ [ 'u', bIndex ] ] ], 4 ]
 				}
 			],
 			stores: [
-				{
-					hashStore: {
-						h49981eab0f8056ff: {
+				[
+					[
+						'h49981eab0f8056ff',
+						{
 							type: 'plain',
 							value: {
 								type: 'textStyle/bold',
 								attributes: { nodeName: 'b' }
 							}
 						}
-					},
-					hashes: bIndex
-				},
-				{
-					hashStore: {},
-					hashes: []
-				}
+					]
+				],
+				[]
 			],
 			selections: {}
 		},
@@ -350,29 +388,35 @@ QUnit.test( 'Serialize/deserialize', function ( assert ) {
 			start: 0,
 			transactions: [ {
 				author: 'fred',
-				operations: [ { type: 'retain', length: 2 } ]
+				operations: [ 2 ]
 			} ],
-			stores: [ { hashes: [ 'xx' ], hashStore: { xx: {
-				type: 'domNodeArray',
-				value: [
-					'<script></script>',
-					'<p onclick="alert(\'gotcha!\')"></p>'
-				]
-			} } } ],
+			stores: [ [ [
+				'xx',
+				{
+					type: 'domNodeArray',
+					value: [
+						'<script></script>',
+						'<p onclick="alert(\'gotcha!\')"></p>'
+					]
+				}
+			] ] ],
 			selections: {}
 		},
 		sanitized = {
 			start: 0,
 			transactions: [ {
 				author: 'fred',
-				operations: [ { type: 'retain', length: 2 } ]
+				operations: [ 2 ]
 			} ],
-			stores: [ { hashes: [ 'xx' ], hashStore: { xx: {
-				type: 'domNodeArray',
-				value: [
-					'<p></p>'
-				]
-			} } } ],
+			stores: [ [ [
+				'xx',
+				{
+					type: 'domNodeArray',
+					value: [
+						'<p></p>'
+					]
+				}
+			] ] ],
 			selections: {}
 		};
 
@@ -388,12 +432,13 @@ QUnit.test( 'Serialize/deserialize', function ( assert ) {
 	);
 
 	assert.deepEqual(
-		ve.dm.Change.static.deserialize( serialized, doc, true ).stores.map( function ( store ) {
-			return store.hashStore;
+		ve.dm.Change.static.deserialize( serialized, doc, true ).stores.map( function (
+store ) {
+			return Object.keys( store.hashStore ).map( function ( hash ) {
+				return [ hash, store.hashStore[ hash ] ];
+			} );
 		} ),
-		serialized.stores.map( function ( store ) {
-			return store.hashStore;
-		} ),
+		serialized.stores,
 		'Deserialize, preserving store values'
 	);
 
