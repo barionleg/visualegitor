@@ -235,6 +235,7 @@ ve.dm.VisualDiff.prototype.getDocChildDiff = function ( oldDocChild, newDocChild
 	var i, ilen, j, jlen,
 		treeDiff, linearDiff,
 		oldNode, newNode,
+		replacement,
 		oldDocChildTree,
 		newDocChildTree,
 		removeLength,
@@ -277,9 +278,11 @@ ve.dm.VisualDiff.prototype.getDocChildDiff = function ( oldDocChild, newDocChild
 			if ( !oldNode.canContainContent() && !newNode.canContainContent() ) {
 
 				// There is no content change
+				replacement = oldNode.type !== newNode.type;
 				diffInfo[ i ] = {
-					typeChange: oldNode.type !== newNode.type,
-					attributeChange: !ve.compare( oldNode.getAttributes(), newNode.getAttributes() ) ?
+					linearDiff: linearDiff,
+					replacement: replacement,
+					attributeChange: !replacement && !ve.compare( oldNode.getAttributes(), newNode.getAttributes() ) ?
 					{
 						oldAttributes: oldNode.getAttributes(),
 						newAttributes: newNode.getAttributes()
@@ -313,10 +316,11 @@ ve.dm.VisualDiff.prototype.getDocChildDiff = function ( oldDocChild, newDocChild
 					insertLength += newNode.getLength();
 				}
 
+				replacement = oldNode.type !== newNode.type;
 				diffInfo[ i ] = {
 					linearDiff: linearDiff,
-					typeChange: oldNode.type !== newNode.type,
-					attributeChange: !ve.compare( oldNode.getAttributes(), newNode.getAttributes() ) ?
+					replacement: replacement,
+					attributeChange: !replacement && !ve.compare( oldNode.getAttributes(), newNode.getAttributes() ) ?
 					{
 						oldAttributes: oldNode.getAttributes(),
 						newAttributes: newNode.getAttributes()
