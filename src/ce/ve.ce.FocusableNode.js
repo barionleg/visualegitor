@@ -146,8 +146,9 @@ ve.ce.FocusableNode.static.getRectsForElement = function ( $element, relativeRec
 
 		// Don't descend if overflow is anything but visible as this prevents
 		// child elements appearing beyond the bounding box of the parent
+		// *unless* display is inline in whic case the overflow setting will be ignored
 		overflow = $el.css( 'overflow' );
-		if ( overflow && overflow !== 'visible' ) {
+		if ( overflow && overflow !== 'visible' && $el.css( 'display' ) !== 'inline' ) {
 			$set = $set.not( $el.find( '*' ) );
 		}
 
