@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e81134c_ede55e07",
+        "filename": "src/ce/ve.ce.FocusableNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2017-06-08T19:31:16Z",
+      "side": 1,
+      "message": "which",
+      "range": {
+        "startLine": 149,
+        "startChar": 35,
+        "endLine": 149,
+        "endChar": 39
+      },
+      "revId": "98469bfac77706f48a7c9bace3e551d618d636fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
