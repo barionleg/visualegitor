@@ -16,6 +16,23 @@
       "revId": "7252325971f82fc45ca5dca4136dfbc10f52cef8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e81134c_1610e303",
+        "filename": "src/ui/elements/ve.ui.DiffElement.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-06-12T16:58:02Z",
+      "side": 1,
+      "message": "I think these messages should include the first part of the group name (which should always be \u0027mwReference\u0027), as that is the part that lets us know the word should be \"Reference\", e.g.\n\n category \u003d group.split(\u0027/\u0027)[0];\n ...\n groupName \u003d ve.msg( \u0027visualeditor-internal-list-diff-group-name-\u0027 + category, groupName );\n ...\n groupName \u003d ve.msg( \u0027visualeditor-internal-list-diff-default-group-name-\u0027 + category );\n\n\nSuch that the message we set in extension/Cite would be\n\n\n \"visualeditor-internal-list-diff-group-name-mwReference\": \"References\"",
+      "revId": "7252325971f82fc45ca5dca4136dfbc10f52cef8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
