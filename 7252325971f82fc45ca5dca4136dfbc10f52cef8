@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e81134c_5638ab9b",
+        "filename": "src/dm/ve.dm.VisualDiff.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-06-12T16:51:06Z",
+      "side": 1,
+      "message": "Avoid attribute diffing by using \u0027internal\u0027. Internal is not always set so use ve.setProp:\n\n ve.setProp( refNodes[ j ].element, \u0027internal\u0027, \u0027overrideIndex\u0027, i + 1 );",
+      "revId": "7252325971f82fc45ca5dca4136dfbc10f52cef8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
