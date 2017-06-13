@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e81134c_a85f2be7",
+        "filename": "src/dm/ve.dm.TransactionProcessor.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 697,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2017-06-13T16:59:28Z",
+      "side": 1,
+      "message": "Why is this commented out? Apart from the fact that you should remove it if it shouldn\u0027t be here, I don\u0027t understand why it would be removed.",
+      "revId": "1f4975c002e3d07d6fbd4f1dcdaa89657b6292d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
