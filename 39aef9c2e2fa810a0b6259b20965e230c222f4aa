@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_0c8da784",
+        "filename": "src/dm/ve.dm.VisualDiff.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 2849
+      },
+      "writtenOn": "2017-06-16T17:52:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e1cb3f9_271a1d70",
+      "revId": "39aef9c2e2fa810a0b6259b20965e230c222f4aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_0736f9e2",
         "filename": "src/dm/ve.dm.VisualDiff.js",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2017-05-26T15:56:37Z",
       "side": 1,
       "message": "this call should probably be inside getDiff to keep the API simple",
+      "revId": "39aef9c2e2fa810a0b6259b20965e230c222f4aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_ccf9efe6",
+        "filename": "src/dm/ve.dm.VisualDiff.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 2849
+      },
+      "writtenOn": "2017-06-16T17:52:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e1cb3f9_0736f9e2",
       "revId": "39aef9c2e2fa810a0b6259b20965e230c222f4aa",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_6ce30333",
+        "filename": "src/dm/ve.dm.VisualDiff.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 2849
+      },
+      "writtenOn": "2017-06-16T17:52:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e1cb3f9_e73f45af",
+      "revId": "39aef9c2e2fa810a0b6259b20965e230c222f4aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_4756310a",
         "filename": "src/dm/ve.dm.VisualDiff.js",
         "patchSetId": 1
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "0e1cb3f9_8cc77798",
+        "filename": "src/dm/ve.dm.VisualDiff.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 2849
+      },
+      "writtenOn": "2017-06-16T17:52:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e1cb3f9_4756310a",
+      "revId": "39aef9c2e2fa810a0b6259b20965e230c222f4aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1cb3f9_c742413f",
         "filename": "src/ui/elements/ve.ui.DiffElement.js",
         "patchSetId": 1
@@ -81,6 +153,24 @@
       "writtenOn": "2017-05-26T15:56:37Z",
       "side": 1,
       "message": "i18n",
+      "revId": "39aef9c2e2fa810a0b6259b20965e230c222f4aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1cb3f9_8f0e8934",
+        "filename": "src/ui/elements/ve.ui.DiffElement.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 2849
+      },
+      "writtenOn": "2017-06-16T17:52:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e1cb3f9_c742413f",
       "revId": "39aef9c2e2fa810a0b6259b20965e230c222f4aa",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
