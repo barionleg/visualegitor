@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee859f59_c8439cb5",
+        "filename": "src/ui/styles/ve.ui.Toolbar.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-06-16T18:37:53Z",
+      "side": 1,
+      "message": "Timo says this is about transform, should we update the comment accordingly?",
+      "revId": "8ec804988d595668405105bf07e8904791205370",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
