@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee859f59_41678722",
+        "filename": "src/ce/nodes/ve.ce.GeneratedContentNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2017-06-17T00:52:41Z",
+      "side": 1,
+      "message": "Optionally, you can get rid of both of these parameters by using \"this\" instead of \"node\" below.",
+      "revId": "310a7819b0ee3f879bc1f527b5c96610248836ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
