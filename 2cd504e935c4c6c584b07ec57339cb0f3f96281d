@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee859f59_f2852b0c",
+        "filename": "src/dm/ve.dm.VisualDiff.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 2849
+      },
+      "writtenOn": "2017-06-18T00:42:45Z",
+      "side": 1,
+      "message": "There can\u0027t be a linear diff here since there\u0027s no content change",
+      "revId": "2cd504e935c4c6c584b07ec57339cb0f3f96281d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee859f59_128b0f22",
+        "filename": "src/dm/ve.dm.VisualDiff.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 2849
+      },
+      "writtenOn": "2017-06-18T00:42:45Z",
+      "side": 1,
+      "message": "Come to think of it, if replacement is true then we shouldn\u0027t even run the linear differ.",
+      "range": {
+        "startLine": 321,
+        "startChar": 5,
+        "endLine": 321,
+        "endChar": 15
+      },
+      "revId": "2cd504e935c4c6c584b07ec57339cb0f3f96281d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee859f59_52919751",
+        "filename": "src/ui/elements/ve.ui.DiffElement.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 2849
+      },
+      "writtenOn": "2017-06-18T00:42:45Z",
+      "side": 1,
+      "message": "Maybe do this the other way round to match line 403?\n\n\u0027data-diff-action\u0027: ( !node.canContainContent() \u0026\u0026 node.hasChildren() ) ? \u0027structural-insert\u0027 : \u0027insert\u0027",
+      "revId": "2cd504e935c4c6c584b07ec57339cb0f3f96281d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
