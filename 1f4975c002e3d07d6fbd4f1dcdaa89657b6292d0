@@ -16,6 +16,24 @@
       "revId": "1f4975c002e3d07d6fbd4f1dcdaa89657b6292d0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee859f59_1028e6dc",
+        "filename": "src/dm/ve.dm.TransactionProcessor.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 697,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-06-19T06:49:02Z",
+      "side": 1,
+      "message": "Sorry, I left this totally unclear.\n\nThe splice queue isn\u0027t being used for actual splices, but for the time being the logic is still useful for detecting unbalanced changes. (In the long run, we can check this better within the TreeModifier).\n\nI\u0027ll push an improvement that makes this more explicit.",
+      "parentUuid": "0e81134c_a85f2be7",
+      "revId": "1f4975c002e3d07d6fbd4f1dcdaa89657b6292d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
