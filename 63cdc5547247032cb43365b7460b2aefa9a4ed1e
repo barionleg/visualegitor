@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "ae8f277b_2f07e920",
+        "filename": "src/dm/ve.dm.TreeCursor.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-06-22T03:08:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce8a9b6b_44300efd",
+      "revId": "63cdc5547247032cb43365b7460b2aefa9a4ed1e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce8a9b6b_ff266bb4",
         "filename": "src/dm/ve.dm.TreeModifier.js",
         "patchSetId": 5
@@ -47,6 +65,24 @@
       "writtenOn": "2017-06-20T18:26:31Z",
       "side": 1,
       "message": "document",
+      "revId": "63cdc5547247032cb43365b7460b2aefa9a4ed1e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae8f277b_d2fa820d",
+        "filename": "src/dm/ve.dm.TreeModifier.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-06-22T03:08:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce8a9b6b_ff266bb4",
       "revId": "63cdc5547247032cb43365b7460b2aefa9a4ed1e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
