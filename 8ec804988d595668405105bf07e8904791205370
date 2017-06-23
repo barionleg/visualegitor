@@ -16,6 +16,24 @@
       "revId": "8ec804988d595668405105bf07e8904791205370",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_5758c68c",
+        "filename": "src/ui/styles/ve.ui.Toolbar.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2017-06-23T16:11:55Z",
+      "side": 1,
+      "message": "I think the comment is correct. Setting a z-index explicitly creates a stacking context, so adding/removing transform no longer changes anything.",
+      "parentUuid": "ee859f59_c8439cb5",
+      "revId": "8ec804988d595668405105bf07e8904791205370",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
