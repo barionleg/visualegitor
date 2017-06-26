@@ -52,6 +52,24 @@
       "revId": "8ec804988d595668405105bf07e8904791205370",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_1c9fb7ba",
+        "filename": "src/ui/styles/ve.ui.Toolbar.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2017-06-26T18:28:02Z",
+      "side": 1,
+      "message": "It has \u0027position: relative\u0027 in OOjs UI styles (and in some circumstances we override that to \u0027position: fixed\u0027 in VE).",
+      "parentUuid": "8e742343_1a057a7c",
+      "revId": "8ec804988d595668405105bf07e8904791205370",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
