@@ -34,6 +34,24 @@
       "revId": "8ec804988d595668405105bf07e8904791205370",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_1a057a7c",
+        "filename": "src/ui/styles/ve.ui.Toolbar.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2017-06-26T17:01:32Z",
+      "side": 1,
+      "message": "Just setting a z-index doesn\u0027t create the context -- it has to be on an element whose position is relative/absolute. Which this might be, I\u0027m not sure, but if so we probably should mention that we expect it in the comment.",
+      "parentUuid": "8e742343_5758c68c",
+      "revId": "8ec804988d595668405105bf07e8904791205370",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
