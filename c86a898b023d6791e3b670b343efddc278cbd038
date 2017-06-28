@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_88591260",
+        "filename": "tests/dm/ve.dm.Document.test.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 1293,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-06-28T17:34:55Z",
+      "side": 1,
+      "message": "capital L because class name?",
+      "revId": "c86a898b023d6791e3b670b343efddc278cbd038",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
