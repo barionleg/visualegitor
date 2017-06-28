@@ -22,6 +22,30 @@
       "revId": "30394e52301b2f35e88d98b66f5d63f944490082",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_2801feb9",
+        "filename": "src/dm/ve.dm.Document.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 1202,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2017-06-28T16:07:04Z",
+      "side": 1,
+      "message": "Oh, fair point.",
+      "parentUuid": "8e742343_68686685",
+      "range": {
+        "startLine": 1202,
+        "startChar": 2,
+        "endLine": 1202,
+        "endChar": 4
+      },
+      "revId": "30394e52301b2f35e88d98b66f5d63f944490082",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
