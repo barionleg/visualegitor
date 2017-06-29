@@ -16,6 +16,24 @@
       "revId": "73e874470299797bd8799dac85200f86b4675170",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_725fe9e8",
+        "filename": "src/ui/actions/ve.ui.FormatAction.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2017-06-29T21:34:45Z",
+      "side": 1,
+      "message": "Good point. I think I had a mental hiccup while writing this patch, and was thinking of the fragment selection as encompassing the leaf nodes, so it wouldn\u0027t be collapsed.",
+      "parentUuid": "8e742343_52d42d4b",
+      "revId": "73e874470299797bd8799dac85200f86b4675170",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
