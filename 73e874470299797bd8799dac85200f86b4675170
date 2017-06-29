@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_52d42d4b",
+        "filename": "src/ui/actions/ve.ui.FormatAction.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-06-29T21:12:07Z",
+      "side": 1,
+      "message": "why measuring data length instead of range length?\n\n fragmentSelection.isCollapsed()",
+      "revId": "73e874470299797bd8799dac85200f86b4675170",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
