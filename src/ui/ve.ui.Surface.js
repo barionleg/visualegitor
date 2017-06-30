@@ -837,8 +837,8 @@ ve.ui.Surface.prototype.initFilibuster = function () {
 				startOffset: nativeRange.startOffset,
 				endContainer: (
 					nativeRange.startContainer === nativeRange.endContainer ?
-					'(=startContainer)' :
-					ve.serializeNodeDebug( nativeRange.endContainer )
+						'(=startContainer)' :
+						ve.serializeNodeDebug( nativeRange.endContainer )
 				),
 				endOffset: nativeRange.endOffset
 			} );

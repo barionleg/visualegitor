@@ -287,16 +287,16 @@ ve.ce.Surface.static.unsafeAttributes = [
  */
 ve.ce.Surface.static.cursorHolderTemplate = (
 	$( '<div>' )
-		.addClass( 've-ce-cursorHolder' )
-		.prop( 'contentEditable', 'true' )
-		.append(
-			// The image does not need a src for Firefox in spite of cursoring
-			// bug https://bugzilla.mozilla.org/show_bug.cgi?id=989012 , because
-			// you can cursor to ce=false blocks in Firefox (see bug
-			// https://bugzilla.mozilla.org/show_bug.cgi?id=1155031 )
-			$( '<img>' ).addClass( 've-ce-cursorHolder-img' )
-		)
-		.get( 0 )
+	.addClass( 've-ce-cursorHolder' )
+	.prop( 'contentEditable', 'true' )
+	.append(
+		// The image does not need a src for Firefox in spite of cursoring
+		// bug https://bugzilla.mozilla.org/show_bug.cgi?id=989012 , because
+		// you can cursor to ce=false blocks in Firefox (see bug
+		// https://bugzilla.mozilla.org/show_bug.cgi?id=1155031 )
+		$( '<img>' ).addClass( 've-ce-cursorHolder-img' )
+	)
+	.get( 0 )
 );
 
 /* Static methods */
@@ -311,12 +311,13 @@ ve.ce.Surface.static.cursorHolderTemplate = (
  */
 ve.ce.Surface.static.getClipboardHash = function ( $elements, beforePasteData ) {
 	beforePasteData = beforePasteData || {};
-	return $elements.text().slice(
-		beforePasteData.leftText ? beforePasteData.leftText.length : 0,
-		beforePasteData.rightText ? -beforePasteData.rightText.length : undefined
-	)
-	// Whitespace may be modified (e.g. ' ' to '&nbsp;'), so strip it all
-	.replace( /\s/gm, '' );
+	return $elements.text()
+		.slice(
+			beforePasteData.leftText ? beforePasteData.leftText.length : 0,
+			beforePasteData.rightText ? -beforePasteData.rightText.length : undefined
+		)
+		// Whitespace may be modified (e.g. ' ' to '&nbsp;'), so strip it all
+		.replace( /\s/gm, '' );
 };
 
 /* Methods */
@@ -648,8 +649,8 @@ ve.ce.Surface.prototype.updateDeactivatedSelection = function () {
 						// Collapsed selections can have a width of 0, so expand
 						width: Math.max( rects[ i ].width, 1 ),
 						height: rects[ i ].height
-					}
-				) ).toggleClass( 've-ce-surface-deactivatedSelection-collapsed', selection.getModel().isCollapsed() );
+					} )
+				).toggleClass( 've-ce-surface-deactivatedSelection-collapsed', selection.getModel().isCollapsed() );
 			}
 		}
 	}
@@ -4049,9 +4050,9 @@ ve.ce.Surface.prototype.paintAuthor = function ( author ) {
 			background: color
 		} ).append(
 			$( '<span>' )
-			.addClass( 've-ce-surface-highlights-user-cursor-label' )
-			.text( this.synchronizer.authorNames[ author ] )
-			.css( { background: color } )
+				.addClass( 've-ce-surface-highlights-user-cursor-label' )
+				.text( this.synchronizer.authorNames[ author ] )
+				.css( { background: color } )
 		)
 	);
 

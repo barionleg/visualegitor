@@ -7,8 +7,7 @@
 QUnit.module( 've.dm.RebaseServer' );
 
 QUnit.test( 'Rebase', function ( assert ) {
-	var cases = [
-		{
+	var cases = [ {
 			name: 'Concurrent insertions',
 			initialData: [ { type: 'paragraph' }, { type: '/paragraph' } ],
 			clients: [ '1', '2' ],

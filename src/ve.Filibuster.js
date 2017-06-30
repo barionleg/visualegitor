@@ -503,11 +503,11 @@ ve.Filibuster.static.clonePlain = function ( val, seen ) {
 	} else if ( val instanceof ve.dm.Selection ) {
 		return { 've.dm.Selection': val.getDescription() };
 	} else if ( val.constructor === ve.dm.AnnotationSet ) {
-		return { 've.dm.AnnotationSet':
-				val.getStore().values( val.getIndexes() )
-				.map( function ( annotation ) {
-					return annotation.name;
-				} )
+		return { 've.dm.AnnotationSet': val.getStore()
+			.values( val.getIndexes() )
+			.map( function ( annotation ) {
+				return annotation.name;
+			} )
 		};
 	} else if ( val.constructor !== Object ) {
 		// Not a plain old object
