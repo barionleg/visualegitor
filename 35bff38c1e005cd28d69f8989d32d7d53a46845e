@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_6f812992",
+        "filename": "src/ce/ve.ce.ResizableNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2017-07-03T21:59:27Z",
+      "side": 1,
+      "message": "I think this is a change for the worse.\n\nWe should either find out the option for this and turn it off (perhaps just for the fragments here), or rewrite this not to use the .find()/.end() pattern (…antipattern?).",
+      "revId": "35bff38c1e005cd28d69f8989d32d7d53a46845e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_0f4f4598",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2017-07-03T21:59:27Z",
+      "side": 1,
+      "message": "Now this is highly silly. If the previous code is causing lint errors, then I\u0027d call that a bug in ESLint.\n\nIn fact, this appears to be the exact opposite of another change you\u0027re making at the bottom of this diff?",
+      "revId": "35bff38c1e005cd28d69f8989d32d7d53a46845e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_2f524140",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 4055,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2017-07-03T21:59:27Z",
+      "side": 1,
+      "message": "(here)",
+      "revId": "35bff38c1e005cd28d69f8989d32d7d53a46845e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_af5e3146",
+        "filename": "src/ve.Filibuster.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2017-07-03T21:59:27Z",
+      "side": 1,
+      "message": "Yeah, I don\u0027t like this.\n\nLet\u0027s put the key-value pair on its own line? Then we can indent the method calls more sensibly.",
+      "range": {
+        "startLine": 506,
+        "startChar": 11,
+        "endLine": 507,
+        "endChar": 30
+      },
+      "revId": "35bff38c1e005cd28d69f8989d32d7d53a46845e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_cf3ffdd1",
+        "filename": "tests/dm/ve.dm.RebaseServer.test.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2017-07-03T21:59:27Z",
+      "side": 1,
+      "message": "This can\u0027t be right.\n\nI note that the end of this array also has a space instead of a newline after the last item. Perhaps that can be changed instead?",
+      "revId": "35bff38c1e005cd28d69f8989d32d7d53a46845e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
