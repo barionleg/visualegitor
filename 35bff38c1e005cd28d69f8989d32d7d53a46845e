@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e742343_3a4da175",
+        "filename": "src/ce/ve.ce.ResizableNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2017-07-03T22:22:29Z",
+      "side": 1,
+      "message": "Deeming it an anti-pattern WFM, if you have an alternative. :-)",
+      "parentUuid": "8e742343_6f812992",
+      "revId": "35bff38c1e005cd28d69f8989d32d7d53a46845e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_0f4f4598",
         "filename": "src/ce/ve.ce.Surface.js",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2017-07-03T21:59:27Z",
       "side": 1,
       "message": "Now this is highly silly. If the previous code is causing lint errors, then I\u0027d call that a bug in ESLint.\n\nIn fact, this appears to be the exact opposite of another change you\u0027re making at the bottom of this diff?",
+      "revId": "35bff38c1e005cd28d69f8989d32d7d53a46845e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_fa563908",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2017-07-03T22:22:29Z",
+      "side": 1,
+      "message": "Indeed, I was perplexed. There\u0027s a reason I pinged Ed on this, as the eslint guru. :-)",
+      "parentUuid": "8e742343_0f4f4598",
       "revId": "35bff38c1e005cd28d69f8989d32d7d53a46845e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
