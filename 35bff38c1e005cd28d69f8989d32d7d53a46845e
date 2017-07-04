@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "8e742343_8058e25a",
+        "filename": "src/ce/ve.ce.ResizableNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2017-07-04T11:13:06Z",
+      "side": 1,
+      "message": "I\u0027d do:\n\n\n\tthis.$resizeHandles.find( \u0027.ve-ce-resizableNode-neHandle\u0027 )\n\t\t.css( { marginRight: -this.$resizable.width() } );\n\tthis.$resizeHandles.find( \u0027.ve-ce-resizableNode-swHandle\u0027 )\n\t\t.css( { marginBottom: -this.$resizable.height() } );\n\tthis.$resizeHandles.find( \u0027.ve-ce-resizableNode-seHandle\u0027 )\n\t\t.css( {\n\t\t\tmarginRight: -this.$resizable.width(),\n\t\t\tmarginBottom: -this.$resizable.height()\n\t\t} );",
+      "parentUuid": "8e742343_3a4da175",
+      "revId": "35bff38c1e005cd28d69f8989d32d7d53a46845e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_0f4f4598",
         "filename": "src/ce/ve.ce.Surface.js",
         "patchSetId": 1
