@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_17c19033",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 1024,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2017-07-05T21:48:23Z",
+      "side": 1,
+      "message": "This behavior only started in a quite recent version of Chrome (we should probably identify which one). I can reproduce it in Chrome 59, but it didn\u0027t work this way when I wrote this function. Instead, targetDoc.baseURI was null if the base href was protocol-relative.",
+      "revId": "7e80419bbb2e234a8ac255fa400560a299634b5f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
