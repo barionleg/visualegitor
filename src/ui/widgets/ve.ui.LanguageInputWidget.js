@@ -16,6 +16,7 @@
  * @cfg {boolean} [hideCodeInput] Prevent user from entering a language code as free text
  * @cfg {ve.ui.WindowManager} [dialogManager] Window manager to launch the language search dialog in
  * @cfg {string[]} [availableLanguages] Available language codes to show in search dialog
+ * @cfg {boolean} [hideDir] Don't display directionality widget
  */
 ve.ui.LanguageInputWidget = function VeUiLanguageInputWidget( config ) {
 	var dirItems;
@@ -98,10 +99,10 @@ ve.ui.LanguageInputWidget = function VeUiLanguageInputWidget( config ) {
 
 	this.$element
 		.addClass( 've-ui-languageInputWidget' )
-		.append(
-			this.languageLayout.$element,
-			this.directionField.$element
-		);
+		.append( this.languageLayout.$element );
+	if ( !config.hideDir ) {
+		this.$element.append( this.directionField.$element );
+	}
 };
 
 /* Inheritance */
