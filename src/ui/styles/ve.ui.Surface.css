@@ -38,4 +38,7 @@
 
 .ve-ui-surface-source .ve-ce-paragraphNode {
 	margin: 0;
+	word-wrap: break-word;
+	white-space: pre-wrap;
+	word-break: normal;
 }
