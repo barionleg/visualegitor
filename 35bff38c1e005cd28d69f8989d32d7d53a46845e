@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "8e742343_7b0f84e4",
+        "filename": "src/ce/ve.ce.ResizableNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-07-10T21:53:58Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "8e742343_8058e25a",
+      "revId": "35bff38c1e005cd28d69f8989d32d7d53a46845e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_0f4f4598",
         "filename": "src/ce/ve.ce.Surface.js",
         "patchSetId": 1
@@ -90,6 +108,24 @@
     },
     {
       "key": {
+        "uuid": "8e742343_3bf25ce0",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-07-10T21:53:58Z",
+      "side": 1,
+      "message": "yeah, looks buggy to me, if we can make a minimal test case we can file upstream",
+      "parentUuid": "8e742343_fa563908",
+      "revId": "35bff38c1e005cd28d69f8989d32d7d53a46845e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_2f524140",
         "filename": "src/ce/ve.ce.Surface.js",
         "patchSetId": 1
@@ -118,6 +154,30 @@
       "writtenOn": "2017-07-03T21:59:27Z",
       "side": 1,
       "message": "Yeah, I don\u0027t like this.\n\nLet\u0027s put the key-value pair on its own line? Then we can indent the method calls more sensibly.",
+      "range": {
+        "startLine": 506,
+        "startChar": 11,
+        "endLine": 507,
+        "endChar": 30
+      },
+      "revId": "35bff38c1e005cd28d69f8989d32d7d53a46845e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_bb2c0c46",
+        "filename": "src/ve.Filibuster.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-07-10T21:53:58Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "8e742343_af5e3146",
       "range": {
         "startLine": 506,
         "startChar": 11,
