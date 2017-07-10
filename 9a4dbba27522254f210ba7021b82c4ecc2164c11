@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e742343_9b0270bd",
+        "filename": "src/ui/elements/ve.ui.DiffElement.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-07-10T21:49:01Z",
+      "side": 1,
+      "message": "Comment this section like the others?",
+      "revId": "9a4dbba27522254f210ba7021b82c4ecc2164c11",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e742343_1b70c06e",
+        "filename": "src/ui/styles/elements/ve.ui.DiffElement.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-07-10T21:49:01Z",
+      "side": 1,
+      "message": "looks like this didn\u0027t conflict resolve cleanly here - the rule is duplicated",
+      "revId": "9a4dbba27522254f210ba7021b82c4ecc2164c11",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
