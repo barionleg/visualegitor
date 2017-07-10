@@ -126,6 +126,24 @@
     },
     {
       "key": {
+        "uuid": "8e742343_1bed20ee",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-07-10T22:04:12Z",
+      "side": 1,
+      "message": "Looks like the issue here is the surrounding parentheses, which are unnecessary - we should still file a bug, but the fix is easy.",
+      "parentUuid": "8e742343_3bf25ce0",
+      "revId": "35bff38c1e005cd28d69f8989d32d7d53a46845e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_2f524140",
         "filename": "src/ce/ve.ce.Surface.js",
         "patchSetId": 1
