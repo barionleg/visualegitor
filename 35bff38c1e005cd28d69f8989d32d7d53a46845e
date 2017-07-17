@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "8e742343_36c80777",
+        "filename": "src/ce/ve.ce.ResizableNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2017-07-17T19:11:44Z",
+      "side": 1,
+      "message": "+1, 2. Also less fragile by not breaking everything when you forget an end() and/or if you call more than traversal method (e.g. find, first, last, eq, prev, next, children, etc.). It also makes it more explicit what it is being referred to.",
+      "parentUuid": "8e742343_7b0f84e4",
+      "revId": "35bff38c1e005cd28d69f8989d32d7d53a46845e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e742343_0f4f4598",
         "filename": "src/ce/ve.ce.Surface.js",
         "patchSetId": 1
