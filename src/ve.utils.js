@@ -1197,6 +1197,11 @@ ve.transformStyleAttributes = function ( html, unmask ) {
 			'colspan' // Same as rowspan
 		];
 
+	// Note that `html` may have multiple root tags (technically a document fragment rather than a
+	// whole document), which causes exceptions from the parser. Wrap it in another tag to avoid it.
+	if ( html.indexOf( '<body' ) === -1 ) {
+		html = '<veroot>' + html + '</veroot>';
+	}
 	// Parse the HTML into an XML DOM
 	xmlDoc = new DOMParser().parseFromString( html, 'text/xml' );
 
@@ -1233,7 +1238,7 @@ ve.transformStyleAttributes = function ( html, unmask ) {
 	} );
 
 	// Serialize back to a string
-	return new XMLSerializer().serializeToString( xmlDoc );
+	return new XMLSerializer().serializeToString( xmlDoc ).replace( /<\/?veroot>/g, '' );
 };
 
 /**

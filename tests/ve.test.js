@@ -682,6 +682,10 @@ QUnit.test( 'transformStyleAttributes', function ( assert ) {
 				before: '<!DOCTYPE html><html><head><title>Foo</title></head><body>Hello</body></html>'
 			},
 			{
+				msg: 'HTML document fragment is parsed correctly',
+				before: '<p>Hello</p><p>world</p>'
+			},
+			{
 				msg: 'Style attributes are masked then unmasked',
 				before: '<body><div style="color:#ffd">Hello</div></body>',
 				masked: '<body><div style="color:#ffd" data-ve-style="color:#ffd">Hello</div></body>'
