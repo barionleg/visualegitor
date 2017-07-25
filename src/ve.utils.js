@@ -1198,7 +1198,9 @@ ve.transformStyleAttributes = function ( html, unmask ) {
 		];
 
 	// Parse the HTML into an XML DOM
-	xmlDoc = new DOMParser().parseFromString( html, 'text/xml' );
+	// Note that `html` may have multiple root tags (technically a document fragment rather than a
+	// whole document), which causes exceptions from the parser. Wrap it in another tag to avoid it.
+	xmlDoc = new DOMParser().parseFromString( '<veroot>' + html + '</veroot>', 'text/xml' );
 
 	// Go through and mask/unmask each attribute on all elements that have it
 	for ( i = 0, len = maskAttrs.length; i < len; i++ ) {
@@ -1233,7 +1235,7 @@ ve.transformStyleAttributes = function ( html, unmask ) {
 	} );
 
 	// Serialize back to a string
-	return new XMLSerializer().serializeToString( xmlDoc );
+	return new XMLSerializer().serializeToString( xmlDoc ).replace( /<\/?veroot>/g, '' );
 };
 
 /**
