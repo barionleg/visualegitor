@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_80d4a6bf",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 1202,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2017-07-27T00:07:26Z",
+      "side": 1,
+      "message": "This seems like a pretty fragile check. On the one hand, the input could be wrapped in \u003cBODY\u003e rather than \u003cbody\u003e; on the other hand, the string \u0027\u003cbody\u0027 could appear somewhere in the middle. Why not just wrap it in \u003cveroot\u003e...\u003c/veroot\u003e unconditionally?",
+      "revId": "bbb3ef99c6161f038c34c965892a27a70cab9296",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_00c8b624",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 1241,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2017-07-27T00:07:26Z",
+      "side": 1,
+      "message": "I would feel better if this was anchored, e.g. /(^\u003cveroot\u003e)|(\u003c\\/veroot\u003e$)/g",
+      "range": {
+        "startLine": 1241,
+        "startChar": 65,
+        "endLine": 1241,
+        "endChar": 79
+      },
+      "revId": "bbb3ef99c6161f038c34c965892a27a70cab9296",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
