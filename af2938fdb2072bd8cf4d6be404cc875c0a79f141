@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_7664dde1",
+        "filename": "src/dm/ve.dm.Model.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2017-07-27T16:42:25Z",
+      "side": 1,
+      "message": "document",
+      "revId": "af2938fdb2072bd8cf4d6be404cc875c0a79f141",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_96b06940",
+        "filename": "src/ve.DiffMatchPatch.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2017-07-27T16:42:25Z",
+      "side": 1,
+      "message": "I get why it\u0027s happening (for the open-elements-only restriction on the fancier checks like you\u0027re adding to Transclusions in that other patch), but it feels a bit weird that in 99% of cases this is exactly the isDiffComparable check which will happen below.",
+      "revId": "af2938fdb2072bd8cf4d6be404cc875c0a79f141",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
