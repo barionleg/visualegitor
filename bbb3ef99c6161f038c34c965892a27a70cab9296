@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_5bb30f4d",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 1202,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2017-07-27T02:01:32Z",
+      "side": 1,
+      "message": "Because if it\u0027s a full document with \u003c!doctype\u003e and stuff, then that\u0027s invalid.",
+      "parentUuid": "4e7eab26_80d4a6bf",
+      "revId": "bbb3ef99c6161f038c34c965892a27a70cab9296",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_00c8b624",
         "filename": "src/ve.utils.js",
         "patchSetId": 3
