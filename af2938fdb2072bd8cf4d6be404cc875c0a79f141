@@ -69,6 +69,24 @@
       "revId": "af2938fdb2072bd8cf4d6be404cc875c0a79f141",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_241cd87b",
+        "filename": "src/ve.DiffMatchPatch.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-07-28T20:30:15Z",
+      "side": 1,
+      "message": "I suppose in theory one should be able to compare two elements of different types and say they are comparable - so we shouldn\u0027t do this check externally.",
+      "parentUuid": "4e7eab26_e47010dc",
+      "revId": "af2938fdb2072bd8cf4d6be404cc875c0a79f141",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
