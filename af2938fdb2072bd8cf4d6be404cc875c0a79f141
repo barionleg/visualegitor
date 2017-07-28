@@ -33,6 +33,24 @@
       "revId": "af2938fdb2072bd8cf4d6be404cc875c0a79f141",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_44348446",
+        "filename": "src/ve.DiffMatchPatch.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-07-28T19:56:20Z",
+      "side": 1,
+      "message": "So then it\u0027s just an optimisation. Is the problem the code repetition?",
+      "parentUuid": "4e7eab26_96b06940",
+      "revId": "af2938fdb2072bd8cf4d6be404cc875c0a79f141",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
