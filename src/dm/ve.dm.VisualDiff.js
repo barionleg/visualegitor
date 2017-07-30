@@ -34,7 +34,14 @@ ve.dm.VisualDiff = function VeDmVisualDiff( oldDoc, newDoc, timeout ) {
 	this.freezeInternalListIndices( this.oldDoc );
 	this.freezeInternalListIndices( this.newDoc );
 
-	this.computeDiff();
+	this.docDiff = {};
+	this.internalListDiff = {};
+	this.diff = {
+		docDiff: this.docDiff,
+		internalListDiff: this.getInternalListDiffInfo()
+	};
+
+	this.computeDiff( this.oldDocChildren, this.newDocChildren, this.docDiff, 'doc' );
 };
 
 /**
@@ -84,91 +91,95 @@ ve.dm.VisualDiff.prototype.freezeInternalListIndices = function ( doc ) {
 };
 
 /**
- * Get the diff between the two documents, in two steps: (1) Compare the children
- * of the old and new document nodes and record any pair where the old child and
+ * Get the diff between the two trees, in two steps: (1) Compare the children
+ * of the old and new root nodes and record any pair where the old child and
  * new child are identical. (If an old child is identical to two new children, it
  * will be paired with the first one only.) (2) If any children of the old or new
- * document nodes remain unpaired, decide whether they are an old child that has
+ * root nodes remain unpaired, decide whether they are an old child that has
  * been removed, a new child that has been inserted, or a pair in which the old
  * child was changed into the new child.
+ *
+ * @param {Array} oldRootChildren Children of the old root node
+ * @param {Array} newRootChildren Children of the new root node
+ * @param {Object} diff Object that will contain information about the diff
+ * @param {String} diffType The type of diff to perform
  */
-ve.dm.VisualDiff.prototype.computeDiff = function () {
+ve.dm.VisualDiff.prototype.computeDiff = function ( oldRootChildren, newRootChildren, diff, diffType ) {
 	var i, ilen, j, jlen,
-		oldDocChildrenToDiff = [],
-		newDocChildrenToDiff = [];
+		oldRootChildrenToDiff = [],
+		newRootChildrenToDiff = [];
 
-	this.diff = {
-		docChildrenOldToNew: {},
-		docChildrenNewToOld: {},
-		docChildrenRemove: [],
-		docChildrenInsert: [],
-		internalListDiff: this.getInternalListDiffInfo()
-	};
+	diff.rootChildrenOldToNew = {};
+	diff.rootChildrenNewToOld = {};
+	diff.rootChildrenRemove = [];
+	diff.rootChildrenInsert = [];
 
-	// STEP 1: Find identical document-node children
+	// STEP 1: Find identical root-node children
 
-	for ( i = 0, ilen = this.oldDocChildren.length; i < ilen; i++ ) {
-		for ( j = 0, jlen = this.newDocChildren.length; j < jlen; j++ ) {
-			if ( !this.diff.docChildrenNewToOld.hasOwnProperty( j ) &&
-				this.compareDocChildren( this.oldDocChildren[ i ], this.newDocChildren[ j ] ) ) {
+	for ( i = 0, ilen = oldRootChildren.length; i < ilen; i++ ) {
+		for ( j = 0, jlen = newRootChildren.length; j < jlen; j++ ) {
+			if ( !diff.rootChildrenNewToOld.hasOwnProperty( j ) &&
+				this.compareRootChildren( oldRootChildren[ i ], newRootChildren[ j ] ) ) {
 
-				this.diff.docChildrenOldToNew[ i ] = j;
-				this.diff.docChildrenNewToOld[ j ] = i;
+				diff.rootChildrenOldToNew[ i ] = j;
+				diff.rootChildrenNewToOld[ j ] = i;
 				break;
 
 			}
 			// If no new nodes equalled the old node, add it to nodes to diff
 			if ( j === jlen - 1 ) {
-				oldDocChildrenToDiff.push( i );
+				oldRootChildrenToDiff.push( i );
 			}
 		}
 	}
 
 	for ( j = 0; j < jlen; j++ ) {
-		if ( !this.diff.docChildrenNewToOld.hasOwnProperty( j ) ) {
-			newDocChildrenToDiff.push( j );
+		if ( !diff.rootChildrenNewToOld.hasOwnProperty( j ) ) {
+			newRootChildrenToDiff.push( j );
 		}
 	}
 
-	// STEP 2: Find removed, inserted and modified document-node children
+	// STEP 2: Find removed, inserted and modified root-node children
 
-	if ( oldDocChildrenToDiff.length !== 0 || newDocChildrenToDiff.length !== 0 ) {
+	if ( oldRootChildrenToDiff.length !== 0 || newRootChildrenToDiff.length !== 0 ) {
 
-		if ( oldDocChildrenToDiff.length === 0 ) {
+		if ( oldRootChildrenToDiff.length === 0 ) {
 
 			// Everything new is an insert
-			this.diff.docChildrenInsert = newDocChildrenToDiff;
+			diff.rootChildrenInsert = newRootChildrenToDiff;
 
-		} else if ( newDocChildrenToDiff.length === 0 ) {
+		} else if ( newRootChildrenToDiff.length === 0 ) {
 
 			// Everything old is a remove
-			this.diff.docChildrenRemove = oldDocChildrenToDiff;
+			diff.rootChildrenRemove = oldRootChildrenToDiff;
 
 		} else {
 
 			// Find out which remaining docChildren are removed, inserted or modified
-			this.findModifiedDocChildren( oldDocChildrenToDiff, newDocChildrenToDiff );
+			this.findModifiedRootChildren(
+				oldRootChildrenToDiff, newRootChildrenToDiff, oldRootChildren, newRootChildren, diff, diffType
+			);
 
 		}
 	}
 };
 
 /**
- * Compare the linear data for two nodes
+ * Compare the linear data for two root-child nodes
  *
- * @param {ve.dm.Node} oldDocChild Child of the old document node
- * @param {ve.dm.Node} newDocChild Child of the new document node
+ * @param {ve.dm.Node} oldRootChild Child of the old root node
+ * @param {ve.dm.Node} newRootChild Child of the new root node
  * @return {boolean} The linear data is the same
  */
-ve.dm.VisualDiff.prototype.compareDocChildren = function ( oldDocChild, newDocChild ) {
+ve.dm.VisualDiff.prototype.compareRootChildren = function ( oldRootChild, newRootChild ) {
 	var i, ilen, oldData, newData, oldStore, newStore;
 
-	if ( oldDocChild.length !== newDocChild.length || oldDocChild.type !== newDocChild.type ) {
+	if ( oldRootChild.length !== newRootChild.length || oldRootChild.type !== newRootChild.type ) {
 		return false;
 	}
 
-	oldData = this.oldDoc.getData( oldDocChild.getOuterRange() );
-	newData = this.newDoc.getData( newDocChild.getOuterRange() );
+	oldData = this.oldDoc.getData( oldRootChild.getOuterRange() );
+	newData = this.newDoc.getData( newRootChild.getOuterRange() );
 
 	if ( JSON.stringify( oldData ) === JSON.stringify( newData ) ) {
 		return true;
@@ -190,8 +201,8 @@ ve.dm.VisualDiff.prototype.compareDocChildren = function ( oldDocChild, newDocCh
 };
 
 /**
- * Diff each child of the old document node against each child of the new
- * document; but if the differs decide that an old child is similar enough to a
+ * Diff each child of the old root node against each child of the new root
+ * node; but if the differs decide that an old child is similar enough to a
  * new child, record these as a change from the old child to the new child and
  * don't diff any more children against either child.
  *
@@ -199,40 +210,49 @@ ve.dm.VisualDiff.prototype.compareDocChildren = function ( oldDocChild, newDocCh
  * similar to two of the new children), but diffing every old child against
  * every new child could have a heavy performance cost.
  *
- * @param {Array} oldDocChildren The children of the old document with no
- * identical partners in the new document
- * @param {Array} newDocChildren The children of the new document with no
- * identical partners in the old document
+ * @param {Array} oldIndices Indices of the old root children diff
+ * @param {Array} newIndices Indices of the new root children diff
+ * @param {Array} oldRootChildren Children of the old root node
+ * @param {Array} newRootChildren Children of the new root node
+ * @param {Object} diff Object that will contain information about the diff
+ * @param {String} diffType The type of diff to perform
  */
-ve.dm.VisualDiff.prototype.findModifiedDocChildren = function ( oldDocChildren, newDocChildren ) {
-	var diff, i, j,
-		ilen = oldDocChildren.length,
-		jlen = newDocChildren.length;
+ve.dm.VisualDiff.prototype.findModifiedRootChildren = function ( oldIndices, newIndices, oldRootChildren, newRootChildren, diff, diffType ) {
+	var diffResults, i, j,
+		ilen = oldIndices.length,
+		jlen = newIndices.length;
 
 	for ( i = 0; i < ilen; i++ ) {
 		for ( j = 0; j < jlen; j++ ) {
 
-			if ( oldDocChildren[ i ] !== null && newDocChildren[ j ] !== null ) {
+			if ( oldIndices[ i ] !== null && newIndices[ j ] !== null ) {
 
-				// Try to diff the nodes. If they are too different, diff will be false
-				diff = this.getDocChildDiff(
-					this.oldDocChildren[ oldDocChildren[ i ] ],
-					this.newDocChildren[ newDocChildren[ j ] ]
-				);
+				// Try to diff the nodes. If they are too different, diffResults will be false
+				// TODO: Add the internalList case, once implemented
+				switch ( diffType ) {
+					case 'doc':
+						diffResults = this.getDocChildDiff(
+							oldRootChildren[ oldIndices[ i ] ],
+							newRootChildren[ newIndices[ j ] ]
+						);
+						break;
+				}
 
-				if ( diff ) {
-					this.diff.docChildrenOldToNew[ oldDocChildren[ i ] ] = {
-						node: newDocChildren[ j ],
-						diff: diff,
+				if ( diffResults ) {
+					diff.rootChildrenOldToNew[ oldIndices[ i ] ] = {
+						node: newIndices[ j ],
+						diff: diffResults,
 						// TODO: Neaten this
-						correspondingNodes: this.treeDiffer.Differ.prototype.getCorrespondingNodes( diff.treeDiff, diff.oldTree.orderedNodes.length, diff.newTree.orderedNodes.length )
+						correspondingNodes: this.treeDiffer.Differ.prototype.getCorrespondingNodes(
+							diffResults.treeDiff, diffResults.oldTree.orderedNodes.length, diffResults.newTree.orderedNodes.length
+						)
 					};
-					this.diff.docChildrenNewToOld[ newDocChildren[ j ] ] = {
-						node: oldDocChildren[ i ]
+					diff.rootChildrenNewToOld[ newIndices[ j ] ] = {
+						node: oldIndices[ i ]
 					};
 
-					oldDocChildren[ i ] = null;
-					newDocChildren[ j ] = null;
+					oldIndices[ i ] = null;
+					newIndices[ j ] = null;
 					break;
 				}
 
@@ -243,20 +263,20 @@ ve.dm.VisualDiff.prototype.findModifiedDocChildren = function ( oldDocChildren, 
 
 	// Any nodes remaining in the 'toDiff' arrays are removes and inserts
 	for ( i = 0; i < ilen; i++ ) {
-		if ( oldDocChildren[ i ] !== null ) {
-			this.diff.docChildrenRemove.push( oldDocChildren[ i ] );
+		if ( oldIndices[ i ] !== null ) {
+			diff.rootChildrenRemove.push( oldIndices[ i ] );
 		}
 	}
 	for ( j = 0; j < jlen; j++ ) {
-		if ( newDocChildren[ j ] !== null ) {
-			this.diff.docChildrenInsert.push( newDocChildren[ j ] );
+		if ( newIndices[ j ] !== null ) {
+			diff.rootChildrenInsert.push( newIndices[ j ] );
 		}
 	}
 
 };
 
 /**
- * Get the diff between a child of the old coument node and a child of the new
+ * Get the diff between a child of the old document node and a child of the new
  * document node. There are three steps: (1) Do a tree diff to find the minimal
  * transactions between the old child and the new child. Allowed transactions
  * are: remove a node, insert a node, or change an old node to a new node. (The
@@ -438,6 +458,9 @@ ve.dm.VisualDiff.prototype.getDocChildDiff = function ( oldDocChild, newDocChild
 };
 
 /*
+ * NB This method does not work for diffing historical revisions and will soon
+ * be replaced.
+ *
  * Get the diff between the old document's internal list and the new document's
  * internal list. The diff is grouped by list group, and each node in each list
  * group is marked as removed, inserted, the same, or changed (in which case the
