@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_19b1fadc",
+        "filename": "src/dm/ve.dm.VisualDiff.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-07-31T16:07:22Z",
+      "side": 1,
+      "message": "If these are rarely accessed, the probably don\u0027t need to be top-level properties, you could just access them as this.diff.docDiff etc.?",
+      "revId": "027d199bb53492210a35d2fef9fcc021ef49219e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_b9c6a64c",
+        "filename": "src/dm/ve.dm.VisualDiff.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-07-31T16:07:22Z",
+      "side": 1,
+      "message": "Could this be the return value instead?",
+      "revId": "027d199bb53492210a35d2fef9fcc021ef49219e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
