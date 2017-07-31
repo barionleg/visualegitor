@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_54bd0762",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 1202,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2017-07-31T19:09:31Z",
+      "side": 1,
+      "message": "Ugh... then it feels like it\u0027s going to be difficult to determine programmatically whether the input is a fragment or not. Perhaps we should instead require that this function only be passed single-root input, and do the wrapping in the caller(s) that feed multi-root input to this function?",
+      "parentUuid": "4e7eab26_5bb30f4d",
+      "revId": "bbb3ef99c6161f038c34c965892a27a70cab9296",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_00c8b624",
         "filename": "src/ve.utils.js",
         "patchSetId": 3
@@ -48,6 +66,30 @@
       "writtenOn": "2017-07-27T00:07:26Z",
       "side": 1,
       "message": "I would feel better if this was anchored, e.g. /(^\u003cveroot\u003e)|(\u003c\\/veroot\u003e$)/g",
+      "range": {
+        "startLine": 1241,
+        "startChar": 65,
+        "endLine": 1241,
+        "endChar": 79
+      },
+      "revId": "bbb3ef99c6161f038c34c965892a27a70cab9296",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_b4854bb3",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 1241,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2017-07-31T19:09:31Z",
+      "side": 1,
+      "message": "...also, doesn\u0027t this need to be case-insensitive? Or did IE stop \u003cUPPERCASING\u003e all tags?",
+      "parentUuid": "4e7eab26_00c8b624",
       "range": {
         "startLine": 1241,
         "startChar": 65,
