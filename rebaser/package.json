@@ -3,10 +3,11 @@
 	"description": "Rebase server for VisualEditor",
 	"version": "0.0.1",
 	"dependencies": {
-		"express": "4.x",
 		"ejs": "2.x",
-		"socket.io": "1.x",
-		"oojs": "1.x"
+		"express": "4.x",
+		"mongodb": "2.2.33",
+		"oojs": "1.x",
+		"socket.io": "1.x"
 	},
 	"devDependencies": {},
 	"scripts": {
