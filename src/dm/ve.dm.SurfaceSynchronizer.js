@@ -271,6 +271,8 @@ ve.dm.SurfaceSynchronizer.prototype.onAuthorDisconnect = function ( authorId ) {
  *
  * @param {Object} data
  * @param {number} data.authorId The author ID allocated by the server
+ * @param {string} data.authorName The author name allocated by the server
+ * @param {string} data.token Secret token
  */
 ve.dm.SurfaceSynchronizer.prototype.onRegistered = function ( data ) {
 	this.setAuthorId( data.authorId );
@@ -345,4 +347,14 @@ ve.dm.SurfaceSynchronizer.prototype.onNewChange = function ( serializedChange ) 
 	}
 	// Schedule submission of unsent local changes, if any
 	this.submitChangeThrottled();
+};
+
+/**
+ * @inheritdoc
+ */
+ve.dm.SurfaceSynchronizer.prototype.setAuthorId = function ( authorId ) {
+	ve.dm.RebaseClient.prototype.setAuthorId.call( this, authorId );
+	// For usurping, forget any tracked third party selections for our new authorId
+	delete this.authorNames[ authorId ];
+	delete this.authorSelections[ authorId ];
 };
