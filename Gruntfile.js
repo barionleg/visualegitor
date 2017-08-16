@@ -360,6 +360,7 @@ module.exports = function ( grunt ) {
 								'src/init/**/*.js',
 								'src/ce/**/*.js',
 								'src/ui/**/*.js',
+								'src/dm/ve.dm.RebaseDocAuthorState.js',
 								'src/dm/ve.dm.RebaseDocState.js',
 								'src/dm/ve.dm.SurfaceSynchronizer.js',
 								'src/dm/ve.dm.TableSlice.js',

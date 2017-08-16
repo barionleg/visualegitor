@@ -12,7 +12,7 @@
  * @class
  *
  * @constructor
- * @param {Function} [logCallback]
+ * @param {Function} [logCallback] Callback for logging events
  */
 ve.dm.RebaseServer = function VeDmRebaseServer( logCallback ) {
 	this.stateForDoc = new Map();
@@ -31,7 +31,7 @@ OO.initClass( ve.dm.RebaseServer );
  */
 ve.dm.RebaseServer.prototype.getDocState = function ( doc ) {
 	if ( !this.stateForDoc.has( doc ) ) {
-		this.stateForDoc.set( doc, new ve.dm.RebaseDocState() );
+		this.stateForDoc.set( doc, ve.dm.RebaseDocState.static.newDoc() );
 	}
 	return Promise.resolve( this.stateForDoc.get( doc ) );
 };
@@ -54,7 +54,7 @@ ve.dm.RebaseServer.prototype.updateDocState = ve.async( function* updateDocState
 
 	authorData = state.authors.get( authorId );
 	if ( !authorData ) {
-		authorData = state.constructor.static.newAuthorData();
+		authorData = ve.dm.RebaseDocAuthorState.static.newAuthor();
 		state.authors.set( authorId, authorData );
 	}
 	if ( authorDataChanges ) {
@@ -89,7 +89,10 @@ ve.dm.RebaseServer.prototype.applyChange = ve.async( function* applyChange( doc,
 	if ( rejections > backtrack ) {
 		// Follow-on does not fully acknowledge outstanding conflicts: reject entirely
 		rejections = rejections - backtrack + change.transactions.length;
-		yield this.updateDocState( doc, authorId, null, { rejections: rejections } );
+		yield this.updateDocState( doc, authorId, null, {
+			rejections: rejections,
+			continueBase: null
+		} );
 		// FIXME argh this publishes an empty change, which is not what we want
 		appliedChange = state.history.truncate( 0 );
 	} else if ( rejections < backtrack ) {
