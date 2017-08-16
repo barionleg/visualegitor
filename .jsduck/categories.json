@@ -103,7 +103,6 @@
 				"name": "Rebasing",
 				"classes": [
 					"ve.dm.Change",
-					"ve.dm.RebaseDocState",
 					"ve.dm.RebaseClient",
 					"ve.dm.SurfaceSynchronizer"
 				]
