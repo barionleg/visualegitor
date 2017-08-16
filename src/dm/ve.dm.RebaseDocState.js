@@ -12,53 +12,58 @@
  * @class
  *
  * @constructor
+ * @param {ve.dm.Change} history Canonical history (can start above zero for partial info)
+ * @param {Map.<number,ve.dm.RebaseDocAuthorState>} authors Information about each author
  */
-ve.dm.RebaseDocState = function VeDmRebaseDocState() {
-	/**
-	 * @property {ve.dm.Change} history History as one big change
-	 */
-	this.history = new ve.dm.Change( 0, [], [], {} );
-
-	/**
-	 * @property {Map.<number, Object>} authors Information about each author
-	 */
-	this.authors = new Map();
+ve.dm.RebaseDocState = function VeDmRebaseDocState( history, authors ) {
+	this.history = history;
+	this.authors = authors;
 };
 
 /* Inheritance */
 
 OO.initClass( ve.dm.RebaseDocState );
 
-/* Static Methods */
+/* Static methods */
 
 /**
- * Get new empty author data object
+ * Get new empty doc state
  *
- * @return {Object} New empty author data object
- * @return {string} return.displayName Display name
- * @return {number} return.rejections Number of unacknowledged rejections
- * @return {ve.dm.Change|null} return.continueBase Continue base
- * @return {string} return.token Secret token for usurping sessions
- * @return {boolean} return.active Whether the author is active
+ * @return {ve.dm.RebaseDocState} New empty doc state
  */
-ve.dm.RebaseDocState.static.newAuthorData = function () {
-	return {
-		displayName: '',
-		rejections: 0,
-		continueBase: null,
-		// TODO use cryptographic randomness here and convert to hex
-		token: Math.random().toString(),
-		active: true
-	};
+ve.dm.RebaseDocState.static.newDoc = function () {
+	return new ve.dm.RebaseDocState( new ve.dm.Change( 0, [], [], {} ), new Map() );
+};
+
+ve.dm.RebaseDocState.static.deserialize = function ( data, preserveStoreValues ) {
+	var author,
+		history = ve.dm.Change.static.deserialize( data.history, undefined, preserveStoreValues ),
+		authors = new Map();
+	for ( author in data.authors ) {
+		authors.set(
+			parseInt( author, 10 ),
+			ve.dm.RebaseDocAuthorState.static.deserialize( data.authors[ author ], undefined, preserveStoreValues )
+		);
+	}
+	return new ve.dm.RebaseDocState( history, authors );
 };
 
 /* Methods */
 
+ve.dm.RebaseDocState.prototype.serialize = function () {
+	var history = this.history.serialize(),
+		authors = {};
+	this.authors.entries.forEach( function ( state, author ) {
+		authors[ author ] = state.serialize();
+	} );
+	return { history: history, authors: authors };
+};
+
 ve.dm.RebaseDocState.prototype.getActiveNames = function () {
 	var result = {};
-	this.authors.forEach( function ( authorData, authorId ) {
-		if ( authorData.active ) {
-			result[ authorId ] = authorData.displayName;
+	this.authors.forEach( function ( authorState, authorId ) {
+		if ( authorState.active ) {
+			result[ authorId ] = authorState.displayName;
 		}
 	} );
 	return result;
