@@ -16,6 +16,7 @@ var rebaseServer, pendingForDoc, artificialDelay, logStream, handlers,
 	http = require( 'http' ).Server( app ),
 	io = require( 'socket.io' )( http ),
 	ve = require( '../dist/ve-rebaser.js' ),
+	MongoStateStore = require( './MongoStateStore.js' ).MongoStateStore,
 	docNamespaces = new Map(),
 	lastAuthorForDoc = new Map();
 
@@ -51,7 +52,6 @@ function logError( err ) {
 	console.log( err.stack );
 }
 
-rebaseServer = new ve.dm.RebaseServer( logServerEvent );
 docNamespaces = new Map();
 lastAuthorForDoc = new Map();
 pendingForDoc = new Map();
@@ -59,10 +59,13 @@ artificialDelay = parseInt( process.argv[ 2 ] ) || 0;
 
 function* welcomeNewClient( socket, docName, authorId ) {
 	var state, authorData;
+	// Call getDocState to create an empty doc if none exists
+	state = yield rebaseServer.getDocState( docName );
+	// Update this author's entry
 	yield rebaseServer.updateDocState( docName, authorId, null, {
 		displayName: 'User ' + authorId // TODO: i18n
 	} );
-
+	// Get the modified state
 	state = yield rebaseServer.getDocState( docName );
 	authorData = state.authors.get( authorId );
 
@@ -111,10 +114,13 @@ function* onChangeName( context, newName ) {
 	} );
 }
 
+// TODO: The first onUsurp after a server restart does not load data (you have to hit reload
+// twice on the browser to see the stored content)
 function* onUsurp( context, data ) {
 	var state = yield rebaseServer.getDocState( context.docName ),
 		newAuthorData = state.authors.get( data.authorId );
-	if ( newAuthorData.token !== data.token ) {
+	console.log( 'onUsurp', data );
+	if ( !newAuthorData || newAuthorData.token !== data.token ) {
 		context.socket.emit( 'usurpFailed' );
 		return;
 	}
@@ -248,7 +254,18 @@ io.on( 'connection', function ( socket ) {
 	}
 } );
 
-startTimestamp = Date.now();
-logServerEvent( { type: 'restart' } );
-http.listen( port );
-console.log( 'Listening on ' + port + ' (artificial delay ' + artificialDelay + ' ms)' );
+ve.spawn( function* main() {
+	rebaseServer = yield MongoStateStore.static.connect(
+		'mongodb://localhost:27017/test',
+		logServerEvent
+	);
+	startTimestamp = Date.now();
+	logServerEvent( { type: 'restart' } );
+	http.listen( port );
+	http.on( 'close', function () {
+		rebaseServer.db.close();
+	} );
+	console.log( 'Listening on ' + port + ' (artificial delay ' + artificialDelay + ' ms)' );
+}() ).catch( function ( err ) {
+	console.error( err.stack );
+} );
