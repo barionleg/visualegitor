@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_e3ab98d2",
+        "filename": ".jsduck/categories.json",
+        "patchSetId": 19
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2017-08-22T21:27:17Z",
+      "side": 0,
+      "message": "Shouldn\u0027t these be somewhere?",
+      "range": {
+        "startLine": 107,
+        "startChar": 13,
+        "endLine": 107,
+        "endChar": 24
+      },
+      "revId": "fec19de119564ced66e9c9c284fdf5f525a8c1b2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
