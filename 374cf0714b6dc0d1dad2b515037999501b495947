@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_4014b34e",
+        "filename": "src/ve.DiffMatchPatch.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 2849
+      },
+      "writtenOn": "2017-08-29T18:45:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e7eab26_bbed908b",
+      "revId": "374cf0714b6dc0d1dad2b515037999501b495947",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_7be3a89c",
         "filename": "src/ve.DiffMatchPatch.js",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2017-08-28T19:58:25Z",
       "side": 1,
       "message": "you can still cache length, you just need to decrement it when you splice",
+      "revId": "374cf0714b6dc0d1dad2b515037999501b495947",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_2652e016",
+        "filename": "src/ve.DiffMatchPatch.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 2849
+      },
+      "writtenOn": "2017-08-29T18:45:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e7eab26_7be3a89c",
       "revId": "374cf0714b6dc0d1dad2b515037999501b495947",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
