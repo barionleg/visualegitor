@@ -22,6 +22,30 @@
       "revId": "a5e36bccf712548fa0e7d8fbeb72159ad7c56fa7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_f6652d1a",
+        "filename": "src/dm/ve.dm.TreeModifier.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-09-06T16:53:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e7eab26_e0e80a7d",
+      "range": {
+        "startLine": 445,
+        "startChar": 9,
+        "endLine": 445,
+        "endChar": 29
+      },
+      "revId": "a5e36bccf712548fa0e7d8fbeb72159ad7c56fa7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
