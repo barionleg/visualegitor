@@ -186,7 +186,7 @@ ve.ui.CommandHelpDialog.static.buildKeyNode = function ( key ) {
 		// Might need to expand this if other keys show up, but currently things like
 		// the tab-character only come from Triggers and are pre-localized there into
 		// "tab" anyway.
-		key = 'space';
+		key = ( new ve.ui.Trigger( 'space' ) ).getMessage();
 	}
 	return $( '<kbd>' ).attr( 'data-key', key ).text( key );
 };
