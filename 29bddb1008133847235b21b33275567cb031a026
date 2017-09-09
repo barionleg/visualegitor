@@ -34,6 +34,24 @@
       "revId": "29bddb1008133847235b21b33275567cb031a026",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_af8418b6",
+        "filename": "src/ce/styles/nodes/ve.ce.ActiveNode.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-09-09T21:29:20Z",
+      "side": 1,
+      "message": "ok - we should comment this weirdness though and link to the  ug",
+      "parentUuid": "4e7eab26_6f79502a",
+      "revId": "29bddb1008133847235b21b33275567cb031a026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
