@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_b4e0eb26",
+        "filename": "src/ce/styles/nodes/ve.ce.ActiveNode.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-09-09T19:41:52Z",
+      "side": 1,
+      "message": "should we use -moz-none in ve-ce-focusableNode then?",
+      "revId": "29bddb1008133847235b21b33275567cb031a026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
