@@ -16,6 +16,24 @@
       "revId": "29bddb1008133847235b21b33275567cb031a026",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_6f79502a",
+        "filename": "src/ce/styles/nodes/ve.ce.ActiveNode.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 910
+      },
+      "writtenOn": "2017-09-09T21:03:55Z",
+      "side": 1,
+      "message": "We can for consistency, but there\u0027s no semantic difference.\n\n\"Starting with Firefox 21 none behaves like -moz-none.\"\n\nhttps://developer.mozilla.org/en-US/docs/Web/CSS/user-select",
+      "parentUuid": "4e7eab26_b4e0eb26",
+      "revId": "29bddb1008133847235b21b33275567cb031a026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
