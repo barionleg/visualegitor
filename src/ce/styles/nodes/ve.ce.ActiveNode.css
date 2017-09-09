@@ -10,5 +10,5 @@
 
 .ve-ce-focusableNode .ve-ce-activeNode,
 .ve-ce-focusableNode .ve-ce-activeNode * {
-	-moz-user-select: text;
+	-moz-user-select: -moz-text;
 }
