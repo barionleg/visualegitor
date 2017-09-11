@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_2ae80fdd",
+        "filename": "src/ui/ve.ui.Trigger.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2017-09-11T15:16:00Z",
+      "side": 1,
+      "message": "I learned something today -- I\u0027d never seen this symbol used. I\u0027m more used to the return one \u0027⏎\u0027, even for enter.\n\nThis might just be my own ignorance in play, but I worry this will cause confusion. If I see \"⌘+⌤ Confirm change\" I would have no idea what to press.",
+      "revId": "eac6d419f60a8f93db231ba1873c42fc7c68cb29",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
