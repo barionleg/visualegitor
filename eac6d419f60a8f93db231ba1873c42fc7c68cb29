@@ -16,6 +16,24 @@
       "revId": "eac6d419f60a8f93db231ba1873c42fc7c68cb29",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_e52f989a",
+        "filename": "src/ui/ve.ui.Trigger.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-09-11T18:28:40Z",
+      "side": 1,
+      "message": "well it\u0027s unlikely anyone will bind to the \u0027enter\u0027 key, but this is the correct symbol and even appears on some mac keyboards",
+      "parentUuid": "4e7eab26_2ae80fdd",
+      "revId": "eac6d419f60a8f93db231ba1873c42fc7c68cb29",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
