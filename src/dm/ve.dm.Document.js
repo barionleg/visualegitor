@@ -1697,3 +1697,17 @@ ve.dm.Document.prototype.getLang = function () {
 ve.dm.Document.prototype.getDir = function () {
 	return this.dir;
 };
+
+/**
+ * @inheritdoc
+ */
+ve.dm.Document.prototype.onNodeAttached = function ( node ) {
+	console.log( 'attached', node );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.dm.Document.prototype.onNodeDetached = function ( node ) {
+	console.log( 'detached', node );
+};

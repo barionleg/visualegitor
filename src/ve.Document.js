@@ -563,3 +563,23 @@ ve.Document.prototype.rangeInsideOneLeafNode = function ( range ) {
 	var selected = this.selectNodes( range, 'leaves' );
 	return selected.length === 1 && selected[ 0 ].nodeRange.containsRange( range ) && selected[ 0 ].indexInNode === undefined;
 };
+
+/**
+ * Callback when a node is attached with ve.Node#setDocument
+ *
+ * The node and all its children are guaranteed to be attached
+ *
+ * @method
+ * @param {ve.Node} node The node attached
+ */
+ve.Document.prototype.onNodeAttached = null;
+
+/**
+ * Callback when a node is attached with ve.Node#setDocument
+ *
+ * The node and all its children are guaranteed to be attached
+ *
+ * @method
+ * @param {ve.Node} node The node detached
+ */
+ve.Document.prototype.onNodeDetached = null;
