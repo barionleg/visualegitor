@@ -19,6 +19,10 @@ ve.dm.BranchNodeStub.static.name = 'branch-stub';
 
 ve.dm.BranchNodeStub.static.matchTagNames = [];
 
+ve.dm.BranchNodeStub.prototype.onNodeAttached = ve.Document.prototype.onNodeAttached;
+
+ve.dm.BranchNodeStub.prototype.onNodeDetached = ve.Document.prototype.onNodeDetached;
+
 ve.dm.nodeFactory.register( ve.dm.BranchNodeStub );
 
 /* Tests */
