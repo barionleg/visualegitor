@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_5c851e5c",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-09-12T15:38:21Z",
+      "side": 1,
+      "message": "Yes, ultimately this should become a registry...",
+      "parentUuid": "4e7eab26_fc32caee",
+      "range": {
+        "startLine": 311,
+        "startChar": 1,
+        "endLine": 311,
+        "endChar": 28
+      },
+      "revId": "dd2251b738bb15c7942f7d945eadb268cdcaad71",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_1c1b1675",
         "filename": "src/ce/ve.ce.Surface.js",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2017-09-12T15:33:26Z",
       "side": 1,
       "message": "We could support this right now, right?",
+      "range": {
+        "startLine": 312,
+        "startChar": 1,
+        "endLine": 312,
+        "endChar": 29
+      },
+      "revId": "dd2251b738bb15c7942f7d945eadb268cdcaad71",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_3cadb2e7",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-09-12T15:38:21Z",
+      "side": 1,
+      "message": "sort of, but it would set direction without language, also I don\u0027t know of any real-world clients that emit this - and I don\u0027t know if there are any arguments.",
+      "parentUuid": "4e7eab26_1c1b1675",
       "range": {
         "startLine": 312,
         "startChar": 1,
