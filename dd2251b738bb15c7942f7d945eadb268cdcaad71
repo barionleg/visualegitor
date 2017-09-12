@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "4e7eab26_dc990eca",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2017-09-12T15:38:52Z",
+      "side": 1,
+      "message": "Right-o.",
+      "parentUuid": "4e7eab26_5c851e5c",
+      "range": {
+        "startLine": 311,
+        "startChar": 1,
+        "endLine": 311,
+        "endChar": 28
+      },
+      "revId": "dd2251b738bb15c7942f7d945eadb268cdcaad71",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e7eab26_1c1b1675",
         "filename": "src/ce/ve.ce.Surface.js",
         "patchSetId": 2
@@ -84,6 +108,30 @@
       "side": 1,
       "message": "sort of, but it would set direction without language, also I don\u0027t know of any real-world clients that emit this - and I don\u0027t know if there are any arguments.",
       "parentUuid": "4e7eab26_1c1b1675",
+      "range": {
+        "startLine": 312,
+        "startChar": 1,
+        "endLine": 312,
+        "endChar": 29
+      },
+      "revId": "dd2251b738bb15c7942f7d945eadb268cdcaad71",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_5cec3e26",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2017-09-12T15:38:52Z",
+      "side": 1,
+      "message": "Understood.",
+      "parentUuid": "4e7eab26_3cadb2e7",
       "range": {
         "startLine": 312,
         "startChar": 1,
