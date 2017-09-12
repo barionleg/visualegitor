@@ -269,7 +269,7 @@ QUnit.test( 'Diffing', function ( assert ) {
 				newDoc: '<p>bar</p><p>foo</p>',
 				expected:
 					'<p data-diff-action="none" data-diff-move="up">bar</p>' +
-					'<p data-diff-action="none" data-diff-move="down">foo</p>'
+					'<p data-diff-action="none">foo</p>'
 			},
 			{
 				msg: 'Paragraphs moved and modified',
@@ -279,7 +279,7 @@ QUnit.test( 'Diffing', function ( assert ) {
 					'<div class="ve-ui-diffElement-doc-child-change" data-diff-move="up">' +
 						'<p>quux whee<ins data-diff-action="insert">!</ins></p>' +
 					'</div>' +
-					'<div class="ve-ui-diffElement-doc-child-change" data-diff-move="down">' +
+					'<div class="ve-ui-diffElement-doc-child-change">' +
 						'<p>foo bar baz<ins data-diff-action="insert">!</ins></p>' +
 					'</div>'
 			},
