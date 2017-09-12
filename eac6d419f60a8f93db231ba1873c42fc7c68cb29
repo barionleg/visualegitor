@@ -34,6 +34,24 @@
       "revId": "eac6d419f60a8f93db231ba1873c42fc7c68cb29",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e7eab26_bcbe82f8",
+        "filename": "src/ui/ve.ui.Trigger.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2017-09-12T15:43:25Z",
+      "side": 1,
+      "message": "We actually have such a shortcut in the command help dialog right now! It\u0027s in the \"dialogs\" section, the one for submit-dialog.",
+      "parentUuid": "4e7eab26_e52f989a",
+      "revId": "eac6d419f60a8f93db231ba1873c42fc7c68cb29",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
