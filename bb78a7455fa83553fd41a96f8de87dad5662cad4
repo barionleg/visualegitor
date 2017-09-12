@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_0bc2eb88",
+        "filename": "src/dm/ve.dm.VisualDiff.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-09-12T21:04:34Z",
+      "side": 1,
+      "message": "do we need to initialise these arrays with a length? all the values will be empty (undefined) either way, and we never access the .length property...",
+      "revId": "bb78a7455fa83553fd41a96f8de87dad5662cad4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
