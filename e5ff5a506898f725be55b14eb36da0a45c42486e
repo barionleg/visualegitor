@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7eab26_a2589cfe",
+        "filename": "src/ce/ve.ce.BranchNode.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-09-12T17:34:45Z",
+      "side": 1,
+      "message": "what is this disconnecting? the one above is obvious, but maybe a comment?",
+      "revId": "e5ff5a506898f725be55b14eb36da0a45c42486e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
