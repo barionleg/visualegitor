@@ -280,6 +280,19 @@ ve.ce.Surface.static.unsafeAttributes = [
 ];
 
 /**
+ * Values of InputEvent.inputType which map to a history action
+ *
+ * These are used when the user selects undo/redo from the context
+ * menu in Chrome.
+ *
+ * @type {Object}
+ */
+ve.ce.Surface.static.historyEvents = {
+	historyUndo: 'undo',
+	historyRedo: 'redo'
+};
+
+/**
  * Cursor holder template
  *
  * @static
@@ -2439,7 +2452,14 @@ ve.ce.Surface.prototype.selectAll = function () {
  * @method
  * @param {jQuery.Event} e The input event
  */
-ve.ce.Surface.prototype.onDocumentInput = function () {
+ve.ce.Surface.prototype.onDocumentInput = function ( e ) {
+	var inputType = e.originalEvent.inputType;
+
+	if ( inputType && inputType in this.constructor.static.historyEvents ) {
+		this.getSurface().executeCommand( this.constructor.static.historyEvents[ inputType ] );
+		e.preventDefault();
+		return;
+	}
 	this.incRenderLock();
 	try {
 		this.surfaceObserver.pollOnce();
