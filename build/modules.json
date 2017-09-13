@@ -641,9 +641,6 @@
 	},
 	"visualEditor.rebase": {
 		"scripts": [
-			"src/ve.utils-es6.js",
-			"src/dm/ve.dm.RebaseDocState.js",
-			"src/dm/ve.dm.RebaseServer.js",
 			"src/dm/ve.dm.RebaseClient.js",
 			"src/dm/ve.dm.SurfaceSynchronizer.js",
 			"src/ui/widgets/ve.ui.AuthorItemWidget.js",
@@ -693,6 +690,7 @@
 			"tests/dm/ve.dm.Transaction.test.js",
 			"tests/dm/ve.dm.TransactionBuilder.test.js",
 			"tests/dm/ve.dm.Change.test.js",
+			"src/ve.utils-es6.js",
 			"tests/dm/ve.dm.TestRebaseClient.js",
 			"tests/dm/ve.dm.TestRebaseServer.js",
 			"tests/dm/ve.dm.RebaseServer.test.js",
