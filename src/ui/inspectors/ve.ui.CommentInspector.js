@@ -40,7 +40,7 @@ ve.ui.CommentInspector.static.actions = [
 		flags: 'destructive',
 		modes: 'edit'
 	}
-].concat( ve.ui.FragmentInspector.static.actions );
+].concat( ve.ui.CommentInspector.super.static.actions );
 
 /**
  * Handle frame ready events.
