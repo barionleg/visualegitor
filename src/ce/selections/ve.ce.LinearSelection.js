@@ -154,7 +154,7 @@ ve.ce.LinearSelection.prototype.getNodeClientRectFromRange = function ( range ) 
 	} else if ( node.nodeType === Node.ELEMENT_NODE && ( offset === 0 || offset === node.childNodes.length ) ) {
 		node = offset ? node.lastChild : node.firstChild;
 		// Nail heights are 0, so use the annotation's height
-		if ( node.classList.contains( 've-ce-nail' ) ) {
+		if ( node && node.classList.contains( 've-ce-nail' ) ) {
 			annotationNode = offset ? node.previousSibling : node.nextSibling;
 			fixHeight = annotationNode.getClientRects()[ 0 ].height;
 		}
