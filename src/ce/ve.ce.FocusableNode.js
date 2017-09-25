@@ -23,6 +23,7 @@
  * @constructor
  * @param {jQuery} [$focusable=this.$element] Primary element user is focusing on
  * @param {Object} [config] Configuration options
+ * @param {jQuery} [$bounding=$focusable] Element to consider for bounding box calculations (e.g. attaching inpsectors)
  * @cfg {string[]} [classes] CSS classes to be added to the highlight container
  */
 ve.ce.FocusableNode = function VeCeFocusableNode( $focusable, config ) {
@@ -34,6 +35,7 @@ ve.ce.FocusableNode = function VeCeFocusableNode( $focusable, config ) {
 	this.isFocusableSetup = false;
 	this.$highlights = $( '<div>' ).addClass( 've-ce-focusableNode-highlights' );
 	this.$focusable = $focusable || this.$element;
+	this.$bounding = config.$bounding || this.$focusable;
 	this.focusableSurface = null;
 	this.rects = null;
 	this.boundingRect = null;
@@ -752,6 +754,12 @@ ve.ce.FocusableNode.prototype.getRects = function () {
  * @return {Object|null} Top, left, bottom & right positions of the focusable node relative to the surface
  */
 ve.ce.FocusableNode.prototype.getBoundingRect = function () {
+	var surfaceOffset, allRects;
+	if ( !this.$bounding.is( this.$focusable ) ) {
+		surfaceOffset = this.focusableSurface.getSurface().getBoundingClientRect();
+		allRects = this.constructor.static.getRectsForElement( this.$bounding, surfaceOffset );
+		return allRects.boundingRect;
+	}
 	if ( !this.highlighted ) {
 		this.calculateHighlights();
 	}
