@@ -76,6 +76,12 @@ ve.ce.LinearEnterKeyDownHandler.static.execute = function ( surface, e ) {
 		surface.model.change( txRemove, new ve.dm.LinearSelection( documentModel, range ) );
 	}
 
+	// Adjust our range to be in cursor-appropriate places, now we know it's collapsed.
+	range = new ve.Range(
+		surface.model.documentModel.getNearestCursorOffset( range.from, 1 ) ||
+		surface.model.documentModel.getNearestCursorOffset( range.from, -1 )
+	);
+
 	node = surface.documentView.getBranchNodeFromOffset( range.from );
 	if ( node !== null ) {
 		// assertion: node is certainly a contentBranchNode
