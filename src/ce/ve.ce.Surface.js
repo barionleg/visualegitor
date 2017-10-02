@@ -2762,7 +2762,7 @@ ve.ce.Surface.prototype.renderSelectedContentBranchNode = function () {
  * @param {ve.ce.RangeState} newState The changed range state
  */
 ve.ce.Surface.prototype.handleObservedChanges = function ( oldState, newState ) {
-	var newSelection, transaction, removedUnicorns,
+	var newSelection, transaction, removedUnicorns, offset,
 		activeNode, coveringRange, nodeRange, containsStart, containsEnd,
 		surface = this,
 		dmDoc = this.getModel().getDocument(),
@@ -2812,9 +2812,16 @@ ve.ce.Surface.prototype.handleObservedChanges = function ( oldState, newState ) 
 				// cursorable location. Failure to do this can result in
 				// strange behavior when inserting content immediately after
 				// clicking on the surface.
-				newSelection = new ve.dm.LinearSelection( dmDoc, new ve.Range(
-					dmDoc.getNearestCursorOffset( newState.veRange.from, 1 )
-				) );
+				offset = dmDoc.getNearestCursorOffset( newState.veRange.from, 0 );
+				if ( dmDoc.data.getNearestContentOffset( offset ) === -1 ) {
+					// First, if we're in a document which outright doesn't
+					// have any cursorable locations, don't try to set one.
+					// These would be niche documents, since slugs normally
+					// catch those cases.
+					newSelection = new ve.dm.NullSelection( dmDoc );
+				} else {
+					newSelection = new ve.dm.LinearSelection( dmDoc, new ve.Range( offset ) );
+				}
 			} else {
 				newSelection = new ve.dm.LinearSelection( dmDoc, newState.veRange );
 			}
