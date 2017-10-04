@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6af365_f22671c8",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 2818,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-10-04T16:00:16Z",
+      "side": 1,
+      "message": "you say cursorable here, but the check is for a content offset?",
+      "revId": "500d45995d92460b8ae0ec8d280d363c37fbd164",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
