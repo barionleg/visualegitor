@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6af365_e8c2fd87",
+        "filename": "src/ve.Document.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2017-10-05T05:41:36Z",
+      "side": 1,
+      "message": "I think this should have a different name. onFoo is for event bindings, and this is a method that *emits* an event.",
+      "range": {
+        "startLine": 595,
+        "startChar": 22,
+        "endLine": 595,
+        "endChar": 36
+      },
+      "revId": "ad04c4168dc8653356bfd050f663c74303a2c0e4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_48c6a99e",
+        "filename": "tests/dm/ve.dm.BranchNode.test.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2017-10-05T05:41:36Z",
+      "side": 1,
+      "message": "?!?! Will adding a Document method to the BranchNodeStub class even work?",
+      "revId": "ad04c4168dc8653356bfd050f663c74303a2c0e4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
