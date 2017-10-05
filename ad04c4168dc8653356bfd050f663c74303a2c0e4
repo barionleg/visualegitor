@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "0e6af365_8844a16f",
+        "filename": "src/ve.Document.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2017-10-05T05:42:51Z",
+      "side": 1,
+      "message": "descendAnts (twice in this block, and twice in the next one)",
+      "range": {
+        "startLine": 32,
+        "startChar": 59,
+        "endLine": 32,
+        "endChar": 70
+      },
+      "revId": "ad04c4168dc8653356bfd050f663c74303a2c0e4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6af365_e8c2fd87",
         "filename": "src/ve.Document.js",
         "patchSetId": 4
