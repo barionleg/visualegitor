@@ -2475,7 +2475,7 @@ ve.ce.Surface.prototype.selectAll = function () {
  * @param {jQuery.Event} e The input event
  */
 ve.ce.Surface.prototype.onDocumentInput = function ( e ) {
-	var inputType = e.originalEvent.inputType,
+	var inputType = e.originalEvent ? e.originalEvent.inputType : '',
 		inputTypeCommands = this.constructor.static.inputTypeCommands;
 
 	if ( inputType && inputTypeCommands.hasOwnProperty( inputType ) ) {
