@@ -174,16 +174,8 @@ ve.ce.BranchNode.prototype.onModelUpdate = function ( transaction ) {
  * @param {...ve.dm.BranchNode} [nodes] Variadic list of nodes to insert
  */
 ve.ce.BranchNode.prototype.onSplice = function ( index ) {
-	var i, j,
-		length,
-		args = [],
-		anchorCeNode,
-		prevCeNode,
-		anchorDomNode,
-		afterAnchor,
-		node,
-		parentNode,
-		removals;
+	var i, length, removals, position, j,
+		args = [];
 
 	for ( i = 0, length = arguments.length; i < length; i++ ) {
 		args.push( arguments[ i ] );
@@ -205,37 +197,14 @@ ve.ce.BranchNode.prototype.onSplice = function ( index ) {
 		removals[ i ].$element.detach();
 	}
 	if ( args.length >= 3 ) {
-		if ( index > 0 ) {
-			// Get the element before the insertion
-			anchorCeNode = this.children[ index - 1 ];
-			// If the CE node is a text node, its $element will be empty
-			// Look at its previous sibling, which cannot be a text node
-			if ( anchorCeNode.getType() === 'text' ) {
-				prevCeNode = this.children[ index - 2 ];
-				if ( prevCeNode ) {
-					anchorDomNode = prevCeNode.$element.last()[ 0 ].nextSibling;
-				} else {
-					anchorDomNode = this.$element[ 0 ].firstChild;
-				}
-			} else {
-				anchorDomNode = anchorCeNode.$element.last()[ 0 ];
-			}
-		}
+		position = this.getDomPosition( index );
 		for ( i = args.length - 1; i >= 2; i-- ) {
 			args[ i ].attach( this );
-			if ( anchorDomNode ) {
-				// DOM equivalent of $( anchorDomNode ).after( args[i].$element );
-				afterAnchor = anchorDomNode.nextSibling;
-				parentNode = anchorDomNode.parentNode;
-				for ( j = 0, length = args[ i ].$element.length; j < length; j++ ) {
-					parentNode.insertBefore( args[ i ].$element[ j ], afterAnchor );
-				}
-			} else {
-				// DOM equivalent of this.$element.prepend( args[j].$element );
-				node = this.$element[ 0 ];
-				for ( j = args[ i ].$element.length - 1; j >= 0; j-- ) {
-					node.insertBefore( args[ i ].$element[ j ], node.firstChild );
-				}
+			for ( j = 0, length = args[ i ].$element.length; j < length; j++ ) {
+				position.node.insertBefore(
+					args[ i ].$element[ j ],
+					position.node.children[ position.offset ]
+				);
 			}
 			if ( this.live !== args[ i ].isLive() ) {
 				args[ i ].setLive( this.live );
@@ -385,4 +354,46 @@ ve.ce.BranchNode.prototype.destroy = function () {
 
 	// Parent method
 	ve.ce.BranchNode.super.prototype.destroy.call( this );
+};
+
+/**
+ * Get the DOM position (node and offset) corresponding to a position in this node
+ *
+ * The node/offset have the same semantics as a DOM Selection focusNode/focusOffset
+ *
+ * @param {number} offset The offset inside this node of the required position
+ * @return {Object|null} The DOM position
+ * @return {Node} return.node DOM node; guaranteed to be this node's final DOM node
+ * @return {number} return.offset DOM offset
+ */
+ve.ce.BranchNode.prototype.getDomPosition = function ( offset ) {
+	var ceNode, domOffset,
+		domNode = this.$element.last()[ 0 ],
+		textNodeCount = 0;
+	while ( true ) {
+		offset--;
+		ceNode = this.children[ offset ];
+		if ( !ceNode ) {
+			// No children with DOM nodes; return the first offset inside this
+			// node's DOM node.
+			domOffset = 0;
+			break;
+		}
+		if ( ceNode.getType() === 'text' ) {
+			// Text nodes do not have a reference to their DOM nodes, so must
+			// adjust for this later
+			textNodeCount++;
+			continue;
+		}
+		if ( ceNode.$element.length > 0 ) {
+			domOffset = Array.prototype.indexOf.call( domNode.childNodes, ceNode.$element.last()[ 0 ] ) + 1;
+			break;
+		}
+		// Else no DOM representation (e.g. a MetaItem); move to previous element
+	}
+	if ( textNodeCount > 1 ) {
+		// The browser may normalize adjacent text nodes
+		ve.log( 'Multiple adjacent text nodes; expect trouble' );
+	}
+	return { node: domNode, offset: domOffset + textNodeCount };
 };
