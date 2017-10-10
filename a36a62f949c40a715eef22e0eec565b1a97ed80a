@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6af365_d4d9b62d",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 2816,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-10-10T12:17:49Z",
+      "side": 1,
+      "message": "this value is equal to:\n\n getNearestCursorOffset( getNearestContentOffset( from ) )\n\nIs that any different from just\n\n getNearestContentOffset( from )?\n\nIf not then we could just do this check on veRange.from, and then only compute NearestCursorOffset if it\u0027s !\u003d\u003d -1",
+      "revId": "a36a62f949c40a715eef22e0eec565b1a97ed80a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
