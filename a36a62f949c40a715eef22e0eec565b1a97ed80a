@@ -16,6 +16,24 @@
       "revId": "a36a62f949c40a715eef22e0eec565b1a97ed80a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_6ac81e78",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 2816,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2017-10-10T22:19:02Z",
+      "side": 1,
+      "message": "That\u0027s a fair point, it shouldn\u0027t make a difference. Not that this case should come up much, so in practice it\u0027s not much of an optimization, but...",
+      "parentUuid": "0e6af365_d4d9b62d",
+      "revId": "a36a62f949c40a715eef22e0eec565b1a97ed80a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
