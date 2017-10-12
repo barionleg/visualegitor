@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0e6af365_6244ba1c",
+        "filename": "src/ve.Document.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-10-12T06:23:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e6af365_8844a16f",
+      "range": {
+        "startLine": 32,
+        "startChar": 59,
+        "endLine": 32,
+        "endChar": 70
+      },
+      "revId": "ad04c4168dc8653356bfd050f663c74303a2c0e4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6af365_e8c2fd87",
         "filename": "src/ve.Document.js",
         "patchSetId": 4
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "0e6af365_42497635",
+        "filename": "src/ve.Document.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-10-12T06:23:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e6af365_e8c2fd87",
+      "range": {
+        "startLine": 595,
+        "startChar": 22,
+        "endLine": 595,
+        "endChar": 36
+      },
+      "revId": "ad04c4168dc8653356bfd050f663c74303a2c0e4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e6af365_48c6a99e",
         "filename": "tests/dm/ve.dm.BranchNode.test.js",
         "patchSetId": 4
@@ -59,6 +107,24 @@
       "writtenOn": "2017-10-05T05:41:36Z",
       "side": 1,
       "message": "?!?! Will adding a Document method to the BranchNodeStub class even work?",
+      "revId": "ad04c4168dc8653356bfd050f663c74303a2c0e4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_224ec23c",
+        "filename": "tests/dm/ve.dm.BranchNode.test.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-10-12T06:23:51Z",
+      "side": 1,
+      "message": "It works in the sense that it runs and prevents the setDocument test below from throwing.\n\nIt also works in the duck typing sense: the actual methods only require the class to have an \u0027emit\u0027 method.\n\nThis deserves a comment, as your punctuation sequence suggests :)",
+      "parentUuid": "0e6af365_48c6a99e",
       "revId": "ad04c4168dc8653356bfd050f663c74303a2c0e4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
