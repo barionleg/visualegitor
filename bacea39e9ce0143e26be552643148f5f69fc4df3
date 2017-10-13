@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6af365_c5256204",
+        "filename": "src/ce/ve.ce.BranchNode.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2017-10-13T21:46:27Z",
+      "side": 1,
+      "message": "This word doesn\u0027t mean anything in this position, the return value doesn\u0027t have a name.",
+      "range": {
+        "startLine": 363,
+        "startChar": 25,
+        "endLine": 363,
+        "endChar": 33
+      },
+      "revId": "bacea39e9ce0143e26be552643148f5f69fc4df3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_458892ec",
+        "filename": "src/ce/ve.ce.BranchNode.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2017-10-13T21:46:27Z",
+      "side": 1,
+      "message": "You should document more clearly what this offset is. I think I understand it from context, but it\u0027s not documented at all.",
+      "range": {
+        "startLine": 365,
+        "startChar": 34,
+        "endLine": 365,
+        "endChar": 40
+      },
+      "revId": "bacea39e9ce0143e26be552643148f5f69fc4df3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_659fd606",
+        "filename": "src/ce/ve.ce.BranchNode.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2017-10-13T21:46:27Z",
+      "side": 1,
+      "message": "I worry that text nodes will not be handled correctly when there are annotations in play. If some of the text in the middle of the text node is bolded, you\u0027ll end up with three nodes (a text node, a \u003cb\u003e node, and another text node), and I think this will return the first text node rather than the second one. Also node that if there is annotated text at the end, the final node might be an annotation node instead of a text node.\n\nThe way I dealt with this in the old code was to go to the next non-text *CE* node, and work backwards from there.\n\nEither way, even if this does work correctly, please add a unit test for this case.",
+      "revId": "bacea39e9ce0143e26be552643148f5f69fc4df3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
