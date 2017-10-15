@@ -186,12 +186,23 @@ ve.extendObject = $.extend;
 /**
  * Feature detect if the browser supports the Internationalization API
  *
- * Should work in Chrome>=24, FF>=29 & IE>=11
+ * Support: IE<=10, Chrome<=23, Firefox<=28, Safari<9.1
  *
  * @private
  * @property {boolean}
  */
 ve.supportsIntl = !!( window.Intl && typeof Intl.Collator === 'function' );
+
+/**
+ * Feature detect if the browser supports position: sticky
+ *
+ * Support: IE, Edge<16, Chrome<56, Firefox<32, Safari<6.1
+ */
+ve.supportsSticky = ( function () {
+	var style = document.createElement( 'div' ).style;
+	style.cssText = 'position:-webkit-sticky;position:sticky;';
+	return style.position.indexOf( 'sticky' ) !== -1;
+}() );
 
 /**
  * @private
