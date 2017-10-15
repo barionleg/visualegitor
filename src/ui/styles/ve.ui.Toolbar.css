@@ -20,7 +20,13 @@
 .ve-ui-toolbar-floating > .oo-ui-toolbar-bar {
 	position: fixed;
 	top: 0;
-	border-top: 0;
+}
+
+.ve-ui-positionedTargetToolbar-sticky {
+	position: -webkit-sticky;
+	position: sticky;
+	top: 0;
+	z-index: 2;
 }
 
 .ve-ui-toolbar.oo-ui-toolbar-position-bottom > .oo-ui-toolbar-bar {

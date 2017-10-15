@@ -28,8 +28,17 @@ ve.ui.PositionedTargetToolbar = function VeUiPositionedTargetToolbar( target, co
 	this.elementOffset = null;
 	this.onWindowScrollThrottled = ve.throttle( this.onWindowScroll.bind( this ), 250 );
 
+	// Support: IE, Edge<16, Chrome<56, Firefox<32, Safari<6.1
+	this.canStick = ( function () {
+		var style = document.createElement( 'test' ).style;
+		style.cssText = 'position:-webkit-sticky;position:sticky;';
+		return style.position.indexOf( 'sticky' ) !== -1;
+	}() );
+
 	// Initialization
-	this.$element.addClass( 've-ui-positionedTargetToolbar' );
+	this.$element
+		.addClass( 've-ui-positionedTargetToolbar' )
+		.toggleClass( 've-ui-positionedTargetToolbar-sticky', this.canStick );
 };
 
 /* Inheritance */
@@ -89,7 +98,7 @@ ve.ui.PositionedTargetToolbar.prototype.onWindowResize = function () {
 	// Update offsets after resize (see #float)
 	this.calculateOffset();
 
-	if ( this.floating ) {
+	if ( !this.canStick && this.floating ) {
 		this.$bar.css( {
 			left: this.elementOffset.left,
 			right: this.elementOffset.right
@@ -134,15 +143,17 @@ ve.ui.PositionedTargetToolbar.prototype.getElementOffset = function () {
 ve.ui.PositionedTargetToolbar.prototype.float = function () {
 	if ( !this.floating ) {
 		this.height = this.$element.height();
-		// When switching into floating mode, set the height of the wrapper and
-		// move the bar to the same offset as the in-flow element
-		this.$element
-			.css( 'height', this.height )
-			.addClass( 've-ui-toolbar-floating' );
-		this.$bar.css( {
-			left: this.elementOffset.left,
-			right: this.elementOffset.right
-		} );
+		if ( !this.canStick ) {
+			// When switching into floating mode, set the height of the wrapper and
+			// move the bar to the same offset as the in-flow element
+			this.$element
+				.css( 'height', this.height )
+				.addClass( 've-ui-toolbar-floating' );
+			this.$bar.css( {
+				left: this.elementOffset.left,
+				right: this.elementOffset.right
+			} );
+		}
 		this.floating = true;
 		this.emit( 'resize' );
 		this.onViewportResize();
@@ -155,10 +166,12 @@ ve.ui.PositionedTargetToolbar.prototype.float = function () {
 ve.ui.PositionedTargetToolbar.prototype.unfloat = function () {
 	if ( this.floating ) {
 		this.height = 0;
-		this.$element
-			.css( 'height', '' )
-			.removeClass( 've-ui-toolbar-floating' );
-		this.$bar.css( { left: '', right: '' } );
+		if ( !this.canStick ) {
+			this.$element
+				.css( 'height', '' )
+				.removeClass( 've-ui-toolbar-floating' );
+			this.$bar.css( { left: '', right: '' } );
+		}
 		this.floating = false;
 		this.emit( 'resize' );
 		this.onViewportResize();
