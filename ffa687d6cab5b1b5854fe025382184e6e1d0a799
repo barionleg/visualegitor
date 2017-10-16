@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e6af365_fad6f9c5",
+        "filename": "src/ui/styles/ve.ui.Toolbar.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2017-10-16T19:11:28Z",
+      "side": 1,
+      "message": "Support: comment here too?",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 39
+      },
+      "revId": "ffa687d6cab5b1b5854fe025382184e6e1d0a799",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_dad9b5f9",
+        "filename": "src/ui/ve.ui.PositionedTargetToolbar.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2017-10-16T19:11:28Z",
+      "side": 1,
+      "message": "Is there a normal way of expressing this for grep-ability?",
+      "range": {
+        "startLine": 31,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 59
+      },
+      "revId": "ffa687d6cab5b1b5854fe025382184e6e1d0a799",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
