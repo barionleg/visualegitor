@@ -128,6 +128,24 @@
       "revId": "bacea39e9ce0143e26be552643148f5f69fc4df3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6af365_c8c9eeaf",
+        "filename": "src/ce/ve.ce.BranchNode.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2017-10-16T15:57:14Z",
+      "side": 1,
+      "message": "Unit test?",
+      "parentUuid": "0e6af365_912c8c46",
+      "revId": "bacea39e9ce0143e26be552643148f5f69fc4df3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
