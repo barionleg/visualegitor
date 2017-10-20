@@ -27,7 +27,7 @@ OO.inheritClass( ve.dm.FlatLinearData, ve.dm.LinearData );
 /* Methods */
 
 /**
- * Get the type of the element at a specified offset.
+ * Get the type of the element at a specified offset
  *
  * @method
  * @param {number} offset Data offset
