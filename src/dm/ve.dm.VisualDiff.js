@@ -433,7 +433,10 @@ ve.dm.VisualDiff.prototype.getDocChildDiff = function ( oldDocChild, newDocChild
 	newDocChildTree = new this.treeDiffer.Tree( newDocChild, ve.DiffTreeNode );
 
 	treeDiff = new this.treeDiffer.Differ( oldDocChildTree, newDocChildTree )
-		.transactions[ oldDocChildTree.orderedNodes.length - 1 ][ newDocChildTree.orderedNodes.length - 1 ];
+		.transactions;
+	if ( treeDiff !== null ) {
+		treeDiff = treeDiff[ oldDocChildTree.orderedNodes.length - 1 ][ newDocChildTree.orderedNodes.length - 1 ];
+	}
 
 	// Length of old content is length of old node minus the open and close
 	// tags for each child node
