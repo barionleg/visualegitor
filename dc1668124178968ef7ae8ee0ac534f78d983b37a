@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce637b91_3500856d",
+        "filename": "lib/treeDiffer/treeDiffer-dist.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-10-23T16:16:57Z",
+      "side": 1,
+      "message": "we should apply this patch upstream too: https://github.com/Tchanders/treeDiffer.js",
+      "revId": "dc1668124178968ef7ae8ee0ac534f78d983b37a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
