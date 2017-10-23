@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce637b91_35c3a50c",
+        "filename": "lib/treeDiffer/treeDiffer-dist.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2017-10-23T16:17:43Z",
+      "side": 1,
+      "message": "Can this library be versioned to make tracking changes like this easier?",
+      "range": {
+        "startLine": 2,
+        "startChar": 3,
+        "endLine": 2,
+        "endChar": 41
+      },
+      "revId": "73563f48af0d49f9853f4d53bd929defc249ebdb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
