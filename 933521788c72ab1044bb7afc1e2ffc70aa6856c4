@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce637b91_d8f5994d",
+        "filename": "src/ui/dialogs/ve.ui.FindAndReplaceDialog.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-10-24T15:19:18Z",
+      "side": 1,
+      "message": "I think this should probably go after renderFragments below.",
+      "revId": "933521788c72ab1044bb7afc1e2ffc70aa6856c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
