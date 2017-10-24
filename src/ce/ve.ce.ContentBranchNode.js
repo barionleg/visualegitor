@@ -480,12 +480,14 @@ ve.ce.ContentBranchNode.prototype.renderContents = function () {
  * @method
  */
 ve.ce.ContentBranchNode.prototype.onTeardown = function () {
-	var ceSurface = this.getRoot().getSurface();
+	var ceSurface = this.getRoot() ? this.getRoot().getSurface() : null;
 
 	// Parent method
 	ve.ce.ContentBranchNode.super.prototype.onTeardown.call( this );
 
-	ceSurface.setNotUnicorning( this );
+	if ( ceSurface ) {
+		ceSurface.setNotUnicorning( this );
+	}
 };
 
 /**
