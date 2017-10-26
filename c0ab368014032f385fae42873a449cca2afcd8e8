@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e5d03d5_145a36fa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 2604
+      },
+      "writtenOn": "2017-10-26T21:00:34Z",
+      "side": 1,
+      "message": "Follow coding guidelines in commit msgs as well? :P  `position: sticky;`",
+      "revId": "c0ab368014032f385fae42873a449cca2afcd8e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e5d03d5_5468ae84",
+        "filename": "src/ui/styles/ve.ui.Toolbar.css",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 2604
+      },
+      "writtenOn": "2017-10-26T21:00:34Z",
+      "side": 1,
+      "message": "Why does the parent get `position: sticky` here while above the child element? To circumvent browser quirks?",
+      "revId": "c0ab368014032f385fae42873a449cca2afcd8e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e5d03d5_f40f5ae2",
+        "filename": "src/ui/ve.ui.PositionedTargetToolbar.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 2604
+      },
+      "writtenOn": "2017-10-26T21:00:34Z",
+      "side": 1,
+      "message": "Wonder why we leave this one in, sticky is a certain special case like `ve-ui-positionedTargetToolbar` itself? And the class is not in use.",
+      "revId": "c0ab368014032f385fae42873a449cca2afcd8e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e5d03d5_54ff4ea7",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 2604
+      },
+      "writtenOn": "2017-10-26T21:00:34Z",
+      "side": 1,
+      "message": "Ha, nice.",
+      "revId": "c0ab368014032f385fae42873a449cca2afcd8e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
