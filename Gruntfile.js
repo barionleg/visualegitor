@@ -325,8 +325,7 @@ module.exports = function ( grunt ) {
 					subdir: '.',
 					reporters: [
 						{ type: 'json-summary', file: 'coverage-summary.json' },
-						{ type: 'html' },
-						{ type: 'text-summary' }
+						{ type: 'html' }
 					],
 					// https://github.com/karma-runner/karma-coverage/blob/v1.1.1/docs/configuration.md#check
 					check: {
