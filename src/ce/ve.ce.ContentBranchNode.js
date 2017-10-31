@@ -159,6 +159,18 @@ ve.ce.ContentBranchNode.prototype.onSplice = function ( index, howmany ) {
 /**
  * @inheritdoc
  */
+ve.ce.ContentBranchNode.prototype.detach = function () {
+	var root = this.getRoot(),
+		ceSurface = root && root.getSurface();
+	if ( ceSurface ) {
+		ceSurface.setNotUnicorning( this );
+	}
+	ve.ce.ContentBranchNode.super.prototype.detach.call( this );
+};
+
+/**
+ * @inheritdoc
+ */
 ve.ce.ContentBranchNode.prototype.setupBlockSlugs = function () {
 	// Respect render lock
 	// TODO: Can this check be moved into the parent method?
