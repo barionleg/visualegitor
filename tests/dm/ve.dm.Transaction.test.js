@@ -208,3 +208,91 @@ QUnit.test( 'getModifiedRange', function ( assert ) {
 		assert.equalRange( txBuilder.getTransaction().getModifiedRange( doc ), cases[ i ].range, cases[ i ].msg );
 	}
 } );
+
+QUnit.test( 'Metadata transactions', function ( assert ) {
+	var doc, surface,
+		fooMeta = { type: 'alienMeta', attributes: { label: 'foo' } },
+		barMeta = { type: 'alienMeta', attributes: { label: 'bar' } },
+		data = [
+			{ type: 'paragraph' },
+			'x',
+			{ type: '/paragraph' },
+			fooMeta,
+			{ type: '/alienMeta' },
+			barMeta,
+			{ type: '/alienMeta' },
+			{ type: 'internalList' },
+			{ type: '/internalList' }
+		],
+		events = [];
+
+	function getElements( metaList ) {
+		return metaList.items.map( function ( item ) {
+			return item.element;
+		} );
+	}
+
+	assert.expect( 8 );
+
+	doc = new ve.dm.Document( [] );
+	surface = new ve.dm.Surface( doc );
+	surface.metaList.connect( null, {
+		insert: function ( item ) {
+			events.push( [ 'insert', item.element ] );
+		},
+		remove: function ( item ) {
+			events.push( [ 'remove', item.element ] );
+		}
+	} );
+	surface.change( ve.dm.TransactionBuilder.static.newFromInsertion( doc, 0, data ) );
+	assert.deepEqual(
+		getElements( surface.metaList ),
+		[ fooMeta, barMeta ],
+		'Metadata inserted into meta list'
+	);
+	doc.documentNode.children[ 1 ].remove();
+	assert.deepEqual(
+		doc.data.data,
+		data.slice( 0, 3 ).concat( data.slice( 5 ) ),
+		'Metadata removed from linear data'
+	);
+	assert.deepEqual(
+		getElements( surface.metaList ),
+		[ barMeta ],
+		'Metadata removed from meta list'
+	);
+	doc.documentNode.children[ 1 ].replaceWith( fooMeta );
+	assert.deepEqual(
+		doc.data.data,
+		data.slice( 0, 5 ).concat( data.slice( 7 ) ),
+		'Metadata replaced in linear data'
+	);
+	assert.deepEqual(
+		getElements( surface.metaList ),
+		[ fooMeta ],
+		'Metadata replaced in meta list'
+	);
+	surface.metaList.insertMeta( barMeta );
+	assert.deepEqual(
+		doc.data.data,
+		data,
+		'Metadata re-inserted into linear data'
+	);
+	assert.deepEqual(
+		getElements( surface.metaList ),
+		[ fooMeta, barMeta ],
+		'Metadata re-inserted into meta list'
+	);
+	assert.deepEqual(
+		events,
+		[
+			[ 'insert', fooMeta ],
+			[ 'insert', barMeta ],
+			[ 'remove', fooMeta ],
+			[ 'remove', barMeta ],
+			[ 'insert', fooMeta ],
+			[ 'insert', barMeta ]
+		],
+		'Meta list events'
+	);
+} );
