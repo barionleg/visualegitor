@@ -202,7 +202,6 @@ ve.dm.Document.prototype.buildNodeTree = function () {
 			if ( !inTextNode ) {
 				// Create a lengthless text node
 				node = new ve.dm.TextNode();
-				node.setDocument( doc );
 				// Put the node on the current inner stack
 				currentStack.push( node );
 				currentNode = node;
@@ -226,7 +225,6 @@ ve.dm.Document.prototype.buildNodeTree = function () {
 				// Branch or leaf node opening
 				// Create a childless node
 				node = ve.dm.nodeFactory.createFromElement( this.data.getData( i ) );
-				node.setDocument( doc );
 				// Put the childless node on the current inner stack
 				currentStack.push( node );
 				if ( ve.dm.nodeFactory.canNodeHaveChildren( node.getType() ) ) {

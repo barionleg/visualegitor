@@ -46,6 +46,24 @@ ve.dm.MetaItem.static.group = 'misc';
 /* Methods */
 
 /**
+ * Remove item from the meta list
+ */
+ve.dm.MetaItem.prototype.remove = function () {
+	XXXXXXXXX apply a TX
+
+	var index,
+		parent = this.getParent();
+	if ( !parent ) {
+		throw new Error( 'Cannot remove parentless item' );
+	}
+	index = parent.children.indexOf( this );
+	if ( index === -1 ) {
+		throw new Error( 'Not in child list of parent' );
+	}
+	parent.splice( index, 1 );
+};
+
+/**
  * Replace item with another in-place.
  *
  * Pass a plain object rather than a MetaItem into this function unless you know what you're doing.
@@ -53,6 +71,17 @@ ve.dm.MetaItem.static.group = 'misc';
  * @param {Object|ve.dm.MetaItem} item Item to replace this item with
  */
 ve.dm.MetaItem.prototype.replaceWith = function () {
+	var index,
+		parent = this.getParent();
+	if ( !parent ) {
+		throw new Error( 'Cannot replace parentless item' );
+	}
+	index = parent.children.indexOf( this );
+	if ( index === -1 ) {
+		throw new Error( 'Not in child list of parent' );
+	}
+	parent.splice( index, 1 );
+	var parent = t
 	throw new Error( 'Not implemented: replaceWith' );
 };
 
