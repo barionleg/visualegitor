@@ -14,28 +14,19 @@
  * @param {ve.dm.Surface} surface Surface model
  */
 ve.dm.MetaList = function VeDmMetaList( surface ) {
-	var i, metadata, item;
-
 	// Mixin constructors
 	OO.EventEmitter.call( this );
 
-	// Properties
 	this.surface = surface;
 	this.document = surface.getDocument();
-	// A sparse array of meta items in document order
+
+	// Sorted array of attached ve.dm.MetaItem nodes in document order
 	this.items = [];
 
-	// Event handlers
-	this.document.connect( this, { transact: 'onTransact' } );
-
-	// Populate from document
-	metadata = this.document.getMetadata();
-	for ( i in metadata ) {
-		if ( Object.prototype.hasOwnProperty.call( metadata, i ) ) {
-			item = metadata[ i ];
-			this.items[ i ] = item;
-		}
-	}
+	this.document.connect( this, {
+		nodeAttached: 'onNodeAttached',
+		nodeDetached: 'onNodeDetached'
+	} );
 };
 
 /* Inheritance */
@@ -52,55 +43,48 @@ OO.mixinClass( ve.dm.MetaList, OO.EventEmitter );
 /**
  * @event remove
  * @param {ve.dm.MetaItem} item Item that was removed
- * @param {number} offset Linear model offset that the item was at
  */
 
 /* Methods */
 
 /**
- * Event handler for transactions on the document.
+ * If a ve.dm.MetaItem was attached, insert it into items in document order
  *
- * When a transaction occurs, update this list to account for it:
- * - insert items for new metadata that was inserted
- * - remove items for metadata that was removed
- * - translate offsets and recompute indices for metadata that has shifted
- *
- * @param {ve.dm.Transaction} tx Transaction that was applied to the document
- * @fires insert
- * @fires remove
+ * @param {ve.dm.Node} node The node that was attached
  */
-ve.dm.MetaList.prototype.onTransact = function ( tx ) {
-	var i, len, op,
-		newPosition = 0;
-	for ( i = 0, len = tx.operations.length; i < len; i++ ) {
-		op = tx.operations[ i ];
-		if ( op.type === 'retain' ) {
-			newPosition += op.length;
-		} else if ( op.type === 'replace' ) {
-			ve.sparseSplice(
-				this.items,
-				newPosition,
-				op.remove.length,
-				this.document.getMetadata( new ve.Range(
-					newPosition,
-					newPosition + op.insert.length
-				) )
-			);
-			newPosition += op.insert.length;
-		} else if ( op.type !== 'annotate' && op.type !== 'attribute' ) {
-			throw new Error( 'Unknown operation type: ' + op.type );
-		}
+ve.dm.MetaList.prototype.onNodeAttached = function ( node ) {
+	var i,
+		offsetPath = node.getOffsetPath();
+	if ( node instanceof ve.dm.MetaItem ) {
+		i = OO.binarySearch( this.items, function searchFunc( other ) {
+			return ve.compareTuples( offsetPath, other.getOffsetPath() );
+		}, true );
+		this.items.splice( i, 0, node );
+		node.attachToMetaList( this );
+		this.emit( 'insert', node );
 	}
 };
 
 /**
- * Get the item at a given offset, if there is one.
+ * If a ve.dm.MetaItem was detached, remove it from items
  *
- * @param {number} offset Offset in the linear model
- * @return {ve.dm.MetaItem|null} The item at offset, or null if not found
+ * @param {ve.dm.Node} node The node that was detached
  */
-ve.dm.MetaList.prototype.getItemAt = function ( offset ) {
-	return this.items[ offset ] || null;
+ve.dm.MetaList.prototype.onNodeDetached = function ( node ) {
+	var i;
+	if ( node instanceof ve.dm.MetaItem ) {
+		i = this.items.indexOf( node );
+		if ( i !== -1 ) {
+			node.detachFromMetaList( this );
+			this.items.splice( i, 1 );
+			this.emit( 'remove', node );
+		}
+	}
+};
+
+ve.dm.MetaList.prototype.indexOf = function ( item, group ) {
+	var items = group ? this.getItemsInGroup( group ) : this.items;
+	return items.indexOf( item );
 };
 
 /**
@@ -125,7 +109,7 @@ ve.dm.MetaList.prototype.getItemsInGroup = function ( group ) {
  * @return {ve.dm.MetaItem[]} Array of items in the list
  */
 ve.dm.MetaList.prototype.getAllItems = function () {
-	return this.items.filter( function () { return true; } );
+	return this.items.slice( 0 );
 };
 
 /**
@@ -135,10 +119,13 @@ ve.dm.MetaList.prototype.getAllItems = function () {
  * Pass a plain object rather than a MetaItem into this function unless you know what you're doing.
  *
  * @param {Object|ve.dm.MetaItem} meta Metadata element (or MetaItem) to insert
- * @param {number} [offset] Offset to insert the new metadata, or undefined to add to the end
+ * @param {number} offset Document offset to insert at; must be a valid offset for metadata
  */
 ve.dm.MetaList.prototype.insertMeta = function ( meta, offset ) {
-	var tx, closeMeta;
+	var closeMeta, tx;
+	if ( arguments[ 2 ] !== undefined ) {
+		throw new Error( 'Old "index" argument is no longer supported' );
+	}
 	if ( meta instanceof ve.dm.MetaItem ) {
 		meta = meta.getElement();
 	}
@@ -147,5 +134,44 @@ ve.dm.MetaList.prototype.insertMeta = function ( meta, offset ) {
 		offset = this.document.getInternalList().getListNode().getOuterRange().start;
 	}
 	tx = ve.dm.TransactionBuilder.static.newFromInsertion( this.document, offset, [ meta, closeMeta ] );
+	this.surface.change( tx );
+};
+
+/**
+ * Remove a meta item from the document. This builds and processes a transaction that removes the
+ * associated metadata from the document.
+ *
+ * @param {ve.dm.MetaItem} item Item to remove
+ */
+ve.dm.MetaList.prototype.removeMeta = function ( item ) {
+	var tx;
+	tx = ve.dm.TransactionBuilder.static.newFromRemoval(
+		this.document,
+		item.getOuterRange(),
+		true
+	);
+	this.surface.change( tx );
+};
+
+/**
+ * Replace a MetaItem with another in-place.
+ *
+ * Pass a plain object rather than a MetaItem into this function unless you know what you're doing.
+ *
+ * @param {ve.dm.MetaItem} oldItem Old item to replace
+ * @param {Object|ve.dm.MetaItem} meta Metadata element (or MetaItem) to insert
+ */
+ve.dm.MetaList.prototype.replaceMeta = function ( oldItem, meta ) {
+	var closeMeta, tx;
+	if ( meta instanceof ve.dm.MetaItem ) {
+		meta = meta.getElement();
+	}
+	closeMeta = { type: '/' + meta.type };
+	tx = ve.dm.TransactionBuilder.static.newFromReplacement(
+		this.document,
+		oldItem.getOuterRange(),
+		[ meta, closeMeta ],
+		true
+	);
 	this.surface.change( tx );
 };
