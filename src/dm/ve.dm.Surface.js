@@ -24,7 +24,7 @@ ve.dm.Surface = function VeDmSurface( doc, config ) {
 	// Properties
 	this.documentModel = doc;
 	this.sourceMode = !!config.sourceMode;
-	this.metaList = new ve.dm.MetaList( this );
+	this.metaList = new ve.dm.MetaList( this.getDocument() );
 	this.selection = new ve.dm.NullSelection( this.getDocument() );
 	this.selectionBefore = new ve.dm.NullSelection( this.getDocument() );
 	this.translatedSelection = null;
