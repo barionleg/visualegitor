@@ -428,3 +428,23 @@ ve.Node.prototype.findParent = function ( type ) {
 		return !( node instanceof type );
 	} );
 };
+
+/**
+ * Get the offset path from the document node to this node
+ *
+ * @return {number[]|null} The offset path, or null if not attached to a ve.dm.DocumentNode
+ */
+ve.Node.prototype.getOffsetPath = function () {
+	var node = this,
+		path = [];
+	while ( true ) {
+		if ( node instanceof ve.dm.DocumentNode ) {
+			return path;
+		}
+		if ( !node.parent ) {
+			return null;
+		}
+		path.unshift( node.parent.indexOf( node ) );
+		node = node.parent;
+	}
+};
