@@ -1061,6 +1061,42 @@ ve.dm.Surface.prototype.getModifiedRanges = function ( includeCollapsed, include
 };
 
 /**
+ * Get a VE source-mode surface offset from a plaintext source offset.
+ *
+ * @param {number} offset Source text offset
+ * @return {number} Source surface offset
+ */
+ve.dm.Surface.prototype.getOffsetFromSourceOffset = function ( offset ) {
+	var lineOffset = 0,
+		line = 0,
+		lines = this.getDocument().getDocumentNode().getChildren();
+
+	while ( lineOffset < offset + 1 ) {
+		lineOffset += lines[ line ].getLength() + 1;
+		line++;
+	}
+	return offset + line;
+};
+
+/**
+ * Get a VE source-mode surface range from plaintext source offsets.
+ *
+ * @param {number} from Source text from offset
+ * @param {number} [to] Source text to offset, omit for a collapsed range
+ * @return {ve.Range} Source surface offset
+ */
+ve.dm.Surface.prototype.getRangeFromSourceOffsets = function ( from, to ) {
+	var fromOffset = this.getOffsetFromSourceOffset( from );
+	return new ve.Range(
+		fromOffset,
+		// Skip toOffset calculation if collapsed
+		to === undefined || to === from ?
+			fromOffset :
+			this.getOffsetFromSourceOffset( to )
+	);
+};
+
+/**
  * Get the author ID
  *
  * @return {number} The author ID
