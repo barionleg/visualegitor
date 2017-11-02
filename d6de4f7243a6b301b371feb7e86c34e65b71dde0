@@ -34,6 +34,24 @@
       "revId": "d6de4f7243a6b301b371feb7e86c34e65b71dde0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_08e3ded5",
+        "filename": "src/dm/ve.dm.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 1074,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2017-11-02T17:39:50Z",
+      "side": 1,
+      "message": "Actually, sorry, I think I ran it wrong in my head. That ‘getLength’ will error on a non-object rather than letting it run off into the infinite. Still, probably shouldn’t.",
+      "parentUuid": "6e5a8fde_48beb6d2",
+      "revId": "d6de4f7243a6b301b371feb7e86c34e65b71dde0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
