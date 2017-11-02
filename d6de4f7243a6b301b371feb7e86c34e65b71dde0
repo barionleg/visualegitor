@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e5a8fde_b5a6a7a5",
+        "filename": "src/dm/ve.dm.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 1074,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2017-11-02T16:11:15Z",
+      "side": 1,
+      "message": "This will infinite-loop on an out of range input. It\u0027s fine if it fails, but locking the thread up is bad.",
+      "revId": "d6de4f7243a6b301b371feb7e86c34e65b71dde0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
