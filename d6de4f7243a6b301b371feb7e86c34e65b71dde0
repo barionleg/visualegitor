@@ -52,6 +52,24 @@
       "revId": "d6de4f7243a6b301b371feb7e86c34e65b71dde0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_ddbd8164",
+        "filename": "src/dm/ve.dm.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 1074,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-11-03T13:06:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e5a8fde_08e3ded5",
+      "revId": "d6de4f7243a6b301b371feb7e86c34e65b71dde0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
