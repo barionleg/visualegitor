@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "6e5a8fde_bb619134",
+        "filename": "src/ui/ve.ui.PositionedTargetToolbar.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2017-11-06T22:34:49Z",
+      "side": 1,
+      "message": "If nothing else, it is convenient to have these CSS classes when debugging. They make it easy to find out which piece of code generated the DOM element you\u0027re inspecting.",
+      "parentUuid": "8e5d03d5_f40f5ae2",
+      "revId": "c0ab368014032f385fae42873a449cca2afcd8e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e5d03d5_54ff4ea7",
         "filename": "src/ve.utils.js",
         "patchSetId": 3
