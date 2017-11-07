@@ -2101,6 +2101,28 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 				msg: 'Paste API HTML used if important attributes dropped'
 			},
 			{
+				rangeOrSelection: new ve.Range( 1 ),
+				pasteHtml: '<span data-ve-clipboard-key="0.13811087369534492-4">&nbsp;</span><s rel="ve:Alien">Alien</s>',
+				pasteTargetHtml: '<p><span>Alien</span></p>',
+				fromVe: true,
+				expectedOps: [
+					[
+						{ type: 'retain', length: 1 },
+						{
+							type: 'replace',
+							insert: [
+								{ type: 'alienInline' },
+								{ type: '/alienInline' }
+							],
+							remove: []
+						},
+						{ type: 'retain', length: docLen - 1 }
+					]
+				],
+				expectedRangeOrSelection: new ve.Range( 3 ),
+				msg: 'Paste API HTML still cleaned up if used when important attributes dropped'
+			},
+			{
 				rangeOrSelection: {
 					type: 'table',
 					tableRange: new ve.Range( 12, 22 ),
