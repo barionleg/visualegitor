@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e5a8fde_71724ce4",
+        "filename": "src/ce/ve.ce.ContentBranchNode.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-11-08T17:39:55Z",
+      "side": 1,
+      "message": "Hmmm, I\u0027m wondering whether this setNotUnicorning logic should actually be in a new ve.ce.ContentBranchNode#detach (which would then call an the base method ve.Node#detach). \n\nI wonder when exactly does onTeardown get called - can a node actually get torn down yet remain non-detached?",
+      "range": {
+        "startLine": 489,
+        "startChar": 2,
+        "endLine": 489,
+        "endChar": 37
+      },
+      "revId": "4e24d20d89330a81c679b8e937d0b7d60994a663",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
