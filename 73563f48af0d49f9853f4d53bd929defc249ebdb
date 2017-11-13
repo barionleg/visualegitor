@@ -22,6 +22,30 @@
       "revId": "73563f48af0d49f9853f4d53bd929defc249ebdb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e5a8fde_dbe3fb30",
+        "filename": "lib/treeDiffer/treeDiffer-dist.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 2849
+      },
+      "writtenOn": "2017-11-13T21:29:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce637b91_35c3a50c",
+      "range": {
+        "startLine": 2,
+        "startChar": 3,
+        "endLine": 2,
+        "endChar": 41
+      },
+      "revId": "73563f48af0d49f9853f4d53bd929defc249ebdb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
