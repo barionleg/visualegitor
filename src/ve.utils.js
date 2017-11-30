@@ -1043,6 +1043,10 @@ ve.fixBase = function ( targetDoc, sourceDoc, fallbackBase ) {
 ve.targetLinksToNewWindow = function ( container ) {
 	// Make all links open in a new window
 	Array.prototype.forEach.call( container.querySelectorAll( 'a[href]' ), function ( el ) {
+		var rel = el.getAttribute( 'rel' );
+		if ( !rel || rel.indexOf( 'noopener' ) === -1 ) {
+			el.setAttribute( 'rel', rel ? ( rel + ' noopener' ) : 'noopener' );
+		}
 		el.setAttribute( 'target', '_blank' );
 	} );
 };
