@@ -1043,8 +1043,19 @@ ve.fixBase = function ( targetDoc, sourceDoc, fallbackBase ) {
 ve.targetLinksToNewWindow = function ( container ) {
 	// Make all links open in a new window
 	Array.prototype.forEach.call( container.querySelectorAll( 'a[href]' ), function ( el ) {
+		ve.appendToRel( el, 'noopener' );
 		el.setAttribute( 'target', '_blank' );
 	} );
+};
+
+ve.appendToRel = function ( element, value ) {
+	var rel = element.getAttribute( 'rel' );
+	if ( !rel ) {
+		return element.setAttribute( 'rel', value );
+	}
+	if ( ( ' ' + rel + ' ' ).indexOf( ' ' + value + ' ' ) === -1 ) {
+		return element.setAttribute( 'rel', rel ? ( rel + ' ' + value ) : value );
+	}
 };
 
 /**
