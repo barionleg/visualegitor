@@ -16,6 +16,24 @@
       "revId": "73a69f79103e26fe9819d6157002970fff481cb8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_b8165f4b",
+        "filename": "src/ui/contextitems/ve.ui.LinkContextItem.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2017-12-01T17:23:13Z",
+      "side": 1,
+      "message": "It wouldn\u0027t here, since this is a brand new \u003ca\u003e which couldn\u0027t have a @rel previously. The util function would, though, which I\u0027ll fix.",
+      "parentUuid": "eee3df47_4fb2eb93",
+      "revId": "73a69f79103e26fe9819d6157002970fff481cb8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
