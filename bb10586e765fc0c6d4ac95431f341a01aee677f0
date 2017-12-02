@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eee3df47_24bd06d2",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 1046,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-12-02T12:55:57Z",
+      "side": 1,
+      "message": "what if the rel is already noopener :) unfortunately there\u0027s no classList-like API for rel\u0027s",
+      "revId": "bb10586e765fc0c6d4ac95431f341a01aee677f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
