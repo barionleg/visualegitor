@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eee3df47_e4ff9efa",
+        "filename": "tests/dm/ve.dm.MetaList.test.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2017-12-02T02:11:47Z",
+      "side": 0,
+      "message": "You\u0027re deleting this test file, but not deleting the MetaList class. Some of the test cases in here might be useful (with modifications) for testing the MetaList behavior that you did keep.",
+      "revId": "c7ef30a30f63579fee6e21cd79d59dde24905153",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
