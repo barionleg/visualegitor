@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eee3df47_078b9f73",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 1047,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-12-04T10:36:14Z",
+      "side": 1,
+      "message": "this is probably close enough, but technically you should use a regex to ensure you don\u0027t match \"notnoopener\", so\n\n rel.match( /(^|\\s)noopener(\\s|$)/ )\n\nor equivalent",
+      "revId": "ddd36d6ad1c51f9bb62311c7c7d14bf084ad4051",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
