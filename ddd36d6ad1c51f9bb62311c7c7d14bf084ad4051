@@ -34,6 +34,24 @@
       "revId": "ddd36d6ad1c51f9bb62311c7c7d14bf084ad4051",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_a79f5354",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 1047,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-12-04T11:08:12Z",
+      "side": 1,
+      "message": "Allegedly the anchorElement has a refList property: https://developer.mozilla.org/en-US/docs/Web/API/HTMLAnchorElement/relList which is a DOMTokenList\n\nBut in reality it appears that Chrome doesn\u0027t support this yet.\n\nSadly you can\u0027t construct a DOMTokenList directly, but if you wanted exact DOMTokenList behaviour you could extract one from a dummy AnchorElement on which you set the class attribute.\n\n var a \u003d document.createElement( \u0027a\u0027 );\n a.className \u003d rel;\n if ( a.classList.contains( \u0027noopener\u0027 ) ) { ...",
+      "parentUuid": "eee3df47_673d4b8a",
+      "revId": "ddd36d6ad1c51f9bb62311c7c7d14bf084ad4051",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
