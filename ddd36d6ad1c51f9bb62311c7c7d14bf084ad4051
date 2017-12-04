@@ -16,6 +16,24 @@
       "revId": "ddd36d6ad1c51f9bb62311c7c7d14bf084ad4051",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_673d4b8a",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 1047,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2017-12-04T10:38:22Z",
+      "side": 1,
+      "message": "looking at the jQuery for $.hasClass, they assume the whitespace must be spaces, and do\n\n ( \u0027 \u0027 + classVal + \u0027 \u0027 ).indexOf( \u0027 \u0027 + query + \u0027  \u0027 );\n\ni.e.\n\n ( \u0027 \u0027 + rel + \u0027 \u0027 ).indexOf( \u0027 noopener \u0027 );\n\nso you could do that as well",
+      "parentUuid": "eee3df47_078b9f73",
+      "revId": "ddd36d6ad1c51f9bb62311c7c7d14bf084ad4051",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
