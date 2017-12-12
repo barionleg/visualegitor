@@ -111,6 +111,7 @@ ve.dm.SourceSurfaceFragment.prototype.insertDocument = function ( doc, newDocRan
 		fragment = this;
 
 	if ( !range ) {
+		this.pushPending( $.Deferred().resolve().promise() );
 		return this;
 	}
 
@@ -146,18 +147,19 @@ ve.dm.SourceSurfaceFragment.prototype.insertDocument = function ( doc, newDocRan
 		return ve.dm.SourceSurfaceFragment.super.prototype.insertContent.call( this, data );
 	}
 
-	this.convertToSource( doc )
-		.done( function ( source ) {
+	this.pushPending( this.convertToSource( doc ).then(
+		function ( source ) {
 			if ( source ) {
 				// Parent method
 				ve.dm.SourceSurfaceFragment.super.prototype.insertContent.call( fragment, source.trim() );
 			} else {
 				fragment.removeContent();
 			}
-		} )
-		.fail( function () {
+		},
+		function () {
 			ve.error( 'Failed to convert document', arguments );
-		} );
+		} )
+	);
 
 	return this;
 };
