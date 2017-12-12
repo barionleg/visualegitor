@@ -79,7 +79,8 @@ ve.test.utils.runSurfacePasteTest = function ( assert, htmlOrView, pasteHtml, in
 			ve.test.utils.createSurfaceViewFromHtml( htmlOrView ) :
 			htmlOrView,
 		model = view.getModel(),
-		doc = model.getDocument();
+		doc = model.getDocument(),
+		done = assert.async();
 
 	function summary( el ) {
 		return ve.getDomElementSummary( el, true );
@@ -117,49 +118,52 @@ ve.test.utils.runSurfacePasteTest = function ( assert, htmlOrView, pasteHtml, in
 	}
 	view.afterPaste( testEvent );
 
-	if ( expectedOps ) {
-		expectedOps = getLayoutSpecific( expectedOps );
-		ops = [];
-		if ( model.getHistory().length ) {
-			txs = model.getHistory()[ 0 ].transactions;
-			for ( i = 0; i < txs.length; i++ ) {
-				txops = ve.copy( txs[ i ].getOperations() );
-				for ( j = 0; j < txops.length; j++ ) {
-					if ( txops[ j ].remove ) {
-						ve.dm.example.postprocessAnnotations( txops[ j ].remove, doc.getStore() );
-						ve.dm.example.removeOriginalDomElements( txops[ j ].remove );
+	setTimeout( function () {
+		if ( expectedOps ) {
+			expectedOps = getLayoutSpecific( expectedOps );
+			ops = [];
+			if ( model.getHistory().length ) {
+				txs = model.getHistory()[ 0 ].transactions;
+				for ( i = 0; i < txs.length; i++ ) {
+					txops = ve.copy( txs[ i ].getOperations() );
+					for ( j = 0; j < txops.length; j++ ) {
+						if ( txops[ j ].remove ) {
+							ve.dm.example.postprocessAnnotations( txops[ j ].remove, doc.getStore() );
+							ve.dm.example.removeOriginalDomElements( txops[ j ].remove );
+						}
+						if ( txops[ j ].insert ) {
+							ve.dm.example.postprocessAnnotations( txops[ j ].insert, doc.getStore() );
+							ve.dm.example.removeOriginalDomElements( txops[ j ].insert );
+						}
 					}
-					if ( txops[ j ].insert ) {
-						ve.dm.example.postprocessAnnotations( txops[ j ].insert, doc.getStore() );
-						ve.dm.example.removeOriginalDomElements( txops[ j ].insert );
-					}
+					ops.push( txops );
 				}
-				ops.push( txops );
+			}
+			assert.equalLinearData( ops, expectedOps, msg + ': data' );
+			if ( store ) {
+				for ( i in store ) {
+					assert.deepEqual( doc.getStore().value( i ).map( summary ), store[ i ].map( summary ), ': store value ' + i );
+				}
 			}
 		}
-		assert.equalLinearData( ops, expectedOps, msg + ': data' );
-		if ( store ) {
-			for ( i in store ) {
-				assert.deepEqual( doc.getStore().value( i ).map( summary ), store[ i ].map( summary ), ': store value ' + i );
+		if ( expectedRangeOrSelection ) {
+			expectedSelection = ve.test.utils.selectionFromRangeOrSelection( model.getDocument(), getLayoutSpecific( expectedRangeOrSelection ) );
+			assert.equalHash( model.getSelection(), expectedSelection, msg + ': selection' );
+		}
+		if ( expectedHtml ) {
+			htmlDoc = ve.dm.converter.getDomFromModel( doc );
+			assert.strictEqual( htmlDoc.body.innerHTML, expectedHtml, msg + ': HTML' );
+		}
+		if ( reuseView ) {
+			while ( model.hasBeenModified() ) {
+				model.undo();
 			}
+			model.truncateUndoStack();
+		} else {
+			view.destroy();
 		}
-	}
-	if ( expectedRangeOrSelection ) {
-		expectedSelection = ve.test.utils.selectionFromRangeOrSelection( model.getDocument(), getLayoutSpecific( expectedRangeOrSelection ) );
-		assert.equalHash( model.getSelection(), expectedSelection, msg + ': selection' );
-	}
-	if ( expectedHtml ) {
-		htmlDoc = ve.dm.converter.getDomFromModel( doc );
-		assert.strictEqual( htmlDoc.body.innerHTML, expectedHtml, msg + ': HTML' );
-	}
-	if ( reuseView ) {
-		while ( model.hasBeenModified() ) {
-			model.undo();
-		}
-		model.truncateUndoStack();
-	} else {
-		view.destroy();
-	}
+		done();
+	} );
 };
 
 ve.test.utils.TestEvent = function TestEvent( data ) {
