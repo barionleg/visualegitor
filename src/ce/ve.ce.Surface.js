@@ -2347,22 +2347,24 @@ ve.ce.Surface.prototype.afterPaste = function () {
 		}
 	}
 
-	if ( this.getSelection().isNativeCursor() ) {
-		// Restore focus and scroll position
-		this.$documentNode[ 0 ].focus();
-		this.$window.scrollTop( beforePasteData.scrollTop );
-		// setTimeout: Firefox sometimes doesn't change scrollTop immediately when pasting
-		// line breaks at the end of a line so do it again later.
-		setTimeout( function () {
+	targetFragment.getPending().then( function () {
+		if ( view.getSelection().isNativeCursor() ) {
+			// Restore focus and scroll position
+			view.$documentNode[ 0 ].focus();
 			view.$window.scrollTop( beforePasteData.scrollTop );
-		} );
-	}
+			// setTimeout: Firefox sometimes doesn't change scrollTop immediately when pasting
+			// line breaks at the end of a line so do it again later.
+			setTimeout( function () {
+				view.$window.scrollTop( beforePasteData.scrollTop );
+			} );
+		}
 
-	// If orignal selection was linear, switch to end of pasted text
-	if ( fragment.getSelection() instanceof ve.dm.LinearSelection ) {
-		targetFragment.collapseToEnd().select();
-		this.checkSequences( /* isPaste */ true );
-	}
+		// If orignal selection was linear, switch to end of pasted text
+		if ( fragment.getSelection() instanceof ve.dm.LinearSelection ) {
+			targetFragment.collapseToEnd().select();
+			view.checkSequences( /* isPaste */ true );
+		}
+	} );
 };
 
 /**
