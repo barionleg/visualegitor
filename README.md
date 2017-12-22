@@ -7,6 +7,7 @@ JavaScript and runs in a web browser.
 For more information about this project, check out the [VisualEditor][]
 page on mediawiki.
 
+foobar
 
 ## Developing and installing
 
