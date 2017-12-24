@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "eee3df47_bb3db4ba",
+        "filename": "src/dm/ve.dm.Converter.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-12-24T06:50:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eee3df47_a9bf2ff5",
+      "range": {
+        "startLine": 245,
+        "startChar": 17,
+        "endLine": 245,
+        "endChar": 27
+      },
+      "revId": "cb5a6d091577201d439138cf28cf1f6ccd041ba1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eee3df47_a94e0f3a",
         "filename": "src/dm/ve.dm.Converter.js",
         "patchSetId": 2
@@ -36,6 +60,24 @@
       "writtenOn": "2017-12-02T02:11:47Z",
       "side": 1,
       "message": "AIUI this ends up dropping that annotation from the meta item by moving it, but I think that\u0027s OK.",
+      "revId": "cb5a6d091577201d439138cf28cf1f6ccd041ba1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_9b3a70bf",
+        "filename": "src/dm/ve.dm.Converter.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-12-24T06:50:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eee3df47_a94e0f3a",
       "revId": "cb5a6d091577201d439138cf28cf1f6ccd041ba1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "eee3df47_5b6f48c0",
+        "filename": "src/dm/ve.dm.Converter.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-12-24T06:50:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eee3df47_2942ff13",
+      "range": {
+        "startLine": 268,
+        "startChar": 45,
+        "endLine": 268,
+        "endChar": 49
+      },
+      "revId": "cb5a6d091577201d439138cf28cf1f6ccd041ba1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eee3df47_c9cc338f",
         "filename": "src/dm/ve.dm.Converter.js",
         "patchSetId": 2
@@ -76,6 +142,24 @@
       "writtenOn": "2017-12-02T02:11:47Z",
       "side": 1,
       "message": "With this change, canContainContentStack now appears to be useless. It\u0027s still written to, but not read from any more.",
+      "revId": "cb5a6d091577201d439138cf28cf1f6ccd041ba1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_9b61d0d3",
+        "filename": "src/dm/ve.dm.Converter.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 1430,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-12-24T06:50:04Z",
+      "side": 1,
+      "message": "Ooh yes, thanks",
+      "parentUuid": "eee3df47_c9cc338f",
       "revId": "cb5a6d091577201d439138cf28cf1f6ccd041ba1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -105,6 +189,30 @@
     },
     {
       "key": {
+        "uuid": "eee3df47_5bae28e5",
+        "filename": "src/dm/ve.dm.Document.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-12-24T06:50:04Z",
+      "side": 1,
+      "message": "Aaaaaaaarghhhhh good catch! :-S It was in TransactionProcessor but got rebased away when crossing the TreeModifier change",
+      "parentUuid": "eee3df47_240a2625",
+      "range": {
+        "startLine": 702,
+        "startChar": 52,
+        "endLine": 702,
+        "endChar": 68
+      },
+      "revId": "cb5a6d091577201d439138cf28cf1f6ccd041ba1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eee3df47_491023ae",
         "filename": "src/dm/ve.dm.MetaList.js",
         "patchSetId": 2
@@ -116,6 +224,24 @@
       "writtenOn": "2017-12-02T02:11:47Z",
       "side": 1,
       "message": "Any reason why you changed .slice( 0 ) to .filter()?",
+      "revId": "cb5a6d091577201d439138cf28cf1f6ccd041ba1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eee3df47_bbb3f44b",
+        "filename": "src/dm/ve.dm.MetaList.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-12-24T06:50:04Z",
+      "side": 1,
+      "message": "Duh, rebase artifact again - thanks",
+      "parentUuid": "eee3df47_491023ae",
       "revId": "cb5a6d091577201d439138cf28cf1f6ccd041ba1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -139,6 +265,24 @@
     },
     {
       "key": {
+        "uuid": "cee8db29_0ba725a4",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-12-24T06:50:04Z",
+      "side": 1,
+      "message": "It\u0027s needed for changesSinceLoad which I inadvertently let get rebased away",
+      "parentUuid": "eee3df47_89718b0e",
+      "revId": "cb5a6d091577201d439138cf28cf1f6ccd041ba1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eee3df47_c952736a",
         "filename": "src/dm/ve.dm.TransactionBuilder.js",
         "patchSetId": 2
@@ -150,6 +294,24 @@
       "writtenOn": "2017-12-02T02:11:47Z",
       "side": 1,
       "message": "What bad things will happen if it is?",
+      "revId": "cb5a6d091577201d439138cf28cf1f6ccd041ba1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cee8db29_2e482d32",
+        "filename": "src/dm/ve.dm.TransactionBuilder.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 734,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-12-24T06:50:04Z",
+      "side": 1,
+      "message": "Done (I think nothing much, but the maintainer should bear the fact in mind, so I\u0027ve adjusted the comment accordingly)",
+      "parentUuid": "eee3df47_c952736a",
       "revId": "cb5a6d091577201d439138cf28cf1f6ccd041ba1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -173,6 +335,24 @@
     },
     {
       "key": {
+        "uuid": "cee8db29_4e4f7138",
+        "filename": "src/dm/ve.dm.TransactionBuilder.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 753,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-12-24T06:50:04Z",
+      "side": 1,
+      "message": "Oh wait no, because insertedDataOffset is an offset in op.insert",
+      "parentUuid": "eee3df47_a94f2fbf",
+      "revId": "cb5a6d091577201d439138cf28cf1f6ccd041ba1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eee3df47_291b1f84",
         "filename": "src/dm/ve.dm.TransactionBuilder.js",
         "patchSetId": 2
@@ -184,6 +364,24 @@
       "writtenOn": "2017-12-02T02:11:47Z",
       "side": 1,
       "message": "It\u0027s probably a good idea to think about optimizations for this, but probably not quite critical. As I understand it, this code runs every time an insertion transaction is built, and its runtime is linear in the distance between the insertion position and the start of the parent of that position. So for typing transactions (single-character insertions) that would be from the cursor (often at the end of a CBN) the start of the CBN, so it\u0027s \"only\" linear in the length of the paragraph. To get it to traverse all the way to the start of the document, you\u0027d have to have something happening outside of a CBN, so perhaps a paragraph split (not sure if those would be affected), or a paragraph\u003c-\u003eheading conversion, or a list wrap/unwrap.\n\nSo while I would like typing into long CBNs not to be slow, the catastrophic case of walking all the way back up to the start of the document is probably going to be limited to operations that are only moderately common, and are not usually done repetitively.",
+      "revId": "cb5a6d091577201d439138cf28cf1f6ccd041ba1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cee8db29_0e456918",
+        "filename": "src/dm/ve.dm.TransactionBuilder.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 994,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-12-24T06:50:04Z",
+      "side": 1,
+      "message": "Done (incorporated this point into the comment)",
+      "parentUuid": "eee3df47_291b1f84",
       "revId": "cb5a6d091577201d439138cf28cf1f6ccd041ba1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -207,6 +405,24 @@
     },
     {
       "key": {
+        "uuid": "cee8db29_6e5235e4",
+        "filename": "src/dm/ve.dm.TransactionBuilder.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 1016,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-12-24T06:50:04Z",
+      "side": 1,
+      "message": "Oh, I just realised I already am at 973",
+      "parentUuid": "eee3df47_89106b5d",
+      "revId": "cb5a6d091577201d439138cf28cf1f6ccd041ba1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eee3df47_a9072f1e",
         "filename": "src/dm/ve.dm.TransactionProcessor.js",
         "patchSetId": 2
@@ -218,6 +434,24 @@
       "writtenOn": "2017-12-02T02:11:47Z",
       "side": 1,
       "message": "That\u0027s not actually what the code below does",
+      "revId": "cb5a6d091577201d439138cf28cf1f6ccd041ba1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cee8db29_6bb231e6",
+        "filename": "src/dm/ve.dm.TransactionProcessor.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-12-24T06:50:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eee3df47_a9072f1e",
       "revId": "cb5a6d091577201d439138cf28cf1f6ccd041ba1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -241,6 +475,24 @@
     },
     {
       "key": {
+        "uuid": "cee8db29_abe399d3",
+        "filename": "src/dm/ve.dm.TransactionProcessor.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-12-24T06:50:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eee3df47_690d2741",
+      "revId": "cb5a6d091577201d439138cf28cf1f6ccd041ba1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eee3df47_4405aa12",
         "filename": "tests/dm/ve.dm.TransactionBuilder.test.js",
         "patchSetId": 2
@@ -252,6 +504,30 @@
       "writtenOn": "2017-12-02T02:11:47Z",
       "side": 1,
       "message": "endsWith is ES6. Maybe just do what you did on line 740?",
+      "range": {
+        "startLine": 1569,
+        "startChar": 32,
+        "endLine": 1569,
+        "endChar": 40
+      },
+      "revId": "cb5a6d091577201d439138cf28cf1f6ccd041ba1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cee8db29_4ec0117f",
+        "filename": "tests/dm/ve.dm.TransactionBuilder.test.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 1569,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2017-12-24T06:50:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eee3df47_4405aa12",
       "range": {
         "startLine": 1569,
         "startChar": 32,
