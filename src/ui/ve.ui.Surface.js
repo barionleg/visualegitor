@@ -29,9 +29,10 @@
  * @cfg {string} [readOnly] Surface is read-only
  * @cfg {string} [nullSelectionOnBlur=true] Surface selection is set to null on blur
  * @cfg {string} [inDialog] The name of the dialog this surface is in
+ * @cfg {jQuery} [$overlay] Overlay to render context menus, inspectors etc. in
  */
 ve.ui.Surface = function VeUiSurface( dataOrDocOrSurface, config ) {
-	var documentModel;
+	var documentModel, globalOverlayClass;
 
 	config = config || {};
 
@@ -46,12 +47,24 @@ ve.ui.Surface = function VeUiSurface( dataOrDocOrSurface, config ) {
 	// The following classes are used here:
 	// * ve-ui-overlay-global-mobile
 	// * ve-ui-overlay-global-desktop
-	this.globalOverlay = new ve.ui.Overlay( { classes: [ 've-ui-overlay-global', 've-ui-overlay-global-' + ( OO.ui.isMobile() ? 'mobile' : 'desktop' ) ] } );
+	globalOverlayClass = 've-ui-overlay-global-' + ( OO.ui.isMobile() ? 'mobile' : 'desktop' );
+	// All these different overlays come to play when we have surfaces nested inside other surfaces'
+	// dialogs, for example for image captions.
+	// * Global overlay is used for surface dialogs. It is attached under `<body>` (`document.body`).
+	// * Local overlay is used for interface elements of the surface (which do not extend outside it):
+	//   selections, "blockers" (e.g. focus highlights), "controls" (e.g. image resize handle).
+	//   It is attached under `this.$element`.
+	// * Overlay (normal overlay, like in OOUI widgets) is used for context menus, inspectors, and
+	//   other popups and dropdowns which may extend outside the surface (and if the surface is inside
+	//   a dialog, also outside that dialog). It is attached somewhere unspecified that should allow
+	//   popups/dropdowns to extend like that.
+	this.globalOverlay = new ve.ui.Overlay( { classes: [ 've-ui-overlay-global', globalOverlayClass ] } );
 	this.localOverlay = new ve.ui.Overlay( { classes: [ 've-ui-overlay-local' ] } );
-	this.$selections = $( '<div>' );
-	this.$blockers = $( '<div>' );
-	this.$controls = $( '<div>' );
-	this.$menus = $( '<div>' );
+	this.$overlay = config.$overlay || this.localOverlay.$element;
+	this.$selections = $( '<div>' ).addClass( 've-ui-surface-selections' );
+	this.$blockers = $( '<div>' ).addClass( 've-ui-surface-blockers' );
+	this.$controls = $( '<div>' ).addClass( 've-ui-surface-controls' );
+	this.$menus = $( '<div>' ).addClass( 've-ui-surface-menus' );
 	this.$placeholder = $( '<div>' ).addClass( 've-ui-surface-placeholder' );
 	this.commandRegistry = config.commandRegistry || ve.ui.commandRegistry;
 	this.sequenceRegistry = config.sequenceRegistry || ve.ui.sequenceRegistry;
@@ -124,10 +137,11 @@ ve.ui.Surface = function VeUiSurface( dataOrDocOrSurface, config ) {
 		// * ve-ui-surface-visual
 		// * ve-ui-surface-source
 		.addClass( 've-ui-surface ve-ui-surface-' + this.mode )
-		.append( this.view.$element );
-	this.view.$element.after( this.localOverlay.$element );
-	this.localOverlay.$element.append( this.$selections, this.$blockers, this.$controls, this.$menus );
+		.append( this.view.$element, this.localOverlay.$element );
 	this.globalOverlay.$element.append( this.dialogs.$element );
+	this.localOverlay.$element.append( this.$selections, this.$blockers, this.$controls );
+	this.$overlay.append( this.$menus );
+	this.localOverlay.$element.append( this.context.$anchor );
 };
 
 /* Inheritance */
@@ -194,6 +208,8 @@ ve.ui.Surface.prototype.destroy = function () {
 	// Remove DOM elements
 	this.$element.remove();
 	this.globalOverlay.$element.remove();
+	// Remove things we appended to this.$overlay
+	this.$menus.detach();
 
 	// Let others know we have been destroyed
 	this.emit( 'destroy' );

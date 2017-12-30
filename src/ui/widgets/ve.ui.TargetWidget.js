@@ -28,6 +28,7 @@
  * @cfg {string} [placeholder] Placeholder text to display when the surface is empty
  * @cfg {boolean} [readOnly] Surface is read-only
  * @cfg {string} [inDialog] The name of the dialog this surface widget is in
+ * @cfg {jQuery} [$overlay] Overlay to render surface context menus, inspectors etc. in
  */
 ve.ui.TargetWidget = function VeUiTargetWidget( config ) {
 	// Config initialization
@@ -51,6 +52,7 @@ ve.ui.TargetWidget = function VeUiTargetWidget( config ) {
 	this.inDialog = config.inDialog;
 	this.modes = config.modes;
 	this.defaultMode = config.defaultMode;
+	this.$overlay = config.$overlay;
 
 	this.target = this.createTarget();
 
@@ -115,6 +117,7 @@ ve.ui.TargetWidget.prototype.setDocument = function ( doc ) {
 	// Destroy the previous surface
 	this.clear();
 	surface = this.target.addSurface( doc, {
+		$overlay: this.$overlay,
 		inTargetWidget: true,
 		includeCommands: this.includeCommands,
 		excludeCommands: this.excludeCommands,

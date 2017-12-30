@@ -8,8 +8,12 @@
 	position: absolute;
 }
 
-.ve-ui-desktopContext-menu {
+.ve-ui-desktopContext-anchor {
 	position: absolute;
+}
+
+.ve-ui-desktopContext-menu {
+	position: relative;
 	width: 400px;
 }
 

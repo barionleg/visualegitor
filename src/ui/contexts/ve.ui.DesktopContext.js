@@ -21,10 +21,12 @@ ve.ui.DesktopContext = function VeUiDesktopContext( surface, config ) {
 	ve.ui.DesktopContext.super.apply( this, arguments );
 
 	// Properties
+	this.$anchor = $( '<div>' ).addClass( 've-ui-desktopContext-anchor' );
 	this.popup = new OO.ui.PopupWidget( {
 		hideWhenOutOfView: false,
 		autoFlip: false,
-		$container: config.$popupContainer || this.surface.$element
+		$container: config.$popupContainer || this.surface.$element,
+		$floatableContainer: this.$anchor
 	} );
 	this.position = null;
 	this.embeddable = null;
@@ -53,7 +55,7 @@ ve.ui.DesktopContext = function VeUiDesktopContext( surface, config ) {
 	// Initialization
 	this.$element
 		.addClass( 've-ui-desktopContext' )
-		.append( this.$focusTrapBefore, this.popup.$element, this.$focusTrapAfter );
+		.append( this.$focusTrapBefore, this.popup.$element, this.$focusTrapAfter, this.$anchor );
 	this.$group.addClass( 've-ui-desktopContext-menu' );
 	this.popup.$body.append( this.$group, this.inspectors.$element );
 };
@@ -362,13 +364,13 @@ ve.ui.DesktopContext.prototype.setPopupSizeAndPosition = function ( repositionOn
 			if ( this.embeddable ) {
 				if ( this.boundingRect.bottom - viewport.top - minimumVisibleHeight < this.dimensions.height + margin ) {
 					floating = false;
-					this.$element.css( {
+					this.$anchor.css( {
 						left: this.position.x,
 						top: this.position.y + this.boundingRect.height - this.dimensions.height - minimumVisibleHeight,
 						bottom: ''
 					} );
 				} else {
-					this.$element.css( {
+					this.$anchor.css( {
 						left: this.position.x + viewport.left,
 						top: this.surface.padding.top + margin,
 						bottom: ''
@@ -377,13 +379,13 @@ ve.ui.DesktopContext.prototype.setPopupSizeAndPosition = function ( repositionOn
 			} else {
 				if ( viewport.bottom - this.boundingRect.top - minimumVisibleHeight < this.dimensions.height + margin ) {
 					floating = false;
-					this.$element.css( {
+					this.$anchor.css( {
 						left: this.position.x,
 						top: this.position.y,
 						bottom: ''
 					} );
 				} else {
-					this.$element.css( {
+					this.$anchor.css( {
 						left: this.position.x + viewport.left,
 						top: '',
 						bottom: this.dimensions.height + margin
@@ -391,33 +393,32 @@ ve.ui.DesktopContext.prototype.setPopupSizeAndPosition = function ( repositionOn
 				}
 			}
 		} else {
-			this.$element.css( {
+			this.$anchor.css( {
 				left: this.position.x,
 				top: this.position.y,
 				bottom: ''
 			} );
 		}
 
-		this.$element.toggleClass( 've-ui-desktopContext-floating', !!floating );
+		this.$anchor.toggleClass( 've-ui-desktopContext-floating', !!floating );
 		this.popup.toggleAnchor( !floating && !this.embeddable );
 	}
 
 	if ( !repositionOnly ) {
-		// PopupWidget normally is clippable, suppress that to be able to resize and scroll it into view.
-		// Needs to be repeated before every call, as it resets itself when the popup is shown or hidden.
-		this.popup.toggleClipping( false );
+		this.popup.setSize( this.dimensions.width );
+		this.popup.setIdealSize( this.dimensions.width, this.dimensions.height );
 
-		// We want to stop the popup from possibly being bigger than the viewport,
-		// as that can result in situations where it's impossible to reach parts
-		// of the popup. Limiting it to the window height would ignore toolbars
-		// and the find-replace dialog and suchlike. Therefore we set its max
-		// height to the surface's estimation of the actual viewport available to
-		// it. It's okay if the inspector goes off the edge of the viewport, so
-		// long as it's possible to scroll and get it all in view.
-		this.popup.setSize( this.dimensions.width, Math.min( this.dimensions.height, viewport.height ) );
+		// if ( this.popup.isClippedVertically() ) {
+		// 	// Add horizontal space for the vertical scrollbar
+		// 	var vertScrollbarWidth = this.popup.$clippable.innerWidth() - this.popup.$clippable.prop( 'clientWidth' );
+		// 	this.popup.setSize( this.dimensions.width + vertScrollbarWidth );
+		// 	this.popup.setIdealSize( this.dimensions.width + vertScrollbarWidth, this.dimensions.height );
+		// }
 
-		this.popup.scrollElementIntoView();
+		// this.popup.scrollElementIntoView();
 	}
+
+	this.popup.position();
 };
 
 /**
