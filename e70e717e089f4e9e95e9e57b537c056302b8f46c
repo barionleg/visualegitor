@@ -16,6 +16,24 @@
       "revId": "e70e717e089f4e9e95e9e57b537c056302b8f46c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aeed6739_1f00046d",
+        "filename": "AUTHORS.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2018-01-03T21:42:34Z",
+      "side": 1,
+      "message": "Taken from git history.",
+      "parentUuid": "aeed6739_5f80cc4b",
+      "revId": "e70e717e089f4e9e95e9e57b537c056302b8f46c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
