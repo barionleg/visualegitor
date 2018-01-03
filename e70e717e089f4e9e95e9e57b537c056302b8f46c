@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aeed6739_5f80cc4b",
+        "filename": "AUTHORS.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2018-01-03T21:06:25Z",
+      "side": 1,
+      "message": "Interesting, you changed \"é\" (e with accent, U+00E9) to \"é\" (e + combining accent, U+0301).",
+      "revId": "e70e717e089f4e9e95e9e57b537c056302b8f46c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
