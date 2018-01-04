@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "aeed6739_641b7f83",
+        "filename": "src/ce/ve.ce.ContentBranchNode.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2018-01-04T21:03:40Z",
+      "side": 1,
+      "message": "Done (merge oops)",
+      "parentUuid": "eee3df47_c419ba80",
+      "revId": "33af4dd4f0a16e5664d0bdd8ea5f78b770336f3c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eee3df47_0449e26a",
         "filename": "src/dm/ve.dm.MetaList.js",
         "patchSetId": 9
@@ -30,6 +48,30 @@
       "writtenOn": "2017-12-02T02:40:06Z",
       "side": 1,
       "message": "Replace",
+      "range": {
+        "startLine": 157,
+        "startChar": 3,
+        "endLine": 157,
+        "endChar": 9
+      },
+      "revId": "33af4dd4f0a16e5664d0bdd8ea5f78b770336f3c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aeed6739_c4108b5e",
+        "filename": "src/dm/ve.dm.MetaList.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2018-01-04T21:03:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eee3df47_0449e26a",
       "range": {
         "startLine": 157,
         "startChar": 3,
