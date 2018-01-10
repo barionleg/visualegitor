@@ -87,10 +87,12 @@ ve.init.sa.Platform.prototype.getUserConfig = function ( keys ) {
 		for ( i = 0, l = keys.length; i < l; i++ ) {
 			values[ keys[ i ] ] = this.getUserConfig( keys[ i ] );
 		}
+		return values;
 	} else {
-		return JSON.parse( localStorage.getItem( 've-' + keys ) );
+		try {
+			return JSON.parse( localStorage.getItem( 've-' + keys ) );
+		} catch ( e ) {}
 	}
-	return values;
 };
 
 /**
@@ -105,7 +107,9 @@ ve.init.sa.Platform.prototype.setUserConfig = function ( keyOrValueMap, value ) 
 			}
 		}
 	} else {
-		localStorage.setItem( 've-' + keyOrValueMap, JSON.stringify( value ) );
+		try {
+			localStorage.setItem( 've-' + keyOrValueMap, JSON.stringify( value ) );
+		} catch ( e ) {}
 	}
 	return true;
 };
