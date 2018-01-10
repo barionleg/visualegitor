@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ef26315_53d2a62d",
+        "filename": "src/init/sa/ve.init.sa.Platform.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-01-10T20:46:24Z",
+      "side": 1,
+      "message": "return null?",
+      "revId": "d1066f39b18021bd21c0fec72410eca97093bfba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef26315_33cf1a84",
+        "filename": "src/init/sa/ve.init.sa.Platform.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-01-10T20:46:24Z",
+      "side": 1,
+      "message": "return false?",
+      "revId": "d1066f39b18021bd21c0fec72410eca97093bfba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
