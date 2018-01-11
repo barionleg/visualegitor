@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8ef26315_7e44c64a",
+        "filename": "src/init/sa/ve.init.sa.Platform.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2018-01-11T03:23:37Z",
+      "side": 1,
+      "message": "Can make it explicit, sure. As below, think it should catch this and abort the loop above?",
+      "parentUuid": "8ef26315_53d2a62d",
+      "revId": "d1066f39b18021bd21c0fec72410eca97093bfba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ef26315_33cf1a84",
         "filename": "src/init/sa/ve.init.sa.Platform.js",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2018-01-10T20:46:24Z",
       "side": 1,
       "message": "return false?",
+      "revId": "d1066f39b18021bd21c0fec72410eca97093bfba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef26315_9e471250",
+        "filename": "src/init/sa/ve.init.sa.Platform.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2018-01-11T03:23:37Z",
+      "side": 1,
+      "message": "Strictly speaking, setUserConfig doesn\u0027t have a documented return. Adding more information is useful, though it does slightly confuse the issue for the map case -- if it\u0027s returning false, should that loop catch it and abort?",
+      "parentUuid": "8ef26315_33cf1a84",
       "revId": "d1066f39b18021bd21c0fec72410eca97093bfba",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
