@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8ef26315_674eb2c5",
+        "filename": "src/ce/ve.ce.BranchNode.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2018-01-22T04:14:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ef26315_273f8a21",
+      "revId": "3ff56dd4513a73475ac647239e20c44d5287f0bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ef26315_8725be05",
         "filename": "src/ce/ve.ce.BranchNode.js",
         "patchSetId": 10
@@ -30,6 +48,24 @@
       "writtenOn": "2018-01-22T03:23:01Z",
       "side": 1,
       "message": "Do this via a static property \"isMeta(Data?)\", accessed through nodeFactory (cf isWrapped)",
+      "revId": "3ff56dd4513a73475ac647239e20c44d5287f0bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef26315_a7c6fa16",
+        "filename": "src/ce/ve.ce.BranchNode.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2018-01-22T04:14:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ef26315_8725be05",
       "revId": "3ff56dd4513a73475ac647239e20c44d5287f0bc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "8ef26315_e7d002cf",
+        "filename": "src/ce/ve.ce.MetaItem.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2018-01-22T04:14:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ef26315_474456bd",
+      "revId": "3ff56dd4513a73475ac647239e20c44d5287f0bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ef26315_672072f3",
         "filename": "src/dm/metaitems/ve.dm.AlienMetaItem.js",
         "patchSetId": 10
@@ -64,6 +118,24 @@
       "writtenOn": "2018-01-22T03:23:01Z",
       "side": 1,
       "message": "we should rename these to -Node at some point",
+      "revId": "3ff56dd4513a73475ac647239e20c44d5287f0bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef26315_67dd12e1",
+        "filename": "src/dm/metaitems/ve.dm.AlienMetaItem.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2018-01-22T04:14:41Z",
+      "side": 1,
+      "message": "Done (commented in ve.dm.MetaItem)",
+      "parentUuid": "8ef26315_672072f3",
       "revId": "3ff56dd4513a73475ac647239e20c44d5287f0bc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "8ef26315_c7ea2673",
+        "filename": "src/dm/ve.dm.Converter.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2018-01-22T04:14:41Z",
+      "side": 1,
+      "message": "Agreed it\u0027s better not to, because data gets spliced below",
+      "parentUuid": "8ef26315_a780bac5",
+      "revId": "3ff56dd4513a73475ac647239e20c44d5287f0bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ef26315_07888eeb",
         "filename": "src/dm/ve.dm.Converter.js",
         "patchSetId": 10
@@ -98,6 +188,24 @@
       "writtenOn": "2018-01-22T03:23:01Z",
       "side": 1,
       "message": "decrement length cache",
+      "revId": "3ff56dd4513a73475ac647239e20c44d5287f0bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef26315_a7ed5a8b",
+        "filename": "src/dm/ve.dm.Converter.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2018-01-22T04:14:41Z",
+      "side": 1,
+      "message": "Agreed it\u0027s better not to cache length",
+      "parentUuid": "8ef26315_07888eeb",
       "revId": "3ff56dd4513a73475ac647239e20c44d5287f0bc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "8ef26315_07e52e9f",
+        "filename": "src/dm/ve.dm.Converter.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2018-01-22T04:14:41Z",
+      "side": 1,
+      "message": "Agreed it\u0027s better not to cache length",
+      "parentUuid": "8ef26315_e78ac2e3",
+      "revId": "3ff56dd4513a73475ac647239e20c44d5287f0bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ef26315_47729611",
         "filename": "src/dm/ve.dm.Converter.js",
         "patchSetId": 10
@@ -132,6 +258,24 @@
       "writtenOn": "2018-01-22T03:23:01Z",
       "side": 1,
       "message": "modelClass.prototype instanceof ve.dm.BranchNode as above?",
+      "revId": "3ff56dd4513a73475ac647239e20c44d5287f0bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef26315_e7e762a5",
+        "filename": "src/dm/ve.dm.Converter.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2018-01-22T04:14:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ef26315_47729611",
       "revId": "3ff56dd4513a73475ac647239e20c44d5287f0bc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "8ef26315_47ff3631",
+        "filename": "src/dm/ve.dm.Document.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2018-01-22T04:14:41Z",
+      "side": 1,
+      "message": "Done (what was I thinking???)",
+      "parentUuid": "8ef26315_276dca2d",
+      "revId": "3ff56dd4513a73475ac647239e20c44d5287f0bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ef26315_877c9ee3",
         "filename": "src/dm/ve.dm.TreeModifier.js",
         "patchSetId": 10
@@ -166,6 +328,24 @@
       "writtenOn": "2018-01-22T03:23:01Z",
       "side": 1,
       "message": "document",
+      "revId": "3ff56dd4513a73475ac647239e20c44d5287f0bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef26315_c79186fd",
+        "filename": "src/dm/ve.dm.TreeModifier.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 631,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2018-01-22T04:14:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ef26315_877c9ee3",
       "revId": "3ff56dd4513a73475ac647239e20c44d5287f0bc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
