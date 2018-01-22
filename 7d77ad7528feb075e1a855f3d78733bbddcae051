@@ -16,6 +16,23 @@
       "revId": "7d77ad7528feb075e1a855f3d78733bbddcae051",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ef26315_c74ea69a",
+        "filename": "src/ui/styles/ve.ui.DebugBar.css",
+        "patchSetId": 14
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-01-22T05:03:50Z",
+      "side": 1,
+      "message": "increase to 50% with fewer columns",
+      "revId": "7d77ad7528feb075e1a855f3d78733bbddcae051",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
