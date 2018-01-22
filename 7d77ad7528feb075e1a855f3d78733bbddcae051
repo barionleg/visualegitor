@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8ef26315_e742c262",
+        "filename": "src/dm/lineardata/ve.dm.ElementLinearData.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 1233,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2018-01-22T05:04:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ef26315_c767c620",
+      "revId": "7d77ad7528feb075e1a855f3d78733bbddcae051",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ef26315_c74ea69a",
         "filename": "src/ui/styles/ve.ui.DebugBar.css",
         "patchSetId": 14
