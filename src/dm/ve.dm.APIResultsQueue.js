@@ -8,7 +8,7 @@
  * API Results Queue object.
  *
  * @class
- * @mixins OO.EventEmitter
+ * @mixins ve.EventEmitter
  *
  * @constructor
  * @param {Object} [config] Configuration options
@@ -31,11 +31,11 @@ ve.dm.APIResultsQueue = function VeDmAPIResultsQueue( config ) {
 	this.setThreshold( config.threshold || 10 );
 
 	// Mixin constructors
-	OO.EventEmitter.call( this );
+	ve.EventEmitter.call( this );
 };
 
 /* Setup */
-OO.mixinClass( ve.dm.APIResultsQueue, OO.EventEmitter );
+OO.mixinClass( ve.dm.APIResultsQueue, ve.EventEmitter );
 
 /* Methods */
 

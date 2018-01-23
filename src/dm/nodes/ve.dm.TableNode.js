@@ -65,7 +65,7 @@ ve.dm.TableNode.prototype.onSplice = function () {
  * @fires cellAttributeChange
  */
 ve.dm.TableNode.prototype.onCellAttributeChange = function ( cell ) {
-	this.emit( 'cellAttributeChange', cell );
+	this.emitCatch( 'cellAttributeChange', cell );
 };
 
 /**
@@ -113,14 +113,14 @@ ve.dm.modelRegistry.register( ve.dm.TableNode );
  * e.g., providing consecutive row indexes.
  *
  * @class
- * @mixins OO.EventEmitter
+ * @mixins ve.EventEmitter
  *
  * @constructor
  * @param {ve.dm.TableNode} tableNode Table node to iterate through
  */
 ve.dm.TableNodeCellIterator = function VeDmTableNodeCellIterator( tableNode ) {
 	// Mixin constructors
-	OO.EventEmitter.call( this );
+	ve.EventEmitter.call( this );
 
 	this.table = tableNode;
 
@@ -141,7 +141,7 @@ ve.dm.TableNodeCellIterator = function VeDmTableNodeCellIterator( tableNode ) {
 
 /* Inheritance */
 
-OO.mixinClass( ve.dm.TableNodeCellIterator, OO.EventEmitter );
+OO.mixinClass( ve.dm.TableNodeCellIterator, ve.EventEmitter );
 
 /* Events */
 
@@ -200,7 +200,7 @@ ve.dm.TableNodeCellIterator.prototype.nextSection = function () {
 	if ( sectionNode instanceof ve.dm.TableSectionNode ) {
 		this.sectionNode = sectionNode;
 		this.rowCount = this.sectionNode.children.length;
-		this.emit( 'newSection', this.sectionNode );
+		this.emitCatch( 'newSection', this.sectionNode );
 	} else {
 		this.nextSection();
 		return;
@@ -229,7 +229,7 @@ ve.dm.TableNodeCellIterator.prototype.nextRow = function () {
 	if ( rowNode instanceof ve.dm.TableRowNode ) {
 		this.rowNode = rowNode;
 		this.cellCount = this.rowNode.children.length;
-		this.emit( 'newRow', this.rowNode );
+		this.emitCatch( 'newRow', this.rowNode );
 	} else {
 		this.nextRow();
 		return;

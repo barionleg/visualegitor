@@ -9,7 +9,7 @@
  * DataModel surface synchronizer.
  *
  * @class
- * @mixins OO.EventEmitter
+ * @mixins ve.EventEmitter
  * @mixins ve.dm.RebaseClient
  *
  * @constructor
@@ -22,7 +22,7 @@ ve.dm.SurfaceSynchronizer = function VeDmSurfaceSynchronizer( surface, documentI
 	config = config || {};
 
 	// Mixin constructors
-	OO.EventEmitter.call( this );
+	ve.EventEmitter.call( this );
 	ve.dm.RebaseClient.call( this );
 
 	// Properties
@@ -61,7 +61,7 @@ ve.dm.SurfaceSynchronizer = function VeDmSurfaceSynchronizer( surface, documentI
 
 /* Inheritance */
 
-OO.mixinClass( ve.dm.SurfaceSynchronizer, OO.EventEmitter );
+OO.mixinClass( ve.dm.SurfaceSynchronizer, ve.EventEmitter );
 OO.mixinClass( ve.dm.SurfaceSynchronizer, ve.dm.RebaseClient );
 
 /* Events */
@@ -242,14 +242,14 @@ ve.dm.SurfaceSynchronizer.prototype.applyNewSelections = function ( newSelection
 		}
 		if ( !translatedSelection.equals( this.authorSelections[ authorId ] ) ) {
 			this.authorSelections[ authorId ] = translatedSelection;
-			this.emit( 'authorSelect', authorId );
+			this.emitCatch( 'authorSelect', authorId );
 		}
 	}
 };
 
 ve.dm.SurfaceSynchronizer.prototype.onNameChange = function ( data ) {
 	this.authorNames[ data.authorId ] = data.authorName;
-	this.emit( 'authorNameChange', data.authorId );
+	this.emitCatch( 'authorNameChange', data.authorId );
 };
 
 ve.dm.SurfaceSynchronizer.prototype.changeName = function ( newName ) {
@@ -258,7 +258,7 @@ ve.dm.SurfaceSynchronizer.prototype.changeName = function ( newName ) {
 
 ve.dm.SurfaceSynchronizer.prototype.onAuthorDisconnect = function ( authorId ) {
 	delete this.authorSelections[ authorId ];
-	this.emit( 'authorDisconnect', authorId );
+	this.emitCatch( 'authorDisconnect', authorId );
 };
 
 /**

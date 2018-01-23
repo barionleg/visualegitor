@@ -15,7 +15,7 @@
  */
 ve.Document = function VeDocument( documentNode ) {
 	// Mixin constructors
-	OO.EventEmitter.call( this );
+	ve.EventEmitter.call( this );
 
 	// Properties
 	this.documentNode = documentNode;
@@ -24,7 +24,7 @@ ve.Document = function VeDocument( documentNode ) {
 
 /* Inheritance */
 
-OO.mixinClass( ve.Document, OO.EventEmitter );
+OO.mixinClass( ve.Document, ve.EventEmitter );
 
 /* Events */
 

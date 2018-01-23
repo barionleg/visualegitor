@@ -8,7 +8,7 @@
  * API Results Provider object.
  *
  * @class
- * @mixins OO.EventEmitter
+ * @mixins ve.EventEmitter
  *
  * @constructor
  * @param {string} apiurl The URL to the api
@@ -38,11 +38,11 @@ ve.dm.APIResultsProvider = function VeDmAPIResultsProvider( apiurl, config ) {
 	this.toggleDepleted( false );
 
 	// Mixin constructors
-	OO.EventEmitter.call( this );
+	ve.EventEmitter.call( this );
 };
 
 /* Setup */
-OO.mixinClass( ve.dm.APIResultsProvider, OO.EventEmitter );
+OO.mixinClass( ve.dm.APIResultsProvider, ve.EventEmitter );
 
 /* Methods */
 

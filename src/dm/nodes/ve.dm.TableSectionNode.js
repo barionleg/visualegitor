@@ -90,7 +90,7 @@ ve.dm.TableSectionNode.prototype.onSplice = function () {
  * @fires cellAttributeChange
  */
 ve.dm.TableSectionNode.prototype.onCellAttributeChange = function ( cell ) {
-	this.emit( 'cellAttributeChange', cell );
+	this.emitCatch( 'cellAttributeChange', cell );
 };
 
 /* Registration */

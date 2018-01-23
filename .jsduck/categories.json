@@ -9,6 +9,7 @@
 					"ve.Range",
 					"ve.PositionStep",
 					"ve.SelectionState",
+					"ve.EventEmitter",
 					"ve.EventSequencer",
 					"ve.Filibuster",
 					"ve.TriggerListener",

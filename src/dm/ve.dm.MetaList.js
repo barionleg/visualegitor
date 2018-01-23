@@ -8,7 +8,7 @@
  * DataModel meta item.
  *
  * @class
- * @mixins OO.EventEmitter
+ * @mixins ve.EventEmitter
  *
  * @constructor
  * @param {ve.dm.Surface} surface Surface model
@@ -18,7 +18,7 @@ ve.dm.MetaList = function VeDmMetaList( surface ) {
 		metaList = this;
 
 	// Mixin constructors
-	OO.EventEmitter.call( this );
+	ve.EventEmitter.call( this );
 
 	this.surface = surface;
 	this.document = surface.getDocument();
@@ -42,7 +42,7 @@ ve.dm.MetaList = function VeDmMetaList( surface ) {
 
 /* Inheritance */
 
-OO.mixinClass( ve.dm.MetaList, OO.EventEmitter );
+OO.mixinClass( ve.dm.MetaList, ve.EventEmitter );
 
 /* Events */
 
@@ -72,7 +72,7 @@ ve.dm.MetaList.prototype.onNodeAttached = function ( node ) {
 		}, true );
 		this.items.splice( i, 0, node );
 		node.attachToMetaList( this );
-		this.emit( 'insert', node );
+		this.emitCatch( 'insert', node );
 	}
 };
 
@@ -88,7 +88,7 @@ ve.dm.MetaList.prototype.onNodeDetached = function ( node ) {
 		if ( i !== -1 ) {
 			node.detachFromMetaList( this );
 			this.items.splice( i, 1 );
-			this.emit( 'remove', node );
+			this.emitCatch( 'remove', node );
 		}
 	}
 };

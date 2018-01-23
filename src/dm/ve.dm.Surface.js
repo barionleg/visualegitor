@@ -8,7 +8,7 @@
  * DataModel surface.
  *
  * @class
- * @mixins OO.EventEmitter
+ * @mixins ve.EventEmitter
  *
  * @constructor
  * @param {ve.dm.Document} doc Document model to create surface for
@@ -19,7 +19,7 @@ ve.dm.Surface = function VeDmSurface( doc, config ) {
 	config = config || {};
 
 	// Mixin constructors
-	OO.EventEmitter.call( this );
+	ve.EventEmitter.call( this );
 
 	// Properties
 	this.documentModel = doc;
@@ -53,7 +53,7 @@ ve.dm.Surface = function VeDmSurface( doc, config ) {
 
 /* Inheritance */
 
-OO.mixinClass( ve.dm.Surface, OO.EventEmitter );
+OO.mixinClass( ve.dm.Surface, ve.EventEmitter );
 
 /* Events */
 
@@ -107,7 +107,7 @@ OO.mixinClass( ve.dm.Surface, OO.EventEmitter );
 ve.dm.Surface.prototype.disable = function () {
 	this.stopHistoryTracking();
 	this.enabled = false;
-	this.emit( 'history' );
+	this.emitCatch( 'history' );
 };
 
 /**
@@ -118,7 +118,7 @@ ve.dm.Surface.prototype.disable = function () {
 ve.dm.Surface.prototype.enable = function () {
 	this.enabled = true;
 	this.startHistoryTracking();
-	this.emit( 'history' );
+	this.emitCatch( 'history' );
 };
 
 /**
@@ -128,7 +128,7 @@ ve.dm.Surface.prototype.enable = function () {
  */
 ve.dm.Surface.prototype.initialize = function () {
 	this.startHistoryTracking();
-	this.emit( 'contextChange' );
+	this.emitCatch( 'contextChange' );
 };
 
 /**
@@ -231,7 +231,7 @@ ve.dm.Surface.prototype.pushStaging = function ( allowUndo ) {
 		// Set a breakpoint to make sure newTransactions is clear
 		this.breakpoint();
 		this.stopHistoryTracking();
-		this.emit( 'history' );
+		this.emitCatch( 'history' );
 	}
 	this.stagingStack.push( {
 		transactions: [],
@@ -266,7 +266,7 @@ ve.dm.Surface.prototype.popStaging = function () {
 
 	if ( !this.isStaging() ) {
 		this.startHistoryTracking();
-		this.emit( 'history' );
+		this.emitCatch( 'history' );
 	}
 
 	return transactions;
@@ -302,7 +302,8 @@ ve.dm.Surface.prototype.applyStaging = function () {
 
 	if ( !this.isStaging() ) {
 		this.startHistoryTracking();
-		this.emit( 'history' );
+		this.emitCatch( 'history' );
+
 	}
 };
 
@@ -357,8 +358,8 @@ ve.dm.Surface.prototype.setInsertionAnnotations = function ( annotations ) {
 		annotations.clone() :
 		new ve.dm.AnnotationSet( this.getDocument().getStore() );
 
-	this.emit( 'insertionAnnotationsChange', this.insertionAnnotations );
-	this.emit( 'contextChange' );
+	this.emitCatch( 'insertionAnnotationsChange', this.insertionAnnotations );
+	this.emitCatch( 'contextChange' );
 };
 
 /**
@@ -380,8 +381,8 @@ ve.dm.Surface.prototype.addInsertionAnnotations = function ( annotations ) {
 		throw new Error( 'Invalid annotations' );
 	}
 
-	this.emit( 'insertionAnnotationsChange', this.insertionAnnotations );
-	this.emit( 'contextChange' );
+	this.emitCatch( 'insertionAnnotationsChange', this.insertionAnnotations );
+	this.emitCatch( 'contextChange' );
 };
 
 /**
@@ -403,8 +404,8 @@ ve.dm.Surface.prototype.removeInsertionAnnotations = function ( annotations ) {
 		throw new Error( 'Invalid annotations' );
 	}
 
-	this.emit( 'insertionAnnotationsChange', this.insertionAnnotations );
-	this.emit( 'contextChange' );
+	this.emitCatch( 'insertionAnnotationsChange', this.insertionAnnotations );
+	this.emitCatch( 'contextChange' );
 };
 
 /**
@@ -543,7 +544,7 @@ ve.dm.Surface.prototype.emitContextChange = function () {
 	if ( this.queueingContextChanges ) {
 		this.contextChangeQueued = true;
 	} else {
-		this.emit( 'contextChange' );
+		this.emitCatch( 'contextChange' );
 	}
 };
 
@@ -560,7 +561,7 @@ ve.dm.Surface.prototype.stopQueueingContextChanges = function () {
 		this.queueingContextChanges = false;
 		if ( this.contextChangeQueued ) {
 			this.contextChangeQueued = false;
-			this.emit( 'contextChange' );
+			this.emitCatch( 'contextChange' );
 		}
 	}
 };
@@ -741,12 +742,13 @@ ve.dm.Surface.prototype.setSelection = function ( selection ) {
 
 	// If selection changed emit a select
 	if ( selectionChange ) {
-		this.emit( 'select', this.selection.clone() );
+		this.emitCatch( 'select', this.selection.clone() );
 		if ( oldSelection.isNull() ) {
-			this.emit( 'focus' );
+			this.emitCatch( 'focus' );
+
 		}
 		if ( selection.isNull() ) {
-			this.emit( 'blur' );
+			this.emitCatch( 'blur' );
 		}
 	}
 
@@ -859,7 +861,7 @@ ve.dm.Surface.prototype.changeInternal = function ( transactions, selection, ski
 			}
 		}
 		this.transacting = false;
-		this.emit( 'history' );
+		this.emitCatch( 'history' );
 	}
 	selectionAfter = this.selection;
 
@@ -878,7 +880,7 @@ ve.dm.Surface.prototype.changeInternal = function ( transactions, selection, ski
 		!selectionBefore.equals( selectionAfter ) &&
 		selectionAfter.equals( this.selection )
 	) {
-		this.emit( 'select', this.selection.clone() );
+		this.emitCatch( 'select', this.selection.clone() );
 	}
 
 	if ( contextChange ) {
@@ -967,7 +969,7 @@ ve.dm.Surface.prototype.redo = function () {
  */
 ve.dm.Surface.prototype.onDocumentTransact = function ( tx ) {
 	this.setSelection( this.getSelection().translateByTransactionWithAuthor( tx, this.authorId ) );
-	this.emit( 'documentUpdate', tx );
+	this.emitCatch( 'documentUpdate', tx );
 };
 
 /**

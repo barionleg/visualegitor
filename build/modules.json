@@ -249,6 +249,7 @@
 	},
 	"visualEditor.core.build": {
 		"scripts": [
+			"src/ve.EventEmitter.js",
 			"src/ve.Range.js",
 			"src/ve.SelectionState.js",
 			"src/ve.Node.js",
