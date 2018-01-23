@@ -311,11 +311,11 @@ ve.dm.Document.prototype.commit = function ( transaction, isStaging ) {
 	if ( transaction.hasBeenApplied() ) {
 		throw new Error( 'Cannot commit a transaction that has already been committed' );
 	}
-	this.emit( 'precommit', transaction );
+	this.emitCatch( 'precommit', transaction );
 	new ve.dm.TransactionProcessor( this, transaction, isStaging ).process();
 	this.completeHistory.push( transaction );
 	this.storeLengthAtHistoryLength[ this.completeHistory.length ] = this.store.getLength();
-	this.emit( 'transact', transaction );
+	this.emitCatch( 'transact', transaction );
 };
 
 /**

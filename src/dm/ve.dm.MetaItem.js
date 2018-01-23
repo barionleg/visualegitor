@@ -11,7 +11,7 @@
  * @class
  * @abstract
  * @extends ve.dm.LeafNode
- * @mixins OO.EventEmitter
+ * @mixins ve.EventEmitter
  *
  * @constructor
  * @param {Object} element Reference to element in meta-linmod
@@ -20,7 +20,7 @@ ve.dm.MetaItem = function VeDmMetaItem() {
 	// Parent constructor
 	ve.dm.MetaItem.super.apply( this, arguments );
 	// Mixin
-	OO.EventEmitter.call( this );
+	ve.EventEmitter.call( this );
 	// Properties
 	this.list = null;
 };
@@ -29,7 +29,7 @@ ve.dm.MetaItem = function VeDmMetaItem() {
 
 OO.inheritClass( ve.dm.MetaItem, ve.dm.LeafNode );
 
-OO.mixinClass( ve.dm.MetaItem, OO.EventEmitter );
+OO.mixinClass( ve.dm.MetaItem, ve.EventEmitter );
 
 /* Static members */
 

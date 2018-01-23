@@ -8,7 +8,7 @@
  * Scalable object.
  *
  * @class
- * @mixins OO.EventEmitter
+ * @mixins ve.EventEmitter
  *
  * @constructor
  * @param {Object} [config] Configuration options
@@ -30,7 +30,7 @@ ve.dm.Scalable = function VeDmScalable( config ) {
 	}, config );
 
 	// Mixin constructors
-	OO.EventEmitter.call( this );
+	ve.EventEmitter.call( this );
 
 	// Computed properties
 	this.ratio = null;
@@ -71,7 +71,7 @@ ve.dm.Scalable = function VeDmScalable( config ) {
 
 /* Inheritance */
 
-OO.mixinClass( ve.dm.Scalable, OO.EventEmitter );
+OO.mixinClass( ve.dm.Scalable, ve.EventEmitter );
 
 /* Events */
 
@@ -238,7 +238,7 @@ ve.dm.Scalable.prototype.setCurrentDimensions = function ( dimensions ) {
 			this.setRatioFromDimensions( this.getCurrentDimensions() );
 		}
 		this.valid = null;
-		this.emit( 'currentSizeChange', this.getCurrentDimensions() );
+		this.emitCatch( 'currentSizeChange', this.getCurrentDimensions() );
 	}
 };
 
@@ -261,7 +261,7 @@ ve.dm.Scalable.prototype.setOriginalDimensions = function ( dimensions ) {
 			this.setRatioFromDimensions( this.getOriginalDimensions() );
 		}
 		this.valid = null;
-		this.emit( 'originalSizeChange', this.getOriginalDimensions() );
+		this.emitCatch( 'originalSizeChange', this.getOriginalDimensions() );
 	}
 };
 
@@ -278,7 +278,7 @@ ve.dm.Scalable.prototype.setDefaultDimensions = function ( dimensions ) {
 	) {
 		this.defaultDimensions = ve.copy( dimensions );
 		this.valid = null;
-		this.emit( 'defaultSizeChange', this.isDefault() );
+		this.emitCatch( 'defaultSizeChange', this.isDefault() );
 	}
 };
 
@@ -291,7 +291,7 @@ ve.dm.Scalable.prototype.clearDefaultDimensions = function () {
 	if ( this.defaultDimensions !== null ) {
 		this.defaultDimensions = null;
 		this.valid = null;
-		this.emit( 'defaultSizeChange', this.isDefault() );
+		this.emitCatch( 'defaultSizeChange', this.isDefault() );
 	}
 };
 
@@ -304,7 +304,7 @@ ve.dm.Scalable.prototype.clearOriginalDimensions = function () {
 	if ( this.originalDimensions !== null ) {
 		this.originalDimensions = null;
 		this.valid = null;
-		this.emit( 'originalSizeChange', this.isDefault() );
+		this.emitCatch( 'originalSizeChange', this.isDefault() );
 	}
 };
 
@@ -325,7 +325,7 @@ ve.dm.Scalable.prototype.toggleDefault = function ( isDefault ) {
 				this.getDefaultDimensions()
 			);
 		}
-		this.emit( 'defaultSizeChange', this.isDefault() );
+		this.emitCatch( 'defaultSizeChange', this.isDefault() );
 	}
 };
 
@@ -342,7 +342,7 @@ ve.dm.Scalable.prototype.setMinDimensions = function ( dimensions ) {
 	) {
 		this.minDimensions = ve.copy( dimensions );
 		this.valid = null;
-		this.emit( 'minSizeChange', dimensions );
+		this.emitCatch( 'minSizeChange', dimensions );
 	}
 };
 
@@ -358,7 +358,7 @@ ve.dm.Scalable.prototype.setMaxDimensions = function ( dimensions ) {
 		!ve.compare( dimensions, this.getMaxDimensions() )
 	) {
 		this.maxDimensions = ve.copy( dimensions );
-		this.emit( 'maxSizeChange', dimensions );
+		this.emitCatch( 'maxSizeChange', dimensions );
 		this.valid = null;
 	}
 };
@@ -372,7 +372,7 @@ ve.dm.Scalable.prototype.clearMinDimensions = function () {
 	if ( this.minDimensions !== null ) {
 		this.minDimensions = null;
 		this.valid = null;
-		this.emit( 'minSizeChange', this.minDimensions );
+		this.emitCatch( 'minSizeChange', this.minDimensions );
 	}
 };
 
@@ -385,7 +385,7 @@ ve.dm.Scalable.prototype.clearMaxDimensions = function () {
 	if ( this.maxDimensions !== null ) {
 		this.maxDimensions = null;
 		this.valid = null;
-		this.emit( 'maxSizeChange', this.maxDimensions );
+		this.emitCatch( 'maxSizeChange', this.maxDimensions );
 	}
 };
 

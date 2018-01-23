@@ -9,7 +9,7 @@
  *
  * @abstract
  * @extends ve.dm.Model
- * @mixins OO.EventEmitter
+ * @mixins ve.EventEmitter
  * @mixins ve.Node
  *
  * @constructor
@@ -21,7 +21,7 @@ ve.dm.Node = function VeDmNode( element ) {
 
 	// Mixin constructors
 	ve.Node.call( this );
-	OO.EventEmitter.call( this );
+	ve.EventEmitter.call( this );
 
 	// Properties
 	this.length = 0;
@@ -44,7 +44,7 @@ OO.inheritClass( ve.dm.Node, ve.dm.Model );
 
 OO.mixinClass( ve.dm.Node, ve.Node );
 
-OO.mixinClass( ve.dm.Node, OO.EventEmitter );
+OO.mixinClass( ve.dm.Node, ve.EventEmitter );
 
 /* Static Properties */
 
@@ -616,8 +616,8 @@ ve.dm.Node.prototype.setLength = function ( length ) {
 		this.parent.adjustLength( diff );
 	}
 	// Emit events
-	this.emit( 'lengthChange', diff );
-	this.emit( 'update' );
+	this.emitCatch( 'lengthChange', diff );
+	this.emitCatch( 'update' );
 };
 
 /**

@@ -8,14 +8,14 @@
  * DataModel meta item.
  *
  * @class
- * @mixins OO.EventEmitter
+ * @mixins ve.EventEmitter
  *
  * @constructor
  * @param {ve.dm.Document} doc Document model
  */
 ve.dm.InternalList = function VeDmInternalList( doc ) {
 	// Mixin constructors
-	OO.EventEmitter.call( this );
+	ve.EventEmitter.call( this );
 
 	// Properties
 	this.document = doc;
@@ -35,7 +35,7 @@ ve.dm.InternalList = function VeDmInternalList( doc ) {
 
 /* Inheritance */
 
-OO.mixinClass( ve.dm.InternalList, OO.EventEmitter );
+OO.mixinClass( ve.dm.InternalList, ve.EventEmitter );
 
 /* Events */
 
@@ -376,7 +376,7 @@ ve.dm.InternalList.prototype.onTransact = function () {
 		for ( i = 0; i < this.groupsChanged.length; i++ ) {
 			this.sortGroupIndexes( this.nodes[ this.groupsChanged[ i ] ] );
 		}
-		this.emit( 'update', this.groupsChanged );
+		this.emitCatch( 'update', this.groupsChanged );
 		this.groupsChanged = [];
 	}
 };
