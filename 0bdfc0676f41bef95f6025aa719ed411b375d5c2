@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ef26315_35ce8986",
+        "filename": "tests/dm/ve.dm.RebaseServer.test.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2018-01-23T23:50:19Z",
+      "side": 1,
+      "message": "I\u0027m sure this unit test does fail, but we can\u0027t see it here because of this. ;-)",
+      "range": {
+        "startLine": 394,
+        "startChar": 8,
+        "endLine": 394,
+        "endChar": 9
+      },
+      "revId": "0bdfc0676f41bef95f6025aa719ed411b375d5c2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
