@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eefef32_f1fbf0dc",
+        "filename": "src/ve.EventEmitter.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2018-01-25T19:09:44Z",
+      "side": 1,
+      "message": "I think we should go straight to this, rather than starting half-way. Though I think that requires either a straight-up re-implementation of emit, or a patch to OOJS to enable it.",
+      "revId": "bfc9f76b2e9045ff762e1033aec61d25d461a9fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eefef32_91eb8c09",
+        "filename": "src/ve.EventEmitter.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2018-01-25T19:09:44Z",
+      "side": 1,
+      "message": "*Should* this return-true? If the error came from a single listener, it sort-of hasn\u0027t actually been handled. (There\u0027s an argument either way, and I\u0027m ambivalent.)",
+      "revId": "bfc9f76b2e9045ff762e1033aec61d25d461a9fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
