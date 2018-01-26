@@ -42,7 +42,7 @@ ve.dm.SurfaceSynchronizer = function VeDmSurfaceSynchronizer( surface, documentI
 	this.socket = io( ( config.server || '' ) + '/' + this.documentId, { query: { docName: this.documentId } } );
 	this.socket.on( 'registered', this.onRegistered.bind( this ) );
 	this.socket.on( 'initDoc', this.onInitDoc.bind( this ) );
-	this.socket.on( 'newChange', this.onNewChange.bind( this ) );
+	// Workround for T185745: onNewChange is registered later, inside initDoc
 	this.socket.on( 'nameChange', this.onNameChange.bind( this ) );
 	this.socket.on( 'authorDisconnect', this.onAuthorDisconnect.bind( this ) );
 	// TODO: unbreak then re-enable usurp
@@ -308,6 +308,8 @@ ve.dm.SurfaceSynchronizer.prototype.onInitDoc = function ( data ) {
 		// Ignore attempt to initialize a second time
 		return;
 	}
+	// Workround for T185745: only listen to newChange after initDoc has been received
+	this.socket.on( 'newChange', this.onNewChange.bind( this ) );
 	for ( authorId in data.names ) {
 		this.onNameChange( { authorId: +authorId, authorName: data.names[ authorId ] } );
 	}
