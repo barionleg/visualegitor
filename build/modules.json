@@ -295,6 +295,7 @@
 			"src/dm/ve.dm.SourceSurfaceFragment.js",
 			"src/dm/ve.dm.DataString.js",
 			"src/dm/ve.dm.Document.js",
+			"src/dm/ve.dm.DocumentSet.js",
 			"src/dm/ve.dm.DocumentSlice.js",
 			"src/dm/ve.dm.TableSlice.js",
 			"src/dm/ve.dm.LinearData.js",
