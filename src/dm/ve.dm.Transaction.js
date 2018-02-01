@@ -121,6 +121,40 @@ ve.dm.Transaction.static.deserialize = function ( data ) {
 /* Methods */
 
 /**
+ * Freeze the transaction's operations with Object.freeze in useful places
+ *
+ * If you use this, you probably want "use strict"; at the top of suspect files
+ */
+ve.dm.Transaction.prototype.debugFreeze = function () {
+	function freezeItem( item ) {
+		if ( Array.isArray( item ) ) {
+			item.forEach( Object.freeze );
+			Object.freeze( item );
+		} else if ( typeof item === 'object' ) {
+			if ( item.attributes ) {
+				Object.freeze( item.attributes );
+			}
+			if ( item.annotations ) {
+				Object.freeze( item.annotations );
+			}
+			Object.freeze( item );
+		}
+		Object.freeze( item );
+	}
+	function freezeOperation( op ) {
+		if ( op.type === 'replace' ) {
+			op.remove.forEach( freezeItem );
+			op.insert.forEach( freezeItem );
+			Object.freeze( op.remove );
+			Object.freeze( op.insert );
+		}
+		Object.freeze( op );
+	}
+	this.operations.forEach( freezeOperation );
+	Object.freeze( this.operations );
+};
+
+/**
  * Serialize the transaction into a JSONable object
  *
  * Values are not necessarily deep copied
