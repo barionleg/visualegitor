@@ -38,6 +38,13 @@ ve.dm.LinearSelection.static.newFromHash = function ( doc, hash ) {
 /* Methods */
 
 /**
+ * @return {ve.dm.LinearSelection} Cloned selection
+ */
+ve.dm.LinearSelection.prototype.clone = function () {
+	return new ve.dm.LinearSelection( this.getDocument(), this.range.clone() );
+};
+
+/**
  * @inheritdoc
  */
 ve.dm.LinearSelection.prototype.toJSON = function () {
