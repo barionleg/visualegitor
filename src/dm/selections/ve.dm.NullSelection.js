@@ -35,6 +35,13 @@ ve.dm.NullSelection.static.newFromHash = function ( doc ) {
 /* Methods */
 
 /**
+ * @return {ve.dm.NullSelection} Cloned selection
+ */
+ve.dm.NullSelection.prototype.clone = function () {
+	return new ve.dm.NullSelection( this.getDocument() );
+};
+
+/**
  * @inheritdoc
  */
 ve.dm.NullSelection.prototype.toJSON = function () {

@@ -102,6 +102,13 @@ ve.Range.static.newCoveringRange = function ( ranges, backwards ) {
 /* Methods */
 
 /**
+ * @return {ve.Range} Cloned range
+ */
+ve.Range.prototype.clone = function () {
+	return new ve.Range( this.from, this.to );
+};
+
+/**
  * Check if an offset is within the range.
  *
  * Specifically we mean the whole element at a specific offset, so in effect

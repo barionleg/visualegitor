@@ -423,7 +423,7 @@ ve.ui.DebugBar.prototype.testSquasher = function () {
 		transactions = this.getSurface().getModel().getDocument().completeHistory.transactions;
 
 	function squashTransactions( transactions ) {
-		var change = new ve.dm.Change(
+		return new ve.dm.Change(
 			0,
 			transactions.map( function ( tx ) {
 				return tx.clone();
@@ -432,9 +432,7 @@ ve.ui.DebugBar.prototype.testSquasher = function () {
 				return new ve.dm.HashValueStore();
 			} ),
 			{}
-		);
-		change.squash();
-		return change.transactions;
+		).squashed().transactions;
 	}
 	if ( transactions.length < 3 ) {
 		// Nothing interesting here

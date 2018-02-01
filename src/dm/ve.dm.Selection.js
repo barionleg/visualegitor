@@ -57,6 +57,14 @@ ve.dm.Selection.static.newFromHash = null;
 /* Methods */
 
 /**
+ * Clone this selection
+ *
+ * @abstract
+ * @return {ve.dm.Selection} Cloned selection
+ */
+ve.dm.Selection.prototype.clone = null;
+
+/**
  * Get a JSON serialization of this selection
  *
  * @abstract

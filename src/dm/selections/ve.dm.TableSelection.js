@@ -70,6 +70,18 @@ ve.dm.TableSelection.static.newFromHash = function ( doc, hash ) {
 
 /* Methods */
 
+ve.dm.TableSelection.prototype.clone = function () {
+	return new ve.dm.TableSelection(
+		this.getDocument(),
+		this.tableRange.clone(),
+		this.fromCol,
+		this.fromRow,
+		this.toCol,
+		this.toRow,
+		this.expand
+	);
+};
+
 /**
  * Expand the selection to cover all merged cells
  *
