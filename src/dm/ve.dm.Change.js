@@ -734,3 +734,44 @@ ve.dm.Change.prototype.serialize = function ( preserveStoreValues ) {
 		selections: selections
 	};
 };
+
+/**
+ * Get a Change with all this Change's Transactions compacted into one (or zero)
+ *
+ * The Change has the same effect when applied as this Change does, but it may cause
+ * rebase conflicts where this change does not.
+ *
+ * TODO: introduce a "histLength" feature so the new change can be considered as
+ * having length > 1.
+ *
+ * @return {ve.dm.Change} One-Transaction version of this Change (or empty change)
+ */
+ve.dm.Change.prototype.squashed = function () {
+	var transactions, squasher, i, iLen, authorId,
+		selections = {};
+
+	if ( this.transactions.length === 0 ) {
+		transactions = [];
+	} else {
+		squasher = new ve.dm.TransactionSquasher( this.transactions[ 0 ] );
+		for ( i = 1, iLen = this.transactions.length; i < iLen; i++ ) {
+			squasher.squashIn( this.transactions[ i ] );
+		}
+		transactions = [ squasher.getTransaction() ];
+	}
+
+	// Make a deep-enough copy of selections (ve.copy wouldn't clone each selection)
+	for ( authorId in this.selections ) {
+		selections[ authorId ] = this.selections[ authorId ].clone();
+	}
+
+	return new ve.dm.Change(
+		this.start,
+		transactions,
+		[ this.stores.reduce( function ( result, current ) {
+			result.merge( current );
+			return result;
+		}, new ve.dm.IndexValueStore() ) ],
+		selections
+	);
+};
