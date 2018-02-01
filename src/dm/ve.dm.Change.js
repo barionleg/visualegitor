@@ -930,54 +930,34 @@ ve.dm.Change.prototype.serialize = function ( preserveStoreValues ) {
 };
 
 /**
- * Squash a change in-place, to use as few transactions as possible
+ * Get a Change with all this Change's Transactions compacted into one (or zero)
+ *
+ * The Change has the same effect when applied as this Change does, but it may cause
+ * rebase conflicts where this change does not.
+ *
+ * TODO: introduce a "histLength" feature so the new change can be considered as
+ * having length > 1.
+ *
+ * @return {ve.dm.Change} One-Transaction version of this Change (or empty change)
  */
-ve.dm.Change.prototype.squash = function () {
-	var transactionA, transactionB, infoA, infoB, offset,
-		i = 0;
-	while ( i < this.transactions.length - 1 ) {
-		transactionA = this.transactions[ i ];
-		// (re)calculate infoA (it can change between iterations, even if i does not)
-		infoA = transactionA.getActiveRangeAndLengthDiff();
-		if ( infoA.start === undefined ) {
-			// No-op: remove, putting any store items into the next transaction
-			this.transactions.splice( i, 1 );
-			this.storeLengthAtTransaction[ i + 1 ] += this.storeLengthAtTransaction[ i ];
-			this.storeLengthAtTransaction.splice( i, 1 );
-			continue;
-		}
-		transactionB = this.transactions[ i + 1 ];
-		infoB = transactionB.getActiveRangeAndLengthDiff();
-		if ( infoB.start === undefined ) {
-			// No-op: remove, putting any store items into the previous transaction
-			this.transactions.splice( i + 1, 1 );
-			this.storeLengthAtTransaction[ i ] += this.storeLengthAtTransaction[ i + 1 ];
-			this.storeLengthAtTransaction.splice( i + 1, 1 );
-			continue;
-		}
+ve.dm.Change.prototype.squashed = function () {
+	var transactions, squasher, i, iLen, authorId,
+		selections = {};
 
-		if ( infoB.end <= infoA.start ) {
-			// Remove from A's start the retained content affected by B
-			transactionA.adjustRetain( 'start', infoB.start - infoB.end );
-			offset = infoB.start;
-		} else if ( infoA.end <= infoB.start - infoA.diff ) {
-			// Remove from A's end the retained content affected by B
-			transactionA.adjustRetain( 'end', infoB.start - infoB.end );
-			offset = infoB.start - infoA.diff;
-		} else {
-			// The active ranges overlap: continue without squashing this pair
-			i++;
-			continue;
-		}
-		transactionA.insertOperations(
-			offset,
-			transactionB.operations.slice(
-				infoB.startOpIndex,
-				infoB.endOpIndex
-			)
-		);
-		this.transactions.splice( i + 1, 1 );
-		this.storeLengthAtTransaction[ i ] += this.storeLengthAtTransaction[ i + 1 ];
-		this.storeLengthAtTransaction.splice( i + 1, 1 );
+	if ( this.transactions.length === 0 ) {
+		return new ve.dm.Change( this.start, [], [], {} );
 	}
+
+	squasher = new ve.dm.TransactionSquasher( this.transactions[ 0 ] );
+	for ( i = 1, iLen = this.transactions.length; i < iLen; i++ ) {
+		squasher.squashIn( this.transactions[ i ] );
+	}
+	transactions = [ squasher.getTransaction() ];
+
+	// Make a deep-enough copy of selections (ve.copy wouldn't clone each selection)
+	for ( authorId in this.selections ) {
+		selections[ authorId ] = this.selections[ authorId ].clone();
+	}
+
+	return new ve.dm.Change( this.start, transactions, [ this.store.clone() ], selections );
 };
