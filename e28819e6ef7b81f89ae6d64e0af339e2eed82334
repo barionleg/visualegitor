@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3f859ae2_1c1de395",
+        "filename": "Gruntfile.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2018-02-02T23:00:28Z",
+      "side": 1,
+      "message": "If we\u0027re going to run this inline for regular testing (which is a a bit sad as it\u0027s so slow), we absolutely have to assert that no files have been changed by this; move to the \u0027ci\u0027 job?",
+      "range": {
+        "startLine": 452,
+        "startChar": 87,
+        "endLine": 452,
+        "endChar": 93
+      },
+      "revId": "e28819e6ef7b81f89ae6d64e0af339e2eed82334",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
