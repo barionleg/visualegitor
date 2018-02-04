@@ -1192,6 +1192,8 @@ ve.dm.Converter.prototype.getDomSubtreeFromModel = function ( model, container, 
 	this.documentData = model.getFullData( undefined, true );
 	this.store = model.getStore();
 	this.internalList = model.getInternalList();
+	// Internal list of the doc this was cloned from, or itself if not cloned
+	this.originalDocInternalList = model.getOriginalDoc() ? model.getOriginalDoc().getInternalList() : this.internalList;
 	this.forClipboard = !!forClipboard;
 
 	this.getDomSubtreeFromData( this.documentData, container, model.getInnerWhitespace() );
@@ -1200,6 +1202,7 @@ ve.dm.Converter.prototype.getDomSubtreeFromModel = function ( model, container, 
 	this.documentData = null;
 	this.store = null;
 	this.internalList = null;
+	this.originalDocInternalList = null;
 	this.forClipboard = null;
 };
 
