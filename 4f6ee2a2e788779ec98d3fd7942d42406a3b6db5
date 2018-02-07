@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e06b7292_40f9de7c",
+        "filename": "src/ui/contextitems/ve.ui.LinkContextItem.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2018-02-07T20:33:22Z",
+      "side": 1,
+      "message": "Maybe it shouldn\u0027t be progressive but simply unflagged?",
+      "range": {
+        "startLine": 28,
+        "startChar": 13,
+        "endLine": 28,
+        "endChar": 24
+      },
+      "revId": "4f6ee2a2e788779ec98d3fd7942d42406a3b6db5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "94b8c109_96dbc381",
+        "filename": "src/ui/contextitems/ve.ui.LinkContextItem.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2018-02-07T20:33:22Z",
+      "side": 1,
+      "message": "(Ditto.)",
+      "range": {
+        "startLine": 34,
+        "startChar": 13,
+        "endLine": 34,
+        "endChar": 24
+      },
+      "revId": "4f6ee2a2e788779ec98d3fd7942d42406a3b6db5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
