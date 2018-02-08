@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ecb4b1d9_35b890c4",
+        "filename": "tests/ce/ve.ce.Document.test.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2018-02-08T04:22:27Z",
+      "side": 1,
+      "message": "Does this behaviour seem acceptable? (I feel it\u0027s better than master in any case)",
+      "revId": "c7e904bb49fc8c490889da0271cdac404bd63ce9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
