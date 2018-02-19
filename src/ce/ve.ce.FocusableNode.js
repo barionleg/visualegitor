@@ -801,9 +801,8 @@ ve.ce.FocusableNode.prototype.hasRendering = function () {
 		return true;
 	}
 	this.$element.each( function () {
-		var $this = $( this );
 		if (
-			( $this.width() >= 8 && $this.height() >= 8 ) ||
+			( this.offsetWidth >= 8 && this.offsetHeight >= 8 ) ||
 			// jQuery handles disparate cases, but is prone to elements which
 			// haven't experienced layout yet having 0 width / height. So,
 			// check the raw DOM width / height properties as well. If it's an
