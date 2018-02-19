@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "725dd0cf_f93d6a62",
+        "filename": "src/ce/ve.ce.FocusableNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 806,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2018-02-19T18:27:06Z",
+      "side": 1,
+      "message": "This comment seems outdated now?",
+      "revId": "a1f0f1787f0df16aeca170070cada7d2047202e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
