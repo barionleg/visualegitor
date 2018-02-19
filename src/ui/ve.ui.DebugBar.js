@@ -196,7 +196,7 @@ ve.ui.DebugBar.prototype.updateDump = function () {
  */
 ve.ui.DebugBar.prototype.generateListFromLinearData = function ( linearData ) {
 	var i, $li, $label, element, text, annotations, data,
-		$ol = $( '<ol start="0"></ol>' );
+		$ol = $( '<ol>' ).attr( 'start', '0' );
 
 	data = linearData instanceof ve.dm.LinearData ? linearData.data : linearData;
 
