@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c0d0c5cb_969459a4",
+        "filename": "src/ui/elements/ve.ui.DiffElement.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-02-21T10:51:35Z",
+      "side": 1,
+      "message": "use node.canContainContent()",
+      "revId": "08cb3e43537e93920f0113e61284efe1aed72d89",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3315c5f4_a52385e5",
+        "filename": "src/ui/elements/ve.ui.DiffElement.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-02-21T10:51:35Z",
+      "side": 1,
+      "message": "Tag -\u003e Element\n\nA tag is a string with angle brackets, in the DOM it becomes an element.",
+      "revId": "08cb3e43537e93920f0113e61284efe1aed72d89",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8aec3619_14116e17",
+        "filename": "src/ui/elements/ve.ui.DiffElement.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 848,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-02-21T10:51:35Z",
+      "side": 1,
+      "message": "Assuming we never call this method twice on the same node (?), we could get rid of this loop and just do\n\n ve.setProp( node, \u0027internal\u0027, \u0027diff\u0027, attributes );",
+      "revId": "08cb3e43537e93920f0113e61284efe1aed72d89",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2d07c087_1e75ff13",
+        "filename": "src/ui/elements/ve.ui.DiffElement.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 855,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-02-21T10:51:35Z",
+      "side": 1,
+      "message": "if you rebase you can use ve.deleteProp, for consistency",
+      "revId": "08cb3e43537e93920f0113e61284efe1aed72d89",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7e968f30_98ffc1de",
+        "filename": "src/ui/elements/ve.ui.DiffElement.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 857,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-02-21T10:51:35Z",
+      "side": 1,
+      "message": "If we don\u0027t need to clone the node anymore, then we don\u0027t need to return the node, because the variable is modified in place.",
+      "range": {
+        "startLine": 856,
+        "startChar": 0,
+        "endLine": 857,
+        "endChar": 9
+      },
+      "revId": "08cb3e43537e93920f0113e61284efe1aed72d89",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
