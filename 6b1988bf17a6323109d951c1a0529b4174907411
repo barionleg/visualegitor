@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e1b08fd4_e8d6576e",
+        "filename": "src/ui/widgets/ve.ui.AuthorItemWidget.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2018-02-21T16:18:36Z",
+      "side": 1,
+      "message": "That function will need to work asynchronously, so when we implement, we should think about how to handle two calls in flight etc.",
+      "range": {
+        "startLine": 51,
+        "startChar": 3,
+        "endLine": 51,
+        "endChar": 51
+      },
+      "revId": "6b1988bf17a6323109d951c1a0529b4174907411",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
