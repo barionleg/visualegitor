@@ -379,10 +379,7 @@ QUnit.test( 'Serialize/deserialize', function ( assert ) {
 					},
 					hashes: bIndex
 				},
-				{
-					hashStore: {},
-					hashes: []
-				}
+				null
 			],
 			selections: {}
 		},
@@ -432,7 +429,7 @@ QUnit.test( 'Serialize/deserialize', function ( assert ) {
 			return store.hashStore;
 		} ),
 		serialized.stores.map( function ( store ) {
-			return store.hashStore;
+			return store ? store.hashStore : {};
 		} ),
 		'Deserialize, preserving store values'
 	);
@@ -442,7 +439,7 @@ QUnit.test( 'Serialize/deserialize', function ( assert ) {
 			return store.hashStore;
 		} ),
 		serialized.stores.map( function ( store ) {
-			return store.hashStore;
+			return store ? store.hashStore : {};
 		} ),
 		'Deserialize, not preserving store values'
 	);
