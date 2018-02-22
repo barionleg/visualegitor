@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e7538041_d83094c6",
+        "filename": "src/ce/nodes/ve.ce.TableNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2018-02-22T16:54:53Z",
+      "side": 1,
+      "message": "Kill this.",
+      "range": {
+        "startLine": 195,
+        "startChar": 12,
+        "endLine": 195,
+        "endChar": 20
+      },
+      "revId": "2611d2ec98e94474855907d2818b4153024de582",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
