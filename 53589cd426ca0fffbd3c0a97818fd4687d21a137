@@ -94,6 +94,30 @@
     },
     {
       "key": {
+        "uuid": "fc7c866d_1d4f753a",
+        "filename": "src/init/ve.init.Platform.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-02-22T17:54:56Z",
+      "side": 1,
+      "message": "I\u0027ll use +string, it\u0027s quicker. +null is 0 and +undefined is NaN which are both falsey",
+      "parentUuid": "f006309d_02743df1",
+      "range": {
+        "startLine": 230,
+        "startChar": 2,
+        "endLine": 230,
+        "endChar": 52
+      },
+      "revId": "53589cd426ca0fffbd3c0a97818fd4687d21a137",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f6d227e7_61ce075e",
         "filename": "src/init/ve.init.Platform.js",
         "patchSetId": 1
