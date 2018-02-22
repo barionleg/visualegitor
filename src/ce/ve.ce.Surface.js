@@ -73,10 +73,6 @@ ve.ce.Surface = function VeCeSurface( model, ui, config ) {
 	this.lastDropPosition = null;
 	this.$pasteTarget = $( '<div>' );
 	this.pasting = false;
-	this.fakePasting = false;
-	// Support: IE<=10
-	// Use paste triggered by CTRL+V in IE<=10, otherwise the event is too late to move the selection
-	this.useFakePaste = profile.name === 'msie' && profile.versionNumber < 11;
 	this.copying = false;
 	this.pasteSpecial = false;
 	this.pointerEvents = null;
@@ -1181,10 +1177,6 @@ ve.ce.Surface.prototype.onDocumentKeyDown = function ( e ) {
 	} else {
 		trigger = new ve.ui.Trigger( e );
 		if ( trigger.isComplete() ) {
-			// Support: IE<=10
-			if ( this.useFakePaste && trigger.toString() === 'ctrl+v' ) {
-				this.onPaste( e, true );
-			}
 			executed = this.surface.execute( trigger );
 			if ( executed || this.isBlockedTrigger( trigger ) ) {
 				e.preventDefault();
@@ -1795,25 +1787,17 @@ ve.ce.Surface.prototype.onCopy = function ( e ) {
  * Handle native paste event
  *
  * @param {jQuery.Event} e Paste event
- * @param {boolean} fakePaste Paste event is fake (i.e. a CTRL+V keydown event)
  * @return {boolean} False if the event is cancelled
  */
-ve.ce.Surface.prototype.onPaste = function ( e, fakePaste ) {
+ve.ce.Surface.prototype.onPaste = function ( e ) {
 	var surface = this;
 	// Prevent pasting until after we are done
 	if ( this.pasting ) {
-		// Only prevent default if the first event wasn't fake
-		return this.fakePasting;
-	} else if ( this.useFakePaste && !fakePaste ) {
-		// The client requires fake paste, but the user triggered the
-		// paste without pressing CTRL+V (e.g. right click -> paste).
-		// We can't handle this case yet so just abort to avoid CE corruption.
 		return false;
 	}
 	this.beforePaste( e );
 	this.surfaceObserver.disable();
 	this.pasting = true;
-	this.fakePasting = !!fakePaste;
 	// setTimeout: postpone until after the default paste action
 	setTimeout( function () {
 		try {
@@ -1826,7 +1810,6 @@ ve.ce.Surface.prototype.onPaste = function ( e, fakePaste ) {
 
 			// Allow pasting again
 			surface.pasting = false;
-			surface.fakePasting = false;
 			surface.pasteSpecial = false;
 			surface.beforePasteData = null;
 		}
