@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "42608af3_3e0a4f63",
+        "filename": "src/init/ve.init.Platform.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2018-02-22T22:49:06Z",
+      "side": 1,
+      "message": "Return a bool here too?",
+      "range": {
+        "startLine": 197,
+        "startChar": 1,
+        "endLine": 197,
+        "endChar": 36
+      },
+      "revId": "757c96edcac2815e32617e21e13f006c27240415",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
