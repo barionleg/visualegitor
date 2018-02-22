@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7d73f4b2_56089ffe",
+        "filename": "src/init/ve.init.Platform.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2018-02-22T16:31:00Z",
+      "side": 1,
+      "message": "{string}",
+      "range": {
+        "startLine": 205,
+        "startChar": 10,
+        "endLine": 205,
+        "endChar": 17
+      },
+      "revId": "53589cd426ca0fffbd3c0a97818fd4687d21a137",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c653b55_dbaf4348",
+        "filename": "src/init/ve.init.Platform.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2018-02-22T16:31:00Z",
+      "side": 1,
+      "message": "For clarity, I suggest:\n\n   var length \u003d parseInt( this.getSession( key + \u0027__length\u0027 ) || \u00270\u0027, 10 );",
+      "range": {
+        "startLine": 208,
+        "startChar": 1,
+        "endLine": 208,
+        "endChar": 55
+      },
+      "revId": "53589cd426ca0fffbd3c0a97818fd4687d21a137",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2978de51_062cbff9",
+        "filename": "src/init/ve.init.Platform.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2018-02-22T16:31:00Z",
+      "side": 1,
+      "message": "String( length ) just for clarity",
+      "range": {
+        "startLine": 213,
+        "startChar": 36,
+        "endLine": 213,
+        "endChar": 42
+      },
+      "revId": "53589cd426ca0fffbd3c0a97818fd4687d21a137",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f006309d_02743df1",
+        "filename": "src/init/ve.init.Platform.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2018-02-22T16:31:00Z",
+      "side": 1,
+      "message": "length \u003d parseInt( this.getSession( key + \u0027__length\u0027 ) || \u00270\u0027, 10 );",
+      "range": {
+        "startLine": 230,
+        "startChar": 2,
+        "endLine": 230,
+        "endChar": 52
+      },
+      "revId": "53589cd426ca0fffbd3c0a97818fd4687d21a137",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f6d227e7_61ce075e",
+        "filename": "src/init/ve.init.Platform.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2018-02-22T16:31:00Z",
+      "side": 1,
+      "message": "length \u003d parseInt( this.getSession( key + \u0027__length\u0027 ) || \u00270\u0027, 10 );",
+      "range": {
+        "startLine": 246,
+        "startChar": 2,
+        "endLine": 246,
+        "endChar": 52
+      },
+      "revId": "53589cd426ca0fffbd3c0a97818fd4687d21a137",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
