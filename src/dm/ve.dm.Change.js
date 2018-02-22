@@ -108,12 +108,18 @@ ve.dm.Change.static.deserialize = function ( data, doc, preserveStoreValues, uns
 			data.selections[ authorId ]
 		);
 	}
-	deserializeStore = ve.dm.IndexValueStore.static.deserialize.bind(
-		null,
-		preserveStoreValues ? function noop( x ) {
-			return x;
-		} : function ( x ) { return deserializeValue( x, unsafe ); }
-	);
+	deserializeStore = function ( data ) {
+		// Empty stores are serialized to null to save space
+		if ( !data ) {
+			return new ve.dm.IndexValueStore();
+		}
+		return ve.dm.IndexValueStore.static.deserialize(
+			preserveStoreValues ? function noop( x ) {
+				return x;
+			} : function ( x ) { return deserializeValue( x, unsafe ); },
+			data
+		);
+	};
 	return new ve.dm.Change(
 		data.start,
 		data.transactions.map( ve.dm.Transaction.static.deserialize ),
@@ -730,7 +736,7 @@ ve.dm.Change.prototype.serialize = function ( preserveStoreValues ) {
 		return x;
 	} : this.constructor.static.serializeValue;
 	serializeStore = function ( store ) {
-		return store.serialize( serializeStoreValues );
+		return store.getLength() ? store.serialize( serializeStoreValues ) : null;
 	};
 	return {
 		start: this.start,
