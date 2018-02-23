@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "11db5b9d_d798634f",
+        "filename": "src/dm/ve.dm.Change.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-02-23T13:46:05Z",
+      "side": 1,
+      "message": "not sure it makes it much safer, but ok",
+      "parentUuid": "377c29da_e1f82a1e",
+      "revId": "9ec23aafd83e83f174d3f8e44a113df79f668cd0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d2765275_3be9fc32",
         "filename": "src/dm/ve.dm.Change.js",
         "patchSetId": 1
@@ -30,6 +48,30 @@
       "writtenOn": "2018-02-22T20:44:09Z",
       "side": 1,
       "message": "Is there a reason we don\u0027t do ( ... ).childNodes[ 0 ] in this case like we do in the else branch? If so, can we comment it?",
+      "range": {
+        "startLine": 142,
+        "startChar": 11,
+        "endLine": 142,
+        "endChar": 40
+      },
+      "revId": "9ec23aafd83e83f174d3f8e44a113df79f668cd0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2b460dc_4be56155",
+        "filename": "src/dm/ve.dm.Change.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-02-23T13:46:05Z",
+      "side": 1,
+      "message": ".childNodes[0] is because DOMPurify wraps the result in a doc fragment. If anything that code needs commenting, but meh.",
+      "parentUuid": "d2765275_3be9fc32",
       "range": {
         "startLine": 142,
         "startChar": 11,
