@@ -45,6 +45,7 @@ ve.ui.DiffElement = function VeUiDiffElement( visualDiff, config ) {
 	this.remove = diff.docDiff.rootChildrenRemove;
 	this.moves = diff.docDiff.moves;
 	this.internalListDiff = diff.internalListDiff;
+	this.timedOut = visualDiff.timedOut;
 
 	this.$overlays = $( '<div>' ).addClass( 've-ui-diffElement-overlays' );
 	this.$content = $( '<div>' ).addClass( 've-ui-diffElement-content' );
@@ -198,7 +199,7 @@ ve.ui.DiffElement.prototype.positionDescriptions = function () {
 ve.ui.DiffElement.prototype.renderDiff = function () {
 	var i, j, ilen, jlen, move, documentSpacerNode, internalListSpacerNode,
 		li, noChanges, group, internalListGroup, referencesListDiffDivs,
-		referencesListDiffDiv, internalListItem,
+		referencesListDiffDiv, internalListItem, alertIconWidget,
 		documentNode = this.$document[ 0 ],
 		hasMoves = false,
 		hasChanges = false,
@@ -236,6 +237,16 @@ ve.ui.DiffElement.prototype.renderDiff = function () {
 		}
 
 		return elements;
+	}
+
+	if ( this.timedOut ) {
+		alertIconWidget = new OO.ui.IconWidget( {
+			icon: 'alert'
+		} );
+		documentNode.appendChild( alertIconWidget.$element[ 0 ] );
+		documentNode.appendChild(
+			document.createTextNode( ve.msg( 'visualeditor-diff-timed-out' ) )
+		);
 	}
 
 	documentSpacerNode = document.createElement( 'div' );
