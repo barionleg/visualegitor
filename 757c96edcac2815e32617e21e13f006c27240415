@@ -46,6 +46,30 @@
       "revId": "757c96edcac2815e32617e21e13f006c27240415",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "550ecb8a_0115dfd5",
+        "filename": "src/init/ve.init.Platform.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-02-24T00:02:48Z",
+      "side": 1,
+      "message": "Fixed in https://gerrit.wikimedia.org/r/#/c/413895/",
+      "parentUuid": "98b14a01_357e5d15",
+      "range": {
+        "startLine": 197,
+        "startChar": 1,
+        "endLine": 197,
+        "endChar": 36
+      },
+      "revId": "757c96edcac2815e32617e21e13f006c27240415",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
