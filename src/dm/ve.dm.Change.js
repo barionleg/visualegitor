@@ -731,8 +731,109 @@ ve.dm.Change.prototype.removeFromHistory = function ( doc ) {
  * @return {ve.dm.Change} Deserialized change
  */
 ve.dm.Change.prototype.serialize = function ( preserveStoreValues ) {
-	var authorId, serializeStoreValues, serializeStore,
-		selections = {};
+	var authorId, serializeStoreValues, serializeStore, info, prevInfo,
+		getAnnotations = ve.dm.ElementLinearData.static.getAnnotationIndexesFromItem,
+		selections = {},
+		transactions = [];
+
+	/**
+	 * Get an item's single code unit (without annotation), or null if not a code unit
+	 *
+	 * @param {Object|Array|string} item The item
+	 * @return {string|null} The single code unit, or null if not a code unit
+	 */
+	function getSingleCodeUnit( item ) {
+		if ( typeof item === 'string' && item.length === 1 ) {
+			return item;
+		}
+		if ( Array.isArray( item ) && item[ 0 ].length === 1 ) {
+			return item[ 0 ];
+		}
+		return null;
+	}
+
+	/**
+	 * Get info about the "uniform text" from an item array, or null if not uniform text
+	 *
+	 * The item array is uniform text if all items have the same annotations, and
+	 * every item is a single code unit of text
+	 *
+	 * @param {Array} items The items
+	 * @return {Object|null} Info about the uniform text, or null if not uniform text
+	 * @return {string} return.text The code units, in a single string
+	 * @return {string} return.annotations Comma-separated annotation indexes for all text
+	 */
+	function getUniformText( items ) {
+		var annotations, i, iLen, item, codeUnit,
+			codeUnits = [];
+		if ( items.length === 0 ) {
+			return null;
+		}
+		codeUnit = getSingleCodeUnit( items[ 0 ] );
+		if ( codeUnit === null ) {
+			return null;
+		}
+		codeUnits.push( codeUnit );
+		annotations = getAnnotations( items[ 0 ] ).join( ',' );
+		for ( i = 1, iLen = items.length; i < iLen; i++ ) {
+			codeUnit = getSingleCodeUnit( items[ i ] );
+			if ( codeUnit === null ) {
+				return null;
+			}
+			codeUnits.push( codeUnit );
+			if ( annotations !== getAnnotations( items[ i ] ).join( ',' ) ) {
+				return null;
+			}
+		}
+		return { text: codeUnits.join( '' ), annotations: annotations };
+	}
+
+	/**
+	 * Get info about a transaction if it is a "simple replacement", or null if not
+	 *
+	 * A simple replacement transaction is one that has just one retain op
+	 * @param {ve.dm.Transaction} tx The transaction
+	 * @return {Object|null} Info about the transaction if a simple replacement, else null
+	 * @return {number} return.start The start offset of the replacement
+	 * @return {number} return.end The end offset of the replacement (after replacement)
+	 * @return {number} return.authorId The author ID
+	 * @return {Object|null} return.uniformInsert The insertion as uniform text, or null if not
+	 * @return {string} return.uniformInsert.text The plain text of the uniform text
+	 * @return {string} return.uniformInsert.annotations Comma-separated ann idxs for all text
+	 */
+	function getInfo( tx ) {
+		var replaceOp, start,
+			op0 = tx.operations[ 0 ],
+			op1 = tx.operations[ 1 ],
+			op2 = tx.operations[ 2 ];
+		if (
+			op0 &&
+			op0.type === 'replace' &&
+			( !op1 || op1.type === 'retain' ) &&
+			!op2
+		) {
+			replaceOp = op0;
+			start = 0;
+		} else if (
+			op0 &&
+			op0.type === 'retain' &&
+			op1 &&
+			op1.type === 'replace' &&
+			( !op2 || op2.type === 'retain' )
+		) {
+			replaceOp = op1;
+			start = op0.length;
+		} else {
+			return null;
+		}
+
+		return {
+			start: start,
+			end: start + replaceOp.insert.length,
+			authorId: tx.authorId,
+			uniformInsert: getUniformText( replaceOp.insert )
+		};
+	}
 
 	for ( authorId in this.selections ) {
 		selections[ authorId ] = this.selections[ authorId ].toJSON();
@@ -743,11 +844,27 @@ ve.dm.Change.prototype.serialize = function ( preserveStoreValues ) {
 	serializeStore = function ( store ) {
 		return store.serialize( serializeStoreValues );
 	};
+	for ( i = 0, iLen = this.transactions.length; i < iLen; i++ ) {
+		tx = this.transactions[ i ];
+		info = getInfo( tx );
+		if (
+			info &&
+			prevInfo &&
+			info.authorId === prevInfo.authorId &&
+			info.start === prevInfo.end &&
+			info.uniformInsert &&
+			prevInfo.uniformInsert &&
+			info.uniformInsert.annotations === prevInfo.uniformInsert.annotations
+		) {
+			transactions.push( info.uniformInsert.text );
+		} else {
+			transactions.push( tx.serialize() );
+		}
+		prevInfo = info;
+	}
 	return {
 		start: this.start,
-		transactions: this.transactions.map( function ( tx ) {
-			return tx.serialize();
-		} ),
+		transactions: transactions,
 		stores: this.stores.map( serializeStore ),
 		selections: selections
 	};
