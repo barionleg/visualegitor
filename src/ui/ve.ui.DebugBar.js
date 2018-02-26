@@ -198,13 +198,13 @@ ve.ui.DebugBar.prototype.updateDump = function () {
  * @return {jQuery} Ordered list
  */
 ve.ui.DebugBar.prototype.generateListFromLinearData = function ( linearData ) {
-	var i, $li, $label, element, text, annotations, data,
+	var i, $li, $chunk, $annotations, $label, element, text, annotations, data,
+		prevType, prevAnnotations,
 		$ol = $( '<ol>' ).attr( 'start', '0' );
 
 	data = linearData instanceof ve.dm.LinearData ? linearData.data : linearData;
 
 	for ( i = 0; i < data.length; i++ ) {
-		$li = $( '<li>' );
 		$label = $( '<span>' );
 		element = data[ i ];
 		annotations = null;
@@ -220,20 +220,47 @@ ve.ui.DebugBar.prototype.generateListFromLinearData = function ( linearData ) {
 			$label.addClass( 've-ui-debugBar-dump-char' );
 			text = element;
 		}
+
 		$label.html( ( text.match( /\S/ ) ? text : '&nbsp;' ) + ' ' );
-		if ( annotations ) {
-			$label.append(
-				$( '<span>' ).text(
+
+		if ( $chunk && !prevType && !element.type && OO.compare( prevAnnotations, annotations ) ) {
+			// This is a run of text with identical annotations. Continue current chunk.
+			$chunk.append( $label );
+		} else {
+			// End current chunk, if any.
+			if ( $chunk ) {
+				if ( $annotations ) {
+					$chunk.append( $annotations );
+				}
+				$ol.append( $chunk );
+				$chunk = null;
+				$annotations = null;
+			}
+
+			// Begin a new chunk
+			$chunk = $( '<li>' ).attr( 'value', i );
+			$chunk.append( $label );
+			if ( annotations ) {
+				$annotations = $( '<span>' ).addClass( 've-ui-debugBar-dump-annotations' ).text(
 					'[' + this.getSurface().getModel().getDocument().getStore().values( annotations ).map( function ( ann ) {
 						return JSON.stringify( ann.getComparableObject() );
 					} ).join( ', ' ) + ']'
 				)
-			);
+			}
 		}
 
-		$li.append( $label );
-		$ol.append( $li );
+		prevType = element.type;
+		prevAnnotations = annotations;
 	}
+
+	// End current chunk, if any.
+	if ( $chunk ) {
+		if ( $annotations ) {
+			$chunk.append( $annotations );
+		}
+		$ol.append( $chunk );
+	}
+
 	return $ol;
 };
 
