@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "003fc8bf_6344713c",
+        "filename": "src/dm/nodes/ve.dm.BlockquoteNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2018-02-26T11:24:57Z",
+      "side": 1,
+      "message": "This has been changed to inherit from ve.dm.ContentBranchNode in 94dbb244dd.",
+      "revId": "1cf97ce27a7c5f9ee03ab6feb989ca63957be529",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
