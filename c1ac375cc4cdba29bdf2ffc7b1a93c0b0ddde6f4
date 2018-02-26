@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f0371155_86e90d33",
+        "filename": "src/dm/ve.dm.Change.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 749,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-02-26T17:15:16Z",
+      "side": 1,
+      "message": ".squash",
+      "revId": "c1ac375cc4cdba29bdf2ffc7b1a93c0b0ddde6f4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a39c3c1e_cec647dd",
+        "filename": "src/dm/ve.dm.Change.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 753,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-02-26T17:15:16Z",
+      "side": 1,
+      "message": "Why throw an exception?\n\nAlso if length \u003c\u003d 1 you can just return this?",
+      "revId": "c1ac375cc4cdba29bdf2ffc7b1a93c0b0ddde6f4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1e2ac302_434dc690",
+        "filename": "src/dm/ve.dm.Change.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 768,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-02-26T17:15:16Z",
+      "side": 1,
+      "message": "is ve.copy available server side? otherwise OO.copy",
+      "revId": "c1ac375cc4cdba29bdf2ffc7b1a93c0b0ddde6f4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed068f8e_71b3386c",
+        "filename": "src/dm/ve.dm.TransactionSquasher.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-02-26T17:15:16Z",
+      "side": 1,
+      "message": "is this util available server side?",
+      "revId": "c1ac375cc4cdba29bdf2ffc7b1a93c0b0ddde6f4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "00330619_ff1c5ae9",
+        "filename": "tests/dm/ve.dm.TransactionSquasher.test.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-02-26T17:15:16Z",
+      "side": 1,
+      "message": "we should just use tx.deserialize, now the format is equally compact.",
+      "revId": "c1ac375cc4cdba29bdf2ffc7b1a93c0b0ddde6f4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
