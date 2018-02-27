@@ -170,7 +170,7 @@ ve.ui.Toolbar.prototype.updateToolState = function () {
 	}
 
 	if ( dirInline !== this.contextDirection.inline ) {
-		// remove previous class:
+		// Remove previous class:
 		this.$element.removeClass( 've-ui-dir-inline-rtl ve-ui-dir-inline-ltr' );
 		// The following classes can be used here:
 		// ve-ui-dir-inline-ltr
