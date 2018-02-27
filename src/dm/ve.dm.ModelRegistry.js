@@ -34,7 +34,7 @@
 		this.modelsWithTypeRegExps = [ [], [] ];
 		/*
 		 * Map tracking registration order
-		 * { nameA: 0, nameB: 1, ... }
+		 * { nameA: 0, nameB: 1, … }
 		 */
 		this.registrationOrder = {};
 		this.nextNumber = 0;

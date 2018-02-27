@@ -486,7 +486,7 @@ ve.Filibuster.static.clonePlain = function ( val, seen ) {
 	}
 	if ( Array.isArray( val ) ) {
 		if ( seen.has( val ) ) {
-			return '...';
+			return '…';
 		}
 		seen.add( val );
 		return val.map( function ( x ) {
@@ -523,7 +523,7 @@ ve.Filibuster.static.clonePlain = function ( val, seen ) {
 		return '(' + ( val.constructor.name || 'unknown' ) + ')';
 	} else {
 		if ( seen.has( val ) ) {
-			return '...';
+			return '…';
 		}
 		seen.add( val );
 		plainVal = {};
