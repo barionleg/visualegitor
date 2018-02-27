@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3579e4e4_8e03761d",
+        "filename": "src/ce/ve.ce.View.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2018-02-27T18:57:30Z",
+      "side": 1,
+      "message": "Capitalise?",
+      "range": {
+        "startLine": 115,
+        "startChar": 6,
+        "endLine": 115,
+        "endChar": 7
+      },
+      "revId": "d4669fa73314f2bb405b7b8ed6eb3d1516809174",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0af69c4b_c5cb7ca1",
+        "filename": "src/ce/ve.ce.View.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2018-02-27T18:57:30Z",
+      "side": 1,
+      "message": "And here?",
+      "range": {
+        "startLine": 117,
+        "startChar": 6,
+        "endLine": 117,
+        "endChar": 7
+      },
+      "revId": "d4669fa73314f2bb405b7b8ed6eb3d1516809174",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
