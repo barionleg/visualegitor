@@ -84,10 +84,12 @@ QUnit.test( 'getOffset', function ( assert ) {
 			{
 				msg: 'Empty paragraph',
 				html: '<p></p>',
-				// CE HTML summary:
-				// <p><span [inlineSlug]><img /></span></p>
-				// Linmod:
-				// [<p>, </p>]
+				/*
+				 * CE HTML summary:
+				 * <p><span [inlineSlug]><img /></span></p>
+				 * Linmod:
+				 * [<p>, </p>]
+				 */
 				expected: [
 					0,
 					1, 1, 1, 1, 1,
@@ -97,8 +99,10 @@ QUnit.test( 'getOffset', function ( assert ) {
 			{
 				msg: 'Annotations',
 				html: '<p><i><b>Foo</b></i></p>',
-				// Linmod:
-				// [<p>, F, o, o, </p>]
+				/*
+				 * Linmod:
+				 * [<p>, F, o, o, </p>]
+				 */
 				expected: [
 					0,
 					1, 1, 1, 1,
@@ -111,8 +115,10 @@ QUnit.test( 'getOffset', function ( assert ) {
 			{
 				msg: 'Multiple siblings',
 				html: '<p><b><i>Foo</i><s><u>Bar</u><span>Baz</span></s></b></p>',
-				// Linmod:
-				// [<p>, F, o, o, B, a, r, B, a, z, </p>]
+				/*
+				 * Linmod:
+				 * [<p>, F, o, o, B, a, r, B, a, z, </p>]
+				 */
 				expected: [
 					0,
 					1, 1, 1, 1,
@@ -131,10 +137,12 @@ QUnit.test( 'getOffset', function ( assert ) {
 			{
 				msg: 'Annotated alien',
 				html: '<p>Foo<b><span rel="ve:Alien">Bar</span></b>Baz</p>',
-				// CE HTML summary;
-				// <p>Foo<b><span [alien]>Bar</span></b>Baz</p>
-				// Linmod:
-				// [<p>, F, o, o, <alineinline>, </alineinline>, B, a, z, </p>]
+				/*
+				 * CE HTML summary;
+				 * <p>Foo<b><span [alien]>Bar</span></b>Baz</p>
+				 * Linmod:
+				 * [<p>, F, o, o, <alineinline>, </alineinline>, B, a, z, </p>]
+				 */
 				expected: [
 					0,
 					1, 1,
@@ -151,8 +159,10 @@ QUnit.test( 'getOffset', function ( assert ) {
 			{
 				msg: 'Block alien',
 				html: '<p>Foo</p><div rel="ve:Alien">Bar</div><p>Baz</p>',
-				// Linmod:
-				// [<p>, F, o, o, </p>, <alienBlock>, </alienBlock>, <p>, B, a, z, </p>]
+				/*
+				 * Linmod:
+				 * [<p>, F, o, o, </p>, <alienBlock>, </alienBlock>, <p>, B, a, z, </p>]
+				 */
 				expected: [
 					0,
 					1, 1,
@@ -172,14 +182,16 @@ QUnit.test( 'getOffset', function ( assert ) {
 			{
 				msg: 'Table with block slugs',
 				html: '<table><tr><td>Foo</td></tr></table>',
-				// CE HTML summary;
-				// <div [slug]>(ignored)</div>
-				// <table><tbody><tr><td>
-				//  <p>Foo</p>
-				// </td></tr></tbody></table>
-				// <div [slug]>(ignored)</div>
-				// Linmod:
-				// [<table>, <tbody>, <tr>, <td>, <p>, F, o, o, </p>, </td>, </tr>, </tbody>, </table>]
+				/*
+				 * CE HTML summary;
+				 * <div [slug]>(ignored)</div>
+				 * <table><tbody><tr><td>
+				 *  <p>Foo</p>
+				 * </td></tr></tbody></table>
+				 * <div [slug]>(ignored)</div>
+				 * Linmod:
+				 * [<table>, <tbody>, <tr>, <td>, <p>, F, o, o, </p>, </td>, </tr>, </tbody>, </table>]
+				 */
 				expected: [
 					0, 0,
 					1,
@@ -200,12 +212,14 @@ QUnit.test( 'getOffset', function ( assert ) {
 			{
 				msg: 'Paragraph with inline slugs',
 				html: '<p><span rel="ve:Alien">Foo</span><span rel="ve:Alien">Bar</span><br></p>',
-				// CE HTML summary:
-				// <p><span [inlineSlug]><img /></span><span [alien]>Foo</span>
-				// <span [inlineSlug]><img /></span><span [alien]>Bar</span>
-				// <span [inlineSlug]><img /></span><br></br><span [inlineSlug]><img /></span></p>
-				// Linmod:
-				// [<p>, <alineinline>, </alineinline>, <alineinline>, </alineinline>, <break>, </break>, </p>]
+				/*
+				 * CE HTML summary:
+				 * <p><span [inlineSlug]><img /></span><span [alien]>Foo</span>
+				 * <span [inlineSlug]><img /></span><span [alien]>Bar</span>
+				 * <span [inlineSlug]><img /></span><br></br><span [inlineSlug]><img /></span></p>
+				 * Linmod:
+				 * [<p>, <alineinline>, </alineinline>, <alineinline>, </alineinline>, <break>, </break>, </p>]
+				 */
 				expected: [
 					0,
 					1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
@@ -304,9 +318,11 @@ QUnit.test( 'resolveTestOffset', function ( assert ) {
 	var i, ilen, j, jlen, tests, test, testOffset, elt, pre, post, dom;
 	tests = [
 		[ 'o', 'k' ],
-		// TODO: doesn't handle tags correctly yet!
-		// ['w', '<b>', 'x', 'y', '</b>', 'z'],
-		// ['q', '<b>', 'r', '<b>', 's', 't', '</b>', 'u', '</b>', 'v']
+		/*
+		 * TODO: doesn't handle tags correctly yet!
+		 * ['w', '<b>', 'x', 'y', '</b>', 'z'],
+		 * ['q', '<b>', 'r', '<b>', 's', 't', '</b>', 'u', '</b>', 'v']
+		 */
 		[ 'h', 'e', 'l', 'l', 'o' ]
 	];
 
@@ -379,8 +395,10 @@ QUnit.test( 'fakeImes', function ( assert ) {
 			if ( action === 'endLoop' ) {
 				foundEndLoop = true;
 				if ( failAt === null || seq < failAt ) {
-					// If no expected failure yet, test the code ran and the
-					// model and CE surface are in sync
+					/*
+					 * If no expected failure yet, test the code ran and the
+					 * model and CE surface are in sync
+					 */
 					if ( died ) {
 						testRunner.failDied( assert, testName, seq, died );
 					} else {
@@ -411,9 +429,11 @@ QUnit.test( 'isAfterAnnotationBoundary', function ( assert ) {
 
 	div.innerHTML = 'Q<b>R<i>S</i>T</b><s>U</s>V<u>W</u>';
 
-	// In the following tests, the 'path' properties are a list of descent offsets to find a
-	// particular descendant node from the top-level div. E.g. a path of [ 5, 7 ] refers to
-	// the node div.childNodes[ 5 ].childNodes[ 7 ] .
+	/*
+	 * In the following tests, the 'path' properties are a list of descent offsets to find a
+	 * particular descendant node from the top-level div. E.g. a path of [ 5, 7 ] refers to
+	 * the node div.childNodes[ 5 ].childNodes[ 7 ] .
+	 */
 	tests = [
 		{ path: [], offset: 0, expected: false },
 		{ path: [ 0 ], offset: 0, expected: false },

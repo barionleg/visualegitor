@@ -18,8 +18,10 @@ ve.ui.LinkAnnotationWidget = function VeUiLinkAnnotationWidget( config ) {
 	this.annotation = null;
 	this.input = this.createInputWidget( config );
 
-	// Parent constructor
-	// Must be called after this.input is set as parent constructor calls this.setDisabled
+	/*
+	 * Parent constructor
+	 * Must be called after this.input is set as parent constructor calls this.setDisabled
+	 */
 	ve.ui.LinkAnnotationWidget.super.apply( this, arguments );
 
 	// Initialization
@@ -122,8 +124,10 @@ ve.ui.LinkAnnotationWidget.prototype.onTextChange = function ( value ) {
 	var isExt,
 		widget = this;
 
-	// RTL/LTR check
-	// TODO: Make this work properly
+	/*
+	 * RTL/LTR check
+	 * TODO: Make this work properly
+	 */
 	if ( $( 'body' ).hasClass( 'rtl' ) ) {
 		isExt = ve.init.platform.getExternalLinkUrlProtocolsRegExp().test( value.trim() );
 		// If URL is external, flip to LTR. Otherwise, set back to RTL

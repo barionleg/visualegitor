@@ -58,9 +58,11 @@ new ve.init.sa.Platform( ve.messagePaths ).getInitializedPromise().done( functio
 		$( '.stylesheet-' + oldDir ).prop( 'disabled', true );
 
 		$( 'body' ).css( 'direction', currentDir )
-			// The following classes can be used here:
-			// ve-demo-dir-ltr
-			// ve-demo-dir-rtl
+			/*
+			 * The following classes can be used here:
+			 * * ve-demo-dir-ltr
+			 * * ve-demo-dir-rtl
+			 */
 			.addClass( 've-demo-dir-' + currentDir )
 			.removeClass( 've-demo-dir-' + oldDir );
 	}

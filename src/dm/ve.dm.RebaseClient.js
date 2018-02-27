@@ -118,9 +118,11 @@ ve.dm.RebaseClient.prototype.submitChange = function () {
 	if ( change.isEmpty() ) {
 		return;
 	}
-	// logEvent before sendChange, for the case where the log entry is sent to the server
-	// over the same tunnel as the change, so that there's no way the server will log
-	// receiving the change before it receives the submitChange message.
+	/*
+	 * logEvent before sendChange, for the case where the log entry is sent to the server
+	 * over the same tunnel as the change, so that there's no way the server will log
+	 * receiving the change before it receives the submitChange message.
+	 */
 	this.logEvent( {
 		type: 'submitChange',
 		change: change,

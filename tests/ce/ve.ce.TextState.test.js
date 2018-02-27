@@ -265,9 +265,11 @@ QUnit.test( 'getChangeTransaction', function ( assert ) {
 				{
 					type: 'replace',
 					remove: [ 'b', 'a', 'z' ],
-					// TODO: Reuse bold instead of creating a new bold?
-					// (Some annotation types may need specific rules as to
-					// when this can be done)
+					/*
+					 * TODO: Reuse bold instead of creating a new bold?
+					 * (Some annotation types may need specific rules as to
+					 * when this can be done)
+					 */
 					insert: [ [ 'b', [ boldIndex ] ], [ 'a', [ boldIndex ] ], [ 'z', [ boldIndex ] ] ]
 				},
 				{ type: 'retain', length: 3 }
@@ -303,10 +305,12 @@ QUnit.test( 'getChangeTransaction', function ( assert ) {
 				{ type: 'retain', length: 5 },
 				{
 					type: 'replace',
-					// This weird-looking removal is the correct output for
-					// a diff algorithm that matches common start/end items
-					// then replaces the entire interior. In real life usage
-					// there won't usually be two separate changed regions.
+					/*
+					 * This weird-looking removal is the correct output for
+					 * a diff algorithm that matches common start/end items
+					 * then replaces the entire interior. In real life usage
+					 * there won't usually be two separate changed regions.
+					 */
 					remove: [
 						[ 'b', [ annIndex( 'i' ) ] ],
 						[ 'a', [ annIndex( 'i' ) ] ],

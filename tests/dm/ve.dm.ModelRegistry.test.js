@@ -104,8 +104,10 @@ ve.dm.example.StubBarNode = function VeDmStubBarNode() {
 OO.inheritClass( ve.dm.example.StubBarNode, ve.dm.BranchNode );
 ve.dm.example.StubBarNode.static.name = 'stub-bar';
 ve.dm.example.StubBarNode.static.matchRdfaTypes = [ 'bar' ];
-// HACK keep ve.dm.Converter happy for now
-// TODO once ve.dm.Converter is rewritten, this can be removed
+/*
+ * HACK keep ve.dm.Converter happy for now
+ * TODO once ve.dm.Converter is rewritten, this can be removed
+ */
 ve.dm.example.StubBarNode.static.toDataElement = function () {};
 ve.dm.example.StubBarNode.static.toDomElements = function () {};
 

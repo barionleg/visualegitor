@@ -71,8 +71,10 @@ ve.ui.ModeledFactory.prototype.getRelatedItems = function ( models ) {
 		return candidates;
 	}
 
-	// Collect compatible classes and the models they are specifically compatible with,
-	// discarding class's with duplicate symbolic names
+	/*
+	 * Collect compatible classes and the models they are specifically compatible with,
+	 * discarding class's with duplicate symbolic names
+	 */
 	for ( i = 0, iLen = models.length; i < iLen; i++ ) {
 		model = models[ i ];
 		classes = collect( model );

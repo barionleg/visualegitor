@@ -157,8 +157,10 @@ QUnit.test( 'Factory methods & serialization (newFromJSON, toJSON, getDescriptio
 	assert.strictEqual( selection.getDescription(), 'Table: 0 - 171, c1 r2 - c3 r4', 'getDescription' );
 } );
 
-// TODO: getMatrixCells
-// TODO: translateByTransaction
-// TODO: newFromAdjustment
-// TODO: isFullRow
-// TODO: isFullCol
+/*
+ * TODO: getMatrixCells
+ * TODO: translateByTransaction
+ * TODO: newFromAdjustment
+ * TODO: isFullRow
+ * TODO: isFullCol
+ */

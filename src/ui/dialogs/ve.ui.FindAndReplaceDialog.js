@@ -56,8 +56,10 @@ ve.ui.FindAndReplaceDialog.prototype.initialize = function () {
 	this.fragments = [];
 	this.results = 0;
 	this.renderedResultsCache = {};
-	// Range over the list of fragments indicating which ones where rendered,
-	// e.g. [1,3] means fragments 1 & 2 were rendered
+	/*
+	 * Range over the list of fragments indicating which ones where rendered,
+	 * e.g. [1,3] means fragments 1 & 2 were rendered
+	 */
 	this.renderedFragments = new ve.Range();
 	this.replacing = false;
 	this.focusedIndex = 0;
@@ -580,8 +582,10 @@ ve.ui.FindAndReplaceDialog.prototype.onReplaceButtonClick = function () {
 
 	this.replace( this.focusedIndex );
 
-	// Find the next fragment after this one ends. Ensures that if we replace
-	// 'foo' with 'foofoo' we don't select the just-inserted text.
+	/*
+	 * Find the next fragment after this one ends. Ensures that if we replace
+	 * 'foo' with 'foofoo' we don't select the just-inserted text.
+	 */
 	end = this.fragments[ this.focusedIndex ].getSelection().getRange().end;
 
 	this.updateFragments();

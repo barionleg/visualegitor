@@ -45,9 +45,11 @@ ve.ui.TableLineContext = function VeUiTableLineContext( tableNode, itemGroup, co
 
 	// Initialization
 	this.popup.$body.append( this.$group );
-	// The following classes can be used here:
-	// * ve-ui-tableLineContext-col
-	// * ve-ui-tableLineContext-row
+	/*
+	 * The following classes can be used here:
+	 * * ve-ui-tableLineContext-col
+	 * * ve-ui-tableLineContext-row
+	 */
 	this.$element
 		.addClass( 've-ui-tableLineContext ve-ui-tableLineContext-' + itemGroup )
 		.append( this.indicator.$element, this.popup.$element );

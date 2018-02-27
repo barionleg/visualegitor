@@ -36,19 +36,23 @@ var self = module.exports = {
 	 * @return {Array} Flat list of file paths
 	 */
 	expandResources: function ( resources ) {
-		// Figure out what the different css targets will be,
-		// we need this to be shared between the recess task
-		// (which will compile the less code) and the concat task
-		// (which will prepend intro.css without it being stripped
-		// like recess would).
+		/*
+		 * Figure out what the different css targets will be,
+		 * we need this to be shared between the recess task
+		 * (which will compile the less code) and the concat task
+		 * (which will prepend intro.css without it being stripped
+		 * like recess would).
+		 */
 		var targets = { 'default': [] };
 		resources.forEach( function ( filepath ) {
 			var variant, buffer;
 			if ( typeof filepath !== 'object' ) {
 				filepath = { 'default': filepath };
 			}
-			// Fetch copy of buffer before filepath/variant loop, otherwise
-			// it can incorrectly include the default file in a non-default variant.
+			/*
+			 * Fetch copy of buffer before filepath/variant loop, otherwise
+			 * it can incorrectly include the default file in a non-default variant.
+			 */
 			buffer = targets.default.slice();
 			for ( variant in filepath ) {
 				if ( !targets[ variant ] ) {
@@ -70,14 +74,14 @@ var self = module.exports = {
 	 */
 	makeBuildList: function ( modules, targets ) {
 		/**
-		* Given a list of modules and targets, returns an object splitting the scripts
-		* and styles.
-		*
-		* @param {Array} modules List of modules
-		* @param {Array} buildlist List of targets to work through
-		* @param {Object|null} filelist Object to extend
-		* @return {Object} Object of two arrays listing the file paths
-		*/
+		 * Given a list of modules and targets, returns an object splitting the scripts
+		 * and styles.
+		 *
+		 * @param {Array} modules List of modules
+		 * @param {Array} buildlist List of targets to work through
+		 * @param {Object|null} filelist Object to extend
+		 * @return {Object} Object of two arrays listing the file paths
+		 */
 		function expandBuildList( modules, buildlist, filelist ) {
 			var build, moduleName, script, style;
 

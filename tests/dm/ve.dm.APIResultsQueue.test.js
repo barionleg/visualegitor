@@ -109,11 +109,13 @@ QUnit.test( 'Query providers', function ( assert ) {
 		.then( function ( data ) {
 			// Check that we received all requested results
 			assert.equal( data.length, 10, 'Query 1: Results received.' );
-			// We've asked for 10 items + 2 threshold from all providers.
-			// Provider 1 returned 12 results
-			// Provider 2 returned 0 results
-			// Provider 3 returned 1 results
-			// Overall 13 results. 10 were retrieved. 3 left in queue.
+			/*
+			 * We've asked for 10 items + 2 threshold from all providers.
+			 * Provider 1 returned 12 results
+			 * Provider 2 returned 0 results
+			 * Provider 3 returned 1 results
+			 * Overall 13 results. 10 were retrieved. 3 left in queue.
+			 */
 			assert.equal( queue.getQueueSize(), 3, 'Query 1: Remaining queue size.' );
 
 			// Check if sources are depleted
@@ -125,13 +127,15 @@ QUnit.test( 'Query providers', function ( assert ) {
 			return queue.get( 10 );
 		} )
 		.then( function ( data1 ) {
-			// This time, only provider 1 was queried, because the other
-			// two were marked as depleted.
-			// * We asked for 10 items
-			// * There are currently 3 items in the queue
-			// * The queue queried provider #1 for 12 items
-			// * The queue returned 10 results as requested
-			// * 5 results are now left in the queue.
+			/*
+			 * This time, only provider 1 was queried, because the other
+			 * two were marked as depleted.
+			 * * We asked for 10 items
+			 * * There are currently 3 items in the queue
+			 * * The queue queried provider #1 for 12 items
+			 * * The queue returned 10 results as requested
+			 * * 5 results are now left in the queue.
+			 */
 			assert.equal( data1.length, 10, 'Query 1: Second set of results received.' );
 			assert.equal( queue.getQueueSize(), 5, 'Query 1: Remaining queue size.' );
 

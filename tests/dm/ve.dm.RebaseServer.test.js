@@ -27,8 +27,10 @@ QUnit.test( 'Rebase', assert => ve.spawn( function* () {
 						[ 'insert', 2, [ 'b' ], 3 ],
 						[ 'insert', 3, [ 'c' ], 3 ]
 					] ],
-					// Client getHistorySummary() output looks like: confirmed/sent?/unsent!
-					// Obviously, the server only has confirmed items
+					/*
+					 * Client getHistorySummary() output looks like: confirmed/sent?/unsent!
+					 * Obviously, the server only has confirmed items
+					 */
 					[ '1', 'assertHist', 'abc!' ],
 					[ '1', 'submit' ],
 					[ '1', 'assertHist', 'abc?' ],
@@ -58,8 +60,10 @@ QUnit.test( 'Rebase', assert => ve.spawn( function* () {
 					[ '1', 'submit' ],
 					[ '1', 'assertHist', 'abc/def?' ],
 					[ '1', 'deliver' ],
-					// The summary order shows that def arrived after AB in the
-					// history (even though it lies before AB in document order)
+					/*
+					 * The summary order shows that def arrived after AB in the
+					 * history (even though it lies before AB in document order)
+					 */
 					[ 'server', 'assertHist', 'abcABdef' ],
 
 					// Client 2 inserts underlined CD
@@ -369,8 +373,10 @@ QUnit.test( 'Rebase', assert => ve.spawn( function* () {
 					[ '1', 'assertHist', 'ab/Q?/XYZ!' ],
 					[ '1', 'assert', function ( assert, client ) {
 						var unsubmitted = client.getChangeSince( client.sentLength, false );
-						// FIXME this fails. If uncommitted = client.getChangeSince( client.commitLength, false );
-						// then we expect uncommitted.stores[1] to contain 'h123', but instead uncommitted.stores[0] does.
+						/*
+						 * FIXME this fails. If uncommitted = client.getChangeSince( client.commitLength, false );
+						 * then we expect uncommitted.stores[1] to contain 'h123', but instead uncommitted.stores[0] does.
+						 */
 						assert.deepEqual( unsubmitted.stores[ 0 ].hashes, [ 'h123' ], 'h123 is still in the store after receiving a foreign change' );
 					} ],
 

@@ -51,24 +51,28 @@ OO.mixinClass( ve.ce.BranchNode, ve.BranchNode );
  */
 ve.ce.BranchNode.inlineSlugTemplate = ( function () {
 	var profile = $.client.profile(),
-		// The following classes can be used here:
-		// * ve-ce-chimera-gecko
-		// * ve-ce-chimera-konqueror
-		// * ve-ce-chimera-msie
-		// * ve-ce-chimera-trident
-		// * ve-ce-chimera-edge
-		// * ve-ce-chimera-opera
-		// * ve-ce-chimera-webkit
+		/*
+		 * The following classes can be used here:
+		 * * ve-ce-chimera-gecko
+		 * * ve-ce-chimera-konqueror
+		 * * ve-ce-chimera-msie
+		 * * ve-ce-chimera-trident
+		 * * ve-ce-chimera-edge
+		 * * ve-ce-chimera-opera
+		 * * ve-ce-chimera-webkit
+		 */
 		$img = $( '<img>' )
 			.addClass( 've-ce-chimera ve-ce-chimera-' + profile.layout ),
 		$span = $( '<span>' )
 			.addClass( 've-ce-branchNode-slug ve-ce-branchNode-inlineSlug' )
 			.append( $img );
 
-	// Support: Firefox
-	// Firefox <=37 misbehaves if we don't set an src: https://bugzilla.mozilla.org/show_bug.cgi?id=989012
-	// Firefox misbehaves if we don't set an src and there is no sizing at node creation time: https://bugzilla.mozilla.org/show_bug.cgi?id=1267906
-	// Setting an src in Chrome is slow, so only set it in affected versions of Firefox
+	/*
+	 * Support: Firefox
+	 * Firefox <=37 misbehaves if we don't set an src: https://bugzilla.mozilla.org/show_bug.cgi?id=989012
+	 * Firefox misbehaves if we don't set an src and there is no sizing at node creation time: https://bugzilla.mozilla.org/show_bug.cgi?id=1267906
+	 * Setting an src in Chrome is slow, so only set it in affected versions of Firefox
+	 */
 	if ( profile.layout === 'gecko' ) {
 		$img.prop( 'src', ve.ce.minImgDataUri );
 	}
@@ -185,8 +189,10 @@ ve.ce.BranchNode.prototype.onSplice = function ( index ) {
 		for ( i = 2, length = args.length; i < length; i++ ) {
 			type = args[ i ].getType();
 			if ( ve.dm.nodeFactory.isMetaData( type ) ) {
-				// Metadata never has an explicit view representation, so a generic
-				// ve.ce.MetaItem should be fine
+				/*
+				 * Metadata never has an explicit view representation, so a generic
+				 * ve.ce.MetaItem should be fine
+				 */
 				type = 'meta';
 			}
 			args[ i ] = ve.ce.nodeFactory.create( type, args[ i ] );
@@ -285,8 +291,10 @@ ve.ce.BranchNode.prototype.setupSlugs = function ( isBlock ) {
 
 	for ( i in this.getModel().slugPositions ) {
 		slugNode = doc.importNode( slugTemplate, true );
-		// FIXME T126019: InternalListNode has an empty $element, so we assume that the slug goes
-		// at the end instead. This is a hack and the internal list needs to die in a fire.
+		/*
+		 * FIXME T126019: InternalListNode has an empty $element, so we assume that the slug goes
+		 * at the end instead. This is a hack and the internal list needs to die in a fire.
+		 */
 		if ( this.children[ i ] && this.children[ i ].$element[ 0 ] ) {
 			child = this.children[ i ].$element[ 0 ];
 			// child.parentNode might not be equal to this.$element[ 0 ]: e.g. annotated inline nodes
@@ -403,8 +411,10 @@ ve.ce.BranchNode.prototype.getDomPosition = function ( offset ) {
 			break;
 		}
 	}
-	// Darn, we hit a text node. CE text nodes can contain varying annotations and so it is
-	// difficult to calculate how many childNodes to skip. Let's try stepping forward instead.
+	/*
+	 * Darn, we hit a text node. CE text nodes can contain varying annotations and so it is
+	 * difficult to calculate how many childNodes to skip. Let's try stepping forward instead.
+	 */
 	i = offset;
 	while ( true ) {
 		ceNode = this.children[ i++ ];

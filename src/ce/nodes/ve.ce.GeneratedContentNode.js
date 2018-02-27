@@ -197,8 +197,10 @@ ve.ce.GeneratedContentNode.prototype.render = function ( generatedContents, stag
 		this.model.emit( 'generatedContentsError', $newElements );
 	}
 
-	// Update focusable and resizable elements if necessary
-	// TODO: Move these method definitions to their respective mixins.
+	/*
+	 * Update focusable and resizable elements if necessary
+	 * TODO: Move these method definitions to their respective mixins.
+	 */
 	if ( this.$focusable ) {
 		this.$focusable = this.getFocusableElement();
 		this.$bounding = this.getBoundingElement();
@@ -310,8 +312,10 @@ ve.ce.GeneratedContentNode.prototype.startGenerating = function () {
 ve.ce.GeneratedContentNode.prototype.abortGenerating = function () {
 	var promise = this.generatingPromise;
 	if ( promise ) {
-		// Unset this.generatingPromise first so that if the promise is resolved or rejected
-		// from within .abort(), this is ignored as it should be
+		/*
+		 * Unset this.generatingPromise first so that if the promise is resolved or rejected
+		 * from within .abort(), this is ignored as it should be
+		 */
 		this.generatingPromise = null;
 		if ( $.isFunction( promise.abort ) ) {
 			promise.abort();
@@ -331,8 +335,10 @@ ve.ce.GeneratedContentNode.prototype.abortGenerating = function () {
 ve.ce.GeneratedContentNode.prototype.doneGenerating = function ( generatedContents, config, staged ) {
 	var store, hash;
 
-	// Because doneGenerating is invoked asynchronously, the model node may have become detached
-	// in the meantime. Handle this gracefully.
+	/*
+	 * Because doneGenerating is invoked asynchronously, the model node may have become detached
+	 * in the meantime. Handle this gracefully.
+	 */
 	if ( this.model && this.model.doc ) {
 		store = this.model.doc.getStore();
 		hash = OO.getHash( [ this.model.getHashObjectForRendering(), config ] );

@@ -48,8 +48,10 @@ ve.ce.FocusableNode = function VeCeFocusableNode( $focusable, config ) {
 		this.$highlights.addClass( config.classes.join( ' ' ) );
 	}
 
-	// Use a debounced handler as some actions can trigger redrawHighlights
-	// twice in quick succession resizeEnd+rerender
+	/*
+	 * Use a debounced handler as some actions can trigger redrawHighlights
+	 * twice in quick succession resizeEnd+rerender
+	 */
 	this.redrawHighlightsDebounced = ve.debounce( this.redrawHighlights.bind( this ), 100 );
 
 	// DOM changes
@@ -130,30 +132,33 @@ ve.ce.FocusableNode.static.getRectsForElement = function ( $element, relativeRec
 			columnCount = $el.css( '-webkit-column-count' );
 			columnWidth = $el.css( '-webkit-column-width' );
 			if ( ( columnCount && columnCount !== 'auto' ) || ( columnWidth && columnWidth !== 'auto' ) ) {
-				// Support: Chrome
-				// Chrome incorrectly measures children of nodes with columns [1], let's
-				// just ignore them rather than render a possibly bizarre highlight. They
-				// will usually not be positioned, because Chrome also doesn't position
-				// them correctly [2] and so people avoid doing it.
-				//
-				// Of course there are other ways to render a node outside the bounding
-				// box of its parent, like negative margin. We do not handle these cases,
-				// and the highlight may not correctly cover the entire node if that
-				// happens. This can't be worked around without implementing CSS
-				// layouting logic ourselves, which is not worth it.
-				//
-				// [1] https://code.google.com/p/chromium/issues/detail?id=391271
-				// [2] https://code.google.com/p/chromium/issues/detail?id=291616
-
-				// jQuery keeps nodes in its collections in document order, so the
-				// children have not been processed yet and can be safely removed.
+				/*
+				 * Support: Chrome
+				 * Chrome incorrectly measures children of nodes with columns [1], let's
+				 * just ignore them rather than render a possibly bizarre highlight. They
+				 * will usually not be positioned, because Chrome also doesn't position
+				 * them correctly [2] and so people avoid doing it.
+				 *
+				 * Of course there are other ways to render a node outside the bounding
+				 * box of its parent, like negative margin. We do not handle these cases,
+				 * and the highlight may not correctly cover the entire node if that
+				 * happens. This can't be worked around without implementing CSS
+				 * layouting logic ourselves, which is not worth it.
+				 *
+				 * [1] https://code.google.com/p/chromium/issues/detail?id=391271
+				 * [2] https://code.google.com/p/chromium/issues/detail?id=291616
+				 * jQuery keeps nodes in its collections in document order, so the
+				 * children have not been processed yet and can be safely removed.
+				 */
 				$set = $set.not( $el.find( '*' ) );
 			}
 		}
 
-		// Don't descend if overflow is anything but visible as this prevents child
-		// elements appearing beyond the bounding box of the parent, *unless* display
-		// is inline, in which case the overflow setting will be ignored
+		/*
+		 * Don't descend if overflow is anything but visible as this prevents child
+		 * elements appearing beyond the bounding box of the parent, *unless* display
+		 * is inline, in which case the overflow setting will be ignored
+		 */
 		overflow = $el.css( 'overflow' );
 		if ( overflow && overflow !== 'visible' && $el.css( 'display' ) !== 'inline' ) {
 			$set = $set.not( $el.find( '*' ) );
@@ -188,9 +193,11 @@ ve.ce.FocusableNode.static.getRectsForElement = function ( $element, relativeRec
 		process( $set[ i ] );
 	}
 
-	// Elements with a width/height of 0 return a clientRect with a width/height of 1
-	// As elements with an actual width/height of 1 aren't that useful anyway, just
-	// throw away anything that is <=1
+	/*
+	 * Elements with a width/height of 0 return a clientRect with a width/height of 1
+	 * As elements with an actual width/height of 1 aren't that useful anyway, just
+	 * throw away anything that is <=1
+	 */
 	filteredRects = rects.filter( function ( rect ) {
 		return rect.width > 1 && rect.height > 1;
 	} );
@@ -277,10 +284,12 @@ ve.ce.FocusableNode.prototype.onFocusableSetup = function () {
 		'touchmove.ve-ce-focusableNode': this.onFocusableTouchMove.bind( this ),
 		'mousedown.ve-ce-focusableNode touchend.ve-ce-focusableNode': this.onFocusableMouseDown.bind( this )
 	} );
-	// $element is ce=false so make sure nothing happens when you click
-	// on it, just in case the browser decides to do something.
-	// If $element == $focusable then this can be skipped as $focusable already
-	// handles mousedown events.
+	/*
+	 * $element is ce=false so make sure nothing happens when you click
+	 * on it, just in case the browser decides to do something.
+	 * If $element == $focusable then this can be skipped as $focusable already
+	 * handles mousedown events.
+	 */
 	if ( !this.$element.is( this.$focusable ) ) {
 		this.$element.on( {
 			'mousedown.ve-ce-focusableNode': function ( e ) {
@@ -292,9 +301,11 @@ ve.ce.FocusableNode.prototype.onFocusableSetup = function () {
 	}
 
 	if ( this.constructor.static.iconWhenInvisible ) {
-		// Set up the invisible icon, and watch for its continued necessity if
-		// unloaded images which don't specify their width or height are
-		// involved.
+		/*
+		 * Set up the invisible icon, and watch for its continued necessity if
+		 * unloaded images which don't specify their width or height are
+		 * involved.
+		 */
 		this.$element
 			.find( 'img:not([width]),img:not([height])' )
 			.addBack( 'img:not([width]),img:not([height])' )
@@ -329,8 +340,10 @@ ve.ce.FocusableNode.prototype.updateInvisibleIcon = function () {
 	}
 	showIcon = !this.hasRendering();
 
-	// Defer updating the DOM. If we don't do this, the hasRendering() call for the next
-	// FocusableNode will force a reflow, which is slow.
+	/*
+	 * Defer updating the DOM. If we don't do this, the hasRendering() call for the next
+	 * FocusableNode will force a reflow, which is slow.
+	 */
 	rAF( function () {
 		if ( showIcon ) {
 			if ( !node.$icon ) {
@@ -492,8 +505,10 @@ ve.ce.FocusableNode.prototype.onFocusableDragStart = function () {
  * @param {jQuery.Event} e Drag end event
  */
 ve.ce.FocusableNode.prototype.onFocusableDragEnd = function () {
-	// endRelocation is usually triggered by onDocumentDrop in the surface, but if it isn't
-	// trigger it here instead
+	/*
+	 * endRelocation is usually triggered by onDocumentDrop in the surface, but if it isn't
+	 * trigger it here instead
+	 */
 	if ( this.focusableSurface ) {
 		this.focusableSurface.endRelocation();
 	}
@@ -681,8 +696,10 @@ ve.ce.FocusableNode.prototype.clearHighlights = function () {
  */
 ve.ce.FocusableNode.prototype.redrawHighlights = function () {
 	if ( this.focused ) {
-		// setFocused will call clearHighlights/createHighlights
-		// and also re-bind events.
+		/*
+		 * setFocused will call clearHighlights/createHighlights
+		 * and also re-bind events.
+		 */
 		this.setFocused( false );
 		this.setFocused( true );
 	}

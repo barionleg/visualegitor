@@ -256,9 +256,11 @@ ve.dm.AnnotationSet.prototype.filter = function ( callback, returnBool ) {
 
 	if ( !returnBool ) {
 		result = this.clone();
-		// TODO: Should we be returning this on all methods that modify the original? Might help
-		// with chainability, but perhaps it's also confusing because most chainable methods return
-		// a new hash set.
+		/*
+		 * TODO: Should we be returning this on all methods that modify the original? Might help
+		 * with chainability, but perhaps it's also confusing because most chainable methods return
+		 * a new hash set.
+		 */
 		result.removeAll();
 	}
 	for ( i = 0, length = this.getLength(); i < length; i++ ) {
@@ -439,7 +441,6 @@ ve.dm.AnnotationSet.prototype.add = function ( annotation, offset ) {
  * @method
  * @param {ve.dm.AnnotationSet} set Set to add to the set
  * @param {number} [offset] Offset at which to insert; defaults to the end of the set
-
  */
 ve.dm.AnnotationSet.prototype.addSet = function ( set, offset ) {
 	var indexes = this.getIndexes();

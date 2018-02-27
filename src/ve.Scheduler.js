@@ -10,8 +10,10 @@
  * @constructor
  */
 ve.Scheduler = function VeScheduler() {
-	// TODO: If we decide to start tracking setTimeout calls within actions, we'll
-	// need to keep state here.
+	/*
+	 * TODO: If we decide to start tracking setTimeout calls within actions, we'll
+	 * need to keep state here.
+	 */
 };
 
 /* Inheritance */
@@ -70,8 +72,10 @@ ve.Scheduler.prototype.schedule = function ( immediateAction, completionTest, de
 			this.postpone( testThenAct, delayHint );
 		}.bind( this );
 
-	// In the future, we may want to expand this to track whether other async calls
-	// were made within the action.
+	/*
+	 * In the future, we may want to expand this to track whether other async calls
+	 * were made within the action.
+	 */
 	immediateAction();
 
 	// Spin up the test cycle

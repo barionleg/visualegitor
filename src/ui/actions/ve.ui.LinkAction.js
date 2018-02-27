@@ -53,9 +53,11 @@ ve.ui.LinkAction.static.methods = [ 'autolinkUrl' ];
  */
 ve.ui.LinkAction.prototype.autolinkUrl = function () {
 	return this.autolink( function ( linktext ) {
-		// Make sure we still have a real URL after trail removal, and not
-		// a bare protocol (or no protocol at all, if we stripped the last
-		// colon from the protocol)
+		/*
+		 * Make sure we still have a real URL after trail removal, and not
+		 * a bare protocol (or no protocol at all, if we stripped the last
+		 * colon from the protocol)
+		 */
 		return ve.ui.LinkAction.static.autolinkRegExp.test( linktext );
 	} );
 };
@@ -119,8 +121,10 @@ ve.ui.LinkAction.prototype.autolink = function ( validateFunc, txFunc ) {
 	// Shrink range to match new linktext.
 	range = range.truncate( linktext.length );
 
-	// If there are word characters (but not punctuation) immediately past the range, don't autolink.
-	// The user did something silly like type a link in the middle of a word.
+	/*
+	 * If there are word characters (but not punctuation) immediately past the range, don't autolink.
+	 * The user did something silly like type a link in the middle of a word.
+	 */
 	if (
 		range.end + 1 < documentModel.data.getLength() &&
 		/\w/.test( documentModel.data.getText( true, new ve.Range( range.end, range.end + 1 ) ) )
@@ -128,8 +132,10 @@ ve.ui.LinkAction.prototype.autolink = function ( validateFunc, txFunc ) {
 		return false;
 	}
 
-	// Check that none of the range has an existing link annotation.
-	// Otherwise we could autolink an internal link, which would be ungood.
+	/*
+	 * Check that none of the range has an existing link annotation.
+	 * Otherwise we could autolink an internal link, which would be ungood.
+	 */
 	for ( i = range.start; i < range.end; i++ ) {
 		if ( documentModel.data.getAnnotationsFromOffset( i ).containsMatching( isLinkAnnotation ) ) {
 			// Don't autolink this.
@@ -142,8 +148,10 @@ ve.ui.LinkAction.prototype.autolink = function ( validateFunc, txFunc ) {
 
 	// Annotate the (previous) range.
 	if ( txFunc ) {
-		// TODO: Change this API so that 'txFunc' is given a surface fragment
-		// as an argument, and uses the fragment to directly edit the document.
+		/*
+		 * TODO: Change this API so that 'txFunc' is given a surface fragment
+		 * as an argument, and uses the fragment to directly edit the document.
+		 */
 		surfaceModel.change( txFunc( documentModel, range, linktext ) );
 	} else {
 		surfaceModel.getLinearFragment( range, true ).annotateContent( 'set', this.getLinkAnnotation( linktext ) );

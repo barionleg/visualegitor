@@ -30,20 +30,24 @@ QUnit.test( 'Converter tests', function ( assert ) {
 	}
 } );
 
-// TODO: getNodeFromOffset
-// TODO: getSlugAtOffset
-// TODO: getDirectionFromRange
+/*
+ * TODO: getNodeFromOffset
+ * TODO: getSlugAtOffset
+ * TODO: getDirectionFromRange
+ */
 
 QUnit.test( 'getNodeAndOffset', function ( assert ) {
 	var tests, i, iLen, test, parts, view, data, dmDoc, ceDoc, rootNode, offsetCount, offset, j, jLen, node, ex;
 
-	// Each test below has the following:
-	// html: an input document
-	// data: the expected DM content
-	// positions: the node+offset corresponding to each DM offset, shown by marking pipe
-	// characters on a modified HTML representation in which text nodes are wrapped in
-	// <#text>...</#text> tags (and most attributes are omitted)
-	// dies (optional): a list of DM offsets where getNodeAndOffset is expected to die
+	/*
+	 * Each test below has the following:
+	 * html: an input document
+	 * data: the expected DM content
+	 * positions: the node+offset corresponding to each DM offset, shown by marking pipe
+	 * characters on a modified HTML representation in which text nodes are wrapped in
+	 * <#text>...</#text> tags (and most attributes are omitted)
+	 * dies (optional): a list of DM offsets where getNodeAndOffset is expected to die
+	 */
 	/* eslint-disable quotes */
 	tests = [
 		{

@@ -130,8 +130,10 @@ OO.mixinClass( ve.dm.Scalable, OO.EventEmitter );
 ve.dm.Scalable.static.getDimensionsFromValue = function ( dimensions, ratio ) {
 	dimensions = ve.copy( dimensions );
 
-	// Normalize for 'empty' values that are specifically given
-	// so if '' is explicitly given, it should be translated to 0
+	/*
+	 * Normalize for 'empty' values that are specifically given
+	 * so if '' is explicitly given, it should be translated to 0
+	 */
 	if ( dimensions.width === '' ) {
 		dimensions.width = 0;
 	}

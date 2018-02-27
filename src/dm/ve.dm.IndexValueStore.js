@@ -195,14 +195,16 @@ ve.dm.IndexValueStore.prototype.indexOfValue = function ( value, stringified ) {
 		stringified = OO.getHash( value );
 	}
 
-	// We don't need cryptographically strong hashes, just low collision probability. Given
-	// effectively random hash distribution, for n values hashed into a space of m hash
-	// strings, the probability of a collision is roughly n^2 / (2m). We use 16 hex digits
-	// of MD5 i.e. 2^64 possible hash strings, so given 2^16 stored values the collision
-	// probability is about 2^-33 =~ 0.0000000001 , i.e. negligible.
-	//
-	// Prefix with a letter to prevent all numeric hashes, and to constrain the space of
-	// possible object property values.
+	/*
+	 * We don't need cryptographically strong hashes, just low collision probability. Given
+	 * effectively random hash distribution, for n values hashed into a space of m hash
+	 * strings, the probability of a collision is roughly n^2 / (2m). We use 16 hex digits
+	 * of MD5 i.e. 2^64 possible hash strings, so given 2^16 stored values the collision
+	 * probability is about 2^-33 =~ 0.0000000001 , i.e. negligible.
+	 *
+	 * Prefix with a letter to prevent all numeric hashes, and to constrain the space of
+	 * possible object property values.
+	 */
 	return 'h' + SparkMD5.hash( stringified ).slice( 0, 16 );
 };
 

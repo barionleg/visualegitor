@@ -101,8 +101,10 @@ ve.dm.TreeModifier.prototype.processOperation = function ( op ) {
  * Retain to the end of the content
  */
 ve.dm.TreeModifier.prototype.processImplicitFinalRetain = function () {
-	// Pretend there is an implicit retain to the end of the document
-	// TODO: fix our tests so this is unnecessary, then check for exhaustion instead
+	/*
+	 * Pretend there is an implicit retain to the end of the document
+	 * TODO: fix our tests so this is unnecessary, then check for exhaustion instead
+	 */
 	var node, retainLength, item;
 	while ( true ) {
 		this.inserter.normalize();
@@ -115,8 +117,10 @@ ve.dm.TreeModifier.prototype.processImplicitFinalRetain = function () {
 			return;
 		}
 		if ( node instanceof ve.dm.TextNode ) {
-			// Retain all remaining text; if there is no remaining text then
-			// retain a single offset.
+			/*
+			 * Retain all remaining text; if there is no remaining text then
+			 * retain a single offset.
+			 */
 			retainLength = Math.max( 1, node.length - this.remover.offset );
 		} else if ( !node.hasChildren() ) {
 			retainLength = 1;
@@ -250,10 +254,11 @@ ve.dm.TreeModifier.prototype.removeNode = function () {
 	pre = this.remover.node.children[ this.remover.offset - 1 ];
 	post = this.remover.node.children[ this.remover.offset ];
 	if ( pre instanceof ve.dm.TextNode && post instanceof ve.dm.TextNode ) {
-		// Lengthen the text node before the remover, and remove the text node after it
-
-		// TODO: these operations are not tree synchronization safe. Should do two
-		// linear splices to match the tree operations.
+		/*
+		 * Lengthen the text node before the remover, and remove the text node after it
+		 * TODO: these operations are not tree synchronization safe. Should do two
+		 * linear splices to match the tree operations.
+		 */
 		preLength = pre.length;
 
 		if ( this.inserter.node === post ) {
@@ -327,11 +332,13 @@ ve.dm.TreeModifier.prototype.processRetain = function ( maxLength ) {
 	remover.normalize();
 	inserter.normalize();
 	if ( this.cursorsMatch() ) {
-		// Pointers are in the same location, so advance them together.
-		// This is the only way both pointers can ever enter the same node;
-		// in any other case, a node entered at an 'open' tag by one pointer
-		// is marked as either as a deletion or a creation, so the other
-		// pointer will not follow.
+		/*
+		 * Pointers are in the same location, so advance them together.
+		 * This is the only way both pointers can ever enter the same node;
+		 * in any other case, a node entered at an 'open' tag by one pointer
+		 * is marked as either as a deletion or a creation, so the other
+		 * pointer will not follow.
+		 */
 		removerStep = remover.stepAtMost( maxLength );
 		inserterStep = inserter.stepAtMost( maxLength );
 		if ( !removerStep ) {
@@ -348,8 +355,10 @@ ve.dm.TreeModifier.prototype.processRetain = function ( maxLength ) {
 		}
 		return removerStep.length;
 	}
-	// Else pointers are not in the same location (in fact they cannot lie in the
-	// same node)
+	/*
+	 * Else pointers are not in the same location (in fact they cannot lie in the
+	 * same node)
+	 */
 	removerStep = remover.stepAtMost( maxLength );
 	if ( removerStep.type === 'crosstext' ) {
 		this.moveLastCrossText();
@@ -423,8 +432,10 @@ ve.dm.TreeModifier.prototype.processRemove = function ( itemOrData ) {
 		removal = this.removeLast().data;
 	} else if ( step.type === 'open' ) {
 		this.deletions.push( step.item );
-		// Don't use step.item.getClonedElement(), as a subclass can legitimately make
-		// the checkExpected calls below fail
+		/*
+		 * Don't use step.item.getClonedElement(), as a subclass can legitimately make
+		 * the checkExpected calls below fail
+		 */
 		removal = step.item.element;
 	} else if ( step.type === 'close' ) {
 		removal = { type: '/' + step.item.type };
@@ -452,9 +463,11 @@ ve.dm.TreeModifier.prototype.processInsert = function ( itemOrData ) {
 
 	if ( type === 'open' ) {
 		if ( inserter.node instanceof ve.dm.TextNode ) {
-			// Step past the end of the text node, even if that skips past some
-			// content (in which case the remover logically must later cross that
-			// content in either processRemove or processRetain).
+			/*
+			 * Step past the end of the text node, even if that skips past some
+			 * content (in which case the remover logically must later cross that
+			 * content in either processRemove or processRetain).
+			 */
 			inserter.stepOut();
 		}
 		data = [ item, { type: '/' + item.type } ];
@@ -465,9 +478,11 @@ ve.dm.TreeModifier.prototype.processInsert = function ( itemOrData ) {
 		data = data.slice();
 		this.insertText( data );
 	} else if ( type === 'close' ) {
-		// Step past the next close tag, even if that skips past some content (in which
-		// case the remover logically must later cross that content in either
-		// processRemove or processRetain).
+		/*
+		 * Step past the next close tag, even if that skips past some content (in which
+		 * case the remover logically must later cross that content in either
+		 * processRemove or processRetain).
+		 */
 		if ( inserter.node instanceof ve.dm.TextNode ) {
 			inserter.stepOut();
 		}

@@ -319,8 +319,10 @@
 	};
 
 	QUnit.diff = function ( o, n ) {
-		// o and n are partially HTML escaped by QUnit. As difflib does
-		// its own escaping we should unescape them first.
+		/*
+		 * o and n are partially HTML escaped by QUnit. As difflib does
+		 * its own escaping we should unescape them first.
+		 */
 		var oLines = difflib.stringAsLines( unescapeText( o ) ),
 			nLines = difflib.stringAsLines( unescapeText( n ) ),
 			sm = new difflib.SequenceMatcher( oLines, nLines ),

@@ -131,8 +131,10 @@ ve.ui.TableDialog.prototype.getActionProcess = function ( action ) {
 							{ type: '/paragraph' },
 							{ type: '/tableCaption' }
 						], false );
-						// Don't change this.fragment immediately, wait until teardown process, as child
-						// dialogs my want access to the original fragment
+						/*
+						 * Don't change this.fragment immediately, wait until teardown process, as child
+						 * dialogs my want access to the original fragment
+						 */
 						this.closingFragment = fragment.collapseToStart().adjustLinearSelection( 2, 2 );
 					}
 				}

@@ -92,9 +92,11 @@ ve.BranchNode.prototype.setRoot = function ( root ) {
 		return;
 	}
 	if ( oldRoot ) {
-		// Null the root, then recurse into children, then emit unroot.
-		// That way, at emit time, all this node's ancestors and descendants have
-		// null root.
+		/*
+		 * Null the root, then recurse into children, then emit unroot.
+		 * That way, at emit time, all this node's ancestors and descendants have
+		 * null root.
+		 */
 		this.root = null;
 		for ( i = 0, len = this.children.length; i < len; i++ ) {
 			this.children[ i ].setRoot( null );
@@ -103,9 +105,11 @@ ve.BranchNode.prototype.setRoot = function ( root ) {
 	}
 	this.root = root;
 	if ( root ) {
-		// We've set the new root, so recurse into children, then emit root.
-		// That way, at emit time, all this node's ancestors and descendants have
-		// the new root.
+		/*
+		 * We've set the new root, so recurse into children, then emit root.
+		 * That way, at emit time, all this node's ancestors and descendants have
+		 * the new root.
+		 */
 		for ( i = 0, len = this.children.length; i < len; i++ ) {
 			this.children[ i ].setRoot( root );
 		}
@@ -128,9 +132,11 @@ ve.BranchNode.prototype.setDocument = function ( doc ) {
 		return;
 	}
 	if ( oldDoc ) {
-		// Null the doc, then recurse into children, then notify the doc.
-		// That way, at notify time, all this node's ancestors and descendants have
-		// null doc.
+		/*
+		 * Null the doc, then recurse into children, then notify the doc.
+		 * That way, at notify time, all this node's ancestors and descendants have
+		 * null doc.
+		 */
 		this.doc = null;
 		for ( i = 0, len = this.children.length; i < len; i++ ) {
 			this.children[ i ].setDocument( null );
@@ -139,9 +145,11 @@ ve.BranchNode.prototype.setDocument = function ( doc ) {
 	}
 	this.doc = doc;
 	if ( doc ) {
-		// We've set the new doc, so recurse into children, then notify the doc.
-		// That way, at notify time, all this node's ancestors and descendants have
-		// the new doc.
+		/*
+		 * We've set the new doc, so recurse into children, then notify the doc.
+		 * That way, at notify time, all this node's ancestors and descendants have
+		 * the new doc.
+		 */
 		for ( i = 0, len = this.children.length; i < len; i++ ) {
 			this.children[ i ].setDocument( doc );
 		}
@@ -173,8 +181,10 @@ ve.BranchNode.prototype.getNodeFromOffset = function ( offset, shallow ) {
 		for ( i = 0, length = currentNode.children.length; i < length; i++ ) {
 			childNode = currentNode.children[ i ];
 			if ( offset === nodeOffset ) {
-				// The requested offset is right before childNode, so it's not
-				// inside any of currentNode's children, but is inside currentNode
+				/*
+				 * The requested offset is right before childNode, so it's not
+				 * inside any of currentNode's children, but is inside currentNode
+				 */
 				return currentNode;
 			}
 			if ( childNode instanceof ve.ce.InternalListNode ) {
@@ -183,8 +193,10 @@ ve.BranchNode.prototype.getNodeFromOffset = function ( offset, shallow ) {
 			nodeLength = childNode.getOuterLength();
 			if ( offset >= nodeOffset && offset < nodeOffset + nodeLength ) {
 				if ( !shallow && childNode.hasChildren() && childNode.getChildren().length ) {
-					// One of the children contains the node; increment to
-					// enter the node, then iterate through children
+					/*
+					 * One of the children contains the node; increment to
+					 * enter the node, then iterate through children
+					 */
 					nodeOffset += 1;
 					currentNode = childNode;
 					continue SIBLINGS;
@@ -195,8 +207,10 @@ ve.BranchNode.prototype.getNodeFromOffset = function ( offset, shallow ) {
 			nodeOffset += nodeLength;
 		}
 		if ( offset === nodeOffset ) {
-			// The requested offset is right before currentNode.children[i], so it's
-			// not inside any of currentNode's children, but is inside currentNode
+			/*
+			 * The requested offset is right before currentNode.children[i], so it's
+			 * not inside any of currentNode's children, but is inside currentNode
+			 */
 			return currentNode;
 		}
 	}

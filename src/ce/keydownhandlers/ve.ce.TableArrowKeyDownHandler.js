@@ -46,9 +46,11 @@ ve.ce.TableArrowKeyDownHandler.static.execute = function ( surface, e ) {
 		expand = e.shiftKey;
 
 	if ( e.ctrlKey || e.altKey || e.metaKey ) {
-		// Support: Firefox
-		// In Firefox, ctrl-tab to switch browser-tabs still triggers the
-		// keydown event.
+		/*
+		 * Support: Firefox
+		 * In Firefox, ctrl-tab to switch browser-tabs still triggers the
+		 * keydown event.
+		 */
 		return;
 	}
 
@@ -125,16 +127,20 @@ ve.ce.TableArrowKeyDownHandler.static.moveTableSelection = function ( surface, r
 
 	adjust();
 
-	// If wrapping forwards didn't move, we must be at the end of the table,
-	// so insert a new row and try again
+	/*
+	 * If wrapping forwards didn't move, we must be at the end of the table,
+	 * so insert a new row and try again
+	 */
 	if ( wrap && colOffset > 0 && selection.equals( newSelection ) ) {
 		surface.getSurface().execute( 'table', 'insert', 'row', 'after' );
 		selection = surface.getModel().getSelection();
 		adjust();
 	}
 
-	// If moving up/down didn't move, we must be at the start/end of the table,
-	// so move outside
+	/*
+	 * If moving up/down didn't move, we must be at the start/end of the table,
+	 * so move outside
+	 */
 	if ( rowOffset !== 0 && selection.equals( newSelection ) ) {
 		documentModel = selection.getDocument();
 		newSelection = new ve.dm.LinearSelection( documentModel, documentModel.getRelativeRange( selection.tableRange, rowOffset ) );

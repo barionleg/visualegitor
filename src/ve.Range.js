@@ -12,10 +12,12 @@
  * @param {number} [to=from] Focus offset
  */
 ve.Range = function VeRange( from, to ) {
-	// For ease of debugging, check arguments.length when applying defaults, to preserve
-	// invalid arguments such as undefined and NaN that indicate a programming error.
-	// Range calculation errors can often propagate quite far before surfacing, so the
-	// indication is important.
+	/*
+	 * For ease of debugging, check arguments.length when applying defaults, to preserve
+	 * invalid arguments such as undefined and NaN that indicate a programming error.
+	 * Range calculation errors can often propagate quite far before surfacing, so the
+	 * indication is important.
+	 */
 	this.from = arguments.length >= 1 ? from : 0;
 	this.to = arguments.length >= 2 ? to : this.from;
 	this.start = this.from < this.to ? this.from : this.to;

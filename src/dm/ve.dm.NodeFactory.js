@@ -99,8 +99,10 @@ ve.dm.NodeFactory.prototype.getSuggestedParentNodeTypes = function ( type ) {
 ve.dm.NodeFactory.prototype.canNodeHaveChildren = function ( type ) {
 	var types;
 	if ( Object.prototype.hasOwnProperty.call( this.registry, type ) ) {
-		// If childNodeTypes is null any child is allowed, if it's an array of at least one element
-		// than at least one kind of node is allowed
+		/*
+		 * If childNodeTypes is null any child is allowed, if it's an array of at least one element
+		 * than at least one kind of node is allowed
+		 */
 		types = this.registry[ type ].static.childNodeTypes;
 		return types === null || ( Array.isArray( types ) && types.length > 0 );
 	}
