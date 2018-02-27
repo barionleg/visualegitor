@@ -1778,9 +1778,9 @@ ve.ce.Surface.prototype.onCopy = function ( e ) {
 	 */
 	this.$pasteTarget.find( 'span' ).addClass( 've-pasteProtect' );
 
-	// When paste has no text content browsers do extreme normalization...
+	// When paste has no text content browsers do extreme normalization…
 	if ( this.$pasteTarget.text() === '' ) {
-		// ...so put nbsp's in empty leaves
+		// … so put nbsp's in empty leaves
 		this.$pasteTarget.find( '*:not( :has( * ) )' ).html( '&nbsp;' );
 	}
 
@@ -1888,7 +1888,7 @@ ve.ce.Surface.prototype.onCopy = function ( e ) {
 				view.surfaceObserver.enable();
 			} );
 		} else {
-			// If the selection is non-native, the pasteTarget *should* already be selected...
+			// If the selection is non-native, the pasteTarget *should* already be selected…
 			ve.selectElement( this.$pasteTarget[ 0 ] );
 		}
 	}
@@ -3535,7 +3535,7 @@ ve.ce.Surface.prototype.findAdjacentUneditableBranchNode = function ( direction 
 				/*
 				 * We shouldn't ever hit a raw text node, because they
 				 * should all be wrapped in CBNs or focusable nodes, but
-				 * just in case...
+				 * just in case…
 				 */
 				node.nodeType === Node.TEXT_NODE
 			) {

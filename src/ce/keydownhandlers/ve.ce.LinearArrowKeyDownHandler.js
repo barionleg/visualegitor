@@ -169,7 +169,7 @@ ve.ce.LinearArrowKeyDownHandler.static.execute = function ( surface, e ) {
 
 		/*
 		 * Support: Chrome
-		 * Chrome bug lets you cursor into a multi-line contentEditable=false with up/down...
+		 * Chrome bug lets you cursor into a multi-line contentEditable=false with up/down…
 		 */
 		viewNode = $( surface.nativeSelection.focusNode ).closest( '.ve-ce-leafNode,.ve-ce-branchNode' ).data( 'view' );
 		if ( !viewNode ) {
