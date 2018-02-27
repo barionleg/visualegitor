@@ -414,8 +414,10 @@ ve.init.Platform.prototype.fetchSpecialCharList = function () {
 			ve.msg( 'visualeditor-specialcharinspector-characterlist-insert' )
 		);
 	} catch ( err ) {
-		// There was no character list found, or the character list message is
-		// invalid json string. Force a fallback to the minimal character list
+		/*
+		 * There was no character list found, or the character list message is
+		 * invalid json string. Force a fallback to the minimal character list
+		 */
 		ve.log( 've.init.Platform: Could not parse the Special Character list.' );
 		ve.log( err.message );
 	}

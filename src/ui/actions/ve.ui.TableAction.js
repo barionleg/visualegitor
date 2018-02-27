@@ -298,13 +298,15 @@ ve.ui.TableAction.prototype.importTable = function ( importedTableNode, importIn
 			cellRange = cell.node.getRange();
 			importedCell = importedMatrix.getCell( row, col );
 			if ( importedCell.node.type !== cell.node.type ) {
-				// Since the imported cell isn't the same type as the
-				// existing cell, we can't quite trust our assumptions about
-				// how it's supposed to work. As such, it's safer to outright
-				// replace the cell rather than trying to be clever and switch
-				// out the attributes / data. We shouldn't have gotten to this
-				// point without it being Cellable, so this should at least
-				// work.
+				/*
+				 * Since the imported cell isn't the same type as the
+				 * existing cell, we can't quite trust our assumptions about
+				 * how it's supposed to work. As such, it's safer to outright
+				 * replace the cell rather than trying to be clever and switch
+				 * out the attributes / data. We shouldn't have gotten to this
+				 * point without it being Cellable, so this should at least
+				 * work.
+				 */
 				surfaceModel.change( ve.dm.TransactionBuilder.static.newFromReplacement(
 					documentModel, cell.node.getOuterRange(),
 					importedTableNode.getDocument().getData( importedCell.node.getOuterRange() )
@@ -312,8 +314,10 @@ ve.ui.TableAction.prototype.importTable = function ( importedTableNode, importIn
 			} else if ( !importedCell.isPlaceholder() ) {
 				// Remove the existing cell contents
 				surfaceModel.change( ve.dm.TransactionBuilder.static.newFromRemoval( documentModel, cellRange ) );
-				// Attribute changes are performed separately, and removing the whole
-				// cell could change the dimensions of the table
+				/*
+				 * Attribute changes are performed separately, and removing the whole
+				 * cell could change the dimensions of the table
+				 */
 				txBuilders = [
 					ve.dm.TransactionBuilder.static.newFromAttributeChanges.bind( null,
 						documentModel, cellRange.start - 1,
@@ -587,18 +591,19 @@ ve.ui.TableAction.prototype.insertRowOrCol = function ( tableNode, mode, index, 
 
 	before = position === 'before';
 
-	// Note: when we insert a new row (or column) we might need to increment a span property
-	// instead of inserting a new cell.
-	// To achieve this we look at the so called base row and a so called reference row.
-	// The base row is the one after or before which the new row will be inserted.
-	// The reference row is the one which is currently at the place of the new one.
-	// E.g. consider inserting a new row after the second: the base row is the second, the
-	// reference row is the third.
-	// A span must be increased if the base cell and the reference cell have the same 'owner'.
-	// E.g.:  C* | P**; C | P* | P**, i.e., one of the two cells might be the owner of the other,
-	// or vice versa, or both a placeholders of a common cell.
-
-	// The index of the reference row or column
+	/*
+	 * Note: when we insert a new row (or column) we might need to increment a span property
+	 * instead of inserting a new cell.
+	 * To achieve this we look at the so called base row and a so called reference row.
+	 * The base row is the one after or before which the new row will be inserted.
+	 * The reference row is the one which is currently at the place of the new one.
+	 * E.g. consider inserting a new row after the second: the base row is the second, the
+	 * reference row is the third.
+	 * A span must be increased if the base cell and the reference cell have the same 'owner'.
+	 * E.g.:  C* | P**; C | P* | P**, i.e., one of the two cells might be the owner of the other,
+	 * or vice versa, or both a placeholders of a common cell.
+	 * The index of the reference row or column
+	 */
 	refIndex = index + ( before ? -1 : 1 );
 	// Cells of the selected row or column
 	if ( mode === 'row' ) {
@@ -649,10 +654,12 @@ ve.ui.TableAction.prototype.insertRowOrCol = function ( tableNode, mode, index, 
 		}
 	}
 
-	// Inserting a new row differs completely from inserting a new column:
-	// For a new row, a new row node is created, and inserted relative to an existing row node.
-	// For a new column, new cells are inserted into existing row nodes at appropriate positions,
-	// i.e., relative to an existing cell node.
+	/*
+	 * Inserting a new row differs completely from inserting a new column:
+	 * For a new row, a new row node is created, and inserted relative to an existing row node.
+	 * For a new column, new cells are inserted into existing row nodes at appropriate positions,
+	 * i.e., relative to an existing cell node.
+	 */
 	if ( mode === 'row' ) {
 		if ( !dataMatrixLine ) {
 			insertData = ve.dm.TableRowNode.static.createData( {
@@ -676,12 +683,16 @@ ve.ui.TableAction.prototype.insertRowOrCol = function ( tableNode, mode, index, 
 		offset = before ? range.start : range.end;
 		txBuilders.push( ve.dm.TransactionBuilder.static.newFromInsertion.bind( null, surfaceModel.getDocument(), offset, insertData ) );
 	} else {
-		// Make sure that the inserts are in descending offset order
-		// so that the transactions do not affect subsequent range offsets.
+		/*
+		 * Make sure that the inserts are in descending offset order
+		 * so that the transactions do not affect subsequent range offsets.
+		 */
 		inserts.sort( ve.dm.TableMatrixCell.static.sortDescending );
 
-		// For inserting a new cell we need to find a reference cell node
-		// which we can use to get a proper insertion offset.
+		/*
+		 * For inserting a new cell we need to find a reference cell node
+		 * which we can use to get a proper insertion offset.
+		 */
 		for ( i = 0; i < inserts.length; i++ ) {
 			cell = inserts[ i ];
 			if ( !cell ) {
@@ -691,8 +702,10 @@ ve.ui.TableAction.prototype.insertRowOrCol = function ( tableNode, mode, index, 
 			refCell = matrix.findClosestCell( cell );
 			if ( refCell ) {
 				range = refCell.node.getOuterRange();
-				// If the found cell is before the base cell the new cell must be placed after it, in any case,
-				// Only if the base cell is not a placeholder we have to consider the insert mode.
+				/*
+				 * If the found cell is before the base cell the new cell must be placed after it, in any case,
+				 * Only if the base cell is not a placeholder we have to consider the insert mode.
+				 */
 				if ( refCell.col < cell.col || ( refCell.col === cell.col && !before ) ) {
 					offset = range.end;
 				} else {
@@ -700,8 +713,10 @@ ve.ui.TableAction.prototype.insertRowOrCol = function ( tableNode, mode, index, 
 				}
 				style = refCell.node.getStyle();
 			} else {
-				// If there are only placeholders in the row, we use the row node's inner range
-				// for the insertion offset
+				/*
+				 * If there are only placeholders in the row, we use the row node's inner range
+				 * for the insertion offset
+				 */
 				range = matrix.getRowNode( cell.row ).getRange();
 				offset = before ? range.start : range.end;
 				style = cells[ 0 ].node.getStyle();
@@ -799,14 +814,16 @@ ve.ui.TableAction.prototype.deleteRowsOrColumns = function ( matrix, mode, minIn
 		surfaceModel = this.surface.getModel(),
 		documentModel = surfaceModel.getDocument();
 
-	// Deleting cells can have two additional consequences:
-	// 1. The cell is a Placeholder. The owner's span must be decreased.
-	// 2. The cell is owner of placeholders which get orphaned by the deletion.
-	//    The first of the placeholders now becomes the real cell, with the span adjusted.
-	//    It also inherits all of the properties and content of the removed cell.
-	// Insertions and deletions of cells must be done in an appropriate order, so that the transactions
-	// do not interfere with each other. To achieve that, we record insertions and deletions and
-	// sort them by the position of the cell (row, column) in the table matrix.
+	/*
+	 * Deleting cells can have two additional consequences:
+	 * 1. The cell is a Placeholder. The owner's span must be decreased.
+	 * 2. The cell is owner of placeholders which get orphaned by the deletion.
+	 *    The first of the placeholders now becomes the real cell, with the span adjusted.
+	 *    It also inherits all of the properties and content of the removed cell.
+	 * Insertions and deletions of cells must be done in an appropriate order, so that the transactions
+	 * do not interfere with each other. To achieve that, we record insertions and deletions and
+	 * sort them by the position of the cell (row, column) in the table matrix.
+	 */
 
 	if ( mode === 'row' ) {
 		for ( row = minIndex; row <= maxIndex; row++ ) {
@@ -826,19 +843,23 @@ ve.ui.TableAction.prototype.deleteRowsOrColumns = function ( matrix, mode, minIn
 		if ( cell.isPlaceholder() ) {
 			key = cell.owner.key;
 			if ( !adapted[ key ] ) {
-				// Note: we can record this transaction immediately, as it does not have an effect on the
-				// node range
+				/*
+				 * Note: we can record this transaction immediately, as it does not have an effect on the
+				 * node range
+				 */
 				txBuilders.push( this.decrementSpan( cell.owner, mode, minIndex, maxIndex ) );
 				adapted[ key ] = true;
 			}
 			continue;
 		}
 
-		// Detect if the owner of a spanning cell gets deleted and
-		// leaves orphaned placeholders
+		/*
+		 * Detect if the owner of a spanning cell gets deleted and
+		 * leaves orphaned placeholders
+		 */
 		span = cell.node.getSpans()[ mode ];
 		if ( cell[ mode ] + span - 1 > maxIndex ) {
-			// add inserts for orphaned place holders
+			// Add inserts for orphaned place holders
 			if ( mode === 'col' ) {
 				startRow = cell.row;
 				startCol = maxIndex + 1;
@@ -866,16 +887,20 @@ ve.ui.TableAction.prototype.deleteRowsOrColumns = function ( matrix, mode, minIn
 		}
 	}
 
-	// Make sure that the actions are in descending offset order
-	// so that the transactions do not affect subsequent range offsets.
-	// Sort recorded actions to make sure the transactions will not interfere with respect to offsets
+	/*
+	 * Make sure that the actions are in descending offset order
+	 * so that the transactions do not affect subsequent range offsets.
+	 * Sort recorded actions to make sure the transactions will not interfere with respect to offsets
+	 */
 	actions.sort( function ( a, b ) {
 		return ve.dm.TableMatrixCell.static.sortDescending( a.cell, b.cell );
 	} );
 
 	if ( mode === 'row' ) {
-		// First replace orphaned placeholders which are below the last deleted row,
-		// thus, this works with regard to transaction offsets
+		/*
+		 * First replace orphaned placeholders which are below the last deleted row,
+		 * thus, this works with regard to transaction offsets
+		 */
 		for ( i = 0; i < actions.length; i++ ) {
 			txBuilders.push( this.replacePlaceholder( matrix, actions[ i ].cell, actions[ i ] ) );
 		}
@@ -948,8 +973,7 @@ ve.ui.TableAction.prototype.deleteRowsOrColumns = function ( matrix, mode, minIn
  */
 ve.ui.TableAction.prototype.replacePlaceholder = function ( matrix, placeholder, options ) {
 	var range, offset, data,
-		// For inserting the new cell a reference cell node
-		// which is used to get an insertion offset.
+		// For inserting the new cell a reference cell node which is used to get an insertion offset.
 		refCell = matrix.findClosestCell( placeholder ),
 		surfaceModel = this.surface.getModel();
 
@@ -957,7 +981,7 @@ ve.ui.TableAction.prototype.replacePlaceholder = function ( matrix, placeholder,
 		range = refCell.node.getOuterRange();
 		offset = ( placeholder.col < refCell.col ) ? range.start : range.end;
 	} else {
-		// if there are only placeholders in the row, the row node's inner range is used
+		// If there are only placeholders in the row, the row node's inner range is used
 		range = matrix.getRowNode( placeholder.row ).getRange();
 		offset = range.start;
 	}

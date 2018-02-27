@@ -106,8 +106,10 @@ ve.init.sa.Platform.prototype.setUserConfig = function ( keyOrValueMap, value ) 
 		for ( i in keyOrValueMap ) {
 			if ( keyOrValueMap.hasOwnProperty( i ) ) {
 				if ( !this.setUserConfig( i, keyOrValueMap[ i ] ) ) {
-					// localStorage will fail if the quota is full, so further
-					// sets won't work anyway.
+					/*
+					 * localStorage will fail if the quota is full, so further
+					 * sets won't work anyway.
+					 */
 					return false;
 				}
 			}
@@ -237,9 +239,11 @@ ve.init.sa.Platform.prototype.initialize = function () {
 	}
 
 	if ( !fallbacks ) {
-		// Try to find something that has fallbacks (which means it's a language we know about)
-		// by stripping things from the end. But collect all the intermediate ones in case we
-		// go past languages that don't have fallbacks but do exist.
+		/*
+		 * Try to find something that has fallbacks (which means it's a language we know about)
+		 * by stripping things from the end. But collect all the intermediate ones in case we
+		 * go past languages that don't have fallbacks but do exist.
+		 */
 		localeParts = locale.split( '-' );
 		localeParts.pop();
 		while ( localeParts.length && !fallbacks ) {
@@ -262,8 +266,10 @@ ve.init.sa.Platform.prototype.initialize = function () {
 		}
 		languagesCovered[ languages[ i ] ] = true;
 
-		// Lower-case the language code for the filename. jQuery.i18n does not case-fold
-		// language codes, so we should not case-fold the second argument in #load.
+		/*
+		 * Lower-case the language code for the filename. jQuery.i18n does not case-fold
+		 * language codes, so we should not case-fold the second argument in #load.
+		 */
 		filename = languages[ i ].toLowerCase() + '.json';
 
 		for ( j = 0, jLen = messagePaths.length; j < jLen; j++ ) {

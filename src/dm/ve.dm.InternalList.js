@@ -326,9 +326,11 @@ ve.dm.InternalList.prototype.addNode = function ( groupName, key, index, node ) 
 		keyedNodes = group.keyedNodes[ key ] = [];
 	}
 	if ( node.getDocument().buildingNodeTree ) {
-		// If the document is building the original node tree
-		// then every item is being added in order, so we don't
-		// need to worry about sorting.
+		/*
+		 * If the document is building the original node tree
+		 * then every item is being added in order, so we don't
+		 * need to worry about sorting.
+		 */
 		keyedNodes.push( node );
 		if ( keyedNodes.length === 1 ) {
 			group.firstNodes[ index ] = node;
@@ -404,8 +406,10 @@ ve.dm.InternalList.prototype.removeNode = function ( groupName, key, index, node
 			break;
 		}
 	}
-	// If the all the items in this key have been removed
-	// then remove this index from indexOrder and firstNodes
+	/*
+	 * If the all the items in this key have been removed
+	 * then remove this index from indexOrder and firstNodes
+	 */
 	if ( keyedNodes.length === 0 ) {
 		delete group.keyedNodes[ key ];
 		delete group.firstNodes[ index ];
@@ -435,8 +439,10 @@ ve.dm.InternalList.prototype.sortGroupIndexes = function ( group ) {
  */
 ve.dm.InternalList.prototype.clone = function ( doc ) {
 	var clone = new this.constructor( doc || this.getDocument() );
-	// Most properties don't need to be copied, because addNode() will be invoked when the new
-	// document tree is built. But some do need copying:
+	/*
+	 * Most properties don't need to be copied, because addNode() will be invoked when the new
+	 * document tree is built. But some do need copying:
+	 */
 	clone.nextUniqueNumber = this.nextUniqueNumber;
 	clone.itemHtmlQueue = ve.copy( this.itemHtmlQueue );
 	return clone;
@@ -474,11 +480,13 @@ ve.dm.InternalList.prototype.merge = function ( list, commonLength ) {
 		}
 
 		if ( this.keyIndexes[ key ] !== undefined ) {
-			// We already have this key in this internal list. Ignore the duplicate that the other
-			// list is trying to merge in.
-			// NOTE: This case cannot occur in VE currently, but may be possible in the future with
-			// collaborative editing, which is why this code needs to be rewritten before we do
-			// collaborative editing.
+			/*
+			 * We already have this key in this internal list. Ignore the duplicate that the other
+			 * list is trying to merge in.
+			 * NOTE: This case cannot occur in VE currently, but may be possible in the future with
+			 * collaborative editing, which is why this code needs to be rewritten before we do
+			 * collaborative editing.
+			 */
 			mapping[ i ] = this.keyIndexes[ key ];
 		} else {
 			mapping[ i ] = nextIndex;

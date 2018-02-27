@@ -37,11 +37,13 @@ OO.inheritClass( ve.ui.AnnotationInspector, ve.ui.FragmentInspector );
  */
 ve.ui.AnnotationInspector.static.modelClasses = [];
 
-// Override the parent action array to only have a 'cancel' button
-// on insert, since the annotation inspectors immediately apply the
-// action and 'cancel' is meaningless. Instead, they use 'done' to
-// perform the same dismissal after applying action that clicking away
-// from the inspector performs.
+/*
+ * Override the parent action array to only have a 'cancel' button
+ * on insert, since the annotation inspectors immediately apply the
+ * action and 'cancel' is meaningless. Instead, they use 'done' to
+ * perform the same dismissal after applying action that clicking away
+ * from the inspector performs.
+ */
 ve.ui.AnnotationInspector.static.actions = [
 	{
 		action: 'done',
@@ -186,18 +188,21 @@ ve.ui.AnnotationInspector.prototype.getSetupProcess = function ( data ) {
 						fragment = fragment.expandLinearSelection( 'word' );
 					}
 
-					// TODO: We should review how getMatchingAnnotation works in light of the fact
-					// that in the case of a collapsed range, the method falls back to retrieving
-					// insertion annotations.
-
-					// Check if we're inside a relevant annotation and if so, define it
+					/*
+					 * TODO: We should review how getMatchingAnnotation works in light of the fact
+					 * that in the case of a collapsed range, the method falls back to retrieving
+					 * insertion annotations.
+					 * Check if we're inside a relevant annotation and if so, define it
+					 */
 					annotationSet = fragment.document.data.getAnnotationsFromRange( fragment.selection.range );
 					annotations = annotationSet.filter( function ( existingAnnotation ) {
 						return ve.isInstanceOfAny( existingAnnotation, inspector.constructor.static.modelClasses );
 					} );
 					if ( annotations.getLength() > 0 ) {
-						// We're in the middle of an annotation, let's make sure we expand
-						// our selection to include the entire existing annotation
+						/*
+						 * We're in the middle of an annotation, let's make sure we expand
+						 * our selection to include the entire existing annotation
+						 */
 						annotation = annotations.get( 0 );
 					}
 				} else {
@@ -232,15 +237,19 @@ ve.ui.AnnotationInspector.prototype.getSetupProcess = function ( data ) {
 				initialCoveringAnnotation &&
 				initialCoveringAnnotation.compareTo( this.initialAnnotation )
 			) {
-				// If the initial annotation doesn't cover the fragment, record this as we'll need
-				// to forcefully apply it to the rest of the fragment later
+				/*
+				 * If the initial annotation doesn't cover the fragment, record this as we'll need
+				 * to forcefully apply it to the rest of the fragment later
+				 */
 				this.initialAnnotationIsCovering = true;
 			}
 
 			this.fragment = fragment;
 
-			// Set the mode - this was done already in FragmentInspector but now that we may have
-			// changed what the fragment is covering we need to run it again
+			/*
+			 * Set the mode - this was done already in FragmentInspector but now that we may have
+			 * changed what the fragment is covering we need to run it again
+			 */
 			this.actions.setMode( this.getMode() );
 		}, this );
 };
@@ -266,8 +275,10 @@ ve.ui.AnnotationInspector.prototype.getTeardownProcess = function ( data ) {
 				!( selection instanceof ve.dm.LinearSelection ) ||
 				( remove && selection.getRange().isCollapsed() )
 			) {
-				// Since we pushStaging on SetupProcess we need to make sure
-				// all terminations pop
+				/*
+				 * Since we pushStaging on SetupProcess we need to make sure
+				 * all terminations pop
+				 */
 				surfaceModel.popStaging();
 				return;
 			}
@@ -284,8 +295,10 @@ ve.ui.AnnotationInspector.prototype.getTeardownProcess = function ( data ) {
 					insertText = true;
 				}
 				if ( annotation ) {
-					// Check if the initial annotation has changed, or didn't cover the whole fragment
-					// to begin with
+					/*
+					 * Check if the initial annotation has changed, or didn't cover the whole fragment
+					 * to begin with
+					 */
 					if (
 						!this.initialAnnotationIsCovering ||
 						!this.initialAnnotation ||
@@ -295,8 +308,10 @@ ve.ui.AnnotationInspector.prototype.getTeardownProcess = function ( data ) {
 					}
 				}
 			}
-			// If we are setting a new annotation, clear any annotations the inspector may have
-			// applied up to this point. Otherwise keep them.
+			/*
+			 * If we are setting a new annotation, clear any annotations the inspector may have
+			 * applied up to this point. Otherwise keep them.
+			 */
 			if ( replace ) {
 				surfaceModel.popStaging();
 			} else {
@@ -328,8 +343,10 @@ ve.ui.AnnotationInspector.prototype.getTeardownProcess = function ( data ) {
 					fragment.annotateContent( 'set', annotation );
 				}
 			}
-			// HACK: ui.WindowAction unsets previousSelection in source mode,
-			// so we can't rely on it existing.
+			/*
+			 * HACK: ui.WindowAction unsets previousSelection in source mode,
+			 * so we can't rely on it existing.
+			 */
 			if ( this.previousSelection && ( !data.action || insertText ) ) {
 				// Restore selection to what it was before we expanded it
 				selection = this.previousSelection;

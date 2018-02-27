@@ -45,11 +45,13 @@ ve.ui.MediaSizeWidget = function VeUiMediaSizeWidget( scalable, config ) {
 			data: 'default',
 			label: ve.msg( 'visualeditor-mediasizewidget-sizeoptions-default' )
 		} ),
-		// TODO: when upright is supported by Parsoid
-		// new OO.ui.ButtonOptionWidget( {
-		// data: 'scale',
-		// label: ve.msg( 'visualeditor-mediasizewidget-sizeoptions-scale' )
-		// } ),
+		/*
+		 * TODO: when upright is supported by Parsoid
+		 * new OO.ui.ButtonOptionWidget( {
+		 * data: 'scale',
+		 * label: ve.msg( 'visualeditor-mediasizewidget-sizeoptions-scale' )
+		 * } ),
+		 */
 		new OO.ui.ButtonOptionWidget( {
 			data: 'custom',
 			label: ve.msg( 'visualeditor-mediasizewidget-sizeoptions-custom' )
@@ -58,30 +60,36 @@ ve.ui.MediaSizeWidget = function VeUiMediaSizeWidget( scalable, config ) {
 
 	// Define scale
 	this.scaleInput = new OO.ui.TextInputWidget();
-	// scalePercentLabel = new OO.ui.LabelWidget( {
-	// 	input: this.scaleInput,
-	// 	label: ve.msg( 'visualeditor-mediasizewidget-label-scale-percent' )
-	// } );
+	/*
+	 * scalePercentLabel = new OO.ui.LabelWidget( {
+	 * 	input: this.scaleInput,
+	 * 	label: ve.msg( 'visualeditor-mediasizewidget-label-scale-percent' )
+	 * } );
+	 */
 
 	this.dimensionsWidget = new ve.ui.DimensionsWidget( { validate: this.isValid.bind( this ) } );
 
-	// Error label is available globally so it can be displayed and
-	// hidden as needed
+	/*
+	 * Error label is available globally so it can be displayed and
+	 * hidden as needed
+	 */
 	this.errorLabel = new OO.ui.LabelWidget( {
 		label: ve.msg( 'visualeditor-mediasizewidget-label-defaulterror' )
 	} );
 
-	// Field layouts
-	// fieldScale = new OO.ui.FieldLayout(
-	// 	this.scaleInput, {
-	// 		align: 'right',
-	// 		// TODO: when upright is supported by Parsoid
-	// 		// classes: ['ve-ui-mediaSizeWidget-section-scale'],
-	// 		label: ve.msg( 'visualeditor-mediasizewidget-label-scale' )
-	// 	}
-	// );
-	// TODO: when upright is supported by Parsoid
-	// this.scaleInput.$element.append( scalePercentLabel.$element );
+	/*
+	 * Field layouts
+	 * fieldScale = new OO.ui.FieldLayout(
+	 * 	this.scaleInput, {
+	 * 		align: 'right',
+	 * 		// TODO: when upright is supported by Parsoid
+	 * 		// classes: ['ve-ui-mediaSizeWidget-section-scale'],
+	 * 		label: ve.msg( 'visualeditor-mediasizewidget-label-scale' )
+	 * 	}
+	 * );
+	 * TODO: when upright is supported by Parsoid
+	 * this.scaleInput.$element.append( scalePercentLabel.$element );
+	 */
 	fieldCustom = new OO.ui.FieldLayout(
 		this.dimensionsWidget, {
 			align: 'right',
@@ -106,8 +114,10 @@ ve.ui.MediaSizeWidget = function VeUiMediaSizeWidget( scalable, config ) {
 	this.$element.append( fieldCustom.$element );
 	if ( !config.noOriginalDimensions ) {
 		this.$element.append(
-			// TODO: when upright is supported by Parsoid
-			// fieldScale.$element,
+			/*
+			 * TODO: when upright is supported by Parsoid
+			 * fieldScale.$element,
+			 */
 			this.fullSizeButton.$element,
 			$( '<div>' )
 				.addClass( 've-ui-mediaSizeWidget-label-error' )
@@ -120,8 +130,10 @@ ve.ui.MediaSizeWidget = function VeUiMediaSizeWidget( scalable, config ) {
 		widthChange: [ 'onDimensionsChange', 'width' ],
 		heightChange: [ 'onDimensionsChange', 'height' ]
 	} );
-	// TODO: when upright is supported by Parsoid
-	// this.scaleInput.connect( this, { change: 'onScaleChange' } );
+	/*
+	 * TODO: when upright is supported by Parsoid
+	 * this.scaleInput.connect( this, { change: 'onScaleChange' } );
+	 */
 	this.sizeTypeSelectWidget.connect( this, { choose: 'onSizeTypeChoose' } );
 	this.fullSizeButton.connect( this, { click: 'onFullSizeButtonClick' } );
 
@@ -184,8 +196,10 @@ ve.ui.MediaSizeWidget.prototype.onScalableCurrentSizeChange = function ( dimensi
 ve.ui.MediaSizeWidget.prototype.onScalableDefaultSizeChange = function ( isDefault ) {
 	// Update the default size into the dimensions widget
 	this.updateDefaultDimensions();
-	// TODO: When 'scale' ('upright' support) is ready, this will need to be adjusted
-	// to support that as well
+	/*
+	 * TODO: When 'scale' ('upright' support) is ready, this will need to be adjusted
+	 * to support that as well
+	 */
 	this.setSizeType(
 		isDefault ?
 			'default' :
@@ -230,8 +244,10 @@ ve.ui.MediaSizeWidget.prototype.onDimensionsChange = function ( type, value ) {
  * Respond to change of the scale input
  */
 ve.ui.MediaSizeWidget.prototype.onScaleChange = function () {
-	// If the input changed (and not empty), set to 'custom'
-	// Otherwise, set to 'default'
+	/*
+	 * If the input changed (and not empty), set to 'custom'
+	 * Otherwise, set to 'default'
+	 */
 	if ( !this.dimensionsWidget.isEmpty() ) {
 		this.sizeTypeSelectWidget.selectItemByData( 'scale' );
 	} else {
@@ -304,8 +320,10 @@ ve.ui.MediaSizeWidget.prototype.getScalePlaceholder = function () {
 ve.ui.MediaSizeWidget.prototype.setSizeType = function ( sizeType ) {
 	if (
 		this.getSizeType() !== sizeType ||
-		// If the dimensions widget has zeros make sure to
-		// allow for the change in size type
+		/*
+		 * If the dimensions widget has zeros make sure to
+		 * allow for the change in size type
+		 */
 		Number( this.dimensionsWidget.getWidth() ) === 0 ||
 		Number( this.dimensionsWidget.getHeight() ) === 0
 	) {
@@ -437,9 +455,11 @@ ve.ui.MediaSizeWidget.prototype.getCurrentDimensions = function () {
  * @param {boolean} isDisabled Disable the widget
  */
 ve.ui.MediaSizeWidget.prototype.setDisabled = function ( isDisabled ) {
-	// The 'setDisabled' method seems to be called before the widgets
-	// are fully defined. So, before disabling/enabling anything,
-	// make sure the objects exist
+	/*
+	 * The 'setDisabled' method seems to be called before the widgets
+	 * are fully defined. So, before disabling/enabling anything,
+	 * make sure the objects exist
+	 */
 	if ( this.sizeTypeSelectWidget &&
 		this.dimensionsWidget &&
 		this.scalable &&
@@ -455,8 +475,10 @@ ve.ui.MediaSizeWidget.prototype.setDisabled = function ( isDisabled ) {
 		this.fullSizeButton.setDisabled(
 			// Disable if asked to disable
 			isDisabled ||
-			// Only enable if the scalable has
-			// the original dimensions available
+			/*
+			 * Only enable if the scalable has
+			 * the original dimensions available
+			 */
 			!this.scalable.getOriginalDimensions()
 		);
 	}
@@ -491,8 +513,10 @@ ve.ui.MediaSizeWidget.prototype.setCurrentDimensions = function ( dimensions ) {
 		!this.scalable.isDefault()
 	) {
 		this.currentDimensions = normalizedDimensions;
-		// This will only update if the value has changed
-		// Set width & height individually as they may be 0
+		/*
+		 * This will only update if the value has changed
+		 * Set width & height individually as they may be 0
+		 */
 		this.dimensionsWidget.setWidth( this.currentDimensions.width );
 		this.dimensionsWidget.setHeight( this.currentDimensions.height );
 

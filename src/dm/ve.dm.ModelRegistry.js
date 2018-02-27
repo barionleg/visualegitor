@@ -16,18 +16,26 @@
 	ve.dm.ModelRegistry = function VeDmModelRegistry() {
 		// Parent constructor
 		OO.Registry.call( this );
-		// Map of func presence and tag names to model names
-		// [ { tagName: [modelNamesWithoutFunc] }, { tagName: [modelNamesWithFunc] } ]
+		/*
+		 * Map of func presence and tag names to model names
+		 * [ { tagName: [modelNamesWithoutFunc] }, { tagName: [modelNamesWithFunc] } ]
+		 */
 		this.modelsByTag = [ {}, {} ];
-		// Map of func presence and rdfaTypes to model names; only rdfaTypes specified as strings are in here
-		// { matchFunctionPresence: { rdfaType: { tagName: [modelNames] } } }
-		// [ { rdfaType: { tagName: [modelNamesWithoutFunc] } }, { rdfaType: { tagName: [modelNamesWithFunc] } ]
+		/*
+		 * Map of func presence and rdfaTypes to model names; only rdfaTypes specified as strings are in here
+		 * { matchFunctionPresence: { rdfaType: { tagName: [modelNames] } } }
+		 * [ { rdfaType: { tagName: [modelNamesWithoutFunc] } }, { rdfaType: { tagName: [modelNamesWithFunc] } ]
+		 */
 		this.modelsByTypeAndTag = [];
-		// Map of func presence to array of model names with rdfaType regexps
-		// [ [modelNamesWithoutFunc], [modelNamesWithFunc] ]
+		/*
+		 * Map of func presence to array of model names with rdfaType regexps
+		 * [ [modelNamesWithoutFunc], [modelNamesWithFunc] ]
+		 */
 		this.modelsWithTypeRegExps = [ [], [] ];
-		// Map tracking registration order
-		// { nameA: 0, nameB: 1, ... }
+		/*
+		 * Map tracking registration order
+		 * { nameA: 0, nameB: 1, ... }
+		 */
 		this.registrationOrder = {};
 		this.nextNumber = 0;
 		this.extSpecificTypes = [];
@@ -143,8 +151,10 @@
 		}
 		for ( i = 0; i < types.length; i++ ) {
 			if ( types[ i ] instanceof RegExp ) {
-				// TODO: Guard against running this again during subsequent
-				// iterations of the for loop
+				/*
+				 * TODO: Guard against running this again during subsequent
+				 * iterations of the for loop
+				 */
 				addType( this.modelsWithTypeRegExps, +!!constructor.static.matchFunction, name );
 			} else {
 				for ( j = 0; j < tags.length; j++ ) {
@@ -204,8 +214,10 @@
 		}
 		for ( i = 0; i < types.length; i++ ) {
 			if ( types[ i ] instanceof RegExp ) {
-				// TODO: Guard against running this again during subsequent
-				// iterations of the for loop
+				/*
+				 * TODO: Guard against running this again during subsequent
+				 * iterations of the for loop
+				 */
 				removeType( this.modelsWithTypeRegExps, +!!constructor.static.matchFunction, name );
 			} else {
 				for ( j = 0; j < tags.length; j++ ) {
@@ -415,9 +427,11 @@
 				return winner;
 			}
 
-			// func+type match
-			// Only look at rules with no tag specified; if a rule does specify a tag, we've
-			// either already processed it above, or the tag doesn't match
+			/*
+			 * func+type match
+			 * Only look at rules with no tag specified; if a rule does specify a tag, we've
+			 * either already processed it above, or the tag doesn't match
+			 */
 			winner = matchWithFunc( types, '' );
 			if ( winner !== null ) {
 				return winner;
@@ -426,25 +440,31 @@
 
 		// func+tag match
 		matches = ve.getProp( this.modelsByTag, 1, tag ) || [];
-		// No need to sort because individual arrays in modelsByTag are already sorted
-		// correctly
+		/*
+		 * No need to sort because individual arrays in modelsByTag are already sorted
+		 * correctly
+		 */
 		for ( i = 0; i < matches.length; i++ ) {
 			name = matches[ i ];
 			model = this.registry[ name ];
-			// Only process this one if it doesn't specify types
-			// If it does specify types, then we've either already processed it in the
-			// func+tag+type step above, or its type rule doesn't match
+			/*
+			 * Only process this one if it doesn't specify types
+			 * If it does specify types, then we've either already processed it in the
+			 * func+tag+type step above, or its type rule doesn't match
+			 */
 			if ( model.static.getMatchRdfaTypes() === null && model.static.matchFunction( node ) ) {
 				return matches[ i ];
 			}
 		}
 
-		// func only
-		// We only need to get the [''][''] array because the other arrays were either
-		// already processed during the steps above, or have a type or tag rule that doesn't
-		// match this node.
-		// No need to sort because individual arrays in modelsByTypeAndTag are already sorted
-		// correctly
+		/*
+		 * func only
+		 * We only need to get the [''][''] array because the other arrays were either
+		 * already processed during the steps above, or have a type or tag rule that doesn't
+		 * match this node.
+		 * No need to sort because individual arrays in modelsByTypeAndTag are already sorted
+		 * correctly
+		 */
 		matches = ve.getProp( this.modelsByTypeAndTag, 1, '', '' ) || [];
 		for ( i = 0; i < matches.length; i++ ) {
 			if ( this.registry[ matches[ i ] ].static.matchFunction( node ) ) {
@@ -458,9 +478,11 @@
 			return winner;
 		}
 
-		// type only
-		// Only look at rules with no tag specified; if a rule does specify a tag, we've
-		// either already processed it above, or the tag doesn't match
+		/*
+		 * type only
+		 * Only look at rules with no tag specified; if a rule does specify a tag, we've
+		 * either already processed it above, or the tag doesn't match
+		 */
 		winner = matchWithoutFunc( types, '' );
 		if ( winner !== null ) {
 			return winner;
@@ -468,22 +490,28 @@
 
 		// tag only
 		matches = ve.getProp( this.modelsByTag, 0, tag ) || [];
-		// No need to track winningName because the individual arrays in modelsByTag are
-		// already sorted correctly
+		/*
+		 * No need to track winningName because the individual arrays in modelsByTag are
+		 * already sorted correctly
+		 */
 		for ( i = 0; i < matches.length; i++ ) {
 			name = matches[ i ];
 			model = this.registry[ name ];
-			// Only process this one if it doesn't specify types
-			// If it does specify types, then we've either already processed it in the
-			// tag+type step above, or its type rule doesn't match
+			/*
+			 * Only process this one if it doesn't specify types
+			 * If it does specify types, then we've either already processed it in the
+			 * tag+type step above, or its type rule doesn't match
+			 */
 			if ( model.static.getMatchRdfaTypes() === null ) {
 				return matches[ i ];
 			}
 		}
 
-		// Rules with no type or tag specified
-		// These are the only rules that can still qualify at this point, the others we've either
-		// already processed or have a type or tag rule that disqualifies them
+		/*
+		 * Rules with no type or tag specified
+		 * These are the only rules that can still qualify at this point, the others we've either
+		 * already processed or have a type or tag rule that disqualifies them
+		 */
 		matches = ve.getProp( this.modelsByTypeAndTag, 0, '', '' ) || [];
 		if ( matches.length > 0 ) {
 			return matches[ 0 ];

@@ -298,11 +298,13 @@ ve.ui.commandRegistry.register(
 			var sideName = sideNames[ side ];
 
 			ve.ui.commandRegistry.register(
-				// Commands registered here:
-				// * insertColumnBefore
-				// * insertColumnAfter
-				// * insertRowBefore
-				// * insertRowAfter
+				/*
+				 * Commands registered here:
+				 * * insertColumnBefore
+				 * * insertColumnAfter
+				 * * insertRowBefore
+				 * * insertRowAfter
+				 */
 				new ve.ui.Command(
 					'insert' + modeName + sideName, 'table', 'insert',
 					{ args: [ mode, side ], supportedSelections: [ 'table' ] }
@@ -310,11 +312,13 @@ ve.ui.commandRegistry.register(
 			);
 
 			ve.ui.commandRegistry.register(
-				// Commands registered here:
-				// * moveColumnBefore
-				// * moveColumnAfter
-				// * moveRowBefore
-				// * moveRowAfter
+				/*
+				 * Commands registered here:
+				 * * moveColumnBefore
+				 * * moveColumnAfter
+				 * * moveRowBefore
+				 * * moveRowAfter
+				 */
 				new ve.ui.Command(
 					'move' + modeName + sideName, 'table', 'moveRelative',
 					{ args: [ mode, side ], supportedSelections: [ 'table' ] }
@@ -323,9 +327,11 @@ ve.ui.commandRegistry.register(
 
 		} );
 
-		// Commands registered here:
-		// * deleteRow
-		// * deleteColumn
+		/*
+		 * Commands registered here:
+		 * * deleteRow
+		 * * deleteColumn
+		 */
 		ve.ui.commandRegistry.register(
 			new ve.ui.Command(
 				'delete' + modeName, 'table', 'delete',

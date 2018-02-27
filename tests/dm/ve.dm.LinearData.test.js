@@ -92,10 +92,12 @@ QUnit.test( 'slice(Object)/splice(Object)/batchSplice', function ( assert ) {
 
 } );
 
-// TODO: ve.dm.LinearData.static.getType
-// TODO: ve.dm.LinearData.static.isElementData
-// TODO: ve.dm.LinearData.static.isOpenElementData
-// TODO: ve.dm.LinearData.static.isCloseElementData
-// TODO: ve.dm.LinearData#push
-// TODO: ve.dm.LinearData#getDataSlice
-// TODO: ve.dm.LinearData#clone
+/*
+ * TODO: ve.dm.LinearData.static.getType
+ * TODO: ve.dm.LinearData.static.isElementData
+ * TODO: ve.dm.LinearData.static.isOpenElementData
+ * TODO: ve.dm.LinearData.static.isCloseElementData
+ * TODO: ve.dm.LinearData#push
+ * TODO: ve.dm.LinearData#getDataSlice
+ * TODO: ve.dm.LinearData#clone
+ */

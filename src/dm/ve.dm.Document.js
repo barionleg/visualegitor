@@ -41,8 +41,10 @@ ve.dm.Document = function VeDmDocument( data, htmlDocument, parentDocument, inte
 	this.dir = dir || 'ltr';
 
 	this.documentNode.setRoot( root );
-	// ve.Document already called setDocument(), but it could be that doc !== this
-	// so call it again
+	/*
+	 * ve.Document already called setDocument(), but it could be that doc !== this
+	 * so call it again
+	 */
 	this.documentNode.setDocument( doc );
 	this.internalList = internalList ? internalList.clone( this ) : new ve.dm.InternalList( this );
 	this.innerWhitespace = innerWhitespace ? ve.copy( innerWhitespace ) : new Array( 2 );
@@ -199,9 +201,11 @@ ve.dm.Document.prototype.buildNodeTree = function () {
 		textLength = 0,
 		inTextNode = false;
 
-	// Build a tree of nodes and nodes that will be added to them after a full scan is complete,
-	// then from the bottom up add nodes to their potential parents. This avoids massive length
-	// updates being broadcast upstream constantly while building is underway.
+	/*
+	 * Build a tree of nodes and nodes that will be added to them after a full scan is complete,
+	 * then from the bottom up add nodes to their potential parents. This avoids massive length
+	 * updates being broadcast upstream constantly while building is underway.
+	 */
 	currentStack = [];
 	parentStack = [ this.documentNode ];
 	// Stack of stacks
@@ -235,8 +239,10 @@ ve.dm.Document.prototype.buildNodeTree = function () {
 			}
 			// Element open/close
 			if ( this.data.isOpenElementData( i ) ) {
-				// Branch or leaf node opening
-				// Create a childless node
+				/*
+				 * Branch or leaf node opening
+				 * Create a childless node
+				 */
 				node = ve.dm.nodeFactory.createFromElement( this.data.getData( i ) );
 				// Put the childless node on the current inner stack
 				currentStack.push( node );
@@ -247,8 +253,10 @@ ve.dm.Document.prototype.buildNodeTree = function () {
 					nodeStack.push( currentStack );
 					currentNode = node;
 				} else {
-					// Assert that the next element is a closing element for this node,
-					// and skip over it.
+					/*
+					 * Assert that the next element is a closing element for this node,
+					 * and skip over it.
+					 */
 					if (
 						!this.data.isCloseElementData( i + 1 ) ||
 						this.data.getType( i + 1 ) !== this.data.getType( i )
@@ -263,8 +271,10 @@ ve.dm.Document.prototype.buildNodeTree = function () {
 					throw new Error( 'Expected closing for ' + currentNode.getType() +
 						' but got closing for ' + this.data.getType( i ) );
 				}
-				// Pop this node's inner stack from the outer stack. It'll have all of the
-				// node's child nodes fully constructed
+				/*
+				 * Pop this node's inner stack from the outer stack. It'll have all of the
+				 * node's child nodes fully constructed
+				 */
 				children = nodeStack.pop();
 				currentStack = parentStack;
 				parentStack = nodeStack[ nodeStack.length - 2 ];
@@ -285,12 +295,16 @@ ve.dm.Document.prototype.buildNodeTree = function () {
 		// Don't bother updating currentNode et al, we don't use them below
 	}
 
-	// State variable that allows nodes to know that they are being
-	// appended in order. Used by ve.dm.InternalList.
+	/*
+	 * State variable that allows nodes to know that they are being
+	 * appended in order. Used by ve.dm.InternalList.
+	 */
 	doc.buildingNodeTree = true;
 
-	// The end state is nodeStack = [ [this.documentNode], [ array, of, its, children ] ]
-	// so attach all nodes in currentStack to the root node
+	/*
+	 * The end state is nodeStack = [ [this.documentNode], [ array, of, its, children ] ]
+	 * so attach all nodes in currentStack to the root node
+	 */
 	if ( nodeStack.length > 2 ) {
 		// A node was opened but never closed
 		throw new Error( 'Unbalanced input passed to document' );
@@ -487,8 +501,10 @@ ve.dm.Document.prototype.shallowCloneFromRange = function ( range ) {
 		endNode = this.getBranchNodeFromOffset( range.end );
 		selection = this.selectNodes( range, 'siblings' );
 
-		// Fix up selection to remove empty items in unwrapped nodes
-		// TODO: fix this is selectNodes
+		/*
+		 * Fix up selection to remove empty items in unwrapped nodes
+		 * TODO: fix this is selectNodes
+		 */
 		while ( selection[ 0 ] && selection[ 0 ].range && selection[ 0 ].range.isCollapsed() && !selection[ 0 ].node.isWrapped() ) {
 			selection.shift();
 		}
@@ -584,8 +600,10 @@ ve.dm.Document.prototype.shallowCloneFromRange = function ( range ) {
 				}
 			}
 
-			// Final data:
-			//  contextOpenings + balanceOpenings + data slice + balanceClosings + contextClosings
+			/*
+			 * Final data:
+			 *  contextOpenings + balanceOpenings + data slice + balanceClosings + contextClosings
+			 */
 			linearData = new ve.dm.ElementLinearData(
 				this.getStore(),
 				contextOpenings.reverse()
@@ -669,8 +687,10 @@ ve.dm.Document.prototype.cloneWithData = function ( data, copyInternalList, deta
 		this
 	);
 	if ( copyInternalList && !detachedCopy ) {
-		// Record the length of the internal list at the time the slice was created so we can
-		// reconcile additions properly
+		/*
+		 * Record the length of the internal list at the time the slice was created so we can
+		 * reconcile additions properly
+		 */
 		newDoc.origInternalListLength = this.internalList.getItemNodeCount();
 	}
 	return newDoc;
@@ -774,9 +794,11 @@ ve.dm.Document.prototype.getRelativeOffset = function ( offset, direction, unit 
 	var relativeContentOffset, relativeStructuralOffset, newOffset, adjacentDataOffset, isFocusable,
 		data = this.data;
 	if ( unit === 'word' ) { // Word
-		// Method getSiblingWordBoundary does not "move/jump" over element data. If passed offset is
-		// an element data offset then the same offset is returned - and in such case this method
-		// fallback to the other path (character) which does "move/jump" over element data.
+		/*
+		 * Method getSiblingWordBoundary does not "move/jump" over element data. If passed offset is
+		 * an element data offset then the same offset is returned - and in such case this method
+		 * fallback to the other path (character) which does "move/jump" over element data.
+		 */
 		newOffset = this.getSiblingWordBoundary( offset, direction );
 		if ( offset === newOffset ) {
 			newOffset = this.getRelativeOffset( offset, direction, 'character' );
@@ -846,8 +868,10 @@ ve.dm.Document.prototype.getRelativeRange = function ( range, direction, unit, e
 		newRange,
 		to = range.to;
 
-	// If you have a non-collapsed range and you move, collapse to the end
-	// in the direction you moved, provided you end up at a content or slug offset
+	/*
+	 * If you have a non-collapsed range and you move, collapse to the end
+	 * in the direction you moved, provided you end up at a content or slug offset
+	 */
 	if ( !range.isCollapsed() && !expand ) {
 		newOffset = direction > 0 ? range.end : range.start;
 		if ( this.data.isContentOffset( newOffset ) || this.hasSlugAtOffset( newOffset ) ) {
@@ -885,8 +909,10 @@ ve.dm.Document.prototype.getRelativeRange = function ( range, direction, unit, e
  * @return {ve.dm.Node|null} Nearest focusable node, or null if not found
  */
 ve.dm.Document.prototype.getNearestFocusableNode = function ( offset, direction, limit ) {
-	// It is never an offset of the node, but just an offset for which getNodeFromOffset should
-	// return that node. Usually it would be node offset + 1 or offset of node closing tag.
+	/*
+	 * It is never an offset of the node, but just an offset for which getNodeFromOffset should
+	 * return that node. Usually it would be node offset + 1 or offset of node closing tag.
+	 */
 	var coveredOffset;
 	this.data.getRelativeOffset(
 		offset,
@@ -1000,8 +1026,10 @@ ve.dm.Document.prototype.getDataFromNode = function ( node ) {
 	var length = node.getLength(),
 		offset = node.getOffset();
 	if ( offset >= 0 ) {
-		// FIXME T126023: If the node is wrapped in an element than we should increment
-		// the offset by one so we only return the content inside the element.
+		/*
+		 * FIXME T126023: If the node is wrapped in an element than we should increment
+		 * the offset by one so we only return the content inside the element.
+		 */
 		if ( node.isWrapped() ) {
 			offset++;
 		}
@@ -1047,8 +1075,10 @@ ve.dm.Document.prototype.getDataFromNode = function ( node ) {
 ve.dm.Document.prototype.rebuildNodes = function ( parent, index, numNodes, offset, newLength ) {
 	// Get a slice of the document where it's been changed
 	var data = this.data.sliceObject( offset, offset + newLength ),
-		// Build document fragment from data
-		// Use plain ve.dm.Document, instead of whatever this.constructor is.
+		/*
+		 * Build document fragment from data
+		 * Use plain ve.dm.Document, instead of whatever this.constructor is.
+		 */
 		documentFragment = new ve.dm.Document( data, this.htmlDocument, this ),
 		// Get generated child nodes from the document fragment
 		addedNodes = documentFragment.getDocumentNode().getChildren(),
@@ -1169,17 +1199,23 @@ ve.dm.Document.prototype.fixupInsertion = function ( data, offset ) {
 
 		// Temporary variables for handling combining marks
 		insert, annotations,
-		// An unattached combining mark may require the insertion to remove a character,
-		// so we send this counter back in the result
+		/*
+		 * An unattached combining mark may require the insertion to remove a character,
+		 * so we send this counter back in the result
+		 */
 		remove = 0,
 
-		// *** Stacks ***
-		// Array of element openings (object). Openings in data are pushed onto this stack
-		// when they are encountered and popped off when they are closed
+		/*
+		 * *** Stacks ***
+		 * Array of element openings (object). Openings in data are pushed onto this stack
+		 * when they are encountered and popped off when they are closed
+		 */
 		openingStack = [],
-		// Array of node objects. Closings in data that close nodes that were
-		// not opened in data (i.e. were already in the document) are pushed onto this stack
-		// and popped off when balanced out by an opening in data
+		/*
+		 * Array of node objects. Closings in data that close nodes that were
+		 * not opened in data (i.e. were already in the document) are pushed onto this stack
+		 * and popped off when balanced out by an opening in data
+		 */
 		closingStack = [],
 
 		// Track the position of the original data in the fixed up data for range adjustments
@@ -1189,21 +1225,27 @@ ve.dm.Document.prototype.fixupInsertion = function ( data, offset ) {
 		// Pointer to this document for private methods
 		doc = this,
 
-		// *** State persisting across iterations of the outer loop ***
-		// The node (from the document) we're currently in. When in a node that was opened
-		// in data, this is set to its first ancestor that is already in the document
+		/*
+		 * *** State persisting across iterations of the outer loop ***
+		 * The node (from the document) we're currently in. When in a node that was opened
+		 * in data, this is set to its first ancestor that is already in the document
+		 */
 		parentNode,
 		// The type of the node we're currently in, even if that node was opened within data
 		parentType,
 		// Whether we are currently in a text node
 		inTextNode,
-		// Whether this is the first child of its parent
-		// The test for last child isn't a loop so we don't need to cache it
+		/*
+		 * Whether this is the first child of its parent
+		 * The test for last child isn't a loop so we don't need to cache it
+		 */
 		isFirstChild,
 
-		// *** Temporary variables that do not persist across iterations ***
-		// The type of the node we're currently inserting. When the to-be-inserted node
-		// is wrapped, this is set to the type of the outer wrapper.
+		/*
+		 * *** Temporary variables that do not persist across iterations ***
+		 * The type of the node we're currently inserting. When the to-be-inserted node
+		 * is wrapped, this is set to the type of the outer wrapper.
+		 */
 		childType,
 		// Stores the return value of getParentNodeTypes( childType )
 		allowedParents,
@@ -1224,8 +1266,10 @@ ve.dm.Document.prototype.fixupInsertion = function ( data, offset ) {
 		// Array of opening elements matching the elements in closings (in the same order)
 		reopenElements,
 
-		// *** Other variables ***
-		// Used to store values popped from various stacks
+		/*
+		 * *** Other variables ***
+		 * Used to store values popped from various stacks
+		 */
 		popped,
 		// Loop variables
 		i, j;
@@ -1246,18 +1290,22 @@ ve.dm.Document.prototype.fixupInsertion = function ( data, offset ) {
 		if ( element.type !== undefined ) {
 			// Content, do nothing
 			if ( element.type.charAt( 0 ) !== '/' ) {
-				// Opening
-				// Check if this opening balances an earlier closing of a node that was already in
-				// the document. This is only the case if openingStack is empty (otherwise we still
-				// have unclosed nodes from within data) and if this opening matches the top of
-				// closingStack
+				/*
+				 * Opening
+				 * Check if this opening balances an earlier closing of a node that was already in
+				 * the document. This is only the case if openingStack is empty (otherwise we still
+				 * have unclosed nodes from within data) and if this opening matches the top of
+				 * closingStack
+				 */
 				if ( openingStack.length === 0 && closingStack.length > 0 &&
 					closingStack[ closingStack.length - 1 ].getType() === element.type
 				) {
-					// The top of closingStack is now balanced out, so remove it
-					// Also restore parentNode from closingStack. While this is technically not
-					// entirely accurate (the current node is a new node that's a sibling of this
-					// node), it's good enough for the purposes of this algorithm
+					/*
+					 * The top of closingStack is now balanced out, so remove it
+					 * Also restore parentNode from closingStack. While this is technically not
+					 * entirely accurate (the current node is a new node that's a sibling of this
+					 * node), it's good enough for the purposes of this algorithm
+					 */
 					parentNode = closingStack.pop();
 				} else {
 					// This opens something new, put it on openingStack
@@ -1265,16 +1313,22 @@ ve.dm.Document.prototype.fixupInsertion = function ( data, offset ) {
 				}
 				parentType = element.type;
 			} else {
-				// Closing
-				// Make sure that this closing matches the currently opened node
+				/*
+				 * Closing
+				 * Make sure that this closing matches the currently opened node
+				 */
 				if ( openingStack.length > 0 ) {
-					// The opening was on openingStack, so we're closing a node that was opened
-					// within data. Don't track that on closingStack
+					/*
+					 * The opening was on openingStack, so we're closing a node that was opened
+					 * within data. Don't track that on closingStack
+					 */
 					expectedType = openingStack.pop().type;
 				} else {
-					// openingStack is empty, so we're closing a node that was already in the
-					// document. This means we have to reopen it later, so track this on
-					// closingStack
+					/*
+					 * openingStack is empty, so we're closing a node that was already in the
+					 * document. This means we have to reopen it later, so track this on
+					 * closingStack
+					 */
 					expectedType = parentNode.getType();
 					closingStack.push( parentNode );
 					parentNode = parentNode.getParent();
@@ -1284,17 +1338,21 @@ ve.dm.Document.prototype.fixupInsertion = function ( data, offset ) {
 					}
 					parentType = expectedType;
 
-					// Validate
-					// FIXME this breaks certain input, should fix it up, not scream and die
-					// For now we fall back to inserting balanced data, but then we miss out on
-					// a lot of the nice content adoption abilities of just fixing up the data in
-					// the context of the insertion point - an example of how this will fail is if
-					// you try to insert "b</p></li></ul><p>c" into "<p>a[cursor]d</p>"
+					/*
+					 * Validate
+					 * FIXME this breaks certain input, should fix it up, not scream and die
+					 * For now we fall back to inserting balanced data, but then we miss out on
+					 * a lot of the nice content adoption abilities of just fixing up the data in
+					 * the context of the insertion point - an example of how this will fail is if
+					 * you try to insert "b</p></li></ul><p>c" into "<p>a[cursor]d</p>"
+					 */
 					if (
 						element.type !== '/' + expectedType &&
 						(
-							// Only throw an error if the content can't be adopted from one content
-							// branch to another
+							/*
+							 * Only throw an error if the content can't be adopted from one content
+							 * branch to another
+							 */
 							!ve.dm.nodeFactory.canNodeContainContent( element.type.slice( 1 ) ) ||
 							!ve.dm.nodeFactory.canNodeContainContent( expectedType )
 						)
@@ -1325,16 +1383,20 @@ ve.dm.Document.prototype.fixupInsertion = function ( data, offset ) {
 			popped = openingStack.pop();
 			parentType = popped.type;
 			reopenElements.push( ve.copy( popped ) );
-			// The opening was on openingStack, so we're closing a node that was opened
-			// within data. Don't track that on closingStack
+			/*
+			 * The opening was on openingStack, so we're closing a node that was opened
+			 * within data. Don't track that on closingStack
+			 */
 		} else {
 			if ( !parentNode.getParent() ) {
 				throw new Error( 'Cannot insert ' + childType + ' even after closing ' +
 					'all containing nodes (at index ' + i + ')' );
 			}
-			// openingStack is empty, so we're closing a node that was already in the
-			// document. This means we have to reopen it later, so track this on
-			// closingStack
+			/*
+			 * openingStack is empty, so we're closing a node that was already in the
+			 * document. This means we have to reopen it later, so track this on
+			 * closingStack
+			 */
 			closingStack.push( parentNode );
 			reopenElements.push( parentNode.getClonedElement() );
 			parentNode = parentNode.getParent();
@@ -1357,12 +1419,13 @@ ve.dm.Document.prototype.fixupInsertion = function ( data, offset ) {
 			openings = [];
 			closings = [];
 			reopenElements = [];
-			// Opening or content
-			// Make sure that opening this element here does not violate the parent/children/content
-			// rules. If it does, insert stuff to fix it
-
-			// If this node is content, check that the containing node can contain content. If not,
-			// wrap in a paragraph
+			/*
+			 * Opening or content
+			 * Make sure that opening this element here does not violate the parent/children/content
+			 * rules. If it does, insert stuff to fix it
+			 * If this node is content, check that the containing node can contain content. If not,
+			 * wrap in a paragraph
+			 */
 			if ( ve.dm.nodeFactory.isNodeContent( childType ) &&
 				!ve.dm.nodeFactory.canNodeContainContent( parentType )
 			) {
@@ -1370,8 +1433,10 @@ ve.dm.Document.prototype.fixupInsertion = function ( data, offset ) {
 				openings.unshift( ve.dm.nodeFactory.getDataElement( childType ) );
 			}
 
-			// Check that this node is allowed to have the containing node as its parent. If not,
-			// wrap it until it's fixed
+			/*
+			 * Check that this node is allowed to have the containing node as its parent. If not,
+			 * wrap it until it's fixed
+			 */
 			do {
 				allowedParents = ve.dm.nodeFactory.getParentNodeTypes( childType );
 				parentsOK = allowedParents === null ||
@@ -1388,9 +1453,11 @@ ve.dm.Document.prototype.fixupInsertion = function ( data, offset ) {
 				}
 			} while ( !parentsOK );
 
-			// Check that the node is allowed to have the containing node as
-			// its parent. If not, close surrounding nodes until the node is
-			// contained in an acceptable parent.
+			/*
+			 * Check that the node is allowed to have the containing node as
+			 * its parent. If not, close surrounding nodes until the node is
+			 * contained in an acceptable parent.
+			 */
 			suggestedParents = ve.dm.nodeFactory.getSuggestedParentNodeTypes( childType );
 			do {
 				suggestedParentsOK = suggestedParents === null ||
@@ -1400,14 +1467,18 @@ ve.dm.Document.prototype.fixupInsertion = function ( data, offset ) {
 				}
 			} while ( !suggestedParentsOK );
 
-			// Check that the containing node can have this node as its child. If not, close nodes
-			// until it's fixed
+			/*
+			 * Check that the containing node can have this node as its child. If not, close nodes
+			 * until it's fixed
+			 */
 			do {
 				allowedChildren = ve.dm.nodeFactory.getChildNodeTypes( parentType );
 				childrenOK = allowedChildren === null ||
 					allowedChildren.indexOf( childType ) !== -1;
-				// Also check if we're trying to insert structure into a node that has to contain
-				// content
+				/*
+				 * Also check if we're trying to insert structure into a node that has to contain
+				 * content
+				 */
 				childrenOK = childrenOK && !(
 					!ve.dm.nodeFactory.isNodeContent( childType ) &&
 					ve.dm.nodeFactory.canNodeContainContent( parentType )
@@ -1415,8 +1486,10 @@ ve.dm.Document.prototype.fixupInsertion = function ( data, offset ) {
 				if ( !childrenOK ) {
 					// We can't insert this into this parent
 					if ( isFirstChild ) {
-						// This element is the first child of its parent, so
-						// abandon this fix up and try again one offset to the left
+						/*
+						 * This element is the first child of its parent, so
+						 * abandon this fix up and try again one offset to the left
+						 */
 						return this.fixupInsertion( data, offset - 1 );
 					}
 
@@ -1430,11 +1503,15 @@ ve.dm.Document.prototype.fixupInsertion = function ( data, offset ) {
 				childType === 'text' &&
 				ve.isUnattachedCombiningMark( data[ i ] )
 			) {
-				// Note we only need to check data[0] as combining marks further
-				// along should already have been merged
+				/*
+				 * Note we only need to check data[0] as combining marks further
+				 * along should already have been merged
+				 */
 				if ( doc.data.isElementData( offset - 1 ) ) {
-					// Inserting a unattached combining mark is generally pretty badly
-					// supported (browser rendering bugs), so we'll just prevent it.
+					/*
+					 * Inserting a unattached combining mark is generally pretty badly
+					 * supported (browser rendering bugs), so we'll just prevent it.
+					 */
 					continue;
 				} else {
 					offset--;
@@ -1449,8 +1526,10 @@ ve.dm.Document.prototype.fixupInsertion = function ( data, offset ) {
 			}
 
 			for ( j = 0; j < closings.length; j++ ) {
-				// writeElement() would update openingStack/closingStack, but we've already done
-				// that for closings
+				/*
+				 * writeElement() would update openingStack/closingStack, but we've already done
+				 * that for closings
+				 */
 				if ( i === 0 ) {
 					insertedDataOffset++;
 				} else {
@@ -1474,8 +1553,10 @@ ve.dm.Document.prototype.fixupInsertion = function ( data, offset ) {
 					// We wrapped the text node, update parentType
 					parentType = childType;
 				}
-				// If we didn't wrap the text node, then the node we're inserting into can have
-				// content, so we couldn't have closed anything
+				/*
+				 * If we didn't wrap the text node, then the node we're inserting into can have
+				 * content, so we couldn't have closed anything
+				 */
 			} else {
 				parentType = data[ i ].type;
 			}
@@ -1488,8 +1569,10 @@ ve.dm.Document.prototype.fixupInsertion = function ( data, offset ) {
 	}
 
 	if ( closingStack.length > 0 && doc.data.isCloseElementData( offset ) ) {
-		// This element is the last child of its parent, so
-		// abandon this fix up and try again one offset to the right
+		/*
+		 * This element is the last child of its parent, so
+		 * abandon this fix up and try again one offset to the right
+		 */
 		return this.fixupInsertion( data, offset + 1 );
 	}
 
@@ -1501,15 +1584,19 @@ ve.dm.Document.prototype.fixupInsertion = function ( data, offset ) {
 	// Close unclosed openings
 	while ( openingStack.length > 0 ) {
 		popped = openingStack[ openingStack.length - 1 ];
-		// writeElement() will perform the actual pop() that removes
-		// popped from openingStack
+		/*
+		 * writeElement() will perform the actual pop() that removes
+		 * popped from openingStack
+		 */
 		writeElement( { type: '/' + popped.type }, i );
 	}
 	// Re-open closed nodes
 	while ( closingStack.length > 0 ) {
 		popped = closingStack[ closingStack.length - 1 ];
-		// writeElement() will perform the actual pop() that removes
-		// popped from closingStack
+		/*
+		 * writeElement() will perform the actual pop() that removes
+		 * popped from closingStack
+		 */
 		writeElement( popped.getClonedElement(), i );
 	}
 
@@ -1544,8 +1631,10 @@ ve.dm.Document.prototype.newFromHtml = function ( html, importRules ) {
 	}
 
 	data.remapInternalListKeys( this.getInternalList() );
-	// Initialize node tree
-	// BUG T75569: This shouldn't be needed
+	/*
+	 * Initialize node tree
+	 * BUG T75569: This shouldn't be needed
+	 */
 	doc.buildNodeTree();
 
 	return doc;
@@ -1581,10 +1670,12 @@ ve.dm.Document.prototype.findText = function ( query, options ) {
 			while ( lines[ i ] && ( match = query.exec( lines[ i ] ) ) !== null ) {
 				// Skip empty string matches (e.g. with .*)
 				if ( match[ 0 ].length === 0 ) {
-					// Set lastIndex to the next character to avoid an infinite
-					// loop. Browsers differ in whether they do this for you
-					// for empty matches; see
-					// http://blog.stevenlevithan.com/archives/exec-bugs
+					/*
+					 * Set lastIndex to the next character to avoid an infinite
+					 * loop. Browsers differ in whether they do this for you
+					 * for empty matches; see
+					 * http://blog.stevenlevithan.com/archives/exec-bugs
+					 */
 					query.lastIndex = match.index + 1;
 					continue;
 				}
@@ -1618,8 +1709,10 @@ ve.dm.Document.prototype.findText = function ( query, options ) {
 					return a.toLowerCase() === b.toLowerCase() ? 0 : 1;
 				};
 		}
-		// Iterate up to (and including) offset textLength - queryLength. Beyond that point
-		// there is not enough room for the query to exist
+		/*
+		 * Iterate up to (and including) offset textLength - queryLength. Beyond that point
+		 * there is not enough room for the query to exist
+		 */
 		for ( offset = 0, l = documentRange.getLength() - qLen; offset <= l; offset++ ) {
 			j = 0;
 			while ( compare( data.getCharacterData( offset + j ), query[ j ] ) === 0 ) {

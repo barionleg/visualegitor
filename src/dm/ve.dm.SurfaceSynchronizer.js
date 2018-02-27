@@ -47,10 +47,11 @@ ve.dm.SurfaceSynchronizer = function VeDmSurfaceSynchronizer( surface, documentI
 	this.socket.on( 'nameChange', this.onNameChange.bind( this ) );
 	this.socket.on( 'colorChange', this.onColorChange.bind( this ) );
 	this.socket.on( 'authorDisconnect', this.onAuthorDisconnect.bind( this ) );
-	// TODO: unbreak then re-enable usurp
-	// this.tryUsurp();
-
-	// Events
+	/*
+	 * TODO: unbreak then re-enable usurp
+	 * this.tryUsurp();
+	 * Events
+	 */
 	this.doc.connect( this, {
 		transact: 'onDocumentTransact'
 	} );
@@ -129,9 +130,11 @@ ve.dm.SurfaceSynchronizer.prototype.applyChange = function ( change ) {
 		delete this.authorSelections[ authorId ];
 	}
 	change.applyTo( this.surface );
-	// HACK: After applyTo(), the selections are wrong and applying them could crash.
-	// The only reason this doesn't happen is because everything that tries to do that uses setTimeout().
-	// Translate the selections that aren't going to be overwritten by change.selections
+	/*
+	 * HACK: After applyTo(), the selections are wrong and applying them could crash.
+	 * The only reason this doesn't happen is because everything that tries to do that uses setTimeout().
+	 * Translate the selections that aren't going to be overwritten by change.selections
+	 */
 	this.applyNewSelections( this.authorSelections, change );
 	// Apply the overwrites from change.selections
 	this.applyNewSelections( change.selections );
@@ -142,9 +145,11 @@ ve.dm.SurfaceSynchronizer.prototype.applyChange = function ( change ) {
  */
 ve.dm.SurfaceSynchronizer.prototype.unapplyChange = function ( change ) {
 	change.unapplyTo( this.surface );
-	// Translate all selections for what we just unapplied
-	// HACK: After unapplyTo(), the selections are wrong and applying them could crash.
-	// The only reason this doesn't happen is because everything that tries to do that uses setTimeout().
+	/*
+	 * Translate all selections for what we just unapplied
+	 * HACK: After unapplyTo(), the selections are wrong and applying them could crash.
+	 * The only reason this doesn't happen is because everything that tries to do that uses setTimeout().
+	 */
 	this.applyNewSelections( this.authorSelections, change.reversed() );
 };
 
@@ -170,8 +175,10 @@ ve.dm.SurfaceSynchronizer.prototype.logEvent = function ( event ) {
 	var key,
 		ob = {};
 	if ( !this.initialized ) {
-		// Do not log before initialization is complete; this prevents us from logging the entire
-		// document history during initialization
+		/*
+		 * Do not log before initialization is complete; this prevents us from logging the entire
+		 * document history during initialization
+		 */
 		return;
 	}
 	ob.sendTimestamp = Date.now();
@@ -196,9 +203,11 @@ ve.dm.SurfaceSynchronizer.prototype.onDocumentTransact = function ( tx ) {
 		// Ignore our own synchronization or initialization transactions
 		return;
 	}
-	// HACK annotate transaction with authorship information
-	// This relies on being able to access the transaction object by reference;
-	// we should probably set the author deeper in dm.Surface or dm.Document instead.
+	/*
+	 * HACK annotate transaction with authorship information
+	 * This relies on being able to access the transaction object by reference;
+	 * we should probably set the author deeper in dm.Surface or dm.Document instead.
+	 */
 	tx.authorId = this.authorId;
 	// TODO deal with staged transactions somehow
 	this.applyNewSelections( this.authorSelections, tx );
@@ -335,8 +344,10 @@ ve.dm.SurfaceSynchronizer.prototype.onInitDoc = function ( data ) {
  */
 ve.dm.SurfaceSynchronizer.prototype.onNewChange = function ( serializedChange ) {
 	var change = ve.dm.Change.static.deserialize( serializedChange, this.doc );
-	// Make sure we don't attempt to submit any of the transactions we commit while manipulating
-	// the state of the document
+	/*
+	 * Make sure we don't attempt to submit any of the transactions we commit while manipulating
+	 * the state of the document
+	 */
 	this.applying = true;
 	try {
 		this.acceptChange( change );

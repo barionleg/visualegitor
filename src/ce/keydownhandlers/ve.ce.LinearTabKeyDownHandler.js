@@ -40,17 +40,21 @@ ve.ce.LinearTabKeyDownHandler.static.execute = function ( surface, e ) {
 	var activeTableNode = surface.getActiveNode() && surface.getActiveNode().findParent( ve.ce.TableNode );
 	if ( activeTableNode ) {
 		if ( e.ctrlKey || e.altKey || e.metaKey ) {
-			// Support: Firefox
-			// In Firefox, ctrl-tab to switch browser-tabs still triggers the
-			// keydown event.
+			/*
+			 * Support: Firefox
+			 * In Firefox, ctrl-tab to switch browser-tabs still triggers the
+			 * keydown event.
+			 */
 			return;
 		}
 
 		e.preventDefault();
 		e.stopPropagation();
 		activeTableNode.setEditing( false );
-		// If this was a merged cell, we're going to have unexpected behavior when the selection moves,
-		// so preemptively collapse to the top-left point of the merged cell.
+		/*
+		 * If this was a merged cell, we're going to have unexpected behavior when the selection moves,
+		 * so preemptively collapse to the top-left point of the merged cell.
+		 */
 		surface.getModel().setSelection( surface.getModel().getSelection().collapseToStart() );
 		ve.ce.TableArrowKeyDownHandler.static.moveTableSelection(
 			surface,

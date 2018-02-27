@@ -6,8 +6,10 @@
 
 QUnit.module( 've.init.sa.Platform', {
 	beforeEach: function () {
-		// Ensure that ve.init.platform is not permanently overwritten
-		// by creating an sa.Platform
+		/*
+		 * Ensure that ve.init.platform is not permanently overwritten
+		 * by creating an sa.Platform
+		 */
 		this.originalPlatform = ve.init.platform;
 		this.purgeKeys = function () {
 			var key,

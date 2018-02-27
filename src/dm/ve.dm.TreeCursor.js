@@ -4,8 +4,10 @@
  * @copyright 2011-2018 VisualEditor Team and others; see http://ve.mit-license.org
  */
 
-// TODO identify a core of "trusted" code that is guaranteed to detect tree invalidation.
-// Probably needs: removeNode insertNode removeText insertText
+/*
+ * TODO identify a core of "trusted" code that is guaranteed to detect tree invalidation.
+ * Probably needs: removeNode insertNode removeText insertText
+ */
 
 /**
  * DataModel TreeCursor - a tree walker that tracks the path to the current position.
@@ -195,8 +197,10 @@ ve.dm.TreeCursor.prototype.adjustPath = function ( path, offset, adjustment, lin
 	var i, len;
 
 	len = path.length;
-	// Find the first offset i where this.path[ i ] is undefined or differs from path[ i ]
-	// If there is such an offset, then own position lies outside the adjusted node
+	/*
+	 * Find the first offset i where this.path[ i ] is undefined or differs from path[ i ]
+	 * If there is such an offset, then own position lies outside the adjusted node
+	 */
 	for ( i = 0; i < len; i++ ) {
 		if ( this.path[ i ] === path[ i ] ) {
 			continue;
@@ -207,9 +211,10 @@ ve.dm.TreeCursor.prototype.adjustPath = function ( path, offset, adjustment, lin
 		}
 		return;
 	}
-	// Else own position is in the adjusted node or one of its children
-
-	// Temporarily push offset onto path to simplify the logic
+	/*
+	 * Else own position is in the adjusted node or one of its children
+	 * Temporarily push offset onto path to simplify the logic
+	 */
 	this.path.push( this.offset );
 
 	if ( this.path[ len ] > offset || (

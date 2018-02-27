@@ -46,19 +46,25 @@ ve.ce.getDomText = function ( element ) {
 			nodeType === Node.DOCUMENT_FRAGMENT_NODE
 		) {
 			if ( element.classList.contains( 've-ce-branchNode-blockSlug' ) ) {
-				// Block slugs are not represented in the model at all, but they do
-				// contain a single nbsp/FEFF character in the DOM, so make sure
-				// that character isn't counted
+				/*
+				 * Block slugs are not represented in the model at all, but they do
+				 * contain a single nbsp/FEFF character in the DOM, so make sure
+				 * that character isn't counted
+				 */
 				return '';
 			} else if ( element.classList.contains( 've-ce-cursorHolder' ) ) {
 				// Cursor holders do not exist in the model
 				return '';
 			} else if ( element.classList.contains( 've-ce-leafNode' ) ) {
-				// For leaf nodes, don't return the content, but return
-				// the right number of placeholder characters so the offsets match up.
+				/*
+				 * For leaf nodes, don't return the content, but return
+				 * the right number of placeholder characters so the offsets match up.
+				 */
 				viewNode = $( element ).data( 'view' );
-				// Only return snowmen for the first element in a sibling group: otherwise
-				// we'll double-count this node
+				/*
+				 * Only return snowmen for the first element in a sibling group: otherwise
+				 * we'll double-count this node
+				 */
 				if ( viewNode && element === viewNode.$element[ 0 ] ) {
 					// \u2603 is the snowman character: ☃
 					return new Array( viewNode.getOuterLength() + 1 ).join( '\u2603' );
@@ -238,9 +244,11 @@ ve.ce.getOffset = function ( domNode, domOffset ) {
 	// Figure out what node to start traversing at (startNode)
 	if ( domNode.nodeType === Node.ELEMENT_NODE ) {
 		if ( domNode.childNodes.length === 0 ) {
-			// domNode has no children, and the offset is inside of it
-			// If domNode is a view node, return the offset inside of it
-			// Otherwise, start traversing at domNode
+			/*
+			 * domNode has no children, and the offset is inside of it
+			 * If domNode is a view node, return the offset inside of it
+			 * Otherwise, start traversing at domNode
+			 */
 			startNode = domNode;
 			view = $( startNode ).data( 'view' );
 			if ( view instanceof ve.ce.Node ) {
@@ -248,12 +256,14 @@ ve.ce.getOffset = function ( domNode, domOffset ) {
 			}
 			node = startNode;
 		} else if ( domOffset === domNode.childNodes.length ) {
-			// Offset is at the end of domNode, after the last child. Set startNode to the
-			// very rightmost descendant node of domNode (i.e. the last child of the last child
-			// of the last child, etc.)
-			// However, if the last child or any of the last children we encounter on the way
-			// is a view node, return the offset after it. This will be the correct return value
-			// because non-traversal nodes don't have a DM width.
+			/*
+			 * Offset is at the end of domNode, after the last child. Set startNode to the
+			 * very rightmost descendant node of domNode (i.e. the last child of the last child
+			 * of the last child, etc.)
+			 * However, if the last child or any of the last children we encounter on the way
+			 * is a view node, return the offset after it. This will be the correct return value
+			 * because non-traversal nodes don't have a DM width.
+			 */
 			startNode = domNode.lastChild;
 
 			view = $( startNode ).data( 'view' );
@@ -269,8 +279,10 @@ ve.ce.getOffset = function ( domNode, domOffset ) {
 			}
 			node = startNode;
 		} else {
-			// Offset is right before childNodes[domOffset]. Set startNode to this node
-			// (i.e. the node right after the offset), then traverse back once.
+			/*
+			 * Offset is right before childNodes[domOffset]. Set startNode to this node
+			 * (i.e. the node right after the offset), then traverse back once.
+			 */
 			startNode = domNode.childNodes[ domOffset ];
 			node = traverse( startNode );
 		}
@@ -286,14 +298,18 @@ ve.ce.getOffset = function ( domNode, domOffset ) {
 		node = traverse( startNode );
 	}
 
-	// Walk the traversal nodes in reverse traversal sequence, until we find a view node.
-	// Add the width of each text node we meet. (Non-text node non-view nodes can only be widthless).
-	// Later, if it transpires that we're inside an alienated node, then we will throw away all the
-	// text node lengths, because the alien's content has no DM width.
+	/*
+	 * Walk the traversal nodes in reverse traversal sequence, until we find a view node.
+	 * Add the width of each text node we meet. (Non-text node non-view nodes can only be widthless).
+	 * Later, if it transpires that we're inside an alienated node, then we will throw away all the
+	 * text node lengths, because the alien's content has no DM width.
+	 */
 	while ( true ) {
-		// First node that has a ve.ce.Node, stop
-		// Note that annotations have a .data( 'view' ) too, but that's a ve.ce.Annotation,
-		// not a ve.ce.Node
+		/*
+		 * First node that has a ve.ce.Node, stop
+		 * Note that annotations have a .data( 'view' ) too, but that's a ve.ce.Annotation,
+		 * not a ve.ce.Node
+		 */
 		view = $( node ).data( 'view' );
 		if ( view instanceof ve.ce.Node ) {
 			break;
@@ -307,7 +323,7 @@ ve.ce.getOffset = function ( domNode, domOffset ) {
 		) {
 			lengthSum += node.data.length;
 		}
-		// else: non-text nodes that don't have a .data( 'view' ) don't exist in the DM
+		// … else: non-text nodes that don't have a .data( 'view' ) don't exist in the DM
 		node = traverse( node );
 	}
 
@@ -322,16 +338,22 @@ ve.ce.getOffset = function ( domNode, domOffset ) {
 		if ( view.getModel().canContainContent() ) {
 			offset += lengthSum;
 		}
-		// else: we're inside an alienated node: throw away all the text node lengths,
-		// because the alien's content has no DM width
+		/*
+		 * … else: we're inside an alienated node: throw away all the text node lengths,
+		 * because the alien's content has no DM width
+		 */
 	} else if ( view.parent ) {
-		// node is not an ancestor of startNode
-		// startNode comes after node, so add node's length
+		/*
+		 * node is not an ancestor of startNode
+		 * startNode comes after node, so add node's length
+		 */
 		offset += view.getOuterLength();
 		if ( view.isContent() ) {
-			// view is a leaf node inside of a CBN, so we started inside of a CBN
-			// (otherwise we would have hit the CBN when entering it), so the text we summed up
-			// needs to be counted.
+			/*
+			 * view is a leaf node inside of a CBN, so we started inside of a CBN
+			 * (otherwise we would have hit the CBN when entering it), so the text we summed up
+			 * needs to be counted.
+			 */
 			offset += lengthSum;
 		}
 	} else {
@@ -490,10 +512,12 @@ ve.ce.modelChangeFromContentChange = function ( oldState, newState ) {
 	oldStart = oldRange.start - nodeOffset - 1;
 	newStart = newRange.start - nodeOffset - 1;
 
-	// If the only change is an insertion just before the new cursor, then apply a
-	// single insertion transaction, using the annotations from the old start
-	// position (accounting for whether the cursor was before or after an annotation
-	// boundary)
+	/*
+	 * If the only change is an insertion just before the new cursor, then apply a
+	 * single insertion transaction, using the annotations from the old start
+	 * position (accounting for whether the cursor was before or after an annotation
+	 * boundary)
+	 */
 	if (
 		bothCollapsed &&
 		lengthDiff > 0 &&
@@ -525,8 +549,10 @@ ve.ce.modelChangeFromContentChange = function ( oldState, newState ) {
 		};
 	}
 
-	// If the only change is a removal touching the old cursor position, then apply
-	// a single removal transaction.
+	/*
+	 * If the only change is a removal touching the old cursor position, then apply
+	 * a single removal transaction.
+	 */
 	if (
 		bothCollapsed &&
 		lengthDiff < 0 &&
@@ -543,13 +569,15 @@ ve.ce.modelChangeFromContentChange = function ( oldState, newState ) {
 		};
 	}
 
-	// Complex change (either removal+insertion or insertion not just before new cursor)
-	// 1. Count unchanged characters from left and right;
-	// 2. Assume that the minimal changed region indicates the replacement made by the user;
-	// 3. Hence guess how to map annotations.
-	// N.B. this logic can go wrong; e.g. this code will see slice->slide and
-	// assume that the user changed 'c' to 'd', but the user could instead have changed 'ic'
-	// to 'id', which would map annotations differently.
+	/*
+	 * Complex change (either removal+insertion or insertion not just before new cursor)
+	 * 1. Count unchanged characters from left and right;
+	 * 2. Assume that the minimal changed region indicates the replacement made by the user;
+	 * 3. Hence guess how to map annotations.
+	 * N.B. this logic can go wrong; e.g. this code will see slice->slide and
+	 * assume that the user changed 'c' to 'd', but the user could instead have changed 'ic'
+	 * to 'id', which would map annotations differently.
+	 */
 
 	len = Math.min( oldData.length, newData.length );
 
@@ -574,15 +602,17 @@ ve.ce.modelChangeFromContentChange = function ( oldState, newState ) {
 		// This CBN is unicorned. Use the stored annotations.
 		annotations = node.unicornAnnotations;
 	} else {
-		// Guess the annotations from the (possibly empty) range being replaced.
-		//
-		// Still consider focusIsAfterAnnotationBoundary, even though the change is
-		// not necessarily at the cursor: assume the old focus was inside the same
-		// DOM text node as the insertion, and therefore has the same annotations.
-		// Otherwise, when using an IME that selects inserted text, this code path
-		// can cause an annotation discrepancy that triggers an unwanted re-render,
-		// closing the IME (For example, when typing at the start of <p><i>x</i></p>
-		// in Windows 8.1 Korean on IE11).
+		/*
+		 * Guess the annotations from the (possibly empty) range being replaced.
+		 *
+		 * Still consider focusIsAfterAnnotationBoundary, even though the change is
+		 * not necessarily at the cursor: assume the old focus was inside the same
+		 * DOM text node as the insertion, and therefore has the same annotations.
+		 * Otherwise, when using an IME that selects inserted text, this code path
+		 * can cause an annotation discrepancy that triggers an unwanted re-render,
+		 * closing the IME (For example, when typing at the start of <p><i>x</i></p>
+		 * in Windows 8.1 Korean on IE11).
+		 */
 		annotations = modelData.getInsertionAnnotationsFromRange(
 			replacementRange,
 			oldRange.isCollapsed() && oldState.focusIsAfterAnnotationBoundary
@@ -592,8 +622,10 @@ ve.ce.modelChangeFromContentChange = function ( oldState, newState ) {
 		ve.dm.Document.static.addAnnotationsToData( data, annotations );
 	}
 	if ( newRange.isCollapsed() ) {
-		// TODO: Remove this, or comment why it's necessary
-		// (When wouldn't we be at a cursor offset?)
+		/*
+		 * TODO: Remove this, or comment why it's necessary
+		 * (When wouldn't we be at a cursor offset?)
+		 */
 		newRange = new ve.Range( dmDoc.getNearestCursorOffset( newRange.start, 1 ) );
 	}
 	return {

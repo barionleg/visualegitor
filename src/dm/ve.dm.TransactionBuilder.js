@@ -143,9 +143,11 @@ ve.dm.TransactionBuilder.static.newFromDocumentInsertion = function ( doc, offse
 	data.remapInternalListIndexes( listMerge.mapping, doc.internalList );
 	// Get data for the new internal list
 	if ( newDoc.origInternalListLength !== null ) {
-		// newDoc is a document slice based on doc, so all the internal list items present in doc
-		// when it was cloned are also in newDoc. We need to get the newDoc version of these items
-		// so that changes made in newDoc are reflected.
+		/*
+		 * newDoc is a document slice based on doc, so all the internal list items present in doc
+		 * when it was cloned are also in newDoc. We need to get the newDoc version of these items
+		 * so that changes made in newDoc are reflected.
+		 */
 		if ( newDoc.origInternalListLength > 0 ) {
 			oldEndOffset = doc.internalList.getItemNode( newDoc.origInternalListLength - 1 ).getOuterRange().end;
 			newEndOffset = newDoc.internalList.getItemNode( newDoc.origInternalListLength - 1 ).getOuterRange().end;
@@ -174,10 +176,11 @@ ve.dm.TransactionBuilder.static.newFromDocumentInsertion = function ( doc, offse
 	txBuilder = new ve.dm.TransactionBuilder();
 
 	if ( offset <= listNodeRange.start ) {
-		// offset is before listNodeRange
-		// First replace the node, then the internal list
-
-		// Fix up the node insertion
+		/*
+		 * offset is before listNodeRange
+		 * First replace the node, then the internal list
+		 * Fix up the node insertion
+		 */
 		insertion = doc.fixupInsertion( data.data, offset );
 		txBuilder.pushRetain( insertion.offset );
 		txBuilder.pushReplacement( doc, insertion.offset, insertion.remove, insertion.data, true );
@@ -187,10 +190,11 @@ ve.dm.TransactionBuilder.static.newFromDocumentInsertion = function ( doc, offse
 		);
 		txBuilder.pushFinalRetain( doc, listNodeRange.end );
 	} else if ( offset >= listNodeRange.end ) {
-		// offset is after listNodeRange
-		// First replace the internal list, then the node
-
-		// Fix up the node insertion
+		/*
+		 * offset is after listNodeRange
+		 * First replace the internal list, then the node
+		 * Fix up the node insertion
+		 */
 		insertion = doc.fixupInsertion( data.data, offset );
 		txBuilder.pushRetain( listNodeRange.start );
 		txBuilder.pushReplacement( doc, listNodeRange.start, listNodeRange.end - listNodeRange.start,
@@ -200,9 +204,11 @@ ve.dm.TransactionBuilder.static.newFromDocumentInsertion = function ( doc, offse
 		txBuilder.pushReplacement( doc, insertion.offset, insertion.remove, insertion.data, true );
 		txBuilder.pushFinalRetain( doc, insertion.offset + insertion.remove );
 	} else if ( offset >= listNodeRange.start && offset <= listNodeRange.end ) {
-		// offset is within listNodeRange
-		// Merge data into listData, then only replace the internal list
-		// Find the internalItem we are inserting into
+		/*
+		 * offset is within listNodeRange
+		 * Merge data into listData, then only replace the internal list
+		 * Find the internalItem we are inserting into
+		 */
 		i = 0;
 		// Find item node in doc
 		while (
@@ -319,9 +325,11 @@ ve.dm.TransactionBuilder.static.newFromAnnotation = function ( doc, range, metho
 				// Don't re-apply matching annotation
 				covered = data.getAnnotationsFromOffset( i ).containsComparable( annotation );
 			} else {
-				// Expect comparable annotations to be removed individually otherwise
-				// we might try to remove more than one annotation per character, which
-				// a single transaction can't do.
+				/*
+				 * Expect comparable annotations to be removed individually otherwise
+				 * we might try to remove more than one annotation per character, which
+				 * a single transaction can't do.
+				 */
 				covered = data.getAnnotationsFromOffset( i ).contains( annotation );
 			}
 			if ( ( covered && method === 'set' ) || ( !covered && method === 'clear' ) ) {
@@ -386,8 +394,10 @@ ve.dm.TransactionBuilder.static.newFromContentBranchConversion = function ( doc,
 		selected = selection[ i ];
 		branch = selected.node.isContent() ? selected.node.getParent() : selected.node;
 		if ( branch.canContainContent() ) {
-			// Skip branches that are already of the target type and have all attributes in attr
-			// set already.
+			/*
+			 * Skip branches that are already of the target type and have all attributes in attr
+			 * set already.
+			 */
 			if ( branch.getType() === type && ve.compare( attr, branch.getAttributes(), true ) ) {
 				continue;
 			}
@@ -407,8 +417,10 @@ ve.dm.TransactionBuilder.static.newFromContentBranchConversion = function ( doc,
 				// Retain the branch, including its opening and closing
 				txBuilder.pushRetain( branch.getOuterLength() );
 			} else {
-				// Types differ, so we need to replace the opening and closing
-				// Replace the opening
+				/*
+				 * Types differ, so we need to replace the opening and closing
+				 * Replace the opening
+				 */
 				txBuilder.pushReplacement( doc, branchOuterRange.start, 1, [ ve.copy( opening ) ] );
 				// Retain the contents
 				txBuilder.pushRetain( branch.getLength() );
@@ -526,9 +538,10 @@ ve.dm.TransactionBuilder.static.newFromWrap = function ( doc, range, unwrapOuter
 	closingUnwrapEach = closingArray( unwrapEach );
 	closingWrapEach = closingArray( wrapEach );
 
-	// TODO: check for and fix nesting validity like fixupInsertion does
-
-	// Verify the data before range.start matches unwrapOuter, and find where to retain up to
+	/*
+	 * TODO: check for and fix nesting validity like fixupInsertion does
+	 * Verify the data before range.start matches unwrapOuter, and find where to retain up to
+	 */
 	ptr = match( 'backwards', range.start, unwrapOuter, 'unwrapOuter' );
 	txBuilder.pushRetain( ptr );
 	// Replace wrapper (retaining any metadata)
@@ -536,14 +549,18 @@ ve.dm.TransactionBuilder.static.newFromWrap = function ( doc, range, unwrapOuter
 	ptr = range.start;
 
 	if ( wrapEach.length === 0 && unwrapEach.length === 0 ) {
-		// There is no wrapEach/unwrapEach to be done, just retain
-		// up to the end of the range
+		/*
+		 * There is no wrapEach/unwrapEach to be done, just retain
+		 * up to the end of the range
+		 */
 		txBuilder.pushRetain( range.end - range.start );
 		ptr = range.end;
 	} else {
-		// Visit each top-level child and wrap/unwrap it
-		// TODO figure out if we should use the tree/node functions here
-		// rather than iterating over offsets, it may or may not be faster
+		/*
+		 * Visit each top-level child and wrap/unwrap it
+		 * TODO figure out if we should use the tree/node functions here
+		 * rather than iterating over offsets, it may or may not be faster
+		 */
 		for ( i = range.start; i < range.end; i++ ) {
 			if ( !doc.data.isElementData( i ) ) {
 				continue;
@@ -665,8 +682,10 @@ ve.dm.TransactionBuilder.prototype.addSafeRemoveOps = function ( doc, removeStar
 	var i, queuedRetain,
 		retainStart = removeStart,
 		undeletableStackDepth = 0;
-	// Iterate over removal range and use a stack counter to determine if
-	// we are inside an undeletable node
+	/*
+	 * Iterate over removal range and use a stack counter to determine if
+	 * we are inside an undeletable node
+	 */
 	for ( i = removeStart; i < removeEnd; i++ ) {
 		if ( doc.data.isElementData( i ) && !ve.dm.nodeFactory.isNodeDeletable( doc.data.getType( i ) ) ) {
 			if ( !doc.data.isCloseElementData( i ) ) {
@@ -745,8 +764,10 @@ ve.dm.TransactionBuilder.prototype.pushReplacement = function ( doc, offset, rem
 	}
 
 	if ( collapse.length > 0 ) {
-		// Push collapsed metadata, moved backwards if this position has become invalid
-		// for metadata
+		/*
+		 * Push collapsed metadata, moved backwards if this position has become invalid
+		 * for metadata
+		 */
 		this.pushMeta( doc, offset, collapse );
 	}
 	// Merge with previous replace, if any (which may have come from the pushMeta above)
@@ -886,10 +907,12 @@ ve.dm.TransactionBuilder.prototype.pushRemoval = function ( doc, currentOffset, 
 			removeStart = first.nodeOuterRange.start;
 			removeEnd = last.nodeOuterRange.end;
 		} else {
-			// Either the first node or the last node is partially covered, so remove
-			// the selected content. The other node might be fully covered, in which case
-			// we remove its contents (nodeRange). For fully covered content nodes, we must
-			// remove the entire node (nodeOuterRange).
+			/*
+			 * Either the first node or the last node is partially covered, so remove
+			 * the selected content. The other node might be fully covered, in which case
+			 * we remove its contents (nodeRange). For fully covered content nodes, we must
+			 * remove the entire node (nodeOuterRange).
+			 */
 			removeStart = (
 				first.range ||
 				( first.node.isContent() ? first.nodeOuterRange : first.nodeRange )
@@ -905,8 +928,10 @@ ve.dm.TransactionBuilder.prototype.pushRemoval = function ( doc, currentOffset, 
 		return removeEnd;
 	}
 
-	// The selection wasn't mergeable, so remove nodes that are completely covered, and strip
-	// nodes that aren't
+	/*
+	 * The selection wasn't mergeable, so remove nodes that are completely covered, and strip
+	 * nodes that aren't
+	 */
 	for ( i = 0; i < selection.length; i++ ) {
 		if ( !selection[ i ].range ) {
 			// Entire node is covered, remove it
@@ -918,8 +943,10 @@ ve.dm.TransactionBuilder.prototype.pushRemoval = function ( doc, currentOffset, 
 			nodeEnd = selection[ i ].range.end;
 		}
 
-		// Merge contiguous removals. Only apply a removal when a gap appears, or at the
-		// end of the loop
+		/*
+		 * Merge contiguous removals. Only apply a removal when a gap appears, or at the
+		 * end of the loop
+		 */
 		if ( removeEnd === null ) {
 			// First removal
 			removeStart = nodeStart;
@@ -928,9 +955,10 @@ ve.dm.TransactionBuilder.prototype.pushRemoval = function ( doc, currentOffset, 
 			// Merge this removal into the previous one
 			removeEnd = nodeEnd;
 		} else {
-			// There is a gap between the previous removal and this one
-
-			// Push the previous removal first
+			/*
+			 * There is a gap between the previous removal and this one
+			 * Push the previous removal first
+			 */
 			this.pushRetain( removeStart - offset );
 			offset = this.addSafeRemoveOps( doc, removeStart, removeEnd, removeMetadata );
 
@@ -972,12 +1000,14 @@ ve.dm.TransactionBuilder.prototype.pushMeta = function ( doc, offset, metaItems 
 	// Start at the current end of the transaction
 	position = { opIndex: ops.length - 1, itemIndex: ops[ ops.length - 1 ].length };
 
-	// Walk backwards over the linear data as it will be after the transaction is
-	// applied, tracking depth, and disregarding tags deeper than the depth at offset.
-	// - If we hit a structural open tag with restricted childNodeTypes (like list) then
-	// move position to just before the tag, and keep walking
-	// - If we hit a structural open tag with unrestricted childNodeTypes, or the document
-	// start, then position is fine: insert metaItems there and return
+	/*
+	 * Walk backwards over the linear data as it will be after the transaction is
+	 * applied, tracking depth, and disregarding tags deeper than the depth at offset.
+	 * - If we hit a structural open tag with restricted childNodeTypes (like list) then
+	 * move position to just before the tag, and keep walking
+	 * - If we hit a structural open tag with unrestricted childNodeTypes, or the document
+	 * start, then position is fine: insert metaItems there and return
+	 */
 	findPositionLoop:
 	for ( i = ops.length - 1; i >= 0; i-- ) {
 		op = ops[ i ];
@@ -1005,20 +1035,24 @@ ve.dm.TransactionBuilder.prototype.pushMeta = function ( doc, offset, metaItems 
 			relDepth--;
 			if ( relDepth >= 0 ) {
 				continue;
-				// TODO: This could be a long walk. Do we want to infer stuff
-				// from element types we see at relDepth 0? For instance, if
-				// we see a structural node at the same depth as position, with
-				// unrestricted parentNodeTypes, could we perhaps infer that
-				// position is a legal place for metadata without walking the
-				// whole 874 miles to the start of the document?
-				//
-				// This is not an immediate priority because for text
-				// replacement during typing (the main performance-critical use
-				// case) we only have to walk back to the start of the CBN,
-				// which is unlikely to be far.
+				/*
+				 * TODO: This could be a long walk. Do we want to infer stuff
+				 * from element types we see at relDepth 0? For instance, if
+				 * we see a structural node at the same depth as position, with
+				 * unrestricted parentNodeTypes, could we perhaps infer that
+				 * position is a legal place for metadata without walking the
+				 * whole 874 miles to the start of the document?
+				 *
+				 * This is not an immediate priority because for text
+				 * replacement during typing (the main performance-critical use
+				 * case) we only have to walk back to the start of the CBN,
+				 * which is unlikely to be far.
+				 */
 			}
-			// We won't let relDepth go below -1 (see below), so this element is
-			// the parent of position
+			/*
+			 * We won't let relDepth go below -1 (see below), so this element is
+			 * the parent of position
+			 */
 			if (
 				!ve.dm.nodeFactory.canNodeContainContent( type ) &&
 				!ve.dm.nodeFactory.getChildNodeTypes( type )

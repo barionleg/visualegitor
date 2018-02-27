@@ -57,8 +57,10 @@ ve.ui.LinkInspectorTool.prototype.getSelectedModels = function ( fragment ) {
 	var surfaceView,
 		selection = fragment && fragment.getSelection();
 
-	// Ask the CE surface about selected models, so it can give the right
-	// answer about links based on the CE selection.
+	/*
+	 * Ask the CE surface about selected models, so it can give the right
+	 * answer about links based on the CE selection.
+	 */
 	if ( selection instanceof ve.dm.LinearSelection ) {
 		surfaceView = this.toolbar.getSurface().getView();
 		if ( selection.equals( surfaceView.getModel().getSelection() ) ) {

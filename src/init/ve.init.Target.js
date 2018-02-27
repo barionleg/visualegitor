@@ -54,8 +54,10 @@ ve.init.Target = function VeInitTarget( config ) {
 		this.$element.addClass( 've-init-target-ie' );
 	}
 
-	// We don't have any Edge CSS bugs that aren't present in IE, so
-	// use a combined class to simplify selectors.
+	/*
+	 * We don't have any Edge CSS bugs that aren't present in IE, so
+	 * use a combined class to simplify selectors.
+	 */
 	if ( isIe || isEdge ) {
 		this.$element.addClass( 've-init-target-ie-or-edge' );
 	}
@@ -239,9 +241,11 @@ ve.init.Target.prototype.setDefaultMode = function ( defaultMode ) {
 		}
 	}
 	if ( defaultMode !== this.defaultMode ) {
-		// The follow classes are used here:
-		// * ve-init-target-visual
-		// * ve-init-target-[modename]
+		/*
+		 * The follow classes are used here:
+		 * * ve-init-target-visual
+		 * * ve-init-target-[modename]
+		 */
 		if ( this.defaultMode ) {
 			this.$element.removeClass( 've-init-target-' + this.defaultMode );
 		}
@@ -294,8 +298,10 @@ ve.init.Target.prototype.unbindHandlers = function () {
  */
 ve.init.Target.prototype.teardown = function () {
 	this.unbindHandlers();
-	// Wait for the toolbar to teardown before clearing surfaces,
-	// as it may want to transition away
+	/*
+	 * Wait for the toolbar to teardown before clearing surfaces,
+	 * as it may want to transition away
+	 */
 	return this.teardownToolbar().then( this.clearSurfaces.bind( this ) );
 };
 
@@ -450,8 +456,10 @@ ve.init.Target.prototype.addSurface = function ( dmDoc, config ) {
  * Destroy and remove all surfaces from the target
  */
 ve.init.Target.prototype.clearSurfaces = function () {
-	// We're about to destroy this.surface, so unset it for sanity
-	// Otherwise, getSurface() could return a destroyed surface
+	/*
+	 * We're about to destroy this.surface, so unset it for sanity
+	 * Otherwise, getSurface() could return a destroyed surface
+	 */
 	this.surface = null;
 	while ( this.surfaces.length ) {
 		this.surfaces.pop().destroy();

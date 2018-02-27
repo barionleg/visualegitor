@@ -86,8 +86,10 @@ ve.ce.ImageNode.prototype.onAttributeChange = function ( key, from, to ) {
  */
 ve.ce.ImageNode.prototype.onLoad = function () {
 	if ( !this.model ) {
-		// This node has probably been destroyed. (Currently there's no easy way for
-		// a mixin class to disconnect listeners on destroy)
+		/*
+		 * This node has probably been destroyed. (Currently there's no easy way for
+		 * a mixin class to disconnect listeners on destroy)
+		 */
 		return;
 	}
 	this.setOriginalDimensions( {

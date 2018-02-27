@@ -39,9 +39,11 @@ ve.ui.Surface = function VeUiSurface( dataOrDoc, config ) {
 	this.inDialog = config.inDialog || '';
 	this.mode = config.mode;
 
-	// The following classes are used here:
-	// * ve-ui-overlay-global-mobile
-	// * ve-ui-overlay-global-desktop
+	/*
+	 * The following classes are used here:
+	 * * ve-ui-overlay-global-mobile
+	 * * ve-ui-overlay-global-desktop
+	 */
 	this.globalOverlay = new ve.ui.Overlay( { classes: [ 've-ui-overlay-global', 've-ui-overlay-global-' + OO.ui.isMobile() ? 'mobile' : 'desktop' ] } );
 	this.localOverlay = new ve.ui.Overlay( { classes: [ 've-ui-overlay-local' ] } );
 	this.$selections = $( '<div>' );
@@ -97,9 +99,11 @@ ve.ui.Surface = function VeUiSurface( dataOrDoc, config ) {
 	// Initialization
 	this.$menus.append( this.context.$element );
 	this.$element
-		// The following classes are used here:
-		// * ve-ui-surface-visual
-		// * ve-ui-surface-source
+		/*
+		 * The following classes are used here:
+		 * * ve-ui-surface-visual
+		 * * ve-ui-surface-source
+		 */
 		.addClass( 've-ui-surface ve-ui-surface-' + this.mode )
 		.append( this.view.$element );
 	this.view.$element.after( this.localOverlay.$element );
@@ -197,9 +201,11 @@ ve.ui.Surface.prototype.initialize = function () {
 		this.setupDebugBar();
 	}
 
-	// The following classes can be used here:
-	// * ve-ui-surface-dir-ltr
-	// * ve-ui-surface-dir-rtl
+	/*
+	 * The following classes can be used here:
+	 * * ve-ui-surface-dir-ltr
+	 * * ve-ui-surface-dir-rtl
+	 */
 	this.$element.addClass( 've-ui-surface-dir-' + this.getDir() );
 
 	this.getView().initialize();
@@ -303,8 +309,10 @@ ve.ui.Surface.prototype.setupDebugBar = function () {
  *  Null if the surface is not attached.
  */
 ve.ui.Surface.prototype.getBoundingClientRect = function () {
-	// We would use getBoundingClientRect(), but in iOS7 that's relative to the
-	// document rather than to the viewport
+	/*
+	 * We would use getBoundingClientRect(), but in iOS7 that's relative to the
+	 * document rather than to the viewport
+	 */
 	return this.$element[ 0 ].getClientRects()[ 0 ] || null;
 };
 
@@ -492,17 +500,21 @@ ve.ui.Surface.prototype.scrollCursorIntoView = function () {
 	}
 
 	if ( this.getView().dragging ) {
-		// Allow native scroll behavior while dragging, as the start/end
-		// points are unreliable until we're finished. Without this, trying to
-		// drag a selection larger than a single screen will sometimes lock
-		// the viewport in place, as it tries to keep the wrong end of the
-		// selection on-screen.
+		/*
+		 * Allow native scroll behavior while dragging, as the start/end
+		 * points are unreliable until we're finished. Without this, trying to
+		 * drag a selection larger than a single screen will sometimes lock
+		 * the viewport in place, as it tries to keep the wrong end of the
+		 * selection on-screen.
+		 */
 		return;
 	}
 
-	// We only care about the focus end of the selection, the anchor never
-	// moves and should be allowed off screen. Thus, we collapse the selection
-	// to the anchor point (collapseToTo) before measuring.
+	/*
+	 * We only care about the focus end of the selection, the anchor never
+	 * moves and should be allowed off screen. Thus, we collapse the selection
+	 * to the anchor point (collapseToTo) before measuring.
+	 */
 	clientRect = this.getView().getSelection( this.getModel().getSelection().collapseToTo() ).getSelectionBoundingRect();
 	if ( !clientRect ) {
 		return;
@@ -512,12 +524,14 @@ ve.ui.Surface.prototype.scrollCursorIntoView = function () {
 	surfaceRect = this.getBoundingClientRect();
 	clientRect = ve.translateRect( clientRect, surfaceRect.left, surfaceRect.top );
 
-	// TODO: this has some long-standing assumptions that we're going to be in
-	// the context we expect. If we get VE in a scrollable div or suchlike,
-	// we'd no longer be able to make these assumptions about top/bottom of
-	// window.
-	topBound = this.toolbarHeight; // top of the window + height of the toolbar
-	bottomBound = window.innerHeight; // bottom of the window
+	/*
+	 * TODO: this has some long-standing assumptions that we're going to be in
+	 * the context we expect. If we get VE in a scrollable div or suchlike,
+	 * we'd no longer be able to make these assumptions about top/bottom of
+	 * window.
+	 */
+	topBound = this.toolbarHeight; // Top of the window + height of the toolbar
+	bottomBound = window.innerHeight; // Bottom of the window
 
 	cursorTop = clientRect.top - 5;
 	cursorBottom = clientRect.bottom + 5;
@@ -624,8 +638,10 @@ ve.ui.Surface.prototype.updatePlaceholder = function () {
 	this.$placeholder.toggleClass( 'oo-ui-element-hidden', hasContent );
 	this.placeholderVisible = !hasContent;
 	if ( !hasContent ) {
-		// Use a clone of the first node in the document so the placeholder
-		// styling matches the text the users sees when they start typing
+		/*
+		 * Use a clone of the first node in the document so the placeholder
+		 * styling matches the text the users sees when they start typing
+		 */
 		firstNode = this.getView().documentView.documentNode.getNodeFromOffset( 1 );
 		if ( firstNode ) {
 			$wrapper = firstNode.$element.clone();

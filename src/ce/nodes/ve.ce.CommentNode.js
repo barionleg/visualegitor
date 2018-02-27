@@ -96,8 +96,10 @@ ve.ce.CommentNode.prototype.onAttributeChange = function ( key, from, to ) {
  */
 ve.ce.CommentNode.prototype.createInvisibleIcon = function () {
 	var icon;
-	// Check the node hasn't been destroyed, as this method is
-	// called after an rAF in ve.ce.FocusableNode
+	/*
+	 * Check the node hasn't been destroyed, as this method is
+	 * called after an rAF in ve.ce.FocusableNode
+	 */
 	if ( !this.getModel() ) {
 		return;
 	}

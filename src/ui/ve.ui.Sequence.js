@@ -100,15 +100,19 @@ ve.ui.Sequence.prototype.execute = function ( surface, range ) {
 
 	surfaceModel.breakpoint();
 
-	// Use SurfaceFragment rather than Selection to automatically adjust the selection for any changes
-	// (additions, removals) caused by executing the command
+	/*
+	 * Use SurfaceFragment rather than Selection to automatically adjust the selection for any changes
+	 * (additions, removals) caused by executing the command
+	 */
 	originalSelectionFragment = surfaceModel.getFragment();
 	if ( this.setSelection ) {
 		surfaceModel.setLinearSelection( range );
 	}
 
-	// For sequences that trigger dialogs, pass an extra flag so the window knows
-	// to un-strip the sequence if it is closed without action. See ve.ui.WindowAction.
+	/*
+	 * For sequences that trigger dialogs, pass an extra flag so the window knows
+	 * to un-strip the sequence if it is closed without action. See ve.ui.WindowAction.
+	 */
 	if ( command.getAction() === 'window' && command.getMethod() === 'open' ) {
 		args = ve.copy( command.args );
 		args[ 1 ] = args[ 1 ] || {};
@@ -118,14 +122,18 @@ ve.ui.Sequence.prototype.execute = function ( surface, range ) {
 	executed = command.execute( surface, args );
 
 	if ( executed && stripFragment ) {
-		// Strip the typed text. This will be undone if the action triggered was
-		// window/open and the window is dismissed
+		/*
+		 * Strip the typed text. This will be undone if the action triggered was
+		 * window/open and the window is dismissed
+		 */
 		stripFragment.removeContent();
 	}
 
-	// Restore user's selection if:
-	// * This sequence was not executed after all
-	// * This sequence is delayed, so it only executes after the user changed the selection
+	/*
+	 * Restore user's selection if:
+	 * * This sequence was not executed after all
+	 * * This sequence is delayed, so it only executes after the user changed the selection
+	 */
 	if ( !executed || this.delayed ) {
 		originalSelectionFragment.select();
 	}

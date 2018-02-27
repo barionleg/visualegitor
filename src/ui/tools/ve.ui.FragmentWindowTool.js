@@ -55,9 +55,11 @@ ve.ui.FragmentWindowTool.prototype.onUpdateState = function ( fragment ) {
 
 	this.setActive( false );
 
-	// Grand-parent method
-	// Parent method is skipped because it set's active state based on which windows
-	// are open, which we override in this implementation
+	/*
+	 * Grand-parent method
+	 * Parent method is skipped because it set's active state based on which windows
+	 * are open, which we override in this implementation
+	 */
 	ve.ui.FragmentWindowTool.super.super.prototype.onUpdateState.apply( this, arguments );
 
 	models = this.getSelectedModels( fragment );

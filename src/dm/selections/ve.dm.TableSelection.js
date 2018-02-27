@@ -213,16 +213,20 @@ ve.dm.TableSelection.prototype.getTableSliceRanges = function () {
 		ranges = [],
 		matrix = this.getTableNode().getMatrix();
 
-	// Arrays are non-overlapping so avoid duplication
-	// by indexing by range.start
+	/*
+	 * Arrays are non-overlapping so avoid duplication
+	 * by indexing by range.start
+	 */
 	function pushNode( node ) {
 		var range = node.getOuterRange();
 		ranges[ range.start ] = new ve.Range( range.start, range.start + 1 );
 		ranges[ range.end - 1 ] = new ve.Range( range.end - 1, range.end );
 	}
 
-	// Get the start and end tags of every parent of the cell
-	// up to and including the TableNode
+	/*
+	 * Get the start and end tags of every parent of the cell
+	 * up to and including the TableNode
+	 */
 	for ( i = this.startRow; i <= this.endRow; i++ ) {
 		node = matrix.getRowNode( i );
 		pushNode( node );

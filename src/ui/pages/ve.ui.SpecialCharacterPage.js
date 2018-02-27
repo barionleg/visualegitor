@@ -29,8 +29,10 @@ ve.ui.SpecialCharacterPage = function VeUiSpecialCharacterPage( name, config ) {
 	$characters = $( '<div>' ).addClass( 've-ui-specialCharacterPage-characters' );
 	charactersNode = $characters[ 0 ];
 
-	// The body of this loop is executed a few thousand times when opening
-	// ve.ui.SpecialCharacterDialog, avoid jQuery wrappers.
+	/*
+	 * The body of this loop is executed a few thousand times when opening
+	 * ve.ui.SpecialCharacterDialog, avoid jQuery wrappers.
+	 */
 	for ( character in characters ) {
 		if ( !source && characters[ character ].source ) {
 			continue;

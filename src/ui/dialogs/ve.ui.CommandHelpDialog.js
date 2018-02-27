@@ -184,9 +184,11 @@ ve.ui.CommandHelpDialog.prototype.initialize = function () {
 ve.ui.CommandHelpDialog.static.buildKeyNode = function ( key ) {
 	var $key = $( '<kbd>' );
 	if ( key === ' ' ) {
-		// Might need to expand this if other keys show up, but currently things like
-		// the tab-character only come from Triggers and are pre-localized there into
-		// "tab" anyway.
+		/*
+		 * Might need to expand this if other keys show up, but currently things like
+		 * the tab-character only come from Triggers and are pre-localized there into
+		 * "tab" anyway.
+		 */
 		key = ( new ve.ui.Trigger( 'space' ) ).getMessage();
 		$key.addClass( 've-ui-commandHelpDialog-specialKey' );
 	}

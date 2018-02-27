@@ -32,8 +32,10 @@ ve.dm.example = {};
 ve.dm.example.preprocessAnnotations = function ( data, store ) {
 	var i, key;
 
-	// Sanity check to make sure ve.dm.example data has not been passed in
-	// by reference. Always use ve#copy.
+	/*
+	 * Sanity check to make sure ve.dm.example data has not been passed in
+	 * by reference. Always use ve#copy.
+	 */
 	for ( i in ve.dm.example ) {
 		if ( data === ve.dm.example[ i ] ) {
 			throw new Error( 'Example data passed to preprocessAnnotations by reference' );
