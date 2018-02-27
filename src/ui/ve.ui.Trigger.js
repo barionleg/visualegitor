@@ -184,8 +184,10 @@ ve.ui.Trigger.static.platformMapping = {
 		'delete': '⌦',
 		down: '↓',
 		end: '↗',
-		// Technically 'enter' is ⌤, but JS doesn't distinguish between 'enter' and
-		// 'return', and the return-arrow is better known
+		/*
+		 * Technically 'enter' is ⌤, but JS doesn't distinguish between 'enter' and
+		 * 'return', and the return-arrow is better known
+		 */
 		enter: '⏎',
 		escape: '⎋',
 		home: '↖',

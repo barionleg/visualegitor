@@ -117,8 +117,10 @@ ve.Document.prototype.selectNodes = function ( range, mode ) {
 		start = range.start,
 		end = range.end,
 		stack = [ {
-			// Node we are currently stepping through
-			// Note each iteration visits a child of node, not node itself
+			/*
+			 * Node we are currently stepping through
+			 * Note each iteration visits a child of node, not node itself
+			 */
 			node: doc,
 			// Index of the child in node we're visiting
 			index: 0,
@@ -181,8 +183,10 @@ ve.Document.prototype.selectNodes = function ( range, mode ) {
 		);
 
 		if ( isWrapped && end === left - 1 && currentFrame.index === 0 ) {
-			// The selection ends here with an empty range at the beginning of the node
-			// TODO duplicated code
+			/*
+			 * The selection ends here with an empty range at the beginning of the node
+			 * TODO duplicated code
+			 */
 			isWrapped = currentFrame.node.isWrapped();
 			retval.push( {
 				node: currentFrame.node,
@@ -218,15 +222,16 @@ ve.Document.prototype.selectNodes = function ( range, mode ) {
 			}
 			return retval;
 		} else if ( startBetween ) {
-			// start is between the previous sibling and node
-			// so the selection covers all or part of node
-
-			// Descend if
-			// - we are in leaves mode, OR
-			// - we are in covered mode and the end is inside node OR
-			// - we are in branches mode and node is a branch (can have grandchildren)
-			// AND
-			// the node is non-empty and doesn't handle its own children
+			/*
+			 * start is between the previous sibling and node
+			 * so the selection covers all or part of node
+			 * Descend if
+			 * - we are in leaves mode, OR
+			 * - we are in covered mode and the end is inside node OR
+			 * - we are in branches mode and node is a branch (can have grandchildren)
+			 * AND
+			 * the node is non-empty and doesn't handle its own children
+			 */
 			if ( ( mode === 'leaves' ||
 					( mode === 'covered' && endInside ) ||
 					( mode === 'branches' && node.canHaveChildrenNotContent() ) ) &&
@@ -312,8 +317,10 @@ ve.Document.prototype.selectNodes = function ( range, mode ) {
 					( mode === 'branches' && node.canHaveChildrenNotContent() ) ) &&
 				node.children && node.children.length
 			) {
-				// node is a branch node and the start is inside it
-				// Descend into it
+				/*
+				 * node is a branch node and the start is inside it
+				 * Descend into it
+				 */
 				currentFrame = {
 					node: node,
 					index: 0,
@@ -326,8 +333,10 @@ ve.Document.prototype.selectNodes = function ( range, mode ) {
 				}
 				continue;
 			} else {
-				// node is a leaf node and the start is inside it
-				// Add to retval and keep going
+				/*
+				 * node is a leaf node and the start is inside it
+				 * Add to retval and keep going
+				 */
 				retval.push( {
 					node: node,
 					range: new ve.Range( start, right ),
@@ -342,9 +351,11 @@ ve.Document.prototype.selectNodes = function ( range, mode ) {
 				startFound = true;
 			}
 		} else if ( endBetween ) {
-			// end is between node and the next sibling
-			// start is not inside node, so the selection covers
-			// all of node, then ends
+			/*
+			 * end is between node and the next sibling
+			 * start is not inside node, so the selection covers
+			 * all of node, then ends
+			 */
 
 			if (
 				( mode === 'leaves' || ( mode === 'branches' && node.canHaveChildrenNotContent() ) ) &&
@@ -383,8 +394,10 @@ ve.Document.prototype.selectNodes = function ( range, mode ) {
 					( mode === 'branches' && node.canHaveChildrenNotContent() ) ) &&
 				node.children && node.children.length
 			) {
-				// node is a branch node and the end is inside it
-				// Descend into it
+				/*
+				 * node is a branch node and the end is inside it
+				 * Descend into it
+				 */
 				currentFrame = {
 					node: node,
 					index: 0,
@@ -397,8 +410,10 @@ ve.Document.prototype.selectNodes = function ( range, mode ) {
 				}
 				continue;
 			} else {
-				// node is a leaf node and the end is inside it
-				// Add to retval and return
+				/*
+				 * node is a leaf node and the end is inside it
+				 * Add to retval and return
+				 */
 				retval.push( {
 					node: node,
 					range: new ve.Range( left, end ),
@@ -413,9 +428,11 @@ ve.Document.prototype.selectNodes = function ( range, mode ) {
 				return retval;
 			}
 		} else if ( startFound && end > right ) {
-			// Neither the start nor the end is inside node, but we found the start earlier,
-			// so node must be between the start and the end
-			// Add the entire node, so no range property
+			/*
+			 * Neither the start nor the end is inside node, but we found the start earlier,
+			 * so node must be between the start and the end
+			 * Add the entire node, so no range property
+			 */
 
 			if (
 				( mode === 'leaves' || ( mode === 'branches' && node.canHaveChildrenNotContent() ) ) &&
@@ -451,9 +468,11 @@ ve.Document.prototype.selectNodes = function ( range, mode ) {
 
 		// Move to the next node
 		if ( nextNode ) {
-			// The next node exists
-			// Advance the index; the start of the next iteration will essentially
-			// do node = nextNode;
+			/*
+			 * The next node exists
+			 * Advance the index; the start of the next iteration will essentially
+			 * do node = nextNode;
+			 */
 			currentFrame.index++;
 			// Advance to the first offset inside nextNode
 			left = right +
@@ -467,8 +486,10 @@ ve.Document.prototype.selectNodes = function ( range, mode ) {
 				// Skip over node's closing, if present
 				( node.isWrapped() ? 1 : 0 );
 			while ( !nextNode ) {
-				// Check if the start is right past the end of this node, at the end of
-				// the parent
+				/*
+				 * Check if the start is right past the end of this node, at the end of
+				 * the parent
+				 */
 				if ( node.isWrapped() && start === left ) {
 					// TODO duplicated code
 					parentRange = new ve.Range( currentFrame.startOffset,
@@ -499,8 +520,10 @@ ve.Document.prototype.selectNodes = function ( range, mode ) {
 				currentFrame = stack[ stack.length - 1 ];
 				currentFrame.index++;
 				nextNode = currentFrame.node.children[ currentFrame.index ];
-				// Skip over the parent node's closing
-				// (this is present for sure, because the parent has children)
+				/*
+				 * Skip over the parent node's closing
+				 * (this is present for sure, because the parent has children)
+				 */
 				left++;
 			}
 

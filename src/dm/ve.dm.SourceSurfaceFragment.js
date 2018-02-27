@@ -82,8 +82,10 @@ ve.dm.SourceSurfaceFragment.prototype.insertContent = function ( content, annota
 			return this;
 		}
 	} else {
-		// Similar to parent method's handling of strings, but doesn't
-		// remove empty lines.
+		/*
+		 * Similar to parent method's handling of strings, but doesn't
+		 * remove empty lines.
+		 */
 		lines = content.split( /\r?\n/ );
 
 		if ( lines.length > 1 ) {
@@ -137,9 +139,11 @@ ve.dm.SourceSurfaceFragment.prototype.insertDocument = function ( doc, newDocRan
 				i++;
 				l++;
 			} else if ( data[ i ] === '\u00a0' ) {
-				// Replace non-breaking spaces, they were probably created during HTML conversion
-				// and are invisible to the user so likely to just cause problems.
-				// If you want a non-breaking space in source you should probably use &nbsp; T154382
+				/*
+				 * Replace non-breaking spaces, they were probably created during HTML conversion
+				 * and are invisible to the user so likely to just cause problems.
+				 * If you want a non-breaking space in source you should probably use &nbsp; T154382
+				 */
 				data[ i ] = ' ';
 			}
 		}

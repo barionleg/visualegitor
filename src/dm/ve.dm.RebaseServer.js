@@ -96,10 +96,12 @@ ve.dm.RebaseServer.prototype.applyChange = ve.async( function* applyChange( doc,
 		throw new Error( 'Backtrack=' + backtrack + ' > ' + rejections + '=rejections' );
 	} else {
 		if ( change.start > base.start ) {
-			// Remote has rebased some committed changes into its history since base was built.
-			// They are guaranteed to be equivalent to the start of base. See mathematical
-			// docs for proof (Cuius rei demonstrationem mirabilem sane deteximus hanc marginis
-			// exiguitas non caperet).
+			/*
+			 * Remote has rebased some committed changes into its history since base was built.
+			 * They are guaranteed to be equivalent to the start of base. See mathematical
+			 * docs for proof (Cuius rei demonstrationem mirabilem sane deteximus hanc marginis
+			 * exiguitas non caperet).
+			 */
 			base = base.mostRecent( change.start );
 		}
 		base = base.concat( state.history.mostRecent( base.start + base.getLength() ) );

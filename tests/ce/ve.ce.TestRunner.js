@@ -73,10 +73,12 @@ ve.ce.TestOffset.static.findTextOffset = function ( node, n, reversed ) {
 	if ( node.nodeType !== node.ELEMENT_NODE ) {
 		return { consumed: 0 };
 	}
-	// node is an ELEMENT_NODE below here
-	// TODO consecutive text nodes will cause an extra phantom boundary.
-	// In realistic usage, this can't always be avoided, because normalize() will
-	// close an IME.
+	/*
+	 * node is an ELEMENT_NODE below here
+	 * TODO consecutive text nodes will cause an extra phantom boundary.
+	 * In realistic usage, this can't always be avoided, because normalize() will
+	 * close an IME.
+	 */
 	childNodes = Array.prototype.slice.call( node.childNodes );
 
 	if ( childNodes.length === 0 ) {
@@ -183,12 +185,13 @@ ve.ce.TestRunner.prototype.sendEvent = function ( eventName, ev ) {
  */
 ve.ce.TestRunner.prototype.changeText = function ( text ) {
 	var paragraph, range, textNode;
-	// TODO: This method doesn't handle arbitrary text changes in a paragraph
-	// with non-text nodes. It just works for the main cases that are important
-	// in the existing IME tests.
-
-	// Remove all descendent text nodes
-	// This may clobber the selection, so the test had better call changeSel next.
+	/*
+	 * TODO: This method doesn't handle arbitrary text changes in a paragraph
+	 * with non-text nodes. It just works for the main cases that are important
+	 * in the existing IME tests.
+	 * Remove all descendent text nodes
+	 * This may clobber the selection, so the test had better call changeSel next.
+	 */
 	paragraph = this.getParagraph();
 	$( paragraph ).find( '*' ).addBack().contents().each( function () {
 		if ( this.nodeType === Node.TEXT_NODE ) {
@@ -200,9 +203,11 @@ ve.ce.TestRunner.prototype.changeText = function ( text ) {
 	if ( text === '' ) {
 		range.setStart( paragraph, 0 );
 	} else {
-		// Insert the text at the start of the paragraph, and put the cursor after
-		// the insertion, to ensure consistency across test environments.
-		// See T176453
+		/*
+		 * Insert the text at the start of the paragraph, and put the cursor after
+		 * the insertion, to ensure consistency across test environments.
+		 * See T176453
+		 */
 		textNode = document.createTextNode( text );
 		paragraph.insertBefore( textNode, paragraph.firstChild );
 		range.setStart( textNode, text.length );

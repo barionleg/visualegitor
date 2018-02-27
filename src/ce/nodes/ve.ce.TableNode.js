@@ -21,8 +21,10 @@ ve.ce.TableNode = function VeCeTableNode() {
 	this.surface = null;
 	this.active = false;
 	this.startCell = null;
-	// Stores the original table selection as
-	// a fragment when entering cell edit mode
+	/*
+	 * Stores the original table selection as
+	 * a fragment when entering cell edit mode
+	 */
 	this.editingFragment = null;
 
 	// DOM changes
@@ -79,8 +81,10 @@ ve.ce.TableNode.prototype.onSetup = function () {
 	} );
 	this.onTableMouseUpHandler = this.onTableMouseUp.bind( this );
 	this.onTableMouseMoveHandler = this.onTableMouseMove.bind( this );
-	// Select and position events both fire updateOverlay, so debounce. Also makes
-	// sure that this.selectedRectangle is up to date before redrawing.
+	/*
+	 * Select and position events both fire updateOverlay, so debounce. Also makes
+	 * sure that this.selectedRectangle is up to date before redrawing.
+	 */
 	this.updateOverlayDebounced = ve.debounce( this.updateOverlay.bind( this ) );
 	this.surface.getModel().connect( this, { select: 'onSurfaceModelSelect' } );
 	this.surface.connect( this, { position: this.updateOverlayDebounced } );
@@ -113,8 +117,10 @@ ve.ce.TableNode.prototype.onTableDblClick = function ( e ) {
 	if ( this.surface.getModel().getSelection() instanceof ve.dm.TableSelection ) {
 		// Don't change selection in setEditing to avoid scrolling to bottom of cell
 		this.setEditing( true, true );
-		// getOffsetFromEventCoords doesn't work in ce=false in Firefox, so ensure
-		// this is called after setEditing( true ).
+		/*
+		 * getOffsetFromEventCoords doesn't work in ce=false in Firefox, so ensure
+		 * this is called after setEditing( true ).
+		 */
 		offset = this.surface.getOffsetFromEventCoords( e.originalEvent );
 		if ( offset !== -1 ) {
 			// Set selection to where the double click happened
@@ -323,12 +329,14 @@ ve.ce.TableNode.prototype.setEditing = function ( isEditing, noSelect ) {
 	}
 
 	this.$element.toggleClass( 've-ce-tableNode-editing', isEditing );
-	// Support: Firefox 39
-	// HACK T103035: Firefox 39 has a regression in which clicking on a ce=false table
-	// always selects the entire table, even if you click in a ce=true child.
-	// Making the table ce=true does allow the user to make selections across cells
-	// and corrupt the table in some circumstance, so restrict this hack as much
-	// as possible.
+	/*
+	 * Support: Firefox 39
+	 * HACK T103035: Firefox 39 has a regression in which clicking on a ce=false table
+	 * always selects the entire table, even if you click in a ce=true child.
+	 * Making the table ce=true does allow the user to make selections across cells
+	 * and corrupt the table in some circumstance, so restrict this hack as much
+	 * as possible.
+	 */
 	profile = $.client.profile();
 	if ( profile.layout === 'gecko' && profile.versionBase === '39' ) {
 		this.$element.prop( 'contentEditable', isEditing.toString() );
@@ -342,8 +350,10 @@ ve.ce.TableNode.prototype.setEditing = function ( isEditing, noSelect ) {
  * @param {ve.dm.Selection} selection Selection
  */
 ve.ce.TableNode.prototype.onSurfaceModelSelect = function ( selection ) {
-	// The table is active if there is a linear selection inside a cell being edited
-	// or a table selection matching this table.
+	/*
+	 * The table is active if there is a linear selection inside a cell being edited
+	 * or a table selection matching this table.
+	 */
 	var active =
 		(
 			this.editingFragment !== null &&
@@ -358,8 +368,10 @@ ve.ce.TableNode.prototype.onSurfaceModelSelect = function ( selection ) {
 	if ( active ) {
 		if ( !this.active ) {
 			this.$overlay.removeClass( 'oo-ui-element-hidden' );
-			// Only register touchstart event after table has become active to prevent
-			// accidental focusing of the table while scrolling
+			/*
+			 * Only register touchstart event after table has become active to prevent
+			 * accidental focusing of the table while scrolling
+			 */
 			this.$element.on( 'touchstart.ve-ce-tableNode', this.onTableMouseDown.bind( this ) );
 		}
 		// Ignore update the overlay if the table selection changed, i.e. not an in-cell selection change
@@ -412,8 +424,10 @@ ve.ce.TableNode.prototype.updateOverlay = function ( selectionChanged ) {
 	selection = this.editingFragment ?
 		this.editingFragment.getSelection() :
 		this.surface.getModel().getSelection();
-	// getBoundingClientRect is more accurate but must be used consistently
-	// due to the iOS7 bug where it is relative to the document.
+	/*
+	 * getBoundingClientRect is more accurate but must be used consistently
+	 * due to the iOS7 bug where it is relative to the document.
+	 */
 	tableOffset = this.getFirstSectionNode().$element[ 0 ].getBoundingClientRect();
 	surfaceOffset = this.surface.getSurface().$element[ 0 ].getBoundingClientRect();
 

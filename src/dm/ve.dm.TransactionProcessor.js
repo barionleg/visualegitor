@@ -27,16 +27,22 @@ ve.dm.TransactionProcessor = function VeDmTransactionProcessor( doc, transaction
 	this.modificationQueue = [];
 	this.rollbackQueue = [];
 	this.eventQueue = [];
-	// Linear model offset that we're currently at. Operations in the transaction are ordered, so
-	// the cursor only ever moves forward.
+	/*
+	 * Linear model offset that we're currently at. Operations in the transaction are ordered, so
+	 * the cursor only ever moves forward.
+	 */
 	this.cursor = 0;
-	// Adjustment that needs to be added to linear model offsets in the original linear model
-	// to get offsets in the half-updated linear model. Arguments to queued modifications all use
-	// unadjusted offsets; this is needed to adjust those offsets after other modifications have been
-	// made to the linear model that have caused offsets to shift.
+	/*
+	 * Adjustment that needs to be added to linear model offsets in the original linear model
+	 * to get offsets in the half-updated linear model. Arguments to queued modifications all use
+	 * unadjusted offsets; this is needed to adjust those offsets after other modifications have been
+	 * made to the linear model that have caused offsets to shift.
+	 */
 	this.adjustment = 0;
-	// Set and clear are sets of annotations which should be added or removed to content being
-	// inserted or retained.
+	/*
+	 * Set and clear are sets of annotations which should be added or removed to content being
+	 * inserted or retained.
+	 */
 	this.set = new ve.dm.AnnotationSet( this.document.getStore() );
 	this.clear = new ve.dm.AnnotationSet( this.document.getStore() );
 	this.annotatedRanges = [];
@@ -87,9 +93,11 @@ ve.dm.TransactionProcessor.prototype.process = function () {
 	// Ensure the pre-modification document tree has been generated
 	this.document.getDocumentNode();
 
-	// First process each operation to gather modifications in the modification queue.
-	// If an exception occurs during this stage, we don't need to do anything to recover,
-	// because no modifications were made yet.
+	/*
+	 * First process each operation to gather modifications in the modification queue.
+	 * If an exception occurs during this stage, we don't need to do anything to recover,
+	 * because no modifications were made yet.
+	 */
 	for ( i = 0; i < this.operations.length; i++ ) {
 		this.executeOperation( this.operations[ i ] );
 	}
@@ -114,8 +122,10 @@ ve.dm.TransactionProcessor.prototype.process = function () {
 				this.treeModifier.undoLinearSplices();
 			}
 			this.rollbackModifications();
-			// The tree may have been left in some sort of half-baked state, so rebuild it
-			// from scratch
+			/*
+			 * The tree may have been left in some sort of half-baked state, so rebuild it
+			 * from scratch
+			 */
 			this.document.rebuildTree();
 		}
 	}
@@ -348,8 +358,10 @@ ve.dm.TransactionProcessor.modifiers.splice = function ( splices ) {
 		lengthDiff = 0,
 		data = this.document.data;
 
-	// We're about to do lots of things that can go wrong, so queue an undo function now
-	// that undoes all splices that we got to
+	/*
+	 * We're about to do lots of things that can go wrong, so queue an undo function now
+	 * that undoes all splices that we got to
+	 */
 	this.queueUndoFunction( function () {
 		var i, s;
 		for ( i = splices.length - 1; i >= 0; i-- ) {
@@ -364,11 +376,15 @@ ve.dm.TransactionProcessor.modifiers.splice = function ( splices ) {
 	for ( i = 0; i < splices.length; i++ ) {
 		s = splices[ i ];
 
-		// Adjust s.offset for previous modifications that have already been synced to the tree;
-		// this value is used by the tree sync code later.
+		/*
+		 * Adjust s.offset for previous modifications that have already been synced to the tree;
+		 * this value is used by the tree sync code later.
+		 */
 		s.treeOffset = s.offset + this.adjustment;
-		// Also adjust s.offset for previous iterations of this loop (i.e. unsynced modifications);
-		// this is the value we need for the actual array splice.
+		/*
+		 * Also adjust s.offset for previous iterations of this loop (i.e. unsynced modifications);
+		 * this is the value we need for the actual array splice.
+		 */
 		s.offset = s.treeOffset + lengthDiff;
 
 		// Perform the splice and put the removed data in s, for the undo function
@@ -533,12 +549,13 @@ ve.dm.TransactionProcessor.processors.attribute = function ( op ) {
 ve.dm.TransactionProcessor.processors.replace = function ( op ) {
 	var i, type;
 
-	// Track balancedness for verification purposes only
-
-	// Walk through the remove and insert data
-	// and keep track of the element depth change (level)
-	// for each of these two separately. The model is
-	// only consistent if both levels are zero.
+	/*
+	 * Track balancedness for verification purposes only
+	 * Walk through the remove and insert data
+	 * and keep track of the element depth change (level)
+	 * for each of these two separately. The model is
+	 * only consistent if both levels are zero.
+	 */
 	for ( i = 0; i < op.remove.length; i++ ) {
 		type = op.remove[ i ].type;
 		if ( type !== undefined ) {

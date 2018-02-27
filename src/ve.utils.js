@@ -206,8 +206,10 @@ ve.supportsIntl = !!( window.Intl && typeof Intl.Collator === 'function' );
 ve.supportsSplice = ( function () {
 	var a, n;
 
-	// Support: Safari 8
-	// This returns false in Safari 8
+	/*
+	 * Support: Safari 8
+	 * This returns false in Safari 8
+	 */
 	a = new Array( 100000 );
 	a.splice( 30, 0, 'x' );
 	a.splice( 20, 1 );
@@ -215,8 +217,10 @@ ve.supportsSplice = ( function () {
 		return false;
 	}
 
-	// Support: Opera 12.15
-	// This returns false in Opera 12.15
+	/*
+	 * Support: Opera 12.15
+	 * This returns false in Opera 12.15
+	 */
 	a = [];
 	n = 256;
 	a[ n ] = 'a';
@@ -249,8 +253,10 @@ ve.supportsSplice = ( function () {
  * @return {Array} Array of items removed
  */
 ve.batchSplice = function ( arr, offset, remove, data ) {
-	// We need to splice insertion in in batches, because of parameter list length limits which vary
-	// cross-browser - 1024 seems to be a safe batch size on all browsers
+	/*
+	 * We need to splice insertion in in batches, because of parameter list length limits which vary
+	 * cross-browser - 1024 seems to be a safe batch size on all browsers
+	 */
 	var splice, spliced,
 		index = 0,
 		batchSize = 1024,
@@ -284,14 +290,18 @@ ve.batchSplice = function ( arr, offset, remove, data ) {
 	}
 
 	if ( data.length === 0 ) {
-		// Special case: data is empty, so we're just doing a removal
-		// The code below won't handle that properly, so we do it here
+		/*
+		 * Special case: data is empty, so we're just doing a removal
+		 * The code below won't handle that properly, so we do it here
+		 */
 		return splice.call( arr, offset, remove );
 	}
 
 	while ( index < data.length ) {
-		// Call arr.splice( offset, remove, i0, i1, i2, ..., i1023 );
-		// Only set remove on the first call, and set it to zero on subsequent calls
+		/*
+		 * Call arr.splice( offset, remove, i0, i1, i2, ..., i1023 );
+		 * Only set remove on the first call, and set it to zero on subsequent calls
+		 */
 		spliced = splice.apply(
 			arr, [ index + offset, toRemove ].concat( data.slice( index, index + batchSize ) )
 		);
@@ -334,9 +344,11 @@ ve.sparseSplice = function ( arr, offset, remove, data ) {
 	} );
 	// Adjust length
 	if ( diff > 0 ) {
-		// Grow with undefined values, then delete. (This is optimised for diff
-		// comparatively small: otherwise, it would sometimes be quicker to relocate
-		// each element of arr that lies above offset).
+		/*
+		 * Grow with undefined values, then delete. (This is optimised for diff
+		 * comparatively small: otherwise, it would sometimes be quicker to relocate
+		 * each element of arr that lies above offset).
+		 */
 		ve.batchSplice( arr, endOffset, 0, new Array( diff ) );
 		for ( i = endOffset + diff - 1; i >= endOffset; i-- ) {
 			delete arr[ i ];
@@ -379,8 +391,10 @@ ve.insertIntoArray = function ( arr, offset, src ) {
  * @return {number} length of the new array
  */
 ve.batchPush = function ( arr, data ) {
-	// We need to push insertion in batches, because of parameter list length limits which vary
-	// cross-browser - 1024 seems to be a safe batch size on all browsers
+	/*
+	 * We need to push insertion in batches, because of parameter list length limits which vary
+	 * cross-browser - 1024 seems to be a safe batch size on all browsers
+	 */
 	var length,
 		index = 0,
 		batchSize = 1024;
@@ -454,8 +468,10 @@ ve.selectElement = function ( element ) {
  * @return {string} Localized message
  */
 ve.msg = function () {
-	// Avoid using bind because ve.init.platform doesn't exist yet.
-	// TODO: Fix dependency issues between ve.js and ve.init.platform
+	/*
+	 * Avoid using bind because ve.init.platform doesn't exist yet.
+	 * TODO: Fix dependency issues between ve.js and ve.init.platform
+	 */
 	return ve.init.platform.getMessage.apply( ve.init.platform, arguments );
 };
 
@@ -479,12 +495,16 @@ ve.config = function () {
  */
 ve.userConfig = function ( key ) {
 	if ( arguments.length <= 1 && ( typeof key === 'string' || Array.isArray( key ) ) ) {
-		// get( string key )
-		// get( Array keys )
+		/*
+		 * get( string key )
+		 * get( Array keys )
+		 */
 		return ve.init.platform.getUserConfig.apply( ve.init.platform, arguments );
 	} else {
-		// set( Object values )
-		// set( key, value )
+		/*
+		 * set( Object values )
+		 * set( key, value )
+		 */
 		return ve.init.platform.setUserConfig.apply( ve.init.platform, arguments );
 	}
 };
@@ -538,14 +558,18 @@ ve.graphemeSafeSubstring = function ( text, start, end, outer ) {
 	var unicodeStart = ve.getByteOffset( text, ve.getClusterOffset( text, start ) ),
 		unicodeEnd = ve.getByteOffset( text, ve.getClusterOffset( text, end ) );
 
-	// If the selection collapses and we want an inner, then just return empty
-	// otherwise we'll end up crossing over start and end
+	/*
+	 * If the selection collapses and we want an inner, then just return empty
+	 * otherwise we'll end up crossing over start and end
+	 */
 	if ( unicodeStart === unicodeEnd && !outer ) {
 		return '';
 	}
 
-	// The above calculations always move to the right of a multibyte grapheme.
-	// Depending on the outer flag, we may want to move to the left:
+	/*
+	 * The above calculations always move to the right of a multibyte grapheme.
+	 * Depending on the outer flag, we may want to move to the left:
+	 */
 	if ( unicodeStart > start && outer ) {
 		unicodeStart = ve.getByteOffset( text, ve.getClusterOffset( text, start ) - 1 );
 	}
@@ -764,12 +788,14 @@ ve.isContentEditable = function ( node ) {
  * @return {Node[]} Filtered DOM nodes
  */
 ve.filterMetaElements = function ( contents ) {
-	// Filter out link and style tags for T52043
-	// Previously filtered out meta tags, but restore these as they
-	// can be made visible with CSS.
-	// As of jQuery 3 we can't use $.not( 'tagName' ) as that doesn't
-	// match text nodes. Also we can't $.remove these elements as they
-	// aren't attached to anything.
+	/*
+	 * Filter out link and style tags for T52043
+	 * Previously filtered out meta tags, but restore these as they
+	 * can be made visible with CSS.
+	 * As of jQuery 3 we can't use $.not( 'tagName' ) as that doesn't
+	 * match text nodes. Also we can't $.remove these elements as they
+	 * aren't attached to anything.
+	 */
 	contents = contents.filter( function ( node ) {
 		return node.tagName !== 'LINK' && node.tagName !== 'STYLE';
 	} );
@@ -818,8 +844,10 @@ ve.createDocumentFromHtml = function ( html ) {
 ve.createDocumentFromHtmlUsingDomParser = function ( html ) {
 	var newDocument;
 
-	// Support: IE
-	// IE doesn't like empty strings
+	/*
+	 * Support: IE
+	 * IE doesn't like empty strings
+	 */
 	html = html || '<body></body>';
 
 	try {
@@ -840,34 +868,35 @@ ve.createDocumentFromHtmlUsingDomParser = function ( html ) {
 ve.createDocumentFromHtmlUsingIframe = function ( html ) {
 	var newDocument, iframe;
 
-	// Here's what this fallback code should look like:
-	//
-	//     var newDocument = document.implementation.createHtmlDocument( '' );
-	//     newDocument.open();
-	//     newDocument.write( html );
-	//     newDocument.close();
-	//     return newDocument;
-	//
-	// Sadly, it's impossible:
-	// * On IE 9, calling open()/write() on such a document throws an "Unspecified error" (sic).
-	// * On Firefox 20, calling open()/write() doesn't actually do anything, including writing.
-	//   This is reported as Firefox bug 867102.
-	// * On Opera 12, calling open()/write() behaves as if called on window.document, replacing the
-	//   entire contents of the page with new HTML. This is reported as Opera bug DSK-384486.
-	//
-	// Funnily, in all of those browsers it's apparently perfectly legal and possible to access the
-	// newly created document's DOM itself, including modifying documentElement's innerHTML, which
-	// would achieve our goal. But that requires some nasty magic to strip off the <html></html> tag
-	// itself, so we're not doing that. (We can't use .outerHTML, either, as the spec disallows
-	// assigning to it for the root element.)
-	//
-	// There is one more way - create an <iframe>, append it to current document, and access its
-	// contentDocument. The only browser having issues with that is Opera (sometimes the accessible
-	// value is not actually a Document, but something which behaves just like an empty regular
-	// object...), so we're detecting that and using the innerHTML hack described above.
-
-	// Support: Firefox 20
-	// Support: Opera 12
+	/*
+	 * Here's what this fallback code should look like:
+	 *
+	 *     var newDocument = document.implementation.createHtmlDocument( '' );
+	 *     newDocument.open();
+	 *     newDocument.write( html );
+	 *     newDocument.close();
+	 *     return newDocument;
+	 *
+	 * Sadly, it's impossible:
+	 * * On IE 9, calling open()/write() on such a document throws an "Unspecified error" (sic).
+	 * * On Firefox 20, calling open()/write() doesn't actually do anything, including writing.
+	 *   This is reported as Firefox bug 867102.
+	 * * On Opera 12, calling open()/write() behaves as if called on window.document, replacing the
+	 *   entire contents of the page with new HTML. This is reported as Opera bug DSK-384486.
+	 *
+	 * Funnily, in all of those browsers it's apparently perfectly legal and possible to access the
+	 * newly created document's DOM itself, including modifying documentElement's innerHTML, which
+	 * would achieve our goal. But that requires some nasty magic to strip off the <html></html> tag
+	 * itself, so we're not doing that. (We can't use .outerHTML, either, as the spec disallows
+	 * assigning to it for the root element.)
+	 *
+	 * There is one more way - create an <iframe>, append it to current document, and access its
+	 * contentDocument. The only browser having issues with that is Opera (sometimes the accessible
+	 * value is not actually a Document, but something which behaves just like an empty regular
+	 * object...), so we're detecting that and using the innerHTML hack described above.
+	 * Support: Firefox 20
+	 * Support: Opera 12
+	 */
 
 	html = html || '<body></body>';
 
@@ -887,9 +916,11 @@ ve.createDocumentFromHtmlUsingIframe = function ( html ) {
 	iframe.parentNode.removeChild( iframe );
 
 	if ( !newDocument.documentElement || newDocument.documentElement.cloneNode( false ) === undefined ) {
-		// Surprise! The document is not a document! Only happens on Opera.
-		// (Or its nodes are not actually nodes, while the document
-		// *is* a document. This only happens when debugging with Dragonfly.)
+		/*
+		 * Surprise! The document is not a document! Only happens on Opera.
+		 * (Or its nodes are not actually nodes, while the document
+		 * *is* a document. This only happens when debugging with Dragonfly.)
+		 */
 		return;
 	}
 
@@ -941,8 +972,10 @@ ve.createDocumentFromHtmlUsingInnerHtml = function ( html ) {
 ve.resolveUrl = function ( url, base ) {
 	var node = base.createElement( 'a' );
 	node.setAttribute( 'href', url );
-	// If doc.baseURI isn't set, node.href will be an empty string
-	// This is crazy, returning the original URL is better
+	/*
+	 * If doc.baseURI isn't set, node.href will be an empty string
+	 * This is crazy, returning the original URL is better
+	 */
 	return node.href || url;
 };
 
@@ -981,11 +1014,13 @@ ve.resolveAttributes = function ( elementsOrJQuery, doc, attrs ) {
 				el.setAttribute( attr, nodeInDoc[ attr ] );
 			}
 		} catch ( e ) {
-			// Support: IE
-			// IE can throw exceptions if the URL is malformed,
-			// so just leave them as is, as there's no way to
-			// resolve them and hopefully they are absolute
-			// URLs. T148858.
+			/*
+			 * Support: IE
+			 * IE can throw exceptions if the URL is malformed,
+			 * so just leave them as is, as there's no way to
+			 * resolve them and hopefully they are absolute
+			 * URLs. T148858.
+			 */
 		}
 	}
 
@@ -1016,11 +1051,13 @@ ve.resolveAttributes = function ( elementsOrJQuery, doc, attrs ) {
 ve.fixBase = function ( targetDoc, sourceDoc, fallbackBase ) {
 	var baseNode = targetDoc.getElementsByTagName( 'base' )[ 0 ];
 	if ( baseNode ) {
-		// Support: Safari
-		// In Safari a base node with an invalid href (e.g. protocol-relative)
-		// in a document which has been dynamically created results in
-		// 'about:blank' rather than '' or null. The base's href will also be '',
-		// but that works out just setting the base to fallbackBase, so it's okay.
+		/*
+		 * Support: Safari
+		 * In Safari a base node with an invalid href (e.g. protocol-relative)
+		 * in a document which has been dynamically created results in
+		 * 'about:blank' rather than '' or null. The base's href will also be '',
+		 * but that works out just setting the base to fallbackBase, so it's okay.
+		 */
 		if ( !targetDoc.baseURI || targetDoc.baseURI === 'about:blank' ) {
 			// <base> tag present but not valid, try resolving its URL
 			baseNode.setAttribute( 'href', ve.resolveUrl( baseNode.getAttribute( 'href' ), sourceDoc ) );
@@ -1029,14 +1066,18 @@ ve.fixBase = function ( targetDoc, sourceDoc, fallbackBase ) {
 				baseNode.setAttribute( 'href', fallbackBase );
 			}
 		}
-		// Support: Chrome
-		// Chrome just entirely ignores <base> tags with a protocol-relative href attribute.
-		// Code below is *not a no-op*; reading the href property and setting it back
-		// will expand the href *attribute* to use an absolute URL if it was relative.
+		/*
+		 * Support: Chrome
+		 * Chrome just entirely ignores <base> tags with a protocol-relative href attribute.
+		 * Code below is *not a no-op*; reading the href property and setting it back
+		 * will expand the href *attribute* to use an absolute URL if it was relative.
+		 */
 		baseNode.href = baseNode.href;
 	} else if ( fallbackBase ) {
-		// Support: Firefox
-		// No <base> tag, add one
+		/*
+		 * Support: Firefox
+		 * No <base> tag, add one
+		 */
 		baseNode = targetDoc.createElement( 'base' );
 		baseNode.setAttribute( 'href', fallbackBase );
 		targetDoc.head.appendChild( baseNode );
@@ -1161,11 +1202,13 @@ ve.fixupPreBug = function ( element ) {
 		return element;
 	}
 
-	// Workaround for bug 42469: if a `<pre>` starts with a newline, that means .innerHTML will
-	// screw up and stringify it with one fewer newline. Work around this by adding a newline.
-	// If we don't see a leading newline, we still don't know if the original HTML was
-	// `<pre>Foo</pre>` or `<pre>\nFoo</pre>`, but that's a syntactic difference, not a
-	// semantic one, and handling that is the integration target's job.
+	/*
+	 * Workaround for bug 42469: if a `<pre>` starts with a newline, that means .innerHTML will
+	 * screw up and stringify it with one fewer newline. Work around this by adding a newline.
+	 * If we don't see a leading newline, we still don't know if the original HTML was
+	 * `<pre>Foo</pre>` or `<pre>\nFoo</pre>`, but that's a syntactic difference, not a
+	 * semantic one, and handling that is the integration target's job.
+	 */
 	$element = $( element ).clone();
 	$element.find( 'pre, textarea, listing' ).each( function () {
 		var matches;
@@ -1196,10 +1239,12 @@ ve.fixupPreBug = function ( element ) {
 ve.normalizeAttributeValue = function ( name, value, nodeName ) {
 	var node = document.createElement( nodeName || 'div' );
 	node.setAttribute( name, value );
-	// Support: IE
-	// IE normalizes invalid CSS to empty string, then if you normalize
-	// an empty string again it becomes null. Return an empty string
-	// instead of null to make this function idempotent.
+	/*
+	 * Support: IE
+	 * IE normalizes invalid CSS to empty string, then if you normalize
+	 * an empty string again it becomes null. Return an empty string
+	 * instead of null to make this function idempotent.
+	 */
 	return node.getAttribute( name ) || '';
 };
 
@@ -1243,8 +1288,10 @@ ve.transformStyleAttributes = function ( html, unmask ) {
 			if ( unmask ) {
 				this.removeAttribute( fromAttr );
 
-				// If the data-ve- version doesn't normalize to the same value,
-				// the attribute must have changed, so don't overwrite it
+				/*
+				 * If the data-ve- version doesn't normalize to the same value,
+				 * the attribute must have changed, so don't overwrite it
+				 */
 				fromAttrNormalized = ve.normalizeAttributeValue( toAttr, fromAttrValue, this.nodeName );
 				// toAttr can't not be set, but IE returns null if the value was ''
 				toAttrValue = this.getAttribute( toAttr ) || '';
@@ -1257,8 +1304,10 @@ ve.transformStyleAttributes = function ( html, unmask ) {
 		} );
 	}
 
-	// FIXME T126032: Inject empty text nodes into empty non-void tags to prevent
-	// things like <a></a> from being serialized as <a /> and wreaking havoc
+	/*
+	 * FIXME T126032: Inject empty text nodes into empty non-void tags to prevent
+	 * things like <a></a> from being serialized as <a /> and wreaking havoc
+	 */
 	$( xmlDoc ).find( ':empty:not(' + ve.elementTypes.void.join( ',' ) + ')' ).each( function () {
 		this.appendChild( xmlDoc.createTextNode( '' ) );
 	} );
@@ -1277,8 +1326,10 @@ ve.transformStyleAttributes = function ( html, unmask ) {
  * @return {HTMLDocument} HTML DOM
  */
 ve.parseXhtml = function ( html ) {
-	// Support: IE
-	// Feature-detect style attribute breakage in IE
+	/*
+	 * Support: IE
+	 * Feature-detect style attribute breakage in IE
+	 */
 	if ( ve.isStyleAttributeBroken === undefined ) {
 		ve.isStyleAttributeBroken = ve.normalizeAttributeValue( 'style', 'color:#ffd' ) !== 'color:#ffd';
 	}
@@ -1308,15 +1359,19 @@ ve.serializeXhtml = function ( doc ) {
  */
 ve.serializeXhtmlElement = function ( element ) {
 	var xml;
-	// Support: IE
-	// Feature-detect style attribute breakage in IE
+	/*
+	 * Support: IE
+	 * Feature-detect style attribute breakage in IE
+	 */
 	if ( ve.isStyleAttributeBroken === undefined ) {
 		ve.isStyleAttributeBroken = ve.normalizeAttributeValue( 'style', 'color:#ffd' ) !== 'color:#ffd';
 	}
 	if ( !ve.isStyleAttributeBroken ) {
-		// Support: Firefox
-		// Use outerHTML if possible because in Firefox, XMLSerializer URL-encodes
-		// hrefs but outerHTML doesn't
+		/*
+		 * Support: Firefox
+		 * Use outerHTML if possible because in Firefox, XMLSerializer URL-encodes
+		 * hrefs but outerHTML doesn't
+		 */
 		return ve.properOuterHtml( element );
 	}
 
@@ -1335,12 +1390,14 @@ ve.serializeXhtmlElement = function ( element ) {
 ve.normalizeNode = function ( node ) {
 	var p, nodeIterator, textNode;
 	if ( ve.isNormalizeBroken === undefined ) {
-		// Support: IE11
-		// Feature-detect IE11's broken .normalize() implementation.
-		// We know that it fails to remove the empty text node at the end
-		// in this example, but for mysterious reasons it also fails to merge
-		// text nodes in other cases and we don't quite know why. So if we detect
-		// that .normalize() is broken, fall back to a completely manual version.
+		/*
+		 * Support: IE11
+		 * Feature-detect IE11's broken .normalize() implementation.
+		 * We know that it fails to remove the empty text node at the end
+		 * in this example, but for mysterious reasons it also fails to merge
+		 * text nodes in other cases and we don't quite know why. So if we detect
+		 * that .normalize() is broken, fall back to a completely manual version.
+		 */
 		p = document.createElement( 'p' );
 		p.appendChild( document.createTextNode( 'Foo' ) );
 		p.appendChild( document.createTextNode( 'Bar' ) );
@@ -1515,9 +1572,11 @@ ve.getCommonAncestor = function () {
 		chains.push( chain );
 	}
 
-	// Step through chains in parallel, until they differ.
-	// All chains are guaranteed to start with the common document element (or the common root
-	// of an unattached branch)
+	/*
+	 * Step through chains in parallel, until they differ.
+	 * All chains are guaranteed to start with the common document element (or the common root
+	 * of an unattached branch)
+	 */
 	for ( i = 1; i < minHeight; i++ ) {
 		node = chains[ 0 ][ i ];
 		for ( j = 1; j < nodeCount; j++ ) {
@@ -1607,10 +1666,12 @@ ve.compareTuples = function ( a, b ) {
 ve.compareDocumentOrder = function ( node1, offset1, node2, offset2 ) {
 	var commonAncestor = ve.getCommonAncestor( node1, node2 );
 	if ( commonAncestor === null ) {
-		// Signal no common ancestor. In theory we could disallow this case, and check
-		// the nodes for detachedness and same-documentness before each call, but such
-		// guard checks would duplicate (either explicitly or implicitly) much of the
-		// branch traversal performed in this method.
+		/*
+		 * Signal no common ancestor. In theory we could disallow this case, and check
+		 * the nodes for detachedness and same-documentness before each call, but such
+		 * guard checks would duplicate (either explicitly or implicitly) much of the
+		 * branch traversal performed in this method.
+		 */
 		return null;
 	}
 	return ve.compareTuples(
@@ -1704,9 +1765,10 @@ ve.adjacentDomPosition = function ( position, direction, options ) {
 			// Else take another step
 			continue;
 		}
-		// Else we're in the interior of a node
-
-		// If we're in a text node, move to the position in this node at the next offset
+		/*
+		 * Else we're in the interior of a node
+		 * If we're in a text node, move to the position in this node at the next offset
+		 */
 		if ( node.nodeType === Node.TEXT_NODE ) {
 			step = new ve.PositionStep(
 				node,
@@ -1728,9 +1790,11 @@ ve.adjacentDomPosition = function ( position, direction, options ) {
 
 		childNode = node.childNodes[ forward ? offset : offset - 1 ];
 
-		// Support: Firefox
-		// If the child is uncursorable, or is an element matching noDescend, do not
-		// descend into it: instead, return the position just beyond it in the current node
+		/*
+		 * Support: Firefox
+		 * If the child is uncursorable, or is an element matching noDescend, do not
+		 * descend into it: instead, return the position just beyond it in the current node
+		 */
 		if (
 			childNode.nodeType === Node.ELEMENT_NODE &&
 			( ve.isVoidElement( childNode ) || $( childNode ).is( noDescend ) )
@@ -1798,8 +1862,10 @@ ve.rejectsCursor = function ( node ) {
 	if ( ve.isVoidElement( node ) ) {
 		return true;
 	}
-	// We don't need to check whether the ancestor-nearest contenteditable tag is
-	// false, because if so then there can be no adjacent cursor.
+	/*
+	 * We don't need to check whether the ancestor-nearest contenteditable tag is
+	 * false, because if so then there can be no adjacent cursor.
+	 */
 	return node.contentEditable === 'false';
 };
 
@@ -1886,8 +1952,10 @@ ve.isClipboardDataFormatsSupported = function ( e, customTypes ) {
 			( !customTypes || profile.name !== 'edge' ) && (
 				// Support: Chrome
 				clipboardData.items ||
-				// Support: Firefox >= 48
-				// (but not Firefox Android, which has name='android' and doesn't support this feature)
+				/*
+				 * Support: Firefox >= 48
+				 * (but not Firefox Android, which has name='android' and doesn't support this feature)
+				 */
 				( profile.name === 'firefox' && profile.versionNumber >= 48 )
 			)
 		);

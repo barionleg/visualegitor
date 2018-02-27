@@ -526,11 +526,11 @@ ve.dm.Surface.prototype.truncateUndoStack = function () {
  * While queueing is active, contextChanges are also collapsed, so if #emitContextChange is called
  * multiple times, only one contextChange event will be emitted by #stopQueueingContextChanges.
  *
- *     this.emitContextChange(); // emits immediately
+ *     this.emitContextChange(); // Emits immediately
  *     this.startQueueingContextChanges();
- *     this.emitContextChange(); // doesn't emit
- *     this.emitContextChange(); // doesn't emit
- *     this.stopQueueingContextChanges(); // emits one contextChange event
+ *     this.emitContextChange(); // Doesn't emit
+ *     this.emitContextChange(); // Doesn't emit
+ *     this.stopQueueingContextChanges(); // Emits one contextChange event
  *
  * @private
  */
@@ -612,8 +612,10 @@ ve.dm.Surface.prototype.fixupRangeForLinks = function ( range ) {
 		return range;
 	}
 
-	// Search for links at start/end that don't cover the whole range.
-	// Assume at most one such link at each end.
+	/*
+	 * Search for links at start/end that don't cover the whole range.
+	 * Assume at most one such link at each end.
+	 */
 	rangeAnnotations = linearData.getAnnotationsFromRange( range );
 	startLink = getLinks( start ).diffWith( rangeAnnotations ).getIndex( 0 );
 	endLink = getLinks( end ).diffWith( rangeAnnotations ).getIndex( 0 );
@@ -688,9 +690,11 @@ ve.dm.Surface.prototype.setSelection = function ( selection ) {
 
 		// Reset insertionAnnotations based on the neighbouring document data
 		insertionAnnotations = linearData.getInsertionAnnotationsFromRange( range );
-		// If there's *any* difference in insertion annotations (even order), then:
-		// * emit insertionAnnotationsChange
-		// * emit contextChange (TODO: is this desirable?)
+		/*
+		 * If there's *any* difference in insertion annotations (even order), then:
+		 * * emit insertionAnnotationsChange
+		 * * emit contextChange (TODO: is this desirable?)
+		 */
 		if ( !insertionAnnotations.equalsInOrder( this.insertionAnnotations ) ) {
 			this.setInsertionAnnotations( insertionAnnotations );
 		}
@@ -706,16 +710,20 @@ ve.dm.Surface.prototype.setSelection = function ( selection ) {
 			contextChange = true;
 		}
 
-		// Did the annotations at the focus point of a non-collapsed selection
-		// change? (i.e. did the selection move in/out of an annotation as it
-		// expanded?)
+		/*
+		 * Did the annotations at the focus point of a non-collapsed selection
+		 * change? (i.e. did the selection move in/out of an annotation as it
+		 * expanded?)
+		 */
 		if ( selectionChange && !range.isCollapsed() && oldSelection instanceof ve.dm.LinearSelection ) {
 			rangeFocus = new ve.Range( range.to );
 			oldRangeFocus = new ve.Range( oldSelection.getRange().to );
 			focusRangeMovingBack = rangeFocus.to < oldRangeFocus.to;
-			// If we're moving back in the document, getInsertionAnnotationsFromRange
-			// needs to be told to fetch the annotations after the cursor, otherwise
-			// it'll trigger one position too soon.
+			/*
+			 * If we're moving back in the document, getInsertionAnnotationsFromRange
+			 * needs to be told to fetch the annotations after the cursor, otherwise
+			 * it'll trigger one position too soon.
+			 */
 			if (
 				!linearData.getInsertionAnnotationsFromRange( rangeFocus, focusRangeMovingBack ).compareTo( linearData.getInsertionAnnotationsFromRange( oldRangeFocus, focusRangeMovingBack ) )
 			) {
@@ -730,9 +738,11 @@ ve.dm.Surface.prototype.setSelection = function ( selection ) {
 	}
 
 	if ( range && range.isCollapsed() !== this.isCollapsed ) {
-		// selectedAnnotations won't have changed if going from insertion annotations to
-		// selection of the same annotations, but some tools will consider that a context change
-		// (e.g. ClearAnnotationTool).
+		/*
+		 * selectedAnnotations won't have changed if going from insertion annotations to
+		 * selection of the same annotations, but some tools will consider that a context change
+		 * (e.g. ClearAnnotationTool).
+		 */
 		this.isCollapsed = range.isCollapsed();
 		contextChange = true;
 	}
@@ -880,9 +890,11 @@ ve.dm.Surface.prototype.changeInternal = function ( transactions, selection, ski
 		this.setSelection( this.selection );
 	}
 
-	// If the selection changed while applying the transactions but not while applying the
-	// selection change, setSelection() won't have emitted a 'select' event. We don't want that
-	// to happen, so emit one anyway.
+	/*
+	 * If the selection changed while applying the transactions but not while applying the
+	 * selection change, setSelection() won't have emitted a 'select' event. We don't want that
+	 * to happen, so emit one anyway.
+	 */
 	if (
 		!selectionBefore.equals( selectionAfter ) &&
 		selectionAfter.equals( this.selection )

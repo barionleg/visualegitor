@@ -42,8 +42,10 @@ ve.ce.LinearEscapeKeyDownHandler.static.execute = function ( surface, e ) {
 		e.preventDefault();
 		e.stopPropagation();
 		activeTableNode.setEditing( false );
-		// If this was a merged cell, we're going to have unexpected behavior when the selection moves,
-		// so preemptively collapse to the top-left point of the merged cell.
+		/*
+		 * If this was a merged cell, we're going to have unexpected behavior when the selection moves,
+		 * so preemptively collapse to the top-left point of the merged cell.
+		 */
 		surface.getModel().setSelection( surface.getModel().getSelection().collapseToStart() );
 		return true;
 	}

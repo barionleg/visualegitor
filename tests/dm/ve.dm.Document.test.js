@@ -1268,11 +1268,12 @@ QUnit.test( 'fixupInsertion', function ( assert ) {
 		fragment = surface.getLinearFragment( new ve.Range( 4, 4 ) ),
 		nodeData = [ { type: 'listlessNode' }, 'x', { type: '/listlessNode' } ];
 
-	// TODO: test other parts of fixupInsertion; childNodes and parentNodes.
-	// Currently they're mostly tested implicitly in the paste tests
-	// elsewhere.
-
-	// We need a node with suggestedParentNodeTypes, and nothing in core actually uses this. So stub one out:
+	/*
+	 * TODO: test other parts of fixupInsertion; childNodes and parentNodes.
+	 * Currently they're mostly tested implicitly in the paste tests
+	 * elsewhere.
+	 * We need a node with suggestedParentNodeTypes, and nothing in core actually uses this. So stub one out:
+	 */
 	function ListlessNode() {
 		ListlessNode.super.apply( this, arguments );
 	}

@@ -132,8 +132,10 @@ ve.ui.AnnotationAction.prototype.clearAll = function () {
 		annotations = fragment.getAnnotations( true );
 
 	arr = annotations.get();
-	// TODO: Allow multiple annotations to be set or cleared by ve.dm.SurfaceFragment, probably
-	// using an annotation set and ideally building a single transaction
+	/*
+	 * TODO: Allow multiple annotations to be set or cleared by ve.dm.SurfaceFragment, probably
+	 * using an annotation set and ideally building a single transaction
+	 */
 	for ( i = 0, len = arr.length; i < len; i++ ) {
 		fragment.annotateContent( 'clear', arr[ i ].name, arr[ i ].data );
 	}

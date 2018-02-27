@@ -361,9 +361,11 @@ QUnit.test( 'newFromInsertion', function ( assert ) {
 				],
 				range: new ve.Range( 43, 48 )
 			}
-			// TODO test cases for unclosed openings
-			// TODO test cases for (currently failing) unopened closings use case
-			// TODO analyze other possible cases (substrings of linmod data)
+			/*
+			 * TODO test cases for unclosed openings
+			 * TODO test cases for (currently failing) unopened closings use case
+			 * TODO analyze other possible cases (substrings of linmod data)
+			 */
 		};
 
 	for ( key in cases ) {

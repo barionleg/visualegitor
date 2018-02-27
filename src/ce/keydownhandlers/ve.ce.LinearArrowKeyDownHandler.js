@@ -109,11 +109,13 @@ ve.ce.LinearArrowKeyDownHandler.static.execute = function ( surface, e ) {
 		// Else inline focusable node
 
 		if ( e.shiftKey ) {
-			// There is no DOM range to expand (because the selection is faked), so
-			// use "collapse to focus - observe - expand". Define "focus" to be the
-			// edge of the focusedNode in the direction of motion (so the selection
-			// always grows). This means that clicking on the focusableNode then
-			// modifying the selection will always include the node.
+			/*
+			 * There is no DOM range to expand (because the selection is faked), so
+			 * use "collapse to focus - observe - expand". Define "focus" to be the
+			 * edge of the focusedNode in the direction of motion (so the selection
+			 * always grows). This means that clicking on the focusableNode then
+			 *modifying the selection will always include the node.
+			 */
 			// eslint-disable-next-line no-bitwise
 			if ( direction === -1 ^ range.isBackwards() ) {
 				range = range.flip();
@@ -134,13 +136,17 @@ ve.ce.LinearArrowKeyDownHandler.static.execute = function ( surface, e ) {
 	// Else keep DM range and DOM selection as-is
 
 	if ( e.shiftKey && !surface.nativeSelection.extend && range.isBackwards() ) {
-		// If the browser doesn't support backwards selections, but the dm range
-		// is backwards, then use "collapse to anchor - observe - expand".
+		/*
+		 * If the browser doesn't support backwards selections, but the dm range
+		 * is backwards, then use "collapse to anchor - observe - expand".
+		 */
 		collapseNode = surface.nativeSelection.anchorNode;
 		collapseOffset = surface.nativeSelection.anchorOffset;
 	} else if ( e.shiftKey && !range.isCollapsed() && isBlockMove ) {
-		// If selection is expanded and cursoring is up/down, use
-		// "collapse to focus - observe - expand" to work round quirks.
+		/*
+		 * If selection is expanded and cursoring is up/down, use
+		 * "collapse to focus - observe - expand" to work round quirks.
+		 */
 		collapseNode = surface.nativeSelection.focusNode;
 		collapseOffset = surface.nativeSelection.focusOffset;
 	}
@@ -161,8 +167,10 @@ ve.ce.LinearArrowKeyDownHandler.static.execute = function ( surface, e ) {
 	surface.eventSequencer.afterOne( { keydown: function () {
 		var viewNode, newRange, afterDirection;
 
-		// Support: Chrome
-		// Chrome bug lets you cursor into a multi-line contentEditable=false with up/down...
+		/*
+		 * Support: Chrome
+		 * Chrome bug lets you cursor into a multi-line contentEditable=false with up/down...
+		 */
 		viewNode = $( surface.nativeSelection.focusNode ).closest( '.ve-ce-leafNode,.ve-ce-branchNode' ).data( 'view' );
 		if ( !viewNode ) {
 			// Irrelevant selection (or none)
@@ -172,8 +180,10 @@ ve.ce.LinearArrowKeyDownHandler.static.execute = function ( surface, e ) {
 		if ( viewNode.isFocusable() ) {
 			// We've landed in a focusable node; fixup the range
 			if ( isBlockMove ) {
-				// The intended direction is clear, even if the cursor did not move
-				// or did something completely preposterous
+				/*
+				 * The intended direction is clear, even if the cursor did not move
+				 *or did something completely preposterous
+				 */
 				afterDirection = keyBlockDirection;
 			} else {
 				// Observe which way the cursor moved

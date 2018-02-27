@@ -216,8 +216,10 @@ ve.dm.Change.static.deserializeValue = function ( serialized, unsafe ) {
 					RETURN_DOM_FRAGMENT: true
 				} ).childNodes[ 0 ];
 			} ).filter( function ( node ) {
-				// Nodes can be sanitized to nothing (empty string or undefined)
-				// so check it is truthy
+				/*
+				 * Nodes can be sanitized to nothing (empty string or undefined)
+				 * so check it is truthy
+				 */
 				return node;
 			} );
 		}
@@ -359,13 +361,17 @@ ve.dm.Change.static.rebaseTransactions = function ( transactionA, transactionB )
 	infoB = getActiveRangeAndLengthDiff( transactionB );
 
 	if ( infoA.start === undefined || infoB.start === undefined ) {
-		// One of the transactions is a no-op: only need to adjust its retain length.
-		// We can safely adjust both, because the no-op must have diff 0
+		/*
+		 * One of the transactions is a no-op: only need to adjust its retain length.
+		 * We can safely adjust both, because the no-op must have diff 0
+		 */
 		adjustRetain( transactionA.operations, 'start', infoB.diff );
 		adjustRetain( transactionB.operations, 'start', infoA.diff );
 	} else if ( infoA.end <= infoB.start ) {
-		// This includes the case where both transactions are insertions at the same
-		// point
+		/*
+		 * This includes the case where both transactions are insertions at the same
+		 * point
+		 */
 		adjustRetain( transactionB.operations, 'start', infoA.diff );
 		adjustRetain( transactionA.operations, 'end', infoB.diff );
 	} else if ( infoB.end <= infoA.start ) {
@@ -461,25 +467,27 @@ ve.dm.Change.static.rebaseUncommittedChange = function ( history, uncommitted ) 
 		throw new Error( 'Different starts: ' + history.start + ' and ' + uncommitted.start );
 	}
 
-	// For each element b_i of transactionsB, rebase the whole list transactionsA over b_i.
-	// To rebase a1, a2, a3, ..., aN over b_i, first we rebase a1 onto b_i. Then we rebase
-	// a2 onto some b', defined as
-	//
-	// b_i' := b_i|a1 , that is b_i.rebasedOnto(a1)
-	//
-	// (which as proven above is equivalent to inv(a1) * b_i * a1)
-	//
-	// Similarly we rebase a3 onto b_i'' := b_i'|a2, and so on.
-	//
-	// The rebased a_j are used for the transposed history: they will all get rebased over the
-	// rest of transactionsB in the same way.
-	// The fully rebased b_i forms the i'th element of the rebased transactionsB.
-	//
-	// If any rebase b_i|a_j fails, we stop rebasing at b_i (i.e. finishing with b_{i-1}).
-	// We return
-	// - rebased: (uncommitted sliced up to i) rebased onto history
-	// - transposedHistory: history rebased onto (uncommitted sliced up to i)
-	// - rejected: uncommitted sliced from i onwards
+	/*
+	 * For each element b_i of transactionsB, rebase the whole list transactionsA over b_i.
+	 * To rebase a1, a2, a3, ..., aN over b_i, first we rebase a1 onto b_i. Then we rebase
+	 * a2 onto some b', defined as
+	 *
+	 * b_i' := b_i|a1 , that is b_i.rebasedOnto(a1)
+	 *
+	 * (which as proven above is equivalent to inv(a1) * b_i * a1)
+	 *
+	 * Similarly we rebase a3 onto b_i'' := b_i'|a2, and so on.
+	 *
+	 * The rebased a_j are used for the transposed history: they will all get rebased over the
+	 * rest of transactionsB in the same way.
+	 * The fully rebased b_i forms the i'th element of the rebased transactionsB.
+	 *
+	 * If any rebase b_i|a_j fails, we stop rebasing at b_i (i.e. finishing with b_{i-1}).
+	 * We return
+	 * - rebased: (uncommitted sliced up to i) rebased onto history
+	 * - transposedHistory: history rebased onto (uncommitted sliced up to i)
+	 * - rejected: uncommitted sliced from i onwards
+	 */
 	bLoop:
 	for ( i = 0, iLen = transactionsB.length; i < iLen; i++ ) {
 		b = transactionsB[ i ];
@@ -558,8 +566,10 @@ ve.dm.Change.static.rebaseUncommittedChange = function ( history, uncommitted ) 
 ve.dm.Change.static.getTransactionInfo = function ( tx ) {
 	var op0, op1, op2, replaceOp, start, end, docLength;
 
-	// Copy of ve.dm.ElementLinearData.static.getAnnotationIndexesFromItem, but we
-	// don't want to load all of ElementLinearData and its dependencies on the server-side.
+	/*
+	 * Copy of ve.dm.ElementLinearData.static.getAnnotationIndexesFromItem, but we
+	 * don't want to load all of ElementLinearData and its dependencies on the server-side.
+	 */
 	function getAnnotations( item ) {
 		if ( typeof item === 'string' ) {
 			return [];

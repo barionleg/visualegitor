@@ -105,11 +105,13 @@ ve.ui.TableLineContextItem.prototype.setup = function () {
 		sides.forEach( function ( side ) {
 			var sideName = sideNames[ side ];
 
-			// Classes created here:
-			// * ve.ui.InsertColumnBeforeContextItem
-			// * ve.ui.InsertColumnAfterContextItem
-			// * ve.ui.InsertRowBeforeContextItem
-			// * ve.ui.InsertRowAfterContextItem
+			/*
+			 * Classes created here:
+			 * * ve.ui.InsertColumnBeforeContextItem
+			 * * ve.ui.InsertColumnAfterContextItem
+			 * * ve.ui.InsertRowBeforeContextItem
+			 * * ve.ui.InsertRowAfterContextItem
+			 */
 			className = 'Insert' + modeName + sideName + 'ContextItem';
 			ve.ui[ className ] = function VeUiInsertRowOrColumnContextItem() {
 				ve.ui.TableLineContextItem.apply( this, arguments );
@@ -118,21 +120,25 @@ ve.ui.TableLineContextItem.prototype.setup = function () {
 			ve.ui[ className ].static.name = 'insert' + modeName + sideName;
 			ve.ui[ className ].static.group = 'table-' + mode;
 			ve.ui[ className ].static.icon = 'tableAdd' + modeName + sideName;
-			// Messages used here:
-			// * visualeditor-table-insert-col-before
-			// * visualeditor-table-insert-col-after
-			// * visualeditor-table-insert-row-before
-			// * visualeditor-table-insert-row-after
+			/*
+			 * Messages used here:
+			 * * visualeditor-table-insert-col-before
+			 * * visualeditor-table-insert-col-after
+			 * * visualeditor-table-insert-row-before
+			 * * visualeditor-table-insert-row-after
+			 */
 			ve.ui[ className ].static.title =
 				OO.ui.deferMsg( 'visualeditor-table-insert-' + mode + '-' + side );
 			ve.ui[ className ].static.commandName = 'insert' + modeName + sideName;
 			ve.ui.contextItemFactory.register( ve.ui[ className ] );
 
-			// Classes created here:
-			// * ve.ui.MoveColumnBeforeContextItem
-			// * ve.ui.MoveColumnAfterContextItem
-			// * ve.ui.MoveRowBeforeContextItem
-			// * ve.ui.MoveRowAfterContextItem
+			/*
+			 * Classes created here:
+			 * * ve.ui.MoveColumnBeforeContextItem
+			 * * ve.ui.MoveColumnAfterContextItem
+			 * * ve.ui.MoveRowBeforeContextItem
+			 * * ve.ui.MoveRowAfterContextItem
+			 */
 			className = 'Move' + modeName + sideName + 'ContextItem';
 			ve.ui[ className ] = function VeUiMoveRowOrColumnContextItem() {
 				ve.ui.TableLineContextItem.apply( this, arguments );
@@ -141,11 +147,13 @@ ve.ui.TableLineContextItem.prototype.setup = function () {
 			ve.ui[ className ].static.name = 'move' + modeName + sideName;
 			ve.ui[ className ].static.group = 'table-' + mode;
 			ve.ui[ className ].static.icon = 'tableMove' + modeName + sideName;
-			// Messages used here:
-			// * visualeditor-table-move-col-before
-			// * visualeditor-table-move-col-after
-			// * visualeditor-table-move-row-before
-			// * visualeditor-table-move-row-after
+			/*
+			 * Messages used here:
+			 * * visualeditor-table-move-col-before
+			 * * visualeditor-table-move-col-after
+			 * * visualeditor-table-move-row-before
+			 * * visualeditor-table-move-row-after
+			 */
 			ve.ui[ className ].static.title =
 				OO.ui.deferMsg( 'visualeditor-table-move-' + mode + '-' + side );
 			ve.ui[ className ].static.commandName = 'move' + modeName + sideName;
@@ -178,9 +186,11 @@ ve.ui.TableLineContextItem.prototype.setup = function () {
 			ve.ui.contextItemFactory.register( ve.ui[ className ] );
 		} );
 
-		// Classes created here:
-		// * ve.ui.DeleteColumnContextItem
-		// * ve.ui.DeleteRowContextItem
+		/*
+		 * Classes created here:
+		 * * ve.ui.DeleteColumnContextItem
+		 * * ve.ui.DeleteRowContextItem
+		 */
 		className = 'Delete' + modeName + 'ContextItem';
 		ve.ui[ className ] = function VeUiDeleteRowOrColumnContextItem() {
 			ve.ui.TableLineContextItem.apply( this, arguments );
@@ -202,9 +212,11 @@ ve.ui.TableLineContextItem.prototype.setup = function () {
 				count = selection.getColCount();
 			}
 
-			// Messages used here:
-			// * visualeditor-table-delete-col
-			// * visualeditor-table-delete-row
+			/*
+			 * Messages used here:
+			 * * visualeditor-table-delete-col
+			 * * visualeditor-table-delete-row
+			 */
 			return ve.msg( 'visualeditor-table-delete-' + mode, count );
 		};
 		ve.ui.contextItemFactory.register( ve.ui[ className ] );

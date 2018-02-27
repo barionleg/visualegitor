@@ -197,15 +197,19 @@ ve.dm.ElementLinearData.prototype.isContentOffset = function ( offset ) {
 		// Data exists at offsets
 		( left !== undefined && right !== undefined ) &&
 		(
-			// If there's content on the left or the right of the offset than we are good
-			// <paragraph>|a|</paragraph>
+			/*
+			 * If there's content on the left or the right of the offset than we are good
+			 * <paragraph>|a|</paragraph>
+			 */
 			( typeof left === 'string' || typeof right === 'string' ) ||
 			// Same checks but for annotated characters - isArray is slower, try it next
 			( Array.isArray( left ) || Array.isArray( right ) ) ||
 			// The most expensive test are last, these deal with elements
 			(
-				// Right of a leaf
-				// <paragraph><image></image>|</paragraph>
+				/*
+				 * Right of a leaf
+				 * <paragraph><image></image>|</paragraph>
+				 */
 				(
 					// Is an element
 					typeof left.type === 'string' &&
@@ -214,8 +218,10 @@ ve.dm.ElementLinearData.prototype.isContentOffset = function ( offset ) {
 					// Is a leaf
 					factory.isNodeContent( left.type.slice( 1 ) )
 				) ||
-				// Left of a leaf
-				// <paragraph>|<image></image></paragraph>
+				/*
+				 * Left of a leaf
+				 * <paragraph>|<image></image></paragraph>
+				 */
 				(
 					// Is an element
 					typeof right.type === 'string' &&
@@ -224,8 +230,10 @@ ve.dm.ElementLinearData.prototype.isContentOffset = function ( offset ) {
 					// Is a leaf
 					factory.isNodeContent( right.type )
 				) ||
-				// Inside empty content branch
-				// <paragraph>|</paragraph>
+				/*
+				 * Inside empty content branch
+				 * <paragraph>|</paragraph>
+				 */
 				(
 					// Inside empty element
 					'/' + left.type === right.type &&
@@ -289,8 +297,10 @@ ve.dm.ElementLinearData.prototype.isStructuralOffset = function ( offset, unrest
 			typeof right.type === 'string'
 		) &&
 		(
-			// Right of a branch
-			// <list><listItem><paragraph>a</paragraph>|</listItem>|</list>|
+			/*
+			 * Right of a branch
+			 * <list><listItem><paragraph>a</paragraph>|</listItem>|</list>|
+			 */
 			(
 				// Is a closing
 				left.type.charAt( 0 ) === '/' &&
@@ -302,14 +312,18 @@ ve.dm.ElementLinearData.prototype.isStructuralOffset = function ( offset, unrest
 				(
 					// Only apply this rule in unrestricted mode
 					!unrestricted ||
-					// Right of an unrestricted branch
-					// <list><listItem><paragraph>a</paragraph>|</listItem></list>|
-					// Both are non-content branches that can have any kind of child
+					/*
+					 * Right of an unrestricted branch
+					 * <list><listItem><paragraph>a</paragraph>|</listItem></list>|
+					 * Both are non-content branches that can have any kind of child
+					 */
 					factory.getParentNodeTypes( left.type.slice( 1 ) ) === null
 				)
 			) ||
-			// Left of a branch
-			// |<list>|<listItem>|<paragraph>a</paragraph></listItem></list>
+			/*
+			 * Left of a branch
+			 * |<list>|<listItem>|<paragraph>a</paragraph></listItem></list>
+			 */
 			(
 				// Is not a closing
 				right.type.charAt( 0 ) !== '/' &&
@@ -321,14 +335,18 @@ ve.dm.ElementLinearData.prototype.isStructuralOffset = function ( offset, unrest
 				(
 					// Only apply this rule in unrestricted mode
 					!unrestricted ||
-					// Left of an unrestricted branch
-					// |<list><listItem>|<paragraph>a</paragraph></listItem></list>
-					// Both are non-content branches that can have any kind of child
+					/*
+					 * Left of an unrestricted branch
+					 * |<list><listItem>|<paragraph>a</paragraph></listItem></list>
+					 * Both are non-content branches that can have any kind of child
+					 */
 					factory.getParentNodeTypes( right.type ) === null
 				)
 			) ||
-			// Inside empty non-content branch
-			// <list>|</list> or <list><listItem>|</listItem></list>
+			/*
+			 * Inside empty non-content branch
+			 * <list>|</list> or <list><listItem>|</listItem></list>
+			 */
 			(
 				// Inside empty element
 				'/' + left.type === right.type &&
@@ -383,8 +401,10 @@ ve.dm.ElementLinearData.prototype.canTakeAnnotationAtOffset = function ( offset,
 			return false;
 		}
 		type = this.getType( offset );
-		// Structural nodes are never annotatable
-		// Blacklisted annotations can't be set
+		/*
+		 * Structural nodes are never annotatable
+		 * Blacklisted annotations can't be set
+		 */
 		return ve.dm.nodeFactory.isNodeContent( type ) && ve.dm.nodeFactory.canNodeTakeAnnotation( type, annotation );
 	} else {
 		// Text is always annotatable
@@ -407,8 +427,10 @@ ve.dm.ElementLinearData.prototype.getAnnotationIndexesFromOffset = function ( of
 		throw new Error( 'offset ' + offset + ' out of bounds' );
 	}
 
-	// Since annotations are not stored on a closing leaf node,
-	// rewind offset by 1 to return annotations for that structure
+	/*
+	 * Since annotations are not stored on a closing leaf node,
+	 * rewind offset by 1 to return annotations for that structure
+	 */
 	if (
 		!ignoreClose &&
 		this.isCloseElementData( offset ) &&
@@ -653,8 +675,10 @@ ve.dm.ElementLinearData.prototype.getInsertionAnnotationsFromRange = function ( 
 		// Use the position just before the cursor
 		start = Math.max( 0, range.start - 1 );
 	} else {
-		// If uncollapsed, use the first character of the selection
-		// If collapsed, use the first position after the cursor
+		/*
+		 * If uncollapsed, use the first character of the selection
+		 * If collapsed, use the first position after the cursor
+		 */
 		start = range.start;
 	}
 
@@ -673,8 +697,10 @@ ve.dm.ElementLinearData.prototype.getInsertionAnnotationsFromRange = function ( 
 		afterAnnotations = new ve.dm.AnnotationSet( this.getStore() );
 	}
 
-	// Return those startAnnotations that either continue in afterAnnotations or
-	// should get added to appended content
+	/*
+	 * Return those startAnnotations that either continue in afterAnnotations or
+	 * should get added to appended content
+	 */
 	return startAnnotations.filter( function ( annotation ) {
 		return annotation.constructor.static.applyToAppendedContent ||
 			afterAnnotations.containsComparable( annotation );
@@ -840,8 +866,10 @@ ve.dm.ElementLinearData.prototype.getRelativeOffset = function ( offset, distanc
 		steps = 0,
 		turnedAround = false,
 		ignoreChildrenDepth = 0;
-	// If offset is already a structural offset and distance is zero than no further work is needed,
-	// otherwise distance should be 1 so that we can get out of the invalid starting offset
+	/*
+	 * If offset is already a structural offset and distance is zero than no further work is needed,
+	 * otherwise distance should be 1 so that we can get out of the invalid starting offset
+	 */
 	if ( distance === 0 ) {
 		if ( callback.apply( this, [ offset ].concat( args ) ) ) {
 			return offset;
@@ -862,17 +890,21 @@ ve.dm.ElementLinearData.prototype.getRelativeOffset = function ( offset, distanc
 	offset = -1;
 	// Iteration
 	while ( i >= 0 && i <= this.getLength() ) {
-		// Detect when the search for a valid offset enters a node whose children should be
-		// ignored, and don't return an offset inside such a node. This clearly won't work
-		// if you start inside such a node, but you shouldn't be doing that to being with
+		/*
+		 * Detect when the search for a valid offset enters a node whose children should be
+		 * ignored, and don't return an offset inside such a node. This clearly won't work
+		 * if you start inside such a node, but you shouldn't be doing that to being with
+		 */
 		dataOffset = i + ( direction > 0 ? -1 : 0 );
 		if (
 			this.isElementData( dataOffset ) &&
 			ve.dm.nodeFactory.shouldIgnoreChildren( this.getType( dataOffset ) )
 		) {
 			isOpen = this.isOpenElementData( dataOffset );
-			// We have entered a node if we step right over an open, or left over a close.
-			// Otherwise we have left a node
+			/*
+			 * We have entered a node if we step right over an open, or left over a close.
+			 * Otherwise we have left a node
+			 */
 			if ( ( direction > 0 && isOpen ) || ( direction < 0 && !isOpen ) ) {
 				ignoreChildrenDepth++;
 			} else {
@@ -1029,10 +1061,12 @@ ve.dm.ElementLinearData.prototype.getWordRange = function ( offset ) {
 	offset = this.getNearestContentOffset( offset );
 
 	if ( unicodeJS.wordbreak.isBreak( dataString, offset ) ) {
-		// The cursor offset is not inside a word. See if there is an adjacent word
-		// codepoint (checking two chars to allow surrogate pairs). If so, expand in that
-		// direction only (preferring backwards if there are word codepoints on both
-		// sides).
+		/*
+		 * The cursor offset is not inside a word. See if there is an adjacent word
+		 * codepoint (checking two chars to allow surrogate pairs). If so, expand in that
+		 * direction only (preferring backwards if there are word codepoints on both
+		 * sides).
+		 */
 
 		if ( this.constructor.static.endWordRegExp.exec(
 			( dataString.read( offset - 2 ) || ' ' ) +
@@ -1082,8 +1116,10 @@ ve.dm.ElementLinearData.prototype.getUsedStoreValues = function ( range ) {
 	range = range || new ve.Range( 0, this.data.length );
 
 	for ( i = range.start; i < range.end; i++ ) {
-		// Annotations
-		// Use ignoreClose to save time; no need to count every element annotation twice
+		/*
+		 * Annotations
+		 * Use ignoreClose to save time; no need to count every element annotation twice
+		 */
 		indexes = this.getAnnotationIndexesFromOffset( i, true );
 		j = indexes.length;
 		while ( j-- ) {
@@ -1192,17 +1228,21 @@ ve.dm.ElementLinearData.prototype.sanitize = function ( rules ) {
 			for ( i = 0, len = allAnnotations.getLength(); i < len; i++ ) {
 				ann = allAnnotations.get( i );
 				if ( ann.element.originalDomElementsIndex !== undefined ) {
-					// This changes the hash of the value, so we have to
-					// update that. If we don't do this, other assumptions
-					// that values fetched from the store are actually in the
-					// store will fail.
+					/*
+					 * This changes the hash of the value, so we have to
+					 * update that. If we don't do this, other assumptions
+					 * that values fetched from the store are actually in the
+					 * store will fail.
+					 */
 					oldHash = store.indexOfValue( ann );
 					delete allAnnotations.get( i ).element.originalDomElementsIndex;
 					newHash = store.replaceHash( oldHash, ann );
 					this.remapAnnotationIndex( oldHash, newHash );
 					if ( allAnnotations.storeIndexes.indexOf( newHash ) !== -1 ) {
-						// New annotation-value was already in the set, which
-						// just reduces the effective-length of the set.
+						/*
+						 * New annotation-value was already in the set, which
+						 * just reduces the effective-length of the set.
+						 */
 						allAnnotations.storeIndexes.splice( i, 1 );
 						i--;
 						len--;
@@ -1269,8 +1309,10 @@ ve.dm.ElementLinearData.prototype.sanitize = function ( rules ) {
 			// Split on breaks
 			if ( !rules.allowBreaks && type === 'break' && contentElement ) {
 				if ( this.isOpenElementData( i - 1 ) && this.isCloseElementData( i + 2 ) ) {
-					// If the break is the only element in another element it was likely added
-					// to force it open, so remove it.
+					/*
+					 * If the break is the only element in another element it was likely added
+					 * to force it open, so remove it.
+					 */
 					this.splice( i, 2 );
 					len -= 2;
 				} else {
@@ -1314,12 +1356,14 @@ ve.dm.ElementLinearData.prototype.sanitize = function ( rules ) {
 				contentElement = isOpen ? this.getData( i ) : null;
 			}
 		} else {
-			// Support: Firefox
-			// Remove plain newline characters, as they are semantically meaningless
-			// and will confuse the user. Firefox adds these automatically when copying
-			// line-wrapped HTML. T104790
-			// However, don't remove them if we're in a situation where they might
-			// actually be meaningful -- i.e. if we're inside a <pre>. T132006
+			/*
+			 * Support: Firefox
+			 * Remove plain newline characters, as they are semantically meaningless
+			 * and will confuse the user. Firefox adds these automatically when copying
+			 * line-wrapped HTML. T104790
+			 * However, don't remove them if we're in a situation where they might
+			 * actually be meaningful -- i.e. if we're inside a <pre>. T132006
+			 */
 			if (
 				this.getCharacterData( i ) === '\n' &&
 				// Get last open type from the stack
@@ -1341,9 +1385,11 @@ ve.dm.ElementLinearData.prototype.sanitize = function ( rules ) {
 					}
 				}
 			}
-			// Support: Chrome, Safari
-			// Sometimes all spaces are replaced with NBSP by the browser, so replace those
-			// which aren't adjacent to plain spaces. T183647
+			/*
+			 * Support: Chrome, Safari
+			 * Sometimes all spaces are replaced with NBSP by the browser, so replace those
+			 * which aren't adjacent to plain spaces. T183647
+			 */
 			if (
 				this.getCharacterData( i ) === '\u00a0' &&
 				// Get last open type from the stack
@@ -1437,11 +1483,15 @@ ve.dm.ElementLinearData.prototype.countNonInternalElements = function ( limit ) 
  * @return {boolean} The document has content
  */
 ve.dm.ElementLinearData.prototype.hasContent = function () {
-	// Two or less elements (<p>, </p>) is considered an empty document
-	// For performance, abort the count when we reach 3.
+	/*
+	 * Two or less elements (<p>, </p>) is considered an empty document
+	 * For performance, abort the count when we reach 3.
+	 */
 	return this.countNonInternalElements( 3 ) > 2 ||
-		// Also check that the element is not a content branch node, e.g. a blockImage
-		// and also that is not the internal list
+		/*
+		 * Also check that the element is not a content branch node, e.g. a blockImage
+		 * and also that is not the internal list
+		 */
 		(
 			this.isElementData( 0 ) &&
 			!ve.dm.nodeFactory.canNodeContainContent( this.getType( 0 ) ) &&

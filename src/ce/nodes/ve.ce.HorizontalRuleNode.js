@@ -19,8 +19,10 @@ ve.ce.HorizontalRuleNode = function VeCeHorizontalRuleNode() {
 	// Parent constructor
 	ve.ce.HorizontalRuleNode.super.apply( this, arguments );
 
-	// Wrap the <hr> in a div so the margins become focusable
-	// and the user has a click target of more than 2px
+	/*
+	 * Wrap the <hr> in a div so the margins become focusable
+	 * and the user has a click target of more than 2px
+	 */
 	this.$element = $( '<div>' ).append( this.$element );
 
 	// Mixin constructors

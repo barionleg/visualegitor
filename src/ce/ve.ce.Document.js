@@ -111,31 +111,35 @@ ve.ce.Document.prototype.getNodeAndOffset = function ( offset ) {
 		$viewNodes,
 		countedNodes = [];
 
-	// 1. Step with ve.adjacentDomPosition( ..., { stop: function () { return true; } } )
-	// until we hit a position at the correct offset (which is guaranteed to be the first
-	// such position in document order).
-	// 2. Use ve.adjacentDomPosition( ..., { stop: ... } ) once to return all
-	// subsequent positions at the same offset.
-	// 3. Look at the possible positions and pick as follows:
-	//   - If there is a unicorn, return just inside it
-	//   - Else if there is a nail, return just outside it
-	//   - Else if there is a text node, return an offset in it
-	//   - Else return the first matching offset
-	//
-	// Offsets of DOM nodes are counted to match their model equivalents.
-	//
-	// TODO: take the following into account:
-	// Unfortunately, there is no way to avoid slugless block nodes with no DM length: an
-	// IME can remove all the text from a node at a time when it is unsafe to fixup the node
-	// contents. In this case, a maximally deep element gives better bounding rectangle
-	// coordinates than any of its containers.
+	/*
+	 * 1. Step with ve.adjacentDomPosition( …, { stop: function () { return true; } } )
+	 * until we hit a position at the correct offset (which is guaranteed to be the first
+	 * such position in document order).
+	 * 2. Use ve.adjacentDomPosition( …, { stop: … } ) once to return all
+	 * subsequent positions at the same offset.
+	 * 3. Look at the possible positions and pick as follows:
+	 *   - If there is a unicorn, return just inside it
+	 *   - Else if there is a nail, return just outside it
+	 *   - Else if there is a text node, return an offset in it
+	 *   - Else return the first matching offset
+	 *
+	 * Offsets of DOM nodes are counted to match their model equivalents.
+	 *
+	 * TODO: take the following into account:
+	 * Unfortunately, there is no way to avoid slugless block nodes with no DM length: an
+	 * IME can remove all the text from a node at a time when it is unsafe to fixup the node
+	 * contents. In this case, a maximally deep element gives better bounding rectangle
+	 * coordinates than any of its containers.
+	 */
 
 	branchNode = this.getBranchNodeFromOffset( offset );
 	count = branchNode.getOffset() + ( ( branchNode.isWrapped() ) ? 1 : 0 );
 
 	if ( !( branchNode instanceof ve.ce.ContentBranchNode ) ) {
-		// The cursor does not lie in a ContentBranchNode, so we can determine
-		// everything from the DM tree
+		/*
+		 * The cursor does not lie in a ContentBranchNode, so we can determine
+		 * everything from the DM tree
+		 */
 		for ( i = 0; ; i++ ) {
 			ceChild = branchNode.children[ i ];
 			if ( count === offset ) {
@@ -177,8 +181,10 @@ ve.ce.Document.prototype.getNodeAndOffset = function ( offset ) {
 		};
 	}
 
-	// Else the cursor lies in a ContentBranchNode, so we must traverse the DOM, keeping
-	// count of the corresponding DM position until it reaches offset.
+	/*
+	 * Else the cursor lies in a ContentBranchNode, so we must traverse the DOM, keeping
+	 * count of the corresponding DM position until it reaches offset.
+	 */
 	position = { node: branchNode.$element[ 0 ], offset: 0 };
 
 	function noDescend() {
@@ -205,10 +211,12 @@ ve.ce.Document.prototype.getNodeAndOffset = function ( offset ) {
 				// Skip without incrementing
 				continue;
 			}
-			// else the code below always breaks or skips over the text node;
-			// therefore it is guaranteed that step.type === 'enter' (we just
-			// stepped in)
-			// TODO: what about zero-length text nodes?
+			/*
+			 * … else the code below always breaks or skips over the text node;
+			 * therefore it is guaranteed that step.type === 'enter' (we just
+			 * stepped in)
+			 * TODO: what about zero-length text nodes?
+			 */
 			if ( offset <= count + node.data.length ) {
 				// Match the appropriate offset in the text node
 				position = { node: node, offset: offset - count };
@@ -219,37 +227,45 @@ ve.ce.Document.prototype.getNodeAndOffset = function ( offset ) {
 				position = { node: node, offset: node.data.length };
 				continue;
 			}
-		} // else it is an element node (TODO: handle comment etc)
+		} // … else it is an element node (TODO: handle comment etc)
 
 		if ( !(
 			node.classList.contains( 've-ce-branchNode' ) ||
 			node.classList.contains( 've-ce-leafNode' )
 		) ) {
-			// Nodes like b, inline slug, browser-generated br that doesn't have
-			// class ve-ce-leafNode: continue walk without incrementing
+			/*
+			 * Nodes like b, inline slug, browser-generated br that doesn't have
+			 * class ve-ce-leafNode: continue walk without incrementing
+			 */
 			continue;
 		}
 
 		if ( step.type === 'leave' ) {
-			// Below we'll guarantee that .ve-ce-branchNode/.ve-ce-leafNode elements
-			// are only entered if their open/close tags take up a model offset, so
-			// we can increment unconditionally here
+			/*
+			 * Below we'll guarantee that .ve-ce-branchNode/.ve-ce-leafNode elements
+			 * are only entered if their open/close tags take up a model offset, so
+			 * we can increment unconditionally here
+			 */
 			count++;
 			continue;
-		} // else step.type === 'enter' || step.type === 'cross'
+		} // … else step.type === 'enter' || step.type === 'cross'
 
 		model = $.data( node, 'view' ).model;
 
 		if ( countedNodes.indexOf( model ) !== -1 ) {
-			// This DM node is rendered as multiple DOM elements, and we have already
-			// counted it as part of an earlier element. Skip past without incrementing
+			/*
+			 * This DM node is rendered as multiple DOM elements, and we have already
+			 * counted it as part of an earlier element. Skip past without incrementing
+			 */
 			position = { node: node.parentNode, offset: ve.parentIndex( node ) + 1 };
 			continue;
 		}
 		countedNodes.push( model );
 		if ( offset >= count + model.getOuterLength() ) {
-			// Offset doesn't lie inside the node. Skip past and count length
-			// skip past the whole node
+			/*
+			 * Offset doesn't lie inside the node. Skip past and count length
+			 * skip past the whole node
+			 */
 			position = { node: node.parentNode, offset: ve.parentIndex( node ) + 1 };
 			count += model.getOuterLength();
 		} else if ( step.type === 'cross' ) {
@@ -263,11 +279,12 @@ ve.ce.Document.prototype.getNodeAndOffset = function ( offset ) {
 			count += 1;
 		}
 	}
-	// Now "position" is the first DOM position (in document order) at the correct
-	// model offset.
-
-	// If the position is exactly after the first of multiple view nodes sharing a model,
-	// then jump to the position exactly after the final such view node.
+	/*
+	 * Now "position" is the first DOM position (in document order) at the correct
+	 * model offset.
+	 * If the position is exactly after the first of multiple view nodes sharing a model,
+	 * then jump to the position exactly after the final such view node.
+	 */
 	prevNode = position.node.childNodes[ position.offset - 1 ];
 	if ( prevNode && prevNode.nodeType === Node.ELEMENT_NODE && (
 		prevNode.classList.contains( 've-ce-branchNode' ) ||
@@ -318,8 +335,10 @@ ve.ce.Document.prototype.getNodeAndOffset = function ( offset ) {
 		found.text = found.text || ( step.node.nodeType === Node.TEXT_NODE && step );
 	} );
 
-	// If there is a unicorn, it should be a unique pre/post-Unicorn pair containing text or
-	// nothing return the position just inside.
+	/*
+	 * If there is a unicorn, it should be a unique pre/post-Unicorn pair containing text or
+	 * nothing return the position just inside.
+	 */
 	if ( found.preUnicorn ) {
 		return ve.ce.nextCursorOffset( found.preUnicorn.node );
 	}
@@ -328,13 +347,17 @@ ve.ce.Document.prototype.getNodeAndOffset = function ( offset ) {
 	}
 
 	if ( found.preOpenNail ) {
-		// This will also cover the case where there is a post-open nail, as there will
-		// be no offset difference between them
+		/*
+		 * This will also cover the case where there is a post-open nail, as there will
+		 * be no offset difference between them
+		 */
 		return ve.ce.previousCursorOffset( found.preOpenNail.node );
 	}
 	if ( found.postCloseNail ) {
-		// This will also cover the case where there is a pre-close nail, as there will
-		// be no offset difference between them
+		/*
+		 * This will also cover the case where there is a pre-close nail, as there will
+		 * be no offset difference between them
+		 */
 		return ve.ce.nextCursorOffset( found.postCloseNail.node );
 	}
 	if ( found.text ) {
@@ -361,18 +384,22 @@ ve.ce.Document.prototype.getDirectionFromRange = function ( range ) {
 		selectedNodes = this.selectNodes( range, 'covered' );
 
 	if ( selectedNodes.length > 1 ) {
-		// Selection of multiple nodes
-		// Get the common parent node
+		/*
+		 * Selection of multiple nodes
+		 * Get the common parent node
+		 */
 		effectiveNode = this.selectNodes( range, 'siblings' )[ 0 ].node.getParent();
 	} else {
 		// Selection of a single node
 		effectiveNode = selectedNodes[ 0 ].node;
 
 		while ( effectiveNode.isContent() ) {
-			// This means that we're in a leaf node, like TextNode
-			// those don't read the directionality properly, we will
-			// have to climb up the parentage chain until we find a
-			// wrapping node like paragraph or list item, etc.
+			/*
+			 * This means that we're in a leaf node, like TextNode
+			 * those don't read the directionality properly, we will
+			 * have to climb up the parentage chain until we find a
+			 * wrapping node like paragraph or list item, etc.
+			 */
 			effectiveNode = effectiveNode.parent;
 		}
 	}

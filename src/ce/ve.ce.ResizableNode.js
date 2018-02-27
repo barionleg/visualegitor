@@ -141,8 +141,10 @@ ve.ce.ResizableNode.prototype.hideSizeLabel = function () {
 		return;
 	}
 
-	// Defer the removal of this class otherwise other DOM changes may cause
-	// the opacity transition to not play out smoothly
+	/*
+	 * Defer the removal of this class otherwise other DOM changes may cause
+	 * the opacity transition to not play out smoothly
+	 */
 	setTimeout( function () {
 		node.$sizeLabel.removeClass( 've-ce-resizableNode-sizeLabel-resizing' );
 	} );
@@ -380,9 +382,11 @@ ve.ce.ResizableNode.prototype.onResizableAttributeChange = function () {
  * @fires resizeStart
  */
 ve.ce.ResizableNode.prototype.onResizeHandlesCornerMouseDown = function ( e ) {
-	// Hide context menu
-	// TODO: Maybe there's a more generic way to handle this sort of thing? For relocation it's
-	// handled in ve.ce.Surface
+	/*
+	 * Hide context menu
+	 * TODO: Maybe there's a more generic way to handle this sort of thing? For relocation it's
+	 * handled in ve.ce.Surface
+	 */
 	this.root.getSurface().getSurface().getContext().toggle( false );
 
 	// Set bounding box width and undo the handle margins
@@ -572,8 +576,10 @@ ve.ce.ResizableNode.prototype.onDocumentMouseUp = function () {
 		this.resizableSurface.getModel().getFragment().changeAttributes( attrChanges );
 	}
 
-	// Update the context menu. This usually happens with the redraw, but not if the
-	// user doesn't perform a drag
+	/*
+	 * Update the context menu. This usually happens with the redraw, but not if the
+	 * user doesn't perform a drag
+	 */
 	this.root.getSurface().getSurface().getContext().updateDimensions();
 
 	this.emit( 'resizeEnd' );

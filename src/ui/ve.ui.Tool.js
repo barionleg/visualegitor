@@ -117,14 +117,18 @@ ve.ui.Tool.prototype.onSelect = function () {
 		}
 	}
 	if ( this.constructor.static.deactivateOnSelect ) {
-		// It's fine to call setActive here before the promise resolves; it
-		// just disables the button, stopping double-clicks and making it feel more responsive
-		// if the promise is slow.
+		/*
+		 * It's fine to call setActive here before the promise resolves; it
+		 * just disables the button, stopping double-clicks and making it feel more responsive
+		 * if the promise is slow.
+		 */
 		this.setActive( false );
 	}
 	if ( contextClosePromise ) {
-		// N.B. If contextClosePromise is already resolved, then the handler is called
-		// before the call to .done returns
+		/*
+		 * N.B. If contextClosePromise is already resolved, then the handler is called
+		 * before the call to .done returns
+		 */
 		contextClosePromise.done( function () {
 			if ( !command.execute( surface ) ) {
 				// If the command fails, ensure the tool is not active

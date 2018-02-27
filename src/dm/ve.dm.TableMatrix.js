@@ -38,8 +38,10 @@ ve.dm.TableMatrix = function VeDmTableMatrix( tableNode ) {
 	OO.EventEmitter.call( this );
 
 	this.tableNode = tableNode;
-	// Do not access these directly as they get invalidated on structural changes
-	// Use the accessor methods instead.
+	/*
+	 * Do not access these directly as they get invalidated on structural changes
+	 * Use the accessor methods instead.
+	 */
 	this.matrix = null;
 	this.rowNodes = null;
 };
@@ -87,8 +89,10 @@ ve.dm.TableMatrix.prototype.update = function () {
 		rowNodes.push( rowNode );
 	} );
 
-	// Iterates through all cells and stores the cells as well as
-	// so called placeholders into the matrix.
+	/*
+	 * Iterates through all cells and stores the cells as well as
+	 * so called placeholders into the matrix.
+	 */
 	while ( ( cellNode = iterator.next() ) !== undefined ) {
 		col++;
 		// Skip placeholders

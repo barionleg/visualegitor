@@ -22,9 +22,11 @@ ve.ui.ToolbarDialog = function VeUiToolbarDialog( config ) {
 	this.disabled = false;
 	this.$shield = $( '<div>' ).addClass( 've-ui-toolbarDialog-shield' );
 
-	// Pre-initialization
-	// This class needs to exist before setup to constrain the height
-	// of the dialog when it first loads.
+	/*
+	 * Pre-initialization
+	 * This class needs to exist before setup to constrain the height
+	 * of the dialog when it first loads.
+	 */
 	this.$element.addClass( 've-ui-toolbarDialog' );
 };
 

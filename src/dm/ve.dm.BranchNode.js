@@ -169,10 +169,12 @@ ve.dm.BranchNode.prototype.setupBlockSlugs = function () {
 		return;
 	}
 
-	// Support: Firefox
-	// If this content branch no longer has any non-internal items, insert a slug to keep the node
-	// from becoming invisible/unfocusable. In Firefox, backspace after Ctrl+A leaves the document
-	// completely empty, so this ensures DocumentNode gets a slug.
+	/*
+	 * Support: Firefox
+	 * If this content branch no longer has any non-internal items, insert a slug to keep the node
+	 * from becoming invisible/unfocusable. In Firefox, backspace after Ctrl+A leaves the document
+	 * completely empty, so this ensures DocumentNode gets a slug.
+	 */
 	if (
 		this.getLength() === 0 ||
 		( this.children.length === 1 && this.children[ 0 ].isInternal() )

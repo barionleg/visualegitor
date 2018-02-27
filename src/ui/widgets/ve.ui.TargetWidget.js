@@ -130,8 +130,10 @@ ve.ui.TargetWidget.prototype.setDocument = function ( doc ) {
  * @fires change
  */
 ve.ui.TargetWidget.prototype.onSurfaceModelHistory = function () {
-	// Rethrow this event so users don't have to re-bind to
-	// surface model 'history' when the surface is changed in #setDocument
+	/*
+	 * Rethrow this event so users don't have to re-bind to
+	 * surface model 'history' when the surface is changed in #setDocument
+	 */
 	this.emit( 'change' );
 };
 

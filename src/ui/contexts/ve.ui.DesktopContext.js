@@ -215,11 +215,15 @@ ve.ui.DesktopContext.prototype.updateDimensions = function () {
 	rtl = this.surface.getModel().getDocument().getDir() === 'rtl';
 	surface = this.surface.getView();
 	focusedNode = surface.getFocusedNode();
-	// Selection when the inspector was opened. Used to stop the context from
-	// jumping when an inline selection expands, e.g. to cover a long word
+	/*
+	 * Selection when the inspector was opened. Used to stop the context from
+	 * jumping when an inline selection expands, e.g. to cover a long word
+	 */
 	startingSelection = !focusedNode && this.inspector && this.inspector.previousSelection;
-	// Don't use start selection if it comes from another document, e.g. the fake document used in
-	// source mode.
+	/*
+	 * Don't use start selection if it comes from another document, e.g. the fake document used in
+	 * source mode.
+	 */
 	if ( startingSelection && startingSelection.getDocument() !== surface.getModel().getDocument ) {
 		startingSelection = null;
 	}
@@ -231,11 +235,13 @@ ve.ui.DesktopContext.prototype.updateDimensions = function () {
 		surface.getSelection( startingSelection ).getSelectionBoundingRect();
 
 	if ( !boundingRect ) {
-		// If !boundingRect, the surface apparently isn't selected.
-		// This shouldn't happen because the context is only supposed to be
-		// displayed in response to a selection, but it sometimes does happen due
-		// to browser weirdness.
-		// Skip updating the cursor position, but still update the width and height.
+		/*
+		 * If !boundingRect, the surface apparently isn't selected.
+		 * This shouldn't happen because the context is only supposed to be
+		 * displayed in response to a selection, but it sometimes does happen due
+		 * to browser weirdness.
+		 * Skip updating the cursor position, but still update the width and height.
+		 */
 		this.popup.toggleAnchor( true );
 		this.popup.setAlignment( 'center' );
 	} else if ( isTableSelection || ( focusedNode && !focusedNode.isContent() ) ) {
@@ -353,9 +359,11 @@ ve.ui.DesktopContext.prototype.setPopupSizeAndPosition = function ( repositionOn
 	}
 
 	if ( this.position ) {
-		// Float the content if it's bigger than the viewport. Exactly how /
-		// whether it should be floated is situational, so this is a
-		// preliminary determination. Checks below might cancel the float.
+		/*
+		 * Float the content if it's bigger than the viewport. Exactly how /
+		 * whether it should be floated is situational, so this is a
+		 * preliminary determination. Checks below might cancel the float.
+		 */
 		floating =
 			( !this.embeddable && this.position.y + this.dimensions.height > viewport.bottom - margin ) ||
 			( this.embeddable && this.position.y < viewport.top + margin );
@@ -405,17 +413,21 @@ ve.ui.DesktopContext.prototype.setPopupSizeAndPosition = function ( repositionOn
 	}
 
 	if ( !repositionOnly ) {
-		// PopupWidget normally is clippable, suppress that to be able to resize and scroll it into view.
-		// Needs to be repeated before every call, as it resets itself when the popup is shown or hidden.
+		/*
+		 * PopupWidget normally is clippable, suppress that to be able to resize and scroll it into view.
+		 * Needs to be repeated before every call, as it resets itself when the popup is shown or hidden.
+		 */
 		this.popup.toggleClipping( false );
 
-		// We want to stop the popup from possibly being bigger than the viewport,
-		// as that can result in situations where it's impossible to reach parts
-		// of the popup. Limiting it to the window height would ignore toolbars
-		// and the find-replace dialog and suchlike. Therefore we set its max
-		// height to the surface's estimation of the actual viewport available to
-		// it. It's okay if the inspector goes off the edge of the viewport, so
-		// long as it's possible to scroll and get it all in view.
+		/*
+		 * We want to stop the popup from possibly being bigger than the viewport,
+		 * as that can result in situations where it's impossible to reach parts
+		 * of the popup. Limiting it to the window height would ignore toolbars
+		 * and the find-replace dialog and suchlike. Therefore we set its max
+		 * height to the surface's estimation of the actual viewport available to
+		 * it. It's okay if the inspector goes off the edge of the viewport, so
+		 * long as it's possible to scroll and get it all in view.
+		 */
 		this.popup.setSize( this.dimensions.width, Math.min( this.dimensions.height, viewport.height ) );
 
 		this.popup.scrollElementIntoView();

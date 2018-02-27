@@ -8,23 +8,17 @@ QUnit.module( 've' );
 
 /* Tests */
 
-// ve.getProp: Tested upstream (OOjs)
-
-// ve.setProp: Tested upstream (OOjs)
-
-// ve.cloneObject: Tested upstream (OOjs)
-
-// ve.getObjectValues: Tested upstream (OOjs)
-
-// ve.compare: Tested upstream (OOjs)
-
-// ve.copy: Tested upstream (OOjs)
-
-// ve.isPlainObject: Tested upstream (jQuery)
-
-// ve.isEmptyObject: Tested upstream (jQuery)
-
-// ve.extendObject: Tested upstream (jQuery)
+/*
+ * ve.getProp: Tested upstream (OOjs)
+ * ve.setProp: Tested upstream (OOjs)
+ * ve.cloneObject: Tested upstream (OOjs)
+ * ve.getObjectValues: Tested upstream (OOjs)
+ * ve.compare: Tested upstream (OOjs)
+ * ve.copy: Tested upstream (OOjs)
+ * ve.isPlainObject: Tested upstream (jQuery)
+ * ve.isEmptyObject: Tested upstream (jQuery)
+ * ve.extendObject: Tested upstream (jQuery)
+ */
 
 QUnit.test( 'compareClassLists', function ( assert ) {
 	var i,
@@ -212,8 +206,10 @@ QUnit.test( 'setDomAttributes', function ( assert ) {
 
 QUnit.test( 'sparseSplice', function ( assert ) {
 	var tests, i, len, test, scratch;
-	// Convert a sparse array of primitives to an array of strings, with '' for holes.
-	// This is needed because QUnit.equiv treats holes as equivalent to undefined.
+	/*
+	 * Convert a sparse array of primitives to an array of strings, with '' for holes.
+	 * This is needed because QUnit.equiv treats holes as equivalent to undefined.
+	 */
 	function mapToString( flatArray ) {
 		var j, jLen,
 			strings = [];
@@ -315,8 +311,10 @@ QUnit.test( 'batchSplice', function ( assert ) {
 
 	assertBatchSplice();
 
-	// If the current browser supported native splice,
-	// test again without the native splice.
+	/*
+	 * If the current browser supported native splice,
+	 * test again without the native splice.
+	 */
 	if ( spliceWasSupported ) {
 		ve.supportsSplice = false;
 		assertBatchSplice();
@@ -610,9 +608,10 @@ QUnit.test( 'isUnattachedCombiningMark', function ( assert ) {
 	assert.strictEqual( ve.isUnattachedCombiningMark( '\u0370' ), false, '"\u0370" is not an unattached combining mark' );
 } );
 
-// TODO: ve.getByteOffset
-
-// TODO: ve.getClusterOffset
+/*
+ * TODO: ve.getByteOffset
+ * TODO: ve.getClusterOffset
+ */
 
 QUnit.test( 'graphemeSafeSubstring', function ( assert ) {
 	var i,
@@ -866,8 +865,10 @@ QUnit.test( 'normalizeNode', function ( assert ) {
 			}
 		];
 
-	// Force normalizeNode to think native normalization is broken so it uses the manual
-	// normalization code
+	/*
+	 * Force normalizeNode to think native normalization is broken so it uses the manual
+	 * normalization code
+	 */
 	wasNormalizeBroken = ve.isNormalizeBroken;
 	ve.isNormalizeBroken = true;
 
@@ -989,14 +990,16 @@ QUnit.test( 'getCommonStartSequenceLength', function ( assert ) {
 QUnit.test( 'adjacentDomPosition', function ( assert ) {
 	var tests, direction, i, len, test, offsetPaths, position, div;
 
-	// In the following tests, the html is put inside the top-level div as innerHTML. Then
-	// ve.adjacentDomPosition is called with the position just inside the div (i.e.
-	// { node: div, offset: 0 } for forward direction tests, and
-	// { node: div, offset: div.childNodes.length } for reverse direction tests). The result
-	// of the first call is passed into the function again, and so on iteratively until the
-	// function returns null. The 'path' properties are a list of descent offsets to find a
-	// particular position node from the top-level div. E.g. a path of [ 5, 7 ] refers to the
-	// node div.childNodes[ 5 ].childNodes[ 7 ] .
+	/*
+	 * In the following tests, the html is put inside the top-level div as innerHTML. Then
+	 * ve.adjacentDomPosition is called with the position just inside the div (i.e.
+	 * { node: div, offset: 0 } for forward direction tests, and
+	 * { node: div, offset: div.childNodes.length } for reverse direction tests). The result
+	 * of the first call is passed into the function again, and so on iteratively until the
+	 * function returns null. The 'path' properties are a list of descent offsets to find a
+	 * particular position node from the top-level div. E.g. a path of [ 5, 7 ] refers to the
+	 * node div.childNodes[ 5 ].childNodes[ 7 ] .
+	 */
 	tests = [
 		{
 			title: 'Simple p node',

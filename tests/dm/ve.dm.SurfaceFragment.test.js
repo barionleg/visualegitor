@@ -745,10 +745,11 @@ QUnit.test( 'rewrapNodes', function ( assert ) {
 	expectedFragment.wrapNodes(
 		[ { type: 'list', attributes: { style: 'bullet' } }, { type: 'listItem' } ]
 	);
-	// Range is now 43, 59
-
-	// Compare a rewrap operation with its equivalent unwrap + wrap
-	// This type of test can only exist if the intermediate state is valid
+	/*
+	 * Range is now 43, 59
+	 * Compare a rewrap operation with its equivalent unwrap + wrap
+	 * This type of test can only exist if the intermediate state is valid
+	 */
 	fragment.rewrapNodes(
 		2,
 		[ { type: 'definitionList' }, { type: 'definitionListItem', attributes: { style: 'term' } } ]
@@ -765,9 +766,11 @@ QUnit.test( 'rewrapNodes', function ( assert ) {
 	);
 	assert.equalHash( fragment.getSelection(), expectedFragment.getSelection(), 'new range contains rewrapping elements' );
 
-	// Rewrap paragrphs as headings
-	// The intermediate stage (plain text attached to the document) would be invalid
-	// if performed as an unwrap and a wrap
+	/*
+	 * Rewrap paragrphs as headings
+	 * The intermediate stage (plain text attached to the document) would be invalid
+	 * if performed as an unwrap and a wrap
+	 */
 	expectedData = ve.copy( doc.getData() );
 
 	fragment = surface.getLinearFragment( new ve.Range( 59, 65 ) );
@@ -871,8 +874,10 @@ QUnit.test( 'rewrapAllNodes', function ( assert ) {
 		expectedSurface = new ve.dm.Surface( expectedDoc ),
 		expectedFragment = expectedSurface.getLinearFragment( new ve.Range( 5, 37 ) );
 
-	// Compare a rewrap operation with its equivalent unwrap + wrap
-	// This type of test can only exist if the intermediate state is valid
+	/*
+	 * Compare a rewrap operation with its equivalent unwrap + wrap
+	 * This type of test can only exist if the intermediate state is valid
+	 */
 	fragment.rewrapAllNodes(
 		4,
 		[ { type: 'list', attributes: { style: 'bullet' } }, { type: 'listItem' } ]
@@ -907,9 +912,11 @@ QUnit.test( 'rewrapAllNodes', function ( assert ) {
 	);
 	assert.equalRange( fragment.getSelection().getRange(), new ve.Range( 5, 37 ), 'new range contains rewrapping elements' );
 
-	// Rewrap a heading as a paragraph
-	// The intermediate stage (plain text attached to the document) would be invalid
-	// if performed as an unwrap and a wrap
+	/*
+	 * Rewrap a heading as a paragraph
+	 * The intermediate stage (plain text attached to the document) would be invalid
+	 * if performed as an unwrap and a wrap
+	 */
 	fragment = surface.getLinearFragment( new ve.Range( 0, 5 ) );
 	fragment.rewrapAllNodes( 1, [ { type: 'paragraph' } ] );
 

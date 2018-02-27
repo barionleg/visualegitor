@@ -58,8 +58,10 @@ ve.ui.FormatAction.prototype.convert = function ( type, attributes ) {
 		return;
 	}
 
-	// We can't have headings or pre's in a list, so if we're trying to convert
-	// things that are in lists to a heading or a pre, split the list
+	/*
+	 * We can't have headings or pre's in a list, so if we're trying to convert
+	 * things that are in lists to a heading or a pre, split the list
+	 */
 	selected = fragment.getLeafNodes();
 	for ( i = 0, length = selected.length; i < length; i++ ) {
 		contentBranch = selected[ i ].node.isContent() ?
@@ -75,12 +77,14 @@ ve.ui.FormatAction.prototype.convert = function ( type, attributes ) {
 
 	fragment.convertNodes( type, attributes );
 	if ( fragmentSelection.isCollapsed() ) {
-		// Converting an empty node needs a small selection fixup afterwards,
-		// otherwise the selection will be displayed outside the new empty
-		// node. This causes issues with the display of the current format in
-		// the toolbar, and with hitting enter if no content is entered. Don't
-		// always reapply the selection, because the automatic behavior is
-		// better if isolateAndUnwrap has actually acted. (T151594)
+		/*
+		 * Converting an empty node needs a small selection fixup afterwards,
+		 * otherwise the selection will be displayed outside the new empty
+		 * node. This causes issues with the display of the current format in
+		 * the toolbar, and with hitting enter if no content is entered. Don't
+		 * always reapply the selection, because the automatic behavior is
+		 * better if isolateAndUnwrap has actually acted. (T151594)
+		 */
 		surfaceModel.setSelection( fragmentSelection );
 	}
 	this.surface.getView().focus();

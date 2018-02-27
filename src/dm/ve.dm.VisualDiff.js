@@ -194,14 +194,18 @@ ve.dm.VisualDiff.prototype.calculateDiffMoves = function ( oldToNew, newToOld ) 
 		var i, ilen, k, low, high, middle, newLength, oldIndex, newIndex,
 			currentLength = 0,
 			moves = [],
-			// finalIndices[i] holds:
-			// - if i is 0, 0
-			// - if there's an increasing subsequence of length i, the final item in that subsequence
-			// - if i > length of longest increasing subsequence, undefined
+			/*
+			 * finalIndices[i] holds:
+			 * - if i is 0, 0
+			 * - if there's an increasing subsequence of length i, the final item in that subsequence
+			 * - if i > length of longest increasing subsequence, undefined
+			 */
 			finalIndices = [],
-			// previousIndices[i] holds:
-			// - if i is in the longest increasing subsequence, the item before i in that subsequence
-			// - otherwise, 0
+			/*
+			 * previousIndices[i] holds:
+			 * - if i is in the longest increasing subsequence, the item before i in that subsequence
+			 * - otherwise, 0
+			 */
 			previousIndices = [];
 
 		finalIndices[ 0 ] = 0;
@@ -226,8 +230,10 @@ ve.dm.VisualDiff.prototype.calculateDiffMoves = function ( oldToNew, newToOld ) 
 			}
 		}
 
-		// Items in the longest increasing subsequence are oldDoc indices of unmoved nodes.
-		// Mark corresponding newDoc indices of these unmoved nodes, in moves array.
+		/*
+		 * Items in the longest increasing subsequence are oldDoc indices of unmoved nodes.
+		 * Mark corresponding newDoc indices of these unmoved nodes, in moves array.
+		 */
 		k = finalIndices[ currentLength ];
 		for ( i = currentLength, ilen = 0; i > ilen; i-- ) {
 			oldIndex = sequence[ k ];
@@ -249,12 +255,16 @@ ve.dm.VisualDiff.prototype.calculateDiffMoves = function ( oldToNew, newToOld ) 
 		oldPermuted.push( typeof oldIndex === 'number' ? oldIndex : oldIndex.node );
 	}
 
-	// Record which newDoc nodes have NOT moved. NB nodes inserted at the end of the
-	// newDoc will be treated as not moved by default.
+	/*
+	 * Record which newDoc nodes have NOT moved. NB nodes inserted at the end of the
+	 * newDoc will be treated as not moved by default.
+	 */
 	moves = longestIncreasingSubsequence( oldPermuted, oldToNew );
 
-	// Record whether the remaining newDoc nodes have moved up or down
-	// (or not at all, e.g. if they are an insert)
+	/*
+	 * Record whether the remaining newDoc nodes have moved up or down
+	 * (or not at all, e.g. if they are an insert)
+	 */
 	ilen = Number( sortedKeys[ sortedKeys.length - 1 ] ) + 1;
 	for ( i = 0; i < ilen; i++ ) {
 
@@ -275,9 +285,11 @@ ve.dm.VisualDiff.prototype.calculateDiffMoves = function ( oldToNew, newToOld ) 
 				// This node comes before any unmoved nodes so must have moved up
 				moves[ i ] = up;
 			} else {
-				// If this node's oldDoc index is higher than the latest unmoved
-				// node's oldDoc index, then it must have moved up; otherwise it
-				// must have moved down
+				/*
+				 * If this node's oldDoc index is higher than the latest unmoved
+				 * node's oldDoc index, then it must have moved up; otherwise it
+				 * must have moved down
+				 */
 				moves[ i ] = newToOld[ i ] > newToOld[ latestUnmoved ] ? up : down;
 			}
 
@@ -309,8 +321,10 @@ ve.dm.VisualDiff.prototype.compareRootChildren = function ( oldRootChild, newRoo
 		return true;
 	}
 
-	// If strings are not equal, the data may still be the same as far as
-	// we are concerned so should compare them properly.
+	/*
+	 * If strings are not equal, the data may still be the same as far as
+	 * we are concerned so should compare them properly.
+	 */
 	oldStore = this.oldDoc.getStore();
 	newStore = this.newDoc.getStore();
 
@@ -439,8 +453,10 @@ ve.dm.VisualDiff.prototype.getDocChildDiff = function ( oldDocChild, newDocChild
 	}
 
 	treeDiff = transactions[ oldDocChildTree.orderedNodes.length - 1 ][ newDocChildTree.orderedNodes.length - 1 ];
-	// Length of old content is length of old node minus the open and close
-	// tags for each child node
+	/*
+	 * Length of old content is length of old node minus the open and close
+	 * tags for each child node
+	 */
 	keepLength = oldDocChild.length - 2 * ( oldDocChildTree.orderedNodes.length - 1 );
 
 	for ( i = 0, ilen = treeDiff.length; i < ilen; i++ ) {
@@ -635,8 +651,10 @@ ve.dm.VisualDiff.prototype.getInternalListDiffInfo = function () {
 		return false;
 	}
 
-	// Find all groups common to old and new docs
-	// Also find inserted groups
+	/*
+	 * Find all groups common to old and new docs
+	 * Also find inserted groups
+	 */
 	for ( group in newDocNodeGroups ) {
 		if ( group in oldDocNodeGroups ) {
 			groups.push( {
@@ -690,8 +708,10 @@ ve.dm.VisualDiff.prototype.getInternalListDiffInfo = function () {
 					( containsDiff( diff.rootChildrenOldToNew ) || containsDiff( diff.moves ) )
 				) {
 
-					// There are changes.
-					// Mark each new doc internal list item as unchanged, changed or inserted
+					/*
+					 * There are changes.
+					 * Mark each new doc internal list item as unchanged, changed or inserted
+					 */
 					newItems = newDocInternalListItems.indices;
 					for ( j = 0, jlen = newItems.length; j < jlen; j++ ) {
 						item = newItems[ j ];
@@ -708,8 +728,10 @@ ve.dm.VisualDiff.prototype.getInternalListDiffInfo = function () {
 
 						} else {
 
-							// Item has changed
-							// (The diff object is stored in rootChildrenOldToNew)
+							/*
+							 * Item has changed
+							 * (The diff object is stored in rootChildrenOldToNew)
+							 */
 							item.diff = diff.rootChildrenOldToNew[
 								diff.rootChildrenNewToOld[ itemIndex ].node
 							].diff;
@@ -724,8 +746,10 @@ ve.dm.VisualDiff.prototype.getInternalListDiffInfo = function () {
 						itemIndex = item.nodeIndex;
 						if ( diff.rootChildrenRemove.indexOf( j ) !== -1 ) {
 
-							// Item is either not in the new internal list, or has been marked
-							// as a remove-insert, so mark as removed
+							/*
+							 * Item is either not in the new internal list, or has been marked
+							 * as a remove-insert, so mark as removed
+							 */
 							item.diff = -1;
 							newItems.push( item );
 

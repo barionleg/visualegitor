@@ -93,8 +93,10 @@ ve.ce.LinearEnterKeyDownHandler.static.execute = function ( surface, e ) {
 			cursor === nodeModelRange.to
 		)
 	) {
-		// If we're at the start/end of something that's not a paragraph, insert a paragraph
-		// before/after. Insert after for empty nodes (from === to).
+		/*
+		 * If we're at the start/end of something that's not a paragraph, insert a paragraph
+		 * before/after. Insert after for empty nodes (from === to).
+		 */
 		if ( cursor === nodeModelRange.to ) {
 			txInsert = ve.dm.TransactionBuilder.static.newFromInsertion(
 				documentModel, nodeModel.getOuterRange().to, emptyParagraph
@@ -133,8 +135,10 @@ ve.ce.LinearEnterKeyDownHandler.static.execute = function ( surface, e ) {
 			cursor = prevContentOffset;
 			node = surface.documentView.getBranchNodeFromOffset( cursor );
 			txInsert = undefined;
-			// Continue to traverseUpstream below. That will succeed because all
-			// ContentBranchNodes have splitOnEnter === true.
+			/*
+			 * Continue to traverseUpstream below. That will succeed because all
+			 * ContentBranchNodes have splitOnEnter === true.
+			 */
 		}
 		insertEmptyParagraph = undefined;
 	}
@@ -142,9 +146,11 @@ ve.ce.LinearEnterKeyDownHandler.static.execute = function ( surface, e ) {
 	// Assertion: if txInsert === undefined then node.splitOnEnter() === true
 
 	if ( txInsert === undefined ) {
-		// This node has splitOnEnter = true. Traverse upstream until the first node
-		// that has splitOnEnter = false, splitting each node as it is reached. Set
-		// outermostNode to the last splittable node.
+		/*
+		 * This node has splitOnEnter = true. Traverse upstream until the first node
+		 * that has splitOnEnter = false, splitting each node as it is reached. Set
+		 * outermostNode to the last splittable node.
+		 */
 
 		node.traverseUpstream( function ( node ) {
 			if ( !node.splitOnEnter() ) {
@@ -182,8 +188,10 @@ ve.ce.LinearEnterKeyDownHandler.static.execute = function ( surface, e ) {
 			listParent = list.getParent();
 			advanceCursor = false;
 			if ( list.getChildren().length === 1 ) {
-				// The list item we're about to remove is the only child of the list
-				// Remove the list
+				/*
+				 * The list item we're about to remove is the only child of the list
+				 * Remove the list
+				 */
 				txInsert = ve.dm.TransactionBuilder.static.newFromRemoval(
 					documentModel, list.getOuterRange()
 				);

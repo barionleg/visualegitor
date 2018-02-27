@@ -31,10 +31,12 @@ ve.test.utils.runSurfaceHandleSpecialKeyTest = function ( assert, htmlOrDoc, ran
 			stopPropagation: function () {}
 		};
 		if ( fullEvents ) {
-			// Some key handlers do things like schedule after-event handlers,
-			// and so we want to fake the full sequence.
-			// TODO: Could probably switch to using this for every test, but it
-			// would need the faked testing surface to be improved.
+			/*
+			 * Some key handlers do things like schedule after-event handlers,
+			 * and so we want to fake the full sequence.
+			 * TODO: Could probably switch to using this for every test, but it
+			 * would need the faked testing surface to be improved.
+			 */
 			view.eventSequencer.onEvent( 'keydown', $.Event( 'keydown', e ) );
 			view.eventSequencer.onEvent( 'keypress', $.Event( 'keypress', e ) );
 			if ( forceSelection instanceof ve.Range ) {
@@ -661,10 +663,12 @@ QUnit.test( 'special key down: table cells', function ( assert ) {
 		);
 	}
 
-	// Allow the real surface created with createSurfaceFromDocument for the
-	// 'Tab at end of table inserts new row' case to get properly initialized
-	// before we end the test and kill it.
-	// FIXME Oh no eww gross
+	/*
+	 * Allow the real surface created with createSurfaceFromDocument for the
+	 * 'Tab at end of table inserts new row' case to get properly initialized
+	 * before we end the test and kill it.
+	 * FIXME Oh no eww gross
+	 */
 	setTimeout( assert.async(), 0 );
 } );
 
@@ -678,10 +682,12 @@ QUnit.test( 'special key down: linear arrow keys', function ( assert ) {
 			)
 		),
 		cases = [
-			// Within normal text. NOTE: these tests manually force the cursor to
-			// move, because we rely on native browser actions for that.
-			// As such, these are mostly testing to make sure that other
-			// behavior doesn't trigger when it shouldn't.
+			/*
+			 * Within normal text. NOTE: these tests manually force the cursor to
+			 * move, because we rely on native browser actions for that.
+			 * As such, these are mostly testing to make sure that other
+			 * behavior doesn't trigger when it shouldn't.
+			 */
 			{
 				htmlOrDoc: blockImageDoc,
 				rangeOrSelection: new ve.Range( 2 ),
@@ -804,9 +810,11 @@ QUnit.test( 'special key down: linear arrow keys', function ( assert ) {
 				expectedRangeOrSelection: new ve.Range( 19 ),
 				msg: 'Cursor page down off a block node'
 			},
-			// Cursoring onto a block node, which should focus it
-			// Again, these are forcibly moving the cursor, so it's not a perfect
-			// test; it's more checking how we fix up the selection afterwards.
+			/*
+			 * Cursoring onto a block node, which should focus it
+			 * Again, these are forcibly moving the cursor, so it's not a perfect
+			 * test; it's more checking how we fix up the selection afterwards.
+			 */
 			{
 				htmlOrDoc: blockImageDoc,
 				rangeOrSelection: new ve.Range( 4 ),
@@ -1420,16 +1428,16 @@ QUnit.test( 'onCopy', function ( assert ) {
 				msg: 'RDFa attributes encoded into data-ve-attributes'
 			}
 			/*
-			// Our CI environment uses either Chrome 57 (mediawiki/extensions/VisualEditor)
-			// or Chrome 63 (VisualEditor/VisualEditor), but they produce different results,
-			// so this test will always fail in at least one of them.
-			{
-				rangeOrSelection: new ve.Range( 0, 61 ),
-				expectedText: 'abc\n\nd\n\ne\n\nf\n\ng\n\nhi\nj\n\nk\n\nl\n\nm\n\n', // Chrome 57
-				expectedText: 'abc\nd\n\ne\n\nf\n\ng\n\nhi\nj\n\nk\n\nl\n\nm\n\n',   // Chrome 63
-				msg: 'Plain text of entire document'
-			}
-			*/
+			 * // Our CI environment uses either Chrome 57 (mediawiki/extensions/VisualEditor)
+			 * // or Chrome 63 (VisualEditor/VisualEditor), but they produce different results,
+			 * // so this test will always fail in at least one of them.
+			 * {
+			 * rangeOrSelection: new ve.Range( 0, 61 ),
+			 * expectedText: 'abc\n\nd\n\ne\n\nf\n\ng\n\nhi\nj\n\nk\n\nl\n\nm\n\n', // Chrome 57
+			 * expectedText: 'abc\nd\n\ne\n\nf\n\ng\n\nhi\nj\n\nk\n\nl\n\nm\n\n',   // Chrome 63
+			 * msg: 'Plain text of entire document'
+			 * }
+			 */
 		];
 
 	function testRunner( doc, rangeOrSelection, expectedData, expectedOriginalRange, expectedBalancedRange, expectedHtml, expectedText, msg ) {
@@ -3273,8 +3281,10 @@ QUnit.test( 'getSelectionState', function ( assert ) {
 				'<p>' +
 					'2<b>n</b>d' +
 				'</p>',
-				// The offset path of the result of getNodeAndOffset for
-				// each offset
+				/*
+				 * The offset path of the result of getNodeAndOffset for
+				 * each offset
+				 */
 				expected: [
 					[ 0, 0, 0 ],
 					[ 0, 0, 0 ],
@@ -3324,44 +3334,48 @@ QUnit.test( 'getSelectionState', function ( assert ) {
 } );
 
 /* Methods with return values */
-// TODO: ve.ce.Surface#getSelection
-// TODO: ve.ce.Surface#getSurface
-// TODO: ve.ce.Surface#getModel
-// TODO: ve.ce.Surface#getDocument
-// TODO: ve.ce.Surface#getFocusedNode
-// TODO: ve.ce.Surface#isRenderingLocked
+/*
+ * TODO: ve.ce.Surface#getSelection
+ * TODO: ve.ce.Surface#getSurface
+ * TODO: ve.ce.Surface#getModel
+ * TODO: ve.ce.Surface#getDocument
+ * TODO: ve.ce.Surface#getFocusedNode
+ * TODO: ve.ce.Surface#isRenderingLocked
+ */
 
 /* Methods without return values */
-// TODO: ve.ce.Surface#initialize
-// TODO: ve.ce.Surface#enable
-// TODO: ve.ce.Surface#disable
-// TODO: ve.ce.Surface#destroy
-// TODO: ve.ce.Surface#focus
-// TODO: ve.ce.Surface#onDocumentFocus
-// TODO: ve.ce.Surface#onDocumentBlur
-// TODO: ve.ce.Surface#onDocumentMouseDown
-// TODO: ve.ce.Surface#onDocumentMouseUp
-// TODO: ve.ce.Surface#onDocumentMouseMove
-// TODO: ve.ce.Surface#onDocumentDragOver
-// TODO: ve.ce.Surface#onDocumentDrop
-// TODO: ve.ce.Surface#onDocumentKeyDown
-// TODO: ve.ce.Surface#onDocumentKeyPress
-// TODO: ve.ce.Surface#afterDocumentKeyDown
-// TODO: ve.ce.Surface#afterDocumentMouseDown
-// TODO: ve.ce.Surface#afterDocumentMouseUp
-// TODO: ve.ce.Surface#afterDocumentKeyPress
-// TODO: ve.ce.Surface#onDocumentKeyUp
-// TODO: ve.ce.Surface#onCut
-// TODO: ve.ce.Surface#onPaste
-// TODO: ve.ce.Surface#onDocumentCompositionEnd
-// TODO: ve.ce.Surface#onChange
-// TODO: ve.ce.Surface#onSurfaceObserverSelectionChange
-// TODO: ve.ce.Surface#onLock
-// TODO: ve.ce.Surface#onUnlock
-// TODO: ve.ce.Surface#startRelocation
-// TODO: ve.ce.Surface#endRelocation
-// TODO: ve.ce.Surface#handleInsertion
-// TODO: ve.ce.Surface#showModelSelection
-// TODO: ve.ce.Surface#appendHighlights
-// TODO: ve.ce.Surface#incRenderLock
-// TODO: ve.ce.Surface#decRenderLock
+/*
+ * TODO: ve.ce.Surface#initialize
+ * TODO: ve.ce.Surface#enable
+ * TODO: ve.ce.Surface#disable
+ * TODO: ve.ce.Surface#destroy
+ * TODO: ve.ce.Surface#focus
+ * TODO: ve.ce.Surface#onDocumentFocus
+ * TODO: ve.ce.Surface#onDocumentBlur
+ * TODO: ve.ce.Surface#onDocumentMouseDown
+ * TODO: ve.ce.Surface#onDocumentMouseUp
+ * TODO: ve.ce.Surface#onDocumentMouseMove
+ * TODO: ve.ce.Surface#onDocumentDragOver
+ * TODO: ve.ce.Surface#onDocumentDrop
+ * TODO: ve.ce.Surface#onDocumentKeyDown
+ * TODO: ve.ce.Surface#onDocumentKeyPress
+ * TODO: ve.ce.Surface#afterDocumentKeyDown
+ * TODO: ve.ce.Surface#afterDocumentMouseDown
+ * TODO: ve.ce.Surface#afterDocumentMouseUp
+ * TODO: ve.ce.Surface#afterDocumentKeyPress
+ * TODO: ve.ce.Surface#onDocumentKeyUp
+ * TODO: ve.ce.Surface#onCut
+ * TODO: ve.ce.Surface#onPaste
+ * TODO: ve.ce.Surface#onDocumentCompositionEnd
+ * TODO: ve.ce.Surface#onChange
+ * TODO: ve.ce.Surface#onSurfaceObserverSelectionChange
+ * TODO: ve.ce.Surface#onLock
+ * TODO: ve.ce.Surface#onUnlock
+ * TODO: ve.ce.Surface#startRelocation
+ * TODO: ve.ce.Surface#endRelocation
+ * TODO: ve.ce.Surface#handleInsertion
+ * TODO: ve.ce.Surface#showModelSelection
+ * TODO: ve.ce.Surface#appendHighlights
+ * TODO: ve.ce.Surface#incRenderLock
+ * TODO: ve.ce.Surface#decRenderLock
+ */

@@ -92,9 +92,11 @@ ve.ui.WindowAction.prototype.open = function ( name, data, action ) {
 
 	if ( windowType === 'toolbar' || windowType === 'inspector' ) {
 		data = ve.extendObject( data, { surface: surface } );
-		// Auto-close the current window if it is different to the one we are
-		// trying to open.
-		// TODO: Make auto-close a window manager setting
+		/*
+		 * Auto-close the current window if it is different to the one we are
+		 * trying to open.
+		 * TODO: Make auto-close a window manager setting
+		 */
 		if ( currentWindow && currentWindow.constructor.static.name !== name ) {
 			autoClosePromises.push( windowManager.closeWindow( currentWindow ).closed );
 		}
@@ -131,9 +133,11 @@ ve.ui.WindowAction.prototype.open = function ( name, data, action ) {
 					}
 				} );
 				instance.opened.always( function () {
-					// This uses .always() so that the action is executed even if the window is already open
-					// (in which case opening it again fails). Hopefully we'll never have a situation where
-					// it's closed, the opening fails for some reason, and then weird things happen.
+					/*
+					 * This uses .always() so that the action is executed even if the window is already open
+					 * (in which case opening it again fails). Hopefully we'll never have a situation where
+					 * it's closed, the opening fails for some reason, and then weird things happen.
+					 */
 					if ( action ) {
 						win.executeAction( action );
 					}

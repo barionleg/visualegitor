@@ -218,8 +218,10 @@ ve.DiffMatchPatch.prototype.getCleanDiff = function ( oldData, newData, options 
 			previousAction = action;
 		}
 
-		// Convert any retains that do not end and start with spaces into remove-
-		// inserts
+		/*
+		 * Convert any retains that do not end and start with spaces into remove-
+		 * inserts
+		 */
 		for ( i = 0; i < diff.length; i++ ) {
 			action = diff[ i ][ 0 ];
 			data = diff[ i ][ 1 ];
@@ -233,24 +235,32 @@ ve.DiffMatchPatch.prototype.getCleanDiff = function ( oldData, newData, options 
 				notPreviousEndsWithWordBreak = i !== 0 && !isBreak( previousData.concat( data ), previousData.length );
 
 				if ( firstWordbreak === null && ( notNextStartsWithWordbreak || notPreviousEndsWithWordBreak ) ) {
-					// If there was no wordbreak, and there are no wordbreaks either side,
-					// the retain should be replaced with a remove-insert
+					/*
+					 * If there was no wordbreak, and there are no wordbreaks either side,
+					 * the retain should be replaced with a remove-insert
+					 */
 					diff.splice( i, 1, [ DIFF_DELETE, data ], [ DIFF_INSERT, data ] );
 					i++;
 				} else {
 					if ( notNextStartsWithWordbreak ) {
-						// Unless the next item starts with a wordbreak, replace the portion
-						// after the last wordbreak.
+						/*
+						 * Unless the next item starts with a wordbreak, replace the portion
+						 * after the last wordbreak.
+						 */
 						end = data.splice( lastWordbreak );
 					}
 					if ( notPreviousEndsWithWordBreak ) {
-						// Unless the previous item ends with a word break,replace the portion
-						// before the first wordbreak.
+						/*
+						 * Unless the previous item ends with a word break,replace the portion
+						 * before the first wordbreak.
+						 */
 						start = data.splice( 0, firstWordbreak );
 					} else {
-						// Skip over close tags to ensure a balanced remove/insert
-						// Word break logic should ensure that there aren't unbalanced
-						// tags on the left of the remove/insert
+						/*
+						 * Skip over close tags to ensure a balanced remove/insert
+						 * Word break logic should ensure that there aren't unbalanced
+						 * tags on the left of the remove/insert
+						 */
 						j = 0;
 						while ( ve.dm.LinearData.static.isCloseElementData( data[ j ] ) ) {
 							j++;
@@ -258,9 +268,11 @@ ve.DiffMatchPatch.prototype.getCleanDiff = function ( oldData, newData, options 
 						start = data.splice( 0, j );
 					}
 
-					// At this point the only portion we want to retain is what's left of
-					// data (if anything; if firstWordbreak === lastWordbreak !== null, then
-					// data has been spliced away completely).
+					/*
+					 * At this point the only portion we want to retain is what's left of
+					 * data (if anything; if firstWordbreak === lastWordbreak !== null, then
+					 * data has been spliced away completely).
+					 */
 					if ( start.length > 0 ) {
 						diff.splice( i, 0, [ DIFF_DELETE, start ], [ DIFF_INSERT, start ] );
 						i += 2;
@@ -276,8 +288,10 @@ ve.DiffMatchPatch.prototype.getCleanDiff = function ( oldData, newData, options 
 			previousData = data;
 		}
 
-		// In a sequence of -remove-insert-remove-insert- make the removes into a
-		// single action and the inserts into a single action
+		/*
+		 * In a sequence of -remove-insert-remove-insert- make the removes into a
+		 * single action and the inserts into a single action
+		 */
 		for ( i = 0, ilen = diff.length; i < ilen; i++ ) {
 			action = diff[ i ][ 0 ];
 			data = diff[ i ][ 1 ];
@@ -310,9 +324,11 @@ ve.DiffMatchPatch.prototype.getCleanDiff = function ( oldData, newData, options 
 			cleanDiff.push( [ DIFF_INSERT, insert ] );
 		}
 
-		// Now go over any consecutive remove-inserts (also insert-removes?) and
-		// if they have the same character data, or are modified content nodes,
-		// make them changes instead
+		/*
+		 * Now go over any consecutive remove-inserts (also insert-removes?) and
+		 * if they have the same character data, or are modified content nodes,
+		 * make them changes instead
+		 */
 		for ( i = 0, ilen = cleanDiff.length - 1; i < ilen; i++ ) {
 			aItem = cleanDiff[ i ];
 			bItem = cleanDiff[ i + 1 ];
@@ -320,10 +336,12 @@ ve.DiffMatchPatch.prototype.getCleanDiff = function ( oldData, newData, options 
 			bData = bItem[ 1 ];
 			aAction = aItem[ 0 ];
 			bAction = bItem[ 0 ];
-			// If they have the same length content and they are a consecutive
-			// remove and insert, and they have the same content then mark the
-			// old one as a change-remove (-2) and the new one as a change-insert
-			// (2)
+			/*
+			 * If they have the same length content and they are a consecutive
+			 * remove and insert, and they have the same content then mark the
+			 * old one as a change-remove (-2) and the new one as a change-insert
+			 * (2)
+			 */
 			if (
 				aData.length === bData.length &&
 				( ( aAction === DIFF_DELETE && bAction === DIFF_INSERT ) || ( aAction === DIFF_INSERT && bAction === DIFF_DELETE ) )
