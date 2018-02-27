@@ -350,8 +350,10 @@ ve.dm.Node.static.cloneElement = function ( element, store, preserveGenerated ) 
 	originalDomElements = store.value( clone.originalDomElementsIndex );
 	// Generate a new about attribute to prevent about grouping of cloned nodes
 	if ( originalDomElements ) {
-		// TODO: The '#mwtNNN' is required by Parsoid. Make the name used here
-		// more generic and specify the #mwt pattern in MW code.
+		/*
+		 * TODO: The '#mwtNNN' is required by Parsoid. Make the name used here
+		 * more generic and specify the #mwt pattern in MW code.
+		 */
 		about = '#mwt' + Math.floor( 1000000000 * Math.random() );
 		domElements = originalDomElements.map( function ( el ) {
 			var elClone = el.cloneNode( true );
@@ -674,10 +676,12 @@ ve.dm.Node.prototype.canBeMergedWith = function ( node ) {
 	var n1 = this,
 		n2 = node;
 
-	// Content node can be merged with node that can contain content, for instance: TextNode
-	// and ParagraphNode. When this method is called for such case (one node is a content node and
-	// the other one can contain content) make sure to start traversal from node that can contain
-	// content (instead of content node itself).
+	/*
+	 * Content node can be merged with node that can contain content, for instance: TextNode
+	 * and ParagraphNode. When this method is called for such case (one node is a content node and
+	 * the other one can contain content) make sure to start traversal from node that can contain
+	 * content (instead of content node itself).
+	 */
 	if ( n1.canContainContent() && n2.isContent() ) {
 		n2 = n2.getParent();
 	} else if ( n2.canContainContent() && n1.isContent() ) {

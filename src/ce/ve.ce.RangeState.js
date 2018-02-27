@@ -162,8 +162,10 @@ ve.ce.RangeState.prototype.saveState = function ( old, documentNode, selectionOn
 			);
 	}
 
-	// Save selection for future comparisons. (But it is not properly frozen, because the nodes
-	// are live and mutable, and therefore the offsets may come to point to places that are
-	// misleadingly different from when the selection was saved).
+	/*
+	 * Save selection for future comparisons. (But it is not properly frozen, because the nodes
+	 * are live and mutable, and therefore the offsets may come to point to places that are
+	 * misleadingly different from when the selection was saved).
+	 */
 	this.misleadingSelection = selection;
 };

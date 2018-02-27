@@ -61,9 +61,11 @@ ve.ce.TableCellNode.prototype.initialize = function () {
 
 	// DOM changes
 	this.$element
-		// The following classes can be used here:
-		// * ve-ce-tableCellNode-data
-		// * ve-ce-tableCellNode-header
+		/*
+		 * The following classes can be used here:
+		 * * ve-ce-tableCellNode-data
+		 * * ve-ce-tableCellNode-header
+		 */
 		.addClass( 've-ce-tableCellNode ve-ce-tableCellNode-' + this.model.getAttribute( 'style' ) );
 
 	// Set attributes (keep in sync with #onSetup)
@@ -94,8 +96,10 @@ ve.ce.TableCellNode.prototype.setEditing = function ( enable ) {
  * @inheritdoc ve.ce.ContentEditableNode
  */
 ve.ce.TableCellNode.prototype.setContentEditable = function () {
-	// Overwite any state passed to setContentEditable with this.editing, so that
-	// setContentEditable doesn't override the editing state.
+	/*
+	 * Overwite any state passed to setContentEditable with this.editing, so that
+	 * setContentEditable doesn't override the editing state.
+	 */
 	return ve.ce.ContentEditableNode.prototype.setContentEditable.call( this, this.editing );
 };
 
@@ -128,9 +132,11 @@ ve.ce.TableCellNode.prototype.onAttributeChange = function ( key, from, to ) {
 			}
 			break;
 		case 'style':
-			// The following classes can be used here:
-			// * ve-ce-tableCellNode-data
-			// * ve-ce-tableCellNode-header
+			/*
+			 * The following classes can be used here:
+			 * * ve-ce-tableCellNode-data
+			 * * ve-ce-tableCellNode-header
+			 */
 			this.$element
 				.removeClass( 've-ce-tableCellNode-' + from )
 				.addClass( 've-ce-tableCellNode-' + to );

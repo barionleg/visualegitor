@@ -43,10 +43,12 @@ ve.Filibuster = function VeFilibuster() {
 	this.frame = this.callTree;
 	// Path (index offsets) to current call frame
 	this.callPath = [];
-	// Index offset tree: {
-	//   changes: {enter: xxx, exit: xxx }
-	//   children: { index offset tree }
-	// }
+	/*
+	 * Index offset tree: {
+	 *   changes: {enter: xxx, exit: xxx }
+	 *   children: { index offset tree }
+	 * }
+	 */
 	this.observationTree = { children: {} };
 	this.active = false;
 	this.startTime = null;
@@ -163,9 +165,11 @@ ve.Filibuster.prototype.log = function ( funcName, action, args, returned ) {
 	}
 	time = ve.now() - this.startTime;
 	if ( action === 'call' ) {
-		// Descend down the call tree (adding a new frame)
-		// Store arguments as a cloned plain object, to avoid anachronistic changes and
-		// for easy display.
+		/*
+		 * Descend down the call tree (adding a new frame)
+		 * Store arguments as a cloned plain object, to avoid anachronistic changes and
+		 * for easy display.
+		 */
 		parentFrame = this.frame;
 		if ( !parentFrame.children ) {
 			parentFrame.children = [];
@@ -175,11 +179,15 @@ ve.Filibuster.prototype.log = function ( funcName, action, args, returned ) {
 			count: this.count++,
 			funcName: funcName,
 			args: this.constructor.static.clonePlain( args ),
-			// returned: xxx,
-			// thrown: xxx
+			/*
+			 * returned: xxx,
+			 * thrown: xxx
+			 */
 			start: time,
-			// end: xxx,
-			// children: xxx,
+			/*
+			 * end: xxx,
+			 * children: xxx,
+			 */
 			parent: parentFrame
 		};
 		parentFrame.children.push( this.frame );

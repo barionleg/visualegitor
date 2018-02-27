@@ -29,8 +29,10 @@ ve.ui.DiffElement = function VeUiDiffElement( visualDiff, config ) {
 	this.oldDocChildren = visualDiff.oldDocChildren;
 	this.newDocChildren = visualDiff.newDocChildren;
 
-	// Merge the old internal list into the new document, so that it knows
-	// about removed references
+	/*
+	 * Merge the old internal list into the new document, so that it knows
+	 * about removed references
+	 */
 	tx = ve.dm.TransactionBuilder.static.newFromDocumentInsertion( this.newDoc, 0, this.oldDoc, new ve.Range( 0 ) );
 	this.newDoc.commit( tx );
 
@@ -314,15 +316,19 @@ ve.ui.DiffElement.prototype.renderDiff = function () {
 
 		} else if ( this.remove.indexOf( i ) !== -1 ) {
 
-			// The old node is a remove. Decrement the new node index
-			// to compare the same new node to the next old node
+			/*
+			 * The old node is a remove. Decrement the new node index
+			 * to compare the same new node to the next old node
+			 */
 			diffQueue.push( [ 'getNodeElements', this.oldDocChildren[ i ], 'remove' ] );
 			j--;
 
 		} else if ( this.insert.indexOf( j ) !== -1 ) {
 
-			// The new node is an insert. Decrement the old node index
-			// to compare the same old node to the next new node
+			/*
+			 * The new node is an insert. Decrement the old node index
+			 * to compare the same old node to the next new node
+			 */
 			diffQueue.push( [ 'getNodeElements', this.newDocChildren[ j ], 'insert' ] );
 			i--;
 
@@ -331,12 +337,14 @@ ve.ui.DiffElement.prototype.renderDiff = function () {
 			this.internalListDiff[ this.newDocChildren[ j ].element.attributes.listGroup ]
 		) {
 
-			// New node is a references list node. If a reference has
-			// changed, the references list nodes appear unchanged,
-			// because of how the internal list works. However, we
-			// already have the HTML for the diffed references list,
-			// (which contains details of changes if there are any) so
-			// just get that.
+			/*
+			 * New node is a references list node. If a reference has
+			 * changed, the references list nodes appear unchanged,
+			 * because of how the internal list works. However, we
+			 * already have the HTML for the diffed references list,
+			 * (which contains details of changes if there are any) so
+			 * just get that.
+			 */
 			referencesListDiffDiv = referencesListDiffDivs[ this.newDocChildren[ j ].element.attributes.listGroup ];
 			diffQueue.push( [ 'getRefListNodeElements', referencesListDiffDiv.elements, referencesListDiffDiv.action, move ] );
 
@@ -498,42 +506,52 @@ ve.ui.DiffElement.prototype.getChangedNodeElements = function ( oldNodeIndex, mo
 
 		if ( !node.canContainContent() && node.hasChildren() ) {
 
-			// Record that the node has been removed, but don't display it, for now
-			// TODO: describe the change for the attribute diff
+			/*
+			 * Record that the node has been removed, but don't display it, for now
+			 * TODO: describe the change for the attribute diff
+			 */
 			structuralRemoves.push( nodeIndex );
 
 		} else {
 
-			// Display the removed node, and all its ancestors, up to the first ancestor that
-			// hasn't been removed.
+			/*
+			 * Display the removed node, and all its ancestors, up to the first ancestor that
+			 * hasn't been removed.
+			 */
 			highestRemovedAncestor = oldNodes[ findRemovedAncestor( orderedNode ) ];
 			removeData = getRemoveData.call( this, orderedNode, highestRemovedAncestor.index );
 
 			// Work out where to insert the removed subtree
 			if ( highestRemovedAncestor.index in highestRemovedAncestors ) {
 
-				// The highest removed ancestor has already been spliced into nodeData, so remove
-				// it from this subtree and splice the rest of this subtree in
+				/*
+				 * The highest removed ancestor has already been spliced into nodeData, so remove
+				 * it from this subtree and splice the rest of this subtree in
+				 */
 				removeData.shift();
 				removeData.pop();
 				insertIndex = highestRemovedAncestors[ highestRemovedAncestor.index ];
 
 			} else if ( !highestRemovedAncestor.parent ) {
 
-				// If this node is a child of the document node, then it won't have a "previous
-				// node" (see below), in which case, insert it just before its corresponding
-				// node in the new document.
+				/*
+				 * If this node is a child of the document node, then it won't have a "previous
+				 * node" (see below), in which case, insert it just before its corresponding
+				 * node in the new document.
+				 */
 				insertIndex = newNodes[ correspondingNodes.oldToNew[ highestRemovedAncestor.index ] ]
 					.node.getOuterRange().from - nodeRange.from;
 
 			} else {
 
-				// Find the node that corresponds to the "previous node" of this node. The
-				// "previous node" is either:
-				// - the rightmost left sibling that corresponds to a node in the new document
-				// - or if there isn't one, then this node's parent (which must correspond to
-				// a node in the new document, or this node would have been marked already
-				// processed)
+				/*
+				 * Find the node that corresponds to the "previous node" of this node. The
+				 * "previous node" is either:
+				 * - the rightmost left sibling that corresponds to a node in the new document
+				 * - or if there isn't one, then this node's parent (which must correspond to
+				 * a node in the new document, or this node would have been marked already
+				 * processed)
+				 */
 				siblingNodes = highestRemovedAncestor.parent.children;
 				for ( i = 0, ilen = siblingNodes.length; i < ilen; i++ ) {
 					if ( siblingNodes[ i ].index === highestRemovedAncestor.index ) {
@@ -544,9 +562,11 @@ ve.ui.DiffElement.prototype.getChangedNodeElements = function ( oldNodeIndex, mo
 					}
 				}
 
-				// If previous node was found among siblings, insert the removed subtree just
-				// after its corresponding node in the new document. Otherwise insert the
-				// removed subtree just inside its parent node's corresponding node.
+				/*
+				 * If previous node was found among siblings, insert the removed subtree just
+				 * after its corresponding node in the new document. Otherwise insert the
+				 * removed subtree just inside its parent node's corresponding node.
+				 */
 				if ( newPreviousNodeIndex ) {
 					insertIndex = newNodes[ newPreviousNodeIndex ].node.getOuterRange().to - nodeRange.from;
 				} else {
@@ -554,9 +574,11 @@ ve.ui.DiffElement.prototype.getChangedNodeElements = function ( oldNodeIndex, mo
 					insertIndex = newNodes[ newPreviousNodeIndex ].node.getRange().from - nodeRange.from;
 				}
 
-				// If more content branch node descendants of the highest removed node have
-				// also been removed, record the index where their subtrees will need to be
-				// spliced in.
+				/*
+				 * If more content branch node descendants of the highest removed node have
+				 * also been removed, record the index where their subtrees will need to be
+				 * spliced in.
+				 */
 				highestRemovedAncestors[ highestRemovedAncestor.index ] = insertIndex + 1;
 
 			}
@@ -597,8 +619,10 @@ ve.ui.DiffElement.prototype.getChangedNodeElements = function ( oldNodeIndex, mo
 	function highlightChangedNode( nodeIndex, diffInfo ) {
 		var node, nodeRangeStart, nodeDiffData, annotatedData, item;
 
-		// The new node was changed.
-		// Get data for this node
+		/*
+		 * The new node was changed.
+		 * Get data for this node
+		 */
 		node = newNodes[ nodeIndex ].node;
 		nodeRangeStart = node.getOuterRange().from - nodeRange.from;
 
@@ -620,8 +644,10 @@ ve.ui.DiffElement.prototype.getChangedNodeElements = function ( oldNodeIndex, mo
 		}
 	}
 
-	// Iterate backwards over trees so that changes are made from right to left
-	// of the data, to avoid having to update ranges
+	/*
+	 * Iterate backwards over trees so that changes are made from right to left
+	 * of the data, to avoid having to update ranges
+	 */
 	ilen = Math.max( oldNodes.length, newNodes.length );
 	jlen = ilen;
 	for ( i = 0, j = 0; i < ilen && j < jlen; i++, j++ ) {
@@ -742,8 +768,10 @@ ve.ui.DiffElement.prototype.getInternalListNodeElements = function ( internalLis
 			listItemNode.ownerDocument.adoptNode( elements[ 0 ] )
 		);
 	} else {
-		// TODO: This is MW-Cite-specific behaviour that VE core
-		// should know nothing about. Move to MWDiffElement?
+		/*
+		 * TODO: This is MW-Cite-specific behaviour that VE core
+		 * should know nothing about. Move to MWDiffElement?
+		 */
 		$( listItemNode ).append(
 			$( '<span>' )
 				.addClass( 've-ce-mwReferencesListNode-muted' )
@@ -887,8 +915,10 @@ ve.ui.DiffElement.prototype.annotateNode = function ( linearDiff ) {
 	}
 	diffDoc = this.newDoc.cloneWithData( diffDocData );
 
-	// Add spans with the appropriate attributes for removes and inserts
-	// TODO: do insert and remove outside of loop
+	/*
+	 * Add spans with the appropriate attributes for removes and inserts
+	 * TODO: do insert and remove outside of loop
+	 */
 	for ( i = 0; i < ilen; i++ ) {
 		end = start + linearDiff[ i ][ 1 ].length;
 		if ( start !== end ) {
@@ -967,8 +997,10 @@ ve.ui.DiffElement.prototype.annotateNode = function ( linearDiff ) {
 					} )
 				);
 
-				// Insert annotation above annotations that span the entire range
-				// and at least one character more
+				/*
+				 * Insert annotation above annotations that span the entire range
+				 * and at least one character more
+				 */
 				annIndexLists = [];
 				for (
 					j = Math.max( 0, range.start - 1 );

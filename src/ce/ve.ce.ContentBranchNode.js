@@ -34,8 +34,10 @@ ve.ce.ContentBranchNode = function VeCeContentBranchNode() {
 	// Events
 	this.connect( this, { childUpdate: 'onChildUpdate' } );
 	this.model.connect( this, { detach: 'onModelDetach' } );
-	// Some browsers allow clicking links inside contenteditable, such as in iOS Safari when the
-	// keyboard is closed
+	/*
+	 * Some browsers allow clicking links inside contenteditable, such as in iOS Safari when the
+	 * keyboard is closed
+	 */
 	this.$element.on( 'click', this.onClickHandler );
 };
 
@@ -141,10 +143,12 @@ ve.ce.ContentBranchNode.prototype.onSplice = function ( index, howmany ) {
 	// Parent method
 	ve.ce.ContentBranchNode.super.prototype.onSplice.apply( this, arguments );
 
-	// FIXME T126025: adjust slugNodes indexes if isRenderingLocked. This should be
-	// sufficient to keep this.slugNodes valid - only text changes can occur, which
-	// cannot create a requirement for a new slug (it can make an existing slug
-	// redundant, but it is harmless to leave it there).
+	/*
+	 * FIXME T126025: adjust slugNodes indexes if isRenderingLocked. This should be
+	 * sufficient to keep this.slugNodes valid - only text changes can occur, which
+	 * cannot create a requirement for a new slug (it can make an existing slug
+	 * redundant, but it is harmless to leave it there).
+	 */
 	if (
 		this.root instanceof ve.ce.DocumentNode &&
 		this.root.getSurface().isRenderingLocked
@@ -160,8 +164,10 @@ ve.ce.ContentBranchNode.prototype.onSplice = function ( index, howmany ) {
  * @inheritdoc
  */
 ve.ce.ContentBranchNode.prototype.setupBlockSlugs = function () {
-	// Respect render lock
-	// TODO: Can this check be moved into the parent method?
+	/*
+	 * Respect render lock
+	 * TODO: Can this check be moved into the parent method?
+	 */
 	if (
 		this.root instanceof ve.ce.DocumentNode &&
 		this.root.getSurface().isRenderingLocked()
@@ -176,8 +182,10 @@ ve.ce.ContentBranchNode.prototype.setupBlockSlugs = function () {
  * @inheritdoc
  */
 ve.ce.ContentBranchNode.prototype.setupInlineSlugs = function () {
-	// Respect render lock
-	// TODO: Can this check be moved into the parent method?
+	/*
+	 * Respect render lock
+	 * TODO: Can this check be moved into the parent method?
+	 */
 	if (
 		this.root instanceof ve.ce.DocumentNode &&
 		this.root.getSurface().isRenderingLocked()
@@ -260,8 +268,10 @@ ve.ce.ContentBranchNode.prototype.getRenderedContents = function () {
 		annotatedHtml = annotatedHtml.concat( this.children[ i ].getAnnotatedHtml() );
 	}
 
-	// Set relCursor to collapsed selection offset, or -1 if none
-	// (in which case we don't need to worry about preannotation)
+	/*
+	 * Set relCursor to collapsed selection offset, or -1 if none
+	 * (in which case we don't need to worry about preannotation)
+	 */
 	relCursor = -1;
 	if ( this.getRoot() ) {
 		ceSurface = this.getRoot().getSurface();
@@ -273,8 +283,10 @@ ve.ce.ContentBranchNode.prototype.getRenderedContents = function () {
 		}
 	}
 
-	// Set cursor status for renderContents. If hasCursor, splice unicorn marker at the
-	// collapsed selection offset. It will be rendered later if it is needed, else ignored
+	/*
+	 * Set cursor status for renderContents. If hasCursor, splice unicorn marker at the
+	 * collapsed selection offset. It will be rendered later if it is needed, else ignored
+	 */
 	if ( relCursor < 0 || relCursor > this.getLength() ) {
 		unicornInfo.hasCursor = false;
 	} else {
@@ -406,10 +418,12 @@ ve.ce.ContentBranchNode.prototype.renderContents = function () {
 	rendered = this.getRenderedContents();
 	unicornInfo = rendered.unicornInfo;
 
-	// Return if unchanged. Test by building the new version and checking DOM-equality.
-	// However we have to normalize to cope with consecutive text nodes. We can't normalize
-	// the attached version, because that would close IMEs. As an optimization, don't perform
-	// this checking if this node has never rendered before.
+	/*
+	 * Return if unchanged. Test by building the new version and checking DOM-equality.
+	 * However we have to normalize to cope with consecutive text nodes. We can't normalize
+	 * the attached version, because that would close IMEs. As an optimization, don't perform
+	 * this checking if this node has never rendered before.
+	 */
 
 	if ( this.rendered ) {
 		oldWrapper = this.$element[ 0 ].cloneNode( true );
@@ -479,9 +493,11 @@ ve.ce.ContentBranchNode.prototype.renderContents = function () {
  */
 ve.ce.ContentBranchNode.prototype.detach = function () {
 	if ( this.getRoot() ) {
-		// This should be true, as the root is removed in the parent detach
-		// method which hasn't run yet. However, just in case a node gets
-		// double-detached...
+		/*
+		 * This should be true, as the root is removed in the parent detach
+		 * method which hasn't run yet. However, just in case a node gets
+		 * double-detached...
+		 */
 		this.getRoot().getSurface().setNotUnicorning( this );
 	}
 

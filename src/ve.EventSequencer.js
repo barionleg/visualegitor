@@ -268,11 +268,13 @@ ve.EventSequencer.prototype.onEvent = function ( eventName, ev ) {
 		onListener = onListeners[ i ];
 		this.callListener( 'on', eventName, i, onListener, ev );
 	}
-	// Create a cancellable pending call. We need one even if there are no after*Listeners, to
-	// call resetAfterLoopTimeout which resets doneOneLoop to false.
-	// - Create the pendingCall object first
-	// - then create the setTimeout invocation to modify pendingCall.id
-	// - then set pendingCall.id to the setTimeout id, so the call can cancel itself
+	/*
+	 * Create a cancellable pending call. We need one even if there are no after*Listeners, to
+	 * call resetAfterLoopTimeout which resets doneOneLoop to false.
+	 * - Create the pendingCall object first
+	 * - then create the setTimeout invocation to modify pendingCall.id
+	 * - then set pendingCall.id to the setTimeout id, so the call can cancel itself
+	 */
 	pendingCall = { id: null, ev: ev, eventName: eventName };
 	eventSequencer = this;
 	id = this.postpone( function () {
@@ -387,9 +389,11 @@ ve.EventSequencer.prototype.runPendingCalls = function ( eventName ) {
 		afterKeyDownCalls = [];
 
 	for ( i = 0; i < this.pendingCalls.length; i++ ) {
-		// Length cache not possible, as a pending call appends another pending call.
-		// It's important that this list remains mutable, in the case that this
-		// function indirectly recurses.
+		/*
+		 * Length cache not possible, as a pending call appends another pending call.
+		 * It's important that this list remains mutable, in the case that this
+		 * function indirectly recurses.
+		 */
 		pendingCall = this.pendingCalls[ i ];
 		if ( pendingCall.id === null ) {
 			// The call has already run
@@ -403,8 +407,10 @@ ve.EventSequencer.prototype.runPendingCalls = function ( eventName ) {
 
 		this.cancelPostponed( pendingCall.id );
 		pendingCall.id = null;
-		// Force to run now. It's important that we set id to null before running,
-		// so that there's no chance a recursive call will call the listener again.
+		/*
+		 * Force to run now. It's important that we set id to null before running,
+		 * so that there's no chance a recursive call will call the listener again.
+		 */
 		this.afterEvent( pendingCall.eventName, pendingCall.ev );
 	}
 	// This is safe: we only ever appended to the list, so it's definitely exhausted now.

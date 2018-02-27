@@ -75,8 +75,10 @@ QUnit.test( 'getDomPosition', function ( assert ) {
 	// Create prior state by attaching manually, to avoid circular dependence on onSplice
 	ceParent.$element = $( '<p>' );
 	ceParent.children.push(
-		// Node with two DOM nodes
-		// TODO: The use of BranchNodeStub below is dissonant
+		/*
+		 * Node with two DOM nodes
+		 * TODO: The use of BranchNodeStub below is dissonant
+		 */
 		new ve.ce.LeafNode( new ve.dm.BranchNodeStub() ),
 		// Node with no DOM nodes
 		new ve.ce.LeafNode( new ve.dm.BranchNodeStub() ),

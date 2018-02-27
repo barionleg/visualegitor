@@ -127,8 +127,10 @@ ve.ui.LinearContext.prototype.afterContextChange = function () {
 			this.inspector &&
 			( !selectedNode || ( selectedNode !== this.lastSelectedNode ) )
 		) {
-			// Change state: inspector -> (closed|menu)
-			// Unless there is a selectedNode that hasn't changed (e.g. your inspector is editing a node)
+			/*
+			 * Change state: inspector -> (closed|menu)
+			 * Unless there is a selectedNode that hasn't changed (e.g. your inspector is editing a node)
+			 */
 			this.inspector.close();
 		}
 	} else {
@@ -158,9 +160,11 @@ ve.ui.LinearContext.prototype.onInspectorOpening = function ( win, opening ) {
 	this.isOpening = true;
 	this.inspector = win;
 
-	// Shut down the SurfaceObserver as soon as possible, so it doesn't get confused
-	// by the selection moving around in IE. Will be reenabled when inspector closes.
-	// FIXME this should be done in a nicer way, managed by the Surface classes
+	/*
+	 * Shut down the SurfaceObserver as soon as possible, so it doesn't get confused
+	 * by the selection moving around in IE. Will be reenabled when inspector closes.
+	 * FIXME this should be done in a nicer way, managed by the Surface classes
+	 */
 	observer.pollOnce();
 	observer.stopTimerLoop();
 
@@ -182,8 +186,10 @@ ve.ui.LinearContext.prototype.onInspectorOpening = function ( win, opening ) {
 		.always( function ( opened ) {
 			opened.always( function ( closed ) {
 				closed.always( function () {
-					// Don't try to close the inspector if a second
-					// opening has already been triggered
+					/*
+					 * Don't try to close the inspector if a second
+					 * opening has already been triggered
+					 */
 					if ( context.isOpening ) {
 						return;
 					}

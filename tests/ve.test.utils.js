@@ -218,8 +218,10 @@
 		var visualDiff, diffElement,
 			oldDoc = ve.dm.converter.getModelFromDom( ve.createDocumentFromHtml( caseItem.oldDoc ) ),
 			newDoc = ve.dm.converter.getModelFromDom( ve.createDocumentFromHtml( caseItem.newDoc ) );
-		// TODO: Differ expects newDoc to be derived from oldDoc and contain all its store data.
-		// We may want to remove that assumption from the differ?
+		/*
+		 * TODO: Differ expects newDoc to be derived from oldDoc and contain all its store data.
+		 * We may want to remove that assumption from the differ?
+		 */
 		newDoc.getStore().merge( oldDoc.getStore() );
 		visualDiff = new ve.dm.VisualDiff( oldDoc, newDoc );
 		diffElement = new ve.ui.DiffElement( visualDiff );
@@ -489,13 +491,17 @@
 
 		eventSequencer.endLoop = function () {
 			var i, f;
-			// Run every postponed call in order of postponement. Do not cache
-			// list length, because postponed calls may add more postponed calls
+			/*
+			 * Run every postponed call in order of postponement. Do not cache
+			 * list length, because postponed calls may add more postponed calls
+			 */
 			for ( i = 0; i < this.postponedCalls.length; i++ ) {
 				f = this.postponedCalls[ i ];
 				if ( f ) {
-					// Exceptions thrown here will leave the postponed calls
-					// list in an inconsistent state
+					/*
+					 * Exceptions thrown here will leave the postponed calls
+					 * list in an inconsistent state
+					 */
 					f();
 				}
 			}

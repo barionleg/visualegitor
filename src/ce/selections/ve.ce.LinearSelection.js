@@ -15,8 +15,10 @@ ve.ce.LinearSelection = function VeCeLinearSelection() {
 	// Parent constructor
 	ve.ce.LinearSelection.super.apply( this, arguments );
 
-	// Properties
-	// The focused node in the view when this selection was created, if one exists
+	/*
+	 * Properties
+	 * The focused node in the view when this selection was created, if one exists
+	 */
 	this.focusedNode = this.getSurface().getFocusedNode( this.getModel().getRange() );
 	this.direction = null;
 };
@@ -52,11 +54,13 @@ ve.ce.LinearSelection.prototype.getSelectionRects = function () {
 		return null;
 	}
 
-	// Support: Firefox, IE
-	// Calling getClientRects sometimes fails:
-	// * in Firefox on page load when the address bar is still focused
-	// * in empty paragraphs
-	// * near annotation nails
+	/*
+	 * Support: Firefox, IE
+	 * Calling getClientRects sometimes fails:
+	 * * in Firefox on page load when the address bar is still focused
+	 * * in empty paragraphs
+	 * * near annotation nails
+	 */
 	try {
 		rects = RangeFix.getClientRects( nativeRange );
 		if ( !rects.length ) {
@@ -168,11 +172,12 @@ ve.ce.LinearSelection.prototype.getNodeClientRectFromRange = function ( range ) 
 		return null;
 	}
 
-	// When possible, pretend the cursor is the left/right border of the node
-	// (depending on directionality) as a fallback.
-
-	// We would use getBoundingClientRect(), but in iOS7 that's relative to the
-	// document rather than to the viewport
+	/*
+	 * When possible, pretend the cursor is the left/right border of the node
+	 * (depending on directionality) as a fallback.
+	 * We would use getBoundingClientRect(), but in iOS7 that's relative to the
+	 * document rather than to the viewport
+	 */
 	rect = node.getClientRects()[ 0 ];
 	if ( !rect ) {
 		// FF can return null when focusNode is invisible

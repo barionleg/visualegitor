@@ -56,8 +56,10 @@ ve.dm.BlockImageNode.static.matchTagNames = [ 'figure' ];
 ve.dm.BlockImageNode.static.toDataElement = function ( domElements, converter ) {
 	var dataElement, figure, classAttr, img, caption, attributes, width, height, altText;
 
-	// Workaround for jQuery's .children() being expensive due to
-	// https://github.com/jquery/sizzle/issues/311
+	/*
+	 * Workaround for jQuery's .children() being expensive due to
+	 * https://github.com/jquery/sizzle/issues/311
+	 */
 	function findChildren( parent, nodeNames ) {
 		return Array.prototype.filter.call( parent.childNodes, function ( element ) {
 			return nodeNames.indexOf( element.nodeName.toLowerCase() ) !== -1;
@@ -103,9 +105,11 @@ ve.dm.BlockImageNode.static.toDataElement = function ( domElements, converter ) 
 	}
 };
 
-// TODO: Consider using jQuery instead of pure JS.
-// TODO: At this moment node is not resizable but when it will be then adding defaultSize class
-// should be more conditional.
+/*
+ * TODO: Consider using jQuery instead of pure JS.
+ * TODO: At this moment node is not resizable but when it will be then adding defaultSize class
+ * should be more conditional.
+ */
 ve.dm.BlockImageNode.static.toDomElements = function ( data, doc, converter ) {
 	var dataElement = data[ 0 ],
 		width = dataElement.attributes.width,
@@ -128,8 +132,10 @@ ve.dm.BlockImageNode.static.toDomElements = function ( data, doc, converter ) {
 		figure.className = classAttr;
 	}
 
-	// If length of captionData is smaller or equal to 2 it means that there is no caption or that
-	// it is empty - in both cases we are going to skip appending <figcaption>.
+	/*
+	 * If length of captionData is smaller or equal to 2 it means that there is no caption or that
+	 * it is empty - in both cases we are going to skip appending <figcaption>.
+	 */
 	if ( captionData.length > 2 ) {
 		converter.getDomSubtreeFromData( data.slice( 1, -1 ), wrapper );
 		while ( wrapper.firstChild ) {

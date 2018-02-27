@@ -63,8 +63,10 @@ QUnit.test( 'convertToData', function ( assert ) {
 			{ type: '/internalList' }
 		];
 
-	// Mimic convert state setup (as done in ve.dm.Converter#getDataFromDom)
-	// TODO: The test should not (directly) reference the global instance
+	/*
+	 * Mimic convert state setup (as done in ve.dm.Converter#getDataFromDom)
+	 * TODO: The test should not (directly) reference the global instance
+	 */
 	ve.dm.converter.doc = htmlDoc;
 	ve.dm.converter.store = doc.getStore();
 	ve.dm.converter.internalList = internalList;

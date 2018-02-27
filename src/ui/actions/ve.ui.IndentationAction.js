@@ -156,10 +156,11 @@ ve.ui.IndentationAction.prototype.indentListItem = function ( listItem ) {
 	listType = listItem.getParent().getAttribute( 'style' );
 	listItemRange = listItem.getOuterRange();
 
-	// CAREFUL: after initializing the variables above, we cannot use the model tree!
-	// The first transaction will cause rebuilds so the nodes we have references to now
-	// will be detached and useless after the first transaction. Instead, inspect
-	// documentModel.data to find out things about the current structure.
+	/*
+	 * CAREFUL: after initializing the variables above, we cannot use the model tree!
+	 * The first transaction will cause rebuilds so the nodes we have references to now
+	 * will be detached and useless after the first transaction. Instead, inspect
+	 * documentModel.data to find out things about the current structure. */
 
 	// (1) Wrap the listItem in a list and a listItem
 	surfaceModel.getLinearFragment( listItemRange, true )
@@ -224,13 +225,14 @@ ve.ui.IndentationAction.prototype.unindentListItem = function ( listItem ) {
 	 * 3b. Split the listItem after the list if it's not the last child
 	 * 4. Unwrap the now-isolated listItem and the isolated list
 	 */
-	// TODO: Child list handling, gotta figure that out.
-	// CAREFUL: after initializing the variables above, we cannot use the model tree!
-	// The first transaction will cause rebuilds so the nodes we have references to now
-	// will be detached and useless after the first transaction. Instead, inspect
-	// documentModel.data to find out things about the current structure.
-
-	// (1) Split the listItem into a separate list
+	/*
+	 * TODO: Child list handling, gotta figure that out.
+	 * CAREFUL: after initializing the variables above, we cannot use the model tree!
+	 * The first transaction will cause rebuilds so the nodes we have references to now
+	 * will be detached and useless after the first transaction. Instead, inspect
+	 * documentModel.data to find out things about the current structure.
+	 * (1) Split the listItem into a separate list
+	 */
 	if ( documentModel.data.getData( listItemRange.start - 1 ).type !== 'list' ) {
 		// (1a) listItem is not the first child, split the list before listItem
 		tx = ve.dm.TransactionBuilder.static.newFromInsertion( documentModel, listItemRange.start,
@@ -251,14 +253,18 @@ ve.ui.IndentationAction.prototype.unindentListItem = function ( listItem ) {
 	splitListRange = new ve.Range( listItemRange.start - 1, listItemRange.end + 1 );
 
 	if ( grandParentType !== 'listItem' ) {
-		// The user is trying to unindent a list item that's not nested
-		// (2) Unwrap both the list and the listItem, dumping the listItem's contents
-		// into the list's parent
+		/*
+		 * The user is trying to unindent a list item that's not nested
+		 * (2) Unwrap both the list and the listItem, dumping the listItem's contents
+		 * into the list's parent
+		 */
 		surfaceModel.getLinearFragment( new ve.Range( listItemRange.start + 1, listItemRange.end - 1 ), true )
 			.unwrapNodes( 2 );
 
-		// Ensure paragraphs are not generated paragraphs now
-		// that they are not in a list
+		/*
+		 * Ensure paragraphs are not generated paragraphs now
+		 * that they are not in a list
+		 */
 		children = fragment.getSiblingNodes();
 		for ( i = 0, length = children.length; i < length; i++ ) {
 			child = children[ i ].node;
@@ -267,8 +273,10 @@ ve.ui.IndentationAction.prototype.unindentListItem = function ( listItem ) {
 			}
 		}
 	} else {
-		// (3) Split the list away from parentListItem into its own listItem
-		// TODO factor common split logic somehow?
+		/*
+		 * (3) Split the list away from parentListItem into its own listItem
+		 * TODO factor common split logic somehow?
+		 */
 		if ( documentModel.data.getData( splitListRange.start - 1 ).type !== 'listItem' ) {
 			// (3a) Split parentListItem before list
 			tx = ve.dm.TransactionBuilder.static.newFromInsertion( documentModel, splitListRange.start,

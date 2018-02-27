@@ -4,8 +4,10 @@
  * @copyright 2011-2018 VisualEditor Team and others; see http://ve.mit-license.org
  */
 
-// Extend QUnit.module to provide a fixture element. This used to be in tests/index.html, but
-// dynamic test runners like Karma build their own web page.
+/*
+ * Extend QUnit.module to provide a fixture element. This used to be in tests/index.html, but
+ * dynamic test runners like Karma build their own web page.
+ */
 ( function ( QUnit ) {
 	var orgModule = QUnit.module;
 

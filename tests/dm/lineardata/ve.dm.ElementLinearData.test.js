@@ -1501,8 +1501,10 @@ QUnit.test( 'getWordRange', function ( assert ) {
 		];
 
 	for ( i = 0; i < cases.length; i++ ) {
-		// Construct the text (inside a paragraph, because getNearestContentOffset assumes
-		// text cannot be at the very start or end of the data).
+		/*
+		 * Construct the text (inside a paragraph, because getNearestContentOffset assumes
+		 * text cannot be at the very start or end of the data).
+		 */
 		data = cases[ i ].phrase.split( '' );
 		data.unshift( { type: 'paragraph' } );
 		data.push( { type: '/paragraph' } );
@@ -2168,10 +2170,12 @@ QUnit.test( 'compareElements and compareElementsUnannotated', function ( assert 
 	}
 } );
 
-// TODO: ve.dm.ElementLinearData#setAnnotationsAtOffset
-// TODO: ve.dm.ElementLinearData#getCharacterData
-// TODO: ve.dm.ElementLinearData#getAnnotatedRangeFromSelection
-// TODO: ve.dm.ElementLinearData#getNearestContentOffset
-// TODO: ve.dm.ElementLinearData#remapInternalListIndexes
-// TODO: ve.dm.ElementLinearData#remapInternalListKeys
-// TODO: ve.dm.ElementLinearData#cloneElements
+/*
+ * TODO: ve.dm.ElementLinearData#setAnnotationsAtOffset
+ * TODO: ve.dm.ElementLinearData#getCharacterData
+ * TODO: ve.dm.ElementLinearData#getAnnotatedRangeFromSelection
+ * TODO: ve.dm.ElementLinearData#getNearestContentOffset
+ * TODO: ve.dm.ElementLinearData#remapInternalListIndexes
+ * TODO: ve.dm.ElementLinearData#remapInternalListKeys
+ * TODO: ve.dm.ElementLinearData#cloneElements
+ */

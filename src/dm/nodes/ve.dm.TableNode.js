@@ -17,8 +17,10 @@ ve.dm.TableNode = function VeDmTableNode() {
 	// Parent constructor
 	ve.dm.TableNode.super.apply( this, arguments );
 
-	// A dense representation of the sparse model to make manipulations
-	// in presence of spanning cells feasible.
+	/*
+	 * A dense representation of the sparse model to make manipulations
+	 * in presence of spanning cells feasible.
+	 */
 	this.matrix = new ve.dm.TableMatrix( this );
 
 	// Events

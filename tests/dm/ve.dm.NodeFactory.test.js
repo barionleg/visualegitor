@@ -124,12 +124,14 @@ QUnit.test( 'initialization', function ( assert ) {
 	assert.ok( ve.dm.nodeFactory instanceof ve.dm.NodeFactory, 'factory is initialized at ve.dm.nodeFactory' );
 } );
 
-// TODO: getDataElement
-// TODO: getSuggestedParentNodeTypes
-// TODO: isNodeWrapped
-// TODO: canNodeContainContent
-// TODO: isNodeContent
-// TODO: doesNodeHaveSignificantWhitespace
-// TODO: doesNodeHandleOwnChildren
-// TODO: shouldIgnoreChildren
-// TODO: isNodeInternal
+/*
+ * TODO: getDataElement
+ * TODO: getSuggestedParentNodeTypes
+ * TODO: isNodeWrapped
+ * TODO: canNodeContainContent
+ * TODO: isNodeContent
+ * TODO: doesNodeHaveSignificantWhitespace
+ * TODO: doesNodeHandleOwnChildren
+ * TODO: shouldIgnoreChildren
+ * TODO: isNodeInternal
+ */

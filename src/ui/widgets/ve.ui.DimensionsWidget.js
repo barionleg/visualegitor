@@ -198,8 +198,10 @@ ve.ui.DimensionsWidget.prototype.getDimensions = function () {
  * @param {boolean} isDisabled Set disabled or enabled
  */
 ve.ui.DimensionsWidget.prototype.setDisabled = function ( isDisabled ) {
-	// The 'setDisabled' method runs in the constructor before the
-	// inputs are initialized
+	/*
+	 * The 'setDisabled' method runs in the constructor before the
+	 * inputs are initialized
+	 */
 	if ( this.widthInput ) {
 		this.widthInput.setDisabled( isDisabled );
 	}

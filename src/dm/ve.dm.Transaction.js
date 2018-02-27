@@ -82,8 +82,10 @@ ve.dm.Transaction.static.deserialize = function ( data ) {
 		if ( typeof data === 'string' ) {
 			return data.split( '' );
 		}
-		// Else deep copy. For this plain, serializable array, stringify+parse profiles
-		// faster than ve.copy
+		/*
+		 * Else deep copy. For this plain, serializable array, stringify+parse profiles
+		 * faster than ve.copy
+		 */
 		return JSON.parse( JSON.stringify( data ) );
 	}
 
@@ -98,8 +100,10 @@ ve.dm.Transaction.static.deserialize = function ( data ) {
 				insert: deminifyLinearData( op[ 1 ] )
 			};
 		}
-		// Else deep copy. For this plain, serializable array, stringify+parse profiles
-		// faster than ve.copy
+		/*
+		 * Else deep copy. For this plain, serializable array, stringify+parse profiles
+		 * faster than ve.copy
+		 */
 		return JSON.parse( JSON.stringify( op ) );
 	}
 
@@ -406,14 +410,18 @@ ve.dm.Transaction.prototype.translateOffset = function ( offset, excludeInsertio
 					// Translate it to after the removal
 					return cursor + removeLength + adjustment;
 				} else {
-					// Translate it to before the replacement
-					// To translate this correctly, we have to use adjustment as it was before
-					// we adjusted it for this replacement
+					/*
+					 * Translate it to before the replacement
+					 * To translate this correctly, we have to use adjustment as it was before
+					 * we adjusted it for this replacement
+					 */
 					return cursor + prevAdjustment;
 				}
 			} else if ( offset > cursor && offset < cursor + removeLength ) {
-				// The offset points inside of the removal
-				// Translate it to after the removal
+				/*
+				 * The offset points inside of the removal
+				 * Translate it to after the removal
+				 */
 				return cursor + removeLength + adjustment;
 			}
 			cursor += removeLength;

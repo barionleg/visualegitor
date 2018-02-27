@@ -53,8 +53,10 @@ ve.ce.TableRowNode.prototype.onSplice = function () {
 	// Defer call until after other changes in this cycle have been made
 	setTimeout( function () {
 		if ( node.getRoot() ) {
-			// It's possible for this to have been removed from the model in the last tick
-			// This mostly seems to happen during cell merges
+			/*
+			 * It's possible for this to have been removed from the model in the last tick
+			 * This mostly seems to happen during cell merges
+			 */
 			node.setupMissingCell();
 		}
 	} );

@@ -370,8 +370,10 @@ QUnit.test( 'getOffsetFromSourceOffset / getSourceOffsetFromOffset / getRangeFro
 	assert.equalRange( surface.getRangeFromSourceOffsets( 8 ), new ve.Range( 11 ), 'Collapsed range (1 arg)' );
 } );
 
-// TODO: ve.dm.Surface#getHistory
-// TODO: ve.dm.Surface#canRedo
-// TODO: ve.dm.Surface#canUndo
-// TODO: ve.dm.Surface#hasBeenModified
-// TODO: ve.dm.Surface#truncateUndoStack
+/*
+ * TODO: ve.dm.Surface#getHistory
+ * TODO: ve.dm.Surface#canRedo
+ * TODO: ve.dm.Surface#canUndo
+ * TODO: ve.dm.Surface#hasBeenModified
+ * TODO: ve.dm.Surface#truncateUndoStack
+ */

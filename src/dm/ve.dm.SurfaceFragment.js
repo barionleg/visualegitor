@@ -777,8 +777,10 @@ ve.dm.SurfaceFragment.prototype.insertContent = function ( content, annotate ) {
 
 	if ( !range.isCollapsed() ) {
 		if ( annotate ) {
-			// If we're replacing content, use the annotations selected
-			// instead of continuing from the left
+			/*
+			 * If we're replacing content, use the annotations selected
+			 * instead of continuing from the left
+			 */
 			annotations = this.getAnnotations();
 		}
 		this.removeContent();
@@ -804,25 +806,31 @@ ve.dm.SurfaceFragment.prototype.insertContent = function ( content, annotate ) {
 	}
 	if ( content.length ) {
 		if ( annotate && !annotations ) {
-			// TODO T126021: Don't reach into properties of document
-			// FIXME T126022: the logic we actually need for annotating inserted content
-			// correctly is much more complicated
+			/*
+			 * TODO T126021: Don't reach into properties of document
+			 * FIXME T126022: the logic we actually need for annotating inserted content
+			 * correctly is much more complicated
+			 */
 			annotations = doc.data
 				.getAnnotationsFromOffset( offset === 0 ? 0 : offset - 1 );
 		}
 		if ( annotations && annotations.getLength() > 0 ) {
-			// Add the annotations to the content, passing the
-			// replaceComparable argument which will remove any comparable
-			// annotations from content so that they can be replaced with
-			// those in annotations. This has the effect of not double-
-			// wrapping any annotations which are identical apart from their
-			// original DOM element so we don't generate markup like
-			// <b>f<b>o</b>o</b> when pasting.
+			/*
+			 * Add the annotations to the content, passing the
+			 * replaceComparable argument which will remove any comparable
+			 * annotations from content so that they can be replaced with
+			 * those in annotations. This has the effect of not double-
+			 * wrapping any annotations which are identical apart from their
+			 * original DOM element so we don't generate markup like
+			 * <b>f<b>o</b>o</b> when pasting.
+			 */
 			ve.dm.Document.static.addAnnotationsToData( content, annotations, true, doc.store );
 		}
 		tx = ve.dm.TransactionBuilder.static.newFromInsertion( doc, offset, content );
-		// Set the range to cover the inserted content; the offset translation will be wrong
-		// if newFromInsertion() decided to move the insertion point
+		/*
+		 * Set the range to cover the inserted content; the offset translation will be wrong
+		 * if newFromInsertion() decided to move the insertion point
+		 */
 		newRange = tx.getModifiedRange( doc );
 		this.change( tx, newRange ? new ve.dm.LinearSelection( doc, newRange ) : new ve.dm.NullSelection( doc ) );
 	}
@@ -871,8 +879,10 @@ ve.dm.SurfaceFragment.prototype.insertDocument = function ( newDoc, newDocRange,
 
 	if ( !range.isCollapsed() ) {
 		if ( annotate ) {
-			// If we're replacing content, use the annotations selected
-			// instead of continuing from the left
+			/*
+			 * If we're replacing content, use the annotations selected
+			 * instead of continuing from the left
+			 */
 			annotations = this.getAnnotations();
 		}
 		this.removeContent();
@@ -888,17 +898,21 @@ ve.dm.SurfaceFragment.prototype.insertDocument = function ( newDoc, newDocRange,
 	if ( !annotations || annotations.getLength() === 0 ) {
 		annotatedDoc = newDoc;
 	} else {
-		// Build shallow-cloned annotatedData array, copying on write as we go
-		// FIXME T126022: the logic we actually need for annotating inserted content
-		// correctly is much more complicated
+		/*
+		 * Build shallow-cloned annotatedData array, copying on write as we go
+		 * FIXME T126022: the logic we actually need for annotating inserted content
+		 * correctly is much more complicated
+		 */
 		annotatedData = newDoc.data.slice();
 		ve.dm.Document.static.addAnnotationsToData( annotatedData, annotations, true, newDoc.store, true );
 		annotatedDoc = newDoc.cloneWithData( annotatedData );
 	}
 	tx = ve.dm.TransactionBuilder.static.newFromDocumentInsertion( doc, offset, annotatedDoc, newDocRange );
 	if ( !tx.isNoOp() ) {
-		// Set the range to cover the inserted content; the offset translation will be wrong
-		// if newFromInsertion() decided to move the insertion point
+		/*
+		 * Set the range to cover the inserted content; the offset translation will be wrong
+		 * if newFromInsertion() decided to move the insertion point
+		 */
 		newRange = tx.getModifiedRange( doc );
 		this.change( tx, newRange ? new ve.dm.LinearSelection( doc, newRange ) : new ve.dm.NullSelection( doc ) );
 	}
@@ -939,10 +953,12 @@ ve.dm.SurfaceFragment.prototype.delete = function ( directionAfterDelete ) {
 		return this;
 	}
 
-	// Try to build a removal transaction. At the moment the transaction processor is only
-	// capable of merging nodes of the same type and at the same depth level, so some or all
-	// of rangeToRemove may be left untouched (and in some cases tx may not remove anything
-	// at all).
+	/*
+	 * Try to build a removal transaction. At the moment the transaction processor is only
+	 * capable of merging nodes of the same type and at the same depth level, so some or all
+	 * of rangeToRemove may be left untouched (and in some cases tx may not remove anything
+	 * at all).
+	 */
 	tx = ve.dm.TransactionBuilder.static.newFromRemoval( this.document, rangeToRemove );
 	this.change( tx );
 	rangeAfterRemove = tx.translateRange( rangeToRemove );
@@ -953,24 +969,30 @@ ve.dm.SurfaceFragment.prototype.delete = function ( directionAfterDelete ) {
 		// If endNode is within our rangeAfterRemove, then we shouldn't delete it
 		endNode.getRange().start >= rangeAfterRemove.end
 	) {
-		// If after processing removal transaction range is not collapsed it means that
-		// not everything got merged nicely, so we process further to deal with
-		// remaining content.
+		/*
+		 * If after processing removal transaction range is not collapsed it means that
+		 * not everything got merged nicely, so we process further to deal with
+		 * remaining content.
+		 */
 
 		startNode = this.document.getBranchNodeFromOffset( rangeAfterRemove.start, false );
 		if ( startNode.getRange().isCollapsed() ) {
-			// If startNode has no content then just delete that node instead of
-			// moving content from endNode to startNode. This prevents content being
-			// inserted into empty structure, e.g. and empty heading will be deleted
-			// rather than "converting" the paragraph beneath to a heading.
+			/*
+			 * If startNode has no content then just delete that node instead of
+			 * moving content from endNode to startNode. This prevents content being
+			 * inserted into empty structure, e.g. and empty heading will be deleted
+			 * rather than "converting" the paragraph beneath to a heading.
+			 */
 			while ( true ) {
 				tx = ve.dm.TransactionBuilder.static.newFromRemoval( this.document, startNode.getOuterRange() );
 				startNode = startNode.getParent();
 				this.change( tx );
 
-				// If the removal resulted in the parent node being empty (e.g.
-				// when startNode was a paragraph inside a list item), loop to
-				// delete the parent node. Else break.
+				/*
+				 * If the removal resulted in the parent node being empty (e.g.
+				 * when startNode was a paragraph inside a list item), loop to
+				 * delete the parent node. Else break.
+				 */
 				if ( !( startNode && startNode.children.length === 0 && (
 					startNode.hasSlugAtOffset( startNode.getRange().start ) ||
 					// These would be uneditable when empty, so remove
@@ -979,15 +1001,19 @@ ve.dm.SurfaceFragment.prototype.delete = function ( directionAfterDelete ) {
 				) && startNode.canHaveChildrenNotContent() ) ) {
 					break;
 				}
-				// Only fix up the range if we're going to loop (if we're not, the
-				// range collapse using getNearestContentOffset below will already
-				// do the fix up).
+				/*
+				 * Only fix up the range if we're going to loop (if we're not, the
+				 * range collapse using getNearestContentOffset below will already
+				 * do the fix up).
+				 */
 				rangeAfterRemove = tx.translateRange( rangeAfterRemove );
 			}
 		} else {
-			// If startNode has content then take remaining content from endNode and
-			// append it into startNode. Then remove endNode (and recursively any
-			// ancestor that the removal causes to be empty).
+			/*
+			 * If startNode has content then take remaining content from endNode and
+			 * append it into startNode. Then remove endNode (and recursively any
+			 * ancestor that the removal causes to be empty).
+			 */
 			endNodeData = this.document.getData( endNode.getRange() );
 			nodeToDelete = endNode;
 			nodeToDelete.traverseUpstream( function ( node ) {
@@ -1024,11 +1050,13 @@ ve.dm.SurfaceFragment.prototype.delete = function ( directionAfterDelete ) {
 	if ( nearestOffset > -1 ) {
 		rangeAfterRemove = new ve.Range( nearestOffset );
 	} else {
-		// There isn't a valid content offset. This probably means that we're
-		// in a strange document which consists entirely of aliens, with no
-		// text entered. This is unusual, but not impossible. As such, just
-		// collapse the selection and accept that it won't really be
-		// meaningful in most cases.
+		/*
+		 * There isn't a valid content offset. This probably means that we're
+		 * in a strange document which consists entirely of aliens, with no
+		 * text entered. This is unusual, but not impossible. As such, just
+		 * collapse the selection and accept that it won't really be
+		 * meaningful in most cases.
+		 */
 		rangeAfterRemove = new ve.Range( rangeAfterRemove.start );
 	}
 
@@ -1374,9 +1402,11 @@ ve.dm.SurfaceFragment.prototype.isolateAndUnwrap = function ( isolateForType ) {
 		}
 	}
 
-	// We have to exclude insertions while doing splits, because we want the range to be
-	// exactly what we're isolating, we don't want it to grow to include the separators
-	// we're inserting (which would happen if one of them is immediately adjacent to the range)
+	/*
+	 * We have to exclude insertions while doing splits, because we want the range to be
+	 * exactly what we're isolating, we don't want it to grow to include the separators
+	 * we're inserting (which would happen if one of them is immediately adjacent to the range)
+	 */
 	oldExclude = this.willExcludeInsertions();
 	this.setExcludeInsertions( true );
 

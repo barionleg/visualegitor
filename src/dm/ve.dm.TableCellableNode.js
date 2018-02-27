@@ -128,10 +128,12 @@ ve.dm.TableCellableNode.prototype.getStyle = function () {
  */
 ve.dm.TableCellableNode.prototype.onCellableAttributeChange = function ( key ) {
 	if ( this.getParent() && ( key === 'colspan' || key === 'rowspan' ) ) {
-		// In practice the matrix should already be invalidated as you
-		// shouldn't change a span without adding/removing other cells,
-		// but it is possible to just change spans if you don't mind a
-		// non-rectangular table.
+		/*
+		 * In practice the matrix should already be invalidated as you
+		 * shouldn't change a span without adding/removing other cells,
+		 * but it is possible to just change spans if you don't mind a
+		 * non-rectangular table.
+		 */
 		this.findParent( ve.dm.TableNode ).getMatrix().invalidate();
 	}
 };

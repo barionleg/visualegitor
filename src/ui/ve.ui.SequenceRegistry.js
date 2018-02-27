@@ -53,18 +53,19 @@ ve.ui.SequenceRegistry.prototype.findMatching = function ( data, offset, isPaste
 		state = 0,
 		sequences = [];
 
-	// To avoid blowup when matching RegExp sequences, we're going to grab
-	// all the plaintext to the left (until the nearest node) *once* and pass
-	// it to each sequence matcher.  We're also going to hard-limit that
-	// plaintext to 256 characters to ensure we don't run into O(N^2)
-	// slowdown when inserting N characters of plain text.
-
-	// First skip over open elements, then close elements, to ensure that
-	// pressing enter after a (possibly nested) list item or inside a
-	// paragraph works properly.  Typing "foo\n" inside a paragraph creates
-	// "foo</p><p>" in the content model, and typing "foo\n" inside a list
-	// creates "foo</p></li><li><p>" -- we want to give the matcher a
-	// chance to match "foo\n+" in these cases.
+	/*
+	 * To avoid blowup when matching RegExp sequences, we're going to grab
+	 * all the plaintext to the left (until the nearest node) *once* and pass
+	 * it to each sequence matcher.  We're also going to hard-limit that
+	 * plaintext to 256 characters to ensure we don't run into O(N^2)
+	 * slowdown when inserting N characters of plain text.
+	 * First skip over open elements, then close elements, to ensure that
+	 * pressing enter after a (possibly nested) list item or inside a
+	 * paragraph works properly.  Typing "foo\n" inside a paragraph creates
+	 * "foo</p><p>" in the content model, and typing "foo\n" inside a list
+	 * creates "foo</p></li><li><p>" -- we want to give the matcher a
+	 * chance to match "foo\n+" in these cases.
+	 */
 	for ( textStart = offset - 1; textStart >= 0 && ( offset - textStart ) <= 256; textStart-- ) {
 		if ( state === 0 && !data.isOpenElementData( textStart ) ) {
 			state++;

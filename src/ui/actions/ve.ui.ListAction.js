@@ -116,8 +116,10 @@ ve.ui.ListAction.prototype.wrap = function ( style, noBreakpoints ) {
 		surfaceModel.breakpoint();
 	}
 
-	// TODO: Would be good to refactor at some point and avoid/abstract path split for block slug
-	// and not block slug.
+	/*
+	 * TODO: Would be good to refactor at some point and avoid/abstract path split for block slug
+	 * and not block slug.
+	 */
 
 	if (
 		range.isCollapsed() &&

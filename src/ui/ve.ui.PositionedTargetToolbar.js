@@ -134,8 +134,10 @@ ve.ui.PositionedTargetToolbar.prototype.getElementOffset = function () {
 ve.ui.PositionedTargetToolbar.prototype.float = function () {
 	if ( !this.floating ) {
 		this.height = this.$element[ 0 ].offsetHeight;
-		// When switching into floating mode, set the height of the wrapper and
-		// move the bar to the same offset as the in-flow element
+		/*
+		 * When switching into floating mode, set the height of the wrapper and
+		 * move the bar to the same offset as the in-flow element
+		 */
 		this.$element
 			.css( 'height', this.height )
 			.addClass( 've-ui-toolbar-floating' );
