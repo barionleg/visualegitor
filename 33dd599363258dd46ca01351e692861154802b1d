@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f9933c72_29601373",
+        "filename": "src/dm/ve.dm.Change.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2018-03-02T00:43:26Z",
+      "side": 1,
+      "message": "This is mostly for Divec\u0027s amusement.",
+      "range": {
+        "startLine": 408,
+        "startChar": 3,
+        "endLine": 408,
+        "endChar": 4
+      },
+      "revId": "33dd599363258dd46ca01351e692861154802b1d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
