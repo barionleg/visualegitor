@@ -67,6 +67,23 @@
       "revId": "549960fcab470534a534852249ad347a5790c590",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "819f94c7_cc03591c",
+        "filename": "src/ui/elements/ve.ui.DiffElement.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-03-03T18:08:05Z",
+      "side": 1,
+      "message": "add\n\n flags: [ \u0027warning\u0027 ]\n\nto make the icon an unpleasant orange",
+      "revId": "549960fcab470534a534852249ad347a5790c590",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
