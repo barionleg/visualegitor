@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9340acf1_36060e6e",
+        "filename": "lib/diff-match-patch/diff_match_patch_uncompressed.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-03-03T19:32:45Z",
+      "side": 1,
+      "message": "lastDiffTimedOut is a property, so probably needs a separate section, unless you make it a getter...",
+      "revId": "1597f0a1a47b5ac7522848b5088bcad1a74bc8cc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
