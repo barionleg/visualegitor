@@ -279,18 +279,16 @@ ve.dm.TransactionBuilder.static.newFromAttributeChanges = function ( doc, offset
  * @return {ve.dm.Transaction} Transaction that annotates content
  */
 ve.dm.TransactionBuilder.static.newFromAnnotation = function ( doc, range, method, annotation ) {
-	var covered, annotatable,
-		txBuilder = new ve.dm.TransactionBuilder(),
+	var i, iLen, covered, annotatable, txBuilder,
+		ranges = [],
 		data = doc.data,
 		index = doc.getStore().index( annotation ),
-		i = range.start,
-		span = i,
-		on = false,
+		onStart = null,
 		insideContentNode = false,
 		ignoreChildrenDepth = 0;
 
 	// Iterate over all data in range, annotating where appropriate
-	while ( i < range.end ) {
+	for ( i = range.start; i < range.end; i++ ) {
 		if ( data.isElementData( i ) && ve.dm.nodeFactory.shouldIgnoreChildren( data.getType( i ) ) ) {
 			ignoreChildrenDepth += data.isOpenElementData( i ) ? 1 : -1;
 		}
@@ -301,11 +299,9 @@ ve.dm.TransactionBuilder.static.newFromAnnotation = function ( doc, range, metho
 			( insideContentNode && !data.isCloseElementData( i ) )
 		) {
 			// Structural element opening or closing, or entering a content node
-			if ( on ) {
-				txBuilder.pushRetain( span );
-				txBuilder.pushStopAnnotating( method, index );
-				span = 0;
-				on = false;
+			if ( onStart !== null ) {
+				ranges.push( new ve.Range( onStart, i ) );
+				onStart = null;
 			}
 		} else if (
 			( !data.isElementData( i ) || !data.isCloseElementData( i ) ) &&
@@ -326,33 +322,37 @@ ve.dm.TransactionBuilder.static.newFromAnnotation = function ( doc, range, metho
 			}
 			if ( ( covered && method === 'set' ) || ( !covered && method === 'clear' ) ) {
 				// Skip annotated content
-				if ( on ) {
-					txBuilder.pushRetain( span );
-					txBuilder.pushStopAnnotating( method, index );
-					span = 0;
-					on = false;
+				if ( onStart !== null ) {
+					ranges.push( new ve.Range( onStart, i ) );
+					onStart = null;
 				}
 			} else {
 				// Cover non-annotated content
-				if ( !on ) {
-					txBuilder.pushRetain( span );
-					txBuilder.pushStartAnnotating( method, index );
-					span = 0;
-					on = true;
+				if ( onStart === null ) {
+					onStart = i;
 				}
 			}
 		} else if ( data.isCloseElementData( i ) ) {
 			// Content closing, skip
 			insideContentNode = false;
 		}
-		span++;
-		i++;
 	}
-	txBuilder.pushRetain( span );
-	if ( on ) {
+	if ( onStart ) {
+		ranges.push( new ve.Range( onStart, range.end ) );
+	}
+	txBuilder = new ve.dm.TransactionBuilder();
+	for ( i = 0, iLen = ranges.length; i < iLen; i++ ) {
+		txBuilder.pushRetain( ranges[ i ].start - ( i > 0 ? ranges[ i - 1 ].end : 0 ) );
+		txBuilder.pushStartAnnotating( method, index );
+		txBuilder.pushRetain( ranges[ i ].end - ranges[ i ].start );
 		txBuilder.pushStopAnnotating( method, index );
 	}
-	txBuilder.pushFinalRetain( doc, range.end );
+	txBuilder.pushFinalRetain(
+		doc,
+		ranges.length > 0 ?
+			ranges[ ranges.length - 1 ].end :
+			0
+	);
 	return txBuilder.getTransaction();
 };
 
