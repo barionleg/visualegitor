@@ -35,10 +35,12 @@ ve.dm.TransactionProcessor = function VeDmTransactionProcessor( doc, transaction
 	// unadjusted offsets; this is needed to adjust those offsets after other modifications have been
 	// made to the linear model that have caused offsets to shift.
 	this.adjustment = 0;
-	// Set and clear are sets of annotations which should be added or removed to content being
+	// Set and clear are arrays of annotations which should be added or removed to content being
 	// inserted or retained.
-	this.set = new ve.dm.AnnotationSet( this.document.getStore() );
-	this.clear = new ve.dm.AnnotationSet( this.document.getStore() );
+	this.set = [];
+	this.clear = [];
+	this.setSpliceAt = [];
+	this.clearSpliceAt = [];
 	this.annotatedRanges = [];
 	// State tracking for unbalanced replace operations
 	this.replaceRemoveLevel = 0;
@@ -248,32 +250,32 @@ ve.dm.TransactionProcessor.prototype.advanceCursor = function ( increment ) {
  * @throws {Error} Annotation to be cleared is not set
  */
 ve.dm.TransactionProcessor.prototype.applyAnnotations = function ( to ) {
-	var annotationHashesForOffset, setIndex, isElement, annotations, i;
+	var isElement, annotations, i;
 
-	function setAndClear( anns, set, clear, index ) {
-		if ( anns.containsAnyOf( set ) ) {
-			throw new Error( 'Invalid transaction, annotation to be set is already set' );
-		} else {
-			anns.addSet( set, index );
+	function setAndClear( anns, set, clear, setSpliceAt ) {
+		var j, jLen;
+		for ( j = 0, jLen = set.length; j < jLen; j++ ) {
+			if ( anns.contains( set[ j ] ) ) {
+				throw new Error( 'Invalid transaction, annotation to be set is already set' );
+			}
 		}
-		if ( !anns.containsAllOf( clear ) ) {
-			throw new Error( 'Invalid transaction, annotation to be cleared is not set' );
-		} else {
-			anns.removeSet( clear );
+		for ( j = 0, jLen = clear.length; j < jLen; j++ ) {
+			if ( !anns.contains( clear[ j ] ) ) {
+				throw new Error( 'Invalid transaction, annotation to be cleared is not set' );
+			}
+		}
+		for ( j = 0, jLen = set.length; j < jLen; j++ ) {
+			anns.add( set[ j ], setSpliceAt[ j ] );
+		}
+		for ( j = 0, jLen = clear.length; j < jLen; j++ ) {
+			anns.remove( clear[ j ] );
 		}
 	}
 
-	if ( this.set.isEmpty() && this.clear.isEmpty() ) {
+	if ( this.set.length === 0 && this.clear.length === 0 ) {
 		return;
 	}
 	// Set/clear annotations on data
-	annotationHashesForOffset = [];
-	for ( i = this.cursor; i < to; i++ ) {
-		annotationHashesForOffset[ i - this.cursor ] = this.document.data.getAnnotationHashesFromOffset( i );
-	}
-	// Calculate highest offset below which annotations are uniform across the whole range
-	setIndex = ve.getCommonStartSequenceLength( annotationHashesForOffset );
-
 	for ( i = this.cursor; i < to; i++ ) {
 		isElement = this.document.data.isElementData( i );
 		if ( isElement ) {
@@ -286,7 +288,12 @@ ve.dm.TransactionProcessor.prototype.applyAnnotations = function ( to ) {
 			}
 		}
 		annotations = this.document.data.getAnnotationsFromOffset( i );
-		setAndClear( annotations, this.set, this.clear, setIndex );
+		setAndClear(
+			annotations,
+			this.set,
+			this.clear,
+			this.setSpliceAt
+		);
 		// Store annotation hashes in linear model
 		this.queueModification( {
 			type: 'annotateData',
@@ -472,11 +479,13 @@ ve.dm.TransactionProcessor.processors.retain = function ( op ) {
  * @throws {Error} Invalid annotation method
  */
 ve.dm.TransactionProcessor.processors.annotate = function ( op ) {
-	var target, annotation;
+	var target, targetSpliceAt, annotation, index;
 	if ( op.method === 'set' ) {
 		target = this.set;
+		targetSpliceAt = this.setSpliceAt;
 	} else if ( op.method === 'clear' ) {
 		target = this.clear;
+		targetSpliceAt = this.clearSpliceAt;
 	} else {
 		throw new Error( 'Invalid annotation method ' + op.method );
 	}
@@ -486,8 +495,13 @@ ve.dm.TransactionProcessor.processors.annotate = function ( op ) {
 	}
 	if ( op.bias === 'start' ) {
 		target.push( annotation );
+		targetSpliceAt.push( op.spliceAt );
 	} else {
-		target.remove( annotation );
+		index = target.indexOf( annotation );
+		if ( index !== -1 ) {
+			target.splice( index, 1 );
+			targetSpliceAt.splice( index, 1 );
+		}
 	}
 	// Actual changes are done by applyAnnotations() called from the retain processor
 };
