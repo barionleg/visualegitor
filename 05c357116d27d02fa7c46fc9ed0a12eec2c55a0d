@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a9d84ed_d194a75b",
+        "filename": "tests/dm/ve.dm.Surface.test.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2018-03-07T18:52:18Z",
+      "side": 1,
+      "message": ";-)",
+      "range": {
+        "startLine": 379,
+        "startChar": 1,
+        "endLine": 379,
+        "endChar": 3
+      },
+      "revId": "05c357116d27d02fa7c46fc9ed0a12eec2c55a0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
