@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c7d5d19d_83ed5322",
+        "filename": "src/init/sa/ve.init.sa.Platform.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 61
+      },
+      "writtenOn": "2018-03-09T08:53:38Z",
+      "side": 1,
+      "message": "All access to and from localStorage and sessionStorage should at any and all time be wrapped in try/catch, to protect against quota, privacy modes and other access failures.",
+      "revId": "b8bbcb015ee84b659f4aef6270348fdd6e370beb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
