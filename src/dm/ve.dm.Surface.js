@@ -1279,14 +1279,14 @@ ve.dm.Surface.prototype.storeDocState = function ( state, html ) {
 		}
 	}
 	// Store HTML separately to avoid wasteful JSON encoding
-	if ( !ve.init.platform.setSession( 've-dochtml', html || this.getHtml() ) ) {
+	if ( !ve.init.platform.setSession( 've-dochtml', html !== undefined ? html : this.getHtml() ) ) {
 		// If we failed to store the html, wipe the docstate
 		ve.init.platform.removeSession( 've-docstate' );
 		this.stopStoringChanges();
 		return false;
 	}
 
-	if ( !html ) {
+	if ( html === undefined ) {
 		// If storing the latest HTML, reset the lastStoreChange pointer,
 		// otherwise assume will be handled by the caller.
 		this.lastStoredChange = this.getDocument().getCompleteHistoryLength();
