@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c803c5ef_1136b488",
+        "filename": "src/ui/elements/ve.ui.DiffElement.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-03-10T18:14:41Z",
+      "side": 1,
+      "message": "We should wrap icon+text in another element with its own class (ve-ui-diffElement-timedOut), then we can add a small amount of right margin to the icon using the selector:\n\n .ve-ui-diffElement-timedOut .oo-ui-iconWidget",
+      "revId": "3210f06a39e55bb86492f8b02803ce815e3ac3b1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
