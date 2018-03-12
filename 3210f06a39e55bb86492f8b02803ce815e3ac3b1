@@ -16,6 +16,24 @@
       "revId": "3210f06a39e55bb86492f8b02803ce815e3ac3b1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2fdc3f28_900292bb",
+        "filename": "src/ui/elements/ve.ui.DiffElement.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-03-12T11:58:33Z",
+      "side": 1,
+      "message": "Actually thinking about this some more we should move all this message stuff out of #renderDiff, and just use jQuery. See above.",
+      "parentUuid": "c803c5ef_1136b488",
+      "revId": "3210f06a39e55bb86492f8b02803ce815e3ac3b1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
