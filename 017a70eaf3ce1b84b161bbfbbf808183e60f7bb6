@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "67553bc7_5e36c768",
+        "filename": "src/dm/ve.dm.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 1272,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-03-12T09:36:29Z",
+      "side": 1,
+      "message": "I find the coding style a bit problematic, because the check if this second parameter was specified or not is encoded in two entirely independent if() conditions. I suggest to refactor this code a bit:\n\n if ( html \u003d\u003d\u003d undefined ) {\n     html \u003d this.getHtml();\n     this.lastStoredChange \u003d …;\n }\n if ( !ve.init.platform.setSession( \u0027ve-dochtml\u0027, html ) ) {\n     …\n     return false;\n }\n return true;",
+      "range": {
+        "startLine": 1272,
+        "startChar": 58,
+        "endLine": 1272,
+        "endChar": 62
+      },
+      "revId": "017a70eaf3ce1b84b161bbfbbf808183e60f7bb6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
