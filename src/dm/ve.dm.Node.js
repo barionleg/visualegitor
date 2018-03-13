@@ -696,3 +696,27 @@ ve.dm.Node.prototype.canBeMergedWith = function ( node ) {
 	}
 	return true;
 };
+
+/**
+ * Get the offset path from the document node to this node
+ *
+ * @return {number[]|null} The offset path, or null if not attached to a ve.dm.DocumentNode
+ */
+ve.dm.Node.prototype.getOffsetPath = function () {
+	var parent,
+		node = this,
+		path = [];
+
+	while ( true ) {
+		if ( node.type === 'document' ) {
+			// We reached the ve.dm.DocumentNode that this node is attached to
+			return path;
+		}
+		parent = node.getParent();
+		if ( !parent ) {
+			return null;
+		}
+		path.unshift( parent.indexOf( node ) );
+		node = parent;
+	}
+};
