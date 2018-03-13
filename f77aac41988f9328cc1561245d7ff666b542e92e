@@ -22,6 +22,30 @@
       "revId": "f77aac41988f9328cc1561245d7ff666b542e92e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a85c7e89_2d244ac1",
+        "filename": "i18n/en.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2018-03-13T18:46:12Z",
+      "side": 1,
+      "message": "I think \"Log selected\" is perfect.",
+      "parentUuid": "3131b7ff_0a3b4c07",
+      "range": {
+        "startLine": 66,
+        "startChar": 36,
+        "endLine": 66,
+        "endChar": 48
+      },
+      "revId": "f77aac41988f9328cc1561245d7ff666b542e92e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
