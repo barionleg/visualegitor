@@ -848,6 +848,10 @@ ve.dm.Converter.prototype.getDataFromDomSubtree = function ( domElement, wrapper
 						if ( !context.annotations.isEmpty() ) {
 							childDataElements[ 0 ].annotations = context.annotations.getHashes().slice();
 						}
+
+						// Mark meta items to be moved outside of content context, as we can't handle them here
+						// context.expectingContent is always true at this point
+						childDataElements.forEach( setInlineMeta );
 					}
 					outputWrappedMetaItems( 'restore' );
 					ve.batchPush( data, childDataElements );
@@ -857,6 +861,7 @@ ve.dm.Converter.prototype.getDataFromDomSubtree = function ( domElement, wrapper
 					// Node or meta item
 					if ( modelClass.prototype instanceof ve.dm.MetaItem ) {
 						if ( context.expectingContent ) {
+							// Mark meta items to be moved outside of content context, as we can't handle them here
 							childDataElements.forEach( setInlineMeta );
 						}
 
