@@ -16,6 +16,24 @@
       "revId": "d2f102689b439d109f3c596e94e4fa0e670e9117",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c808db29_a18ed5ed",
+        "filename": "src/dm/ve.dm.Node.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 711,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2018-03-13T16:16:45Z",
+      "side": 1,
+      "message": "It\u0027s only ever called in dm.MetaList\u0027s onNodeAttached, once per attached-node, and then again in a binary search against existing MetaItems if the attached node is a MetaItem. (And the initial once-per-node could be removed as an optimization, since it\u0027s also not actually used unless the node is a MetaItem.)",
+      "parentUuid": "d40e125a_6d8330fd",
+      "revId": "d2f102689b439d109f3c596e94e4fa0e670e9117",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
