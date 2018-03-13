@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d40e125a_6d8330fd",
+        "filename": "src/dm/ve.dm.Node.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 711,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-03-13T16:07:00Z",
+      "side": 1,
+      "message": "I don\u0027t know how often this method is called, but node.type \u003d\u003d\u003d \u0027document\u0027 is twice as fast.",
+      "revId": "d2f102689b439d109f3c596e94e4fa0e670e9117",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
