@@ -893,6 +893,14 @@
 			"visualEditor.mobile"
 		]
 	},
+	"visualEditor.mobile.standalone.dist": {
+		"scripts": [
+			"src/init/sa/ve.init.sa.MobileTarget.js"
+		],
+		"dependencies": [
+			"visualEditor.standalone.wikimediaui.dist"
+		]
+	},
 	"visualEditor.standalone.demo": {
 		"scripts": [
 			"demos/ve/ve.demo.js",
