@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d7af9fa0_b2f9a470",
+        "filename": "src/ce/ve.ce.BranchNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-03-16T13:50:28Z",
+      "side": 1,
+      "message": "This is basically a prepend call because the loop runs in reverse. Does the loop need to run in reverse?",
+      "range": {
+        "startLine": 212,
+        "startChar": 13,
+        "endLine": 212,
+        "endChar": 25
+      },
+      "revId": "d85bf0d68d2aa46f76208cd870be2feba182a944",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df34669e_bace25b7",
+        "filename": "src/ce/ve.ce.BranchNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-03-16T13:50:28Z",
+      "side": 1,
+      "message": "Does this loop need to run in reverse?",
+      "revId": "d85bf0d68d2aa46f76208cd870be2feba182a944",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5b0bd794_d2cdc818",
+        "filename": "src/ce/ve.ce.BranchNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-03-16T13:50:28Z",
+      "side": 1,
+      "message": "I assume this needs to happen after the fragment has been attached, but nothing exploded when it was in the loop above?",
+      "revId": "d85bf0d68d2aa46f76208cd870be2feba182a944",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
