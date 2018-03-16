@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "68cbbda3_46172599",
+        "filename": "src/ce/ve.ce.BranchNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2018-03-16T16:55:39Z",
+      "side": 1,
+      "message": "Hmmm, I think not - it *looks* to me like this was only in reverse so that the insertion position remained constant between loop iterations - https://phabricator.wikimedia.org/rGVED872d2bdb9 .",
+      "parentUuid": "d7af9fa0_b2f9a470",
+      "range": {
+        "startLine": 212,
+        "startChar": 13,
+        "endLine": 212,
+        "endChar": 25
+      },
+      "revId": "d85bf0d68d2aa46f76208cd870be2feba182a944",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "df34669e_bace25b7",
         "filename": "src/ce/ve.ce.BranchNode.js",
         "patchSetId": 1
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "dab1f4e9_414899d0",
+        "filename": "src/ce/ve.ce.BranchNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2018-03-16T16:55:39Z",
+      "side": 1,
+      "message": "No",
+      "parentUuid": "df34669e_bace25b7",
+      "revId": "d85bf0d68d2aa46f76208cd870be2feba182a944",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5b0bd794_d2cdc818",
         "filename": "src/ce/ve.ce.BranchNode.js",
         "patchSetId": 1
@@ -53,6 +95,24 @@
       "writtenOn": "2018-03-16T13:50:28Z",
       "side": 1,
       "message": "I assume this needs to happen after the fragment has been attached, but nothing exploded when it was in the loop above?",
+      "revId": "d85bf0d68d2aa46f76208cd870be2feba182a944",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "53bc0148_b1370c31",
+        "filename": "src/ce/ve.ce.BranchNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2018-03-16T16:55:39Z",
+      "side": 1,
+      "message": "I agree it would be better to have maximum possible consistency when we call setLive, since it triggers events - even though it seems like right now there is no listener that will look at siblings.",
+      "parentUuid": "5b0bd794_d2cdc818",
       "revId": "d85bf0d68d2aa46f76208cd870be2feba182a944",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
