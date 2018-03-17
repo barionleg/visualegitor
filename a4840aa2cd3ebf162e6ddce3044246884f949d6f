@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ab50e872_5fe2e9d0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2018-03-17T20:44:26Z",
+      "side": 1,
+      "message": "This url won\u0027t be around for ever, so when it gets removed, all context is lost",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 95
+      },
+      "revId": "a4840aa2cd3ebf162e6ddce3044246884f949d6f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
