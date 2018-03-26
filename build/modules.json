@@ -800,7 +800,8 @@
 	"visualEditor.theme.wikimediaui": {
 		"styles": [
 			"src/themes/wikimediaui/dialogs.css",
-			"src/themes/wikimediaui/widgets.css"
+			"src/themes/wikimediaui/widgets.css",
+			"src/themes/wikimediaui/toolbars.css"
 		]
 	},
 	"visualEditor.desktop": {
