@@ -22,6 +22,30 @@
       "revId": "6732c96d25cbf90626813698f7f25786fc6cbc33",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b9e965f4_3cebc1cb",
+        "filename": "src/themes/wikimediaui/toolbars.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-03-26T21:36:01Z",
+      "side": 1,
+      "message": "They can in the code, but the only reason we mixin iconElement is so that we can show a checkmark in Apex. If you set a different icon on a menu tool it would break in Apex, so they are functionally icon-less.",
+      "parentUuid": "650909f3_e57a64a0",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 33
+      },
+      "revId": "6732c96d25cbf90626813698f7f25786fc6cbc33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
