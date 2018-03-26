@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "650909f3_e57a64a0",
+        "filename": "src/themes/wikimediaui/toolbars.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2018-03-26T21:31:02Z",
+      "side": 1,
+      "message": "Tools inside MenuToolGroups unfortunately can have icons just fine, so I don\u0027t think we\u0027ll be able to upstream this. We just happen to not use icons for the tools in this menu.",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 33
+      },
+      "revId": "6732c96d25cbf90626813698f7f25786fc6cbc33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
