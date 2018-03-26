@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3eaf2936_565619b2",
+        "filename": "src/themes/apex/dialogs.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-03-26T21:21:54Z",
+      "side": 1,
+      "message": "This bit isn\u0027t Apex specific...",
+      "revId": "e01b9a0f7aa9c20409c723fb39e49cbff41941f7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
