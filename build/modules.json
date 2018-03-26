@@ -793,7 +793,8 @@
 	"visualEditor.theme.apex": {
 		"styles": [
 			"src/themes/apex/dialogs.css",
-			"src/themes/apex/widgets.css"
+			"src/themes/apex/widgets.css",
+			"src/themes/apex/toolbars.css"
 		]
 	},
 	"visualEditor.theme.wikimediaui": {
