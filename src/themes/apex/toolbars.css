@@ -9,8 +9,3 @@
 	/* Use px so padding is not changed by font size. This is normally 0.5em. */
 	padding-left: 6.4px;
 }
-
-.oo-ui-menuToolGroup .oo-ui-tool-name-blockquote .oo-ui-tool-title {
-	/* Add 1.5em for blockquote to the default 0.5em for tool styling. */
-	padding-left: 2em;
-}
