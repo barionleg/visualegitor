@@ -22,4 +22,5 @@
 }
 .ve-ce-commentNode > .ve-ce-focusableNode-invisibleIcon.oo-ui-iconElement .oo-ui-iconElement-icon {
 	height: auto;
+	bottom: 0;
 }
