@@ -16,6 +16,24 @@
       "revId": "98fb62aa45485929c94140ede15aa08c41619bef",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3419942_b3b5b492",
+        "filename": "src/themes/wikimediaui.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-03-27T17:16:48Z",
+      "side": 1,
+      "message": "I know - but it\u0027s going away in a week...",
+      "parentUuid": "c8d947e5_7bd14500",
+      "revId": "98fb62aa45485929c94140ede15aa08c41619bef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
