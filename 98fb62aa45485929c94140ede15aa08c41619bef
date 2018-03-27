@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c8d947e5_7bd14500",
+        "filename": "src/themes/wikimediaui.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2018-03-27T12:30:44Z",
+      "side": 1,
+      "message": "This overrides your 0.71428571em now.",
+      "revId": "98fb62aa45485929c94140ede15aa08c41619bef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
