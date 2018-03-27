@@ -34,6 +34,24 @@
       "revId": "98fb62aa45485929c94140ede15aa08c41619bef",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eabaf5ab_c884d9fd",
+        "filename": "src/themes/wikimediaui.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2018-03-27T17:59:51Z",
+      "side": 1,
+      "message": "Then I guess this is supposed to wait until next week? Because it looks super broken when this extra padding suddenly appears on *smaller* windows.",
+      "parentUuid": "a3419942_b3b5b492",
+      "revId": "98fb62aa45485929c94140ede15aa08c41619bef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
