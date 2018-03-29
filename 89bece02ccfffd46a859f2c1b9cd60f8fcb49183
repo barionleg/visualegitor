@@ -16,6 +16,24 @@
       "revId": "89bece02ccfffd46a859f2c1b9cd60f8fcb49183",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3bbc2bad_aa3c7142",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2018-03-29T17:01:12Z",
+      "side": 1,
+      "message": "The easiest case to hit would be unbalanced wikitext, if the selection includes, say, half an infobox. Not that it\u0027d be an error-error, but the document wouldn\u0027t do what they might expect. Preview would catch it.\n\nArguably there\u0027s also stuff like niche emoticons. (Starting a line with a : has significance in wikitext, for instance.)",
+      "parentUuid": "f0508fee_038b2009",
+      "revId": "89bece02ccfffd46a859f2c1b9cd60f8fcb49183",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
