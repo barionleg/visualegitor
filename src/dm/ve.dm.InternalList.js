@@ -44,6 +44,10 @@ OO.mixinClass( ve.dm.InternalList, OO.EventEmitter );
  * @param {string[]} groupsChanged List of groups changed since the last transaction
  */
 
+/* Static Properties */
+
+ve.dm.InternalList.static.childNodeTypes = [ 'internalItem' ];
+
 /* Methods */
 
 /**
