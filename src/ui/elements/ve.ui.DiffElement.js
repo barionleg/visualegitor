@@ -669,7 +669,7 @@ ve.ui.DiffElement.prototype.getChangedNodeElements = function ( oldNodeIndex, mo
 			for ( k = 0, klen = treeDiff.length; k < klen; k++ ) {
 				if ( treeDiff[ k ][ 0 ] === oldIndex && treeDiff[ k ][ 1 ] === newIndex ) {
 
-					if ( diffInfo[ k ].replacement ) {
+					if ( !diffInfo[ k ] ) {
 
 						// We are treating these nodes as removed and inserted
 						highlightInsertedNode.call( this, newIndex );
