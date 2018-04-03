@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "881ad57e_ed0cbd75",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2018-04-03T20:55:20Z",
+      "side": 1,
+      "message": "Also works:\n\nhttps://gerrit.wikimedia.org/g/oojs/core/+/v2.2.0/History.md\n\nI think we generally use /g/ as canonical, but unfortunately, in many cases Gerrit bypasses that config. That\u0027ll be fixed at some point (Chad\u0027s working on it), but I guess by now this has spread enough that we\u0027ll probably have to support both from now on.",
+      "range": {
+        "startLine": 10,
+        "startChar": 1,
+        "endLine": 10,
+        "endChar": 77
+      },
+      "revId": "9dbeb9d6e58c387a9b5194f30b0f03a0febc6604",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
