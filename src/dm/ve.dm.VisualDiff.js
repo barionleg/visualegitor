@@ -40,7 +40,7 @@ ve.dm.VisualDiff = function VeDmVisualDiff( oldDoc, newDoc, timeout ) {
 	this.freezeInternalListIndices( this.newDoc );
 
 	this.diff = {
-		docDiff: this.computeDiff( this.oldDocChildren, this.newDocChildren ),
+		docDiff: this.diffList( this.oldDocChildren, this.newDocChildren ),
 		internalListDiff: this.getInternalListDiffInfo()
 	};
 
@@ -93,6 +93,8 @@ ve.dm.VisualDiff.prototype.freezeInternalListIndices = function ( doc ) {
 };
 
 /**
+ * TODO: Update documentation and variable names
+ *
  * Get the diff between the two trees, in two steps: (1) Compare the children
  * of the old and new root nodes and record any pair where the old child and
  * new child are identical. (If an old child is identical to two new children, it
@@ -105,7 +107,7 @@ ve.dm.VisualDiff.prototype.freezeInternalListIndices = function ( doc ) {
  * @param {Array} newRootChildren Children of the new root node
  * @return {Object} Object containing diff information
  */
-ve.dm.VisualDiff.prototype.computeDiff = function ( oldRootChildren, newRootChildren ) {
+ve.dm.VisualDiff.prototype.diffList = function ( oldRootChildren, newRootChildren ) {
 	var i, ilen, j, jlen,
 		oldRootChildrenToDiff = [],
 		newRootChildrenToDiff = [],
@@ -121,7 +123,8 @@ ve.dm.VisualDiff.prototype.computeDiff = function ( oldRootChildren, newRootChil
 	for ( i = 0, ilen = oldRootChildren.length; i < ilen; i++ ) {
 		for ( j = 0, jlen = newRootChildren.length; j < jlen; j++ ) {
 			if ( !diff.rootChildrenNewToOld.hasOwnProperty( j ) &&
-				this.compareRootChildren( oldRootChildren[ i ], newRootChildren[ j ] ) ) {
+				this.compareRootChildren( oldRootChildren[ i ], newRootChildren[ j ] )
+			) {
 
 				diff.rootChildrenOldToNew[ i ] = j;
 				diff.rootChildrenNewToOld[ j ] = i;
@@ -355,7 +358,7 @@ ve.dm.VisualDiff.prototype.findModifiedRootChildren = function ( oldIndices, new
 
 			if ( oldIndices[ i ] !== null && newIndices[ j ] !== null ) {
 
-				diffResults = this.getDocChildDiff( oldRootChildren[ oldIndices[ i ] ], newRootChildren[ newIndices[ j ] ] );
+				diffResults = this.diffNodes( oldRootChildren[ oldIndices[ i ] ], newRootChildren[ newIndices[ j ] ] );
 
 				if ( diffResults ) {
 					diff.rootChildrenOldToNew[ oldIndices[ i ] ] = {
@@ -398,9 +401,174 @@ ve.dm.VisualDiff.prototype.findModifiedRootChildren = function ( oldIndices, new
  * @param {ve.dm.Node} newDocChild Child of the new document node
  * @return {Array|boolean} The diff, or false if the children are too different
  */
-ve.dm.VisualDiff.prototype.getDocChildDiff = function ( oldDocChild, newDocChild ) {
-	// TODO: Do a more efficient diff where possible
-	return this.calculateTreeDiff( oldDocChild, newDocChild );
+ve.dm.VisualDiff.prototype.diffNodes = function ( oldDocChild, newDocChild ) {
+	var diff;
+	// If not diff comparable, return no diff
+	if ( !( oldDocChild.isDiffComparable( newDocChild ) ) ) {
+		return false;
+	}
+
+	// TODO: Use properties rather than instanceof
+	if ( oldDocChild instanceof ve.dm.LeafNode || oldDocChild instanceof ve.dm.ContentBranchNode ) {
+
+		// If leaf-like, do leaf diff
+		diff = this.diffLeafNodes( oldDocChild, newDocChild );
+
+	// TODO: Use isListLike property, also on DefinitionListNode and MWGalleryNode
+	} else if ( oldDocChild instanceof ve.dm.ListNode ) {
+
+		diff = this.diffListNodes( oldDocChild, newDocChild );
+
+	} else {
+
+		// Else do tree diff
+		diff = this.diffTreeNodes( oldDocChild, newDocChild );
+
+	}
+
+	return diff;
+};
+
+// Add documentation
+// TODO: DiffElement still uses getChangedTreeNodeElements, hence the
+// over-complicated diff. Simplify this structure for getChangedLeafNodeElements.
+ve.dm.VisualDiff.prototype.diffLeafNodes = function ( oldNode, newNode ) {
+	var diff, changeRecord,
+		linearDiff = null,
+		oldTreeOrderedNodes = new this.treeDiffer.Tree( oldNode, ve.DiffTreeNode ).orderedNodes,
+		newTreeOrderedNodes = new this.treeDiffer.Tree( newNode, ve.DiffTreeNode ).orderedNodes;
+
+	if ( oldNode.canContainContent() ) {
+		changeRecord = {
+			keepLength: oldNode.length,
+			diffLength: 0
+		};
+		linearDiff = this.diffContent( oldNode, newNode );
+		if ( !( linearDiff ) ) {
+			return false;
+		}
+		this.updateChangeRecordLinearDiff( linearDiff, changeRecord );
+		if ( this.underDiffThreshold( changeRecord ) ) {
+			return false;
+		}
+	}
+
+	diff = {
+		treeDiff: [ [ 0, 0 ] ],
+		diffInfo: [ {
+			attributeChange: this.diffAttributes( oldNode, newNode ),
+			linearDiff: linearDiff
+		} ],
+		oldTreeOrderedNodes: oldTreeOrderedNodes,
+		newTreeOrderedNodes: newTreeOrderedNodes,
+		correspondingNodes: {
+			insert: [],
+			remove: [],
+			change: { 0: 0 },
+			newToOld: { 0: 0 },
+			oldToNew: { 0: 0 }
+		}
+	};
+
+	return diff;
+};
+
+// Add documentation
+ve.dm.VisualDiff.prototype.diffListNodes = function ( oldNode, newNode ) {
+	var i, ilen, j, listDiff, listDiffInfo,
+		oldFlatList = {
+			nodes: [],
+			metadata: [],
+			indices: []
+		},
+		newFlatList = {
+			nodes: [],
+			metadata: [],
+			indices: []
+		};
+
+	this.flattenList( oldNode, oldFlatList, 0 );
+	this.flattenList( newNode, newFlatList, 0 );
+
+	// TODO: Neaten this
+	for ( i = 0, ilen = oldFlatList.nodes.length; i < ilen; i++ ) {
+		oldFlatList.indices.push( { indexOrder: i } );
+	}
+	for ( i = 0, ilen = newFlatList.nodes.length; i < ilen; i++ ) {
+		newFlatList.indices.push( { indexOrder: i } );
+	}
+
+	// List align flat lists
+	listDiff = this.diffList( oldFlatList.nodes, newFlatList.nodes );
+
+	// Do metadata diff of all aligned nodes
+	for ( i in listDiff.rootChildrenOldToNew ) {
+		j = listDiff.rootChildrenOldToNew[ i ];
+		if ( j && !( ve.compare( oldFlatList.metadata[ i ], newFlatList.metadata[ j ] ) ) ) {
+			// TODO: Neaten this
+			if ( typeof listDiff.rootChildrenOldToNew[ i ] === 'number' ) {
+				listDiff.rootChildrenOldToNew[ i ] = {
+					node: j,
+					diff: {
+						metadata: {
+							oldMetadata: oldFlatList.metadata[ i ],
+							newMetadata: newFlatList.metadata[ j ]
+						}
+					}
+				};
+			} else {
+				listDiff.rootChildrenOldToNew[ i ].diff.metadata = {
+					oldMetadata: oldFlatList.metadata[ i ],
+					newMetadata: newFlatList.metadata[ j ]
+				};
+			}
+			listDiff.rootChildrenNewToOld[ j ] = { node: i };
+		}
+	}
+
+	listDiffInfo = this.getListDiffInfo( listDiff, oldFlatList.indices, newFlatList.indices );
+
+	// TODO: Check diffInfo didn't return false
+	// TODO: Check kept proportion; return false if too low
+	// Don't need diff attributes of root list node because stored in its list items
+
+	listDiffInfo.oldList = oldFlatList;
+	listDiffInfo.newList = newFlatList;
+
+	return listDiffInfo;
+};
+
+// Add documentation
+// Flattens a (potentially-nested) list. If a list item contains a single
+// list-like node, the contents of that node will be added to the flat list
+// with depth of that list item's depth + 1.
+// If a list item contains a non-list node that contains a list, that list
+// will NOT get flattened out.
+// If a list item contains more than one non-list node, they will be
+// interpreted as separate list items. We expect that to be an edge case.
+ve.dm.VisualDiff.prototype.flattenList = function ( listNode, flatList, depth ) {
+	var i, ilen, j, jlen, listItem,
+		listContents, listContent,
+		listItems = listNode.children;
+
+	for ( i = 0, ilen = listItems.length; i < ilen; i++ ) {
+		listItem = listItems[ i ];
+		listContents = listItem.children;
+		for ( j = 0, jlen = listContents.length; j < jlen; j++ ) {
+			listContent = listContents[ j ];
+			// TODO: set isListLike to return true for List, DefinitionList and Gallery
+			if ( listContent instanceof ve.dm.ListNode ) {
+				this.flattenList( listContent, flatList, depth + 1 );
+			} else {
+				flatList.metadata.push( {
+					listType: listNode.getAttribute( 'style' ),
+					listItemType: listItem.getAttribute( 'style' ),
+					depth: depth
+				} );
+				flatList.nodes.push( listContent );
+			}
+		}
+	}
 };
 
 /**
@@ -443,7 +611,7 @@ ve.dm.VisualDiff.prototype.alignTrees = function ( oldDocChildTree, newDocChildT
  * @param {ve.dm.Node} newDocChild child of the new document node
  * @return {Object|false} Diff object, or false if nodes are too different
  */
-ve.dm.VisualDiff.prototype.calculateTreeDiff = function ( oldDocChild, newDocChild ) {
+ve.dm.VisualDiff.prototype.diffTreeNodes = function ( oldDocChild, newDocChild ) {
 	var i, ilen,
 		treeDiff, linearDiff,
 		oldNode, newNode,
@@ -480,7 +648,7 @@ ve.dm.VisualDiff.prototype.calculateTreeDiff = function ( oldDocChild, newDocChi
 				if ( oldNode.isDiffComparable( newNode ) ) {
 					diffInfo[ i ] = {
 						linearDiff: null,
-						attributeChange: this.calculateAttributesDiff( oldNode, newNode )
+						attributeChange: this.diffAttributes( oldNode, newNode )
 					};
 				}
 
@@ -498,10 +666,10 @@ ve.dm.VisualDiff.prototype.calculateTreeDiff = function ( oldDocChild, newDocChi
 			} else {
 
 				if ( oldNode.isDiffComparable( newNode ) ) {
-					linearDiff = this.calculateLinearDiff( oldNode, newNode, changeRecord );
+					linearDiff = this.diffContent( oldNode, newNode, changeRecord );
 					diffInfo[ i ] = {
 						linearDiff: linearDiff,
-						attributeChange: this.calculateAttributesDiff( oldNode, newNode )
+						attributeChange: this.diffAttributes( oldNode, newNode )
 					};
 				}
 
@@ -536,7 +704,7 @@ ve.dm.VisualDiff.prototype.calculateTreeDiff = function ( oldDocChild, newDocChi
 	// Only return the diff if a high enough proportion of the content is
 	// unchanged; otherwise, these nodes don't correspond and shouldn't be
 	// diffed.
-	if ( changeRecord.keepLength < this.diffThreshold * changeRecord.diffLength ) {
+	if ( this.underDiffThreshold( changeRecord ) ) {
 		return false;
 	}
 
@@ -558,7 +726,7 @@ ve.dm.VisualDiff.prototype.calculateTreeDiff = function ( oldDocChild, newDocChi
  * @param {ve.dm.Node} newNode Node from the new document
  * @return {Object|false} The attributes diff, or false if unchanged
  */
-ve.dm.VisualDiff.prototype.calculateAttributesDiff = function ( oldNode, newNode ) {
+ve.dm.VisualDiff.prototype.diffAttributes = function ( oldNode, newNode ) {
 	var attributesUnchanged = ve.compare( oldNode.getAttributes(), newNode.getAttributes() );
 
 	if ( attributesUnchanged ) {
@@ -578,7 +746,7 @@ ve.dm.VisualDiff.prototype.calculateAttributesDiff = function ( oldNode, newNode
  * @param {Object} changeRecord Record of the length of changed content
  * @return {Array|false} The linear diff, or false if timed out
  */
-ve.dm.VisualDiff.prototype.calculateLinearDiff = function ( oldNode, newNode ) {
+ve.dm.VisualDiff.prototype.diffContent = function ( oldNode, newNode ) {
 	var linearDiff;
 
 	if ( new Date().getTime() < this.endTime ) {
@@ -639,6 +807,12 @@ ve.dm.VisualDiff.prototype.updateChangeRecordLinearDiff = function ( linearDiff,
 	}
 };
 
+// Add documentation
+// Proportion of content kept is under threshold for corresponding nodes
+ve.dm.VisualDiff.prototype.underDiffThreshold = function ( changeRecord ) {
+	return changeRecord.keepLength < this.diffThreshold * changeRecord.diffLength;
+};
+
 /*
  * Get the diff between the old document's internal list and the new document's
  * internal list. The diff is grouped by list group, and each node in each list
@@ -648,8 +822,7 @@ ve.dm.VisualDiff.prototype.updateChangeRecordLinearDiff = function ( linearDiff,
  * @return {Object} Internal list diff object
  */
 ve.dm.VisualDiff.prototype.getInternalListDiffInfo = function () {
-	var i, ilen, j, jlen, diff, item, group,
-		newItems, oldItems, itemIndex,
+	var i, ilen, diff, diffInfo, group,
 		oldDocNodeGroups = this.oldDoc.getInternalList().getNodeGroups(),
 		newDocNodeGroups = this.newDoc.getInternalList().getNodeGroups(),
 		oldDocInternalListItems,
@@ -693,18 +866,6 @@ ve.dm.VisualDiff.prototype.getInternalListDiffInfo = function () {
 		}
 
 		return internalListItems;
-	}
-
-	function containsDiff( diffObject ) {
-		var i;
-
-		for ( i in diffObject ) {
-			if ( typeof diffObject[ i ] !== 'number' ) {
-				return true;
-			}
-		}
-
-		return false;
 	}
 
 	// Find all groups common to old and new docs
@@ -751,73 +912,16 @@ ve.dm.VisualDiff.prototype.getInternalListDiffInfo = function () {
 				);
 
 				// Diff internal list items
-				diff = this.computeDiff(
+				diff = this.diffList(
 					oldDocInternalListItems.toDiff,
 					newDocInternalListItems.toDiff
 				);
 
-				// Check there actually are any changes
-				if (
-					( diff.rootChildrenRemove.length > 0 || diff.rootChildrenInsert.length > 0 ) ||
-					( containsDiff( diff.rootChildrenOldToNew ) || containsDiff( diff.moves ) )
-				) {
-
-					// There are changes.
-					// Mark each new doc internal list item as unchanged, changed or inserted
-					newItems = newDocInternalListItems.indices;
-					for ( j = 0, jlen = newItems.length; j < jlen; j++ ) {
-						item = newItems[ j ];
-						itemIndex = item.indexOrder;
-						if ( typeof diff.rootChildrenNewToOld[ itemIndex ] === 'number' ) {
-
-							// Item hasn't changed
-							item.diff = 0;
-
-						} else if ( diff.rootChildrenNewToOld[ itemIndex ] === undefined ) {
-
-							// Item was inserted
-							item.diff = 1;
-
-						} else {
-
-							// Item has changed
-							// (The diff object is stored in rootChildrenOldToNew)
-							item.diff = diff.rootChildrenOldToNew[
-								diff.rootChildrenNewToOld[ itemIndex ].node
-							].diff;
-
-						}
-					}
-
-					// Add all removed items and mark as removed
-					oldItems = oldDocInternalListItems.indices;
-					for ( j = 0, jlen = oldItems.length; j < jlen; j++ ) {
-						item = oldItems[ j ];
-						itemIndex = item.nodeIndex;
-						if ( diff.rootChildrenRemove.indexOf( j ) !== -1 ) {
-
-							// Item is either not in the new internal list, or has been marked
-							// as a remove-insert, so mark as removed
-							item.diff = -1;
-							newItems.push( item );
-
-						}
-					}
-
-					// Sort internal list items by index order
-					internalListDiffInfo[ group.group ] = newItems.sort( function ( a, b ) {
-						if ( a.indexOrder === b.indexOrder ) {
-
-							// When index order is the same, put removed item first
-							return a.diff === -1 ? -1 : 1;
-
-						}
-						return a.indexOrder > b.indexOrder ? 1 : -1;
-					} );
-
-					internalListDiffInfo[ group.group ].changes = true;
-					internalListDiffInfo[ group.group ].moves = diff.moves;
-
+				diffInfo = this.getListDiffInfo(
+					diff, oldDocInternalListItems.indices, newDocInternalListItems.indices
+				);
+				if ( diffInfo ) {
+					internalListDiffInfo[ group.group ] = diffInfo;
 				}
 
 				break;
@@ -848,4 +952,88 @@ ve.dm.VisualDiff.prototype.getInternalListDiffInfo = function () {
 	}
 
 	return internalListDiffInfo;
+};
+
+// Add documentation
+// diff is listDiff
+ve.dm.VisualDiff.prototype.getListDiffInfo = function ( diff, oldItems, newItems ) {
+	var i, ilen, item, itemIndex, listDiffInfo;
+
+	function containsDiff( diffObject ) {
+		var i;
+		for ( i in diffObject ) {
+			if ( typeof diffObject[ i ] !== 'number' ) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	// Check there actually are any changes
+	if (
+		( diff.rootChildrenRemove.length > 0 || diff.rootChildrenInsert.length > 0 ) ||
+		( containsDiff( diff.rootChildrenOldToNew ) || containsDiff( diff.moves ) )
+	) {
+
+		// There are changes.
+		// Mark each new doc internal list item as unchanged, changed or inserted
+		for ( i = 0, ilen = newItems.length; i < ilen; i++ ) {
+			item = newItems[ i ];
+			itemIndex = item.indexOrder;
+			if ( typeof diff.rootChildrenNewToOld[ itemIndex ] === 'number' ) {
+
+				// Item hasn't changed
+				item.diff = 0;
+
+			} else if ( diff.rootChildrenNewToOld[ itemIndex ] === undefined ) {
+
+				// Item was inserted
+				item.diff = 1;
+
+			} else {
+
+				// Item has changed
+				// (The diff object is stored in rootChildrenOldToNew)
+				item.diff = diff.rootChildrenOldToNew[
+					diff.rootChildrenNewToOld[ itemIndex ].node
+				].diff;
+
+			}
+		}
+
+		// Add all removed items and mark as removed
+		for ( i = 0, ilen = oldItems.length; i < ilen; i++ ) {
+			item = oldItems[ i ];
+			if ( diff.rootChildrenRemove.indexOf( i ) !== -1 ) {
+
+				// Item is either not in the new internal list, or has been marked
+				// as a remove-insert, so mark as removed
+				item.diff = -1;
+				newItems.push( item );
+
+			}
+		}
+
+		// Sort internal list items by index order
+		listDiffInfo = newItems.sort( function ( a, b ) {
+			if ( a.indexOrder === b.indexOrder ) {
+
+				// When index order is the same, put removed item first
+				return a.diff === -1 ? -1 : 1;
+
+			}
+			return a.indexOrder > b.indexOrder ? 1 : -1;
+		} );
+
+		listDiffInfo.changes = true;
+		listDiffInfo.moves = diff.moves;
+
+		return listDiffInfo;
+
+	} else {
+
+		return false;
+
+	}
+
 };

@@ -308,6 +308,8 @@ QUnit.test( 'Diffing', function ( assert ) {
 					'<p data-diff-action="none">foo</p>' +
 					'<div class="ve-ui-diffElement-doc-child-change">' +
 						'<div rel="ve:Alien" data-diff-action="remove">Alien old</div>' +
+					'</div>' +
+					'<div class="ve-ui-diffElement-doc-child-change">' +
 						'<div rel="ve:Alien" data-diff-action="insert">Alien new</div>' +
 					'</div>'
 			},

@@ -450,6 +450,90 @@ ve.ui.DiffElement.prototype.getNodeElements = function ( node, action, move ) {
 	return Array.prototype.slice.call( body.childNodes );
 };
 
+// Add documentation
+// TODO: Separate out leaf, list and tree diffs, to mirror visualdiff
+// TODO (long term?): Look into diffing internal list and refnodes here too
+ve.ui.DiffElement.prototype.getChangedNodeElements = function ( oldNodeIndex, move ) {
+	var oldNode = this.oldDocChildren[ oldNodeIndex ];
+
+	// TODO: if isListLike()
+	if ( oldNode instanceof ve.dm.ListNode ) {
+		return this.getChangedListNodeElements( oldNodeIndex, move );
+		// return this.getChangedTreeNodeElements( oldNodeIndex, move );
+	} else {
+		return this.getChangedTreeNodeElements( oldNodeIndex, move );
+	}
+};
+
+// Add documentation
+// TODO: Pass in move and display it
+ve.ui.DiffElement.prototype.getChangedListNodeElements = function ( oldNodeIndex ) {
+	var i, ilen, item, depth, newDepth, action, nodes,
+		depthChange, rootListNode, parentNode, nodeElements,
+		diff = this.oldToNew[ oldNodeIndex ].diff,
+		oldNodes = diff.oldList,
+		newNodes = diff.newList,
+		element = document.createElement( 'div' );
+
+	function appendListItem( parentNode, nodeElements, depthChange ) {
+		var i, ilen, listNode, listItem = document.createElement( 'li' );
+		if ( depthChange === 0 ) {
+			listItem.appendChild( nodeElements );
+			parentNode.appendChild( listItem );
+		} else if ( depthChange > 0 ) {
+			parentNode.appendChild( listItem );
+			for ( i = 0, ilen = depthChange; i < ilen; i++ ) {
+				// TODO Check ul/ol
+				listNode = document.createElement( 'ul' );
+				listItem.appendChild( listNode );
+				listItem = document.createElement( 'li' );
+				listNode.appendChild( listItem );
+			}
+			listItem.appendChild( nodeElements );
+			parentNode = listNode;
+		} else if ( depthChange < 0 ) {
+			for ( i = 0, ilen = -depthChange; i < ilen; i++ ) {
+				parentNode = parentNode.parentElement.parentElement;
+			}
+			listItem.appendChild( nodeElements );
+			parentNode.appendChild( listItem );
+		}
+		return parentNode;
+	}
+
+	// TODO: Check if lowest level is ul or ol
+	rootListNode = document.createElement( 'ul' );
+	parentNode = rootListNode;
+	depth = 0;
+	for ( i = 0, ilen = diff.length; i < ilen; i++ ) {
+		item = diff[ i ];
+		if ( typeof item.diff === 'number' ) {
+
+			action = item.diff === 0 ? 'none' : ( item.diff === -1 ? 'remove' : 'insert' );
+			nodes = action === 'remove' ? oldNodes : newNodes;
+			newDepth = nodes.metadata[ item.indexOrder ].depth;
+			depthChange = newDepth - depth;
+			nodeElements = this.getNodeElements( nodes.nodes[ item.indexOrder ], action, diff.moves[ i ] )[ 0 ];
+			parentNode = appendListItem( parentNode, nodeElements, depthChange );
+
+		} else {
+
+			newDepth = newNodes.metadata[ item.indexOrder ].depth;
+			depthChange = newDepth - depth;
+			// TODO: Refactor getChangedTreeNodeElements to deal with non-docChildren
+			// nodeElements = this.getChangedTreeNodeElements( oldNodes.nodes[ item.indexOrder ] )[ 0 ];
+			// parentNode = appendChangedListItem( parentNode, item.diff );
+
+		}
+		depth = newDepth;
+	}
+
+	// TODO: Mark move
+	element.append( rootListNode );
+
+	return [ element ];
+};
+
 /**
  * Get the HTML for the diff of a single child of the document node that has
  * changed from the old document to the new document. It may also have moved.
@@ -458,7 +542,7 @@ ve.ui.DiffElement.prototype.getNodeElements = function ( node, action, move ) {
  * @param {string} [move] 'up' or 'down' if the node has moved
  * @return {HTMLElement[]} HTML elements to display the action/move
  */
-ve.ui.DiffElement.prototype.getChangedNodeElements = function ( oldNodeIndex, move ) {
+ve.ui.DiffElement.prototype.getChangedTreeNodeElements = function ( oldNodeIndex, move ) {
 	var i, ilen, j, jlen, k, klen,
 		newIndex, oldIndex, element, body,
 		newNodeIndex = this.oldToNew[ oldNodeIndex ].node,
