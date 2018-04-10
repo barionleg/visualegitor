@@ -858,6 +858,7 @@ ve.dm.SurfaceFragment.prototype.insertHtml = function ( html, importRules ) {
  * @param {ve.dm.Document} newDoc Document to insert
  * @param {ve.Range} [newDocRange] Range from the new document to insert (defaults to entire document)
  * @param {boolean} [annotate] Content should be automatically annotated to match surrounding content
+ * @param {boolean} [fromPaste] Whether the document is coming from a paste action
  * @chainable
  */
 ve.dm.SurfaceFragment.prototype.insertDocument = function ( newDoc, newDocRange, annotate ) {
