@@ -2384,7 +2384,7 @@ ve.ce.Surface.prototype.afterPaste = function () {
 			}
 		}
 		if ( !handled ) {
-			targetFragment.insertDocument( pastedDocumentModel, contextRange, true );
+			targetFragment.insertDocument( pastedDocumentModel, contextRange, true, true );
 		}
 	}
 
