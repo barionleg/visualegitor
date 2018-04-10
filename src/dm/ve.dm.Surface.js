@@ -274,7 +274,7 @@ ve.dm.Surface.prototype.pushStaging = function ( allowUndo ) {
 	}
 	this.stagingStack.push( {
 		transactions: [],
-		selectionBefore: new ve.dm.NullSelection( this.getDocument() ),
+		selectionBefore: this.getSelection(),
 		allowUndo: !!allowUndo
 	} );
 };
