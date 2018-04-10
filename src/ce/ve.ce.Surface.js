@@ -2369,7 +2369,7 @@ ve.ce.Surface.prototype.afterPaste = function () {
 			}
 		}
 
-		targetFragment.insertDocument( pastedDocumentModel, contextRange, true );
+		targetFragment.insertDocument( pastedDocumentModel, contextRange, true, true );
 	}
 
 	return targetFragment.getPending().then( function () {
