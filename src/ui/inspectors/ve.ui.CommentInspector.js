@@ -122,7 +122,7 @@ ve.ui.CommentInspector.prototype.getTeardownProcess = function ( data ) {
 		.first( function () {
 			var surfaceModel = this.getFragment().getSurface();
 
-			if ( data.action === 'remove' || this.textWidget.getValue() === '' ) {
+			if ( data.action !== 'done' || this.textWidget.getValue() === '' ) {
 				surfaceModel.popStaging();
 				// If popStaging removed the node then this will be a no-op
 				this.getFragment().removeContent();
