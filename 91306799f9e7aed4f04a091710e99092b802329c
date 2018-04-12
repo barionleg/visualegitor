@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c8682cce_f9760493",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 1819,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-04-12T19:27:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b73a538_f91f830e",
+      "revId": "91306799f9e7aed4f04a091710e99092b802329c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "707e0bcc_347d9feb",
         "filename": "src/ce/ve.ce.Surface.js",
         "patchSetId": 8
@@ -30,6 +48,24 @@
       "writtenOn": "2018-04-12T18:42:13Z",
       "side": 1,
       "message": "This is wrong. You\u0027re returning from the .filter() closure here, not the main function, and you should be returning booleans, not promises.",
+      "revId": "91306799f9e7aed4f04a091710e99092b802329c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b02c3d48_2fe368d8",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 2012,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-04-12T19:27:06Z",
+      "side": 1,
+      "message": "Alarming that this didn\u0027t trigger a test failure...",
+      "parentUuid": "707e0bcc_347d9feb",
       "revId": "91306799f9e7aed4f04a091710e99092b802329c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ba988e08_5d3ff32c",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 2014,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-04-12T19:27:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "89182b3a_4b935ca2",
+      "revId": "91306799f9e7aed4f04a091710e99092b802329c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "caf85f31_b4bf1690",
         "filename": "src/ce/ve.ce.Surface.js",
         "patchSetId": 8
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "8f992572_bf47093d",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 2057,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-04-12T19:27:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "caf85f31_b4bf1690",
+      "revId": "91306799f9e7aed4f04a091710e99092b802329c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7c79fc87_fcac700b",
         "filename": "src/ce/ve.ce.Surface.js",
         "patchSetId": 8
@@ -81,6 +153,24 @@
       "writtenOn": "2018-04-12T18:42:13Z",
       "side": 1,
       "message": "Inner return",
+      "revId": "91306799f9e7aed4f04a091710e99092b802329c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "49195ef2_00da74a9",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 2112,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-04-12T19:27:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c79fc87_fcac700b",
       "revId": "91306799f9e7aed4f04a091710e99092b802329c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
