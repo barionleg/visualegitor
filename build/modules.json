@@ -593,6 +593,7 @@
 			"src/ui/ve.ui.TabIndexScope.js",
 			"src/ui/windowmanagers/ve.ui.SurfaceWindowManager.js",
 			"src/ui/actions/ve.ui.AnnotationAction.js",
+			"src/ui/actions/ve.ui.BlockquoteAction.js",
 			"src/ui/actions/ve.ui.ContentAction.js",
 			"src/ui/actions/ve.ui.FormatAction.js",
 			"src/ui/actions/ve.ui.HistoryAction.js",

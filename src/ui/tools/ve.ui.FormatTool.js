@@ -247,7 +247,7 @@ ve.ui.BlockquoteFormatTool = function VeUiBlockquoteFormatTool() {
 };
 OO.inheritClass( ve.ui.BlockquoteFormatTool, ve.ui.FormatTool );
 ve.ui.BlockquoteFormatTool.static.name = 'blockquote';
-ve.ui.BlockquoteFormatTool.static.group = 'format';
+ve.ui.BlockquoteFormatTool.static.group = 'structure';
 ve.ui.BlockquoteFormatTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-formatdropdown-format-blockquote' );
 ve.ui.BlockquoteFormatTool.static.format = { type: 'blockquote' };
