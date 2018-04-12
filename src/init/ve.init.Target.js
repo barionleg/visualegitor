@@ -100,7 +100,7 @@ ve.init.Target.static.toolbarGroups = [
 		type: 'menu',
 		include: [ { group: 'format' } ],
 		promote: [ 'paragraph' ],
-		demote: [ 'preformatted', 'blockquote' ]
+		demote: [ 'preformatted' ]
 	},
 	{
 		name: 'style',
@@ -119,7 +119,7 @@ ve.init.Target.static.toolbarGroups = [
 		type: 'list',
 		icon: 'listBullet',
 		include: [ { group: 'structure' } ],
-		demote: [ 'outdent', 'indent' ]
+		demote: [ 'outdent', 'indent', 'blockquote' ]
 	},
 	{
 		name: 'insert',

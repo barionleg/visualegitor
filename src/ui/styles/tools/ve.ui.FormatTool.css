@@ -44,11 +44,6 @@
 	font-family: monospace, monospace;
 }
 
-.oo-ui-menuToolGroup-tools .oo-ui-tool-name-blockquote .oo-ui-tool-title {
-	/* Indent in addition to padding */
-	text-indent: 1.5em;
-}
-
 .oo-ui-menuToolGroup-tools .oo-ui-tool-name-tableCellHeader .oo-ui-tool-title {
 	font-weight: bold;
 }
