@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0b73a538_f91f830e",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 1819,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2018-04-12T18:42:13Z",
+      "side": 1,
+      "message": "This code would probably be clearer if afterPastePromise was declared inside the setTimeout closure, because it\u0027s only used there. This way I keep looking for what I\u0027m missing about how/where else it\u0027s used.",
+      "revId": "91306799f9e7aed4f04a091710e99092b802329c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "707e0bcc_347d9feb",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 2012,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2018-04-12T18:42:13Z",
+      "side": 1,
+      "message": "This is wrong. You\u0027re returning from the .filter() closure here, not the main function, and you should be returning booleans, not promises.",
+      "revId": "91306799f9e7aed4f04a091710e99092b802329c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "89182b3a_4b935ca2",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 2014,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2018-04-12T18:42:13Z",
+      "side": 1,
+      "message": "Same here",
+      "revId": "91306799f9e7aed4f04a091710e99092b802329c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "caf85f31_b4bf1690",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 2057,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2018-04-12T18:42:13Z",
+      "side": 1,
+      "message": "This is also an inner return",
+      "revId": "91306799f9e7aed4f04a091710e99092b802329c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c79fc87_fcac700b",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 2112,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2018-04-12T18:42:13Z",
+      "side": 1,
+      "message": "Inner return",
+      "revId": "91306799f9e7aed4f04a091710e99092b802329c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
