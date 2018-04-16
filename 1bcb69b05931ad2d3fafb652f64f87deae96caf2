@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bd91326f_b88a9a9d",
+        "filename": "src/dm/ve.dm.VisualDiff.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-04-16T16:24:13Z",
+      "side": 1,
+      "message": "documentation",
+      "revId": "1bcb69b05931ad2d3fafb652f64f87deae96caf2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "06c7e6c1_553abaca",
+        "filename": "src/dm/ve.dm.VisualDiff.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-04-16T16:24:13Z",
+      "side": 1,
+      "message": "|false ..., or false if timed out",
+      "revId": "1bcb69b05931ad2d3fafb652f64f87deae96caf2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e2ed3a19_3e195f20",
+        "filename": "src/dm/ve.dm.VisualDiff.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 559,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-04-16T16:24:13Z",
+      "side": 1,
+      "message": ", or false if unchanged.",
+      "revId": "1bcb69b05931ad2d3fafb652f64f87deae96caf2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8c1e5b70_ab8f645d",
+        "filename": "src/dm/ve.dm.VisualDiff.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-04-16T16:24:13Z",
+      "side": 1,
+      "message": ", or null if timed out\n\n(should it be false like all the others?)",
+      "revId": "1bcb69b05931ad2d3fafb652f64f87deae96caf2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d4dbdd44_4f151626",
+        "filename": "src/dm/ve.dm.VisualDiff.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 625,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-04-16T16:24:13Z",
+      "side": 1,
+      "message": "{Object}",
+      "revId": "1bcb69b05931ad2d3fafb652f64f87deae96caf2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
