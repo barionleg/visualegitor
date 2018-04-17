@@ -60,7 +60,7 @@
 /* Selector for comment node, which isn't an iconWidget */
 .ve-ce-focusableNode-invisibleIcon.oo-ui-iconElement,
 .ve-ce-focusableNode-invisibleIcon.oo-ui-iconWidget.oo-ui-iconElement {
-	display: block;
+	display: inline-block;
 	/* Don't scale icon in headings etc. */
 	width: 24px;
 	height: 24px;
@@ -69,6 +69,25 @@
 	font-size: 24px;
 	line-height: 1em;
 	opacity: 0.5;
+}
+
+/* Alignment in headings */
+/* Support: IE, Edge (can't just use :matches() to simplify this) */
+h1 .ve-ce-focusableNode-invisible .oo-ui-buttonElement-button,
+h2 .ve-ce-focusableNode-invisible .oo-ui-buttonElement-button,
+h3 .ve-ce-focusableNode-invisible .oo-ui-buttonElement-button,
+h4 .ve-ce-focusableNode-invisible .oo-ui-buttonElement-button,
+h5 .ve-ce-focusableNode-invisible .oo-ui-buttonElement-button,
+h6 .ve-ce-focusableNode-invisible .oo-ui-buttonElement-button {
+	margin-top: -0.625em;
+}
+h1 .ve-ce-focusableNode-invisible .oo-ui-buttonElement-button .oo-ui-iconElement-icon,
+h2 .ve-ce-focusableNode-invisible .oo-ui-buttonElement-button .oo-ui-iconElement-icon,
+h3 .ve-ce-focusableNode-invisible .oo-ui-buttonElement-button .oo-ui-iconElement-icon,
+h4 .ve-ce-focusableNode-invisible .oo-ui-buttonElement-button .oo-ui-iconElement-icon,
+h5 .ve-ce-focusableNode-invisible .oo-ui-buttonElement-button .oo-ui-iconElement-icon,
+h6 .ve-ce-focusableNode-invisible .oo-ui-buttonElement-button .oo-ui-iconElement-icon {
+	top: 1px;
 }
 
 /* Highlights group opacity */
