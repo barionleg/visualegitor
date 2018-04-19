@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "96f6b01b_772aa2d9",
+        "filename": "src/ce/styles/nodes/ve.ce.FocusableNode.css",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2018-04-19T20:19:56Z",
+      "side": 1,
+      "message": "Looks like OOUI\u0027s `margin-left: -0.3125em;` rule has higher specificity than this.",
+      "revId": "9c623390486770460f21d31649e3c1687b43cb5c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
