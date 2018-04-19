@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "749735f4_33f15f3c",
+        "filename": "src/dm/ve.dm.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 887,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2018-04-19T20:39:13Z",
+      "side": 1,
+      "message": "(here)",
+      "revId": "c07949011e3841724ea7c6a5a7f66cc72c271f14",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
