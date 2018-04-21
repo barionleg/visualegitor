@@ -1142,8 +1142,11 @@ ve.ce.Surface.prototype.onDocumentDrop = function ( e ) {
 		// Start staging so we can abort in the catch later
 		surfaceModel.pushStaging();
 
-		// Remove node from old location
-		originFragment.removeContent();
+		// Dragging performs cut-and-paste by default (remove content from old location).
+		// If Ctrl is held, it performs copy-and-paste instead.
+		if ( !e.ctrlKey ) {
+			originFragment.removeContent();
+		}
 
 		try {
 			// Re-insert data at new location
