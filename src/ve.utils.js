@@ -1895,3 +1895,22 @@ ve.isClipboardDataFormatsSupported = function ( e, customTypes ) {
 
 	return ve.isClipboardDataFormatsSupported[ cacheKey ];
 };
+
+/**
+ * Deep copy a value, if mutable
+ *
+ * @param {Mixed} val The value
+ * @return {Mixed} Deep copy of val if mutable, else val itself
+ */
+ve.copyIfMutable = function ( val ) {
+	if ( typeof val !== 'object' || val === null ) {
+		return val;
+	}
+	if ( Array.isArray( val ) ) {
+		return val.slice();
+	}
+	if ( val instanceof Node ) {
+		return val.cloneNode();
+	}
+	return ve.copy( val );
+};
