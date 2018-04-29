@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2592cdfa_374d7f84",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 1905,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-04-29T12:44:35Z",
+      "side": 1,
+      "message": "why is this method needed? Doesn\u0027t ve.copy work on immutable types anyway?",
+      "revId": "001139cdf4cec44e7e12aa06494afa79ff19ef4f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "49efccf5_caac62f2",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 1910,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-04-29T12:44:35Z",
+      "side": 1,
+      "message": "this is not a deep copy",
+      "revId": "001139cdf4cec44e7e12aa06494afa79ff19ef4f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3e718831_e7cdcdf9",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 1912,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-04-29T12:44:35Z",
+      "side": 1,
+      "message": "ve.copy also already does this",
+      "revId": "001139cdf4cec44e7e12aa06494afa79ff19ef4f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
