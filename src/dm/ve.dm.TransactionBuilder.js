@@ -836,7 +836,10 @@ ve.dm.TransactionBuilder.prototype.pushAttributeChanges = function ( changes, ol
 	var key;
 	for ( key in changes ) {
 		if ( oldAttrs[ key ] !== changes[ key ] ) {
-			this.pushReplaceElementAttribute( key, oldAttrs[ key ], changes[ key ] );
+			this.pushReplaceElementAttribute( key,
+				ve.copyIfMutable( oldAttrs[ key ] ),
+				ve.copyIfMutable( changes[ key ] )
+			);
 		}
 	}
 };
