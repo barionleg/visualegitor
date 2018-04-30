@@ -1959,9 +1959,10 @@ ve.ce.Surface.prototype.beforePaste = function ( e ) {
  * Handle post-paste events.
  *
  * @param {jQuery.Event} e Paste event
+ * @param {boolean} [useClipboardData] Use clipboard data over the paste target
  * @return {jQuery.Promise} Promise which resolves when the content has been pasted
  */
-ve.ce.Surface.prototype.afterPaste = function () {
+ve.ce.Surface.prototype.afterPaste = function ( e, useClipboardData ) {
 	var clipboardKey, clipboardHash,
 		$elements, pasteData, slice, documentRange,
 		data, pastedDocumentModel, htmlDoc, $body, $images, i,
@@ -2112,7 +2113,7 @@ ve.ce.Surface.prototype.afterPaste = function () {
 
 			try {
 				attrs = JSON.parse( attrsJSON );
-			} catch ( e ) {
+			} catch ( err ) {
 				// Invalid JSON
 				return;
 			}
@@ -2208,6 +2209,7 @@ ve.ce.Surface.prototype.afterPaste = function () {
 				$elements = $( $.parseHTML( beforePasteData.html ) );
 			}
 			if (
+				useClipboardData ||
 				// FIXME T126045: Allow the test runner to force the use of clipboardData
 				clipboardKey === 'useClipboardData-0' ||
 				$elements.find( importantElement ).addBack().filter( importantElement ).length > this.$pasteTarget.find( importantElement ).length
@@ -2343,6 +2345,11 @@ ve.ce.Surface.prototype.afterPaste = function () {
 			) {
 				right--;
 				context.splice( context.getLength() - 1, 1 );
+			}
+			if ( context.getLength() && !useClipboardData ) {
+				// The paste target got corrupted so we should start again and try
+				// to use clipboardData instead. T193110
+				return this.afterPaste( e, true );
 			}
 			// Support: Chrome
 			// FIXME T126046: Strip trailing linebreaks probably introduced by Chrome bug
