@@ -20,30 +20,14 @@
 	min-height: 0.2em;
 }
 
-/* Format tools */
+/* ve.ui.ToolbarDialog */
 
-/*
- * TODO: Consider upstreaming this to OOUI, as menuToolGroups
- * aren't designed to have icons.
- */
-
-.ve-test-toolbar-format .oo-ui-tool-link {
-	/* These tools have no icons, so balance out the padding */
-	padding-left: 0.85714286em;
+.ve-ui-toolbarDialog .oo-ui-dialog-content > .oo-ui-window-body {
+	outline: 0;
 }
 
 /* Temporary workaround for T190694 */
 .ve-ui-toolbar.oo-ui-toolbar-narrow .oo-ui-popupToolGroup .oo-ui-tool-link {
 	padding-left: 2.5em;
 	padding-right: 0.71428571em;
-}
-
-.ve-ui-toolbar.oo-ui-toolbar-narrow .ve-test-toolbar-format .oo-ui-tool-link {
-	padding-left: 0.71428571em;
-}
-
-/* ve.ui.ToolbarDialog */
-
-.ve-ui-toolbarDialog .oo-ui-dialog-content > .oo-ui-window-body {
-	outline: 0;
 }
