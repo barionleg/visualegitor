@@ -61,7 +61,7 @@ ve.dm.CommentNode.static.toDomElements = function ( dataElement, doc, converter 
 		return [ span ];
 	} else if ( converter.isForPreview() ) {
 		// isForPreview(), use CE rendering
-		modelNode = new ve.dm.RealCommentNode( dataElement );
+		modelNode = ve.dm.nodeFactory.createFromElement( dataElement );
 		modelNode.setDocument( converter.internalList.getDocument() );
 		viewNode = new ve.ce.CommentNode( modelNode );
 		// Force rendering
