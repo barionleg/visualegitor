@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "13e17074_665c456a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-05-11T12:07:25Z",
+      "side": 1,
+      "message": "still WIP?",
+      "revId": "042bfdbb6dd4c41ac5f01a35e23dfdcf524f393b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d7d9c123_e9c7d7ed",
         "filename": "src/dm/ve.dm.VisualDiff.js",
         "patchSetId": 5
