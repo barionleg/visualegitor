@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1de1a6fa_549ea06c",
+        "filename": "src/dm/ve.dm.Node.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-05-11T12:19:22Z",
+      "side": 1,
+      "message": "If this is only ever going to be used for diffs, maybe we should call it \"isDiffedAsList\", or similar?",
+      "revId": "8f2cd3bcb4ff0ecb036ce65bf48d828646b02771",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "578d5e40_d1dcd4b4",
+        "filename": "src/dm/ve.dm.VisualDiff.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-05-11T12:19:22Z",
+      "side": 1,
+      "message": "You could doc as {ve.dm.Node[]}",
+      "revId": "8f2cd3bcb4ff0ecb036ce65bf48d828646b02771",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c5a69758_5f3ae85a",
+        "filename": "src/dm/ve.dm.VisualDiff.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-05-11T12:19:22Z",
+      "side": 1,
+      "message": "is this {number[]}?",
+      "revId": "8f2cd3bcb4ff0ecb036ce65bf48d828646b02771",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4d28da46_b0e7e15e",
+        "filename": "src/dm/ve.dm.VisualDiff.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-05-11T12:19:22Z",
+      "side": 1,
+      "message": "{ve.dm.Node[]} again?",
+      "revId": "8f2cd3bcb4ff0ecb036ce65bf48d828646b02771",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d5c4aa4c_7834e074",
+        "filename": "src/dm/ve.dm.VisualDiff.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-05-11T12:19:22Z",
+      "side": 1,
+      "message": "use a different variable name here so \u0027j\u0027 is always a number",
+      "revId": "8f2cd3bcb4ff0ecb036ce65bf48d828646b02771",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
