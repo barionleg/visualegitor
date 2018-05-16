@@ -26,7 +26,11 @@ ve.ce.Annotation = function VeCeAnnotation( model, parentNode, config ) {
 
 	// Properties
 	this.parentNode = parentNode || null;
-	this.$element.data( 'view', this );
+
+	this.$element
+		// Make data available before setup
+		.data( 'view', this )
+		.addClass( 've-ce-annotation' );
 };
 
 /* Inheritance */
@@ -105,6 +109,14 @@ ve.ce.Annotation.prototype.attachContents = function () {
  */
 ve.ce.Annotation.prototype.appendTo = function ( node ) {
 	node.appendChild( this.$element[ 0 ] );
+};
+
+/**
+ * Toggle an annotation's active state: when the cursor is inside it
+ *
+ * @param {boolean} active
+ */
+ve.ce.Annotation.prototype.toggleActive = function () {
 };
 
 /**
