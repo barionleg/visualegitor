@@ -881,7 +881,7 @@ ve.ce.Surface.prototype.onDocumentSelectionChange = function () {
 		return;
 	}
 	this.fixupCursorPosition( 0, this.dragging );
-	this.updateActiveLink();
+	this.updateActiveAnnotation();
 	this.surfaceObserver.pollOnceSelection();
 };
 
@@ -3693,7 +3693,7 @@ ve.ce.Surface.prototype.showSelectionState = function ( selection ) {
 	}
 
 	if ( newSel.equalsSelection( sel ) ) {
-		this.updateActiveLink();
+		this.updateActiveAnnotation();
 		return false;
 	}
 
@@ -3717,7 +3717,7 @@ ve.ce.Surface.prototype.showSelectionState = function ( selection ) {
 			// Fallback: Apply the corresponding forward selection
 			newSel = newSel.flip();
 			if ( newSel.equalsSelection( sel ) ) {
-				this.updateActiveLink();
+				this.updateActiveAnnotation();
 				return false;
 			}
 		}
@@ -3750,24 +3750,24 @@ ve.ce.Surface.prototype.showSelectionState = function ( selection ) {
 			$( newSel.focusNode ).closest( '*' ).get( 0 )
 		);
 	}
-	this.updateActiveLink();
+	this.updateActiveAnnotation();
 	return true;
 };
 
 /**
- * Update the activeLink property and apply CSS classes accordingly
+ * Update the activeAnnotation property and apply CSS classes accordingly
  */
-ve.ce.Surface.prototype.updateActiveLink = function () {
-	var activeLink = this.linkAnnotationAtFocus();
-	if ( activeLink === this.activeLink ) {
+ve.ce.Surface.prototype.updateActiveAnnotation = function () {
+	var activeAnnotation = this.annotationAtFocus();
+	if ( activeAnnotation === this.activeAnnotation ) {
 		return;
 	}
-	if ( this.activeLink ) {
-		this.activeLink.classList.remove( 've-ce-linkAnnotation-active' );
+	if ( this.activeAnnotation ) {
+		$.data( this.activeAnnotation, 'view' ).toggleActive( false );
 	}
-	this.activeLink = activeLink;
-	if ( activeLink ) {
-		this.activeLink.classList.add( 've-ce-linkAnnotation-active' );
+	this.activeAnnotation = activeAnnotation;
+	if ( activeAnnotation ) {
+		$.data( this.activeAnnotation, 'view' ).toggleActive( true );
 	}
 	this.model.emit( 'contextChange' );
 };
@@ -3795,24 +3795,24 @@ ve.ce.Surface.prototype.selectNodeContents = function ( node ) {
 };
 
 /**
- * Update the selection to contain the contents of the activeLink, if it exists
+ * Update the selection to contain the contents of the activeAnnotation, if it exists
  *
  * @return {boolean} Whether the selection changed
  */
-ve.ce.Surface.prototype.selectActiveLinkContents = function () {
-	return this.selectLinkContents( this.activeLink );
+ve.ce.Surface.prototype.selectActiveAnnotationContents = function () {
+	return this.selectAnnotationContents( this.activeAnnotation );
 };
 
 /**
- * Get the linkAnnotation node containing the cursor focus
+ * Get the annotation node containing the cursor focus
  *
- * If there is no focus, or it is not inside a linkAnnotation, return null
+ * If there is no focus, or it is not inside a annotation, return null
  *
- * @return {Node|null} the linkAnnotation node containing the focus
+ * @return {HTMLElement|null} The annotation containing the focus
  *
  */
-ve.ce.Surface.prototype.linkAnnotationAtFocus = function () {
-	return $( this.nativeSelection.focusNode ).closest( '.ve-ce-linkAnnotation' )[ 0 ] || null;
+ve.ce.Surface.prototype.annotationAtFocus = function () {
+	return $( this.nativeSelection.focusNode ).closest( '.ve-ce-annotation' )[ 0 ] || null;
 };
 
 /**
@@ -4090,7 +4090,7 @@ ve.ce.Surface.prototype.getSelectedModels = function () {
 		) );
 	}
 
-	if ( this.activeLink ) {
+	if ( this.activeAnnotation ) {
 		return models;
 	}
 	return models.filter( function ( annModel ) {
