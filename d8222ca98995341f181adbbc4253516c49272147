@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fddb614a_0423252b",
+        "filename": "src/ui/contextitems/ve.ui.LinkContextItem.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-05-16T17:19:46Z",
+      "side": 1,
+      "message": "Use ve.dm.SurfaceFragment.expandLinearSelection( \u0027annotation\u0027 )",
+      "revId": "d8222ca98995341f181adbbc4253516c49272147",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
