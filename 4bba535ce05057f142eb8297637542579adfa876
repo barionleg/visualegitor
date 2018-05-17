@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d386c5a6_27461db3",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 3763,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2018-05-17T10:19:09Z",
+      "side": 1,
+      "message": "Add some sort of comment, e.g.:\n\n\"WARNING: In the case of annotations that don\u0027t have ve-ce-nail images at the boundary, the browser can be quite fluid about whether a cursor at the boundary is inside or outside.\n\nAvoid writing code that depends on the activeAnnotation property being accurate in such cases.\"",
+      "revId": "4bba535ce05057f142eb8297637542579adfa876",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
