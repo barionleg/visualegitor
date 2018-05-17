@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "36951900_447815ec",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 3783,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2018-05-17T10:35:59Z",
+      "side": 1,
+      "message": "\u003d\u003d\u003d -1",
+      "range": {
+        "startLine": 3783,
+        "startChar": 54,
+        "endLine": 3783,
+        "endChar": 56
+      },
+      "revId": "74ae6ce0f642ddb6b3f374f043e0a9479661722b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6adc0fda_4a7b4556",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 3790,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2018-05-17T10:35:59Z",
+      "side": 1,
+      "message": "Reverse the order of these two lines",
+      "revId": "74ae6ce0f642ddb6b3f374f043e0a9479661722b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "25578ecb_f32a0093",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 3818,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2018-05-17T10:35:59Z",
+      "side": 1,
+      "message": "nodes",
+      "range": {
+        "startLine": 3818,
+        "startChar": 22,
+        "endLine": 3818,
+        "endChar": 26
+      },
+      "revId": "74ae6ce0f642ddb6b3f374f043e0a9479661722b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b86ca2bf_30ad3dcd",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 3820,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2018-05-17T10:35:59Z",
+      "side": 1,
+      "message": "[]",
+      "range": {
+        "startLine": 3820,
+        "startChar": 66,
+        "endLine": 3820,
+        "endChar": 70
+      },
+      "revId": "74ae6ce0f642ddb6b3f374f043e0a9479661722b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce737347_f90ac666",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 3822,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2018-05-17T10:35:59Z",
+      "side": 1,
+      "message": "annotations",
+      "range": {
+        "startLine": 3822,
+        "startChar": 36,
+        "endLine": 3822,
+        "endChar": 46
+      },
+      "revId": "74ae6ce0f642ddb6b3f374f043e0a9479661722b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
