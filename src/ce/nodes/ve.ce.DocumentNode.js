@@ -29,7 +29,7 @@ ve.ce.DocumentNode = function VeCeDocumentNode( model, surface, config ) {
 	this.setRoot( this );
 
 	// DOM changes
-	this.$element.addClass( 've-ce-documentNode ve-ce-rootNode' );
+	this.$element.addClass( 've-ce-documentNode ve-ce-attachedRootNode' );
 	// Prevent Grammarly from polluting the DOM (T165746)
 	this.$element.attr( 'data-gramm', 'false' );
 };
@@ -67,24 +67,6 @@ ve.ce.DocumentNode.prototype.getOuterLength = function () {
  */
 ve.ce.DocumentNode.prototype.getSurface = function () {
 	return this.surface;
-};
-
-/**
- * Disable editing.
- *
- * @method
- */
-ve.ce.DocumentNode.prototype.disable = function () {
-	this.setContentEditable( false );
-};
-
-/**
- * Enable editing.
- *
- * @method
- */
-ve.ce.DocumentNode.prototype.enable = function () {
-	this.setContentEditable( true );
 };
 
 /* Registration */
