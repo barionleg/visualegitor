@@ -144,7 +144,7 @@ body {
 /* Editor */
 
 .ve-ui-surface-placeholder,
-.ve-ui-surface .ve-ce-rootNode {
+.ve-ui-surface .ve-ce-attachedRootNode {
 	padding: 0.5em 1.5em;
 }
 
