@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "070b3bb2_3fb76e43",
+        "filename": "src/ui/widgets/ve.ui.TargetWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2018-05-18T13:59:10Z",
+      "side": 1,
+      "message": "Explain why it\u0027s `null` rather than just not being included? It\u0027s probably confusing, since the answer includes \"the default *should* be X, but downstream implementations override getSurfaceConfig so it\u0027s Y instead\", thus nobody reading just the core VE code is going to know what\u0027s going on...",
+      "revId": "5b611b525eb20b22a748bfa2c65ca3d00b3d8bea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
