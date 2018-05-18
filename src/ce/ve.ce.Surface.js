@@ -29,12 +29,15 @@ ve.ce.Surface = function VeCeSurface( model, ui, config ) {
 	this.surface = ui;
 	this.model = model;
 	this.documentView = new ve.ce.Document( model.getDocument(), this );
+	this.root = this.documentView.getDocumentNode().getNodeFromOffset(
+		model.getRoot().getOffset() + ( model.getRoot().isWrapped() ? 1 : 0 )
+	);
 	this.selection = null;
 	this.surfaceObserver = new ve.ce.SurfaceObserver( this );
 	this.synchronizer = null;
 	this.$window = $( this.getElementWindow() );
 	this.$document = $( this.getElementDocument() );
-	this.$documentNode = this.getDocument().getDocumentNode().$element;
+	this.$rootNode = this.root.$element;
 	// Window.getSelection returns a live singleton representing the document's selection
 	this.nativeSelection = this.getElementWindow().getSelection();
 	this.eventSequencer = new ve.EventSequencer( [
@@ -105,7 +108,7 @@ ve.ce.Surface = function VeCeSurface( model, ui, config ) {
 	} );
 
 	this.onDocumentMouseUpHandler = this.onDocumentMouseUp.bind( this );
-	this.$documentNode.on( {
+	this.$rootNode.on( {
 		// Mouse events shouldn't be sequenced as the event sequencer
 		// is detached on blur
 		mousedown: this.onDocumentMouseDown.bind( this ),
@@ -127,9 +130,9 @@ ve.ce.Surface = function VeCeSurface( model, ui, config ) {
 	this.$document.on( 'mousedown', this.debounceFocusChange );
 	// It is possible that when focusin fires, the selection is not yet inside
 	// the document. This happens if the selection is being moved inside itself,
-	// e.g. the whole html page was previously selected, including the docuemntNode.
+	// e.g. the whole html page was previously selected, including the rootNode
 	// In this case the selection is not moved until mouseup. T157499
-	this.$documentNode.on( 'mouseup', this.debounceFocusChange );
+	this.$rootNode.on( 'mouseup', this.debounceFocusChange );
 
 	this.$pasteTarget.add( this.$highlights ).on( {
 		cut: this.onCut.bind( this ),
@@ -137,12 +140,12 @@ ve.ce.Surface = function VeCeSurface( model, ui, config ) {
 		paste: this.onPaste.bind( this )
 	} );
 
-	this.$documentNode
+	this.$rootNode
 		.on( 'paste', this.onPaste.bind( this ) )
 		.on( 'focus', 'a', function () {
 			// Opera <= 12 triggers 'blur' on document node before any link is
 			// focused and we don't want that
-			surface.$documentNode[ 0 ].focus();
+			surface.$rootNode[ 0 ].focus();
 		} );
 
 	// Support: IE<=11
@@ -153,7 +156,7 @@ ve.ce.Surface = function VeCeSurface( model, ui, config ) {
 		this.$document.on( 'selectionchange', this.onDocumentSelectionChangeDebounced );
 	} else {
 		// Fake selection change events with mousemove if dragging
-		this.$documentNode.on( 'mousemove', function () {
+		this.$rootNode.on( 'mousemove', function () {
 			if ( surface.dragging ) {
 				surface.onDocumentSelectionChangeDebounced();
 			}
@@ -203,7 +206,7 @@ ve.ce.Surface = function VeCeSurface( model, ui, config ) {
 
 	// Add elements to the DOM
 	this.$highlights.append( this.$dropMarker );
-	this.$element.append( this.$documentNode, this.$pasteTarget );
+	this.$element.append( this.$rootNode, this.$pasteTarget );
 	this.surface.$blockers.append( this.$highlights );
 	this.surface.$selections.append( this.$deactivatedSelection );
 	this.enable();
@@ -360,7 +363,7 @@ ve.ce.Surface.static.getClipboardHash = function ( $elements, beforePasteData ) 
  * @method
  */
 ve.ce.Surface.prototype.destroy = function () {
-	var documentNode = this.documentView.getDocumentNode();
+	var root = this.root;
 
 	// Support: Firefox, iOS
 	// FIXME T126041: Blur to make selection/cursor disappear (needed in Firefox
@@ -375,7 +378,7 @@ ve.ce.Surface.prototype.destroy = function () {
 	this.eventSequencer.detach();
 
 	// Make document node not live
-	documentNode.setLive( false );
+	root.setLive( false );
 
 	// Disconnect events
 	this.model.disconnect( this );
@@ -478,7 +481,7 @@ ve.ce.Surface.prototype.getSelection = function ( selection ) {
  * @method
  */
 ve.ce.Surface.prototype.initialize = function () {
-	this.documentView.getDocumentNode().setLive( true );
+	this.root.setLive( true );
 	if ( $.client.profile().layout === 'gecko' ) {
 		// Turn off native object editing. This must be tried after the surface has been added to DOM.
 		// This is only needed in Gecko. In other engines, these properties are off by default,
@@ -498,7 +501,7 @@ ve.ce.Surface.prototype.initialize = function () {
 ve.ce.Surface.prototype.enable = function () {
 	this.disabled = false;
 	this.$element.addClass( 've-ce-surface-enabled' );
-	this.documentView.getDocumentNode().enable();
+	this.root.enable();
 };
 
 /**
@@ -509,7 +512,7 @@ ve.ce.Surface.prototype.enable = function () {
 ve.ce.Surface.prototype.disable = function () {
 	this.disabled = true;
 	this.$element.removeClass( 've-ce-surface-enabled' );
-	this.documentView.getDocumentNode().disable();
+	this.root.disable();
 };
 
 /**
@@ -533,7 +536,7 @@ ve.ce.Surface.prototype.focus = function () {
 		selection = this.getSelection();
 	}
 
-	// Focus the documentNode for text selections, or the pasteTarget for focusedNode selections
+	// Focus the contentEditable for text selections, or the pasteTarget for focusedNode selections
 	if ( selection.isFocusedNode() ) {
 		this.$pasteTarget[ 0 ].focus();
 	} else if ( selection.isNativeCursor() ) {
@@ -604,7 +607,7 @@ ve.ce.Surface.prototype.onFocusChange = function () {
 
 	hasFocus = OO.ui.contains(
 		[
-			this.$documentNode[ 0 ],
+			this.$rootNode[ 0 ],
 			this.$pasteTarget[ 0 ],
 			this.$highlights[ 0 ]
 		],
@@ -613,7 +616,7 @@ ve.ce.Surface.prototype.onFocusChange = function () {
 	);
 
 	if ( this.deactivated ) {
-		if ( OO.ui.contains( this.$documentNode[ 0 ], this.nativeSelection.anchorNode, true ) ) {
+		if ( OO.ui.contains( this.$rootNode[ 0 ], this.nativeSelection.anchorNode, true ) ) {
 			this.onDocumentFocus();
 		}
 	} else {
@@ -654,7 +657,7 @@ ve.ce.Surface.prototype.activate = function () {
 		this.deactivated = false;
 		this.updateDeactivatedSelection();
 		this.surfaceObserver.enable();
-		if ( OO.ui.contains( this.$documentNode[ 0 ], this.nativeSelection.anchorNode, true ) ) {
+		if ( OO.ui.contains( this.$rootNode[ 0 ], this.nativeSelection.anchorNode, true ) ) {
 			// The selection has been placed back in the document, either by the user clicking
 			// or by the closing window updating the model. Poll in case it was the user clicking.
 			this.surfaceObserver.clear();
@@ -1546,7 +1549,7 @@ ve.ce.Surface.prototype.cleanupUnicorns = function ( fixupCursor ) {
 		return false;
 	}
 	preUnicorn = this.unicorningNode.unicorns[ 0 ];
-	if ( !this.$documentNode[ 0 ].contains( preUnicorn ) ) {
+	if ( !this.$rootNode[ 0 ].contains( preUnicorn ) ) {
 		return false;
 	}
 
@@ -1778,7 +1781,7 @@ ve.ce.Surface.prototype.onCopy = function ( e ) {
 				// If the range was in $highlights (right-click copy), don't restore it
 				if ( !OO.ui.contains( view.$highlights[ 0 ], originalSelection.focusNode, true ) ) {
 					// Change focus back
-					view.$documentNode[ 0 ].focus();
+					view.$rootNode[ 0 ].focus();
 					view.showSelectionState( originalSelection );
 					// Restore scroll position
 					view.$window.scrollTop( scrollTop );
@@ -1992,7 +1995,7 @@ ve.ce.Surface.prototype.afterPaste = function () {
 	return pending.then( function () {
 		if ( view.getSelection().isNativeCursor() ) {
 			// Restore focus and scroll position
-			view.$documentNode[ 0 ].focus();
+			view.$rootNode[ 0 ].focus();
 			view.$window.scrollTop( beforePasteData.scrollTop );
 			// setTimeout: Firefox sometimes doesn't change scrollTop immediately when pasting
 			// line breaks at the end of a line so do it again later.
@@ -2772,8 +2775,8 @@ ve.ce.Surface.prototype.onModelSelect = function () {
 				// If dragging, we already have a native selection, so don't mess with it
 				if ( !this.dragging ) {
 					this.preparePasteTargetForCopy();
-					// Since the selection is no longer in the documentNode, clear the SurfaceObserver's
-					// selection state. Otherwise, if the user places the selection back into the documentNode
+					// Since the selection is no longer in the root, clear the SurfaceObserver's
+					// selection state. Otherwise, if the user places the selection back into the root
 					// in exactly the same place where it was before, the observer won't consider that a change.
 					this.surfaceObserver.clear();
 				}
@@ -3730,7 +3733,7 @@ ve.ce.Surface.prototype.showModelSelection = function ( force ) {
 		return false;
 	}
 	modelRange = selection.getModel().getRange();
-	if ( !force && this.documentView.documentNode.$element.get( 0 ).contains(
+	if ( !force && this.$rootNode.get( 0 ).contains(
 		this.nativeSelection.focusNode
 	) ) {
 		// See whether the model range implied by the DOM selection is already equal to

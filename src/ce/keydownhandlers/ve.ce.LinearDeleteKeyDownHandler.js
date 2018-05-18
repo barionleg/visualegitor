@@ -232,7 +232,7 @@ ve.ce.LinearDeleteKeyDownHandler.static.execute = function ( surface, e ) {
 				!startNode.isUnwrappable() ||
 				// Content item at the start / end?
 				(
-					( startNode.canContainContent() || documentModel.getDocumentNode() === startNode ) &&
+					( startNode.canContainContent() || surface.root === startNode ) &&
 					( nodeRange.start === 0 || nodeRange.end === docLength )
 				)
 			) {

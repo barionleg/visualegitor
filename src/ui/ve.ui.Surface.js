@@ -268,7 +268,13 @@ ve.ui.Surface.prototype.createDialogWindowManager = function () {
  * @return {ve.dm.Surface} Surface model
  */
 ve.ui.Surface.prototype.createModel = function ( doc ) {
-	return new ve.dm.Surface( doc, { sourceMode: this.getMode() === 'source' } );
+	var root = doc.getDocumentNode();
+	// root = root.children[ 0 ].children[ 1 ] ... or whatever
+	debugger;
+	if ( !root.isSurfaceable() ) {
+		throw new Error( 'Not a surfaceable node' );
+	}
+	return new ve.dm.Surface( doc, root, { sourceMode: this.getMode() === 'source' } );
 };
 
 /**
@@ -628,7 +634,7 @@ ve.ui.Surface.prototype.updatePlaceholder = function () {
 	if ( !hasContent ) {
 		// Use a clone of the first node in the document so the placeholder
 		// styling matches the text the users sees when they start typing
-		firstNode = this.getView().documentView.documentNode.getNodeFromOffset( 1 );
+		firstNode = this.getView().root.getNodeFromOffset( 1 );
 		if ( firstNode ) {
 			$wrapper = firstNode.$element.clone();
 			if ( ve.debug ) {

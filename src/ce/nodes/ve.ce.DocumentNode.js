@@ -69,24 +69,6 @@ ve.ce.DocumentNode.prototype.getSurface = function () {
 	return this.surface;
 };
 
-/**
- * Disable editing.
- *
- * @method
- */
-ve.ce.DocumentNode.prototype.disable = function () {
-	this.setContentEditable( false );
-};
-
-/**
- * Enable editing.
- *
- * @method
- */
-ve.ce.DocumentNode.prototype.enable = function () {
-	this.setContentEditable( true );
-};
-
 /* Registration */
 
 ve.ce.nodeFactory.register( ve.ce.DocumentNode );
