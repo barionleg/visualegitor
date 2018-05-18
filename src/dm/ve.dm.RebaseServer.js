@@ -77,10 +77,10 @@ ve.dm.RebaseServer.prototype.updateDocState = ve.async( function* updateDocState
  * @param {number} authorId Author ID
  * @param {number} backtrack How many transactions are backtracked from the previous submission
  * @param {ve.dm.Change} change Change to apply
- * @return {Promise<ve.dm.Change>} Accepted change (or initial segment thereof), as rebased
+ * @return {Promise<ve.dm.Change|null>} Accepted rebased change, or null if there is any conflict
  */
 ve.dm.RebaseServer.prototype.applyChange = ve.async( function* applyChange( doc, authorId, backtrack, change ) {
-	var base, rejections, result, appliedChange,
+	var base, rejections, result, appliedChange, authorDataChanges,
 		state = yield this.getDocState( doc ),
 		authorData = state.authors.get( authorId );
 
@@ -105,12 +105,20 @@ ve.dm.RebaseServer.prototype.applyChange = ve.async( function* applyChange( doc,
 		base = base.concat( state.history.mostRecent( base.start + base.getLength() ) );
 
 		result = ve.dm.Change.static.rebaseUncommittedChange( base, change );
-		rejections = result.rejected ? result.rejected.getLength() : 0;
-		yield this.updateDocState( doc, authorId, result.rebased, {
-			rejections: rejections,
-			continueBase: result.transposedHistory
-		} );
-		appliedChange = result.rebased;
+		if ( result.rejected ) {
+			// There are rejections, so reject the entire change (atomicity)
+			appliedChange = null;
+			rejections = change.getLength();
+			authorDataChanges = { rejections: rejections };
+		} else {
+			appliedChange = result.rebased;
+			rejections = 0;
+			authorDataChanges = {
+				rejections: rejections,
+				continueBase: result.transposedHistory
+			};
+		}
+		yield this.updateDocState( doc, authorId, appliedChange, authorDataChanges );
 	}
 	this.logEvent( {
 		type: 'applyChange',

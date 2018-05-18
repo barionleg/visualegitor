@@ -103,7 +103,7 @@ function* onSubmitChange( context, data ) {
 	var change, applied;
 	change = ve.dm.Change.static.deserialize( data.change, null, true );
 	applied = yield rebaseServer.applyChange( context.docName, context.authorId, data.backtrack, change );
-	if ( !applied.isEmpty() ) {
+	if ( applied && !applied.isEmpty() ) {
 		docNamespaces.get( context.docName ).emit( 'newChange', applied.serialize( true ) );
 	}
 }

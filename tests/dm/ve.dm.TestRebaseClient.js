@@ -145,7 +145,7 @@ ve.dm.TestRebaseClient.prototype.deliverOne = ve.async( function* () {
 		item.backtrack,
 		item.change
 	);
-	if ( !rebased.isEmpty() ) {
+	if ( rebased && !rebased.isEmpty() ) {
 		this.server.incoming.push( rebased );
 	}
 } );
