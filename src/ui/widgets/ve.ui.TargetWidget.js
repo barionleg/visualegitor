@@ -106,7 +106,9 @@ ve.ui.TargetWidget.prototype.setDocument = function ( doc ) {
 		importRules: this.importRules,
 		multiline: this.multiline,
 		placeholder: this.placeholder,
-		inDialog: this.inDialog
+		inDialog: this.inDialog,
+		// Use the closest scrollable container
+		$overlayContainer: null
 	} );
 
 	// Events
