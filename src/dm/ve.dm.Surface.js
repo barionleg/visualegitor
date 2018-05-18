@@ -5,24 +5,32 @@
  */
 
 /**
- * DataModel surface.
+ * DataModel surface for a node within a document
+ *
+ * Methods do not check that ranges actually lie inside the surfaced node
  *
  * @class
  * @mixins OO.EventEmitter
  *
  * @constructor
  * @param {ve.dm.Document} doc Document model to create surface for
+ * @param {ve.dm.BranchNode} root Node to surface (use doc.getRoot() to surface the whole document)
  * @param {Object} [config] Configuration options
  * @cfg {boolean} [sourceMode] Source editing mode
  */
-ve.dm.Surface = function VeDmSurface( doc, config ) {
+ve.dm.Surface = function VeDmSurface( doc, root, config ) {
 	config = config || {};
+
+	if ( !( root instanceof ve.dm.BranchNode ) ) {
+		throw new Error( 'Expected ve.dm.BranchNode for root' );
+	}
 
 	// Mixin constructors
 	OO.EventEmitter.call( this );
 
 	// Properties
 	this.documentModel = doc;
+	this.root = root;
 	this.sourceMode = !!config.sourceMode;
 	this.metaList = new ve.dm.MetaList( this );
 	this.selection = new ve.dm.NullSelection( this.getDocument() );
@@ -485,6 +493,15 @@ ve.dm.Surface.prototype.hasBeenModified = function () {
  */
 ve.dm.Surface.prototype.getDocument = function () {
 	return this.documentModel;
+};
+
+/**
+ * Get the surfaced node
+ *
+ * @return {ve.dm.Node} The surfaced node
+ */
+ve.dm.Surface.prototype.getRoot = function () {
+	return this.root;
 };
 
 /**
