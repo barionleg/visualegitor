@@ -4921,3 +4921,12 @@ ve.ce.Surface.prototype.onPosition = function () {
 		} );
 	}
 };
+
+/**
+ * TODO: Document
+ *
+ * @return {jQuery}
+ */
+ve.ce.Surface.prototype.getOutOfFlowNodes = function () {
+	return $();
+};
