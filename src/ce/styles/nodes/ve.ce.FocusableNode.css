@@ -17,11 +17,23 @@
 }
 
 .ve-ce-focusableNode-highlight {
-	background: #6da9f7;
-	box-shadow: inset 0 0 0 1px #4c76ac;
+	pointer-events: none;
 	position: absolute;
 	/* Clip extra span added for selectability */
 	overflow: hidden;
+}
+
+.ve-ce-focusableNode-highlight mask path {
+	fill-rule: evenodd;
+	fill: #fff;
+}
+
+.ve-ce-focusableNode-highlight g path {
+	fill-rule: evenodd;
+	fill: #6da9f7;
+	stroke: #4c76ac;
+	stroke-width: 2;
+	pointer-events: visibleFill;
 }
 
 .ve-ce-focusableNode-highlight-error {
@@ -54,23 +66,11 @@
 	margin-left: 0;
 }
 
-/* Highlights group opacity */
-
-.ve-ce-surface-highlights-focused .ve-ce-focusableNode-highlights {
+/* Highlights opacity */
+.ve-ce-surface-highlights-focused .ve-ce-focusableNode-highlight {
 	opacity: 0.5;
 }
 
-.ve-ce-surface-highlights-blurred .ve-ce-focusableNode-highlights {
-	opacity: 0.15;
-}
-
-/* Support: IE, Edge */
-/* Set opacity directly on the highlights, rather than their containers,
-   otherwise the opacity isn't applied at all */
-.ve-init-target-ie-or-edge .ve-ce-surface-highlights-focused .ve-ce-focusableNode-highlight {
-	opacity: 0.5;
-}
-
-.ve-init-target-ie-or-edge .ve-ce-surface-highlights-blurred .ve-ce-focusableNode-highlight {
+.ve-ce-surface-highlights-blurred .ve-ce-focusableNode-highlight {
 	opacity: 0.15;
 }
