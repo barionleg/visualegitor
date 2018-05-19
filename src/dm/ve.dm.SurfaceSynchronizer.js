@@ -36,6 +36,8 @@ ve.dm.SurfaceSynchronizer = function VeDmSurfaceSynchronizer( surface, documentI
 
 	// Whether the document has been initialized
 	this.initialized = false;
+	// Unique string identifying the document
+	this.docId = null;
 	// Whether we are currently synchronizing the model
 	this.applying = false;
 
@@ -47,6 +49,7 @@ ve.dm.SurfaceSynchronizer = function VeDmSurfaceSynchronizer( surface, documentI
 	this.socket.on( 'nameChange', this.onNameChange.bind( this ) );
 	this.socket.on( 'colorChange', this.onColorChange.bind( this ) );
 	this.socket.on( 'authorDisconnect', this.onAuthorDisconnect.bind( this ) );
+	this.socket.on( 'disconnect', this.onDisconnect.bind( this ) );
 	// TODO: unbreak then re-enable usurp
 	// this.tryUsurp();
 
@@ -81,6 +84,14 @@ OO.mixinClass( ve.dm.SurfaceSynchronizer, ve.dm.RebaseClient );
 
 /**
  * @event initDoc
+ */
+
+/**
+ * @event wrongDoc
+ */
+
+/**
+ * @event disconnect
  */
 
 /* Methods */
@@ -316,6 +327,15 @@ ve.dm.SurfaceSynchronizer.prototype.tryUsurp = function () {
  */
 ve.dm.SurfaceSynchronizer.prototype.onInitDoc = function ( data ) {
 	var history, authorId;
+
+	if ( this.docId !== null && this.docId !== data.docId ) {
+		// TODO: surface this error
+
+		// TODO: either make SurfaceSynchronizer unit testable, or move
+		// connection/disconnection to the RebaseClient
+		this.emit( 'wrongDoc' );
+		return;
+	}
 	if ( this.initialized ) {
 		// Ignore attempt to initialize a second time
 		return;
@@ -325,10 +345,11 @@ ve.dm.SurfaceSynchronizer.prototype.onInitDoc = function ( data ) {
 	}
 	history = ve.dm.Change.static.deserialize( data.history, this.doc );
 	this.acceptChange( history );
-	this.emit( 'initDoc' );
 
 	// Mark ourselves as initialized and retry any prevented submissions
 	this.initialized = true;
+	this.docId = data.docId;
+	this.emit( 'initDoc' );
 	this.submitChangeThrottled();
 };
 
@@ -358,4 +379,9 @@ ve.dm.SurfaceSynchronizer.prototype.onNewChange = function ( serializedChange ) 
 	}
 	// Schedule submission of unsent local changes, if any
 	this.submitChangeThrottled();
+};
+
+ve.dm.SurfaceSynchronizer.prototype.onDisconnect = function () {
+	this.initialized = false;
+	this.emit( 'disconnect' );
 };

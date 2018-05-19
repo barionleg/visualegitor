@@ -4143,7 +4143,8 @@ ve.ce.Surface.prototype.setSynchronizer = function ( synchronizer ) {
 	this.synchronizer.connect( this, {
 		authorSelect: 'onSynchronizerAuthorUpdate',
 		authorNameChange: 'onSynchronizerAuthorUpdate',
-		authorColorChange: 'onSynchronizerAuthorUpdate'
+		authorColorChange: 'onSynchronizerAuthorUpdate',
+		wrongDoc: 'onSynchronizerWrongDoc'
 	} );
 };
 
@@ -4154,6 +4155,16 @@ ve.ce.Surface.prototype.setSynchronizer = function ( synchronizer ) {
  */
 ve.ce.Surface.prototype.onSynchronizerAuthorUpdate = function ( authorId ) {
 	this.paintAuthor( authorId );
+};
+
+/**
+ * Called when the synchronizer reconnects and their is a server doc ID mismatch
+ */
+ve.ce.Surface.prototype.onSynchronizerWrongDoc = function () {
+	OO.ui.alert(
+		ve.msg( 'visualeditor-missing-document-error' ),
+		{ title: ve.msg( 'visualeditor-missing-document-title' ) }
+	);
 };
 
 /**

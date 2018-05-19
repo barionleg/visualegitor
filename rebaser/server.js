@@ -94,6 +94,7 @@ function* welcomeNewClient( socket, docName, authorId ) {
 	// feasible if TransactionProcessor was modified to have a "don't sync, just apply"
 	// mode and ve.dm.Document was faked with { data: ..., metadata: ..., store: ... }
 	socket.emit( 'initDoc', {
+		docId: state.docId,
 		history: state.history.serialize( true ),
 		names: state.getActiveNames()
 	} );
