@@ -4378,3 +4378,11 @@ ve.ce.Surface.prototype.onPosition = function () {
 		}
 	} );
 };
+
+/**
+ * [getOutOfFlowNodes description]
+ * @return {jQuery}
+ */
+ve.ce.Surface.prototype.getOutOfFlowNodes = function () {
+	return $();
+};

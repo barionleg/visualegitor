@@ -23,7 +23,7 @@
  * @constructor
  * @param {jQuery} [$focusable=this.$element] Primary element user is focusing on
  * @param {Object} [config] Configuration options
- * @param {jQuery} [$bounding=$focusable] Element to consider for bounding box calculations (e.g.
+ * @cfg {jQuery} [$bounding=$focusable] Element to consider for bounding box calculations (e.g.
  *   attaching inspectors)
  * @cfg {string[]} [classes] CSS classes to be added to the highlight container
  */
@@ -93,6 +93,13 @@ OO.initClass( ve.ce.FocusableNode );
  * @inheritable
  */
 ve.ce.FocusableNode.static.iconWhenInvisible = null;
+
+/**
+ * A number incremented and used each time we need to generate a unique ID.
+ *
+ * @property {number}
+ */
+ve.ce.FocusableNode.static.uid = 0;
 
 /* Static methods */
 
@@ -231,11 +238,12 @@ ve.ce.FocusableNode.static.getRectsForElement = function ( $element, relativeRec
 /**
  * Create a highlight element.
  *
+ * @param {string} html HTML code of the highlight element to create
  * @return {jQuery} A highlight element
  */
-ve.ce.FocusableNode.prototype.createHighlight = function () {
+ve.ce.FocusableNode.prototype.createHighlight = function ( html ) {
 	var extraClasses = this.generatedContentsInvalid ? ' ve-ce-focusableNode-highlight-error' : '';
-	return $( '<div>' )
+	return $( html )
 		.addClass( 've-ce-focusableNode-highlight' + extraClasses )
 		.prop( {
 			title: this.constructor.static.getDescription( this.model ),
@@ -267,7 +275,7 @@ ve.ce.FocusableNode.prototype.onFocusableSetup = function () {
 
 	// Events
 	this.$focusable.on( {
-		'mouseenter.ve-ce-focusableNode': this.onFocusableMouseEnter.bind( this ),
+		'mouseover.ve-ce-focusableNode': this.onFocusableMouseOver.bind( this ),
 		'touchstart.ve-ce-focusableNode': this.onFocusableTouchStart.bind( this ),
 		'touchmove.ve-ce-focusableNode': this.onFocusableTouchMove.bind( this ),
 		'mousedown.ve-ce-focusableNode touchend.ve-ce-focusableNode': this.onFocusableMouseDown.bind( this )
@@ -436,6 +444,11 @@ ve.ce.FocusableNode.prototype.onFocusableMouseDown = function ( e ) {
 		return;
 	}
 
+	if ( OO.ui.contains( this.getHoles().toArray(), e.target, true ) ) {
+		// Clicked on a "hole", don't select this, and allow normal selection stuff to happen
+		return;
+	}
+
 	if ( e.which === OO.ui.MouseButtons.RIGHT ) {
 		// Make ce=true so we get cut/paste options in context menu
 		this.$highlights.prop( 'contentEditable', 'true' );
@@ -525,14 +538,20 @@ ve.ce.FocusableNode.prototype.onFocusableDragEnd = function () {
 };
 
 /**
- * Handle mouse enter events.
+ * Handle mouse over events.
  *
  * @method
- * @param {jQuery.Event} e Mouse enter event
+ * @param {jQuery.Event} e Mouse over event
  */
-ve.ce.FocusableNode.prototype.onFocusableMouseEnter = function () {
+ve.ce.FocusableNode.prototype.onFocusableMouseOver = function ( e ) {
 	if ( !this.root.getSurface().dragging && !this.root.getSurface().resizing && this.isInContentEditable() ) {
-		this.createHighlights();
+		if ( OO.ui.contains( this.getHoles().toArray(), e.target, true ) ) {
+			if ( !this.focused ) {
+				this.clearHighlights();
+			}
+		} else {
+			this.createHighlights();
+		}
 	}
 };
 
@@ -716,7 +735,7 @@ ve.ce.FocusableNode.prototype.redrawHighlights = function () {
  * Re-calculate position of highlights
  */
 ve.ce.FocusableNode.prototype.calculateHighlights = function () {
-	var allRects, surfaceOffset;
+	var allRects, allHoles, surfaceOffset;
 
 	// Protect against calling before/after surface setup/teardown
 	if ( !this.focusableSurface ) {
@@ -729,8 +748,10 @@ ve.ce.FocusableNode.prototype.calculateHighlights = function () {
 	surfaceOffset = this.focusableSurface.getSurface().getBoundingClientRect();
 
 	allRects = this.constructor.static.getRectsForElement( this.$focusable, surfaceOffset );
+	allHoles = this.constructor.static.getRectsForElement( this.getHoles(), surfaceOffset );
 
 	this.rects = allRects.rects;
+	this.holes = allHoles.rects;
 	this.boundingRect = allRects.boundingRect;
 	// startAndEndRects is lazily evaluated in getStartAndEndRects from rects
 	this.startAndEndRects = null;
@@ -742,7 +763,7 @@ ve.ce.FocusableNode.prototype.calculateHighlights = function () {
  * @method
  */
 ve.ce.FocusableNode.prototype.positionHighlights = function () {
-	var i, l;
+	var i, highlightSegments, highlight, boundingRect, maskId, svgPath, svg;
 
 	if ( !this.highlighted ) {
 		return;
@@ -753,16 +774,79 @@ ve.ce.FocusableNode.prototype.positionHighlights = function () {
 		// Append something selectable for right-click copy
 		.append( $( '<span>' ).addClass( 've-ce-focusableNode-highlight-selectable' ).html( '&nbsp;' ) );
 
-	for ( i = 0, l = this.rects.length; i < l; i++ ) {
-		this.$highlights.append(
-			this.createHighlight().css( {
-				top: this.rects[ i ].top,
-				left: this.rects[ i ].left,
-				width: this.rects[ i ].width,
-				height: this.rects[ i ].height
-			} )
+	boundingRect = this.boundingRect;
+
+	// Add another rect to the shape we're computing in `highlightSegments`.
+	function combinePolysegmentsWithRect( rect ) {
+		var polygon;
+		rect = ve.translateRect( rect, -boundingRect.left, -boundingRect.top );
+		polygon = {
+			inverted: false,
+			regions: [ [
+				[ rect.left, rect.top ],
+				[ rect.left + rect.width, rect.top ],
+				[ rect.left + rect.width, rect.top + rect.height ],
+				[ rect.left, rect.top + rect.height ]
+			] ]
+		};
+		return PolyBool.combine(
+			highlightSegments,
+			PolyBool.segments( polygon )
 		);
 	}
+	highlightSegments = PolyBool.segments( { regions: [], inverted: false } );
+	for ( i = 0; i < this.rects.length; i++ ) {
+		highlightSegments = PolyBool.selectUnion( combinePolysegmentsWithRect( this.rects[ i ] ) );
+	}
+	for ( i = 0; i < this.holes.length; i++ ) {
+		highlightSegments = PolyBool.selectDifference( combinePolysegmentsWithRect( this.holes[ i ] ) );
+	}
+	highlight = PolyBool.polygon( highlightSegments );
+
+	// Convert a list of PolyBool regions to a SVG `<path>`.
+	function polyregionsToSvgPath( regions ) {
+		var i, j, d = '';
+
+		for ( i = 0; i < regions.length; i++ ) {
+			d += 'M' + regions[ i ][ 0 ][ 0 ] + ' ' + regions[ i ][ 0 ][ 1 ];
+			for ( j = 1; j < regions[ i ].length; j++ ) {
+				d += ' ' + regions[ i ][ j ][ 0 ] + ' ' + regions[ i ][ j ][ 1 ];
+			}
+			d += ' z';
+		}
+
+		return '<path d="' + d + '" />';
+	}
+
+	maskId = 've-ce-focusableNode-mask' + ve.ce.FocusableNode.static.uid++;
+	svgPath = polyregionsToSvgPath( highlight.regions );
+
+	// We build the SVG as one markup blob instead of nicely constructing DOM objects because that
+	// would require careful use of verbose methods like #createElementNS and #setAttributeNS.
+	svg =
+		'<svg>' +
+			'<defs>' +
+				// <pattern> elements used for styling AlienNode highlights
+				ve.ce.AlienNode.static.fillPatterns +
+				// Use the path itself as its mask to trim off excess outside stroke (it is 2px total, 1px
+				// inside/1px outside; we want it on the inside only).
+				'<mask id="' + maskId + '">' +
+					svgPath +
+				'</mask>' +
+			'</defs>' +
+			'<g mask="url(#' + maskId + ')">' +
+				svgPath +
+			'</g>' +
+		'</svg>';
+
+	this.$highlights.append(
+		this.createHighlight( svg ).css( {
+			top: boundingRect.top,
+			left: boundingRect.left,
+			width: boundingRect.width,
+			height: boundingRect.height
+		} )
+	);
 };
 
 /**
@@ -775,6 +859,27 @@ ve.ce.FocusableNode.prototype.getRects = function () {
 		this.calculateHighlights();
 	}
 	return this.rects;
+};
+
+/**
+ * Get nodes inside the focusable node which will not be covered by the highlights
+ *
+ * @return {jQuery}
+ */
+ve.ce.FocusableNode.prototype.getHoles = function () {
+	return this.root.getSurface().getOutOfFlowNodes();
+};
+
+/**
+ * Get list of rectangles outlining the shape of the holes inside this node
+ *
+ * @return {Object[]} List of rectangle objects
+ */
+ve.ce.FocusableNode.prototype.getHoleRects = function () {
+	if ( !this.highlighted ) {
+		this.calculateHighlights();
+	}
+	return this.holes;
 };
 
 /**

@@ -44,6 +44,20 @@ ve.ce.AlienNode.static.name = 'alien';
 
 ve.ce.AlienNode.static.iconWhenInvisible = 'puzzle';
 
+// Support: Chrome, IE, Edge
+// We have to keep this in the JS code to dump it into the main document, because Chrome and
+// Internet Explorer do not support using fill patterns from external SVG files (or data: URIs).
+// Used by ve.ce.FocusableNode.
+ve.ce.AlienNode.static.fillPatterns =
+	'<pattern id="ve-ce-alienNode-pattern-hover" patternUnits="userSpaceOnUse" width="14" height="14">' +
+		'<rect width="14" height="14" fill="white" />' +
+		'<path d="m 0,0 0,7 7,-7 z M 14,0 0,14 l 7,0 7,-7 L 14,7 z" fill="#95d14f" />' +
+	'</pattern>' +
+	'<pattern id="ve-ce-alienNode-pattern-focus" patternUnits="userSpaceOnUse" width="14" height="14">' +
+		'<rect width="14" height="14" fill="#6da9f7" />' +
+		'<path d="m 0,0 0,7 7,-7 z M 14,0 0,14 l 7,0 7,-7 L 14,7 z" fill="#95d14f" />' +
+	'</pattern>';
+
 /* Methods */
 
 /**
