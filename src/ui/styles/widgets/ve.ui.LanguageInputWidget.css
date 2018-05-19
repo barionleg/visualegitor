@@ -16,6 +16,10 @@
 	width: 7em;
 }
 
+.ve-ui-languageInputWidget .oo-ui-actionFieldLayout-button {
+	width: auto;
+}
+
 .ve-ui-languageInputWidget-languageCodeTextInput {
 	width: 6em;
 }

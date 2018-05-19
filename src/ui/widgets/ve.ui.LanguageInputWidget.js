@@ -20,9 +20,10 @@
  * @cfg {boolean} [hideCodeInput] Prevent user from entering a language code as free text
  * @cfg {ve.ui.WindowManager} [dialogManager] Window manager to launch the language search dialog in
  * @cfg {string[]} [availableLanguages] Available language codes to show in search dialog
+ * @cfg {Object} [fieldConfig] Override field config options
  */
 ve.ui.LanguageInputWidget = function VeUiLanguageInputWidget( config ) {
-	var languageLayoutConfig, dirItems, dirInput;
+	var languageFieldConfig, dirItems, dirInput;
 
 	// Configuration initialization
 	config = config || {};
@@ -53,21 +54,21 @@ ve.ui.LanguageInputWidget = function VeUiLanguageInputWidget( config ) {
 	this.directionSelect = new OO.ui.ButtonSelectWidget( {
 		classes: [ 've-ui-languageInputWidget-directionSelect' ]
 	} );
-	languageLayoutConfig = {
+	languageFieldConfig = ve.extendObject( {
 		align: 'left',
 		label: ve.msg( 'visualeditor-languageinspector-widget-label-language' )
-	};
+	}, config.fieldConfig );
 
 	if ( config.hideCodeInput ) {
-		this.languageLayout = new OO.ui.FieldLayout(
+		this.languageField = new OO.ui.FieldLayout(
 			this.findLanguageButton,
-			languageLayoutConfig
+			languageFieldConfig
 		);
 	} else {
-		this.languageLayout = new OO.ui.ActionFieldLayout(
+		this.languageField = new OO.ui.ActionFieldLayout(
 			this.languageCodeTextInput,
 			this.findLanguageButton,
-			languageLayoutConfig
+			languageFieldConfig
 		);
 	}
 	this.findLanguageButton.$element.before( this.selectedLanguageLabel.$element );
@@ -107,7 +108,7 @@ ve.ui.LanguageInputWidget = function VeUiLanguageInputWidget( config ) {
 
 	this.$element
 		.addClass( 've-ui-languageInputWidget' )
-		.append( this.languageLayout.$element );
+		.append( this.languageField.$element );
 	if ( dirInput !== 'none' ) {
 		this.$element.append( this.directionField.$element );
 	}
@@ -197,9 +198,9 @@ ve.ui.LanguageInputWidget.prototype.setLangAndDir = function ( lang, dir ) {
 	this.selectedLanguageLabel.setTitle( this.selectedLanguageLabel.$label.text() );
 	this.updating = false;
 
-	this.emit( 'change', lang, dir );
 	this.lang = lang;
 	this.dir = dir;
+	this.emit( 'change', lang, dir );
 };
 
 /**
