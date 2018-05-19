@@ -23,8 +23,9 @@
  * @constructor
  * @param {jQuery} [$focusable=this.$element] Primary element user is focusing on
  * @param {Object} [config] Configuration options
- * @param {jQuery} [$bounding=$focusable] Element to consider for bounding box calculations (e.g.
+ * @cfg {jQuery} [$bounding=$focusable] Element to consider for bounding box calculations (e.g.
  *   attaching inspectors)
+ * @cfg {jQuery} [$holes] Holes inside the focusable element which will not be covered
  * @cfg {string[]} [classes] CSS classes to be added to the highlight container
  */
 ve.ce.FocusableNode = function VeCeFocusableNode( $focusable, config ) {
@@ -37,6 +38,7 @@ ve.ce.FocusableNode = function VeCeFocusableNode( $focusable, config ) {
 	this.$highlights = $( '<div>' ).addClass( 've-ce-focusableNode-highlights' );
 	this.$focusable = $focusable || this.$element;
 	this.$bounding = config.$bounding || this.$focusable;
+	this.$holes = config.$holes || $();
 	this.focusableSurface = null;
 	this.rects = null;
 	this.boundingRect = null;
@@ -692,7 +694,7 @@ ve.ce.FocusableNode.prototype.redrawHighlights = function () {
  * Re-calculate position of highlights
  */
 ve.ce.FocusableNode.prototype.calculateHighlights = function () {
-	var allRects, surfaceOffset;
+	var allRects, allHoles, $holes, surfaceOffset;
 
 	// Protect against calling before/after surface setup/teardown
 	if ( !this.focusableSurface ) {
@@ -705,8 +707,11 @@ ve.ce.FocusableNode.prototype.calculateHighlights = function () {
 	surfaceOffset = this.focusableSurface.getSurface().getBoundingClientRect();
 
 	allRects = this.constructor.static.getRectsForElement( this.$focusable, surfaceOffset );
+	$holes = this.$holes.add( this.root.getSurface().getOutOfFlowNodes() );
+	allHoles = this.constructor.static.getRectsForElement( $holes, surfaceOffset );
 
 	this.rects = allRects.rects;
+	this.holes = allHoles.rects;
 	this.boundingRect = allRects.boundingRect;
 	// startAndEndRects is lazily evaluated in getStartAndEndRects from rects
 	this.startAndEndRects = null;
@@ -718,8 +723,8 @@ ve.ce.FocusableNode.prototype.calculateHighlights = function () {
  * @method
  */
 ve.ce.FocusableNode.prototype.positionHighlights = function () {
-	var i, l;
-
+	var i, l, thisRect;
+	
 	if ( !this.highlighted ) {
 		return;
 	}
@@ -729,14 +734,55 @@ ve.ce.FocusableNode.prototype.positionHighlights = function () {
 		// Append something selectable for right-click copy
 		.append( $( '<span>' ).addClass( 've-ce-focusableNode-highlight-selectable' ).html( '&nbsp;' ) );
 
+	function makeRect( rect, extra ) {
+		rect = ve.translateRect( rect, -thisRect.left, -thisRect.top );
+		return '<rect x="' + rect.left + '" y="' + rect.top + '" width="' + rect.width + '" height="' + rect.height + '" ' + ( extra || '' ) +' />'
+	}
+	function makePath( cwRects, ccwRects, extra ) {
+		var d = 
+			cwRects.map( function ( rect ) {
+				rect = ve.translateRect( rect, -thisRect.left, -thisRect.top );
+				return 'M' + rect.left + ' ' + rect.top + ' h' + rect.width + ' v' + rect.height + ' h-' + rect.width + ' z';
+			} ).join( ' ' ) + ' ' +
+			ccwRects.map( function ( rect ) {
+				rect = ve.translateRect( rect, -thisRect.left, -thisRect.top );
+				return 'M' + rect.left + ' ' + rect.top + ' v' + rect.height + ' h' + rect.width + ' v-' + rect.height + ' z';
+			} ).join( ' ' );
+		return '<path d="' + d + '" ' + ( extra || '' ) +' />'
+	}
+	
 	for ( i = 0, l = this.rects.length; i < l; i++ ) {
+		thisRect = this.rects[ i ];
 		this.$highlights.append(
-			this.createHighlight().css( {
-				top: this.rects[ i ].top,
-				left: this.rects[ i ].left,
-				width: this.rects[ i ].width,
-				height: this.rects[ i ].height
-			} )
+			this.createHighlight()
+				.css( {
+					top: thisRect.top,
+					left: thisRect.left,
+					width: thisRect.width,
+					height: thisRect.height
+				} )
+				.css( 'pointer-events', 'none' )
+				.html(
+					'<svg class="ve-ce-focusableNode-highlight-svg" width="' + thisRect.width + '" height="' + thisRect.height + '">' +
+						'<defs>' +
+							'<clipPath id="clip">' +
+								makePath( [ thisRect ], this.holes ) +
+							'</clipPath>' +
+							'<mask id="mask">' +
+								makeRect( thisRect, 'fill="white"' ) +
+								this.holes.map( function ( rect ) {
+									return makeRect( rect );
+								} ).join( '' ) +
+							'</mask>' +
+						'</defs>' +
+						'<g mask="url(#mask)" fill="#6da9f7" stroke="#4c76ac" stroke-width="2">' +
+							makeRect( thisRect, 'style="pointer-events: visibleFill;" clip-path="url(#clip)"' ) +
+							this.holes.map( function ( rect ) {
+								return makeRect( rect, 'fill="none"' );
+							} ).join( '' ) +
+						'</g>' +
+					'</svg>'
+				)
 		);
 	}
 };
@@ -751,6 +797,18 @@ ve.ce.FocusableNode.prototype.getRects = function () {
 		this.calculateHighlights();
 	}
 	return this.rects;
+};
+
+/**
+ * Get list of holes inside this node
+ *
+ * @return {Object[]} List of rectangle objects
+ */
+ve.ce.FocusableNode.prototype.getHoles = function () {
+	if ( !this.highlighted ) {
+		this.calculateHighlights();
+	}
+	return this.holes;
 };
 
 /**
