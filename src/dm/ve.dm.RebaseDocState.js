@@ -15,6 +15,11 @@
  */
 ve.dm.RebaseDocState = function VeDmRebaseDocState() {
 	/**
+	 * @property {string} id Random document ID
+	 */
+	this.docId = Math.random().toString();
+
+	/**
 	 * @property {ve.dm.Change} history History as one big change
 	 */
 	this.history = new ve.dm.Change( 0, [], [], {} );
