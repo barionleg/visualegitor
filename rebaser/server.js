@@ -169,6 +169,7 @@ function* onUsurp( context, data ) {
 }
 
 function* onDisconnect( context ) {
+	console.log( 'disconnect' + context.socket.client.conn.remoteAddress + ' ' + context.socket.handshake.url );
 	yield rebaseServer.updateDocState( context.docName, context.authorId, null, {
 		active: false,
 		continueBase: null,
@@ -269,8 +270,9 @@ app.get( '/doc/raw/:docName', function ( req, res ) {
 
 io.on( 'connection', function ( socket ) {
 	var nsp,
-		docName = url.parse( socket.handshake.url, true ).query.docName;
+		docName = socket.handshake.query.docName;
 
+	console.log( 'connection ' + socket.client.conn.remoteAddress + ' ' + socket.handshake.url );
 	if ( docName && !docNamespaces.has( docName ) ) {
 		nsp = io.of( '/' + docName );
 		docNamespaces.set( docName, nsp );
