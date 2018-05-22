@@ -123,6 +123,11 @@
 			"lib/unicodejs/unicodejs.js"
 		]
 	},
+	"polybool": {
+		"scripts": [
+			"lib/polybool/polybool.js"
+		]
+	},
 	"rangefix": {
 		"scripts": [
 			"lib/rangefix/rangefix.js"
@@ -255,6 +260,7 @@
 		"dependencies": [
 			"visualEditor.supportCheck",
 			"unicodejs",
+			"polybool",
 			"rangefix",
 			"spark-md5"
 		]
