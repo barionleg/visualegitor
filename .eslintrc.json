@@ -11,6 +11,7 @@
 		"VisualEditorSupportCheck": "writable",
 		"OO": "readonly",
 		"unicodeJS": "readonly",
+		"PolyBool": "readonly",
 		"RangeFix": "readonly",
 		"Papa": "readonly"
 	},
