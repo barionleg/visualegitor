@@ -126,6 +126,11 @@ PapaParse
  – MIT license
  – Matthew Holt and other contributors; fork by Ed Sanders
 
+PolyBool
+ – https://github.com/voidqk/polybooljs
+ – MIT license
+ – Sean Connelly (@voidqk, web: syntheti.cc)
+
 RangeFix
  – https://github.com/edg2s/rangefix
  – MIT license
