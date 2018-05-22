@@ -10,6 +10,7 @@
 		"VisualEditorSupportCheck": false,
 		"OO": false,
 		"unicodeJS": false,
+		"PolyBool": false,
 		"RangeFix": false,
 		"Papa": false
 	},
