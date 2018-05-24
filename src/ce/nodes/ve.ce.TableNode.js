@@ -463,11 +463,11 @@ ve.ce.TableNode.prototype.updateOverlay = function ( selectionChanged ) {
 		left: tableOffset.left - surfaceOffset.left,
 		width: tableOffset.width
 	} );
-	this.colContext.icon.$element.css( {
+	this.colContext.$element.css( {
 		left: selectionOffset.left,
 		width: selectionOffset.width
 	} );
-	this.rowContext.icon.$element.css( {
+	this.rowContext.$element.css( {
 		top: selectionOffset.top,
 		height: selectionOffset.height
 	} );
