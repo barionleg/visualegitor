@@ -1,0 +1,14 @@
+{
+	"extends": [
+		"../.eslintrc.json",
+		"plugin:qunit/recommended",
+		"plugin:qunit/two"
+	],
+	"rules": {
+		"qunit/no-async-in-loops": 0,
+		"qunit/no-global-stop-start": 0,
+		"qunit/require-expect": 0,
+		"qunit/resolve-async": 0
+	},
+	"plugins": [ "qunit" ]
+}
