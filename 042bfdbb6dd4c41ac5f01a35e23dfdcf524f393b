@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4a1590b7_7790e5b5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 2849
+      },
+      "writtenOn": "2018-05-28T11:41:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13e17074_665c456a",
+      "revId": "042bfdbb6dd4c41ac5f01a35e23dfdcf524f393b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d7d9c123_e9c7d7ed",
         "filename": "src/dm/ve.dm.VisualDiff.js",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2018-05-11T12:07:09Z",
       "side": 1,
       "message": "{Array|boolean} (repeated a few times)",
+      "revId": "042bfdbb6dd4c41ac5f01a35e23dfdcf524f393b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d467f141_3ff435d1",
+        "filename": "src/dm/ve.dm.VisualDiff.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 2849
+      },
+      "writtenOn": "2018-05-28T11:41:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d7d9c123_e9c7d7ed",
       "revId": "042bfdbb6dd4c41ac5f01a35e23dfdcf524f393b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
