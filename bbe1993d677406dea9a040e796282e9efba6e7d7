@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "43b82b1a_242c343b",
+        "filename": "src/ce/styles/nodes/ve.ce.CommentNode.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2018-05-29T16:29:14Z",
+      "side": 1,
+      "message": "Tut. Rename the file?",
+      "range": {
+        "startLine": 2,
+        "startChar": 32,
+        "endLine": 2,
+        "endChar": 50
+      },
+      "revId": "bbe1993d677406dea9a040e796282e9efba6e7d7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
