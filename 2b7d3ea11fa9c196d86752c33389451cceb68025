@@ -33,6 +33,23 @@
       "revId": "2b7d3ea11fa9c196d86752c33389451cceb68025",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c2fac00f_b793472a",
+        "filename": "src/ui/styles/contextitems/ve.ui.LinkContextItem.css",
+        "patchSetId": 23
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-05-30T17:55:37Z",
+      "side": 1,
+      "message": "you may have more cross-theme joy with vertical-align middle, and line heights, like we use in mobile context items",
+      "revId": "2b7d3ea11fa9c196d86752c33389451cceb68025",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
