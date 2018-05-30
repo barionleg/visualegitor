@@ -12,7 +12,7 @@ QUnit.test( 'Diffing', function ( assert ) {
 	var i, len,
 		spacer = '<div class="ve-ui-diffElement-spacer">⋮</div>',
 		comment = function ( text ) {
-			return '<span class="ve-ce-leafNode ve-ce-focusableNode ve-ce-commentNode" contenteditable="false" title="' + text + '">' +
+			return '<span class="ve-ce-leafNode ve-ce-focusableNode ve-ce-commentNode ve-ce-focusableNode-invisible" contenteditable="false" title="' + text + '">' +
 				'<span class="ve-ce-focusableNode-invisibleIcon oo-ui-widget oo-ui-widget-enabled oo-ui-buttonElement oo-ui-buttonElement-frameless oo-ui-iconElement oo-ui-buttonWidget oo-ui-labelElement" aria-disabled="false">' +
 					'<a class="oo-ui-buttonElement-button" role="button" tabindex="0" aria-disabled="false" rel="nofollow">' +
 						'<span class="oo-ui-iconElement-icon oo-ui-icon-notice"></span>' +
