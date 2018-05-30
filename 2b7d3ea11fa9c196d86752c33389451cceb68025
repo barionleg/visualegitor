@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5c88302e_1d592ddf",
+        "filename": "src/ui/contextitems/ve.ui.AnnotationContextItem.js",
+        "patchSetId": 23
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-05-30T17:46:00Z",
+      "side": 1,
+      "message": "I\u0027d do\n\n .some( fn( ann ) {\n   if ( model \u003d\u003d\u003d ann.model ) {\n     annotation \u003d ann;\n     return true;\n   }\n } );\n return annotation;\n\nSadly we can\u0027t use Array.find :(",
+      "revId": "2b7d3ea11fa9c196d86752c33389451cceb68025",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "182e3689_3e413de7",
+        "filename": "src/ui/contextitems/ve.ui.LinkContextItem.js",
+        "patchSetId": 23
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-05-30T17:46:00Z",
+      "side": 1,
+      "message": "Part of the layout issue might be that Apex adds padding to label widgets, whereas WMUI doesn\u0027t. I want to fix this upstream...",
+      "revId": "2b7d3ea11fa9c196d86752c33389451cceb68025",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
