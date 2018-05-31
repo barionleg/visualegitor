@@ -16,6 +16,24 @@
       "revId": "3dce775229f124f19ff0707918c2052192272d9b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "160697c2_97ed1c57",
+        "filename": "src/ce/ve.ce.FocusableNode.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-05-31T16:44:41Z",
+      "side": 1,
+      "message": "It also appears that this is necessary for the drop cursor to render in Chrome as well.",
+      "parentUuid": "df4b808c_21e76695",
+      "revId": "3dce775229f124f19ff0707918c2052192272d9b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
