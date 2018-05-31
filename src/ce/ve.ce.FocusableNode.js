@@ -474,10 +474,10 @@ ve.ce.FocusableNode.prototype.executeCommand = function () {
  * @method
  * @param {jQuery.Event} e Drag start event
  */
-ve.ce.FocusableNode.prototype.onFocusableDragStart = function () {
+ve.ce.FocusableNode.prototype.onFocusableDragStart = function ( e ) {
 	if ( this.focusableSurface ) {
-		// Allow dragging this node in the surface
-		this.focusableSurface.startRelocation( this );
+		// Pass event up to the surface
+		this.focusableSurface.onDocumentDragStart( e );
 	}
 	this.$highlights.addClass( 've-ce-focusableNode-highlights-relocating' );
 };
