@@ -58,6 +58,11 @@ ve.dm.Selection.static.newFromHash = null;
 
 /**
  * Test for selection equality
+ *
+ * @abstract
+ * @method
+ * @param {ve.dm.Selection} other Other selection
+ * @return {boolean} Selections are equal
  */
 ve.dm.Selection.prototype.equals = null;
 
