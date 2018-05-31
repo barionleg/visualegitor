@@ -3565,8 +3565,6 @@ QUnit.test( 'getSelectionState', function ( assert ) {
 // TODO: ve.ce.Surface#onSurfaceObserverSelectionChange
 // TODO: ve.ce.Surface#onLock
 // TODO: ve.ce.Surface#onUnlock
-// TODO: ve.ce.Surface#startRelocation
-// TODO: ve.ce.Surface#endRelocation
 // TODO: ve.ce.Surface#handleInsertion
 // TODO: ve.ce.Surface#showModelSelection
 // TODO: ve.ce.Surface#appendHighlights
