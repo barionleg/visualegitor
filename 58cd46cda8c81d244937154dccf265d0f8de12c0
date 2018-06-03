@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8afc7a2a_a8cef43d",
+        "filename": "src/ce/ve.ce.FocusableNode.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-06-03T16:16:06Z",
+      "side": 1,
+      "message": "Actually, it looks like Chrome needs at least a space.",
+      "revId": "58cd46cda8c81d244937154dccf265d0f8de12c0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
