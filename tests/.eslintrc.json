@@ -5,6 +5,7 @@
 		"plugin:qunit/two"
 	],
 	"rules": {
+		"qunit/no-assert-equal": "error",
 		"qunit/require-expect": 0,
 		"qunit/resolve-async": 0
 	},

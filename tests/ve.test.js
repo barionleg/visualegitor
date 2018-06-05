@@ -930,7 +930,7 @@ QUnit.test( 'getCommonAncestor', function ( assert ) {
 		test = tests[ i ];
 		testNodes = test.nodes.split( /\s+/ ).map( getNode );
 		ancestorNode = nodes[ test.ancestor ];
-		assert.equal(
+		assert.strictEqual(
 			ve.getCommonAncestor.apply( null, testNodes ),
 			ancestorNode,
 			test.nodes + ' -> ' + test.ancestor
@@ -938,7 +938,7 @@ QUnit.test( 'getCommonAncestor', function ( assert ) {
 	}
 
 	// Test no-argument case
-	assert.equal( ve.getCommonAncestor(), null, 'No nodes' );
+	assert.strictEqual( ve.getCommonAncestor(), null, 'No nodes' );
 } );
 
 QUnit.test( 'getCommonStartSequenceLength', function ( assert ) {
