@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cfee3343_1823807e",
+        "filename": "tests/dm/lineardata/ve.dm.ElementLinearData.test.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 2158,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2018-06-05T16:30:43Z",
+      "side": 1,
+      "message": "Should we do identically-annotated too?",
+      "range": {
+        "startLine": 2158,
+        "startChar": 10,
+        "endLine": 2158,
+        "endChar": 50
+      },
+      "revId": "601e06d35c94ea9085055511f0b1b56735d0d201",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
