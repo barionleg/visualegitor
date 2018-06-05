@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "65360d17_6055073c",
+        "filename": "src/ce/ve.ce.FocusableNode.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2018-06-05T22:43:32Z",
+      "side": 1,
+      "message": "Drive by comment: Calling event handlers directly feels like an anti-pattern.\n\nIf this method is meant to be re-usable, it should perhaps have a different name and take a parameter that is not Event, which is hard to document / verify as being used correctly. E.g. it could take \"type\" and clipboardData or some such as parameter, and be called directly onFocusableDrag, onDocumentDrag and onCopy.\n\nFeel free to ignore if this has been done a fair bit already, in which it\u0027s something to consider for a later refactor :)",
+      "range": {
+        "startLine": 502,
+        "startChar": 24,
+        "endLine": 502,
+        "endChar": 43
+      },
+      "revId": "d73a047a91018fd6fcfdd88e57592a50a7e45405",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
