@@ -2155,12 +2155,12 @@ QUnit.test( 'compareElements and compareElementsUnannotated', function ( assert 
 	store.hash( new ve.dm.ItalicAnnotation( ve.dm.example.italic ) );
 
 	for ( i = 0; i < cases.length; i++ ) {
-		assert.equal(
+		assert.strictEqual(
 			ve.dm.ElementLinearData.static.compareElements( cases[ i ].a, cases[ i ].b, store ),
 			cases[ i ].comparison,
 			cases[ i ].msg
 		);
-		assert.equal(
+		assert.strictEqual(
 			ve.dm.ElementLinearData.static.compareElementsUnannotated( cases[ i ].a, cases[ i ].b ),
 			cases[ i ].comparisonUnannotated || cases[ i ].comparison,
 			cases[ i ].msg + ' (unannotated)'
