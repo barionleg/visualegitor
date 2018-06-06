@@ -22,6 +22,30 @@
       "revId": "d73a047a91018fd6fcfdd88e57592a50a7e45405",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c3c9009_7e56bc66",
+        "filename": "src/ce/ve.ce.FocusableNode.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-06-06T18:39:49Z",
+      "side": 1,
+      "message": "Well it passes through to onCopy, which uses quite a lot of the event object, so I wouldn\u0027t want to do a massive refactor at this point.\n\nI think it\u0027s probably semi-ok to pass event handlers through to other event handlers.",
+      "parentUuid": "65360d17_6055073c",
+      "range": {
+        "startLine": 502,
+        "startChar": 24,
+        "endLine": 502,
+        "endChar": 43
+      },
+      "revId": "d73a047a91018fd6fcfdd88e57592a50a7e45405",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
