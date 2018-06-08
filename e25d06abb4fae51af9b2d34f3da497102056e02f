@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "30a5d4df_b0182857",
+        "filename": "src/dm/ve.dm.ModelRegistry.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2018-06-08T15:06:09Z",
+      "side": 1,
+      "message": "...",
+      "range": {
+        "startLine": 119,
+        "startChar": 44,
+        "endLine": 119,
+        "endChar": 50
+      },
+      "revId": "e25d06abb4fae51af9b2d34f3da497102056e02f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
