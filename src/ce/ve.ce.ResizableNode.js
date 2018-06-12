@@ -24,7 +24,6 @@ ve.ce.ResizableNode = function VeCeResizableNode( $resizable, config ) {
 	// Properties
 	this.$resizable = $resizable || this.$element;
 	this.resizing = false;
-	this.enabled = !!this.$resizable.length;
 	this.$resizeHandles = $( '<div>' );
 	this.snapToGrid = config.snapToGrid !== undefined ? config.snapToGrid : 10;
 	this.outline = !!config.outline;
@@ -38,9 +37,6 @@ ve.ce.ResizableNode = function VeCeResizableNode( $resizable, config ) {
 	}
 	this.resizableOffset = null;
 	this.resizableSurface = null;
-	if ( !this.enabled ) {
-		return;
-	}
 
 	// Events
 	this.connect( this, {
@@ -96,6 +92,15 @@ OO.initClass( ve.ce.ResizableNode );
 /* Methods */
 
 /**
+ * Check if the node is resizable in its current state
+ *
+ * @return {boolean} The node is currently resizable
+ */
+ve.ce.ResizableNode.prototype.isResizable = function () {
+	return this.$resizable && !!this.$resizable.length;
+};
+
+/**
  * Get and cache the relative offset of the $resizable node
  *
  * @return {Object} Position coordinates, containing top & left
@@ -117,7 +122,7 @@ ve.ce.ResizableNode.prototype.getResizableOffset = function () {
 ve.ce.ResizableNode.prototype.setOriginalDimensions = function ( dimensions ) {
 	var scalable;
 
-	if ( !this.enabled ) {
+	if ( !this.isResizable() ) {
 		return;
 	}
 
@@ -137,7 +142,7 @@ ve.ce.ResizableNode.prototype.setOriginalDimensions = function ( dimensions ) {
 ve.ce.ResizableNode.prototype.hideSizeLabel = function () {
 	var node = this;
 
-	if ( !this.enabled ) {
+	if ( !this.isResizable() ) {
 		return;
 	}
 
@@ -157,7 +162,7 @@ ve.ce.ResizableNode.prototype.hideSizeLabel = function () {
  */
 ve.ce.ResizableNode.prototype.updateSizeLabel = function () {
 	var top, height, scalable, dimensions, offset, minWidth;
-	if ( !this.enabled ) {
+	if ( !this.isResizable() ) {
 		return;
 	}
 	if ( !this.showSizeLabel && !this.canShowScaleLabel ) {
@@ -214,7 +219,7 @@ ve.ce.ResizableNode.prototype.showHandles = function ( handles ) {
 		remove = [],
 		allDirections = [ 'nw', 'ne', 'sw', 'se' ];
 
-	if ( !this.enabled ) {
+	if ( !this.isResizable() ) {
 		return;
 	}
 
@@ -237,6 +242,9 @@ ve.ce.ResizableNode.prototype.showHandles = function ( handles ) {
  * @method
  */
 ve.ce.ResizableNode.prototype.onResizableFocus = function () {
+	if ( !this.isResizable() ) {
+		return;
+	}
 	this.$resizeHandles.appendTo( this.resizableSurface.getSurface().$controls );
 	if ( this.$sizeLabel ) {
 		this.$sizeLabel.appendTo( this.resizableSurface.getSurface().$controls );
@@ -431,7 +439,7 @@ ve.ce.ResizableNode.prototype.onResizeHandlesCornerMouseDown = function ( e ) {
  */
 ve.ce.ResizableNode.prototype.setResizableHandlesSizeAndPosition = function () {
 	var width, height;
-	if ( !this.enabled ) {
+	if ( !this.isResizable() ) {
 		return;
 	}
 
@@ -468,7 +476,7 @@ ve.ce.ResizableNode.prototype.setResizableHandlesSizeAndPosition = function () {
  */
 ve.ce.ResizableNode.prototype.setResizableHandlesPosition = function () {
 	var offset;
-	if ( !this.enabled ) {
+	if ( !this.isResizable() ) {
 		return;
 	}
 
