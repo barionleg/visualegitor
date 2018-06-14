@@ -181,8 +181,11 @@ ve.dm.BranchNode.prototype.setupBlockSlugs = function () {
 	} else {
 		// Iterate over all children of this branch and add slugs in appropriate places
 		for ( i = 0, len = this.children.length; i < len; i++ ) {
-			// Don't put slugs after internal nodes
-			if ( this.children[ i ].isInternal() ) {
+			// Don't put slugs after internal nodes or meta items
+			if (
+				this.children[ i ].isInternal() ||
+				this.children[ i ].isMetaData()
+			) {
 				continue;
 			}
 			// First sluggable child (left side)
