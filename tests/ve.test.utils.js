@@ -22,6 +22,17 @@
 	OO.inheritClass( DummyPlatform, ve.init.Platform );
 	DummyPlatform.prototype.getUserLanguages = function () { return [ 'en' ]; };
 	DummyPlatform.prototype.getMessage = function () { return Array.prototype.join.call( arguments, ',' ); };
+	DummyPlatform.prototype.getHtmlMessage = function () {
+		var $wrapper = $( '<div>' );
+		Array.prototype.forEach.call( arguments, function ( arg, i, args ) {
+			$wrapper.append( arg );
+			if ( i < args.length - 1 ) {
+				$wrapper.append( ',' );
+			}
+		} );
+		// Re-parse HTML to merge text nodes
+		return $( $.parseHTML( $wrapper.html() ) );
+	};
 	DummyPlatform.prototype.getLanguageName = function ( lang ) { return 'langname-' + lang; };
 	DummyPlatform.prototype.getLanguageDirection = function () { return 'ltr'; };
 	DummyPlatform.prototype.getExternalLinkUrlProtocolsRegExp = function () { return /^https?:\/\//i; };
