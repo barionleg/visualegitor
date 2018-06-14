@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "33c75eb9_2e9f2f44",
+        "filename": "tests/ce/ve.ce.Surface.test.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 890,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2018-06-14T23:14:06Z",
+      "side": 1,
+      "message": "I don\u0027t think this is correct. Shift+Left or Shift+Right should move the \"to\" offset of the selection, in this case 18. I would expect this to result in `ve.Range( 4, 17 )` or `ve.Range( 4, 4 )`.\n\n(It actually results in `ve.Range( 5, 5 )`, so I guess this is broken anyway.)",
+      "revId": "c93bfd1a8997a66fc3a63fab1e445aa7e4be05fe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "963e095a_b37feb1f",
+        "filename": "tests/ce/ve.ce.Surface.test.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 898,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2018-06-14T23:14:06Z",
+      "side": 1,
+      "message": "(same)",
+      "revId": "c93bfd1a8997a66fc3a63fab1e445aa7e4be05fe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
