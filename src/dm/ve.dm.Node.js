@@ -454,6 +454,13 @@ ve.dm.Node.prototype.isInternal = function () {
 };
 
 /**
+ * @inheritdoc ve.dm.Node
+ */
+ve.dm.Node.prototype.isMetaData = function () {
+	return this.constructor.static.isMetaData;
+};
+
+/**
  * @inheritdoc ve.Node
  */
 ve.dm.Node.prototype.isWrapped = function () {
