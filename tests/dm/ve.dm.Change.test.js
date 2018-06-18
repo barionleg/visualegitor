@@ -385,7 +385,7 @@ QUnit.test( 'Serialize/deserialize', function ( assert ) {
 	);
 
 	assert.deepEqual(
-		ve.dm.Change.static.deserialize( serialized, doc, true ).stores.map( function ( store ) {
+		ve.dm.Change.static.deserialize( serialized, doc, true ).getStores().map( function ( store ) {
 			return store.hashStore;
 		} ),
 		serialized.stores.map( function ( store ) {
@@ -395,7 +395,7 @@ QUnit.test( 'Serialize/deserialize', function ( assert ) {
 	);
 
 	assert.notDeepEqual(
-		ve.dm.Change.static.deserialize( serialized, doc ).stores.map( function ( store ) {
+		ve.dm.Change.static.deserialize( serialized, doc ).getStores().map( function ( store ) {
 			return store.hashStore;
 		} ),
 		serialized.stores.map( function ( store ) {
@@ -425,7 +425,7 @@ QUnit.test( 'Serialize/deserialize', function ( assert ) {
 	);
 
 	assert.deepEqual(
-		ve.dm.Change.static.deserialize( simpleSerialized, doc, true ).stores.map( function ( store ) {
+		ve.dm.Change.static.deserialize( simpleSerialized, doc, true ).getStores().map( function ( store ) {
 			return store.hashStore;
 		} ),
 		[ {} ],
