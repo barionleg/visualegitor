@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "918a9f3f_a1850037",
+        "filename": "src/ui/contextitems/ve.ui.LinkContextItem.js",
+        "patchSetId": 26
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2018-06-19T01:44:26Z",
+      "side": 1,
+      "message": "You already used this class above (line 25), is this correct here?",
+      "range": {
+        "startLine": 32,
+        "startChar": 26,
+        "endLine": 32,
+        "endChar": 61
+      },
+      "revId": "921278c98f14525ac9bddc2db90261a02dcad8e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
