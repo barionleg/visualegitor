@@ -924,7 +924,8 @@ ve.dm.Document.prototype.getNearestFocusableNode = function ( offset, direction,
  * @method
  * @param {number} offset Offset to start looking at
  * @param {number} [direction=-1] Direction to look in, +1 or -1; if 0, find the closest offset
- * @return {number} Nearest offset a cursor can be placed at
+ * @return {number} Nearest offset a cursor can be placed at, or -1 if a cursor can not be placed
+ *   at `offset` and anywhere in the given direction
  */
 ve.dm.Document.prototype.getNearestCursorOffset = function ( offset, direction ) {
 	var contentOffset, structuralOffset, left, right;
@@ -946,7 +947,15 @@ ve.dm.Document.prototype.getNearestCursorOffset = function ( offset, direction )
 	contentOffset = this.data.getNearestContentOffset( offset, direction );
 	structuralOffset = this.data.getNearestStructuralOffset( offset, direction, true );
 
-	if ( !this.hasSlugAtOffset( structuralOffset ) && contentOffset !== -1 ) {
+	// If only one of `contentOffset` and `structuralOffset` is valid, return the valid one.
+	// If neither is valid, this returns -1.
+	if ( structuralOffset === -1 ) {
+		return contentOffset;
+	} else if ( contentOffset === -1 ) {
+		return structuralOffset;
+	}
+
+	if ( !this.hasSlugAtOffset( structuralOffset ) ) {
 		return contentOffset;
 	}
 
