@@ -8,6 +8,8 @@
  * @class ve
  */
 
+/* global DOMPurify */
+
 /**
  * Checks if an object is an instance of one or more classes.
  *
@@ -594,6 +596,29 @@ ve.escapeHtml = ( function () {
 		return value.replace( /['"<>&]/g, escape );
 	};
 }() );
+
+/**
+ * Parse and sanitize an HTML string, making user HTML safe to load on the page
+ *
+ * @param {string} html HTML
+ * @return {NodeList} Node list
+ */
+ve.sanitizeHtml = function ( html ) {
+	// TODO: Move MW-specific rules to ve-mw
+	var addTags = [ 'figure-inline' ],
+		addAttrs = [
+			'srcset',
+			// RDFa
+			'about', 'rel', 'resource', 'property', 'content', 'datatype', 'typeof'
+		];
+	return DOMPurify.sanitize( html, {
+		ADD_TAGS: addTags,
+		ADD_ATTR: addAttrs,
+		ADD_URI_SAFE_ATTR: addAttrs,
+		FORBID_TAGS: [ 'style' ],
+		RETURN_DOM_FRAGMENT: true
+	} ).childNodes;
+};
 
 /**
  * Get the attributes of a DOM element as an object with key/value pairs.

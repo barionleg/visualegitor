@@ -882,7 +882,8 @@
 		],
 		"dependencies": [
 			"visualEditor.base.build",
-			"visualEditor.diffing.standalone"
+			"visualEditor.diffing.standalone",
+			"dompurify"
 		]
 	},
 	"visualEditor.desktop.standalone": {
