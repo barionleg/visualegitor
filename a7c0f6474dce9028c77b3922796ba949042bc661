@@ -22,6 +22,30 @@
       "revId": "a7c0f6474dce9028c77b3922796ba949042bc661",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4b363b09_b74e908b",
+        "filename": "src/dm/ve.dm.BranchNode.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2018-06-19T07:42:07Z",
+      "side": 1,
+      "message": "Yeah I think you\u0027re right about Ctrl+A — the comment goes all the way back to 9b999622158b1879773543a0b65b4479a32b05df in 2013, so I\u0027m not surprised it changed. But I think it\u0027s fine to keep this behaviour for an empty document — I\u0027d say it\u0027s logically correct even if unused.",
+      "parentUuid": "94efea3e_81069c49",
+      "range": {
+        "startLine": 177,
+        "startChar": 74,
+        "endLine": 178,
+        "endChar": 96
+      },
+      "revId": "a7c0f6474dce9028c77b3922796ba949042bc661",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
