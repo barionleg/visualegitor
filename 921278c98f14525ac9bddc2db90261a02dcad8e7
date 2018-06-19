@@ -22,6 +22,30 @@
       "revId": "921278c98f14525ac9bddc2db90261a02dcad8e7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "421a7819_1d4d07ae",
+        "filename": "src/ui/contextitems/ve.ui.LinkContextItem.js",
+        "patchSetId": 26
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2018-06-19T02:55:42Z",
+      "side": 1,
+      "message": "Oops, yeah, that\u0027s doubled up. Fortunately the CSS is written so it\u0027s not a problem. I\u0027ll just take this one out.",
+      "parentUuid": "918a9f3f_a1850037",
+      "range": {
+        "startLine": 32,
+        "startChar": 26,
+        "endLine": 32,
+        "endChar": 61
+      },
+      "revId": "921278c98f14525ac9bddc2db90261a02dcad8e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
