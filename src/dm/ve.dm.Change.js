@@ -182,7 +182,7 @@ ve.dm.Change.static.serializeValue = function ( value ) {
 	if ( value instanceof ve.dm.Annotation ) {
 		return { type: 'annotation', value: value.element };
 	} else if ( Array.isArray( value ) && value[ 0 ] instanceof Node ) {
-		return { type: 'domNodeArray', value: value.map( ve.getNodeHtml ) };
+		return { type: 'domNodes', value: value.map( ve.getNodeHtml ).join( '' ) };
 	} else {
 		return { type: 'plain', value: value };
 	}
@@ -192,15 +192,12 @@ ve.dm.Change.static.deserializeValue = function ( serialized, unsafe ) {
 	var nodes;
 	if ( serialized.type === 'annotation' ) {
 		return ve.dm.annotationFactory.createFromElement( serialized.value );
-	} else if ( serialized.type === 'domNodeArray' ) {
+	} else if ( serialized.type === 'domNodes' ) {
 		if ( unsafe ) {
-			return $.parseHTML( serialized.value.join( '' ), undefined, true );
+			return $.parseHTML( serialized.value, undefined, true );
 		} else {
-			nodes = [];
-			serialized.value.forEach( function ( nodeHtml ) {
-				nodes = nodes.concat( Array.prototype.slice.call( ve.sanitizeHtml( nodeHtml ) ) );
-			} );
-			return nodes;
+			// Convert NodeList to Array
+			return Array.prototype.slice.call( ve.sanitizeHtml( serialized.value ) );
 		}
 	} else if ( serialized.type === 'plain' ) {
 		return serialized.value;
