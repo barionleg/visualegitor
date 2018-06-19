@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "94efea3e_81069c49",
+        "filename": "src/dm/ve.dm.BranchNode.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2018-06-19T01:12:24Z",
+      "side": 1,
+      "message": "This comment confuses me and I could not reproduce this. Maybe we\u0027re handling this elsewhere? But seemingly random tests failed if I changed this behavior, and the proposed code preserves it (without needing the special case).",
+      "range": {
+        "startLine": 177,
+        "startChar": 74,
+        "endLine": 178,
+        "endChar": 96
+      },
+      "revId": "a7c0f6474dce9028c77b3922796ba949042bc661",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
