@@ -16,6 +16,29 @@
       "revId": "8f7302bfe21b418ffe193ad1963e26c5993aeb91",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5e23c16_c0c8fd16",
+        "filename": "src/ve.sanitize.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2018-06-21T16:50:10Z",
+      "side": 1,
+      "message": "HTML",
+      "range": {
+        "startLine": 2,
+        "startChar": 16,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "revId": "8f7302bfe21b418ffe193ad1963e26c5993aeb91",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
