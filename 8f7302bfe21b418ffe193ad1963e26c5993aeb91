@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "32869c3b_544e8473",
+        "filename": "src/init/sa/ve.init.sa.Platform.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2018-06-21T16:49:45Z",
+      "side": 1,
+      "message": "\u003e * Why `true`, would we ever want to have \u003cscript\u003e elements here? Allowing them to be removed is actually simpler ;) and it saves us from one possible XSS vector, should we have a bug elsewhere and pass bad input here.\n\u003e * Actually, we shouldn\u0027t parse strings as HTML here at all – just wrap them in document.createTextNode(). mw.message().parseDom() works that way, too:\n\u003e \n\u003e      \n\u003e $( \u0027\u003cdiv\u003e\u0027 ).append( mw.message( \u0027pagetitle\u0027, \u0027\u003cb\u003easdf\u003c/b\u003e\u0027 ).parseDom() ).html();\n\u003e \u003d\u003e \"\u0026lt;b\u0026gt;asdf\u0026lt;/b\u0026gt; - Testwiki\"\n\u003e     \n\u003e $( \u0027\u003cdiv\u003e\u0027 ).append( mw.message( \u0027pagetitle\u0027, $( \u0027\u003cb\u003easdf\u003c/b\u003e\u0027 ) ).parseDom() ).html();\n\u003e \u003d\u003e \"\u003cb\u003easdf\u003c/b\u003e - Testwiki\"",
+      "revId": "8f7302bfe21b418ffe193ad1963e26c5993aeb91",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
