@@ -90,6 +90,30 @@
       "revId": "227413634e305e2dd32eaae4913c5d918a1928d3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75ba482d_07dbc541",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 614,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-06-21T20:41:53Z",
+      "side": 1,
+      "message": "True, hopefully we aren\u0027t storing any important hrefs in the hashstore though.",
+      "parentUuid": "f6bcb96e_5a35cdc9",
+      "range": {
+        "startLine": 614,
+        "startChar": 28,
+        "endLine": 614,
+        "endChar": 32
+      },
+      "revId": "227413634e305e2dd32eaae4913c5d918a1928d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
