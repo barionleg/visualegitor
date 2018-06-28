@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "41d359d4_2c471527",
+        "filename": "i18n/en.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-06-28T09:33:56Z",
+      "side": 1,
+      "message": "I\u0027d just make this \u0027Remove\u0027, for example the comment annotation isn\u0027t really \u0027formatting\u0027 and it\u0027s clear from the context what it is removing.",
+      "revId": "360a455a09e770a4fd1691018eeb6c51ea7c8e4b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f5dead50_bd020265",
+        "filename": "i18n/qqq.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-06-28T09:33:56Z",
+      "side": 1,
+      "message": "This button only removes the specific annotation associated with the current context, not all formatting so we should clarify this message.",
+      "revId": "360a455a09e770a4fd1691018eeb6c51ea7c8e4b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
