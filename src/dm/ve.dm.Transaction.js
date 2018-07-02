@@ -121,6 +121,40 @@ ve.dm.Transaction.static.deserialize = function ( data ) {
 /* Methods */
 
 /**
+ * Freeze the transaction's operations with Object.freeze in useful places
+ *
+ * If you use this, you probably want "use strict"; at the top of suspect files
+ */
+ve.dm.Transaction.prototype.debugFreeze = function () {
+	function freezeItem( item ) {
+		if ( Array.isArray( item ) ) {
+			item.forEach( Object.freeze );
+			Object.freeze( item );
+		} else if ( typeof item === 'object' ) {
+			if ( item.attributes ) {
+				Object.freeze( item.attributes );
+			}
+			if ( item.annotations ) {
+				Object.freeze( item.annotations );
+			}
+			Object.freeze( item );
+		}
+		Object.freeze( item );
+	}
+	function freezeOperation( op ) {
+		if ( op.type === 'replace' ) {
+			op.remove.forEach( freezeItem );
+			op.insert.forEach( freezeItem );
+			Object.freeze( op.remove );
+			Object.freeze( op.insert );
+		}
+		Object.freeze( op );
+	}
+	this.operations.forEach( freezeOperation );
+	Object.freeze( this.operations );
+};
+
+/**
  * Serialize the transaction into a JSONable object
  *
  * Values are not necessarily deep copied
@@ -560,10 +594,12 @@ ve.dm.Transaction.prototype.getModifiedRange = function ( doc, includeInternalLi
  * @return {Object} Active range and length change
  * @return {number|undefined} return.start Start offset of the active range
  * @return {number|undefined} return.end End offset of the active range
+ * @return {number|undefined} return.startOpIndex Start operation index of the active range
+ * @return {number|undefined} return.endOpIndex End operation index of the active range
  * @return {number} return.diff Length change the transaction causes
  */
 ve.dm.Transaction.prototype.getActiveRangeAndLengthDiff = function () {
-	var i, len, op, start, end, active,
+	var i, len, op, start, end, startOpIndex, endOpIndex, active,
 		offset = 0,
 		annotations = 0,
 		diff = 0;
@@ -580,6 +616,7 @@ ve.dm.Transaction.prototype.getActiveRangeAndLengthDiff = function () {
 		// Place start marker
 		if ( active && start === undefined ) {
 			start = offset;
+			startOpIndex = i;
 		}
 		// Adjust offset and diff
 		if ( op.type === 'retain' ) {
@@ -592,11 +629,19 @@ ve.dm.Transaction.prototype.getActiveRangeAndLengthDiff = function () {
 		if ( op.type === 'attribute' || op.type === 'replaceMetadata' ) {
 			// Op with length 0 but that effectively modifies 1 position
 			end = offset + 1;
+			endOpIndex = i + 1;
 		} else if ( active ) {
 			end = offset;
+			endOpIndex = i + 1;
 		}
 	}
-	return { start: start, end: end, diff: diff };
+	return {
+		start: start,
+		end: end,
+		startOpIndex: startOpIndex,
+		endOpIndex: endOpIndex,
+		diff: diff
+	};
 };
 
 // TODO: Use adjustRetain to replace ve.dm.TransactionBuilder#pushRetain
@@ -631,4 +676,41 @@ ve.dm.Transaction.prototype.adjustRetain = function ( place, diff ) {
 		throw new Error( 'Negative retain length' );
 	}
 	ops.splice( start ? 0 : ops.length, 0, { type: 'retain', length: diff } );
+};
+
+/**
+ * Split (in place) the retain at the given offset, if any
+ *
+ * Throws an error if offset is in the interior of a replace operation
+ *
+ * @param {number} offset The offset at which to split
+ * @return {number} Index in operations starting at offset
+ */
+ve.dm.Transaction.prototype.splitRetain = function ( offset ) {
+	var i, iLen, op, opLen,
+		n = 0;
+	for ( i = 0, iLen = this.operations.length; i < iLen; i++ ) {
+		op = this.operations[ i ];
+		opLen = ( op.type === 'retain' ? op.length : op.type === 'replace' ? op.remove.length : 0 );
+		if ( n + opLen <= offset ) {
+			n += opLen;
+			continue;
+		}
+		if ( n === offset ) {
+			// At start edge; no need to split
+			return i;
+		}
+		// Else n < offset < n + opLen
+		if ( op.type !== 'retain' ) {
+			throw new Error( 'Cannot split operation of type ' + op.type );
+		}
+		// Split the retain operation
+		op.length -= n + opLen - offset;
+		this.operations.splice( i + 1, 0, { type: 'retain', length: n + opLen - offset } );
+		return i + 1;
+	}
+	if ( n === offset ) {
+		return iLen + 1;
+	}
+	throw new Error( 'Offset beyond end of transaction' );
 };
