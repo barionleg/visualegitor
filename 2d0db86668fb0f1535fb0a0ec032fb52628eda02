@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8439f17c_e05394ae",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-07-03T13:28:28Z",
+      "side": 1,
+      "message": "Maybe this should be changed to a ve.Range object?",
+      "revId": "2d0db86668fb0f1535fb0a0ec032fb52628eda02",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
