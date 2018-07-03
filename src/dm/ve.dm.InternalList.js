@@ -423,6 +423,9 @@ ve.dm.InternalList.prototype.removeNode = function ( groupName, key, index, node
 ve.dm.InternalList.prototype.sortGroupIndexes = function ( group ) {
 	// Sort indexOrder
 	group.indexOrder.sort( function ( index1, index2 ) {
+		if ( !group.firstNodes[ index1 ] || !group.firstNodes[ index2 ] ){
+			return 0;
+		}
 		return group.firstNodes[ index1 ].getRange().start - group.firstNodes[ index2 ].getRange().start;
 	} );
 };
