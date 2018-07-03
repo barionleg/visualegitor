@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d6574b9e_6f82f96f",
+        "filename": "src/ui/ve.ui.TriggerRegistry.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2018-07-03T21:43:53Z",
+      "side": 1,
+      "message": "string, actually?",
+      "range": {
+        "startLine": 74,
+        "startChar": 12,
+        "endLine": 74,
+        "endChar": 25
+      },
+      "revId": "8a2306591295951f6f8a731ea089d3e841cad358",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
