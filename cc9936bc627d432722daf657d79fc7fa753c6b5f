@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "11cd50e6_b6d5529d",
+        "filename": "src/dm/ve.dm.InternalList.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-07-04T09:09:45Z",
+      "side": 1,
+      "message": "This patch looks like it is *hiding* a bug that happens somewhere else. Essentially: Why does this indexOrder array contain indexes that are *not* present in the firstNodes array?",
+      "range": {
+        "startLine": 425,
+        "startChar": 7,
+        "endLine": 425,
+        "endChar": 17
+      },
+      "revId": "cc9936bc627d432722daf657d79fc7fa753c6b5f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
