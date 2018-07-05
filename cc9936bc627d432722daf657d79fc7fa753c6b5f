@@ -22,6 +22,30 @@
       "revId": "cc9936bc627d432722daf657d79fc7fa753c6b5f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a0cd6d1f_98e32097",
+        "filename": "src/dm/ve.dm.InternalList.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 110
+      },
+      "writtenOn": "2018-07-05T04:10:05Z",
+      "side": 1,
+      "message": "I asked the same question in the ticket.  See the discussion in the ticket T191011",
+      "parentUuid": "11cd50e6_b6d5529d",
+      "range": {
+        "startLine": 425,
+        "startChar": 7,
+        "endLine": 425,
+        "endChar": 17
+      },
+      "revId": "cc9936bc627d432722daf657d79fc7fa753c6b5f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
