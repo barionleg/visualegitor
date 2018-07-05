@@ -45,6 +45,11 @@
 	opacity: 0.5;
 }
 
+.ve-ce-focusableNode-invisibleIcon > .oo-ui-buttonElement-button {
+	/* Make button unclickable, T198912 */
+	pointer-events: none;
+}
+
 .ve-ce-focusableNode-invisibleIcon.oo-ui-labelElement {
 	width: auto;
 }
