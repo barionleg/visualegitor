@@ -22,6 +22,23 @@
       "revId": "8a2306591295951f6f8a731ea089d3e841cad358",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b5fcde13_418e92a1",
+        "filename": "src/ui/ve.ui.TriggerRegistry.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2018-07-05T15:55:00Z",
+      "side": 1,
+      "message": "Normalize the triggerString? `new ve.ui.Trigger( triggerString ).toString()`\n\nI don\u0027t know what use cases you\u0027re seeing for this, but if it\u0027s any sort of user input or you want to hard-code trigger strings elsewhere, then normalization would be a good idea.",
+      "revId": "8a2306591295951f6f8a731ea089d3e841cad358",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
