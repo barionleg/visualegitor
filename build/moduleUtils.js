@@ -116,19 +116,20 @@ var self = module.exports = {
 	 * @return {Array} Flat list of file paths
 	 */
 	buildDependencyList: function ( modules, load, list ) {
-		var i, module;
+		var i, module,
+			hasOwn = Object.prototype.hasOwnProperty;
 
 		list = list || [];
 
 		for ( i = 0; i < load.length; i++ ) {
 			module = load[ i ];
 
-			if ( !modules.hasOwnProperty( module ) ) {
+			if ( !hasOwn.call( modules, module ) ) {
 				throw new Error( 'Dependency ' + module + ' not found' );
 			}
 
 			// Add in any dependencies
-			if ( modules[ module ].hasOwnProperty( 'dependencies' ) ) {
+			if ( hasOwn.call( modules[ module ], 'dependencies' ) ) {
 				self.buildDependencyList( modules, modules[ module ].dependencies, list );
 			}
 
