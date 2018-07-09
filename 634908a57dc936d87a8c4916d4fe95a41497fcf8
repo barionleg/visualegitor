@@ -22,6 +22,30 @@
       "revId": "634908a57dc936d87a8c4916d4fe95a41497fcf8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a5348ba4_b6746438",
+        "filename": "package.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2018-07-09T16:04:30Z",
+      "side": 1,
+      "message": "Yeah, formally stylelint-config-wikimedia@0.4.2 supports 9.2.0 not 9.2.1 and I didn\u0027t want to leave it in an unusual state.",
+      "parentUuid": "c0894fe1_d9963318",
+      "range": {
+        "startLine": 48,
+        "startChar": 22,
+        "endLine": 48,
+        "endChar": 23
+      },
+      "revId": "634908a57dc936d87a8c4916d4fe95a41497fcf8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
