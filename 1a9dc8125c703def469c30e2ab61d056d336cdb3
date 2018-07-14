@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f905a21c_aee0806c",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-07-14T09:27:34Z",
+      "side": 1,
+      "message": "|| op1.type !\u003d\u003d op2.type\n\nthen you only need to check one in the lines below",
+      "revId": "1a9dc8125c703def469c30e2ab61d056d336cdb3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0a82be84_d564ae49",
+        "filename": "tests/dm/ve.dm.Change.test.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 722,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-07-14T09:27:34Z",
+      "side": 1,
+      "message": "we don\u0027t do \"expect\" anymore",
+      "revId": "1a9dc8125c703def469c30e2ab61d056d336cdb3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e3ab3da8_a1879ff3",
+        "filename": "tests/dm/ve.dm.TransactionSquasher.test.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-07-14T09:27:34Z",
+      "side": 1,
+      "message": "delete",
+      "revId": "1a9dc8125c703def469c30e2ab61d056d336cdb3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
