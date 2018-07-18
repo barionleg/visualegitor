@@ -9,6 +9,7 @@
  *
  * @class
  * @extends ve.ce.Annotation
+ * @mixins ve.ce.NailedAnnotation
  * @constructor
  * @param {ve.dm.CommentAnnotation} model Model to observe
  * @param {ve.ce.ContentBranchNode} [parentNode] Node rendering this annotation
@@ -18,6 +19,9 @@ ve.ce.CommentAnnotation = function VeCeCommentAnnotation() {
 	// Parent constructor
 	ve.ce.CommentAnnotation.super.apply( this, arguments );
 
+	// Mixin constructor
+	ve.ce.NailedAnnotation.call( this );
+
 	// DOM changes
 	this.$element.addClass( 've-ce-commentAnnotation' );
 };
@@ -25,6 +29,8 @@ ve.ce.CommentAnnotation = function VeCeCommentAnnotation() {
 /* Inheritance */
 
 OO.inheritClass( ve.ce.CommentAnnotation, ve.ce.Annotation );
+
+OO.mixinClass( ve.ce.CommentAnnotation, ve.ce.NailedAnnotation );
 
 /* Static Properties */
 
