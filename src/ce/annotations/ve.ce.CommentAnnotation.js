@@ -18,6 +18,8 @@ ve.ce.CommentAnnotation = function VeCeCommentAnnotation() {
 	// Parent constructor
 	ve.ce.CommentAnnotation.super.apply( this, arguments );
 
+	ve.ce.NailedAnnotation.call( this );
+
 	// DOM changes
 	this.$element.addClass( 've-ce-commentAnnotation' );
 };
@@ -25,6 +27,8 @@ ve.ce.CommentAnnotation = function VeCeCommentAnnotation() {
 /* Inheritance */
 
 OO.inheritClass( ve.ce.CommentAnnotation, ve.ce.Annotation );
+
+OO.mixinClass( ve.ce.CommentAnnotation, ve.ce.NailedAnnotation );
 
 /* Static Properties */
 
