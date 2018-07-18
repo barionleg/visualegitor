@@ -9,6 +9,7 @@
  *
  * @class
  * @extends ve.ce.Annotation
+ * @mixins ve.ce.NailedAnnotation
  * @constructor
  * @param {ve.dm.LanguageAnnotation} model Model to observe
  * @param {ve.ce.ContentBranchNode} [parentNode] Node rendering this annotation
@@ -17,6 +18,9 @@
 ve.ce.LanguageAnnotation = function VeCeLanguageAnnotation() {
 	// Parent constructor
 	ve.ce.LanguageAnnotation.super.apply( this, arguments );
+
+	// Mixin constructor
+	ve.ce.NailedAnnotation.call( this );
 
 	// DOM changes
 	this.$element
@@ -32,6 +36,8 @@ ve.ce.LanguageAnnotation = function VeCeLanguageAnnotation() {
 /* Inheritance */
 
 OO.inheritClass( ve.ce.LanguageAnnotation, ve.ce.Annotation );
+
+OO.mixinClass( ve.ce.LanguageAnnotation, ve.ce.NailedAnnotation );
 
 /* Static Properties */
 
