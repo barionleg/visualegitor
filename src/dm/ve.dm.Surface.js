@@ -946,6 +946,7 @@ ve.dm.Surface.prototype.breakpoint = function () {
 	this.resetHistoryTrackingInterval();
 	if ( this.newTransactions.length > 0 ) {
 		this.undoStack.push( {
+			start: this.getDocument().getCompleteHistoryLength(),
 			transactions: this.newTransactions,
 			selection: this.selection,
 			selectionBefore: this.selectionBefore
@@ -964,7 +965,8 @@ ve.dm.Surface.prototype.breakpoint = function () {
  * @fires undoStackChange
  */
 ve.dm.Surface.prototype.undo = function () {
-	var i, item, transaction, transactions = [];
+	var i, item, history, done, result, selection,
+		surface = this;
 	if ( !this.canUndo() ) {
 		return;
 	}
@@ -978,12 +980,25 @@ ve.dm.Surface.prototype.undo = function () {
 
 	item = this.undoStack[ this.undoStack.length - this.undoIndex ];
 	if ( item ) {
-		// Apply reversed transactions in reversed order
-		for ( i = item.transactions.length - 1; i >= 0; i-- ) {
-			transaction = item.transactions[ i ].reversed();
-			transactions.push( transaction );
+		history = this.getDocument().getChangeSince( item.start );
+		done = new ve.dm.Change(
+			item.start - item.transactions.length,
+			item.transactions,
+			item.transactions.map( function () {
+				// Undo cannot add store items, so we don't need to worry here
+				return new ve.dm.HashValueStore();
+			} ),
+			{}
+		);
+		result = ve.dm.Change.static.rebaseUncommittedChange( history, done.reversed() );
+		if ( result.rejected ) {
+			// Rebasing conflict
+			debugger;
+		} else {
+			selection = item.selectionBefore.translateByChange( result.transposedHistory );
+			// Undo cannot add store items, so we can safely apply just transactions
+			this.changeInternal( result.rebased.transactions, selection, true );
 		}
-		this.changeInternal( transactions, item.selectionBefore, true );
 		this.emit( 'undoStackChange' );
 	}
 };
@@ -993,7 +1008,7 @@ ve.dm.Surface.prototype.undo = function () {
  * @fires undoStackChange
  */
 ve.dm.Surface.prototype.redo = function () {
-	var item;
+	var item, history, done, result, selection;
 	if ( !this.canRedo() ) {
 		return;
 	}
@@ -1003,6 +1018,26 @@ ve.dm.Surface.prototype.redo = function () {
 	item = this.undoStack[ this.undoStack.length - this.undoIndex ];
 	if ( item ) {
 		this.undoIndex--;
+		history = this.getDocument().getChangeSince( item.start );
+		done = new ve.dm.Change(
+			item.start,
+			item.transactions,
+			item.transactions.map( function () {
+				// Redo cannot add store items
+				return new ve.dm.HashValueStore();
+			} ),
+			{}
+		);
+		result = ve.dm.Change.static.rebaseUncommittedChange( history, done );
+		if ( result.rejected ) {
+			// Rebasing conflict
+			debugger;
+		} else {
+			selection = item.selection.translateByChange( result.transposedHistory );
+			// Redo cannot add store items, so we can safely apply just transactions
+			this.changeInternal( result.rebased.transactions, selection, true );
+		}
+
 		// ve.copy( item.transactions ) invokes .clone() on each transaction in item.transactions
 		this.changeInternal( ve.copy( item.transactions ), item.selection, true );
 		this.emit( 'undoStackChange' );
@@ -1242,6 +1277,7 @@ ve.dm.Surface.prototype.stopStoringChanges = function () {
  * Restore transactions from session storage
  *
  * @return {boolean} Some changes were restored
+ * YYYYYYYYYYYYYY
  * @throws {Error} Failed to restore auto-saved session
  */
 ve.dm.Surface.prototype.restoreChanges = function () {
