@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2d1b1bf7_98e88d8c",
+        "filename": "src/ce/ve.ce.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2018-07-18T12:18:46Z",
+      "side": 1,
+      "message": "the closest nailed annotation",
+      "range": {
+        "startLine": 443,
+        "startChar": 8,
+        "endLine": 443,
+        "endChar": 29
+      },
+      "revId": "ad72f3278ff2aa47ab3e06525847b529efda34a0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79d7a780_ea30c9ea",
+        "filename": "src/ce/ve.ce.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2018-07-18T12:18:46Z",
+      "side": 1,
+      "message": "The closest nailed annotation",
+      "range": {
+        "startLine": 446,
+        "startChar": 23,
+        "endLine": 446,
+        "endChar": 44
+      },
+      "revId": "ad72f3278ff2aa47ab3e06525847b529efda34a0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
