@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "353cf34a_43db304f",
+        "filename": "src/dm/ve.dm.Surface.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 1014,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-07-19T12:37:21Z",
+      "side": 1,
+      "message": "can we just filter item.transactions to the current authorId?",
+      "revId": "0f28beedbc20f32812080b43dce1450e2c448ed1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
