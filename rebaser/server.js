@@ -42,10 +42,12 @@ function logServerEvent( event ) {
  * Protocol server
  *
  * Handles the abstract protocol without knowing the specific transport
+ *
+ * @param {Map} docNamespaces Document namespaces
  */
-function ProtocolServer() {
+function ProtocolServer( docNamespaces ) {
 	this.rebaseServer = new ve.dm.RebaseServer( logServerEvent );
-	this.docNamespaces = new Map();
+	this.docNamespaces = docNamespaces;
 	this.lastAuthorForDoc = new Map();
 }
 
@@ -241,8 +243,8 @@ ProtocolServer.prototype.onDisconnect = function ( context ) {
  * @constructor
  */
 function TransportServer() {
-	this.protocolServer = new ProtocolServer();
 	this.docNamespaces = new Map();
+	this.protocolServer = new ProtocolServer( this.docNamespaces );
 }
 
 /**
