@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "169f9978_60cfc3ae",
+        "filename": "src/ui/ve.ui.Sequence.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-07-26T18:01:25Z",
+      "side": 1,
+      "message": "what about headings?\n\nyou should probably check canContainContent instead",
+      "revId": "66703e17acedfc4d514cf3bb73c3003a3cf061bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
