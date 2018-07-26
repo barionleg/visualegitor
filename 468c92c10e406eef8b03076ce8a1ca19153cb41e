@@ -22,6 +22,30 @@
       "revId": "468c92c10e406eef8b03076ce8a1ca19153cb41e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "61463c2f_e0ed8aa4",
+        "filename": "src/ui/tools/ve.ui.HorizontalRuleTool.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2018-07-26T16:42:13Z",
+      "side": 1,
+      "message": "The age-old task of looking through the icons list and thinking \"...what works?\"",
+      "parentUuid": "2c0d7584_2e275bb8",
+      "range": {
+        "startLine": 16,
+        "startChar": 46,
+        "endLine": 16,
+        "endChar": 54
+      },
+      "revId": "468c92c10e406eef8b03076ce8a1ca19153cb41e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
