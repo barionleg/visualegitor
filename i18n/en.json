@@ -123,6 +123,7 @@
 	"visualeditor-historybutton-undo-tooltip": "Undo",
 	"visualeditor-indentationbutton-indent-tooltip": "Increase indentation",
 	"visualeditor-indentationbutton-outdent-tooltip": "Decrease indentation",
+	"visualeditor-insert-horizontalrule": "Horizontal Rule",
 	"visualeditor-inspector-close-tooltip": "Close",
 	"visualeditor-inspector-remove-tooltip": "Remove",
 	"visualeditor-key-alt": "Alt",

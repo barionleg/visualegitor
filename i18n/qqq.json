@@ -133,6 +133,7 @@
 	"visualeditor-historybutton-undo-tooltip": "Tooltip text for the undo button.\n{{Identical|Undo}}",
 	"visualeditor-indentationbutton-indent-tooltip": "Tooltip text for list indent button",
 	"visualeditor-indentationbutton-outdent-tooltip": "Tooltip text for list outdent button",
+	"visualeditor-insert-horizontalrule": "Item in the insert menu for inserting a horizontal rule",
 	"visualeditor-inspector-close-tooltip": "{{Identical|Close}}",
 	"visualeditor-inspector-remove-tooltip": "Tooltip text for the button to remove an annotation in an inspector.\n{{Identical|Remove}}",
 	"visualeditor-key-alt": "The common identifier of the alt key\n{{Related|Visualeditor-key}}",
