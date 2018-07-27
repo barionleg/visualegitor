@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4bd75bac_19d9116d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-07-27T12:30:08Z",
+      "side": 1,
+      "message": "I don\u0027t find this argument compelling. Also keyboards don\u0027t have an ellipsis key (I\u0027m sure macs do some clever trick, but we don\u0027t all use macs), so going forward people are just going to keep using \u0027...\u0027 making it inconsistent again.\n\nThat all said, I don\u0027t really care that much, as I\u0027m unlikely to grep for either.",
+      "revId": "eb4a57a6b71707b4e1809954e417480fdfe4edba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
