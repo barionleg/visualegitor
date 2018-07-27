@@ -1278,10 +1278,11 @@ ve.ce.Surface.prototype.onDocumentKeyPress = function ( e ) {
  * @param {jQuery.Event} e keydown event
  */
 ve.ce.Surface.prototype.afterDocumentKeyDown = function ( e ) {
-	var keyDownSelectionState, direction, focusableNode, startOffset, endOffset,
+	var keyDownSelectionState, direction, focusableNode, captionNode, startOffset, endOffset,
 		offsetDiff, dmFocus, dmSelection, inNonSlug, ceSelection, ceNode, range,
 		fixupCursorForUnicorn, matrix, col, row, $focusNode, removedUnicorns,
 		surface = this,
+		documentModel = this.getModel().getDocument(),
 		isArrow = (
 			e.keyCode === OO.ui.Keys.UP ||
 			e.keyCode === OO.ui.Keys.DOWN ||
@@ -1461,7 +1462,7 @@ ve.ce.Surface.prototype.afterDocumentKeyDown = function ( e ) {
 			if ( Math.abs( offsetDiff ) === 2 ) {
 				// Test whether we crossed a focusable node
 				// (this applies even if we cursored up/down)
-				focusableNode = this.model.documentModel.documentNode
+				focusableNode = documentModel.documentNode
 					.getNodeFromOffset( ( startOffset + endOffset ) / 2 );
 
 				if ( focusableNode.isFocusable() ) {
@@ -1482,15 +1483,21 @@ ve.ce.Surface.prototype.afterDocumentKeyDown = function ( e ) {
 		}
 		if ( focusableNode instanceof ve.ce.TableNode ) {
 			if ( direction > 0 ) {
-				this.model.setSelection( new ve.dm.TableSelection(
-					this.model.documentModel, range, 0, 0
-				) );
+				if ( ( captionNode = focusableNode.getModel().getCaptionNode() ) ) {
+					this.model.setLinearSelection(
+						documentModel.getRelativeRange( new ve.Range( captionNode.getRange().start ), 1 )
+					);
+				} else {
+					this.model.setSelection( new ve.dm.TableSelection(
+						documentModel, range, 0, 0
+					) );
+				}
 			} else {
 				matrix = focusableNode.getModel().getMatrix();
 				row = matrix.getRowCount() - 1;
 				col = matrix.getColCount( row ) - 1;
 				this.model.setSelection( new ve.dm.TableSelection(
-					this.model.documentModel, range, col, row
+					documentModel, range, col, row
 				) );
 			}
 		} else {
