@@ -4,6 +4,42 @@
  * @copyright 2011-2018 VisualEditor Team and others; see http://ve.mit-license.org
  */
 
+/**
+ * @class
+ * @extends ve.dm.LeafNode
+ * @constructor
+ */
+ve.dm.SectionPlaceholderNode = function VeDmCXPlaceholderNode() {
+	ve.dm.SectionPlaceholderNode.super.apply( this, arguments );
+};
+OO.inheritClass( ve.dm.SectionPlaceholderNode, ve.dm.LeafNode );
+ve.dm.SectionPlaceholderNode.static.name = 'sectionPlaceholder';
+ve.dm.SectionPlaceholderNode.static.matchTagNames = [ 'section' ];
+ve.dm.SectionPlaceholderNode.static.matchRdfaTypes = [ 've:SectionPlaceholder' ];
+ve.dm.SectionPlaceholderNode.prototype.canHaveSlugBefore = function () {
+	return false;
+};
+ve.dm.SectionPlaceholderNode.prototype.canHaveSlugAfter = function () {
+	return false;
+};
+ve.dm.modelRegistry.register( ve.dm.SectionPlaceholderNode );
+
+/**
+ * @class
+ * @extends ve.ce.LeafNode
+ * @constructor
+ */
+ve.ce.SectionPlaceholderNode = function VeCeCXPlaceholderNode() {
+	ve.ce.SectionPlaceholderNode.super.apply( this, arguments );
+	this.$element
+		.addClass( 've-ce-sectionPlaceholderNode' )
+		.append( $( '<hr>' ) );
+};
+OO.inheritClass( ve.ce.SectionPlaceholderNode, ve.ce.LeafNode );
+ve.ce.SectionPlaceholderNode.static.tagName = 'section';
+ve.ce.SectionPlaceholderNode.static.name = 'sectionPlaceholder';
+ve.ce.nodeFactory.register( ve.ce.SectionPlaceholderNode );
+
 ( function () {
 	/**
 	 * @class
