@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c1de8cd8_2c11b767",
+        "filename": "tests/ve.test.utils.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-07-31T16:08:31Z",
+      "side": 1,
+      "message": "You should probably just register these in the test function they are used in (and then unregister them after). If we find a need to test them elsewhere we can think about the best place to keep them.\n\nAlso we can keep them out of the \"real\" node namespaces, just make them local variables.",
+      "revId": "81432a190d7b237ddbefe9adc79b87ff17f2ae77",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
