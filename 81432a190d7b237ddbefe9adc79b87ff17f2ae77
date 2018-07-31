@@ -16,6 +16,24 @@
       "revId": "81432a190d7b237ddbefe9adc79b87ff17f2ae77",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2b674de9_38790fdf",
+        "filename": "tests/ve.test.utils.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2018-07-31T23:02:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1de8cd8_2c11b767",
+      "revId": "81432a190d7b237ddbefe9adc79b87ff17f2ae77",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
