@@ -73,7 +73,9 @@ ve.ui.LinkContextItem.prototype.getDescription = function () {
  * @inheritdoc
  */
 ve.ui.LinkContextItem.prototype.renderBody = function () {
-	var htmlDoc = this.context.getSurface().getModel().getDocument().getHtmlDocument();
+	var surfaceModel = this.context.getSurface().getModel(),
+		htmlDoc = surfaceModel.getDocument().getHtmlDocument(),
+		annotationSelection = surfaceModel.getFragment().expandLinearSelection( 'annotation', this.model ).getSelection();
 	this.$body.empty().append(
 		$( '<a>' )
 			.text( this.getDescription() )
@@ -81,10 +83,12 @@ ve.ui.LinkContextItem.prototype.renderBody = function () {
 				href: ve.resolveUrl( this.model.getHref(), htmlDoc ),
 				target: '_blank',
 				rel: 'noopener'
-			} ),
-		this.$labelLayout
+			} )
 	);
-	this.updateLabelPreview();
+	if ( !annotationSelection.equals( surfaceModel.getSelection() ) ) {
+		this.$body.append( this.$labelLayout );
+		this.updateLabelPreview();
+	}
 };
 
 /**
