@@ -1443,9 +1443,15 @@ ve.dm.Document.prototype.fixupInsertion = function ( data, offset ) {
 				if ( !childrenOK ) {
 					// We can't insert this into this parent
 					if ( isFirstChild ) {
-						// This element is the first child of its parent, so
+						// This element would be the first child of its parent, so
 						// abandon this fix up and try again one offset to the left
-						return this.fixupInsertion( data, offset - 1 );
+						insertion = this.fixupInsertion( data, offset - 1 );
+						if ( doc.data.isCloseElementData( offset ) && !ve.dm.nodeFactory.isNodeInternal( parentType ) ) {
+							// This element would also be the last child, so that means parent is empty.
+							// Remove it entirely. (Never remove the internal list though, ugh...)
+							insertion.remove += 2;
+						}
+						return insertion;
 					}
 
 					// Close the parent and try one level up
@@ -1516,7 +1522,7 @@ ve.dm.Document.prototype.fixupInsertion = function ( data, offset ) {
 	}
 
 	if ( closingStack.length > 0 && doc.data.isCloseElementData( offset ) ) {
-		// This element is the last child of its parent, so
+		// This element would be the last child of its parent, so
 		// abandon this fix up and try again one offset to the right
 		return this.fixupInsertion( data, offset + 1 );
 	}
