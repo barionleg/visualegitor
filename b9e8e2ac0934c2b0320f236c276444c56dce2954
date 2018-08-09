@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba1fcbc6_194d876e",
+        "filename": "src/dm/ve.dm.Document.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 1448,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-08-09T12:44:08Z",
+      "side": 1,
+      "message": "needs a var",
+      "revId": "b9e8e2ac0934c2b0320f236c276444c56dce2954",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
