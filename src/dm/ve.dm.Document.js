@@ -1473,14 +1473,14 @@ ve.dm.Document.prototype.fixupInsertion = function ( data, offset ) {
 					// supported (browser rendering bugs), so we'll just prevent it.
 					continue;
 				} else {
-					offset--;
-					remove++;
-					insert = doc.data.getCharacterData( offset ) + data[ i ];
-					annotations = doc.data.getAnnotationHashesFromOffset( offset );
-					if ( annotations.length ) {
-						insert = [ insert, annotations ];
-					}
-					data[ i ] = insert;
+					// offset--;
+					// remove++;
+					// insert = doc.data.getCharacterData( offset ) + data[ i ];
+					// annotations = doc.data.getAnnotationHashesFromOffset( offset );
+					// if ( annotations.length ) {
+					// 	insert = [ insert, annotations ];
+					// }
+					// data[ i ] = insert;
 				}
 			}
 
