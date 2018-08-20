@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7046179a_f27906eb",
+        "filename": "src/dm/ve.dm.Converter.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 1304,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-08-20T19:27:34Z",
+      "side": 1,
+      "message": "We should add this to my tech debt bug about having CE code in the DM.",
+      "revId": "7b257fd99224eab2d81c3086800c6d29cbebf3bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
