@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ba0024e_237811b2",
+        "filename": "src/ce/nodes/ve.ce.GeneratedContentNode.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-08-21T14:16:16Z",
+      "side": 1,
+      "message": "I think the return type is still Node[], it\u0027s only later on in getRenderedDomElements, that we ensure all text nodes are wrapped.",
+      "revId": "7ac2e833c2225d75d3a145077619d1046e782c11",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
