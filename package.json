@@ -34,7 +34,7 @@
     "grunt-cssjanus": "0.4.0",
     "grunt-eslint": "21.0.0",
     "grunt-jsonlint": "1.1.0",
-    "grunt-karma": "2.0.0",
+    "grunt-karma": "git://github.com/karma-runner/grunt-karma.git#1182766a2ab1e67c0093fbdbed0acd9ca89a73c5",
     "grunt-stylelint": "0.10.0",
     "grunt-svgmin": "5.0.0",
     "grunt-tyops": "0.1.0",
