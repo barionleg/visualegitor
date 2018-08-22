@@ -296,7 +296,7 @@ ve.dm.Surface.prototype.pushStaging = function ( allowUndo ) {
 		transactions: [],
 		// Will get overridden after the first transaction, but while the
 		// stack is empty, should be equal to the previous selectionBefore.
-		selectionBefore: this.isStaging() ? this.getStaging().selectionBefore : this.selectionBefore,
+		selectionBefore: this.isStaging() ? this.getStaging().selectionBefore : this.selection,
 		allowUndo: !!allowUndo
 	} );
 };
