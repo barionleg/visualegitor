@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4f24f33d_84eb0e19",
+        "filename": "src/ui/dialogs/ve.ui.CommandHelpDialog.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2018-08-22T16:48:39Z",
+      "side": 1,
+      "message": "Or we could make this an array?",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 44
+      },
+      "revId": "330311722355569ac7fa64ec8175c8e56a952c04",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
