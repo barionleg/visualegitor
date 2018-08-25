@@ -116,6 +116,8 @@
 	"visualeditor-dialog-table-caption": "Label for caption toggle in table dialog.\n{{Identical|Caption}}",
 	"visualeditor-dialog-table-title": "Title for the table dialog.",
 	"visualeditor-diff-moved-down": "Description of an item that has been moved down the page for visual diffing.",
+	"visualeditor-diff-moved-table-col": "Description of table column that has been moved for visual diffing.",
+	"visualeditor-diff-moved-table-row": "Description of table row that has been moved for visual diffing.",
 	"visualeditor-diff-moved-up": "Description of an item that has been moved up the page for visual diffing.",
 	"visualeditor-diff-no-changes": "Label displayed in the diff view when no net changes have been made.",
 	"visualeditor-diff-timed-out": "Label displayed in the diff view if the diff took too long to compute accurately.",
