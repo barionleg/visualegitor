@@ -459,9 +459,9 @@ QUnit.test( 'Diffing', function ( assert ) {
 				newDoc: '<table><tr><td>A</td><td>B</td></tr><tr><td>C</td><td>D</td></tr></table>',
 				expected:
 					'<table><tbody>' +
-						'<tr><td>A</td>' +
+						'<tr><td data-diff-action="none">A</td>' +
 						'<td data-diff-action="insert">B</td></tr>' +
-						'<tr><td>C</td>' +
+						'<tr><td data-diff-action="none">C</td>' +
 						'<td data-diff-action="insert">D</td></tr>' +
 					'</tbody></table>'
 			},
@@ -471,47 +471,8 @@ QUnit.test( 'Diffing', function ( assert ) {
 				newDoc: '<table><tr><td>A</td></tr><tr><td>C</td></tr></table>',
 				expected:
 					'<table><tbody>' +
-						'<tr><td>A</td><td data-diff-action="remove">B</td></tr>' +
-						'<tr><td>C</td><td data-diff-action="remove">D</td></tr>' +
-					'</tbody></table>'
-			},
-			{
-				msg: 'Change table columns',
-				oldDoc:
-					'<table>' +
-						'<tr><td>A</td><td>Foo</td><td>Baz</td></tr>' +
-						'<tr><td>B</td><td>Bar</td><td>Qux</td></tr>' +
-					'</table>',
-				newDoc:
-					'<table>' +
-						'<tr><td>A</td><td>Foo 1</td><td>Baz 1</td></tr>' +
-						'<tr><td>B</td><td>Bar 1</td><td>Qux 1</td></tr>' +
-					'</table>',
-				expected:
-					'<table><tbody>' +
-						'<tr><td>A</td><td>Foo<ins data-diff-action="insert"> 1</ins></td><td>Baz<ins data-diff-action="insert"> 1</ins></td></tr>' +
-						'<tr><td>B</td><td>Bar<ins data-diff-action="insert"> 1</ins></td><td>Qux<ins data-diff-action="insert"> 1</ins></td></tr>' +
-					'</tbody></table>'
-			},
-			{
-				msg: 'Change table rows',
-				oldDoc:
-					'<table>' +
-						'<tr><td>A</td><td>B</td></tr>' +
-						'<tr><td>Foo</td><td>Bar</td></tr>' +
-						'<tr><td>Baz</td><td>Qux</td></tr>' +
-					'</table>',
-				newDoc:
-					'<table>' +
-						'<tr><td>A</td><td>B</td></tr>' +
-						'<tr><td>Foo 1</td><td>Bar 1</td></tr>' +
-						'<tr><td>Baz 1</td><td>Qux 1</td></tr>' +
-					'</table>',
-				expected:
-					'<table><tbody>' +
-						'<tr><td>A</td><td>B</td></tr>' +
-						'<tr><td>Foo<ins data-diff-action="insert"> 1</ins></td><td>Bar<ins data-diff-action="insert"> 1</ins></td></tr>' +
-						'<tr><td>Baz<ins data-diff-action="insert"> 1</ins></td><td>Qux<ins data-diff-action="insert"> 1</ins></td></tr>' +
+						'<tr><td data-diff-action="none">A</td><td data-diff-action="remove">B</td></tr>' +
+						'<tr><td data-diff-action="none">C</td><td data-diff-action="remove">D</td></tr>' +
 					'</tbody></table>'
 			},
 			{
@@ -527,15 +488,15 @@ QUnit.test( 'Diffing', function ( assert ) {
 					'</table>',
 				expected:
 					'<table><tbody>' +
-						'<tr><td>A</td><td>B</td><td>C</td></tr>' +
-						'<tr data-diff-action="structural-remove">' +
+						'<tr><td data-diff-action="none">A</td><td data-diff-action="none">B</td><td data-diff-action="none">C</td></tr>' +
+						'<tr>' +
 							'<td data-diff-action="remove">D</td>' +
 							'<td data-diff-action="remove">E</td>' +
 							'<td data-diff-action="remove">F</td>' +
 						'</tr>' +
 						'<tr>' +
 							'<td><p data-diff-action="remove">G</p><p data-diff-action="insert">Q</p></td>' +
-							'<td>H</td>' +
+							'<td data-diff-action="none">H</td>' +
 							'<td><p data-diff-action="remove">I</p><p data-diff-action="insert">Y</p></td>' +
 						'</tr>' +
 					'</tbody></table>'
@@ -554,16 +515,13 @@ QUnit.test( 'Diffing', function ( assert ) {
 					'</table>',
 				expected:
 					'<table><tbody>' +
-						'<tr><td>A</td><td>B</td></tr>' +
-						'<tr>' +
-							'<td><p data-diff-action="remove">C</p><p data-diff-action="insert">E</p></td>' +
-							'<td><p data-diff-action="remove">D</p><p data-diff-action="insert">F</p></td>' +
-						'</tr>' +
-						'<tr>' +
-							'<td><p data-diff-action="remove">E</p><p data-diff-action="insert">C</p></td>' +
-							'<td><p data-diff-action="remove">F</p><p data-diff-action="insert">D</p></td>' +
-						'</tr>' +
-					'</tbody></table>'
+						'<tr><td data-diff-action="none">A</td><td data-diff-action="none">B</td>' +
+						'<tr><td data-diff-action="none">E</td><td data-diff-action="none">F</td>' +
+						'<tr><td data-diff-move="table-row" data-diff-id="0">C</td><td data-diff-move="table-row">D</td>' +
+					'</tbody></table>',
+				expectedDescriptions: [
+					'<div>visualeditor-diff-moved-table-row</div>'
+				]
 			},
 			{
 				msg: 'Horizontal merge (also rowspan set to 1 and not described)',
@@ -577,8 +535,8 @@ QUnit.test( 'Diffing', function ( assert ) {
 					'</table>',
 				expected:
 					'<table><tbody>' +
-						'<tr><td colspan="2" rowspan="1" data-diff-id="0"><p data-diff-action="none">A</p></td><td data-diff-action="remove">B</td></tr>' +
-						'<tr><td>C</td><td>D</td></tr>' +
+						'<tr><td colspan="2" rowspan="1" data-diff-id="0"><p data-diff-action="none">A</p></td></tr>' +
+						'<tr><td data-diff-action="none">C</td><td data-diff-action="none">D</td></tr>' +
 					'</tbody></table>',
 				expectedDescriptions: [
 					'<div>visualeditor-changedesc-set,colspan,<ins>2</ins></div>'
@@ -597,7 +555,7 @@ QUnit.test( 'Diffing', function ( assert ) {
 				expected:
 					'<table><tbody>' +
 						'<tr><td data-diff-id="0"><p data-diff-action="none">A</p></td><td data-diff-action="insert">B</td></tr>' +
-						'<tr><td>C</td><td>D</td></tr>' +
+						'<tr><td data-diff-action="none">C</td><td data-diff-action="none">D</td></tr>' +
 					'</tbody></table>',
 				expectedDescriptions: [
 					'<div>visualeditor-changedesc-unset,colspan,<del>2</del></div>'
@@ -615,8 +573,8 @@ QUnit.test( 'Diffing', function ( assert ) {
 					'</table>',
 				expected:
 					'<table><tbody>' +
-						'<tr><td colspan="2" data-diff-id="0"><p data-diff-action="remove">A</p><p data-diff-action="insert">Q</p></td><td data-diff-action="remove">B</td></tr>' +
-						'<tr><td>C</td><td>D</td></tr>' +
+						'<tr><td colspan="2" data-diff-id="0"><p data-diff-action="remove">A</p><p data-diff-action="insert">Q</p></td></tr>' +
+						'<tr><td data-diff-action="none">C</td><td data-diff-action="none">D</td></tr>' +
 					'</tbody></table>',
 				expectedDescriptions: [
 					'<div>visualeditor-changedesc-set,colspan,<ins>2</ins></div>'
@@ -633,13 +591,11 @@ QUnit.test( 'Diffing', function ( assert ) {
 						'<tr><td>D</td></tr>' +
 					'</table>',
 				expected:
+					// TODO: Detect the merge
 					'<table><tbody>' +
-						'<tr><td rowspan="2" data-diff-id="0"><p data-diff-action="none">A</p></td><td>B</td></tr>' +
-						'<tr><td data-diff-action="remove">C</td><td>D</td></tr>' +
-					'</tbody></table>',
-				expectedDescriptions: [
-					'<div>visualeditor-changedesc-set,rowspan,<ins>2</ins></div>'
-				]
+						'<tr><td rowspan="2" data-diff-action="insert">A</td><td data-diff-action="remove">A</td><td data-diff-action="none">B</td></tr>' +
+						'<tr><td data-diff-action="remove">C</td><td data-diff-action="none">D</td></tr>' +
+					'</tbody></table>'
 			},
 			{
 				msg: 'Vertical merge and modify',
@@ -652,21 +608,19 @@ QUnit.test( 'Diffing', function ( assert ) {
 						'<tr><td>D 1</td></tr>' +
 					'</table>',
 				expected:
+					// TODO: Detect the merge
 					'<table><tbody>' +
-						'<tr><td rowspan="2" data-diff-id="0"><p data-diff-action="none">A</p></td><td>B<ins data-diff-action="insert"> 1</ins></td></tr>' +
-						'<tr><td><p data-diff-action="remove">C</p><p data-diff-action="insert">D 1</p></td><td data-diff-action="remove">D</td></tr>' +
-					'</tbody></table>',
-				expectedDescriptions: [
-					'<div>visualeditor-changedesc-set,rowspan,<ins>2</ins></div>'
-				]
+						'<tr><td rowspan="2" data-diff-action="insert">A</td><td data-diff-action="insert">B 1</td><td data-diff-action="remove">A</td><td data-diff-action="remove">B</td></tr>' +
+						'<tr><td data-diff-action="insert">D 1</td></tr><tr><td data-diff-action="remove">C</td><td data-diff-action="remove">D</td></tr>' +
+					'</tbody></table>'
 			},
 			{
 				msg: 'Table with no changes (colspan/rowspan set to 1) is not rendered',
-				oldDoc: '<p>a</p><table><tr><td>A</td></tr></table><p>b</p>',
-				newDoc: '<p>a</p><table><tr><td colspan="1" rowspan="1">A</td></tr></table><p>b</p>',
+				oldDoc: '<table><tr><td>A</td></tr></table>',
+				newDoc: '<table><tr><td colspan="1" rowspan="1">A</td></tr></table>',
 				expected:
-					// TODO: This should be noChanges
-					'<p data-diff-action="none">a</p><table><tbody><tr><td colspan="1" rowspan="1"></td></tr></tbody></table><p data-diff-action="none">b</p>'
+					// TODO: Should be noChanges
+					'<table><tbody><tr><td colspan="1" rowspan="1" data-diff-action="insert">A</td><td data-diff-action="remove">A</td></tr></tbody></table>'
 			},
 			{
 				msg: 'Sparse table insertion',
@@ -680,8 +634,8 @@ QUnit.test( 'Diffing', function ( assert ) {
 					'</table>',
 				expected:
 					'<table><tbody>' +
-						'<tr><td>A</td><td>B</td><td>C</td></tr>' +
-						'<tr><td>D</td><td data-diff-action="insert">E</td></tr>' +
+						'<tr><td data-diff-action="none">A</td><td data-diff-action="none">B</td><td data-diff-action="none">C</td></tr>' +
+						'<tr><td data-diff-action="none">D</td><td data-diff-action="insert">E</td></tr>' +
 					'</tbody></table>'
 			},
 			{
@@ -696,8 +650,8 @@ QUnit.test( 'Diffing', function ( assert ) {
 					'</table>',
 				expected:
 					'<table><tbody>' +
-						'<tr><td>A</td><td>B</td><td>C</td></tr>' +
-						'<tr><td>D</td><td data-diff-action="remove">E</td></tr>' +
+						'<tr><td data-diff-action="none">A</td><td data-diff-action="none">B</td><td data-diff-action="none">C</td></tr>' +
+						'<tr><td data-diff-action="none">D</td><td data-diff-action="remove">E</td></tr>' +
 					'</tbody></table>'
 			},
 			{
@@ -705,21 +659,21 @@ QUnit.test( 'Diffing', function ( assert ) {
 				oldDoc: '<table><caption>Foo</caption><tr><td>Bar</td></tr></table>',
 				newDoc: '<table><caption>Foo 1</caption><tr><td>Bar</td></tr></table>',
 				expected:
-					'<table><caption>Foo<ins data-diff-action="insert"> 1</ins></caption><tbody><tr><td>Bar</td></tr></tbody></table>'
+					'<table><caption>Foo<ins data-diff-action="insert"> 1</ins></caption><tbody><tr><td data-diff-action="none">Bar</td></tr></tbody></table>'
 			},
 			{
 				msg: 'Table caption insert',
 				oldDoc: '<table><tr><td>Bar</td></tr></table>',
 				newDoc: '<table><caption>Foo</caption><tr><td>Bar</td></tr></table>',
 				expected:
-					'<table><caption data-diff-action="insert">Foo</caption><tbody><tr><td>Bar</td></tr></tbody></table>'
+					'<table><caption data-diff-action="insert">Foo</caption><tbody><tr><td data-diff-action="none">Bar</td></tr></tbody></table>'
 			},
 			{
 				msg: 'Table caption remove',
 				oldDoc: '<table><caption>Foo</caption><tr><td>Bar</td></tr></table>',
 				newDoc: '<table><tr><td>Bar</td></tr></table>',
 				expected:
-					'<table><caption data-diff-action="remove">Foo</caption><tbody><tr><td>Bar</td></tr></tbody></table>'
+					'<table><caption data-diff-action="remove">Foo</caption><tbody><tr><td data-diff-action="none">Bar</td></tr></tbody></table>'
 			},
 			{
 				msg: 'List item indentation in div',
@@ -764,7 +718,7 @@ QUnit.test( 'Diffing', function ( assert ) {
 						'<tr><td><ul><li>foo<ul><li>bar</li></ul></li><li>baz</li></ul></td><td>Here</td></tr>' +
 					'</table>',
 				expected:
-					'<table><tbody><tr><td>Hello</td><td>World</td><tr><td>' +
+					'<table><tbody><tr><td data-diff-action="none">Hello</td><td data-diff-action="none">World</td><tr><td>' +
 					'<ul>' +
 						'<li data-diff-list-none>' +
 							'<p data-diff-action="none">foo</p>' +
@@ -778,7 +732,7 @@ QUnit.test( 'Diffing', function ( assert ) {
 							'<p data-diff-action="none">baz</p>' +
 						'</li>' +
 					'</ul>' +
-					'</td><td>Here</td></tr></tbody></table>',
+					'</td><td data-diff-action="none">Here</td></tr></tbody></table>',
 				expectedDescriptions: [
 					'<div>visualeditor-changedesc-list-indent</div>'
 				]
@@ -1278,7 +1232,7 @@ QUnit.test( 'Diffing', function ( assert ) {
 					'</li></ul>',
 				expected:
 					'<ul><li>' +
-						'<table><tbody><tr><td>Foo</td><td>Bar</td><td><p data-diff-action="remove">Baz1</p><p data-diff-action="insert">Baz2</p></td></tr></tbody></table>' +
+						'<table><tbody><tr><td data-diff-action="none">Foo</td><td data-diff-action="none">Bar</td><td data-diff-action="insert">Baz2</td><td data-diff-action="remove">Baz1</td></tr></tbody></table>' +
 					'</li></ul>'
 			},
 			{

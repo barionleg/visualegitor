@@ -42,6 +42,8 @@ ve.dm.TableNode.static.childNodeTypes = [ 'tableSection', 'tableCaption' ];
 
 ve.dm.TableNode.static.matchTagNames = [ 'table' ];
 
+ve.dm.TableNode.static.isDiffedAsTable = true;
+
 /* Methods */
 
 /**
