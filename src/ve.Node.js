@@ -213,6 +213,14 @@ ve.Node.prototype.isDiffedAsList = null;
 ve.Node.prototype.isDiffedAsLeaf = null;
 
 /**
+ * Check if the node behaves like a table for diffing
+ *
+ * @abstract
+ * @return {boolean} Node behaves like a table
+ */
+ve.Node.prototype.isDiffedAsTable = null;
+
+/**
  * Check if the node behaves like a document for diffing
  *
  * @abstract
