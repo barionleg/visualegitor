@@ -547,6 +547,13 @@ ve.dm.Node.prototype.isDiffedAsLeaf = function () {
 /**
  * @inheritdoc ve.Node
  */
+ve.dm.Node.prototype.isDiffedAsTable = function () {
+	return this.constructor.static.isDiffedAsTable;
+};
+
+/**
+ * @inheritdoc ve.Node
+ */
 ve.dm.Node.prototype.isDiffedAsDocument = function () {
 	return this.getChildNodeTypes() === null;
 };
