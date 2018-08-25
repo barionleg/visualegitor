@@ -34,6 +34,7 @@ ve.dm.Transaction = function VeDmTransaction( operations, authorId ) {
 	this.applied = false;
 	this.authorId = authorId || null;
 	this.isReversed = false;
+	this.reverses = null;
 };
 
 /* Inheritance */
@@ -125,7 +126,7 @@ ve.dm.Transaction.static.deserialize = function ( data ) {
  * @return {Object|Array} Serialized transaction
  */
 ve.dm.Transaction.prototype.serialize = function () {
-	var operations;
+	var operations, ob;
 
 	function isSingleCodePoint( x ) {
 		return typeof x === 'string' && x.length === 1;
@@ -156,11 +157,15 @@ ve.dm.Transaction.prototype.serialize = function () {
 
 	operations = this.operations.map( minify );
 
-	if ( this.authorId !== null ) {
-		return {
-			o: operations,
-			a: this.authorId
-		};
+	if ( this.authorId !== null || this.reverses !== null ) {
+		ob = { o: operations };
+		if ( this.authorId !== null ) {
+			ob.a = this.authorId;
+		}
+		if ( this.reverses !== null ) {
+			ob.r = this.reverses;
+		}
+		return ob;
 	} else {
 		return operations;
 	}

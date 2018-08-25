@@ -681,10 +681,13 @@ ve.dm.Change.prototype.summarize = function () {
  * @return {ve.dm.Change} The change that backs out this change
  */
 ve.dm.Change.prototype.reversed = function () {
+	var start = this.start + this.transactions.length;
 	return new ve.dm.Change(
-		this.start + this.transactions.length,
-		this.transactions.map( function ( tx ) {
-			return ve.dm.Transaction.prototype.reversed.call( tx );
+		start,
+		this.transactions.map( function ( tx, i ) {
+			var reversed = tx.reversed();
+			reversed.reverses = start + i;
+			return reversed;
 		} ).reverse(),
 		// Empty store for each transaction (reverting cannot possibly add new annotations)
 		this.transactions.map( function () {
@@ -924,6 +927,16 @@ ve.dm.Change.prototype.serialize = function ( preserveStoreValues ) {
 	}
 	return data;
 };
+
+/**
+ * Squash a change in-place, removing do-undo pairs.
+ *
+ * By construction, an undo must not conflict with the history since the original transaction.
+ */
+ve.dm.Change.prototype.squashUndos = function () {
+	TODO: implement this.
+}
+
 
 /**
  * Squash a change in-place, to use as few transactions as possible
