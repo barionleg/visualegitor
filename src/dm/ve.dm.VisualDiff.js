@@ -4,7 +4,7 @@
  * @copyright 2011-2018 VisualEditor Team and others; see http://ve.mit-license.org
  */
 
-/* global treeDiffer */
+/* global treeDiffer, daff */
 
 /**
  * VisualDiff
@@ -342,12 +342,18 @@ ve.dm.VisualDiff.prototype.compareNodes = function ( oldNode, newNode ) {
 ve.dm.VisualDiff.prototype.findModifiedNodes = function ( oldIndices, newIndices, oldNodes, newNodes, diff ) {
 	var diffResults, i, j,
 		ilen = oldIndices.length,
-		jlen = newIndices.length;
+		jlen = newIndices.length,
+		// For daff diff
+		oldRootChild, newRootChild, oldTableView, newTableView, compareTables,
+		align, dataDiff, tableDiff, flags, highlighter;
 
 	for ( i = 0; i < ilen; i++ ) {
 		for ( j = 0; j < jlen; j++ ) {
 
 			if ( oldIndices[ i ] !== null && newIndices[ j ] !== null ) {
+
+				oldRootChild = oldNodes[ oldIndices[ i ] ];
+				newRootChild = newNodes[ newIndices[ i ] ];
 
 				diffResults = this.diffNodes( oldNodes[ oldIndices[ i ] ], newNodes[ newIndices[ j ] ] );
 
@@ -404,6 +410,8 @@ ve.dm.VisualDiff.prototype.diffNodes = function ( oldNode, newNode ) {
 		diff = this.diffLeafNodes( oldNode, newNode );
 	} else if ( oldNode.isDiffedAsList() ) {
 		diff = this.diffListNodes( oldNode, newNode );
+	} else if ( oldNode.isDiffedAsTable() ) {
+		diff = this.diffTableNodes( oldNode, newNode );
 	} else {
 		diff = this.diffTreeNodes( oldNode, newNode );
 	}
@@ -444,6 +452,38 @@ ve.dm.VisualDiff.prototype.diffLeafNodes = function ( oldNode, newNode ) {
 	};
 
 	return diff;
+};
+
+/**
+ * Diff two table nodes
+ *
+ * @param {ve.dm.Node} oldNode Node from the old document
+ * @param {ve.dm.Node} newNode Node from the new document
+ */
+ve.dm.VisualDiff.prototype.diffTableNodes = function ( oldNode, newNode ) {
+	var oldTableView, newTableView, compareTables, align, dataDiff,
+		tableDiff, flags, highlighter;
+
+	function getDataMatrix( node ) {
+		var doc = node.getDocument();
+		return node.getMatrix().getMatrix().map( function ( row ) {
+			return row.map( function ( cell ) {
+				return doc.getData( cell.getOwner().node.getRange() );
+			} );
+		} );
+	}
+
+	oldTableView = new daff.TableView( getDataMatrix( oldNode ) );
+	newTableView = new daff.TableView( getDataMatrix( newNode ) );
+	compareTables = daff.compareTables( oldTableView, newTableView );
+	align = compareTables.align();
+	dataDiff = [];
+	tableDiff = new daff.TableView( dataDiff );
+	flags = new daff.CompareFlags();
+	highlighter = new daff.TableDiff( align, flags );
+
+	highlighter.hilite( tableDiff );
+	// console.log( tableDiff );
 };
 
 /**
