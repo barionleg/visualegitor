@@ -165,10 +165,10 @@ figure[ data-diff-action='remove' ] > figcaption {
 }
 
 /* TODO: These sibling selectors still match when there is a text node in-between, should be fixed in JS */
-[ data-diff-action='remove' ] + [ data-diff-action='insert' ],
-[ data-diff-action='insert' ] + [ data-diff-action='remove' ],
-[ data-diff-action='remove' ] + [ data-diff-action='change-insert' ],
-[ data-diff-action='insert' ] + [ data-diff-action='change-remove' ] {
+del[ data-diff-action='remove' ] + ins[ data-diff-action='insert' ],
+ins[ data-diff-action='insert' ] + del[ data-diff-action='remove' ],
+del[ data-diff-action='remove' ] + span[ data-diff-action='change-insert' ],
+ins[ data-diff-action='insert' ] + span[ data-diff-action='change-remove' ] {
 	margin-left: 4px;
 }
 
@@ -191,6 +191,11 @@ figure[ data-diff-action='remove' ] > figcaption {
 [ data-diff-move ] {
 	background: #eaecf0; /* base80 */
 	outline: 5px solid #eaecf0;
+}
+
+td[ data-diff-move ],
+th[ data-diff-move ] {
+	outline: 0;
 }
 
 .ve-ui-diffElement-moved-up,

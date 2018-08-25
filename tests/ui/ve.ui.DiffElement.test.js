@@ -568,10 +568,10 @@ QUnit.test( 'Diffing', function ( assert ) {
 				expected:
 					'<div class="ve-ui-diffElement-doc-child-change">' +
 						'<table><tbody>' +
-							'<tr><td>A</td>' +
-							'<td data-diff-action="structural-insert"><p data-diff-action="insert">B</p></td></tr>' +
-							'<tr><td>C</td>' +
-							'<td data-diff-action="structural-insert"><p data-diff-action="insert">D</p></td></tr>' +
+							'<tr><td data-diff-action="none">A</td>' +
+							'<td data-diff-action="insert">B</td></tr>' +
+							'<tr><td data-diff-action="none">C</td>' +
+							'<td data-diff-action="insert">D</td></tr>' +
 						'</tbody></table>' +
 					'</div>'
 			},
@@ -582,8 +582,8 @@ QUnit.test( 'Diffing', function ( assert ) {
 				expected:
 					'<div class="ve-ui-diffElement-doc-child-change">' +
 						'<table><tbody>' +
-							'<tr><td>A</td><td data-diff-action="structural-remove"><p data-diff-action="remove">B</p></td></tr>' +
-							'<tr><td>C</td><td data-diff-action="structural-remove"><p data-diff-action="remove">D</p></td></tr>' +
+							'<tr><td data-diff-action="none">A</td><td data-diff-action="remove">B</td></tr>' +
+							'<tr><td data-diff-action="none">C</td><td data-diff-action="remove">D</td></tr>' +
 						'</tbody></table>' +
 					'</div>'
 			},
@@ -595,20 +595,193 @@ QUnit.test( 'Diffing', function ( assert ) {
 						'<tr><td>G</td><td>H</td><td>I</td></tr>' +
 					'</table>',
 				newDoc: '<table>' +
-						'<tr><td>A</td><td>B</td><td>X</td></tr>' +
-						'<tr><td>G</td><td>H</td><td>Y</td></tr>' +
+						'<tr><td>A</td><td>B</td><td>C</td></tr>' +
+						'<tr><td>Q</td><td>H</td><td>Y</td></tr>' +
 					'</table>',
 				expected:
 					'<div class="ve-ui-diffElement-doc-child-change">' +
 						'<table><tbody>' +
-							'<tr><td>A</td><td>B</td><td><del data-diff-action="remove">C</del><ins data-diff-action="insert">X</ins></td></tr>' +
-							'<tr data-diff-action="structural-remove">' +
-								'<td data-diff-action="structural-remove"><p data-diff-action="remove">D</p></td>' +
-								'<td data-diff-action="structural-remove"><p data-diff-action="remove">E</p></td>' +
-								'<td data-diff-action="structural-remove"><p data-diff-action="remove">F</p></td>' +
+							'<tr><td data-diff-action="none">A</td><td data-diff-action="none">B</td><td data-diff-action="none">C</td></tr>' +
+							'<tr>' +
+								'<td data-diff-action="remove">D</td>' +
+								'<td data-diff-action="remove">E</td>' +
+								'<td data-diff-action="remove">F</td>' +
 							'</tr>' +
-							'<tr><td>G</td><td>H</td><td><del data-diff-action="remove">I</del><ins data-diff-action="insert">Y</ins></td></tr>' +
+							'<tr>' +
+								'<td><p data-diff-action="remove">G</p><p data-diff-action="insert">Q</p></td>' +
+								'<td data-diff-action="none">H</td>' +
+								'<td><p data-diff-action="remove">I</p><p data-diff-action="insert">Y</p></td>' +
+							'</tr>' +
 						'</tbody></table>' +
+					'</div>'
+			},
+			{
+				msg: 'Table row moved',
+				oldDoc: '<table>' +
+						'<tr><td>A</td><td>B</td></tr>' +
+						'<tr><td>C</td><td>D</td></tr>' +
+						'<tr><td>E</td><td>F</td></tr>' +
+					'</table>',
+				newDoc: '<table>' +
+						'<tr><td>A</td><td>B</td></tr>' +
+						'<tr><td>E</td><td>F</td></tr>' +
+						'<tr><td>C</td><td>D</td></tr>' +
+					'</table>',
+				expected:
+					'<div class="ve-ui-diffElement-doc-child-change">' +
+						'<table><tbody>' +
+							'<tr><td data-diff-action="none">A</td><td data-diff-action="none">B</td>' +
+							'<tr><td data-diff-action="none">E</td><td data-diff-action="none">F</td>' +
+							'<tr><td data-diff-move="table-row" data-diff-id="0">C</td><td data-diff-move="table-row">D</td>' +
+						'</tbody></table>' +
+					'</div>',
+				expectedDescriptions: [
+					'<div>visualeditor-diff-moved-table-row</div>'
+				]
+			},
+			{
+				msg: 'Horizontal merge',
+				oldDoc: '<table>' +
+						'<tr><td>A</td><td>B</td></tr>' +
+						'<tr><td>C</td><td>D</td></tr>' +
+					'</table>',
+				newDoc: '<table>' +
+						'<tr><td colspan="2">A</td></tr>' +
+						'<tr><td>C</td><td>D</td></tr>' +
+					'</table>',
+				expected:
+					'<div class="ve-ui-diffElement-doc-child-change">' +
+						'<table><tbody>' +
+						// TODO: The data-diff-action=none causes the cell text to be grey
+						'<tr><td colspan="2" data-diff-id="0"><p data-diff-action="none">A</p></td></tr>' +
+						'<tr><td data-diff-action="none">C</td><td data-diff-action="none">D</td></tr>' +
+						'</tbody></table>' +
+					'</div>',
+				expectedDescriptions: [
+					'<div>visualeditor-changedesc-set,colspan,<ins>2</ins></div>'
+				]
+			},
+			{
+				msg: 'Horizontal unmerge',
+				oldDoc: '<table>' +
+						'<tr><td colspan="2">A</td></tr>' +
+						'<tr><td>C</td><td>D</td></tr>' +
+					'</table>',
+				newDoc: '<table>' +
+						'<tr><td>A</td><td>B</td></tr>' +
+						'<tr><td>C</td><td>D</td></tr>' +
+					'</table>',
+				expected:
+					'<div class="ve-ui-diffElement-doc-child-change">' +
+						'<table><tbody>' +
+						'<tr><td data-diff-id="0"><p data-diff-action="none">A</p></td><td data-diff-action="insert">B</td></tr>' +
+						'<tr><td data-diff-action="none">C</td><td data-diff-action="none">D</td></tr>' +
+						'</tbody></table>' +
+					'</div>',
+				expectedDescriptions: [
+					'<div>visualeditor-changedesc-unset,colspan,<del>2</del></div>'
+				]
+			},
+			{
+				msg: 'Horizontal merge and change',
+				oldDoc: '<table>' +
+						'<tr><td>A</td><td>B</td></tr>' +
+						'<tr><td>C</td><td>D</td></tr>' +
+					'</table>',
+				newDoc: '<table>' +
+						'<tr><td colspan="2">Q</td></tr>' +
+						'<tr><td>C</td><td>D</td></tr>' +
+					'</table>',
+				expected:
+					'<div class="ve-ui-diffElement-doc-child-change">' +
+						'<table><tbody>' +
+						'<tr><td colspan="2" data-diff-id="0"><p data-diff-action="remove">A</p><p data-diff-action="insert">Q</p></td></tr>' +
+						'<tr><td data-diff-action="none">C</td><td data-diff-action="none">D</td></tr>' +
+						'</tbody></table>' +
+					'</div>',
+				expectedDescriptions: [
+					'<div>visualeditor-changedesc-set,colspan,<ins>2</ins></div>'
+				]
+			},
+			{
+				msg: 'Vertical merge',
+				oldDoc: '<table>' +
+						'<tr><td>A</td><td>B</td></tr>' +
+						'<tr><td>C</td><td>D</td></tr>' +
+					'</table>',
+				newDoc: '<table>' +
+						'<tr><td rowspan="2">A</td><td>B</td></tr>' +
+						'<tr><td>D</td></tr>' +
+					'</table>',
+				expected:
+					'<div class="ve-ui-diffElement-doc-child-change">' +
+						'<table><tbody>' +
+						'<tr><td rowspan="2" data-diff-action="insert">A</td><td data-diff-action="remove">A</td><td data-diff-action="none">B</td></tr>' +
+						'<tr><td data-diff-action="remove">C</td><td data-diff-action="none">D</td></tr>' +
+						'</tbody></table>' +
+					'</div>'
+			},
+			{
+				msg: 'Sparse table insertion',
+				oldDoc: '<table>' +
+						'<tr><td>A</td><td>B</td><td>C</td></tr>' +
+						'<tr><td>D</td></tr>' +
+					'</table>',
+				newDoc: '<table>' +
+						'<tr><td>A</td><td>B</td><td>C</td></tr>' +
+						'<tr><td>D</td><td>E</td></tr>' +
+					'</table>',
+				expected:
+					'<div class="ve-ui-diffElement-doc-child-change">' +
+						'<table><tbody>' +
+							'<tr><td data-diff-action="none">A</td><td data-diff-action="none">B</td><td data-diff-action="none">C</td></tr>' +
+							'<tr><td data-diff-action="none">D</td><td data-diff-action="insert">E</td></tr>' +
+						'</tbody></table>' +
+					'</div>'
+			},
+			{
+				msg: 'Sparse table removal',
+				oldDoc: '<table>' +
+						'<tr><td>A</td><td>B</td><td>C</td></tr>' +
+						'<tr><td>D</td><td>E</td></tr>' +
+					'</table>',
+				newDoc: '<table>' +
+						'<tr><td>A</td><td>B</td><td>C</td></tr>' +
+						'<tr><td>D</td></tr>' +
+					'</table>',
+				expected:
+					'<div class="ve-ui-diffElement-doc-child-change">' +
+						'<table><tbody>' +
+							'<tr><td data-diff-action="none">A</td><td data-diff-action="none">B</td><td data-diff-action="none">C</td></tr>' +
+							'<tr><td data-diff-action="none">D</td><td data-diff-action="remove">E</td></tr>' +
+						'</tbody></table>' +
+					'</div>'
+			},
+			{
+				msg: 'Table caption change',
+				oldDoc: '<table><caption>Foo</caption><tr><td>Bar</td></tr></table>',
+				newDoc: '<table><caption>Foo 1</caption><tr><td>Bar</td></tr></table>',
+				expected:
+					'<div class="ve-ui-diffElement-doc-child-change">' +
+						'<table><caption>Foo<ins data-diff-action="insert"> 1</ins></caption><tbody><tr><td data-diff-action="none">Bar</td></tr></tbody></table>' +
+					'</div>'
+			},
+			{
+				msg: 'Table caption insert',
+				oldDoc: '<table><tr><td>Bar</td></tr></table>',
+				newDoc: '<table><caption>Foo</caption><tr><td>Bar</td></tr></table>',
+				expected:
+					'<div class="ve-ui-diffElement-doc-child-change">' +
+						'<table><caption data-diff-action="insert">Foo</caption><tbody><tr><td data-diff-action="none">Bar</td></tr></tbody></table>' +
+					'</div>'
+			},
+			{
+				msg: 'Table caption remove',
+				oldDoc: '<table><caption>Foo</caption><tr><td>Bar</td></tr></table>',
+				newDoc: '<table><tr><td>Bar</td></tr></table>',
+				expected:
+					'<div class="ve-ui-diffElement-doc-child-change">' +
+						'<table><caption data-diff-action="remove">Foo</caption><tbody><tr><td data-diff-action="none">Bar</td></tr></tbody></table>' +
 					'</div>'
 			},
 			{
@@ -638,6 +811,40 @@ QUnit.test( 'Diffing', function ( assert ) {
 							'</li>' +
 						'</ul>' +
 						'</div>' +
+					'</div>',
+				expectedDescriptions: [
+					'<div>visualeditor-changedesc-list-indent</div>'
+				]
+			},
+			{
+				msg: 'List item indentation in table',
+				oldDoc:
+					'<table>' +
+						'<tr><td>Hello</td><td>World</td>' +
+						'<tr><td><ul><li>foo</li><li>bar</li><li>baz</li></ul></td><td>Here</td></tr>' +
+					'</table>',
+				newDoc:
+					'<table>' +
+						'<tr><td>Hello</td><td>World</td>' +
+						'<tr><td><ul><li>foo<ul><li>bar</li></ul></li><li>baz</li></ul></td><td>Here</td></tr>' +
+					'</table>',
+				expected:
+					'<div class="ve-ui-diffElement-doc-child-change">' +
+						'<table><tbody><tr><td data-diff-action="none">Hello</td><td data-diff-action="none">World</td><tr><td>' +
+						'<ul>' +
+							'<li>' +
+								'<p data-diff-action="none">foo</p>' +
+								'<ul>' +
+									'<li data-diff-id="0">' +
+										'<p data-diff-action="structural-change">bar</p>' +
+									'</li>' +
+								'</ul>' +
+							'</li>' +
+							'<li>' +
+								'<p data-diff-action="none">baz</p>' +
+							'</li>' +
+						'</ul>' +
+						'</td><td data-diff-action="none">Here</td></tr></tbody></table>' +
 					'</div>',
 				expectedDescriptions: [
 					'<div>visualeditor-changedesc-list-indent</div>'
@@ -1139,7 +1346,7 @@ QUnit.test( 'Diffing', function ( assert ) {
 				expected:
 					'<div class="ve-ui-diffElement-doc-child-change">' +
 						'<ul><li>' +
-							'<table><tbody><tr><td>Foo</td><td>Bar</td><td><del data-diff-action="remove">Baz1</del><ins data-diff-action="insert">Baz2</ins></td></tr></tbody></table>' +
+							'<table><tbody><tr><td data-diff-action="none">Foo</td><td data-diff-action="none">Bar</td><td data-diff-action="insert">Baz2</td><td data-diff-action="remove">Baz1</td></tr></tbody></table>' +
 						'</li></ul>' +
 					'</div>'
 			}
