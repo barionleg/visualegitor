@@ -522,6 +522,8 @@ ve.ui.DiffElement.prototype.getChangedNodeData = function ( diff, oldNode, newNo
 		nodeData = this.getChangedLeafNodeData( newNode, diff, move );
 	} else if ( newNode.isDiffedAsList() ) {
 		nodeData = this.getChangedListNodeData( newNode, diff );
+	} else if ( newNode.isDiffedAsTable() ) {
+		nodeData = this.getChangedTableNodeData( oldNode, newNode, diff );
 	} else if ( newNode.isDiffedAsDocument() ) {
 		nodeData = this.getChangedDocListData( newNode, diff );
 	} else {
@@ -839,7 +841,6 @@ ve.ui.DiffElement.prototype.getChangedListNodeData = function ( newListNode, dif
 };
 
 /**
-==== BASE ====
  * Get the linear data for the diff of a table node that has been changed.
  *
  * @param {ve.dm.TableNode} oldNode Corresponding node from the old document
@@ -981,7 +982,6 @@ ve.ui.DiffElement.prototype.getChangedTableNodeData = function ( oldNode, newNod
 };
 
 /**
-==== BASE ====
  * Get the linear data for the diff of a tree-like node that has been changed.
  * Any node that is not leaf-like or list-like is treated as tree-like.
  *
