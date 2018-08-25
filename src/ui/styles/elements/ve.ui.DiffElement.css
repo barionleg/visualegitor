@@ -224,6 +224,11 @@ li[ data-diff-action='none' ]:not( [ data-diff-move ] )::marker {
 	}
 }
 
+td[ data-diff-move ],
+th[ data-diff-move ] {
+	outline: 0;
+}
+
 .ve-ui-diffElement-moved-up,
 .ve-ui-diffElement-moved-down {
 	position: relative;

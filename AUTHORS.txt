@@ -82,6 +82,11 @@ Color Picker
  – MIT license
  – Taufik Nurrohman and other contributors
 
+daff
+ – https://github.com/paulfitz/daff
+ – MIT license
+ – Paul Fitzpatrick and other contributors
+
 Diff Match and Patch
  – https://code.google.com/p/google-diff-match-patch/
  – Apache license 2.0
