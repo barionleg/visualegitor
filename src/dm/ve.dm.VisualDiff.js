@@ -4,7 +4,7 @@
  * @copyright 2011-2020 VisualEditor Team and others; see http://ve.mit-license.org
  */
 
-/* global treeDiffer */
+/* global treeDiffer, daff */
 
 /**
  * VisualDiff
@@ -98,14 +98,14 @@ ve.dm.VisualDiff.prototype.freezeInternalListIndices = function ( doc ) {
 /**
  * Diff two nodes as documents, comaparing their children as lists.
  *
- * @param {ve.dm.Node} oldRoot Old root
- * @param {ve.dm.Node} newRoot New root
- * @param {boolean} skipInternalLists Skip internal list nodes
+ * @param {ve.dm.Node|null} oldRoot Old root
+ * @param {ve.dm.Node|null} newRoot New root
+ * @param {boolean} [skipInternalLists] Skip internal list nodes
  * @return {Object} Object containing diff information
  */
 ve.dm.VisualDiff.prototype.diffDocs = function ( oldRoot, newRoot, skipInternalLists ) {
-	var oldChildren = oldRoot.children;
-	var newChildren = newRoot.children;
+	var oldChildren = ( oldRoot && oldRoot.children ) || [];
+	var newChildren = ( newRoot && newRoot.children ) || [];
 
 	if ( skipInternalLists ) {
 		oldChildren = oldChildren.filter( function ( node ) {
@@ -446,6 +446,8 @@ ve.dm.VisualDiff.prototype.diffNodes = function ( oldNode, newNode ) {
 		diff = this.diffLeafNodes( oldNode, newNode );
 	} else if ( oldNode.isDiffedAsList() ) {
 		diff = this.diffListNodes( oldNode, newNode );
+	} else if ( oldNode.isDiffedAsTable() ) {
+		diff = this.diffTableNodes( oldNode, newNode );
 	} else if ( oldNode.isDiffedAsDocument() ) {
 		diff = this.diffDocs( oldNode, newNode );
 	} else {
@@ -487,6 +489,84 @@ ve.dm.VisualDiff.prototype.diffLeafNodes = function ( oldNode, newNode ) {
 	};
 
 	return diff;
+};
+
+/**
+ * Diff two table nodes
+ *
+ * @param {ve.dm.Node} oldNode Node from the old document
+ * @param {ve.dm.Node} newNode Node from the new document
+ */
+ve.dm.VisualDiff.prototype.diffTableNodes = function ( oldNode, newNode ) {
+	var visualDiff = this;
+
+	function CellView() {
+		CellView.super.apply( this, arguments );
+	}
+	OO.inheritClass( CellView, daff.CellView );
+	CellView.prototype.equals = function ( d1, d2 ) {
+		return this.toString( d1 ) === this.toString( d2 );
+	};
+	CellView.prototype.toString = function ( d ) {
+		var node = d && d.node;
+		if ( node ) {
+			return JSON.stringify( node.getDocument().getData( node.getOuterRange() ) );
+		} else {
+			return '';
+		}
+	};
+
+	function TableView() {
+		TableView.super.apply( this, arguments );
+	}
+	OO.inheritClass( TableView, daff.TableView );
+	TableView.prototype.getCellView = function () {
+		return new CellView();
+	};
+
+	var oldTableView = new TableView( oldNode.getMatrix().getMatrix() );
+	var newTableView = new TableView( newNode.getMatrix().getMatrix() );
+	var alignment = daff.compareTables( oldTableView, newTableView ).align();
+	var dataDiff = [];
+	var tableDiff = new daff.TableView( dataDiff );
+	var flags = new daff.CompareFlags();
+	/* eslint-disable camelcase */
+	flags.always_show_header = false;
+	flags.allow_nested_cells = true;
+	flags.show_unchanged = true;
+	flags.show_unchanged_columns = true;
+	flags.show_unchanged_meta = true;
+	flags.quote_html = false;
+	/* eslint-enable camelcase */
+	var highlighter = new daff.TableDiff( alignment, flags );
+	highlighter.hilite( tableDiff );
+
+	// Ensure there is always a schema row
+	if ( tableDiff.data[ 0 ][ 0 ] !== '!' ) {
+		tableDiff.data.splice( 0, 0, [ '!' ] );
+	}
+
+	tableDiff.data.slice( 1 ).forEach( function ( row ) {
+		row.slice( 1 ).forEach( function ( cell ) {
+			if ( cell && ( cell.before || cell.after ) ) {
+				cell.diff = visualDiff.diffDocs(
+					cell.before && !cell.before.isPlaceholder() ? cell.before.node : null,
+					cell.after && !cell.after.isPlaceholder() ? cell.after.node : null
+				);
+			}
+		} );
+	} );
+
+	var oldCaptionNode = oldNode.getCaptionNode();
+	var newCaptionNode = newNode.getCaptionNode();
+
+	return {
+		// TODO: attributeChange?
+		tableDiff: tableDiff,
+		captionDiff: oldCaptionNode || newCaptionNode ?
+			this.diffDocs( oldCaptionNode, newCaptionNode ) :
+			false
+	};
 };
 
 /**
