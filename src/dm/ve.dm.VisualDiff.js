@@ -4,7 +4,7 @@
  * @copyright 2011-2020 VisualEditor Team and others; see http://ve.mit-license.org
  */
 
-/* global treeDiffer */
+/* global treeDiffer, daff */
 
 /**
  * VisualDiff
@@ -446,6 +446,8 @@ ve.dm.VisualDiff.prototype.diffNodes = function ( oldNode, newNode ) {
 		diff = this.diffLeafNodes( oldNode, newNode );
 	} else if ( oldNode.isDiffedAsList() ) {
 		diff = this.diffListNodes( oldNode, newNode );
+	} else if ( oldNode.isDiffedAsTable() ) {
+		diff = this.diffTableNodes( oldNode, newNode );
 	} else if ( oldNode.isDiffedAsDocument() ) {
 		diff = this.diffDocs( oldNode, newNode );
 	} else {
@@ -487,6 +489,78 @@ ve.dm.VisualDiff.prototype.diffLeafNodes = function ( oldNode, newNode ) {
 	};
 
 	return diff;
+};
+
+/**
+ * Diff two table nodes
+ *
+ * @param {ve.dm.Node} oldNode Node from the old document
+ * @param {ve.dm.Node} newNode Node from the new document
+ */
+ve.dm.VisualDiff.prototype.diffTableNodes = function ( oldNode, newNode ) {
+	var visualDiff = this;
+
+	function CellView() {
+		CellView.super.apply( this, arguments );
+	}
+	OO.inheritClass( CellView, daff.CellView );
+	CellView.prototype.equals = function ( d1, d2 ) {
+		return this.toString( d1 ) === this.toString( d2 );
+	};
+	CellView.prototype.toString = function ( d ) {
+		var node = d.node;
+		if ( node ) {
+			return JSON.stringify( node.getDocument().getData( node.getRange() ) );
+		} else {
+			return '';
+		}
+	};
+
+	function TableView() {
+		TableView.super.apply( this, arguments );
+	}
+	OO.inheritClass( TableView, daff.TableView );
+	TableView.prototype.getCellView = function () {
+		return new CellView();
+	};
+
+	var oldTableView = new TableView( oldNode.getMatrix().getMatrix() );
+	var newTableView = new TableView( newNode.getMatrix().getMatrix() );
+	var alignment = daff.compareTables( oldTableView, newTableView ).align();
+	var dataDiff = [];
+	var tableDiff = new daff.TableView( dataDiff );
+	var flags = new daff.CompareFlags();
+	/* eslint-disable camelcase */
+	flags.always_show_header = false;
+	flags.allow_nested_cells = true;
+	flags.show_unchanged = true;
+	flags.show_unchanged_columns = true;
+	flags.show_unchanged_meta = true;
+	flags.quote_html = false;
+	/* eslint-enable camelcase */
+	var highlighter = new daff.TableDiff( alignment, flags );
+	highlighter.hilite( tableDiff );
+
+	// Ensure there is always a schema row
+	if ( tableDiff.data[ 0 ][ 0 ] !== '!' ) {
+		tableDiff.data.splice( 0, 0, [ '!' ] );
+	}
+
+	tableDiff.data.slice( 1 ).forEach( function ( row ) {
+		row.slice( 1 ).forEach( function ( cell ) {
+			if ( cell && cell.before ) {
+				cell.diff = visualDiff.diffList(
+					cell.before.node.children,
+					cell.after.node.children
+				);
+			}
+		} );
+	} );
+
+	return {
+		// TODO: attributeChange?
+		tableDiff: tableDiff
+	};
 };
 
 /**
