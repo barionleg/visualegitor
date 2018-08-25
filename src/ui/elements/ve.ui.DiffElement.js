@@ -522,6 +522,8 @@ ve.ui.DiffElement.prototype.getChangedNodeData = function ( diff, oldNode, newNo
 		nodeData = this.getChangedLeafNodeData( newNode, diff, move );
 	} else if ( newNode.isDiffedAsList() ) {
 		nodeData = this.getChangedListNodeData( newNode, diff );
+	} else if ( newNode.isDiffedAsTable() ) {
+		nodeData = this.getChangedTableNodeData( oldNode, newNode, diff );
 	} else if ( newNode.isDiffedAsDocument() ) {
 		nodeData = this.getChangedDocListData( newNode, diff );
 	} else {
