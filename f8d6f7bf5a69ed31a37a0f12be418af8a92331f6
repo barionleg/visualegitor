@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "73443836_f2d521ce",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 4879
+      },
+      "writtenOn": "2018-08-27T20:23:36Z",
+      "side": 1,
+      "message": "Hi, this commit message totally confused me. VWIP is WorkInProgress?\n\nCan you provide better commit message per commit message guidelines?https://www.mediawiki.org/wiki/Gerrit/Commit_message_guidelines\n\nThanks!",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 20
+      },
+      "revId": "f8d6f7bf5a69ed31a37a0f12be418af8a92331f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
