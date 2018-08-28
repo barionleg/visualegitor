@@ -338,6 +338,9 @@
 				$blockers: $( '<div>' ),
 				$selections: $( '<div>' ),
 				$element: $( '<div>' ),
+				getMode: function () {
+					return 'visual';
+				},
 				isMobile: function () {
 					return false;
 				},

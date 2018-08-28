@@ -9,7 +9,7 @@ QUnit.module( 've.ce.TextNode' );
 /* Tests */
 
 QUnit.test( 'getAnnotatedHtml', function ( assert ) {
-	var i, len, cases, doc,
+	var i, len, cases, doc, node,
 		store = new ve.dm.HashValueStore();
 
 	cases = [
@@ -57,19 +57,64 @@ QUnit.test( 'getAnnotatedHtml', function ( assert ) {
 			html: [ ' ' ]
 		},
 		{
+			// [ ][ ]
+			data: [ { type: 'paragraph' }, ' ', ' ', { type: '/paragraph' } ],
+			html: [ ' ', ' ' ],
+			sourceModeHtml: [ ' ', '\u00a0' ]
+		},
+		{
 			// [ ][ ][ ]
 			data: [ { type: 'paragraph' }, ' ', ' ', ' ', { type: '/paragraph' } ],
-			html: [ ' ', ' ', ' ' ]
+			html: [ ' ', ' ', ' ' ],
+			sourceModeHtml: [ ' ', '\u00a0', ' ' ]
+		},
+		{
+			// [ ][ ][ ][ ]
+			data: [ { type: 'paragraph' }, ' ', ' ', ' ', ' ', { type: '/paragraph' } ],
+			html: [ ' ', ' ', ' ', ' ' ],
+			sourceModeHtml: [ ' ', '\u00a0', ' ', '\u00a0' ]
+		},
+		{
+			// [ ][ ][ ][ ][ ]
+			data: [ { type: 'paragraph' }, ' ', ' ', ' ', ' ', ' ', { type: '/paragraph' } ],
+			html: [ ' ', ' ', ' ', ' ', ' ' ],
+			sourceModeHtml: [ ' ', '\u00a0', ' ', '\u00a0', ' ' ]
+		},
+		{
+			// [ ][ ][ ][ ][ ][ ]
+			data: [ { type: 'paragraph' }, ' ', ' ', ' ', ' ', ' ', ' ', { type: '/paragraph' } ],
+			html: [ ' ', ' ', ' ', ' ', ' ', ' ' ],
+			sourceModeHtml: [ ' ', '\u00a0', ' ', '\u00a0', ' ', '\u00a0' ]
+		},
+		{
+			// [ ][A][ ][ ][ ][ ]
+			data: [ { type: 'paragraph' }, ' ', 'A', ' ', ' ', ' ', ' ', { type: '/paragraph' } ],
+			html: [ ' ', 'A', ' ', ' ', ' ', ' ' ],
+			sourceModeHtml: [ ' ', 'A', ' ', '\u00a0', ' ', '\u00a0' ]
+		},
+		{
+			// [ ][ ][A][ ][ ][ ]
+			data: [ { type: 'paragraph' }, ' ', ' ', 'A', ' ', ' ', ' ', { type: '/paragraph' } ],
+			html: [ ' ', ' ', 'A', ' ', ' ', ' ' ],
+			sourceModeHtml: [ ' ', ' ', 'A', ' ', '\u00a0', ' ' ]
 		},
 		{
 			// [ ][ ][ ][A][ ][ ]
 			data: [ { type: 'paragraph' }, ' ', ' ', ' ', 'A', ' ', ' ', { type: '/paragraph' } ],
-			html: [ ' ', ' ', ' ', 'A', ' ', ' ' ]
+			html: [ ' ', ' ', ' ', 'A', ' ', ' ' ],
+			sourceModeHtml: [ ' ', '\u00a0', ' ', 'A', ' ', '\u00a0' ]
 		},
 		{
-			// [A][ ][A] with non-breaking space
-			data: [ { type: 'paragraph' }, 'A', '\u00a0', 'A', { type: '/paragraph' } ],
-			html: [ 'A', '\u00a0', 'A' ]
+			// [ ][ ][ ][ ][A][ ]
+			data: [ { type: 'paragraph' }, ' ', ' ', ' ', ' ', 'A', ' ', { type: '/paragraph' } ],
+			html: [ ' ', ' ', ' ', ' ', 'A', ' ' ],
+			sourceModeHtml: [ ' ', '\u00a0', ' ', ' ', 'A', ' '  ]
+		},
+		{
+			// [ ][ ][ ][ ][ ][A]
+			data: [ { type: 'paragraph' }, ' ', ' ', ' ', ' ', ' ', 'A', { type: '/paragraph' } ],
+			html: [ ' ', ' ', ' ', ' ', ' ', 'A' ],
+			sourceModeHtml: [ ' ', '\u00a0', ' ', '\u00a0', ' ', 'A' ]
 		},
 		{
 			data: [ { type: 'paragraph' }, '\n', 'A', '\n', 'B', '\n', { type: '/paragraph' } ],
@@ -78,6 +123,11 @@ QUnit.test( 'getAnnotatedHtml', function ( assert ) {
 		{
 			data: [ { type: 'paragraph' }, '\t', 'A', '\t', 'B', '\t', { type: '/paragraph' } ],
 			html: [ '\u279e', 'A', '\u279e', 'B', '\u279e' ]
+		},
+		{
+			// [A][ ][A] with non-breaking space
+			data: [ { type: 'paragraph' }, 'A', '\u00a0', 'A', { type: '/paragraph' } ],
+			html: [ 'A', '\u00a0', 'A' ]
 		},
 		{
 			data: [ { type: 'preformatted' }, '\n', 'A', '\n', 'B', '\n', { type: '/preformatted' } ],
@@ -90,7 +140,8 @@ QUnit.test( 'getAnnotatedHtml', function ( assert ) {
 		{
 			// [ ][ ][ ][A][ ][ ]
 			data: [ { type: 'preformatted' }, ' ', ' ', ' ', 'A', ' ', ' ', { type: '/preformatted' } ],
-			html: [ ' ', ' ', ' ', 'A', ' ', ' ' ]
+			html: [ ' ', ' ', ' ', 'A', ' ', ' ' ],
+			sourceModeHtml: [ ' ', '\u00a0', ' ', 'A', ' ', '\u00a0' ]
 		},
 		{
 			data: [ { type: 'paragraph' }, '&', '<', '>', '\'', '"', { type: '/paragraph' } ],
@@ -101,9 +152,14 @@ QUnit.test( 'getAnnotatedHtml', function ( assert ) {
 	for ( i = 0, len = cases.length; i < len; i++ ) {
 		doc = new ve.dm.Document( ve.dm.example.preprocessAnnotations( cases[ i ].data, store ) );
 		ve.dm.example.preprocessAnnotations( cases[ i ].html, store );
-		assert.deepEqual(
-			( new ve.ce.TextNode( doc.getDocumentNode().getChildren()[ 0 ].getChildren()[ 0 ] ) ).getAnnotatedHtml(),
-			cases[ i ].html
-		);
+
+		node = new ve.ce.TextNode( doc.getDocumentNode().getChildren()[ 0 ].getChildren()[ 0 ] );
+		assert.deepEqual( node.getAnnotatedHtml(), cases[ i ].html );
+
+		// Trick the node into thinking it is in a source-mode surface
+		node.getSurfaceMode = function () {
+			return 'source';
+		}
+		assert.deepEqual( node.getAnnotatedHtml(), cases[ i ].sourceModeHtml || cases[ i ].html );
 	}
 } );

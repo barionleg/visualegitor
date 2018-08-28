@@ -38,14 +38,28 @@ ve.ce.TextNode.static.whitespaceHtmlCharacters = {
 /* Methods */
 
 /**
+ * @return {string|null} Surface mode, or null when not attached to a surface
+ */
+ve.ce.TextNode.prototype.getSurfaceMode = function () {
+	var
+		// When running unit tests, these functions may return nothing
+		rootNode = this.getRoot(),
+		ceSurface = rootNode && rootNode.getSurface(),
+		uiSurface = ceSurface && ceSurface.getSurface(),
+		mode = uiSurface && uiSurface.getMode();
+	return mode || null;
+}
+
+/**
  * Get an HTML rendering of the text.
  *
  * @method
  * @return {Array} Array of rendered HTML fragments with annotations
  */
 ve.ce.TextNode.prototype.getAnnotatedHtml = function () {
-	var i, chr,
+	var i, chr, spaceBefore,
 		data = this.model.getDocument().getDataFromNode( this.model ),
+		sourceMode = this.getSurfaceMode() === 'source',
 		whitespaceHtmlChars = this.constructor.static.whitespaceHtmlCharacters,
 		significantWhitespace = this.getModel().getParent().hasSignificantWhitespace();
 
@@ -73,6 +87,22 @@ ve.ce.TextNode.prototype.getAnnotatedHtml = function () {
 			// Show meaningful whitespace characters
 			if ( Object.prototype.hasOwnProperty.call( whitespaceHtmlChars, chr ) ) {
 				setChar( whitespaceHtmlChars[ chr ], i, data );
+			}
+		}
+	}
+
+	if ( sourceMode ) {
+		// Change some spaces to NBSP to prevent the browser from collapsing trailing spaces
+		// at the end of a line when rendering text. This uses the same algorithm as CodeMirror
+		// (in function splitSpaces()) for compatibility with syntax highlighting overlay. (T188839)
+		spaceBefore = false;
+		for ( i = 0; i < data.length; i++ ) {
+			chr = getChar( i, data );
+			if ( chr === ' ' && spaceBefore && ( i === data.length - 1 || getChar( i + 1, data ) === ' ' ) ) {
+				setChar( '\u00a0', i, data );
+				spaceBefore = false;
+			} else {
+				spaceBefore = ( chr === ' ' );
 			}
 		}
 	}

@@ -76,8 +76,8 @@ ve.ce.getDomText = function ( element ) {
 		}
 		return text;
 	};
-	// Return the text
-	return func( element );
+	// Return the text, replacing non-breaking spaces with spaces
+	return func( element ).replace( /\u00A0/g, ' ' );
 };
 
 /**
