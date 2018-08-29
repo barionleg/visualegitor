@@ -16,6 +16,24 @@
       "revId": "cc3e6193001d7a314e5702329a2c5e0980e8c256",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "55301927_60537e6d",
+        "filename": "src/dm/lineardata/ve.dm.ElementLinearData.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 1084,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2018-08-29T21:58:38Z",
+      "side": 1,
+      "message": "...so they are. This is /really/ not in my memory at the moment, so I can\u0027t remember whether `newIndex` already being present means we should just not do anything, or whether we need to do further remapping. It seems plausible that we should just drop the `else` case, though.",
+      "parentUuid": "f6a6311a_20f83e9b",
+      "revId": "cc3e6193001d7a314e5702329a2c5e0980e8c256",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
