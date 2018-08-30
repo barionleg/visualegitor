@@ -483,9 +483,9 @@ ve.ui.DiffElement.prototype.getNodeData = function ( node, action, move ) {
 	nodeData = doc.getData( node.getOuterRange() );
 
 	// Add the classes to the outer element
-	this.addAttributesToElement( nodeData[ 0 ], { 'data-diff-action': action } );
+	this.addAttributesToElement( nodeData, 0, { 'data-diff-action': action } );
 	if ( move ) {
-		this.addAttributesToElement( nodeData[ 0 ], { 'data-diff-move': move } );
+		this.addAttributesToElement( nodeData, 0, { 'data-diff-move': move } );
 	}
 
 	return nodeData;
@@ -532,7 +532,7 @@ ve.ui.DiffElement.prototype.getChangedNodeData = function ( oldNode, newNode, di
 
 	if ( move ) {
 		// Add move class to the outer element
-		this.addAttributesToElement( nodeData[ 0 ], { 'data-diff-move': move } );
+		this.addAttributesToElement( nodeData, 0, { 'data-diff-move': move } );
 	}
 
 	return nodeData;
@@ -562,7 +562,7 @@ ve.ui.DiffElement.prototype.getChangedLeafNodeData = function ( oldNode, newNode
 	if ( attributeChange ) {
 		// If there is no content change, just add change class
 		this.addAttributesToElement(
-			nodeData[ 0 ], { 'data-diff-action': 'structural-change' }
+			nodeData, 0, { 'data-diff-action': 'structural-change' }
 		);
 		item = this.compareNodeAttributes( nodeData, 0, this.newDoc, attributeChange );
 		if ( item ) {
@@ -775,7 +775,7 @@ ve.ui.DiffElement.prototype.getChangedTreeNodeData = function ( oldNode, newNode
 			var removeData, tempData;
 
 			removeData = this.oldDoc.getData( orderedNode.node.getOuterRange() );
-			this.addAttributesToElement( removeData[ 0 ], {
+			this.addAttributesToElement( removeData, 0, {
 				'data-diff-action': 'remove'
 			} );
 
@@ -784,7 +784,7 @@ ve.ui.DiffElement.prototype.getChangedTreeNodeData = function ( oldNode, newNode
 				tempData = this.oldDoc.getData( orderedNode.node.getOuterRange() );
 				removeData.unshift( tempData[ 0 ] );
 				removeData.push( tempData[ tempData.length - 1 ] );
-				this.addAttributesToElement( removeData[ 0 ], {
+				this.addAttributesToElement( removeData, 0, {
 					'data-diff-action': 'structural-remove'
 				} );
 			}
@@ -879,7 +879,7 @@ ve.ui.DiffElement.prototype.getChangedTreeNodeData = function ( oldNode, newNode
 
 		// Add insert class
 		this.addAttributesToElement(
-			nodeData[ nodeRangeStart ], {
+			nodeData, nodeRangeStart, {
 				'data-diff-action': ( !node.canContainContent() && node.hasChildren() ) ? 'structural-insert' : 'insert'
 			}
 		);
@@ -910,7 +910,7 @@ ve.ui.DiffElement.prototype.getChangedTreeNodeData = function ( oldNode, newNode
 		if ( diffInfo.attributeChange ) {
 			// If there is no content change, just add change class
 			this.addAttributesToElement(
-				nodeData[ nodeRangeStart ], { 'data-diff-action': 'structural-change' }
+				nodeData, nodeRangeStart, { 'data-diff-action': 'structural-change' }
 			);
 			item = this.compareNodeAttributes( nodeData, nodeRangeStart, this.newDoc, diffInfo.attributeChange );
 			if ( item ) {
@@ -1099,7 +1099,7 @@ ve.ui.DiffElement.prototype.compareNodeAttributes = function ( data, offset, doc
 		data[ offset ].internal.diff[ 'data-diff-id' ] === undefined )
 	) {
 		item = this.getChangeDescriptionItem( changes );
-		this.addAttributesToElement( data[ offset ], { 'data-diff-id': item.getData() } );
+		this.addAttributesToElement( data, offset, { 'data-diff-id': item.getData() } );
 		return item;
 	}
 
@@ -1138,21 +1138,25 @@ ve.ui.DiffElement.prototype.getChangeDescriptionItem = function ( changes ) {
 /**
  * Mark an element with attributes to be added later by the converter.
  *
- * @param {Object} element Element to be marked
+ * @param {Array} data Data containing element to be marked
+ * @param {number} offset Offset of element to be marked
  * @param {Object} attributes Attributes to set
  */
-ve.ui.DiffElement.prototype.addAttributesToElement = function ( element, attributes ) {
-	var key;
+ve.ui.DiffElement.prototype.addAttributesToElement = function ( data, offset, attributes ) {
+	var key,
+		newElement = ve.copy( data[ offset ] );
 
 	// NB we modify the linear data here, but then this is a cloned document.
 	for ( key in attributes ) {
 		if ( attributes[ key ] !== undefined ) {
-			ve.setProp( element, 'internal', 'diff', key, attributes[ key ] );
+			ve.setProp( newElement, 'internal', 'diff', key, attributes[ key ] );
 		}
 	}
 
 	// Don't let any nodes get unwrapped
-	ve.deleteProp( element, 'internal', 'generated' );
+	ve.deleteProp( newElement, 'internal', 'generated' );
+
+	data.splice( offset, 1, newElement );
 };
 
 /**
