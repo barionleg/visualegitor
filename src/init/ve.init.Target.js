@@ -214,9 +214,11 @@ ve.init.Target.static.parseDocument = function ( documentString, mode ) {
 
 		documentString.split( '\n' ).forEach( function ( line ) {
 			var p = doc.createElement( 'p' );
+			p.setAttribute( 'data-ve-hasSignificantWhitespace', '' );
 			p.appendChild( doc.createTextNode( line ) );
 			doc.body.appendChild( p );
 		} );
+
 	} else {
 		doc = ve.createDocumentFromHtml( documentString );
 	}

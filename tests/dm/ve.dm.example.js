@@ -3005,6 +3005,36 @@ ve.dm.example.domToDataCases = {
 		],
 		innerWhitespace: [ '\n', '\n\n\n\n\n' ]
 	},
+	'whitespace preservation not triggered when attribute present': {
+		body: '<p data-ve-hasSignificantWhitespace>\t\t\tFoo\t\t\tBar\t\t\t\t</p>',
+		data: [
+			{ type: 'paragraph' },
+			'\t',
+			'\t',
+			'\t',
+			'F',
+			'o',
+			'o',
+			'\t',
+			'\t',
+			'\t',
+			'B',
+			'a',
+			'r',
+			'\t',
+			'\t',
+			'\t',
+			'\t',
+			{ type: '/paragraph' },
+			{ type: 'internalList' },
+			{ type: '/internalList' }
+		],
+		// TODO: This should round-trip correctly, but the attribute is a hack used by source mode
+		// where we use a different method to convert back to text.
+		fromDataBody: '<p>Foo\t\t\tBar\t\t\t\t</p>',
+		clipboardBody: '<p>\t\t\tFoo\t\t\tBar\t\t\t\t</p>',
+		normalizedBody: '<p data-ve-hasSignificantWhitespace>Foo\t\t\tBar\t\t\t\t</p>'
+	},
 	'whitespace preservation in table cell starting with text and ending with annotation': {
 		body: '<table><tbody><tr><td>Foo <b>Bar</b></td></tr></tbody></table>',
 		data: [
