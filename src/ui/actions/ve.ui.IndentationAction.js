@@ -199,7 +199,7 @@ ve.ui.IndentationAction.prototype.indentListItem = function ( listItem ) {
  */
 ve.ui.IndentationAction.prototype.unindentListItem = function ( listItem ) {
 	var tx, i, length, children, child, splitListRange,
-		fragment, list, listElement, grandParentType, listItemRange,
+		fragment, list, listElement, grandParentType, listItemRange, start, newElement,
 		surfaceModel = this.surface.getModel(),
 		documentModel = surfaceModel.getDocument();
 
@@ -263,7 +263,10 @@ ve.ui.IndentationAction.prototype.unindentListItem = function ( listItem ) {
 		for ( i = 0, length = children.length; i < length; i++ ) {
 			child = children[ i ].node;
 			if ( child.type === 'paragraph' ) {
-				ve.deleteProp( child.element, 'internal', 'generated' );
+				documentModel.data.modifyData( child.getOuterRange().start, function ( item ) {
+					ve.deleteProp( item, 'internal', 'generated' );
+					return item;
+				} );
 			}
 		}
 	} else {

@@ -640,7 +640,7 @@ ve.dm.TreeModifier.prototype.create = function ( data ) {
  * @param {number} offset The offset in the document
  */
 ve.dm.TreeModifier.prototype.markBranchNodeChanged = function ( offset ) {
-	var item,
+	var item, newItem,
 		adjustment = this.isReversed ? -1 : 1,
 		i = offset - 1;
 
@@ -656,8 +656,10 @@ ve.dm.TreeModifier.prototype.markBranchNodeChanged = function ( offset ) {
 		}
 		if ( item.internal && item.internal.changesSinceLoad !== undefined ) {
 			if ( this.changedBranchNodes.indexOf( item ) === -1 ) {
-				this.changedBranchNodes.push( item );
-				item.internal.changesSinceLoad += adjustment;
+				newItem = ve.copy( item );
+				this.changedBranchNodes.push( newItem );
+				newItem.internal.changesSinceLoad += adjustment;
+				this.data.splice( i + 1, 1, newItem );
 			}
 		}
 		// This is a branch node boundary, so go no further

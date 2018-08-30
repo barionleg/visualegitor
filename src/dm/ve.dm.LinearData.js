@@ -16,7 +16,7 @@
  */
 ve.dm.LinearData = function VeDmLinearData( store, data ) {
 	this.store = store;
-	this.data = data || [];
+	this.data = data ? ve.deepFreeze( data, true ) : [];
 };
 
 /* Inheritance */
@@ -101,6 +101,10 @@ ve.dm.LinearData.prototype.getData = function ( offset ) {
  */
 ve.dm.LinearData.prototype.setData = function ( offset, value ) {
 	this.data[ offset ] = value;
+};
+
+ve.dm.LinearData.prototype.modifyData = function ( offset, modify ) {
+	this.setData( offset, modify( ve.copy( this.getData( offset ) ) ) );
 };
 
 /**

@@ -86,6 +86,37 @@ ve.debounce = OO.ui.debounce;
  */
 ve.throttle = OO.ui.throttle;
 
+ve.freezeProxyHandler = {
+	set: function ( obj, name ) {
+		throw new Error( 'Object is frozen, can\'t set property: ' + name );
+	}
+};
+
+ve.deepFreeze = function ( object, ignoreParent ) {
+	var name, value;
+
+	for ( name in object ) {
+		if ( Object.prototype.hasOwnProperty.call( object, name ) ) {
+			value = object[ name ];
+			try {
+				object[ name ] = value && typeof value === 'object' ? ve.deepFreeze( value ) : value;
+			} catch ( e ) {
+				// Object may have been frozen already
+			}
+		}
+	}
+
+	if ( ignoreParent ) {
+		return object;
+	}
+
+	if ( window.Proxy ) {
+		object = new window.Proxy( object, ve.freezeProxyHandler );
+	}
+
+	return Object.freeze( object );
+};
+
 /**
  * Copy an array of DOM elements, optionally into a different document.
  *
