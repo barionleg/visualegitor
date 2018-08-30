@@ -329,6 +329,10 @@ ve.ui.DebugBar.prototype.onInputDebuggingToggleChange = function ( value ) {
 	surfaceModel.setNullSelection();
 	setTimeout( function () {
 		surfaceModel.getDocument().rebuildTree();
+		// As we just rebuilt the tree, invalidate the tableNode cache
+		if ( selection instanceof ve.dm.TableSelection ) {
+			selection.tableNode = null;
+		}
 		surfaceModel.setSelection( selection );
 	} );
 };
