@@ -1107,7 +1107,8 @@ ve.dm.Converter.prototype.getDataFromDomSubtree = function ( domElement, wrapper
 				// and store it so it can be restored later.
 				if (
 					context.annotations.isEmpty() && i === 0 && wrapperElement &&
-					!this.nodeFactory.doesNodeHaveSignificantWhitespace( wrapperElement.type )
+					!this.nodeFactory.doesNodeHaveSignificantWhitespace( wrapperElement.type ) &&
+					!domElement.hasAttribute( 'data-ve-hasSignificantWhitespace' )
 				) {
 					// Strip leading whitespace from the first child
 					matches = text.match( new RegExp( '^[' + whitespaceList + ']+' ) );
