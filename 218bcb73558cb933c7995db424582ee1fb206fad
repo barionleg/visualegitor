@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "14df8a30_9c45807b",
+        "filename": "src/ui/dialogs/ve.ui.CommandHelpDialog.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 2849
+      },
+      "writtenOn": "2018-08-31T21:09:19Z",
+      "side": 1,
+      "message": "Should this be promote[ i ]?",
+      "range": {
+        "startLine": 229,
+        "startChar": 18,
+        "endLine": 229,
+        "endChar": 25
+      },
+      "revId": "218bcb73558cb933c7995db424582ee1fb206fad",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
