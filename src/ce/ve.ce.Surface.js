@@ -2243,8 +2243,6 @@ ve.ce.Surface.prototype.afterPasteAddToFragmentFromExternal = function ( clipboa
 		documentModel = surfaceModel.getDocument(),
 		beforePasteData = this.beforePasteData || {};
 
-	this.afterPasteSanitizePasteTarget();
-
 	if ( ( clipboardKey || forceClipboardData ) && $clipboardHtml ) {
 		// If the clipboardKey is set (paste from other VE instance), and clipboard
 		// data is available, then make sure important elements haven't been dropped
@@ -2273,6 +2271,7 @@ ve.ce.Surface.prototype.afterPasteAddToFragmentFromExternal = function ( clipboa
 		// in edge cases (e.g. pasting a single MWReference)
 		htmlDoc = ve.createDocumentFromHtml( this.$pasteTarget.html() );
 	}
+
 	// Some browsers don't provide pasted image data through the clipboardData API and
 	// instead create img tags with data URLs, so detect those here
 	$body = $( htmlDoc.body );
@@ -2290,6 +2289,8 @@ ve.ce.Surface.prototype.afterPasteAddToFragmentFromExternal = function ( clipboa
 			return $.Deferred().resolve().promise();
 		}
 	}
+
+	this.afterPasteSanitizeExternal( $( htmlDoc.body ) );
 
 	// HACK: Fix invalid HTML from Google Docs nested lists (T98100).
 	// Converts
@@ -2481,15 +2482,17 @@ ve.ce.Surface.prototype.afterPasteFromExternalContextRange = function ( pastedDo
 };
 
 /**
- * Helper to clean up the pasteTarget
+ * Helper to clean up externally pasted HTML (via pasteTarget).
+ * 
+ * @param {jQuery} $node Root node containing pasted stuff to sanitize
  */
-ve.ce.Surface.prototype.afterPasteSanitizePasteTarget = function () {
+ve.ce.Surface.prototype.afterPasteSanitizeExternal = function ( $node ) {
 	var metadataIdRegExp = ve.init.platform.getMetadataIdRegExp();
 
 	// Remove the clipboard key
-	this.$pasteTarget.find( 'span[data-ve-clipboard-key]' ).remove();
+	$node.find( 'span[data-ve-clipboard-key]' ).remove();
 	// Remove style tags (T185532)
-	this.$pasteTarget.find( 'style' ).remove();
+	$node.find( 'style' ).remove();
 	// If this is from external, run extra sanitization:
 
 	// Do some simple transforms to catch content that is using
@@ -2500,7 +2503,7 @@ ve.ce.Surface.prototype.afterPasteSanitizePasteTarget = function () {
 	// likely to incorrectly over-format things.
 	// TODO: This might be cleaner if we could move the sanitization into
 	// dm.converter entirely.
-	this.$pasteTarget.find( 'span' ).each( function ( i, node ) {
+	$node.find( 'span' ).each( function ( i, node ) {
 		var $node;
 		// Later sanitization will replace completely-empty spans with
 		// their contents, so we can lazily-wrap here without cleaning
@@ -2530,10 +2533,10 @@ ve.ce.Surface.prototype.afterPasteSanitizePasteTarget = function () {
 	} );
 
 	// Remove style attributes. Any valid styles will be restored by data-ve-attributes.
-	this.$pasteTarget.find( '[style]' ).removeAttr( 'style' );
+	$node.find( '[style]' ).removeAttr( 'style' );
 
 	if ( metadataIdRegExp ) {
-		this.$pasteTarget.find( '[id]' ).each( function () {
+		$node.find( '[id]' ).each( function () {
 			var $this = $( this );
 			if ( $this.attr( 'id' ).match( metadataIdRegExp ) ) {
 				$this.removeAttr( 'id' );
@@ -2542,7 +2545,7 @@ ve.ce.Surface.prototype.afterPasteSanitizePasteTarget = function () {
 	}
 
 	// Remove the pasteProtect class (see #onCopy) and unwrap empty spans.
-	this.$pasteTarget.find( 'span' ).each( function () {
+	$node.find( 'span' ).each( function () {
 		var $this = $( this );
 		$this.removeClass( 've-pasteProtect' );
 		if ( $this.attr( 'class' ) === '' ) {
@@ -2555,7 +2558,7 @@ ve.ce.Surface.prototype.afterPasteSanitizePasteTarget = function () {
 	} );
 
 	// Restore attributes. See #onCopy.
-	this.$pasteTarget.find( '[data-ve-attributes]' ).each( function () {
+	$node.find( '[data-ve-attributes]' ).each( function () {
 		var attrs,
 			attrsJSON = this.getAttribute( 'data-ve-attributes' );
 
