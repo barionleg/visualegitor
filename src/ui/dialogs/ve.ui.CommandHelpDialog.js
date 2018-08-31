@@ -226,11 +226,14 @@ ve.ui.CommandHelpDialog.static.sortedCommandsFromGroup = function ( groupName, p
 		demoted = [];
 	keys.sort();
 	for ( i = 0; i < promote.length; i++ ) {
+		if ( !commands[ promote ] ) {
+			continue;
+		}
 		promoted.push( commands[ promote[ i ] ] );
 		used[ promote[ i ] ] = true;
 	}
 	for ( i = 0; i < demote.length; i++ ) {
-		if ( used[ demote[ i ] ] ) {
+		if ( used[ demote[ i ] ] || !commands[ demote[ i ] ] ) {
 			continue;
 		}
 		demoted.push( commands[ demote[ i ] ] );
