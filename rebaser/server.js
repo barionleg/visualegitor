@@ -6,7 +6,7 @@
 
 /* eslint-disable no-console */
 
-var logStream, transportServer,
+var logStream, docStore, protocolServer, transportServer,
 	port = 8081,
 	startTimestamp,
 	fs = require( 'fs' ),
@@ -14,7 +14,8 @@ var logStream, transportServer,
 	app = express(),
 	http = require( 'http' ).Server( app ),
 	io = require( 'socket.io' )( http ),
-	ve = require( '../dist/ve-rebaser.js' );
+	ve = require( '../dist/ve-rebaser.js' ),
+	MongoClient = require( 'mongodb' ).MongoClient;
 
 function logEvent( event ) {
 	if ( !logStream ) {
@@ -42,10 +43,14 @@ function logServerEvent( event ) {
  * Protocol server
  *
  * Handles the abstract protocol without knowing the specific transport
+ *
+ * @param {MongoDocStore} docStore the persistent storage
  */
-function ProtocolServer() {
+function ProtocolServer( docStore ) {
 	this.rebaseServer = new ve.dm.RebaseServer( logServerEvent );
 	this.lastAuthorForDoc = new Map();
+	this.loadingForDoc = new Map();
+	this.docStore = docStore;
 }
 
 ProtocolServer.static = {};
@@ -56,6 +61,34 @@ ProtocolServer.static.palette = [
 	'aec7e8', 'ffbb78', '98df8a', 'ff9896', 'c5b0d5',
 	'c49c94', 'f7b6d2', 'c7c7c7', 'dbdb8d', '9edae5'
 ];
+
+/**
+ * If the document is not loaded, load from storage (creating as empty if absent)
+ *
+ * @param {string} docName Name of the document
+ * @return {Promise<undefined>} Resolves when loaded
+ */
+ProtocolServer.prototype.ensureLoaded = function ( docName ) {
+	var loading = this.loadingForDoc.get( docName ),
+		rebaseServer = this.rebaseServer;
+
+	if ( loading ) {
+		return loading;
+	}
+	console.log( 'Loading', docName );
+	loading = this.docStore.load( docName ).then( function ( change ) {
+		console.log( 'Done loading', docName );
+		rebaseServer.updateDocState( docName, null, change );
+	} );
+	this.loadingForDoc.set( docName, loading );
+	return loading;
+};
+
+ProtocolServer.prototype.onUnload = function ( context ) {
+	console.log( 'Unloading', context.docName );
+	this.loadingForDoc.delete( context.docName );
+	this.rebaseServer.clearDocState( context.docName );
+};
 
 /**
  * Check the client's credentials, and return a connection context object
@@ -163,11 +196,13 @@ ProtocolServer.prototype.welcomeClient = function ( context ) {
  * @param {Object} data The change data
  */
 ProtocolServer.prototype.onSubmitChange = function ( context, data ) {
-	var change, applied;
+	var change, applied, appliedSerialized;
 	change = ve.dm.Change.static.deserialize( data.change, null, true );
 	applied = this.rebaseServer.applyChange( context.docName, context.authorId, data.backtrack, change );
 	if ( !applied.isEmpty() ) {
-		context.broadcast( 'newChange', applied.serialize( true ) );
+		appliedSerialized = applied.serialize( true );
+		this.docStore.onNewChange( context.docName, appliedSerialized );
+		context.broadcast( 'newChange', appliedSerialized );
 	}
 };
 
@@ -239,9 +274,10 @@ ProtocolServer.prototype.onDisconnect = function ( context ) {
  * Transport server for Socket IO transport
  *
  * @constructor
+ * @param {ProtocolServer} protocolServer The protocol server
  */
-function TransportServer() {
-	this.protocolServer = new ProtocolServer();
+function TransportServer( protocolServer ) {
+	this.protocolServer = protocolServer;
 	this.docNamespaces = new Map();
 }
 
@@ -251,29 +287,134 @@ function TransportServer() {
  * This just creates a namespace handler for the docName, if one does not already exist
  *
  * @param {Object} socket The io socket
+ * @return {Promise}
  */
 TransportServer.prototype.onConnection = function ( socket ) {
-	var context,
-		server = this.protocolServer,
+	var server = this.protocolServer,
 		docName = socket.handshake.query.docName,
 		authorId = +socket.handshake.query.authorId || null,
 		token = socket.handshake.query.token || null;
 
-	socket.join( docName );
-	context = server.authenticate( docName, authorId, token );
-	context.broadcast = function () {
-		var room = io.sockets.in( docName );
-		room.emit.apply( room, arguments );
-	};
-	context.sendAuthor = socket.emit.bind( socket );
-	context.connectionId = socket.client.conn.remoteAddress + ' ' + socket.handshake.url;
+	/**
+	 * Ensure the doc is loaded when calling f
+	 *
+	 * @param {Function} f A method of server
+	 * @param {Object} context Connection context object passed to f as first argument
+	 * @return {Function} Function returning a promise resolving with f's return value
+	 */
+	function ensureLoadedWrap( f, context ) {
+		// In theory, some protection is needed to ensure the document cannot unload
+		// between the ensureLoaded promise resolving and f running. In practice,
+		// this should not happen if the unloading is not too aggressive.
+		return function () {
+			var args = Array.prototype.slice.call( arguments );
+			args.splice( 0, 0, context );
+			return server.ensureLoaded( docName ).then( function () {
+				return f.apply( server, args );
+			} );
+		};
+	}
 
-	socket.on( 'submitChange', server.onSubmitChange.bind( server, context ) );
-	socket.on( 'changeName', server.onChangeName.bind( server, context ) );
-	socket.on( 'changeColor', server.onChangeColor.bind( server, context ) );
-	socket.on( 'disconnect', server.onDisconnect.bind( server, context ) );
-	socket.on( 'logEvent', server.onLogEvent.bind( server, context ) );
-	server.welcomeClient( context );
+	socket.join( docName );
+	return server.ensureLoaded( docName ).then( function () {
+		var context = server.authenticate( docName, authorId, token );
+		context.broadcast = function () {
+			var room = io.sockets.in( docName );
+			room.emit.apply( room, arguments );
+		};
+		context.sendAuthor = socket.emit.bind( socket );
+		context.connectionId = socket.client.conn.remoteAddress + ' ' + socket.handshake.url;
+		socket.on( 'submitChange', ensureLoadedWrap( server.onSubmitChange, context ) );
+		socket.on( 'changeName', ensureLoadedWrap( server.onChangeName, context ) );
+		socket.on( 'changeColor', ensureLoadedWrap( server.onChangeColor, context ) );
+		socket.on( 'disconnect', ensureLoadedWrap( server.onDisconnect, context ) );
+		socket.on( 'logEvent', ensureLoadedWrap( server.onLogEvent, context ) );
+		// XXX event for testing purposes only; replace with unit tests
+		socket.on( 'unload', server.onUnload.bind( server, context ) );
+		server.welcomeClient( context );
+	} );
+};
+
+TransportServer.prototype.broadcast = function ( docName, namespace, eventName, object ) {
+	namespace.emit( eventName, object );
+};
+
+TransportServer.prototype.onClose = function () {
+	this.docStore.onClose();
+};
+
+function MongoDocStore( url ) {
+	this.url = url;
+	this.db = null;
+	this.collection = null;
+	this.startForDoc = new Map();
+}
+
+/**
+ * @return {Promise<undefined>} Resolves when connected
+ */
+MongoDocStore.prototype.connect = function () {
+	var mongoDocStore = this;
+	return MongoClient.connect( this.url ).then( function ( db ) {
+		console.log( 'Connected', mongoDocStore.url );
+		mongoDocStore.db = db;
+		// XXX for testing only: drop database on connect
+		return db.dropDatabase().then( function () {
+			mongoDocStore.collection = db.collection( 'vedocstore' );
+		} );
+	} );
+};
+
+/**
+ * Load a document from storage (creating as empty if absent)
+ *
+ * @param {string} docName Name of the document
+ * @return {Promise<ve.dm.Change>} Confirmed document history
+ */
+MongoDocStore.prototype.load = function ( docName ) {
+	var mongoDocStore = this;
+	return this.collection.findAndModify(
+		{ docName: docName },
+		undefined,
+		{ $setOnInsert: { start: 0, transactions: [], stores: [] } },
+		{ upsert: true, 'new': true }
+	).then( function ( result ) {
+		mongoDocStore.startForDoc.set( docName, result.value.start + result.value.transactions.length || 0 );
+		console.log( 'Loaded', result.value );
+		return ve.dm.Change.static.deserialize( {
+			start: 0,
+			transactions: result.value.transactions,
+			stores: result.value.stores,
+			selections: {}
+		} );
+	} );
+};
+
+MongoDocStore.prototype.onNewChange = function ( docName, object ) {
+	var mongoDocStore = this,
+		expectedStart = mongoDocStore.startForDoc.get( docName ) || 0;
+	console.log( 'Processing new change', docName, object );
+	if ( expectedStart !== object.start ) {
+		console.log( 'Unmatched starts:', expectedStart, object.start );
+		throw new Error( 'Unmatched starts:', expectedStart, object.start );
+	}
+	mongoDocStore.startForDoc.set( docName, object.start + object.transactions.length );
+	return mongoDocStore.collection.update(
+		{ docName: docName },
+		{
+			$push: {
+				transactions: { $each: object.transactions },
+				stores: { $each: object.stores || object.transactions.map( function () {
+					return null;
+				} ) }
+			}
+		}
+	);
+};
+
+MongoDocStore.prototype.onClose = function () {
+	console.log( 'closing' );
+	this.db.close();
 };
 
 app.use( express.static( __dirname + '/..' ) );
@@ -296,10 +437,14 @@ app.get( '/doc/raw/:docName', function ( req, res ) {
 	res.status( 401 ).send( 'DOM in nodejs is hard' );
 } );
 
-transportServer = new TransportServer();
+docStore = new MongoDocStore( 'mongodb://localhost:27017/test' );
+protocolServer = new ProtocolServer( docStore );
+transportServer = new TransportServer( protocolServer );
 io.on( 'connection', transportServer.onConnection.bind( transportServer ) );
 
 startTimestamp = Date.now();
 logServerEvent( { type: 'restart' } );
-http.listen( port );
+docStore.connect().then( function () {
+	http.listen( port );
+} );
 console.log( 'Listening on ' + port );
