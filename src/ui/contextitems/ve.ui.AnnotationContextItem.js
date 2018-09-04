@@ -70,6 +70,7 @@ ve.ui.AnnotationContextItem.prototype.isClearable = function () {
  * @protected
  */
 ve.ui.AnnotationContextItem.prototype.onClearButtonClick = function () {
+	ve.track( 'activity.annotation.' + this.constructor.static.name, { method: 'clear' } );
 	this.applyToAnnotations( function ( fragment, annotation ) {
 		fragment.annotateContent( 'clear', annotation );
 	} );

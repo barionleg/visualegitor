@@ -66,6 +66,8 @@ ve.ui.WindowAction.prototype.open = function ( name, data, action ) {
 		return false;
 	}
 
+	ve.track( 'activity.dialog.' + name );
+
 	if ( !mayContainFragment ) {
 		fragmentPromise = $.Deferred().resolve().promise();
 	} else if ( sourceMode ) {
