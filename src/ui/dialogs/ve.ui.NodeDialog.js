@@ -43,8 +43,10 @@ ve.ui.NodeDialog.prototype.initialize = function ( data ) {
  * @inheritdoc
  */
 ve.ui.NodeDialog.prototype.getSetupProcess = function ( data ) {
+	var process;
+	ve.track( 'activity.dialog.' + ( this.constructor.static.name || this.constructor.name || 'unknown' ) );
 	// Parent method
-	var process = ve.ui.NodeDialog.super.prototype.getSetupProcess.call( this, data );
+	process = ve.ui.NodeDialog.super.prototype.getSetupProcess.call( this, data );
 	// Mixin method
 	return ve.ui.NodeWindow.prototype.getSetupProcess.call( this, data, process );
 };
