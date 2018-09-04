@@ -504,6 +504,12 @@ ve.ui.Surface.prototype.scrollCursorIntoView = function () {
 	// we'd no longer be able to make these assumptions about top/bottom of
 	// window.
 	topBound = this.toolbarHeight; // top of the window + height of the toolbar
+	if ( OO.ui.isMobile() && !this.getModel().getSelection().isCollapsed() ) {
+		// Assume that if the selection has been expanded, then a context menu is visible
+		// above the selection. We don't want this to obscure the toolbar so add on an
+		// estimate of its height. (T202723)
+		topBound += 60;
+	}
 	bottomBound = window.innerHeight; // bottom of the window
 
 	cursorTop = clientRect.top - 5;
