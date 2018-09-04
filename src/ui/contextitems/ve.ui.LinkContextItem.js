@@ -111,6 +111,15 @@ ve.ui.LinkContextItem.prototype.onLabelButtonClick = function () {
 	surface.selectNodeContents( annotationView.$element[ 0 ] );
 };
 
+/**
+ * @inheritdoc
+ */
+ve.ui.LinkContextItem.prototype.onClearButtonClick = function () {
+	ve.track( 'activity.dialog.link', { method: 'clear' } );
+	// Parent method
+	ve.ui.LinkContextItem.super.prototype.onClearButtonClick.apply( this, arguments );
+};
+
 /* Registration */
 
 ve.ui.contextItemFactory.register( ve.ui.LinkContextItem );

@@ -122,6 +122,7 @@ ve.ui.LinkAnnotationInspector.prototype.createAnnotationInput = function () {
  * @inheritdoc
  */
 ve.ui.LinkAnnotationInspector.prototype.getSetupProcess = function ( data ) {
+	ve.track( 'activity.dialog.link' );
 	return ve.ui.LinkAnnotationInspector.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
 			// Disable surface until animation is complete; will be reenabled in ready()
