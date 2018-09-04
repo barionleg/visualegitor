@@ -42,13 +42,18 @@ ve.ui.AnnotationAction.static.methods = [ 'set', 'clear', 'toggle', 'clearAll' ]
  * @method
  * @param {string} name Annotation name, for example: 'textStyle/bold'
  * @param {Object} [data] Additional annotation data
+ * @param {boolean} [suppressTracking] whether to avoid tracking this (because toggle calls this method)
  * @return {boolean} Action was executed
  */
-ve.ui.AnnotationAction.prototype.set = function ( name, data ) {
+ve.ui.AnnotationAction.prototype.set = function ( name, data, suppressTracking ) {
 	var i, trimmedFragment,
 		fragment = this.surface.getModel().getFragment(),
 		annotationClass = ve.dm.annotationFactory.lookup( name ),
 		removes = annotationClass.static.removes;
+
+	if ( !suppressTracking ) {
+		ve.track( 'activity.annotation.' + name, { method: 'set' } );
+	}
 
 	if ( fragment.getSelection() instanceof ve.dm.LinearSelection ) {
 		trimmedFragment = fragment.trimLinearSelection();
@@ -73,6 +78,7 @@ ve.ui.AnnotationAction.prototype.set = function ( name, data ) {
  * @return {boolean} Action was executed
  */
 ve.ui.AnnotationAction.prototype.clear = function ( name, data ) {
+	ve.track( 'activity.annotation.' + name, { method: 'clear' } );
 	this.surface.getModel().getFragment().annotateContent( 'clear', name, data );
 	return true;
 };
@@ -96,14 +102,16 @@ ve.ui.AnnotationAction.prototype.toggle = function ( name, data ) {
 		removes = annotation.constructor.static.removes;
 
 	if ( !fragment.getSelection().isCollapsed() ) {
+		ve.track( 'activity.annotation.' + name, { method: 'toggle.selection' } );
 		if ( !fragment.getAnnotations().containsComparable( annotation ) ) {
-			this.set( name, data );
+			this.set( name, data, true );
 		} else {
 			fragment.annotateContent( 'clear', name );
 		}
 	} else if ( surfaceModel.sourceMode ) {
 		return false;
 	} else {
+		ve.track( 'activity.annotation.' + name, { method: 'toggle.insertion' } );
 		insertionAnnotations = surfaceModel.getInsertionAnnotations();
 		existingAnnotations = insertionAnnotations.getAnnotationsByName( annotation.name );
 		if ( existingAnnotations.isEmpty() ) {
@@ -130,6 +138,8 @@ ve.ui.AnnotationAction.prototype.clearAll = function () {
 		surfaceModel = this.surface.getModel(),
 		fragment = surfaceModel.getFragment(),
 		annotations = fragment.getAnnotations( true );
+
+	ve.track( 'activity.annotation.all', { method: 'clearAll' } );
 
 	arr = annotations.get();
 	// TODO: Allow multiple annotations to be set or cleared by ve.dm.SurfaceFragment, probably
