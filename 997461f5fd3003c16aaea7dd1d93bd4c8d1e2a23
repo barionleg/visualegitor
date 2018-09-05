@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f4e02eae_1c9cfbf1",
+        "filename": "src/ui/actions/ve.ui.AnnotationAction.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2018-09-05T14:31:16Z",
+      "side": 1,
+      "message": "I feel this to be the most questionable thing I\u0027m doing in the entire patchset.",
+      "revId": "997461f5fd3003c16aaea7dd1d93bd4c8d1e2a23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
