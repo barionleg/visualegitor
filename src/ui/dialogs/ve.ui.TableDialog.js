@@ -16,6 +16,8 @@
 ve.ui.TableDialog = function VeUiTableDialog( config ) {
 	// Parent constructor
 	ve.ui.TableDialog.super.call( this, config );
+
+	this.$element.addClass( 've-ui-tableDialog' );
 };
 
 /* Inheritance */
@@ -26,7 +28,7 @@ OO.inheritClass( ve.ui.TableDialog, ve.ui.FragmentDialog );
 
 ve.ui.TableDialog.static.name = 'table';
 
-ve.ui.TableDialog.static.size = 'medium';
+ve.ui.TableDialog.static.size = 'small';
 
 ve.ui.TableDialog.static.title = OO.ui.deferMsg( 'visualeditor-dialog-table-title' );
 
