@@ -1,0 +1,15 @@
+/*!
+ * VisualEditor MediaWiki UserInterface TableDialog styles.
+ *
+ * @copyright 2011-2018 VisualEditor Team and others; see AUTHORS.txt
+ * @license The MIT License (MIT); see LICENSE.txt
+ */
+
+.ve-ui-tableDialog .oo-ui-fieldLayout.oo-ui-fieldLayout-align-left.oo-ui-labelElement > .oo-ui-fieldLayout-body > .oo-ui-fieldLayout-header {
+	width: 75%;
+}
+
+.ve-ui-tableDialog .oo-ui-fieldLayout.oo-ui-fieldLayout-align-left > .oo-ui-fieldLayout-body > .oo-ui-fieldLayout-field {
+	width: 25%;
+	text-align: right;
+}

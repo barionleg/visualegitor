@@ -16,6 +16,8 @@
 ve.ui.TableDialog = function VeUiTableDialog( config ) {
 	// Parent constructor
 	ve.ui.TableDialog.super.call( this, config );
+
+	this.$element.addClass( 've-ui-tableDialog' );
 };
 
 /* Inheritance */
