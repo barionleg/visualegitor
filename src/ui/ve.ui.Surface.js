@@ -507,16 +507,16 @@ ve.ui.Surface.prototype.scrollCursorIntoView = function () {
 	bottomBound = window.innerHeight; // bottom of the window
 	if (
 		OO.ui.isMobile() &&
-		// Scrolling on iOS closes the context
-		!ve.init.platform.constructor.static.isIos() &&
 		!this.getModel().getSelection().isCollapsed()
 	) {
 		// Assume that if the selection has been expanded, then a context menu is visible
 		// above the selection. We don't want this to obscure the toolbar so add on an
 		// estimate of its height. (T202723)
 		topBound += 60;
-		// Also assume there are selection handles below on Android. (T204718)
-		bottomBound -= 30;
+		if ( !ve.init.platform.constructor.static.isIos() ) {
+			// Also assume there are selection handles below on Android. (T204718)
+			bottomBound -= 30;
+		}
 	}
 
 	cursorTop = clientRect.top - 5;
