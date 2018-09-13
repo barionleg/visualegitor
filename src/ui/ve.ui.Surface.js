@@ -506,8 +506,6 @@ ve.ui.Surface.prototype.scrollCursorIntoView = function () {
 	topBound = this.toolbarHeight; // top of the window + height of the toolbar
 	if (
 		OO.ui.isMobile() &&
-		// Scrolling on iOS closes the context
-		!ve.init.platform.constructor.static.isIos() &&
 		!this.getModel().getSelection().isCollapsed()
 	) {
 		// Assume that if the selection has been expanded, then a context menu is visible
