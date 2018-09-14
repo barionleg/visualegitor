@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "180119c0_385ca28b",
+        "filename": "src/dm/ve.dm.SourceConverter.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2018-09-14T09:51:22Z",
+      "side": 1,
+      "message": "This was a brain teaser. But it\u0027s correct and seems better than obvious alternatives.",
+      "revId": "a273ba69c7d748f7220957725957848b4806a353",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "227899b0_241488ec",
+        "filename": "src/dm/ve.dm.SourceConverter.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2018-09-14T09:51:22Z",
+      "side": 1,
+      "message": "This condition is different than in the old ve.dm.ElementLinearData.prototype.getSourceText code, and at first it it looked wrong, but it\u0027s correct. Old code is:\n\n\t\tif ( data[ i ].type \u003d\u003d\u003d \u0027/paragraph\u0027 \u0026\u0026 ( !data[ i + 1 ] || data[ i + 1 ].type \u003d\u003d\u003d \u0027paragraph\u0027 ) ) {\n\nSo it looks like the old code would add a newline at the end of the text, but it doesn\u0027t, because there\u0027s the \u003cinternalList\u003e\u003c/internalList\u003e following the last \u003c/paragraph\u003e.",
+      "revId": "a273ba69c7d748f7220957725957848b4806a353",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
