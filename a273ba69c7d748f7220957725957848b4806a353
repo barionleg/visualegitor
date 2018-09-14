@@ -33,6 +33,24 @@
       "revId": "a273ba69c7d748f7220957725957848b4806a353",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6375963f_e59e12ba",
+        "filename": "src/dm/ve.dm.SourceConverter.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-09-14T10:46:25Z",
+      "side": 1,
+      "message": "Yeah - in the real world there was always an internalList, but not in unit tests, so I fixed it.",
+      "parentUuid": "227899b0_241488ec",
+      "revId": "a273ba69c7d748f7220957725957848b4806a353",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
