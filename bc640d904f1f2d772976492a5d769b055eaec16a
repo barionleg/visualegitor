@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5d9c20d4_5b3dd4a1",
+        "filename": "src/dm/ve.dm.Surface.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 1294,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2018-09-17T11:58:06Z",
+      "side": 1,
+      "message": "Would it be better to do this?\n\n selection \u003d selection.translateByChange( change );\n change.applyTo( surface );",
+      "range": {
+        "startLine": 1294,
+        "startChar": 3,
+        "endLine": 1294,
+        "endChar": 34
+      },
+      "revId": "bc640d904f1f2d772976492a5d769b055eaec16a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
