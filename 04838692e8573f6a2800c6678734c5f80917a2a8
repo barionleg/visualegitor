@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9dd7c7d7_99c492e8",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 1841,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-09-20T11:12:11Z",
+      "side": 1,
+      "message": "technically this is cut or copy - we could use e.type to distinguish",
+      "revId": "04838692e8573f6a2800c6678734c5f80917a2a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7e4d3305_a32d92b9",
+        "filename": "src/ui/actions/ve.ui.AnnotationAction.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-09-20T11:12:11Z",
+      "side": 1,
+      "message": "I agree - should we create a \u0027setInternal\u0027 method?",
+      "revId": "04838692e8573f6a2800c6678734c5f80917a2a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e294b1c0_dcbb592f",
+        "filename": "src/ui/dialogs/ve.ui.NodeDialog.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-09-20T11:12:11Z",
+      "side": 1,
+      "message": "By tracking in NodeDialog are we missing some dialogs (e.g. FindAndReplace). Why not FragmentDialog?",
+      "revId": "04838692e8573f6a2800c6678734c5f80917a2a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "57dabc4d_1eaf66c8",
+        "filename": "src/ui/dialogs/ve.ui.NodeDialog.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-09-20T11:12:11Z",
+      "side": 1,
+      "message": "we can fallback to the function name (this.constructor.name), before \u0027unknown\u0027, that would help us fix unnamed dialogs (assuming they aren\u0027t completely anonymous functions)",
+      "revId": "04838692e8573f6a2800c6678734c5f80917a2a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
