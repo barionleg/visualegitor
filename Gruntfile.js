@@ -343,8 +343,8 @@ module.exports = function ( grunt ) {
 		},
 		eslint: {
 			main: [
-				'*.{js,html}',
-				'{bin,build,demos,src,tests,rebaser}/**/*.{js,html}',
+				'*.js',
+				'{bin,build,demos,src,tests,rebaser}/**/*.js',
 				'!rebaser/node_modules/**'
 			]
 		},
