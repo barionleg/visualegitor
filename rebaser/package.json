@@ -3,10 +3,13 @@
 	"description": "Rebase server for VisualEditor",
 	"version": "0.0.1",
 	"dependencies": {
+		"domino": "2.1.0",
 		"ejs": "2.6",
 		"express": "4.16",
+		"jquery": "3.3.1",
 		"oojs": "2.2",
-		"socket.io": "2.1"
+		"socket.io": "2.1",
+		"spark-md5": "3.0.0"
 	},
 	"devDependencies": {},
 	"scripts": {

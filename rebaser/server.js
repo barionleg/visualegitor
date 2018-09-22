@@ -270,11 +270,23 @@ app.get( '/doc/edit/:docName', function ( req, res ) {
 } );
 
 app.get( '/doc/raw/:docName', function ( req, res ) {
-	// TODO return real data
-	// In order to provide HTML here, we'd need all of ve.dm (Document, Converter, all nodes)
-	// and none of that code is likely to work in nodejs without some work because of how heavily
-	// it uses the DOM.
-	res.status( 401 ).send( 'DOM in nodejs is hard' );
+	var history, doc, dom, surface,
+		docName = req.params.docName,
+		state = transportServer.protocolServer.rebaseServer.getDocState( docName );
+
+	doc = new ve.dm.Document( [
+		{ type: 'paragraph' }, { type: '/paragraph' },
+		{ type: 'internalList' }, { type: '/internalList' }
+	] );
+	surface = new ve.dm.Surface( doc );
+
+	history = ve.dm.Change.static.deserialize( state.history.serialize( true ), doc );
+
+	history.applyTo( surface );
+
+	dom = ve.dm.converter.getDomFromModel( surface.getDocument() );
+
+	res.send( dom.body.innerHTML );
 } );
 
 transportServer = new TransportServer();
