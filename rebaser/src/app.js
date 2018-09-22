@@ -36,12 +36,23 @@ function initApp( options ) {
 	} );
 
 	app.get( new RegExp( '/doc/raw/(.*)' ), function ( req, res ) {
-		// TODO return real data
-		// In order to provide HTML here, we'd need all of ve.dm (Document, Converter, all nodes)
-		// and none of that code is likely to work in nodejs without some work because of how heavily
-		// it uses the DOM.
-		// var docName = req.params[ 0 ];
-		res.status( 401 ).send( 'DOM in nodejs is hard' );
+		var history, doc, dom, surface,
+			docName = req.params[ 0 ],
+			state = protocolServer.rebaseServer.getDocState( docName );
+
+		doc = new ve.dm.Document( [
+			{ type: 'paragraph' }, { type: '/paragraph' },
+			{ type: 'internalList' }, { type: '/internalList' }
+		] );
+		surface = new ve.dm.Surface( doc );
+
+		// The state from getDocState has serialized store values
+		history = ve.dm.Change.static.deserialize( state.history.serialize( true ) );
+		history.applyTo( surface );
+
+		dom = ve.dm.converter.getDomFromModel( surface.getDocument() );
+
+		res.send( dom.body.innerHTML );
 	} );
 
 	logger = new Logger( app.logger );
