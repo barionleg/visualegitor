@@ -1,3 +1,16 @@
 ( function ( ve ) {
-var module = undefined;
+var module = undefined,
+	unicodeJS = require( '../lib/unicodejs/unicodejs.js' ),
+	OO = require( '../rebaser/node_modules/oojs' ),
+	SparkMD5 = require( '../rebaser/node_modules/spark-md5' ),
+	domino = require( '../rebaser/node_modules/domino' ),
+	Node = domino.impl.Node,
+	document = domino.createDocument( '', true ),
+	window = domino.createWindow( '' ),
+	$ = require( '../rebaser/node_modules/jquery' )( window );
 ve.dm = {};
+
+OO.ui = {
+	debounce: function () { throw new Error( 'No OO.ui.debounce' ); },
+	throttle: function () { throw new Error( 'No OO.ui.throttle' ); }
+};

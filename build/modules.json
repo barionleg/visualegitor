@@ -1139,6 +1139,9 @@
 	},
 	"rebaser.build": {
 		"scripts": [
+			"src/ve.utils.js",
+			"src/ve.utils.node.js",
+			"src/ve.utils.parsing.js",
 			"src/dm/ve.dm.HashValueStore.js",
 			"src/dm/ve.dm.Transaction.js",
 			"src/dm/ve.dm.Change.js",
@@ -1154,7 +1157,10 @@
 			"src/dm/selections/ve.dm.TableSelection.js"
 		],
 		"dependencies": [
-			"oojs.noJQuery"
+			"oojs.noJQuery",
+			"visualEditor.core.root",
+			"visualEditor.core.model",
+			"visualEditor.sanitize"
 		]
 	},
 	"visualEditor.build": {
