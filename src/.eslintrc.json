@@ -21,5 +21,14 @@
 		"no-jquery/no-visibility": "error",
 		"max-len": "off",
 		"no-var": "off"
-	}
+	},
+	"overrides": [ {
+		"files": [
+			"ve.utils.node.js"
+		],
+		"extends": "wikimedia/server",
+		"rules": {
+			"es-x/no-promise-prototype-finally": "off"
+		}
+	} ]
 }

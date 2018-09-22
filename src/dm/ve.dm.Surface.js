@@ -66,7 +66,8 @@ ve.dm.Surface = function VeDmSurface( doc, attachedRoot, config ) {
 	this.autosavePrefix = '';
 	this.synchronizer = null;
 	this.storing = false;
-	this.setStorage( ve.init.platform.sessionStorage );
+	// TODO: Have storage passed in, instead of reaching out to platform
+	this.setStorage( ve.init && ve.init.platform.sessionStorage );
 
 	// Let document know about the attachedRoot
 	this.documentModel.attachedRoot = this.attachedRoot;

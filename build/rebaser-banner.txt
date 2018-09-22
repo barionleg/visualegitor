@@ -1,3 +1,25 @@
 ( function ( ve ) {
-var module = undefined;
+var module = undefined,
+	unicodeJS = require( '../lib/unicodejs/unicodejs.js' ),
+	OO = require( '../rebaser/node_modules/oojs' ),
+	SparkMD5 = require( '../rebaser/node_modules/spark-md5' ),
+	JSDOM = require( '../rebaser/node_modules/jsdom' ).JSDOM,
+	dom = new JSDOM( '' ),
+	window = dom.window,
+	document = window.document,
+	Node = window.Node,
+	DOMParser = window.DOMParser,
+	$ = require( '../rebaser/node_modules/jquery' )( window );
 ve.dm = {};
+
+OO.ui = {
+	debounce: function () { throw new Error( 'No OO.ui.debounce' ); },
+	throttle: function () { throw new Error( 'No OO.ui.throttle' ); },
+	deferMsg: function ( msg ) {
+		return function () {
+			return msg;
+		};
+	},
+};
+
+exports = '';

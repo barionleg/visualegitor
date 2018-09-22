@@ -39,12 +39,23 @@ function initApp( options ) {
 
 	// eslint-disable-next-line prefer-regex-literals
 	app.get( new RegExp( '/doc/raw/(.*)' ), function ( req, res ) {
-		// TODO return real data
-		// In order to provide HTML here, we'd need all of ve.dm (Document, Converter, all nodes)
-		// and none of that code is likely to work in nodejs without some work because of how heavily
-		// it uses the DOM.
-		// var docName = req.params[ 0 ];
-		res.status( 401 ).send( 'DOM in nodejs is hard' );
+		const docName = req.params[ 0 ];
+		// eslint-disable-next-line no-use-before-define
+		const state = protocolServer.rebaseServer.getDocState( docName );
+
+		const doc = new ve.dm.Document( [
+			{ type: 'paragraph' }, { type: '/paragraph' },
+			{ type: 'internalList' }, { type: '/internalList' }
+		] );
+		const surface = new ve.dm.Surface( doc );
+
+		// The state from getDocState has serialized store values
+		const history = ve.dm.Change.static.deserialize( state.history.serialize( true ) );
+		history.applyTo( surface );
+
+		const dom = ve.dm.converter.getDomFromModel( surface.getDocument() );
+
+		res.send( dom.body.innerHTML );
 	} );
 
 	const logger = new Logger( app.logger );
