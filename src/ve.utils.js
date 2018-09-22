@@ -703,6 +703,11 @@ ve.convertDomElements = function ( value ) {
 	return value;
 };
 
+ve.whitespaceHtmlCharacters = {
+	'\n': '\u21b5', // &crarr; / ↵
+	'\t': '\u279e' // &#10142; / ➞
+};
+
 /**
  * Check whether a given DOM element has a block element type.
  *
