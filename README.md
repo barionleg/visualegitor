@@ -1,5 +1,5 @@
 [![devDependency Status](https://david-dm.org/wikimedia/visualeditor/dev-status.svg)](https://david-dm.org/wikimedia/visualeditor#info=devDependencies)
-# VisualEditor
+# VisualEditor 
 
 VisualEditor provides a visual editor for HTML pages. It is written in
 JavaScript and runs in a web browser.
