@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "237d075f_1f7777e9",
+        "filename": "src/ui/styles/ve.ui.Surface.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2018-09-25T16:15:54Z",
+      "side": 1,
+      "message": "This seems like it\u0027s just asking for funny rendering bugs… Can we instead put overflow: hidden on it?",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 19
+      },
+      "revId": "5724f8273210c0829bb5ff85dde9c54960f1bbe9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
