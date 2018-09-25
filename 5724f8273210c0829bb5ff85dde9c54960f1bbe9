@@ -22,6 +22,30 @@
       "revId": "5724f8273210c0829bb5ff85dde9c54960f1bbe9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7044286c_9c53fc5e",
+        "filename": "src/ui/styles/ve.ui.Surface.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-09-25T16:35:16Z",
+      "side": 1,
+      "message": "That\u0027s would definitely change renderings - e.g. over-wide tables.\n\nPadding is overridden everywhere except for monobook/minerva-desktop anyway.",
+      "parentUuid": "237d075f_1f7777e9",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 19
+      },
+      "revId": "5724f8273210c0829bb5ff85dde9c54960f1bbe9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
