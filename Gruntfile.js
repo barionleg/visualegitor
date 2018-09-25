@@ -475,10 +475,38 @@ module.exports = function ( grunt ) {
 		} );
 	} );
 
+	grunt.registerTask( 'npm-audit', function () {
+		var done = this.async();
+		// Are there npm audit issues?
+		require( 'child_process' ).exec( 'npm audit --json', function ( err, stdout, stderr ) {
+			var modules,
+				response,
+				error = err || stderr || !stdout;
+
+			if ( error ) {
+				grunt.log.error( 'Error running npm audit!' );
+				grunt.log.error( error );
+				done( false );
+			}
+
+			response = JSON.parse( stdout );
+			if ( response.actions && response.actions.length ) {
+				grunt.log.error( 'Audit concerns in these modules:' );
+				modules = [];
+				response.actions.map( function ( val ) { modules.push( val ); } );
+				grunt.log.error( modules );
+				done( false );
+			} else {
+				grunt.log.ok( 'No audit concerns from ' + response.metadata.totalDependencies + ' total dependencies.' );
+				done();
+			}
+		} );
+	} );
+
 	grunt.registerTask( 'build', [ 'clean', 'concat', 'cssjanus', 'cssUrlEmbed', 'copy', 'buildloader' ] );
 	grunt.registerTask( 'lint', [ 'tyops', 'eslint', 'stylelint', 'jsonlint', 'banana' ] );
 	grunt.registerTask( 'unit', [ 'karma:main' ] );
-	grunt.registerTask( '_test', [ 'lint', 'git-build', 'build', 'unit' ] );
+	grunt.registerTask( '_test', [ 'lint', 'git-build', 'build', 'unit', 'npm-audit' ] );
 	grunt.registerTask( 'ci', [ '_test', 'svgmin', 'git-status' ] );
 	grunt.registerTask( 'watch', [ 'karma:bg:start', 'runwatch' ] );
 
