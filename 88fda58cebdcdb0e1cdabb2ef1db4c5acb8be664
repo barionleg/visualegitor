@@ -34,6 +34,24 @@
       "revId": "88fda58cebdcdb0e1cdabb2ef1db4c5acb8be664",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa68376b_67b1d39d",
+        "filename": "src/dm/.eslintrc.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2018-09-27T19:51:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bce06d63_c250d2de",
+      "revId": "88fda58cebdcdb0e1cdabb2ef1db4c5acb8be664",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
