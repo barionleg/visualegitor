@@ -1085,3 +1085,34 @@ QUnit.test( 'adjacentDomPosition', function ( assert ) {
 		}
 	}
 } );
+
+QUnit.test( 'deepFreeze', function ( assert ) {
+	var frozen, originalData,
+		data = [
+			{ type: 'heading', attributes: { level: 1 } },
+			'F', 'o', 'o',
+			{ type: '/heading' }
+		];
+
+	originalData = ve.copy( data );
+	frozen = ve.deepFreeze( data, true );
+
+	assert.deepEqual( frozen, originalData, 'Frozen data is equal to original data' );
+	assert.strictEqual( frozen, data, 'Result is same object as input' );
+
+	assert.throws( function () {
+		data[ 0 ].attributes.level = 2;
+	}, Error, 'Can\'t change data attribute' );
+
+	frozen.splice( 3, 1, 'b' );
+
+	assert.strictEqual( frozen[ 3 ], 'b', 'Data can be spliced' );
+	assert.strictEqual( data[ 3 ], 'b', 'Original object affected by splice' );
+
+	frozen = ve.deepFreeze( data );
+
+	assert.throws( function () {
+		frozen.splice( 3, 1, 'c' );
+	}, Error, 'Can\'t splice if root is frozen' );
+
+} );
