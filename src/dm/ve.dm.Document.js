@@ -759,22 +759,26 @@ ve.dm.Document.prototype.getFullData = function ( range, mode ) {
 			continue;
 		}
 		if ( mode === 'roundTrip' && !ve.getProp( item, 'internal', 'changesSinceLoad' ) ) {
-			metaItems = ve.getProp( item, 'internal', 'metaItems' ) || [];
-			// No changes, so restore meta item offsets
-			for ( j = 0, jLen = metaItems.length; j < jLen; j++ ) {
-				metaItem = metaItems[ j ];
-				offset = i + metaItem.internal.loadMetaParentOffset;
-				if ( !insertions[ offset ] ) {
-					insertions[ offset ] = [];
+			// eslint-disable-next-line no-loop-func, no-shadow
+			this.data.modifyData( i, function ( item ) {
+				metaItems = ve.getProp( item, 'internal', 'metaItems' ) || [];
+				// No changes, so restore meta item offsets
+				for ( j = 0, jLen = metaItems.length; j < jLen; j++ ) {
+					metaItem = metaItems[ j ];
+					offset = i + metaItem.internal.loadMetaParentOffset;
+					if ( !insertions[ offset ] ) {
+						insertions[ offset ] = [];
+					}
+
+					delete metaItem.internal.loadBranchNodeHash;
+					delete metaItem.internal.loadBranchNodeOffset;
+					if ( Object.keys( metaItem.internal ).length === 0 ) {
+						delete metaItem.internal;
+					}
+					insertions[ offset ].push( stripMetaLoadInfo( metaItem ) );
+					insertedMetaItems.push( metaItem.originalDomElementsHash );
 				}
-				delete metaItem.internal.loadBranchNodeHash;
-				delete metaItem.internal.loadBranchNodeOffset;
-				if ( Object.keys( metaItem.internal ).length === 0 ) {
-					delete metaItem.internal;
-				}
-				insertions[ offset ].push( stripMetaLoadInfo( metaItem ) );
-				insertedMetaItems.push( metaItem.originalDomElementsHash );
-			}
+			} );
 		} else if ( mode === 'roundTrip' ) {
 			metaItems = ve.getProp( item, 'internal', 'metaItems' ) || [];
 			// Had changes, so remove removable meta items that are out of place now
