@@ -273,6 +273,7 @@
 			"src/ve.utils.js",
 			"src/ve.TriggerListener.js",
 			{ "file": "src/ve.debug.js", "debug": true },
+			{ "file": "src/ve.freeze.js", "debug": true },
 			"src/ve.track.js"
 		]
 	},
@@ -774,6 +775,7 @@
 	"visualEditor.test": {
 		"scripts": [
 			"src/ve.utils-es6.js",
+			"src/ve.freeze.js",
 			"src/dm/ve.dm.RebaseDocState.js",
 			"src/dm/ve.dm.RebaseServer.js",
 
