@@ -773,6 +773,7 @@
 	},
 	"visualEditor.test": {
 		"scripts": [
+			"src/ve.debug.js",
 			"src/ve.utils-es6.js",
 			"src/dm/ve.dm.RebaseDocState.js",
 			"src/dm/ve.dm.RebaseServer.js",

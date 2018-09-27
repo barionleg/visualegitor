@@ -133,3 +133,43 @@ ve.summarizeTransaction = function ( tx ) {
 		}
 	} ).join( ', ' ) + ')';
 };
+
+( function () {
+	var freezeProxyHandler = {
+		set: function ( obj, name ) {
+			throw new Error( 'Object is frozen, can\'t set property: ' + name );
+		}
+	};
+
+	/**
+	 * Deep freeze an object, making it immutable
+	 *
+	 * @param {Object} object Object to freeze
+	 * @param {boolean} onlyProperties Only freeze properties (or array items)
+	 * @return {Object} Frozen object
+	 */
+	ve.deepFreeze = function ( object, onlyProperties ) {
+		var name, value;
+
+		for ( name in object ) {
+			if ( Object.prototype.hasOwnProperty.call( object, name ) ) {
+				value = object[ name ];
+				try {
+					object[ name ] = value && typeof value === 'object' ? ve.deepFreeze( value ) : value;
+				} catch ( e ) {
+					// Object may have been frozen already
+				}
+			}
+		}
+
+		if ( onlyProperties ) {
+			return object;
+		}
+
+		if ( window.Proxy ) {
+			object = new window.Proxy( object, freezeProxyHandler );
+		}
+
+		return Object.freeze( object );
+	};
+}() );
