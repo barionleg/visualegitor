@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4a088b4e_345c7436",
+        "filename": "src/dm/.eslintrc.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-09-27T19:21:32Z",
+      "side": 1,
+      "message": "I don\u0027t think we need extends, linting rules are inherited from the parent by default?",
+      "revId": "88fda58cebdcdb0e1cdabb2ef1db4c5acb8be664",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
