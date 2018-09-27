@@ -463,8 +463,11 @@ ve.dm.ElementLinearData.prototype.setAnnotationHashesAtOffset = function ( offse
 		isElement = this.isElementData( offset );
 	if ( hashes.length > 0 ) {
 		if ( isElement ) {
-			// New element annotation
-			item.annotations = hashes;
+			this.modifyData( offset, function ( item ) {
+				// New element annotation
+				item.annotations = hashes;
+				return item;
+			} );
 		} else {
 			// New character annotation
 			character = this.getCharacterData( offset );
@@ -490,23 +493,25 @@ ve.dm.ElementLinearData.prototype.setAnnotationHashesAtOffset = function ( offse
  * @param {Mixed} value Value to set, or undefined to unset
  */
 ve.dm.ElementLinearData.prototype.setAttributeAtOffset = function ( offset, key, value ) {
-	var item = this.getData( offset );
 	if ( !this.isElementData( offset ) ) {
 		return;
 	}
-	if ( value === undefined ) {
-		// Clear
-		if ( item.attributes ) {
-			delete item.attributes[ key ];
+	this.modifyData( offset, function ( item ) {
+		if ( value === undefined ) {
+			// Clear
+			if ( item.attributes ) {
+				delete item.attributes[ key ];
+			}
+		} else {
+			// Automatically initialize attributes object
+			if ( !item.attributes ) {
+				item.attributes = {};
+			}
+			// Set
+			item.attributes[ key ] = value;
 		}
-	} else {
-		// Automatically initialize attributes object
-		if ( !item.attributes ) {
-			item.attributes = {};
-		}
-		// Set
-		item.attributes[ key ] = value;
-	}
+		return item;
+	} );
 };
 
 /**
@@ -1167,11 +1172,11 @@ ve.dm.ElementLinearData.prototype.remapAnnotationHash = function ( oldHash, newH
 		} else if ( Array.isArray( this.data[ i ] ) ) {
 			spliceAt = this.data[ i ][ 1 ].indexOf( oldHash );
 			if ( spliceAt !== -1 ) {
-				if ( this.data[ i ][ 1 ].indexOf( newHash ) === -1 ) {
-					this.data[ i ][ 1 ].splice( spliceAt, 1, newHash );
-				} else {
-					this.data[ i ][ 1 ].splice( spliceAt, 1, newHash );
-				}
+				// eslint-disable-next-line no-loop-func
+				this.modifyData( i, function ( item ) {
+					item[ 1 ].splice( spliceAt, 1, newHash );
+					return item;
+				} );
 			}
 		}
 	}
@@ -1253,7 +1258,11 @@ ve.dm.ElementLinearData.prototype.sanitize = function ( rules ) {
 			// Apply type conversions
 			if ( rules.conversions && rules.conversions[ type ] ) {
 				type = rules.conversions[ type ];
-				this.getData( i ).type = ( !isOpen ? '/' : '' ) + type;
+				// eslint-disable-next-line no-loop-func
+				this.modifyData( i, function ( item ) {
+					item.type = ( !isOpen ? '/' : '' ) + type;
+					return item;
+				} );
 			}
 
 			// Convert content-containing non-paragraph nodes to paragraphs in plainText mode
@@ -1274,7 +1283,10 @@ ve.dm.ElementLinearData.prototype.sanitize = function ( rules ) {
 				len--;
 				// Make sure you haven't just unwrapped a wrapper paragraph
 				if ( isOpen ) {
-					ve.deleteProp( this.getData( i ), 'internal', 'generated' );
+					this.modifyData( i, function ( item ) {
+						ve.deleteProp( item, 'internal', 'generated' );
+						return item;
+					} );
 				}
 				// Move pointer back and continue
 				i--;
@@ -1311,7 +1323,10 @@ ve.dm.ElementLinearData.prototype.sanitize = function ( rules ) {
 			}
 
 			if ( !rules.preserveHtmlWhitespace ) {
-				ve.deleteProp( this.getData( i ), 'internal', 'whitespace' );
+				this.modifyData( i, function ( item ) {
+					ve.deleteProp( item, 'internal', 'whitespace' );
+					return item;
+				} );
 			}
 
 			if ( canContainContent && !isOpen && rules.singleLine ) {
@@ -1367,9 +1382,12 @@ ve.dm.ElementLinearData.prototype.sanitize = function ( rules ) {
 				if ( !( this.getCharacterData( i + 1 ) === ' ' || this.getCharacterData( i - 1 ) === ' ' ) ) {
 					// Replace with a space
 					if ( typeof this.getData( i ) === 'string' ) {
-						this.data[ i ] = ' ';
+						this.setData( i, ' ' );
 					} else {
-						this.data[ i ][ 0 ] = ' ';
+						this.modifyData( i, function ( item ) {
+							item[ 0 ] = ' ';
+							return item;
+						} );
 					}
 				}
 			}
