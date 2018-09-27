@@ -16,6 +16,24 @@
       "revId": "88fda58cebdcdb0e1cdabb2ef1db4c5acb8be664",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bce06d63_c250d2de",
+        "filename": "src/dm/.eslintrc.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-09-27T19:23:30Z",
+      "side": 1,
+      "message": "I think we specify in the tests/ eslint file because we are changing the \"extends\" property to add \"wikimedia/qunit\", but the configs aren\u0027t deep-merged, so we have to re-specify the parent file (which extends \"wikimedia\")",
+      "parentUuid": "4a088b4e_345c7436",
+      "revId": "88fda58cebdcdb0e1cdabb2ef1db4c5acb8be664",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
