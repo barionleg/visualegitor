@@ -66,11 +66,18 @@ ve.dm.InternalList.prototype.queueItemHtml = function ( groupName, key, html ) {
 	if ( index === undefined ) {
 		index = this.itemHtmlQueue.length;
 		this.keyIndexes[ groupName + '/' + key ] = index;
-		this.itemHtmlQueue.push( html );
+		this.itemHtmlQueue.push( { html: html } );
 		isNew = true;
-	} else if ( this.itemHtmlQueue[ index ] === '' ) {
+	} else if ( this.itemHtmlQueue[ index ].html === '' ) {
 		// Previous value with this key was empty, overwrite value in queue
-		this.itemHtmlQueue[ index ] = html;
+		if ( !this.itemHtmlQueueExecuting ) {
+			this.itemHtmlQueue[ index ].html = html;
+		} else {
+			this.itemHtmlQueue.push( {
+				html: html,
+				spliceIndex: this.itemHtmlQueue[ index ].spliceIndex
+			} );
+		}
 		isNew = true;
 	}
 	return {
@@ -215,25 +222,31 @@ ve.dm.InternalList.prototype.getNextUniqueNumber = function () {
  * @return {Array} Linear model data
  */
 ve.dm.InternalList.prototype.convertToData = function ( converter, doc ) {
-	var i, length, itemData, div,
+	var i, itemData, div,
 		itemHtmlQueue = this.getItemHtmlQueue(),
 		list = [];
 
 	list.push( { type: 'internalList' } );
-	for ( i = 0, length = itemHtmlQueue.length; i < length; i++ ) {
-		if ( itemHtmlQueue[ i ] !== '' ) {
+	// Length may change if parsed items queue more items to parse
+	for ( i = 0; i < itemHtmlQueue.length; i++ ) {
+		if ( itemHtmlQueue[ i ].html !== '' ) {
 			div = doc.createElement( 'div' );
-			div.innerHTML = itemHtmlQueue[ i ];
+			div.innerHTML = itemHtmlQueue[ i ].html;
 			itemData = [].concat(
 				[ { type: 'internalItem' } ],
 				converter.getDataFromDomSubtree( div ),
 				[ { type: '/internalItem' } ]
 			);
 			if ( !converter.isFromClipboard() ) {
-				itemData[ 0 ].attributes = { originalHtml: itemHtmlQueue[ i ] };
+				itemData[ 0 ].attributes = { originalHtml: itemHtmlQueue[ i ].html };
 			}
-			list = list.concat( itemData );
+			if ( itemHtmlQueue[ i ].spliceIndex ) {
+				ve.batchSplice( list, itemHtmlQueue[ i ].spliceIndex, 2, itemData );
+			} else {
+				list = list.concat( itemData );
+			}
 		} else {
+			itemHtmlQueue[ i ].spliceIndex = list.length;
 			list = list.concat( [ { type: 'internalItem' }, { type: '/internalItem' } ] );
 		}
 	}
