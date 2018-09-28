@@ -412,6 +412,9 @@
 				types = types.concat( node.getAttribute( 'property' ).split( ' ' ) );
 			}
 		}
+		types = types.filter( function ( t ) {
+			return t !== '';
+		} );
 
 		if ( types.length ) {
 			// func+tag+type match
