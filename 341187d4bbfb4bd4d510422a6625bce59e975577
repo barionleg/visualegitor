@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "48461c40_85b2e32a",
+        "filename": "src/ui/styles/widgets/ve.ui.MediaSizeWidget.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 2849
+      },
+      "writtenOn": "2018-09-28T17:13:09Z",
+      "side": 1,
+      "message": "I think this size is a bit awkward. On all the mobile formats I\u0027ve tried, the widget wraps to two lines, and the dropdown isn\u0027t wide enough to contain (e.g.) the German label for \"custom\" - worst of both worlds. How about accepting it\u0027s going to be two lines in custom mode, and making the dropdown full width?",
+      "revId": "341187d4bbfb4bd4d510422a6625bce59e975577",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
