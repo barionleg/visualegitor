@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a0d34000_f401a45f",
+        "filename": "src/ce/ve.ce.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2018-09-30T23:24:45Z",
+      "side": 1,
+      "message": "shurely .last()?",
+      "range": {
+        "startLine": 359,
+        "startChar": 66,
+        "endLine": 359,
+        "endChar": 71
+      },
+      "revId": "411ef306ef1c32dea6e10bd15d8b73c12fb5b05c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
