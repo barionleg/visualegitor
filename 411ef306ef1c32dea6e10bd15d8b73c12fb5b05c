@@ -22,6 +22,30 @@
       "revId": "411ef306ef1c32dea6e10bd15d8b73c12fb5b05c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fd9a2c8d_b40b8242",
+        "filename": "src/ce/ve.ce.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-10-01T11:13:25Z",
+      "side": 1,
+      "message": "prevAll matches in reverse order, apparently",
+      "parentUuid": "a0d34000_f401a45f",
+      "range": {
+        "startLine": 359,
+        "startChar": 66,
+        "endLine": 359,
+        "endChar": 71
+      },
+      "revId": "411ef306ef1c32dea6e10bd15d8b73c12fb5b05c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
