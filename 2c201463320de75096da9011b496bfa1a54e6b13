@@ -105,6 +105,24 @@
       "revId": "2c201463320de75096da9011b496bfa1a54e6b13",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3192c3f3_c2236078",
+        "filename": "src/ve.freeze.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-10-01T16:46:44Z",
+      "side": 1,
+      "message": "We should comment that this only exists so we can check #isFrozen later.",
+      "parentUuid": "9b964b1d_cd5eb3c7",
+      "revId": "2c201463320de75096da9011b496bfa1a54e6b13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
