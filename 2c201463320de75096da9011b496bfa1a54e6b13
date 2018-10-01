@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3e11ff3a_97bb0589",
+        "filename": "src/ve.freeze.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2018-10-01T15:58:14Z",
+      "side": 1,
+      "message": "Done (I was avoiding adding Set to categories.json – but I guess you\u0027re right, it\u0027s better to just bite the bullet).",
+      "parentUuid": "d6aba70a_45637f7b",
+      "revId": "2c201463320de75096da9011b496bfa1a54e6b13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f9f51ed9_0ca10406",
         "filename": "src/ve.freeze.js",
         "patchSetId": 3
@@ -47,6 +65,24 @@
       "writtenOn": "2018-10-01T13:01:47Z",
       "side": 1,
       "message": "Actually the second sentence is not not true - in the loop above we modify the original object before taking a copy, so this method always modifies the original object.",
+      "parentUuid": "f9f51ed9_0ca10406",
+      "revId": "2c201463320de75096da9011b496bfa1a54e6b13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "28889ce8_5099b087",
+        "filename": "src/ve.freeze.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2018-10-01T15:58:14Z",
+      "side": 1,
+      "message": "I thought that too, but actually test 6 fails without this line (because we end up trying to proxy a data object twice, which fails).",
       "parentUuid": "f9f51ed9_0ca10406",
       "revId": "2c201463320de75096da9011b496bfa1a54e6b13",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
