@@ -6,13 +6,14 @@
 
 /* eslint-disable no-console */
 
-var logger, protocolServer, transportServer,
+var logger, documentStore, protocolServer, transportServer,
 	port = 8081,
 	fs = require( 'fs' ),
 	express = require( 'express' ),
 	app = express(),
 	http = require( 'http' ).Server( app ),
 	io = require( 'socket.io' )( http ),
+	MongoClient = require( 'mongodb' ).MongoClient,
 	ve = require( '../../dist/ve-rebaser.js' );
 
 function Logger( filename ) {
@@ -77,7 +78,8 @@ app.get( new RegExp( '/doc/raw/(.*)' ), function ( req, res ) {
 } );
 
 logger = new Logger( 'rebaser.log' );
-protocolServer = new ve.dm.ProtocolServer( logger );
+documentStore = new ve.dm.DocumentStore( MongoClient, 'mongodb://localhost:27017/test', logger );
+protocolServer = new ve.dm.ProtocolServer( documentStore, logger );
 transportServer = new ve.dm.TransportServer( protocolServer );
 io.on(
 	'connection',
@@ -86,5 +88,8 @@ io.on(
 		io.sockets.in.bind( io.sockets )
 	)
 );
-http.listen( port );
-console.log( 'Listening on ' + port );
+console.log( 'Connecting to document store' );
+documentStore.connect().then( function () {
+	http.listen( port );
+	console.log( 'Listening on ' + port );
+} );
