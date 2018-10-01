@@ -33,6 +33,24 @@
       "revId": "2c201463320de75096da9011b496bfa1a54e6b13",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3ce1d7f5_dbb8cf7a",
+        "filename": "src/ve.freeze.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-10-01T13:01:47Z",
+      "side": 1,
+      "message": "Actually the second sentence is not not true - in the loop above we modify the original object before taking a copy, so this method always modifies the original object.",
+      "parentUuid": "f9f51ed9_0ca10406",
+      "revId": "2c201463320de75096da9011b496bfa1a54e6b13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
