@@ -11,15 +11,18 @@
  *
  * Handles the abstract protocol without knowing the specific transport
  *
+ * @param {ve.dm.DocumentStore} documentStore The persistent storage
  * @param {Object} logger Logger class
  * @param {Function} logger.getRelativeTimestmap Return the number of ms since the logger started
- * @param {Function} logger.logEvent Stringify first object argument; write it to the log
- * @param {Function} logger.logServerEvent Like logEvent but adds timestamp and server ID properties
+ * @param {Function} logger.logEvent Stringify object argument to log
+ * @param {Function} logger.logServerEvent Stringify object argument to log, adding timestamp and server ID properties
  */
-ve.dm.ProtocolServer = function VeDmProtocolServer( logger ) {
+ve.dm.ProtocolServer = function VeDmProtocolServer( documentStore, logger ) {
 	this.logger = logger;
 	this.rebaseServer = new ve.dm.RebaseServer();
 	this.lastAuthorForDoc = new Map();
+	this.loadingForDoc = new Map();
+	this.documentStore = documentStore;
 	this.logger.logServerEvent( { type: 'restart' } );
 };
 
@@ -31,6 +34,35 @@ ve.dm.ProtocolServer.static.palette = [
 	'aec7e8', 'ffbb78', '98df8a', 'ff9896', 'c5b0d5',
 	'c49c94', 'f7b6d2', 'c7c7c7', 'dbdb8d', '9edae5'
 ];
+
+/**
+ * If the document is not loaded, load from storage (creating as empty if absent)
+ *
+ * @param {string} docName Name of the document
+ * @return {Promise<undefined>} Resolves when loaded
+ */
+ve.dm.ProtocolServer.prototype.ensureLoaded = function ( docName ) {
+	var documentStore = this,
+		loading = this.loadingForDoc.get( docName ),
+		rebaseServer = this.rebaseServer;
+
+	if ( loading ) {
+		return loading;
+	}
+	this.logger.logServerEvent( { type: 'ProtocolServer#load', docName: docName } );
+	loading = this.documentStore.load( docName ).then( function ( change ) {
+		documentStore.logger.logServerEvent( { type: 'ProtocolServer#loaded', docName: docName } );
+		rebaseServer.updateDocState( docName, null, change );
+	} );
+	this.loadingForDoc.set( docName, loading );
+	return loading;
+};
+
+ve.dm.ProtocolServer.prototype.onUnload = function ( context ) {
+	this.logger.logServerEvent( { type: 'ProtocolServer#unload', docName: context.docName } );
+	this.loadingForDoc.delete( context.docName );
+	this.rebaseServer.clearDocState( context.docName );
+};
 
 /**
  * Check the client's credentials, and return a connection context object
@@ -138,6 +170,7 @@ ve.dm.ProtocolServer.prototype.onSubmitChange = function ( context, data ) {
 	change = ve.dm.Change.static.deserialize( data.change, null, true );
 	applied = this.rebaseServer.applyChange( context.docName, context.authorId, data.backtrack, change );
 	if ( !applied.isEmpty() ) {
+		this.documentStore.onNewChange( context.docName, applied );
 		context.broadcast( 'newChange', applied.serialize( true ) );
 	}
 };
