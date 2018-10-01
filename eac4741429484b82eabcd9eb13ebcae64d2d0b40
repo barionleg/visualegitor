@@ -16,6 +16,24 @@
       "revId": "eac4741429484b82eabcd9eb13ebcae64d2d0b40",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "033e9b35_60d06bb8",
+        "filename": "src/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2018-10-01T15:24:50Z",
+      "side": 1,
+      "message": "Huh, indeed. Fixed in https://gerrit.wikimedia.org/r/463787",
+      "parentUuid": "2edbfb1a_cc45029f",
+      "revId": "eac4741429484b82eabcd9eb13ebcae64d2d0b40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
