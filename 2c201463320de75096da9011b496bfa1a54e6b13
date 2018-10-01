@@ -16,6 +16,23 @@
       "revId": "2c201463320de75096da9011b496bfa1a54e6b13",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f9f51ed9_0ca10406",
+        "filename": "src/ve.freeze.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-10-01T12:55:26Z",
+      "side": 1,
+      "message": "I left this in for environments that didn\u0027t have window.Proxy, but now we rely on that it\u0027s not required. Removing it means that the original object passed it is left unfrozen, which is a cleaner API.",
+      "revId": "2c201463320de75096da9011b496bfa1a54e6b13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
