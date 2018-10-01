@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d6aba70a_45637f7b",
+        "filename": "src/ve.freeze.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-10-01T12:50:01Z",
+      "side": 1,
+      "message": "Why not {Set}?",
+      "revId": "2c201463320de75096da9011b496bfa1a54e6b13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
