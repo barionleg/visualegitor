@@ -6,13 +6,14 @@
 
 /* eslint-disable no-console */
 
-var logger, transportServer,
+var logger, documentStore, protocolServer, transportServer,
 	port = 8081,
 	fs = require( 'fs' ),
 	express = require( 'express' ),
 	app = express(),
 	http = require( 'http' ).Server( app ),
 	io = require( 'socket.io' )( http ),
+	MongoClient = require( 'mongodb' ).MongoClient,
 	ve = require( '../../dist/ve-rebaser.js' );
 
 function Logger( filename ) {
@@ -59,10 +60,10 @@ Logger.prototype.logServerEvent = function ( event ) {
  * Transport server for Socket IO transport
  *
  * @constructor
- * @param {Logger} logger The logger class
+ * @param {ve.dm.ProtocolServer} protocolServer The protocol server
  */
-function TransportServer( logger ) {
-	this.protocolServer = new ve.dm.ProtocolServer( logger );
+function TransportServer( protocolServer ) {
+	this.protocolServer = protocolServer;
 	this.docNamespaces = new Map();
 }
 
@@ -72,28 +73,60 @@ function TransportServer( logger ) {
  * This just creates a namespace handler for the docName, if one does not already exist
  *
  * @param {Object} socket The io socket
+ * @return {Promise}
  */
 TransportServer.prototype.onConnection = function ( socket ) {
-	var context,
-		server = this.protocolServer,
+	var server = this.protocolServer,
 		docName = socket.handshake.query.docName,
 		authorId = +socket.handshake.query.authorId || null,
 		token = socket.handshake.query.token || null;
 
-	socket.join( docName );
-	context = server.authenticate( docName, authorId, token );
-	context.broadcast = function () {
-		var room = io.sockets.in( docName );
-		room.emit.apply( room, arguments );
-	};
-	context.sendAuthor = socket.emit.bind( socket );
-	context.connectionId = socket.client.conn.remoteAddress + ' ' + socket.handshake.url;
+	/**
+	 * Ensure the doc is loaded when calling f
+	 *
+	 * @param {Function} f A method of server
+	 * @param {Object} context Connection context object passed to f as first argument
+	 * @return {Function} Function returning a promise resolving with f's return value
+	 */
+	function ensureLoadedWrap( f, context ) {
+		// In theory, some protection is needed to ensure the document cannot unload
+		// between the ensureLoaded promise resolving and f running. In practice,
+		// this should not happen if the unloading is not too aggressive.
+		return function () {
+			var args = Array.prototype.slice.call( arguments );
+			args.splice( 0, 0, context );
+			return server.ensureLoaded( docName ).then( function () {
+				return f.apply( server, args );
+			} );
+		};
+	}
 
-	socket.on( 'submitChange', server.onSubmitChange.bind( server, context ) );
-	socket.on( 'changeAuthor', server.onChangeAuthor.bind( server, context ) );
-	socket.on( 'disconnect', server.onDisconnect.bind( server, context ) );
-	socket.on( 'logEvent', server.onLogEvent.bind( server, context ) );
-	server.welcomeClient( context );
+	socket.join( docName );
+	return server.ensureLoaded( docName ).then( function () {
+		var context = server.authenticate( docName, authorId, token );
+		context.broadcast = function () {
+			var room = io.sockets.in( docName );
+			room.emit.apply( room, arguments );
+		};
+		context.sendAuthor = socket.emit.bind( socket );
+		context.connectionId = socket.client.conn.remoteAddress + ' ' + socket.handshake.url;
+		socket.on( 'submitChange', ensureLoadedWrap( server.onSubmitChange, context ) );
+		socket.on( 'changeName', ensureLoadedWrap( server.onChangeName, context ) );
+		socket.on( 'changeColor', ensureLoadedWrap( server.onChangeColor, context ) );
+		socket.on( 'disconnect', ensureLoadedWrap( server.onDisconnect, context ) );
+		socket.on( 'logEvent', ensureLoadedWrap( server.onLogEvent, context ) );
+		// XXX event for testing purposes only; replace with unit tests
+		socket.on( 'unload', server.onUnload.bind( server, context ) );
+		server.welcomeClient( context );
+	} );
+};
+
+TransportServer.prototype.broadcast = function ( docName, namespace, eventName, object ) {
+	namespace.emit( eventName, object );
+};
+
+TransportServer.prototype.onClose = function () {
+	this.documentStore.onClose();
 };
 
 app.use( express.static( __dirname + '/../..' ) );
@@ -118,7 +151,12 @@ app.get( new RegExp( '/doc/raw/(.*)' ), function ( req, res ) {
 } );
 
 logger = new Logger( 'rebaser.log' );
-transportServer = new TransportServer( logger );
+documentStore = new ve.dm.DocumentStore( MongoClient, 'mongodb://localhost:27017/test', logger );
+protocolServer = new ve.dm.ProtocolServer( documentStore, logger );
+transportServer = new TransportServer( protocolServer );
 io.on( 'connection', transportServer.onConnection.bind( transportServer ) );
-http.listen( port );
-console.log( 'Listening on ' + port );
+console.log( 'Connecting to document store' );
+documentStore.connect().then( function () {
+	http.listen( port );
+	console.log( 'Listening on ' + port );
+} );
