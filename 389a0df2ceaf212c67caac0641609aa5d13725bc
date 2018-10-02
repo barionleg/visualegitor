@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a4c51c6d_5c13e485",
+        "filename": "src/dm/ve.dm.ModelRegistry.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2018-10-02T09:53:46Z",
+      "side": 1,
+      "message": "Why not replace this and the similar splits below with /\\s+/ ? This is my personal best practice. It contains all basic whitespace (which is a wanted feature here, I believe), and even performs better than the additional filter call below.",
+      "range": {
+        "startLine": 406,
+        "startChar": 60,
+        "endLine": 406,
+        "endChar": 63
+      },
+      "revId": "389a0df2ceaf212c67caac0641609aa5d13725bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
