@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6b25ea11_da80d71c",
+        "filename": "src/ui/dialogs/ve.ui.NodeDialog.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-10-03T19:57:47Z",
+      "side": 1,
+      "message": "In fact, even FragmentDialog doesn\u0027t catch everything. We should just move this code to WindowAction.",
+      "revId": "543897fa190ee52a6afff9c982583aaa888213a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
