@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "53ae5e03_8d591c50",
+        "filename": "src/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2018-10-04T19:08:42Z",
+      "side": 1,
+      "message": "scaleField?\n\n(It\u0027s rather annoying to have this here, commented out, eh)",
+      "range": {
+        "startLine": 76,
+        "startChar": 4,
+        "endLine": 76,
+        "endChar": 15
+      },
+      "revId": "be43d950ca27483fac4ebc1b503a9edc5891748f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80d61bd8_29418d60",
+        "filename": "src/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2018-10-04T19:08:42Z",
+      "side": 1,
+      "message": "scaleField?",
+      "range": {
+        "startLine": 100,
+        "startChar": 26,
+        "endLine": 100,
+        "endChar": 36
+      },
+      "revId": "be43d950ca27483fac4ebc1b503a9edc5891748f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
