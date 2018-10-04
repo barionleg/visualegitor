@@ -46,6 +46,30 @@
       "revId": "5724f8273210c0829bb5ff85dde9c54960f1bbe9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb593729_f386c20f",
+        "filename": "src/ui/styles/ve.ui.Surface.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 2604
+      },
+      "writtenOn": "2018-10-04T18:02:41Z",
+      "side": 1,
+      "message": "I had the same reaction like Bartosz. Also where did `0.05px` come from, looks so particularly chosen. Why not `0.1px` or `0.01px`? Possible rounding errors on a subpixel level – ha!",
+      "parentUuid": "7044286c_9c53fc5e",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 19
+      },
+      "revId": "5724f8273210c0829bb5ff85dde9c54960f1bbe9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
