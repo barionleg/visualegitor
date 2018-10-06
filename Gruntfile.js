@@ -6,6 +6,9 @@
 
 /* eslint-env node, es6 */
 
+var qunit = require( 'qunit' ),
+	inspect = require( 'util' ).inspect;
+
 module.exports = function ( grunt ) {
 	var modules = grunt.file.readJSON( 'build/modules.json' ),
 		moduleUtils = require( './build/moduleUtils' ),
@@ -475,9 +478,48 @@ module.exports = function ( grunt ) {
 		} );
 	} );
 
+	grunt.registerTask( '_qunit', function () {
+		var oldQUnit,
+			done = this.async();
+		qunit.on( 'testEnd', function ( testEnd ) {
+			testEnd.errors.forEach( function ( error ) {
+				var actual = inspect( error.actual ),
+					expected = inspect( error.expected ),
+					reason = actual + ' !== ' + expected,
+					message = [
+						error.message,
+						reason,
+						error.stack
+					].join( '\n' );
+				grunt.log.errorlns( message );
+			} );
+		} );
+		qunit.done( function ( details ) {
+			grunt.option( 'qunit.passed', details.passed );
+			grunt.option( 'qunit.failed', details.failed );
+			grunt.option( 'qunit.total', details.total );
+			grunt.event.emit( 'qunit.end', details.passed, details.failed, details.total );
+			if ( details.failed === 0 ) {
+				grunt.log.ok( 'All assertions passed' );
+			} else {
+				grunt.log.error( details.failed + '/' + details.total + ' assertions failed' );
+			}
+			done( details.failed === 0 );
+		} );
+		oldQUnit = global.QUnit;
+		global.QUnit = qunit;
+		try {
+			require( './rebaser/tests/rebaser.test.js' );
+			grunt.event.emit( 'qunit.start', qunit );
+			qunit.start();
+		} finally {
+			global.QUnit = oldQUnit;
+		}
+	} );
+	grunt.registerTask( 'qunit', [ 'concat', '_qunit' ] );
 	grunt.registerTask( 'build', [ 'clean', 'concat', 'cssjanus', 'cssUrlEmbed', 'copy', 'buildloader' ] );
 	grunt.registerTask( 'lint', [ 'tyops', 'eslint', 'stylelint', 'jsonlint', 'banana' ] );
-	grunt.registerTask( 'unit', [ 'karma:main' ] );
+	grunt.registerTask( 'unit', [ 'qunit', 'karma:main' ] );
 	grunt.registerTask( '_test', [ 'lint', 'git-build', 'build', 'unit' ] );
 	grunt.registerTask( 'ci', [ '_test', 'svgmin', 'git-status' ] );
 	grunt.registerTask( 'watch', [ 'karma:bg:start', 'runwatch' ] );
