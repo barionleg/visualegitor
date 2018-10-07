@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6b92499f_2f9b3ffa",
+        "filename": "src/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 2849
+      },
+      "writtenOn": "2018-10-07T22:18:25Z",
+      "side": 1,
+      "message": "Done (and yes...)",
+      "parentUuid": "53ae5e03_8d591c50",
+      "range": {
+        "startLine": 76,
+        "startChar": 4,
+        "endLine": 76,
+        "endChar": 15
+      },
+      "revId": "be43d950ca27483fac4ebc1b503a9edc5891748f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "80d61bd8_29418d60",
         "filename": "src/ui/widgets/ve.ui.MediaSizeWidget.js",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2018-10-04T19:08:42Z",
       "side": 1,
       "message": "scaleField?",
+      "range": {
+        "startLine": 100,
+        "startChar": 26,
+        "endLine": 100,
+        "endChar": 36
+      },
+      "revId": "be43d950ca27483fac4ebc1b503a9edc5891748f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3cd097a4_c4f05eef",
+        "filename": "src/ui/widgets/ve.ui.MediaSizeWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 2849
+      },
+      "writtenOn": "2018-10-07T22:18:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "80d61bd8_29418d60",
       "range": {
         "startLine": 100,
         "startChar": 26,
