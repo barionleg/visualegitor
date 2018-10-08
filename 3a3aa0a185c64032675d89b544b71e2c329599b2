@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ffd8eab0_9c510469",
+        "filename": "rebaser/package.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-10-08T16:20:58Z",
+      "side": 1,
+      "message": "latest is 3.1.6, any reason to not use 3?\n\nlatest in 2 in 2.2.36",
+      "revId": "3a3aa0a185c64032675d89b544b71e2c329599b2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
