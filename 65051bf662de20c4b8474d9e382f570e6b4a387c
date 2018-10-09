@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dee6ef36_ca7262a0",
+        "filename": "rebaser/src/dm/ve.dm.DocumentStore.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-10-09T09:41:45Z",
+      "side": 1,
+      "message": "delete",
+      "revId": "65051bf662de20c4b8474d9e382f570e6b4a387c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c810fe0e_81e283e0",
+        "filename": "rebaser/src/dm/ve.dm.DocumentStore.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-10-09T09:41:45Z",
+      "side": 1,
+      "message": "{Logger}?",
+      "revId": "65051bf662de20c4b8474d9e382f570e6b4a387c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
