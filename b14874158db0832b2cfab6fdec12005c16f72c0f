@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "191c5a66_a6d7a4ad",
+        "filename": "src/ui/actions/ve.ui.WindowAction.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-10-09T16:59:52Z",
+      "side": 1,
+      "message": "\"dialog\" is a subset of \"window\", which includes \"inspector\u0027, so this should be window-open.",
+      "revId": "b14874158db0832b2cfab6fdec12005c16f72c0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
