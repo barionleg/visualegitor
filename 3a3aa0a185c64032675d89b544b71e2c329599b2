@@ -16,6 +16,24 @@
       "revId": "3a3aa0a185c64032675d89b544b71e2c329599b2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "607ab363_ff887307",
+        "filename": "rebaser/package.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2018-10-09T09:29:53Z",
+      "side": 1,
+      "message": "Done (originally I pulled this from a script I wrote some time ago)",
+      "parentUuid": "ffd8eab0_9c510469",
+      "revId": "3a3aa0a185c64032675d89b544b71e2c329599b2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
