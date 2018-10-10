@@ -1680,6 +1680,11 @@ ve.dm.Converter.prototype.getDomSubtreeFromData = function ( data, container, in
 					parentDomElement.removeChild( domElement );
 				}
 
+				// Parsoid requires empty <p></p> nodes to have a <br> inside, otherwise it ignores them
+				if ( this.isForParser() && !doUnwrap && domElement.tagName === 'P' && domElement.childNodes.length === 0 ) {
+					domElement.appendChild( doc.createElement( 'br' ) );
+				}
+
 				delete domElement.veInternal;
 				delete domElement.lastOuterPost;
 				// Ascend to parent node, except if this is an internal node

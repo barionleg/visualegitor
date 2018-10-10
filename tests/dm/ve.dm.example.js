@@ -2190,7 +2190,7 @@ ve.dm.example.domToDataCases = {
 		]
 	},
 	'wrapping of bare content between paragraphs': {
-		body: '<p>abc</p>def<p></p>',
+		body: '<p>abc</p>def<p>x</p>',
 		data: [
 			{ type: 'paragraph' },
 			'a',
@@ -2203,6 +2203,7 @@ ve.dm.example.domToDataCases = {
 			'f',
 			{ type: '/paragraph' },
 			{ type: 'paragraph' },
+			'x',
 			{ type: '/paragraph' },
 			{ type: 'internalList' },
 			{ type: '/internalList' }
@@ -2579,6 +2580,35 @@ ve.dm.example.domToDataCases = {
 			{ type: '/paragraph' },
 			{ type: '/listItem' },
 			{ type: '/list' },
+			{ type: 'internalList' },
+			{ type: '/internalList' }
+		]
+	},
+	'empty paragraph handling': {
+		body: '<p></p><p></p>',
+		data: [
+			{ type: 'paragraph' },
+			{ type: '/paragraph' },
+			{ type: 'paragraph' },
+			{ type: '/paragraph' },
+			{ type: 'internalList' },
+			{ type: '/internalList' }
+		],
+		clipboardBody: '<p></p><p></p>',
+		previewBody: '<p></p><p></p>',
+		normalizedBody: '<p><br></p><p><br></p>'
+	},
+	'empty paragraph handling (with br)': {
+		body: '<p><br></p><p><br></p>',
+		data: [
+			{ type: 'paragraph' },
+			{ type: 'break' },
+			{ type: '/break' },
+			{ type: '/paragraph' },
+			{ type: 'paragraph' },
+			{ type: 'break' },
+			{ type: '/break' },
+			{ type: '/paragraph' },
 			{ type: 'internalList' },
 			{ type: '/internalList' }
 		]
