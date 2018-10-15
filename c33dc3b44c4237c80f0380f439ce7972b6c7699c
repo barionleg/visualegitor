@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9c88b80c_0b8277b1",
+        "filename": "rebaser/dump-mongo.javascript",
+        "patchSetId": 12
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-10-15T13:16:01Z",
+      "side": 1,
+      "message": "rebaser/tools/dump-mongo.js?",
+      "revId": "c33dc3b44c4237c80f0380f439ce7972b6c7699c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
