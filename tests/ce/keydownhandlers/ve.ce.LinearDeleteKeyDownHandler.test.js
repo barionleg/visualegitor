@@ -16,6 +16,7 @@ QUnit.module( 've.ce.LinearDeleteKeyDownHandler', {
 QUnit.test( 'special key down: linear backspace/delete', function ( assert ) {
 	var i,
 		emptyList = '<ul><li><p></p></li></ul>',
+		link = '<p>foo <a href="#">bar</a> baz</p>',
 		cases = [
 			{
 				rangeOrSelection: new ve.Range( 1, 4 ),
@@ -317,6 +318,15 @@ QUnit.test( 'special key down: linear backspace/delete', function ( assert ) {
 				},
 				expectedRangeOrSelection: new ve.Range( 1 ),
 				msg: 'Backspace with an alien selected deletes it and replaces it with a paragraph, when the alien is the entire document'
+			},
+			{
+				htmlOrDoc: link,
+				rangeOrSelection: new ve.Range( 5 ),
+				keys: [ 'DELETE' ],
+				expectedData: function () {
+				},
+				expectedRangeOrSelection: new ve.Range( 5 ),
+				msg: 'Delete next to a link just activates the link'
 			}
 		];
 
