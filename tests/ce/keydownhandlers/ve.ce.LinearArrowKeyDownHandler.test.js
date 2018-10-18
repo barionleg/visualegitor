@@ -15,6 +15,7 @@ QUnit.module( 've.ce.LinearArrowKeyDownHandler', {
 
 QUnit.test( 'special key down: linear arrow keys', function ( assert ) {
 	var i,
+		supportsSelectionExtend = ve.supportsSelectionExtend,
 		complexTableDoc = ve.dm.example.createExampleDocument( 'complexTable' ),
 		slugDoc = ve.dm.example.createExampleDocumentFromData(
 			[
@@ -83,6 +84,28 @@ QUnit.test( 'special key down: linear arrow keys', function ( assert ) {
 				forceSelection: new ve.Range( 1 ),
 				expectedRangeOrSelection: new ve.Range( 2, 1 ),
 				msg: 'Cursor left in text with shift'
+			},
+			{
+				htmlOrDoc: blockImageDoc,
+				rangeOrSelection: new ve.Range( 3, 2 ),
+				keys: [ 'SHIFT+LEFT' ],
+				// No forceSelection, so just check the selection is preserved
+				expectedRangeOrSelection: new ve.Range( 3, 2 ),
+				msg: 'Cursor left in text with shift on a backwards selection'
+			},
+			{
+				htmlOrDoc: blockImageDoc,
+				rangeOrSelection: new ve.Range( 3, 2 ),
+				setup: function () {
+					ve.supportsSelectionExtend = false;
+				},
+				teardown: function () {
+					ve.supportsSelectionExtend = supportsSelectionExtend;
+				},
+				keys: [ 'SHIFT+LEFT' ],
+				// No forceSelection, so just check the selection is preserved
+				expectedRangeOrSelection: new ve.Range( 3, 2 ),
+				msg: 'Cursor left in text with shift on a backwards selection with no extend'
 			},
 			{
 				htmlOrDoc: blockImageDoc,
@@ -316,10 +339,16 @@ QUnit.test( 'special key down: linear arrow keys', function ( assert ) {
 		];
 
 	for ( i = 0; i < cases.length; i++ ) {
+		if ( cases[ i ].setup ) {
+			cases[ i ].setup();
+		}
 		ve.test.utils.runSurfaceHandleSpecialKeyTest(
 			assert, cases[ i ].htmlOrDoc, cases[ i ].rangeOrSelection, cases[ i ].keys,
 			cases[ i ].expectedData, cases[ i ].expectedRangeOrSelection, cases[ i ].msg,
 			cases[ i ].forceSelection, true
 		);
+		if ( cases[ i ].teardown ) {
+			cases[ i ].teardown();
+		}
 	}
 } );
