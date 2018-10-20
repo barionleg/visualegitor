@@ -8,9 +8,7 @@ QUnit.module( 've.ce.NodeFactory' );
 
 /* Stubs */
 
-ve.ce.NodeFactoryNodeStub = function VeCeNodeFactoryNodeStub( a, b ) {
-	this.a = a;
-	this.b = b;
+ve.ce.NodeFactoryNodeStub = function VeCeNodeFactoryNodeStub() {
 };
 
 OO.inheritClass( ve.ce.NodeFactoryNodeStub, ve.ce.LeafNode );
