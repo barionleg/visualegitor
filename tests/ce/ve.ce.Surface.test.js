@@ -23,6 +23,7 @@ ve.test.utils.runSurfaceHandleSpecialKeyTest = function ( assert, caseItem ) {
 		keys = caseItem.keys,
 		expectedData = caseItem.expectedData,
 		expectedRangeOrSelection = caseItem.expectedRangeOrSelection,
+		expectedDefaultPrevented = caseItem.expectedDefaultPrevented,
 		msg = caseItem.msg,
 		forceSelection = caseItem.forceSelection,
 		view = typeof htmlOrDoc === 'string' ?
@@ -30,6 +31,7 @@ ve.test.utils.runSurfaceHandleSpecialKeyTest = function ( assert, caseItem ) {
 			( htmlOrDoc instanceof ve.ce.Surface ? htmlOrDoc : ve.test.utils.createSurfaceViewFromDocument( htmlOrDoc || ve.dm.example.createExampleDocument() ) ),
 		model = view.getModel(),
 		data = ve.copy( model.getDocument().getFullData() ),
+		wereDefaultsPrevented = [],
 		execCommands = {
 			BACKSPACE: 'delete',
 			'SHIFT+BACKSPACE': 'delete',
@@ -67,6 +69,7 @@ ve.test.utils.runSurfaceHandleSpecialKeyTest = function ( assert, caseItem ) {
 			};
 			keyDownEvent = ve.test.utils.TestEvent( { type: 'keydown' }, keyData );
 			view.eventSequencer.onEvent( 'keydown', keyDownEvent );
+			wereDefaultsPrevented.push( keyDownEvent.isDefaultPrevented() );
 			if ( !keyDownEvent.isDefaultPrevented() ) {
 				if ( execCommands[ keyString ] ) {
 					document.execCommand( execCommands[ keyString ] );
@@ -98,6 +101,7 @@ ve.test.utils.runSurfaceHandleSpecialKeyTest = function ( assert, caseItem ) {
 			expectedData( data );
 			assert.equalLinearData( model.getDocument().getFullData(), data, msg + ': data' );
 		}
+		assert.deepEqual( wereDefaultsPrevented, expectedDefaultPrevented || Array( keys.length ).fill( true ), msg + ': defaultsPrevented' );
 
 		expectedSelection = ve.dm.Selection.static.newFromJSON( model.getDocument(), expectedRangeOrSelection instanceof ve.Range ?
 			{ type: 'linear', range: expectedRangeOrSelection } :
