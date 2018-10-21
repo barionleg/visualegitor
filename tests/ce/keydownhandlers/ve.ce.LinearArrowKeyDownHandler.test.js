@@ -373,8 +373,10 @@ QUnit.test( 'special key down: linear arrow keys', function ( assert ) {
 	cases.forEach( function ( caseItem ) {
 		promise = promise.then( function () {
 			return ve.test.utils.runSurfaceHandleSpecialKeyTest( assert, caseItem );
+		} ).catch( function ( error ) {
+			assert.notOk( true, caseItem.msg + ': throws ' + error );
 		} );
 	} );
 
-	promise.then( function () { done(); } );
+	promise.always( function () { done(); } );
 } );
