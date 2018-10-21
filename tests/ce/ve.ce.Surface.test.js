@@ -62,40 +62,40 @@ ve.test.utils.runSurfaceHandleSpecialKeyTest = function ( assert, caseItem ) {
 		);
 	} );
 
-	keys.forEach( function ( keyString ) {
-		function doKey() {
-			var keyParts = keyString.split( '+' ),
-				key = keyParts.pop(),
-				keyCode = OO.ui.Keys[ key ];
-			keyData = {
-				keyCode: keyCode,
-				which: keyCode,
-				shiftKey: keyParts.indexOf( 'SHIFT' ) !== -1,
-				ctrlKey: keyParts.indexOf( 'CTRL' ) !== -1
-			};
-			keyDownEvent = ve.test.utils.createTestEvent( { type: 'keydown' }, keyData );
-			view.eventSequencer.onEvent( 'keydown', keyDownEvent );
-			wereDefaultsPrevented.push( keyDownEvent.isDefaultPrevented() );
-			if ( !keyDownEvent.isDefaultPrevented() ) {
-				if ( execCommands[ keyString ] ) {
-					document.execCommand( execCommands[ keyString ] );
-				}
-				view.eventSequencer.onEvent( 'keypress', ve.test.utils.createTestEvent( { type: 'keypress' }, keyData ) );
+	function doKey( keyString ) {
+		var keyParts = keyString.split( '+' ),
+			key = keyParts.pop(),
+			keyCode = OO.ui.Keys[ key ];
+		keyData = {
+			keyCode: keyCode,
+			which: keyCode,
+			shiftKey: keyParts.indexOf( 'SHIFT' ) !== -1,
+			ctrlKey: keyParts.indexOf( 'CTRL' ) !== -1
+		};
+		keyDownEvent = ve.test.utils.createTestEvent( { type: 'keydown' }, keyData );
+		view.eventSequencer.onEvent( 'keydown', keyDownEvent );
+		wereDefaultsPrevented.push( keyDownEvent.isDefaultPrevented() );
+		if ( !keyDownEvent.isDefaultPrevented() ) {
+			if ( execCommands[ keyString ] ) {
+				document.execCommand( execCommands[ keyString ] );
 			}
-			if ( forceSelection instanceof ve.Range ) {
-				view.showSelectionState( view.getSelectionState( forceSelection ) );
-			} else if ( forceSelection && forceSelection.focusNode ) {
-				view.showSelectionState( new ve.SelectionState( {
-					anchorNode: view.$element.find( forceSelection.anchorNode )[ 0 ],
-					anchorOffset: forceSelection.anchorOffset,
-					focusNode: view.$element.find( forceSelection.focusNode )[ 0 ],
-					focusOffset: forceSelection.focusOffset
-				} ) );
-			}
-			view.eventSequencer.onEvent( 'keyup', ve.test.utils.createTestEvent( { type: 'keyup' }, keyData ) );
-			view.eventSequencer.endLoop();
+			view.eventSequencer.onEvent( 'keypress', ve.test.utils.createTestEvent( { type: 'keypress' }, keyData ) );
 		}
-		defer( doKey );
+		if ( forceSelection instanceof ve.Range ) {
+			view.showSelectionState( view.getSelectionState( forceSelection ) );
+		} else if ( forceSelection && forceSelection.focusNode ) {
+			view.showSelectionState( new ve.SelectionState( {
+				anchorNode: view.$element.find( forceSelection.anchorNode )[ 0 ],
+				anchorOffset: forceSelection.anchorOffset,
+				focusNode: view.$element.find( forceSelection.focusNode )[ 0 ],
+				focusOffset: forceSelection.focusOffset
+			} ) );
+		}
+		view.eventSequencer.onEvent( 'keyup', ve.test.utils.createTestEvent( { type: 'keyup' }, keyData ) );
+		view.eventSequencer.endLoop();
+	}
+	keys.forEach( function ( keyString ) {
+		defer( doKey.bind( this, keyString ) );
 	} );
 
 	defer( function () {
