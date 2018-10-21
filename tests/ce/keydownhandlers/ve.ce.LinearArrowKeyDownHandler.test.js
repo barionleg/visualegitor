@@ -342,9 +342,14 @@ QUnit.test( 'special key down: linear arrow keys', function ( assert ) {
 		if ( cases[ i ].setup ) {
 			cases[ i ].setup();
 		}
-		ve.test.utils.runSurfaceHandleSpecialKeyTest( assert, cases[ i ], true );
 		if ( cases[ i ].teardown ) {
-			cases[ i ].teardown();
+			try {
+				ve.test.utils.runSurfaceHandleSpecialKeyTest( assert, cases[ i ], true );
+			} finally {
+				cases[ i ].teardown();
+			}
+		} else {
+			ve.test.utils.runSurfaceHandleSpecialKeyTest( assert, cases[ i ], true );
 		}
 	}
 } );
