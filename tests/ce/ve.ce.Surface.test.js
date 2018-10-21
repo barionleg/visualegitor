@@ -47,12 +47,15 @@ ve.test.utils.runSurfaceHandleSpecialKeyTest = function ( assert, caseItem ) {
 	if ( caseItem.setup ) {
 		caseItem.setup();
 	}
+	// Below this point, any code that might throw an exception should run in the promise chain,
+	// so the caseItem.teardown() at the lexical end of this function will always run
 
-	ve.test.utils.hijackEventSequencerTimeouts( view.eventSequencer );
-
-	model.setSelection(
-		ve.test.utils.selectionFromRangeOrSelection( model.getDocument(), rangeOrSelection )
-	);
+	promise = promise.then( function () {
+		ve.test.utils.hijackEventSequencerTimeouts( view.eventSequencer );
+		model.setSelection(
+			ve.test.utils.selectionFromRangeOrSelection( model.getDocument(), rangeOrSelection )
+		);
+	} );
 
 	keys.forEach( function ( keyString ) {
 		promise = promise.then( function () {
@@ -109,6 +112,7 @@ ve.test.utils.runSurfaceHandleSpecialKeyTest = function ( assert, caseItem ) {
 		);
 		assert.equalHash( model.getSelection(), expectedSelection, msg + ': selection' );
 		view.destroy();
+	} ).always( function () {
 		if ( caseItem.teardown ) {
 			caseItem.teardown();
 		}
