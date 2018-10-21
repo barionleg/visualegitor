@@ -109,6 +109,7 @@ ve.test.utils.runSurfaceHandleSpecialKeyTest = function ( assert, caseItem ) {
 		);
 		assert.equalHash( model.getSelection(), expectedSelection, msg + ': selection' );
 		view.destroy();
+	} ).always( function () {
 		if ( caseItem.teardown ) {
 			caseItem.teardown();
 		}
