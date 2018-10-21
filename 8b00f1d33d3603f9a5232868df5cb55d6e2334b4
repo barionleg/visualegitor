@@ -22,6 +22,29 @@
       "revId": "8b00f1d33d3603f9a5232868df5cb55d6e2334b4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "611d5802_9973b866",
+        "filename": "tests/ce/ve.ce.Surface.test.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2018-10-21T04:37:36Z",
+      "side": 1,
+      "message": "Ok, I can reliably observe the Heisenbug on Chromium 69 with the following code:\n\n  if ( msg \u003d\u003d\u003d \u0027Empty node deleted by delete; selection goes to nearest content offset\u0027 ) {\n    console.log( JSON.stringify( model.getSelection().toJSON() ) );\n  }\n\n\nIf the debugger is closed, the output is always this:\n\n  {\"type\":\"range\",\"from\":56,\"to\":56}\n\nBut if the debugger is open, the output is always this:\n\n  {\"type\":\"range\",\"from\":1,\"to\":1}",
+      "range": {
+        "startLine": 98,
+        "startChar": 3,
+        "endLine": 98,
+        "endChar": 24
+      },
+      "revId": "8b00f1d33d3603f9a5232868df5cb55d6e2334b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
