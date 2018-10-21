@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7420dcbd_024b8e37",
+        "filename": "tests/ce/keydownhandlers/ve.ce.LinearDeleteKeyDownHandler.test.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2018-10-21T03:21:39Z",
+      "side": 1,
+      "message": "I\u0027m now seeing a race condition here, where occasionally this test fails. When it fails, the deleted content is the \u0027a\u0027 at 1 and the \u0027l\u0027 at 56 (not the \u0027l\u0027 at 56 and the paragraph at 56-57).",
+      "range": {
+        "startLine": 76,
+        "startChar": 3,
+        "endLine": 84,
+        "endChar": 5
+      },
+      "revId": "8b00f1d33d3603f9a5232868df5cb55d6e2334b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
