@@ -15,7 +15,7 @@ QUnit.module( 've.ce.Surface', {
 
 /* Tests */
 
-ve.test.utils.runSurfaceHandleSpecialKeyTest = function ( assert, caseItem ) {
+ve.test.utils.unguardedRunSurfaceHandleSpecialKeyTest = function ( assert, caseItem ) {
 	var keyData, keyDownEvent, expectedSelection,
 		promise = $.Deferred().resolve().promise(),
 		htmlOrDoc = caseItem.htmlOrDoc,
@@ -109,6 +109,7 @@ ve.test.utils.runSurfaceHandleSpecialKeyTest = function ( assert, caseItem ) {
 		);
 		assert.equalHash( model.getSelection(), expectedSelection, msg + ': selection' );
 		view.destroy();
+	} ).always( function () {
 		if ( caseItem.teardown ) {
 			caseItem.teardown();
 		}
