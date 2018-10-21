@@ -45,6 +45,30 @@
       "revId": "8b00f1d33d3603f9a5232868df5cb55d6e2334b4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9feb4fd4_b26cb963",
+        "filename": "tests/ce/ve.ce.Surface.test.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2018-10-21T08:03:12Z",
+      "side": 1,
+      "message": "Ok, I\u0027ve tried diffing ve.Filibuster outputs of the passing situation vs the failing one, and the difference comes down to this:\n\n  VeDmSurface.setSelection({\"ve.dm.Selection\":\"Linear: 56 - 57\"})\n    ...\n    VeDmSurface.emit(\"select\", {\"ve.dm.Selection\":\"Linear: 56 - 57\"})\n     ...\n     VeCeSurface.onModelSelect({\"ve.dm.Selection\":\"Linear: 56 - 57\"})\n      ...\n      VeCeSurface.showModelSelection()\n       ...\n       VeCeSurface.showSelectionState(\"(VeSelectionState)\")\n        ...\n -      VeCeSurface.onDocumentFocusInOut(\"(unknown)\")---\u003e\"(undefined)\"\n        VeCeSurface.updateActiveAnnotations() \n        ... \n - VeCeSurface.onFocusChange()\n   ...\n - VeCeSurface.onDocumentSelectionChange(\"(unknown)\")\n   ...\n   VeEventSequencer.afterEvent(\"keyup\", \"(unknown)\")---\u003e\"(undefined)\"\n   VeEventSequencer.doAfterLoop(2)---\u003e\"(undefined)\"\n +  VeCeSurface.onDocumentSelectionChange(\"(unknown)\")\n   ...\n - VeCeSurface.isFocused()---\u003etrue\n + VeCeSurface.isFocused()---\u003efalse\n + VeCeSurface.getModel()---\u003e\"(VeDmSurface)\"\n + VeDmSurface.selectFirstContentOffset()\n\n\nAnd indeed, with the debugger closed, you can cause the tests to fail in Chromium by reloading the test page and quickly clicking in the location bar. (Also, with the debugger open, the tests pass if you click on the page then reload with CTRL+R).\n\nIn other words, the new asynchronicity is allowing listeners to react to a selection difference where before they did not.",
+      "parentUuid": "611d5802_9973b866",
+      "range": {
+        "startLine": 98,
+        "startChar": 3,
+        "endLine": 98,
+        "endChar": 24
+      },
+      "revId": "8b00f1d33d3603f9a5232868df5cb55d6e2334b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
