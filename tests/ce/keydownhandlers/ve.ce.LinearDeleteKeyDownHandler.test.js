@@ -346,5 +346,5 @@ QUnit.test( 'special key down: linear backspace/delete', function ( assert ) {
 		} );
 	} );
 
-	promise.then( function () { done(); } );
+	promise.always( function () { done(); } );
 } );

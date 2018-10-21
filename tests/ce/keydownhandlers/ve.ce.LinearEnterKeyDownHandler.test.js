@@ -243,5 +243,5 @@ QUnit.test( 'special key down: linear enter', function ( assert ) {
 		} );
 	} );
 
-	promise.then( function () { done(); } );
+	promise.always( function () { done(); } );
 } );

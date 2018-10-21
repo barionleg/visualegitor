@@ -43,5 +43,5 @@ QUnit.test( 'special key down: linear escape', function ( assert ) {
 		} );
 	} );
 
-	promise.then( function () { done(); } );
+	promise.always( function () { done(); } );
 } );

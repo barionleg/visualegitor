@@ -132,7 +132,7 @@ QUnit.test( 'special key down: table arrow keys (complex movements)', function (
 		} );
 	} );
 
-	promise.then( function () { done(); } );
+	promise.always( function () { done(); } );
 
 	// Allow the real surface created with createSurfaceFromDocument for the
 	// 'Tab at end of table inserts new row' case to get properly initialized
