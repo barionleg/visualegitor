@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1c24a6d1_ccf67998",
+        "filename": "tests/ce/ve.ce.Surface.test.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2018-10-22T16:59:55Z",
+      "side": 1,
+      "message": "I too wondered whether we need the setTimeout. Empirically it looks like we might not but I don\u0027t fully understand why [not].\n\nIf it is now logically correct, I\u0027m unclear as to whether it\u0027s only logically correct because each key action is executed in a separately deferred chunk.\n\nWe should either work out the answer and document it, or (more likely) document that we\u0027re unsure but it might matter.",
+      "range": {
+        "startLine": 98,
+        "startChar": 2,
+        "endLine": 98,
+        "endChar": 17
+      },
+      "revId": "ee35e4e2225798f70527d0f87318deab3b65c2ea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
