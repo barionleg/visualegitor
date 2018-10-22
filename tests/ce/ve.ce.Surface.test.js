@@ -1476,9 +1476,15 @@ QUnit.test( 'onCopy', function ( assert ) {
 		];
 
 	function testRunner( doc, rangeOrSelection, expectedData, expectedOriginalRange, expectedBalancedRange, expectedHtml, expectedText, noClipboardData, msg ) {
+<<<<<<< HEAD   (a64ba1 Add extra copy/paste tests for <span> clipboard keys)
 		var slice, isClipboardDataFormatsSupported, $expected, clipboardKey,
 			testEvent = new ve.test.utils.TestEvent(),
 			clipboardData = testEvent.originalEvent.clipboardData,
+=======
+		var slice, isClipboardDataFormatsSupported, $expected, clipboardKey, profile,
+			clipboardData = new ve.test.utils.DataTransfer(),
+			testEvent = ve.test.utils.createTestEvent( { type: 'copy', clipboardData: clipboardData } ),
+>>>>>>> CHANGE (f6af90 Fix test in Chrome 70)
 			view = ve.test.utils.createSurfaceViewFromDocument( doc || ve.dm.example.createExampleDocument() ),
 			model = view.getModel();
 
@@ -1514,7 +1520,8 @@ QUnit.test( 'onCopy', function ( assert ) {
 			);
 		}
 		if ( expectedText ) {
-			if ( $.client.profile().layout === 'gecko' ) {
+			profile = $.client.profile();
+			if ( profile.layout === 'gecko' || ( profile.name === 'chrome' && profile.versionNumber >= 70 ) ) {
 				expectedText = expectedText.trim();
 			}
 			assert.strictEqual( clipboardData.getData( 'text/plain' ), expectedText, msg + ': text' );
