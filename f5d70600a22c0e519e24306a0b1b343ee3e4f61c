@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "51609f00_5034a0c9",
+        "filename": "src/dm/ve.dm.Change.js",
+        "patchSetId": 42
+      },
+      "lineNbr": 944,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2018-10-28T16:54:54Z",
+      "side": 1,
+      "message": "Done - I think it\u0027s a bit horrible for this patch set to keep the name \"squash\" but change it from being in-place to not. But it\u0027s not very widely used so far.",
+      "parentUuid": "4c049b0e_e7940dac",
+      "range": {
+        "startLine": 943,
+        "startChar": 25,
+        "endLine": 944,
+        "endChar": 22
+      },
+      "revId": "f5d70600a22c0e519e24306a0b1b343ee3e4f61c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "df6e013c_5580e339",
         "filename": "src/dm/ve.dm.Change.js",
         "patchSetId": 42
@@ -36,6 +60,24 @@
       "writtenOn": "2018-10-28T12:52:35Z",
       "side": 1,
       "message": "Is length \u003d\u003d\u003d 1 going to be a common case? In which case you could special case it and return \u0027this\u0027 or this.clone?",
+      "revId": "f5d70600a22c0e519e24306a0b1b343ee3e4f61c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "334eafa3_310cbf01",
+        "filename": "src/dm/ve.dm.Change.js",
+        "patchSetId": 42
+      },
+      "lineNbr": 949,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2018-10-28T16:54:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df6e013c_5580e339",
       "revId": "f5d70600a22c0e519e24306a0b1b343ee3e4f61c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -59,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "0576f931_06d1f560",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 42
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2018-10-28T16:54:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "464f2f65_678ff03c",
+      "revId": "f5d70600a22c0e519e24306a0b1b343ee3e4f61c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "34f518bf_9e04deb3",
         "filename": "src/dm/ve.dm.TransactionSquasher.js",
         "patchSetId": 42
@@ -70,6 +130,24 @@
       "writtenOn": "2018-10-28T12:52:35Z",
       "side": 1,
       "message": "Should we mark methods from here down as @private?",
+      "revId": "f5d70600a22c0e519e24306a0b1b343ee3e4f61c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cfde1aaf_df99095b",
+        "filename": "src/dm/ve.dm.TransactionSquasher.js",
+        "patchSetId": 42
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2018-10-28T16:54:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34f518bf_9e04deb3",
       "revId": "f5d70600a22c0e519e24306a0b1b343ee3e4f61c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
