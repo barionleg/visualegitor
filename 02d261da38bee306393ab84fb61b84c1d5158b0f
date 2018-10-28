@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8cb780e7_21ce8221",
+        "filename": "src/dm/ve.dm.Change.js",
+        "patchSetId": 35
+      },
+      "lineNbr": 967,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-10-28T12:52:35Z",
+      "side": 1,
+      "message": "I would allow an array of transactions to be passed to the constructor, and move this loop into there.",
+      "revId": "02d261da38bee306393ab84fb61b84c1d5158b0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f7a5eab0_4634ef42",
+        "filename": "src/dm/ve.dm.Change.js",
+        "patchSetId": 35
+      },
+      "lineNbr": 970,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-10-28T12:52:35Z",
+      "side": 1,
+      "message": "I think it would. ve/oo.copy is deep, and it looks for clone or cloneNode methods.",
+      "revId": "02d261da38bee306393ab84fb61b84c1d5158b0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

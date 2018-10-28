@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4c049b0e_e7940dac",
+        "filename": "src/dm/ve.dm.Change.js",
+        "patchSetId": 42
+      },
+      "lineNbr": 944,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-10-28T12:52:35Z",
+      "side": 1,
+      "message": "My response to your previous answer on squashed vs squash was that all of our Range \u0026 Selection methods use imperative and they are immutable, as does \"clone\".",
+      "range": {
+        "startLine": 943,
+        "startChar": 25,
+        "endLine": 944,
+        "endChar": 22
+      },
+      "revId": "f5d70600a22c0e519e24306a0b1b343ee3e4f61c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df6e013c_5580e339",
+        "filename": "src/dm/ve.dm.Change.js",
+        "patchSetId": 42
+      },
+      "lineNbr": 949,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-10-28T12:52:35Z",
+      "side": 1,
+      "message": "Is length \u003d\u003d\u003d 1 going to be a common case? In which case you could special case it and return \u0027this\u0027 or this.clone?",
+      "revId": "f5d70600a22c0e519e24306a0b1b343ee3e4f61c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "464f2f65_678ff03c",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 42
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-10-28T12:52:35Z",
+      "side": 1,
+      "message": "rebase on I2cc2e6afa654e81f8e565775e4197c4d23442cf6?",
+      "revId": "f5d70600a22c0e519e24306a0b1b343ee3e4f61c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "34f518bf_9e04deb3",
+        "filename": "src/dm/ve.dm.TransactionSquasher.js",
+        "patchSetId": 42
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-10-28T12:52:35Z",
+      "side": 1,
+      "message": "Should we mark methods from here down as @private?",
+      "revId": "f5d70600a22c0e519e24306a0b1b343ee3e4f61c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
