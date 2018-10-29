@@ -87,6 +87,24 @@
       "revId": "02d261da38bee306393ab84fb61b84c1d5158b0f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c902f1d9_9d09b6eb",
+        "filename": "src/dm/ve.dm.Change.js",
+        "patchSetId": 35
+      },
+      "lineNbr": 970,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2018-10-29T15:04:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1350d025_7fde53a3",
+      "revId": "02d261da38bee306393ab84fb61b84c1d5158b0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
