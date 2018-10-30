@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fd698253_09daa0f5",
+        "filename": "tests/ui/actions/ve.ui.WindowAction.test.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2018-10-30T21:41:29Z",
+      "side": 1,
+      "message": "Doesn\u0027t the qunit style module complain about this? It probably should, though… running `assert.expect( 2 )` here is icky too.",
+      "range": {
+        "startLine": 19,
+        "startChar": 3,
+        "endLine": 19,
+        "endChar": 18
+      },
+      "revId": "581663f45100a942f669860b9c38042ca442b9e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
