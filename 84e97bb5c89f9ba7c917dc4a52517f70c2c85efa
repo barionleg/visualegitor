@@ -16,6 +16,24 @@
       "revId": "84e97bb5c89f9ba7c917dc4a52517f70c2c85efa",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "74bb2636_e4d64cb2",
+        "filename": "src/ce/selections/ve.ce.LinearSelection.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2018-10-30T13:55:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7864c7a_241e0e61",
+      "revId": "84e97bb5c89f9ba7c917dc4a52517f70c2c85efa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
