@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c75dd8c0_07526ac6",
+        "filename": "src/ce/ve.ce.ResizableNode.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2018-11-01T22:41:25Z",
+      "side": 1,
+      "message": "IIRC (very vaguely) we didn\u0027t want to have to pass in variables to a message in stand-alone, but that now works fine? Eh.",
+      "range": {
+        "startLine": 199,
+        "startChar": 6,
+        "endLine": 199,
+        "endChar": 17
+      },
+      "revId": "b4fa3d230e785facc382155c7aae629a372fbd2e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
