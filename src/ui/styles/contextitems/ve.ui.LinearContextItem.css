@@ -16,6 +16,10 @@
 
 .ve-ui-linearContextItem-title > .oo-ui-labelWidget {
 	margin-left: 0.3em;
+	word-wrap: break-word;
+	white-space: pre-line;
+	width: 65%;
+	position: absolute;
 }
 
 .ve-ui-linearContextItem-info {
