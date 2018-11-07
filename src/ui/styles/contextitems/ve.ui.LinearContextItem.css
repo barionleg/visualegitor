@@ -12,10 +12,14 @@
 .ve-ui-linearContextItem-title {
 	padding: 0.5em 1em;
 	white-space: nowrap;
+	display: flex;
 }
 
 .ve-ui-linearContextItem-title > .oo-ui-labelWidget {
 	margin-left: 0.3em;
+	word-wrap: break-word;
+	white-space: pre-line;
+	min-width: auto
 }
 
 .ve-ui-linearContextItem-info {
