@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "acbcbaec_ed67832e",
+        "filename": "src/ui/styles/ve.ui.MobileContext.css",
+        "patchSetId": 10
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2018-11-08T18:28:02Z",
+      "side": 1,
+      "message": "I would use max-width, so that the description can use this space if the title is short.",
+      "revId": "7527fef041366823df562751faafb5113191649f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f91c7632_164466d5",
+        "filename": "src/ui/styles/ve.ui.MobileContext.css",
+        "patchSetId": 10
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2018-11-08T18:28:02Z",
+      "side": 1,
+      "message": "Probably should be the same as padding-left on .ve-ui-linearContextItem-title above – 0.5em.",
+      "revId": "7527fef041366823df562751faafb5113191649f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
