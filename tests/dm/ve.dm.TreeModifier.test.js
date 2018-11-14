@@ -44,6 +44,65 @@ ve.dm.TreeModifier.prototype.dump = function () {
 
 QUnit.module( 've.dm.TreeModifier' );
 
+QUnit.test( 'treeDiff', function ( assert ) {
+	var origData, tx, treeDiff, surface, doc, treeModifier;
+
+	// old: <div><p>foobarbaz</p><p>qux</p></div>
+	// new: <ul><li><p>foo</p><p>barBAZ</p><p>qux</p></li></ul>
+	// tx: {-<div>-|+<ul><li>+}<p>foo{+</p><p>+}bar{-baz-|+BAZ+}</p><p>qux</p>{-</div>-|+</li></ul>+}
+	origData = [
+		{ type: 'div' },
+		{ type: 'paragraph' },
+		'f',
+		'o',
+		'o',
+		'b',
+		'a',
+		'r',
+		'b',
+		'a',
+		'z',
+		{ type: '/paragraph' },
+		{ type: 'paragraph' },
+		'q',
+		'u',
+		'x',
+		{ type: '/paragraph' },
+		{ type: '/div' }
+	];
+	tx = new ve.dm.Transaction( [
+		{ type: 'replace', remove: [ { type: 'div' } ], insert: [ { type: 'list' }, { type: 'listItem' } ] },
+		{ type: 'retain', length: 4 },
+		{ type: 'replace', remove: [], insert: [ { type: '/paragraph' }, { type: 'paragraph' } ] },
+		{ type: 'retain', length: 3 },
+		{ type: 'replace', remove: [ 'b', 'a', 'z' ], insert: [ 'B', 'A', 'Z' ] },
+		{ type: 'retain', length: 6 },
+		{ type: 'replace', remove: [ { type: '/div' } ], insert: [ { type: '/listItem' }, { type: '/list' } ] }
+	] );
+	treeDiff = [
+		// XXX adjust offsets to cope with text nodes transparently
+		// XXX include removals to be symmetrical with insertions
+		{ type: 'insertNode', at: [ 0 ], element: { type: 'list' } },
+		{ type: 'insertNode', at: [ 0, 0 ], element: { type: 'listItem' } },
+		{ type: 'insertNode', at: [ 1, 0, 0 ], element: { type: 'paragraph' } },
+		{ type: 'moveText', from: [ 0, 0, 0, 0 ], to: [ 1, 0, 0, 0 ], length: 3 },
+		{ type: 'insertNode', at: [ 1, 0, 0 ], element: { type: 'paragraph' } },
+		{ type: 'moveText', from: [ 0, 0, 0, 3 ], length: 3, to: [ 1, 0, 0, 0 ] },
+		{ type: 'removeText', at: [ 0, 0, 0, 6 ], data: [ 'b', 'a', 'z' ] },
+		{ type: 'insertText', at: [ 1, 0, 0, 0 ], data: [ 'B', 'A', 'Z' ] },
+		{ type: 'removeNode', at: [ 0, 0 ], element: { type: 'paragraph' } },
+		{ type: 'moveNode', from: [ 0, 1 ], to: [ 1, 0, 0 ] },
+		{ type: 'removeNode', at: [ 0 ], element: { type: 'div' } }
+	];
+	surface = new ve.dm.Surface(
+		ve.dm.example.createExampleDocumentFromData( origData )
+	);
+	doc = surface.documentModel;
+	treeModifier = new ve.dm.TreeModifier( doc, tx );
+	treeModifier.process();
+	assert.deepEqual( treeModifier.treeDiff, treeDiff, 'Tree diff is correct' );
+} );
+
 QUnit.test( 'modify', function ( assert ) {
 	var origData, surface, doc, tx, expectedTreeDump, actualTreeDump;
 
