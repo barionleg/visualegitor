@@ -184,50 +184,6 @@ ve.dm.TreeCursor.prototype.stepAtMost = function ( maxLength ) {
 };
 
 /**
- * Adjust own position to account for an insertion/deletion
- *
- * @param {number[]} path The path to the node in which the insertion/deletion occurs
- * @param {number} offset The offset at which the insertion/deletion occurs
- * @param {number} adjustment The number of nodes inserted (if > 0) or deleted (if < 0)
- * @param {number} linearAdjustment The linear adjustment made at the offset
- */
-ve.dm.TreeCursor.prototype.adjustPath = function ( path, offset, adjustment, linearAdjustment ) {
-	var i, len;
-
-	len = path.length;
-	// Find the first offset i where this.path[ i ] is undefined or differs from path[ i ]
-	// If there is such an offset, then own position lies outside the adjusted node
-	for ( i = 0; i < len; i++ ) {
-		if ( this.path[ i ] === path[ i ] ) {
-			continue;
-		}
-		if ( path[ i ] < ( i === this.path.length ? this.offset : this.path[ i ] ) ) {
-			// Own position lies after the adjusted node
-			this.linearOffset += linearAdjustment;
-		}
-		return;
-	}
-	// Else own position is in the adjusted node or one of its children
-
-	// Temporarily push offset onto path to simplify the logic
-	this.path.push( this.offset );
-
-	if ( this.path[ len ] > offset || (
-		this.path[ len ] === offset && ( adjustment || linearAdjustment ) > 0
-	) ) {
-		// Own position lies inside the adjusted node, after the adjustment
-		if ( this.path[ len ] + adjustment < offset ) {
-			throw new Error( 'Cursor lies within deleted range' );
-		}
-		this.path[ len ] += adjustment;
-		// Need not adjust this.nodes, because the actual node object is unchanged
-		this.linearOffset += linearAdjustment;
-	}
-	// Restore offset
-	this.offset = this.path.pop();
-};
-
-/**
  * Step into the next node
  *
  * @return {Object} The step
