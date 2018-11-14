@@ -31,6 +31,7 @@ QUnit.test( 'roundTripMetadata', function ( assert ) {
 
 	doc = ve.dm.converter.getModelFromDom( ve.createDocumentFromHtml( '<body>' + beforeHtml ) );
 	tx = ve.dm.TransactionBuilder.static.newFromRemoval( doc, new ve.Range( 10, 11 ) );
+	// Dies because inserter.stepAtMost doesn't recognise it's stepping over removed text
 	doc.commit( tx );
 	assert.strictEqual(
 		ve.dm.converter.getDomFromModel( doc ).body.innerHTML,
