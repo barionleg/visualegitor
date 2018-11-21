@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6fc4de37_e35d296b",
+        "filename": "src/ve.debug.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2018-11-21T18:45:14Z",
+      "side": 1,
+      "message": "Ha. I guess the annoyance is worth it!",
+      "revId": "c9b894467b47153e24ceb48545e87e0d367a92b0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
