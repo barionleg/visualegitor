@@ -16,6 +16,24 @@
       "revId": "a585434899b42500b067e4f80e6fed82e09c3667",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "864293a9_348e65a3",
+        "filename": "src/ve.utils.client.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2018-11-21T21:27:00Z",
+      "side": 1,
+      "message": "That\u0027s not what I get in my tests with a plain text input. It\u0027s always the parent.",
+      "parentUuid": "f6f20d86_b47df334",
+      "revId": "a585434899b42500b067e4f80e6fed82e09c3667",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
