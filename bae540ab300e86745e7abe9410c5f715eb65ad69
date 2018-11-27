@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "91a3ea37_ea6b74b1",
+        "filename": ".eslintrc.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2018-11-27T22:48:00Z",
+      "side": 1,
+      "message": "Already set upstream.",
+      "range": {
+        "startLine": 16,
+        "startChar": 2,
+        "endLine": 16,
+        "endChar": 55
+      },
+      "revId": "bae540ab300e86745e7abe9410c5f715eb65ad69",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
