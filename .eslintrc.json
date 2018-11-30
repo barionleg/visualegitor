@@ -13,6 +13,8 @@
 		"Papa": false
 	},
 	"rules": {
+		"jquery/no-hide": 2,
+		"jquery/no-show": 2,
 		"max-statements-per-line": [ "error", { "max": 1 } ],
 		"max-len": 0
 	},
