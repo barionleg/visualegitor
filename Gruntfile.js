@@ -338,6 +338,9 @@ module.exports = function ( grunt ) {
 			]
 		},
 		eslint: {
+			options: {
+				reportUnusedDisableDirectives: true
+			},
 			main: [
 				'*.{js,html}',
 				'{bin,build,demos,src,tests,rebaser}/**/*.{js,html}',
