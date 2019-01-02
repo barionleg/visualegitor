@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "59faab3e_deaa46d1",
+        "filename": "tests/ce/ve.ce.Surface.test.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 2562,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2019-01-02T17:32:47Z",
+      "side": 1,
+      "message": "The null return is never tested?",
+      "revId": "7a9d2d5d13a7682d459e7e73e2854678007e9de3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
