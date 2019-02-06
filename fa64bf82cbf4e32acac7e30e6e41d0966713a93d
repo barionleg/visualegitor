@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9176fab8_6be33d89",
+        "filename": "src/dm/ve.dm.Node.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 591,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2019-02-06T17:14:35Z",
+      "side": 1,
+      "message": "where does this enforce the node being a BranchNode?",
+      "revId": "fa64bf82cbf4e32acac7e30e6e41d0966713a93d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4016cf69_6d2c79ad",
+        "filename": "src/dm/ve.dm.Surface.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2019-02-06T17:14:35Z",
+      "side": 1,
+      "message": "ve.dm.BranchNode",
+      "revId": "fa64bf82cbf4e32acac7e30e6e41d0966713a93d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
