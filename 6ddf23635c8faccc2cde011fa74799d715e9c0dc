@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9199c517_5c7b8c62",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 2631,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2019-02-07T19:04:11Z",
+      "side": 1,
+      "message": "this is a plain array of jquery collections, so the $ prefix should not be used",
+      "revId": "6ddf23635c8faccc2cde011fa74799d715e9c0dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee1dbb04_47451291",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 2635,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2019-02-07T19:04:11Z",
+      "side": 1,
+      "message": "current is a jquery collection, so should be $-prefixed\n\nthat said we could probably do this without jQuery....\n\n current.nodeName\n\n current.querySelectorAll(\u0027img\u0027)",
+      "revId": "6ddf23635c8faccc2cde011fa74799d715e9c0dc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
