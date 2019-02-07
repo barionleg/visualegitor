@@ -337,6 +337,8 @@ ve.demo.SurfaceContainer.prototype.loadHtml = function ( pageHtml, mode ) {
 			container.surface.getView().focus();
 		}
 	} );
+
+	this.surface.setReadOnly( true );
 };
 
 /**

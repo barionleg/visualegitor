@@ -415,17 +415,29 @@ ve.ui.Surface.prototype.getGlobalOverlay = function () {
  * @inheritdoc
  */
 ve.ui.Surface.prototype.setDisabled = function ( disabled ) {
-	if ( disabled !== this.disabled && this.disabled !== null ) {
-		if ( disabled ) {
-			this.view.disable();
-			this.model.disable();
-		} else {
-			this.view.enable();
-			this.model.enable();
-		}
+	if ( disabled ) {
+		OO.ui.warnDeprecation( 'Surfaces can\'t be disabled, only set to readOnly' );
 	}
-	// Parent method
-	return ve.ui.Surface.super.prototype.setDisabled.call( this, disabled );
+};
+
+/**
+ * Set the read-only state of the surface
+ *
+ * @param {boolean} readOnly Make surface read-only
+ */
+ve.ui.Surface.prototype.setReadOnly = function ( readOnly ) {
+	this.readOnly = !!readOnly;
+	this.model.setReadOnly( readOnly );
+	this.view.setReadOnly( readOnly );
+};
+
+/**
+ * Check if the surface is read-only
+ *
+ * @return {boolean}
+ */
+ve.ui.Surface.prototype.isReadOnly = function () {
+	return this.readOnly;
 };
 
 /**
@@ -673,9 +685,9 @@ ve.ui.Surface.prototype.getCommands = function () {
 ve.ui.Surface.prototype.execute = function ( triggerOrAction, method ) {
 	var command, obj, ret;
 
-	if ( this.isDisabled() ) {
-		return;
-	}
+	// if ( this.isDisabled() ) {
+	// 	return;
+	// }
 
 	if ( triggerOrAction instanceof ve.ui.Trigger ) {
 		command = this.triggerListener.getCommandByTrigger( triggerOrAction.toString() );
