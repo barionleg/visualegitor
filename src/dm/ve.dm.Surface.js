@@ -40,7 +40,7 @@ ve.dm.Surface = function VeDmSurface( doc, config ) {
 	this.selectedAnnotations = new ve.dm.AnnotationSet( this.getDocument().getStore() );
 	this.isCollapsed = null;
 	this.multiUser = false;
-	this.enabled = true;
+	this.readOnly = false;
 	this.transacting = false;
 	this.queueingContextChanges = false;
 	this.contextChangeQueued = false;
@@ -117,25 +117,27 @@ OO.mixinClass( ve.dm.Surface, OO.EventEmitter );
 /* Methods */
 
 /**
- * Disable changes.
+ * Set the read-only state of the surface
  *
- * @fires history
+ * @param {boolean} readOnly Make surface read-only
  */
-ve.dm.Surface.prototype.disable = function () {
-	this.stopHistoryTracking();
-	this.enabled = false;
+ve.dm.Surface.prototype.setReadOnly = function ( readOnly ) {
+	this.readOnly = !!readOnly;
+	if ( readOnly ) {
+		this.stopHistoryTracking();
+	} else {
+		this.startHistoryTracking();
+	}
 	this.emit( 'history' );
 };
 
 /**
- * Enable changes.
+ * Check if the surface is read-only
  *
- * @fires history
+ * @return {boolean}
  */
-ve.dm.Surface.prototype.enable = function () {
-	this.enabled = true;
-	this.startHistoryTracking();
-	this.emit( 'history' );
+ve.dm.Surface.prototype.isReadOnly = function () {
+	return this.readOnly;
 };
 
 /**
@@ -211,7 +213,7 @@ ve.dm.Surface.prototype.createSynchronizer = function ( documentId, config ) {
  * Start tracking state changes in history.
  */
 ve.dm.Surface.prototype.startHistoryTracking = function () {
-	if ( !this.enabled ) {
+	if ( this.readOnly ) {
 		return;
 	}
 	if ( this.historyTrackingInterval === null ) {
@@ -223,7 +225,7 @@ ve.dm.Surface.prototype.startHistoryTracking = function () {
  * Stop tracking state changes in history.
  */
 ve.dm.Surface.prototype.stopHistoryTracking = function () {
-	if ( !this.enabled ) {
+	if ( this.readOnly ) {
 		return;
 	}
 	if ( this.historyTrackingInterval !== null ) {
@@ -428,7 +430,7 @@ ve.dm.Surface.prototype.getInsertionAnnotations = function () {
  * @fires contextChange
  */
 ve.dm.Surface.prototype.setInsertionAnnotations = function ( annotations ) {
-	if ( !this.enabled ) {
+	if ( this.readOnly ) {
 		return;
 	}
 	this.insertionAnnotations = annotations !== null ?
@@ -447,7 +449,7 @@ ve.dm.Surface.prototype.setInsertionAnnotations = function ( annotations ) {
  * @fires contextChange
  */
 ve.dm.Surface.prototype.addInsertionAnnotations = function ( annotations ) {
-	if ( !this.enabled ) {
+	if ( this.readOnly ) {
 		return;
 	}
 	if ( annotations instanceof ve.dm.Annotation ) {
@@ -470,7 +472,7 @@ ve.dm.Surface.prototype.addInsertionAnnotations = function ( annotations ) {
  * @fires contextChange
  */
 ve.dm.Surface.prototype.removeInsertionAnnotations = function ( annotations ) {
-	if ( !this.enabled ) {
+	if ( this.readOnly ) {
 		return;
 	}
 	if ( annotations instanceof ve.dm.Annotation ) {
@@ -491,7 +493,7 @@ ve.dm.Surface.prototype.removeInsertionAnnotations = function ( annotations ) {
  * @return {boolean} Redo is allowed
  */
 ve.dm.Surface.prototype.canRedo = function () {
-	return this.undoIndex > 0 && this.enabled;
+	return this.undoIndex > 0 && !this.readOnly;
 };
 
 /**
@@ -500,7 +502,7 @@ ve.dm.Surface.prototype.canRedo = function () {
  * @return {boolean} Undo is allowed
  */
 ve.dm.Surface.prototype.canUndo = function () {
-	return this.hasBeenModified() && this.enabled && ( !this.isStaging() || this.doesStagingAllowUndo() );
+	return this.hasBeenModified() && !this.readOnly && ( !this.isStaging() || this.doesStagingAllowUndo() );
 };
 
 /**
@@ -729,9 +731,6 @@ ve.dm.Surface.prototype.setSelection = function ( selection ) {
 		contextChange = false,
 		linearData = this.getDocument().data;
 
-	if ( !this.enabled ) {
-		return;
-	}
 	this.translatedSelection = null;
 
 	if ( this.transacting ) {
@@ -896,14 +895,10 @@ ve.dm.Surface.prototype.changeInternal = function ( transactions, selection, ski
 		selectionBefore = this.selection,
 		contextChange = false;
 
-	if ( !this.enabled ) {
-		return;
-	}
-
 	this.startQueueingContextChanges();
 
 	// Process transactions
-	if ( transactions ) {
+	if ( transactions && !this.readOnly ) {
 		if ( transactions instanceof ve.dm.Transaction ) {
 			transactions = [ transactions ];
 		}
@@ -977,7 +972,7 @@ ve.dm.Surface.prototype.changeInternal = function ( transactions, selection, ski
  */
 ve.dm.Surface.prototype.breakpoint = function () {
 	var breakpointSet = false;
-	if ( !this.enabled ) {
+	if ( this.readOnly ) {
 		return false;
 	}
 	this.resetHistoryTrackingInterval();
