@@ -37,7 +37,7 @@ ve.ui.FragmentInspector.static.actions = ve.ui.FragmentInspector.super.static.ac
 	{
 		label: OO.ui.deferMsg( 'visualeditor-dialog-action-cancel' ),
 		flags: [ 'safe', 'back' ],
-		modes: [ 'edit', 'insert' ]
+		modes: [ 'readonly', 'edit', 'insert' ]
 	},
 	{
 		action: 'done',
@@ -83,10 +83,17 @@ ve.ui.FragmentInspector.prototype.getFragment = function () {
  *
  * By default will return 'edit' if #isEditing is true, and 'insert' otherwise.
  *
+ * If the surface model is in read-only mode, will return 'readonly'.
+ *
  * @return {string} Symbolic mode name
  */
 ve.ui.FragmentInspector.prototype.getMode = function () {
+	var surface;
 	if ( this.fragment ) {
+		surface = this.fragment.getSurface();
+		if ( surface && surface.isReadOnly() ) {
+			return 'readonly';
+		}
 		return this.isEditing() ? 'edit' : 'insert';
 	}
 	return '';
