@@ -36,11 +36,13 @@ ve.ui.TableDialog.static.actions = [
 	{
 		action: 'done',
 		label: OO.ui.deferMsg( 'visualeditor-dialog-action-apply' ),
-		flags: [ 'primary', 'progressive' ]
+		flags: [ 'primary', 'progressive' ],
+		modes: [ 'edit' ]
 	},
 	{
 		label: OO.ui.deferMsg( 'visualeditor-dialog-action-cancel' ),
-		flags: [ 'safe', 'back' ]
+		flags: [ 'safe', 'back' ],
+		modes: [ 'readonly', 'edit' ]
 	}
 ];
 
@@ -100,13 +102,15 @@ ve.ui.TableDialog.prototype.getValues = function () {
 ve.ui.TableDialog.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.TableDialog.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
+			var isReadOnly = this.isReadOnly();
 			this.initialValues = {
 				caption: !!this.getFragment().getSelection().getTableNode(
 					this.getFragment().getDocument()
 				).getCaptionNode()
 			};
-			this.captionToggle.setValue( this.initialValues.caption );
+			this.captionToggle.setValue( this.initialValues.caption ).setDisabled( isReadOnly );
 			this.closingFragment = null;
+			this.actions.setMode( isReadOnly ? 'readonly' : 'edit' );
 			this.updateActions();
 		}, this );
 };
