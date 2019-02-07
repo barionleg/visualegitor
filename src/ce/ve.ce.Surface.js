@@ -2599,12 +2599,20 @@ ve.ce.Surface.prototype.afterPasteSanitizeExternal = function ( $element ) {
  * @return {boolean} One more items was handled
  */
 ve.ce.Surface.prototype.handleDataTransfer = function ( dataTransfer, isPaste, targetFragment ) {
-	var i, l, pushItemToBack,
+	var i, j, l, pushItemToBack,
 		items = [],
-		htmlStringData = dataTransfer.getData( 'text/html' );
+		htmlStringData = dataTransfer.getData( 'text/html' ),
+		htmlPreParse, htmlPreParseDescendants, htmlPreParseFlat, imgCount, contentCount;
 
-	// Only look for files if HTML is not available:
-	//  - If a file is pasted/dropped it is unlikely it will have HTML fallback (it will have plain text fallback though)
+	// Rules for clipboard content selection:
+	//  1. If the clipboard has only HTML, proceed parsing such HTML.
+	//  2. If the clipboard has only files, process them as-is.
+	//  3. If the clipboard has both:
+	//    a. If the HTML in the clipboard contains only images and other elements with no text, process the image files.
+	//    b. Otherwise, ignore the files and process the HTML.
+	//
+	// Notes:
+	//  - If a file is pasted/dropped, it may have HTML fallback, such as an IMG node with alt text, for example.
 	//  - HTML generated from some clients has an image fallback(!) that is a screenshot of the HTML snippet (e.g. LibreOffice Calc)
 	if ( !htmlStringData ) {
 		if ( dataTransfer.items ) {
@@ -2615,6 +2623,44 @@ ve.ce.Surface.prototype.handleDataTransfer = function ( dataTransfer, isPaste, t
 			}
 		} else if ( dataTransfer.files ) {
 			for ( i = 0, l = dataTransfer.files.length; i < l; i++ ) {
+				items.push( ve.ui.DataTransferItem.static.newFromBlob( dataTransfer.files[ i ], htmlStringData ) );
+			}
+		}
+	} else if ( dataTransfer.files ) {
+		htmlPreParse = $.parseHTML( htmlStringData );
+		htmlPreParseFlat = htmlPreParse.slice(); // copy
+
+		for ( i = 0; i < htmlPreParse.length; i++ ) {
+			if ( typeof htmlPreParse[ i ].querySelectorAll !== 'function' ) {
+				continue;
+			}
+
+			htmlPreParseDescendants = htmlPreParse[ i ].querySelectorAll( '*' );
+			for ( j = 0; j < htmlPreParseDescendants.length; j++ ) {
+				htmlPreParseFlat.push( htmlPreParseDescendants[ j ] );
+			}
+		}
+
+		imgCount = htmlPreParseFlat.reduce( function ( accumulate, current ) {
+			return accumulate + ( ( current.nodeName === 'IMG' ) ? 1 : 0 );
+		}, /* accumulate = */ 0 );
+
+		contentCount = htmlPreParseFlat.reduce( function ( accumulate, current ) {
+			// From jQuery.text():
+			//   - use textContent for elements (nodeType: 1)
+			//   - use nodeValue for text nodes (nodeType: 3)
+			if ( current.nodeType === 1 && current.textContent.trim() !== '' ) {
+				return accumulate + 1;
+			} else if ( current.nodeType === 3 && current.nodeValue.trim() !== '' ) {
+				return accumulate + 1;
+			} else {
+				return accumulate;
+			}
+		}, /* accumulate = */ 0 );
+
+		if ( contentCount === 0 && imgCount === dataTransfer.files.length ) {
+			for ( i = 0, l = dataTransfer.files.length; i < l; i++ ) {
+				// TODO: should we use image node outerHTML instead of htmlStringData?
 				items.push( ve.ui.DataTransferItem.static.newFromBlob( dataTransfer.files[ i ], htmlStringData ) );
 			}
 		}
