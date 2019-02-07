@@ -72,3 +72,12 @@ ve.ui.FragmentDialog.prototype.getTeardownProcess = function ( data ) {
 ve.ui.FragmentDialog.prototype.getFragment = function () {
 	return this.fragment;
 };
+
+/**
+ * Check if the fragment's surface is readOnly
+ *
+ * @return {boolean} Fragment's surface is readOnly
+ */
+ve.ui.FragmentDialog.prototype.isReadOnly = function () {
+	return this.fragment && this.fragment.getSurface() && this.fragment.getSurface().isReadOnly();
+};

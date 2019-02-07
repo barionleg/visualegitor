@@ -36,11 +36,13 @@ ve.ui.TableDialog.static.actions = [
 	{
 		action: 'done',
 		label: OO.ui.deferMsg( 'visualeditor-dialog-action-apply' ),
-		flags: [ 'primary', 'progressive' ]
+		flags: [ 'primary', 'progressive' ],
+		modes: [ 'edit' ]
 	},
 	{
 		label: OO.ui.deferMsg( 'visualeditor-dialog-action-cancel' ),
-		flags: [ 'safe', 'back' ]
+		flags: [ 'safe', 'back' ],
+		modes: [ 'readonly', 'edit' ]
 	}
 ];
 
@@ -107,6 +109,7 @@ ve.ui.TableDialog.prototype.getSetupProcess = function ( data ) {
 			};
 			this.captionToggle.setValue( this.initialValues.caption );
 			this.closingFragment = null;
+			this.actions.setMode( this.isReadOnly() ? 'readonly' : 'edit' );
 			this.updateActions();
 		}, this );
 };
