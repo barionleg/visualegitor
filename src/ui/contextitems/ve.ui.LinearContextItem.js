@@ -17,6 +17,8 @@
  * @param {Object} [config] Configuration options
  */
 ve.ui.LinearContextItem = function VeUiLinearContextItem( context, model, config ) {
+	var isReadOnly;
+
 	config = config || {};
 
 	// Parent constructor
@@ -36,9 +38,12 @@ ve.ui.LinearContextItem = function VeUiLinearContextItem( context, model, config
 	this.icon = new OO.ui.IconWidget( { icon: config.icon || this.constructor.static.icon } );
 	this.label = new OO.ui.LabelWidget( { label: config.label || this.constructor.static.label } );
 
+	isReadOnly = this.context.getSurface().isReadOnly();
+
 	if ( !this.context.isMobile() ) {
+		// Desktop
 		this.editButton = new OO.ui.ButtonWidget( {
-			label: ve.msg( 'visualeditor-contextitemwidget-label-secondary' ),
+			label: ve.msg( isReadOnly ? 'visualeditor-contextitemwidget-label-view' : 'visualeditor-contextitemwidget-label-secondary' ),
 			flags: [ 'progressive' ]
 		} );
 		this.deleteButton = new OO.ui.ButtonWidget( {
@@ -46,9 +51,10 @@ ve.ui.LinearContextItem = function VeUiLinearContextItem( context, model, config
 			flags: [ 'destructive' ]
 		} );
 	} else {
+		// Mobile
 		this.editButton = new OO.ui.ButtonWidget( {
 			framed: false,
-			icon: 'edit',
+			icon: isReadOnly ? 'eye' : 'edit',
 			flags: [ 'progressive' ]
 		} );
 		this.deleteButton = new OO.ui.ButtonWidget( {
@@ -156,7 +162,7 @@ ve.ui.LinearContextItem.prototype.isEditable = function () {
  * @return {boolean} Item is deletable
  */
 ve.ui.LinearContextItem.prototype.isDeletable = function () {
-	return this.constructor.static.deletable && this.isNode() && this.context.showDeleteButton();
+	return this.constructor.static.deletable && this.isNode() && this.context.showDeleteButton() && this.context.getSurface().isReadOnly();
 };
 
 /**
