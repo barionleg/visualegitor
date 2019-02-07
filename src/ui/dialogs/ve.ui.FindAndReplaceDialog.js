@@ -358,6 +358,7 @@ ve.ui.FindAndReplaceDialog.prototype.updateFragments = function () {
 	var i, l, startIndex,
 		surfaceModel = this.surface.getModel(),
 		documentModel = surfaceModel.getDocument(),
+		isReadOnly = surfaceModel.isReadOnly(),
 		ranges = [],
 		matchCase = this.matchCaseToggle.getValue(),
 		isRegex = this.regexToggle.getValue(),
@@ -398,8 +399,9 @@ ve.ui.FindAndReplaceDialog.prototype.updateFragments = function () {
 	this.focusedIndex = startIndex || 0;
 	this.nextButton.setDisabled( !this.results );
 	this.previousButton.setDisabled( !this.results );
-	this.replaceButton.setDisabled( !this.results );
-	this.replaceAllButton.setDisabled( !this.results );
+	this.replaceText.setDisabled( isReadOnly );
+	this.replaceButton.setDisabled( !this.results || isReadOnly );
+	this.replaceAllButton.setDisabled( !this.results || isReadOnly );
 };
 
 /**
