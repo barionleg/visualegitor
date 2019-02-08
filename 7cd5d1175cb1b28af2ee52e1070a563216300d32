@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5916028f_eee72217",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 2648,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2019-02-08T14:37:27Z",
+      "side": 1,
+      "message": "as we only check contentCount \u003d\u003d\u003d 0, we could just use\n\n hasContent \u003d htmlPreParseFlat.some( fn(...\n\nthen we can stop searching at the first sign of content\n\n...also as textContent is essentially recursive we can do this on the unflattened htmlPreParse.",
+      "revId": "7cd5d1175cb1b28af2ee52e1070a563216300d32",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4c567d83_455ec480",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 2651,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2019-02-08T14:37:27Z",
+      "side": 1,
+      "message": "Not sure why they bother, textContent is defined for all node types, maybe it is because they support nodeType 4 (CDATA sections?)\n\nProbably fine to just simplify this to current.textContent.",
+      "revId": "7cd5d1175cb1b28af2ee52e1070a563216300d32",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
