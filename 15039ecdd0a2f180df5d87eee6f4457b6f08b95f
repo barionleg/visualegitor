@@ -16,6 +16,24 @@
       "revId": "15039ecdd0a2f180df5d87eee6f4457b6f08b95f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "74ec827e_8f17bb25",
+        "filename": "src/ce/keydownhandlers/ve.ce.LinearDeleteKeyDownHandler.js",
+        "patchSetId": 19
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2019-02-08T17:13:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "704b2ec3_7ec1f808",
+      "revId": "15039ecdd0a2f180df5d87eee6f4457b6f08b95f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
