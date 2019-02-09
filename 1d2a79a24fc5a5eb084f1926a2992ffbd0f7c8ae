@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba8cc20f_38fef077",
+        "filename": "src/ce/ve.ce.ResizableNode.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2019-02-09T22:24:23Z",
+      "side": 1,
+      "message": "Apparently in the handleObservedChanges tests this is unset (returning null)…",
+      "range": {
+        "startLine": 101,
+        "startChar": 18,
+        "endLine": 101,
+        "endChar": 40
+      },
+      "revId": "1d2a79a24fc5a5eb084f1926a2992ffbd0f7c8ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
