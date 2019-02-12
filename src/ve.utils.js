@@ -1253,8 +1253,7 @@ ve.transformStyleAttributes = function ( html, unmask ) {
 			'color', // IE normalizes 'Red' to 'red'
 			'width', // IE normalizes '240px' to '240'
 			'height', // Same as width
-			// Support: Firefox
-			'rowspan', // IE and Firefox normalize rowspan="02" to rowspan="2"
+			'rowspan', // IE normalizes rowspan="02" to rowspan="2"
 			'colspan' // Same as rowspan
 		];
 
@@ -1287,8 +1286,8 @@ ve.transformStyleAttributes = function ( html, unmask ) {
 		} );
 	}
 
-	// FIXME T126032: Inject empty text nodes into empty non-void tags to prevent
-	// things like <a></a> from being serialized as <a /> and wreaking havoc
+	// Inject empty text nodes into empty non-void tags to prevent things like <a></a> from
+	// being serialized as <a /> and wreaking havoc
 	$( xmlDoc ).find( ':empty:not(' + ve.elementTypes.void.join( ',' ) + ')' ).each( function () {
 		this.appendChild( xmlDoc.createTextNode( '' ) );
 	} );
