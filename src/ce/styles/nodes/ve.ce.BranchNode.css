@@ -31,7 +31,7 @@
 	visibility: hidden;
 }
 
-.ve-ce-branchNode-blockSlug:hover,
+.ve-ce-surface:not( .ve-ce-surface-dragging  ) .ve-ce-branchNode-blockSlug:hover,
 .ve-ce-branchNode-blockSlug.ve-ce-branchNode-blockSlug-focused {
 	opacity: 1;
 }
