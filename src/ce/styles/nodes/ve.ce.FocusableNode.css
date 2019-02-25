@@ -16,6 +16,13 @@
 	-moz-user-select: none;
 }
 
+.ve-ce-focusableNode .ve-ce-activeNode-active,
+.ve-ce-focusableNode .ve-ce-activeNode-active * {
+	/* Support: Firefox */
+	/* T70537: work around Firefox bug */
+	-moz-user-select: text;
+}
+
 .ve-ce-focusableNode-highlight {
 	background: #6da9f7;
 	box-shadow: inset 0 0 0 1px #4c76ac;
