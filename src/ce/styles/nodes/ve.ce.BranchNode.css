@@ -19,6 +19,12 @@
 	overflow: hidden;
 }
 
+/* Don't draw selection highlight inside block slug after selecting across it */
+.ve-ce-branchNode-blockSlug .oo-ui-labelElement-label::selection,
+.ve-ce-branchNode-blockSlug .oo-ui-labelElement-label::-moz-selection { /* stylelint-disable-line selector-no-vendor-prefix */
+	background: transparent;
+}
+
 .ve-ce-branchNode-blockSlug,
 .ve-ce-branchNode-newSlug {
 	margin: -0.3em 0 -0.1em 0;
