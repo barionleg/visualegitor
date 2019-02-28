@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e07ee33c_7171f030",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 4513,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2019-02-28T14:01:53Z",
+      "side": 1,
+      "message": "I understand this is meant as an integer cast, but I find it surprising and hard to read. Why does the source contain non-integer values in the first place? Wouldn\u0027t it be better to either fix this issue at it\u0027s root, or teach onSynchronizerAuthorUpdate() to do the conversion?",
+      "range": {
+        "startLine": 4513,
+        "startChar": 39,
+        "endLine": 4513,
+        "endChar": 48
+      },
+      "revId": "1107e6d840ee941b92085cdca8cfa4dd074d1707",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
