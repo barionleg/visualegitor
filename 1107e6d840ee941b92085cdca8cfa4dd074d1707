@@ -46,6 +46,30 @@
       "revId": "1107e6d840ee941b92085cdca8cfa4dd074d1707",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "985c7c27_fb8bd0d5",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 4513,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2019-02-28T15:19:34Z",
+      "side": 1,
+      "message": "Do you mind replacing the + with, for example, this?\n\n authorId \u003d parseInt( authorId );",
+      "parentUuid": "49bd64cf_9bfc06f5",
+      "range": {
+        "startLine": 4513,
+        "startChar": 39,
+        "endLine": 4513,
+        "endChar": 48
+      },
+      "revId": "1107e6d840ee941b92085cdca8cfa4dd074d1707",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
