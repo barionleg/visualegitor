@@ -22,6 +22,30 @@
       "revId": "1107e6d840ee941b92085cdca8cfa4dd074d1707",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "49bd64cf_9bfc06f5",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 4513,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2019-02-28T14:24:38Z",
+      "side": 1,
+      "message": "Because authorSelections is an object keyed on authorId and object keys must always be strings. I\u0027d rather on..AuthorUpdate had a clean API (accepting only numbers) and do the fix here.",
+      "parentUuid": "e07ee33c_7171f030",
+      "range": {
+        "startLine": 4513,
+        "startChar": 39,
+        "endLine": 4513,
+        "endChar": 48
+      },
+      "revId": "1107e6d840ee941b92085cdca8cfa4dd074d1707",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
