@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae9884cb_1003f5a5",
+        "filename": "src/ce/styles/nodes/ve.ce.BranchNode.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2019-02-28T12:46:18Z",
+      "side": 1,
+      "message": "Each of these selectors needs to be in a separate block, with all properties duplicated. When browsers don\u0027t understand any part of a selector, they ignore the entire rule.",
+      "revId": "6ec90cbb885a169c687307f1b8a690bda39b5009",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
