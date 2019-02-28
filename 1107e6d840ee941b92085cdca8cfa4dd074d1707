@@ -70,6 +70,30 @@
       "revId": "1107e6d840ee941b92085cdca8cfa4dd074d1707",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "739c1d1a_218a0aa8",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 4513,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2019-02-28T16:55:05Z",
+      "side": 1,
+      "message": "Actually I think for a string that is supposed to be an integer, +x might be a better solution than parseInt( x ).\n\n  \u003e [ \u00272.9999999999999999\u0027, \u00272e-2222\u0027, \u00272.2\u0027, \u00272Pac\u0027 ].map( x \u003d\u003e parseInt( x ) )\n  [ 2, 2, 2, 2 ]\n  \u003e [ \u00272.9999999999999999\u0027, \u00272e-2222\u0027, \u00272.2\u0027, \u00272Pac\u0027 ].map( x \u003d\u003e +x )\n  [ 3, 0, 2.2, NaN ]\n\nBecause parseInt works by truncation, unexpected input can silently get converted to plausible-but-wrong integers. This could be hard to debug.",
+      "parentUuid": "985c7c27_fb8bd0d5",
+      "range": {
+        "startLine": 4513,
+        "startChar": 39,
+        "endLine": 4513,
+        "endChar": 48
+      },
+      "revId": "1107e6d840ee941b92085cdca8cfa4dd074d1707",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
