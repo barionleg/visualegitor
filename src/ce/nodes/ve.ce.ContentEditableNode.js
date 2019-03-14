@@ -13,7 +13,9 @@
  * @constructor
  */
 ve.ce.ContentEditableNode = function VeCeContentEditableNode() {
-	this.$element.prop( { contentEditable: 'true', spellcheck: true } );
+	this.ceSurface = null;
+	this.setContentEditable( true );
+
 	this.connect( this, {
 		root: 'onNodeRoot',
 		unroot: 'onNodeUnroot'
@@ -27,21 +29,44 @@ OO.initClass( ve.ce.ContentEditableNode );
 
 /* Methods */
 
+/**
+ * Handle root events on the node
+ *
+ * @param {ve.ce.BranchNode} root Root node
+ */
 ve.ce.ContentEditableNode.prototype.onNodeRoot = function ( root ) {
-	root.connect( this, { contentEditable: 'onRootContentEditable' } );
-};
-
-ve.ce.ContentEditableNode.prototype.onNodeUnroot = function ( root ) {
-	root.disconnect( this, { contentEditable: 'onRootContentEditable' } );
+	this.ceSurface = root.getSurface().getSurface();
+	this.ceSurface.connect( this, { readOnly: 'onSurfaceReadOnly' } );
+	// Set initial state
+	this.setReadOnly( this.ceSurface.isReadOnly() );
 };
 
 /**
- * Called when the documentNode is enabled / disabled
+ * Handle unroot events on the node
  *
- * @param {boolean} disabled Whether the documentNode is disabled
+ * @param {ve.ce.BranchNode} oldRoot Old root node
  */
-ve.ce.ContentEditableNode.prototype.onRootContentEditable = function () {
-	this.setContentEditable( this.getRoot().isContentEditable() );
+ve.ce.ContentEditableNode.prototype.onNodeUnroot = function () {
+	this.ceSurface.disconnect( this, { readOnly: 'onSurfaceReadOnly' } );
+	this.ceSurface = null;
+};
+
+/**
+ * Handle readOnly events from the surface
+ *
+ * @param {boolean} readOnly Surface is read-only
+ */
+ve.ce.ContentEditableNode.prototype.onSurfaceReadOnly = function ( readOnly ) {
+	this.setReadOnly( readOnly );
+};
+
+/**
+ * Called when the surface read-only state changes
+ *
+ * @param {boolean} readOnly Surface is read-only
+ */
+ve.ce.ContentEditableNode.prototype.setReadOnly = function ( readOnly ) {
+	this.$element.prop( 'spellcheck', !readOnly );
 };
 
 /**
@@ -50,13 +75,14 @@ ve.ce.ContentEditableNode.prototype.onRootContentEditable = function () {
  * @param {boolean} enabled Whether to enable editing
  */
 ve.ce.ContentEditableNode.prototype.setContentEditable = function ( enabled ) {
-	if ( enabled === this.isContentEditable() ) {
-		return;
-	}
-	this.$element.prop( 'contentEditable', enabled ? 'true' : 'false' );
-	this.emit( 'contentEditable' );
+	this.$element.prop( 'contentEditable', ( !!enabled ).toString() );
 };
 
+/**
+ * Check if the node is currently editable
+ *
+ * @return {boolean} Node is currently editable
+ */
 ve.ce.ContentEditableNode.prototype.isContentEditable = function () {
 	return this.$element.prop( 'contentEditable' ) === 'true';
 };
