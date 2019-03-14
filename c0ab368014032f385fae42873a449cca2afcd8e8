@@ -121,6 +121,29 @@
       "revId": "c0ab368014032f385fae42873a449cca2afcd8e8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "43f9207c_2adb7067",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2019-03-14T00:45:46Z",
+      "side": 1,
+      "message": "This is non-trivial DOM interaction, currently happening at module execution, which would interrupt the regular module initialisation cycle with slow DOM code.\n\nWould be better to lazy-init this. I know that\u0027ll make it inconsistent with the others, but that might be a reason to change the others as well as some point. Right now the others though, are trivial enough to not really be an issue.\n\nSomething minimal like this could work:\n\n ve.supportsSticky \u003d function () {\n   var supported, style;\n   style \u003d document.createElement( \u0027div\u0027 ).style;\n   style.cssText \u003d \u0027position:-webkit-sticky;position:sticky;\u0027;\n   supported \u003d style.position.indexOf( \u0027sticky\u0027 ) !\u003d\u003d -1;\n   ve.supportsSticky \u003d function () {\n     return supported;\n   };\n\n   return ve.supportsSticky();\n };",
+      "range": {
+        "startLine": 202,
+        "startChar": 1,
+        "endLine": 204,
+        "endChar": 50
+      },
+      "revId": "c0ab368014032f385fae42873a449cca2afcd8e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
