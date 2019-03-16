@@ -277,4 +277,4 @@ ve.ce.LinearDeleteKeyDownHandler.static.execute = function ( surface, e ) {
 
 /* Registration */
 
-ve.ce.keyDownHandlerFactory.register( ve.ce.LinearDeleteKeyDownHandler );
+// ve.ce.keyDownHandlerFactory.register( ve.ce.LinearDeleteKeyDownHandler );
