@@ -539,7 +539,9 @@ ve.ui.Surface.prototype.scrollCursorIntoView = function () {
 	cursorTop = clientRect.top - 5;
 	cursorBottom = clientRect.bottom + 5;
 
-	if ( cursorTop < topBound ) {
+	// On iOS, we can't estimate the bottomBound correctly, because we don't know the size of the
+	// keyboard. Always scroll so that the selection is at the top of the viewport.
+	if ( cursorTop < topBound || ve.init.platform.constructor.static.isIos() ) {
 		scrollTo = this.$scrollContainer.scrollTop() + ( cursorTop - topBound );
 		this.scrollTo( scrollTo );
 	} else if ( cursorBottom > bottomBound ) {
