@@ -2944,6 +2944,8 @@ ve.ce.Surface.prototype.onModelSelect = function () {
 	}
 	// Update the selection state in the SurfaceObserver
 	this.surfaceObserver.pollOnceNoCallback();
+
+	this.getSurface().scrollCursorIntoView();
 };
 
 /**

@@ -96,7 +96,6 @@ ve.ui.Surface = function VeUiSurface( dataOrDocOrSurface, config ) {
 	} );
 
 	// Events
-	this.getModel().connect( this, { select: 'scrollCursorIntoView' } );
 	this.getModel().getDocument().connect( this, { transact: 'onDocumentTransact' } );
 	this.dialogs.connect( this, { opening: 'onWindowOpening' } );
 	this.context.getInspectors().connect( this, { opening: 'onWindowOpening' } );
