@@ -469,6 +469,8 @@ ve.ce.FocusableNode.prototype.onFocusableMouseDown = function ( e ) {
 				nodeRange
 		).select();
 		node.focusableSurface.updateActiveAnnotations();
+		// Ensure surface is active as native 'focus' event won't be fired
+		node.focusableSurface.activate();
 	} );
 };
 
@@ -656,6 +658,7 @@ ve.ce.FocusableNode.prototype.setFocused = function ( value ) {
 		} else {
 			this.emit( 'blur' );
 			this.$element.removeClass( 've-ce-focusableNode-focused' );
+			this.$highlights.removeClass( 've-ce-focusableNode-highlights-deactivated' );
 			this.clearHighlights();
 		}
 	}
@@ -681,7 +684,10 @@ ve.ce.FocusableNode.prototype.createHighlights = function () {
 	this.positionHighlights();
 
 	this.focusableSurface.appendHighlights( this.$highlights, this.focused );
-	this.focusableSurface.connect( this, { position: 'positionHighlights' } );
+	this.focusableSurface.connect( this, {
+		position: 'positionHighlights',
+		activation: 'onSurfaceActivation'
+	} );
 
 	// Events
 	if ( !this.focused ) {
@@ -690,6 +696,13 @@ ve.ce.FocusableNode.prototype.createHighlights = function () {
 			'mouseleave.ve-ce-focusableNode': this.onSurfaceMouseLeave.bind( this )
 		} );
 	}
+};
+
+/**
+ * Handle activation events from the surface
+ */
+ve.ce.FocusableNode.prototype.onSurfaceActivation = function () {
+	this.$highlights.toggleClass( 've-ce-focusableNode-highlights-deactivated', !!this.focusableSurface.deactivated );
 };
 
 /**
@@ -703,7 +716,7 @@ ve.ce.FocusableNode.prototype.clearHighlights = function () {
 	}
 	this.$highlights.remove().empty();
 	this.focusableSurface.$element.off( '.ve-ce-focusableNode' );
-	this.focusableSurface.disconnect( this, { position: 'positionHighlights' } );
+	this.focusableSurface.disconnect( this );
 	this.highlighted = false;
 	this.boundingRect = null;
 };

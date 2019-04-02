@@ -268,6 +268,12 @@ OO.mixinClass( ve.ce.Surface, OO.EventEmitter );
  * a pair of blur-focus events is emitted anyway.
  */
 
+/**
+ * Surface activation state has changed (i.e. on activate or deactivate)
+ *
+ * @event activation
+ */
+
 /* Static properties */
 
 /**
@@ -667,8 +673,9 @@ ve.ce.Surface.prototype.onFocusChange = function () {
  * Used by dialogs so they can take focus without losing the original document selection.
  *
  * @param {boolean} [deactivatedForCopy] Surface was deactivated by preparePasteTargetForCopy
+ * @param {boolean} [noSelectionChange] Don't change the native selection.
  */
-ve.ce.Surface.prototype.deactivate = function ( deactivatedForCopy ) {
+ve.ce.Surface.prototype.deactivate = function ( deactivatedForCopy, noSelectionChange ) {
 	this.deactivatedForCopy = !!deactivatedForCopy;
 	if ( !this.deactivated ) {
 		// Disable the surface observer, there can be no observable changes
@@ -678,7 +685,9 @@ ve.ce.Surface.prototype.deactivate = function ( deactivatedForCopy ) {
 		this.checkDelayedSequences();
 		// Remove ranges so the user can't accidentally type into the document,
 		// and so virtual keyboards are hidden.
-		this.removeRangesAndBlur();
+		if ( !noSelectionChange ) {
+			this.removeRangesAndBlur();
+		}
 		this.updateDeactivatedSelection();
 		this.clearKeyDownState();
 	}
@@ -710,6 +719,8 @@ ve.ce.Surface.prototype.activate = function () {
  * Update the fake selection while the surface is deactivated.
  *
  * While the surface is deactivated, all calls to showModelSelection will get redirected here.
+ *
+ * @fires activation
  */
 ve.ce.Surface.prototype.updateDeactivatedSelection = function () {
 	var rects, textColor, currentNode,
@@ -718,6 +729,8 @@ ve.ce.Surface.prototype.updateDeactivatedSelection = function () {
 		isCollapsed = selection.getModel().isCollapsed();
 
 	this.$deactivatedSelection.empty();
+
+	this.emit( 'activation' );
 
 	// Check we have a deactivated surface and a native selection
 	if ( this.deactivated && selection.isNativeCursor() ) {
@@ -781,6 +794,9 @@ ve.ce.Surface.prototype.onDocumentFocus = function () {
  * @fires blur
  */
 ve.ce.Surface.prototype.onDocumentBlur = function () {
+	// Set noSelectionChange as we already know the selection has left
+	// the document and we don't want #deactivate to move it again.
+	this.deactivate( false, true );
 	this.eventSequencer.detach();
 	this.surfaceObserver.stopTimerLoop();
 	this.surfaceObserver.pollOnce();
@@ -789,11 +805,13 @@ ve.ce.Surface.prototype.onDocumentBlur = function () {
 	this.onDocumentSelectionChange();
 	this.setDragging( false );
 	this.focused = false;
-	if ( this.focusedNode ) {
-		this.focusedNode.setFocused( false );
-		this.focusedNode = null;
+	if ( this.surface.nullSelectionOnBlur ) {
+		if ( this.focusedNode ) {
+			this.focusedNode.setFocused( false );
+			this.focusedNode = null;
+		}
+		this.getModel().setNullSelection();
 	}
-	this.getModel().setNullSelection();
 	this.$element.removeClass( 've-ce-surface-focused' );
 	this.emit( 'blur' );
 };
