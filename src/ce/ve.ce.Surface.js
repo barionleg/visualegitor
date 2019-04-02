@@ -268,6 +268,12 @@ OO.mixinClass( ve.ce.Surface, OO.EventEmitter );
  * a pair of blur-focus events is emitted anyway.
  */
 
+/**
+ * Surface activation state has changed (i.e. on activate or deactivate)
+ *
+ * @event activation
+ */
+
 /* Static properties */
 
 /**
@@ -710,6 +716,8 @@ ve.ce.Surface.prototype.activate = function () {
  * Update the fake selection while the surface is deactivated.
  *
  * While the surface is deactivated, all calls to showModelSelection will get redirected here.
+ *
+ * @fires activation
  */
 ve.ce.Surface.prototype.updateDeactivatedSelection = function () {
 	var rects, textColor, currentNode,
@@ -718,6 +726,8 @@ ve.ce.Surface.prototype.updateDeactivatedSelection = function () {
 		isCollapsed = selection.getModel().isCollapsed();
 
 	this.$deactivatedSelection.empty();
+
+	this.emit( 'activation' );
 
 	// Check we have a deactivated surface and a native selection
 	if ( this.deactivated && selection.isNativeCursor() ) {
