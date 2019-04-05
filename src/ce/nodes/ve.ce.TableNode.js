@@ -401,7 +401,7 @@ ve.ce.TableNode.prototype.onSurfaceModelSelect = function ( selection ) {
 			if ( this.editingFragment ) {
 				this.setEditing( false, true );
 			}
-			this.updateOverlayDebounced( true );
+			this.updateOverlayDebounced();
 		}
 	} else if ( !active && this.active ) {
 		this.$overlay.addClass( 'oo-ui-element-hidden' );
@@ -442,7 +442,7 @@ ve.ce.TableNode.prototype.onSurfaceActivation = function () {
  *
  * @param {boolean} selectionChanged The update was triggered by a selection change
  */
-ve.ce.TableNode.prototype.updateOverlay = function ( selectionChanged ) {
+ve.ce.TableNode.prototype.updateOverlay = function () {
 	var i, l, anchorNode, anchorOffset, selectionOffset, selection, documentModel,
 		selectionRect, tableOffset, surfaceOffset, cells,
 		editable = true;
@@ -529,10 +529,6 @@ ve.ce.TableNode.prototype.updateOverlay = function ( selectionChanged ) {
 		.toggleClass( 've-ce-tableNodeOverlay-selection-box-fullRow', selection.isFullRow( documentModel ) )
 		.toggleClass( 've-ce-tableNodeOverlay-selection-box-fullCol', selection.isFullCol( documentModel ) )
 		.toggleClass( 've-ce-tableNodeOverlay-selection-box-notEditable', !editable );
-
-	if ( selectionChanged ) {
-		ve.scrollIntoView( this.$selectionBox.get( 0 ) );
-	}
 };
 
 /**
