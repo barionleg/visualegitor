@@ -513,10 +513,6 @@ ve.ce.TableNode.prototype.updateOverlay = function ( selectionChanged ) {
 		.toggleClass( 've-ce-tableNodeOverlay-selection-box-fullRow', selection.isFullRow( documentModel ) )
 		.toggleClass( 've-ce-tableNodeOverlay-selection-box-fullCol', selection.isFullCol( documentModel ) )
 		.toggleClass( 've-ce-tableNodeOverlay-selection-box-notEditable', !editable );
-
-	if ( selectionChanged ) {
-		ve.scrollIntoView( this.$selectionBox.get( 0 ) );
-	}
 };
 
 /**
