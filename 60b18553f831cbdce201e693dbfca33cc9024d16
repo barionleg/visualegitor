@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "93456612_551246d7",
+        "filename": "src/ui/actions/ve.ui.BlockquoteAction.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2019-04-08T16:58:46Z",
+      "side": 1,
+      "message": "Is hasMatchingAncestor the right thing to test?\n\nDo we want nesting blockquotes to be possible?",
+      "revId": "60b18553f831cbdce201e693dbfca33cc9024d16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
