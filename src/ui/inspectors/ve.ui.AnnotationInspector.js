@@ -314,12 +314,14 @@ ve.ui.AnnotationInspector.prototype.getTeardownProcess = function ( data ) {
 			}
 			if ( data.action ) {
 				surfaceModel.setSelection( selection );
-				// Then tweak the selection to be within the annotation (this will produce the same model-selection)
-				annotationNodeAndOffset = surfaceView.getDocument().getNodeAndOffset( selection.range.start + 1 );
-				if ( annotationNodeAndOffset ) {
-					$annotationNode = $( annotationNodeAndOffset.node ).closest( '.ve-ce-nailedAnnotation' );
-					if ( $annotationNode.length ) {
-						surfaceView.selectNodeContents( $annotationNode[ 0 ] );
+				if ( !( OO.ui.isMobile() && !selection.isCollapsed() ) ) {
+					// Then tweak the selection to be within the annotation (this will produce the same model-selection)
+					annotationNodeAndOffset = surfaceView.getDocument().getNodeAndOffset( selection.range.start + 1 );
+					if ( annotationNodeAndOffset ) {
+						$annotationNode = $( annotationNodeAndOffset.node ).closest( '.ve-ce-nailedAnnotation' );
+						if ( $annotationNode.length ) {
+							surfaceView.selectNodeContents( $annotationNode[ 0 ] );
+						}
 					}
 				}
 			}

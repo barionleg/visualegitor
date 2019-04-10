@@ -146,7 +146,9 @@ ve.ui.WindowAction.prototype.open = function ( name, data, action ) {
 					// Use windowManager events, instead of instance.closing, as the re-activation needs
 					// to happen in the same event cycle as the user click event that closed the window (T203517).
 					windowManager.once( 'closing', function () {
-						surface.getView().activate();
+						if ( !( OO.ui.isMobile() && !surface.getModel().getSelection().isCollapsed() ) ) {
+							surface.getView().activate();
+						}
 					} );
 				}
 
