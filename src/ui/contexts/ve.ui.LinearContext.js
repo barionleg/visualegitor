@@ -203,7 +203,7 @@ ve.ui.LinearContext.prototype.onInspectorOpening = function ( win, opening ) {
 					}
 
 					// Restore selection
-					if ( context.getSurface().getModel().getSelection() ) {
+					if ( !( OO.ui.isMobile() && !context.getSurface().getModel().getSelection().isCollapsed() ) ) {
 						context.getSurface().getView().focus();
 					}
 				} );
