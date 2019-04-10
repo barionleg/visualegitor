@@ -722,6 +722,7 @@ ve.ce.Surface.prototype.deactivate = function ( showAsActivated, noSelectionChan
  * @fires activation
  */
 ve.ce.Surface.prototype.activate = function () {
+	var previousSelection, newSelection;
 	if ( this.deactivated ) {
 		this.deactivated = false;
 		this.showAsActivated = false;
@@ -730,8 +731,21 @@ ve.ce.Surface.prototype.activate = function () {
 		if ( OO.ui.contains( this.$attachedRootNode[ 0 ], this.nativeSelection.anchorNode, true ) ) {
 			// The selection has been placed back in the document, either by the user clicking
 			// or by the closing window updating the model. Poll in case it was the user clicking.
+			previousSelection = this.getModel().getSelection();
 			this.surfaceObserver.clear();
 			this.surfaceObserver.pollOnce();
+			newSelection = this.getModel().getSelection();
+			if (
+				previousSelection.getCoveringRange() &&
+				newSelection.getCoveringRange() &&
+				previousSelection.getCoveringRange().containsRange(
+					newSelection.getCoveringRange()
+				)
+			) {
+				// If the user reactivates by click on their previous
+				// selection, use that selection.
+				this.getModel().setSelection( previousSelection );
+			}
 		} else {
 			// Clear focused node so onModelSelect re-selects it if necessary
 			this.focusedNode = null;
