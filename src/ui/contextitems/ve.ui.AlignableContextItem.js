@@ -59,6 +59,7 @@ ve.ui.AlignableContextItem.static.isCompatibleWith = function ( model ) {
  */
 ve.ui.AlignableContextItem.prototype.renderBody = function () {
 	this.$body.empty().append( this.align.$element );
+	this.align.setDisabled( this.context.getSurface().isReadOnly() );
 };
 
 /**
