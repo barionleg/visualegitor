@@ -351,7 +351,7 @@ ve.ui.DebugBar.prototype.onFilibusterToggleClick = function () {
 		ve.filibuster.start();
 	} else {
 		ve.filibuster.stop();
-		this.$filibuster.html( this.getSurface().filibuster.getObservationsHtml() );
+		this.$filibuster.html( ve.filibuster.getObservationsHtml() );
 		this.$filibuster.on( 'click', function ( e ) {
 			var path,
 				$li = $( e.target ).closest( '.ve-filibuster-frame' );
@@ -363,7 +363,7 @@ ve.ui.DebugBar.prototype.onFilibusterToggleClick = function () {
 					return;
 				}
 				$li.children( 'span' ).replaceWith(
-					$( debugBar.getSurface().filibuster.getObservationsHtml( path ) )
+					$( ve.filibuster.getObservationsHtml( path ) )
 				);
 				$li.toggleClass( 've-filibuster-frame-expanded' );
 			} else if ( $li.children( 'ul' ).length ) {
