@@ -109,7 +109,7 @@ ve.ce.TableArrowKeyDownHandler.static.moveTableSelection = function ( surface, r
 			colOffset *= -1;
 		}
 	}
-	if ( !expand && !selection.isSingleCell( surface.getModel().getDocument() ) ) {
+	if ( !expand ) {
 		selection = selection.collapseToFrom();
 	}
 
