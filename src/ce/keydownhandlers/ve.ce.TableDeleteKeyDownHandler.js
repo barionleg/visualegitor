@@ -12,6 +12,7 @@
  *
  * @constructor
  */
+/* istanbul ignore next */
 ve.ce.TableDeleteKeyDownHandler = function VeCeTableDeleteKeyDownHandler() {
 	// Parent constructor - never called because class is fully static
 	// ve.ui.TableDeleteKeyDownHandler.super.apply( this, arguments );

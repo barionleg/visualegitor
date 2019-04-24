@@ -61,6 +61,7 @@ ve.ce.LinkAnnotation.static.getDescription = function ( model ) {
  *
  * @param {jQuery.Event} e Mouse click event
  */
+/* istanbul ignore next */
 ve.ce.LinkAnnotation.prototype.onClick = function ( e ) {
 	if ( e.which === OO.ui.MouseButtons.LEFT && ( e.ctrlKey || e.metaKey ) ) {
 		window.open( this.$element.prop( 'href' ) );

@@ -12,6 +12,7 @@
  *
  * @constructor
  */
+/* istanbul ignore next */
 ve.ce.KeyDownHandler = function VeCeKeyDownHandler() {
 };
 
