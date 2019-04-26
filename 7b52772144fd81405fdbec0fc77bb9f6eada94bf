@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c341004f_801b45a4",
+        "filename": "src/ui/actions/ve.ui.WindowAction.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2019-04-26T18:42:39Z",
+      "side": 1,
+      "message": "Does this still work?\n\nActually, do we need it? Looks like this was to re-open the keyboard on mobile, but now it seems we decided we don\u0027t want to re-open the keyboard anymore.",
+      "range": {
+        "startLine": 146,
+        "startChar": 0,
+        "endLine": 147,
+        "endChar": 99
+      },
+      "revId": "7b52772144fd81405fdbec0fc77bb9f6eada94bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
