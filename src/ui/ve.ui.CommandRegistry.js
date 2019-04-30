@@ -393,3 +393,9 @@ ve.ui.commandRegistry.register(
 		{ supportedSelections: [ 'table' ] }
 	)
 );
+ve.ui.commandRegistry.register(
+	new ve.ui.Command(
+		'exitTableCell', 'table', 'exitTableCell',
+		{ supportedSelections: [ 'linear' ] }
+	)
+);

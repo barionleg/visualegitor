@@ -35,7 +35,7 @@ ve.ui.TableAction.static.name = 'table';
  */
 ve.ui.TableAction.static.methods = [
 	'create', 'insert', 'moveRelative', 'move', 'delete', 'importTable',
-	'changeCellStyle', 'mergeCells', 'enterTableCell'
+	'changeCellStyle', 'mergeCells', 'enterTableCell', 'exitTableCell'
 ];
 
 /* Methods */
@@ -526,6 +526,30 @@ ve.ui.TableAction.prototype.enterTableCell = function () {
 	}
 	tableNode = this.surface.getView().documentView.getBranchNodeFromOffset( selection.tableRange.start + 1 );
 	tableNode.setEditing( true );
+	this.surface.getView().focus();
+	return true;
+};
+
+/**
+ * Exit a table cell for table-structure-editing
+ *
+ * @return {boolean} Action was executed
+ */
+ve.ui.TableAction.prototype.exitTableCell = function () {
+	var tableNode, node,
+		selection = this.surface.getModel().getSelection();
+
+	if ( !( selection instanceof ve.dm.LinearSelection ) ) {
+		return false;
+	}
+	node = this.surface.getView().documentView.getBranchNodeFromOffset( selection.getRange().start );
+	tableNode = node.$element.closest( 'table' ).data( 'view' );
+
+	if ( !tableNode ) {
+		return false;
+	}
+
+	tableNode.setEditing( false );
 	this.surface.getView().focus();
 	return true;
 };
