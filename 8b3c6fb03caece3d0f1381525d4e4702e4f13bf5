@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d04b59e5_921ea286",
+        "filename": "i18n/en.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2019-04-30T18:51:23Z",
+      "side": 1,
+      "message": "maybe just \"Select cells\"\n\nedit: I see this is a toggle. Maybe we should have two messages then, and switch between \"Select cells\" and \"Select contents\"",
+      "revId": "8b3c6fb03caece3d0f1381525d4e4702e4f13bf5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "08a3693b_45af2dfa",
+        "filename": "src/ui/contextitems/ve.ui.TableLineContextItem.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2019-04-30T18:51:23Z",
+      "side": 1,
+      "message": "maybe we can just use the \u0027table\u0027 icon again, if the label is \"select cells\" as it is a picture of some table cells...",
+      "revId": "8b3c6fb03caece3d0f1381525d4e4702e4f13bf5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
