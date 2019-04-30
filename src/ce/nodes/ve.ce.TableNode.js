@@ -166,6 +166,8 @@ ve.ce.TableNode.prototype.onTableMouseDown = function ( e ) {
 		// Right click within the current selection, or any click in deactviated selection:
 		// leave selection as is
 		newSelection = selection;
+		// Make sure there's a startCell
+		startCell = this.startCell || endCell;
 	} else {
 		// Select single cell
 		startCell = endCell;
@@ -211,10 +213,14 @@ ve.ce.TableNode.prototype.onTableMouseDown = function ( e ) {
 	}
 
 	this.startCell = startCell;
-	this.surface.$document.on( {
-		'mouseup touchend': this.onTableMouseUpHandler,
-		'mousemove touchmove': this.onTableMouseMoveHandler
-	} );
+	if ( !( selection instanceof ve.dm.TableSelection ) && OO.ui.isMobile() ) {
+		this.setEditing( true );
+	} else {
+		this.surface.$document.on( {
+			'mouseup touchend': this.onTableMouseUpHandler,
+			'mousemove touchmove': this.onTableMouseMoveHandler
+		} );
+	}
 	e.preventDefault();
 };
 
