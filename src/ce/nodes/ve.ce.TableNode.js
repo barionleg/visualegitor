@@ -211,10 +211,14 @@ ve.ce.TableNode.prototype.onTableMouseDown = function ( e ) {
 	}
 
 	this.startCell = startCell;
-	this.surface.$document.on( {
-		'mouseup touchend': this.onTableMouseUpHandler,
-		'mousemove touchmove': this.onTableMouseMoveHandler
-	} );
+	if ( !( selection instanceof ve.dm.TableSelection ) && OO.ui.isMobile() ) {
+		this.setEditing( true );
+	} else {
+		this.surface.$document.on( {
+			'mouseup touchend': this.onTableMouseUpHandler,
+			'mousemove touchmove': this.onTableMouseMoveHandler
+		} );
+	}
 	e.preventDefault();
 };
 
