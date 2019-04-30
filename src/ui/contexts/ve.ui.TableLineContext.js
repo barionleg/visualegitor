@@ -62,7 +62,7 @@ OO.inheritClass( ve.ui.TableLineContext, ve.ui.Context );
 ve.ui.TableLineContext.static.groups = {
 	col: [ 'insertColumnBefore', 'insertColumnAfter', 'moveColumnBefore', 'moveColumnAfter', 'deleteColumn' ],
 	row: [ 'insertRowBefore', 'insertRowAfter', 'moveRowBefore', 'moveRowAfter', 'deleteRow' ],
-	table: [ 'tableProperties', 'deleteTable' ]
+	table: [ 'tableProperties', 'toggleTableEditing', 'deleteTable' ]
 };
 
 ve.ui.TableLineContext.static.icons = {
@@ -113,7 +113,7 @@ ve.ui.TableLineContext.prototype.onContextItemCommand = function () {
  */
 ve.ui.TableLineContext.prototype.onIconMouseDown = function ( e ) {
 	e.preventDefault();
-	this.toggleMenu();
+	this.toggleMenu( undefined, true );
 };
 
 /**
@@ -123,7 +123,7 @@ ve.ui.TableLineContext.prototype.onIconMouseDown = function ( e ) {
  */
 ve.ui.TableLineContext.prototype.onDocumentMouseDown = function ( e ) {
 	if ( !$( e.target ).closest( this.$element ).length ) {
-		this.toggleMenu( false );
+		this.toggleMenu( false, true );
 	}
 };
 
@@ -139,7 +139,7 @@ ve.ui.TableLineContext.prototype.onModelSelect = function () {
 /**
  * @inheritdoc
  */
-ve.ui.TableLineContext.prototype.toggleMenu = function ( show ) {
+ve.ui.TableLineContext.prototype.toggleMenu = function ( show, restoreEditing ) {
 	var dir, surfaceModel, surfaceView;
 	show = show === undefined ? !this.popup.isVisible() : !!show;
 
@@ -147,6 +147,7 @@ ve.ui.TableLineContext.prototype.toggleMenu = function ( show ) {
 	surfaceView = this.surface.getView();
 
 	if ( show ) {
+		this.wasEditing = !!this.tableNode.editingFragment;
 		this.tableNode.setEditing( false );
 		surfaceModel.connect( this, { select: 'onModelSelect' } );
 		surfaceView.$document.on( 'mousedown', this.onDocumentMouseDownHandler );
@@ -159,6 +160,9 @@ ve.ui.TableLineContext.prototype.toggleMenu = function ( show ) {
 		surfaceModel.disconnect( this );
 		surfaceView.$document.off( 'mousedown', this.onDocumentMouseDownHandler );
 		surfaceView.activate();
+		if ( restoreEditing && surfaceModel.getSelection() instanceof ve.dm.TableSelection ) {
+			this.tableNode.setEditing( this.wasEditing );
+		}
 	}
 
 	// Parent method - call after selection has been possibly modified above
