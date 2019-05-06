@@ -245,6 +245,11 @@ OO.mixinClass( ve.ce.Surface, OO.EventEmitter );
  */
 
 /**
+ * @event dragging
+ * @param {boolean} dragging
+ */
+
+/**
  * @event keyup
  */
 
@@ -1038,6 +1043,7 @@ ve.ce.Surface.prototype.setDragging = function ( dragging ) {
 	this.dragging = !!dragging;
 	// Class can be used to suppress hover states, such as branch slugs.
 	this.$element.toggleClass( 've-ce-surface-dragging', this.dragging );
+	this.emit( 'dragging', this.dragging );
 };
 
 /**
