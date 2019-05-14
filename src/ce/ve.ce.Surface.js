@@ -715,6 +715,7 @@ ve.ce.Surface.prototype.deactivate = function ( showAsActivated, noSelectionChan
 		}
 		this.updateDeactivatedSelection();
 		this.clearKeyDownState();
+		this.surface.$element.addClass( 've-ui-surface-deactivated' );
 		this.emit( 'activation' );
 	}
 };
@@ -766,6 +767,8 @@ ve.ce.Surface.prototype.activate = function () {
 				} );
 			}
 		}
+
+		this.surface.$element.removeClass( 've-ui-surface-deactivated' );
 
 		this.emit( 'activation' );
 	}
@@ -4194,6 +4197,9 @@ ve.ce.Surface.prototype.updateActiveAnnotations = function ( fromModel ) {
 	} );
 
 	if ( changed ) {
+		if ( !this.activeAnnotations.length ) {
+			this.deactivate();
+		}
 		this.activeAnnotations = activeAnnotations;
 		this.model.emit( 'contextChange' );
 	}
