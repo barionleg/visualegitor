@@ -4,6 +4,19 @@
  * @copyright 2011-2019 VisualEditor Team and others; see http://ve.mit-license.org
  */
 
+.ve-ui-mobileContext {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	height: 3em;
+	background: #fff;
+	box-shadow: 0 -1px 1px 0 rgba( 0, 0, 0, 0.1 );
+}
+
+.oo-ui-window-body .ve-ui-mobileContext {
+	bottom: 3em;
+}
+
 .ve-ui-mobileContext .ve-ui-linearContextItem-body {
 	display: none;
 }
