@@ -705,6 +705,7 @@ ve.ce.Surface.prototype.deactivate = function ( showAsActivated, noSelectionChan
 		// Disable the surface observer, there can be no observable changes
 		// until the surface is activated
 		this.surfaceObserver.disable();
+		this.surface.$element.addClass( 've-ui-surface-deactivated' );
 		this.deactivated = true;
 		this.previousActiveAnnotations = this.activeAnnotations;
 		this.checkDelayedSequences();
@@ -731,6 +732,7 @@ ve.ce.Surface.prototype.activate = function () {
 		this.showAsActivated = false;
 		this.updateDeactivatedSelection();
 		this.surfaceObserver.enable();
+		this.surface.$element.removeClass( 've-ui-surface-deactivated' );
 
 		previousSelection = this.getModel().getSelection();
 
@@ -4194,6 +4196,9 @@ ve.ce.Surface.prototype.updateActiveAnnotations = function ( fromModel ) {
 	} );
 
 	if ( changed ) {
+		if ( !this.activeAnnotations.length ) {
+			this.deactivate();
+		}
 		this.activeAnnotations = activeAnnotations;
 		this.model.emit( 'contextChange' );
 	}
