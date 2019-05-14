@@ -64,15 +64,3 @@ ve.init.sa.MobileTarget.static.toolbarGroups = [
 		include: '*'
 	}
 ];
-
-/* Methods */
-
-/**
- * @inheritdoc
- */
-ve.init.sa.MobileTarget.prototype.setupToolbar = function ( surface ) {
-	// Parent method
-	ve.init.sa.MobileTarget.super.prototype.setupToolbar.call( this, surface );
-
-	this.getToolbar().$bar.append( surface.context.$element );
-};
