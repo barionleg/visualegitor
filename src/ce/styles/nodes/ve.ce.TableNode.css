@@ -46,16 +46,6 @@
 	opacity: 0.3;
 }
 
-.ve-ce-tableNodeOverlay-selection-box-fullCol {
-	border-left-width: 2px;
-	border-right-width: 2px;
-}
-
-.ve-ce-tableNodeOverlay-selection-box-fullRow {
-	border-top-width: 2px;
-	border-bottom-width: 2px;
-}
-
 .ve-ce-tableNodeOverlay-selection-box-notEditable {
 	background-image: -webkit-repeating-linear-gradient( -45deg, transparent 0 transparent 5px, #95d14f 5px, #95d14f 10px );
 	background-image: -moz-repeating-linear-gradient( -45deg, transparent 0, transparent 5px, #95d14f 5px, #95d14f 10px );
