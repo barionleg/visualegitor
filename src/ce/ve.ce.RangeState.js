@@ -44,16 +44,6 @@ ve.ce.RangeState = function VeCeRangeState( old, root, selectionOnly ) {
 	this.node = null;
 
 	/**
-	 * @property {string|null} text Plain text of current branch node
-	 */
-	this.text = null;
-
-	/**
-	 * @property {string|null} DOM Hash of current branch node
-	 */
-	this.hash = null;
-
-	/**
 	 * @property {ve.ce.TextState|null} Current branch node's annotated content
 	 */
 	this.textState = null;
@@ -81,7 +71,7 @@ OO.initClass( ve.ce.RangeState );
  * @param {boolean} selectionOnly The caller promises the content has not changed from old
  */
 ve.ce.RangeState.prototype.saveState = function ( old, root, selectionOnly ) {
-	var $node, selection, anchorNodeChanged,
+	var $node, selection, anchorNodeChanged, textState,
 		oldSelection = old ? old.misleadingSelection : ve.SelectionState.static.newNullSelection(),
 		nativeSelection = root.getElementDocument().getSelection();
 
@@ -128,28 +118,21 @@ ve.ce.RangeState.prototype.saveState = function ( old, root, selectionOnly ) {
 
 	// Compute text/hash/textState, for change comparison
 	if ( !this.node ) {
-		this.text = null;
-		this.hash = null;
 		this.textState = null;
 	} else if ( selectionOnly && !anchorNodeChanged ) {
-		this.text = old.text;
-		this.hash = old.hash;
 		this.textState = old.textState;
 	} else {
-		this.text = ve.ce.getDomText( this.node.$element[ 0 ] );
-		this.hash = ve.ce.getDomHash( this.node.$element[ 0 ] );
 		this.textState = new ve.ce.TextState( this.node.$element[ 0 ] );
 	}
 
-	// Only set contentChanged if we're still in the same branch node
-	this.contentChanged =
+	// Only set contentChanged if we're still in the same content branch node
+	this.contentChanged = !!(
 		!selectionOnly &&
-		!this.branchNodeChanged && (
-			( old && old.hash ) !== this.hash ||
-			( old && old.text ) !== this.text ||
-			( !this.textState && old && old.textState ) ||
-			( !!this.textState && !this.textState.isEqual( old && old.textState ) )
-		);
+		!this.branchNodeChanged &&
+		textState &&
+		// Compare textState to the prior state stored in the CBN
+		!textState.isEqual( this.node.textState )
+	);
 
 	if ( old && !this.selectionChanged && !this.contentChanged ) {
 		this.focusIsAfterAnnotationBoundary = old.focusIsAfterAnnotationBoundary;
