@@ -114,9 +114,7 @@ QUnit.test( 'Basic tests', function ( assert ) {
 			selectionChanged: state.selectionChanged,
 			contentChanged: state.contentChanged,
 			veRange: state.veRange && [ state.veRange.from, state.veRange.to ],
-			node: state.node && state.node.getRenderedContents().outerHTML,
-			text: state.text,
-			hash: state.hash
+			node: state.node && state.node.getRenderedContents().outerHTML
 		};
 	}
 
