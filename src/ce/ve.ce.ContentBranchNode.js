@@ -18,6 +18,7 @@
 ve.ce.ContentBranchNode = function VeCeContentBranchNode() {
 	// Properties
 	this.lastTransaction = null;
+	this.lastTextState = null;
 	// Parent constructor calls renderContents, so this must be set first
 	this.rendered = this.rendered;
 	this.unicornAnnotations = null;
@@ -416,6 +417,7 @@ ve.ce.ContentBranchNode.prototype.renderContents = function () {
 		this.root instanceof ve.ce.DocumentNode &&
 		this.root.getSurface().isRenderingLocked()
 	) {
+		this.lastTextState = new ve.ce.TextState( this.$element[ 0 ] );
 		return false;
 	}
 
@@ -449,6 +451,7 @@ ve.ce.ContentBranchNode.prototype.renderContents = function () {
 		ve.normalizeNode( oldWrapper );
 		ve.normalizeNode( newWrapper );
 		if ( newWrapper.isEqualNode( oldWrapper ) ) {
+			this.lastTextState = new ve.ce.TextState( this.$element[ 0 ] );
 			return false;
 		}
 		rendered = newWrapper;
@@ -482,6 +485,7 @@ ve.ce.ContentBranchNode.prototype.renderContents = function () {
 
 	// Add slugs
 	this.setupInlineSlugs();
+	this.lastTextState = new ve.ce.TextState( this.$element[ 0 ] );
 
 	// Highlight the node in debug mode
 	if ( ve.inputDebug ) {
@@ -490,7 +494,6 @@ ve.ce.ContentBranchNode.prototype.renderContents = function () {
 			node.$element.css( 'backgroundColor', '' );
 		}, 300 );
 	}
-
 	return true;
 };
 
