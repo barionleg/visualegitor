@@ -33,10 +33,14 @@ ve.ui.Command = function VeUiCommand( name, action, method, options ) {
  *
  * @param {ve.ui.Surface} surface Surface to execute command on
  * @param {Object} [args] Custom arguments to override defaults
+ * @param {String} [source] Label for the source of the command, for tracking
  * @return {boolean} Command was executed
  */
-ve.ui.Command.prototype.execute = function ( surface, args ) {
+ve.ui.Command.prototype.execute = function ( surface, args, source ) {
 	if ( this.isExecutable( surface.getModel().getFragment() ) ) {
+		if ( this.action === 'window' && this.method === 'open' ) {
+			ve.track( 'activity.' + ( args || this.args )[ 0 ], { action: 'window-open-from-' + ( source || 'command' ) } );
+		}
 		return surface.execute.apply( surface, [ this.action, this.method ].concat( args || this.args ) );
 	} else {
 		return false;
