@@ -292,3 +292,36 @@ QUnit.test( 'Metadata transactions', function ( assert ) {
 		'Meta list events'
 	);
 } );
+
+QUnit.test( 'distort', function ( assert ) {
+	var doc1, doc2, tx1, tx2;
+	doc1 = new ve.dm.Document( [
+		{ type: 'paragraph' },
+		'f',
+		'o',
+		'o',
+		{ type: '/paragraph' },
+		{ type: 'paragraph' },
+		'b',
+		'a',
+		'r',
+		{ type: '/paragraph' }
+	] );
+	doc2 = new ve.dm.Document( [
+		{ type: 'paragraph' },
+		{ type: '/paragraph' },
+		{ type: 'paragraph' },
+		{ type: '/paragraph' }
+	] );
+	tx1 = new ve.dm.Transaction( [
+		{ type: 'retain', length: 3 },
+		{
+			type: 'replace',
+			remove: [ 'o', 'o', { type: '/paragraph' }, { type: 'paragraph' }, 'b', 'a' ],
+			insert: [ 'i' ]
+		},
+		{ type: 'retain', length: 2 }
+	] );
+	tx2 = tx1.distort( doc1, doc2 );
+	debugger;
+} );

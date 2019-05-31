@@ -672,3 +672,57 @@ ve.dm.Transaction.prototype.insertOperations = function ( offset, operations ) {
 	this.tryUnsplit( opIndex + operations.length );
 	this.tryUnsplit( opIndex );
 };
+
+/**
+ * Distort this transaction on ownDoc to work on otherDoc
+ *
+ * XXX this doesn't work to remove node for which there is content in otherDoc
+ */
+ve.dm.Transaction.prototype.distort = function ( ownDoc, otherDoc ) {
+	var i, len, op, oldLinearOffset,
+		ownCursor = new ve.dm.TreeCursor( ownDoc.getDocumentNode(), [] ),
+		otherCursor = new ve.dm.TreeCursor( otherDoc.getDocumentNode(), [] ),
+		newOps = [];
+
+	function stripContent( data ) {
+		return ve.copy( data.filter( function ( item ) {
+			var type = item.type;
+			if ( type ) {
+				if ( type.charAt( 0 ) === '/' ) {
+					type = type.slice( 1 );
+				}
+				return !ve.dm.nodeFactory.isNodeContent( type );
+			}
+			return false;
+		} ) );
+	}
+
+	for ( i = 0, len = this.operations.length; i < len; i++ ) {
+		debugger;
+		var newRemove, newInsert;
+		op = this.operations[ i ];
+		if ( op.type === 'retain' ) {
+			ownCursor.stepLinear( op.length );
+			oldLinearOffset = otherCursor.linearOffset;
+			// Fixup this position
+			otherCursor.gotoPosition( ownCursor.path, ownCursor.offset );
+			newOps.push( {
+				type: 'retain',
+				length: otherCursor.linearOffset - oldLinearOffset
+			} );
+		} else if ( op.type === 'replace' ) {
+			newRemove = stripContent( op.remove );
+			newInsert = stripContent( op.insert );
+			newOps.push( {
+				type: 'replace',
+				remove: newRemove,
+				insert: newInsert
+			} );
+			ownCursor.stepLinear( op.remove.length );
+			otherCursor.stepLinear( newRemove.length );
+		} else {
+			newOps.push( ve.clone( op ) );
+		}
+	}
+	return new ve.dm.Transaction( newOps, this.authorId );
+};

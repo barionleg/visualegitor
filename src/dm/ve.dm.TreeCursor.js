@@ -79,7 +79,7 @@ ve.dm.TreeCursor.prototype.normalizeCursor = function ( tooShort ) {
  */
 ve.dm.TreeCursor.prototype.crossIgnoredNodes = function () {
 	var item,
-		len = ( this.node && this.node.hasChildren() && this.node.children.length ) || 0;
+		len = ( this.node && this.node.type !== 'text' && this.node.hasChildren() && this.node.children.length ) || 0;
 	while (
 		this.offset < len &&
 		( item = this.node.children[ this.offset ] ) &&
@@ -115,6 +115,14 @@ ve.dm.TreeCursor.prototype.checkLinearOffset = function () {
 	}
 	if ( expected !== this.linearOffset ) {
 		throw new Error( 'Linear offset does not match tree position' );
+	}
+};
+
+ve.dm.TreeCursor.prototype.stepLinear = function ( length ) {
+	var step;
+	while ( length > 0 ) {
+		step = this.stepAtMost( length );
+		length -= step.length;
 	}
 };
 
@@ -225,6 +233,11 @@ ve.dm.TreeCursor.prototype.stepIn = function () {
 	return step;
 };
 
+ve.dm.TreeCursor.prototype.inContentBranchNode = function () {
+	var node = this.nodes[ this.nodes.length - 1 ];
+	return node && node.canContainContent();
+};
+
 /**
  * Step out of the current node (skipping past any uncrossed children or text within)
  * @return {Object} The step
@@ -264,4 +277,37 @@ ve.dm.TreeCursor.prototype.stepOut = function () {
 	this.offset++;
 	this.lastStep = step;
 	return step;
+};
+
+ve.dm.TreeCursor.prototype.gotoPosition = function ( path, offset ) {
+	var i, iLen, pathI, j, jLen, child, position;
+
+	this.path = path;
+	this.offset = offset;
+	this.nodes = [ this.root ];
+	this.node = this.root;
+	this.lastStep = null;
+	this.linearOffset = 0;
+
+	position = path.concat( offset );
+
+	for ( i = 0, iLen = position.length; i < iLen; i++ ) {
+		pathI = path[ i ];
+		if ( this.node.type === 'text' ) {
+			this.linearOffset += pathI;
+		} else {
+			for ( j = 0, jLen = pathI - 1; j < jLen; j++ ) {
+				child = this.node.children[ j ];
+				this.linearOffset += child.getOuterLength();
+			}
+			// account for stepping into node
+			if ( i < iLen - 1 ) {
+				this.node = this.node.children[ pathI ];
+				this.nodes.push( this.node );
+				if ( this.node.type !== 'text' ) {
+					this.linearOffset++;
+				}
+			}
+		}
+	}
 };
