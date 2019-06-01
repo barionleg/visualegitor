@@ -52,6 +52,7 @@ ve.dm.Surface = function VeDmSurface( doc, attachedRoot, config ) {
 	this.undoStack = [];
 	this.undoIndex = 0;
 	this.undoConflict = false;
+	this.redoConflict = false;
 	this.historyTrackingInterval = null;
 	this.insertionAnnotations = new ve.dm.AnnotationSet( this.getDocument().getStore() );
 	this.selectedAnnotations = new ve.dm.AnnotationSet( this.getDocument().getStore() );
@@ -514,7 +515,7 @@ ve.dm.Surface.prototype.removeInsertionAnnotations = function ( annotations ) {
  * @return {boolean} Redo is allowed
  */
 ve.dm.Surface.prototype.canRedo = function () {
-	return this.undoIndex > 0 && !this.readOnly;
+	return this.undoIndex > 0 && !this.readOnly && !this.redoConflict;
 };
 
 /**
@@ -972,6 +973,7 @@ ve.dm.Surface.prototype.changeInternal = function ( transactions, selection, ski
 		}
 		this.transacting = false;
 		this.undoConflict = false;
+		this.redoConflict = false;
 		this.emit( 'history' );
 	}
 	selectionAfter = this.selection;
@@ -1108,19 +1110,59 @@ ve.dm.Surface.prototype.undo = function () {
  * @fires undoStackChange
  */
 ve.dm.Surface.prototype.redo = function () {
-	var item;
+	var item, authorId, history, done, result, selection;
 	if ( !this.canRedo() ) {
 		return;
 	}
 
 	this.breakpoint();
 
-	item = this.undoStack[ this.undoStack.length - this.undoIndex ];
-	if ( item ) {
-		this.undoIndex--;
-		// ve.copy( item.transactions ) invokes .clone() on each transaction in item.transactions
-		this.changeInternal( ve.copy( item.transactions ), item.selection, true );
-		this.emit( 'undoStackChange' );
+	if ( !this.isMultiUser() ) {
+		item = this.undoStack[ this.undoStack.length - this.undoIndex ];
+		if ( item ) {
+			this.undoIndex--;
+			// ve.copy( item.transactions ) invokes .clone() on each transaction in item.transactions
+			this.changeInternal( ve.copy( item.transactions ), item.selection, true );
+			this.emit( 'undoStackChange' );
+		}
+	} else {
+		// Find the next stack item by this user
+		while ( this.undoIndex > 0 ) {
+			item = this.undoStack[ this.undoStack.length - this.undoIndex ];
+			this.undoIndex--;
+			// Assume every transaction in the stack item has the same author (see ve.dm.Change#applyTo)
+			authorId = item.transactions[ 0 ].authorId;
+			if ( authorId === null || authorId === this.getAuthorId() ) {
+				break;
+			}
+			item = null;
+		}
+		if ( item ) {
+			history = this.getDocument().getChangeSince( item.start );
+			done = new ve.dm.Change(
+				item.start,
+				// ve.copy( item.transactions ) invokes .clone() on each transaction in item.transactions
+				ve.copy( item.transactions ),
+				item.transactions.map( function () {
+					// Redo cannot add store items
+					return new ve.dm.HashValueStore();
+				} ),
+				{}
+			);
+			result = ve.dm.Change.static.rebaseUncommittedChange( history, done );
+			if ( result.rejected ) {
+				// Rebasing conflict: move pointer back and don't try again until next transaction
+				this.undoIndex++;
+				this.redoConflict = true;
+				// Undo stack didn't change, but ability to undo did
+				this.emit( 'history' );
+			} else {
+				selection = item.selection.translateByChange( result.transposedHistory );
+				// Redo cannot add store items, so we can safely apply just transactions
+				this.changeInternal( result.rebased.transactions, selection, true );
+				this.emit( 'undoStackChange' );
+			}
+		}
 	}
 };
 
