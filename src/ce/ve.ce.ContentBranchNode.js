@@ -30,10 +30,14 @@ ve.ce.ContentBranchNode = function VeCeContentBranchNode() {
 
 	// DOM changes (keep in sync with #onSetup)
 	this.$element.addClass( 've-ce-contentBranchNode' );
+	this.updateLLDirtyState();
 
 	// Events
 	this.connect( this, { childUpdate: 'onChildUpdate' } );
-	this.model.connect( this, { detach: 'onModelDetach' } );
+	this.model.connect( this, {
+		detach: 'onModelDetach',
+		attributeChange: 'onModelAttributeChange'
+	} );
 	// Some browsers allow clicking links inside contenteditable, such as in iOS Safari when the
 	// keyboard is closed
 	this.$element.on( 'click', this.onClickHandler );
@@ -95,6 +99,7 @@ ve.ce.ContentBranchNode.prototype.onSetup = function () {
 
 	// DOM changes (duplicated from constructor in case this.$element is replaced)
 	this.$element.addClass( 've-ce-contentBranchNode' );
+	this.updateLLDirtyState();
 };
 
 /**
@@ -111,6 +116,18 @@ ve.ce.ContentBranchNode.prototype.onClick = function ( e ) {
 	) {
 		e.preventDefault();
 	}
+};
+
+ve.ce.ContentBranchNode.prototype.onModelAttributeChange = function ( key ) {
+	if ( key === 'll-dirty' ) {
+		this.updateLLDirtyState();
+	}
+};
+
+ve.ce.ContentBranchNode.prototype.updateLLDirtyState = function () {
+	var state = this.model.getAttribute( 'll-dirty' );
+	// Values can be 'mt', 'edited', 'approved' or undefined
+	this.$element.toggleClass( 've-ce-contentBranchNode-ll-dirty', state === 'edited' || state === 'mt' );
 };
 
 /**
