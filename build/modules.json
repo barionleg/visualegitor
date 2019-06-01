@@ -1112,6 +1112,14 @@
 			"demos/ve/demo.minimal.css"
 		]
 	},
+	"visualEditor.sidebyside.standalone.demo": {
+		"scripts": [
+			"demos/ve/demo.sidebyside.js"
+		],
+		"styles": [
+			"demos/ve/demo.sidebyside.css"
+		]
+	},
 	"rebaser.build": {
 		"scripts": [
 			"src/dm/ve.dm.HashValueStore.js",

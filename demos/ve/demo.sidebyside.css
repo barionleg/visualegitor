@@ -1,0 +1,28 @@
+/*!
+ * VisualEditor minimal demo
+ *
+ * @copyright 2011-2019 VisualEditor Team and others; see http://ve.mit-license.org
+ */
+
+body {
+	font-family: sans-serif;
+	font-size: 0.8em;
+}
+
+.ve-demo-editors {
+	display: flex;
+}
+
+.ve-demo-editor {
+	width: 50%;
+}
+
+.ve-instance {
+	margin: 1em;
+	border: 1px solid #ccc;
+}
+
+.ve-ui-surface-placeholder,
+.ve-ui-surface .ve-ce-attachedRootNode {
+	padding: 0.5em 1.5em;
+}
