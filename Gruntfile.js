@@ -321,6 +321,21 @@ module.exports = function ( grunt ) {
 				dir: 'rtl',
 				langList: false
 			},
+			sidebysideDemo: {
+				targetFile: 'demos/ve/sidebyside.html',
+				template: 'demos/ve/sidebyside.html.template',
+				modules: modules,
+				load: [
+					'visualEditor.standalone.apex.dist',
+					'visualEditor.standalone.read'
+				],
+				run: [ 'visualEditor.sidebyside.standalone.demo' ],
+				pathPrefix: '../../',
+				i18n: [ 'dist/i18n/', 'lib/oojs-ui/i18n/' ],
+				indent: '\t\t',
+				dir: 'ltr',
+				langList: false
+			},
 			test: {
 				targetFile: 'tests/index.html',
 				template: 'tests/index.html.template',
