@@ -16,6 +16,24 @@
       "revId": "0f28beedbc20f32812080b43dce1450e2c448ed1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c8057ae7_969e9d94",
+        "filename": "src/dm/ve.dm.Surface.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 1014,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2019-06-02T16:00:11Z",
+      "side": 1,
+      "message": "Ooooooh right, but we need to rebase over any transactions that don\u0027t have the current authorId",
+      "parentUuid": "353cf34a_43db304f",
+      "revId": "0f28beedbc20f32812080b43dce1450e2c448ed1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
