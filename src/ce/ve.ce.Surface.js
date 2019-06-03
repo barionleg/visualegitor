@@ -2092,6 +2092,7 @@ ve.ce.Surface.prototype.beforePaste = function ( e ) {
 
 	// Save scroll position before changing focus to "offscreen" paste target
 	this.beforePasteData.scrollTop = this.$window.scrollTop();
+	this.beforePasteData.scrollLeft = this.$window.scrollLeft();
 
 	this.$pasteTarget.empty();
 
@@ -2157,8 +2158,12 @@ ve.ce.Surface.prototype.beforePaste = function ( e ) {
 		this.$pasteTarget[ 0 ].focus();
 	}
 
+	// Clean up the paste target in case of lingering content effects (CSS, width, etc)
+	this.$pasteTarget.empty();
+
 	// Restore scroll position after focusing the paste target
 	this.$window.scrollTop( this.beforePasteData.scrollTop );
+	this.$window.scrollLeft( this.beforePasteData.scrollLeft );
 
 };
 
