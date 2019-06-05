@@ -4210,7 +4210,7 @@ ve.ce.Surface.prototype.updateActiveAnnotations = function ( fromModel ) {
 	if ( changed ) {
 		// Hide the keyboard and the selection when first clicking on a link
 		// If inMouseDownCycle has been cleared, then assume this is a selection drag.
-		if ( OO.ui.isMobile() && !this.activeAnnotations.length && this.inMouseDownCycle ) {
+		if ( OO.ui.isMobile() && activeAnnotations.length && this.inMouseDownCycle ) {
 			this.deactivate( false, false, true );
 		}
 		this.activeAnnotations = activeAnnotations;
