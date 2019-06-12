@@ -143,23 +143,25 @@ ve.ui.WindowAction.prototype.open = function ( name, data, action ) {
 				} );
 
 				if ( !win.constructor.static.activeSurface ) {
-					// Collapse mobile selection: We need to re-activate the surface in case an insertion
-					// annotation was generated. We also need to do it during the same event cycle otherwise
-					// the device may not open the virtual keyboard, so use the 'closing' event. (T203517)
-					if ( OO.ui.isMobile() && surface.getModel().getSelection().isCollapsed() ) {
-						windowManager.once( 'closing', function () {
+					// Use the closing promise to wait until the dialog has performed its actions,
+					// such as creating new annotations, before re-activating.
+					instance.closing.then( function () {
+						// Don't activate if mobile and expanded. We only need to re-activate the surface
+						// if an insertion annotation was generated, which implies a collapsed selection.
+						if ( !OO.ui.isMobile() || surface.getModel().getSelection().isCollapsed() ) {
 							surface.getView().activate();
-						} );
-					} else {
-						// Otherwise use the closing promise to wait until the dialog has performed its actions,
-						// such as creating new annotations, before re-activating.
-						instance.closing.then( function () {
-							// Don't activate if mobile and expanded
-							if ( !( OO.ui.isMobile() && !surface.getModel().getSelection().isCollapsed() ) ) {
+						}
+					} );
+
+					// On mobile, we need to re-activate the surface during the same event cycle, otherwise
+					// the device may not open the virtual keyboard, so duplicate our handling for the mobile
+					// case in the 'closing' event. (T203517)
+					if ( OO.ui.isMobile() ) {
+						windowManager.once( 'closing', function () {
+							if ( surface.getModel().getSelection().isCollapsed() ) {
 								surface.getView().activate();
 							}
 						} );
-
 					}
 				}
 
