@@ -22,6 +22,30 @@
       "revId": "4423a59127add6546e1be62bef988306b276cd0a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d9544bfc_7f9c76aa",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 4258,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2019-06-13T18:08:36Z",
+      "side": 1,
+      "message": "Most places use list[0] assuming there will only be one result after filtering to a specific type, but we should probably de-deuplicate for cleanliness.",
+      "parentUuid": "6baf7042_55d0405c",
+      "range": {
+        "startLine": 4258,
+        "startChar": 15,
+        "endLine": 4258,
+        "endChar": 33
+      },
+      "revId": "4423a59127add6546e1be62bef988306b276cd0a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
