@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6baf7042_55d0405c",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 4258,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2019-06-13T16:42:06Z",
+      "side": 1,
+      "message": "This creates a list with duplication, right? Is that acceptable?",
+      "range": {
+        "startLine": 4258,
+        "startChar": 15,
+        "endLine": 4258,
+        "endChar": 33
+      },
+      "revId": "4423a59127add6546e1be62bef988306b276cd0a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
