@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1e58fb7f_b88c8091",
+        "filename": "src/ui/inspectors/ve.ui.AnnotationInspector.js",
+        "patchSetId": 21
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2019-06-14T20:32:27Z",
+      "side": 1,
+      "message": "I will split this change into a separate commit. It is not really related to the other context changes, and it seems to be the only functional change in that commit that affects both old and new contexts.\n\nhttps://gerrit.wikimedia.org/r/c/VisualEditor/VisualEditor/+/517133",
+      "revId": "a87c7633c554db1f534fe03563682f730e746482",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
