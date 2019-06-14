@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "09a97d49_66ea6b18",
+        "filename": "src/ui/inspectors/ve.ui.AnnotationInspector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2019-06-14T20:34:47Z",
+      "side": 1,
+      "message": "eh, the third argument doesn\u0027t exist yet, whatever",
+      "range": {
+        "startLine": 324,
+        "startChar": 43,
+        "endLine": 324,
+        "endChar": 48
+      },
+      "revId": "42717187ac6cb8b5059be51e609a3e991ff68ace",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
