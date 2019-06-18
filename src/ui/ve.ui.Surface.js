@@ -509,6 +509,11 @@ ve.ui.Surface.prototype.scrollSelectionIntoView = function () {
 		selection = view.getSelection(),
 		surface = this;
 
+	if ( !this.$element[ 0 ].parentNode ) {
+		// Surface has been destroyed (debounced call)
+		return;
+	}
+
 	// We only care about the focus end of the selection, the anchor never
 	// moves and should be allowed off screen.
 	clientRect = selection.getSelectionFocusRect();
