@@ -49,14 +49,6 @@ ve.dm.SourceSurfaceFragment.prototype.annotateContent = function () {
 
 /**
  * @inheritdoc
-*/
-ve.dm.SourceSurfaceFragment.prototype.getAnnotations = function () {
-	// Source surface contains no annotations
-	return new ve.dm.AnnotationSet( this.getDocument().getStore() );
-};
-
-/**
- * @inheritdoc
  */
 ve.dm.SourceSurfaceFragment.prototype.convertNodes = function () {
 	var tempFragment, tempSurfaceModel,
