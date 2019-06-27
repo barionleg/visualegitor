@@ -904,7 +904,7 @@ ve.ce.Surface.prototype.isFocused = function () {
  * @param {jQuery.Event} e Mouse down event
  */
 ve.ce.Surface.prototype.onDocumentMouseDown = function ( e ) {
-	var newFragment, contexedAnnotations, offset,
+	var newFragment, contexedAnnotations, offset, node,
 		surface = this;
 
 	if ( e.which !== OO.ui.MouseButtons.LEFT ) {
@@ -919,7 +919,10 @@ ve.ce.Surface.prototype.onDocumentMouseDown = function ( e ) {
 		offset = this.getOffsetFromEventCoords( e );
 		if ( offset !== -1 ) {
 			contexedAnnotations = this.annotationsAtNode( e.target, isContexedNode );
-			if ( !contexedAnnotations.length ) {
+			if ( contexedAnnotations.length ) {
+				// Store target node for use in updateActiveAnnotations
+				node = e.target;
+			} else {
 				// Occasionally on iOS, e.target is outside the to-be focused annotation, so check
 				// using the model offset as well.
 				contexedAnnotations = this.annotationsAtModelSelection( isContexedNode, offset );
@@ -930,7 +933,8 @@ ve.ce.Surface.prototype.onDocumentMouseDown = function ( e ) {
 					// HACK: Re-activate flag so selection is repositioned
 					surface.activate();
 					surface.deactivate( false, false, true );
-					surface.updateActiveAnnotations( true );
+					// Use the clicked node if it produced results, otherwise use 'fromModel' mode.
+					surface.updateActiveAnnotations( node || true );
 				} );
 				this.contexedAnnotations = contexedAnnotations;
 				e.preventDefault();
@@ -4209,17 +4213,24 @@ ve.ce.Surface.prototype.showSelectionState = function ( selection ) {
  *
  * Also the order of .activeAnnotations may not be well defined.
  *
- * @param {boolean} [fromModel] Gather annotations from the model, instead of the cusor focus point
+ * @param {boolean|Node} [fromModelOrNode] If `true`, gather annotations from the model,
+ *  instead of the cusor focus point. If a Node is passed, gather annotations from that node.
  */
-ve.ce.Surface.prototype.updateActiveAnnotations = function ( fromModel ) {
-	var changed = false,
+ve.ce.Surface.prototype.updateActiveAnnotations = function ( fromModelOrNode ) {
+	var activeAnnotations,
+		changed = false,
 		surface = this,
 		canBeActive = function ( view ) {
 			return view.canBeActive();
-		},
-		activeAnnotations = fromModel ?
-			this.annotationsAtModelSelection( canBeActive ) :
-			this.annotationsAtFocus( canBeActive );
+		};
+
+	if ( fromModelOrNode === true ) {
+		activeAnnotations = this.annotationsAtModelSelection( canBeActive );
+	} else if ( fromModelOrNode instanceof Node ) {
+		activeAnnotations = this.annotationsAtNode( fromModelOrNode, canBeActive );
+	} else {
+		activeAnnotations = this.annotationsAtFocus( canBeActive );
+	}
 
 	// Iterate over previously active annotations
 	this.activeAnnotations.forEach( function ( annotation ) {
