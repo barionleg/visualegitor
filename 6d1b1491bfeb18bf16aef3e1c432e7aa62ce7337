@@ -16,6 +16,24 @@
       "revId": "6d1b1491bfeb18bf16aef3e1c432e7aa62ce7337",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "72f2d421_b8d60830",
+        "filename": "src/dm/ve.dm.TransactionSquasher.js",
+        "patchSetId": 51
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2019-06-28T03:50:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea5a89f3_a2a05d07",
+      "revId": "6d1b1491bfeb18bf16aef3e1c432e7aa62ce7337",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
