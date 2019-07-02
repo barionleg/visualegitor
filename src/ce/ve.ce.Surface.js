@@ -919,7 +919,7 @@ ve.ce.Surface.prototype.onDocumentMouseDown = function ( e ) {
 		return surface.surface.context.getRelatedSourcesFromModels( [ view.model ] ).length;
 	}
 
-	if ( OO.ui.isMobile() && ve.newMobileContext ) {
+	if ( OO.ui.isMobile() ) {
 		offset = this.getOffsetFromEventCoords( e );
 		if ( offset !== -1 ) {
 			contexedAnnotations = this.annotationsAtNode( e.target, isContexedNode );
