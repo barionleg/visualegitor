@@ -14,11 +14,21 @@
 	white-space: nowrap;
 }
 
+.ve-ui-mobileContext .ve-ui-linearContextItem-title {
+	font-weight: bold;
+}
+
 .ve-ui-linearContextItem-title > .oo-ui-labelWidget {
 	margin-left: 0.3em;
 	word-wrap: break-word;
 	white-space: pre-line;
 	vertical-align: top;
+}
+
+.ve-ui-linearContextItem-close {
+	display: table-cell;
+	width: 1%;
+	padding: 0 0.5em;
 }
 
 .ve-ui-linearContextItem-actions {
@@ -28,12 +38,27 @@
 	padding: 0.5em;
 }
 
-/* Only used in desktop contexts */
 .ve-ui-linearContextItem-body {
 	max-height: 15em;
 	overflow: auto;
 }
 
-.ve-ui-linearContextItem-body:not( :empty ) {
+.ve-ui-desktopContext .ve-ui-linearContextItem-body:not( :empty ) {
 	padding: 0 1em 1em 1em;
+}
+
+.ve-ui-mobileContext .ve-ui-linearContextItem-body-action {
+	border-top: 1px solid #eaecf0;
+	display: table;
+}
+
+.ve-ui-mobileContext .ve-ui-linearContextItem-body {
+	padding: 0.5em 1em;
+	display: table-cell;
+}
+
+.ve-ui-linearContextItem-foot:not( :empty ) {
+	border-top: 1px solid #eaecf0;
+	padding: 0.5em 1em;
+	text-align: right;
 }

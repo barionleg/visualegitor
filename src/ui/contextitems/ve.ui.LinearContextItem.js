@@ -30,23 +30,46 @@ ve.ui.LinearContextItem = function VeUiLinearContextItem( context, model, config
 	this.$title = $( '<div>' );
 	this.$actions = $( '<div>' );
 	this.$body = $( '<div>' );
+	this.$foot = $( '<div>' );
 	// Don't use mixins as they expect the icon and label to be children of this.$element.
 	this.icon = new OO.ui.IconWidget( { icon: config.icon || this.constructor.static.icon } );
 	this.label = new OO.ui.LabelWidget( { label: config.label || this.constructor.static.label } );
-
-	// Desktop
-	this.editButton = new OO.ui.ButtonWidget( {
-		label: ve.msg( this.isReadOnly() ? 'visualeditor-contextitemwidget-label-view' : 'visualeditor-contextitemwidget-label-secondary' ),
-		flags: [ 'progressive' ]
-	} );
-	this.deleteButton = new OO.ui.ButtonWidget( {
-		label: ve.msg( 'visualeditor-contextitemwidget-label-remove' ),
-		flags: [ 'destructive' ]
-	} );
-
 	this.actionButtons = new OO.ui.ButtonGroupWidget();
-	if ( this.isDeletable() ) {
-		this.actionButtons.addItems( [ this.deleteButton ] );
+
+	if ( this.context.isMobile() ) {
+		this.closeButton = new OO.ui.ButtonWidget( {
+			classes: [ 've-ui-linearContextItem-close' ],
+			framed: false,
+			icon: 'close'
+		} );
+		this.editButton = new OO.ui.ButtonWidget( {
+			framed: false,
+			icon: this.isReadOnly() ? 'eye' : 'edit',
+			flags: [ 'progressive' ]
+		} );
+		this.deleteButton = new OO.ui.ButtonWidget( {
+			framed: false,
+			label: ve.msg( 'visualeditor-contextitemwidget-label-remove' ),
+			icon: 'trash',
+			flags: [ 'destructive' ]
+		} );
+		this.$bodyAction = $( '<div>' );
+		if ( this.isDeletable() ) {
+			this.$foot.append( this.deleteButton.$element );
+		}
+	} else {
+		// Desktop
+		this.editButton = new OO.ui.ButtonWidget( {
+			label: ve.msg( this.isReadOnly() ? 'visualeditor-contextitemwidget-label-view' : 'visualeditor-contextitemwidget-label-secondary' ),
+			flags: [ 'progressive' ]
+		} );
+		this.deleteButton = new OO.ui.ButtonWidget( {
+			label: ve.msg( 'visualeditor-contextitemwidget-label-remove' ),
+			flags: [ 'destructive' ]
+		} );
+		if ( this.isDeletable() ) {
+			this.actionButtons.addItems( [ this.deleteButton ] );
+		}
 	}
 	if ( this.isEditable() ) {
 		this.actionButtons.addItems( [ this.editButton ] );
@@ -70,6 +93,13 @@ ve.ui.LinearContextItem = function VeUiLinearContextItem( context, model, config
 	this.$element
 		.addClass( 've-ui-linearContextItem' )
 		.append( this.$head, this.$body );
+
+	if ( this.context.isMobile() ) {
+		this.$foot.addClass( 've-ui-linearContextItem-foot' );
+		this.$head.append( this.closeButton.$element );
+		this.$bodyAction.addClass( 've-ui-linearContextItem-body-action' ).append( this.$body, this.$actions );
+		this.$element.append( this.$head, this.$bodyAction, this.$foot );
+	}
 };
 
 /* Inheritance */
