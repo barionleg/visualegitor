@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1ba784ac_b4e05f3a",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 933,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2019-07-03T12:14:36Z",
+      "side": 1,
+      "message": "merge this if statement with the one below",
+      "range": {
+        "startLine": 933,
+        "startChar": 16,
+        "endLine": 933,
+        "endChar": 17
+      },
+      "revId": "f49338ba6a45678aa3094fd6ef8e29930bbee869",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
