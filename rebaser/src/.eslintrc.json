@@ -8,6 +8,8 @@
 		"OO": false
 	},
 	"rules": {
-		"max-len": 0
+		"max-len": "off",
+		"no-jquery/no-class-state": "off",
+		"prefer-template": "off"
 	}
 }
