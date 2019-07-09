@@ -72,7 +72,7 @@ ve.ui.Surface = function VeUiSurface( dataOrDocOrSurface, config ) {
 			// HTMLDocument
 			documentModel = ve.dm.converter.getModelFromDom( dataOrDocOrSurface );
 		}
-		this.model = this.createModel( documentModel );
+		this.model = this.createModel( documentModel, config.node );
 	}
 	this.view = this.createView( this.model );
 	this.dialogs = this.createDialogWindowManager();
@@ -271,11 +271,13 @@ ve.ui.Surface.prototype.createDialogWindowManager = function () {
  * @param {ve.dm.Document} doc Document model
  * @return {ve.dm.Surface} Surface model
  */
-ve.ui.Surface.prototype.createModel = function ( doc ) {
-	var sections, node,
+ve.ui.Surface.prototype.createModel = function ( doc, node ) {
+	var sections,
 		root = doc.getDocumentNode();
 	sections = doc.getNodesByType( 'section' );
-	if ( sections.length && sections.length === 1 ) {
+	if ( node ) {
+		//
+	} else if ( sections.length && sections.length === 1 ) {
 		node = sections[ 0 ];
 	} else {
 		node = root;

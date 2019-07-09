@@ -91,7 +91,7 @@ OO.inheritClass( ve.ui.TargetWidget, OO.ui.Widget );
  *
  * @param {ve.dm.Document} doc Document
  */
-ve.ui.TargetWidget.prototype.setDocument = function ( doc ) {
+ve.ui.TargetWidget.prototype.setDocument = function ( doc, node ) {
 	// Destroy the previous surface
 	if ( this.surface ) {
 		this.surface.destroy();
@@ -103,6 +103,7 @@ ve.ui.TargetWidget.prototype.setDocument = function ( doc ) {
 	}
 	this.surface = ve.init.target.createSurface( doc, {
 		mode: this.mode,
+		node: node,
 		inTargetWidget: true,
 		commandRegistry: this.commandRegistry,
 		sequenceRegistry: this.sequenceRegistry,
