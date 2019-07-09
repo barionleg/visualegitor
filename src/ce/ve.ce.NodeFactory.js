@@ -68,18 +68,19 @@ ve.ce.NodeFactory.prototype.getNodePrimaryCommandName = function ( type ) {
 /**
  * Create a view node from a model node.
  *
- * @param {ve.dm.Node} model Mode node
+ * @param {ve.dm.Node} model Model node
+ * @param {ve.ce.Surface} [surface] Surface document is part of
  * @return {ve.ce.Node} View node
  * @throws {Error} Unknown object name
  */
-ve.ce.NodeFactory.prototype.createFromModel = function ( model ) {
+ve.ce.NodeFactory.prototype.createFromModel = function ( model, surface ) {
 	var type = model.getType();
 	if ( ve.dm.nodeFactory.isMetaData( type ) ) {
 		// Metadata never has an explicit view representation, so a generic
 		// ve.ce.MetaItem should be fine
 		type = 'meta';
 	}
-	return this.create( type, model );
+	return this.create( type, model, surface );
 };
 
 /* Initialization */

@@ -14,31 +14,23 @@
  *
  * @constructor
  * @param {ve.dm.Document} doc Document model to create surface for
- * @param {ve.dm.BranchNode} [attachedRoot] Node to surface; default is document node
  * @param {Object} [config] Configuration options
  * @cfg {boolean} [sourceMode] Source editing mode
  */
-ve.dm.Surface = function VeDmSurface( doc, attachedRoot, config ) {
+ve.dm.Surface = function VeDmSurface( doc, unused, config ) {
 	// Support old (doc, config) argument order
 	// TODO: Remove this once all callers are updated
-	if ( !config && ve.isPlainObject( attachedRoot ) ) {
-		config = attachedRoot;
-		attachedRoot = undefined;
+	if ( !config && ve.isPlainObject( unused ) ) {
+		config = unused;
 	}
 
-	attachedRoot = attachedRoot || doc.getDocumentNode();
 	config = config || {};
-
-	if ( !( attachedRoot instanceof ve.dm.BranchNode ) ) {
-		throw new Error( 'Expected ve.dm.BranchNode for attachedRoot' );
-	}
 
 	// Mixin constructors
 	OO.EventEmitter.call( this );
 
 	// Properties
 	this.documentModel = doc;
-	this.attachedRoot = attachedRoot;
 	this.sourceMode = !!config.sourceMode;
 	this.metaList = new ve.dm.MetaList( this );
 	this.selection = new ve.dm.NullSelection();
@@ -67,9 +59,6 @@ ve.dm.Surface = function VeDmSurface( doc, attachedRoot, config ) {
 	this.autosavePrefix = '';
 	this.synchronizer = null;
 	this.storage = ve.init.platform.sessionStorage;
-
-	// Let document know about the attachedRoot
-	this.documentModel.attachedRoot = this.attachedRoot;
 
 	// Events
 	this.getDocument().connect( this, {
@@ -550,15 +539,6 @@ ve.dm.Surface.prototype.getDocument = function () {
 };
 
 /**
- * Get the surfaced node
- *
- * @return {ve.dm.BranchNode} The surfaced node
- */
-ve.dm.Surface.prototype.getAttachedRoot = function () {
-	return this.attachedRoot;
-};
-
-/**
  * Get the meta list.
  *
  * @return {ve.dm.MetaList} Meta list of the surface
@@ -870,23 +850,6 @@ ve.dm.Surface.prototype.setSelection = function ( selection ) {
 		this.emitContextChange();
 	}
 
-};
-
-/**
- * Place the selection at the first content offset in the document.
- */
-ve.dm.Surface.prototype.selectFirstContentOffset = function () {
-	var firstOffset = this.getDocument().data.getNearestContentOffset(
-		this.getAttachedRoot().getOffset(),
-		1
-	);
-	if ( firstOffset !== -1 ) {
-		// Found a content offset
-		this.setLinearSelection( new ve.Range( firstOffset ) );
-	} else {
-		// Document is full of structural nodes, just give up
-		this.setNullSelection();
-	}
 };
 
 /**

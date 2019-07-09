@@ -73,9 +73,9 @@ ve.ui.Surface = function VeUiSurface( dataOrDocOrSurface, config ) {
 			// HTMLDocument
 			documentModel = ve.dm.converter.getModelFromDom( dataOrDocOrSurface );
 		}
-		this.model = this.createModel( documentModel, config.attachedRoot );
+		this.model = this.createModel( documentModel );
 	}
-	this.view = this.createView( this.model );
+	this.view = this.createView( this.model, config.attachedRoot );
 	this.dialogs = this.createDialogWindowManager();
 	this.importRules = config.importRules || {};
 	this.multiline = config.multiline !== false;
@@ -282,21 +282,21 @@ ve.ui.Surface.prototype.createDialogWindowManager = function () {
  * Create a surface model
  *
  * @param {ve.dm.Document} doc Document model
- * @param {ve.dm.BranchNode} [attachedRoot] Node to surface
  * @return {ve.dm.Surface} Surface model
  */
-ve.ui.Surface.prototype.createModel = function ( doc, attachedRoot ) {
-	return new ve.dm.Surface( doc, attachedRoot, { sourceMode: this.getMode() === 'source' } );
+ve.ui.Surface.prototype.createModel = function ( doc ) {
+	return new ve.dm.Surface( doc, { sourceMode: this.getMode() === 'source' } );
 };
 
 /**
  * Create a surface view
  *
  * @param {ve.dm.Surface} model Surface model
+ * @param {ve.dm.BranchNode} [attachedRoot] Node to surface
  * @return {ve.ce.Surface} Surface view
  */
-ve.ui.Surface.prototype.createView = function ( model ) {
-	return new ve.ce.Surface( model, this );
+ve.ui.Surface.prototype.createView = function ( model, attachedRoot ) {
+	return new ve.ce.Surface( model, attachedRoot, this );
 };
 
 /**

@@ -13,11 +13,21 @@
  *
  * @constructor
  * @param {ve.dm.Surface} model Surface model to observe
+ * @param {ve.dm.BranchNode} [attachedRoot] Node to surface; default is document node
  * @param {ve.ui.Surface} ui Surface user interface
  * @param {Object} [config] Configuration options
  */
-ve.ce.Surface = function VeCeSurface( model, ui, config ) {
+ve.ce.Surface = function VeCeSurface( model, attachedRoot, ui, config ) {
 	var surface = this;
+
+	if ( attachedRoot instanceof ve.ui.Surface ) {
+		config = ui;
+		ui = attachedRoot;
+		attachedRoot = undefined;
+	}
+	if ( attachedRoot === undefined ) {
+		attachedRoot = model.getDocument().getDocumentNode();
+	}
 
 	// Parent constructor
 	ve.ce.Surface.super.call( this, config );
@@ -28,9 +38,10 @@ ve.ce.Surface = function VeCeSurface( model, ui, config ) {
 	// Properties
 	this.surface = ui;
 	this.model = model;
+	this.attachedRootModel = attachedRoot;
 	this.documentView = new ve.ce.Document( model.getDocument(), this );
 	this.attachedRoot = this.getDocument().getDocumentNode().getNodeFromOffset(
-		model.getAttachedRoot().getOffset() + ( model.getAttachedRoot().isWrapped() ? 1 : 0 )
+		attachedRoot.getOffset() + ( attachedRoot.isWrapped() ? 1 : 0 )
 	);
 	this.selection = null;
 	this.readOnly = false;
@@ -564,7 +575,7 @@ ve.ce.Surface.prototype.focus = function () {
 	}
 
 	if ( selection.getModel().isNull() ) {
-		this.getModel().selectFirstContentOffset();
+		this.selectFirstContentOffset();
 		selection = this.getSelection();
 	}
 
@@ -589,7 +600,7 @@ ve.ce.Surface.prototype.focus = function () {
 		// TODO: rename isFocused and other methods to something which reflects
 		// the fact they actually mean "has a native selection"
 		if ( !surface.isFocused() ) {
-			surface.getModel().selectFirstContentOffset();
+			surface.selectFirstContentOffset();
 		}
 	} );
 	// onDocumentFocus takes care of the rest
@@ -844,7 +855,7 @@ ve.ce.Surface.prototype.onDocumentFocus = function () {
 	if ( this.getModel().getSelection().isNull() ) {
 		// If the document is being focused by a non-mouse/non-touch user event,
 		// find the first content offset and place the cursor there.
-		this.getModel().selectFirstContentOffset();
+		this.selectFirstContentOffset();
 	}
 	this.eventSequencer.attach( this.$element );
 	this.surfaceObserver.startTimerLoop();
@@ -3023,6 +3034,23 @@ ve.ce.Surface.prototype.selectAll = function () {
 };
 
 /**
+ * Place the selection at the first content offset in the document.
+ */
+ve.ce.Surface.prototype.selectFirstContentOffset = function () {
+	var firstOffset = this.getModel().getDocument().data.getNearestContentOffset(
+		this.getAttachedRoot().getModel().getOffset(),
+		1
+	);
+	if ( firstOffset !== -1 ) {
+		// Found a content offset
+		this.getModel().setLinearSelection( new ve.Range( firstOffset ) );
+	} else {
+		// Document is full of structural nodes, just give up
+		this.getModel().setNullSelection();
+	}
+};
+
+/**
  * Handle input events.
  *
  * @param {jQuery.Event} e The input event
@@ -4535,6 +4563,15 @@ ve.ce.Surface.prototype.getModel = function () {
  */
 ve.ce.Surface.prototype.getDocument = function () {
 	return this.documentView;
+};
+
+/**
+ * Get the surfaced node
+ *
+ * @return {ve.ce.BranchNode} The surfaced node
+ */
+ve.ce.Surface.prototype.getAttachedRoot = function () {
+	return this.attachedRoot;
 };
 
 /**

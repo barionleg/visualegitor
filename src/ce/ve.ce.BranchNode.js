@@ -15,14 +15,18 @@
  * @mixins ve.BranchNode
  * @constructor
  * @param {ve.dm.BranchNode} model Model to observe
+ * @param {ve.ce.Surface} [surface] Surface document is part of
  * @param {Object} [config] Configuration options
  */
-ve.ce.BranchNode = function VeCeBranchNode( model ) {
+ve.ce.BranchNode = function VeCeBranchNode( model, surface, config ) {
+	// Properties
+	this.surface = surface;
+
 	// Mixin constructor
 	ve.BranchNode.call( this );
 
 	// Parent constructor
-	ve.ce.BranchNode.super.apply( this, arguments );
+	ve.ce.BranchNode.super.call( this, model, config );
 
 	// Properties
 	this.tagName = this.$element.get( 0 ).nodeName.toLowerCase();
@@ -174,9 +178,8 @@ ve.ce.BranchNode.prototype.onModelUpdate = function ( transaction ) {
 ve.ce.BranchNode.prototype.onSplice = function ( index ) {
 	var i, length, removals, position, j, fragment,
 		inAttachedRoot, upstreamOfAttachedRoot,
-		// attachedRoot and doc can be undefined in tests
-		dmDoc = this.getModel().getDocument(),
-		attachedRoot = dmDoc && dmDoc.attachedRoot,
+		// attachedRootModel and surface can be undefined in tests
+		attachedRoot = this.surface && this.surface.attachedRootModel,
 		isAllAttached = !attachedRoot || attachedRoot instanceof ve.dm.DocumentNode,
 		args = [];
 
@@ -198,7 +201,7 @@ ve.ce.BranchNode.prototype.onSplice = function ( index ) {
 				// TODO: Come up with a more explict way to skip the UnrenderedNode optimisation.
 				args[ i ].findParent( ve.dm.InternalItemNode )
 			) {
-				args[ i ] = ve.ce.nodeFactory.createFromModel( args[ i ] );
+				args[ i ] = ve.ce.nodeFactory.createFromModel( args[ i ], this.surface );
 				args[ i ].model.connect( this, { update: 'onModelUpdate' } );
 			} else {
 				args[ i ] = new ve.ce.UnrenderedNode( args[ i ] );

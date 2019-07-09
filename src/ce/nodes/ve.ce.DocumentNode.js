@@ -16,11 +16,8 @@
  * @param {Object} [config] Configuration options
  */
 ve.ce.DocumentNode = function VeCeDocumentNode( model, surface, config ) {
-	// Properties
-	this.surface = surface;
-
 	// Parent constructor
-	ve.ce.DocumentNode.super.call( this, model, config );
+	ve.ce.DocumentNode.super.call( this, model, surface, config );
 
 	// Mixin constructor
 	ve.ce.ContentEditableNode.call( this );
