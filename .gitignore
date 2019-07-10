@@ -14,6 +14,7 @@ node_modules
 npm-debug.log
 rebaser/config.yaml
 rebaser/rebaser.log
+rebaser/package-lock.json
 .eslintcache
 
 # OS
