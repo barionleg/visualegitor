@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cf114e3d_0cfd7162",
+        "filename": "src/ce/ve.ce.BranchNode.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2019-07-13T14:36:52Z",
+      "side": 1,
+      "message": "I think this should really say \"args[ i ] is not attachedRoot or one of its ancestors or descendants\". Maybe we want\n\n  ve.Node.prototype.getAncestors \u003d function () {\n      var ancestors \u003d [];\n      this.traverseUpstream( function ( node ) {\n          ancestors.push( node );\n          return true;\n      } );\n      return ancestors;\n  }\n\nand\n\n  ve.Node.prototype.inBranch \u003d function ( branchNode ) {\n      return this.traverseUpstream( function ( node ) {\n          return node !\u003d\u003d branchNode;\n      } ) !\u003d\u003d null;\n  };\n\nThen at the top of this function:\n\n  var ...,\n      attached \u003d this.inBranch( attachedRoot ),\n      needed \u003d ve.getAncestors( attachedRoot );\n\nThen here:\n\n  if ( attached || needed.indexOf( args[ i ] ) !\u003d\u003d -1 ) {\n      Render me\n  } else {\n      Make me unrendered\n  }",
+      "range": {
+        "startLine": 190,
+        "startChar": 4,
+        "endLine": 191,
+        "endChar": 54
+      },
+      "revId": "cda0a4c9efaaed12fc323ef1e79930e0a5bc57d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
