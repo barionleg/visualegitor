@@ -447,6 +447,7 @@
 			"src/ce/ve.ce.BranchNode.js",
 			"src/ce/ve.ce.ContentBranchNode.js",
 			"src/ce/ve.ce.LeafNode.js",
+			"src/ce/ve.ce.UnrenderedNode.js",
 			"src/ce/ve.ce.MetaItem.js",
 			"src/ce/ve.ce.ClassAttributeNode.js",
 			"src/ce/ve.ce.AlignableNode.js",

@@ -175,6 +175,7 @@ ve.ce.BranchNode.prototype.onModelUpdate = function ( transaction ) {
  */
 ve.ce.BranchNode.prototype.onSplice = function ( index ) {
 	var i, length, removals, position, j, fragment,
+		attachedRoot = this.surface && this.surface.getModel().getAttachedRoot(),
 		args = [];
 
 	for ( i = 0, length = arguments.length; i < length; i++ ) {
@@ -183,8 +184,19 @@ ve.ce.BranchNode.prototype.onSplice = function ( index ) {
 	// Convert models to views and attach them to this node
 	if ( args.length >= 3 ) {
 		for ( i = 2, length = args.length; i < length; i++ ) {
-			args[ i ] = ve.ce.nodeFactory.createFromModel( args[ i ] );
-			args[ i ].model.connect( this, { update: 'onModelUpdate' } );
+			if (
+				attachedRoot &&
+				!( attachedRoot instanceof ve.dm.DocumentNode ) &&
+				args[ i ].parent instanceof ve.dm.DocumentNode &&
+				args[ i ] !== this.surface.model.getAttachedRoot()
+			) {
+				args[ i ] = new ve.ce.LeafNode(
+					args[ i ]
+				);
+			} else {
+				args[ i ] = ve.ce.nodeFactory.createFromModel( args[ i ] );
+				args[ i ].model.connect( this, { update: 'onModelUpdate' } );
+			}
 		}
 	}
 	removals = this.children.splice.apply( this.children, args );
