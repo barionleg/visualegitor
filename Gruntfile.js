@@ -408,7 +408,7 @@ module.exports = function ( grunt ) {
 				autoWatch: false
 			},
 			main: {
-				browsers: [ 'ChromeCustom' ], // T200347: Temporarily disabled `, 'Firefox'*/ ],`
+				browsers: [ 'ChromeCustom', 'Firefox' ],
 				preprocessors: {
 					'rebaser/src/**/*.js': [ 'coverage' ],
 					'src/**/*.js': [ 'coverage' ]
