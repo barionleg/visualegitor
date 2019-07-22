@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "644e9109_32bedfaa",
+        "filename": "src/ui/ve.ui.Surface.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 717,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2019-07-22T22:23:43Z",
+      "side": 1,
+      "message": "I noticed that this extra padding is never removed, even after the keyboard is closed. But this is already the case before these changes…",
+      "revId": "dfe0eb02533ebb77c4a04e59dd45388fd8f9ef74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
