@@ -403,12 +403,17 @@ module.exports = function ( grunt ) {
 						base: 'ChromeHeadless',
 						// Chrome requires --no-sandbox in Docker/CI.
 						flags: ( process.env.CHROMIUM_FLAGS || '' ).split( ' ' )
+					},
+					FirefoxCustom: {
+						base: 'ChromeHeadless',
+						// Chrome requires --no-sandbox in Docker/CI.
+						flags: ( process.env.CHROMIUM_FLAGS || '' ).split( ' ' ).concat( '-headless' )
 					}
 				},
 				autoWatch: false
 			},
 			main: {
-				browsers: [ 'ChromeCustom' ], // T200347: Temporarily disabled `, 'Firefox'*/ ],`
+				browsers: [ 'ChromeCustom', 'FirefoxCustom' ],
 				preprocessors: {
 					'rebaser/src/**/*.js': [ 'coverage' ],
 					'src/**/*.js': [ 'coverage' ]
