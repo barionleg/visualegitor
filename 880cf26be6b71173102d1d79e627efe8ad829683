@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a3485cac_36e71406",
+        "filename": "Gruntfile.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2019-07-22T18:47:54Z",
+      "side": 1,
+      "message": "This is, despite the name, still just Chrome. :-)",
+      "range": {
+        "startLine": 407,
+        "startChar": 0,
+        "endLine": 407,
+        "endChar": 21
+      },
+      "revId": "880cf26be6b71173102d1d79e627efe8ad829683",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
