@@ -34,6 +34,29 @@
       "revId": "dfe0eb02533ebb77c4a04e59dd45388fd8f9ef74",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "55bc4de4_079c6554",
+        "filename": "src/ui/ve.ui.Surface.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 717,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2019-07-23T20:26:14Z",
+      "side": 1,
+      "message": "Oops, \"this.$element.height()\" is actually wrong… in the old code `this` was the Target, but now it\u0027s the surface, so it counts the entire surface height, not one page.",
+      "range": {
+        "startLine": 717,
+        "startChar": 12,
+        "endLine": 717,
+        "endChar": 34
+      },
+      "revId": "dfe0eb02533ebb77c4a04e59dd45388fd8f9ef74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
