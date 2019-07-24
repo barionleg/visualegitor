@@ -38,10 +38,10 @@ ve.ui.Command = function VeUiCommand( name, action, method, options ) {
  */
 ve.ui.Command.prototype.execute = function ( surface, args, source ) {
 	if ( this.isExecutable( surface.getModel().getFragment() ) ) {
-		// We want to log things that are functionally a window being opened. Mostly
-		// window+open covers this, but in the MW extension that's overridden by the
-		// link context item to use link+open instead for link inspectors.
-		if ( ( this.action === 'window' || this.action === 'link' ) && this.method === 'open' ) {
+		// We want to log things that are functionally a window being opened. We
+		// rely on the convention of the method being "open", regardless of what the
+		// action is. (Commonly window, but overridden in places.)
+		if ( this.method === 'open' ) {
 			ve.track(
 				'activity.' + ( ( args || this.args )[ 0 ] || this.action ),
 				{ action: 'window-open-from-' + ( source || 'command' ) }
