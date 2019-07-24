@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4f7c9ce7_7aa3cc17",
+        "filename": "src/ui/contextitems/ve.ui.LinearContextItem.js",
+        "patchSetId": 22
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2019-07-24T22:02:43Z",
+      "side": 1,
+      "message": "Aliens can\u0027t be edited, so unconditionally showing the edit button is wrong.\n\nWhat is this code supposed to handle anyway?",
+      "revId": "e6bc8896fddb7f578163df8465f2a0d8b1d9a03c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d7b16163_c9e493f9",
+        "filename": "src/ui/inspectors/ve.ui.LinkAnnotationInspector.js",
+        "patchSetId": 22
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2019-07-24T22:02:43Z",
+      "side": 1,
+      "message": "We shouldn\u0027t show \"Add…\"/\"Edit…\" in read-only mode.\n\nShould be:\n\n\t\t\t\tthis.isReadOnly() ? \u0027visualeditor-linkinspector-title\u0027 :\n\t\t\t\t\tthis.isNew ? \u0027visualeditor-linkinspector-title-add\u0027 :\n\t\t\t\t\t\u0027visualeditor-linkinspector-title-edit\u0027",
+      "revId": "e6bc8896fddb7f578163df8465f2a0d8b1d9a03c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
