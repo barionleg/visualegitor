@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "692fa9e0_3523c796",
+        "filename": "src/ui/contextitems/ve.ui.LinkContextItem.js",
+        "patchSetId": 22
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2019-07-24T22:59:02Z",
+      "side": 1,
+      "message": "So, this is kind of nasty…\n\nI think the ideal approach here would be to have multiple bodies+actions in each context item. This would also work for the Citoid context, with its \"Convert\" action.  I note that the CSS for `.ve-ui-linearContextItem-body-action …` and for `.ve-ui-linkContextItem-label …` is already basically the same.\n\nI fiddled with that a bit, but I had a hard time reconciling it with the current design on desktop, things were looking even nastier than this with a million ifs() for every element.\n\nApparently we\u0027re planning to apply the same general design to desktop too, though. So we should probably leave this for now, and come back to refactor it when the current desktop code is gone.",
+      "revId": "e6bc8896fddb7f578163df8465f2a0d8b1d9a03c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d7b16163_c9e493f9",
         "filename": "src/ui/inspectors/ve.ui.LinkAnnotationInspector.js",
         "patchSetId": 22
