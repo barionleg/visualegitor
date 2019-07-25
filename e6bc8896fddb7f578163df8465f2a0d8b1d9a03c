@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "f717e643_a426df18",
+        "filename": "src/ui/contextitems/ve.ui.LinearContextItem.js",
+        "patchSetId": 22
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2019-07-25T20:05:08Z",
+      "side": 1,
+      "message": "Ah, I see. The difference in behavior is a bit surprising to me, but whatever.\n\n(You actually added a body to the gallery context recently… ;) but there are other examples now that I know what to look for, e.g. maps from Kartographer.)",
+      "parentUuid": "7dc07a78_73db7f42",
+      "revId": "e6bc8896fddb7f578163df8465f2a0d8b1d9a03c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "692fa9e0_3523c796",
         "filename": "src/ui/contextitems/ve.ui.LinkContextItem.js",
         "patchSetId": 22
