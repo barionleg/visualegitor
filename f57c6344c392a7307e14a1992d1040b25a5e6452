@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "152442e9_371864b4",
+        "filename": "src/ui/inspectors/ve.ui.AnnotationInspector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2019-07-31T13:01:25Z",
+      "side": 0,
+      "message": "This is the correct behaviour for desktop.\n\n \"foo [ctrl+k]bar[enter] baz\"",
+      "revId": "f57c6344c392a7307e14a1992d1040b25a5e6452",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
