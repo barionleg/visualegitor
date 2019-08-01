@@ -16,6 +16,24 @@
       "revId": "f57c6344c392a7307e14a1992d1040b25a5e6452",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e5c2ce3_a98b45da",
+        "filename": "src/ui/inspectors/ve.ui.AnnotationInspector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2019-08-01T03:26:32Z",
+      "side": 0,
+      "message": "As I explained in the commit message, this line does nothing, and if it worked, it would be incorrect.",
+      "parentUuid": "152442e9_371864b4",
+      "revId": "f57c6344c392a7307e14a1992d1040b25a5e6452",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
