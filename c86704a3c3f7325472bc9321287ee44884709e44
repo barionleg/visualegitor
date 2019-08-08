@@ -16,6 +16,24 @@
       "revId": "c86704a3c3f7325472bc9321287ee44884709e44",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fcb164ad_a1da4ce6",
+        "filename": "src/ui/widgets/ve.ui.UrlInputWidget.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2019-08-08T17:38:15Z",
+      "side": 1,
+      "message": "As was pointed out in the meeting we had, this would apply `icon:search` to the config. This might want to be overridden.",
+      "parentUuid": "73b81f73_8c529182",
+      "revId": "c86704a3c3f7325472bc9321287ee44884709e44",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
