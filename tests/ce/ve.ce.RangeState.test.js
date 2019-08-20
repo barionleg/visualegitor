@@ -113,8 +113,8 @@ QUnit.test( 'Basic tests', function ( assert ) {
 			branchNodeChanged: state.branchNodeChanged,
 			selectionChanged: state.selectionChanged,
 			contentChanged: state.contentChanged,
-			veRange: state.veRange,
-			node: state.node,
+			veRange: state.veRange && [ state.veRange.from, state.veRange.to ],
+			node: state.node && state.node.getRenderedContents().outerHTML,
 			text: state.text,
 			hash: state.hash
 		};
@@ -134,7 +134,11 @@ QUnit.test( 'Basic tests', function ( assert ) {
 			oldState = null;
 		}
 		rangeState = new ve.ce.RangeState( oldState, doc );
-		assert.deepEqual( getSummary( rangeState ), cases[ i ].expected, cases[ i ].msg );
+		assert.deepEqual(
+			getSummary( rangeState ),
+			getSummary( cases[ i ].expected ),
+			cases[ i ].msg
+		);
 		oldState = rangeState;
 	}
 	view.destroy();
