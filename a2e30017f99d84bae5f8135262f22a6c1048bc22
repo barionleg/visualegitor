@@ -33,6 +33,24 @@
       "revId": "a2e30017f99d84bae5f8135262f22a6c1048bc22",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2848868f_8368fcad",
+        "filename": "tests/ce/ve.ce.RangeState.test.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2019-08-21T12:07:56Z",
+      "side": 1,
+      "message": "or deepEqualWithNodeTree",
+      "parentUuid": "1aa80788_c8e495b9",
+      "revId": "a2e30017f99d84bae5f8135262f22a6c1048bc22",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
