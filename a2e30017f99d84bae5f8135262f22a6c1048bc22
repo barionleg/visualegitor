@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "e8381597_402e36b8",
+        "filename": "tests/ce/ve.ce.RangeState.test.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2019-08-21T12:16:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cdd4c7bb_b835e40d",
+      "revId": "a2e30017f99d84bae5f8135262f22a6c1048bc22",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1aa80788_c8e495b9",
         "filename": "tests/ce/ve.ce.RangeState.test.js",
         "patchSetId": 2
@@ -48,6 +66,24 @@
       "side": 1,
       "message": "or deepEqualWithNodeTree",
       "parentUuid": "1aa80788_c8e495b9",
+      "revId": "a2e30017f99d84bae5f8135262f22a6c1048bc22",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4389159e_3f173822",
+        "filename": "tests/ce/ve.ce.RangeState.test.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2019-08-21T12:16:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2848868f_8368fcad",
       "revId": "a2e30017f99d84bae5f8135262f22a6c1048bc22",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
