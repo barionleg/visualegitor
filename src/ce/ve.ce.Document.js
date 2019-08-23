@@ -130,6 +130,9 @@ ve.ce.Document.prototype.getNodeAndOffset = function ( offset ) {
 	// coordinates than any of its containers.
 
 	branchNode = this.getBranchNodeFromOffset( offset );
+	if ( !branchNode ) {
+		throw new Error( 'No branch nodes found at offset' );
+	}
 	count = branchNode.getOffset() + ( ( branchNode.isWrapped() ) ? 1 : 0 );
 
 	if ( !( branchNode instanceof ve.ce.ContentBranchNode ) ) {

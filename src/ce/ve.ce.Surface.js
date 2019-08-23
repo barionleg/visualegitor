@@ -4301,10 +4301,20 @@ ve.ce.Surface.prototype.annotationsAtModelSelection = function ( filter, offset 
 	// TODO: For annotation boundaries we have to search one place left and right
 	// to find the text inside the annotation. This will give too many results for
 	// adjancent annotations, and will fail for one character annotations. (T221967)
-	nodeAndOffset = this.getDocument().getNodeAndOffset( offset - 1 );
+	try {
+		nodeAndOffset = this.getDocument().getNodeAndOffset( offset - 1 );
+	} catch ( e ) {
+		nodeAndOffset = null;
+	}
 	annotations = nodeAndOffset ? this.annotationsAtNode( nodeAndOffset.node, filter ) : [];
-	nodeAndOffset = this.getDocument().getNodeAndOffset( offset + 1 );
+
+	try {
+		nodeAndOffset = this.getDocument().getNodeAndOffset( offset + 1 );
+	} catch ( e ) {
+		nodeAndOffset = null;
+	}
 	annotations = OO.unique( annotations.concat( nodeAndOffset ? this.annotationsAtNode( nodeAndOffset.node, filter ) : [] ) );
+
 	return annotations;
 };
 
