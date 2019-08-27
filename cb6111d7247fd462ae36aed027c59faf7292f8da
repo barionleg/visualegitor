@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae7e64a9_2e98f266",
+        "filename": "src/dm/ve.dm.VisualDiff.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 2849
+      },
+      "writtenOn": "2019-08-27T12:42:56Z",
+      "side": 1,
+      "message": "This should just be \"nodes\", as for the newTreeOrderedNodes. Often leaf nodes of these tree structures are actually a BranchNode (e.g. ContentBranchNode) but they can be a LeafNode (e.g. MWTransclusionNode).",
+      "range": {
+        "startLine": 632,
+        "startChar": 58,
+        "endLine": 632,
+        "endChar": 70
+      },
+      "revId": "cb6111d7247fd462ae36aed027c59faf7292f8da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
