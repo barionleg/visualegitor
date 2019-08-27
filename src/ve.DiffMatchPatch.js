@@ -35,6 +35,46 @@ ve.DiffMatchPatch.static.DIFF_EQUAL = 0;
 ve.DiffMatchPatch.static.DIFF_CHANGE_DELETE = -2;
 ve.DiffMatchPatch.static.DIFF_CHANGE_INSERT = 2;
 
+/* Static methods */
+
+ve.DiffMatchPatch.static.diffToTransactionOperations = function ( diff ) {
+	var i, iLen, type, data, op,
+		ops = [];
+	for ( i = 0, iLen = diff.length; i < iLen; i++ ) {
+		type = diff[ i ][ 0 ];
+		data = diff[ i ][ 1 ];
+		if ( type === 0 ) {
+			if ( op && op.type !== 'retain' ) {
+				ops.push( op );
+				op = undefined;
+			}
+			if ( !op ) {
+				op = { type: 'retain', length: 0 };
+			}
+			op.length += data.length;
+			continue;
+		}
+		if ( op && op.type !== 'replace' ) {
+			ops.push( op );
+			op = undefined;
+		}
+		if ( !op ) {
+			op = { type: 'replace', remove: [], insert: [] };
+		}
+		if ( type === -1 ) {
+			ve.batchPush( op.remove, data );
+		} else if ( type === 1 ) {
+			ve.batchPush( op.insert, data );
+		} else {
+			throw new Error( 'Unknown type code: ' + type );
+		}
+	}
+	if ( op ) {
+		ops.push( op );
+	}
+	return ops;
+};
+
 /* Methods */
 
 ve.DiffMatchPatch.prototype.isEqualChar = function ( a, b ) {
