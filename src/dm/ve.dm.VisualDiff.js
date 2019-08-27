@@ -598,15 +598,33 @@ ve.dm.VisualDiff.prototype.flattenList = function ( listNode, flatList, depth ) 
  * @return {Array|boolean} Corresponding tree node indices, or false if timed out
  */
 ve.dm.VisualDiff.prototype.alignTrees = function ( oldTree, newTree ) {
-	var transactions = new this.treeDiffer.Differ( oldTree, newTree ).transactions;
-
-	if ( transactions === null ) {
-		// Tree diff timed out
-		this.timedOut = true;
-		return false;
+	var oldNode, newNode, oldRange, newRange, oldData, newData, differ, diff, tx, treeOps;
+	function repeat( s, n ) {
+		return new Array( n + 1 ).join( s );
 	}
-
-	return transactions[ oldTree.orderedNodes.length - 1 ][ newTree.orderedNodes.length - 1 ];
+	oldNode = oldTree.root.node;
+	newNode = newTree.root.node;
+	oldRange = oldNode.getRange();
+	newRange = newNode.getRange();
+	oldData = oldNode.getDocument().getData().slice( oldRange.start, oldRange.end );
+	newData = newNode.getDocument().getData().slice( newRange.start, newRange.end );
+	differ = new ve.DiffMatchPatch(
+		oldNode.getDocument().getStore(),
+		newNode.getDocument().getStore()
+	);
+	diff = differ.diff_main( oldData, newData );
+	diff.unshift( [ 0, repeat( 'x', oldRange.start ) ] );
+	diff.push( [ 0, repeat( 'x', oldNode.getDocument().getLength() - oldRange.end ) ] );
+	tx = new ve.dm.Transaction(
+		ve.DiffMatchPatch.static.diffToTransactionOperations( diff )
+	);
+	ve.dm.treeModifier.setup( oldNode.getDocument() );
+	ve.dm.treeModifier.calculateTreeOperations( tx );
+	treeOps = ve.dm.treeModifier.treeOps;
+	if ( treeOps ) {
+		throw new Error( 'Now map treeOps to the format we return, referencing oldTree.orderedNodes and newTree.orderedNodes: ' + treeOps );
+	}
+	return treeOps;
 };
 
 /**
@@ -654,7 +672,6 @@ ve.dm.VisualDiff.prototype.diffTreeNodes = function ( oldTreeNode, newTreeNode )
 
 	oldTree = new this.treeDiffer.Tree( oldTreeNode, ve.DiffTreeNode );
 	newTree = new this.treeDiffer.Tree( newTreeNode, ve.DiffTreeNode );
-
 	treeDiff = this.alignTrees( oldTree, newTree );
 
 	// Length of old content is length of old node minus the open and close
