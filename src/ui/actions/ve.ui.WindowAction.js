@@ -66,6 +66,8 @@ ve.ui.WindowAction.prototype.open = function ( name, data, action ) {
 		return false;
 	}
 
+	this.openPromise = ve.createDeferred();
+
 	if ( !mayRequireFragment ) {
 		fragmentPromise = ve.createDeferred().resolve().promise();
 	} else if ( sourceMode ) {
@@ -137,6 +139,7 @@ ve.ui.WindowAction.prototype.open = function ( name, data, action ) {
 					if ( action ) {
 						win.executeAction( action );
 					}
+					windowAction.openPromise.resolve( instance );
 				} );
 
 				if ( !win.constructor.static.activeSurface ) {
