@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "e693b05f_d67a2e1a",
+        "filename": "src/ui/actions/ve.ui.WindowAction.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2019-08-29T13:31:39Z",
+      "side": 1,
+      "message": "Looking at all uses of \"ve.ui.actionFactory.create\" I don\u0027t think this would be that controversial.",
+      "parentUuid": "b2d1c018_76963e7d",
+      "revId": "12bd8be511a7c3d7c7c9f6a622ca4a63da989507",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d1b71a30_961b1b2b",
         "filename": "src/ui/actions/ve.ui.WindowAction.js",
         "patchSetId": 1
