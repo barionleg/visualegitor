@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5f1a940b_371cc03c",
+        "filename": "src/ui/actions/ve.ui.WindowAction.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2019-08-29T13:30:20Z",
+      "side": 1,
+      "message": "Then it isn\u0027t a promise, it\u0027s a deferred.\n\nMake the deferred a local variable\n\n var openDeferred \u003d ve.createDeferred)\n\nthen\n\n this.openPromise \u003d openDeferred.promise();",
+      "revId": "12bd8be511a7c3d7c7c9f6a622ca4a63da989507",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b2d1c018_76963e7d",
+        "filename": "src/ui/actions/ve.ui.WindowAction.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2019-08-29T13:30:20Z",
+      "side": 1,
+      "message": "Note that the window action controls multiple window managers, and it is possible to have multiple windows open in different managers (e.g. \u0027findAndReplace\u0027 and \u0027mwsave\u0027).\n\nAs such having a single openPromise for the whole action may not make sense.\n\nIt might just make more sense to change the assumption that actions always return booleans and allow them to return promises as well.",
+      "revId": "12bd8be511a7c3d7c7c9f6a622ca4a63da989507",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d1b71a30_961b1b2b",
+        "filename": "src/ui/actions/ve.ui.WindowAction.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2019-08-29T13:30:20Z",
+      "side": 1,
+      "message": "This would be openDeferred.resolve",
+      "revId": "12bd8be511a7c3d7c7c9f6a622ca4a63da989507",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
