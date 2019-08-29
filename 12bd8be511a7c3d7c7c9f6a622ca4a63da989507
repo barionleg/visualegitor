@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "f3666ea7_2764f513",
+        "filename": "src/ui/actions/ve.ui.WindowAction.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2019-08-29T15:41:19Z",
+      "side": 1,
+      "message": "Good argument -- I\u0027d considered it but decided to be conservative at first. That said, ui.Action\u0027s docs already say that the return value will be cast to boolean for its uses, so I think it\u0027s not even a breaking change technically.",
+      "parentUuid": "e693b05f_d67a2e1a",
+      "revId": "12bd8be511a7c3d7c7c9f6a622ca4a63da989507",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d1b71a30_961b1b2b",
         "filename": "src/ui/actions/ve.ui.WindowAction.js",
         "patchSetId": 1
