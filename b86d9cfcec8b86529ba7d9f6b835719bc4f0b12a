@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ea7014e6_4552f22a",
+        "filename": "src/ui/actions/ve.ui.WindowAction.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2019-08-30T11:52:36Z",
+      "side": 1,
+      "message": "We\u0027re still saying jQuery.Promise",
+      "revId": "b86d9cfcec8b86529ba7d9f6b835719bc4f0b12a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
