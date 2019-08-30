@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ac8b2036_618183c7",
+        "filename": "src/ui/ve.ui.FragmentWindow.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2019-08-30T22:40:57Z",
+      "side": 1,
+      "message": "So, weird requirement set. This method isn\u0027t overridden anywhere at all currently, so I could instead add overrides that call the mixin method explicitly to the direct users of the mixin, if that\u0027s less hacky.",
+      "revId": "5042a3f8951b07bef92d49d4773d3c0b1a07d695",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
