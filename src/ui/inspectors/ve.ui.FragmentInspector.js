@@ -116,6 +116,16 @@ ve.ui.FragmentInspector.prototype.getActionProcess = function ( action ) {
 };
 
 /**
+ * @inheritdoc OO.ui.Dialog
+ */
+ve.ui.FragmentInspector.prototype.getActionWidgetConfig = function ( config ) {
+	// mixin
+	config = ve.ui.FragmentInspector.prototype.getActionWidgetConfig.call( this, config );
+	// parent
+	return this.constructor.super.prototype.getActionWidgetConfig.call( this, config );
+};
+
+/**
  * @inheritdoc
  */
 ve.ui.FragmentInspector.prototype.getSetupProcess = function ( data ) {
