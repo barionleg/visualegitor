@@ -16,6 +16,24 @@
       "revId": "b86d9cfcec8b86529ba7d9f6b835719bc4f0b12a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b102d8ad_e3d32cf9",
+        "filename": "src/ui/actions/ve.ui.WindowAction.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2019-08-30T15:22:34Z",
+      "side": 1,
+      "message": "Oops, I was mislead by a quick search turning up this usage, but I think that was all in things like DocumentStore which are off in maybe-really-have-actual-Promises land.",
+      "parentUuid": "ea7014e6_4552f22a",
+      "revId": "b86d9cfcec8b86529ba7d9f6b835719bc4f0b12a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
