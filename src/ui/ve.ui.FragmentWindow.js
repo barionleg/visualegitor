@@ -35,6 +35,21 @@ ve.ui.FragmentWindow.prototype.getFragment = function () {
 };
 
 /**
+ * @inheritdoc OO.ui.Dialog
+ */
+ve.ui.FragmentWindow.prototype.getActionWidgetConfig = function ( config ) {
+	if ( config.action === 'done' && OO.ui.isMobile() ) {
+		config = ve.extendObject( {
+			icon: 'check',
+			invisibleLabel: true
+		}, config );
+	}
+
+	// parent of mixed-in class's method
+	return this.constructor.super.prototype.getActionWidgetConfig( config );
+};
+
+/**
  * @inheritdoc OO.ui.Window
  * @throws {Error} If fragment was not provided through data parameter
  */
