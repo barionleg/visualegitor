@@ -16,6 +16,24 @@
       "revId": "5042a3f8951b07bef92d49d4773d3c0b1a07d695",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be2539e6_8197c592",
+        "filename": "src/ui/ve.ui.FragmentWindow.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2019-08-31T20:24:05Z",
+      "side": 1,
+      "message": "Yeah, mixins shouldn\u0027t call out to anything.\n\nFragmentDialog/FragmentInspector should call this.",
+      "parentUuid": "ac8b2036_618183c7",
+      "revId": "5042a3f8951b07bef92d49d4773d3c0b1a07d695",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
