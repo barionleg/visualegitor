@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e281fa21_1a797a06",
+        "filename": "src/ui/dialogs/ve.ui.FragmentDialog.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2019-09-02T10:09:21Z",
+      "side": 1,
+      "message": "\"Mixin method\" \"Parent method\" as below.",
+      "revId": "a58fa3eade981914eb74f3a76d5db55ad8184020",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e5ad1efd_92258a0a",
+        "filename": "src/ui/dialogs/ve.ui.FragmentDialog.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2019-09-02T10:09:21Z",
+      "side": 1,
+      "message": "Don\u0027t use this.constructor, it doesn\u0027t work for subclasses.\n\nUse ve.ui.FragmentDialog.super.",
+      "revId": "a58fa3eade981914eb74f3a76d5db55ad8184020",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e81cba6_ce5fa8c9",
+        "filename": "src/ui/inspectors/ve.ui.FragmentInspector.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2019-09-02T10:09:21Z",
+      "side": 1,
+      "message": "same",
+      "revId": "a58fa3eade981914eb74f3a76d5db55ad8184020",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
