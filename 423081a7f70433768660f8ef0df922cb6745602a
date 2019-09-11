@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4b840258_250e8447",
+        "filename": "src/dm/ve.dm.TreeModifier.js",
+        "patchSetId": 21
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2019-09-11T15:57:37Z",
+      "side": 1,
+      "message": "use a switch?",
+      "revId": "423081a7f70433768660f8ef0df922cb6745602a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e44199db_b3a4d6a0",
+        "filename": "src/dm/ve.dm.TreeModifier.js",
+        "patchSetId": 21
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2019-09-11T15:57:37Z",
+      "side": 1,
+      "message": "Do XXX comments need action? Can they be converted to TODO?",
+      "revId": "423081a7f70433768660f8ef0df922cb6745602a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69156d53_0210477f",
+        "filename": "src/dm/ve.dm.TreeModifier.js",
+        "patchSetId": 21
+      },
+      "lineNbr": 534,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2019-09-11T15:57:37Z",
+      "side": 1,
+      "message": "also a switch?",
+      "revId": "423081a7f70433768660f8ef0df922cb6745602a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "be5c5489_37a6f16b",
+        "filename": "src/dm/ve.dm.TreeModifier.js",
+        "patchSetId": 21
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2019-09-11T15:57:37Z",
+      "side": 1,
+      "message": "document these methods?",
+      "revId": "423081a7f70433768660f8ef0df922cb6745602a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
