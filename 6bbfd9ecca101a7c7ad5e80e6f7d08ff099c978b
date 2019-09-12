@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3547d3ce_64e3eea3",
+        "filename": "src/dm/ve.dm.TreeModifier.js",
+        "patchSetId": 22
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2019-09-12T20:01:54Z",
+      "side": 1,
+      "message": "There are other XXX comments, should probably action them all..",
+      "revId": "6bbfd9ecca101a7c7ad5e80e6f7d08ff099c978b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
