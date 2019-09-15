@@ -195,7 +195,7 @@ QUnit.test( 'modify', function ( assert ) {
 		// Build a tree modifier just for the .dump method (don't modify anything)
 		var treeModifier = new ve.dm.TreeModifier();
 		treeModifier.setup( doc );
-		treeModifier.dump();
+		return treeModifier.dump();
 	}
 
 	origData = [
@@ -209,6 +209,11 @@ QUnit.test( 'modify', function ( assert ) {
 		'e',
 		'f',
 		'g',
+		{ type: '/paragraph' },
+		{ type: 'paragraph' },
+		'h',
+		'i',
+		'j',
 		{ type: '/paragraph' },
 		{ type: 'internalList' },
 		{ type: '/internalList' }
@@ -235,7 +240,18 @@ QUnit.test( 'modify', function ( assert ) {
 			insertedDataOffset: 0,
 			insertedDataLength: 0
 		},
-		{ type: 'retain', length: 5 }
+		{ type: 'retain', length: 4 },
+		{
+			type: 'replace',
+			remove: [ 'h' ],
+			insert: [
+				{ type: 'inlineImage' },
+				{ type: '/inlineImage' }
+			],
+			insertedDataOffset: 0,
+			insertedDataLength: 2
+		},
+		{ type: 'retain', length: 3 }
 	] );
 
 	doc.commit( tx );
