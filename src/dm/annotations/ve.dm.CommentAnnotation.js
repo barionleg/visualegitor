@@ -35,7 +35,10 @@ ve.dm.CommentAnnotation.static.toDataElement = function ( domElements ) {
 	return {
 		type: this.name,
 		attributes: {
-			text: domElements[ 0 ].getAttribute( 'data-text' ) || ''
+			text: parseInt(
+				domElements[ 0 ].getAttribute( 'data-text' ),
+				10
+			) || 0
 		}
 	};
 };
