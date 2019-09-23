@@ -49,6 +49,15 @@ ve.ce.LinearEnterKeyDownHandler.static.execute = function ( surface, e ) {
 
 	e.preventDefault();
 
+	$.Deferred().reject( new Error( 'AA handled' ) ).promise().catch( function () {} );
+	$.Deferred().reject( new Error( 'BB handled' ) ).fail( function () {} );
+	$.Deferred().reject( new Error( 'CC unhandled' ) );
+	$.Deferred().reject( new Error( 'DD handled' ) ).promise().then( function () {} ).then( function () {} ).fail( function () {} );
+	$.Deferred().reject( new Error( 'EE handled' ) ).promise().then( function () {} ).then( function () {} ).always( function () {} );
+	$.Deferred().reject( new Error( 'FF unhandled' ) ).promise().then( function () {} ).then( function () {} );
+	$.Deferred().resolve( 'gg' ).promise().then( function () { throw new Error( 'GG handled' ); } ).catch( function () {} );
+	$.Deferred().resolve( 'hh' ).promise().then( function () { throw new Error( 'HH unhandled' ); } ).then( function () {} );
+
 	if ( e.ctrlKey || e.metaKey ) {
 		// CTRL+Enter triggers the submit command
 		return false;

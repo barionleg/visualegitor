@@ -193,3 +193,72 @@ ve.initFilibuster = function () {
 			} );
 		} );
 };
+
+ve.jQueryDeferred = $.Deferred;
+
+/**
+ * Create a jQuery.Deferred-compatible object, shadowed by native promises
+ * so unhandled rejections can be debugged easily. See T233480
+ */
+ve.createDeferred = $.Deferred = function () {
+	var nativePromise,
+		deferred = ve.jQueryDeferred.apply( this, arguments ),
+		resolveWith = deferred.resolveWith,
+		rejectWith = deferred.rejectWith,
+		promise = deferred.promise(),
+		deferredPromise = deferred.promise,
+		deferredFail = deferred.fail,
+		deferredAlways = deferred.always,
+		promiseThen = promise.then,
+		promiseFail = promise.fail;
+
+	deferred.aaa = 1;
+
+	promise.deferred = deferred;
+	nativePromise = promise.nativePromise = new Promise( function ( resolve, reject ) {
+		promise.nativeResolve = resolve;
+		promise.nativeReject = reject;
+	} );
+	deferred.promise = function () {
+		if ( arguments.length === 0 ) {
+			return promise;
+		}
+		return deferredPromise.apply( this, arguments );
+	}
+	deferred.resolveWith = function ( context, args ) {
+		return resolveWith.apply( this, arguments );
+	};
+	deferred.rejectWith = function ( context, args ) {
+		var error = args[ 0 ];
+		setTimeout( function () {
+			promise.nativeReject( error );
+		} );
+		return rejectWith.apply( this, arguments );
+	};
+	deferred.fail = function () {
+		nativePromise.catch( function () {} );
+		return deferredFail.apply( this, arguments );
+	};
+	deferred.always = function () {
+		nativePromise.catch( function () {} );
+		return deferredAlways.apply( this, arguments );
+	};
+	promise.then = function( onResolve, onReject, onProgress ) {
+		var value = promiseThen.apply( this, arguments );
+		if ( onReject ) {
+			nativePromise.catch( function () {} );
+		} else {
+			if ( value && value.then && value.nativeReject ) {
+				nativePromise.catch( function ( error ) {
+					value.nativeReject( error );
+				} );
+			}
+		}
+		return value;
+	};
+	promise.fail = function () {
+		nativePromise.catch( function () {} );
+		return promiseFail.apply( this, arguments );
+	}
+	return deferred;
+};
