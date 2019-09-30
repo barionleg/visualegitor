@@ -88,6 +88,7 @@ ve.ui.Surface = function VeUiSurface( dataOrDocOrSurface, config ) {
 	this.setPlaceholder( config.placeholder );
 	this.setReadOnly( !!config.readOnly );
 	this.nullSelectionOnBlur = config.nullSelectionOnBlur !== false;
+	this.completion = new ve.ui.CompletionWidget( this );
 
 	// Deprecated, use this.padding.top
 	this.toolbarHeight = 0;
@@ -124,7 +125,7 @@ ve.ui.Surface = function VeUiSurface( dataOrDocOrSurface, config ) {
 		.addClass( 've-ui-surface ve-ui-surface-' + this.mode )
 		.append( this.view.$element );
 	this.view.$element.after( this.localOverlay.$element );
-	this.localOverlay.$element.append( this.$selections, this.$blockers, this.$controls, this.$menus );
+	this.localOverlay.$element.append( this.$selections, this.$blockers, this.$controls, this.$menus, this.completion.$element );
 	this.globalOverlay.$element.append( this.dialogs.$element );
 };
 
