@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6cda9d98_819bcb33",
+        "filename": "src/ui/styles/widgets/ve.ui.CompletionWidget.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2019-10-03T15:11:08Z",
+      "side": 1,
+      "message": "CompletionWidget",
+      "revId": "5817ae3159d90386dad788dc531db9ea14ca3a5d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b27f4a08_c9e338d9",
+        "filename": "src/ui/ve.ui.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2019-10-03T15:11:08Z",
+      "side": 1,
+      "message": "I think this can be attached to $menus.",
+      "revId": "5817ae3159d90386dad788dc531db9ea14ca3a5d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2c5fd266_43cd2f59",
+        "filename": "src/ui/widgets/ve.ui.CompletionWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2019-10-03T15:11:08Z",
+      "side": 1,
+      "message": "These should be setup/teardown, as they do a lot more than just toggle visibility.",
+      "revId": "5817ae3159d90386dad788dc531db9ea14ca3a5d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a356884a_c3847ffd",
+        "filename": "src/ui/widgets/ve.ui.CompletionWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2019-10-03T15:11:08Z",
+      "side": 1,
+      "message": "we should use the adjustLinearSelection here so the box aligns with the start of the trigger",
+      "revId": "5817ae3159d90386dad788dc531db9ea14ca3a5d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d80bfefa_991ea92e",
+        "filename": "src/ui/widgets/ve.ui.CompletionWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2019-10-03T15:11:08Z",
+      "side": 1,
+      "message": "All the word break logic is specific to the word-completion widget. Generically we don\u0027t need to look for word breaks, for example usernames can have spaces in them.\n\nWhen the widget is setup the caller should decide what the context range is (or the start offset).",
+      "revId": "5817ae3159d90386dad788dc531db9ea14ca3a5d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
