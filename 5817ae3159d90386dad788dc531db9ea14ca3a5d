@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "041a167f_47de9f82",
+        "filename": "src/ui/styles/widgets/ve.ui.CompletionWidget.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2019-10-03T15:20:18Z",
+      "side": 1,
+      "message": "Oh, that copy-paste.",
+      "parentUuid": "6cda9d98_819bcb33",
+      "revId": "5817ae3159d90386dad788dc531db9ea14ca3a5d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b27f4a08_c9e338d9",
         "filename": "src/ui/ve.ui.Surface.js",
         "patchSetId": 1
@@ -81,6 +99,24 @@
       "writtenOn": "2019-10-03T15:11:08Z",
       "side": 1,
       "message": "All the word break logic is specific to the word-completion widget. Generically we don\u0027t need to look for word breaks, for example usernames can have spaces in them.\n\nWhen the widget is setup the caller should decide what the context range is (or the start offset).",
+      "revId": "5817ae3159d90386dad788dc531db9ea14ca3a5d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5493759b_4c90f3c7",
+        "filename": "src/ui/widgets/ve.ui.CompletionWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2019-10-03T15:20:18Z",
+      "side": 1,
+      "message": "Although usernames can have spaces, I sort of think that a space is still a good place to break out of autocomplete-mode. Otherwise it becomes a fairly ambiguous question to decide when to _stop_ checking the current string for completions, particularly if we add the \"always show the current string as a valid option to turn into a userlink\" mode that was suggested.\n\nMight be worth running it by Jess for a UX opinion? Spaces in usernames are kinda uncommon, so it\u0027s not a well covered feature.\n\nThat said, I do agree about just setting the start offset. I need to adjust the API a little bit so it knows to ignore trigger characters like the @ when computing the completion. (Could use the sequence remove-trigger thing, but that\u0027d suddenly make deliberately typing the @ impossible, so...)",
+      "parentUuid": "d80bfefa_991ea92e",
       "revId": "5817ae3159d90386dad788dc531db9ea14ca3a5d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
