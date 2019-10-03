@@ -138,6 +138,24 @@
       "revId": "5817ae3159d90386dad788dc531db9ea14ca3a5d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3e81d192_7c37ba8b",
+        "filename": "src/ui/widgets/ve.ui.CompletionWidget.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2019-10-03T15:38:09Z",
+      "side": 1,
+      "message": "Hm, good point. I think Phabricator\u0027s logic is to dismiss completion if you hit space again once there\u0027s no more possible completions. That might be generic enough to at least build in to the core CompletionAction logic as the default behavior, unless someone wants to override it.",
+      "parentUuid": "cad179fd_94a0324d",
+      "revId": "5817ae3159d90386dad788dc531db9ea14ca3a5d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
