@@ -16,6 +16,24 @@
       "revId": "fec3647e76b7ecee5ed84283f7d6a702811a7a50",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f625db3b_c8ab2f17",
+        "filename": "tests/dm/ve.dm.TreeModifier.test.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2019-10-07T15:18:22Z",
+      "side": 1,
+      "message": "This is a test of an inner function ensureNotText inside ve.dm.TreeModifier.static.applyTreeOperation – do you still think the name should be changed?",
+      "parentUuid": "c8382aa7_75bc0bc0",
+      "revId": "fec3647e76b7ecee5ed84283f7d6a702811a7a50",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
