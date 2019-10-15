@@ -455,25 +455,25 @@ ve.ui.Trigger.prototype.getMessage = function ( explode ) {
 	// i18n
 	keys = keys.map( function ( key ) {
 		// The following messages are used here:
-		// * visualeditor-key-alt
-		// * visualeditor-key-backspace
-		// * visualeditor-key-ctrl
-		// * visualeditor-key-delete
-		// * visualeditor-key-down
-		// * visualeditor-key-end
-		// * visualeditor-key-enter
-		// * visualeditor-key-escape
-		// * visualeditor-key-home
-		// * visualeditor-key-insert
-		// * visualeditor-key-left
-		// * visualeditor-key-meta
-		// * visualeditor-key-page-down
-		// * visualeditor-key-page-up
-		// * visualeditor-key-right
-		// * visualeditor-key-shift
-		// * visualeditor-key-space
-		// * visualeditor-key-tab
-		// * visualeditor-key-up
+		// * msg:visualeditor-key-alt
+		// * msg:visualeditor-key-backspace
+		// * msg:visualeditor-key-ctrl
+		// * msg:visualeditor-key-delete
+		// * msg:visualeditor-key-down
+		// * msg:visualeditor-key-end
+		// * msg:visualeditor-key-enter
+		// * msg:visualeditor-key-escape
+		// * msg:visualeditor-key-home
+		// * msg:visualeditor-key-insert
+		// * msg:visualeditor-key-left
+		// * msg:visualeditor-key-meta
+		// * msg:visualeditor-key-page-down
+		// * msg:visualeditor-key-page-up
+		// * msg:visualeditor-key-right
+		// * msg:visualeditor-key-shift
+		// * msg:visualeditor-key-space
+		// * msg:visualeditor-key-tab
+		// * msg:visualeditor-key-up
 		return translatableKeys.indexOf( key ) !== -1 ? ve.msg( 'visualeditor-key-' + key ) : key.toUpperCase();
 	} );
 

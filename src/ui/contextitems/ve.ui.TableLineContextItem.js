@@ -119,10 +119,10 @@ ve.ui.TableLineContextItem.prototype.setup = function () {
 			ve.ui[ className ].static.group = 'table-' + mode;
 			ve.ui[ className ].static.icon = 'tableAdd' + modeName + sideName;
 			// Messages used here:
-			// * visualeditor-table-insert-col-before
-			// * visualeditor-table-insert-col-after
-			// * visualeditor-table-insert-row-before
-			// * visualeditor-table-insert-row-after
+			// * msg:visualeditor-table-insert-col-before
+			// * msg:visualeditor-table-insert-col-after
+			// * msg:visualeditor-table-insert-row-before
+			// * msg:visualeditor-table-insert-row-after
 			ve.ui[ className ].static.title =
 				OO.ui.deferMsg( 'visualeditor-table-insert-' + mode + '-' + side );
 			ve.ui[ className ].static.commandName = 'insert' + modeName + sideName;
@@ -142,10 +142,10 @@ ve.ui.TableLineContextItem.prototype.setup = function () {
 			ve.ui[ className ].static.group = 'table-' + mode;
 			ve.ui[ className ].static.icon = 'tableMove' + modeName + sideName;
 			// Messages used here:
-			// * visualeditor-table-move-col-before
-			// * visualeditor-table-move-col-after
-			// * visualeditor-table-move-row-before
-			// * visualeditor-table-move-row-after
+			// * msg:visualeditor-table-move-col-before
+			// * msg:visualeditor-table-move-col-after
+			// * msg:visualeditor-table-move-row-before
+			// * msg:visualeditor-table-move-row-after
 			ve.ui[ className ].static.title =
 				OO.ui.deferMsg( 'visualeditor-table-move-' + mode + '-' + side );
 			ve.ui[ className ].static.commandName = 'move' + modeName + sideName;
@@ -206,8 +206,8 @@ ve.ui.TableLineContextItem.prototype.setup = function () {
 			}
 
 			// The following messages are used here:
-			// * visualeditor-table-delete-col
-			// * visualeditor-table-delete-row
+			// * msg:visualeditor-table-delete-col
+			// * msg:visualeditor-table-delete-row
 			return ve.msg( 'visualeditor-table-delete-' + mode, count );
 		};
 		ve.ui.contextItemFactory.register( ve.ui[ className ] );
@@ -268,8 +268,8 @@ ve.ui.TableLineContextItem.prototype.setup = function () {
 			mode = 'contents';
 		}
 		// The following messages are used here:
-		// * visualeditor-table-contextitem-selectionmode-cells
-		// * visualeditor-table-contextitem-selectionmode-contents
+		// * msg:visualeditor-table-contextitem-selectionmode-cells
+		// * msg:visualeditor-table-contextitem-selectionmode-contents
 		return ve.msg( 'visualeditor-table-contextitem-selectionmode-' + mode );
 	};
 	ve.ui.contextItemFactory.register( ve.ui.ToggleTableSelectionContextItem );

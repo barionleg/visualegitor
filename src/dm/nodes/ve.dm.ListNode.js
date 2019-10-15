@@ -60,8 +60,8 @@ ve.dm.ListNode.static.describeChange = function ( key, change ) {
 	if ( key === 'style' ) {
 		return ve.htmlMsg( 'visualeditor-changedesc-no-key',
 			// The following messages are used here:
-			// * visualeditor-listbutton-bullet-tooltip
-			// * visualeditor-listbutton-number-tooltip
+			// * msg:visualeditor-listbutton-bullet-tooltip
+			// * msg:visualeditor-listbutton-number-tooltip
 			this.wrapText( 'del', ve.msg( 'visualeditor-listbutton-' + change.from + '-tooltip' ) ),
 			this.wrapText( 'ins', ve.msg( 'visualeditor-listbutton-' + change.to + '-tooltip' ) )
 		);
