@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b2a0bdb2_2180a0cd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2019-10-15T14:00:25Z",
+      "side": 1,
+      "message": "its",
+      "range": {
+        "startLine": 9,
+        "startChar": 24,
+        "endLine": 9,
+        "endChar": 28
+      },
+      "revId": "10b2bc66eec2cab22cc3b972190fc47946ab0741",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f7ad16bc_fe6d4f60",
+        "filename": "build/eslint-plugin-mediawiki/index.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2019-10-15T14:00:25Z",
+      "side": 1,
+      "message": "Apparently this is being executed in the wrong context?",
+      "range": {
+        "startLine": 5,
+        "startChar": 23,
+        "endLine": 5,
+        "endChar": 35
+      },
+      "revId": "10b2bc66eec2cab22cc3b972190fc47946ab0741",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
