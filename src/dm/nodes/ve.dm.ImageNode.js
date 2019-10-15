@@ -75,9 +75,9 @@ ve.dm.ImageNode.static.describeChanges = function ( attributeChanges, attributes
 ve.dm.ImageNode.static.describeChange = function ( key, change ) {
 	if ( key === 'align' ) {
 		// The following messages are used here:
-		// * visualeditor-align-desc-left
-		// * visualeditor-align-desc-right
-		// * visualeditor-align-desc-center
+		// * msg:visualeditor-align-desc-left
+		// * msg:visualeditor-align-desc-right
+		// * msg:visualeditor-align-desc-center
 		return ve.htmlMsg( 'visualeditor-changedesc-align',
 			this.wrapText( 'del', ve.msg( 'visualeditor-align-desc-' + change.from ) ),
 			this.wrapText( 'ins', ve.msg( 'visualeditor-align-desc-' + change.to ) )
