@@ -595,6 +595,7 @@ ve.ui.FindAndReplaceDialog.prototype.onReplaceButtonClick = function () {
 	end = this.fragments[ this.focusedIndex ].getSelection().getRange().end;
 
 	this.updateFragments();
+	this.clearRenderedResultsCache();
 
 	if ( !this.results ) {
 		this.focusedIndex = 0;
@@ -606,7 +607,6 @@ ve.ui.FindAndReplaceDialog.prototype.onReplaceButtonClick = function () {
 	// We may have iterated off the end
 	this.focusedIndex = this.focusedIndex % this.results;
 
-	this.clearRenderedResultsCache();
 	this.renderFragments();
 
 	// Wherever we end up, scroll to whatever we've got focused
