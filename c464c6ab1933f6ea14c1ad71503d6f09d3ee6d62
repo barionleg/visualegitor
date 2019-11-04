@@ -16,6 +16,24 @@
       "revId": "c464c6ab1933f6ea14c1ad71503d6f09d3ee6d62",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a051991c_c5a16253",
+        "filename": "src/ui/styles/contextitems/ve.ui.LinkContextItem.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2019-11-04T22:06:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b1eb601_e9210158",
+      "revId": "c464c6ab1933f6ea14c1ad71503d6f09d3ee6d62",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
