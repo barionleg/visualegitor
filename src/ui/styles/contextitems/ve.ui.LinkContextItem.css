@@ -83,5 +83,10 @@
 }
 
 .ve-ui-desktopContext .ve-ui-linkContextItem .ve-ui-linkContextItem-label .ve-ui-linkContextItem-label-action .oo-ui-buttonElement-button {
-	margin: -6px -6px -6px 0;
+	/* 6px padding + 1px border */
+	margin: -7px -7px -7px 0;
+}
+
+.ve-ui-desktopContext .ve-ui-linkContextItem .ve-ui-linkContextItem-label .ve-ui-linkContextItem-label-action .oo-ui-buttonElement-button > .oo-ui-labelElement-label {
+	padding: 2px 0;
 }
