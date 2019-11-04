@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2b1eb601_e9210158",
+        "filename": "src/ui/styles/contextitems/ve.ui.LinkContextItem.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2019-11-04T21:28:34Z",
+      "side": 1,
+      "message": "per Ib76df8caf4e9dcef2e906baa5037d0f1444b35d1 I think these should be -7px",
+      "revId": "c464c6ab1933f6ea14c1ad71503d6f09d3ee6d62",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
