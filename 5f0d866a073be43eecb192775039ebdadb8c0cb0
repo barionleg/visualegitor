@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f1140931_7b30a893",
+        "filename": "src/ui/styles/contextitems/ve.ui.LinkContextItem.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 2604
+      },
+      "writtenOn": "2019-11-04T19:50:47Z",
+      "side": 1,
+      "message": "Ok, even better, let\u0027s get rid of more overrides. \nBut I\u0027d recommend removing negative bottom margin and just do `-6px -6px 0  0;`",
+      "revId": "5f0d866a073be43eecb192775039ebdadb8c0cb0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
