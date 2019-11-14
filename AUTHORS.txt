@@ -46,6 +46,7 @@ Kyle Florence <kyle.florence@gmail.com>
 Mark A. Hershberger <mah@everybody.org>
 Mark Holmquist <mtraceur@member.fsf.org>
 Matthew Flaschen <mflaschen@wikimedia.org>
+Marcella L. Florence <mflorence@wikimedia.org>
 mayankmadan <maddiemadan@gmail.com>
 Moriel Schottlender <mschottlender@wikimedia.org>
 Neil Kandalgaonkar <neilk@users.mediawiki.org>
