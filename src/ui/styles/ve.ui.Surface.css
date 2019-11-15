@@ -35,6 +35,8 @@
 	/* Support: Blink, Gecko, Webkit */
 	/* Specify a valid second value to fix size, see T176636 */
 	font-family: monospace, monospace;
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
 	tab-size: 4;
 }
 
