@@ -34,6 +34,24 @@
       "revId": "b861d5f724114f0c9a1e99740ea92c3a14f873a9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fbde56f6_fc309845",
+        "filename": "src/ui/styles/ve.ui.Surface.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2019-11-24T09:36:23Z",
+      "side": 1,
+      "message": "(Done in https://gerrit.wikimedia.org/r/c/VisualEditor/VisualEditor/+/551210)",
+      "parentUuid": "2c91b9ca_2df4cf6d",
+      "revId": "b861d5f724114f0c9a1e99740ea92c3a14f873a9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
