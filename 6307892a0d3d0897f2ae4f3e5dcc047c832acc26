@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b9d66b26_a7a127d8",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 2509,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2019-12-02T07:38:53Z",
+      "side": 1,
+      "message": "Of all the changes in this file, this line is the one that fixes the bug as reported.",
+      "revId": "6307892a0d3d0897f2ae4f3e5dcc047c832acc26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
