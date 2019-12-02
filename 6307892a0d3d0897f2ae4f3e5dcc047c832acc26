@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "b0099e65_cbb9d781",
+        "filename": "src/ve.sanitize.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2019-12-02T23:05:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bb128839_11dc4951",
+      "revId": "6307892a0d3d0897f2ae4f3e5dcc047c832acc26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "33e5da5e_2e549bd0",
         "filename": "src/ve.sanitize.js",
         "patchSetId": 1
@@ -47,6 +65,24 @@
       "writtenOn": "2019-12-02T14:24:14Z",
       "side": 1,
       "message": "document",
+      "revId": "6307892a0d3d0897f2ae4f3e5dcc047c832acc26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "148ba123_493e1f71",
+        "filename": "src/ve.sanitize.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2019-12-02T23:05:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "33e5da5e_2e549bd0",
       "revId": "6307892a0d3d0897f2ae4f3e5dcc047c832acc26",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
