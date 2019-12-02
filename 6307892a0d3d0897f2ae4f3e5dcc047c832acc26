@@ -16,6 +16,40 @@
       "revId": "6307892a0d3d0897f2ae4f3e5dcc047c832acc26",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb128839_11dc4951",
+        "filename": "src/ve.sanitize.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2019-12-02T14:24:14Z",
+      "side": 1,
+      "message": "document as internal, otherwise it isn\u0027t clear whether to use this or ve.sanitizeHtmlToDocument",
+      "revId": "6307892a0d3d0897f2ae4f3e5dcc047c832acc26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33e5da5e_2e549bd0",
+        "filename": "src/ve.sanitize.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2019-12-02T14:24:14Z",
+      "side": 1,
+      "message": "document",
+      "revId": "6307892a0d3d0897f2ae4f3e5dcc047c832acc26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
