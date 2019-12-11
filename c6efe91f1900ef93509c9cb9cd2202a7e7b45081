@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "88c90232_a17f6c22",
+        "filename": "src/ui/actions/ve.ui.CompletionAction.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2019-12-11T14:21:15Z",
+      "side": 1,
+      "message": "document these",
+      "revId": "c6efe91f1900ef93509c9cb9cd2202a7e7b45081",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9fc54c86_f26a66f3",
+        "filename": "src/ui/actions/ve.ui.CompletionAction.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2019-12-11T14:21:15Z",
+      "side": 1,
+      "message": "should probably make this any whitespace?\n\n .match( /\\s/ )\n\nthen !! to cast to bool",
+      "range": {
+        "startLine": 87,
+        "startChar": 109,
+        "endLine": 87,
+        "endChar": 110
+      },
+      "revId": "c6efe91f1900ef93509c9cb9cd2202a7e7b45081",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
