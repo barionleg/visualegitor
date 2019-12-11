@@ -39,6 +39,40 @@
       "revId": "c6efe91f1900ef93509c9cb9cd2202a7e7b45081",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eeb2038c_ce34c512",
+        "filename": "src/ui/actions/ve.ui.CompletionAction.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2019-12-11T14:28:30Z",
+      "side": 1,
+      "message": "document methods (and as private?)",
+      "revId": "c6efe91f1900ef93509c9cb9cd2202a7e7b45081",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b31b152c_2bb1bb50",
+        "filename": "src/ui/widgets/ve.ui.CompletionWidget.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2019-12-11T14:28:30Z",
+      "side": 1,
+      "message": "document all methods",
+      "revId": "c6efe91f1900ef93509c9cb9cd2202a7e7b45081",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
