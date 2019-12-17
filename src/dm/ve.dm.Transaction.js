@@ -361,6 +361,17 @@ ve.dm.Transaction.prototype.translateOffset = function ( offset, excludeInsertio
 		if ( op.type === 'replace' ) {
 			insertLength = op.insert.length;
 			removeLength = op.remove.length;
+			// If the data is equal without annotations don't translate the offset at all.
+			// This matches the behaviour of the old 'annotate' operation type.
+			if (
+				insertLength === removeLength &&
+				// eslint-disable-next-line no-loop-func
+				op.insert.every( function ( insert, i ) {
+					return ve.dm.ElementLinearData.static.compareElementsUnannotated( insert, op.remove[ i ] );
+				} )
+			) {
+				continue;
+			}
 			prevAdjustment = adjustment;
 			adjustment += insertLength - removeLength;
 			if ( offset === cursor + removeLength ) {
