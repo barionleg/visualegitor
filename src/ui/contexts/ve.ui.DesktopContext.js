@@ -42,9 +42,6 @@ ve.ui.DesktopContext = function VeUiDesktopContext( surface, config ) {
 		relocationEnd: 'onUnsuppress',
 		position: 'onPosition'
 	} );
-	this.surface.getModel().connect( this, {
-		select: 'onModelSelect'
-	} );
 	this.inspectors.connect( this, {
 		resize: 'onInspectorResize'
 	} );
