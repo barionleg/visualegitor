@@ -352,15 +352,43 @@ ve.dm.Transaction.prototype.markAsApplied = function () {
  * @return {number} Translated offset, as it will be after processing transaction
  */
 ve.dm.Transaction.prototype.translateOffset = function ( offset, excludeInsertion ) {
-	var i, op, insertLength, removeLength, prevAdjustment,
+	var i, op, insertLength, removeLength, retainLength, prevAdjustment,
 		cursor = 0,
 		adjustment = 0;
 
 	for ( i = 0; i < this.operations.length; i++ ) {
 		op = this.operations[ i ];
-		if ( op.type === 'replace' ) {
+		if ( op.type === 'retain' || (
+			// If a 'replace' only changes annotations, treat it like a 'retain'
+			// This imitates the behaviour of the old 'annotate' operation type.
+			op.type === 'replace' &&
+			op.insert.length === op.remove.length &&
+			// eslint-disable-next-line no-loop-func
+			op.insert.every( function ( insert, j ) {
+				return ve.dm.ElementLinearData.static.compareElementsUnannotated( insert, op.remove[ j ] );
+			} )
+
+		) ) {
+			retainLength = op.type === 'retain' ? op.length : op.remove.length;
+			if ( offset >= cursor && offset < cursor + retainLength ) {
+				return offset + adjustment;
+			}
+			cursor += retainLength;
+			continue;
+		} else if ( op.type === 'replace' ) {
 			insertLength = op.insert.length;
 			removeLength = op.remove.length;
+			// If the data is equal without annotations don't translate the offset at all.
+			// This matches the behaviour of the old 'annotate' operation type.
+			if (
+				insertLength === removeLength &&
+				// eslint-disable-next-line no-loop-func
+				op.insert.every( function ( insert, i ) {
+					return ve.dm.ElementLinearData.static.compareElementsUnannotated( insert, op.remove[ i ] );
+				} )
+			) {
+				continue;
+			}
 			prevAdjustment = adjustment;
 			adjustment += insertLength - removeLength;
 			if ( offset === cursor + removeLength ) {
@@ -389,11 +417,6 @@ ve.dm.Transaction.prototype.translateOffset = function ( offset, excludeInsertio
 				return cursor + removeLength + adjustment;
 			}
 			cursor += removeLength;
-		} else if ( op.type === 'retain' ) {
-			if ( offset >= cursor && offset < cursor + op.length ) {
-				return offset + adjustment;
-			}
-			cursor += op.length;
 		}
 	}
 	return offset + adjustment;
