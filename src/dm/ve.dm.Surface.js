@@ -330,6 +330,11 @@ ve.dm.Surface.prototype.getStagingTransactions = function () {
 ve.dm.Surface.prototype.pushStaging = function ( allowUndo ) {
 	// If we're starting staging stop history tracking
 	if ( !this.isStaging() ) {
+		// TODO: Allow the synchronizer to keep running while staging
+		// by rebasing the transactions in the staging stack.
+		if ( this.synchronizer ) {
+			this.synchronizer.pauseChanges();
+		}
 		// Set a breakpoint to make sure newTransactions is clear
 		this.breakpoint();
 		this.stopHistoryTracking();
@@ -369,6 +374,9 @@ ve.dm.Surface.prototype.popStaging = function () {
 	this.changeInternal( reverseTransactions, staging.selectionBefore, true );
 
 	if ( !this.isStaging() ) {
+		if ( this.synchronizer ) {
+			this.synchronizer.resumeChanges();
+		}
 		this.startHistoryTracking();
 		this.emit( 'history' );
 	}
@@ -405,6 +413,9 @@ ve.dm.Surface.prototype.applyStaging = function () {
 	}
 
 	if ( !this.isStaging() ) {
+		if ( this.synchronizer ) {
+			this.synchronizer.resumeChanges();
+		}
 		this.startHistoryTracking();
 		this.emit( 'history' );
 	}
