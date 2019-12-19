@@ -395,9 +395,9 @@ module.exports = function ( grunt ) {
 				frameworks: [ 'qunit' ],
 				reporters: [ 'dots' ],
 				singleRun: true,
-				browserDisconnectTimeout: 5000,
+				browserDisconnectTimeout: 10000,
 				browserDisconnectTolerance: 2,
-				browserNoActivityTimeout: 30000,
+				browserNoActivityTimeout: 60000,
 				customLaunchers: {
 					ChromeCustom: {
 						base: 'ChromeHeadless',
