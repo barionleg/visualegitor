@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8d146447_0a6be760",
+        "filename": "tests/ce/ve.ce.TextState.test.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2019-12-19T15:51:37Z",
+      "side": 1,
+      "message": "The test still passes, but I\u0027m not sure it still does what is intended? It\u0027s definitely wrong to have CE html in this field though. The unicorns will just convert to \u0027inlineImage\u0027 nodes.",
+      "revId": "6f9dbe2969293eb5f4ff3c986d391c48d9e180da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
