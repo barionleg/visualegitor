@@ -7,7 +7,7 @@
 QUnit.module( 've.dm.Surface' );
 
 ve.dm.SurfaceStub = function VeDmSurfaceStub( data, range ) {
-	var doc = new ve.dm.Document( data || [ { type: 'paragraph' }, 'h', 'i', { type: '/paragraph' } ] );
+	var doc = new ve.dm.Document( data || [ { type: 'paragraph' }, 'h', 'i', { type: '/paragraph' }, { type: 'internalList' }, { type: '/internalList' } ] );
 
 	// Inheritance
 	ve.dm.SurfaceStub.super.call( this, doc );
@@ -43,7 +43,8 @@ QUnit.test( 'contextChange events', function ( assert ) {
 			[ 'a', [ ve.dm.example.italic ] ],
 			[ 'z', [ ve.dm.example.italic ] ],
 			'F', 'o', 'o',
-			{ type: '/paragraph' }
+			{ type: '/paragraph' },
+			{ type: 'internalList' }, { type: '/internalList' }
 		] ) ),
 		contextChanges = 0,
 		tests, i, iLen;
@@ -200,7 +201,8 @@ QUnit.test( 'multi-user undo', function ( assert ) {
 		range = new ve.Range( 1 );
 		surface = new ve.dm.SurfaceStub( [
 			{ type: 'paragraph' }, { type: '/paragraph' },
-			{ type: 'paragraph' }, { type: '/paragraph' }
+			{ type: 'paragraph' }, { type: '/paragraph' },
+			{ type: 'internalList' }, { type: '/internalList' }
 		], range );
 		surface.setAuthorId( i );
 		surface.setMultiUser( true );
@@ -237,7 +239,8 @@ QUnit.test( 'multi-user undo', function ( assert ) {
 		surfaces[ 0 ].getDocument().getData(),
 		[
 			{ type: 'paragraph' }, { type: '/paragraph' },
-			{ type: 'paragraph' }, '1', '2', '3', '4', '5', '6', { type: '/paragraph' }
+			{ type: 'paragraph' }, '1', '2', '3', '4', '5', '6', { type: '/paragraph' },
+			{ type: 'internalList' }, { type: '/internalList' }
 		]
 	);
 	assert.strictEqual( surfaces[ 0 ].canUndo(), false, 'No more steps for user on surface 1 to undo' );
@@ -249,7 +252,8 @@ QUnit.test( 'multi-user undo', function ( assert ) {
 		surfaces[ 1 ].getDocument().getData(),
 		[
 			{ type: 'paragraph' }, 'f', 'o', 'o', 'b', 'a', 'r', { type: '/paragraph' },
-			{ type: 'paragraph' }, { type: '/paragraph' }
+			{ type: 'paragraph' }, { type: '/paragraph' },
+			{ type: 'internalList' }, { type: '/internalList' }
 		]
 	);
 	// TODO: We should disable undo as soon as the user runs out of transactions of their own
@@ -477,7 +481,7 @@ QUnit.test( 'autosave', function ( assert ) {
 		storage.getList( 've-changes' ).map( JSON.parse ),
 		[ {
 			start: 0,
-			transactions: [ [ 3, [ '', ' bar' ], 1 ] ]
+			transactions: [ [ 3, [ '', ' bar' ], 3 ] ]
 		} ],
 		'First change stored'
 	);
@@ -494,7 +498,8 @@ QUnit.test( 'autosave', function ( assert ) {
 			transactions: [ [
 				[ [ { type: 'paragraph' } ], [ { type: 'heading', attributes: { level: 1 } } ] ],
 				6,
-				[ [ { type: '/paragraph' } ], [ { type: '/heading' } ] ]
+				[ [ { type: '/paragraph' } ], [ { type: '/heading' } ] ],
+				2
 			] ]
 		},
 		'Second change stored'
