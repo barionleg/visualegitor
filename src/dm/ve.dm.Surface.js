@@ -764,6 +764,15 @@ ve.dm.Surface.prototype.setSelection = function ( selection ) {
 		contextChange = false,
 		linearData = this.getDocument().data;
 
+	if (
+		selection instanceof ve.dm.LinearSelection &&
+		!this.getDocument().getDocumentRange().containsRange( selection.getRange() )
+	) {
+		// Selection is out of range
+		// TODO: Check table selections too
+		return;
+	}
+
 	this.translatedSelection = null;
 
 	if ( this.transacting ) {
