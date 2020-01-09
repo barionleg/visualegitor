@@ -21,6 +21,11 @@
 	margin-top: -1px;
 }
 
+.ve-init-mobileTarget .ve-ce-tableNode-active {
+	margin-left: 1.2em;
+	margin-right: 1.2em;
+}
+
 .ve-ce-tableNodeOverlay {
 	position: absolute;
 	pointer-events: none;
