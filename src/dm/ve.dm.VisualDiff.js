@@ -598,15 +598,115 @@ ve.dm.VisualDiff.prototype.flattenList = function ( listNode, flatList, depth ) 
  * @return {Array|boolean} Corresponding tree node indices, or false if timed out
  */
 ve.dm.VisualDiff.prototype.alignTrees = function ( oldTree, newTree ) {
-	var transactions = new this.treeDiffer.Differ( oldTree, newTree ).transactions;
-
-	if ( transactions === null ) {
-		// Tree diff timed out
-		this.timedOut = true;
-		return false;
+	var oldNode, newNode, oldRange, newRange, oldData, newData, differ, diff, tx, treeOps,
+		nodeIndexTree, changedNodes;
+	function repeat( s, n ) {
+		return new Array( n + 1 ).join( s );
 	}
-
-	return transactions[ oldTree.orderedNodes.length - 1 ][ newTree.orderedNodes.length - 1 ];
+	function getNode( root, path ) {
+		var i, iLen, index,
+			node = root;
+		for ( i = 0, iLen = path.length; i < iLen; i++ ) {
+			index = path[ i ];
+			node = node.children[ index ];
+		}
+		return node;
+	}
+	function makeEmptyTree( node ) {
+		var i, iLen, children, child;
+		if ( !node.children || !node.children.length || node.canContainContent() ) {
+			return {};
+		}
+		children = [];
+		for ( i = 0, iLen = node.children.length; i < iLen; i++ ) {
+			child = node.children[ i ];
+			children.push( makeEmptyTree( child ) );
+		}
+		return { children: children };
+	}
+	function labelTreeIndexes( node, indexLabel, nextIndexRef ) {
+		var i, iLen;
+		if ( nextIndexRef === undefined ) {
+			nextIndexRef = { value: 0 };
+		}
+		if ( node.children && node.children.length ) {
+			for ( i = 0, iLen = node.children.length; i < iLen; i++ ) {
+				labelTreeIndexes( node.children[ i ], indexLabel, nextIndexRef );
+			}
+		}
+		node[ indexLabel ] = nextIndexRef.value++;
+	}
+	function applyTreeOps( nodeIndexTree, treeOps ) {
+		var i, iLen, op, parentNode, node,
+			changedNodes = [];
+		for ( i = 0, iLen = treeOps.length; i < iLen; i++ ) {
+			op = treeOps[ i ];
+			if ( op.isContent ) {
+				continue;
+			} else if ( op.type === 'removeNode' ) {
+				// Slice the first entry in op.at: it's the path to the root
+				parentNode = getNode( nodeIndexTree, op.at.slice( 1, -1 ) );
+				node = parentNode.children.splice( op.at[ op.at.length - 1 ], 1 )[ 0 ];
+				if ( parentNode.children.length === 0 ) {
+					delete parentNode.children;
+				}
+				node.type = 'removed';
+				changedNodes.push( node );
+			} else if ( op.type === 'insertNode' ) {
+				// Slice the first entry in op.at: it's the path to the root
+				parentNode = getNode( nodeIndexTree, op.at.slice( 1, -1 ) );
+				if ( !parentNode.children ) {
+					parentNode.children = [];
+				}
+				node = {};
+				parentNode.children.splice( op.at[ op.at.length - 1 ], 0, node );
+				node.type = 'inserted';
+				changedNodes.push( node );
+			} else if ( op.type === 'moveNode' ) {
+				// Slice the first entry in op.from: it's the path to the root
+				parentNode = getNode( nodeIndexTree, op.from.slice( 1, -1 ) );
+				node = parentNode.children.splice( op.from[ op.from.length - 1 ], 1 )[ 0 ];
+				if ( parentNode.children.length === 0 ) {
+					delete parentNode.children;
+				}
+				// Slice the first entry in op.to: it's the path to the root
+				parentNode = getNode( nodeIndexTree, op.to.slice( 1, -1 ) );
+				if ( !parentNode.children ) {
+					parentNode.children = [];
+				}
+				parentNode.children.splice( op.to[ op.to.length - 1 ], 0, node );
+				node.type = 'moved';
+				changedNodes.push( node );
+			}
+		}
+		return changedNodes;
+	}
+	oldNode = oldTree.root.node;
+	newNode = newTree.root.node;
+	oldRange = oldNode.getRange();
+	newRange = newNode.getRange();
+	oldData = oldNode.getDocument().getData().slice( oldRange.start, oldRange.end );
+	newData = newNode.getDocument().getData().slice( newRange.start, newRange.end );
+	differ = new ve.DiffMatchPatch(
+		oldNode.getDocument().getStore(),
+		newNode.getDocument().getStore()
+	);
+	diff = differ.diff_main( oldData, newData );
+	diff.unshift( [ 0, repeat( 'x', oldRange.start ) ] );
+	diff.push( [ 0, repeat( 'x', oldNode.getDocument().getLength() - oldRange.end ) ] );
+	tx = new ve.dm.Transaction(
+		ve.DiffMatchPatch.static.diffToTransactionOperations( diff )
+	);
+	ve.dm.treeModifier.setup( oldNode.getDocument() );
+	ve.dm.treeModifier.calculateTreeOperations( tx );
+	treeOps = ve.dm.treeModifier.treeOps;
+	nodeIndexTree = makeEmptyTree( oldNode );
+	labelTreeIndexes( nodeIndexTree, 'oldIndex' );
+	changedNodes = applyTreeOps( nodeIndexTree, treeOps );
+	labelTreeIndexes( nodeIndexTree, 'newIndex' );
+	return changedNodes.map( function ( changedNode ) {
+		return [ changedNode.oldIndex || null, changedNode.newIndex || null ];
+	} );
 };
 
 /**
@@ -654,7 +754,6 @@ ve.dm.VisualDiff.prototype.diffTreeNodes = function ( oldTreeNode, newTreeNode )
 
 	oldTree = new this.treeDiffer.Tree( oldTreeNode, ve.DiffTreeNode );
 	newTree = new this.treeDiffer.Tree( newTreeNode, ve.DiffTreeNode );
-
 	treeDiff = this.alignTrees( oldTree, newTree );
 
 	// Length of old content is length of old node minus the open and close
