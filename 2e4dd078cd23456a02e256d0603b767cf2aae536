@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "28dc0ce1_bb48db93",
+        "filename": "src/ce/styles/nodes/ve.ce.TableNode.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2020-02-05T23:52:22Z",
+      "side": 1,
+      "message": "why do we need a right margin as well?",
+      "revId": "2e4dd078cd23456a02e256d0603b767cf2aae536",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
