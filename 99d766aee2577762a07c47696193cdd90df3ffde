@@ -16,6 +16,24 @@
       "revId": "99d766aee2577762a07c47696193cdd90df3ffde",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ffe531db_e83bef14",
+        "filename": "src/ce/ve.ce.BranchNode.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2020-02-05T18:47:46Z",
+      "side": 1,
+      "message": "It seems to work as-is with section editing – because this.root is still a document node.",
+      "parentUuid": "03ba30e7_8b924c19",
+      "revId": "99d766aee2577762a07c47696193cdd90df3ffde",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
