@@ -34,6 +34,24 @@
       "revId": "4e434d6acfaa1695d23e1ac2645ab0208fa29673",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a27a09ca_39dc3423",
+        "filename": "src/ui/actions/ve.ui.CompletionAction.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2020-02-07T20:52:32Z",
+      "side": 1,
+      "message": "No, but we shouldn\u0027t push input.trim() as a suggestion with the wrong casing, so we might as well just trim earlier and show the \"exact\" match with proper casing.",
+      "parentUuid": "b26efda6_d06caced",
+      "revId": "4e434d6acfaa1695d23e1ac2645ab0208fa29673",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
