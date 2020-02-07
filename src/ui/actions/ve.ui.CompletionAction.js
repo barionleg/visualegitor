@@ -108,7 +108,7 @@ ve.ui.CompletionAction.prototype.insertCompletion = function ( data, range ) {
 ve.ui.CompletionAction.prototype.shouldAbandon = function ( input, matches ) {
 	// abandon after adding whitespace if there are no active potential matches
 	return matches === ( this.constructor.static.alwaysIncludeInput ? 1 : 0 ) &&
-		!!( input[ input.length - 1 ] && input[ input.length - 1 ].match( /\s/ ) );
+		!!( input && input.match( /\s$/ ) );
 };
 
 // helpers
@@ -141,12 +141,12 @@ ve.ui.CompletionAction.prototype.getMenuItemForSuggestion = function ( suggestio
  * @return {string[]}
  */
 ve.ui.CompletionAction.prototype.filterSuggestionsForInput = function ( suggestions, input ) {
-	var exact = false;
-	input = input.toLowerCase();
+	var exact = false,
+		lcInput = input.toLowerCase();
 	suggestions = suggestions.filter( function ( word ) {
 		word = word.toLowerCase();
-		exact = exact || word === input;
-		return word.slice( 0, input.length ) === input && word !== input;
+		exact = exact || word === lcInput;
+		return word.slice( 0, lcInput.length ) === lcInput;
 	} );
 	if ( this.constructor.static.defaultLimit < suggestions.length ) {
 		suggestions.length = this.constructor.static.defaultLimit;
