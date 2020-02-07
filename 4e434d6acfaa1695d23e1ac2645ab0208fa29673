@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "af4d63c2_51b0f657",
+        "filename": "src/ui/actions/ve.ui.CompletionAction.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2020-02-07T20:16:28Z",
+      "side": 1,
+      "message": "This trim should happen earlier. If I type \"alice\u003cspace\u003e\" I get no exact match for \"Alice\", but I do get a suggestion to insert \"alice\" (trimmed).",
+      "revId": "4e434d6acfaa1695d23e1ac2645ab0208fa29673",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
