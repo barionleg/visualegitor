@@ -16,6 +16,24 @@
       "revId": "4e434d6acfaa1695d23e1ac2645ab0208fa29673",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b26efda6_d06caced",
+        "filename": "src/ui/actions/ve.ui.CompletionAction.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2020-02-07T20:18:08Z",
+      "side": 1,
+      "message": "Can you think of a case where we\u0027d want to complete something which ends in trailing spaces? (Nothing springs to mind for me, but...)",
+      "parentUuid": "af4d63c2_51b0f657",
+      "revId": "4e434d6acfaa1695d23e1ac2645ab0208fa29673",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
