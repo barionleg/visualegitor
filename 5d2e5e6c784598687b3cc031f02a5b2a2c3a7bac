@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c779fff9_1e6e0814",
+        "filename": "src/ui/dialogs/ve.ui.FindAndReplaceDialog.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 4879
+      },
+      "writtenOn": "2020-02-13T00:26:04Z",
+      "side": 1,
+      "message": "Remove these spaces from end of this line.",
+      "range": {
+        "startLine": 213,
+        "startChar": 63,
+        "endLine": 213,
+        "endChar": 65
+      },
+      "revId": "5d2e5e6c784598687b3cc031f02a5b2a2c3a7bac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
