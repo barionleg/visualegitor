@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6d428c40_066d560e",
+        "filename": "src/ui/dialogs/ve.ui.FindAndReplaceDialog.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2020-02-14T15:44:17Z",
+      "side": 1,
+      "message": "Can we comment that these are used for accessibility, but not rendered, or someone might come along later and delete them, thinking they aren\u0027t shown anywhere.",
+      "revId": "ab9a8bb3333f470b716a834f9ea3cd3c92d6aeac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
