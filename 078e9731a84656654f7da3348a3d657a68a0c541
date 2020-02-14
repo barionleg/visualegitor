@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "38caa811_353d73fd",
+        "filename": "src/ui/dialogs/ve.ui.FindAndReplaceDialog.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2020-02-14T00:20:36Z",
+      "side": 1,
+      "message": "This happens in `OO.ui.Dialog.prototype.initialize`, in the upstream library OOUI… Looks like we should be inserting `this.title.$element` somewhere. I\u0027ll submit a separate patch to fix this better since it\u0027s not as trivial.",
+      "range": {
+        "startLine": 212,
+        "startChar": 0,
+        "endLine": 213,
+        "endChar": 62
+      },
+      "revId": "078e9731a84656654f7da3348a3d657a68a0c541",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
