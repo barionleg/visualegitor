@@ -16,6 +16,24 @@
       "revId": "ab9a8bb3333f470b716a834f9ea3cd3c92d6aeac",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0f792989_0202cd9d",
+        "filename": "src/ui/dialogs/ve.ui.FindAndReplaceDialog.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2020-02-14T21:43:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d428c40_066d560e",
+      "revId": "ab9a8bb3333f470b716a834f9ea3cd3c92d6aeac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
