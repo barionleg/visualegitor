@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "297097c6_d43a204d",
+        "filename": "src/ui/dialogs/ve.ui.TableDialog.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 2604
+      },
+      "writtenOn": "2020-02-19T02:05:10Z",
+      "side": 1,
+      "message": "Minor nitpick: This should move up before thiis.captionField.",
+      "revId": "5c6bf84325fbe857ac28610c92f84d9f6082f0cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
