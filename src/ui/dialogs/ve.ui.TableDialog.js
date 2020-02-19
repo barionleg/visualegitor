@@ -54,6 +54,7 @@ ve.ui.TableDialog.prototype.initialize = function () {
 		align: 'left',
 		label: ve.msg( 'visualeditor-dialog-table-caption' )
 	} );
+	this.captionToggle.$element.attr( 'aria-label', ve.msg( 'visualeditor-dialog-table-caption' ) );
 
 	this.captionToggle.connect( this, { change: 'updateActions' } );
 
