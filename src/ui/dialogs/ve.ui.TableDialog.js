@@ -50,6 +50,7 @@ ve.ui.TableDialog.prototype.initialize = function () {
 	} );
 
 	this.captionToggle = new OO.ui.ToggleSwitchWidget();
+	this.captionToggle.$element.attr( 'aria-label', ve.msg( 'visualeditor-dialog-table-caption' ) );
 	this.captionField = new OO.ui.FieldLayout( this.captionToggle, {
 		align: 'left',
 		label: ve.msg( 'visualeditor-dialog-table-caption' )
