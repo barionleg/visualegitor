@@ -68,6 +68,7 @@ OO.inheritClass( ve.ui.Toolbar, OO.ui.Toolbar );
  */
 ve.ui.Toolbar.prototype.setup = function ( groups, surface ) {
 	var oldSurface,
+		groupsByName,
 		surfaceChange = false;
 
 	this.detach();
@@ -101,6 +102,17 @@ ve.ui.Toolbar.prototype.setup = function ( groups, surface ) {
 		// Emit surface change event after tools have been setup
 		this.emit( 'surfaceChange', oldSurface, surface );
 	}
+
+	groupsByName = this.groupsByName;
+	this.groups.forEach( function ( group ) {
+		var toolMenu, groupType = group.type;
+		if ( groupType === 'list' ) {
+			toolMenu = groupsByName[ group.name ];
+			if ( toolMenu.title ) {
+				toolMenu.$handle.attr( 'aria-label', toolMenu.title );
+			}
+		}
+	} );
 
 	// Events
 	this.getSurface().getModel().connect( this, { contextChange: 'onContextChange' } );
