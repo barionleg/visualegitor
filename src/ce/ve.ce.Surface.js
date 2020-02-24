@@ -137,6 +137,13 @@ ve.ce.Surface = function VeCeSurface( model, ui, config ) {
 		cut: this.onCut.bind( this ),
 		copy: this.onCopy.bind( this )
 	} );
+	if ( window.MutationObserver ) {
+		this.mutationObserver = new MutationObserver( this.onMutations.bind( this ) );
+		this.mutationObserver.observe(
+			this.$attachedRootNode[ 0 ],
+			{ childList: true, subtree: true }
+		);
+	}
 
 	this.onWindowResizeHandler = ve.debounce( this.onWindowResize.bind( this ), 50 );
 	this.$window.on( 'resize', this.onWindowResizeHandler );
@@ -643,6 +650,52 @@ ve.ce.Surface.prototype.removeRangesAndBlur = function () {
 	if ( this.getElementDocument().activeElement ) {
 		// Blurring the activeElement ensures the keyboard is hidden on iOS
 		this.getElementDocument().activeElement.blur();
+	}
+};
+
+/**
+ * Handler for mutation observer
+ *
+ * Identifies deleted DOM nodes, and finds and deletes corresponding model structural nodes
+ *
+ * @param {MutationRecord[]} mutationRecords Records of the mutations observed
+ */
+ve.ce.Surface.prototype.onMutations = function ( mutationRecords ) {
+	var removedRanges, i, iLen, mutationRecord, j, jLen, view, tx;
+	removedRanges = [];
+	for ( i = 0, iLen = mutationRecords.length; i < iLen; i++ ) {
+		mutationRecord = mutationRecords[ i ];
+		if ( !mutationRecord.removedNodes ) {
+			continue;
+		}
+		for ( j = 0, jLen = mutationRecord.removedNodes.length; j < jLen; j++ ) {
+			view = $.data( mutationRecord.removedNodes[ j ], 'view' );
+			if ( view && view.isContent && !view.isContent() ) {
+				removedRanges.push( view.getOuterRange() );
+			}
+		}
+	}
+	removedRanges.sort( function ( x, y ) {
+		return x.start - y.start;
+	} );
+	for ( i = 0, iLen = removedRanges.length; i < iLen; i++ ) {
+		// Remove any overlapped range (which in a tree must be a nested range)
+		if ( i > 0 && removedRanges[ i ].start < removedRanges[ i - 1 ].end ) {
+			removedRanges.splice( i, 1 );
+			i--;
+			continue;
+		}
+	}
+	removedRanges.reverse();
+	if ( !removedRanges.length ) {
+		return;
+	}
+	for ( i = 0, iLen = removedRanges.length; i < iLen; i++ ) {
+		tx = ve.dm.TransactionBuilder.static.newFromRemoval(
+			this.getModel().getDocument(),
+			removedRanges[ i ]
+		);
+		this.getModel().change( tx );
 	}
 };
 
