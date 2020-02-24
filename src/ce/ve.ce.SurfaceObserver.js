@@ -132,7 +132,12 @@ ve.ce.SurfaceObserver.prototype.pollOnceSelection = function () {
  * @param {boolean} selectionOnly Check for selection changes only
  */
 ve.ce.SurfaceObserver.prototype.pollOnceInternal = function ( signalChanges, selectionOnly ) {
-	var oldState, newState;
+	var oldState, newState, mutationsList;
+
+	mutationsList = this.surface.mutationObserver.takeRecords();
+	if ( mutationsList.length !== 0 ) {
+		debugger;
+	}
 
 	if ( !this.domDocument || this.disabled ) {
 		return;

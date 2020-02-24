@@ -137,6 +137,53 @@ ve.ce.Surface = function VeCeSurface( model, ui, config ) {
 		cut: this.onCut.bind( this ),
 		copy: this.onCopy.bind( this )
 	} );
+	this.mutationObserver = new MutationObserver( function ( mutationsList, observer ) {
+		console.log( 'Observed mutations:' );
+		mutationsList.forEach( function ( m, i ) {
+			console.log( i, 'Remove', Array.prototype.map.call( m.removedNodes, function ( n ) {
+				return n.outerHTML;
+			} ) );
+		} );
+		return;
+		var i, iLen, removedNodes, j, jLen, removedNode, view, model, start, change,
+			documentModel = surface.getModel().getDocument(),
+			txs = [];
+		for ( i = 0, iLen = mutationsList.length; i < iLen; i++ ) {
+			removedNodes = mutationsList[ i ].removedNodes;
+			for ( j = 0, jLen = removedNodes.length; j < jLen; j++ ) {
+				removedNode = removedNodes[ j ];
+				view = $.data( removedNode, 'view' );
+				if ( view ) {
+					model = view.getModel();
+					txs.push( ve.dm.TransactionBuilder.static.newFromRemoval(
+						documentModel,
+						model.getRange()
+					) );
+				}
+			}
+		}
+		if ( txs.length === 0 ) {
+			return;
+		}
+		start = documentModel.getCompleteHistoryLength();
+		change = new ve.dm.Change( start, [], [], {} );
+		txs.forEach( function ( tx, i ) {
+			console.log( 'Pushing tx', JSON.stringify( tx.serialize() ) );
+			change.push( new ve.dm.Change(
+				start,
+				[ tx ],
+				[ new ve.dm.HashValueStore() ],
+				{}
+			).rebasedOnto( change ) );
+		} );
+		console.log( 'Will apply change', JSON.stringify( change.serialize() ) );
+		//change.applyTo( surface.getModel() );
+	} );
+	this.mutationObserver.observe(
+		this.$attachedRootNode[ 0 ],
+		{ attributes: true, characterData: true, childList: true, subTree: true }
+		// { attributes: true, childList: true, subTree: true }
+	);
 
 	this.onWindowResizeHandler = ve.debounce( this.onWindowResize.bind( this ), 50 );
 	this.$window.on( 'resize', this.onWindowResizeHandler );
