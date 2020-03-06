@@ -127,16 +127,16 @@ ve.ui.FindAndReplaceDialog.prototype.initialize = function () {
 
 	this.replaceButton = new OO.ui.ButtonWidget( {
 		label: ve.msg( 'visualeditor-find-and-replace-replace-button' ),
-		tabIndex: 1
+		tabIndex: 2
 	} );
 	this.replaceAllButton = new OO.ui.ButtonWidget( {
 		label: ve.msg( 'visualeditor-find-and-replace-replace-all-button' ),
-		tabIndex: 1
+		tabIndex: 2
 	} );
 	doneButton = new OO.ui.ButtonWidget( {
 		classes: [ 've-ui-findAndReplaceDialog-cell' ],
 		label: ve.msg( 'visualeditor-find-and-replace-done' ),
-		tabIndex: 1
+		tabIndex: 2
 	} );
 
 	optionsGroup = new OO.ui.ButtonGroupWidget( {
