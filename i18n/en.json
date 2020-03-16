@@ -214,6 +214,7 @@
 	"visualeditor-table-move-col-before": "Move before",
 	"visualeditor-table-move-row-after": "Move below",
 	"visualeditor-table-move-row-before": "Move above",
+	"visualeditor-table-sum-label": "Sum: $1, Average: $2",
 	"visualeditor-tablecell-contextitem": "Table cell",
 	"visualeditor-tablecell-tooltip": "Double click to edit cell",
 	"visualeditor-toolbar-format-tooltip": "Format paragraph",
