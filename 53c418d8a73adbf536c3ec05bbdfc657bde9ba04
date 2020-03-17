@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1993f342_63c0a345",
+        "filename": "src/ui/contextitems/ve.ui.SumCellsContextItem.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2020-03-17T18:35:47Z",
+      "side": 1,
+      "message": "Alien nodes, you mean, right? This is stand-alone VE. ;-)",
+      "range": {
+        "startLine": 70,
+        "startChar": 57,
+        "endLine": 70,
+        "endChar": 66
+      },
+      "revId": "53c418d8a73adbf536c3ec05bbdfc657bde9ba04",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
