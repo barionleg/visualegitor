@@ -8,28 +8,6 @@
  * @class ve
  */
 
-/**
- * Check whether a given DOM element has a block element type.
- *
- * @param {HTMLElement|string} element Element or element name
- * @return {boolean} Element is a block element
- */
-ve.isBlockElement = function ( element ) {
-	var elementName = typeof element === 'string' ? element : element.nodeName;
-	return ve.elementTypes.block.indexOf( elementName.toLowerCase() ) !== -1;
-};
-
-/**
- * Check whether a given DOM element is a void element (can't have children).
- *
- * @param {HTMLElement|string} element Element or element name
- * @return {boolean} Element is a void element
- */
-ve.isVoidElement = function ( element ) {
-	var elementName = typeof element === 'string' ? element : element.nodeName;
-	return ve.elementTypes.void.indexOf( elementName.toLowerCase() ) !== -1;
-};
-
 ve.elementTypes = {
 	block: [
 		'div', 'p',
@@ -461,4 +439,19 @@ ve.serializeXhtmlElement = function ( element ) {
 	// FIXME T126035: This strips out xmlns as a quick hack
 	xml = xml.replace( '<html xmlns="http://www.w3.org/1999/xhtml"', '<html' );
 	return ve.transformStyleAttributes( xml, true );
+};
+
+/**
+ * Resolve a URL relative to a given base.
+ *
+ * @param {string} url URL to resolve
+ * @param {HTMLDocument} base Document whose base URL to use
+ * @return {string} Resolved URL
+ */
+ve.resolveUrl = function ( url, base ) {
+	var node = base.createElement( 'a' );
+	node.setAttribute( 'href', url );
+	// If doc.baseURI isn't set, node.href will be an empty string
+	// This is crazy, returning the original URL is better
+	return node.href || url;
 };

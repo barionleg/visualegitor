@@ -819,6 +819,28 @@ ve.visibleWhitespaceCharacters = {
 };
 
 /**
+ * Check whether a given DOM element has a block element type.
+ *
+ * @param {HTMLElement|string} element Element or element name
+ * @return {boolean} Element is a block element
+ */
+ve.isBlockElement = function ( element ) {
+	var elementName = typeof element === 'string' ? element : element.nodeName;
+	return ve.elementTypes.block.indexOf( elementName.toLowerCase() ) !== -1;
+};
+
+/**
+ * Check whether a given DOM element is a void element (can't have children).
+ *
+ * @param {HTMLElement|string} element Element or element name
+ * @return {boolean} Element is a void element
+ */
+ve.isVoidElement = function ( element ) {
+	var elementName = typeof element === 'string' ? element : element.nodeName;
+	return ve.elementTypes.void.indexOf( elementName.toLowerCase() ) !== -1;
+};
+
+/**
  * Check whether a given node is contentEditable
  *
  * Handles 'inherit', via checking isContentEditable. Knows to check for text
@@ -850,21 +872,6 @@ ve.filterMetaElements = function ( contents ) {
 	// Also remove link and style tags nested inside other tags
 	$( contents ).find( 'link, style' ).remove();
 	return contents;
-};
-
-/**
- * Resolve a URL relative to a given base.
- *
- * @param {string} url URL to resolve
- * @param {HTMLDocument} base Document whose base URL to use
- * @return {string} Resolved URL
- */
-ve.resolveUrl = function ( url, base ) {
-	var node = base.createElement( 'a' );
-	node.setAttribute( 'href', url );
-	// If doc.baseURI isn't set, node.href will be an empty string
-	// This is crazy, returning the original URL is better
-	return node.href || url;
 };
 
 /**
