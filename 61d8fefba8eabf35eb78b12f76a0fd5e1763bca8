@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "833e13c3_5d1af50b",
+        "filename": "src/ve.utils.parsing.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2020-03-20T23:07:41Z",
+      "side": 0,
+      "message": "I\u0027m not sure it makes sense to move these away form ve.elementTypes. They\u0027re very closely linked even if right now they technically aren\u0027t used in parsing, and ve.elementTypes is used in one place.",
+      "revId": "61d8fefba8eabf35eb78b12f76a0fd5e1763bca8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
