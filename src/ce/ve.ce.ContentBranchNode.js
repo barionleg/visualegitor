@@ -19,6 +19,7 @@ ve.ce.ContentBranchNode = function VeCeContentBranchNode() {
 	// Properties
 	this.lastTransaction = null;
 	// Parent constructor calls renderContents, so this must be set first
+	// eslint-disable-next-line no-self-assign
 	this.rendered = this.rendered;
 	this.unicornAnnotations = null;
 	this.unicorns = null;
