@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "32e13800_ffe326b1",
+        "filename": "src/ce/ve.ce.ContentBranchNode.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2020-04-08T12:59:06Z",
+      "side": 1,
+      "message": "I don\u0027t understand how this is not a no-op, cc\u0027inc divec who added this in I90ed05c413 (and changed it from this.rendered \u003d false).",
+      "revId": "5cd4e63ce9258e32baf14e212b9ce9c3e55952aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
