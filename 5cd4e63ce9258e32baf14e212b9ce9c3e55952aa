@@ -16,6 +16,24 @@
       "revId": "5cd4e63ce9258e32baf14e212b9ce9c3e55952aa",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6968e81e_4f428852",
+        "filename": "src/ce/ve.ce.ContentBranchNode.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2020-04-08T14:36:57Z",
+      "side": 1,
+      "message": "Oh good point. This is simply a typo: it should be \"this.rendered \u003d false\" as before. Those initialisations are mostly there for readability. The problem solved by I90ed05c413 was that we used to have:\n\n  ve.ce.ContentBranchNode.super.apply( this, arguments );\n  this.rendered \u003d false;\n  this.unicornAnnotations \u003d null;\n  this.unicorns \u003d null;\n\nBut the base constructor was calling renderContents, which set the three values to something meaningful. Then our \"initialisations\" we actually overwriting the meaningful values.",
+      "parentUuid": "32e13800_ffe326b1",
+      "revId": "5cd4e63ce9258e32baf14e212b9ce9c3e55952aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
