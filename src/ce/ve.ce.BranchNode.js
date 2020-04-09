@@ -51,7 +51,7 @@ OO.mixinClass( ve.ce.BranchNode, ve.BranchNode );
  */
 ve.ce.BranchNode.inlineSlugTemplate = ( function () {
 	var profile = $.client.profile(),
-		// The following classes can be used here:
+		// The following classes are used here:
 		// * ve-ce-chimera-gecko
 		// * ve-ce-chimera-konqueror
 		// * ve-ce-chimera-msie
