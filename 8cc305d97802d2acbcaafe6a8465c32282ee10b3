@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0d696d10_350afdd2",
+        "filename": "src/ui/contextitems/ve.ui.TableLineContextItem.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2020-04-16T04:56:58Z",
+      "side": 1,
+      "message": "I think you should keep this (and the other occurrences in this file) as \"Classes created here\", given what the code below does",
+      "revId": "8cc305d97802d2acbcaafe6a8465c32282ee10b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
