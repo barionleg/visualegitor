@@ -16,6 +16,24 @@
       "revId": "8cc305d97802d2acbcaafe6a8465c32282ee10b3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62db7edc_6533559c",
+        "filename": "src/ui/contextitems/ve.ui.TableLineContextItem.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2020-04-16T17:29:56Z",
+      "side": 1,
+      "message": "I re-worded it to the standard message, but we don\u0027t assert the wording of the message, so we could…",
+      "parentUuid": "0d696d10_350afdd2",
+      "revId": "8cc305d97802d2acbcaafe6a8465c32282ee10b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
