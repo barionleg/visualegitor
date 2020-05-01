@@ -16,6 +16,24 @@
       "revId": "6adf65179de3203abe43007f2703fb8922e28dfd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "813b074d_ca1299f5",
+        "filename": "lib/jquery/AUTHORS.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2020-05-01T16:08:58Z",
+      "side": 1,
+      "message": "You should set a better GitHub display name. :-P",
+      "parentUuid": "26c1225c_32c0201f",
+      "revId": "6adf65179de3203abe43007f2703fb8922e28dfd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
