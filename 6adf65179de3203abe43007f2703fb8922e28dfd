@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "26c1225c_32c0201f",
+        "filename": "lib/jquery/AUTHORS.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2020-05-01T16:05:29Z",
+      "side": 1,
+      "message": "who dis?",
+      "revId": "6adf65179de3203abe43007f2703fb8922e28dfd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
