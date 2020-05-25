@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9c03af88_2654568c",
+        "filename": "lib/rangefix/rangefix.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2020-05-25T19:08:17Z",
+      "side": 1,
+      "message": "Lies.",
+      "range": {
+        "startLine": 5,
+        "startChar": 18,
+        "endLine": 5,
+        "endChar": 20
+      },
+      "revId": "2a4509800ebf44b68c5264291f43aebad0b84b8a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
