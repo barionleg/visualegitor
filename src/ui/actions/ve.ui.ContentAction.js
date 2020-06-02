@@ -27,10 +27,9 @@ OO.inheritClass( ve.ui.ContentAction, ve.ui.Action );
 ve.ui.ContentAction.static.name = 'content';
 
 /**
- * List of allowed methods for the action.
+ * @property List of allowed methods for the action.
  *
  * @static
- * @property
  */
 ve.ui.ContentAction.static.methods = [ 'insert', 'remove', 'select', 'pasteSpecial', 'selectAll', 'changeDirectionality', 'submit', 'focusContext' ];
 
