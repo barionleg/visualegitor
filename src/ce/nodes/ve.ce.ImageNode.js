@@ -48,7 +48,7 @@ OO.mixinClass( ve.ce.ImageNode, ve.ce.ResizableNode );
 /* Static Methods */
 
 /**
- * @inheritdoc ve.ce.Node
+ * @see ve.ce.Node
  */
 ve.ce.ImageNode.static.getDescription = function ( model ) {
 	return model.getAttribute( 'src' );

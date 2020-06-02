@@ -27,18 +27,16 @@ OO.inheritClass( ve.ui.LinkAction, ve.ui.Action );
 ve.ui.LinkAction.static.name = 'link';
 
 /**
- * RegExp matching an autolink + trailing space.
+ * @property {RegExp} RegExp matching an autolink + trailing space.
  *
- * @property {RegExp}
  * @private
  */
 ve.ui.LinkAction.static.autolinkRegExp = null; // Initialized below.
 
 /**
- * List of allowed methods for the action.
+ * @property List of allowed methods for the action.
  *
  * @static
- * @property
  */
 ve.ui.LinkAction.static.methods = [ 'autolinkUrl' ];
 

@@ -42,7 +42,7 @@ ve.ui.ToolbarDialog.static.padded = true;
  * Toolbar position, either 'above' or 'side' (right in LTR)
  *
  * @static
- * @type {string} Toolbar position
+ * @type {string}
  */
 ve.ui.ToolbarDialog.static.position = 'above';
 

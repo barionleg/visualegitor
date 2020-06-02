@@ -27,7 +27,7 @@ OO.initClass( ve.ui.Action );
 /* Static Properties */
 
 /**
- * List of allowed methods for the action.
+ * @property List of allowed methods for the action.
  *
  * To avoid use of methods not intended to be executed via surface.execute(), the methods must be
  * whitelisted here. This information is checked by ve.ui.Surface before executing an action.
@@ -39,7 +39,6 @@ OO.initClass( ve.ui.Action );
  * be carried out.
  *
  * @static
- * @property
  * @inheritable
  */
 ve.ui.Action.static.methods = [];

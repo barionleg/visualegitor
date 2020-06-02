@@ -170,14 +170,14 @@ ve.init.Target.static.actionGroups = [];
 /**
  * List of commands which can be triggered anywhere from within the document
  *
- * @type {string[]} List of command names
+ * @type {string[]}
  */
 ve.init.Target.static.documentCommands = [ 'commandHelp' ];
 
 /**
  * List of commands which can be triggered from within the target element
  *
- * @type {string[]} List of command names
+ * @type {string[]}
  */
 ve.init.Target.static.targetCommands = [ 'findAndReplace', 'findNext', 'findPrevious' ];
 
@@ -186,14 +186,14 @@ ve.init.Target.static.targetCommands = [ 'findAndReplace', 'findNext', 'findPrev
  *
  * Null means all commands in the registry are used (excluding excludeCommands)
  *
- * @type {string[]|null} List of command names
+ * @type {string[]|null}
  */
 ve.init.Target.static.includeCommands = null;
 
 /**
  * List of commands to exclude from the target entirely
  *
- * @type {string[]} List of command names
+ * @type {string[]}
  */
 ve.init.Target.static.excludeCommands = [];
 

@@ -29,7 +29,7 @@ OO.mixinClass( ve.dm.ImageNode, ve.dm.ResizableNode );
 /* Static Methods */
 
 /**
- * @inheritdoc ve.dm.Model
+ * @see ve.dm.Model
  */
 ve.dm.ImageNode.static.isDiffComparable = function ( element, other ) {
 	// Images with different src's shouldn't be diffed
@@ -37,7 +37,7 @@ ve.dm.ImageNode.static.isDiffComparable = function ( element, other ) {
 };
 
 /**
- * @inheritdoc ve.dm.Model
+ * @see ve.dm.Model
  */
 ve.dm.ImageNode.static.describeChanges = function ( attributeChanges, attributes ) {
 	var key, sizeFrom, sizeTo, change,
@@ -70,7 +70,7 @@ ve.dm.ImageNode.static.describeChanges = function ( attributeChanges, attributes
 };
 
 /**
- * @inheritdoc ve.dm.Node
+ * @see ve.dm.Node
  */
 ve.dm.ImageNode.static.describeChange = function ( key, change ) {
 	if ( key === 'align' ) {
