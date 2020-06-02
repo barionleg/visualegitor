@@ -66,7 +66,7 @@ ve.ui.FragmentDialog.prototype.initialize = function ( data ) {
 };
 
 /**
- * @inheritdoc OO.ui.Dialog
+ * @see OO.ui.Dialog
  */
 ve.ui.FragmentDialog.prototype.getActionWidgetConfig = function ( config ) {
 	// Mixin method

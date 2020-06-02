@@ -28,10 +28,9 @@ OO.inheritClass( ve.ui.TableAction, ve.ui.Action );
 ve.ui.TableAction.static.name = 'table';
 
 /**
- * List of allowed methods for the action.
+ * @property List of allowed methods for the action.
  *
  * @static
- * @property
  */
 ve.ui.TableAction.static.methods = [
 	'create', 'insert', 'moveRelative', 'move', 'delete', 'importTable',

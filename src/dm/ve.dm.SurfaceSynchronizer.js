@@ -109,8 +109,9 @@ OO.mixinClass( ve.dm.SurfaceSynchronizer, ve.dm.RebaseClient );
  */
 
 /**
- * @event pause
  * The synchronizer is paused or resumes
+ *
+ * @event pause
  */
 
 /* Methods */

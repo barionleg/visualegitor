@@ -26,10 +26,9 @@ OO.inheritClass( ve.ui.WindowAction, ve.ui.Action );
 ve.ui.WindowAction.static.name = 'window';
 
 /**
- * List of allowed methods for the action.
+ * @property List of allowed methods for the action.
  *
  * @static
- * @property
  */
 ve.ui.WindowAction.static.methods = [ 'open', 'close', 'toggle' ];
 
