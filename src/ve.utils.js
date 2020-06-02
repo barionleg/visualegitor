@@ -174,13 +174,13 @@ ve.copy = OO.copy;
 
 /**
  * @method
- * @inheritdoc OO.ui#debounce
+ * @see OO.ui#debounce
  */
 ve.debounce = OO.ui.debounce;
 
 /**
  * @method
- * @inheritdoc OO.ui#throttle
+ * @see OO.ui#throttle
  */
 ve.throttle = OO.ui.throttle;
 

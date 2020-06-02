@@ -14,7 +14,7 @@ ve.debug = true;
 
 /**
  * @class ve.debug
- * @override ve
+ * @override
  * @singleton
  */
 

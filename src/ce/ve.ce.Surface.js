@@ -260,17 +260,19 @@ OO.mixinClass( ve.ce.Surface, OO.EventEmitter );
  */
 
 /**
- * @event focus
  * Note that it's possible for a focus event to occur immediately after a blur event, if the focus
  * moves to or from a FocusableNode. In this case the surface doesn't lose focus conceptually, but
  * a pair of blur-focus events is emitted anyway.
+ *
+ * @event focus
  */
 
 /**
- * @event blur
  * Note that it's possible for a focus event to occur immediately after a blur event, if the focus
  * moves to or from a FocusableNode. In this case the surface doesn't lose focus conceptually, but
  * a pair of blur-focus events is emitted anyway.
+ *
+ * @event blur
  */
 
 /**

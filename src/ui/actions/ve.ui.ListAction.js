@@ -26,10 +26,9 @@ OO.inheritClass( ve.ui.ListAction, ve.ui.Action );
 ve.ui.ListAction.static.name = 'list';
 
 /**
- * List of allowed methods for the action.
+ * @property List of allowed methods for the action.
  *
  * @static
- * @property
  */
 ve.ui.ListAction.static.methods = [ 'wrap', 'unwrap', 'toggle', 'wrapOnce' ];
 

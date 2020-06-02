@@ -110,7 +110,7 @@ ve.dm.ClassAttributeNode.static.getClassAttrFromAttributes = function ( attribut
 };
 
 /**
- * @inheritdoc ve.dm.Node
+ * @see ve.dm.Node
  */
 ve.dm.ClassAttributeNode.static.sanitize = function ( dataElement ) {
 	if ( dataElement.attributes ) {

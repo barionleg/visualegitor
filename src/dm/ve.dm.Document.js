@@ -90,14 +90,16 @@ OO.inheritClass( ve.dm.Document, ve.Document );
 /* Events */
 
 /**
- * @event precommit
  * Emitted when a transaction is about to be committed.
+ *
+ * @event precommit
  * @param {ve.dm.Transaction} tx Transaction that is about to be committed
  */
 
 /**
- * @event transact
  * Emitted when a transaction has been committed.
+ *
+ * @event transact
  * @param {ve.dm.Transaction} tx Transaction that was just processed
  */
 

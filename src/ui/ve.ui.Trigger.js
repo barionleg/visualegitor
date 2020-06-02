@@ -63,21 +63,17 @@ OO.initClass( ve.ui.Trigger );
 /* Static Properties */
 
 /**
- * Symbolic modifier key names.
- *
- * The order of this array affects the canonical order of a trigger string.
+ * @property Symbolic modifier key names. The order of this array affects the canonical order of a trigger string.
  *
  * @static
- * @property
  * @inheritable
  */
 ve.ui.Trigger.static.modifierKeys = [ 'meta', 'ctrl', 'alt', 'shift' ];
 
 /**
- * Symbolic primary key names.
+ * @property Symbolic primary key names.
  *
  * @static
- * @property
  * @inheritable
  */
 ve.ui.Trigger.static.primaryKeys = [
@@ -170,10 +166,9 @@ ve.ui.Trigger.static.primaryKeys = [
 ];
 
 /**
- * Mappings to use when rendering string for a specific platform.
+ * @property Mappings to use when rendering string for a specific platform.
  *
  * @static
- * @property
  * @inheritable
  */
 ve.ui.Trigger.static.platformMapping = {
@@ -202,10 +197,9 @@ ve.ui.Trigger.static.platformMapping = {
 };
 
 /**
- * Symbol to use when concatenating keys in a sequence.
+ * @property Symbol to use when concatenating keys in a sequence.
  *
  * @static
- * @property
  * @inheritable
  */
 ve.ui.Trigger.static.platformStringJoiners = {
@@ -214,10 +208,9 @@ ve.ui.Trigger.static.platformStringJoiners = {
 };
 
 /**
- * Special keys which have i18n messages
+ * @property Special keys which have i18n messages
  *
  * @static
- * @property
  * @inheritable
  */
 ve.ui.Trigger.static.translatableKeys = [
@@ -243,10 +236,9 @@ ve.ui.Trigger.static.translatableKeys = [
 ];
 
 /**
- * Aliases for modifier or primary key names.
+ * @property Aliases for modifier or primary key names.
  *
  * @static
- * @property
  * @inheritable
  */
 ve.ui.Trigger.static.keyAliases = {
@@ -273,10 +265,9 @@ ve.ui.Trigger.static.keyAliases = {
 };
 
 /**
- * Mapping of key codes and symbolic key names.
+ * @property Mapping of key codes and symbolic key names.
  *
  * @static
- * @property
  * @inheritable
  */
 ve.ui.Trigger.static.primaryKeyMap = {
