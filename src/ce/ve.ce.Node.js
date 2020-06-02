@@ -102,84 +102,84 @@ ve.ce.Node.static.getDescription = function () {
 /* Methods */
 
 /**
- * @inheritdoc ve.Node
+ * @see ve.Node
  */
 ve.ce.Node.prototype.getChildNodeTypes = function () {
 	return this.model.getChildNodeTypes();
 };
 
 /**
- * @inheritdoc ve.Node
+ * @see ve.Node
  */
 ve.ce.Node.prototype.getParentNodeTypes = function () {
 	return this.model.getParentNodeTypes();
 };
 
 /**
- * @inheritdoc ve.Node
+ * @see ve.Node
  */
 ve.ce.Node.prototype.getSuggestedParentNodeTypes = function () {
 	return this.model.getSuggestedParentNodeTypes();
 };
 
 /**
- * @inheritdoc ve.Node
+ * @see ve.Node
  */
 ve.ce.Node.prototype.canHaveChildren = function () {
 	return this.model.canHaveChildren();
 };
 
 /**
- * @inheritdoc ve.Node
+ * @see ve.Node
  */
 ve.ce.Node.prototype.canHaveChildrenNotContent = function () {
 	return this.model.canHaveChildrenNotContent();
 };
 
 /**
- * @inheritdoc ve.Node
+ * @see ve.Node
  */
 ve.ce.Node.prototype.isInternal = function () {
 	return this.model.isInternal();
 };
 
 /**
- * @inheritdoc ve.Node
+ * @see ve.Node
  */
 ve.ce.Node.prototype.isMetaData = function () {
 	return this.model.isMetaData();
 };
 
 /**
- * @inheritdoc ve.Node
+ * @see ve.Node
  */
 ve.ce.Node.prototype.isWrapped = function () {
 	return this.model.isWrapped();
 };
 
 /**
- * @inheritdoc ve.Node
+ * @see ve.Node
  */
 ve.ce.Node.prototype.isUnwrappable = function () {
 	return this.model.isUnwrappable();
 };
 
 /**
- * @inheritdoc ve.Node
+ * @see ve.Node
  */
 ve.ce.Node.prototype.canContainContent = function () {
 	return this.model.canContainContent();
 };
 
 /**
- * @inheritdoc ve.Node
+ * @see ve.Node
  */
 ve.ce.Node.prototype.isContent = function () {
 	return this.model.isContent();
 };
 
 /**
- * @inheritdoc ve.Node
+ * @see ve.Node
  *
  * If this is set to true it should implement:
  *
@@ -191,63 +191,63 @@ ve.ce.Node.prototype.isFocusable = function () {
 };
 
 /**
- * @inheritdoc ve.Node
+ * @see ve.Node
  */
 ve.ce.Node.prototype.isAlignable = function () {
 	return this.model.isAlignable();
 };
 
 /**
- * @inheritdoc ve.Node
+ * @see ve.Node
  */
 ve.ce.Node.prototype.isCellable = function () {
 	return this.model.isCellable();
 };
 
 /**
- * @inheritdoc ve.Node
+ * @see ve.Node
  */
 ve.ce.Node.prototype.isCellEditable = function () {
 	return this.model.isCellEditable();
 };
 
 /**
- * @inheritdoc ve.Node
+ * @see ve.Node
  */
 ve.ce.Node.prototype.hasSignificantWhitespace = function () {
 	return this.model.hasSignificantWhitespace();
 };
 
 /**
- * @inheritdoc ve.Node
+ * @see ve.Node
  */
 ve.ce.Node.prototype.handlesOwnChildren = function () {
 	return this.model.handlesOwnChildren();
 };
 
 /**
- * @inheritdoc ve.Node
+ * @see ve.Node
  */
 ve.ce.Node.prototype.shouldIgnoreChildren = function () {
 	return this.model.shouldIgnoreChildren();
 };
 
 /**
- * @inheritdoc ve.Node
+ * @see ve.Node
  */
 ve.ce.Node.prototype.getLength = function () {
 	return this.model.getLength();
 };
 
 /**
- * @inheritdoc ve.Node
+ * @see ve.Node
  */
 ve.ce.Node.prototype.getOuterLength = function () {
 	return this.model.getOuterLength();
 };
 
 /**
- * @inheritdoc ve.Node
+ * @see ve.Node
  */
 ve.ce.Node.prototype.getOffset = function () {
 	return this.model.getOffset();

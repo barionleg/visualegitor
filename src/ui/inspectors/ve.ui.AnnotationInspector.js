@@ -124,7 +124,7 @@ ve.ui.AnnotationInspector.prototype.getMatchingAnnotations = function ( fragment
 };
 
 /**
- * @inheritdoc ve.ui.FragmentWindow
+ * @see ve.ui.FragmentWindow
  */
 ve.ui.AnnotationInspector.prototype.isEditing = function () {
 	// If initialSelection isn't set yet, default to assume we are editing,

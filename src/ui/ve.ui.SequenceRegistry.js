@@ -38,14 +38,19 @@ ve.ui.SequenceRegistry.prototype.register = function ( sequence ) {
 };
 
 /**
+ * Matching sequence and corresponding range
+ * @typedef {Object} Match
+ * @property {ve.ui.Sequence} sequence
+ * @property {ve.Range} range
+ */
+
+/**
  * Find sequence matches a given offset in the data
  *
  * @param {ve.dm.ElementLinearData} data Linear data
  * @param {number} offset Offset
  * @param {boolean} [isPaste] Whether this in the context of a paste
- * @return {{sequence:ve.ui.Sequence,range:ve.Range}[]}
- *   Array of matching sequences, and the corresponding range of the match
- *   for each.
+ * @return {Match[]} Array of matching sequences, and the corresponding range of the match for each.
  */
 ve.ui.SequenceRegistry.prototype.findMatching = function ( data, offset, isPaste ) {
 	var textStart, plaintext, name, range, sequence,
