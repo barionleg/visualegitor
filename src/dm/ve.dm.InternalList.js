@@ -39,6 +39,7 @@ OO.mixinClass( ve.dm.InternalList, OO.EventEmitter );
 /**
  * @event update
  * @param {string[]} groupsChanged List of groups changed since the last transaction
+ * @memberof ve.dm.InternalList
  */
 
 /* Methods */

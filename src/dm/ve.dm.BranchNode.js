@@ -39,10 +39,12 @@ ve.dm.BranchNode = function VeDmBranchNode( element, children ) {
  * @param {number} index
  * @param {number} howmany
  * @param {ve.dm.BranchNode} [childModel]
+ * @memberof ve.dm.BranchNode
  */
 
 /**
  * @event update
+ * @memberof ve.dm.BranchNode
  */
 
 /* Inheritance */

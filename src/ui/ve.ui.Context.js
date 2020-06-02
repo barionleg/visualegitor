@@ -57,6 +57,7 @@ OO.mixinClass( ve.ui.Context, OO.ui.mixin.GroupElement );
 
 /**
  * @event resize
+ * @memberof ve.ui.Context
  */
 
 /* Static Properties */

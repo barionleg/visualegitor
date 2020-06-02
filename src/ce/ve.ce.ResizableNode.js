@@ -78,15 +78,18 @@ OO.initClass( ve.ce.ResizableNode );
 
 /**
  * @event resizeStart
+ * @memberof ve.ce.ResizableNode
  */
 
 /**
  * @event resizing
  * @param {Object} dimensions Dimension object containing width & height
+ * @memberof ve.ce.ResizableNode
  */
 
 /**
  * @event resizeEnd
+ * @memberof ve.ce.ResizableNode
  */
 
 /* Methods */

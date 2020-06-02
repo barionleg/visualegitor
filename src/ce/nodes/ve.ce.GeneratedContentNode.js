@@ -33,14 +33,17 @@ OO.initClass( ve.ce.GeneratedContentNode );
 
 /**
  * @event setup
+ * @memberof ve.ce.GeneratedContentNode
  */
 
 /**
  * @event teardown
+ * @memberof ve.ce.GeneratedContentNode
  */
 
 /**
  * @event rerender
+ * @memberof ve.ce.GeneratedContentNode
  */
 
 /* Static members */

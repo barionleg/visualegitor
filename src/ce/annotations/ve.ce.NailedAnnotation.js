@@ -55,14 +55,14 @@ ve.ce.NailedAnnotation.static.makeNail = function ( type ) {
 /* Methods */
 
 /**
- * @inheritdoc ve.ce.Annotation
+ * @see ve.ce.Annotation
  */
 ve.ce.NailedAnnotation.prototype.getContentContainer = function () {
 	return this.contentFragment;
 };
 
 /**
- * @inheritdoc ve.ce.Annotation
+ * @see ve.ce.Annotation
  */
 ve.ce.NailedAnnotation.prototype.attachContents = function () {
 	var element = this.$element[ 0 ];
@@ -73,7 +73,7 @@ ve.ce.NailedAnnotation.prototype.attachContents = function () {
 };
 
 /**
- * @inheritdoc ve.ce.Annotation
+ * @see ve.ce.Annotation
  */
 ve.ce.NailedAnnotation.prototype.appendTo = function ( node ) {
 	// Insert pre-open nail, element, and post-close nail into a parent node

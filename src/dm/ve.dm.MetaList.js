@@ -39,11 +39,13 @@ OO.mixinClass( ve.dm.MetaList, OO.EventEmitter );
 /**
  * @event insert
  * @param {ve.dm.MetaItem} item Item that was inserted
+ * @memberof ve.dm.MetaList
  */
 
 /**
  * @event remove
  * @param {ve.dm.MetaItem} item Item that was removed
+ * @memberof ve.dm.MetaList
  */
 
 /* Methods */

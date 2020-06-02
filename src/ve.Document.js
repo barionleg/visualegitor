@@ -35,6 +35,7 @@ OO.mixinClass( ve.Document, OO.EventEmitter );
  *
  * @event nodeAttached
  * @param {ve.Node} node The node that has been attached
+ * @memberof ve.Document
  */
 
 /**
@@ -44,6 +45,7 @@ OO.mixinClass( ve.Document, OO.EventEmitter );
  *
  * @event nodeDetached
  * @param {ve.Node} node The node that has been detached
+ * @memberof ve.Document
  */
 
 /* Methods */

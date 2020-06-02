@@ -115,7 +115,7 @@ ve.ce.TableCellNode.prototype.onTableCellTeardown = function () {
 };
 
 /**
- * @inheritdoc ve.ce.ContentEditableNode
+ * @see ve.ce.ContentEditableNode
  */
 ve.ce.TableCellNode.prototype.setContentEditable = function () {
 	// Overwite any state passed to setContentEditable with this.editing, so that

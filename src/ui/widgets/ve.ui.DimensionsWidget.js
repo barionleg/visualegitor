@@ -70,11 +70,13 @@ OO.inheritClass( ve.ui.DimensionsWidget, OO.ui.Widget );
 /**
  * @event widthChange
  * @param {string} value The new width
+ * @memberof ve.ui.DimensionsWidget
  */
 
 /**
  * @event heightChange
  * @param {string} value The new width
+ * @memberof ve.ui.DimensionsWidget
  */
 
 /* Methods */

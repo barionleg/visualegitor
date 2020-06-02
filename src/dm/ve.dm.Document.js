@@ -21,7 +21,7 @@
  *  ignored.
  * @param {ve.dm.Document} [parentDocument] Document to use as root for created nodes, used when cloning
  * @param {ve.dm.InternalList} [internalList] Internal list to clone; passed when creating a document slice
- * @param {(string|undefined)[]} [innerWhitespace] Inner whitespace to clone; passed when creating a document slice
+ * @param {Array.<string|undefined>} [innerWhitespace] Inner whitespace to clone; passed when creating a document slice
  * @param {string} [lang] Language code
  * @param {string} [dir='ltr'] Directionality (ltr/rtl)
  * @param {ve.dm.Document} [originalDocument] Original document form which this was cloned.
@@ -92,15 +92,19 @@ OO.inheritClass( ve.dm.Document, ve.Document );
 /* Events */
 
 /**
- * @event precommit
  * Emitted when a transaction is about to be committed.
+ *
+ * @event precommit
  * @param {ve.dm.Transaction} tx Transaction that is about to be committed
+ * @memberof ve.dm.Document
  */
 
 /**
- * @event transact
  * Emitted when a transaction has been committed.
+ *
+ * @event transact
  * @param {ve.dm.Transaction} tx Transaction that was just processed
+ * @memberof ve.dm.Document
  */
 
 /* Static methods */
@@ -468,7 +472,7 @@ ve.dm.Document.prototype.getInternalList = function () {
 /**
  * Get the document's inner whitespace
  *
- * @return {(string|undefined)[]} The document's inner whitespace
+ * @return {Array.<string|undefined>} The document's inner whitespace
  */
 ve.dm.Document.prototype.getInnerWhitespace = function () {
 	return this.innerWhitespace;

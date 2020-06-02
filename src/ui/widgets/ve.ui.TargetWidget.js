@@ -74,24 +74,28 @@ OO.mixinClass( ve.ui.TargetWidget, OO.ui.mixin.PendingElement );
  * The target's surface has been changed.
  *
  * @event change
+ * @memberof ve.ui.TargetWidget
  */
 
 /**
  * The target's surface has been submitted, e.g. Ctrl+Enter
  *
  * @event submit
+ * @memberof ve.ui.TargetWidget
  */
 
 /**
  * The target's surface has been cancelled, e.g. Escape
  *
  * @event cancel
+ * @memberof ve.ui.TargetWidget
  */
 
 /**
  * A document has been attached to the target, and a toolbar and surface created.
  *
  * @event setup
+ * @memberof ve.ui.TargetWidget
  */
 
 /**

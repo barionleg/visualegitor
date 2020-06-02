@@ -128,29 +128,36 @@ OO.mixinClass( ve.dm.SurfaceSynchronizer, ve.dm.RebaseClient );
 /**
  * @event authorSelect
  * @param {number} authorId The author whose selection has changed
+ * @memberof ve.dm.SurfaceSynchronizer
  */
 
 /**
  * @event authorChange
  * @param {number} authorId The author whose data has changed
+ * @memberof ve.dm.SurfaceSynchronizer
  */
 
 /**
  * @event wrongDoc
+ * @memberof ve.dm.SurfaceSynchronizer
  */
 
 /**
  * @event initDoc
  * @param {Error} error Error, if there was a problem initializing the document
+ * @memberof ve.dm.SurfaceSynchronizer
  */
 
 /**
  * @event disconnect
+ * @memberof ve.dm.SurfaceSynchronizer
  */
 
 /**
- * @event pause
  * The synchronizer is paused or resumes
+ *
+ * @event pause
+ * @memberof ve.dm.SurfaceSynchronizer
  */
 
 /* Methods */

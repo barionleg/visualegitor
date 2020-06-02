@@ -29,6 +29,7 @@ OO.inheritClass( ve.ce.AlignableNode, ve.ce.ClassAttributeNode );
 /**
  * @event align
  * @param {string} align New alignment
+ * @memberof ve.ce.AlignableNode
  */
 
 /**

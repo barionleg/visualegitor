@@ -50,6 +50,7 @@ OO.mixinClass( ve.dm.TableMatrix, OO.EventEmitter );
 
 /**
  * @event structureChange
+ * @memberof ve.dm.TableMatrix
  */
 
 /**

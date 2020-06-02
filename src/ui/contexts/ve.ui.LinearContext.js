@@ -233,8 +233,6 @@ ve.ui.LinearContext.prototype.removePersistentSource = function ( name ) {
 };
 
 /**
- * @inheritdoc
- *
  * Also adds the `embeddable` property to each object.
  */
 ve.ui.LinearContext.prototype.getRelatedSources = function () {

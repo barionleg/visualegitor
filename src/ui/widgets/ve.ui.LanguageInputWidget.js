@@ -116,6 +116,7 @@ OO.inheritClass( ve.ui.LanguageInputWidget, OO.ui.Widget );
  * @event change
  * @param {string} lang Language code
  * @param {string} dir Directionality
+ * @memberof ve.ui.LanguageInputWidget
  */
 
 /* Methods */

@@ -32,6 +32,7 @@ OO.inheritClass( ve.dm.TableNode, ve.dm.BranchNode );
 /**
  * @event cellAttributeChange
  * @param {ve.dm.TableCellableNode} cell
+ * @memberof ve.dm.TableNode
  */
 
 /* Static Properties */
@@ -146,11 +147,13 @@ OO.mixinClass( ve.dm.TableNodeCellIterator, OO.EventEmitter );
 /**
  * @event newSection
  * @param {ve.dm.TableSectionNode} node Table section node
+ * @memberof ve.dm.TableNodeCellIterator
  */
 
 /**
  * @event newRow
  * @param {ve.dm.TableRowNode} node Table row node
+ * @memberof ve.dm.TableNodeCellIterator
  */
 
 /* Methods */

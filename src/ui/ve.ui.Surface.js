@@ -160,12 +160,14 @@ OO.inheritClass( ve.ui.Surface, OO.ui.Widget );
  * When a surface has been initialized
  *
  * @event ready
+ * @memberof ve.ui.Surface
  */
 
 /**
  * When a surface is destroyed.
  *
  * @event destroy
+ * @memberof ve.ui.Surface
  */
 
 /**
@@ -173,18 +175,21 @@ OO.inheritClass( ve.ui.Surface, OO.ui.Widget );
  * as a result of a native selection change
  *
  * @event scroll
+ * @memberof ve.ui.Surface
  */
 
 /**
  * The surface has been submitted by user action, e.g. Ctrl+Enter
  *
  * @event submit
+ * @memberof ve.ui.Surface
  */
 
 /**
  * The surface has been cancelled by user action, e.g. Escape
  *
  * @event cancel
+ * @memberof ve.ui.Surface
  */
 
 /**
@@ -192,6 +197,7 @@ OO.inheritClass( ve.ui.Surface, OO.ui.Widget );
  *
  * @event readOnly
  * @param {boolean} readOnly The surface is read-only
+ * @memberof ve.ui.Surface
  */
 
 /* Methods */

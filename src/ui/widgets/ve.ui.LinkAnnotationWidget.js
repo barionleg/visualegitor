@@ -38,11 +38,11 @@ OO.inheritClass( ve.ui.LinkAnnotationWidget, OO.ui.Widget );
 /* Events */
 
 /**
- * @event change
- *
  * A change event is emitted when the annotation value of the input changes.
  *
+ * @event change
  * @param {ve.dm.LinkAnnotation|null} annotation
+ * @memberof ve.ui.LinkAnnotationWidget
  */
 
 /* Static Methods */

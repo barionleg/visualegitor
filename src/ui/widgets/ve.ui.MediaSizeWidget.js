@@ -126,16 +126,19 @@ OO.inheritClass( ve.ui.MediaSizeWidget, OO.ui.Widget );
 /**
  * @event change
  * @param {Object} dimensions Width and height dimensions
+ * @memberof ve.ui.MediaSizeWidget
  */
 
 /**
  * @event valid
  * @param {boolean} isValid Current dimensions are valid
+ * @memberof ve.ui.MediaSizeWidget
  */
 
 /**
  * @event changeSizeType
  * @param {string} sizeType 'default', 'custom' or 'scale'
+ * @memberof ve.ui.MediaSizeWidget
  */
 
 /* Methods */

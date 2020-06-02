@@ -80,6 +80,7 @@ OO.mixinClass( ve.dm.Scalable, OO.EventEmitter );
  *
  * @event currentSizeChange
  * @param {Object} currentDimensions Current dimensions width and height
+ * @memberof ve.dm.Scalable
  */
 
 /**
@@ -87,6 +88,7 @@ OO.mixinClass( ve.dm.Scalable, OO.EventEmitter );
  *
  * @event defaultSizeChange
  * @param {boolean} isDefault The size is default
+ * @memberof ve.dm.Scalable
  */
 
 /**
@@ -94,6 +96,7 @@ OO.mixinClass( ve.dm.Scalable, OO.EventEmitter );
  *
  * @event originalSizeChange
  * @param {Object} originalDimensions Original dimensions width and height
+ * @memberof ve.dm.Scalable
  */
 
 /**
@@ -101,6 +104,7 @@ OO.mixinClass( ve.dm.Scalable, OO.EventEmitter );
  *
  * @event minSizeChange
  * @param {Object} minDimensions Min dimensions width and height
+ * @memberof ve.dm.Scalable
  */
 
 /**
@@ -108,6 +112,7 @@ OO.mixinClass( ve.dm.Scalable, OO.EventEmitter );
  *
  * @event maxSizeChange
  * @param {Object} maxDimensions Max dimensions width and height
+ * @memberof ve.dm.Scalable
  */
 
 /**

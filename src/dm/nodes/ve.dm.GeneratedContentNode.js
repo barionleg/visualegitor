@@ -24,6 +24,7 @@ OO.initClass( ve.dm.GeneratedContentNode );
 /**
  * @event generatedContentsError
  * @param {jQuery} $element Element containing the error message
+ * @memberof ve.dm.GeneratedContentNode
  */
 
 /* Static methods */

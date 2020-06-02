@@ -94,6 +94,7 @@ OO.mixinClass( ve.ui.ContextItem, OO.ui.mixin.PendingElement );
 
 /**
  * @event command
+ * @memberof ve.ui.LinearContextItem
  */
 
 /* Static Properties */

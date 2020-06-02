@@ -46,16 +46,19 @@ OO.inheritClass( ve.ui.Toolbar, OO.ui.Toolbar );
  * @param {ve.dm.SurfaceFragment|null} fragment Surface fragment. Null if no surface is active.
  * @param {Object|null} direction Context direction with 'inline' & 'block' properties if a surface exists. Null if no surface is active.
  * @param {string[]} activeDialogs List of names of currently open dialogs.
+ * @memberof ve.ui.Toolbar
  */
 
 /**
  * @event surfaceChange
  * @param {ve.ui.Surface|null} oldSurface Old surface being controlled
  * @param {ve.ui.Surface|null} newSurface New surface being controlled
+ * @memberof ve.ui.Toolbar
  */
 
 /**
  * @event resize
+ * @memberof ve.ui.Toolbar
  */
 
 /* Methods */

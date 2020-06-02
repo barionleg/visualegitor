@@ -79,10 +79,12 @@ OO.initClass( ve.ce.FocusableNode );
 
 /**
  * @event focus
+ * @memberof ve.ce.FocusableNode
  */
 
 /**
  * @event blur
+ * @memberof ve.ce.FocusableNode
  */
 
 /* Static properties */

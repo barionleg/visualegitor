@@ -41,6 +41,7 @@ ve.ui.PreviewElement = function VeUiPreviewElement( model, config ) {
  * The element rendering has been updated
  *
  * @event render
+ * @memberof ve.ui.PreviewElement
  */
 
 /* Inheritance */

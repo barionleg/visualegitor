@@ -243,14 +243,17 @@ OO.mixinClass( ve.ce.Surface, OO.EventEmitter );
 
 /**
  * @event relocationStart
+ * @memberof ve.ce.Surface
  */
 
 /**
  * @event relocationEnd
+ * @memberof ve.ce.Surface
  */
 
 /**
  * @event keyup
+ * @memberof ve.ce.Surface
  */
 
 /**
@@ -258,26 +261,32 @@ OO.mixinClass( ve.ce.Surface, OO.EventEmitter );
  * (only after initialize has already been called).
  *
  * @event position
+ * @memberof ve.ce.Surface
  */
 
 /**
+ * Note that it's possible for a focus event to occur immediately after a blur event, if the focus
+ * moves to or from a FocusableNode. In this case the surface doesn't lose focus conceptually, but
+ * a pair of blur-focus events is emitted anyway.
+ *
  * @event focus
- * Note that it's possible for a focus event to occur immediately after a blur event, if the focus
- * moves to or from a FocusableNode. In this case the surface doesn't lose focus conceptually, but
- * a pair of blur-focus events is emitted anyway.
+ * @memberof ve.ce.Surface
  */
 
 /**
- * @event blur
  * Note that it's possible for a focus event to occur immediately after a blur event, if the focus
  * moves to or from a FocusableNode. In this case the surface doesn't lose focus conceptually, but
  * a pair of blur-focus events is emitted anyway.
+ *
+ * @event blur
+ * @memberof ve.ce.Surface
  */
 
 /**
  * Surface activation state has changed (i.e. on activate or deactivate)
  *
  * @event activation
+ * @memberof ve.ce.Surface
  */
 
 /* Static properties */

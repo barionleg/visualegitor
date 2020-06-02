@@ -50,10 +50,12 @@ OO.mixinClass( ve.ce.View, OO.EventEmitter );
 
 /**
  * @event setup
+ * @memberof ve.ce.View
  */
 
 /**
  * @event teardown
+ * @memberof ve.ce.View
  */
 
 /* Static members */

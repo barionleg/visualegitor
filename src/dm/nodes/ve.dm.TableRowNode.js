@@ -29,6 +29,7 @@ OO.inheritClass( ve.dm.TableRowNode, ve.dm.BranchNode );
 /**
  * @event cellAttributeChange
  * @param {ve.dm.TableCellableNode} cell
+ * @memberof ve.dm.TableRowNode
  */
 
 /* Static Properties */

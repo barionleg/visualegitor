@@ -51,6 +51,7 @@ OO.inheritClass( ve.ui.ContextItem, OO.ui.Widget );
 
 /**
  * @event command
+ * @memberof ve.ui.ContextItem
  */
 
 /* Static Properties */

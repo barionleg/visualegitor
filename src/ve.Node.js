@@ -23,11 +23,13 @@ ve.Node = function VeNode() {
 /**
  * @event attach
  * @param {ve.Node} New parent
+ * @memberof ve.Node
  */
 
 /**
  * @event detach
  * @param {ve.Node} Old parent
+ * @memberof ve.Node
  */
 
 /**
@@ -38,6 +40,7 @@ ve.Node = function VeNode() {
  *
  * @event root
  * @param {ve.Node} New root
+ * @memberof ve.Node
  */
 
 /**
@@ -48,6 +51,7 @@ ve.Node = function VeNode() {
  *
  * @event unroot
  * @param {ve.Node} Old root
+ * @memberof ve.Node
  */
 
 /* Abstract Methods */
