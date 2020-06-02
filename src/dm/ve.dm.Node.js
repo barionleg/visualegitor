@@ -419,119 +419,119 @@ ve.dm.Node.prototype.getClonedElement = function ( preserveGenerated ) {
 };
 
 /**
- * @inheritdoc ve.Node
+ * @see ve.Node
  */
 ve.dm.Node.prototype.getChildNodeTypes = function () {
 	return this.constructor.static.childNodeTypes;
 };
 
 /**
- * @inheritdoc ve.Node
+ * @see ve.Node
  */
 ve.dm.Node.prototype.getParentNodeTypes = function () {
 	return this.constructor.static.parentNodeTypes;
 };
 
 /**
- * @inheritdoc ve.Node
+ * @see ve.Node
  */
 ve.dm.Node.prototype.getSuggestedParentNodeTypes = function () {
 	return this.constructor.static.suggestedParentNodeTypes;
 };
 
 /**
- * @inheritdoc ve.Node
+ * @see ve.Node
  */
 ve.dm.Node.prototype.canHaveChildren = function () {
 	return ve.dm.nodeFactory.canNodeHaveChildren( this.type );
 };
 
 /**
- * @inheritdoc ve.Node
+ * @see ve.Node
  */
 ve.dm.Node.prototype.canHaveChildrenNotContent = function () {
 	return ve.dm.nodeFactory.canNodeHaveChildrenNotContent( this.type );
 };
 
 /**
- * @inheritdoc ve.Node
+ * @see ve.Node
  */
 ve.dm.Node.prototype.isInternal = function () {
 	return this.constructor.static.isInternal;
 };
 
 /**
- * @inheritdoc ve.Node
+ * @see ve.Node
  */
 ve.dm.Node.prototype.isMetaData = function () {
 	return this.constructor.static.isMetaData;
 };
 
 /**
- * @inheritdoc ve.Node
+ * @see ve.Node
  */
 ve.dm.Node.prototype.isWrapped = function () {
 	return this.constructor.static.isWrapped;
 };
 
 /**
- * @inheritdoc ve.Node
+ * @see ve.Node
  */
 ve.dm.Node.prototype.isUnwrappable = function () {
 	return this.isWrapped() && this.constructor.static.isUnwrappable;
 };
 
 /**
- * @inheritdoc ve.Node
+ * @see ve.Node
  */
 ve.dm.Node.prototype.canContainContent = function () {
 	return this.constructor.static.canContainContent;
 };
 
 /**
- * @inheritdoc ve.Node
+ * @see ve.Node
  */
 ve.dm.Node.prototype.isContent = function () {
 	return this.constructor.static.isContent;
 };
 
 /**
- * @inheritdoc ve.Node
+ * @see ve.Node
  */
 ve.dm.Node.prototype.isFocusable = function () {
 	return this.constructor.static.isFocusable;
 };
 
 /**
- * @inheritdoc ve.Node
+ * @see ve.Node
  */
 ve.dm.Node.prototype.isAlignable = function () {
 	return this.constructor.static.isAlignable;
 };
 
 /**
- * @inheritdoc ve.Node
+ * @see ve.Node
  */
 ve.dm.Node.prototype.isCellable = function () {
 	return this.constructor.static.isCellable;
 };
 
 /**
- * @inheritdoc ve.Node
+ * @see ve.Node
  */
 ve.dm.Node.prototype.isCellEditable = function () {
 	return this.constructor.static.isCellEditable;
 };
 
 /**
- * @inheritdoc ve.Node
+ * @see ve.Node
  */
 ve.dm.Node.prototype.isDiffedAsList = function () {
 	return this.constructor.static.isDiffedAsList;
 };
 
 /**
- * @inheritdoc ve.Node
+ * @see ve.Node
  */
 ve.dm.Node.prototype.isDiffedAsLeaf = function () {
 	return this.constructor.static.isDiffedAsLeaf;
@@ -568,21 +568,21 @@ ve.dm.Node.prototype.suppressSlugType = function () {
 };
 
 /**
- * @inheritdoc ve.Node
+ * @see ve.Node
  */
 ve.dm.Node.prototype.hasSignificantWhitespace = function () {
 	return this.constructor.static.hasSignificantWhitespace;
 };
 
 /**
- * @inheritdoc ve.Node
+ * @see ve.Node
  */
 ve.dm.Node.prototype.handlesOwnChildren = function () {
 	return this.constructor.static.handlesOwnChildren;
 };
 
 /**
- * @inheritdoc ve.Node
+ * @see ve.Node
  */
 ve.dm.Node.prototype.shouldIgnoreChildren = function () {
 	return this.constructor.static.ignoreChildren;
@@ -643,7 +643,7 @@ ve.dm.Node.prototype.matches = function ( type, attributes ) {
 };
 
 /**
- * @inheritdoc ve.Node
+ * @see ve.Node
  */
 ve.dm.Node.prototype.getLength = function () {
 	return this.length;
@@ -694,7 +694,7 @@ ve.dm.Node.prototype.adjustLength = function ( adjustment ) {
 };
 
 /**
- * @inheritdoc ve.Node
+ * @see ve.Node
  */
 ve.dm.Node.prototype.getOffset = function () {
 	var i, len, siblings, offset;

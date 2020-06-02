@@ -91,24 +91,23 @@ OO.mixinClass( ve.dm.Surface, OO.EventEmitter );
  */
 
 /**
- * @event focus
- *
  * The selection was just set to a non-null selection
+ *
+ * @event focus
  */
 
 /**
- * @event blur
- *
  * The selection was just set to a null selection
+ *
+ * @event blur
  */
 
 /**
- * @event documentUpdate
- *
  * Emitted when a transaction has been processed on the document and the selection has been
  * translated to account for that transaction. You should only use this event if you need
  * to access the selection; in most cases, you should use {ve.dm.Document#event-transact}.
  *
+ * @event documentUpdate
  * @param {ve.dm.Transaction} tx Transaction that was processed on the document
  */
 
@@ -122,18 +121,21 @@ OO.mixinClass( ve.dm.Surface, OO.EventEmitter );
  */
 
 /**
- * @event history
  * Emitted when the history stacks change, or the ability to use them changes.
+ *
+ * @event history
  */
 
 /**
- * @event undoStackChange
  * Emitted when the main undo stack changes (this.undoStack or this.undoIndex).
+ *
+ * @event undoStackChange
  */
 
 /**
- * @event autosaveFailed
  * Auto-save failed to store a change
+ *
+ * @event autosaveFailed
  */
 
 /* Methods */
