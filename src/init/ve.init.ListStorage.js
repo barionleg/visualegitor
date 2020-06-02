@@ -11,35 +11,35 @@ ve.init.ListStorage = function ( storage ) {
 };
 
 /**
- * @inheritdoc ve.init.SafeStorage
+ * @see ve.init.SafeStorage
  */
 ve.init.ListStorage.prototype.get = function ( key ) {
 	return this.storage.get( key );
 };
 
 /**
- * @inheritdoc ve.init.SafeStorage
+ * @see ve.init.SafeStorage
  */
 ve.init.ListStorage.prototype.set = function ( key, value ) {
 	return this.storage.set( key, value );
 };
 
 /**
- * @inheritdoc ve.init.SafeStorage
+ * @see ve.init.SafeStorage
  */
 ve.init.ListStorage.prototype.remove = function ( key ) {
 	return this.storage.remove( key );
 };
 
 /**
- * @inheritdoc ve.init.SafeStorage
+ * @see ve.init.SafeStorage
  */
 ve.init.ListStorage.prototype.getObject = function ( key ) {
 	return this.storage.getObject( key );
 };
 
 /**
- * @inheritdoc ve.init.SafeStorage
+ * @see ve.init.SafeStorage
  */
 ve.init.ListStorage.prototype.setObject = function ( key, value ) {
 	return this.storage.setObject( key, value );

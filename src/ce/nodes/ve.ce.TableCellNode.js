@@ -98,7 +98,7 @@ ve.ce.TableCellNode.prototype.setEditing = function ( enable ) {
 };
 
 /**
- * @inheritdoc ve.ce.ContentEditableNode
+ * @see ve.ce.ContentEditableNode
  */
 ve.ce.TableCellNode.prototype.setContentEditable = function () {
 	// Overwite any state passed to setContentEditable with this.editing, so that

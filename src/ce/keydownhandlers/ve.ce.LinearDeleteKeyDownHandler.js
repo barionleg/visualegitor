@@ -33,7 +33,7 @@ ve.ce.LinearDeleteKeyDownHandler.static.supportedSelections = [ 'linear' ];
 /* Static methods */
 
 /**
- * @inheritdoc
+ * @see ve.ce.KeyDownHandler
  *
  * The handler just schedules a poll to observe the native content removal, unless
  * one of the following is true:
