@@ -1079,7 +1079,6 @@ ve.dm.Document.prototype.getDataFromNode = function ( node ) {
  *  - If {numNodes} > 1: The node at {index} and the next {numNodes-1} nodes will be rebuilt
  * @param {number} offset Linear model offset to rebuild from
  * @param {number} newLength Length of data in linear model to rebuild or insert nodes for
- * @return {ve.dm.Node[]} Array containing the rebuilt/inserted nodes
  */
 ve.dm.Document.prototype.rebuildNodes = function ( parent, index, numNodes, offset, newLength ) {
 	// Get a slice of the document where it's been changed
@@ -1093,9 +1092,6 @@ ve.dm.Document.prototype.rebuildNodes = function ( parent, index, numNodes, offs
 		removedNodes = ve.batchSplice( parent, index, numNodes, addedNodes );
 
 	this.updateNodesByType( addedNodes, removedNodes );
-
-	// Return inserted nodes
-	return addedNodes;
 };
 
 /**
@@ -1135,8 +1131,12 @@ ve.dm.Document.prototype.updateNodesByType = function ( addedNodes, removedNodes
 	}
 
 	function add( node ) {
-		var type = node.getType(),
-			nodes = doc.nodesByType[ type ] = doc.nodesByType[ type ] || [];
+		var type, nodes;
+		type = node.getType();
+		if ( doc.nodesByType[ type ] && doc.nodesByType[ type ].indexOf( node ) !== -1 ) {
+			return;
+		}
+		nodes = doc.nodesByType[ type ] = doc.nodesByType[ type ] || [];
 
 		nodes.push( node );
 	}
