@@ -1079,7 +1079,6 @@ ve.dm.Document.prototype.getDataFromNode = function ( node ) {
  *  - If {numNodes} > 1: The node at {index} and the next {numNodes-1} nodes will be rebuilt
  * @param {number} offset Linear model offset to rebuild from
  * @param {number} newLength Length of data in linear model to rebuild or insert nodes for
- * @return {ve.dm.Node[]} Array containing the rebuilt/inserted nodes
  */
 ve.dm.Document.prototype.rebuildNodes = function ( parent, index, numNodes, offset, newLength ) {
 	// Get a slice of the document where it's been changed
@@ -1088,14 +1087,10 @@ ve.dm.Document.prototype.rebuildNodes = function ( parent, index, numNodes, offs
 		// Use plain ve.dm.Document, instead of whatever this.constructor is.
 		documentFragment = new ve.dm.Document( data, this.htmlDocument, this ),
 		// Get generated child nodes from the document fragment
-		addedNodes = documentFragment.getDocumentNode().getChildren(),
-		// Replace nodes in the model tree
-		removedNodes = ve.batchSplice( parent, index, numNodes, addedNodes );
+		addedNodes = documentFragment.getDocumentNode().getChildren();
 
-	this.updateNodesByType( addedNodes, removedNodes );
-
-	// Return inserted nodes
-	return addedNodes;
+	// Replace nodes in the model tree
+	ve.batchSplice( parent, index, numNodes, addedNodes );
 };
 
 /**
