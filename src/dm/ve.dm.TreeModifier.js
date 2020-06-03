@@ -146,7 +146,7 @@ ve.dm.TreeModifier.static.checkEqualData = function ( actual, expected ) {
  * @param {Object} treeOp The tree operation
  */
 ve.dm.TreeModifier.static.applyTreeOperation = function ( isReversed, document, treeOp ) {
-	var wantText, f, t, a, data, node, adjustment, nodeToInsert,
+	var wantText, f, t, a, data, node, adjustment, nodeToInsert, removedNodes,
 		changedBranchNodes = [];
 
 	function ensureText( position ) {
@@ -319,8 +319,9 @@ ve.dm.TreeModifier.static.applyTreeOperation = function ( isReversed, document, 
 			// The node should have no contents, so its outer length should be 2
 			data = spliceLinear( a.linearOffset, 2 );
 			this.checkEqualData( data, [ treeOp.element, { type: '/' + treeOp.element.type } ] );
-			a.node.splice( a.offset, 1 );
+			removedNodes = a.node.splice( a.offset, 1 );
 			healTextNodes( a.node, a.offset );
+			document.updateNodesByType( [], removedNodes );
 			break;
 		case 'insertNode':
 			spliceLinear( a.linearOffset, 0, [ treeOp.element, { type: '/' + treeOp.element.type } ] );
@@ -329,6 +330,7 @@ ve.dm.TreeModifier.static.applyTreeOperation = function ( isReversed, document, 
 				nodeToInsert.setupBlockSlugs();
 			}
 			a.node.splice( a.offset, 0, nodeToInsert );
+			document.updateNodesByType( [ nodeToInsert ], [] );
 			break;
 		case 'moveNode':
 			data = spliceLinear( f.linearOffset, f.node.children[ f.offset ].getOuterLength() );
