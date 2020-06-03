@@ -16,6 +16,24 @@
       "revId": "8533d57a51f7a7addd836d5c879dee70b11b9311",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bb64072c_720480b5",
+        "filename": "CONTRIBUTING.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2020-06-03T23:00:30Z",
+      "side": 1,
+      "message": "Aha, thanks.",
+      "parentUuid": "3bc6890d_574ed67b",
+      "revId": "8533d57a51f7a7addd836d5c879dee70b11b9311",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
