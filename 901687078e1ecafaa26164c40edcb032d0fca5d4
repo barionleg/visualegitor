@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "905a56a6_bfce803a",
+        "filename": "src/dm/ve.dm.NodeFactory.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2020-06-10T11:32:05Z",
+      "side": 1,
+      "message": "Support back-compat. for the migration?",
+      "range": {
+        "startLine": 204,
+        "startChar": 1,
+        "endLine": 204,
+        "endChar": 72
+      },
+      "revId": "901687078e1ecafaa26164c40edcb032d0fca5d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
