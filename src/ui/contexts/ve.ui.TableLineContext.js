@@ -42,6 +42,9 @@ ve.ui.TableLineContext = function VeUiTableLineContext( tableNode, itemGroup, co
 	this.onDocumentMouseDownHandler = this.onDocumentMouseDown.bind( this );
 
 	// Initialization
+	this.icon.$element
+		.attr( 'role', 'button' )
+		.attr( 'aria-label', itemGroup === 'col' ? ve.msg( 'visualeditor-table-button-col' ) : ve.msg( 'visualeditor-table-button-row' ) );
 	this.popup.$body.append( this.$group );
 	// The following classes are used here:
 	// * ve-ui-tableLineContext-col
