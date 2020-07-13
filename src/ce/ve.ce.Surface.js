@@ -1438,6 +1438,7 @@ ve.ce.Surface.prototype.onDocumentKeyDown = function ( e ) {
 			// Allowed keystrokes in readonly mode:
 			// Arrows, simple navigation
 			ve.ce.LinearArrowKeyDownHandler.static.keys.indexOf( e.keyCode ) !== -1 ||
+			e.keyCode === OO.ui.Keys.TAB ||
 			// Potential commands:
 			// Function keys...
 			( e.keyCode >= 112 && e.keyCode <= 123 ) ||
@@ -1475,13 +1476,22 @@ ve.ce.Surface.prototype.onDocumentKeyDown = function ( e ) {
  * @return {boolean} Trigger should preventDefault
  */
 ve.ce.Surface.prototype.isBlockedTrigger = function ( trigger ) {
-	var platformKey = ve.getSystemPlatform() === 'mac' ? 'mac' : 'pc',
-		blocked = {
-			mac: [ 'cmd+b', 'cmd+i', 'cmd+u', 'cmd+z', 'cmd+y', 'cmd+shift+z', 'tab', 'shift+tab', 'cmd+[', 'cmd+]' ],
-			pc: [ 'ctrl+b', 'ctrl+i', 'ctrl+u', 'ctrl+z', 'ctrl+y', 'ctrl+shift+z', 'tab', 'shift+tab' ]
+	var
+		triggerString = trigger.toString(),
+		platformKey = ve.getSystemPlatform() === 'mac' ? 'mac' : 'pc',
+		indentationTriggers = [ 'tab', 'shift+tab' ],
+		blockedTriggers = {
+			mac: [ 'cmd+b', 'cmd+i', 'cmd+u', 'cmd+z', 'cmd+y', 'cmd+shift+z', 'cmd+[', 'cmd+]' ],
+			pc: [ 'ctrl+b', 'ctrl+i', 'ctrl+u', 'ctrl+z', 'ctrl+y', 'ctrl+shift+z' ]
 		};
 
-	return blocked[ platformKey ].indexOf( trigger.toString() ) !== -1;
+	// Special case: only block Tab/Shift+Tab if indentation commands are enabled on this surface,
+	// otherwise allow them to change focus
+	if ( indentationTriggers.indexOf( triggerString ) !== -1 ) {
+		return !!this.surface.triggerListener.getCommandByTrigger( triggerString );
+	}
+
+	return blockedTriggers[ platformKey ].indexOf( triggerString ) !== -1;
 };
 
 /**
