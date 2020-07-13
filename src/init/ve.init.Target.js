@@ -631,7 +631,8 @@ ve.init.Target.prototype.getActions = function () {
  * @param {ve.ui.Surface} surface Surface
  */
 ve.init.Target.prototype.setupToolbar = function ( surface ) {
-	var toolbar = this.getToolbar(),
+	var target = this,
+		toolbar = this.getToolbar(),
 		actions = this.getActions(),
 		rAF = window.requestAnimationFrame || setTimeout;
 
@@ -640,6 +641,36 @@ ve.init.Target.prototype.setupToolbar = function ( surface ) {
 		active: 'onToolbarActive'
 	} );
 	actions.connect( this, { active: 'onToolbarActive' } );
+
+
+	$( [ toolbar.$element[ 0 ], actions.$element[ 0 ] ] )
+		.on( 'focusin', function ( e ) {
+			// When the focus moves to the toolbar, deactivate the surface but keep the selection (even if
+			// nullSelectionOnBlur is true), to allow tools to act on that selection.
+			surface.getView().deactivate( /*showAsActivated*/ true );
+		} )
+		.on( 'focusout', function ( e ) {
+			// We need to use setTimeout() to see where the focus will end up
+			setTimeout( function () {
+				if ( !OO.ui.contains( [ toolbar.$element[ 0 ], actions.$element[ 0 ] ], document.activeElement, true ) ) {
+					// When the focus moves out of the toolbar:
+					if ( OO.ui.contains( surface.getView().$element[ 0 ], document.activeElement, true ) ) {
+						// When the focus moves out of the toolbar, and it moves back into the surface,
+						// make sure the previous selection is restored.
+						var previousSelection = surface.getModel().getSelection();
+						surface.getView().activate();
+						if ( !previousSelection.isNull() ) {
+							surface.getModel().setSelection( previousSelection );
+						}
+					} else {
+						// When the focus moves out of the toolbar, and it doesn't move back into the surface,
+						// blur the surface explicitly to restore the expected nullSelectionOnBlur behavior.
+						// The surface was deactivated, so it doesn't react to the focus change itself.
+						surface.getView().blur();
+					}
+				}
+			} )
+		} );
 
 	toolbar.setup( this.toolbarGroups, surface );
 	actions.setup( this.actionGroups, surface );
