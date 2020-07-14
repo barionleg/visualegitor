@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5cfd01f6_7b66960d",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 1482,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2020-07-14T15:38:31Z",
+      "side": 1,
+      "message": "This should at least be focusTriggers - they are special cased because of their native behaviour, not because of what they are bound to in VE.\n\nEven more generically they are blockedIfRegisteredTriggers.",
+      "revId": "62e551f7f41103a4601e46a12dbe2055205dee2e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
