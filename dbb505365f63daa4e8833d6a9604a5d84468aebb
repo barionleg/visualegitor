@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c0749605_8bb2f37b",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2020-07-31T12:31:20Z",
+      "side": 1,
+      "message": "this is a bit scary, we should check things like mobile (especially iOS) for regressions",
+      "revId": "dbb505365f63daa4e8833d6a9604a5d84468aebb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
