@@ -19,6 +19,8 @@ ve.ui.WhitespacePreservingTextInputWidget = function VeUiWhitespacePreservingTex
 	// Configuration
 	config = config || {};
 
+	OO.ui.warnDeprecation( 've.ui.WhitespacePreservingTextInputWidget is deprecated. Use ve.separateWhitespace & ve.attachWhitespace instead.' );
+
 	// Parent constructor
 	ve.ui.WhitespacePreservingTextInputWidget.super.call( this, config );
 

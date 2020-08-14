@@ -51,7 +51,7 @@ ve.ui.CommentInspector.prototype.initialize = function () {
 	// Parent method
 	ve.ui.CommentInspector.super.prototype.initialize.call( this );
 
-	this.textWidget = new ve.ui.WhitespacePreservingTextInputWidget( {
+	this.textWidget = new OO.ui.MultilineTextInputWidget( {
 		autosize: true
 	} );
 	this.textWidget.connect( this, { resize: 'updateSize' } );
@@ -82,11 +82,15 @@ ve.ui.CommentInspector.prototype.getActionProcess = function ( action ) {
 ve.ui.CommentInspector.prototype.getSetupProcess = function ( data ) {
 	return ve.ui.CommentInspector.super.prototype.getSetupProcess.call( this, data )
 		.next( function () {
+			var valueAndWhitespace;
+
 			this.getFragment().getSurface().pushStaging();
 
 			this.commentNode = this.getSelectedNode();
 			if ( this.commentNode ) {
-				this.textWidget.setValueAndWhitespace( this.commentNode.getAttribute( 'text' ) || '' );
+				valueAndWhitespace = ve.separateWhitespace( this.commentNode.getAttribute( 'text' ) || '' );
+				this.whitespace = valueAndWhitespace.whitespace;
+				this.textWidget.setValue( valueAndWhitespace.value );
 			} else {
 				this.textWidget.setWhitespace( [ ' ', ' ' ] );
 				this.getFragment().insertContent( [
@@ -124,7 +128,9 @@ ve.ui.CommentInspector.prototype.getTeardownProcess = function ( data ) {
 			// data.action can be 'done', 'remove' or undefined (cancel)
 			if ( data.action === 'done' && this.textWidget.getValue() !== '' ) {
 				// Edit comment node
-				this.getFragment().changeAttributes( { text: this.textWidget.getValueAndWhitespace() } );
+				this.getFragment().changeAttributes( {
+					text: ve.attachWhitespace( this.textWidget.getValue(), this.whitespace )
+				} );
 				surfaceModel.applyStaging();
 			} else {
 				surfaceModel.popStaging();
@@ -134,7 +140,8 @@ ve.ui.CommentInspector.prototype.getTeardownProcess = function ( data ) {
 			}
 
 			// Reset inspector
-			this.textWidget.setValueAndWhitespace( '' );
+			this.textWidget.setValue( '' );
+			this.whitespace = [ '', '' ];
 		}, this );
 };
 

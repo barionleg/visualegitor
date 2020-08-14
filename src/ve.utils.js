@@ -1423,3 +1423,39 @@ ve.countEdgeMatches = function ( before, after, equals ) {
 ve.repeatString = function ( str, n ) {
 	return new Array( n + 1 ).join( str );
 };
+
+/**
+ * Seprate leading/trailing whitespace from a string value
+ *
+ * @param {string} value
+ * @param {number} [limit] Limit number of whitespace characters than can be removed
+ * @return {Object} Object containing `value` (string) and `whitespace` (string tuple) properties.
+ */
+ve.separateWhitespace = function ( value, limit ) {
+	var leftValue, rightValue,
+		whitespace = [];
+
+	leftValue = limit ? value.slice( 0, limit ) : value;
+	whitespace[ 0 ] = leftValue.match( /^\s*/ )[ 0 ];
+	value = value.slice( whitespace[ 0 ].length );
+
+	rightValue = limit ? value.slice( -limit ) : value;
+	whitespace[ 1 ] = rightValue.match( /\s*$/ )[ 0 ];
+	value = value.slice( 0, value.length - whitespace[ 1 ].length );
+
+	return {
+		value: value,
+		whitespace: whitespace
+	};
+};
+
+/**
+ * Attach a whitespace tuple back to a string
+ *
+ * @param {string} value
+ * @param {string[]} whitespace
+ * @return {string} Concatenated string
+ */
+ve.attachWhitespace = function ( value, whitespace ) {
+	return whitespace[ 0 ] + value + whitespace[ 1 ];
+};
