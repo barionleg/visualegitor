@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bcffba51_8b2ec860",
+        "filename": "src/dm/ve.dm.TreeModifier.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2020-08-31T20:20:40Z",
+      "side": 1,
+      "message": "I don\u0027t really know this code, but it looks like adjustedRemoverPosition and adjustedInserterPosition are just arrays of numbers. This seems like an extremely roundabout way of comparing them. Why not just write out the loop?\n\n\tif ( adjustedRemoverPosition.length !\u003d\u003d adjustedInserterPosition.length ) {\n\t\treturn false;\n\t}\n\tfor ( i \u003d 0; i \u003c adjustedRemoverPosition.length; i++ ) {\n\t\tif ( adjustedRemoverPosition[ i ] !\u003d\u003d adjustedInserterPosition[ i ] ) {\n\t\t\treturn false;\n\t\t}\n\t}\n\treturn true;\n\n(this could be a helper function somewhere)\n\nThis might be fast enough that we wouldn\u0027t need the special case, would you be able to benchmark this and check?",
+      "revId": "2ad40fae371ef49a7c85ee02f5188f264bb3f6bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
