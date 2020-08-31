@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3e7c790f_7d95d4b7",
+        "filename": "src/dm/ve.dm.TreeModifier.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 966,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2020-08-31T20:54:47Z",
+      "side": 1,
+      "message": "If `node.parent` is a parent of some node, then it must have children, so isn\u0027t this unnecessary anyway?",
+      "range": {
+        "startLine": 966,
+        "startChar": 56,
+        "endLine": 966,
+        "endChar": 81
+      },
+      "revId": "d79d9bf6bed59d6cffff9fdbfbadbae8cd8844f5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4cb55112_1a3a3f4c",
+        "filename": "src/dm/ve.dm.TreeModifier.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 972,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2020-08-31T20:54:47Z",
+      "side": 1,
+      "message": "We slice again on line 985, not sure if this matters",
+      "revId": "d79d9bf6bed59d6cffff9fdbfbadbae8cd8844f5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
