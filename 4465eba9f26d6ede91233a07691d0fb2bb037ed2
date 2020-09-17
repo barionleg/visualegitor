@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e964bcd9_14bf3fdf",
+        "filename": "tests/ui/actions/ve.ui.TableAction.test.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2020-09-17T21:43:16Z",
+      "side": 1,
+      "message": "There should definitely be two cells here, but this is less broken than before and you mentioned this issue, so let\u0027s go with it.",
+      "revId": "4465eba9f26d6ede91233a07691d0fb2bb037ed2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
