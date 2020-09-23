@@ -85,6 +85,15 @@ ve.ce.Node.static.trapsCursor = false;
  */
 ve.ce.Node.static.primaryCommandName = null;
 
+/**
+ * Command to execute when Delete or Backspace is pressed while this node is selected.
+ *
+ * @static
+ * @property {string|null}
+ * @inheritable
+ */
+ve.ce.Node.static.deleteCommandName = null;
+
 /* Static Methods */
 
 /**
