@@ -138,6 +138,8 @@ ve.ce.Surface = function VeCeSurface( model, ui, config ) {
 		copy: this.onCopy.bind( this )
 	} );
 
+	this.showModelSelectionDebounced = ve.debounce( this.showModelSelection.bind( this ) );
+
 	this.onWindowResizeHandler = ve.debounce( this.onWindowResize.bind( this ), 50 );
 	this.$window.on( 'resize', this.onWindowResizeHandler );
 
@@ -3201,7 +3203,8 @@ ve.ce.Surface.prototype.onModelSelect = function () {
 	// called with the same (object-identical) selection object
 	// (i.e. if the model is calling us back)
 	if ( !this.isRenderingLocked() && selection !== this.newModelSelection ) {
-		this.showModelSelection();
+		// T261662
+		this.showModelSelectionDebounced();
 		this.cleanupUnicorns( false );
 	}
 	// Update the selection state in the SurfaceObserver
