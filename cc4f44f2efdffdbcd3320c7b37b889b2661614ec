@@ -16,6 +16,24 @@
       "revId": "cc4f44f2efdffdbcd3320c7b37b889b2661614ec",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "343b2b50_f127eb47",
+        "filename": "src/ce/ve.ce.Node.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2020-10-02T17:40:03Z",
+      "side": 1,
+      "message": "It\u0027s the same for primaryCommandName above. I guess I should move that one too?",
+      "parentUuid": "6a0deb2f_65e7bb0d",
+      "revId": "cc4f44f2efdffdbcd3320c7b37b889b2661614ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
