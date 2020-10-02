@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6a0deb2f_65e7bb0d",
+        "filename": "src/ce/ve.ce.Node.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2020-10-02T00:11:22Z",
+      "side": 1,
+      "message": "\"focused\" not \"selected\".\n\nshould this be in focusableNode instead?\n\nwe should be clear that this command doesn\u0027t run if the node selected as part of a larger selection, only if it is directly focused",
+      "revId": "cc4f44f2efdffdbcd3320c7b37b889b2661614ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
