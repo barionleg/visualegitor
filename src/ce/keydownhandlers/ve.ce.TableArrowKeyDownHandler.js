@@ -130,7 +130,7 @@ ve.ce.TableArrowKeyDownHandler.static.moveTableSelection = function ( surface, r
 	// If wrapping forwards didn't move, we must be at the end of the table,
 	// so insert a new row and try again
 	if ( wrap && colOffset > 0 && selection.equals( newSelection ) ) {
-		surface.getSurface().execute( 'table', 'insert', 'row', 'after' );
+		surface.getSurface().execute( 'table', 'insert', false, 'row', 'after' );
 		selection = surface.getModel().getSelection();
 		adjust();
 	}
