@@ -14,6 +14,9 @@
  * @constructor
  * @param {string} name Unique symbolic name of page
  * @param {Object} [config] Configuration options
+ * @cfg {string} [label] Label
+ * @cfg {Object} [characters] Character set
+ * @cfg {boolean} [source] Source mode only set
  */
 ve.ui.SpecialCharacterPage = function VeUiSpecialCharacterPage( name, config ) {
 	var character, characterNode, characters, $characters, charactersNode,
@@ -58,7 +61,7 @@ ve.ui.SpecialCharacterPage = function VeUiSpecialCharacterPage( name, config ) {
 
 	this.$element
 		.addClass( 've-ui-specialCharacterPage' )
-		.append( $( '<h3>' ).text( name ), $characters );
+		.append( $( '<h3>' ).text( this.label ), $characters );
 };
 
 /* Inheritance */
