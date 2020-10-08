@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8a0cc0ca_38511a1f",
+        "filename": "src/ui/ve.ui.Action.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2020-10-08T13:40:01Z",
+      "side": 1,
+      "message": "fixed this to match the documentation in ve.ui.Command",
+      "revId": "0d74538ee48e671d3fbdf0ff94637ad10c2389c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
