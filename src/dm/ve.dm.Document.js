@@ -752,7 +752,7 @@ ve.dm.Document.prototype.getFullData = function ( range, mode ) {
 			(
 				mode === 'noMetadata' ||
 				mode === 'roundTrip' &&
-				insertedMetaItems.indexOf( item ) !== -1
+				insertedMetaItems.indexOf( item.originalDomElementsHash ) !== -1
 			)
 		) {
 			// Already inserted; skip this item and its matching close tag
@@ -774,7 +774,7 @@ ve.dm.Document.prototype.getFullData = function ( range, mode ) {
 					delete metaItem.internal;
 				}
 				insertions[ offset ].push( metaItem );
-				insertedMetaItems.push( metaItem );
+				insertedMetaItems.push( metaItem.originalDomElementsHash );
 			}
 		} else if ( mode === 'roundTrip' ) {
 			metaItems = ve.getProp( item, 'internal', 'metaItems' ) || [];
@@ -782,7 +782,7 @@ ve.dm.Document.prototype.getFullData = function ( range, mode ) {
 			for ( j = 0, jLen = metaItems.length; j < jLen; j++ ) {
 				metaItem = metaItems[ j ];
 				if ( ve.dm.nodeFactory.isRemovableMetaData( metaItem.type ) ) {
-					insertedMetaItems.push( metaItem );
+					insertedMetaItems.push( metaItem.originalDomElementsHash );
 				}
 			}
 		}
