@@ -1,4 +1,9 @@
 {
+	"vue": {
+		"scripts": [
+			"lib/vue/vue.js"
+		]
+	},
 	"socket.io": {
 		"scripts": [
 			"lib/socket.io-client/socket.io.min.js"
@@ -218,7 +223,8 @@
 			"jquery.i18n",
 			"jquery.uls.data",
 			"jquery.client",
-			"papaparse"
+			"papaparse",
+			"vue"
 		]
 	},
 	"baselibs.dist": {
@@ -229,7 +235,8 @@
 			"jquery.i18n.dist",
 			"jquery.uls.data.dist",
 			"jquery.client",
-			"papaparse"
+			"papaparse",
+			"vue"
 		]
 	},
 	"visualEditor.supportCheck": {
