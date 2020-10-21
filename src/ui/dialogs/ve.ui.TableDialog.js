@@ -38,6 +38,8 @@ ve.ui.TableDialog.static.title = OO.ui.deferMsg( 'visualeditor-dialog-table-titl
  * @inheritdoc
  */
 ve.ui.TableDialog.prototype.initialize = function () {
+	var container,
+		dialog = this;
 	// Parent method
 	ve.ui.TableDialog.super.prototype.initialize.call( this );
 
@@ -49,15 +51,28 @@ ve.ui.TableDialog.prototype.initialize = function () {
 		classes: [ 've-ui-tableDialog-panel' ]
 	} );
 
-	this.captionToggle = new OO.ui.ToggleSwitchWidget();
-	this.captionField = new OO.ui.FieldLayout( this.captionToggle, {
-		align: 'left',
-		label: ve.msg( 'visualeditor-dialog-table-caption' )
+	this.contents = new Vue( {
+		el: document.createElement( 'div' ),
+		template: `<div class="oo-ui-layout oo-ui-labelElement oo-ui-fieldLayout oo-ui-fieldLayout-align-left">
+			<div class="oo-ui-fieldLayout-body">
+				<span class="oo-ui-fieldLayout-header"><label class="oo-ui-labelElement-label">{{ label }}</label></span>
+				<div class="oo-ui-fieldLayout-field">
+					<input :disabled="isReadOnly" type="checkbox" v-model="captionEnabled" v-on:change="onChange">
+				</div>
+			</div>
+		</div>`,
+		data: {
+			captionEnabled: false,
+			isReadOnly: false,
+			label: ve.msg( 'visualeditor-dialog-table-caption' )
+		},
+		methods: {
+			onChange: function() {
+				dialog.updateActions();
+			}
+		}
 	} );
-
-	this.captionToggle.connect( this, { change: 'updateActions' } );
-
-	this.panel.$element.append( this.captionField.$element );
+	this.panel.$element.append( this.contents.$el );
 
 	this.$body.append( this.panel.$element );
 };
@@ -78,7 +93,7 @@ ve.ui.TableDialog.prototype.updateActions = function () {
  */
 ve.ui.TableDialog.prototype.getValues = function () {
 	return {
-		caption: this.captionToggle.getValue()
+		caption: this.contents.captionEnabled
 	};
 };
 
@@ -94,7 +109,8 @@ ve.ui.TableDialog.prototype.getSetupProcess = function ( data ) {
 					this.getFragment().getDocument()
 				).getCaptionNode()
 			};
-			this.captionToggle.setValue( this.initialValues.caption ).setDisabled( isReadOnly );
+			this.contents.captionEnabled = this.initialValues.caption;
+			this.contents.isReadOnly = isReadOnly;
 			this.closingFragment = null;
 			this.updateActions();
 		}, this );
@@ -114,7 +130,7 @@ ve.ui.TableDialog.prototype.getActionProcess = function ( action ) {
 				captionNode = this.getFragment().getSelection().getTableNode(
 					this.getFragment().getDocument()
 				).getCaptionNode();
-				if ( this.captionToggle.getValue() !== this.initialValues.caption ) {
+				if ( this.contents.captionEnabled !== this.initialValues.caption ) {
 					if ( this.initialValues.caption ) {
 						fragment = surfaceModel.getLinearFragment( captionNode.getOuterRange(), true );
 						fragment.removeContent();
