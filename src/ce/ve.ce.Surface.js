@@ -578,7 +578,12 @@ ve.ce.Surface.prototype.focus = function () {
 	if ( selection.isFocusedNode() ) {
 		this.$pasteTarget[ 0 ].focus();
 	} else if ( selection.isNativeCursor() ) {
-		node = this.getDocument().getNodeAndOffset( selection.getModel().getRange().start ).node;
+		try {
+			node = this.getDocument().getNodeAndOffset( selection.getModel().getRange().start ).node;
+		} catch ( e ) {
+			// Unexplained failures causing log spam: T262487
+			return;
+		}
 		$( node ).closest( '[contenteditable=true]' )[ 0 ].focus();
 	}
 
