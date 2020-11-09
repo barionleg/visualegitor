@@ -78,14 +78,20 @@ ve.ce.LinearDeleteKeyDownHandler.static.execute = function ( surface, e ) {
 	// (or CTRL is down, in which case we can't reliably predict whether the native behaviour
 	// would delete far enough to remove some element)
 	if ( rangeToRemove.isCollapsed() && !e.ctrlKey ) {
-		position = ve.adjacentDomPosition(
-			{
-				node: surface.nativeSelection.focusNode,
-				offset: surface.nativeSelection.focusOffset
-			},
-			direction,
-			{ stop: ve.isHardCursorStep }
-		);
+		try {
+			position = ve.adjacentDomPosition(
+				{
+					node: surface.nativeSelection.focusNode,
+					offset: surface.nativeSelection.focusOffset
+				},
+				direction,
+				{ stop: ve.isHardCursorStep }
+			);
+		} catch ( e ) {
+			// Unexplained failures causing log spam: T262303
+			e.preventDefault();
+			return true;
+		}
 		skipNode = position.steps[ position.steps.length - 1 ].node;
 		if ( skipNode.nodeType === Node.TEXT_NODE ) {
 			surface.eventSequencer.afterOne( {
