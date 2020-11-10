@@ -16,6 +16,24 @@
       "revId": "87e822b9b0b9f341662c257c0e2189bd34ac22d6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9dc056be_5cbf06ad",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2020-11-10T20:52:26Z",
+      "side": 1,
+      "message": "Not really, I can do that if it seems better to you.",
+      "parentUuid": "9ee5b4cf_6a2ae3a1",
+      "revId": "87e822b9b0b9f341662c257c0e2189bd34ac22d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
