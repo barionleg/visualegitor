@@ -34,6 +34,24 @@
       "revId": "87e822b9b0b9f341662c257c0e2189bd34ac22d6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f90c325d_d89af94e",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2020-11-11T22:56:38Z",
+      "side": 1,
+      "message": "I think so. I\u0027m not certain that we don\u0027t need to run all the subsequent code, or that we won\u0027t in the future.",
+      "parentUuid": "9dc056be_5cbf06ad",
+      "revId": "87e822b9b0b9f341662c257c0e2189bd34ac22d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
