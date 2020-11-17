@@ -34,7 +34,7 @@ ve.ui.LinkAnnotationInspector.static.modelClasses = [ ve.dm.LinkAnnotation ];
  * Handle annotation input change events
  */
 ve.ui.LinkAnnotationInspector.prototype.onAnnotationInputChange = function () {
-	this.labelInput.$input.attr( 'placeholder', this.getInsertionText() );
+	this.contents.label.placeholder = this.contents.annotation.value;
 	this.updateActions();
 };
 
@@ -42,39 +42,34 @@ ve.ui.LinkAnnotationInspector.prototype.onAnnotationInputChange = function () {
  * Update the actions based on the annotation state
  */
 ve.ui.LinkAnnotationInspector.prototype.updateActions = function () {
-	var isValid = false,
-		inspector = this,
-		annotation = this.annotationInput.getAnnotation();
+	var inspector = this,
+		annotation = this.contents.annotation.value,
+		isValid = annotation && this.contents.validate()
 
-	this.annotationInput.getTextInputWidget().getValidity()
-		.then( function () { isValid = true; } )
-		.always( function () {
-			isValid = isValid && !!annotation;
-			inspector.actions.forEach( { actions: [ 'done', 'insert' ] }, function ( action ) {
-				action.setDisabled( !isValid );
-			} );
-		} );
+	inspector.actions.forEach( { actions: [ 'done', 'insert' ] }, function ( action ) {
+		action.setDisabled( !isValid );
+	} );
 };
 
 /**
  * @inheritdoc
  */
 ve.ui.LinkAnnotationInspector.prototype.shouldRemoveAnnotation = function () {
-	return !this.annotationInput.getAnnotation();
+	return !this.contents.annotation.value;
 };
 
 /**
  * @inheritdoc
  */
 ve.ui.LinkAnnotationInspector.prototype.getInsertionText = function () {
-	return this.labelInput.getValue().trim() || this.annotationInput.getHref();
+	return this.contents.label.value.trim() || this.contents.href();
 };
 
 /**
  * @inheritdoc
  */
 ve.ui.LinkAnnotationInspector.prototype.getAnnotation = function () {
-	return this.annotationInput.getAnnotation();
+	return this.contents.annotation.value;
 };
 
 /**
@@ -93,44 +88,148 @@ ve.ui.LinkAnnotationInspector.prototype.getAnnotationFromFragment = function ( f
  * @inheritdoc
  */
 ve.ui.LinkAnnotationInspector.prototype.initialize = function () {
+	var inspector = this;
 	// Parent method
 	ve.ui.LinkAnnotationInspector.super.prototype.initialize.call( this );
 
-	// Properties
-	this.labelInput = this.createLabelInput();
-	this.annotationInput = this.createAnnotationInput();
-
-	this.labelField = new OO.ui.FieldLayout(
-		this.labelInput,
-		{
-			align: 'top',
-			label: ve.msg( 'visualeditor-linkcontext-label-label' )
+	Vue.component('ooui-field', {
+		template: `<div>
+			<span class="oo-ui-fieldLayout-header"><label class="oo-ui-labelElement-label">{{ label }}</label></span>
+			<div class="oo-ui-fieldLayout-field">
+				<div class="oo-ui-widget oo-ui-widget-enabled">
+					<slot></slot>
+				</div>
+			</div>
+		</div>`,
+		props: [ 'label' ],
+	});
+	Vue.component('ooui-input-text', {
+		template: `
+			<div class="oo-ui-widget oo-ui-widget-enabled oo-ui-inputWidget oo-ui-textInputWidget oo-ui-textInputWidget-type-text">
+				<input ref="input" type="text" class="oo-ui-inputWidget-input"
+					:value="value"
+					@input="$emit('input', $event.target.value)"
+					:disabled="disabled"
+					:placeholder="placeholder"
+				/>
+			</div>
+		`,
+		props: [ 'value', 'disabled', 'placeholder' ],
+		methods: {
+			focus: function () {
+				this.$refs.input.focus();
+			},
+			blur: function () {
+				this.$refs.input.blur();
+			}
 		}
-	);
-	this.annotationField = new OO.ui.FieldLayout(
-		this.annotationInput,
-		{
-			align: 'top',
-			label: ve.msg( 'visualeditor-linkinspector-title' )
+	});
+	Vue.component('ve-input-annotation', {
+		template: `<ooui-input-text ref="input"
+			v-model="annotation"
+			:disabled="disabled"
+			:placeholder="placeholder"
+		></ooui-input-text>`,
+		props: [ 'value', 'disabled', 'placeholder' ],
+		data: function() {
+			return {
+				newValue: this.value,
+			}
+		},
+		computed: {
+			// we have "value" which is a ve.dm.LinkAnnotation
+			annotation: {
+				get: function() {
+					return this.newValue ? this.newValue.getHref() : '';
+				},
+				set: function( value ) {
+					if ( value == '' ) {
+						this.newValue = null;
+					} else {
+						this.newValue = new ve.dm.LinkAnnotation( {
+							type: 'link',
+							attributes: {
+								href: value
+							}
+						} );
+					}
+					this.$emit( 'input', this.newValue );
+				}
+			}
+		},
+		watch: {
+			value: function( value ) {
+				this.newValue = value;
+			}
+		},
+		methods: {
+			focus: function () {
+				this.$refs.input.focus();
+			},
+			blur: function () {
+				this.$refs.input.blur();
+			}
 		}
-	);
-
-	// Events
-	this.annotationInput.connect( this, { change: 'onAnnotationInputChange' } );
-	this.annotationInput.getTextInputWidget().connect( this, { enter: 'onFormSubmit' } );
-	this.labelInput.connect( this, { enter: 'onFormSubmit' } );
-	this.labelInput.connect( this, { change: 'onAnnotationInputChange' } );
-
-	// Initialization
-	this.form.$element.append(
-		this.labelField.$element,
-		this.annotationField.$element
-	);
-
-	if ( !OO.ui.isMobile() ) {
-		this.annotationField.setLabel( null );
-		this.labelField.$element.detach();
-	}
+	});
+	this.contents = new Vue({
+		el: document.createElement( 'div' ),
+		template: `<div class="oo-ui-layout oo-ui-fieldLayout oo-ui-fieldLayout-align-top">
+			<div class="oo-ui-fieldLayout-body">
+				<ooui-field v-if="mobile" :label="label.label">
+					<ooui-input-text ref="label"
+						v-model="label.value"
+						v-bind="label"
+					></ooui-input-text>
+				</ooui-field>
+				<ooui-field :label="mobile ? '' : annotation.label">
+					<ve-input-annotation ref="annotation"
+						v-model="annotation.value"
+						v-bind="annotation"
+					></ve-input-annotation>
+				</ooui-field>
+			</div>
+		</div>`,
+		data: {
+			mobile: OO.ui.isMobile(),
+			annotation: {
+				value: '',
+				label: ve.msg( 'visualeditor-linkinspector-title' ),
+				placeholder: '',
+				disabled: false,
+			},
+			label: {
+				value: '',
+				label: ve.msg( 'visualeditor-linkcontext-label-label' ),
+				placeholder: '',
+				disabled: false,
+			},
+		},
+		watch: {
+			annotation: {
+				deep: true,
+				handler: function() { inspector.onAnnotationInputChange(); },
+			},
+			label: {
+				deep: true,
+				handler: function() { inspector.onAnnotationInputChange(); },
+			},
+		},
+		methods: {
+			validate: function() {
+				return !!this.annotation.value;
+			},
+			focus: function () {
+				this.$refs.annotation && this.$refs.annotation.focus();
+			},
+			blur: function () {
+				this.$refs.annotation && this.$refs.annotation.blur();
+			},
+			href: function() {
+				return this.annotation.value ? this.annotation.value.getHref() : '';
+			}
+		}
+	});
+	this.form.$element.append( this.contents.$el );
 };
 
 /**
@@ -160,9 +259,9 @@ ve.ui.LinkAnnotationInspector.prototype.shouldInsertText = function () {
 		return true;
 	}
 	if ( OO.ui.isMobile() ) {
-		return !this.labelInput.isDisabled() &&
+		return !this.contents.label.disabled &&
 			// Don't touch it if the plaintext value hasn't changed, to preserve internal annotations if possible
-			this.labelInput.getValue().trim() !== this.initialLabel.trim();
+			this.contents.label.value.trim() !== this.initialLabel.trim();
 	}
 	return false;
 };
@@ -184,10 +283,11 @@ ve.ui.LinkAnnotationInspector.prototype.getSetupProcess = function ( data ) {
 				fragment = this.getFragment();
 			this.title.setLabel( title ).setTitle( title );
 			this.initialLabel = fragment.getText();
-			this.labelInput.setDisabled( !fragment.containsOnlyText() );
-			this.labelInput.setValue( this.initialLabel );
-			this.annotationInput.setAnnotation( this.initialAnnotation );
-			this.annotationInput.setReadOnly( this.isReadOnly() );
+
+			this.contents.label.disabled = !fragment.containsOnlyText();
+			this.contents.label.value = this.initialLabel;
+			this.contents.annotation.disabled = this.isReadOnly();
+			this.contents.annotation.value = this.initialAnnotation;
 
 			this.updateActions();
 		}, this );
@@ -200,11 +300,11 @@ ve.ui.LinkAnnotationInspector.prototype.getReadyProcess = function ( data ) {
 	return ve.ui.LinkAnnotationInspector.super.prototype.getReadyProcess.call( this, data )
 		.next( function () {
 			if ( !OO.ui.isMobile() ) {
-				this.annotationInput.getTextInputWidget().focus().select();
+				this.contents.focus();
 			}
 
 			// Clear validation state, so that we don't get "invalid" state immediately on focus
-			this.annotationInput.getTextInputWidget().setValidityFlag( true );
+			// this.annotationInput.getTextInputWidget().setValidityFlag( true );
 		}, this );
 };
 
@@ -214,7 +314,7 @@ ve.ui.LinkAnnotationInspector.prototype.getReadyProcess = function ( data ) {
 ve.ui.LinkAnnotationInspector.prototype.getHoldProcess = function ( data ) {
 	return ve.ui.LinkAnnotationInspector.super.prototype.getHoldProcess.call( this, data )
 		.next( function () {
-			this.annotationInput.getTextInputWidget().blur();
+			this.contents.blur();
 		}, this );
 };
 
@@ -224,9 +324,9 @@ ve.ui.LinkAnnotationInspector.prototype.getHoldProcess = function ( data ) {
 ve.ui.LinkAnnotationInspector.prototype.getTeardownProcess = function ( data ) {
 	return ve.ui.LinkAnnotationInspector.super.prototype.getTeardownProcess.call( this, data )
 		.next( function () {
-			this.annotationInput.setAnnotation( null );
-			this.labelInput.$input.attr( 'placeholder', '' );
-			this.labelInput.setValue( '' );
+			this.contents.annotation.value = null;
+			this.contents.label.placeholder = '';
+			this.contents.label.value = '';
 		}, this );
 };
 
