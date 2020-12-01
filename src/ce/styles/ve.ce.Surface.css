@@ -145,3 +145,26 @@
 	height: 1em;
 	border: 1px solid #d33;
 }
+
+/* See ve-ui-overlay-local-selections in ve.ui.Surface.css */
+/* stylelint-disable-next-line plugin/no-unsupported-browser-features */
+@supports ( mix-blend-mode: multiply ) {
+	.ve-ui-overlay-local-selections {
+		/* stylelint-disable-next-line plugin/no-unsupported-browser-features */
+		mix-blend-mode: multiply;
+	}
+
+	.ve-ce-surface-deactivatedSelection {
+		opacity: 1;
+	}
+
+	.ve-ce-surface-deactivatedSelection > div {
+		/* Equivalent to #6da9f7 at 50% */
+		background: #abd5fa;
+	}
+
+	.ve-ce-surface-deactivatedSelection-showAsDeactivated > div {
+		/* Equivalent to #000 at 15% */
+		background: #d9d9d9;
+	}
+}
