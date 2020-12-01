@@ -74,8 +74,7 @@ ve.ce.Surface = function VeCeSurface( model, ui, config ) {
 	this.$highlightsUserCursors = $( '<div>' );
 	this.userSelectionOverlays = {};
 	this.$highlights = $( '<div>' ).append(
-		this.$highlightsFocused, this.$highlightsBlurred,
-		this.$highlightsUserSelections, this.$highlightsUserCursors
+		this.$highlightsFocused, this.$highlightsBlurred
 	);
 	this.$findResults = $( '<div>' );
 	this.$dropMarker = $( '<div>' ).addClass( 've-ce-surface-dropMarker oo-ui-element-hidden' );
@@ -234,7 +233,7 @@ ve.ce.Surface = function VeCeSurface( model, ui, config ) {
 	this.$highlights.append( this.$dropMarker );
 	this.$element.append( this.$attachedRootNode, this.$pasteTarget );
 	this.surface.$blockers.append( this.$highlights );
-	this.surface.$selections.append( this.$deactivatedSelection );
+	this.surface.$selections.append( this.$deactivatedSelection, this.$highlightsUserSelections, this.$highlightsUserCursors );
 };
 
 /* Inheritance */
