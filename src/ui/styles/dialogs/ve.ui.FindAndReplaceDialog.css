@@ -72,3 +72,21 @@
 .ve-init-target-ie-or-edge .ve-ui-findAndReplaceDialog-findResult-focused > div {
 	opacity: 0.4;
 }
+
+/* See .ve-ui-overlay-local-selections in ve.ce.Surface.css */
+/* stylelint-disable-next-line plugin/no-unsupported-browser-features */
+@supports ( mix-blend-mode: multiply ) {
+	.ve-ui-findAndReplaceDialog-findResult {
+		opacity: 1;
+	}
+
+	.ve-ui-findAndReplaceDialog-findResult > div {
+		/* Equivalent to #28bb0b at 20% */
+		background: #ccf1d3;
+	}
+
+	.ve-ui-findAndReplaceDialog-findResult-focused > div {
+		/* Equivalent to #1f850b at 40% */
+		background: #99cda3;
+	}
+}
