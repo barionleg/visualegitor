@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a501202d_6755f9fc",
+        "filename": "tests/ui/ve.ui.DiffElement.test.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2020-12-02T21:11:17Z",
+      "side": 1,
+      "message": "There is one?",
+      "range": {
+        "startLine": 274,
+        "startChar": 5,
+        "endLine": 274,
+        "endChar": 38
+      },
+      "revId": "a5c48728ad7bbb19c4b6f9a1f75f6d9a43c2cadf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
