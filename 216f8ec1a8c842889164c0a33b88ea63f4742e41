@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d8602fdc_15d421eb",
+        "filename": "src/dm/ve.dm.Document.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 764,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2020-12-07T15:57:50Z",
+      "side": 1,
+      "message": "This is clever, but should we have an inline comment that this will be false if the property doesn\u0027t exist?",
+      "range": {
+        "startLine": 764,
+        "startChar": 3,
+        "endLine": 764,
+        "endChar": 31
+      },
+      "revId": "216f8ec1a8c842889164c0a33b88ea63f4742e41",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
