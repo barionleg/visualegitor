@@ -22,6 +22,30 @@
       "revId": "216f8ec1a8c842889164c0a33b88ea63f4742e41",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "00dd79fc_ce77a616",
+        "filename": "src/dm/ve.dm.Document.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 764,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2020-12-07T19:36:32Z",
+      "side": 1,
+      "message": "we do this enough, especially in while loops, that it shouldn\u0027t be that confusing",
+      "parentUuid": "d8602fdc_15d421eb",
+      "range": {
+        "startLine": 764,
+        "startChar": 3,
+        "endLine": 764,
+        "endChar": 31
+      },
+      "revId": "216f8ec1a8c842889164c0a33b88ea63f4742e41",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
