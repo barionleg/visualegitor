@@ -46,6 +46,23 @@
       "revId": "216f8ec1a8c842889164c0a33b88ea63f4742e41",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5bba369_1e8622fd",
+        "filename": "src/dm/ve.dm.Document.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 765,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2020-12-09T22:34:52Z",
+      "side": 1,
+      "message": "Having these two assignments here means that we\u0027ll only enter the if(){} body if item.internal and item.internal.metaItems are defined; previously this was not checked. (Are they always defined?)\n\nI think we can just put them below, since the check apparently doesn\u0027t matter. So, instead of lines 762-767, something like this:\n\n\t\tif ( mode \u003d\u003d\u003d \u0027roundTrip\u0027 ) {\n\t\t\tinternal \u003d item.internal || {};\n\t\t\tmetaItems \u003d internal.metaItems || [];\n\t\t\t\n\t\t\tif ( !internal.changesSinceLoad ) {\n\t\t\t\t...\n\n(Not sure if we need the default values, only if these props may be undefined)",
+      "revId": "216f8ec1a8c842889164c0a33b88ea63f4742e41",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
