@@ -384,9 +384,18 @@ ve.DiffMatchPatch.prototype.getCleanDiff = function ( oldData, newData, options 
 					annotationChanges = [];
 					bAnnotations.get().forEach( function ( b ) { // eslint-disable-line no-loop-func
 						var sameName = aAnnotations.getAnnotationsByName( b.name );
-						if ( sameName.getLength() && !aAnnotations.containsComparable( b ) ) {
-							// Annotations which have the same type, but are non-comparable, e.g. link with a different href
-							annotationChanges.push( { oldAnnotation: sameName.get( 0 ), newAnnotation: b } );
+						if ( !aAnnotations.containsComparable( b ) ) {
+							if ( sameName.getLength() ) {
+								// Annotations which have the same type, but are non-comparable, e.g. link with a different href
+								annotationChanges.push( { oldAnnotation: sameName.get( 0 ), newAnnotation: b } );
+							} else {
+								annotationChanges.push( { newAnnotation: b } );
+							}
+						}
+					} );
+					aAnnotations.get().forEach( function ( a ) { // eslint-disable-line no-loop-func
+						if ( !bAnnotations.containsComparable( a ) ) {
+							annotationChanges.push( { oldAnnotation: a } );
 						}
 					} );
 
