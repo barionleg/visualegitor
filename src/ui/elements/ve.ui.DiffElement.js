@@ -533,7 +533,7 @@ ve.ui.DiffElement.prototype.wrapNodeData = function ( nodeData ) {
  * @return {Array} Linear Data
  */
 ve.ui.DiffElement.prototype.getNodeData = function ( node, action, move ) {
-	var nodeData, doc = action === 'remove' ? this.oldDoc : this.newDoc;
+	var nodeData, item, doc = action === 'remove' ? this.oldDoc : this.newDoc;
 
 	// Get the linear model for the node
 	nodeData = doc.getData( node.getOuterRange() );
@@ -541,7 +541,15 @@ ve.ui.DiffElement.prototype.getNodeData = function ( node, action, move ) {
 	// Add the classes to the outer element
 	this.addAttributesToElement( nodeData[ 0 ], { 'data-diff-action': action } );
 	if ( move ) {
-		this.addAttributesToElement( nodeData[ 0 ], { 'data-diff-move': move } );
+		// The following messages are used here:
+		// * visualeditor-diff-moved-up
+		// * visualeditor-diff-moved-down
+		// The following classes are used here:
+		// * ve-ui-diffElement-moved-up
+		// * ve-ui-diffElement-moved-down
+		item = this.getChangeDescriptionItem( [ ve.msg( 'visualeditor-diff-moved-' + move ) ], [ 've-ui-diffElement-moved-' + move ] );
+		this.addAttributesToElement( nodeData[ 0 ], { 'data-diff-move': move, 'data-diff-id': item.getData() } );
+		this.descriptionItemsStack.push( item );
 	}
 
 	return nodeData;
@@ -575,7 +583,7 @@ ve.ui.DiffElement.prototype.getChangedNodeElements = function ( oldNodeIndex, mo
  * @return {Array} Linear data for the diff
  */
 ve.ui.DiffElement.prototype.getChangedNodeData = function ( diff, move, newNode, oldNode ) {
-	var nodeData;
+	var nodeData, item;
 
 	// Choose the appropriate method for the type of node
 	if ( newNode.isDiffedAsLeaf() ) {
@@ -588,7 +596,15 @@ ve.ui.DiffElement.prototype.getChangedNodeData = function ( diff, move, newNode,
 
 	if ( move ) {
 		// Add move class to the outer element
-		this.addAttributesToElement( nodeData[ 0 ], { 'data-diff-move': move } );
+		// The following messages are used here:
+		// * visualeditor-diff-moved-up
+		// * visualeditor-diff-moved-down
+		// The following classes are used here:
+		// * ve-ui-diffElement-moved-up
+		// * ve-ui-diffElement-moved-down
+		item = this.getChangeDescriptionItem( [ ve.msg( 'visualeditor-diff-moved-' + move ) ], [ 've-ui-diffElement-moved-' + move ] );
+		this.addAttributesToElement( nodeData[ 0 ], { 'data-diff-move': move, 'data-diff-id': item.getData() } );
+		this.descriptionItemsStack.push( item );
 	}
 
 	return nodeData;
@@ -1175,9 +1191,10 @@ ve.ui.DiffElement.prototype.compareNodeAttributes = function ( data, offset, doc
  * Get a change description item from a set of changes
  *
  * @param {Array} changes List of changes, each change being either text or a Node array
+ * @param {Array} classes Additional classes
  * @return {OO.ui.OptionWidget} Change description item
  */
-ve.ui.DiffElement.prototype.getChangeDescriptionItem = function ( changes ) {
+ve.ui.DiffElement.prototype.getChangeDescriptionItem = function ( changes, classes ) {
 	var i, l, item, $change,
 		elementId = this.elementId,
 		$label = $( [] );
@@ -1191,10 +1208,11 @@ ve.ui.DiffElement.prototype.getChangeDescriptionItem = function ( changes ) {
 		}
 		$label = $label.add( $change );
 	}
+	// eslint-disable-next-line mediawiki/class-doc
 	item = new OO.ui.OptionWidget( {
 		label: $label,
 		data: elementId,
-		classes: [ 've-ui-diffElement-attributeChange' ]
+		classes: [ 've-ui-diffElement-attributeChange' ].concat( classes || [] )
 	} );
 	this.elementId++;
 	return item;
