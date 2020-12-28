@@ -287,6 +287,15 @@ ve.ui.commandRegistry.register(
 );
 ve.ui.commandRegistry.register(
 	new ve.ui.Command(
+		'focusNext', 'content', 'focusNext'
+	)
+);ve.ui.commandRegistry.register(
+	new ve.ui.Command(
+		'focusPrev', 'content', 'focusPrev'
+	)
+);
+ve.ui.commandRegistry.register(
+	new ve.ui.Command(
 		'comment', 'window', 'open',
 		{ args: [ 'comment' ], supportedSelections: [ 'linear' ] }
 	)
