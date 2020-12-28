@@ -283,3 +283,10 @@ ve.ui.triggerRegistry.register(
 		pc: new ve.ui.Trigger( 'ctrl+shift+enter' )
 	}
 );
+// If both indent/outdent and focusNext/focusPrev are enabled... what happens?
+ve.ui.triggerRegistry.register(
+	'focusNext', new ve.ui.Trigger( 'tab' )
+);
+ve.ui.triggerRegistry.register(
+	'focusPrev', new ve.ui.Trigger( 'shift+tab' )
+);

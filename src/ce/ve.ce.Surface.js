@@ -77,6 +77,9 @@ ve.ce.Surface = function VeCeSurface( model, ui, config ) {
 		this.$highlightsFocused, this.$highlightsBlurred,
 		this.$highlightsUserSelections, this.$highlightsUserCursors
 	);
+	// Used by focusNext/focusPrev commands
+	this.$focusTrapBefore = $( '<div>' ).prop( 'tabIndex', -1 );
+	this.$focusTrapAfter = $( '<div>' ).prop( 'tabIndex', -1 );
 	this.$findResults = $( '<div>' );
 	this.$dropMarker = $( '<div>' ).addClass( 've-ce-surface-dropMarker oo-ui-element-hidden' );
 	this.$lastDropTarget = null;
@@ -232,7 +235,7 @@ ve.ce.Surface = function VeCeSurface( model, ui, config ) {
 
 	// Add elements to the DOM
 	this.$highlights.append( this.$dropMarker );
-	this.$element.append( this.$attachedRootNode, this.$pasteTarget );
+	this.$element.append( this.$focusTrapBefore, this.$attachedRootNode, this.$pasteTarget, this.$focusTrapAfter );
 	this.surface.$blockers.append( this.$highlights );
 	this.surface.$selections.append( this.$deactivatedSelection );
 };
@@ -640,7 +643,7 @@ ve.ce.Surface.prototype.removeRangesAndBlur = function () {
 	this.nativeSelection.removeAllRanges();
 	// Support: IE<=11
 	// While switching between editor modes, there's sometimes no activeElement.
-	if ( this.getElementDocument().activeElement ) {
+	if ( this.getElementDocument().activeElement === this.$attachedRootNode[ 0 ] ) {
 		// Blurring the activeElement ensures the keyboard is hidden on iOS
 		this.getElementDocument().activeElement.blur();
 	}
@@ -667,15 +670,20 @@ ve.ce.Surface.prototype.onDocumentFocusInOut = function ( e ) {
  * Handle global focus change.
  */
 ve.ce.Surface.prototype.onFocusChange = function () {
-	var hasFocus = false;
-
-	hasFocus = OO.ui.contains(
-		[
+	var hasFocus,
+		surfaceNodes = [
 			this.$attachedRootNode[ 0 ],
 			this.$pasteTarget[ 0 ],
 			this.$highlights[ 0 ]
-		],
+		];
+
+	hasFocus = OO.ui.contains(
+		surfaceNodes,
 		this.nativeSelection.anchorNode,
+		true
+	) && OO.ui.contains(
+		surfaceNodes,
+		document.activeElement,
 		true
 	);
 
@@ -1427,6 +1435,7 @@ ve.ce.Surface.prototype.onDocumentKeyDown = function ( e ) {
 			// Allowed keystrokes in readonly mode:
 			// Arrows, simple navigation
 			ve.ce.LinearArrowKeyDownHandler.static.keys.indexOf( e.keyCode ) !== -1 ||
+			e.keyCode === OO.ui.Keys.TAB ||
 			// Potential commands:
 			// Function keys...
 			( e.keyCode >= 112 && e.keyCode <= 123 ) ||
@@ -1466,8 +1475,8 @@ ve.ce.Surface.prototype.onDocumentKeyDown = function ( e ) {
 ve.ce.Surface.prototype.isBlockedTrigger = function ( trigger ) {
 	var platformKey = ve.getSystemPlatform() === 'mac' ? 'mac' : 'pc',
 		blocked = {
-			mac: [ 'cmd+b', 'cmd+i', 'cmd+u', 'cmd+z', 'cmd+y', 'cmd+shift+z', 'tab', 'shift+tab', 'cmd+[', 'cmd+]' ],
-			pc: [ 'ctrl+b', 'ctrl+i', 'ctrl+u', 'ctrl+z', 'ctrl+y', 'ctrl+shift+z', 'tab', 'shift+tab' ]
+			mac: [ 'cmd+b', 'cmd+i', 'cmd+u', 'cmd+z', 'cmd+y', 'cmd+shift+z', 'cmd+[', 'cmd+]' ],
+			pc: [ 'ctrl+b', 'ctrl+i', 'ctrl+u', 'ctrl+z', 'ctrl+y', 'ctrl+shift+z' ]
 		};
 
 	return blocked[ platformKey ].indexOf( trigger.toString() ) !== -1;

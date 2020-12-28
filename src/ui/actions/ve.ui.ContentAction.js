@@ -26,7 +26,7 @@ OO.inheritClass( ve.ui.ContentAction, ve.ui.Action );
 
 ve.ui.ContentAction.static.name = 'content';
 
-ve.ui.ContentAction.static.methods = [ 'insert', 'remove', 'select', 'pasteSpecial', 'selectAll', 'changeDirectionality', 'submit', 'focusContext' ];
+ve.ui.ContentAction.static.methods = [ 'insert', 'remove', 'select', 'pasteSpecial', 'selectAll', 'changeDirectionality', 'submit', 'focusContext', 'focusNext', 'focusPrev' ];
 
 /* Methods */
 
@@ -131,7 +131,7 @@ ve.ui.ContentAction.prototype.submit = function () {
 };
 
 /**
- * Emit a surface submit event
+ * Move keyboard focus to the context menu.
  *
  * @return {boolean} Action was executed
  */
@@ -149,6 +149,28 @@ ve.ui.ContentAction.prototype.focusContext = function () {
 			return true;
 		}
 	}
+	return false;
+};
+
+/**
+ * Move keyboard focus outside of the editing surface, to the next focusable node.
+ *
+ * @return {boolean} Action was executed
+ */
+ve.ui.ContentAction.prototype.focusNext = function () {
+	this.surface.getView().$focusTrapAfter[ 0 ].focus();
+	// Do not preventDefault - allow browser to move focus
+	return false;
+};
+
+/**
+ * Move keyboard focus outside of the editing surface, to the previous focusable node.
+ *
+ * @return {boolean} Action was executed
+ */
+ve.ui.ContentAction.prototype.focusPrev = function () {
+	this.surface.getView().$focusTrapBefore[ 0 ].focus();
+	// Do not preventDefault - allow browser to move focus
 	return false;
 };
 
