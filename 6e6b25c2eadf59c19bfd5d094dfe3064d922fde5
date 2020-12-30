@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "15ada2fb_963075d0",
+        "filename": "src/ce/annotations/ve.ce.LinkAnnotation.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2020-12-30T16:13:59Z",
+      "side": 1,
+      "message": "It seems like this is the culprit with regards to the surface clicking bug.",
+      "revId": "6e6b25c2eadf59c19bfd5d094dfe3064d922fde5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
