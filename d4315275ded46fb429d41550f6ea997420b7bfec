@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a6c645d8_7524304e",
+        "filename": "src/dm/ve.dm.Converter.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 1426,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2021-01-12T22:19:55Z",
+      "side": 1,
+      "message": "I\u0027m using domElement because that is actually designed to be the last DOM container in the \"stack\" (not including annotation nodes).\n\ndataElement exists but could be a close element, and to make a stack safe version of that seems like a lot of work, especially when we know domElement is correct, and have attached private properties before.",
+      "revId": "d4315275ded46fb429d41550f6ea997420b7bfec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
