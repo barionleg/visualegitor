@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "096975bf_546b7f29",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 4172,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2021-01-16T15:32:56Z",
+      "side": 1,
+      "message": "focusNode can be null. While Element.contains(null) appears to work, I think it would be cleaner to check if focusNode was truthy first.",
+      "revId": "783deb1a03256a9ea532d98453069d399d2d5877",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
