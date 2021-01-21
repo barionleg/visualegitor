@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a60ed1c_7eef4e3f",
+        "filename": "src/ui/styles/elements/ve.ui.DiffElement.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2021-01-21T17:15:29Z",
+      "side": 1,
+      "message": "Can we comment as to where this number comes from?",
+      "range": {
+        "startLine": 60,
+        "startChar": 12,
+        "endLine": 60,
+        "endChar": 24
+      },
+      "revId": "56264f356884262ac63d22073bda1cbef2700ee9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
