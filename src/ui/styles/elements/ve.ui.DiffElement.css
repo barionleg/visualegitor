@@ -76,19 +76,22 @@
 	color: #72777d;
 }
 
-.ve-ui-diffElement-attributeChange del,
-.ve-ui-diffElement-attributeChange ins {
-	text-decoration: none;
-}
-
 .ve-ui-diffElement-attributeChange del {
 	background-color: #f2c2bf;
 	box-shadow: 0 0 0 1px #f2c2bf;
+	text-decoration: line-through;
+}
+
+.ve-ui-diffElement-attributeChange del:hover {
+	background-color: #f2c2bf;
+	box-shadow: 0 0 0 1px #f2c2bf;
+	text-decoration: none;
 }
 
 .ve-ui-diffElement-attributeChange ins {
 	background-color: #c4ede4;
 	box-shadow: 0 0 0 1px #c4ede4;
+	text-decoration: none;
 }
 
 .ve-ui-diffElement-attributeChange.oo-ui-labelElement .oo-ui-labelElement-label {
