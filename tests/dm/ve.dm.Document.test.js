@@ -1452,4 +1452,11 @@ QUnit.test( 'readOnly and offset caching', function ( assert ) {
 
 	// Offset caching test
 	assert.strictEqual( doc.getDocumentNode().children[ 1 ].getOffset(), 9, 'Second child node offset has been translated, not cached from before' );
+
+	// Document modified after cache set
+	doc.setReadOnly( false );
+	surface.getLinearFragment( new ve.Range( 1 ) ).insertContent( 'Quux' );
+
+	doc.setReadOnly( true );
+	assert.strictEqual( doc.getDocumentNode().children[ 1 ].getOffset(), 13, 'Second child node offset has been translated again, not cached from before' );
 } );
