@@ -16,6 +16,46 @@ QUnit.test( 'getModelFromDom', function ( assert ) {
 	}
 } );
 
+QUnit.test( 'getModelFromDom throws', function ( assert ) {
+	ve.test.utils.runGetModelFromDomTest( assert, {
+		body: '<p></p><p></p>',
+		data: [
+			{ type: 'paragraph' },
+			{ type: '/paragraph' },
+			{ type: 'paragraph' },
+			{ type: '/paragraph' },
+			{ type: 'internalList' },
+			{ type: '/internalList' }
+		]
+	}, 'plain paragraph does not throw' );
+
+	assert.throws( function () {
+		ve.test.utils.runGetModelFromDomTest( assert, {
+			body: '<p about="oops"></p><p about="oops"></p>'
+		} );
+	}, /cannot have an about-group/, 'plain paragraph with "about" throws' );
+
+	ve.test.utils.runGetModelFromDomTest( assert, {
+		body: '<p about="oops"></p>',
+		data: [
+			{ type: 'paragraph' },
+			{ type: '/paragraph' },
+			{ type: 'internalList' },
+			{ type: '/internalList' }
+		]
+	}, 'single plain paragraph does not throw (it should, but that breaks MW Cite)' );
+
+	ve.test.utils.runGetModelFromDomTest( assert, {
+		body: '<p about="oops" rel="ve:Alien"></p><p about="oops"></p>',
+		data: [
+			{ type: 'alienBlock' },
+			{ type: '/alienBlock' },
+			{ type: 'internalList' },
+			{ type: '/internalList' }
+		]
+	}, 'alien paragraph with "about" does not throw' );
+} );
+
 QUnit.test( 'getModelFromDom with store argument', function ( assert ) {
 	var model,
 		store = new ve.dm.HashValueStore();

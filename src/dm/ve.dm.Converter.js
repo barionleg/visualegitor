@@ -842,6 +842,9 @@ ve.dm.Converter.prototype.getDataFromDomSubtree = function ( domElement, wrapper
 				aboutGroup = getAboutGroup( childNode );
 				modelName = this.modelRegistry.matchElement( childNode, aboutGroup.length > 1 );
 				modelClass = this.modelRegistry.lookup( modelName ) || ve.dm.AlienNode;
+				if ( aboutGroup.length > 1 && !modelClass.static.enableAboutGrouping ) {
+					throw new Error( 'Element of type ' + modelName + ' cannot have an about-group' );
+				}
 				if ( modelClass.prototype instanceof ve.dm.Annotation ) {
 					childNodes = [ childNode ];
 				} else {
