@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "63235db3_2d2f298e",
+        "filename": "src/ve.utils.parsing.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2021-02-24T16:45:54Z",
+      "side": 1,
+      "message": "This assumes that the user will only pass in a full \u003cbody\u003e tag or a within-body fragment?\n\nIs it a problem that passing in a full \u003chtml\u003e node, or a \u003chead\u003e+\u003cbody\u003e will now explode in weird ways?",
+      "revId": "ca3f685b36fe4f9db2fbd3fcb848d46d7d1bb732",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
