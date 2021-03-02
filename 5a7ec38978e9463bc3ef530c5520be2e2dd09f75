@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f3a0a786_213395cf",
+        "filename": "src/ui/dialogs/ve.ui.SpecialCharacterDialog.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2021-03-02T20:40:41Z",
+      "side": 1,
+      "message": "focus doesn\u0027t reset the selection, the selection is cleared by the deactivate call in ve.init.Target#setupToolbar, which calls ve.ce.Surface#removeRangesAndBlur",
+      "revId": "5a7ec38978e9463bc3ef530c5520be2e2dd09f75",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
