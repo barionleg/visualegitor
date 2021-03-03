@@ -16,6 +16,24 @@
       "revId": "5a7ec38978e9463bc3ef530c5520be2e2dd09f75",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c36f88e5_af258304",
+        "filename": "src/ui/dialogs/ve.ui.SpecialCharacterDialog.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2021-03-03T23:13:53Z",
+      "side": 1,
+      "message": "It does though. Try it out, call ve.init.target.surface.view.deactivate() (which clears native selection but not model selection), then ve.init.target.surface.view.focus() (which moves the model selection to the start of the document).",
+      "parentUuid": "f3a0a786_213395cf",
+      "revId": "5a7ec38978e9463bc3ef530c5520be2e2dd09f75",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
