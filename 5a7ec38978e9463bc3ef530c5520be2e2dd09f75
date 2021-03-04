@@ -70,6 +70,24 @@
       "revId": "5a7ec38978e9463bc3ef530c5520be2e2dd09f75",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c53cba37_d2215b56",
+        "filename": "src/ui/dialogs/ve.ui.SpecialCharacterDialog.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2021-03-04T21:11:51Z",
+      "side": 1,
+      "message": "\u003e Restoring the selection from the model is not ideal as you could lose your position in a link cartouche.\n\nWell, luckily, that\u0027s already broken for unrelated reasons: T228006",
+      "parentUuid": "a0b45a1e_a494762a",
+      "revId": "5a7ec38978e9463bc3ef530c5520be2e2dd09f75",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
