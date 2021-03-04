@@ -34,6 +34,24 @@
       "revId": "5a7ec38978e9463bc3ef530c5520be2e2dd09f75",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d76a43ef_6676ffe0",
+        "filename": "src/ui/dialogs/ve.ui.SpecialCharacterDialog.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2021-03-04T20:29:09Z",
+      "side": 1,
+      "message": "Oh, you mean it resets the model selection?",
+      "parentUuid": "c36f88e5_af258304",
+      "revId": "5a7ec38978e9463bc3ef530c5520be2e2dd09f75",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
