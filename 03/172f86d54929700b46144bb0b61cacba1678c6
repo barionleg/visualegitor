@@ -1,0 +1,9 @@
+Verified+1: Libraryupgrader <tools.libraryupgrader@tools.wmflabs.org>
+Verified+2: jenkins-bot
+Code-Review+1: DannyS712 <DannyS712.enwiki@gmail.com>
+Code-Review+2: Bartosz Dziewoński <matma.rex@gmail.com>
+Submitted-by: jenkins-bot
+Submitted-at: Mon, 08 Mar 2021 22:26:53 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/c/VisualEditor/VisualEditor/+/669948
+Project: VisualEditor/VisualEditor
+Branch: refs/heads/master
