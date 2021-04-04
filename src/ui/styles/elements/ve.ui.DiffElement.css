@@ -130,12 +130,24 @@ figure[ data-diff-action='insert' ] > figcaption {
 	box-shadow: 0 0 0 1px #7fd7c4;
 }
 
+/* elements having <code> tag need background-colors and borders */
+[ data-diff-action='insert' ] > code {
+	background-color: #7fd7c4;
+	border: 1px solid #7fd7c4; /* overriding border of changed code elements */
+}
+
 [ data-diff-action='remove' ],
 /* elements using display:table-caption need separate backgrounds */
 table[ data-diff-action='remove' ] > caption,
 figure[ data-diff-action='remove' ] > figcaption {
 	background-color: #e88e89 !important; /* stylelint-disable-line declaration-no-important */
 	box-shadow: 0 0 0 1px #e88e89;
+}
+
+/* elements having <code> tag need background-colors and borders */
+[ data-diff-action='remove' ] > code {
+	background-color: #e88e89;
+	border: 1px solid #e88e89; /* overriding border of changed code elements */
 }
 
 [ data-diff-action='change' ],
