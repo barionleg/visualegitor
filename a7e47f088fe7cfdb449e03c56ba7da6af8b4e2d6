@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c77cbf06_b2ee6ccb",
+        "filename": "src/ui/styles/elements/ve.ui.DiffElement.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2021-04-06T13:20:20Z",
+      "side": 1,
+      "message": "Rather than creating a separate rule just to handle the border colour, I would just add the `\u003e code` selector to the rule above. We aren\u0027t changing the border-color on tables or figures.",
+      "revId": "a7e47f088fe7cfdb449e03c56ba7da6af8b4e2d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
