@@ -16,6 +16,24 @@
       "revId": "a7e47f088fe7cfdb449e03c56ba7da6af8b4e2d6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f2c899dc_9392e14e",
+        "filename": "src/ui/styles/elements/ve.ui.DiffElement.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 8954
+      },
+      "writtenOn": "2021-04-06T14:02:26Z",
+      "side": 1,
+      "message": "Elements with \u003ccode\u003e tag already has border(border: 1px solid #eaecf0;) so we must override it otherwise discontinuity in line will not look elegant. Table and figure elements are not written in continuation of text, so it is not necessary for these. Putting just \u003e code in already added selector would unnecessary add box-shadow to \u003ccode\u003e tag elements.",
+      "parentUuid": "c77cbf06_b2ee6ccb",
+      "revId": "a7e47f088fe7cfdb449e03c56ba7da6af8b4e2d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
