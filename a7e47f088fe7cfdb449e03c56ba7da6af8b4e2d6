@@ -34,6 +34,24 @@
       "revId": "a7e47f088fe7cfdb449e03c56ba7da6af8b4e2d6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b74fd2ab_2d430831",
+        "filename": "src/ui/styles/elements/ve.ui.DiffElement.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2021-04-06T19:09:35Z",
+      "side": 1,
+      "message": "I think it will look ok with the grey border. The box shadow is essentially an outline. It doesn\u0027t matter that there is a thin grey border between the background and the outline, the same happens on tables and images (mixing green with grey borders).",
+      "parentUuid": "f2c899dc_9392e14e",
+      "revId": "a7e47f088fe7cfdb449e03c56ba7da6af8b4e2d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
