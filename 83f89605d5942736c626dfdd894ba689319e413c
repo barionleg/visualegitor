@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f4572bcb_a76366fb",
+        "filename": "src/ui/widgets/ve.ui.LanguageSearchWidget.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2021-04-08T14:44:02Z",
+      "side": 0,
+      "message": "Still needed.",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 100,
+        "endChar": 44
+      },
+      "revId": "83f89605d5942736c626dfdd894ba689319e413c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}

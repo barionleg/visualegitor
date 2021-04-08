@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9f9c9cc0_54b0ff6d",
+        "filename": "src/ve.utils.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2021-04-08T14:44:02Z",
+      "side": 1,
+      "message": "That\u0027s nice. Until you do that, this is still needed.",
+      "range": {
+        "startLine": 316,
+        "startChar": 0,
+        "endLine": 316,
+        "endChar": 66
+      },
+      "revId": "8bb9481d970213e9fe42a1e0bb17c48e9dafa907",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
