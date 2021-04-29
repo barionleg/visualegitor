@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fc648494_422d1813",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 6729
+      },
+      "writtenOn": "2021-04-29T16:40:19Z",
+      "side": 1,
+      "message": "this link doesn\u0027t work, \"Cannot parse URL as a Gitiles URL\" - https://gerrit.wikimedia.org/r/plugins/gitiles/unicodejs/+/refs/tags/v13.0.3/History.md works for me",
+      "range": {
+        "startLine": 10,
+        "startChar": 1,
+        "endLine": 10,
+        "endChar": 61
+      },
+      "revId": "26d8747968f9e02ed22c5f64b7957777c1480fea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
