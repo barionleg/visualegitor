@@ -1159,10 +1159,13 @@
 			"rebaser/src/dm/ve.dm.ProtocolServer.js",
 			"rebaser/src/dm/ve.dm.TransportServer.js",
 			"src/ve.Range.js",
+			"src/dm/ve.dm.LinearData.js",
 			"src/dm/ve.dm.Selection.js",
 			"src/dm/selections/ve.dm.NullSelection.js",
 			"src/dm/selections/ve.dm.LinearSelection.js",
-			"src/dm/selections/ve.dm.TableSelection.js"
+			"src/dm/selections/ve.dm.TableSelection.js",
+			"src/dm/lineardata/ve.dm.FlatLinearData.js",
+			"src/dm/lineardata/ve.dm.ElementLinearData.js"
 		],
 		"dependencies": [
 			"oojs.noJQuery"

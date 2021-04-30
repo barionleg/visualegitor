@@ -27,11 +27,11 @@ OO.inheritClass( ve.dm.ElementLinearData, ve.dm.FlatLinearData );
 /* Static Members */
 
 ve.dm.ElementLinearData.static.startWordRegExp = new RegExp(
-	'^(' + unicodeJS.characterclass.patterns.word + ')'
+	'^([a-zA-Z0-9])'
 );
 
 ve.dm.ElementLinearData.static.endWordRegExp = new RegExp(
-	'(' + unicodeJS.characterclass.patterns.word + ')$'
+	'([a-zA-Z0-9])$'
 );
 
 /* Static Methods */
