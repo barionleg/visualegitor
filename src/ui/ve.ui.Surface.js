@@ -123,7 +123,7 @@ ve.ui.Surface = function VeUiSurface( dataOrDocOrSurface, config ) {
 		// The following classes are used here:
 		// * ve-ui-surface-visual
 		// * ve-ui-surface-source
-		.addClass( 've-ui-surface ve-ui-surface-' + this.mode )
+		.addClass( 'mw-body-content ve-ui-surface ve-ui-surface-' + this.mode )
 		.append( this.view.$element );
 	this.view.$element.after( this.localOverlay.$element );
 	this.localOverlay.$element.append( this.$selections, this.$blockers, this.$controls, this.$menus );
