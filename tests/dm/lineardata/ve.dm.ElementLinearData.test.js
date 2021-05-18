@@ -2358,6 +2358,11 @@ QUnit.test( 'compareElements and compareElementsUnannotated', function ( assert 
 			cases[ i ].comparisonUnannotated || cases[ i ].comparison,
 			cases[ i ].msg + ' (unannotated)'
 		);
+		assert.strictEqual(
+			ve.dm.Transaction.static.compareElementsUnannotatedSimple( cases[ i ].a, cases[ i ].b ),
+			cases[ i ].comparisonUnannotated || cases[ i ].comparison,
+			cases[ i ].msg + ' (unannotatedSimple)'
+		);
 	}
 } );
 

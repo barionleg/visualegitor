@@ -113,7 +113,52 @@ ve.dm.Transaction.static.deserialize = function ( data ) {
 			data.a
 		);
 	}
+};
 
+/**
+ * Simpified comparison of linear data elements
+ *
+ * Identical to ve.dm.ElementLinearData.static.compareElementsUnannotated, but without
+ * the complex comparison of node elements that requires the model registry.
+ *
+ * For the purposes of translateOffset it is just sufficient that we catch obvious
+ * cases of annotations being set/clear.
+ *
+ * @param {Object|Array|string} a First element
+ * @param {Object|Array|string} b Second element
+ * @return {boolean} Elements are comparable
+ */
+ve.dm.Transaction.static.compareElementsUnannotatedSimple = function ( a, b ) {
+	var aPlain = a,
+		bPlain = b;
+
+	if ( Array.isArray( a ) ) {
+		aPlain = a[ 0 ];
+	}
+	if ( Array.isArray( b ) ) {
+		bPlain = b[ 0 ];
+	}
+	if ( typeof aPlain === 'string' && typeof bPlain === 'string' ) {
+		return aPlain === bPlain;
+	}
+
+	if ( typeof a !== typeof b ) {
+		// Different types
+		return false;
+	}
+
+	// By this point, both must be objects, so must have equal types
+	if ( a.type !== b.type ) {
+		return false;
+	}
+
+	if ( ve.dm.LinearData.static.isOpenElementData( a ) ) {
+		// Not ve.comapre
+		return ve.compare( aPlain, bPlain );
+	} else {
+		// Both objects are close elements, no need to compare attributes
+		return true;
+	}
 };
 
 /* Methods */
@@ -366,7 +411,7 @@ ve.dm.Transaction.prototype.translateOffset = function ( offset, excludeInsertio
 			op.insert.length === op.remove.length &&
 			// eslint-disable-next-line no-loop-func
 			op.insert.every( function ( insert, j ) {
-				return ve.dm.ElementLinearData.static.compareElementsUnannotated( insert, op.remove[ j ] );
+				return ve.dm.Transaction.static.compareElementsUnannotatedSimple( insert, op.remove[ j ] );
 			} )
 
 		) ) {
