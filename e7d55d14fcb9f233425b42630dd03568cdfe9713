@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba637516_e4f4b357",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2021-05-23T05:06:25Z",
+      "side": 1,
+      "message": "This doesn\u0027t quite work because open elements contain an .annotations property.\n\nI\u0027ve replaced it with a check on .attributes. But if we think even that will create spurious differences, maybe we could even just compare on .type?\n\nIn the relatively rare case that someone replaces an element with another element of the same type, in exactly the same location, there\u0027s no particular reason we\u0027d care much if translateOffset doesn\u0027t notice the change and doesn\u0027t move the offset.",
+      "revId": "e7d55d14fcb9f233425b42630dd03568cdfe9713",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
