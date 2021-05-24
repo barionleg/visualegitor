@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "33fdec66_449fc46d",
+        "filename": "src/dm/ve.dm.SurfaceFragment.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2021-05-24T20:09:50Z",
+      "side": 0,
+      "message": "This change looks suspicious, but the value was not actually used.",
+      "revId": "5866b762f41fc252e5fc08976778e02317a5074b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
