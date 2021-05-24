@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a88a79d_87f80dba",
+        "filename": "src/ce/nodes/ve.ce.GeneratedContentNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2021-05-24T20:21:48Z",
+      "side": 1,
+      "message": "I dislike this style (where one variable is on the same line as `var`, and others are indented below), but I don\u0027t actually care enough to amend this patch.",
+      "revId": "1d80e69e6713d2097f45648e7db1704a90eb0ac5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
