@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3c4143fd_5269ca30",
+        "filename": "src/ve.Document.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 553,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2021-05-26T21:37:03Z",
+      "side": 0,
+      "message": "Looks sus, however, firstCoveredSibling was unused.",
+      "range": {
+        "startLine": 551,
+        "startChar": 0,
+        "endLine": 553,
+        "endChar": 36
+      },
+      "revId": "bc819fdc63d86d2f5ad161c992c7352f2a41fb74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
