@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "55423531_67126165",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 3290,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2021-05-31T06:50:10Z",
+      "side": 1,
+      "message": "I don\u0027t really understand what \"internal\" means in this context. How is being out of bounds \"internal\"? Maybe you want to remove this comment? I think this exception can\u0027t happen any more after the change.",
+      "range": {
+        "startLine": 3290,
+        "startChar": 3,
+        "endLine": 3290,
+        "endChar": 51
+      },
+      "revId": "bc819fdc63d86d2f5ad161c992c7352f2a41fb74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
