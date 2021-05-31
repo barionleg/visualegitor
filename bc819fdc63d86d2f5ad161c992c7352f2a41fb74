@@ -22,6 +22,30 @@
       "revId": "bc819fdc63d86d2f5ad161c992c7352f2a41fb74",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eecf5527_b67c627e",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 3290,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2021-05-31T19:11:44Z",
+      "side": 1,
+      "message": "The \"internal list\" is a node at the end of the document that contains (in theory) any content that is not attached to any place in the document, or (in practice) the contents of references.\n\nYou\u0027re right that the exception can\u0027t happen though, I tested by running this snippet:\n\n    r \u003d ve.init.target.surface.model.documentModel.getInternalList().getListNode().getRange();\n    rr \u003d new ve.Range( r.start );\n    ve.init.target.surface.view.findBlockSlug( rr );",
+      "parentUuid": "55423531_67126165",
+      "range": {
+        "startLine": 3290,
+        "startChar": 3,
+        "endLine": 3290,
+        "endChar": 51
+      },
+      "revId": "bc819fdc63d86d2f5ad161c992c7352f2a41fb74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
     }
   ]
 }
