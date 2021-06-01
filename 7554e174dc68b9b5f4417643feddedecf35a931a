@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2381f681_c612b104",
+        "filename": "build/modules.json",
+        "patchSetId": 7
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2021-06-01T11:49:20Z",
+      "side": 1,
+      "message": "Declared here.",
+      "range": {
+        "startLine": 123,
+        "startChar": 2,
+        "endLine": 123,
+        "endChar": 11
+      },
+      "revId": "7554e174dc68b9b5f4417643feddedecf35a931a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eea9a49d_3ab980eb",
+        "filename": "build/modules.json",
+        "patchSetId": 7
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2021-06-01T11:49:20Z",
+      "side": 1,
+      "message": "Used in the visualEditor.base.build module here. But not in the rebaser.build module below.",
+      "range": {
+        "startLine": 257,
+        "startChar": 4,
+        "endLine": 257,
+        "endChar": 13
+      },
+      "revId": "7554e174dc68b9b5f4417643feddedecf35a931a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f60a413a_a4cd13ce",
+        "filename": "build/modules.json",
+        "patchSetId": 7
+      },
+      "lineNbr": 1162,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2021-06-01T11:49:20Z",
+      "side": 1,
+      "message": "All 3 new files and a lot of the existing ones are part of the visualEditor.core.model module. It might be better to just add the entire module as a dependency instead.\n\nsrc/ve.Range.js is part of the visualEditor.core.root module. These module names and the files they contain sound like we should use them as they are and not pull in files one by one.\n\nSuggestion:\n\n\t\"rebaser.build\": {\n\t\t\"scripts\": [\n\t\t\t\"rebaser/src/dm/ve.dm.RebaseDocState.js\",\n\t\t\t\"rebaser/src/dm/ve.dm.RebaseServer.js\",\n\t\t\t\"rebaser/src/dm/ve.dm.DocumentStore.js\",\n\t\t\t\"rebaser/src/dm/ve.dm.ProtocolServer.js\",\n\t\t\t\"rebaser/src/dm/ve.dm.TransportServer.js\"\n\t\t],\n\t\t\"dependencies\": [\n\t\t\t\"visualEditor.core.root\",\n\t\t\t\"visualEditor.core.model\",\n\t\t\t\"oojs.noJQuery\",\n\t\t\t\"unicodejs\"\n\t\t]\n\t},",
+      "revId": "7554e174dc68b9b5f4417643feddedecf35a931a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9815622e_46380f26",
+        "filename": "lib/unicodejs/unicodejs.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2021-06-01T11:49:20Z",
+      "side": 1,
+      "message": "Note: This is an upstream library (that\u0027s why it\u0027s in the lib folder). This mirrors the upstream patch from I223f2d2.",
+      "revId": "7554e174dc68b9b5f4417643feddedecf35a931a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
