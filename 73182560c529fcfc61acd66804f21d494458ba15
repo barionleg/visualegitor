@@ -16,6 +16,24 @@
       "revId": "73182560c529fcfc61acd66804f21d494458ba15",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e2137282_3f243cac",
+        "filename": "src/dm/ve.dm.Transaction.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2021-06-03T15:48:09Z",
+      "side": 1,
+      "message": "Hmmm interesting point ... I think the case we most want to optimise is normal typing, in which case a and b will almost always be strings, so we should probably leave this check here.",
+      "parentUuid": "4e56a8f3_883fb013",
+      "revId": "73182560c529fcfc61acd66804f21d494458ba15",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
