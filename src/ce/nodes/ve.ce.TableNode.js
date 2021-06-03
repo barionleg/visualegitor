@@ -102,6 +102,11 @@ ve.ce.TableNode.prototype.onSetup = function () {
 ve.ce.TableNode.prototype.onTeardown = function () {
 	// Parent method
 	ve.ce.TableNode.super.prototype.onTeardown.call( this );
+
+	if ( !this.isSetup ) {
+		return;
+	}
+
 	// Events
 	this.$element.off( '.ve-ce-tableNode' );
 	this.$overlay.off( '.ve-ce-tableNode' );
