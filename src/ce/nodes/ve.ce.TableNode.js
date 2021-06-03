@@ -25,6 +25,7 @@ ve.ce.TableNode = function VeCeTableNode() {
 	// Stores the original table selection as
 	// a fragment when entering cell edit mode
 	this.editingFragment = null;
+	this.$overlay = $( '<div>' );
 
 	// DOM changes
 	this.$element
@@ -62,7 +63,7 @@ ve.ce.TableNode.prototype.onSetup = function () {
 	this.colContext = new ve.ui.TableLineContext( this, 'col' );
 	this.rowContext = new ve.ui.TableLineContext( this, 'row' );
 
-	this.$overlay = $( '<div>' )
+	this.$overlay
 		.addClass( 've-ce-tableNodeOverlay oo-ui-element-hidden' )
 		.append( [
 			this.$selectionBox,
