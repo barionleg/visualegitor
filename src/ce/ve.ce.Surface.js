@@ -237,6 +237,7 @@ ve.ce.Surface = function VeCeSurface( model, ui, config ) {
 	this.$element.append( this.$attachedRootNode, this.$pasteTarget );
 	this.surface.$blockers.append( this.$highlights );
 	this.surface.$selections.append( this.$deactivatedSelection );
+	this.destroy();
 };
 
 /* Inheritance */
