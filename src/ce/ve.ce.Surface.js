@@ -12,7 +12,7 @@
  * @mixins OO.EventEmitter
  *
  * @constructor
- * @param {ve.dm.Surface} model Surface model to observe
+ * @param {ve.dm.Surface} model Surface modeld to observe
  * @param {ve.ui.Surface} ui Surface user interface
  * @param {Object} [config] Configuration options
  */
