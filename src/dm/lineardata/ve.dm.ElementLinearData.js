@@ -413,8 +413,8 @@ ve.dm.ElementLinearData.prototype.isContentData = function () {
 /**
  * Check if an annotation can be applied at a specific offset
  *
- * @param {number} offset Offset
- * @param {ve.dm.Annotation} annotation Annotation
+ * @param {number} offset
+ * @param {ve.dm.Annotation} annotation
  * @param {boolean} [ignoreClose] Ignore close elements, otherwise check if their open element is annotatable
  * @return {boolean} Annotation can be applied at this offset
  */
