@@ -8,7 +8,7 @@
  * @class
  * @extends ve.dm.Selection
  * @constructor
- * @param {ve.Range} range Range
+ * @param {ve.Range} range
  */
 ve.dm.LinearSelection = function VeDmLinearSelection( range ) {
 	// Parent constructor

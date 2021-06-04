@@ -168,7 +168,7 @@ ve.ui.DebugBar.prototype.onLogRangeButtonClick = function () {
 /**
  * Handle change events on the show model toggle
  *
- * @param {boolean} value Value
+ * @param {boolean} value
  */
 ve.ui.DebugBar.prototype.onShowModelToggleChange = function ( value ) {
 	if ( value ) {
@@ -273,7 +273,7 @@ ve.ui.DebugBar.prototype.generateListFromLinearData = function ( linearData ) {
 /**
  * Generate an ordered list describing a node
  *
- * @param {ve.Node} node Node
+ * @param {ve.Node} node
  * @return {jQuery} Ordered list
  */
 ve.ui.DebugBar.prototype.generateListFromNode = function ( node ) {
@@ -305,7 +305,7 @@ ve.ui.DebugBar.prototype.generateListFromNode = function ( node ) {
 /**
  * Handle change events on the update model toggle button
  *
- * @param {boolean} value Value
+ * @param {boolean} value
  */
 ve.ui.DebugBar.prototype.onUpdateModelToggleChange = function ( value ) {
 	if ( value ) {
@@ -319,7 +319,7 @@ ve.ui.DebugBar.prototype.onUpdateModelToggleChange = function ( value ) {
 /**
  * Handle click events on the input debugging toggle button
  *
- * @param {boolean} value Value
+ * @param {boolean} value
  */
 ve.ui.DebugBar.prototype.onInputDebuggingToggleChange = function ( value ) {
 	var surfaceModel = this.getSurface().getModel(),
@@ -382,7 +382,7 @@ ve.ui.DebugBar.prototype.onFilibusterToggleClick = function () {
 /**
  * Handle click events on the filibuster toggle button
  *
- * @param {boolean} value Value
+ * @param {boolean} value
  */
 ve.ui.DebugBar.prototype.onTransactionsToggleChange = function ( value ) {
 	if ( value ) {
@@ -394,7 +394,7 @@ ve.ui.DebugBar.prototype.onTransactionsToggleChange = function ( value ) {
 /**
  * Handle click events on the test squasher toggle button
  *
- * @param {boolean} value Value
+ * @param {boolean} value
  */
 ve.ui.DebugBar.prototype.onTestSquasherToggleChange = function ( value ) {
 	var doc = this.getSurface().getModel().getDocument();

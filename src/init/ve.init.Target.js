@@ -577,7 +577,7 @@ ve.init.Target.prototype.onSurfaceViewFocus = function ( surface ) {
 /**
  * Set the target's active surface
  *
- * @param {ve.ui.Surface} surface Surface
+ * @param {ve.ui.Surface} surface
  */
 ve.init.Target.prototype.setSurface = function ( surface ) {
 	if ( this.surfaces.indexOf( surface ) === -1 ) {
@@ -628,7 +628,7 @@ ve.init.Target.prototype.getActions = function () {
 /**
  * Set up the toolbar, attaching it to a surface.
  *
- * @param {ve.ui.Surface} surface Surface
+ * @param {ve.ui.Surface} surface
  */
 ve.init.Target.prototype.setupToolbar = function ( surface ) {
 	var toolbar = this.getToolbar(),
