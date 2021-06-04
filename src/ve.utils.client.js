@@ -13,7 +13,7 @@ ve.scrollIntoView = OO.ui.Element.static.scrollIntoView.bind( OO.ui.Element.stat
 /**
  * Select the contents of an element
  *
- * @param {HTMLElement} element Element
+ * @param {HTMLElement} element
  */
 ve.selectElement = function ( element ) {
 	var win = OO.ui.Element.static.getWindow( element ),

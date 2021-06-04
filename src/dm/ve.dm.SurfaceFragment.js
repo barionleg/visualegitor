@@ -642,7 +642,7 @@ ve.dm.SurfaceFragment.prototype.clearPending = function () {
 /**
  * Push a promise to the fragment's pending list
  *
- * @param {jQuery.Promise} promise Promise
+ * @param {jQuery.Promise} promise
  */
 ve.dm.SurfaceFragment.prototype.pushPending = function ( promise ) {
 	this.pending.push( promise );

@@ -332,7 +332,7 @@ ve.dm.Model.static.getAttributeDiff = function ( oldText, newText, allowRemoveIn
  * Utility function for wrapping text in a tag, equivalent to `$( '<tag>' ).text( text )`
  *
  * @param {string} tag Wrapping element's tag
- * @param {string} text Text
+ * @param {string} text
  * @return {HTMLElement} Element wrapping text
  */
 ve.dm.Model.static.wrapText = function ( tag, text ) {

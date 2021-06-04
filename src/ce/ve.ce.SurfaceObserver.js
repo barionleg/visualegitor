@@ -156,7 +156,7 @@ ve.ce.SurfaceObserver.prototype.pollOnceInternal = function ( signalChanges, sel
 /**
  * Wrapper for setTimeout, for ease of debugging
  *
- * @param {Function} callback Callback
+ * @param {Function} callback
  * @param {number} timeout Timeout ms
  * @return {number} Timeout ID
  */
