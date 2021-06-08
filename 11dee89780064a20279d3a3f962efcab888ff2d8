@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8edd713d_dccd1acc",
+        "filename": "src/ce/nodes/ve.ce.TableNode.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2021-06-08T19:47:11Z",
+      "side": 1,
+      "message": "This property is never set?",
+      "revId": "11dee89780064a20279d3a3f962efcab888ff2d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
