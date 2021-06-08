@@ -91,7 +91,7 @@ ve.ui.CommandHelpDialog.prototype.initialize = function () {
 		$list, $shortcut, groupName, commandGroup, commandGroups, commandGroupsOrder, sequence, hasCommand, hasShortcut,
 		surface = ve.init.target.getSurface(),
 		sequenceRegistry = surface.sequenceRegistry,
-		commandRegistry = surface.commandRegistry;
+		surfaceCommands = surface.getCommands();
 
 	// Parent method
 	ve.ui.CommandHelpDialog.super.prototype.initialize.call( this );
@@ -114,7 +114,7 @@ ve.ui.CommandHelpDialog.prototype.initialize = function () {
 		$list = $( '<dl>' ).addClass( 've-ui-commandHelpDialog-list' );
 		for ( j = 0, jLen = commands.length; j < jLen; j++ ) {
 			if ( commands[ j ].trigger ) {
-				if ( !commands[ j ].ignoreCommand && !commandRegistry.lookup( commands[ j ].trigger ) ) {
+				if ( !commands[ j ].ignoreCommand && surfaceCommands.indexOf( commands[ j ].trigger ) === -1 ) {
 					// Trigger is specified by unavailable command
 					continue;
 				}
@@ -122,6 +122,10 @@ ve.ui.CommandHelpDialog.prototype.initialize = function () {
 			} else {
 				triggerList = [];
 				if ( commands[ j ].shortcuts ) {
+					if ( commands[ j ].checkCommand && surfaceCommands.indexOf( commands[ j ].checkCommand ) === -1 ) {
+						// 'checkCommand' is not available
+						continue;
+					}
 					for ( k = 0, kLen = commands[ j ].shortcuts.length; k < kLen; k++ ) {
 						shortcut = commands[ j ].shortcuts[ k ];
 						triggerList.push(
