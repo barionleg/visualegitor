@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1118db49_af1b4dd0",
+        "filename": "src/dm/ve.dm.Change.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 806,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2021-06-14T12:58:42Z",
+      "side": 1,
+      "message": "Suspicious but fine, it\u0027s the same object",
+      "range": {
+        "startLine": 806,
+        "startChar": 2,
+        "endLine": 806,
+        "endChar": 5
+      },
+      "revId": "6b37c819f49c2854124d41c987c0939152705059",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": true
+    }
+  ]
+}
