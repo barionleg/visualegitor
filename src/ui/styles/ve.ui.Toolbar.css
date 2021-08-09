@@ -15,6 +15,11 @@
 	z-index: 2;
 }
 
+.ve-ui-toolbar.ve-ui-toolbar-empty > .oo-ui-toolbar-bar  {
+	border: 0;
+	box-shadow: none;
+}
+
 /* PositionedTargetToolbar */
 
 .ve-ui-toolbar-floating > .oo-ui-toolbar-bar {
