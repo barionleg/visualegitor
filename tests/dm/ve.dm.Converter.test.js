@@ -40,19 +40,35 @@ QUnit.test( 'getFullData', function ( assert ) {
 	var cases = [
 		{
 			msg: 'Metadata in ContentBranchNode gets moved outside by any change',
-			beforeHtml: '<!-- w --><meta foo="x"><p>ab<meta foo="y">cd</p><p>ef<meta foo="z">gh</p>',
+			beforeHtml: '<p>x</p><!-- w --><meta foo="x"><p>ab<meta foo="y">cd</p><p>ef<meta foo="z">gh</p>',
 			transaction: function ( doc ) {
-				return ve.dm.TransactionBuilder.static.newFromRemoval( doc, new ve.Range( 10, 11 ) );
+				return ve.dm.TransactionBuilder.static.newFromRemoval( doc, new ve.Range( 13, 14 ) );
 			},
-			afterHtml: '<!-- w --><meta foo="x"><p>abc</p><meta foo="y"><p>ef<meta foo="z">gh</p>'
+			afterHtml: '<p>x</p><!-- w --><meta foo="x"><p>abc</p><meta foo="y"><p>ef<meta foo="z">gh</p>'
+		},
+		{
+			msg: 'Metadata in ContentBranchNode is NOT removed when the whole node is removed',
+			beforeHtml: '<p>x</p><!-- w --><meta foo="x"><p>ab<meta foo="y">cd</p><p>ef<meta foo="z">gh</p>',
+			transaction: function ( doc ) {
+				return ve.dm.TransactionBuilder.static.newFromRemoval( doc, new ve.Range( 7, 15 ) );
+			},
+			afterHtml: '<p>x</p><!-- w --><meta foo="x"><meta foo="y"><p>ef<meta foo="z">gh</p>'
 		},
 		{
 			msg: 'Removable metadata (empty annotation) in ContentBranchNode is removed by any change',
-			beforeHtml: '<p>ab<i></i>cd</p><p>efgh</p>',
+			beforeHtml: '<p>x</p><p>ab<i></i>cd</p><p>efgh</p>',
 			transaction: function ( doc ) {
-				return ve.dm.TransactionBuilder.static.newFromRemoval( doc, new ve.Range( 4, 5 ) );
+				return ve.dm.TransactionBuilder.static.newFromRemoval( doc, new ve.Range( 7, 8 ) );
 			},
-			afterHtml: '<p>abc</p><p>efgh</p>'
+			afterHtml: '<p>x</p><p>abc</p><p>efgh</p>'
+		},
+		{
+			msg: 'Removable metadata (empty annotation) in ContentBranchNode is removed when the whole node is removed',
+			beforeHtml: '<p>x</p><p>ab<i></i>cd</p><p>efgh</p>',
+			transaction: function ( doc ) {
+				return ve.dm.TransactionBuilder.static.newFromRemoval( doc, new ve.Range( 3, 9 ) );
+			},
+			afterHtml: '<p>x</p><p>efgh</p>'
 		}
 	];
 
