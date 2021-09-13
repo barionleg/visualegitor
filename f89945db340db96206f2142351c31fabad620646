@@ -16,6 +16,24 @@
       "message": "As I\u0027m not fully familiar with this codebase, I was solely focussing on the `src` directory, but would appreciate guidance on working dist output.",
       "revId": "f89945db340db96206f2142351c31fabad620646",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7676336_ea5f3c18",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2021-09-13T16:08:40Z",
+      "side": 1,
+      "message": "That\u0027s fine, it\u0027s built automatically.",
+      "parentUuid": "dc11f656_c0d34c6f",
+      "revId": "f89945db340db96206f2142351c31fabad620646",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
