@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc11f656_c0d34c6f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2604
+      },
+      "writtenOn": "2021-09-13T15:41:01Z",
+      "side": 1,
+      "message": "As I\u0027m not fully familiar with this codebase, I was solely focussing on the `src` directory, but would appreciate guidance on working dist output.",
+      "revId": "f89945db340db96206f2142351c31fabad620646",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
