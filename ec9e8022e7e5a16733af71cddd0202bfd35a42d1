@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7cbbdfb_ea4e3655",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2021-09-14T21:54:19Z",
+      "side": 1,
+      "message": "Gerrit insisted that there\u0027s a merge conflict.",
+      "revId": "ec9e8022e7e5a16733af71cddd0202bfd35a42d1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
