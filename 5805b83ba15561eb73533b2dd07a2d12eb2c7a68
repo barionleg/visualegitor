@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ce720ee_d7e0b3f4",
+        "filename": "Gruntfile.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2021-10-07T14:56:09Z",
+      "side": 1,
+      "message": "Much nicer!",
+      "range": {
+        "startLine": 20,
+        "startChar": 1,
+        "endLine": 20,
+        "endChar": 77
+      },
+      "revId": "5805b83ba15561eb73533b2dd07a2d12eb2c7a68",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
