@@ -686,7 +686,7 @@ ve.ce.Surface.prototype.onFocusChange = function () {
 	);
 
 	if ( this.deactivated ) {
-		if ( OO.ui.contains( this.$attachedRootNode[ 0 ], this.nativeSelection.anchorNode, true ) ) {
+		if ( !this.deactivating && OO.ui.contains( this.$attachedRootNode[ 0 ], this.nativeSelection.anchorNode, true ) ) {
 			this.onDocumentFocus();
 		}
 	} else {
@@ -732,6 +732,7 @@ ve.ce.Surface.prototype.isShownAsDeactivated = function () {
  * @fires activation
  */
 ve.ce.Surface.prototype.deactivate = function ( showAsActivated, noSelectionChange, hideSelection ) {
+	var surface = this;
 	this.showAsActivated = showAsActivated === undefined || !!showAsActivated;
 	this.hideSelection = hideSelection;
 	if ( !this.deactivated ) {
@@ -750,6 +751,12 @@ ve.ce.Surface.prototype.deactivate = function ( showAsActivated, noSelectionChan
 		this.updateDeactivatedSelection();
 		this.clearKeyDownState();
 		this.emit( 'activation' );
+		// iOS Safari will not remove the native selection immediately, so prevent
+		// onFocusChange from immediately re-focusing the document (T293661)
+		this.deactivating = true;
+		setTimeout( function () {
+			surface.deactivating = false;
+		}, 100 );
 	}
 };
 
