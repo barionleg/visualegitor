@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0edb73b9_230555f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2021-10-19T00:50:42Z",
+      "side": 1,
+      "message": "I\u0027m investigating whether we can avoid the 100ms setTimeout.",
+      "revId": "2c9bfb0ed40c0ff67bdc7dbee484612c6f8cd8a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abf6350a_f1ad4833",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 759,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2021-10-19T00:50:42Z",
+      "side": 1,
+      "message": "I\u0027m guessing the 100 ms is here for a reason? I\u0027d prefer it if we could find a way to use an EventSequencer after-listener, to avoid the risk of hard-to-reproduce bugs. Investigating.",
+      "revId": "2c9bfb0ed40c0ff67bdc7dbee484612c6f8cd8a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
