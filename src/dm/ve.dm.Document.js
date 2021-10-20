@@ -1142,8 +1142,8 @@ ve.dm.Document.prototype.rebuildTree = function () {
 		documentNode,
 		0,
 		documentNode.getChildren().length,
-		0,
-		this.data.getLength()
+		documentNode.getOffset(),
+		documentNode.getLength()
 	);
 };
 
