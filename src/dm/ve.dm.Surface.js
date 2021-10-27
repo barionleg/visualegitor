@@ -896,16 +896,16 @@ ve.dm.Surface.prototype.setSelection = function ( selection ) {
 };
 
 /**
- * Place the selection at the first content offset in the document.
+ * Place the selection at a content offset near the provided offset
+ *
+ * @param {number} offset Offset to start from
+ * @param {number} [direction] Direction to prefer matching offset in, -1 for left and 1 for right
  */
-ve.dm.Surface.prototype.selectFirstContentOffset = function () {
-	var firstOffset = this.getDocument().data.getNearestContentOffset(
-		this.getAttachedRoot().getOffset(),
-		1
-	);
-	if ( firstOffset !== -1 ) {
+ve.dm.Surface.prototype.selectNearestContentOffset = function ( offset, direction ) {
+	var contentOffset = this.getDocument().data.getNearestContentOffset( offset, direction );
+	if ( contentOffset !== -1 ) {
 		// Found a content offset
-		this.setLinearSelection( new ve.Range( firstOffset ) );
+		this.setLinearSelection( new ve.Range( contentOffset ) );
 	} else {
 		// Document is full of structural nodes, just give up
 		this.setNullSelection();
@@ -913,20 +913,23 @@ ve.dm.Surface.prototype.selectFirstContentOffset = function () {
 };
 
 /**
+ * Place the selection at the first content offset in the document.
+ */
+ve.dm.Surface.prototype.selectFirstContentOffset = function () {
+	return this.selectNearestContentOffset(
+		this.getAttachedRoot().getOffset(),
+		1
+	);
+};
+
+/**
  * Place the selection at the last content offset in the document.
  */
 ve.dm.Surface.prototype.selectLastContentOffset = function () {
-	var data = this.getDocument().data,
-		documentRange = this.getDocument().getDocumentRange(),
-		lastOffset = data.getNearestContentOffset( documentRange.end, -1 );
-
-	if ( lastOffset !== -1 ) {
-		// Found a content offset
-		this.setLinearSelection( new ve.Range( lastOffset ) );
-	} else {
-		// Document is full of structural nodes, just give up
-		this.setNullSelection();
-	}
+	return this.selectNearestContentOffset(
+		this.getDocument().getDocumentRange().end,
+		-1
+	);
 };
 
 /**
