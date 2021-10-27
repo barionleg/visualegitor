@@ -574,11 +574,7 @@ ve.ce.Surface.prototype.focus = function () {
 		return;
 	}
 
-	var selection = this.getSelection();
-	if ( selection.getModel().isNull() ) {
-		this.getModel().selectFirstContentOffset();
-		selection = this.getSelection();
-	}
+	var selection = this.selectFirstVisibleOffset( true );
 
 	// Focus the contentEditable for text selections, or the pasteTarget for focusedNode selections
 	if ( selection.isFocusedNode() ) {
@@ -609,7 +605,7 @@ ve.ce.Surface.prototype.focus = function () {
 		// TODO: rename isFocused and other methods to something which reflects
 		// the fact they actually mean "has a native selection"
 		if ( !surface.isFocused() ) {
-			surface.getModel().selectFirstContentOffset();
+			surface.selectFirstVisibleOffset( true );
 		}
 	} );
 	// onDocumentFocus takes care of the rest
@@ -4185,6 +4181,30 @@ ve.ce.Surface.prototype.getViewportRange = function () {
 		binarySearch( top, documentRange, 'bottom' ),
 		binarySearch( bottom, documentRange, 'top' )
 	);
+};
+
+/**
+ * Move the selection to the first visible point in the viewport
+ *
+ * @param {boolean} [fallbackToFirst] Whether to select the first content offset if a visible offset can't be found
+ * @return {ve.ce.Selection} The new selection
+ */
+ve.ce.Surface.prototype.selectFirstVisibleOffset = function ( fallbackToFirst ) {
+	var selection = this.getSelection();
+	if ( selection.getModel().isNull() ) {
+		var visibleRange = this.getViewportRange();
+		if ( visibleRange ) {
+			this.getModel().selectNearestContentOffset( visibleRange.start, 1 );
+		}
+		selection = this.getSelection();
+	}
+	if ( fallbackToFirst && selection.getModel().isNull() ) {
+		// if a visible range couldn't be determined, or a selection couldn't
+		// be made for some reason, fall back to the actual first content offset.
+		this.getModel().selectFirstContentOffset();
+		selection = this.getSelection();
+	}
+	return selection;
 };
 
 /**
