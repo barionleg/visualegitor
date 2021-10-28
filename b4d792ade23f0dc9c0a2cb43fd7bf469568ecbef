@@ -16,6 +16,23 @@
       "message": "Am going to play around with this patch on Friday.",
       "revId": "b4d792ade23f0dc9c0a2cb43fd7bf469568ecbef",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c354169f_1600b612",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2021-10-28T17:29:21Z",
+      "side": 1,
+      "message": "I implemented getViewportRange to let findAndReplace know which content is visible, so the bounding box of the range should (in theory) completely cover the viewport. So if a line is half scrolled off the page, it is included in the range.\n\nFor this purpose we probably want to exclude things at the boundary, so that we choose an offset that is fully within the viewport (and don\u0027t trigger any extra scrolling). The toolbar will also need to be taken into account.\n\nWe could add a mode\u003d[\u0027cover\u0027|\u0027contain\u0027] parameter for this.\n\n(All of the above assumes I implemented this correctly in the first place :) )",
+      "revId": "b4d792ade23f0dc9c0a2cb43fd7bf469568ecbef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
