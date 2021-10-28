@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "488c212a_0c1d63b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2021-10-28T20:38:31Z",
+      "side": 1,
+      "message": "Fixes T294394, doesn\u0027t regress T293661",
+      "revId": "cdfeef3197f40600e59737f2d265c3187590b3d1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
