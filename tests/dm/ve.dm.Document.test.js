@@ -95,7 +95,7 @@ QUnit.test( 'newBlankDocument', function ( assert ) {
 
 	doc = ve.dm.Document.static.newBlankDocument();
 
-	assert.ok( doc instanceof ve.dm.Document, 'newBlankDocument creates a document' );
+	assert.true( doc instanceof ve.dm.Document, 'newBlankDocument creates a document' );
 	assert.strictEqual( doc.data.data[ 0 ].internal.generated, 'empty', 'Creates an "empty" paragraph with no args' );
 
 	doc = ve.dm.Document.static.newBlankDocument( 'wrapper' );

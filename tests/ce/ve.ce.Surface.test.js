@@ -2374,7 +2374,7 @@ QUnit.test( 'findBlockSlug', function ( assert ) {
 	for ( i = 0; i <= len; i++ ) {
 		ret = view.findBlockSlug( new ve.Range( i ) );
 		if ( slugOffsets[ i ] ) {
-			assert.ok( ret, 'Block slug found at offset ' + i );
+			assert.true( ret instanceof HTMLElement, 'Block slug found at offset ' + i );
 		} else {
 			assert.strictEqual( ret, null, 'No block slug found at offset ' + i );
 		}

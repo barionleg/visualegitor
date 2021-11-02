@@ -44,7 +44,7 @@ QUnit.test( 'Create', function ( assert ) {
 		}, true ) ).then( function () {
 			assert.notOk( true, 'Throw on unmached start' );
 		} ).catch( function () {
-			assert.ok( true, 'Throw on unmatched start' );
+			assert.true( true, 'Throw on unmatched start' );
 		} );
 	} ).then( function () {
 		return documentStore.load( 'Foo' );
