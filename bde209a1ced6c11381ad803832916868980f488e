@@ -33,6 +33,24 @@
       "message": "It might be possible to further optimize the runtime of this code, e.g. by moving the new identity check down here, or by swapping the two checks in line #67 and #71. But this depends on the real-world data that typically ends here, e.g. what the chance of the input being `….compareElementsUnannotated( [ sameObject ], sameObject )` is, or how often both are strings.\n\nI don\u0027t know if this is worth investing time in. Just a suggestion.",
       "revId": "bde209a1ced6c11381ad803832916868980f488e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55e567e8_944495ad",
+        "filename": "src/dm/lineardata/ve.dm.ElementLinearData.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2021-11-05T13:38:34Z",
+      "side": 1,
+      "message": "I think a strict equality check is so fast it won\u0027t make a appreciable difference.",
+      "parentUuid": "a30b566b_5e6fcee8",
+      "revId": "bde209a1ced6c11381ad803832916868980f488e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
