@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e2494dc_6b35c92b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2021-11-05T11:51:28Z",
+      "side": 1,
+      "message": "Nice, thanks! I would +2 this right away but don\u0027t have the right to do so in this codebase.",
+      "revId": "bde209a1ced6c11381ad803832916868980f488e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a30b566b_5e6fcee8",
+        "filename": "src/dm/lineardata/ve.dm.ElementLinearData.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2021-11-05T11:51:28Z",
+      "side": 1,
+      "message": "It might be possible to further optimize the runtime of this code, e.g. by moving the new identity check down here, or by swapping the two checks in line #67 and #71. But this depends on the real-world data that typically ends here, e.g. what the chance of the input being `….compareElementsUnannotated( [ sameObject ], sameObject )` is, or how often both are strings.\n\nI don\u0027t know if this is worth investing time in. Just a suggestion.",
+      "revId": "bde209a1ced6c11381ad803832916868980f488e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
