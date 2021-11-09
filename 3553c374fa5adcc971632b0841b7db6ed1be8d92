@@ -16,6 +16,23 @@
       "message": "I\u0027m okay with this, but it\u0027s not exactly a pretty way to do it… What do you think about more directly attaching the executeAction() method to the TargetWidget \u0027submit\u0027 event? \n\ne.g. in ve.ui.MWMediaDialog, replace:\n\n\tthis.captionTarget.connect( this, { change: \u0027checkChanged\u0027 } );\n\nwith:\n\n\tthis.captionTarget.connect( this, {\n\t\tchange: \u0027checkChanged\u0027,\n\t\tsubmit: [ \u0027executeAction\u0027, \u0027done\u0027 ]\n\t} );\n\nSimilar patches would have to be made everywhere that we use a TargetWidget, but there are only a few of those.",
       "revId": "3553c374fa5adcc971632b0841b7db6ed1be8d92",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8df01017_b52dafc8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2021-11-09T22:16:58Z",
+      "side": 1,
+      "message": "There\u0027s one more approach I just thought of – OOjs #emit method returns true if there was a listener that handled the event, and false otherwise. We could use that to decide whether to call #stopPropagation or not, and when it\u0027s not called, the DOM event would bubble up and be handled normally by OO.ui.Dialog.\n\nThe only problem is that we\u0027re \"forwarding\" the \u0027submit\u0027 event from ve.ui.Surface to ve.ui.TargetWidget, and so the event in Surface always has a listener. We\u0027d have to forward it in some other way (e.g. maybe override ve.ui.TargetWidget#on to call ve.ui.Surface#on, instead of having a real event; or some specific support for this use case in OOjs).",
+      "revId": "3553c374fa5adcc971632b0841b7db6ed1be8d92",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
