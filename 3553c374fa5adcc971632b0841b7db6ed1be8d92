@@ -33,6 +33,42 @@
       "message": "There\u0027s one more approach I just thought of – OOjs #emit method returns true if there was a listener that handled the event, and false otherwise. We could use that to decide whether to call #stopPropagation or not, and when it\u0027s not called, the DOM event would bubble up and be handled normally by OO.ui.Dialog.\n\nThe only problem is that we\u0027re \"forwarding\" the \u0027submit\u0027 event from ve.ui.Surface to ve.ui.TargetWidget, and so the event in Surface always has a listener. We\u0027d have to forward it in some other way (e.g. maybe override ve.ui.TargetWidget#on to call ve.ui.Surface#on, instead of having a real event; or some specific support for this use case in OOjs).",
       "revId": "3553c374fa5adcc971632b0841b7db6ed1be8d92",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca9944f0_4e333bd7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2021-11-10T16:50:46Z",
+      "side": 1,
+      "message": "I did consider this, but this is the opposite to how every other form input works (e.g. TextInputWidget): no explicit binding is required.",
+      "parentUuid": "be11b9d0_53414821",
+      "revId": "3553c374fa5adcc971632b0841b7db6ed1be8d92",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c21864fd_d46e3bba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2021-11-10T16:50:46Z",
+      "side": 1,
+      "message": "That could help. In practice no one is actually listening to these events, so I\u0027m happy to leave it as TODO for now.",
+      "parentUuid": "8df01017_b52dafc8",
+      "revId": "3553c374fa5adcc971632b0841b7db6ed1be8d92",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
