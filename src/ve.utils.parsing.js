@@ -68,10 +68,16 @@ ve.elementTypes = {
  * @return {HTMLDocument} Document constructed from the HTML string
  */
 ve.createDocumentFromHtml = function ( html ) {
+	// T116525
+	var iosFormatDetectionMeta = '<meta name="format-detection" content="telephone=no"/>';
+
 	if ( html !== '' && html.indexOf( '<body' ) === -1 ) {
 		// When the given HTML fragment starts with a <meta> or <style> element, it is placed in the
 		// automatically generated <head> rather than <body>, and breaks our assumptions. (T273234)
-		html = '<body>' + html + '</body>';
+		html = '<head>' + iosFormatDetectionMeta + '</head>' +
+			'<body>' + html + '</body>';
+	} else if ( html ) {
+		html = html.replace( /<head[^>]+>/, '$&' + iosFormatDetectionMeta );
 	}
 
 	var newDocument = ve.createDocumentFromHtmlUsingDomParser( html );
