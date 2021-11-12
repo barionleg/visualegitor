@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6da26d8e_ab118f6a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2021-11-12T21:59:06Z",
+      "side": 1,
+      "message": "Fixing JSDuck failure (maybe)",
+      "revId": "869889f17ea4f763e74e0b3f84b1cd58ce2a1dcd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
