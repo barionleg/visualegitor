@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92065965_0879d954",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1567
+      },
+      "writtenOn": "2021-11-16T14:24:38Z",
+      "side": 1,
+      "message": "Now I get \"We couldn\u0027t make a citation for you\" and \"load.php?lang\u003den-gb\u0026modules\u003dext.uls.common%2Ccompactlinks%2Cinterface%2Cpreferences%2Cwebfonts|jquery%2Csite|jquery.client%2Ccookie%2CtextSelection|jquery.uls.data|mediawiki.String%2CTitle%2CUri%2Capi%2Cbase%2Ccldr%2Ccookie%2Cexperiments%2CjqueryMsg%2Clanguage%2Cstorage%2Cuser%2Cutil|mediawiki.editfont.styles|mediawiki.libs.pluralruleparser|mediawiki.page.ready|skins.vector.es6%2Cjs|skins.vector.icons.js|user.defaults\u0026skin\u003dvector\u0026version\u003drc28g:79 jQuery.Deferred exception: Cannot read properties of null (reading \u0027insertBefore\u0027) TypeError: Cannot read properties of null (reading \u0027insertBefore\u0027)\" at VeCeParagraphNode.ve.ce.BranchNode.setupSlugs (http://dev.wiki.local.wmftest.net:8080/w/load.php?lang\u003den-gb\u0026modules\u003dext.visualEditor.articleTarget%2Cbase%2Ccore%2CdesktopArticleTarget%2CdesktopTarget%2Cdiffing%2Cicons%2Clanguage%2Cmediawiki%2Cmwalienextension%2Cmwcore%2Cmwextensions%2Cmwformatting%2Cmwgallery%2Cmwimage%2Cmwlanguage%2Cmwlink%2Cmwmeta%2Cmwsave%2Cmwsignature%2Cmwtransclusion%2Csanitize%2Cswitching%2Cwelcome%7Cext.visualEditor.core.desktop%2Cutils%7Cext.visualEditor.mwextensions.desktop%7Cext.visualEditor.mwimage.core\u0026skin\u003dvector\u0026version\u003dyhxrh:455:551) \n\nOn attempting to insert a citation.",
+      "revId": "4721f95b6f338ff71e97cd24a6727b2da89a940e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
