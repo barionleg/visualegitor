@@ -68,6 +68,17 @@ ve.ce.Node.static.removeEmptyLastChildOnEnter = false;
 ve.ce.Node.static.isMultiline = null;
 
 /**
+ * Whether a node can be active (e.g. ve.ce.ActiveNode or ve.ce.TableCellNode)
+ *
+ * Not to be confused with ve.ce.Annotation.static.canBeActive.
+ *
+ * @static
+ * @property {boolean}
+ * @inheritable
+ */
+ve.ce.Node.static.canBeActive = false;
+
+/**
  * Whether a node traps the cursor when active, e.g. in table cells
  *
  * @static
@@ -279,6 +290,15 @@ ve.ce.Node.prototype.isMultiline = function () {
 	} else {
 		return !this.root || this.getRoot().getSurface().getSurface().isMultiline();
 	}
+};
+
+/**
+ * Check if the node can be active
+ *
+ * @return {boolean} Node can be active
+ */
+ve.ce.Node.prototype.canBeActive = function () {
+	return this.constructor.static.canBeActive;
 };
 
 /**
