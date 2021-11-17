@@ -36,6 +36,10 @@ ve.ce.ActiveNode = function VeCeActiveNode() {
 
 OO.mixinClass( ve.ce.ActiveNode, ve.ce.ContentEditableNode );
 
+/* Static Properties */
+
+ve.ce.ActiveNode.static.canBeActive = true;
+
 /* Methods */
 
 /**

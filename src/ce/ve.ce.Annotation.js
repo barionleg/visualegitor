@@ -43,6 +43,8 @@ ve.ce.Annotation.static.tagName = 'span';
 
 /**
  * Annotations which can be active get a ve-ce-annotation-active class when focused.
+ *
+ * Not to be confused with ve.ce.Node.static.canBeActive.
  */
 ve.ce.Annotation.static.canBeActive = false;
 
