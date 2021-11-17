@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c9f7a66_ca2a3098",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2021-11-17T22:43:29Z",
+      "side": 1,
+      "message": "Caused T295403",
+      "revId": "6f310f990c6db40ba6ac5b02f03ce7a40a5aa5ad",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
