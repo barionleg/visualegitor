@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6aef273_c9aca256",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2021-11-19T20:39:47Z",
+      "side": 1,
+      "message": "Test cases: https://phabricator.wikimedia.org/P17781",
+      "revId": "c5636f1b6161738f14a6c41844bc67f2ccc85f58",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
