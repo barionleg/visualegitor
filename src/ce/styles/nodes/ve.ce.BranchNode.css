@@ -117,9 +117,8 @@ pre.ve-ce-branchNode {
 }
 
 /* Emulate the first paragraph in each list item being unwrapped */
-
-/* TODO use CSS class for wrapper paragraph */
+/* TODO This shouldn't be necessary, but the .ve-ce-generated-wrapper CSS class is not consistently
+   applied to these elements (it's missing for newly added ones) */
 li.ve-ce-branchNode p.ve-ce-branchNode:first-child {
 	margin: 0;
-	padding: 0;
 }
