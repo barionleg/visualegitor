@@ -35,6 +35,6 @@
 	visibility: visible;
 }
 
-.ve-ce-tableCellNode .ve-ce-paragraphNode {
+.ve-ce-tableCellNode .ve-ce-paragraphNode.ve-ce-generated-wrapper {
 	margin: 0;
 }
