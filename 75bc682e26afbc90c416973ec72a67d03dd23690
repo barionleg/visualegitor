@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "289fcf78_5b7f26a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2021-11-20T04:37:07Z",
+      "side": 1,
+      "message": "I tested this in Safari 15.1 and it worked.",
+      "revId": "75bc682e26afbc90c416973ec72a67d03dd23690",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
