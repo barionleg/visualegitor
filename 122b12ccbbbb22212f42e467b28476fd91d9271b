@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "966a51ac_62f68d95",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2021-11-29T14:55:04Z",
+      "side": 1,
+      "message": "Is there another commit that uses this?",
+      "revId": "122b12ccbbbb22212f42e467b28476fd91d9271b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
