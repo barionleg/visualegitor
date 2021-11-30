@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e345fcf3_cfd964f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2021-11-30T15:12:11Z",
+      "side": 1,
+      "message": "I would rebase this on Idc0cccbe73d1b49d07b60c14a192a40f47d64608, the refactor you\u0027ve done in the DM is similar to what happens there in CE",
+      "revId": "44cd842daf12e731d7cd1e4bc4147065ff7a6a28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
