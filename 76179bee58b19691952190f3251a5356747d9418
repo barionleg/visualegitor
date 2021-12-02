@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "472bc734_37fc8626",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8461
+      },
+      "writtenOn": "2021-12-02T04:27:30Z",
+      "side": 1,
+      "message": "Something to note by the way as to why I couldn\u0027t have modified mediawiki/extensions/Cite to instead change the InternalList key of the changed reference: a key change never actually propagates to other references, since VisualEditor will find no other references under the new key (since it searches for the *current* key of the reference, not the old one). There\u0027s also no inbuilt way to manually change the literal key of an existing key. That means whenever a reference is modified, it splits the reference as if it were an entirely new one. This leads to duplicate references under different names, which is unacceptable.",
+      "revId": "76179bee58b19691952190f3251a5356747d9418",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
