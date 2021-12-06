@@ -16,6 +16,40 @@
       "message": "Test cases: https://phabricator.wikimedia.org/P17781",
       "revId": "c5636f1b6161738f14a6c41844bc67f2ccc85f58",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b304e585_9be25a72",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2021-12-06T17:13:42Z",
+      "side": 1,
+      "message": "Suggesting a more aggressive change.",
+      "revId": "c5636f1b6161738f14a6c41844bc67f2ccc85f58",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cff71849_ece15ebe",
+        "filename": "src/ce/styles/nodes/ve.ce.TableCellNode.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2021-12-06T17:13:42Z",
+      "side": 1,
+      "message": "Generally speaking, generated wrappers represent paragraphs which will not exist in read mode, so we can reset the margin to 0 on __all__ generated wrappers (maybe use !important, and reset padding too just in case).\n\nThere is also an ancient \"TODO use CSS class for wrapper paragraph\" in ve.ce.BranchNode.css that we should fix in this bug.\n\nThe only time a generated wrapper should have styling is when it will be unwrapped by the converter (e.g. if you modify content such that two wrappers are now adjacent), however that is rare enough for us not to worry about right now.",
+      "revId": "c5636f1b6161738f14a6c41844bc67f2ccc85f58",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
