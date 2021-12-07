@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c96e607c_35560b95",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2021-12-07T01:00:22Z",
+      "side": 1,
+      "message": "I like this, but there are a few scenarios where it fails unacceptably IMO. Hopefully we can fix that.\n\nI wrote the following tiny script for testing the behavior without having to open/close VE every time, just paste into browser console and the cursor position will update as you scroll and will be highlighted in green:\n\n\tmw.util.addCSS( `.ve-ce-surface-deactivatedSelection \u003e div {\n\t\toutline: 3px solid lime;\n\t\toutline-offset: 5px;\n\t}` );\n\twindow.onscroll \u003d function () {\n\t\tve.init.target.surface.view.selectFirstVisibleContentOffset();\n\t\tve.init.target.surface.view.deactivate( true );\n\t}\n\n…and testing with that, I noticed two problems: (video: https://phabricator.wikimedia.org/F34851247)\n\n* In multi-line paragraphs, when the cursor would be placed on the 2nd or later line, it\u0027s placed after the first character of the line instead of before. Worse, this often places it inside link annotations and displays their context menus.\n\n* Next to block images, the cursor is placed alongside the top of the image. This is less problematic, but would probably cause a noticeable jump when switching to edit mode (assuming we resolve other causes of jumping).",
+      "revId": "35636a6170624387d1ceea547a53cd1c484bfb00",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
