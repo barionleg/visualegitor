@@ -134,9 +134,7 @@ ve.ui.CompletionWidget.prototype.updateMenu = function ( input, suggestions ) {
 };
 
 ve.ui.CompletionWidget.prototype.onMenuChoose = function ( item ) {
-	var fragment = this.action.insertCompletion( item.getData(), this.getCompletionRange( true ) );
-
-	fragment.collapseToEnd().select();
+	this.action.onChoose( item, this.getCompletionRange( true ) );
 
 	this.teardown();
 };
