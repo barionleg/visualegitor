@@ -686,7 +686,9 @@
 			"src/ui/inspectors/ve.ui.LinkAnnotationInspector.js",
 			"src/ui/inspectors/ve.ui.CommentInspector.js",
 			"src/ui/inspectors/ve.ui.LanguageInspector.js",
-			"src/ui/pages/ve.ui.SpecialCharacterPage.js"
+			"src/ui/pages/ve.ui.SpecialCharacterPage.js",
+			"src/ui/actions/ve.ui.HelpCompletionAction.js",
+			"src/ui/tools/ve.ui.HelpCompletionTool.js"
 		],
 		"styles": [
 			"src/ui/styles/dialogs/ve.ui.ToolbarDialog.css",

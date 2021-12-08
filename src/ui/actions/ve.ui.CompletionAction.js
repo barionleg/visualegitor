@@ -121,6 +121,12 @@ ve.ui.CompletionAction.prototype.shouldAbandon = function ( input, matches ) {
 		!!( input && input.match( /\s$/ ) );
 };
 
+ve.ui.CompletionAction.prototype.onChoose = function ( item, range ) {
+    var fragment = this.insertCompletion( item.getData(), range );
+
+    fragment.collapseToEnd().select();
+}
+
 // helpers
 
 /**
@@ -148,13 +154,14 @@ ve.ui.CompletionAction.prototype.getMenuItemForSuggestion = function ( suggestio
  * @protected
  * @param  {string[]} suggestions List of strings of valid completions
  * @param  {string} input Input to filter the suggestions to
+ * @param  {Function} comparison Function to say whether a comparison is valid
  * @return {string[]}
  */
-ve.ui.CompletionAction.prototype.filterSuggestionsForInput = function ( suggestions, input ) {
+ve.ui.CompletionAction.prototype.filterSuggestionsForInput = function ( suggestions, input, comparison ) {
 	var exact = false,
 		inputTrimmed = input.trim(),
 		inputTrimmedLower = inputTrimmed.toLowerCase().trim();
-	suggestions = suggestions.filter( function ( word ) {
+	suggestions = suggestions.filter( comparison || function ( word ) {
 		var wordLower = word.toLowerCase();
 		exact = exact || wordLower === inputTrimmedLower;
 		return wordLower.slice( 0, inputTrimmedLower.length ) === inputTrimmedLower;
