@@ -58,6 +58,13 @@ function initApp( options ) {
 	app.transportServer = new ve.dm.TransportServer( protocolServer );
 	app.logger.log( 'info', 'Connecting to document store' );
 
+	app.set( 'case sensitive routing', true );
+	app.get( '/document/:name/', function ( req, res ) {
+		const state = protocolServer.rebaseServer.getDocState( req.params.name );
+		const editorCount = state.getActiveAuthors() ? Object.keys( state.getActiveAuthors() ).length : 0;
+		res.json( { editorCount: editorCount } );
+	} );
+
 	return documentStore.connect().then( function () {
 		const dropDatabase = ( process.argv.includes( '--drop' ) );
 		if ( dropDatabase ) {
