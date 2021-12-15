@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82ebb2b7_a9862856",
+        "filename": "src/ui/actions/ve.ui.HelpCompletionAction.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2021-12-15T14:09:52Z",
+      "side": 1,
+      "message": "Rather than search commands and their English technical names (\"insertTable\"), we should iterate over toolFactory and index their localised labels (ve.ui.InsertTableTool.static.title \u003d \"Tabla\" in Spanish). We could also work out if a tool is in a toolgroup to show \"Inserta \u003e Tabla\".",
+      "revId": "634922c3c6b3ceeb3b36c6bdd34861d9b1019617",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
