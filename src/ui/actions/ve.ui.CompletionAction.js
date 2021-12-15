@@ -97,6 +97,17 @@ ve.ui.CompletionAction.prototype.getHeaderLabel = function () {
 };
 
 /**
+ * Choose a specific item
+ *
+ * @param {OO.ui.MenuOptionWidget} item Chosen item
+ * @param {ve.Range} range Current surface range
+ */
+ve.ui.CompletionAction.prototype.chooseItem = function ( item, range ) {
+	var fragment = this.insertCompletion( item.getData(), range );
+	fragment.collapseToEnd().select();
+};
+
+/**
  * Perform the insetion for the chosen suggestion
  *
  * @param {Object} data Whatever data was attached to the menu option widget
@@ -121,12 +132,6 @@ ve.ui.CompletionAction.prototype.shouldAbandon = function ( input, matches ) {
 		!!( input && input.match( /\s$/ ) );
 };
 
-ve.ui.CompletionAction.prototype.onChoose = function ( item, range ) {
-	var fragment = this.insertCompletion( item.getData(), range );
-
-	fragment.collapseToEnd().select();
-};
-
 // helpers
 
 /**
@@ -138,6 +143,17 @@ ve.ui.CompletionAction.prototype.onChoose = function ( item, range ) {
  */
 ve.ui.CompletionAction.prototype.getMenuItemForSuggestion = function ( suggestion ) {
 	return new OO.ui.MenuOptionWidget( { data: suggestion, label: suggestion } );
+};
+
+/**
+ * Update the menu item list before adding, e.g. to add menu groups
+ *
+ * @protected
+ * @param  {OO.ui.MenuOptionWidget[]} menuItems
+ * @return {OO.ui.MenuOptionWidget[]}
+ */
+ve.ui.CompletionAction.prototype.updateMenuItems = function ( menuItems ) {
+	return menuItems;
 };
 
 /**

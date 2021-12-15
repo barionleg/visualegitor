@@ -80,11 +80,11 @@
 		return this.open();
 	};
 
-	ve.ui.HelpCompletionAction.prototype.getToolTitle = function ( toolName ) {
+	ve.ui.HelpCompletionAction.prototype.getToolIndex = function ( toolName ) {
 		var tool = this.tools[ toolName ];
 		var title = '';
 		if ( tool.elementGroup instanceof OO.ui.PopupToolGroup ) {
-			title += tool.elementGroup.getTitle() + ' > ';
+			title += tool.elementGroup.getTitle() + ' ';
 		}
 		title += tool.getTitle();
 
@@ -99,7 +99,7 @@
 			this.toolNames,
 			input,
 			function ( toolName ) {
-				return action.getToolTitle( toolName ).toLowerCase().indexOf( input ) !== -1;
+				return action.getToolIndex( toolName ).toLowerCase().indexOf( input ) !== -1;
 			}
 		) );
 	};
@@ -108,18 +108,36 @@
 		var tool = this.tools[ toolName ];
 		return new OO.ui.MenuOptionWidget( {
 			data: tool,
-			label: this.getToolTitle( toolName ),
+			label: tool.getTitle(),
 			// HACK: an invalid icon name will render as a spacer for alignment
 			icon: tool.getIcon() || '_',
 			disabled: tool.isDisabled()
 		} );
 	};
 
+	ve.ui.HelpCompletionAction.prototype.updateMenuItems = function ( menuItems ) {
+		var lastGroup = null;
+		for ( var i = 0; i < menuItems.length; i++ ) {
+			var tool = menuItems[ i ].getData();
+			if ( tool.elementGroup instanceof OO.ui.PopupToolGroup && tool.elementGroup !== lastGroup ) {
+				menuItems.splice(
+					i, 0,
+					new OO.ui.MenuSectionOptionWidget( {
+						label: tool.elementGroup.getTitle()
+					} )
+				);
+				lastGroup = tool.elementGroup;
+				i++;
+			}
+		}
+		return menuItems;
+	};
+
 	ve.ui.HelpCompletionAction.prototype.getHeaderLabel = function () {
 		return ve.msg( 'visualeditor-dialog-command-help-title' );
 	};
 
-	ve.ui.HelpCompletionAction.prototype.onChoose = function ( item, range ) {
+	ve.ui.HelpCompletionAction.prototype.chooseItem = function ( item, range ) {
 		// We're completely ignoring the idea that we should be "inserting" anything...
 		// Instead, we run the command that was chosen.
 
@@ -153,6 +171,14 @@
 	sequence = new ve.ui.Sequence( 'autocompleteHelpCommands', 'openHelpCompletions', '\\', 0 );
 	ve.ui.commandRegistry.register( openCommand );
 	ve.ui.commandRegistry.register( insertAndOpenCommand );
+
+	ve.ui.triggerRegistry.register(
+		'openHelpCompletions', {
+			mac: new ve.ui.Trigger( 'cmd+shift+p' ),
+			pc: new ve.ui.Trigger( 'ctrl+shift+p' )
+		}
+	);
+
 	// ve.ui.wikitextCommandRegistry.register( openCommand );
 	// ve.ui.wikitextCommandRegistry.register( insertAndOpenCommand );
 	ve.ui.sequenceRegistry.register( sequence );

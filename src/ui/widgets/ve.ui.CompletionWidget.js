@@ -105,7 +105,9 @@ ve.ui.CompletionWidget.prototype.update = function () {
 
 	this.updateMenu( input );
 	this.action.getSuggestions( input ).then( function ( suggestions ) {
-		this.menu.clearItems().addItems( suggestions.map( this.action.getMenuItemForSuggestion.bind( this.action ) ) );
+		var menuItems = suggestions.map( this.action.getMenuItemForSuggestion.bind( this.action ) );
+		menuItems = this.action.updateMenuItems( menuItems );
+		this.menu.clearItems().addItems( menuItems );
 		if ( this.menu.getItems().length ) {
 			this.menu.highlightItem( this.menu.getItems()[ 0 ] );
 		}
@@ -134,7 +136,7 @@ ve.ui.CompletionWidget.prototype.updateMenu = function ( input, suggestions ) {
 };
 
 ve.ui.CompletionWidget.prototype.onMenuChoose = function ( item ) {
-	this.action.onChoose( item, this.getCompletionRange( true ) );
+	this.action.chooseItem( item, this.getCompletionRange( true ) );
 
 	this.teardown();
 };
