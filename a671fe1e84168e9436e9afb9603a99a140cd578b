@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a89d5765_3920c4ef",
+        "filename": "src/ce/styles/nodes/ve.ce.BranchNode.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2021-12-16T15:06:38Z",
+      "side": 1,
+      "message": "I see the problem. I wouldn\u0027t phrase it like this though - the CSS is applied when the property is present.\n\nFor tables we always make new cells with \u0027wrapper\u0027 paragraphs, so the output HTML isn\u0027t full of \u003cp\u003es.\n\nFor lists we take an existing paragraph and wrap it in a list, and it is likely that existing paragraph isn\u0027t a wrapper.\n\nWe should probably toggle the \u0027wrapper\u0027 property converting from/to a list but that seems out of scope for this task.",
+      "revId": "a671fe1e84168e9436e9afb9603a99a140cd578b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
