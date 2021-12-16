@@ -51,6 +51,24 @@
       "parentUuid": "e1755ffa_56c801d6",
       "revId": "b1a02d7043e1605277f426e783297fd86fe76386",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f16567e_96b785e5",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2021-12-16T17:10:37Z",
+      "side": 1,
+      "message": "I think we shouldn\u0027t extend annotations at boundaries that are soft (\u003daren\u0027t ve.ce.NailedAnnotations), because it\u0027s more or less arbitrary whether the browser puts the cursor inside or outside. (On Chromium it biases towards the earlier option in document order; in Firefox it depends how you landed there).\n\nFor non-nailed annotations, we should only extend them if we\u0027re in the interior, or if it\u0027s a non-collapsed selection (both of which we can tell from the model).",
+      "parentUuid": "2e312f69_080a4e68",
+      "revId": "b1a02d7043e1605277f426e783297fd86fe76386",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
