@@ -28,9 +28,6 @@ ve.ce.ContentBranchNode = function VeCeContentBranchNode() {
 
 	this.onClickHandler = this.onClick.bind( this );
 
-	// DOM changes (keep in sync with #onSetup)
-	this.$element.addClass( 've-ce-contentBranchNode' );
-
 	// Events
 	this.connect( this, { childUpdate: 'onChildUpdate' } );
 	this.model.connect( this, { detach: 'onModelDetach' } );
@@ -61,12 +58,29 @@ ve.ce.ContentBranchNode.static.autoFocus = true;
 /* Static Methods */
 
 /**
+ * Clone the DOM element, normalizing for comparison
+ *
+ * @param {HTMLElement} element The element to clone
+ * @return {HTMLElement} Cloned, element
+ */
+ve.ce.ContentBranchNode.static.cloneForComparison = function ( element ) {
+	element = element.cloneNode( true );
+	ve.normalizeNode( element );
+	var $element = $( element );
+	$element.find( '.ve-ce-annotation-active' ).removeClass( 've-ce-annotation-active' );
+	$element.find( '.ve-ce-branchNode-inlineSlug' ).children().unwrap();
+	$element.filter( '.ve-ce-chimera' ).remove();
+	element.removeAttribute( 'class' );
+	return element;
+};
+
+/**
  * Append the return value of #getRenderedContents to a DOM element.
  *
  * @param {HTMLElement} container DOM element
- * @param {HTMLElement} wrapper Wrapper returned by #getRenderedContents
+ * @param {HTMLElement} renderedContents Element returned by #getRenderedContents
  */
-ve.ce.ContentBranchNode.static.appendRenderedContents = function ( container, wrapper ) {
+ve.ce.ContentBranchNode.static.appendRenderedContents = function ( container, renderedContents ) {
 	function resolveOriginals( domElement ) {
 		for ( var i = 0, len = domElement.childNodes.length; i < len; i++ ) {
 			var child = domElement.childNodes[ i ];
@@ -79,13 +93,22 @@ ve.ce.ContentBranchNode.static.appendRenderedContents = function ( container, wr
 	}
 
 	/* Resolve references to the original nodes. */
-	resolveOriginals( wrapper );
-	while ( wrapper.firstChild ) {
-		container.appendChild( wrapper.firstChild );
+	resolveOriginals( renderedContents );
+	while ( renderedContents.firstChild ) {
+		container.appendChild( renderedContents.firstChild );
 	}
 };
 
 /* Methods */
+
+/**
+ * @inheritdoc
+ */
+ve.ce.ContentBranchNode.prototype.initialize = function () {
+	// Parent method
+	ve.ce.ContentBranchNode.super.prototype.initialize.call( this );
+	this.$element.addClass( 've-ce-contentBranchNode' );
+};
 
 /**
  * @inheritdoc
@@ -192,7 +215,7 @@ ve.ce.ContentBranchNode.prototype.setupInlineSlugs = function () {
 };
 
 /**
- * Get an HTML rendering of the contents.
+ * Get an HTML rendering of the model contents.
  *
  * If you are actually going to append the result to a DOM, you need to
  * do this with #appendRenderedContents, which resolves the cloned
@@ -207,7 +230,7 @@ ve.ce.ContentBranchNode.prototype.getRenderedContents = function () {
 		annotationSet = new ve.dm.AnnotationSet( store ),
 		annotatedHtml = [],
 		doc = this.getElementDocument(),
-		wrapper = doc.createElement( 'div' ),
+		wrapper = this.$element[ 0 ].cloneNode( false ),
 		current = wrapper,
 		annotationStack = [],
 		nodeStack = [],
@@ -391,6 +414,8 @@ ve.ce.ContentBranchNode.prototype.getRenderedContents = function () {
 	while ( annotationStack.length > 0 ) {
 		closeAnnotation();
 	}
+	// TODO: Is normalizeNode guaranteed to be a no-op?
+	ve.normalizeNode( wrapper );
 	wrapper.unicornInfo = unicornInfo;
 	return wrapper;
 };
@@ -403,7 +428,7 @@ ve.ce.ContentBranchNode.prototype.onModelDetach = function () {
 };
 
 /**
- * Render contents.
+ * Update the view with an HTML rendering of the model contents
  *
  * @return {boolean} Whether the contents have changed
  */
@@ -421,38 +446,23 @@ ve.ce.ContentBranchNode.prototype.renderContents = function () {
 		this.root.getSurface().setContentBranchNodeChanged();
 	}
 
-	var rendered = this.getRenderedContents();
-	var unicornInfo = rendered.unicornInfo;
+	var modelRenderedContents = this.getRenderedContents();
 
 	// Return if unchanged. Test by building the new version and checking DOM-equality.
 	// However we have to normalize to cope with consecutive text nodes. We can't normalize
 	// the attached version, because that would close IMEs. As an optimization, don't perform
 	// this checking if this node has never rendered before.
-
 	if ( this.rendered ) {
-		var oldWrapper = this.$element[ 0 ].cloneNode( true );
-		$( oldWrapper )
-			.find( '.ve-ce-annotation-active' )
-			.removeClass( 've-ce-annotation-active' );
-		$( oldWrapper )
-			.find( '.ve-ce-branchNode-inlineSlug' )
-			.children()
-			.unwrap()
-			.filter( '.ve-ce-chimera' )
-			.remove();
-		var newWrapper = this.$element[ 0 ].cloneNode( false );
-		while ( rendered.firstChild ) {
-			newWrapper.appendChild( rendered.firstChild );
-		}
-		ve.normalizeNode( oldWrapper );
-		ve.normalizeNode( newWrapper );
-		if ( newWrapper.isEqualNode( oldWrapper ) ) {
+		var viewRenderedContents = ve.ce.ContentBranchNode.static.cloneForComparison(
+			this.$element[ 0 ]
+		);
+		if ( modelRenderedContents.isEqualNode( viewRenderedContents ) ) {
 			return false;
 		}
-		rendered = newWrapper;
 	}
 	this.rendered = true;
 
+	var unicornInfo = modelRenderedContents.unicornInfo;
 	this.unicornAnnotations = unicornInfo.annotations || null;
 	this.unicorns = unicornInfo.unicorns || null;
 
@@ -465,7 +475,7 @@ ve.ce.ContentBranchNode.prototype.renderContents = function () {
 	}
 
 	// Reattach nodes
-	this.constructor.static.appendRenderedContents( this.$element[ 0 ], rendered );
+	this.constructor.static.appendRenderedContents( this.$element[ 0 ], modelRenderedContents );
 
 	// Set unicorning status
 	if ( this.getRoot() ) {
