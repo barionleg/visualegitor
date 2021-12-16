@@ -17,7 +17,7 @@ QUnit.test( 'findAndExecuteSequences', function ( assert ) {
 				expectedData: [
 					{ type: 'list', attributes: { style: 'bullet' } },
 					{ type: 'listItem' },
-					{ type: 'paragraph' },
+					{ type: 'paragraph', internal: { generated: 'wrapper' } },
 					{ type: '/paragraph' },
 					{ type: '/listItem' },
 					{ type: '/list' }
@@ -30,7 +30,7 @@ QUnit.test( 'findAndExecuteSequences', function ( assert ) {
 				expectedData: [
 					{ type: 'list', attributes: { style: 'number' } },
 					{ type: 'listItem' },
-					{ type: 'paragraph' },
+					{ type: 'paragraph', internal: { generated: 'wrapper' } },
 					{ type: '/paragraph' },
 					{ type: '/listItem' },
 					{ type: '/list' }
