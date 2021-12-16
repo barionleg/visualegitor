@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de1c91a1_1fc246b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2021-12-16T02:01:30Z",
+      "side": 1,
+      "message": "I\u0027m generally in favour of using the view\u0027s info about annotations where we can, since it\u0027s more granular.",
+      "revId": "b1a02d7043e1605277f426e783297fd86fe76386",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1755ffa_56c801d6",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2021-12-16T02:01:30Z",
+      "side": 1,
+      "message": "Should we merge this with this.activeAnnotations ?",
+      "revId": "b1a02d7043e1605277f426e783297fd86fe76386",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
