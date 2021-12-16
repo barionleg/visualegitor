@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "312d1668_d919e3bf",
+        "filename": "src/ui/actions/ve.ui.IndentationAction.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2021-12-16T16:39:56Z",
+      "side": 0,
+      "message": "Removing a transaction-less manipulation of the DM!",
+      "revId": "2947b78df4631c2b41d7c9954c6e60822fe7cea1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4fac063d_77ee305e",
+        "filename": "tests/ui/actions/ve.ui.IndentationAction.test.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2021-12-16T16:39:56Z",
+      "side": 0,
+      "message": "The fact we are deleting these dodgy test cases tells me this is a good change.",
+      "revId": "2947b78df4631c2b41d7c9954c6e60822fe7cea1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
