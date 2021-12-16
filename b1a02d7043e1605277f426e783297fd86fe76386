@@ -69,6 +69,24 @@
       "parentUuid": "2e312f69_080a4e68",
       "revId": "b1a02d7043e1605277f426e783297fd86fe76386",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b4e1989_5f206cf1",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2021-12-16T18:18:21Z",
+      "side": 1,
+      "message": "1. We need this logic to ensure the annotations are still applied at non-boundary positions, otherwise we need some more complex logic later on to work out if we are actually at a boundary.\n2. This decides if annotations will be continued by looking at where the native cursor is (inside or outside the annotation boundary), which matches up with what typing would do (tested in Chrome \u0026 FF). I think paste matching what typing does is an sensible approach.",
+      "parentUuid": "6f16567e_96b785e5",
+      "revId": "b1a02d7043e1605277f426e783297fd86fe76386",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
