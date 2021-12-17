@@ -87,6 +87,24 @@
       "parentUuid": "6f16567e_96b785e5",
       "revId": "b1a02d7043e1605277f426e783297fd86fe76386",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84013aa7_055d9658",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2021-12-17T04:12:41Z",
+      "side": 1,
+      "message": "1. The model logic isn\u0027t too complex. Essentially:\n\n  nonBoundaryAnnotations \u003d doc.data.getAnnotationsFromRange( new ve.Range( offset - 1, offset ) )\n\nexcept it\u0027s the empty set if you\u0027re at the start or end of the ContentBranchNode.\n\n2. Considering likely times when you\u0027d paste, I think it\u0027s most probable that you *don\u0027t* want boundary annotations to be applied —except if you explicitly put the selection inside the link cartouche. Other than links, the most heuristically likely annotation boundaries are bold/italic, which you probably don\u0027t want to apply on paste, but which the code will tend[*] to do at an end boundary and sometimes at a start boundary, if we rely on native browser cursor positioning.\n\n[*] Chromium\u0027s native behaviour is to place the cursor nearer the start of the document, meaning typing at an end-annotation boundary continues the annotation, but typing before an annotation does not. There are exceptions to this, e.g. if the annotation is at the start of the block node or straight after a non-editable island, then the cursor lies inside the annotation. In Firefox, it depends how you landed at the offset: if cursoring, it biases to landing in the closest offset (in document order) to where you cursored from; if clicking, it\u0027s complex but it tends to land where you visually clicked (which matters if, say, there\u0027s a text wrapping boundary or a bidi boundary or any CSS width to the annotation).",
+      "parentUuid": "2b4e1989_5f206cf1",
+      "revId": "b1a02d7043e1605277f426e783297fd86fe76386",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
