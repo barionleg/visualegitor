@@ -27,73 +27,72 @@ QUnit.module( 've' );
 // ve.extendObject: Tested upstream (jQuery)
 
 QUnit.test( 'compareClassLists', function ( assert ) {
-	var i,
-		cases = [
-			{
-				args: [ '', '' ],
-				expected: true
-			},
-			{
-				args: [ '', [] ],
-				expected: true
-			},
-			{
-				args: [ [], [] ],
-				expected: true
-			},
-			{
-				args: [ '', [ '' ] ],
-				expected: true
-			},
-			{
-				args: [ [], [ '' ] ],
-				expected: true
-			},
-			{
-				args: [ 'foo', '' ],
-				expected: false
-			},
-			{
-				args: [ 'foo', 'foo' ],
-				expected: true
-			},
-			{
-				args: [ 'foo', 'bar' ],
-				expected: false
-			},
-			{
-				args: [ 'foo', 'foo bar' ],
-				expected: false
-			},
-			{
-				args: [ 'foo', [ 'foo' ] ],
-				expected: true
-			},
-			{
-				args: [ [ 'foo' ], 'bar' ],
-				expected: false
-			},
-			{
-				args: [ 'foo', [ 'foo', 'bar' ] ],
-				expected: false
-			},
-			{
-				args: [ 'foo', [ 'foo', 'foo' ] ],
-				expected: true
-			},
-			{
-				args: [ [ 'foo' ], 'foo foo' ],
-				expected: true
-			},
-			{
-				args: [ 'foo bar foo', 'foo foo' ],
-				expected: false
-			}
-		];
+	var cases = [
+		{
+			args: [ '', '' ],
+			expected: true
+		},
+		{
+			args: [ '', [] ],
+			expected: true
+		},
+		{
+			args: [ [], [] ],
+			expected: true
+		},
+		{
+			args: [ '', [ '' ] ],
+			expected: true
+		},
+		{
+			args: [ [], [ '' ] ],
+			expected: true
+		},
+		{
+			args: [ 'foo', '' ],
+			expected: false
+		},
+		{
+			args: [ 'foo', 'foo' ],
+			expected: true
+		},
+		{
+			args: [ 'foo', 'bar' ],
+			expected: false
+		},
+		{
+			args: [ 'foo', 'foo bar' ],
+			expected: false
+		},
+		{
+			args: [ 'foo', [ 'foo' ] ],
+			expected: true
+		},
+		{
+			args: [ [ 'foo' ], 'bar' ],
+			expected: false
+		},
+		{
+			args: [ 'foo', [ 'foo', 'bar' ] ],
+			expected: false
+		},
+		{
+			args: [ 'foo', [ 'foo', 'foo' ] ],
+			expected: true
+		},
+		{
+			args: [ [ 'foo' ], 'foo foo' ],
+			expected: true
+		},
+		{
+			args: [ 'foo bar foo', 'foo foo' ],
+			expected: false
+		}
+	];
 
-	for ( i = 0; i < cases.length; i++ ) {
-		assert.strictEqual( ve.compareClassLists.apply( ve, cases[ i ].args ), cases[ i ].expected );
-	}
+	cases.forEach( function ( caseItem ) {
+		assert.strictEqual( ve.compareClassLists.apply( ve, caseItem.args ), caseItem.expected );
+	} );
 } );
 
 QUnit.test( 'isInstanceOfAny', function ( assert ) {
@@ -491,137 +490,134 @@ QUnit.test( 'createDocumentFromHtml', function ( assert ) {
 } );
 
 QUnit.test( 'resolveUrl', function ( assert ) {
-	var i, doc,
-		cases = [
-			{
-				base: 'http://example.com',
-				href: 'foo',
-				resolved: 'http://example.com/foo',
-				msg: 'Simple href with domain as base'
-			},
-			{
-				base: 'http://example.com/bar',
-				href: 'foo',
-				resolved: 'http://example.com/foo',
-				msg: 'Simple href with page as base'
-			},
-			{
-				base: 'http://example.com/bar/',
-				href: 'foo',
-				resolved: 'http://example.com/bar/foo',
-				msg: 'Simple href with directory as base'
-			},
-			{
-				base: 'http://example.com/bar/',
-				href: './foo',
-				resolved: 'http://example.com/bar/foo',
-				msg: './ in href'
-			},
-			{
-				base: 'http://example.com/bar/',
-				href: '../foo',
-				resolved: 'http://example.com/foo',
-				msg: '../ in href'
-			},
-			{
-				base: 'http://example.com/bar/',
-				href: '/foo',
-				resolved: 'http://example.com/foo',
-				msg: 'href starting with /'
-			},
-			{
-				base: 'http://example.com/bar/',
-				href: '//example.org/foo',
-				resolved: 'http://example.org/foo',
-				msg: 'protocol-relative href'
-			},
-			{
-				base: 'http://example.com/bar/',
-				href: 'https://example.org/foo',
-				resolved: 'https://example.org/foo',
-				msg: 'href with protocol'
-			}
-		];
+	var cases = [
+		{
+			base: 'http://example.com',
+			href: 'foo',
+			resolved: 'http://example.com/foo',
+			msg: 'Simple href with domain as base'
+		},
+		{
+			base: 'http://example.com/bar',
+			href: 'foo',
+			resolved: 'http://example.com/foo',
+			msg: 'Simple href with page as base'
+		},
+		{
+			base: 'http://example.com/bar/',
+			href: 'foo',
+			resolved: 'http://example.com/bar/foo',
+			msg: 'Simple href with directory as base'
+		},
+		{
+			base: 'http://example.com/bar/',
+			href: './foo',
+			resolved: 'http://example.com/bar/foo',
+			msg: './ in href'
+		},
+		{
+			base: 'http://example.com/bar/',
+			href: '../foo',
+			resolved: 'http://example.com/foo',
+			msg: '../ in href'
+		},
+		{
+			base: 'http://example.com/bar/',
+			href: '/foo',
+			resolved: 'http://example.com/foo',
+			msg: 'href starting with /'
+		},
+		{
+			base: 'http://example.com/bar/',
+			href: '//example.org/foo',
+			resolved: 'http://example.org/foo',
+			msg: 'protocol-relative href'
+		},
+		{
+			base: 'http://example.com/bar/',
+			href: 'https://example.org/foo',
+			resolved: 'https://example.org/foo',
+			msg: 'href with protocol'
+		}
+	];
 
-	for ( i = 0; i < cases.length; i++ ) {
-		doc = ve.createDocumentFromHtml( '' );
-		doc.head.appendChild( $( '<base>', doc ).attr( 'href', cases[ i ].base )[ 0 ] );
-		assert.strictEqual( ve.resolveUrl( cases[ i ].href, doc ), cases[ i ].resolved, cases[ i ].msg );
-	}
+	cases.forEach( function ( caseItem ) {
+		var doc = ve.createDocumentFromHtml( '' );
+		doc.head.appendChild( $( '<base>', doc ).attr( 'href', caseItem.base )[ 0 ] );
+		assert.strictEqual( ve.resolveUrl( caseItem.href, doc ), caseItem.resolved, caseItem.msg );
+	} );
 } );
 
 QUnit.test( 'resolveAttributes', function ( assert ) {
-	var i, doc, div,
-		cases = [
-			{
-				base: 'http://example.com',
-				html: '<div><a href="foo">foo</a></div><a href="bar">bar</a><img src="baz">',
-				resolved: '<div><a href="http://example.com/foo">foo</a></div><a href="http://example.com/bar">bar</a><img src="http://example.com/baz">',
-				msg: 'href and src resolved'
-			},
-			{
-				base: 'http://example.com',
-				html: '<a href="foo">foo</a>',
-				resolved: '<a href="http://example.com/foo">foo</a>',
-				msg: 'href resolved on self (unwrapped)'
-			}
-		];
+	var cases = [
+		{
+			base: 'http://example.com',
+			html: '<div><a href="foo">foo</a></div><a href="bar">bar</a><img src="baz">',
+			resolved: '<div><a href="http://example.com/foo">foo</a></div><a href="http://example.com/bar">bar</a><img src="http://example.com/baz">',
+			msg: 'href and src resolved'
+		},
+		{
+			base: 'http://example.com',
+			html: '<a href="foo">foo</a>',
+			resolved: '<a href="http://example.com/foo">foo</a>',
+			msg: 'href resolved on self (unwrapped)'
+		}
+	];
 
-	for ( i = 0; i < cases.length; i++ ) {
-		doc = ve.createDocumentFromHtml( '' );
-		doc.head.appendChild( $( '<base>', doc ).attr( 'href', cases[ i ].base )[ 0 ] );
-		div = document.createElement( 'div' );
-		div.innerHTML = cases[ i ].html;
+	cases.forEach( function ( caseItem ) {
+		var doc = ve.createDocumentFromHtml( '' );
+		doc.head.appendChild( $( '<base>', doc ).attr( 'href', caseItem.base )[ 0 ] );
+		var div = document.createElement( 'div' );
+		div.innerHTML = caseItem.html;
 		ve.resolveAttributes( div.childNodes, doc, ve.dm.Converter.static.computedAttributes );
 		assert.strictEqual(
 			div.innerHTML,
-			cases[ i ].resolved,
-			cases[ i ].msg
+			caseItem.resolved,
+			caseItem.msg
 		);
-	}
+	} );
 } );
 
 QUnit.test( 'fixBase', function ( assert ) {
-	var i, targetDoc, sourceDoc, expectedBase,
-		cases = [
-			{
-				targetBase: '//example.org/foo',
-				sourceBase: 'https://example.com',
-				fixedBase: 'https://example.org/foo',
-				msg: 'Protocol-relative base is made absolute'
-			},
-			{
-				targetBase: 'http://example.org/foo',
-				sourceBase: 'https://example.com',
-				fixedBase: 'http://example.org/foo',
-				msg: 'Fully specified base is left alone'
-			},
-			{
-				// No targetBase
-				sourceBase: 'https://example.com',
-				fallbackBase: 'https://example.org/foo',
-				fixedBase: 'https://example.org/foo',
-				msg: 'When base is missing, fallback base is used'
-			}
-		];
+	var cases = [
+		{
+			targetBase: '//example.org/foo',
+			sourceBase: 'https://example.com',
+			fixedBase: 'https://example.org/foo',
+			msg: 'Protocol-relative base is made absolute'
+		},
+		{
+			targetBase: 'http://example.org/foo',
+			sourceBase: 'https://example.com',
+			fixedBase: 'http://example.org/foo',
+			msg: 'Fully specified base is left alone'
+		},
+		{
+			// No targetBase
+			sourceBase: 'https://example.com',
+			fallbackBase: 'https://example.org/foo',
+			fixedBase: 'https://example.org/foo',
+			msg: 'When base is missing, fallback base is used'
+		}
+	];
 
-	for ( i = 0; i < cases.length; i++ ) {
-		targetDoc = ve.createDocumentFromHtml( '' );
-		sourceDoc = ve.createDocumentFromHtml( '' );
-		expectedBase = cases[ i ].fixedBase;
-		if ( cases[ i ].targetBase ) {
-			targetDoc.head.appendChild( $( '<base>', targetDoc ).attr( 'href', cases[ i ].targetBase )[ 0 ] );
+	cases.forEach( function ( caseItem ) {
+		var targetDoc = ve.createDocumentFromHtml( '' );
+		var sourceDoc = ve.createDocumentFromHtml( '' );
+		var expectedBase = caseItem.fixedBase;
+		if ( caseItem.targetBase ) {
+			targetDoc.head.appendChild( $( '<base>', targetDoc ).attr( 'href', caseItem.targetBase )[ 0 ] );
 			if ( targetDoc.baseURI ) {
 				// baseURI is valid, so we expect it to be untouched
 				expectedBase = targetDoc.baseURI;
 			}
 		}
-		if ( cases[ i ].sourceBase ) {
-			sourceDoc.head.appendChild( $( '<base>', sourceDoc ).attr( 'href', cases[ i ].sourceBase )[ 0 ] );
+		if ( caseItem.sourceBase ) {
+			sourceDoc.head.appendChild( $( '<base>', sourceDoc ).attr( 'href', caseItem.sourceBase )[ 0 ] );
 		}
-		ve.fixBase( targetDoc, sourceDoc, cases[ i ].fallbackBase );
-		assert.strictEqual( targetDoc.baseURI, expectedBase, cases[ i ].msg );
-	}
+		ve.fixBase( targetDoc, sourceDoc, caseItem.fallbackBase );
+		assert.strictEqual( targetDoc.baseURI, expectedBase, caseItem.msg );
+	} );
 } );
 
 QUnit.test( 'isUriComponentValid', function ( assert ) {
@@ -655,8 +651,7 @@ QUnit.test( 'isBlockElement/isVoidElement', function ( assert ) {
 // TODO: ve.getClusterOffset
 
 QUnit.test( 'graphemeSafeSubstring', function ( assert ) {
-	var i,
-		text = '12\ud860\udee245\ud860\udee2789\ud860\udee2bc',
+	var text = '12\ud860\udee245\ud860\udee2789\ud860\udee2bc',
 		cases = [
 			{
 				msg: 'start and end inside multibyte',
@@ -684,23 +679,22 @@ QUnit.test( 'graphemeSafeSubstring', function ( assert ) {
 			}
 		];
 
-	for ( i = 0; i < cases.length; i++ ) {
+	cases.forEach( function ( caseItem ) {
 		assert.strictEqual(
-			ve.graphemeSafeSubstring( text, cases[ i ].start, cases[ i ].end, true ),
-			cases[ i ].expected[ 0 ],
-			cases[ i ].msg + ' (outer)'
+			ve.graphemeSafeSubstring( text, caseItem.start, caseItem.end, true ),
+			caseItem.expected[ 0 ],
+			caseItem.msg + ' (outer)'
 		);
 		assert.strictEqual(
-			ve.graphemeSafeSubstring( text, cases[ i ].start, cases[ i ].end, false ),
-			cases[ i ].expected[ 1 ],
-			cases[ i ].msg + ' (inner)'
+			ve.graphemeSafeSubstring( text, caseItem.start, caseItem.end, false ),
+			caseItem.expected[ 1 ],
+			caseItem.msg + ' (inner)'
 		);
-	}
+	} );
 } );
 
 QUnit.test( 'transformStyleAttributes', function ( assert ) {
-	var i, wasStyleAttributeBroken, oldNormalizeAttributeValue,
-		normalizeColor = function ( name, value ) {
+	var normalizeColor = function ( name, value ) {
 			if ( name === 'style' && value === 'color:#ffd' ) {
 				return 'color: rgb(255, 255, 221);';
 			}
@@ -758,174 +752,173 @@ QUnit.test( 'transformStyleAttributes', function ( assert ) {
 		];
 
 	// Force transformStyleAttributes to think that we're in a broken browser
-	wasStyleAttributeBroken = ve.isStyleAttributeBroken;
+	var wasStyleAttributeBroken = ve.isStyleAttributeBroken;
 	ve.isStyleAttributeBroken = true;
 
-	for ( i = 0; i < cases.length; i++ ) {
-		if ( cases[ i ].normalize ) {
+	cases.forEach( function ( caseItem ) {
+		var oldNormalizeAttributeValue;
+		if ( caseItem.normalize ) {
 			oldNormalizeAttributeValue = ve.normalizeAttributeValue;
-			ve.normalizeAttributeValue = cases[ i ].normalize;
+			ve.normalizeAttributeValue = caseItem.normalize;
 		}
-		if ( cases[ i ].before ) {
+		if ( caseItem.before ) {
 			assert.strictEqual(
-				ve.transformStyleAttributes( cases[ i ].before, false )
+				ve.transformStyleAttributes( caseItem.before, false )
 					// Firefox adds linebreaks after <!DOCTYPE>s
 					.replace( '<!DOCTYPE html>\n', '<!DOCTYPE html>' ),
-				cases[ i ].masked || cases[ i ].before,
-				cases[ i ].msg + ' (masking)'
+				caseItem.masked || caseItem.before,
+				caseItem.msg + ' (masking)'
 			);
 		} else {
-			assert.true( true, cases[ i ].msg + ' (no masking test)' );
+			assert.true( true, caseItem.msg + ' (no masking test)' );
 		}
 		assert.strictEqual(
-			ve.transformStyleAttributes( cases[ i ].masked || cases[ i ].before, true )
+			ve.transformStyleAttributes( caseItem.masked || caseItem.before, true )
 				// Firefox adds a linebreak after <!DOCTYPE>s
 				.replace( '<!DOCTYPE html>\n', '<!DOCTYPE html>' ),
-			cases[ i ].after || cases[ i ].before,
-			cases[ i ].msg + ' (unmasking)'
+			caseItem.after || caseItem.before,
+			caseItem.msg + ' (unmasking)'
 		);
 
-		if ( cases[ i ].normalize ) {
+		if ( caseItem.normalize ) {
 			ve.normalizeAttributeValue = oldNormalizeAttributeValue;
 		}
-	}
+	} );
 
 	ve.isStyleAttributeBroken = wasStyleAttributeBroken;
 } );
 
 QUnit.test( 'normalizeNode', function ( assert ) {
-	var i, actual, expected, wasNormalizeBroken,
-		cases = [
-			{
-				msg: 'Merge two adjacent text nodes',
-				before: {
-					type: 'p',
-					children: [
-						{ type: '#text', text: 'Foo' },
-						{ type: '#text', text: 'Bar' }
-					]
-				},
-				after: {
-					type: 'p',
-					children: [
-						{ type: '#text', text: 'FooBar' }
-					]
-				}
+	var cases = [
+		{
+			msg: 'Merge two adjacent text nodes',
+			before: {
+				type: 'p',
+				children: [
+					{ type: '#text', text: 'Foo' },
+					{ type: '#text', text: 'Bar' }
+				]
 			},
-			{
-				msg: 'Merge three adjacent text nodes',
-				before: {
-					type: 'p',
-					children: [
-						{ type: '#text', text: 'Foo' },
-						{ type: '#text', text: 'Bar' },
-						{ type: '#text', text: 'Baz' }
-					]
-				},
-				after: {
-					type: 'p',
-					children: [
-						{ type: '#text', text: 'FooBarBaz' }
-					]
-				}
-			},
-			{
-				msg: 'Drop empty text node after single text node',
-				before: {
-					type: 'p',
-					children: [
-						{ type: '#text', text: 'Foo' },
-						{ type: '#text', text: '' }
-					]
-				},
-				after: {
-					type: 'p',
-					children: [
-						{ type: '#text', text: 'Foo' }
-					]
-				}
-			},
-			{
-				msg: 'Drop empty text node after two text nodes',
-				before: {
-					type: 'p',
-					children: [
-						{ type: '#text', text: 'Foo' },
-						{ type: '#text', text: 'Bar' },
-						{ type: '#text', text: '' }
-					]
-				},
-				after: {
-					type: 'p',
-					children: [
-						{ type: '#text', text: 'FooBar' }
-					]
-				}
-			},
-			{
-				msg: 'Normalize recursively',
-				before: {
-					type: 'div',
-					children: [
-						{ type: '#text', text: '' },
-						{
-							type: 'p',
-							children: [
-								{ type: '#text', text: 'Foo' },
-								{ type: '#text', text: 'Bar' }
-							]
-						},
-						{
-							type: 'p',
-							children: [
-								{ type: '#text', text: 'Baz' },
-								{ type: '#text', text: 'Quux' }
-							]
-						},
-						{ type: '#text', text: 'Whee' }
-					]
-				},
-				after: {
-					type: 'div',
-					children: [
-						{
-							type: 'p',
-							children: [
-								{ type: '#text', text: 'FooBar' }
-							]
-						},
-						{
-							type: 'p',
-							children: [
-								{ type: '#text', text: 'BazQuux' }
-							]
-						},
-						{ type: '#text', text: 'Whee' }
-					]
-				}
+			after: {
+				type: 'p',
+				children: [
+					{ type: '#text', text: 'FooBar' }
+				]
 			}
-		];
+		},
+		{
+			msg: 'Merge three adjacent text nodes',
+			before: {
+				type: 'p',
+				children: [
+					{ type: '#text', text: 'Foo' },
+					{ type: '#text', text: 'Bar' },
+					{ type: '#text', text: 'Baz' }
+				]
+			},
+			after: {
+				type: 'p',
+				children: [
+					{ type: '#text', text: 'FooBarBaz' }
+				]
+			}
+		},
+		{
+			msg: 'Drop empty text node after single text node',
+			before: {
+				type: 'p',
+				children: [
+					{ type: '#text', text: 'Foo' },
+					{ type: '#text', text: '' }
+				]
+			},
+			after: {
+				type: 'p',
+				children: [
+					{ type: '#text', text: 'Foo' }
+				]
+			}
+		},
+		{
+			msg: 'Drop empty text node after two text nodes',
+			before: {
+				type: 'p',
+				children: [
+					{ type: '#text', text: 'Foo' },
+					{ type: '#text', text: 'Bar' },
+					{ type: '#text', text: '' }
+				]
+			},
+			after: {
+				type: 'p',
+				children: [
+					{ type: '#text', text: 'FooBar' }
+				]
+			}
+		},
+		{
+			msg: 'Normalize recursively',
+			before: {
+				type: 'div',
+				children: [
+					{ type: '#text', text: '' },
+					{
+						type: 'p',
+						children: [
+							{ type: '#text', text: 'Foo' },
+							{ type: '#text', text: 'Bar' }
+						]
+					},
+					{
+						type: 'p',
+						children: [
+							{ type: '#text', text: 'Baz' },
+							{ type: '#text', text: 'Quux' }
+						]
+					},
+					{ type: '#text', text: 'Whee' }
+				]
+			},
+			after: {
+				type: 'div',
+				children: [
+					{
+						type: 'p',
+						children: [
+							{ type: '#text', text: 'FooBar' }
+						]
+					},
+					{
+						type: 'p',
+						children: [
+							{ type: '#text', text: 'BazQuux' }
+						]
+					},
+					{ type: '#text', text: 'Whee' }
+				]
+			}
+		}
+	];
 
 	// Force normalizeNode to think native normalization is broken so it uses the manual
 	// normalization code
-	wasNormalizeBroken = ve.isNormalizeBroken;
+	var wasNormalizeBroken = ve.isNormalizeBroken;
 	ve.isNormalizeBroken = true;
 
-	for ( i = 0; i < cases.length; i++ ) {
-		actual = ve.test.utils.buildDom( cases[ i ].before );
-		expected = ve.test.utils.buildDom( cases[ i ].after );
+	cases.forEach( function ( caseItem ) {
+		var actual = ve.test.utils.buildDom( caseItem.before );
+		var expected = ve.test.utils.buildDom( caseItem.after );
 		ve.normalizeNode( actual );
-		assert.equalDomElement( actual, expected, cases[ i ].msg );
-		assert.true( actual.isEqualNode( expected ), cases[ i ].msg + ' (isEqualNode)' );
-	}
+		assert.equalDomElement( actual, expected, caseItem.msg );
+		assert.true( actual.isEqualNode( expected ), caseItem.msg + ' (isEqualNode)' );
+	} );
 
 	ve.isNormalizeBroken = wasNormalizeBroken;
 } );
 
 QUnit.test( 'getCommonAncestor', function ( assert ) {
-	var doc, nodes, tests, i, len, test, testNodes, ancestorNode;
-	doc = ve.createDocumentFromHtml( '<html><div><p>AA<i><b>BB<img src="#"></b></i>CC</p>DD</div>EE' );
-	tests = [
+	var doc = ve.createDocumentFromHtml( '<html><div><p>AA<i><b>BB<img src="#"></b></i>CC</p>DD</div>EE' );
+	var cases = [
 		{ nodes: 'b b', ancestor: 'b' },
 		{ nodes: 'b i', ancestor: 'i' },
 		{ nodes: 'textB img', ancestor: 'b' },
@@ -946,7 +939,7 @@ QUnit.test( 'getCommonAncestor', function ( assert ) {
 		{ nodes: 'b unattached', ancestor: 'null' },
 		{ nodes: 'unattached b', ancestor: 'null' }
 	];
-	nodes = {};
+	var nodes = {};
 	nodes.html = doc.documentElement;
 	nodes.head = doc.head;
 	nodes.body = doc.body;
@@ -966,24 +959,22 @@ QUnit.test( 'getCommonAncestor', function ( assert ) {
 		return nodes[ name ];
 	}
 
-	for ( i = 0, len = tests.length; i < len; i++ ) {
-		test = tests[ i ];
-		testNodes = test.nodes.split( /\s+/ ).map( getNode );
-		ancestorNode = nodes[ test.ancestor ];
+	cases.forEach( function ( caseItem ) {
+		var testNodes = caseItem.nodes.split( /\s+/ ).map( getNode );
+		var ancestorNode = nodes[ caseItem.ancestor ];
 		assert.strictEqual(
 			ve.getCommonAncestor.apply( null, testNodes ),
 			ancestorNode,
-			test.nodes + ' -> ' + test.ancestor
+			caseItem.nodes + ' -> ' + caseItem.ancestor
 		);
-	}
+	} );
 
 	// Test no-argument case
 	assert.strictEqual( ve.getCommonAncestor(), null, 'No nodes' );
 } );
 
 QUnit.test( 'getCommonStartSequenceLength', function ( assert ) {
-	var i, len, tests, test;
-	tests = [
+	var cases = [
 		{
 			sequences: [ [ 0, 1, 2 ], [ 0, 1, 2 ], [ '0', 1, 2 ] ],
 			commonLength: 0,
@@ -1016,19 +1007,16 @@ QUnit.test( 'getCommonStartSequenceLength', function ( assert ) {
 		}
 	];
 
-	for ( i = 0, len = tests.length; i < len; i++ ) {
-		test = tests[ i ];
+	cases.forEach( function ( caseItem ) {
 		assert.strictEqual(
-			ve.getCommonStartSequenceLength( test.sequences ),
-			test.commonLength,
-			test.title
+			ve.getCommonStartSequenceLength( caseItem.sequences ),
+			caseItem.commonLength,
+			caseItem.title
 		);
-	}
+	} );
 } );
 
 QUnit.test( 'adjacentDomPosition', function ( assert ) {
-	var tests, direction, i, len, test, offsetPaths, position, div;
-
 	// In the following tests, the html is put inside the top-level div as innerHTML. Then
 	// ve.adjacentDomPosition is called with the position just inside the div (i.e.
 	// { node: div, offset: 0 } for forward direction tests, and
@@ -1037,7 +1025,7 @@ QUnit.test( 'adjacentDomPosition', function ( assert ) {
 	// function returns null. The 'path' properties are a list of descent offsets to find a
 	// particular position node from the top-level div. E.g. a path of [ 5, 7 ] refers to the
 	// node div.childNodes[ 5 ].childNodes[ 7 ] .
-	tests = [
+	var cases = [
 		{
 			title: 'Simple p node',
 			html: '<p>x</p>',
@@ -1104,15 +1092,15 @@ QUnit.test( 'adjacentDomPosition', function ( assert ) {
 		}
 	];
 
-	div = document.createElement( 'div' );
+	var div = document.createElement( 'div' );
 	div.contentEditable = 'true';
 
-	for ( direction in { forward: undefined, backward: undefined } ) {
-		for ( i = 0, len = tests.length; i < len; i++ ) {
-			test = tests[ i ];
-			div.innerHTML = test.html;
-			offsetPaths = [];
-			position = {
+	for ( var direction in { forward: undefined, backward: undefined } ) {
+		// eslint-disable-next-line no-loop-func
+		cases.forEach( function ( caseItem ) {
+			div.innerHTML = caseItem.html;
+			var offsetPaths = [];
+			var position = {
 				node: div,
 				offset: direction === 'backward' ? div.childNodes.length : 0
 			};
@@ -1123,32 +1111,31 @@ QUnit.test( 'adjacentDomPosition', function ( assert ) {
 				position = ve.adjacentDomPosition(
 					position,
 					direction === 'backward' ? -1 : 1,
-					test.options
+					caseItem.options
 				);
 			}
 			assert.deepEqual(
 				offsetPaths,
 				(
 					direction === 'backward' ?
-						test.expectedOffsetPaths.slice().reverse() :
-						test.expectedOffsetPaths
+						caseItem.expectedOffsetPaths.slice().reverse() :
+						caseItem.expectedOffsetPaths
 				),
-				test.title + ' (' + direction + ')'
+				caseItem.title + ' (' + direction + ')'
 			);
-		}
+		} );
 	}
 } );
 
 QUnit.test( 'deepFreeze', function ( assert ) {
-	var frozen, originalData,
-		data = [
-			{ type: 'heading', attributes: { level: 1 } },
-			'F', 'o', 'o',
-			{ type: '/heading' }
-		];
+	var data = [
+		{ type: 'heading', attributes: { level: 1 } },
+		'F', 'o', 'o',
+		{ type: '/heading' }
+	];
 
-	originalData = ve.copy( data );
-	frozen = ve.deepFreeze( data, true );
+	var originalData = ve.copy( data );
+	var frozen = ve.deepFreeze( data, true );
 
 	assert.deepEqual( frozen, originalData, 'Frozen data is equal to original data' );
 	assert.strictEqual( frozen, data, 'Result is same object as input' );
@@ -1177,11 +1164,12 @@ QUnit.test( 'deepFreeze', function ( assert ) {
 } );
 
 QUnit.test( 'deepFreeze (on cyclic structure)', function ( assert ) {
-	var cyclic, count,
-		realFreeze = ve.deepFreeze;
+	var realFreeze = ve.deepFreeze;
 
-	cyclic = { foo: 'bar' };
+	var cyclic = { foo: 'bar' };
 	cyclic.self = cyclic;
+
+	var count;
 
 	ve.deepFreeze = function () {
 		count++;
