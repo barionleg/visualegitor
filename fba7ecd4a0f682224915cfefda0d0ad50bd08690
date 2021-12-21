@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9c01075_5fccf4f0",
+        "filename": "i18n/en.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2021-12-21T13:10:19Z",
+      "side": 1,
+      "message": "Maybe \"List item indented\" and \"List item unindented\"?",
+      "range": {
+        "startLine": 55,
+        "startChar": 41,
+        "endLine": 55,
+        "endChar": 72
+      },
+      "revId": "fba7ecd4a0f682224915cfefda0d0ad50bd08690",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
