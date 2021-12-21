@@ -22,6 +22,30 @@
       },
       "revId": "fba7ecd4a0f682224915cfefda0d0ad50bd08690",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdbae25f_693fd17d",
+        "filename": "i18n/en.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2021-12-21T19:14:30Z",
+      "side": 1,
+      "message": "I feel like \"unindent\" is not really a common word, and may be difficult to understand and translate.",
+      "parentUuid": "e9c01075_5fccf4f0",
+      "range": {
+        "startLine": 55,
+        "startChar": 41,
+        "endLine": 55,
+        "endChar": 72
+      },
+      "revId": "fba7ecd4a0f682224915cfefda0d0ad50bd08690",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
