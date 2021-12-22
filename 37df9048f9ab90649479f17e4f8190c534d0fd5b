@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ad13c4c_d49687ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2021-12-22T22:44:42Z",
+      "side": 1,
+      "message": "This doesn\u0027t seem to remove the \"ve-ce-generated-wrapper\" classes after unwrapping a list. These paragraphs then have funny margins when editing, and cause T275572.",
+      "revId": "37df9048f9ab90649479f17e4f8190c534d0fd5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
