@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "546ce083_ba135e3c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2021-12-22T22:10:47Z",
+      "side": 1,
+      "message": "I see the same exception as MVolz… I think you might have accidentally undone that fix when rebasing or something.",
+      "revId": "723b19e498f37ae892ace0a82e49f4f0a5dce25a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
