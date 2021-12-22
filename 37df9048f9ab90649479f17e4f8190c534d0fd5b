@@ -16,6 +16,23 @@
       "message": "This doesn\u0027t seem to remove the \"ve-ce-generated-wrapper\" classes after unwrapping a list. These paragraphs then have funny margins when editing, and cause T275572.",
       "revId": "37df9048f9ab90649479f17e4f8190c534d0fd5b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a8824be_6136a99b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2021-12-22T22:52:37Z",
+      "side": 1,
+      "message": "Can you describe how that happens for you - the code in ve.ui.IndentationAction does exactly this and it works for me when I de-indent a list item back into a plain paragrpah.",
+      "revId": "37df9048f9ab90649479f17e4f8190c534d0fd5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
