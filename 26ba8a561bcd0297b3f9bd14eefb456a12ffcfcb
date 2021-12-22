@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bedc2898_11dc78eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2021-12-22T22:15:12Z",
+      "side": 1,
+      "message": "Restored patchset 10, which seems to be the right version.",
+      "revId": "26ba8a561bcd0297b3f9bd14eefb456a12ffcfcb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
