@@ -33,6 +33,24 @@
       "message": "Can you describe how that happens for you - the code in ve.ui.IndentationAction does exactly this and it works for me when I de-indent a list item back into a plain paragrpah.",
       "revId": "37df9048f9ab90649479f17e4f8190c534d0fd5b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87389799_31500f45",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2021-12-22T23:06:51Z",
+      "side": 1,
+      "message": "Oh, apparently it only happens when the list is at the beginning of the document, and I place the cursor at the beginning and press Backspace to unwrap it. When using Shift+Tab, or when the list is not at the beginning, it works fine.",
+      "parentUuid": "2a8824be_6136a99b",
+      "revId": "37df9048f9ab90649479f17e4f8190c534d0fd5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
