@@ -666,6 +666,73 @@ ve.ui.DiffElement.prototype.appendListItem = function ( diffData, insertIndex, l
 	return insertIndex;
 };
 
+ve.ui.DiffElement.prototype.getChangedDocListData = function ( newListNode, diff ) {
+	var diffData = [];
+
+	var ilen = Math.max( diff.oldNodes.length, diff.newNodes.length );
+	var jlen = ilen;
+
+	for ( var i = 0, j = 0; i < ilen || j < jlen; i++, j++ ) {
+
+		var move = diff.moves[ j ] === 0 ? null : diff.moves[ j ];
+
+		if ( diff.oldNodes[ i ] === undefined ) {
+
+			// Everything else in the new doc list is an insert
+			while ( j < diff.newNodes.length ) {
+				ve.batchPush( diffData, this.getNodeData( diff.newNodes[ j ], 'insert' ) );
+				j++;
+			}
+
+		} else if ( diff.newNodes[ j ] === undefined ) {
+
+			// Everything else in the old doc is a remove
+			while ( i < diff.oldNodes.length ) {
+				ve.batchPush( diffData, this.getNodeData( diff.oldNodes[ i ], 'remove' ) );
+				i++;
+			}
+
+		} else if ( diff.remove.indexOf( i ) !== -1 ) {
+
+			// The old node is a remove. Decrement the new node index
+			// to compare the same new node to the next old node
+			ve.batchPush( diffData, this.getNodeData( diff.oldNodes[ i ], 'remove' ) );
+			j--;
+
+		} else if ( diff.insert.indexOf( j ) !== -1 ) {
+
+			// The new node is an insert. Decrement the old node index
+			// to compare the same old node to the next new node
+			ve.batchPush( diffData, this.getNodeData( diff.newNodes[ j ], 'insert' ) );
+			i--;
+
+		} else if ( typeof diff.newToOld[ j ] === 'number' ) {
+
+			// The old and new node are exactly the same
+			ve.batchPush( diffData, this.getNodeData( diff.newNodes[ j ], 'none', move ) );
+
+		} else {
+
+			var oldNodeIndex = diff.newToOld[ j ].node;
+			var oldNode = diff.oldNodes[ oldNodeIndex ];
+			var newNode = diff.newNodes[ diff.oldToNew[ oldNodeIndex ].node ];
+			var nodeDiff = diff.oldToNew[ oldNodeIndex ].diff;
+
+			// The new node is modified from the old node
+			ve.batchPush( diffData, this.getChangedNodeData( nodeDiff, move, newNode, oldNode ) );
+
+		}
+	}
+
+	var newListNodeData = this.newDoc.getData( newListNode.getOuterRange() );
+
+	// Wrap in newListNode
+	diffData.unshift( newListNodeData[ 0 ] );
+	diffData.push( newListNodeData[ newListNodeData.length - 1 ] );
+
+	return diffData;
+};
+
 /**
  * Get the linear data for the diff of a list-like node that has been changed.
  *
@@ -862,7 +929,7 @@ ve.ui.DiffElement.prototype.getChangedTableNodeData = function ( oldNode, newNod
 						if ( cell.diff ) {
 							ve.batchPush(
 								diffData,
-								diffElement.getChangedTreeNodeData( cell.before.node, cell.after.node, cell.diff )
+								diffElement.getChangedDocListData( cell.after.node, cell.diff )
 							);
 						} else {
 							// Remove-insert
