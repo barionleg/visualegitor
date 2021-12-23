@@ -528,9 +528,9 @@ ve.dm.VisualDiff.prototype.diffTableNodes = function ( oldNode, newNode ) {
 	tableDiff.data.slice( 1 ).forEach( function ( row ) {
 		row.slice( 1 ).forEach( function ( cell ) {
 			if ( cell && cell.before ) {
-				cell.diff = visualDiff.diffNodes(
-					cell.before.node,
-					cell.after.node
+				cell.diff = visualDiff.diffList(
+					cell.before.node.children,
+					cell.after.node.children
 				);
 			}
 		} );
