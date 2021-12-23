@@ -40,12 +40,8 @@ ve.dm.VisualDiff = function VeDmVisualDiff( oldDocOrNode, newDocOrNode, timeout 
 	this.oldDoc.setReadOnly( true );
 	this.newDoc.setReadOnly( true );
 
-	this.oldDocNode = this.oldDoc.getDocumentNode();
-	this.newDocNode = this.newDoc.getDocumentNode();
-	this.oldDocChildren = this.getDocChildren( this.oldDocNode );
-	this.newDocChildren = this.getDocChildren( this.newDocNode );
-	this.oldDocInternalListNode = this.oldDoc.getInternalList().getListNode();
-	this.newDocInternalListNode = this.newDoc.getInternalList().getListNode();
+	var oldDocChildren = this.getDocChildren( this.oldDoc.getDocumentNode() );
+	var newDocChildren = this.getDocChildren( this.newDoc.getDocumentNode() );
 	this.treeDiffer = treeDiffer;
 	this.linearDiffer = new ve.DiffMatchPatch( this.oldDoc.getStore(), this.newDoc.getStore() );
 
@@ -58,9 +54,15 @@ ve.dm.VisualDiff = function VeDmVisualDiff( oldDocOrNode, newDocOrNode, timeout 
 	this.freezeInternalListIndices( this.oldDoc );
 	this.freezeInternalListIndices( this.newDoc );
 
+	var oldInternalList = this.oldDoc.getInternalList();
+	var newInternalList = this.newDoc.getInternalList();
 	this.diff = {
-		docDiff: this.diffList( this.oldDocChildren, this.newDocChildren ),
-		internalListDiff: this.getInternalListDiffInfo()
+		docDiff: this.diffList( oldDocChildren, newDocChildren ),
+		internalListDiff: {
+			groups: this.getInternalListDiffGroups( oldInternalList, newInternalList ),
+			oldNode: oldInternalList.getListNode(),
+			newNode: newInternalList.getListNode()
+		}
 	};
 
 	// Make docs writable again, so they can be modified by DiffElement
@@ -125,6 +127,8 @@ ve.dm.VisualDiff.prototype.diffList = function ( oldNodes, newNodes ) {
 	var oldNodesToDiff = [],
 		newNodesToDiff = [],
 		diff = {
+			oldNodes: oldNodes,
+			newNodes: newNodes,
 			oldToNew: {},
 			newToOld: {},
 			remove: [],
@@ -853,13 +857,16 @@ ve.dm.VisualDiff.prototype.underDiffThreshold = function ( changeRecord ) {
  *
  * @return {Object} Internal list diff object
  */
-ve.dm.VisualDiff.prototype.getInternalListDiffInfo = function () {
-	var oldDocNodeGroups = this.oldDoc.getInternalList().getNodeGroups(),
-		newDocNodeGroups = this.newDoc.getInternalList().getNodeGroups(),
+ve.dm.VisualDiff.prototype.getInternalListDiffGroups = function ( oldInternalList, newInternalList ) {
+	var oldDocNodeGroups = oldInternalList.getNodeGroups(),
+		newDocNodeGroups = newInternalList.getNodeGroups(),
+		oldDocInternalListNode = oldInternalList.getListNode(),
+		newDocInternalListNode = newInternalList.getListNode(),
 		oldDocInternalListItems,
 		newDocInternalListItems,
 		groups = [],
-		internalListDiffInfo = {};
+		internalListDiffGroups = {
+		};
 
 	function getInternalListItemsToDiff( indexOrder, nodes ) {
 		var j, jlen, nodeIndex,
@@ -936,11 +943,11 @@ ve.dm.VisualDiff.prototype.getInternalListDiffInfo = function () {
 				// Get old and new doc internal list items for this group
 				oldDocInternalListItems = getInternalListItemsToDiff(
 					oldDocNodeGroups[ group.group ].indexOrder,
-					this.oldDocInternalListNode.children
+					oldDocInternalListNode.children
 				);
 				newDocInternalListItems = getInternalListItemsToDiff(
 					newDocNodeGroups[ group.group ].indexOrder,
-					this.newDocInternalListNode.children
+					newDocInternalListNode.children
 				);
 
 				// Diff internal list items
@@ -953,7 +960,7 @@ ve.dm.VisualDiff.prototype.getInternalListDiffInfo = function () {
 					diff, oldDocInternalListItems.indices, newDocInternalListItems.indices, true
 				);
 				if ( diffInfo ) {
-					internalListDiffInfo[ group.group ] = diffInfo;
+					internalListDiffGroups[ group.group ] = diffInfo;
 				}
 
 				break;
@@ -961,29 +968,29 @@ ve.dm.VisualDiff.prototype.getInternalListDiffInfo = function () {
 			case 'insert':
 
 				// Get new doc internal list items for this group and mark as inserted
-				internalListDiffInfo[ group.group ] = getInternalListItems(
+				internalListDiffGroups[ group.group ] = getInternalListItems(
 					newDocNodeGroups[ group.group ].indexOrder,
-					this.newDocInternalListNode.children,
+					newDocInternalListNode.children,
 					1
 				);
-				internalListDiffInfo[ group.group ].changes = true;
+				internalListDiffGroups[ group.group ].changes = true;
 				break;
 
 			case 'remove':
 
 				// Get old doc internal list items for this group and mark as removed
-				internalListDiffInfo[ group.group ] = getInternalListItems(
+				internalListDiffGroups[ group.group ] = getInternalListItems(
 					oldDocNodeGroups[ group.group ].indexOrder,
-					this.oldDocInternalListNode.children,
+					oldDocInternalListNode.children,
 					-1
 				);
-				internalListDiffInfo[ group.group ].changes = true;
+				internalListDiffGroups[ group.group ].changes = true;
 				break;
 
 		}
 	}
 
-	return internalListDiffInfo;
+	return internalListDiffGroups;
 };
 
 /**
