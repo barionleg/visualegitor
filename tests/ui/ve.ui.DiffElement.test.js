@@ -578,12 +578,46 @@ QUnit.test( 'Diffing', function ( assert ) {
 								'<td data-diff-action="remove">F</td>' +
 							'</tr>' +
 							'<tr>' +
-								'<td><div data-diff-action="remove">G</div><div data-diff-action="insert">Q</div></td>' +
+								'<td><p data-diff-action="remove">G</p><p data-diff-action="insert">Q</p></td>' +
 								'<td>H</td>' +
-								'<td><div data-diff-action="remove">I</div><div data-diff-action="insert">Y</div></td>' +
+								'<td><p data-diff-action="remove">I</p><p data-diff-action="insert">Y</p></td>' +
 							'</tr>' +
 						'</tbody></table>' +
 					'</div>'
+			},
+			{
+				msg: 'List item indentation in table',
+				oldDoc:
+					'<table>' +
+						'<tr><td>Hello</td><td>World</td>' +
+						'<tr><td><ul><li>foo</li><li>bar</li><li>baz</li></ul></td><td>Here</td></tr>' +
+					'</table>',
+				newDoc:
+					'<table>' +
+						'<tr><td>Hello</td><td>World</td>' +
+						'<tr><td><ul><li>foo<ul><li>bar</li></ul></li><li>baz</li></ul></td><td>Here</td></tr>' +
+					'</table>',
+				expected:
+					'<div class="ve-ui-diffElement-doc-child-change">' +
+						'<table><tbody><tr><td>Hello</td><td>World</td><tr><td>' +
+						'<ul>' +
+							'<li>' +
+								'<p data-diff-action="none">foo</p>' +
+								'<ul>' +
+									'<li data-diff-id="0">' +
+										'<p data-diff-action="structural-change">bar</p>' +
+									'</li>' +
+								'</ul>' +
+							'</li>' +
+							'<li>' +
+								'<p data-diff-action="none">baz</p>' +
+							'</li>' +
+						'</ul>' +
+						'</td><td>Here</td></tr></tbody></table>' +
+					'</div>',
+				expectedDescriptions: [
+					'<div>visualeditor-changedesc-list-indent</div>'
+				]
 			},
 			{
 				msg: 'Annotation insertion',
