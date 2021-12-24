@@ -558,6 +558,46 @@ QUnit.test( 'Diffing', function ( assert ) {
 					'</div>'
 			},
 			{
+				msg: 'Change table column',
+				oldDoc:
+					'<table>' +
+						'<tr><td>A</td><td>Foo</td></tr>' +
+						'<tr><td>B</td><td>Bar</td></tr>' +
+					'</table>',
+				newDoc:
+					'<table>' +
+						'<tr><td>A</td><td>Foo 1</td></tr>' +
+						'<tr><td>B</td><td>Bar 1</td></tr>' +
+					'</table>',
+				expected:
+					'<div class="ve-ui-diffElement-doc-child-change">' +
+						'<table><tbody>' +
+							'<tr><td>A</td><td>Foo<ins data-diff-action="insert"> 1</ins></td></tr>' +
+							'<tr><td>B</td><td>Bar<ins data-diff-action="insert"> 1</ins></td></tr>' +
+						'</tbody></table>' +
+					'</div>'
+			},
+			{
+				msg: 'Change table row',
+				oldDoc:
+					'<table>' +
+						'<tr><td>A</td><td>B</td></tr>' +
+						'<tr><td>Foo</td><td>Bar</td></tr>' +
+					'</table>',
+				newDoc:
+					'<table>' +
+						'<tr><td>A</td><td>B</td></tr>' +
+						'<tr><td>Foo 1</td><td>Bar 1</td></tr>' +
+					'</table>',
+				expected:
+					'<div class="ve-ui-diffElement-doc-child-change">' +
+						'<table><tbody>' +
+							'<tr><td>A</td><td>B</td></tr>' +
+							'<tr><td>Foo<ins data-diff-action="insert"> 1</ins></td><td>Bar<ins data-diff-action="insert"> 1</ins></td></tr>' +
+						'</tbody></table>' +
+					'</div>'
+			},
+			{
 				msg: 'Table row removed and cells edited',
 				oldDoc: '<table>' +
 						'<tr><td>A</td><td>B</td><td>C</td></tr>' +
@@ -1147,7 +1187,7 @@ QUnit.test( 'Diffing', function ( assert ) {
 				expected:
 					'<div class="ve-ui-diffElement-doc-child-change">' +
 						'<ul><li>' +
-							'<table><tbody><tr><td>Foo</td><td>Bar</td><td data-diff-action="insert">Baz2</td><td data-diff-action="remove">Baz1</td></tr></tbody></table>' +
+							'<table><tbody><tr><td>Foo</td><td>Bar</td><td><p data-diff-action="remove">Baz1</p><p data-diff-action="insert">Baz2</p></td></tr></tbody></table>' +
 						'</li></ul>' +
 					'</div>'
 			}
