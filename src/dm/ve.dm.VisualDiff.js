@@ -520,13 +520,58 @@ ve.dm.VisualDiff.prototype.diffTableNodes = function ( oldNode, newNode ) {
 	var highlighter = new daff.TableDiff( alignment, flags );
 	highlighter.hilite( tableDiff );
 
+	var schema = tableDiff.data[ 0 ];
 	// Ensure there is always a schema row
 	if ( tableDiff.data[ 0 ][ 0 ] !== '!' ) {
-		tableDiff.data.splice( 0, 0, [ '!' ] );
+		schema = [ '!' ];
+		tableDiff.data.splice( 0, 0, schema );
+	} else {
+		schema.forEach( function ( col, colIndex ) {
+			// Convert adjacent column remove-insert into a change
+			if ( col === '---' && schema[ colIndex - 1 ] === '+++' ) {
+				tableDiff.data.forEach( function ( row, rowIndex ) {
+					if ( rowIndex === 0 ) {
+						return;
+					}
+					// Convert "insert" column to a change
+					row[ colIndex ] = {
+						before: row[ colIndex ],
+						after: row[ colIndex - 1 ]
+					};
+					// Remove "remove" column
+					row.splice( colIndex - 1, 1 );
+				} );
+				schema[ colIndex ] = '->';
+				schema.splice( colIndex - 1, 1 );
+			}
+		} );
 	}
 
-	tableDiff.data.slice( 1 ).forEach( function ( row ) {
-		row.slice( 1 ).forEach( function ( cell ) {
+	tableDiff.data.forEach( function ( row, rowIndex ) {
+		if ( rowIndex === 0 ) {
+			return;
+		}
+		var rowBefore = tableDiff.data[ rowIndex - 1 ];
+		// Convert adjacent row remove-insert into a change
+		if ( row[ 0 ] === '---' && rowBefore[ 0 ] === '+++' ) {
+			// Convert "insert" row to a change
+			row[ 0 ] = '->';
+			row.forEach( function ( cell, colIndex ) {
+				if ( colIndex === 0 ) {
+					return;
+				}
+				row[ colIndex ] = {
+					before: cell,
+					after: rowBefore[ colIndex ]
+				};
+			} );
+			// Remove "remove" row
+			tableDiff.data.splice( rowIndex - 1, 1 );
+		}
+		row.forEach( function ( cell, colIndex ) {
+			if ( colIndex === 0 ) {
+				return;
+			}
 			if ( cell && cell.before ) {
 				cell.diff = visualDiff.diffList(
 					cell.before.node.children,
