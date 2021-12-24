@@ -541,12 +541,89 @@ ve.dm.VisualDiff.prototype.diffTableNodes = function ( oldNode, newNode ) {
 	var highlighter = new daff.TableDiff( alignment, flags );
 	highlighter.hilite( tableDiff );
 
+	var data = tableDiff.data;
+	var schema = data[ 0 ];
 	// Ensure there is always a schema row
-	if ( tableDiff.data[ 0 ][ 0 ] !== '!' ) {
-		tableDiff.data.splice( 0, 0, [ '!' ] );
+	if ( data[ 0 ][ 0 ] !== '!' ) {
+		schema = [ '!' ];
+		data.splice( 0, 0, schema );
+	} else {
+		schema.forEach( function ( col, colIndex ) {
+			var n = 0;
+			// Starting at a boundary from +++ to ---, count outwards and compare
+			while (
+				schema[ colIndex - ( n + 1 ) ] === '+++' &&
+				schema[ colIndex + n ] === '---'
+			) {
+				n++;
+			}
+			// We now have n inserts then removes, e.g. when n=2: +++,+++,---,---
+
+			// Convert these column remove-inserts into changes
+			for ( var i = 0; i < n; i++ ) {
+				// eslint-disable-next-line no-loop-func
+				data.forEach( function ( row, rowIndex ) {
+					if ( rowIndex === 0 ) {
+						return;
+					}
+					var insertIndex = colIndex - n + i;
+					// As "---" cols are spliced, the next one is always at colIndex, not colIndex + i
+					var removeIndex = colIndex;
+
+					// Convert "+++" column to a change
+					row[ insertIndex ] = {
+						before: row[ removeIndex ],
+						after: row[ insertIndex ]
+					};
+					// Remove "---" column
+					row.splice( removeIndex, 1 );
+				} );
+				schema[ colIndex ] = '->';
+				schema.splice( colIndex - 1, 1 );
+			}
+		} );
 	}
 
-	tableDiff.data.slice( 1 ).forEach( function ( row ) {
+	data.forEach( function ( row, rowIndex ) {
+		if ( rowIndex === 0 ) {
+			return;
+		}
+		var n = 0;
+		// Starting at a boundary from +++ to ---, count outwards and compare
+		while (
+			data[ rowIndex - ( n + 1 ) ] && data[ rowIndex - ( n + 1 ) ][ 0 ] === '+++' &&
+			data[ rowIndex + n ] && data[ rowIndex + n ][ 0 ] === '---'
+		) {
+			n++;
+		}
+		// We now have n inserts then removes, e.g. when n=2: +++,+++,---,---
+
+		for ( var i = 0; i < n; i++ ) {
+			var insertIndex = rowIndex - n + i;
+			// As "---" rows are spliced, the next one is always at rowIndex, not rowIndex + i
+			var removeIndex = rowIndex;
+
+			var insertRow = data[ insertIndex ];
+			var removeRow = data[ removeIndex ];
+			// Convert "+++" row to a change
+			insertRow[ 0 ] = '->';
+			// eslint-disable-next-line no-loop-func
+			insertRow.forEach( function ( cell, colIndex ) {
+				if ( colIndex === 0 ) {
+					return;
+				}
+				insertRow[ colIndex ] = {
+					before: removeRow[ colIndex ],
+					after: cell
+				};
+			} );
+			// Remove "---" row
+			data.splice( removeIndex, 1 );
+		}
+	} );
+
+	// Compute cell diffs
+	data.slice( 1 ).forEach( function ( row ) {
 		row.slice( 1 ).forEach( function ( cell ) {
 			if ( cell && ( cell.before || cell.after ) ) {
 				cell.diff = visualDiff.diffDocs(
