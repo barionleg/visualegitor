@@ -524,6 +524,8 @@ ve.ui.DiffElement.prototype.getChangedNodeData = function ( diff, oldNode, newNo
 		nodeData = this.getChangedListNodeData( newNode, diff );
 	} else if ( newNode.isDiffedAsTable() ) {
 		nodeData = this.getChangedTableNodeData( oldNode, newNode, diff );
+	} else if ( newNode.isDiffedAsDocument() ) {
+		nodeData = this.getChangedDocListData( newNode, diff );
 	} else {
 		nodeData = this.getChangedTreeNodeData( oldNode, newNode, diff );
 	}
@@ -662,6 +664,13 @@ ve.ui.DiffElement.prototype.getChangedDocListData = function ( newListNode, diff
 	// Wrap in newListNode
 	diffData.unshift( newListNodeData[ 0 ] );
 	diffData.push( newListNodeData[ newListNodeData.length - 1 ] );
+
+	if ( diff.attributeChange ) {
+		var item = this.compareNodeAttributes( diffData, 0, diff.attributeChange );
+		if ( item ) {
+			this.descriptionItemsStack.push( item );
+		}
+	}
 
 	return diffData;
 };
@@ -925,7 +934,7 @@ ve.ui.DiffElement.prototype.getChangedTableNodeData = function ( oldNode, newNod
 						if ( cell.diff ) {
 							ve.batchPush(
 								diffData,
-								diffElement.getChangedDocListData( cell.after.node, cell.diff )
+								diffElement.getChangedNodeData( cell.diff, cell.before.node, cell.after.node, null )
 							);
 						} else {
 							// Remove-insert

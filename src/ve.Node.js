@@ -221,6 +221,14 @@ ve.Node.prototype.isDiffedAsLeaf = null;
 ve.Node.prototype.isDiffedAsTable = null;
 
 /**
+ * Check if the node behaves like a document for diffing
+ *
+ * @abstract
+ * @return {boolean} Node behaves like a document
+ */
+ve.Node.prototype.isDiffedAsDocument = null;
+
+/**
  * Check if the node has significant whitespace.
  *
  * Can only be true if canContainContent is also true.
