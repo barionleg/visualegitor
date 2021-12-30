@@ -582,6 +582,38 @@ QUnit.test( 'Diffing', function ( assert ) {
 					'</div>'
 			},
 			{
+				msg: 'List item indentation in div',
+				oldDoc:
+					'<div>' +
+						'<tr><td><ul><li>foo</li><li>bar</li><li>baz</li></ul></td></tr>' +
+					'</div>',
+				newDoc:
+					'<div>' +
+						'<tr><td><ul><li>foo<ul><li>bar</li></ul></li><li>baz</li></ul></td></tr>' +
+					'</div>',
+				expected:
+					'<div class="ve-ui-diffElement-doc-child-change">' +
+						'<div>' +
+						'<ul>' +
+							'<li>' +
+								'<p data-diff-action="none">foo</p>' +
+								'<ul>' +
+									'<li data-diff-id="0">' +
+										'<p data-diff-action="structural-change">bar</p>' +
+									'</li>' +
+								'</ul>' +
+							'</li>' +
+							'<li>' +
+								'<p data-diff-action="none">baz</p>' +
+							'</li>' +
+						'</ul>' +
+						'</div>' +
+					'</div>',
+				expectedDescriptions: [
+					'<div>visualeditor-changedesc-list-indent</div>'
+				]
+			},
+			{
 				msg: 'Annotation insertion',
 				oldDoc: '<p>foo bar baz</p>',
 				newDoc: '<p>foo <b>bar</b> baz</p>',
