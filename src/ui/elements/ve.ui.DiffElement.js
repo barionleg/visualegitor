@@ -715,6 +715,8 @@ ve.ui.DiffElement.prototype.getChangedListNodeData = function ( newListNode, dif
 	var lastListNode = null;
 	var listNodeData;
 
+	var indexAtDepth = [];
+
 	// Splice in each item with its diff annotations
 	for ( var i = 0, ilen = diff.length; i < ilen; i++ ) {
 
@@ -752,6 +754,8 @@ ve.ui.DiffElement.prototype.getChangedListNodeData = function ( newListNode, dif
 		var newDepth = nodes.metadata[ item.indexOrder ].depth;
 		var depthChange = newDepth - depth;
 
+		indexAtDepth[ newDepth ] = indexAtDepth[ newDepth ] || 1;
+
 		// Get linear data. Also get list node, since may need ancestors
 		var listNode = nodes.metadata[ item.indexOrder ].listNode;
 		// Only re-fetch list node data once per list
@@ -762,6 +766,12 @@ ve.ui.DiffElement.prototype.getChangedListNodeData = function ( newListNode, dif
 
 		// Get linear data of list item
 		var listItemData = doc.getData( nodes.metadata[ item.indexOrder ].listItem.getOuterRange() );
+		// TODO: Make this a node property, instead of a magic attribute
+		if ( listNode.getAttribute( 'style' ) === 'number' ) {
+			// Manually number list items for <ol>'s which contain removals
+			// TODO: Consider if the <ol> contains a `start` attribute (not currently handled by DM)
+			this.addAttributesToElement( listItemData, 0, { value: indexAtDepth[ newDepth ] } );
+		}
 		ve.batchSplice( listItemData, 1, listItemData.length - 2, contentData );
 
 		// Check for attribute changes
@@ -787,6 +797,11 @@ ve.ui.DiffElement.prototype.getChangedListNodeData = function ( newListNode, dif
 		insertIndex = this.appendListItem(
 			diffData, insertIndex, newListNode, listNodeData, listItemData, depthChange
 		);
+
+		if ( item.diff !== -1 ) {
+			indexAtDepth[ newDepth ]++;
+		}
+
 		depth = newDepth;
 	}
 
