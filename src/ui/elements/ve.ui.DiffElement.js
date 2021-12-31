@@ -522,6 +522,8 @@ ve.ui.DiffElement.prototype.getChangedNodeData = function ( diff, oldNode, newNo
 		nodeData = this.getChangedLeafNodeData( newNode, diff, move );
 	} else if ( newNode.isDiffedAsList() ) {
 		nodeData = this.getChangedListNodeData( newNode, diff );
+	} else if ( newNode.isDiffedAsDocument() ) {
+		nodeData = this.getChangedDocListData( newNode, diff );
 	} else {
 		nodeData = this.getChangedTreeNodeData( oldNode, newNode, diff );
 	}
@@ -627,6 +629,48 @@ ve.ui.DiffElement.prototype.appendListItem = function ( diffData, insertIndex, l
 	}
 
 	return insertIndex;
+};
+
+/**
+ * Get the linear data for a document-like node that has been changed
+ *
+ * @param {ve.dm.Node} newListNode Node from new document
+ * @param {Object} diff Object describing the duff
+ * @return {Array} Linear data for the diff
+ */
+ve.ui.DiffElement.prototype.getChangedDocListData = function ( newListNode, diff ) {
+	var diffData = [],
+		diffElement = this;
+
+	this.iterateDiff( diff, {
+		insert: function ( newNode ) {
+			ve.batchPush( diffData, diffElement.getNodeData( newNode, 'insert' ) );
+		},
+		remove: function ( oldNode ) {
+			ve.batchPush( diffData, diffElement.getNodeData( oldNode, 'remove' ) );
+		},
+		move: function ( newNode, move ) {
+			ve.batchPush( diffData, diffElement.getNodeData( newNode, 'none', move ) );
+		},
+		changed: function ( nodeDiff, oldNode, newNode, move ) {
+			ve.batchPush( diffData, diffElement.getChangedNodeData( nodeDiff, oldNode, newNode, move ) );
+		}
+	} );
+
+	var newListNodeData = this.newDoc.getData( newListNode.getOuterRange() );
+
+	// Wrap in newListNode
+	diffData.unshift( newListNodeData[ 0 ] );
+	diffData.push( newListNodeData[ newListNodeData.length - 1 ] );
+
+	if ( diff.attributeChange ) {
+		var item = this.compareNodeAttributes( diffData, 0, diff.attributeChange );
+		if ( item ) {
+			this.descriptionItemsStack.push( item );
+		}
+	}
+
+	return diffData;
 };
 
 ve.ui.DiffElement.prototype.iterateDiff = function ( diff, callbacks ) {
@@ -790,6 +834,147 @@ ve.ui.DiffElement.prototype.getChangedListNodeData = function ( newListNode, dif
 
 		depth = newDepth;
 	}
+
+	return diffData;
+};
+
+/**
+ * Get the linear data for the diff of a table node that has been changed.
+ *
+ * @param {ve.dm.TableNode} oldNode Corresponding node from the old document
+ * @param {ve.dm.TableNode} newNode Corresponding node from the new document
+ * @param {Object} diff Object describing the diff
+ * @return {Array} Linear data for the diff
+ */
+ve.ui.DiffElement.prototype.getChangedTableNodeData = function ( oldNode, newNode, diff ) {
+	var diffElement = this,
+		newData = this.newDoc.getData( newNode.getOuterRange() ),
+		diffData = [];
+
+	function getData( node ) {
+		return node.getDocument().getData( node.getOuterRange() );
+	}
+
+	function getOpen( node ) {
+		var range = node.getOuterRange();
+		return node.getDocument().getData( new ve.Range( range.start, range.start + 1 ) )[ 0 ];
+	}
+
+	function getClose( node ) {
+		var range = node.getOuterRange();
+		return node.getDocument().getData( new ve.Range( range.end - 1, range.end ) )[ 0 ];
+	}
+
+	// <table>
+	diffData.push( newData[ 0 ] );
+	var colInfo = diff.tableDiff.data[ 0 ].slice( 1 );
+	var lastSectionNode = null;
+	var lastRowNode = null;
+	diff.tableDiff.data.slice( 1 ).forEach( function ( row, rowIndex ) {
+		var rowInfo = row[ 0 ];
+
+		var rowNode = ( row[ 1 ].after || row[ 1 ] ).owner.node.parent;
+		var sectionNode = rowNode.parent;
+
+		if ( !lastSectionNode || sectionNode.getAttribute( 'style' ) !== lastSectionNode.getAttribute( 'style' ) ) {
+			if ( lastSectionNode ) {
+				diffData.push( getClose( sectionNode ) );
+			}
+			diffData.push( getOpen( sectionNode ) );
+		}
+		if ( rowNode !== lastRowNode ) {
+			diffData.push( getOpen( rowNode ) );
+		}
+
+		if ( rowInfo === '+++' || rowInfo === '---' ) {
+			row.slice( 1 ).forEach( function ( cell ) {
+				if ( cell && !cell.isPlaceholder() ) {
+					var cellData = getData( cell.node );
+					diffElement.addAttributesToElement( cellData, 0, { 'data-diff-action': rowInfo === '+++' ? 'insert' : 'remove' } );
+					ve.batchPush( diffData, cellData );
+				}
+			} );
+		} else {
+			row.slice( 1 ).forEach( function ( cell, colIndex ) {
+				var cellData;
+				if ( cell instanceof ve.dm.TableMatrixCell ) {
+					if ( !cell.isPlaceholder() ) {
+						cellData = getData( cell.node );
+						if ( colInfo[ colIndex ] === '+++' ) {
+							diffElement.addAttributesToElement( cellData, 0, { 'data-diff-action': 'insert' } );
+						} else if ( colInfo[ colIndex ] === '---' ) {
+							diffElement.addAttributesToElement( cellData, 0, { 'data-diff-action': 'remove' } );
+						} else if ( rowInfo === ':' || colInfo[ colIndex ] === ':' ) {
+							var move = '';
+							if ( rowInfo === ':' && colIndex === 0 ) {
+								// row moved
+								move = 'table-row';
+							} else if ( colInfo[ colIndex ] === ':' && rowIndex === 0 ) {
+								// col moved
+								move = 'table-col';
+							}
+							var attrs = { 'data-diff-move': move };
+							if ( move ) {
+								// The following messages are used here:
+								// * visualeditor-diff-moved-table-col
+								// * visualeditor-diff-moved-table-row
+								var item = diffElement.getChangeDescriptionItem( [ ve.msg( 'visualeditor-diff-moved-' + move ) ] );
+								attrs[ 'data-diff-id' ] = item.getData();
+								diffElement.descriptionItemsStack.push( item );
+							}
+							diffElement.addAttributesToElement( cellData, 0, attrs );
+
+						}
+						ve.batchPush( diffData, cellData );
+					}
+				} else {
+					if ( !cell.after.isPlaceholder() ) {
+						if ( cell.diff ) {
+							ve.batchPush(
+								diffData,
+								diffElement.getChangedDocListData( cell.after.node, cell.diff )
+							);
+						} else {
+							// Remove-insert
+							var afterCellData = getData( cell.after.node );
+							var afterCellDiv = [ { type: 'div' } ];
+							diffElement.addAttributesToElement( afterCellDiv, 0, { 'data-diff-action': 'insert' } );
+							var beforeCellData = getData( cell.before.node );
+							var beforeCellDiv = [ { type: 'div' } ];
+							diffElement.addAttributesToElement( beforeCellDiv, 0, { 'data-diff-action': 'remove' } );
+							cellData = [ afterCellData[ 0 ] ].concat(
+								beforeCellDiv
+							).concat(
+								beforeCellData.slice( 1, beforeCellData.length - 1 )
+							).concat( [
+								{ type: '/div' }
+							] ).concat(
+								afterCellDiv
+							).concat(
+								afterCellData.slice( 1, afterCellData.length - 1 )
+							).concat( [
+								{ type: '/div' },
+								afterCellData[ afterCellData.length - 1 ]
+							] );
+							ve.batchPush( diffData, cellData );
+						}
+					}
+				}
+			} );
+		}
+		if ( rowNode !== lastRowNode ) {
+			diffData.push( getClose( rowNode ) );
+		}
+
+		lastRowNode = rowNode;
+		lastSectionNode = sectionNode;
+	} );
+
+	if ( lastSectionNode ) {
+		diffData.push( getClose( lastSectionNode ) );
+	}
+	// </table>
+	diffData.push( newData[ newData.length - 1 ] );
 
 	return diffData;
 };
