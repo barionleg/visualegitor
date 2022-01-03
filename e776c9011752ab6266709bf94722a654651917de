@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddae980e_c3a3da58",
+        "filename": "tests/ui/ve.ui.DiffElement.test.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 777,
+      "author": {
+        "id": 2849
+      },
+      "writtenOn": "2022-01-03T16:58:47Z",
+      "side": 1,
+      "message": "This looks wrong - can we fix it in a separate commit?",
+      "range": {
+        "startLine": 777,
+        "startChar": 34,
+        "endLine": 777,
+        "endChar": 54
+      },
+      "revId": "e776c9011752ab6266709bf94722a654651917de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
