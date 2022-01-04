@@ -120,6 +120,47 @@
 		return ve.createDeferred().resolve().promise();
 	};
 
+	var voids = ve.elementTypes.void.slice();
+	// Used in ve.createDocumentFromHtml test
+	voids.push( 'bodything' );
+	var voidGroup = '(' + voids.join( '|' ) + ')';
+	var voidRegexp = new RegExp( '(<' + voidGroup + '[^>]*?(/?))>', 'g' );
+	var createDocumentFromHtml = ve.createDocumentFromHtml;
+	ve.createDocumentFromHtml = function ( html, ignoreWarnings ) {
+		if ( html && !ignoreWarnings ) {
+			var xml = '<xml>' +
+				html
+					// Close open void tags
+					.replace( voidRegexp, function () {
+						return arguments[ 3 ] ?
+							// self-closing - do nothing
+							arguments[ 0 ] :
+							// add close tag
+							arguments[ 0 ] + '</' + arguments[ 2 ] + '>';
+					} )
+					// Remove entities, named ones not recognised
+					.replace( /&[^;]+;/g, '' )
+					// Remove doctype
+					.replace( /<!doctype html>/i, '' ) +
+			'</xml>';
+			var xmlDoc;
+			// Firefox additionally throws an error
+			try {
+				xmlDoc = ( new DOMParser() ).parseFromString( '<xml>' + xml + '</xml>', 'application/xml' );
+			} catch ( e ) {
+			}
+			if ( xmlDoc ) {
+				var parserError = xmlDoc.querySelector( 'parsererror' );
+				if ( parserError ) {
+					// eslint-disable-next-line no-console
+					console.warn( parserError.innerText, '\n', html, '\n', xml );
+				}
+			}
+		}
+
+		return createDocumentFromHtml( html );
+	};
+
 	function getSerializableData( model ) {
 		return model.getFullData( undefined, 'roundTrip' );
 	}
@@ -209,7 +250,7 @@
 
 		if ( caseItem.head !== undefined || caseItem.body !== undefined ) {
 			var html = '<head>' + ( caseItem.head || defaultHead ) + '</head><body>' + caseItem.body + '</body>';
-			var htmlDoc = ve.createDocumentFromHtml( html );
+			var htmlDoc = ve.createDocumentFromHtml( html, caseItem.ignoreXmlWarnings );
 			var model = ve.dm.converter.getModelFromDom( htmlDoc, { fromClipboard: !!caseItem.fromClipboard } );
 			var actualDataReal = model.getFullData();
 			var actualDataMeta = getSerializableData( model );
@@ -242,7 +283,7 @@
 			}
 			// Check round-trip
 			var expectedRtDoc = caseItem.normalizedBody ?
-				ve.createDocumentFromHtml( caseItem.normalizedBody ) :
+				ve.createDocumentFromHtml( caseItem.normalizedBody, caseItem.ignoreXmlWarnings ) :
 				htmlDoc;
 			assert.equalDomElement( actualRtDoc.body, expectedRtDoc.body, msg + ': round-trip' );
 		}
@@ -274,12 +315,12 @@
 		var previewHtml = '<body>' + ( caseItem.previewBody || fromDataBody ) + '</body>';
 		assert.equalDomElement(
 			ve.dm.converter.getDomFromModel( model ),
-			ve.createDocumentFromHtml( html ),
+			ve.createDocumentFromHtml( html, caseItem.ignoreXmlWarnings ),
 			msg
 		);
 		assert.equalDomElement(
 			ve.dm.converter.getDomFromModel( model, ve.dm.Converter.static.CLIPBOARD_MODE ),
-			ve.createDocumentFromHtml( clipboardHtml ),
+			ve.createDocumentFromHtml( clipboardHtml, caseItem.ignoreXmlWarnings ),
 			msg + ' (clipboard mode)'
 		);
 		// Make this conditional on previewBody being present until downstream test-suites have been fixed.
@@ -288,7 +329,7 @@
 		if ( caseItem.previewBody ) {
 			assert.equalDomElement(
 				ve.dm.converter.getDomFromModel( model, ve.dm.Converter.static.PREVIEW_MODE ),
-				ve.createDocumentFromHtml( previewHtml ),
+				ve.createDocumentFromHtml( previewHtml, caseItem.ignoreXmlWarnings ),
 				msg + ' (preview mode)'
 			);
 		}
