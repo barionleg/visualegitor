@@ -33,6 +33,23 @@
       "message": "They are applied fairly inconsistently too: when block level elements are removed we don\u0027t/can\u0027t wrap them in inline tags. I think it\u0027s fine to just use them for inline changes.",
       "revId": "593fe9026165af85dcdaa5cc81be545c28685bde",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f467a02_09c12d7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2022-01-10T22:14:42Z",
+      "side": 1,
+      "message": "If we were going to do this properly it should happen in the linear model DM, but I don\u0027t think it\u0027s worth the effort.",
+      "revId": "593fe9026165af85dcdaa5cc81be545c28685bde",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
