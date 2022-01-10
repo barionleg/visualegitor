@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98ac684d_148a027f",
+        "filename": "src/ce/keydownhandlers/ve.ce.LinearDeleteKeyDownHandler.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2022-01-10T14:37:55Z",
+      "side": 1,
+      "message": "This is much less flaky.",
+      "revId": "c55e24a670daf8002026a125c0dd0f0415e47da9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "313f627b_7da11cf2",
+        "filename": "tests/ce/keydownhandlers/ve.ce.LinearDeleteKeyDownHandler.test.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2022-01-10T14:37:55Z",
+      "side": 1,
+      "message": "The cursor now stays at the end of the paragraph like it should.",
+      "revId": "c55e24a670daf8002026a125c0dd0f0415e47da9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
