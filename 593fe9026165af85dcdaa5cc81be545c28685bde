@@ -16,6 +16,23 @@
       "message": "The \u003cdel\u003e/\u003cins\u003e wrappers might have some semantic/accessibility value (although I\u0027m not sure how useful they really are). Would your other patches still work if we kept them?",
       "revId": "593fe9026165af85dcdaa5cc81be545c28685bde",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff902b54_02adfb03",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2022-01-10T22:09:45Z",
+      "side": 1,
+      "message": "They are applied fairly inconsistently too: when block level elements are removed we don\u0027t/can\u0027t wrap them in inline tags. I think it\u0027s fine to just use them for inline changes.",
+      "revId": "593fe9026165af85dcdaa5cc81be545c28685bde",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
