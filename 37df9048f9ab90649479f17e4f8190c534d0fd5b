@@ -51,6 +51,24 @@
       "parentUuid": "2a8824be_6136a99b",
       "revId": "37df9048f9ab90649479f17e4f8190c534d0fd5b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8686355_10b5f6fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2022-01-10T14:36:33Z",
+      "side": 1,
+      "message": "Ah I see - linear delete does it\u0027s own list unwrapping by removing the opening element and relying on the transaction to be cleaned up nicely. We shouldn\u0027t do that...",
+      "parentUuid": "87389799_31500f45",
+      "revId": "37df9048f9ab90649479f17e4f8190c534d0fd5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
