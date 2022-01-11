@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dce52bc3_9b001bbd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2022-01-11T16:37:08Z",
+      "side": 1,
+      "message": "I did a git bisect and found that this patch broke my local dev environment. I will post more information on Phabricator.",
+      "revId": "6eb23a10fae9d2e819ed528eb5c6636b879e60f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
