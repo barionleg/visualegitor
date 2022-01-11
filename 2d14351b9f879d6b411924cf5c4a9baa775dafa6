@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc27f898_6d51f849",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2022-01-11T16:50:07Z",
+      "side": 1,
+      "message": "This patch broke something in my local dev environment. When I click a template transclusion to edit it, the ContextItem popup that opens is just a few pixels high: https://phabricator.wikimedia.org/F34914592. When I undo this change it behaves as before and I can use the popup.\n\nThis is not connected to a Phabricator ticket. Should I report this as a new bug?",
+      "revId": "2d14351b9f879d6b411924cf5c4a9baa775dafa6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
