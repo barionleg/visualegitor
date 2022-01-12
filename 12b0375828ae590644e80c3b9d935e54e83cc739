@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db10208c_7ea72af1",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 4254,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2022-01-12T18:34:25Z",
+      "side": 1,
+      "message": "What is the resulting range when this happens? The whole document? The start of the document? Can we document it...\n\n(Give the edge case described in the patch summary, the whole document would appear to make sense)",
+      "revId": "12b0375828ae590644e80c3b9d935e54e83cc739",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
