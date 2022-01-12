@@ -34,6 +34,24 @@
       "parentUuid": "db10208c_7ea72af1",
       "revId": "12b0375828ae590644e80c3b9d935e54e83cc739",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0cfe8fe_fc223a99",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 4254,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2022-01-12T19:01:13Z",
+      "side": 1,
+      "message": "Oh, my logic for it not just being the start/end was that returning a collapsed range as the visible range seems like it\u0027d be unexpected behavior and might have side-effects. (Though, granted, we\u0027re presumably already doing it in the empty-document case.)",
+      "parentUuid": "c0693e4f_46e61259",
+      "revId": "12b0375828ae590644e80c3b9d935e54e83cc739",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
