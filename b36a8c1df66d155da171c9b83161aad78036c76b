@@ -16,6 +16,24 @@
       "message": "It\u0027s not obvious this causes the while loop to break without doing any more searching (other than that the while loop must always break /eventually/ because it requires the range to keep decreasing in length). If we are forcefully bailing, should we just `return end/start` or something?",
       "revId": "b36a8c1df66d155da171c9b83161aad78036c76b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3941f77_7653cd06",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 4254,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2022-01-12T17:50:43Z",
+      "side": 1,
+      "message": "Yeah, that\u0027s fair. I\u0027ll switch to just returning for clarity.",
+      "parentUuid": "d2f6e268_fe9c1a40",
+      "revId": "b36a8c1df66d155da171c9b83161aad78036c76b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
