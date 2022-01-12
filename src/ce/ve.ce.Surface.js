@@ -4261,17 +4261,31 @@ ve.ce.Surface.prototype.getViewportRange = function ( covering, padding ) {
 				}
 			}
 
-			// Try to create a selection of one character for more reliable
-			// behaviour when text wraps.
-			var contentRange;
-			if ( data.isContentOffset( mid + 1 ) ) {
-				contentRange = new ve.Range( mid, mid + 1 );
-			} else if ( data.isContentOffset( mid - 1 ) ) {
-				contentRange = new ve.Range( mid - 1, mid );
-			} else {
-				contentRange = new ve.Range( mid );
+			var rect = null;
+			while ( !rect ) {
+				// Try to create a selection of one character for more reliable
+				// behaviour when text wraps.
+				var contentRange;
+				if ( data.isContentOffset( mid + 1 ) ) {
+					contentRange = new ve.Range( mid, mid + 1 );
+				} else if ( data.isContentOffset( mid - 1 ) ) {
+					contentRange = new ve.Range( mid - 1, mid );
+				} else {
+					contentRange = new ve.Range( mid );
+				}
+				rect = surface.getSelection( new ve.dm.LinearSelection( contentRange ) ).getSelectionBoundingRect();
+
+				// Node at contentRange is not rendered, find rendered parent
+				if ( !rect ) {
+					if ( !midNode ) {
+						throw new Error( 'Offset has no rendered node container' );
+					}
+					var midNodeRange = midNode.getOuterRange();
+					mid = side === 'top' ? midNodeRange.end : midNodeRange.start;
+					// Ensure we check parent in next iteration
+					midNode = midNode.parent;
+				}
 			}
-			var rect = surface.getSelection( new ve.dm.LinearSelection( contentRange ) ).getSelectionBoundingRect();
 			if ( rect[ side ] > offset ) {
 				end = mid;
 				range = new ve.Range( range.start, end );
