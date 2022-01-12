@@ -4249,6 +4249,10 @@ ve.ce.Surface.prototype.getViewportRange = function ( covering, padding ) {
 				mid = side === 'top' ? nodeRange.end : nodeRange.start;
 			} else {
 				mid = data.getNearestContentOffset( mid );
+				if ( mid === -1 ) {
+					// There is no content offset in this document.
+					mid = side === 'top' ? range.end : range.start;
+				}
 			}
 
 			// Try to create a selection of one character for more reliable
