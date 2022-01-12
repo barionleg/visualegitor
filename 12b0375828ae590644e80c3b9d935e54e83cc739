@@ -16,6 +16,24 @@
       "message": "What is the resulting range when this happens? The whole document? The start of the document? Can we document it...\n\n(Give the edge case described in the patch summary, the whole document would appear to make sense)",
       "revId": "12b0375828ae590644e80c3b9d935e54e83cc739",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0693e4f_46e61259",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 4254,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2022-01-12T18:36:50Z",
+      "side": 1,
+      "message": "It\u0027s the whole document. I will document this in the comments...",
+      "parentUuid": "db10208c_7ea72af1",
+      "revId": "12b0375828ae590644e80c3b9d935e54e83cc739",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
