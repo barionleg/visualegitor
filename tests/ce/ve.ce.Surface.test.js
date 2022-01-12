@@ -2470,10 +2470,16 @@ QUnit.test( 'getViewportRange', function ( assert ) {
 		'B', 'a', 'z',
 		// 18
 		{ type: '/paragraph' },
-		[
-			{ type: 'internalList' },
-			{ type: '/internalList' }
-		]
+		// Mimic a figure with a hidden caption
+		{ type: 'div' },
+		{ type: 'paragraph', originalDomElements: $( '<p style="display: none;">' ).toArray() },
+		// 21
+		'Q', 'u', 'x',
+		// 24
+		{ type: '/paragraph' },
+		{ type: '/div' },
+		{ type: 'internalList' },
+		{ type: '/internalList' }
 	) );
 	var cases = [
 		{
@@ -2500,15 +2506,15 @@ QUnit.test( 'getViewportRange', function ( assert ) {
 			msg: 'Viewport from to first alien to second alien',
 			htmlOrDoc: doc,
 			viewportDimensions: { top: 500, bottom: 1600 },
-			expectedContains: new ve.Range( 8, 10 ),
+			expectedContains: new ve.Range( 8, 11 ),
 			expectedCovering: new ve.Range( 4, 15 )
 		},
 		{
 			msg: 'Viewport from to second alien to end of document',
 			htmlOrDoc: doc,
 			viewportDimensions: { top: 1600, bottom: 3000 },
-			expectedContains: new ve.Range( 15, 18 ),
-			expectedCovering: new ve.Range( 10, 19 )
+			expectedContains: new ve.Range( 15, 20 ),
+			expectedCovering: new ve.Range( 11, 26 )
 		}
 	];
 
