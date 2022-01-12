@@ -178,7 +178,7 @@ ve.dm.example.textStyleClasses = 've-ce-annotation ve-ce-textStyleAnnotation';
 
 ve.dm.example.commentNodePreview = function ( text ) {
 	return '<span class="ve-ce-leafNode ve-ce-focusableNode ve-ce-commentNode ve-ce-focusableNode-invisible" contenteditable="false" title="' + text + '">' +
-		'<span class="ve-ce-focusableNode-invisibleIcon oo-ui-widget oo-ui-widget-enabled oo-ui-buttonElement oo-ui-buttonElement-frameless oo-ui-iconElement oo-ui-buttonWidget oo-ui-labelElement" aria-disabled="false">' +
+		'<span class="ve-ce-focusableNode-invisibleIcon oo-ui-widget oo-ui-widget-enabled oo-ui-buttonElement oo-ui-buttonElement-frameless oo-ui-iconElement oo-ui-buttonWidget oo-ui-labelElement">' +
 			'<a class="oo-ui-buttonElement-button" role="button" rel="nofollow">' +
 				'<span class="oo-ui-iconElement-icon oo-ui-icon-notice"></span>' +
 				'<span class="oo-ui-labelElement-label">' + text + '</span>' +
