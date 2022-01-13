@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "587b3df7_27e6ee83",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2022-01-13T08:44:53Z",
+      "side": 1,
+      "message": "In my test this fixes the error described in T296910#7613287.",
+      "revId": "29482de0fc1608c903ca059f24abd3636905ef8e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
