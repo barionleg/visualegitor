@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9e71e0d_02886a51",
+        "filename": "src/ui/elements/ve.ui.DiffElement.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2022-01-14T17:40:35Z",
+      "side": 0,
+      "message": "(this return value was unused)",
+      "revId": "e7b92f6eafaee3b392db9e8be813cfe04fd5f3f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
