@@ -539,9 +539,10 @@ ve.ui.DiffElement.prototype.getChangedNodeElements = function ( diff, oldNode, n
  * @param {ve.dm.Node} oldNode Node from the old document
  * @param {ve.dm.Node} newNode Corresponding node from the new document
  * @param {string|null} move 'up' or 'down' if the node has moved
- * @return {Array} Linear data for the diff
+ * @param {boolean} [noTreeDiff] Don't perform a tree diff of the nodes (used internally to avoid recursion)
+ * @return {Array|boolean} Linear data for the diff, or false
  */
-ve.ui.DiffElement.prototype.getChangedNodeData = function ( diff, oldNode, newNode, move ) {
+ve.ui.DiffElement.prototype.getChangedNodeData = function ( diff, oldNode, newNode, move, noTreeDiff ) {
 	var nodeData;
 
 	// Choose the appropriate method for the type of node
@@ -551,8 +552,10 @@ ve.ui.DiffElement.prototype.getChangedNodeData = function ( diff, oldNode, newNo
 		nodeData = this.getChangedListNodeData( newNode, diff );
 	} else if ( newNode.isDiffedAsDocument() ) {
 		nodeData = this.getChangedDocListData( newNode, diff );
-	} else {
+	} else if ( !noTreeDiff ) {
 		nodeData = this.getChangedTreeNodeData( oldNode, newNode, diff );
+	} else {
+		return false;
 	}
 
 	this.markMove( move, nodeData );
@@ -898,13 +901,14 @@ ve.ui.DiffElement.prototype.getChangedListNodeData = function ( newListNode, dif
  * Get the linear data for the diff of a tree-like node that has been changed.
  * Any node that is not leaf-like or list-like is treated as tree-like.
  *
- * @param {ve.dm.Node} oldNode Node from the old document
- * @param {ve.dm.Node} newNode Corresponding node from the new document
+ * @param {ve.dm.Node} oldTreeNode Node from the old document
+ * @param {ve.dm.Node} newTreeNode Corresponding node from the new document
  * @param {Object} diff Object describing the diff
  * @return {Array} Linear data for the diff
  */
-ve.ui.DiffElement.prototype.getChangedTreeNodeData = function ( oldNode, newNode, diff ) {
-	var nodeRange = newNode.getOuterRange(),
+ve.ui.DiffElement.prototype.getChangedTreeNodeData = function ( oldTreeNode, newTreeNode, diff ) {
+	var diffElement = this,
+		nodeRange = newTreeNode.getOuterRange(),
 		nodeData = this.newDoc.getData( nodeRange ),
 		treeDiff = diff.treeDiff,
 		diffInfo = diff.diffInfo,
@@ -953,7 +957,7 @@ ve.ui.DiffElement.prototype.getChangedTreeNodeData = function ( oldNode, newNode
 		var orderedNode = oldNodes[ nodeIndex ];
 		var node = orderedNode.node;
 
-		if ( !node.canContainContent() && node.hasChildren() ) {
+		if ( node.isDiffedAsTree() && node.hasChildren() ) {
 
 			// Record that the node has been removed, but don't display it, for now
 			// TODO: describe the change for the attribute diff
@@ -1040,7 +1044,7 @@ ve.ui.DiffElement.prototype.getChangedTreeNodeData = function ( oldNode, newNode
 		// Add insert class
 		this.addAttributesToElement(
 			nodeData, nodeRangeStart, {
-				'data-diff-action': ( !node.canContainContent() && node.hasChildren() ) ? 'structural-insert' : 'insert'
+				'data-diff-action': ( node.isDiffedAsTree() && node.hasChildren() ) ? 'structural-insert' : 'insert'
 			}
 		);
 	}
@@ -1049,30 +1053,37 @@ ve.ui.DiffElement.prototype.getChangedTreeNodeData = function ( oldNode, newNode
 	 * Mark this node as changed and, if it is a content branch node, splice in
 	 * the diff data.
 	 *
-	 * @param {number} nodeIndex The index of this node in the subtree rooted at
-	 * this document child
-	 * @param {Object} info Information relating to this node's change
+	 * @param {number} oldIdx Old node index
+	 * @param {number} newIdx New node index
+	 * @param {Object} info Diff information relating to this node's change
 	 */
-	function highlightChangedNode( nodeIndex, info ) {
+	function highlightChangedNode( oldIdx, newIdx, info ) {
 		// The new node was changed.
 		// Get data for this node
-		var node = newNodes[ nodeIndex ].node;
-		var nodeRangeStart = node.getOuterRange().from - nodeRange.from;
+		var oldNode = oldNodes[ oldIdx ].node;
+		var newNode = newNodes[ newIdx ].node;
+		var nodeRangeStart = newNode.getOuterRange().from - nodeRange.from;
 
-		if ( info.linearDiff ) {
-			// If there is a content change, splice it in
-			var nodeDiffData = info.linearDiff;
-			var annotatedData = this.annotateNode( nodeDiffData );
-			ve.batchSplice( nodeData, nodeRangeStart + 1, node.length, annotatedData );
-		}
-		if ( info.attributeChange ) {
-			// If there is no content change, just add change class
-			this.addAttributesToElement(
-				nodeData, nodeRangeStart, { 'data-diff-action': 'structural-change' }
-			);
-			var item = this.compareNodeAttributes( nodeData, nodeRangeStart, info.attributeChange );
-			if ( item ) {
-				this.descriptionItemsStack.push( item );
+		var nodeDiffData = diffElement.getChangedNodeData( info, oldNode, newNode, null, true );
+		if ( nodeDiffData ) {
+			// Diff was handled e.g. by leaf/list/doc differ
+			ve.batchSplice( nodeData, nodeRangeStart, newNode.getOuterLength(), nodeDiffData );
+		} else {
+			if ( info.linearDiff ) {
+				// If there is a content change, splice it in
+				nodeDiffData = info.linearDiff;
+				var annotatedData = this.annotateNode( nodeDiffData );
+				ve.batchSplice( nodeData, nodeRangeStart + 1, newNode.getLength(), annotatedData );
+			}
+			if ( info.attributeChange ) {
+				// If there is no content change, just add change class
+				this.addAttributesToElement(
+					nodeData, nodeRangeStart, { 'data-diff-action': 'structural-change' }
+				);
+				var item = this.compareNodeAttributes( nodeData, nodeRangeStart, info.attributeChange );
+				if ( item ) {
+					this.descriptionItemsStack.push( item );
+				}
 			}
 		}
 	}
@@ -1111,7 +1122,7 @@ ve.ui.DiffElement.prototype.getChangedTreeNodeData = function ( oldNode, newNode
 					} else {
 
 						// There could be any combination of content, attribute and type changes
-						highlightChangedNode.call( this, newIndex, diffInfo[ k ] );
+						highlightChangedNode.call( this, oldIndex, newIndex, diffInfo[ k ] );
 
 					}
 
