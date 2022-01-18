@@ -1418,24 +1418,14 @@ QUnit.test( 'Diffing', function ( assert ) {
 				newDoc: 'Hi<ref>Foo 1</ref><ref>Baz1</ref><ref>Baz2</ref><ref>Baz3</ref><ref>Baz4</ref><ref>Quux</ref>',
 				expected:
 					'<p data-diff-action="none">Hi' + '<ref></ref>'.repeat( 6 ) + '</p>' +
-					'<div class="ve-ui-diffElement-doc-child-change">' +
-						'<ol start="1">' +
-							'<li><div class="ve-ui-diffElement-doc-child-change">Foo<ins data-diff-action="insert"> 1</ins></div></li>' +
-						'</ol>' +
-						'<ol start="2">' +
-							'<li><div class="ve-ui-diffElement-doc-child-change"><p data-diff-action="remove">Bar</p></div></li>' +
-						'</ol>' +
-						'<ol start="2">' +
-							'<li><p data-diff-action="none">Baz1</p></li>' +
-						'</ol>' +
-						'<ol class="ve-ui-diffElement-internalListSpacer"><li>' + spacer + '</li></ol>' +
-						'<ol start="5">' +
-							'<li><p data-diff-action="none">Baz4</p></li>' +
-						'</ol>' +
-						'<ol start="6">' +
-							'<li><div class="ve-ui-diffElement-doc-child-change"><p data-diff-action="insert">Quux</p></div></li>' +
-						'</ol>' +
-					'</div>'
+					'<ol class="ve-ui-diffElement-doc-child-change">' +
+						'<li value="1"><div class="ve-ui-diffElement-doc-child-change">Foo<ins data-diff-action="insert"> 1</ins></div></li>' +
+						'<li value="2"><div class="ve-ui-diffElement-doc-child-change"><p data-diff-action="remove">Bar</p></div></li>' +
+						'<li value="2"><p data-diff-action="none">Baz1</p></li>' +
+						'<li class="ve-ui-diffElement-internalListSpacer">' + spacer + '</li>' +
+						'<li value="5"><p data-diff-action="none">Baz4</p></li>' +
+						'<li value="6"><div class="ve-ui-diffElement-doc-child-change"><p data-diff-action="insert">Quux</p></div></li>' +
+					'</ol>'
 			}
 		];
 
