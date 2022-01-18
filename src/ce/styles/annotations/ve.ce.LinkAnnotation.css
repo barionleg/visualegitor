@@ -30,6 +30,14 @@
 	vertical-align: middle;
 }
 
+.ve-ce-nailedAnnotation {
+	white-space: nowrap;
+}
+
+.ve-ce-nailedAnnotation-content {
+	white-space: normal;
+}
+
 .ve-init-target-ctrl-meta-down .ve-ce-linkAnnotation {
 	cursor: pointer;
 }

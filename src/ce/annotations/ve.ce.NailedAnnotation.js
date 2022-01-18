@@ -13,7 +13,7 @@
  */
 ve.ce.NailedAnnotation = function VeCeNailedAnnotation() {
 	// Initialization
-	this.contentFragment = document.createDocumentFragment();
+	this.$content = $( '<span>' ).addClass( 've-ce-nailedAnnotation-content' );
 
 	this.$element.addClass( 've-ce-nailedAnnotation' );
 };
@@ -58,7 +58,7 @@ ve.ce.NailedAnnotation.static.makeNail = function ( type ) {
  * @inheritdoc ve.ce.Annotation
  */
 ve.ce.NailedAnnotation.prototype.getContentContainer = function () {
-	return this.contentFragment;
+	return this.$content[ 0 ];
 };
 
 /**
@@ -68,7 +68,7 @@ ve.ce.NailedAnnotation.prototype.attachContents = function () {
 	var element = this.$element[ 0 ];
 	// Insert post-open nail, annotation contents, and pre-close nail into the element
 	element.appendChild( this.constructor.static.makeNail( 'post-open' ) );
-	element.appendChild( this.contentFragment );
+	element.appendChild( this.$content[ 0 ] );
 	element.appendChild( this.constructor.static.makeNail( 'pre-close' ) );
 };
 
