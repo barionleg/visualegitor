@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7b81c0f_12489c95",
+        "filename": "tests/ui/ve.ui.DiffElement.test.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 598,
+      "author": {
+        "id": 2849
+      },
+      "writtenOn": "2022-01-18T13:36:23Z",
+      "side": 0,
+      "message": "Esanders says this is intended. Looks fine to me.",
+      "revId": "89356a90ab15351b291acad471681da9a0dbb7fe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
