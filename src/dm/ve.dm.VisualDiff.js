@@ -25,15 +25,13 @@ ve.dm.VisualDiff = function VeDmVisualDiff( oldDocOrNode, newDocOrNode, timeout 
 		oldDocOrNode instanceof ve.dm.DocumentNode || oldDocOrNode instanceof ve.dm.Document ?
 			undefined :
 			oldDocOrNode.getRange(),
-		true,
-		'noMetadata'
+		true
 	);
 	this.newDoc = newDoc.cloneFromRange(
 		newDocOrNode instanceof ve.dm.DocumentNode || newDocOrNode instanceof ve.dm.Document ?
 			undefined :
 			newDocOrNode.getRange(),
-		true,
-		'noMetadata'
+		true
 	);
 
 	// Set to read-only so that node offsets get cached
