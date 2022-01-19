@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1038fbcb_159d9441",
+        "filename": "tests/ui/ve.ui.DiffElement.test.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 1306,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2022-01-19T01:58:43Z",
+      "side": 1,
+      "message": "I tested this from before I9a677301 and confirmed this is not a regression, so can be fixed at a later date.",
+      "revId": "5ad3aeaac19f56ddad18ed072656e40ee6afa272",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
