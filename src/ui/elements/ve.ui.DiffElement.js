@@ -58,9 +58,8 @@ ve.ui.DiffElement = function VeUiDiffElement( visualDiff, config ) {
 	// DOM
 	this.$element
 		.append(
-			this.$overlays,
 			this.$messages,
-			this.$content.append( this.$document ),
+			this.$content.append( this.$document, this.$overlays ),
 			this.$sidebar.append( this.descriptions.$element )
 		)
 		.addClass( 've-ui-diffElement' );
