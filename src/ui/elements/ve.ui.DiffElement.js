@@ -10,6 +10,7 @@
  *
  * @class
  * @extends OO.ui.Element
+ * @mixins OO.EventEmitter
  *
  * @constructor
  * @param {ve.dm.VisualDiff} [visualDiff] Diff to visualize
@@ -20,6 +21,9 @@ ve.ui.DiffElement = function VeUiDiffElement( visualDiff, config ) {
 
 	// Parent constructor
 	ve.ui.DiffElement.super.call( this, config );
+
+	// Mixin constructor
+	OO.EventEmitter.call( this );
 
 	this.elementId = 0;
 
@@ -69,6 +73,8 @@ ve.ui.DiffElement = function VeUiDiffElement( visualDiff, config ) {
 /* Inheritance */
 
 OO.inheritClass( ve.ui.DiffElement, OO.ui.Element );
+
+OO.mixinClass( ve.ui.DiffElement, OO.EventEmitter );
 
 /* Static methods */
 
@@ -205,24 +211,32 @@ ve.ui.DiffElement.prototype.positionDescriptions = function () {
  */
 ve.ui.DiffElement.prototype.processQueue = function processQueue( queue ) {
 	var hasChanges = false,
-		lastItemSpacer = false,
+		lastItemIsSpacer = false,
 		needsSpacer = false,
+		lastSpacer = null,
 		headingContext = null,
 		headingContextSpacer = false,
-		processedQueue = [];
+		processedQueue = [],
+		contextQueue = [];
 
 	function isUnchanged( item ) {
 		return !item || ( item[ 2 ] === 'none' && !item[ 3 ] );
 	}
 
 	function addSpacer() {
-		processedQueue.push( null );
-		lastItemSpacer = true;
+		lastSpacer = { spacer: true };
+		processedQueue.push( lastSpacer );
+		lastItemIsSpacer = true;
 	}
 
 	function addItem( item ) {
+		if ( lastSpacer ) {
+			lastSpacer.diffQueue = contextQueue;
+			contextQueue = [];
+			lastSpacer = null;
+		}
 		processedQueue.push( item );
-		lastItemSpacer = false;
+		lastItemIsSpacer = false;
 	}
 
 	function isHeading( item ) {
@@ -249,6 +263,8 @@ ve.ui.DiffElement.prototype.processQueue = function processQueue( queue ) {
 					if ( headingContextSpacer ) {
 						addSpacer();
 					}
+					// Heading context is being rendered, remove it from the contextQueue
+					contextQueue.splice( contextQueue.indexOf( headingContext ), 1 );
 					addItem( headingContext );
 				} else if ( isHeading( queue[ k + 1 ] ) ) {
 					// Skipping the context header becuase the next node is a heading
@@ -257,7 +273,7 @@ ve.ui.DiffElement.prototype.processQueue = function processQueue( queue ) {
 				}
 				headingContext = null;
 			}
-			if ( needsSpacer && !lastItemSpacer ) {
+			if ( needsSpacer && !lastItemIsSpacer ) {
 				addSpacer();
 				needsSpacer = false;
 			}
@@ -276,12 +292,16 @@ ve.ui.DiffElement.prototype.processQueue = function processQueue( queue ) {
 			} else {
 				needsSpacer = true;
 			}
+			contextQueue.push( queue[ k ] );
 		}
 	}
 
 	// Trailing spacer
-	if ( hasChanges && needsSpacer && !lastItemSpacer ) {
+	if ( hasChanges && needsSpacer && !lastItemIsSpacer ) {
 		addSpacer();
+		if ( lastSpacer ) {
+			lastSpacer.diffQueue = contextQueue;
+		}
 	}
 
 	return processedQueue;
@@ -295,7 +315,7 @@ ve.ui.DiffElement.prototype.processQueue = function processQueue( queue ) {
 ve.ui.DiffElement.prototype.renderQueue = function ( queue, parentNode, spacerNode ) {
 	var diffElement = this;
 	return queue.forEach( function ( item ) {
-		if ( item ) {
+		if ( !item.spacer ) {
 			var elements = diffElement[ item[ 0 ] ].apply( diffElement, item.slice( 1 ) );
 			while ( elements.length ) {
 				parentNode.appendChild(
@@ -304,9 +324,15 @@ ve.ui.DiffElement.prototype.renderQueue = function ( queue, parentNode, spacerNo
 				elements.shift();
 			}
 		} else {
-			parentNode.appendChild(
-				parentNode.ownerDocument.adoptNode( spacerNode.cloneNode( true ) )
-			);
+			var spacer = parentNode.ownerDocument.adoptNode( spacerNode.cloneNode( true ) );
+			parentNode.appendChild( spacer );
+			spacer.addEventListener( 'click', function () {
+				var container = parentNode.ownerDocument.createElement( 'div' );
+				diffElement.renderQueue( item.diffQueue, container, spacerNode );
+				spacer.parentNode.insertBefore( container, spacer );
+				spacer.parentNode.removeChild( spacer );
+				diffElement.emit( 'resize' );
+			} );
 		}
 	} );
 };
@@ -708,7 +734,7 @@ ve.ui.DiffElement.prototype.getChangedDocListData = function ( newDoclistNode, d
 		diffQueue = this.processQueue( diffQueue );
 	}
 	diffQueue.forEach( function ( diffItem ) {
-		if ( diffItem ) {
+		if ( !diffItem.spacer ) {
 			ve.batchPush( diffData, diffElement[ diffItem[ 0 ] ].apply( diffElement, diffItem.slice( 1 ) ) );
 		} else {
 			ve.batchPush( diffData, spacerData.slice() );
