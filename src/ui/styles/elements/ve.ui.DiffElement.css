@@ -250,6 +250,11 @@ del[ data-diff-action='remove' ] {
 .ve-ui-diffElement-spacer {
 	color: #72777d;
 	clear: both;
+	cursor: pointer;
+}
+
+.ve-ui-diffElement-spacer:hover {
+	color: inherit;
 }
 
 [ data-diff-list-spacer ],
