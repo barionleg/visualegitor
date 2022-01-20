@@ -19,6 +19,7 @@
 	margin-right: 16em;
 	padding-right: 1em;
 	border-right: 1px solid #c8ccd1;
+	overflow-x: auto;
 }
 
 @media ( max-width: 400px ) {
