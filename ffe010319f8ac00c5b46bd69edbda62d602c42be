@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc530342_d541db15",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2022-01-20T07:54:48Z",
+      "side": 1,
+      "message": "Thanks for looking at this! Unfortunately Chromium won\u0027t let the cursor land at the first offset inside the span:\n\n \u003cimg\u003e\u003ca href\u003dx\u003e\u003cimg\u003e\u003cspan\u003e|foo\u003c/span\u003e\u003cimg\u003e\u003c/a\u003e\u003cimg\u003e\n\nInstead it will normalise the position the the earliest point in document order at the same plaintext offset, to here:\n\n \u003cimg\u003e\u003ca href\u003dx\u003e\u003cimg\u003e|\u003cspan\u003efoo\u003c/span\u003e\u003cimg\u003e\u003c/a\u003e\u003cimg\u003e\n\nThat means if you type at the start of the link, the text will lie outside the \"white-space: normal\" span and won\u0027t wrap properly. Potentially it could become wider than the viewport (particularly on mobile). That\u0027s more serious than the cartouche wrapping, though it would also be far rarer.\n\nThrowing an extra ve-ce-nail image at the start of the \u003cspan\u003e lets the cursor land inside the span, at the start of the link text, but it causes the wrapping bug again.",
+      "revId": "ffe010319f8ac00c5b46bd69edbda62d602c42be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
