@@ -68,6 +68,8 @@ ve.ui.DiffDialog.prototype.getSetupProcess = function ( data ) {
 			this.content.$element.append(
 				this.diffElement.$element
 			);
+
+			this.diffElement.on( 'resize', this.positionDiffElement.bind( this ) );
 		}, this );
 };
 
