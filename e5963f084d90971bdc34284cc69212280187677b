@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad214fde_b9059a30",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2022-01-21T15:12:10Z",
+      "side": 1,
+      "message": "I\u0027ve updated the commit message with why I still think is a good idea (just).",
+      "revId": "e5963f084d90971bdc34284cc69212280187677b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
