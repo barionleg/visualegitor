@@ -16,6 +16,23 @@
       "message": "Fine with me, though should update the commit message since these did used to be styled: I23295efd75e9e37b273b99a361ded99a98217295 (Also will we never want to style them again?)\n\nWe\u0027ll need to update ve.ui.DiffElement.test.js when we do the pull-through",
       "revId": "78d6a048effedc6d67890773a77ab3e8d0f55352",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "afc1a7ac_39520a24",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2022-01-21T15:10:03Z",
+      "side": 1,
+      "message": "I found the commit where they were removed: I4eff61abce243411d46734b59f0d7f64022e4feb\n\nOne reason there is that it fails on floated elements, and in general I think modifying the structure of the output is likely to cause layout problems. If we want to highlight changed sections in future we should do it by marking the modified elements directly, or using overlays.",
+      "revId": "78d6a048effedc6d67890773a77ab3e8d0f55352",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
