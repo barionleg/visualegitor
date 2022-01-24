@@ -22,7 +22,6 @@ ve.ce.ListItemNode = function VeCeListItemNode() {
 /* Inheritance */
 
 OO.inheritClass( ve.ce.ListItemNode, ve.ce.BranchNode );
-OO.mixinClass( ve.ce.ListItemNode, ve.ce.ContentEditableNode );
 
 /* Static Properties */
 
