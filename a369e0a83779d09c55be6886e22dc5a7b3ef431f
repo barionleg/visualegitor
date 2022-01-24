@@ -34,6 +34,24 @@
       "parentUuid": "148608d1_40d427f0",
       "revId": "a369e0a83779d09c55be6886e22dc5a7b3ef431f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d78d7988_76455597",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6770
+      },
+      "writtenOn": "2022-01-24T18:33:23Z",
+      "side": 1,
+      "message": "(Ah, sorry, I missed that this itself is submoduled into mediawiki/extensions/VisualEditor.)",
+      "parentUuid": "678716db_d2f7506a",
+      "revId": "a369e0a83779d09c55be6886e22dc5a7b3ef431f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
