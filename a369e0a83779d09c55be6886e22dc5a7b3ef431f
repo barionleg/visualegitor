@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "148608d1_40d427f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2022-01-24T18:24:28Z",
+      "side": 1,
+      "message": "I don\u0027t remember whether merging this will automatically update the submodule in mediawiki/extensions/VisualEditor, or whether that has to be done manually. But I\u0027m apparently not able to +2 this, so if it\u0027s manual, then this needs to be merged first by the deployer.",
+      "revId": "a369e0a83779d09c55be6886e22dc5a7b3ef431f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
