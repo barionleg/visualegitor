@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "998df116_491b76cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2022-01-25T19:27:17Z",
+      "side": 1,
+      "message": "PS2 also removes the @mixins annotations.",
+      "revId": "94ea92dd020d8d4ac0d5b16c4a45d7e4fce3e441",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
