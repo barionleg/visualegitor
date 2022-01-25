@@ -34,6 +34,24 @@
       "parentUuid": "966a51ac_62f68d95",
       "revId": "122b12ccbbbb22212f42e467b28476fd91d9271b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3be3c6e8_ec22de2f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8461
+      },
+      "writtenOn": "2022-01-25T22:07:33Z",
+      "side": 1,
+      "message": "I\u0027ve published the commit that depends on this one and it\u0027s now available at https://gerrit.wikimedia.org/r/c/mediawiki/extensions/Cite/+/743057",
+      "parentUuid": "829fee6f_a8a682ce",
+      "revId": "122b12ccbbbb22212f42e467b28476fd91d9271b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }

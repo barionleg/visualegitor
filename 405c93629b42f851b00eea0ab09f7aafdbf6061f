@@ -16,6 +16,23 @@
       "message": "recheck",
       "revId": "405c93629b42f851b00eea0ab09f7aafdbf6061f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c39f044_5dba5d56",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8461
+      },
+      "writtenOn": "2022-01-25T22:07:33Z",
+      "side": 1,
+      "message": "Publishing comment. Forgot to do so last December.",
+      "revId": "405c93629b42f851b00eea0ab09f7aafdbf6061f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
