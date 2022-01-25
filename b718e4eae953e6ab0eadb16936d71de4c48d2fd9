@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be1ebee2_2fb9813d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2022-01-25T21:01:36Z",
+      "side": 1,
+      "message": "With this patch applied, the blue frame can stil overlap the sidebar: https://phabricator.wikimedia.org/F34930637\n\n…and it can also overlap the other sidebar, when scrolled horizontally: https://phabricator.wikimedia.org/F34930638",
+      "revId": "b718e4eae953e6ab0eadb16936d71de4c48d2fd9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
