@@ -16,6 +16,23 @@
       "message": "With this patch applied, the blue frame can stil overlap the sidebar: https://phabricator.wikimedia.org/F34930637\n\n…and it can also overlap the other sidebar, when scrolled horizontally: https://phabricator.wikimedia.org/F34930638",
       "revId": "b718e4eae953e6ab0eadb16936d71de4c48d2fd9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8be961c3_73f32732",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2022-01-26T14:39:37Z",
+      "side": 1,
+      "message": "We could put the overlay div inside the content div, but the overlays use outlines which extend beyond the boundary of the element they are highlighting, so the sides would be clipped in this case. It think this is an improvement if not perfect.",
+      "revId": "b718e4eae953e6ab0eadb16936d71de4c48d2fd9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
