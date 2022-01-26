@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45754e89_f08274d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2022-01-26T14:58:27Z",
+      "side": 1,
+      "message": "I made the change I suggested above and used some padding to make the left outline visible. The right outline is still truncated and I couldn\u0027t see a way to fix it, but that seems like a very minor issue.",
+      "revId": "f87677c905da7aa951cb8ea678e1546fa2fe83e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
