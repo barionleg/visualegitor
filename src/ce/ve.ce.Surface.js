@@ -2510,26 +2510,25 @@ ve.ce.Surface.prototype.afterPasteAddToFragmentFromExternal = function ( clipboa
 		beforePasteData = this.beforePasteData || {};
 
 	var htmlDoc;
-	if ( ( clipboardKey || forceClipboardData ) && $clipboardHtml ) {
-		// If the clipboardKey is set (paste from other VE instance), and clipboard
-		// data is available, then make sure important elements haven't been dropped
-		if (
+	// If clipboard data is available, then make sure important elements haven't been dropped
+	if (
+		$clipboardHtml && (
 			forceClipboardData ||
 			// FIXME T126045: Allow the test runner to force the use of clipboardData
 			clipboardKey === 'useClipboardData-0' ||
 			$clipboardHtml.find( importantElement ).addBack( importantElement ).length > this.$pasteTarget.find( importantElement ).length
-		) {
-			// CE destroyed an important element, so revert to using clipboard data
-			htmlDoc = ve.sanitizeHtmlToDocument( beforePasteData.html );
-			$( htmlDoc )
-				// Remove the pasteProtect class. See #onCopy.
-				.find( 'span' ).removeClass( 've-pasteProtect' ).end()
-				// Remove the clipboard key
-				.find( 'span[data-ve-clipboard-key]' ).remove().end()
-				// Remove ve-attributes
-				.find( '[data-ve-attributes]' ).removeAttr( 'data-ve-attributes' );
-			beforePasteData.context = null;
-		}
+		)
+	) {
+		// CE destroyed an important element, so revert to using clipboard data
+		htmlDoc = ve.sanitizeHtmlToDocument( beforePasteData.html );
+		$( htmlDoc )
+			// Remove the pasteProtect class. See #onCopy.
+			.find( 'span' ).removeClass( 've-pasteProtect' ).end()
+			// Remove the clipboard key
+			.find( 'span[data-ve-clipboard-key]' ).remove().end()
+			// Remove ve-attributes
+			.find( '[data-ve-attributes]' ).removeAttr( 'data-ve-attributes' );
+		beforePasteData.context = null;
 	}
 	if ( !htmlDoc ) {
 		// If there were no problems, let CE do its sanitizing as it may
