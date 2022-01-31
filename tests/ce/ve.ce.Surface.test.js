@@ -1420,7 +1420,7 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 			},
 			{
 				rangeOrSelection: new ve.Range( 0 ),
-				pasteHtml: ve.dm.example.blockImage.html.replace( '<figure', '<figure typeof="ve:Image"' ),
+				pasteHtml: ve.dm.example.blockImage.html,
 				pasteTargetHtml: $( ve.dm.example.blockImage.html ).unwrap().html(),
 				expectedOps: [
 					[
@@ -1438,7 +1438,7 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 					]
 				],
 				expectedRangeOrSelection: new ve.Range( 13 ),
-				msg: 'Paste API HTML used if element with important attributes dropped'
+				msg: 'Paste API HTML used if important element dropped'
 			},
 			{
 				rangeOrSelection: new ve.Range( 1 ),
