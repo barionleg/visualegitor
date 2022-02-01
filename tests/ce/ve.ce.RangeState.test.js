@@ -20,10 +20,8 @@ QUnit.test( 'Basic tests', function ( assert ) {
 				expected: {
 					branchNodeChanged: false,
 					contentChanged: false,
-					hash: null,
 					node: null,
 					selectionChanged: false,
-					text: null,
 					veRange: null
 				}
 			},
@@ -37,10 +35,8 @@ QUnit.test( 'Basic tests', function ( assert ) {
 				expected: {
 					branchNodeChanged: true,
 					contentChanged: false,
-					hash: '<H1>#<B>#</B><I>#</I></H1>',
 					node: doc.children[ 0 ],
 					selectionChanged: true,
-					text: 'abc',
 					veRange: new ve.Range( 2 )
 				}
 			},
@@ -55,10 +51,8 @@ QUnit.test( 'Basic tests', function ( assert ) {
 				expected: {
 					branchNodeChanged: true,
 					contentChanged: false,
-					hash: '<P>#</P>',
 					node: doc.children[ 4 ],
 					selectionChanged: true,
-					text: 'l',
 					veRange: new ve.Range( 56, 57 )
 				}
 			},
@@ -73,10 +67,8 @@ QUnit.test( 'Basic tests', function ( assert ) {
 				expected: {
 					branchNodeChanged: false,
 					contentChanged: false,
-					hash: '<P>#</P>',
 					node: doc.children[ 4 ],
 					selectionChanged: true,
-					text: 'l',
 					veRange: new ve.Range( 57, 57 )
 				}
 			},
@@ -85,10 +77,8 @@ QUnit.test( 'Basic tests', function ( assert ) {
 				expected: {
 					branchNodeChanged: true,
 					contentChanged: false,
-					hash: null,
 					node: null,
 					selectionChanged: true,
-					text: null,
 					veRange: null
 				}
 			},
@@ -97,10 +87,8 @@ QUnit.test( 'Basic tests', function ( assert ) {
 				expected: {
 					branchNodeChanged: false,
 					contentChanged: false,
-					hash: null,
 					node: null,
 					selectionChanged: false,
-					text: null,
 					veRange: null
 				}
 			}
@@ -112,9 +100,7 @@ QUnit.test( 'Basic tests', function ( assert ) {
 			selectionChanged: state.selectionChanged,
 			contentChanged: state.contentChanged,
 			veRange: state.veRange && state.veRange.toJSON(),
-			node: state.node,
-			text: state.text,
-			hash: state.hash
+			node: state.node
 		};
 	}
 
