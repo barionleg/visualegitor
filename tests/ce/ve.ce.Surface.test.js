@@ -444,21 +444,19 @@ QUnit.test( 'handleObservedChanges (content changes)', function ( assert ) {
 	function testRunner( prevHtml, prevRange, prevFocusIsAfterAnnotationBoundary, nextHtml, nextRange, expectedOps, expectedRangeOrSelection, expectsBreakpoint, msg ) {
 		var delayed = [],
 			view = ve.test.utils.createSurfaceViewFromHtml( prevHtml ),
+			view2 = ve.test.utils.createSurfaceViewFromHtml( nextHtml ),
 			model = view.getModel(),
 			node = view.getDocument().getDocumentNode().children[ 0 ],
+			node2 = view2.getDocument().getDocumentNode().children[ 0 ],
 			prevNode = $( prevHtml )[ 0 ],
 			nextNode = $( nextHtml )[ 0 ],
 			prev = {
 				node: node,
-				text: ve.ce.getDomText( prevNode ),
-				textState: new ve.ce.TextState( prevNode ),
 				veRange: prevRange,
 				focusIsAfterAnnotationBoundary: prevFocusIsAfterAnnotationBoundary || false
 			},
 			next = {
 				node: node,
-				text: ve.ce.getDomText( nextNode ),
-				textState: new ve.ce.TextState( nextNode ),
 				veRange: nextRange,
 				selectionChanged: !nextRange.equals( prevRange ),
 				contentChanged: true
@@ -471,6 +469,8 @@ QUnit.test( 'handleObservedChanges (content changes)', function ( assert ) {
 
 		// Set model linear selection, so that insertion annotations are primed correctly
 		model.setLinearSelection( prevRange );
+		// Apply changes
+		node.$element[ 0 ].innerHTML = node2.$element[ 0 ].innerHTML;
 		view.handleObservedChanges( prev, next );
 		delayed.forEach( function ( callback ) {
 			callback();
