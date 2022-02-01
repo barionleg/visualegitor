@@ -18,8 +18,9 @@
 ve.ce.ContentBranchNode = function VeCeContentBranchNode() {
 	// Properties
 	this.lastTransaction = null;
+
 	// Parent constructor calls renderContents, so this must be set first
-	this.rendered = false;
+	this.lastRenderedContents = null;
 	this.unicornAnnotations = null;
 	this.unicorns = null;
 
@@ -451,7 +452,7 @@ ve.ce.ContentBranchNode.prototype.renderContents = function () {
 	// However we have to normalize to cope with consecutive text nodes. We can't normalize
 	// the attached version, because that would close IMEs. As an optimization, don't perform
 	// this checking if this node has never rendered before.
-	if ( this.rendered ) {
+	if ( this.lastRenderedContents ) {
 		var viewRenderedContents = ve.ce.ContentBranchNode.static.cloneForComparison(
 			this.$element[ 0 ]
 		);
@@ -459,7 +460,7 @@ ve.ce.ContentBranchNode.prototype.renderContents = function () {
 			return false;
 		}
 	}
-	this.rendered = true;
+	this.lastRenderedContents = modelRenderedContents.cloneNode( true );
 
 	var unicornInfo = modelRenderedContents.unicornInfo;
 	this.unicornAnnotations = unicornInfo.annotations || null;
