@@ -3736,8 +3736,10 @@ ve.ce.Surface.prototype.handleObservedChanges = function ( oldState, newState ) 
 			this.showModelSelection();
 			return;
 		} else {
-			var transaction = newState.textState.getChangeTransaction(
-				oldState.textState,
+			var prevTextState = new ve.ce.TextState( newState.node.lastRenderedContents );
+			var newTextState = new ve.ce.TextState( newState.node.$element[ 0 ] );
+			var transaction = newTextState.getChangeTransaction(
+				prevTextState,
 				dmDoc,
 				newState.node.getOffset(),
 				newState.node.unicornAnnotations
@@ -3749,6 +3751,10 @@ ve.ce.Surface.prototype.handleObservedChanges = function ( oldState, newState ) 
 				} finally {
 					this.decRenderLock();
 				}
+				newState.node.lastRenderedContents =
+						ve.ce.ContentBranchNode.static.cloneForComparison(
+							newState.node.$element[ 0 ]
+						);
 				insertedText = transaction.operations.some( function ( op ) {
 					return op.type === 'replace' && op.insert.length;
 				} );
