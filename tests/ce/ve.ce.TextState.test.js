@@ -367,14 +367,14 @@ QUnit.test( 'getChangeTransaction', function ( assert ) {
 			caseItem.msg + ' (oldInnerHtml)'
 		);
 		view.model.setSelection( new ve.dm.LinearSelection( new ve.Range( 1 ) ) );
-		var oldState = new ve.ce.RangeState( null, documentNode, false );
+		var oldTextState = new ve.ce.TextState( contentNode.$element[ 0 ] );
 		contentNode.$element.html( caseItem.newInnerHtml );
 		view.model.setSelection( new ve.dm.LinearSelection( new ve.Range( 1 ) ) );
-		var newState = new ve.ce.RangeState( oldState, documentNode, false );
-		var change = newState.textState.getChangeTransaction(
-			oldState.textState,
+		var newTextState = new ve.ce.TextState( contentNode.$element[ 0 ] );
+		var change = newTextState.getChangeTransaction(
+			oldTextState,
 			view.model.getDocument(),
-			newState.node.getOffset()
+			contentNode.getOffset()
 		);
 		( caseItem.willFail ? assert.notDeepEqual : assert.deepEqual ).call(
 			assert,
