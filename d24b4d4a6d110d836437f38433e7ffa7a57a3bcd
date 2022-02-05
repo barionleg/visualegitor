@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6aadfabd_2d6dfa36",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2022-02-05T23:11:17Z",
+      "side": 1,
+      "message": "Our setup of CE nodes is a bit messy.\n\nWe have the constructor, initialize, and onSetup. Some, but not all, have moved init to initialize, but a lost still happens in the constructor (as you have discovered). According to docs, initialize is supposed to be called whenever this.$element is replaced, so should be the _only_ place you need to modify this.$element (we call it in ve.ce.GeneratedContentNode.prototype.render, for example).\n\nI\u0027m not sure why duplicate this in ContentBranchNode#onSetup, but it may predate #initialize.",
+      "revId": "d24b4d4a6d110d836437f38433e7ffa7a57a3bcd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
