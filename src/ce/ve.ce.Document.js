@@ -133,11 +133,10 @@ ve.ce.Document.prototype.getNodeAndOffset = function ( offset ) {
 	var branchNode = this.getBranchNodeFromOffset( offset );
 	var count = branchNode.getOffset() + ( branchNode.isWrapped() ? 1 : 0 );
 
-	var node, ceChild;
 	if ( !( branchNode instanceof ve.ce.ContentBranchNode ) ) {
 		// The cursor does not lie in a ContentBranchNode, so we can determine
 		// everything from the DM tree
-		var i;
+		var i, node, ceChild;
 		for ( i = 0; ; i++ ) {
 			ceChild = branchNode.children[ i ];
 			if ( count === offset ) {
