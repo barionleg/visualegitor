@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30496f6b_ed92947e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2022-02-23T18:24:27Z",
+      "side": 1,
+      "message": "Could use a lock file update on this one.",
+      "revId": "f1eec3f6a298255c5eb7babced0c69bf6bfae707",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
