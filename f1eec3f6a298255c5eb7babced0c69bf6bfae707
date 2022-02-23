@@ -16,6 +16,24 @@
       "message": "Could use a lock file update on this one.",
       "revId": "f1eec3f6a298255c5eb7babced0c69bf6bfae707",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f8863c1_eda502ec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2022-02-23T18:26:00Z",
+      "side": 1,
+      "message": "My local git claimed it wasn\u0027t committed. Hmm.",
+      "parentUuid": "30496f6b_ed92947e",
+      "revId": "f1eec3f6a298255c5eb7babced0c69bf6bfae707",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
