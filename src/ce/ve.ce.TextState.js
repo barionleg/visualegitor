@@ -5,12 +5,12 @@
  */
 
 /**
- * Annotated text content state (a snapshot of node content)
+ * Annotated text content state (a snapshot of ContentBranchNode content)
  *
  * @class
  *
  * @constructor
- * @param {HTMLElement} element Element whose content is to be snapshotted
+ * @param {HTMLElement} element DOM representation of a ContentBranchNode
  */
 ve.ce.TextState = function VeCeTextState( element ) {
 	/**
@@ -26,9 +26,9 @@ OO.initClass( ve.ce.TextState );
 /* Static methods */
 
 /**
- * Saves a snapshot of the current text content state
+ * Takes a DOM representation of a ContentBranchNode, and saves a snapshot of its text state.
  *
- * @param {HTMLElement} element Element whose content is to be snapshotted
+ * @param {HTMLElement} element DOM representation of a ContentBranchNode
  * @return {ve.ce.TextStateChunk[]} chunks
  */
 ve.ce.TextState.static.getChunks = function ( element ) {
@@ -61,7 +61,6 @@ ve.ce.TextState.static.getChunks = function ( element ) {
 		}
 	}
 
-	var view;
 	var annotationStack = [];
 	var node = element;
 	while ( true ) {
@@ -79,15 +78,11 @@ ve.ce.TextState.static.getChunks = function ( element ) {
 			node.classList.contains( 've-ce-cursorHolder' )
 		) {
 			// Do nothing
-		} else if ( ( view = $( node ).data( 'view' ) ) && view instanceof ve.ce.LeafNode ) {
+		} else if ( node.classList.contains( 've-ce-leafNode' ) ) {
 			// Don't return the content, but return placeholder characters so the
-			// offsets match up.
-			// Only return placeholders for the first element in a sibling group;
-			// otherwise we'll double count this node
-			if ( node === view.$element[ 0 ] ) {
-				// \u2603 is the snowman character: ☃
-				add( ve.repeatString( '\u2603', view.getOuterLength() ) );
-			}
+			// offsets match up. Leaf nodes all have outer length 2.
+			// \u2603 is the snowman character: ☃
+			add( '\u2603\u2603' );
 		} else if ( node.classList.contains( 've-ce-unicorn' ) ) {
 			add( '', 'unicorn' );
 		} else if ( node.firstChild ) {
