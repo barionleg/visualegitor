@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30615e22_e7158cca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2022-03-03T15:41:16Z",
+      "side": 1,
+      "message": "As a follow-up it may be worth changing some of these to either return their promise to the QUnit.test callback (and thus let QUnit deal with waiting for it) and/or better yet turning it into an async function with await (if the maintainers are okay with using es2017 for test/).\n\nhttps://api.qunitjs.com/QUnit/test/#example-async-test",
+      "revId": "4eacee1c5d2f0cfa88663d452887bb64723d3137",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
