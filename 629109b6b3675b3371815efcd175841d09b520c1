@@ -22,6 +22,30 @@
       },
       "revId": "629109b6b3675b3371815efcd175841d09b520c1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67281d2e_eb32bfe9",
+        "filename": "tests/ce/ve.ce.Surface.test.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 1475,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2022-03-08T23:49:23Z",
+      "side": 1,
+      "message": "Done in:\nhttps://gerrit.wikimedia.org/r/c/VisualEditor/VisualEditor/+/769140\nhttps://gerrit.wikimedia.org/r/c/mediawiki/extensions/VisualEditor/+/769141",
+      "parentUuid": "79cc3c4b_bd436ba2",
+      "range": {
+        "startLine": 1475,
+        "startChar": 52,
+        "endLine": 1475,
+        "endChar": 96
+      },
+      "revId": "629109b6b3675b3371815efcd175841d09b520c1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
