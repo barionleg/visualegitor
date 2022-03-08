@@ -519,7 +519,7 @@ QUnit.test( 'newFromRemoval', function ( assert ) {
 				ops: [
 					{
 						type: 'replace',
-						remove: [ { type: 'alienBlock', originalDomElements: $( '<foobar />' ).toArray() }, { type: '/alienBlock' } ],
+						remove: [ { type: 'alienBlock', originalDomElements: $.parseHTML( '<foobar />' ) }, { type: '/alienBlock' } ],
 						insert: []
 					},
 					{ type: 'retain', length: 1 },
@@ -543,7 +543,7 @@ QUnit.test( 'newFromRemoval', function ( assert ) {
 					{ type: 'retain', length: 1 },
 					{
 						type: 'replace',
-						remove: [ { type: 'alienBlock', originalDomElements: $( '<foobar />' ).toArray() }, { type: '/alienBlock' } ],
+						remove: [ { type: 'alienBlock', originalDomElements: $.parseHTML( '<foobar />' ) }, { type: '/alienBlock' } ],
 						insert: []
 					},
 					{ type: 'retain', length: alienDoc.data.getLength() - 10 }
@@ -555,7 +555,7 @@ QUnit.test( 'newFromRemoval', function ( assert ) {
 					{ type: 'retain', length: 1 },
 					{
 						type: 'replace',
-						remove: [ { type: '/paragraph' }, { type: 'paragraph' }, 'a', { type: 'alienInline', originalDomElements: $( '<foobar />' ).toArray() }, { type: '/alienInline' } ],
+						remove: [ { type: '/paragraph' }, { type: 'paragraph' }, 'a', { type: 'alienInline', originalDomElements: $.parseHTML( '<foobar />' ) }, { type: '/alienInline' } ],
 						insert: []
 					},
 					{ type: 'retain', length: alienWithEmptyDoc.data.getLength() - 6 }
