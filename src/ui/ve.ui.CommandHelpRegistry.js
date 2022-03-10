@@ -138,6 +138,7 @@ ve.ui.commandHelpRegistry.register( 'formatting', 'indentIn', { trigger: 'indent
 ve.ui.commandHelpRegistry.register( 'formatting', 'indentOut', { trigger: 'outdent', label: OO.ui.deferMsg( 'visualeditor-indentationbutton-outdent-tooltip' ) } );
 ve.ui.commandHelpRegistry.register( 'formatting', 'listBullet', { sequences: [ 'bulletStar' ], label: OO.ui.deferMsg( 'visualeditor-listbutton-bullet-tooltip' ) } );
 ve.ui.commandHelpRegistry.register( 'formatting', 'listNumber', { sequences: [ 'numberDot' ], label: OO.ui.deferMsg( 'visualeditor-listbutton-number-tooltip' ) } );
+ve.ui.commandHelpRegistry.register( 'formatting', 'code', { sequences: [ 'backtick' ], label: OO.ui.deferMsg( 'visualeditor-annotationbutton-code-tooltip' ) } );
 
 // History
 ve.ui.commandHelpRegistry.register( 'history', 'undo', { trigger: 'undo', label: OO.ui.deferMsg( 'visualeditor-historybutton-undo-tooltip' ) } );
