@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41680640_e410d058",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2022-03-11T22:25:50Z",
+      "side": 1,
+      "message": "Oh I love stylelint, it\u0027s so helpful all the time",
+      "revId": "cf7b08eee147329ff8780330896650340846f37a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
