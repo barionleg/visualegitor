@@ -41,6 +41,10 @@ ve.ui.CommandHelpRegistry.prototype.register = function ( groupName, commandHelp
 			details = ve.copy( details );
 			details.sequences = ( existingCommand.sequences || [] ).concat( details.sequences );
 		}
+		if ( details.sequenceMessages ) {
+			details = ve.copy( details );
+			details.sequenceMessages = ( existingCommand.sequenceMessages || [] ).concat( details.sequenceMessages );
+		}
 		details = ve.extendObject( existingCommand, details );
 	}
 
@@ -87,10 +91,10 @@ ve.ui.commandHelpRegistry = new ve.ui.CommandHelpRegistry();
 ve.ui.commandHelpRegistry.register( 'textStyle', 'bold', { trigger: 'bold', label: OO.ui.deferMsg( 'visualeditor-annotationbutton-bold-tooltip' ) } );
 ve.ui.commandHelpRegistry.register( 'textStyle', 'italic', { trigger: 'italic', label: OO.ui.deferMsg( 'visualeditor-annotationbutton-italic-tooltip' ) } );
 ve.ui.commandHelpRegistry.register( 'textStyle', 'link', { trigger: 'link', label: OO.ui.deferMsg( 'visualeditor-annotationbutton-link-tooltip' ) } );
-ve.ui.commandHelpRegistry.register( 'textStyle', 'superscript', { trigger: 'superscript', label: OO.ui.deferMsg( 'visualeditor-annotationbutton-superscript-tooltip' ) } );
-ve.ui.commandHelpRegistry.register( 'textStyle', 'subscript', { trigger: 'subscript', label: OO.ui.deferMsg( 'visualeditor-annotationbutton-subscript-tooltip' ) } );
+ve.ui.commandHelpRegistry.register( 'textStyle', 'superscript', { trigger: 'superscript', sequences: [ 'htmlSup' ], label: OO.ui.deferMsg( 'visualeditor-annotationbutton-superscript-tooltip' ) } );
+ve.ui.commandHelpRegistry.register( 'textStyle', 'subscript', { trigger: 'subscript', sequences: [ 'htmlSub' ], label: OO.ui.deferMsg( 'visualeditor-annotationbutton-subscript-tooltip' ) } );
 ve.ui.commandHelpRegistry.register( 'textStyle', 'underline', { trigger: 'underline', label: OO.ui.deferMsg( 'visualeditor-annotationbutton-underline-tooltip' ) } );
-ve.ui.commandHelpRegistry.register( 'textStyle', 'code', { trigger: 'code', sequences: [ 'backtick' ], label: OO.ui.deferMsg( 'visualeditor-annotationbutton-code-tooltip' ) } );
+ve.ui.commandHelpRegistry.register( 'textStyle', 'code', { trigger: 'code', sequences: [ 'backtick', 'htmlCode' ], label: OO.ui.deferMsg( 'visualeditor-annotationbutton-code-tooltip' ) } );
 ve.ui.commandHelpRegistry.register( 'textStyle', 'strikethrough', { trigger: 'strikethrough', label: OO.ui.deferMsg( 'visualeditor-annotationbutton-strikethrough-tooltip' ) } );
 ve.ui.commandHelpRegistry.register( 'textStyle', 'clear', { trigger: 'clear', label: OO.ui.deferMsg( 'visualeditor-clearbutton-tooltip' ) } );
 
@@ -131,13 +135,14 @@ ve.ui.commandHelpRegistry.register( 'dialog', 'focusContext', {
 
 // Formatting
 ve.ui.commandHelpRegistry.register( 'formatting', 'paragraph', { trigger: 'paragraph', label: OO.ui.deferMsg( 'visualeditor-formatdropdown-format-paragraph' ) } );
-ve.ui.commandHelpRegistry.register( 'formatting', 'heading', { shortcuts: [ 'ctrl+1-6' ], checkCommand: 'heading1', label: OO.ui.deferMsg( 'visualeditor-formatdropdown-format-heading-label' ) } );
-ve.ui.commandHelpRegistry.register( 'formatting', 'pre', { trigger: 'preformatted', label: OO.ui.deferMsg( 'visualeditor-formatdropdown-format-preformatted' ) } );
-ve.ui.commandHelpRegistry.register( 'formatting', 'blockquote', { trigger: 'blockquote', label: OO.ui.deferMsg( 'visualeditor-formatdropdown-format-blockquote' ) } );
+// TODO: List "<h1N" sequences
+ve.ui.commandHelpRegistry.register( 'formatting', 'heading', { shortcuts: [ 'ctrl+1-6' ], sequenceMessages: [ [ '<', 'h', '1-6' ] ], checkCommand: 'heading1', label: OO.ui.deferMsg( 'visualeditor-formatdropdown-format-heading-label' ) } );
+ve.ui.commandHelpRegistry.register( 'formatting', 'pre', { trigger: 'preformatted', sequences: [ 'htmlPre' ], label: OO.ui.deferMsg( 'visualeditor-formatdropdown-format-preformatted' ) } );
+ve.ui.commandHelpRegistry.register( 'formatting', 'blockquote', { trigger: 'blockquote', sequences: [ 'htmlBlockquote' ], label: OO.ui.deferMsg( 'visualeditor-formatdropdown-format-blockquote' ) } );
 ve.ui.commandHelpRegistry.register( 'formatting', 'indentIn', { trigger: 'indent', label: OO.ui.deferMsg( 'visualeditor-indentationbutton-indent-tooltip' ) } );
 ve.ui.commandHelpRegistry.register( 'formatting', 'indentOut', { trigger: 'outdent', label: OO.ui.deferMsg( 'visualeditor-indentationbutton-outdent-tooltip' ) } );
-ve.ui.commandHelpRegistry.register( 'formatting', 'listBullet', { sequences: [ 'bulletStar' ], label: OO.ui.deferMsg( 'visualeditor-listbutton-bullet-tooltip' ) } );
-ve.ui.commandHelpRegistry.register( 'formatting', 'listNumber', { sequences: [ 'numberDot' ], label: OO.ui.deferMsg( 'visualeditor-listbutton-number-tooltip' ) } );
+ve.ui.commandHelpRegistry.register( 'formatting', 'listBullet', { sequences: [ 'bulletStar', 'htmlUl' ], label: OO.ui.deferMsg( 'visualeditor-listbutton-bullet-tooltip' ) } );
+ve.ui.commandHelpRegistry.register( 'formatting', 'listNumber', { sequences: [ 'numberDot', 'htmlOl' ], label: OO.ui.deferMsg( 'visualeditor-listbutton-number-tooltip' ) } );
 
 // History
 ve.ui.commandHelpRegistry.register( 'history', 'undo', { trigger: 'undo', label: OO.ui.deferMsg( 'visualeditor-historybutton-undo-tooltip' ) } );
@@ -152,4 +157,5 @@ ve.ui.commandHelpRegistry.register( 'other', 'changeDirectionality', { trigger: 
 ve.ui.commandHelpRegistry.register( 'other', 'commandHelp', { trigger: 'commandHelp', label: OO.ui.deferMsg( 'visualeditor-dialog-command-help-title' ) } );
 
 // Insert
-ve.ui.commandHelpRegistry.register( 'insert', 'horizontalRule', { sequences: [ 'horizontalRule' ], label: OO.ui.deferMsg( 'visualeditor-horizontalrule-tooltip' ) } );
+ve.ui.commandHelpRegistry.register( 'insert', 'horizontalRule', { sequences: [ 'horizontalRule', 'htmlHr' ], label: OO.ui.deferMsg( 'visualeditor-horizontalrule-tooltip' ) } );
+ve.ui.commandHelpRegistry.register( 'insert', 'table', { sequences: [ 'htmlTable' ], label: OO.ui.deferMsg( 'visualeditor-table-insert-table' ) } );

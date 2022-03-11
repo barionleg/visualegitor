@@ -26,6 +26,7 @@
  *       changed. This is useful for variable-length sequences (defined with RegExps).
  * @cfg {boolean} [checkOnPaste=false] Whether the sequence should also be matched after paste.
  * @cfg {boolean} [checkOnDelete=false] Whether the sequence should also be matched after delete.
+ * @cfg {string[]} [message] Overrides return of #getMessage. Useful for RegExp sequences.
  */
 ve.ui.Sequence = function VeUiSequence( name, commandName, data, strip, config ) {
 	this.name = name;
@@ -38,6 +39,7 @@ ve.ui.Sequence = function VeUiSequence( name, commandName, data, strip, config )
 		this.delayed = !!config.delayed;
 		this.checkOnPaste = !!config.checkOnPaste;
 		this.checkOnDelete = !!config.checkOnDelete;
+		this.message = config.message;
 	} else {
 		// Backwards compatibility with variadic arguments
 		this.setSelection = !!arguments[ 4 ];
@@ -179,7 +181,7 @@ ve.ui.Sequence.prototype.getCommandName = function () {
  * - It strips out undisplayable things like the paragraph-start marker.
  * - Regexps are just returned as a toString of the regexp.
  *
- * @param {boolean} explode Whether to return the message split up into some
+ * @param {boolean} [explode] Whether to return the message split up into some
  *        reasonable sequence of inputs required to trigger the sequence (regexps
  *        in sequences will be considered a single "input" as a toString of
  *        the regexp, because they're hard to display no matter what…)
@@ -187,7 +189,9 @@ ve.ui.Sequence.prototype.getCommandName = function () {
  */
 ve.ui.Sequence.prototype.getMessage = function ( explode ) {
 	var data;
-	if ( typeof this.data === 'string' ) {
+	if ( this.message ) {
+		data = this.message;
+	} else if ( typeof this.data === 'string' ) {
 		data = this.data.split( '' );
 	} else if ( this.data instanceof RegExp ) {
 		data = [ this.data.toString() ];
