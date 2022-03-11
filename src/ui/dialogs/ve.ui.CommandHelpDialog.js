@@ -171,6 +171,19 @@ ve.ui.CommandHelpDialog.prototype.initialize = function () {
 					}
 				} );
 			}
+			if ( command.sequenceMessages ) {
+				command.sequenceMessages.forEach( function ( sequenceMessage ) {
+					// Append an array of jQuery collections from buildKeyNode
+					// eslint-disable-next-line no-jquery/no-append-html
+					$shortcut.append( $( '<kbd>' ).addClass( 've-ui-commandHelpDialog-sequence' )
+						.attr( 'data-label', ve.msg( 'visualeditor-shortcuts-sequence-notice' ) )
+						.append(
+							sequenceMessage.map( dialog.constructor.static.buildKeyNode )
+						)
+					);
+					hasShortcut = true;
+				} );
+			}
 			if ( hasShortcut ) {
 				$list.append(
 					$shortcut,

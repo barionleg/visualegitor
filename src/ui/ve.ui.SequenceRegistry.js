@@ -114,3 +114,53 @@ ve.ui.sequenceRegistry.register(
 ve.ui.sequenceRegistry.register(
 	new ve.ui.Sequence( 'backtick', 'code', '`', 1 )
 );
+( function () {
+	function ucfirst( text ) {
+		return text.slice( 0, 1 ).toUpperCase() + text.slice( 1 );
+	}
+
+	// HTML sequences matched anywhere
+	// We don't match single letter tags (a/b/i/u/s) as this will cause
+	// too many conflicts, and usually have well known shortcuts.
+	var htmlSequences = {
+		// Text style
+		code: 'code',
+		sub: 'subscript',
+		sup: 'superscript',
+		big: 'big',
+		small: 'small',
+		// Content
+		hr: 'insertHorizontalRule',
+		table: 'insertTable'
+	};
+	Object.keys( htmlSequences ).forEach( function ( tagName ) {
+		var command = htmlSequences[ tagName ];
+		ve.ui.sequenceRegistry.register(
+			new ve.ui.Sequence( 'html' + ucfirst( tagName ), command, '<' + tagName, tagName.length + 1 )
+		);
+	} );
+
+	// HTML sequences matched at start of ContentBranchNode
+	// Again, avoid single letter tags (p) to avoid conflicts.
+	var htmlSequencesStart = {
+		ul: 'bullet',
+		ol: 'number',
+		pre: 'preformatted',
+		blockquote: 'blockquote'
+	};
+	// Headings <h1 ... <h6
+	for ( var level = 1; level <= 6; level++ ) {
+		htmlSequencesStart[ 'h' + level ] = 'heading' + level;
+	}
+
+	Object.keys( htmlSequencesStart ).forEach( function ( tagName ) {
+		var command = htmlSequencesStart[ tagName ];
+		ve.ui.sequenceRegistry.register(
+			// This regex will also match to the right of an inline node. This may or may not be an issue.
+			new ve.ui.Sequence(
+				'html' + ucfirst( tagName ), command, new RegExp( '^<' + tagName ), tagName.length + 1,
+				{ message: [ '<' + tagName ] }
+			)
+		);
+	} );
+}() );
