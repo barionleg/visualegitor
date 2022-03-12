@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcc58678_e809a7d0",
+        "filename": "src/ui/ve.ui.Sequence.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2022-03-12T23:36:44Z",
+      "side": 1,
+      "message": "This won\u0027t work correctly when combined with the checks on `arguments` below. Arguments object is magic, and assigning to `config` will also assign to `arguments[ 4 ]` (and similarly for any other parameter).\n\nAs a result, you get the following incorrect behavior:\n\n    var seq \u003d new ve.ui.Sequence( \u0027a\u0027, \u0027b\u0027, \u0027\u0027, 0, /*setSelection*/false, /*delayed*/true );\n    console.log( seq.setSelection ); // \u003d\u003e true\n\n(Looks like we never use this particular combination in our code, but it\u0027s possible and gadgets etc. might use it)\n\nI think you can just move this assignment inside the if(){} on line 36 to make it work.",
+      "revId": "a0dc161052e61916514e6d6db0ced7e0567ae38b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
