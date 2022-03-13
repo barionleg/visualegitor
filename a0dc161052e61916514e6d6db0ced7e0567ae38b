@@ -34,6 +34,24 @@
       "parentUuid": "fcc58678_e809a7d0",
       "revId": "a0dc161052e61916514e6d6db0ced7e0567ae38b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5306893_d79e2baa",
+        "filename": "src/ui/ve.ui.Sequence.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2022-03-13T13:44:27Z",
+      "side": 1,
+      "message": "Well we only proceed if config is an object anyway, so we can drop it.",
+      "parentUuid": "780f39bd_05a76c80",
+      "revId": "a0dc161052e61916514e6d6db0ced7e0567ae38b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
