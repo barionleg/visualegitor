@@ -199,6 +199,14 @@ ve.ce.Surface = function VeCeSurface( model, ui, config ) {
 		keydown: this.afterDocumentKeyDown.bind( this )
 	} );
 
+	if ( window.MutationObserver ) {
+		this.mutationObserver = new MutationObserver( this.afterMutations.bind( this ) );
+		this.mutationObserver.observe(
+			this.$attachedRootNode[ 0 ],
+			{ childList: true, subtree: true }
+		);
+	}
+
 	// Initialization
 	// Support: Chrome
 	// Add 'notranslate' class to prevent Chrome's translate feature from
@@ -5548,4 +5556,47 @@ ve.ce.Surface.prototype.onPosition = function () {
 			}
 		} );
 	}
+};
+
+/**
+ * Handler for mutation observer
+ *
+ * Identifies deleted DOM nodes, and finds and deletes corresponding model structural nodes.
+ * Mutation observers run asynchronously (on the microtask queue) so the current document state
+ * may differ from when the mutations happened. Therefore this handler rechecks node attachment,
+ * document ranges etc.
+ *
+ * @param {MutationRecord[]} mutationRecords Records of the mutations observed
+ */
+ve.ce.Surface.prototype.afterMutations = function ( mutationRecords ) {
+	var removals = [];
+	mutationRecords.forEach( function ( mutationRecord ) {
+		if ( !mutationRecord.removedNodes ) {
+			return;
+		}
+		mutationRecord.removedNodes.forEach( function ( removedNode ) {
+			var view = $.data( removedNode, 'view' );
+			if ( view && view.isContent && !view.isContent() ) {
+				removals.push( { node: view, range: view.getOuterRange() } );
+			}
+		} );
+	} );
+	removals.sort( function ( x, y ) {
+		return x.range.start - y.range.start;
+	} );
+	for ( var i = 0, iLen = removals.length; i < iLen; i++ ) {
+		// Remove any overlapped range (which in a tree must be a nested range)
+		if ( i > 0 && removals[ i ].range.start < removals[ i - 1 ].range.end ) {
+			removals.splice( i, 1 );
+			i--;
+			continue;
+		}
+	}
+	removals.forEach( function ( removal ) {
+		var tx = ve.dm.TransactionBuilder.static.newFromRemoval(
+			this.getModel().getDocument(),
+			removal.node.getOuterRange()
+		);
+		this.getModel().change( tx );
+	} );
 };
