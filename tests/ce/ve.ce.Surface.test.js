@@ -2390,6 +2390,20 @@ QUnit.test( 'findBlockSlug', function ( assert ) {
 	}
 } );
 
+QUnit.test( 'afterMutations', function ( assert ) {
+	var view, dmDoc, done;
+	view = ve.test.utils.createSurfaceViewFromHtml( '<p>Foo</p><p>Bar</p><p>Baz</p>' );
+	dmDoc = view.getModel().getDocument();
+	done = assert.async();
+	view.documentView.documentNode.children[ 0 ].$element[ 0 ].remove();
+	// The mutation observer runs on the microtask queue, so definitely before setTimeout
+	setTimeout( function () {
+		var data = dmDoc.getData( new ve.Range( 1, 4 ) );
+		assert.deepEqual( data, [ 'B', 'a', 'r' ], 'DOM paragraph removal propagates to the model' );
+		done();
+	} );
+} );
+
 QUnit.test( 'selectFirstSelectableContentOffset/selectLastSelectableContentOffset', function ( assert ) {
 	var cases = [
 		{
