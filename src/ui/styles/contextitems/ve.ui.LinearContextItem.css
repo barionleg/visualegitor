@@ -37,7 +37,11 @@
 	overflow: auto;
 }
 
-.ve-ui-linearContextItem + .ve-ui-linearContextItem .ve-ui-linearContextItem-close {
+.ve-ui-linearContextItem-empty .ve-ui-linearContextItem-body {
+	display: none;
+}
+
+.ve-ui-linearContextItem:not( :first-of-type ) .ve-ui-linearContextItem-close {
 	/* Only show a close button in the first context item */
 	display: none;
 }
