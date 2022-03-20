@@ -53,11 +53,13 @@ ve.ui.LinearContextItem = function VeUiLinearContextItem( context, model, config
 			flags: [ 'progressive' ]
 		} );
 		this.copyButton = new OO.ui.ButtonWidget( {
+			classes: [ 've-ui-linearContextItem-copy' ],
 			framed: false,
 			label: ve.msg( 'visualeditor-clipboard-copy' ),
 			icon: 'articles'
 		} );
 		this.deleteButton = new OO.ui.ButtonWidget( {
+			classes: [ 've-ui-linearContextItem-delete' ],
 			framed: false,
 			label: ve.msg( 'visualeditor-contextitemwidget-label-remove' ),
 			icon: 'trash',
