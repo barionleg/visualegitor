@@ -40,10 +40,6 @@ OO.inheritClass( ve.ui.MobileContext, ve.ui.LinearContext );
 
 ve.ui.MobileContext.static.isMobile = true;
 
-ve.ui.MobileContext.static.showDeleteButton = true;
-
-ve.ui.MobileContext.static.showCopyButton = true;
-
 /* Methods */
 
 /**
@@ -146,6 +142,39 @@ ve.ui.MobileContext.prototype.toggle = function ( show ) {
 };
 
 /**
+ * Check if the surface is currently selecting a focusable node
+ *
+ * @return {boolean}
+ */
+ve.ui.MobileContext.prototype.isFocusableNode = function () {
+	var selectedNode = this.surface.getModel().getSelectedNode();
+	return !!( selectedNode && selectedNode.isFocusable() );
+};
+
+/**
+ * @inheritdoc
+ */
+ve.ui.MobileContext.prototype.getRelatedSourcesFromModels = function ( selectedModels ) {
+	// Parent method
+	var relatedSources = ve.ui.MobileContext.super.prototype.getRelatedSourcesFromModels.apply( this, arguments );
+
+	selectedModels.some( function ( model ) {
+		if ( model instanceof ve.dm.Node && model.isFocusable() && ve.ui.contextItemFactory.lookup( 'mobileActions' ) ) {
+			relatedSources.push( {
+				type: 'item',
+				embeddable: ve.ui.contextItemFactory.isEmbeddable( 'mobileActions' ),
+				name: 'mobileActions',
+				model: model
+			} );
+			return true;
+		}
+		return false;
+	} );
+
+	return relatedSources;
+};
+
+/**
  * @inheritdoc
  */
 ve.ui.MobileContext.prototype.isVisible = function () {
@@ -156,6 +185,7 @@ ve.ui.MobileContext.prototype.isVisible = function () {
  * @inheritdoc
  */
 ve.ui.MobileContext.prototype.isInspectable = function () {
+	// Parent method
 	return ve.ui.MobileContext.super.prototype.isInspectable.call( this ) &&
 		// Suppress context when surface is active (virtual keyboard)
 		this.surface.getView().isDeactivated();
