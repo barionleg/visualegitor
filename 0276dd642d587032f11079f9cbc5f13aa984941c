@@ -39,6 +39,30 @@
       },
       "revId": "0276dd642d587032f11079f9cbc5f13aa984941c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfe354a5_e896ab5a",
+        "filename": "src/ui/styles/contextitems/ve.ui.LinearContextItem.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2022-03-22T14:45:40Z",
+      "side": 1,
+      "message": "What I want to do is move the close button out of the context item and into the MobileContext, but for now I\u0027ll just leave the selector alone.",
+      "parentUuid": "ea148cf7_ed912af5",
+      "range": {
+        "startLine": 44,
+        "startChar": 30,
+        "endLine": 44,
+        "endChar": 44
+      },
+      "revId": "0276dd642d587032f11079f9cbc5f13aa984941c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
