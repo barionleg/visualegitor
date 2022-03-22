@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b72fa95c_1ec39bec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2022-03-22T00:02:02Z",
+      "side": 1,
+      "message": "Pending discussion on T274263 (I think this would break the template delete button VE-MW)",
+      "revId": "0276dd642d587032f11079f9cbc5f13aa984941c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
