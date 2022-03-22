@@ -35,6 +35,24 @@
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c73a4a93_e4b14e17",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2022-03-22T22:14:13Z",
+      "side": 1,
+      "message": "There are tests for MWExternalLinkAnnotation, which were failing with this patch until I fixed it (https://gerrit.wikimedia.org/r/c/mediawiki/extensions/VisualEditor/+/769113).",
+      "parentUuid": "1e92d276_4edf7e01",
+      "revId": "91a762803e501e9a0195431bf53e15537be8b1db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5102f7b4_128024b0",
@@ -48,6 +66,24 @@
       "writtenOn": "2022-03-18T17:43:53Z",
       "side": 1,
       "message": "This is testing that RDFa attributes are overwritten by the attributes encoded in data-ve-attributes. Your test appears to preserve this.",
+      "revId": "91a762803e501e9a0195431bf53e15537be8b1db",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "debc4c44_98366ac1",
+        "filename": "tests/ce/ve.ce.Surface.test.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 1240,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2022-03-22T22:14:13Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5102f7b4_128024b0",
       "revId": "91a762803e501e9a0195431bf53e15537be8b1db",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
