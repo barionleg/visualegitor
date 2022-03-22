@@ -16,6 +16,29 @@
       "message": "Pending discussion on T274263 (I think this would break the template delete button VE-MW)",
       "revId": "0276dd642d587032f11079f9cbc5f13aa984941c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea148cf7_ed912af5",
+        "filename": "src/ui/styles/contextitems/ve.ui.LinearContextItem.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2022-03-22T00:02:40Z",
+      "side": 1,
+      "message": "This only checks the tag name (probably always a `div`), which is probably not what you want. Maybe it should be a \"~\" selector?",
+      "range": {
+        "startLine": 44,
+        "startChar": 30,
+        "endLine": 44,
+        "endChar": 44
+      },
+      "revId": "0276dd642d587032f11079f9cbc5f13aa984941c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
