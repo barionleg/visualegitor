@@ -38,13 +38,6 @@ ve.ui.LinearContextItem = function VeUiLinearContextItem( context, model, config
 	this.actionButtons = new OO.ui.ButtonGroupWidget();
 
 	if ( this.context.isMobile() ) {
-		this.closeButton = new OO.ui.ButtonWidget( {
-			classes: [ 've-ui-linearContextItem-close' ],
-			framed: false,
-			label: ve.msg( 'visualeditor-contextitemwidget-label-close' ),
-			invisibleLabel: true,
-			icon: 'close'
-		} );
 		this.editButton = new OO.ui.ButtonWidget( {
 			framed: false,
 			label: ve.msg( this.isReadOnly() ? 'visualeditor-contextitemwidget-label-view' : 'visualeditor-contextitemwidget-label-secondary' ),
@@ -54,14 +47,6 @@ ve.ui.LinearContextItem = function VeUiLinearContextItem( context, model, config
 		} );
 		this.$foot = $( '<div>' );
 		this.$bodyAction = $( '<div>' );
-		this.closeButton.on( 'click', function () {
-			context.toggleMenu( false );
-			context.toggle( false );
-			// Clear last-known contexedAnnotations so that clicking the annotation
-			// again just brings up this context item. (T232172)
-			context.getSurface().getView().contexedAnnotations = [];
-			ve.track( 'activity.' + contextItem.constructor.static.name, { action: 'context-close' } );
-		} );
 	} else {
 		// Desktop
 		this.editButton = new OO.ui.ButtonWidget( {
@@ -93,7 +78,6 @@ ve.ui.LinearContextItem = function VeUiLinearContextItem( context, model, config
 
 	if ( this.context.isMobile() ) {
 		this.$foot.addClass( 've-ui-linearContextItem-foot' );
-		this.$head.append( this.closeButton.$element );
 		this.$bodyAction.addClass( 've-ui-linearContextItem-body-action' ).append( this.$body, this.$actions );
 		this.$element.append(
 			this.$head,
@@ -193,7 +177,6 @@ ve.ui.LinearContextItem.prototype.setup = function () {
 		if ( this.isEditable() ) {
 			this.$head.append( this.editButton.$element );
 		}
-		this.closeButton.$element.remove();
 	}
 	this.$element.toggleClass( 've-ui-linearContextItem-empty', isEmpty );
 
