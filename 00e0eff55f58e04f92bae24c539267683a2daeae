@@ -16,6 +16,23 @@
       "message": "Ready for review per T274263#7795089",
       "revId": "00e0eff55f58e04f92bae24c539267683a2daeae",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "358ace95_c7e35424",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2022-03-26T21:23:33Z",
+      "side": 1,
+      "message": "I\u0027ll let this sit for a week or two to ensure no one has late objections to removing the template \"Delete\" button, because this change looks like it\u0027d be very awkward to revert.",
+      "revId": "00e0eff55f58e04f92bae24c539267683a2daeae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
