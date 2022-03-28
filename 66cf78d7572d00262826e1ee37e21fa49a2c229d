@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a573f1de_572a22dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2022-03-28T14:58:14Z",
+      "side": 1,
+      "message": "When you want to merge it again, it should probably be connected to a task",
+      "revId": "66cf78d7572d00262826e1ee37e21fa49a2c229d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
