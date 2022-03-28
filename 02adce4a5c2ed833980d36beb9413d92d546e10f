@@ -18,6 +18,23 @@
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c9538ec_953e2178",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6729
+      },
+      "writtenOn": "2022-03-28T02:26:28Z",
+      "side": 1,
+      "message": "LGTM, not able to +2 ref T284360",
+      "revId": "02adce4a5c2ed833980d36beb9413d92d546e10f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1d0a69dd_d128f97c",
@@ -79,6 +96,30 @@
       "side": 1,
       "message": "Yeah, I intentionally aligned this to the repo \u0027standard\u0027.",
       "parentUuid": "76330427_5e596082",
+      "range": {
+        "startLine": 4,
+        "startChar": 19,
+        "endLine": 4,
+        "endChar": 24
+      },
+      "revId": "02adce4a5c2ed833980d36beb9413d92d546e10f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd75b03e_e6d13180",
+        "filename": "tests/init/ve.init.Target.test.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 6729
+      },
+      "writtenOn": "2022-03-28T02:26:28Z",
+      "side": 1,
+      "message": "okay, if this was intentional then I\u0027ll defer to the existing \u0027standard\u0027",
+      "parentUuid": "e573cedc_6d0ba109",
       "range": {
         "startLine": 4,
         "startChar": 19,
