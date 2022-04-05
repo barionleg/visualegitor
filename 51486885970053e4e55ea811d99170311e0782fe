@@ -50,6 +50,24 @@
       "message": "Possibly just compare .css( \u0027display\u0027 ) !\u003d\u003d \u0027none\u0027?",
       "revId": "51486885970053e4e55ea811d99170311e0782fe",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69f41f46_8fdc1a5b",
+        "filename": "src/ce/ve.ce.FocusableNode.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2022-04-05T08:18:29Z",
+      "side": 1,
+      "message": ":visible checks this eventually but does some more efficient checks first:\n\nhttps://github.com/jquery/sizzle/blob/20390f05731af380833b5aa805db97de0b91268a/external/jquery/jquery.js#L7260",
+      "parentUuid": "612ecddf_adf5850b",
+      "revId": "51486885970053e4e55ea811d99170311e0782fe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
