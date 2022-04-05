@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b77da006_251f496e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2022-04-05T22:07:14Z",
+      "side": 1,
+      "message": "Actually, this doesn\u0027t work correctly on mobile VE. The invisible icon is always added, probably because the entire editor is invisible at the point when this runs. ",
+      "revId": "26988b80a4cc22d3c1461503d1d36795939e9ab0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
