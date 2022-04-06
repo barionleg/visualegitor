@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3d0c8a0_e723bc57",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2022-04-06T21:32:48Z",
+      "side": 1,
+      "message": "(I checked in https://codesearch.wmcloud.org/ and the public methods/properties being removed here seem unused elsewhere)",
+      "revId": "7f80d75ce15331e431b5465ed60279ca6366fe20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
