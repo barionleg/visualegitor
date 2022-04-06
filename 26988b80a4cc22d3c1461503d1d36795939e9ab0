@@ -16,6 +16,24 @@
       "message": "Actually, this doesn\u0027t work correctly on mobile VE. The invisible icon is always added, probably because the entire editor is invisible at the point when this runs. ",
       "revId": "26988b80a4cc22d3c1461503d1d36795939e9ab0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3c342c6_192950f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2022-04-06T10:49:48Z",
+      "side": 1,
+      "message": "That sounds like a problem with the Mobile target, initialising the surface too soon. The surface shouldn\u0027t be initialised until it is attached.",
+      "parentUuid": "b77da006_251f496e",
+      "revId": "26988b80a4cc22d3c1461503d1d36795939e9ab0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
