@@ -52,6 +52,24 @@
       "parentUuid": "a3c342c6_192950f8",
       "revId": "26988b80a4cc22d3c1461503d1d36795939e9ab0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2acd358d_3b9f0908",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2022-04-06T20:43:18Z",
+      "side": 1,
+      "message": "That patch looks scary… I\u0027ll revert this for now so that we can merge and pull through other changes in the submodule, sorry :/",
+      "parentUuid": "15010884_3eb0b573",
+      "revId": "26988b80a4cc22d3c1461503d1d36795939e9ab0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
