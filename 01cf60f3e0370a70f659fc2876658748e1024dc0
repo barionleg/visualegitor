@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cd55241_82de16f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2022-04-07T22:53:31Z",
+      "side": 1,
+      "message": "Fixed styles for the empty context items (it\u0027s no longer :first-child because we insert .ve-ui-mobileContext-close before it)",
+      "revId": "01cf60f3e0370a70f659fc2876658748e1024dc0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
