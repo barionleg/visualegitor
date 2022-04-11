@@ -16,6 +16,24 @@
       "message": "Important to note that we still scroll so that the selection is partially visible on the screen, because we scroll the selection\u0027s context menu into view. The change was confusing to me after reading the code (if we didn\u0027t scroll at all and let the selection go offscreen, that would be a poor behavior), until I tested it and realized how that works.",
       "revId": "94ed5bb4e7a6372b84d89f07501fc5caeb1ca03b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29ccedaf_67d4783a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2022-04-11T19:10:09Z",
+      "side": 1,
+      "message": "Actually, that doesn\u0027t work in the mobile version. But maybe it\u0027s not as important there since you\u0027re less likely to navigate using keyboard keys?",
+      "parentUuid": "369a5c9f_1e0fbb89",
+      "revId": "94ed5bb4e7a6372b84d89f07501fc5caeb1ca03b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
