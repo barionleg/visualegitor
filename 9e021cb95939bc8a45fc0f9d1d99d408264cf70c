@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02965c34_89e20857",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2022-04-11T19:19:06Z",
+      "side": 1,
+      "message": "I\u0027ll merge this in a week or two once I\u0027m reasonably confident that we won\u0027t need to revert Ib7d53c05e62754228a3463bde9bf13e4f0cc1e70.",
+      "revId": "9e021cb95939bc8a45fc0f9d1d99d408264cf70c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
