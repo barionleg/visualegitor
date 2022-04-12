@@ -34,6 +34,24 @@
       "parentUuid": "369a5c9f_1e0fbb89",
       "revId": "94ed5bb4e7a6372b84d89f07501fc5caeb1ca03b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5b466e8_2c596643",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2022-04-12T12:26:11Z",
+      "side": 1,
+      "message": "in is also likely that adjacent cursor positions will have already caused the template to be at least partially in view",
+      "parentUuid": "29ccedaf_67d4783a",
+      "revId": "94ed5bb4e7a6372b84d89f07501fc5caeb1ca03b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
