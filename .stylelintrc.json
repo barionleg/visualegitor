@@ -1,5 +1,5 @@
 {
-	"extends": "stylelint-config-wikimedia/grade-a",
+	"extends": "stylelint-config-wikimedia/support-modern",
 	"rules": {
 		"selector-class-pattern": "^(ve|oo-ui)-",
 		"declaration-property-unit-disallowed-list": null
