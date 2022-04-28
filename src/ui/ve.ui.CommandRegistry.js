@@ -155,6 +155,12 @@ ve.ui.commandRegistry.register(
 );
 ve.ui.commandRegistry.register(
 	new ve.ui.Command(
+		'tableCells', 'window', 'open',
+		{ args: [ 'tableCells' ], supportedSelections: [ 'table' ] }
+	)
+);
+ve.ui.commandRegistry.register(
+	new ve.ui.Command(
 		'number', 'list', 'toggle',
 		{ args: [ 'number' ], supportedSelections: [ 'linear' ] }
 	)

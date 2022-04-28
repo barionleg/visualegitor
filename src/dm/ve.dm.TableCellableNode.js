@@ -30,11 +30,14 @@ ve.dm.TableCellableNode.static.isCellable = true;
 /* Static Methods */
 
 ve.dm.TableCellableNode.static.setAttributes = function ( attributes, domElements ) {
-	var style = domElements[ 0 ].nodeName.toLowerCase() === 'th' ? 'header' : 'data',
-		colspan = domElements[ 0 ].getAttribute( 'colspan' ),
-		rowspan = domElements[ 0 ].getAttribute( 'rowspan' );
+	var domElement = domElements[ 0 ],
+		style = domElement.nodeName.toLowerCase() === 'th' ? 'header' : 'data',
+		colspan = domElement.getAttribute( 'colspan' ),
+		rowspan = domElement.getAttribute( 'rowspan' ),
+		align = domElement.style.textAlign || 'default';
 
 	attributes.style = style;
+	attributes.align = attributes.originalAlign = align;
 
 	if ( colspan !== null ) {
 		attributes.originalColspan = colspan;
@@ -76,6 +79,14 @@ ve.dm.TableCellableNode.static.applyAttributes = function ( attributes, domEleme
 	}
 
 	ve.setDomAttributes( domElement, spans );
+
+	if ( attributes.align !== attributes.originalAlign ) {
+		domElement.style.textAlign = attributes.align !== 'default' ? attributes.align : '';
+		// If the only style is set to '', we still have a empty style attribute to clean up
+		if ( domElement.getAttribute( 'style' ) === '' ) {
+			domElement.removeAttribute( 'style' );
+		}
+	}
 };
 
 /* Methods */
