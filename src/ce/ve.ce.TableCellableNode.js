@@ -18,6 +18,10 @@ ve.ce.TableCellableNode = function VeCeTableCellableNode() {
 	}
 
 	this.$element.addClass( 've-ce-tableCellableNode' );
+
+	// Events
+	this.connect( this, { setup: 'updateTableCellableAttributes' } );
+	this.model.connect( this, { attributeChange: 'updateTableCellableAttributes' } );
 };
 
 /* Inheritance */
@@ -52,4 +56,12 @@ ve.ce.TableCellableNode.prototype.getTagName = function () {
 		throw new Error( 'Invalid style' );
 	}
 	return types[ style ];
+};
+
+/**
+ * Update DOM from attributes
+ */
+ve.ce.TableCellableNode.prototype.updateTableCellableAttributes = function () {
+	var align = this.model.getAttribute( 'align' );
+	this.$element[ 0 ].style.textAlign = align !== 'default' ? align : '';
 };
