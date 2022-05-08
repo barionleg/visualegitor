@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6061ed3d_5862e779",
+        "filename": "src/dm/nodes/ve.dm.AlienNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2022-05-08T21:21:42Z",
+      "side": 1,
+      "message": "We should be testing for type equality before we get this far. If `other` isn\u0027t an alien, we should return false immediately.",
+      "revId": "e87a8d704ad93ea469b74b1c10f66515a85e731a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
