@@ -88,7 +88,7 @@ ve.dm.AlienNode.static.isDiffComparable = function ( element, other, elementStor
 
 	// Deep copy DOM nodes from store
 	var elementOriginalDomElements = ve.copy( elementStore.value( element.originalDomElementsHash ) );
-	var otherOriginalDomElements = ve.copy( otherStore.value( other.originalDomElementsHash ) );
+	var otherOriginalDomElements = ve.copy( otherStore.value( other.originalDomElementsHash ) ) || [];
 	// Remove about attributes
 	elementOriginalDomElements.forEach( removeAboutAttributes );
 	otherOriginalDomElements.forEach( removeAboutAttributes );
