@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f84d14fe_3d72ef46",
+        "filename": "src/dm/nodes/ve.dm.AlienNode.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 9322
+      },
+      "writtenOn": "2022-05-09T08:24:44Z",
+      "side": 1,
+      "message": "Nitpick, and I don\u0027t know what JS guidelines say, but I\u0027d tend to write:\n\nif ( element.type !\u003d\u003d other.type ) {\n  return false;\n}\nif ( element.originalDomElementsHash....... ) {\n  return true;\n}\n\nto avoid the nested if.",
+      "revId": "58e060bdb41bf4a77bc27c13e071e8fd9443d2c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
