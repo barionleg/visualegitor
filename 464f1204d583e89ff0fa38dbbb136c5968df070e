@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fdf5f304_513caa0b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2022-05-09T23:30:37Z",
+      "side": 1,
+      "message": "Actually, this has some unexpected consequences… If you press Escape while switching now, it closes the editor completely instead. ",
+      "revId": "464f1204d583e89ff0fa38dbbb136c5968df070e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
