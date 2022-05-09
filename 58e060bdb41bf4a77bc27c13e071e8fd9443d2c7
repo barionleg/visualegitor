@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cdcf397b_e59373f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2022-05-09T14:38:03Z",
+      "side": 1,
+      "message": "Consistency with the parent is a good enough argument for me.",
+      "revId": "58e060bdb41bf4a77bc27c13e071e8fd9443d2c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f84d14fe_3d72ef46",
