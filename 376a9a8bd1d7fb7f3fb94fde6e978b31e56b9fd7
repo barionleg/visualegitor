@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80cfee9b_5f5e6eec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2022-05-09T22:49:06Z",
+      "side": 1,
+      "message": "This also fixes T217618.",
+      "revId": "376a9a8bd1d7fb7f3fb94fde6e978b31e56b9fd7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
