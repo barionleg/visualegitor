@@ -25,10 +25,14 @@ ve.ui.DimensionsWidget = function VeUiDimensionsWidget( config ) {
 	ve.ui.DimensionsWidget.super.call( this, config );
 
 	this.widthInput = new OO.ui.TextInputWidget( {
-		validate: config.validate || $.isNumeric
+		validate: config.validate || $.isNumeric,
+		label: ve.msg( 'visualeditor-dimensionswidget-width' ),
+		invisibleLabel: true
 	} );
 	this.heightInput = new OO.ui.TextInputWidget( {
-		validate: config.validate || $.isNumeric
+		validate: config.validate || $.isNumeric,
+		label: ve.msg( 'visualeditor-dimensionswidget-height' ),
+		invisibleLabel: true
 	} );
 
 	this.defaults = config.defaults || { width: '', height: '' };

@@ -106,6 +106,8 @@
 	"visualeditor-diff-moved-up": "Moved up",
 	"visualeditor-diff-no-changes": "No changes",
 	"visualeditor-diff-timed-out": "It took too long to compute your changes, so the description below may not be optimal.",
+	"visualeditor-dimensionswidget-width": "width",
+	"visualeditor-dimensionswidget-height": "height",
 	"visualeditor-dimensionswidget-px": "px",
 	"visualeditor-dimensionswidget-times": "×",
 	"visualeditor-find-and-replace-diacritic": "Diacritic insensitive",
