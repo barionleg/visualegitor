@@ -25,11 +25,15 @@ ve.ui.DimensionsWidget = function VeUiDimensionsWidget( config ) {
 	ve.ui.DimensionsWidget.super.call( this, config );
 
 	this.widthInput = new OO.ui.TextInputWidget( {
-		validate: config.validate || $.isNumeric
+		validate: config.validate || $.isNumeric,
+		title: ve.msg( 'visualeditor-dimensionswidget-width' )
 	} );
 	this.heightInput = new OO.ui.TextInputWidget( {
-		validate: config.validate || $.isNumeric
+		validate: config.validate || $.isNumeric,
+		title: ve.msg( 'visualeditor-dimensionswidget-height' )
 	} );
+	this.widthInput.$input.attr( 'aria-label', ve.msg( 'visualeditor-dimensionswidget-width' ) );
+	this.heightInput.$input.attr( 'aria-label', ve.msg( 'visualeditor-dimensionswidget-height' ) );
 
 	this.defaults = config.defaults || { width: '', height: '' };
 	this.setReadOnly( !!config.readOnly );

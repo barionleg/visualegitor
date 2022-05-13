@@ -40,6 +40,7 @@ ve.ui.LanguageInputWidget = function VeUiLanguageInputWidget( config ) {
 
 	this.findLanguageButton = new OO.ui.ButtonWidget( {
 		classes: [ 've-ui-languageInputWidget-findLanguageButton' ],
+		title: ve.msg( 'visualeditor-dialog-language-search-title' ),
 		icon: 'ellipsis'
 	} );
 	this.selectedLanguageLabel = new OO.ui.LabelWidget( {
@@ -47,8 +48,11 @@ ve.ui.LanguageInputWidget = function VeUiLanguageInputWidget( config ) {
 		label: ve.msg( 'visualeditor-languageinspector-widget-changelang' )
 	} );
 	this.languageCodeTextInput = new OO.ui.TextInputWidget( {
-		classes: [ 've-ui-languageInputWidget-languageCodeTextInput' ]
+		classes: [ 've-ui-languageInputWidget-languageCodeTextInput' ],
+		title: ve.msg( 'visualeditor-languageinspector-widget-label-langcode' )
 	} );
+	this.languageCodeTextInput.$input.attr( 'aria-label', ve.msg( 'visualeditor-languageinspector-widget-label-langcode' ) );
+
 	this.directionSelect = new OO.ui.ButtonSelectWidget( {
 		classes: [ 've-ui-languageInputWidget-directionSelect' ]
 	} );
