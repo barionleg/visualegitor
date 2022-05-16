@@ -22,6 +22,30 @@
       },
       "revId": "0204727b996ee59baf2ea37227c700039244c558",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f4d2378_babed3b4",
+        "filename": "src/ui/widgets/ve.ui.LanguageInputWidget.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2022-05-16T10:07:56Z",
+      "side": 1,
+      "message": "I think we have the same problem with the message above. It\u0027s probably best to stick to the \"visualeditor-languageinspector-widget-…\" naming scheme.",
+      "parentUuid": "0823a36f_0429373b",
+      "range": {
+        "startLine": 52,
+        "startChar": 18,
+        "endLine": 52,
+        "endChar": 52
+      },
+      "revId": "0204727b996ee59baf2ea37227c700039244c558",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
