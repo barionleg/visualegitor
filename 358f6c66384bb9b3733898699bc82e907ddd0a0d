@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c223533_51dc9a3f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2022-05-16T13:34:02Z",
+      "side": 1,
+      "message": "Pending the next OOUI release.",
+      "revId": "358f6c66384bb9b3733898699bc82e907ddd0a0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
