@@ -69,6 +69,24 @@
       "message": "This also fixes T293129.",
       "revId": "9ea2a51b01755cace5efd6de66292dcaa572893e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c8874db_d94b6bf6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2022-05-19T23:43:58Z",
+      "side": 1,
+      "message": "Done, and updating other mobile targets in:\n* https://gerrit.wikimedia.org/r/c/mediawiki/extensions/VisualEditor/+/793562\n* https://gerrit.wikimedia.org/r/c/mediawiki/extensions/DiscussionTools/+/793138",
+      "parentUuid": "739994ec_4c6d354b",
+      "revId": "9ea2a51b01755cace5efd6de66292dcaa572893e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
