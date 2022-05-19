@@ -34,6 +34,41 @@
       "parentUuid": "38d0e1d4_2ec8ec3c",
       "revId": "9ea2a51b01755cace5efd6de66292dcaa572893e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "739994ec_4c6d354b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2022-05-19T23:26:46Z",
+      "side": 1,
+      "message": "That\u0027s because in the mobile VE, the toolbar dropdowns are not in the overlay, but in DT they are.",
+      "parentUuid": "ce0357ec_1c753a0a",
+      "revId": "9ea2a51b01755cace5efd6de66292dcaa572893e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf03be8b_9b45cb54",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2022-05-19T23:26:46Z",
+      "side": 1,
+      "message": "This also fixes T293129.",
+      "revId": "9ea2a51b01755cace5efd6de66292dcaa572893e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
