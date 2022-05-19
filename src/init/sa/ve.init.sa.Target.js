@@ -69,6 +69,9 @@ ve.init.sa.Target.prototype.addSurface = function () {
 	// Parent method
 	var surface = ve.init.sa.Target.super.prototype.addSurface.apply( this, arguments );
 
+	// Allow popup tool groups's menus to display on top of the context, which is attached here (T307849)
+	this.toolbarConfig.$overlay = surface.getGlobalOverlay().$element;
+
 	this.$element.append( $( '<div>' ).addClass( 've-init-sa-target-surfaceWrapper' ).append( surface.$element ) );
 	if ( !this.getSurface() ) {
 		this.setSurface( surface );
