@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c641d35d_e2827f47",
+        "filename": "i18n/en.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2022-05-20T18:17:10Z",
+      "side": 1,
+      "message": "Note: This message was already here, but apparently unused. Looks like it was meant to be used here.",
+      "range": {
+        "startLine": 173,
+        "startChar": 2,
+        "endLine": 173,
+        "endChar": 54
+      },
+      "revId": "0a1dfadacc5d31119babc6210724cd4c7b2da06c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4e4ac30_8527bec3",
+        "filename": "src/ui/dialogs/ve.ui.LanguageSearchDialog.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2022-05-20T18:17:10Z",
+      "side": 1,
+      "message": "Note: This message is intentionally reused to guarantee the text is always the same.",
+      "range": {
+        "startLine": 32,
+        "startChar": 18,
+        "endLine": 32,
+        "endChar": 59
+      },
+      "revId": "0a1dfadacc5d31119babc6210724cd4c7b2da06c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}

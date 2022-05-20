@@ -46,6 +46,30 @@
       },
       "revId": "0204727b996ee59baf2ea37227c700039244c558",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6048d1e4_4d4b3c8d",
+        "filename": "src/ui/widgets/ve.ui.LanguageInputWidget.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2022-05-20T18:17:10Z",
+      "side": 1,
+      "message": "Fixed in patchset 6.",
+      "parentUuid": "6f4d2378_babed3b4",
+      "range": {
+        "startLine": 52,
+        "startChar": 18,
+        "endLine": 52,
+        "endChar": 52
+      },
+      "revId": "0204727b996ee59baf2ea37227c700039244c558",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
