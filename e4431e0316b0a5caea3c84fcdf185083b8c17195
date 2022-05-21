@@ -22,6 +22,30 @@
       },
       "revId": "e4431e0316b0a5caea3c84fcdf185083b8c17195",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf2d8554_a0255132",
+        "filename": "src/dm/ve.dm.VisualDiff.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 819,
+      "author": {
+        "id": 6729
+      },
+      "writtenOn": "2022-05-21T11:16:27Z",
+      "side": 1,
+      "message": "(hit submit too soon) - perhaps we can add it as a custom type for this repo\u0027s doc configuration? Though that really shouldn\u0027t be needed. Unfortunately, jsduck is no longer maintained, so they probably wouldn\u0027t support upstream fixes. It would be at [1] adding `false` as an alias for the Boolean class with a note that its always false\n\n[1] https://github.com/senchalabs/jsduck/blob/febef5558ecd05da25f5c260365acc3afd0cafd8/lib/jsduck/type_parser.rb#L57",
+      "parentUuid": "101ce04a_b8e01087",
+      "range": {
+        "startLine": 819,
+        "startChar": 18,
+        "endLine": 819,
+        "endChar": 23
+      },
+      "revId": "e4431e0316b0a5caea3c84fcdf185083b8c17195",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
