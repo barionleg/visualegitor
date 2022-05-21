@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e521fe91_1b4db3b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2022-05-21T01:44:35Z",
+      "side": 1,
+      "message": "\u003e Do we also need to fix the toolbar popup in TargetWidgets?\n\nBah, you\u0027re right, I thought those would use the same Target or something. Done now. We can just do this in ve.init.Target (and then we also don\u0027t need the patches in other repos).",
+      "revId": "004148911b81554adbf24459ad9fe0f4edf74018",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
