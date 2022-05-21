@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "101ce04a_b8e01087",
+        "filename": "src/dm/ve.dm.VisualDiff.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 819,
+      "author": {
+        "id": 6729
+      },
+      "writtenOn": "2022-05-21T11:12:48Z",
+      "side": 1,
+      "message": "apparently `false` is not a known type",
+      "range": {
+        "startLine": 819,
+        "startChar": 18,
+        "endLine": 819,
+        "endChar": 23
+      },
+      "revId": "e4431e0316b0a5caea3c84fcdf185083b8c17195",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
