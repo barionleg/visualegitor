@@ -46,6 +46,30 @@
       },
       "revId": "e4431e0316b0a5caea3c84fcdf185083b8c17195",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d6f04fc_416af1ca",
+        "filename": "src/dm/ve.dm.VisualDiff.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 819,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2022-05-21T13:06:57Z",
+      "side": 1,
+      "message": "Good to know this is possible. Thanks! But I think the extra effort is not really worth it in this case.",
+      "parentUuid": "bf2d8554_a0255132",
+      "range": {
+        "startLine": 819,
+        "startChar": 18,
+        "endLine": 819,
+        "endChar": 23
+      },
+      "revId": "e4431e0316b0a5caea3c84fcdf185083b8c17195",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
