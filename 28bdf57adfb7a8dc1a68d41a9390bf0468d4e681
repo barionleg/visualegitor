@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f10cd56_f4697574",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2022-05-23T19:40:04Z",
+      "side": 1,
+      "message": "Needs manual rebase. Also, can you provide an example?",
+      "revId": "28bdf57adfb7a8dc1a68d41a9390bf0468d4e681",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
