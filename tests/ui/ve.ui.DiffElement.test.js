@@ -10,7 +10,6 @@ QUnit.module( 've.ui.DiffElement' );
 
 QUnit.test( 'Diffing', function ( assert ) {
 	var spacer = '<div class="ve-ui-diffElement-spacer">⋮</div>',
-		noChanges = '<div class="ve-ui-diffElement-no-changes">' + ve.msg( 'visualeditor-diff-no-changes' ) + '</div>',
 		comment = ve.dm.example.commentNodePreview,
 		cases = [
 			{
@@ -101,7 +100,7 @@ QUnit.test( 'Diffing', function ( assert ) {
 				msg: 'Non semantic whitespace change (no diff)',
 				oldDoc: '<p>foo</p>',
 				newDoc: '<p>  foo  </p>',
-				expected: noChanges
+				expected: '<div class="ve-ui-diffElement-no-changes">' + ve.msg( 'visualeditor-diff-no-changes' ) + '</div>'
 			},
 			{
 				msg: 'Simple text change with non-whitespace word break boundaires',
@@ -789,12 +788,6 @@ QUnit.test( 'Diffing', function ( assert ) {
 					'<div class="ve-ui-diffElement-doc-child-change">' +
 						'<table data-diff-action="insert"><tbody><tr><td rowspan="2">A</td><td>B 1</td></tr><tr><td>D 1</td></tr></tbody></table>' +
 					'</div>'
-			},
-			{
-				msg: 'Table with no changes (colspan/rowspan set to 1) is not rendered',
-				oldDoc: '<table><tr><td>A</td></tr></table>',
-				newDoc: '<table><tr><td colspan="1" rowspan="1">A</td></tr></table>',
-				expected: noChanges
 			},
 			{
 				msg: 'Sparse table insertion',

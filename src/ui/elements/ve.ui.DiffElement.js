@@ -529,10 +529,6 @@ ve.ui.DiffElement.prototype.getNodeData = function ( node, action, move ) {
 ve.ui.DiffElement.prototype.getChangedNodeElements = function ( diff, oldNode, newNode, move ) {
 	var nodeData = this.getChangedNodeData( diff, oldNode, newNode, move );
 
-	if ( !nodeData.length ) {
-		return [];
-	}
-
 	return this.wrapNodeData( nodeData );
 };
 
@@ -916,8 +912,7 @@ ve.ui.DiffElement.prototype.getChangedTreeNodeData = function ( oldNode, newNode
 		newNodes = diff.newTreeOrderedNodes,
 		correspondingNodes = diff.correspondingNodes,
 		structuralRemoves = [],
-		highestRemovedAncestors = {},
-		hasChanges = false;
+		highestRemovedAncestors = {};
 
 	/**
 	 * Splice in the removed data for the subtree rooted at this node, from the old
@@ -927,8 +922,6 @@ ve.ui.DiffElement.prototype.getChangedTreeNodeData = function ( oldNode, newNode
 	 * this document child
 	 */
 	function highlightRemovedNode( nodeIndex ) {
-
-		hasChanges = true;
 
 		function findRemovedAncestor( n ) {
 			if ( !n.parent || structuralRemoves.indexOf( n.parent.index ) === -1 ) {
@@ -1040,8 +1033,6 @@ ve.ui.DiffElement.prototype.getChangedTreeNodeData = function ( oldNode, newNode
 	 * this document child
 	 */
 	function highlightInsertedNode( nodeIndex ) {
-		hasChanges = true;
-
 		// Find index of first data element for this node
 		var node = newNodes[ nodeIndex ].node;
 		var nodeRangeStart = node.getOuterRange().from - nodeRange.from;
@@ -1069,7 +1060,6 @@ ve.ui.DiffElement.prototype.getChangedTreeNodeData = function ( oldNode, newNode
 		var nodeRangeStart = node.getOuterRange().from - nodeRange.from;
 
 		if ( info.linearDiff ) {
-			hasChanges = true;
 			// If there is a content change, splice it in
 			var nodeDiffData = info.linearDiff;
 			var annotatedData = this.annotateNode( nodeDiffData );
@@ -1082,7 +1072,6 @@ ve.ui.DiffElement.prototype.getChangedTreeNodeData = function ( oldNode, newNode
 			);
 			var item = this.compareNodeAttributes( nodeData, nodeRangeStart, info.attributeChange );
 			if ( item ) {
-				hasChanges = true;
 				this.descriptionItemsStack.push( item );
 			}
 		}
@@ -1142,10 +1131,6 @@ ve.ui.DiffElement.prototype.getChangedTreeNodeData = function ( oldNode, newNode
 			i--;
 
 		}
-	}
-
-	if ( !hasChanges ) {
-		return [];
 	}
 
 	// Push new description items from the queue
@@ -1349,9 +1334,6 @@ ve.ui.DiffElement.prototype.markMove = function ( move, elementOrData, offset ) 
 	// * ve-ui-diffElement-moved-down
 	var item = this.getChangeDescriptionItem( [ ve.msg( 'visualeditor-diff-moved-' + move ) ], [ 've-ui-diffElement-moved-' + move ] );
 	if ( Array.isArray( elementOrData ) ) {
-		if ( !elementOrData.length ) {
-			return;
-		}
 		this.addAttributesToElement( elementOrData, offset || 0, { 'data-diff-move': move, 'data-diff-id': item.getData() } );
 	} else {
 		elementOrData.setAttribute( 'data-diff-move', move );
