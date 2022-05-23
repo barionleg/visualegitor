@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d6a4f60_1500ea1a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2022-05-23T23:40:21Z",
+      "side": 1,
+      "message": "I think this should use \u0027aria-label\u0027 attributes rather than \u0027title\u0027. Apparently screen readers don\u0027t consistently handle \u0027title\u0027, and so it is not recommended. You can find some examples elsewhere in this repo, e.g. in in ve.ui.FindAndReplaceDialog.js:\n\n\tthis.replaceText \u003d new OO.ui.TextInputWidget( {\n\t\tplaceholder: ve.msg( \u0027visualeditor-find-and-replace-replace-text\u0027 ),\n\t\tvalue: ve.userConfig( \u0027visualeditor-findAndReplace-replaceText\u0027 ),\n\t\ttabIndex: 1\n\t} );\n\tthis.replaceText.$input.attr( \u0027aria-label\u0027, ve.msg( \u0027visualeditor-find-and-replace-replace-text\u0027 ) );\n\n\n(For ButtonWidget, you can also use config like `label: ..., invisibleLabel: true`.)",
+      "revId": "0a1dfadacc5d31119babc6210724cd4c7b2da06c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c641d35d_e2827f47",
