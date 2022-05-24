@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c617e3c1_e9817fc4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2022-05-24T18:27:37Z",
+      "side": 1,
+      "message": "Thanks a lot for noticing. I did indeed miss this. However. I carefully checked and come to the conclusion that a title that creates a visible tooltip is the best option in all 4 cases.\n* The \"Size\" widget presents two input fields where the only difference is their order. While this should be obvious for most users, I think it\u0027s helpful when I have the option to hover the two fields and get a quick explanation of what each means.\n* The language widget just says that, \"Language\". But what it expects me to enter is a language code. Now a tooltip explains that. There are certainly other options to make this more obvious. But a visible tooltip feels like a quick and easy improvement for the existing UI.\n* The button currently shows three dots. I think a visible tooltip is almost a must in this case. Again, while there are many other options, this is a quick and easy improvement.\n\nI suggest to merge this as is. More improvements are possible, but shouldn\u0027t block this first step.",
+      "parentUuid": "0d6a4f60_1500ea1a",
+      "revId": "0a1dfadacc5d31119babc6210724cd4c7b2da06c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c641d35d_e2827f47",
         "filename": "i18n/en.json",
         "patchSetId": 6
