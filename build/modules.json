@@ -210,6 +210,27 @@
 			"jquery"
 		]
 	},
+	"vue": {
+		"scripts": [
+			"lib/vue/vue.global.js"
+		]
+	},
+	"codex": {
+		"scripts": [
+			"lib/codex/codex.umd.js"
+		],
+		"styles": [
+			"lib/codex/codex.style.css"
+		],
+		"dependencies": [
+			"vue"
+		]
+	},
+	"codex-icons": {
+		"scripts": [
+			"lib/codex-icons/codex-icons.umd.js"
+		]
+	},
 	"baselibs": {
 		"dependencies": [
 			"jquery",
@@ -218,7 +239,10 @@
 			"jquery.i18n",
 			"jquery.uls.data",
 			"jquery.client",
-			"papaparse"
+			"papaparse",
+			"vue",
+			"codex",
+			"codex-icons"
 		]
 	},
 	"baselibs.dist": {

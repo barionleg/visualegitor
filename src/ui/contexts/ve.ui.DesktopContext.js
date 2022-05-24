@@ -35,6 +35,7 @@ ve.ui.DesktopContext = function VeUiDesktopContext( surface, config ) {
 	this.transitioning = null;
 	this.dimensions = null;
 	this.suppressed = false;
+	this.vueState = null;
 	this.onWindowScrollDebounced = ve.debounce( this.onWindowScroll.bind( this ) );
 	this.onWindowResizeHandler = this.onPosition.bind( this );
 	this.$window = $( this.getElementWindow() );
