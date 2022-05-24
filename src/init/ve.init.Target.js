@@ -756,4 +756,122 @@ ve.init.Target.prototype.attachToolbar = function () {
 	toolbar.$element.insertBefore( toolbar.getSurface().$element );
 	toolbar.initialize();
 	this.getActions().initialize();
+
+	var vueContainer = document.createElement( 'div' );
+	toolbar.$element.before( vueContainer );
+
+	for ( const component in codex ) {
+		if ( typeof codex[ component ] !== 'function' ) {
+			codex[ component ].compatConfig = { MODE: 3 };
+		}
+	}
+
+	const vueState = toolbar.getSurface().vueState;
+
+	Vue.createApp( {
+		compatConfig: { MODE: 3 },
+		template: `
+			<div class="ve-vue-toolbar">
+				<cdx-button
+					:disabled="!canUndo"
+					@click="undo"
+				>
+					<cdx-icon :icon="cdxIconUndo" />
+				</cdx-button>
+				<cdx-button
+					:disabled="!canRedo"
+					@click="redo"
+				>
+					<cdx-icon :icon="cdxIconRedo" />
+				</cdx-button>
+				<cdx-select
+					:model-value="selectedCBNType"
+					:menu-items="formatMenuItems"
+					@update:modelValue="changeCBNType"
+					@mousedown.prevent
+				/>
+				<cdx-toggle-button
+					:model-value="boldAnnotationActive"
+					@update:modelValue="updateBold"
+					@mousedown.prevent
+				>
+					<cdx-icon :icon="cdxIconBold" />
+				</cdx-toggle-button>
+				<cdx-toggle-button
+					:model-value="italicAnnotationActive"
+					@update:modelValue="updateItalic"
+					@mousedown.prevent
+				>
+					<cdx-icon :icon="cdxIconItalic" />
+				</cdx-toggle-button>
+			</div>
+		`,
+		components: {
+			CdxButton: codex.CdxButton,
+			CdxSelect: codex.CdxSelect,
+			CdxToggleButton: codex.CdxToggleButton,
+			CdxIcon: codex.CdxIcon
+		},
+		setup() {
+			const italicAnnotationActive = Vue.computed( () => vueState.annotationSet.value.hasAnnotationWithName( 'textStyle/italic' ) );
+
+			const formatMenuItems = [
+				{ label: 'Paragraph', value: 'paragraph' },
+				{ label: 'Heading 1', value: 'heading1' },
+				{ label: 'Heading 2', value: 'heading2' },
+				{ label: 'Heading 3', value: 'heading3' },
+				{ label: 'Heading 4', value: 'heading4' },
+				{ label: 'Heading 5', value: 'heading5' },
+				{ label: 'Heading 6', value: 'heading6' },
+				{ label: 'Preformatted', value: 'preformatted' },
+			];
+			const selectedCBNType = Vue.computed( () => {
+				const types = vueState.selectedCBNs.value.map( ( cbn ) =>
+					cbn.getType() === 'heading' ?
+						`heading${cbn.getAttribute( 'level' )}` :
+						cbn.getType()
+				);
+				const typesSet = new Set( types );
+				return typesSet.size === 1 ? types[ 0 ] : null;
+			} );
+
+			return {
+				boldAnnotationActive: vueState.boldAnnotationActive,
+				italicAnnotationActive,
+				canUndo: vueState.canUndo,
+				canRedo: vueState.canRedo,
+				formatMenuItems,
+				selectedCBNType,
+				cdxIconBold: window['codex-icons'].cdxIconBold,
+				cdxIconItalic: window['codex-icons'].cdxIconItalic,
+				cdxIconUndo: window['codex-icons'].cdxIconUndo,
+				cdxIconRedo: window['codex-icons'].cdxIconRedo
+			};
+		},
+		methods: {
+			updateBold() {
+				toolbar.getSurface().execute( 'annotation', 'toggle', 'textStyle/bold' );
+			},
+			updateItalic() {
+				toolbar.getSurface().execute( 'annotation', 'toggle', 'textStyle/italic' );
+			},
+			undo() {
+				toolbar.getSurface().execute( 'history', 'undo' );
+			},
+			redo() {
+				toolbar.getSurface().execute( 'history', 'redo' );
+			},
+			changeCBNType( newCBNType ) {
+				let name, attributes;
+				if ( newCBNType.startsWith( 'heading' ) ) {
+					name = 'heading';
+					attributes = { level: Number( newCBNType.substr( -1, 1 ) ) };
+				} else {
+					name = newCBNType;
+					attributes = undefined;
+				}
+				toolbar.getSurface().execute( 'format', 'convert', name, attributes );
+			}
+		}
+	} ).mount( vueContainer );
 };

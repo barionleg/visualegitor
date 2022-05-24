@@ -91,6 +91,7 @@ ve.ui.Surface = function VeUiSurface( dataOrDocOrSurface, config ) {
 	this.showProgressDebounced = ve.debounce( this.showProgress.bind( this ) );
 	this.scrollSelectionIntoViewDebounced = ve.debounce( this.scrollSelectionIntoView.bind( this ), 500 );
 	this.debugBar = null;
+	this.vueState = null;
 	this.placeholder = null;
 	this.placeholderVisible = false;
 	this.setPlaceholder( config.placeholder );
@@ -146,6 +147,8 @@ ve.ui.Surface = function VeUiSurface( dataOrDocOrSurface, config ) {
 	this.view.$element.after( this.localOverlay.$element );
 	this.localOverlay.$element.append( this.$selections, this.$blockers, this.$controls, this.$menus );
 	this.globalOverlay.$element.append( this.dialogs.$element );
+
+	this.setupVueState();
 };
 
 /* Inheritance */
@@ -851,4 +854,46 @@ ve.ui.Surface.prototype.getDir = function () {
  */
 ve.ui.Surface.prototype.getInDialog = function () {
 	return this.inDialog;
+};
+
+ve.ui.Surface.prototype.setupVueState = function () {
+	const { ref, computed } = Vue;
+
+	const annotationSet = ref( this.getModel().getFragment().getAnnotations() );
+
+	this.getModel().on( 'contextChange', function () {
+		const newAnnotationSet = this.getModel().getFragment().getAnnotations();
+		if ( !newAnnotationSet.equalsInOrder( annotationSet.value ) ) {
+			annotationSet.value = newAnnotationSet;
+		}
+	}.bind( this ) );
+
+	const boldAnnotationActive = computed( () => annotationSet.value.hasAnnotationWithName( 'textStyle/bold' ) );
+
+	const canUndo = ref( this.getModel().canUndo() );
+	const canRedo = ref( this.getModel().canRedo() );
+	this.getModel().on( 'history', function () {
+		canUndo.value = this.getModel().canUndo();
+		canRedo.value = this.getModel().canRedo();
+	}.bind( this ) );
+
+	const getSelectedCBNs = function () {
+		return this.getModel().getFragment().getLeafNodes().map( ( selected ) =>
+			selected.node.isContent() ?
+				selected.node.getParent() :
+				selected.node
+		);
+	}.bind( this );
+	const selectedCBNs = ref( getSelectedCBNs() );
+	this.getModel().on( 'contextChange', function () {
+		selectedCBNs.value = getSelectedCBNs();
+	} );
+
+	this.vueState = {
+		annotationSet,
+		boldAnnotationActive,
+		canUndo,
+		canRedo,
+		selectedCBNs
+	};
 };
