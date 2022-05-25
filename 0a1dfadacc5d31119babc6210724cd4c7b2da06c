@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e3dfa7cb_3e4d6024",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2022-05-25T06:48:06Z",
+      "side": 1,
+      "message": "To make this decision we would need to know:\n* In which context is a title not enough?\n* We could as well make the situation worse when both title and aria-label are read.\n\nI\u0027m currently not aware of a problem with the approach in patchset 6.\n\nTitles can indeed be misplaced when they are phrased in a way that targets screenreaders, but there is nothing to learn for sighted users. In this case aria-label should be used. But this is not a problem we run into here.\n\nI would like to move forward and possibly improve this later when it turns out to be necessary.",
+      "parentUuid": "0b97d48b_1ddc8c02",
+      "revId": "0a1dfadacc5d31119babc6210724cd4c7b2da06c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c641d35d_e2827f47",
         "filename": "i18n/en.json",
         "patchSetId": 6
