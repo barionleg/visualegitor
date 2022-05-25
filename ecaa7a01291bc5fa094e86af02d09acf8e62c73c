@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "909b7c06_4a89c023",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2022-05-25T23:32:34Z",
+      "side": 1,
+      "message": "This adds \u0027fat\u0027, \u0027rsk\u0027, and \u0027rw\u0027… but none of those have i18n files?",
+      "revId": "ecaa7a01291bc5fa094e86af02d09acf8e62c73c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
