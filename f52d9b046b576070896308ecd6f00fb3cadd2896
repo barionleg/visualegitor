@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c5e4bdf_cc7c05bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2022-05-25T13:29:59Z",
+      "side": 1,
+      "message": "The \"context\" are the extra nodes we show either side of the diff, so if your \"no change\" table has a paragraph either side (likely), this broken feature would hide the table but still show the paragraphs either side as context.",
+      "revId": "f52d9b046b576070896308ecd6f00fb3cadd2896",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
