@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0b97d48b_1ddc8c02",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2022-05-25T00:19:58Z",
+      "side": 1,
+      "message": "Adding a \u0027title\u0027 looks like a good idea, but I still think that this should be done in addition to \u0027aria-label\u0027, rather than instead of it. As far as I know, using \u0027title\u0027 for accessibility is a bad practice, and I\u0027d like to avoid us providing a bad example. It should be easy enough to do both in this patch.",
+      "parentUuid": "c617e3c1_e9817fc4",
+      "revId": "0a1dfadacc5d31119babc6210724cd4c7b2da06c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c641d35d_e2827f47",
         "filename": "i18n/en.json",
         "patchSetId": 6
