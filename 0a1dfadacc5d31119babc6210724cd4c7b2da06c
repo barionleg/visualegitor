@@ -72,6 +72,23 @@
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f46a73c_f1feae46",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 143
+      },
+      "writtenOn": "2022-05-25T09:41:32Z",
+      "side": 1,
+      "message": "To add a possibly unhelpful point, I don\u0027t think that \"title\" is good for non-a11y browsing either.  The current best practice a visible label field which is associated with the input, as we\u0027ve been doing in the template dialog recently.  I rarely if ever hover the cursor above a field for more information.",
+      "revId": "0a1dfadacc5d31119babc6210724cd4c7b2da06c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c641d35d_e2827f47",
