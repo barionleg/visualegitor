@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8028fa6e_ffcfb765",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2022-05-25T10:06:30Z",
+      "side": 1,
+      "message": "That requires much more design work, which is something we said we want to avoid at the moment. The point of this ticket/patch is to make some quick and easy improvements without having to do an actual redesign.",
+      "parentUuid": "6f46a73c_f1feae46",
+      "revId": "0a1dfadacc5d31119babc6210724cd4c7b2da06c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c641d35d_e2827f47",
         "filename": "i18n/en.json",
         "patchSetId": 6
