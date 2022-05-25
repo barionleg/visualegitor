@@ -107,6 +107,24 @@
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d580cc52_549bad2d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2022-05-25T14:50:30Z",
+      "side": 1,
+      "message": "(I did some research today to update my knowledge, here\u0027s an article that I found useful: https://www.24a11y.com/2017/the-trials-and-tribulations-of-the-title-attribute/ )\n\n\u0027title\u0027 is okay in some cases, but you have to carefully think about what elements you\u0027re placing it on, and worry about whether each of the dozens of combinations of software will handle it as you expect. Why not just use \u0027aria-label\u0027, which always works in every application?\n\nIt\u0027s as if you were arguing to use `\u003d\u003d` instead of `\u003d\u003d\u003d` because you carefully considered all cases and you\u0027re sure it works correctly, and it saves one character. But why not just do it in the generally-accepted, well-understood way?\n\nAnyway, I don\u0027t want to argue about this further. I still think it\u0027s a bad approach, but it won\u0027t break the world, so I\u0027ll leave it up to you and the team to decide.",
+      "parentUuid": "e3dfa7cb_3e4d6024",
+      "revId": "0a1dfadacc5d31119babc6210724cd4c7b2da06c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c641d35d_e2827f47",
