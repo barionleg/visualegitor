@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3bc3256_66d49d78",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2022-05-30T23:40:21Z",
+      "side": 1,
+      "message": "I like the idea, noticed a bug though: when I search for a username long enough to require a line break, it goes offscreen again: https://phabricator.wikimedia.org/F35191421 . Probably can be fixed by adding a popup.position() call somewhere in updateMenu()?",
+      "revId": "a3bba7a7590438df935f1e6531b05919b88e9990",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
