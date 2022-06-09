@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63a64ab3_0b40fcde",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2022-06-09T14:45:17Z",
+      "side": 1,
+      "message": "Filed task T310290 for QA and coordination",
+      "revId": "32c0cbfceefcafc1bc1ab1cf9b979ca29ab02841",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
