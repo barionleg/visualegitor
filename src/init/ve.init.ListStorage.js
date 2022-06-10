@@ -38,14 +38,17 @@ ve.init.createListStorage = function ( storage ) {
 	 *
 	 * @param {string} key Key of list to set value for
 	 * @param {string} value Value to set
+	 * @param {number} expiry Number of seconds after which this list can be deleted
 	 * @return {boolean} The value was set
 	 */
-	ListStorage.prototype.appendToList = function ( key, value ) {
+	ListStorage.prototype.appendToList = function ( key, value, expiry ) {
 		var length = this.getListLength( key );
 
 		if ( this.set( getIndexKey( key, length ), value ) ) {
 			length++;
-			return this.set( getLengthKey( key ), length.toString() );
+			// Only set expiry on the length key. The rest of the list will
+			// get expired automatically by ListStorage.prototype.remove
+			return this.set( getLengthKey( key ), length.toString(), expiry );
 		}
 		return false;
 	};
@@ -89,9 +92,27 @@ ve.init.createListStorage = function ( storage ) {
 		var length = this.getListLength( key );
 
 		for ( var i = 0; i < length; i++ ) {
-			this.remove( getIndexKey( key, i ) );
+			// Parent method
+			ListStorage.super.prototype.remove.call( this, getIndexKey( key, i ) );
 		}
-		this.remove( getLengthKey( key ) );
+		// Parent method
+		return ListStorage.super.prototype.remove.call( this, getLengthKey( key ) );
+	};
+
+	/**
+	 * @inheritdoc
+	 */
+	ListStorage.prototype.remove = function ( key ) {
+		if ( key.slice( -8 ) === '__length' ) {
+			// If a list length key is removed, remove the rest of the list.
+			// Callers should typically call removeList directly, but this
+			// will catch the interal call to #remove when a list length
+			// key expires.
+			return this.removeList( key.slice( 0, -8 ) );
+		} else {
+			// Parent method
+			return ListStorage.super.prototype.remove.call( this, key );
+		}
 	};
 
 	return new ListStorage( storage.store );
