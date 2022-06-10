@@ -28,6 +28,7 @@ ve.init.SafeStorage.prototype.get = null;
  * @abstract
  * @param {string} key Key name to store under
  * @param {string} value Value to be stored
+ * @param {number} [expiry] Number of seconds after which this item can be deleted
  * @return {boolean} The value was set
  */
 ve.init.SafeStorage.prototype.set = null;
@@ -57,6 +58,7 @@ ve.init.SafeStorage.prototype.getObject = null;
  * @abstract
  * @param {string} key Key name to store under
  * @param {Object} value Object value to be stored
+ * @param {number} [expiry] Number of seconds after which this item can be deleted
  * @return {boolean} The value was set
  */
 ve.init.SafeStorage.prototype.setObject = null;
