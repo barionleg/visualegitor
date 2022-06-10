@@ -38,14 +38,19 @@ ve.init.createListStorage = function ( storage ) {
 	 *
 	 * @param {string} key Key of list to set value for
 	 * @param {string} value Value to set
+	 * @param {number} expiry Number of seconds after which this list can be deleted
 	 * @return {boolean} The value was set
 	 */
-	ListStorage.prototype.appendToList = function ( key, value ) {
+	ListStorage.prototype.appendToList = function ( key, value, expiry ) {
 		var length = this.getListLength( key );
 
-		if ( this.set( getIndexKey( key, length ), value ) ) {
+		if ( this.set( getIndexKey( key, length ), value, expiry ) ) {
+			// Update expiry on previous items
+			for ( var i = 0; i < length; i++ ) {
+				this.setExpires( getIndexKey( key, i ), expiry );
+			}
 			length++;
-			return this.set( getLengthKey( key ), length.toString() );
+			return this.set( getLengthKey( key ), length.toString(), expiry );
 		}
 		return false;
 	};
