@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5cd0a69_3bb9c58d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2022-06-14T21:56:27Z",
+      "side": 1,
+      "message": "I don\u0027t think adding back the escapable dialog to \"catch\" the key stroke is the correct fix though.",
+      "revId": "dbdc7a3fb0715c09e01aef4310878f13969147c3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
