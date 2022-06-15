@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55367f78_5e01b3d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2022-06-15T19:22:36Z",
+      "side": 1,
+      "message": "Required patches in DiscussionTools and Flow:\n\nhttps://gerrit.wikimedia.org/r/c/mediawiki/extensions/DiscussionTools/+/805892\nhttps://gerrit.wikimedia.org/r/c/mediawiki/extensions/Flow/+/805894",
+      "revId": "1a871fab59872403de2ba233a0d1a6aac606275e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
