@@ -46,6 +46,23 @@ ve.ui.ProgressDialog.static.escapable = false;
 /**
  * @inheritdoc
  */
+ve.ui.ProgressDialog.prototype.onDialogKeyDown = function ( e ) {
+	// Parent method
+	ve.ui.ProgressDialog.super.prototype.onDialogKeyDown.apply( this, arguments );
+
+	// The dialog is not escapable, so the parent method will not trigger
+	// an action, but we also want to capture the keystroke while the dialog
+	// is open to prevent the surface from handling it (e.g. closing the editor).
+	// TODO: Consider upstreaming this functionality
+	if ( e.which === OO.ui.Keys.ESCAPE ) {
+		e.preventDefault();
+		e.stopPropagation();
+	}
+};
+
+/**
+ * @inheritdoc
+ */
 ve.ui.ProgressDialog.prototype.initialize = function () {
 	// Parent method
 	ve.ui.ProgressDialog.super.prototype.initialize.call( this );
