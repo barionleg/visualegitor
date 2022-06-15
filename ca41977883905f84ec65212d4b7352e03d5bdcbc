@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe4fc062_372a67b0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 6097
+      },
+      "writtenOn": "2022-06-15T12:11:39Z",
+      "side": 1,
+      "message": "multiple? \n\nTIL https://en.wikipedia.org/wiki/Multiplet",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 9
+      },
+      "revId": "ca41977883905f84ec65212d4b7352e03d5bdcbc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
