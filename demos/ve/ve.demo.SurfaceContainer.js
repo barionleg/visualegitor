@@ -37,7 +37,7 @@ ve.demo.SurfaceContainer = function VeDemoSurfaceContainer( target, page, lang, 
 	} );
 	this.autosaveToggle = new OO.ui.ToggleButtonWidget( {
 		label: 'Auto-save',
-		value: !!ve.init.platform.sessionStorage.getObject( 've-docstate' )
+		value: !!ve.init.platform.localStorage.getObject( 've-docstate' )
 	} );
 	var saveButton = new OO.ui.ButtonWidget( {
 		label: 'Save HTML'
@@ -301,10 +301,10 @@ ve.demo.SurfaceContainer.prototype.loadHtml = function ( pageHtml, mode ) {
 	}
 
 	if ( this.autosaveToggle.getValue() ) {
-		var state = ve.init.platform.sessionStorage.getObject( 've-docstate' );
+		var state = ve.init.platform.localStorage.getObject( 've-docstate' );
 
 		if ( state && state.page === this.page ) {
-			pageHtml = ve.init.platform.sessionStorage.get( 've-dochtml' );
+			pageHtml = ve.init.platform.localStorage.get( 've-dochtml' );
 			restored = true;
 		}
 	}
