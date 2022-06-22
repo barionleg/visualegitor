@@ -103,7 +103,7 @@
 
 		return new MockSafeStorage( store );
 	};
-	DummyPlatform.prototype.createLocalStorage = DummyPlatform.prototype.createSessionStorage = function ( store ) {
+	DummyPlatform.prototype.createLocalStorage = DummyPlatform.prototype.createSessionStorage = function ( store, mayConflict ) {
 		store = store || {};
 
 		var MockSystemStorage = function () {};
@@ -138,7 +138,7 @@
 
 		var storage = this.createSafeStorage( new MockSystemStorage( store ) );
 
-		return ve.init.createListStorage( storage );
+		return ve.init.createListStorage( storage, mayConflict );
 	};
 
 	ve.test.utils.DummyPlatform = DummyPlatform;
