@@ -67,7 +67,7 @@ ve.dm.Surface = function VeDmSurface( doc, attachedRoot, config ) {
 	this.autosavePrefix = '';
 	this.synchronizer = null;
 	this.storing = false;
-	this.storage = ve.init.platform.sessionStorage;
+	this.setStorage( ve.init.platform.sessionStorage );
 
 	// Let document know about the attachedRoot
 	this.documentModel.attachedRoot = this.attachedRoot;
@@ -1422,13 +1422,29 @@ ve.dm.Surface.prototype.setAutosaveDocId = function ( docId ) {
 /**
  * Set the storage interface for autosave
  *
- * @param {ve.init.SafeStorage} storage Storage interface
+ * @param {ve.init.ListStorage} storage Storage interface
  */
 ve.dm.Surface.prototype.setStorage = function ( storage ) {
 	if ( this.storing ) {
 		throw new Error( 'Can\'t change storage interface after auto-save has stared' );
 	}
 	this.storage = storage;
+
+	var isLocalStorage = false;
+	try {
+		// Accessing window.localStorage can throw an exception when it is disabled
+		// eslint-disable-next-line no-undef
+		isLocalStorage = this.storage.store === window.localStorage;
+	} catch ( e ) {}
+
+	if ( isLocalStorage ) {
+		var conflictableKeys = {};
+		conflictableKeys[ this.autosavePrefix + 've-docstate' ] = true;
+		conflictableKeys[ this.autosavePrefix + 've-dochtml' ] = true;
+		conflictableKeys[ this.autosavePrefix + 've-selection' ] = true;
+		conflictableKeys[ this.autosavePrefix + 've-changes' ] = 'list';
+		this.storage.addConflictableKeys( conflictableKeys );
+	}
 };
 
 /**
