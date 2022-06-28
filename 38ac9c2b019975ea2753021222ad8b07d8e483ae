@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4aabb76a_b5bbfc57",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2022-06-28T13:40:38Z",
+      "side": 1,
+      "message": "Test failures are due to T311513.",
+      "revId": "38ac9c2b019975ea2753021222ad8b07d8e483ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
