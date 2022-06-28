@@ -1113,7 +1113,7 @@ ve.dm.Surface.prototype.undo = function () {
 				var transaction = item.transactions[ i ].reversed();
 				transactions.push( transaction );
 			}
-			this.changeInternal( transactions, item.selectionBefore, true );
+			this.changeInternal( ve.dm.TransactionSquasher.static.squash( transactions ), item.selectionBefore, true );
 			this.emit( 'undoStackChange' );
 		}
 	} else {
@@ -1175,7 +1175,7 @@ ve.dm.Surface.prototype.redo = function () {
 	if ( item ) {
 		this.undoIndex--;
 		// ve.copy( item.transactions ) invokes .clone() on each transaction in item.transactions
-		this.changeInternal( ve.copy( item.transactions ), item.selection, true );
+		this.changeInternal( ve.dm.TransactionSquasher.static.squash( item.transactions ), item.selection, true );
 		this.emit( 'undoStackChange' );
 	}
 };
