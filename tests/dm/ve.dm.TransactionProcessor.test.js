@@ -87,18 +87,11 @@ QUnit.test( 'commit', function ( assert ) {
 					data.splice( 1, 1, 'F', 'O', 'O', { type: 'inlineImage' }, { type: '/inlineImage' }, 'B', 'A', 'R' );
 				}
 			},
-			'inserting unbalanced data': {
+			'inserting unpaired close tag': {
 				calls: [
-					[ 'pushReplacement', 0, 0, [ { type: 'table' } ] ]
+					[ 'pushReplacement', 0, 0, [ { type: '/div' } ] ]
 				],
-				exception: /Unbalanced set of replace operations found/
-			},
-			'inserting unclosed inline node': {
-				calls: [
-					[ 'pushRetain', 1 ],
-					[ 'pushReplacement', 1, 1, [ 'F', { type: 'inlineImage' }, 'O', 'O' ] ]
-				],
-				exception: /Unbalanced set of replace operations found/
+				exception: /Unexpected closing for div/
 			},
 			'inserting an inline node in a structure position': {
 				calls: [
@@ -129,14 +122,6 @@ QUnit.test( 'commit', function ( assert ) {
 					delete data[ 0 ].attributes;
 					data[ 4 ].type = '/paragraph';
 				}
-			},
-			'conversion with wrong closing': {
-				calls: [
-					[ 'pushReplacement', 0, 1, [ { type: 'paragraph' } ] ],
-					[ 'pushRetain', 3 ],
-					[ 'pushReplacement', 4, 1, [ { type: '/paragraph' }, { type: 'paragraph' } ] ]
-				],
-				exception: /Unbalanced set of replace operations found/
 			},
 			'splitting an element': {
 				calls: [
