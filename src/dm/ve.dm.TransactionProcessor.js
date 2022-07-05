@@ -35,12 +35,6 @@ ve.dm.TransactionProcessor = function VeDmTransactionProcessor( doc, transaction
 	// unadjusted offsets; this is needed to adjust those offsets after other modifications have been
 	// made to the linear model that have caused offsets to shift.
 	this.adjustment = 0;
-	// State tracking for unbalanced replace operations
-	this.replaceRemoveLevel = 0;
-	this.replaceInsertLevel = 0;
-	this.replaceMinInsertLevel = 0;
-	this.retainDepth = 0;
-	this.balanced = true;
 };
 
 /* Static members */
@@ -84,9 +78,9 @@ ve.dm.TransactionProcessor.prototype.process = function () {
 	// 3) rebuildTree rebuilt the part of the DM tree invalidated by the linear splices.
 	//
 	// Since then, we removed annotation changes completely. And TreeModifier handles
-	// replacements. So for replacements:
-	// 1) executeOperation does very little (just a balancedness check)
-	// 2) applyModifications queues linear splices for rollback on error
+	// replacements. So now:
+	// 1) executeOperation just builds a .modificationQueue of annotation modifications
+	// 2) applyModifications processes .modificationQueue, and queues for rollback on error
 	// 3) rebuildTree is only called in the rollback case
 
 	// Ensure the pre-modification document tree has been generated
@@ -97,9 +91,6 @@ ve.dm.TransactionProcessor.prototype.process = function () {
 	// because no modifications were made yet.
 	for ( var i = 0; i < this.operations.length; i++ ) {
 		this.executeOperation( this.operations[ i ] );
-	}
-	if ( !this.balanced ) {
-		throw new Error( 'Unbalanced set of replace operations found' );
 	}
 
 	var completed;
@@ -335,7 +326,7 @@ ve.dm.TransactionProcessor.modifiers.setAttribute = function ( offset, key, valu
  */
 
 /**
- * Execute a retain operation.
+ * Advance past content to retain.
  *
  * Called within the context of a transaction processor instance; moves the cursor by op.length
  *
@@ -343,16 +334,6 @@ ve.dm.TransactionProcessor.modifiers.setAttribute = function ( offset, key, valu
  * @param {number} op.length Number of elements to retain
  */
 ve.dm.TransactionProcessor.processors.retain = function ( op ) {
-	if ( !this.balanced ) {
-		// Track the depth of retained data when in the middle of an unbalanced replace
-		var retainedData = this.document.getData( new ve.Range( this.cursor, this.cursor + op.length ) );
-		for ( var i = 0; i < retainedData.length; i++ ) {
-			var type = retainedData[ i ].type;
-			if ( type !== undefined ) {
-				this.retainDepth += type.charAt( 0 ) === '/' ? -1 : 1;
-			}
-		}
-	}
 	this.advanceCursor( op.length );
 };
 
@@ -382,48 +363,13 @@ ve.dm.TransactionProcessor.processors.attribute = function ( op ) {
 };
 
 /**
- * Verify a replace operation (the actual processing is now done in ve.dm.TreeModifier)
+ * Advance past a content to remove (the actual processing is now done in ve.dm.TreeModifier)
+ *
+ * Called within the context of a transaction processor instance; moves the cursor by op.remove.length
  *
  * @param {Object} op Operation object
  * @param {Array} op.remove Linear model data to remove
- * @param {Array} op.insert Linear model data to insert
  */
 ve.dm.TransactionProcessor.processors.replace = function ( op ) {
-	// Track balancedness for verification purposes only
-
-	// Walk through the remove and insert data
-	// and keep track of the element depth change (level)
-	// for each of these two separately. The model is
-	// only consistent if both levels are zero.
-	var i, type;
-	for ( i = 0; i < op.remove.length; i++ ) {
-		type = op.remove[ i ].type;
-		if ( type !== undefined ) {
-			if ( type.charAt( 0 ) === '/' ) {
-				// Closing element
-				this.replaceRemoveLevel--;
-			} else {
-				// Opening element
-				this.replaceRemoveLevel++;
-			}
-		}
-	}
-	for ( i = 0; i < op.insert.length; i++ ) {
-		type = op.insert[ i ].type;
-		if ( type !== undefined ) {
-			if ( type.charAt( 0 ) === '/' ) {
-				// Closing element
-				this.replaceInsertLevel--;
-			} else {
-				// Opening element
-				this.replaceInsertLevel++;
-			}
-		}
-	}
 	this.advanceCursor( op.remove.length );
-
-	this.balanced =
-		this.replaceRemoveLevel === 0 &&
-		this.replaceInsertLevel === 0 &&
-		this.retainDepth === 0;
 };
