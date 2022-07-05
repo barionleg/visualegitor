@@ -626,9 +626,9 @@ ve.dm.TreeModifier.prototype.processRetain = function ( maxLength ) {
 					inserter.stepOut();
 				}
 				inserterStep = inserter.stepOut();
-				if ( inserterStep.item.type !== removerStep.item.type ) {
+				if ( ( inserterStep && inserterStep.item.type ) !== removerStep.item.type ) {
 					throw new Error( 'Expected ' + removerStep.item.type + ', not ' +
-		inserterStep.item.type );
+						( inserterStep && inserterStep.item.type ) );
 				}
 			}
 			this.pushRemoveLastIfInDeletions();
@@ -713,7 +713,9 @@ ve.dm.TreeModifier.prototype.processInsert = function ( itemOrData ) {
 				inserter.stepOut();
 			}
 			var step = inserter.stepOut();
-			if ( step.item.type !== item.type.slice( 1 ) ) {
+			if ( !step ) {
+				throw new Error( 'Unexpected closing for ' + item.type.slice( 1 ) );
+			} else if ( step.item.type !== item.type.slice( 1 ) ) {
 				throw new Error( 'Expected closing for ' + step.item.type +
 					' but got closing for ' + item.type.slice( 1 ) );
 			}
