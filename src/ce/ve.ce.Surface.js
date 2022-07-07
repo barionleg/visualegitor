@@ -47,7 +47,7 @@ ve.ce.Surface = function VeCeSurface( model, ui, config ) {
 	this.eventSequencer = new ve.EventSequencer( [
 		'keydown', 'keypress', 'keyup',
 		'compositionstart', 'compositionend',
-		'input', 'mousedown'
+		'beforeinput', 'input', 'mousedown'
 	] );
 	this.clipboard = null;
 	this.clipboardId = Math.random().toString();
@@ -201,6 +201,7 @@ ve.ce.Surface = function VeCeSurface( model, ui, config ) {
 		keydown: this.onDocumentKeyDown.bind( this ),
 		keyup: this.onDocumentKeyUp.bind( this ),
 		keypress: this.onDocumentKeyPress.bind( this ),
+		beforeinput: this.onDocumentBeforeInput.bind( this ),
 		input: this.onDocumentInput.bind( this ),
 		compositionstart: this.onDocumentCompositionStart.bind( this )
 	} ).after( {
@@ -3073,6 +3074,59 @@ ve.ce.Surface.prototype.selectAll = function () {
 				0, 0, matrix.getMaxColCount() - 1, matrix.getRowCount() - 1
 			)
 		);
+	}
+};
+
+/**
+ * Handle beforeinput events.
+ *
+ * @param {jQuery.Event} e The input event
+ */
+ve.ce.Surface.prototype.onDocumentBeforeInput = function ( e ) {
+	if ( this.getSelection().isNativeCursor() ) {
+		var surface = this,
+			inputType = e.originalEvent ? e.originalEvent.inputType : null;
+
+		// Support: Chrome (Android, GBoard)
+		// Handle IMEs that emit text fragments with a trailing newline on Enter keypress (T312558)
+		if (
+			this.getSelection().isNativeCursor() &&
+			( inputType === 'insertText' || inputType === 'insertCompositionText' ) &&
+			e.originalEvent.data.lastIndexOf( '\n' ) === e.originalEvent.data.length - 1
+		) {
+			// The event will have inserted a newline into the CE view,
+			// so fix up the DM accordingly depending on the context.
+			setTimeout( function () {
+				ve.ce.keyDownHandlerFactory.lookup( 'linearEnter' ).static.execute( surface, e );
+			} );
+		}
+
+		// Support: Chrome (Android, GBoard)
+		// Handle backspace keypresses on IMEs while a multi-node selection is active (T217223)
+		if ( inputType === 'deleteContentBackward' ) {
+			var model = this.getModel(),
+				rangeToRemove = model.getSelection().getRange(),
+				startNode = model.getDocument().getBranchNodeFromOffset( rangeToRemove.start ),
+				startNodeRange = startNode ? startNode.getRange() : null;
+
+			// We correctly handle the case where the selection is fully within a single branch node,
+			// but fail to make the requisite DM changes when it encompasses multiple nodes,
+			// or is at the start of a node (potentially causing it to be merged with a previous node).
+			// The IME event is most likely uncancellable, so fix up the DM after the fact.
+			if ( startNodeRange ) {
+				if ( !startNodeRange.containsRange( rangeToRemove ) ) {
+					setTimeout( function () {
+						surface.getModel().getLinearFragment( rangeToRemove, true ).delete( -1 ).select();
+					} );
+				} else {
+					// The selection being deleted starts at the start of its parent node,
+					// so merge the parent with its predecessor if appropriate.
+					if ( startNodeRange.start === rangeToRemove.start ) {
+						// TODO: find a reasonable approach to implement this
+					}
+				}
+			}
+		}
 	}
 };
 
