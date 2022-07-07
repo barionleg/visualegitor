@@ -47,7 +47,7 @@ ve.ce.Surface = function VeCeSurface( model, ui, config ) {
 	this.eventSequencer = new ve.EventSequencer( [
 		'keydown', 'keypress', 'keyup',
 		'compositionstart', 'compositionend',
-		'input', 'mousedown'
+		'beforeinput', 'input', 'mousedown'
 	] );
 	this.clipboard = null;
 	this.clipboardId = Math.random().toString();
@@ -206,6 +206,7 @@ ve.ce.Surface = function VeCeSurface( model, ui, config ) {
 		keydown: this.onDocumentKeyDown.bind( this ),
 		keyup: this.onDocumentKeyUp.bind( this ),
 		keypress: this.onDocumentKeyPress.bind( this ),
+		beforeinput: this.onDocumentBeforeInput.bind( this ),
 		input: this.onDocumentInput.bind( this ),
 		compositionstart: this.onDocumentCompositionStart.bind( this )
 	} ).after( {
@@ -3100,6 +3101,65 @@ ve.ce.Surface.prototype.selectAll = function () {
 				0, 0, matrix.getMaxColCount() - 1, matrix.getRowCount() - 1
 			)
 		);
+	}
+};
+
+/**
+ * Handle beforeinput events.
+ *
+ * @param {jQuery.Event} e The input event
+ */
+ve.ce.Surface.prototype.onDocumentBeforeInput = function ( e ) {
+	if ( this.getSelection().isNativeCursor() ) {
+		var surface = this,
+			inputType = e.originalEvent ? e.originalEvent.inputType : null;
+
+		// Support: Chrome (Android, GBoard)
+		// Handle IMEs that emit text fragments with a trailing newline on Enter keypress (T312558)
+		if (
+			( inputType === 'insertText' || inputType === 'insertCompositionText' ) &&
+			e.originalEvent.data.slice( -1 ) === '\n'
+		) {
+			// The event will have inserted a newline into the CE view,
+			// so fix up the DM accordingly depending on the context.
+			this.eventSequencer.afterOne( {
+				input: surface.fixupChromiumNativeEnter.bind( surface )
+			} );
+		}
+	}
+};
+
+/**
+ * Remove spurious DOM elements from the CE view inserted by Chromium's native IME (T312558).
+ */
+ve.ce.Surface.prototype.fixupChromiumNativeEnter = function () {
+	var fixedUp = false;
+
+	// Traverse the DOM subtree containing the focus point of the active selection, looking for DOM nodes we did not create.
+	// In a paragraph context, these nodes will be direct siblings of the branch node (paragraph) holding our selection,
+	// but in other contexts, such as inline lists, they may instead be siblings of its parent.
+	for (
+		var $branchNode = $( this.nativeSelection.focusNode ).closest( '.ve-ce-branchNode' );
+		$branchNode.length > 0;
+		$branchNode = $branchNode.parents( '.ve-ce-branchNode' ) // one level up
+	) {
+		for ( var node = $branchNode[ 0 ]; node !== null; node = node.nextElementSibling ) {
+			// This node is known to the editor; leave it unmodified.
+			if ( $.data( node, 'view' ) ) {
+				continue;
+			}
+			// Else the native Enter action added a spurious DOM node that does not exist in
+			// the view. Remove it and perform a VE Enter action.
+			// We expect it's <div><br></div>, but in any case, it's out of sync with the DM.
+			node.parentNode.removeChild( node );
+			fixedUp = true;
+		}
+	}
+
+	// If the native IME handler performed work that we had to cleanup, execute our own Enter handler now
+	// to perform the context-appropriate operation.
+	if ( fixedUp ) {
+		ve.ce.keyDownHandlerFactory.lookup( 'linearEnter' ).static.execute( this, new Event( 'dummy' ) );
 	}
 };
 
