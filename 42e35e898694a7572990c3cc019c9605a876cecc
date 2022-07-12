@@ -16,6 +16,24 @@
       "message": "Results in ugly artifacts on added/deleted images: https://phabricator.wikimedia.org/F35302474 (note the red line above the caption)",
       "revId": "42e35e898694a7572990c3cc019c9605a876cecc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80d897ae_d0b28797",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2022-07-12T15:55:56Z",
+      "side": 1,
+      "message": "I don\u0027t think that\u0027s a regression. The figure and the figcaption render as if they were siblings and that line is where the outlines overlap. It exists on live at the moment.",
+      "parentUuid": "e584e0dc_7020f2f6",
+      "revId": "42e35e898694a7572990c3cc019c9605a876cecc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
