@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f8befd8_913bfe4b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2022-07-13T19:01:52Z",
+      "side": 1,
+      "message": "Release happened in https://gerrit.wikimedia.org/r/c/VisualEditor/VisualEditor/+/813628",
+      "revId": "38470f11edce43252b1c9a11d19a62ddb02aa7a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
