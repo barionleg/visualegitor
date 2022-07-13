@@ -44,21 +44,6 @@ ve.init.sa.Target = function VeInitSaTarget( config ) {
 
 OO.inheritClass( ve.init.sa.Target, ve.init.Target );
 
-/* Static properties */
-
-ve.init.sa.Target.static.actionGroups = [
-	{
-		name: 'pageMenu',
-		type: 'list',
-		icon: 'menu',
-		indicator: null,
-		title: OO.ui.deferMsg( 'visualeditor-pagemenu-tooltip' ),
-		label: OO.ui.deferMsg( 'visualeditor-pagemenu-tooltip' ),
-		invisibleLabel: true,
-		include: [ 'findAndReplace', 'changeDirectionality', 'commandHelp' ]
-	}
-];
-
 /* Methods */
 
 /**
