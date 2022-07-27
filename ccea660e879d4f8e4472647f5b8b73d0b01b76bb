@@ -18,6 +18,23 @@
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7653c15_322c274c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 540
+      },
+      "writtenOn": "2022-07-27T15:03:35Z",
+      "side": 1,
+      "message": "Thanks for the review! I\u0027ll be removing the incomplete Backspace handling from this patchset per Ed\u0027s recommendation to limit the scope.",
+      "revId": "ccea660e879d4f8e4472647f5b8b73d0b01b76bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1660a52b_b92e9e4c",
@@ -31,6 +48,24 @@
       "writtenOn": "2022-07-21T14:49:57Z",
       "side": 1,
       "message": "True for Gboard, but we cannot be sure other IMEs will do the same, so we need some validation inside the fixup handler.",
+      "revId": "ccea660e879d4f8e4472647f5b8b73d0b01b76bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53d76838_7c47f221",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 3123,
+      "author": {
+        "id": 540
+      },
+      "writtenOn": "2022-07-27T15:03:35Z",
+      "side": 1,
+      "message": "Hmm, the check for a trailing newline is aimed to accomplish that - any IME that inserts text with a trailing newline would cause similar model corruption as I understand it.",
+      "parentUuid": "1660a52b_b92e9e4c",
       "revId": "ccea660e879d4f8e4472647f5b8b73d0b01b76bb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     },
@@ -69,6 +104,24 @@
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "285aee57_3532397e",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 3132,
+      "author": {
+        "id": 540
+      },
+      "writtenOn": "2022-07-27T15:03:35Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "111ca68b_fa4b42ae",
+      "revId": "ccea660e879d4f8e4472647f5b8b73d0b01b76bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "01cf2ab6_9e3d79e4",
@@ -82,6 +135,24 @@
       "writtenOn": "2022-07-21T14:49:57Z",
       "side": 1,
       "message": "It\u0027s possible for an IME to trigger multiple events before this setTimeout happens, in which case the rangeToRemove may no longer be valid.",
+      "revId": "ccea660e879d4f8e4472647f5b8b73d0b01b76bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc689032_bad68bf9",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 3145,
+      "author": {
+        "id": 540
+      },
+      "writtenOn": "2022-07-27T15:03:35Z",
+      "side": 1,
+      "message": "Ack. I\u0027ll be removing the unfinished Backspace handling from this patchset as per Ed\u0027s suggestion; we can work on that separately.",
+      "parentUuid": "01cf2ab6_9e3d79e4",
       "revId": "ccea660e879d4f8e4472647f5b8b73d0b01b76bb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
