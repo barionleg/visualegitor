@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9b05370_79a616bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2022-07-29T08:50:20Z",
+      "side": 1,
+      "message": "This patchset fixes removes the extra \u003cdiv\u003e\u003cbr\u003e\u003c/div\u003e that Chromium usually adds (see https://phabricator.wikimedia.org/T312558#8114458 ).\n\nBut it fails in cases where Chromium instead adds a new list item.",
+      "revId": "11312ee0a8643532b18da553636187d272ad6269",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a75ca921_1b7ac58b",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 3136,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2022-07-29T08:50:20Z",
+      "side": 1,
+      "message": "This logic works if the native action creates a new \u003cdiv\u003e\u003cbr\u003e\u003c/div\u003e sibling to the branch node. But it fails if the native action creates a new list bullet (because it is the sibling of the branch node\u0027s parent node).",
+      "revId": "11312ee0a8643532b18da553636187d272ad6269",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
