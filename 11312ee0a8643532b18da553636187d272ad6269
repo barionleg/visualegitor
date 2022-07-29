@@ -33,6 +33,24 @@
       "message": "This logic works if the native action creates a new \u003cdiv\u003e\u003cbr\u003e\u003c/div\u003e sibling to the branch node. But it fails if the native action creates a new list bullet (because it is the sibling of the branch node\u0027s parent node).",
       "revId": "11312ee0a8643532b18da553636187d272ad6269",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e9036da_6fc8d5f5",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 3136,
+      "author": {
+        "id": 540
+      },
+      "writtenOn": "2022-07-29T12:51:18Z",
+      "side": 1,
+      "message": "This is great, thank you. I submitted a new PS that extends this logic to upper levels of the DOM subtree that holds the active selection, which appears to fix the behavior in a list item context.",
+      "parentUuid": "a75ca921_1b7ac58b",
+      "revId": "11312ee0a8643532b18da553636187d272ad6269",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
