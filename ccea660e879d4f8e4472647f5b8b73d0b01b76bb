@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3daad173_f17792bf",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 3123,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2022-07-29T08:54:40Z",
+      "side": 1,
+      "message": "Yes I agree the check is good. I\u0027m just not 100% confident that all IME+browser combinations add a following sibling node in the same way as GBoard whenever the data ends with \u0027\\n\u0027.",
+      "parentUuid": "53d76838_7c47f221",
+      "revId": "ccea660e879d4f8e4472647f5b8b73d0b01b76bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "153f8ccb_c694b2e1",
         "filename": "src/ce/ve.ce.Surface.js",
         "patchSetId": 3
