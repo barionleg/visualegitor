@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39ae3ff7_e24fc15a",
+        "filename": "src/ui/widgets/ve.ui.LanguageInputWidget.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1883
+      },
+      "writtenOn": "2022-08-03T14:10:10Z",
+      "side": 1,
+      "message": "I think it would be better to say something like \u0027choose language\u0027 or \u0027change language\u0027 here.",
+      "range": {
+        "startLine": 45,
+        "startChar": 63,
+        "endLine": 45,
+        "endChar": 114
+      },
+      "revId": "c9055f43353f57874201b0076c1ce8d4fa7bd83a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
