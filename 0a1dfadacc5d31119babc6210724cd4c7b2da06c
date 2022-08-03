@@ -143,6 +143,24 @@
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "49e8e91c_c9de251d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8576
+      },
+      "writtenOn": "2022-08-03T11:32:53Z",
+      "side": 1,
+      "message": "I updated the patch to only contain area labels and no titles.",
+      "parentUuid": "ac719ace_107a4986",
+      "revId": "0a1dfadacc5d31119babc6210724cd4c7b2da06c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c641d35d_e2827f47",
