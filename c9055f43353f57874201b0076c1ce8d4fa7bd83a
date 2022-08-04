@@ -39,6 +39,30 @@
       },
       "revId": "c9055f43353f57874201b0076c1ce8d4fa7bd83a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0c574e0_f97f966a",
+        "filename": "src/ui/widgets/ve.ui.LanguageInputWidget.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 8576
+      },
+      "writtenOn": "2022-08-04T14:00:28Z",
+      "side": 1,
+      "message": "Yes, thanks for noticing. The ticket said we should use the same label as the popup window. I changed that back. That got lost in some of the patchsets. 😮",
+      "parentUuid": "39ae3ff7_e24fc15a",
+      "range": {
+        "startLine": 45,
+        "startChar": 63,
+        "endLine": 45,
+        "endChar": 114
+      },
+      "revId": "c9055f43353f57874201b0076c1ce8d4fa7bd83a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
