@@ -163,6 +163,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "afabd8ab_1c645d12",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2022-08-04T14:02:11Z",
+      "side": 1,
+      "message": "Bartosz, do you think it\u0027s better to use the `invisibleLabel` feature of OO.ui.mixin.LabelElement instead of the ARIA attributes currently proposed in this patch? I think either works.\n\nFor now we simplified this patch further, as said above. Unfortunately none of the WMDE TechWish team members can +2 patches in this codebase.",
+      "parentUuid": "49e8e91c_c9de251d",
+      "revId": "0a1dfadacc5d31119babc6210724cd4c7b2da06c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c641d35d_e2827f47",
         "filename": "i18n/en.json",
         "patchSetId": 6
