@@ -45,7 +45,7 @@ ve.dm.LinearSelection.static.newFromHash = function ( hash ) {
 ve.dm.LinearSelection.prototype.toJSON = function () {
 	return {
 		type: this.constructor.static.name,
-		range: this.range
+		range: this.range.toJSON()
 	};
 };
 

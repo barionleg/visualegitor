@@ -4,6 +4,8 @@
  * @copyright 2011-2020 VisualEditor Team and others; see http://ve.mit-license.org
  */
 
+/* global Peer */
+
 /**
  * DataModel surface for a node within a document
  *
@@ -1551,4 +1553,45 @@ ve.dm.Surface.prototype.removeDocStateAndChanges = function () {
 	this.storage.remove( this.autosavePrefix + 've-dochtml' );
 	this.storage.remove( this.autosavePrefix + 've-selection' );
 	this.storage.removeList( this.autosavePrefix + 've-changes' );
+};
+
+ve.dm.Surface.prototype.initPeerServer = function () {
+	var surface = this;
+	var peerServer = this.peerServer = new ve.dm.PeerTransportServer( this.documentModel.completeHistory.getLength() );
+	if ( this.documentModel.completeHistory.transactions.length > 0 ) {
+		this.documentModel.completeHistory.transactions[ 0 ].authorId = 1;
+	}
+	peerServer.protocolServer.rebaseServer.updateDocState(
+		'doc123',
+		1,
+		ve.dm.Change.static.deserialize(
+			ve.init.target.surface.model.documentModel.completeHistory.serialize(),
+			true
+		),
+		this.documentModel.completeHistory,
+		{}
+	);
+	var peer = this.peerServer.peer = new Peer();
+	peer.on( 'open', function ( id ) {
+		/* eslint-disable-next-line no-console */
+		console.log( 'Open, Now in another browser window, do:\nve.init.target.surface.model.initPeerClient( \'' + id + '\' );' );
+		surface.initPeerClient( id );
+	} );
+	peer.on( 'connection', function ( conn ) {
+		peerServer.onConnection( conn );
+	} );
+};
+
+ve.dm.Surface.prototype.initPeerClient = function ( serverId ) {
+	var surface = this,
+		peerClient = this.peerClient = new Peer();
+	surface.documentModel.completeHistory.transactions[ 0 ].authorId = 1;
+	peerClient.on( 'open', function ( /* id */ ) {
+		var conn = peerClient.connect( serverId );
+		conn.on( 'open', function () {
+			surface.createSynchronizer( 'foo', { peerConnection: conn } );
+			surface.synchronizer.commitLength = surface.documentModel.completeHistory.getLength();
+			surface.synchronizer.sentLength = surface.documentModel.completeHistory.getLength();
+		} );
+	} );
 };

@@ -124,7 +124,7 @@ ve.dm.RebaseClient.prototype.submitChange = function () {
 	// receiving the change before it receives the submitChange message.
 	this.logEvent( {
 		type: 'submitChange',
-		change: change,
+		change: change.serialize(),
 		backtrack: this.backtrack
 	} );
 	this.sendChange( this.backtrack, change );
@@ -186,15 +186,15 @@ ve.dm.RebaseClient.prototype.acceptChange = function ( change ) {
 	// Only log the result if it's "interesting", i.e. we rebased or rejected something of nonzero length
 	if ( result ) {
 		if ( result.rebased.getLength() > 0 || result.rejected ) {
-			logResult.rebased = result.rebased;
-			logResult.transposedHistory = result.transposedHistory;
+			logResult.rebased = result.rebased.serialize();
+			logResult.transposedHistory = result.transposedHistory.serialize();
 		}
 		if ( result.rejected ) {
-			logResult.rejected = result.rejected;
+			logResult.rejected = result.rejected.serialize();
 		}
 	}
 	if ( unsent.getLength() > 0 ) {
-		logResult.unsent = unsent;
+		logResult.unsent = unsent.serialize();
 	}
 	this.logEvent( ve.extendObject( {
 		type: 'acceptChange',
