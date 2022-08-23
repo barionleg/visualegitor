@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0ca41ec_376b1123",
+        "filename": "src/dm/ve.dm.Surface.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 1434,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2022-08-23T00:27:31Z",
+      "side": 1,
+      "message": "I believe this can throw. See e.g. the try-catch in core for assinging this property, and startup.js where we use the \u0027in\u0027 operator instead. When private mode and privacy browsers disable this, it tends to be that when reading the property, it will throw an error on property access.",
+      "range": {
+        "startLine": 1434,
+        "startChar": 29,
+        "endLine": 1434,
+        "endChar": 49
+      },
+      "revId": "e8db3ff1f3cafdd8ec409a71140a548e2018059d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
