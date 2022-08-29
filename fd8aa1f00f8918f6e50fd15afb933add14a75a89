@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c991ec4_3997f524",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2022-08-29T05:37:43Z",
+      "side": 1,
+      "message": "Thanks TK-999! I\u0027d like to build more on your PS8 ... I think we should err on the side of caution when deleting trailing .ve-ce-branchNode siblings without view nodes. As it stands, the code happens to delete the paste target (which follows the document node) — that\u0027s easily fixed, but more generally, unknown IMEs may temporarily insert unknown elements then delete them soon after (I\u0027m thinking javascript IMEs for example).\n\nSo I\u0027d like us to target the code to delete the specific spurious nodes Gboard creates (trailing paragraph, or trailing list item + paragraph), rather than correcting other hypothetical spurious issues that we don\u0027t know will arise, and risk tripping up unknown IMEs. Basically, we want to disturb things as little as possible because unfortunately we can\u0027t guess how every IME will behave — the varieties are bewildering!",
+      "revId": "fd8aa1f00f8918f6e50fd15afb933add14a75a89",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
