@@ -254,6 +254,16 @@ ve.init.createListStorage = function ( storage ) {
 	};
 
 	/**
+	 * Update the expiry time of a list
+	 *
+	 * @param {string} key Key of list to set value for
+	 * @param {number} [expiry] Number of seconds after which this list can be deleted
+	 */
+	ListStorage.prototype.setExpiresList = function ( key, expiry ) {
+		this.setExpires( getLengthKey( key ), expiry );
+	};
+
+	/**
 	 * Get the length of a list in storage
 	 *
 	 * @param {string} key Key of list
