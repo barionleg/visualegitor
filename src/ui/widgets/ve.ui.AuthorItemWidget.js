@@ -6,6 +6,13 @@
  */
 
 /* global CP */
+CP = window.CP || function ( element ) {
+	// Stub implementation
+	this.element = element;
+	this.picker = document.createElement( 'div' );
+	this.element.appendChild( this.picker );
+	this.on = this.fit = this.set = function () {};
+};
 
 /**
  * UserInterface AuthorItemWidget
