@@ -117,8 +117,9 @@ ve.dm.ProtocolServer.prototype.onLogEvent = function ( context, event ) {
  * Setup author on the server and send initialization events
  *
  * @param {Object} context The connection context
+ * @param {number} startHeight The height of the common history
  */
-ve.dm.ProtocolServer.prototype.welcomeClient = function ( context ) {
+ve.dm.ProtocolServer.prototype.welcomeClient = function ( context, startHeight ) {
 	const docName = context.docName,
 		serverId = context.serverId,
 		authorId = context.authorId;
@@ -153,7 +154,7 @@ ve.dm.ProtocolServer.prototype.welcomeClient = function ( context ) {
 	// feasible if TransactionProcessor was modified to have a "don't sync, just apply"
 	// mode and ve.dm.Document was faked with { data: …, metadata: …, store: … }
 	context.sendAuthor( 'initDoc', {
-		history: state.history.serialize( true ),
+		history: state.history.mostRecent( startHeight ).serialize( true ),
 		authors: state.getActiveAuthors()
 	} );
 };
