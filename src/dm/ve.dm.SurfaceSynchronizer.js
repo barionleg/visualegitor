@@ -3,7 +3,8 @@
  *
  * @copyright 2011-2020 VisualEditor Team and others; see http://ve.mit-license.org
  */
-/* global io */
+
+/* global Map */
 
 /**
  * DataModel surface synchronizer.
@@ -44,27 +45,37 @@ ve.dm.SurfaceSynchronizer = function VeDmSurfaceSynchronizer( surface, documentI
 	this.paused = false;
 
 	// SocketIO events
-	var path = ( config.server || '' );
-	var options = {
-		query: {
-			docName: this.documentId,
-			authorId: this.getAuthorId() || '',
-			token: this.token || ''
-		},
-		transports: [ 'websocket' ]
-	};
-	this.conn = {
-		socket: io( path, options ),
+	if ( !config.peerConnection ) {
+		throw new Error( 'Expected config.peerConnection' );
+	}
+	var conn = this.conn = {
+		peerConnection: config.peerConnection,
+		handlers: new Map(),
 		on: function ( type, handler ) {
-			this.socket.on( type, handler );
+			if ( !this.handlers.has( type ) ) {
+				this.handlers.set( type, [] );
+			}
+			this.handlers.get( type ).push( handler );
 		},
 		send: function ( type, data ) {
-			this.socket.emit( type, data );
+			console.log( 'peerConnection send', type, data );
+			this.peerConnection.send( { type: type, data: ve.serialize( data ) } );
 		},
 		disconnect: function () {
-			this.socket.disconnect();
+			this.peerConnection.close();
 		}
 	};
+	this.conn.peerConnection.on( 'data', function ( data ) {
+		var type = data.type;
+		if ( typeof type !== 'string' ) {
+			throw new Error( 'Expected .type in <' + data + '>' );
+		}
+		console.log( 'peerConnection on', type, data.data );
+		( conn.handlers.get( type ) || [] ).forEach( function ( handler ) {
+			handler( data.data );
+		} );
+	} );
+
 	this.conn.on( 'registered', this.onRegistered.bind( this ) );
 	this.conn.on( 'initDoc', this.onInitDoc.bind( this ) );
 	this.conn.on( 'newChange', this.onNewChange.bind( this ) );
@@ -202,7 +213,7 @@ ve.dm.SurfaceSynchronizer.prototype.submitChange = function () {
 ve.dm.SurfaceSynchronizer.prototype.sendChange = function ( backtrack, change ) {
 	this.conn.send( 'submitChange', {
 		backtrack: this.backtrack,
-		change: change
+		change: change.serialize()
 	} );
 };
 
