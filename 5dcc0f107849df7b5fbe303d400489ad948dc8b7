@@ -16,6 +16,23 @@
       "message": "I don\u0027t have +2 here? o.O",
       "revId": "5dcc0f107849df7b5fbe303d400489ad948dc8b7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "920da7d2_b6716895",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2022-10-07T09:12:41Z",
+      "side": 1,
+      "message": "I have complained about some of the false positives at https://github.com/wikimedia/eslint-config-wikimedia/issues/477 .",
+      "revId": "5dcc0f107849df7b5fbe303d400489ad948dc8b7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
