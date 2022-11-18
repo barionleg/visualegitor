@@ -1019,6 +1019,28 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 				msg: 'Formatted text into heading with pasteSpecial'
 			},
 			{
+				rangeOrSelection: new ve.Range( 1 ),
+				pasteHtml: '<a href="javascript:alert(\'unsafe\');">Foo</a><a href="#safe">Bar</a>',
+				expectedRangeOrSelection: new ve.Range( 7 ),
+				expectedOps: [
+					[
+						{ type: 'retain', length: 1 },
+						{
+							type: 'replace',
+							insert: [
+								'F', 'o', 'o',
+								[ 'B', [ { type: 'link', attributes: { href: '#safe' } } ] ],
+								[ 'a', [ { type: 'link', attributes: { href: '#safe' } } ] ],
+								[ 'r', [ { type: 'link', attributes: { href: '#safe' } } ] ]
+							],
+							remove: []
+						},
+						{ type: 'retain', length: docLen - 1 }
+					]
+				],
+				msg: 'Unsafe link removed by ve.sanitize'
+			},
+			{
 				rangeOrSelection: new ve.Range( 4 ),
 				pasteHtml: '<p>Bar</p>',
 				expectedRangeOrSelection: new ve.Range( 7 ),
