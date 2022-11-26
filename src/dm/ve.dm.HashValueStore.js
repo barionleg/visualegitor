@@ -231,6 +231,7 @@ ve.dm.HashValueStore.prototype.value = function ( hash ) {
  * @param {string[]} hashes Hashes to lookup
  * @return {Array} Values for these hashes (undefined for any not present)
  */
+// eslint-disable-next-line es-x/no-array-prototype-values
 ve.dm.HashValueStore.prototype.values = function ( hashes ) {
 	var values = [];
 	for ( var i = 0, length = hashes.length; i < length; i++ ) {
