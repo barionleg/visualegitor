@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bf1d495_14d569a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2022-12-22T15:09:13Z",
+      "side": 1,
+      "message": "https://codesearch.wmcloud.org/search/?q\u003dfullImgSrc 👍",
+      "revId": "be037551375e97f7cfb701bf2b47c2f227554f5a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
