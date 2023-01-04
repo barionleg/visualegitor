@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c535b0a_5fa78779",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2023-01-04T19:53:31Z",
+      "side": 1,
+      "message": "This looks slightly odd with no package.json/foreign-resources.yaml update to match",
+      "revId": "95ccd3290f12b6e26677d91c44ecfcd04c969790",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
