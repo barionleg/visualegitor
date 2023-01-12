@@ -503,15 +503,18 @@ ve.dm.Transaction.prototype.translateRangeWithAuthor = function ( range, authorI
  * removal transaction it will be a zero-length range.
  *
  * @param {ve.dm.Document} doc The document in the state to which the transaction applies
- * @param {boolean} includeInternalList Include changes within the internal list
+ * @param {Object} [options] Options
+ * @param {boolean} [options.includeInternalList] Include changes within the internal list
  * @return {ve.Range|null} Range covering modifications, or null for a no-op transaction
  */
-ve.dm.Transaction.prototype.getModifiedRange = function ( doc, includeInternalList ) {
+ve.dm.Transaction.prototype.getModifiedRange = function ( doc, options ) {
 	var docEndOffset = doc.data.getLength(),
 		oldOffset = 0,
 		offset = 0;
 
-	if ( !includeInternalList ) {
+	options = options || {};
+
+	if ( !options.includeInternalList ) {
 		var internalListNode = doc.getInternalList().getListNode();
 		if ( internalListNode ) {
 			docEndOffset = internalListNode.getOuterRange().start;
