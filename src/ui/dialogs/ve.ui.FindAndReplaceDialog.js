@@ -390,11 +390,22 @@ ve.ui.FindAndReplaceDialog.prototype.updateFragments = function () {
 			noOverlaps: true,
 			wholeWord: wholeWord
 		} );
-		for ( var i = 0, l = ranges.length; i < l; i++ ) {
-			this.fragments.push( surfaceModel.getLinearFragment( ranges[ i ], true, true ) );
-			if ( startIndex === undefined && ranges[ i ].start >= this.startOffset ) {
-				startIndex = this.fragments.length - 1;
+	} else {
+		// Hack: highlight inserted content from the document history
+		var postOffset = 0;
+		documentModel.completeHistory.squash().transactions[ 0 ].operations.forEach( function ( op ) {
+			if ( op.type === 'retain' ) {
+				postOffset += op.length;
+			} else if ( op.type === 'replace' ) {
+				ranges.push( new ve.Range( postOffset, postOffset + op.insert.length ) );
+				postOffset += op.insert.length;
 			}
+		} );
+	}
+	for ( var i = 0, l = ranges.length; i < l; i++ ) {
+		this.fragments.push( surfaceModel.getLinearFragment( ranges[ i ], true, true ) );
+		if ( startIndex === undefined && ranges[ i ].start >= this.startOffset ) {
+			startIndex = this.fragments.length - 1;
 		}
 	}
 	this.results = this.fragments.length;
