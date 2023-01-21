@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f40bbb63_492d248c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2023-01-21T12:44:32Z",
+      "side": 1,
+      "message": "CX needs a patch: https://codesearch-beta.wmcloud.org/search/?q\u003dgetModifiedRange (or back-compat)",
+      "revId": "92c8dc7f944d77a7d7c0de68d7022d9b1c6efff6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
