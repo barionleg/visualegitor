@@ -46,6 +46,30 @@
       },
       "revId": "e8db3ff1f3cafdd8ec409a71140a548e2018059d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1515dc8c_15780ee1",
+        "filename": "src/dm/ve.dm.Surface.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 1434,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2023-01-21T09:36:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a79b2599_b1d332a0",
+      "range": {
+        "startLine": 1434,
+        "startChar": 29,
+        "endLine": 1434,
+        "endChar": 49
+      },
+      "revId": "e8db3ff1f3cafdd8ec409a71140a548e2018059d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
