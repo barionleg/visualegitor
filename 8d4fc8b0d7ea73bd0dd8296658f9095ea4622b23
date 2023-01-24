@@ -16,6 +16,24 @@
       "message": "T313162 is reproducible in a Google Chrome browser.",
       "revId": "8d4fc8b0d7ea73bd0dd8296658f9095ea4622b23",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7817d0d2_e70fba92",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2023-01-24T17:19:55Z",
+      "side": 1,
+      "message": "True… I can\u0027t reproduce it with this patch, though!",
+      "parentUuid": "55a49f06_16d53e32",
+      "revId": "8d4fc8b0d7ea73bd0dd8296658f9095ea4622b23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
