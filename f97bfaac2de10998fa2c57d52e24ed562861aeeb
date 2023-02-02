@@ -16,6 +16,24 @@
       "message": "This is a plain object without a getSurface() method. Just use .surface?",
       "revId": "f97bfaac2de10998fa2c57d52e24ed562861aeeb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5369f08_2e7cfbd7",
+        "filename": "src/ui/dialogs/ve.ui.CommandHelpDialog.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2023-02-02T21:25:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b815dfbc_639d9fa3",
+      "revId": "f97bfaac2de10998fa2c57d52e24ed562861aeeb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
