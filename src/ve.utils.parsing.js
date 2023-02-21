@@ -410,3 +410,33 @@ ve.resolveUrl = function ( url, base ) {
 	// This is crazy, returning the original URL is better
 	return node.href || url;
 };
+
+/**
+ * Get a list whitespace separated values from RDFa types
+ *
+ * Reads the rel, typeof and property attributes and converts
+ * to a list of values, where separated by whitespace.
+ *
+ * @param {HTMLElement} element Element
+ * @return {string[]} List of types
+ */
+ve.getRdfaTypes = function( element ) {
+	return (
+		( element.getAttribute( 'rel' ) || '' ) + ' ' +
+		( element.getAttribute( 'typeof' ) || '' ) + ' ' +
+		( element.getAttribute( 'property' ) || '' )
+	).split( /\s+/ ).filter( function ( type ) {
+		return type;
+	} );
+};
+
+/**
+ * Check if an element contains a specific RDFa type
+ *
+ * @param {HTMLElement} element Element
+ * @param {string} type RDFa type value
+ * @return {boolean} Element contains the type
+ */
+ve.hasRdfaType = function ( element, type ) {
+	return ve.getRdfaTypes( element ).indexOf( type ) !== -1;
+}

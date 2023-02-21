@@ -618,6 +618,56 @@ QUnit.test( 'isBlockElement/isVoidElement', function ( assert ) {
 	assert.strictEqual( ve.isVoidElement( document.createElement( 'div' ) ), false, '<div> is not a void element' );
 } );
 
+QUnit.test( 'getRdfaTypes/hasRdfaType', function ( assert ) {
+	var cases = [
+		{
+			html: '<span typeof="ve:Foo">',
+			types: [ 've:Foo' ],
+			hasTypes: {
+				've:Foo': true,
+				've:Bar': false
+			}
+		},
+		{
+			html: '<a rel="ve:Foo" typeof="ve:Error">',
+			types: [ 've:Foo', 've:Error' ],
+			hasTypes: {
+				've:Foo': true,
+				've:Error': true,
+				've:Bar': false
+			}
+		},
+		{
+			html: '<a typeof="ve:Thing" property="ve:Thing">',
+			types: [ 've:Thing', 've:Thing' ],
+			hasTypes: {
+				've:Thing': true,
+				've:Bar': false
+			}
+		},
+		{
+			html: '<div>',
+			types: [],
+			hasTypes: {
+				've:Bar': false
+			}
+		}
+	]
+
+	cases.forEach( function ( caseItem ) {
+		var node = $.parseHTML( caseItem.html )[ 0 ];
+		assert.deepEqual( ve.getRdfaTypes( node ), caseItem.types, caseItem.html );
+
+		Object.keys( caseItem.hasTypes || {} ).forEach( function ( type ) {
+			var expected = caseItem.hasTypes[ type ];
+			assert.strictEqual(
+				ve.hasRdfaType( node, type ), expected,
+				caseItem.html + ': ' + ( expected ? 'has type' : 'doesn\'t have type' ) + ' ' + type
+			);
+		} )
+	} );
+} );
+
 // TODO: ve.getByteOffset
 
 // TODO: ve.getClusterOffset
