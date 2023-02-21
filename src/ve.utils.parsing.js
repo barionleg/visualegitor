@@ -410,3 +410,22 @@ ve.resolveUrl = function ( url, base ) {
 	// This is crazy, returning the original URL is better
 	return node.href || url;
 };
+
+/**
+ * Get a list whitespace separated values from RDFa types
+ *
+ * Reads the rel, typeof and property attributes into a DOMTokenList,
+ * like Element.classList.
+ *
+ * @param {HTMLElement} element Element
+ * @return {DOMTokenList} List of types
+ */
+ve.getRdfaTokenList = function( element ) {
+	var span = document.createElement( 'span' );
+	span.setAttribute( 'class',
+		( element.getAttribute( 'rel' ) || '' ) + ' ' +
+		( element.getAttribute( 'typeof' ) || '' ) + ' ' +
+		( element.getAttribute( 'property' ) || '' )
+	);
+	return span.classList;
+};
