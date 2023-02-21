@@ -399,21 +399,15 @@
 			return winningName;
 		}
 
-		types = [];
-		if ( node.getAttribute ) {
-			if ( node.getAttribute( 'rel' ) ) {
-				types = types.concat( node.getAttribute( 'rel' ).trim().split( /\s+/ ) );
-			}
-			if ( node.getAttribute( 'typeof' ) ) {
-				types = types.concat( node.getAttribute( 'typeof' ).trim().split( /\s+/ ) );
-			}
-			if ( node.getAttribute( 'property' ) ) {
-				types = types.concat( node.getAttribute( 'property' ).trim().split( /\s+/ ) );
-			}
-		}
+		types = ve.getRdfaTokenList(
+			node.nodeType === Node.ELEMENT_NODE ?
+				node :
+				// Generate an empty list
+				document.createElement( 'span' )
+		);
 
 		var winner;
-		if ( types.length ) {
+		if ( types && types.length ) {
 			// func+tag+type match
 			winner = matchWithFunc( nodeName );
 			if ( winner !== null ) {

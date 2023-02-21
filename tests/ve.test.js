@@ -618,6 +618,32 @@ QUnit.test( 'isBlockElement/isVoidElement', function ( assert ) {
 	assert.strictEqual( ve.isVoidElement( document.createElement( 'div' ) ), false, '<div> is not a void element' );
 } );
 
+QUnit.test( 'getRdfaTokenList', function ( assert ) {
+	var cases = [
+		{
+			html: '<span typeof="ve:Foo">',
+			values: [ 've:Foo' ]
+		},
+		{
+			html: '<a rel="ve:Foo" typeof="ve:Error">',
+			values: [ 've:Foo', 've:Error' ]
+		},
+		{
+			html: '<a typeof="ve:Thing" property="ve:Thing">',
+			values: [ 've:Thing' ]
+		},
+		{
+			html: '<div>',
+			values: []
+		}
+	]
+
+	cases.forEach( function ( caseItem ) {
+		var node = $.parseHTML( caseItem.html )[ 0 ];
+		assert.deepEqual( Array.from( ve.getRdfaTokenList( node ) ), caseItem.values, caseItem.html );
+	} );
+} );
+
 // TODO: ve.getByteOffset
 
 // TODO: ve.getClusterOffset
