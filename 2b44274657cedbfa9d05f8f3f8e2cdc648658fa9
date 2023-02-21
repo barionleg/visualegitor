@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "55cc28fb_ff37fef7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2023-02-21T22:18:08Z",
+      "side": 1,
+      "message": "I feel like using a DOMTokenList for this is confusing. Those objects usually allow modifying the attribute as well, but here we can only read the values (while modifying them will only affect the unused hidden \u003cspan\u003e). ",
+      "revId": "2b44274657cedbfa9d05f8f3f8e2cdc648658fa9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e3cf387_409e3b69",
