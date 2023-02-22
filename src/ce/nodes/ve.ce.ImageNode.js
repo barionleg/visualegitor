@@ -45,7 +45,14 @@ OO.mixinClass( ve.ce.ImageNode, ve.ce.FocusableNode );
 
 OO.mixinClass( ve.ce.ImageNode, ve.ce.ResizableNode );
 
-/* Static Methods */
+/* Static properties */
+
+/*
+ * @inheritdoc ve.ce.FocusableNode
+ */
+ve.ce.ImageNode.static.addBreak = false;
+
+/* Static methods */
 
 // eslint-disable-next-line jsdoc/require-param, jsdoc/require-returns
 /**
