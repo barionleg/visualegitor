@@ -18,6 +18,24 @@
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "541e0def_3a400126",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2023-02-22T14:06:44Z",
+      "side": 1,
+      "message": "Maybe - although we can just add to the documentation that the list is read-only. We could also convert it to another data type (Set or Array) but then we would either have to do the tokenisation ourselves, or still use the DOMTokenList as an intermediate structure.",
+      "parentUuid": "55cc28fb_ff37fef7",
+      "revId": "2b44274657cedbfa9d05f8f3f8e2cdc648658fa9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e3cf387_409e3b69",
@@ -31,6 +49,30 @@
       "writtenOn": "2023-02-21T20:01:08Z",
       "side": 1,
       "message": "Do you really want to just smush all of these together?  Granted, it *probably* wouldn\u0027t matter, because I don\u0027t think there\u0027s an instance where \u0027rel\u003dX\u0027 means something totally different from \u0027property\u003dX\u0027 --- not because `rel` and `property` don\u0027t mean totally different things, but because the actual `X` tokens for these attributes tend to be distinct.\n\nBut I\u0027d still rather see this be:\n\n ve.getRdfaTokenList \u003d function ( element, attribName ) {\n\tvar span \u003d document.createElement( \u0027span\u0027 );\n\tspan.setAttribute( \u0027class\u0027,\n\t\t( element.getAttribute( attribName ) || \u0027\u0027 )\n\t);\n\treturn span.classList;\n };\n\nand then have the caller just specify which of the rdfa attributes they are interested in.",
+      "range": {
+        "startLine": 417,
+        "startChar": 13,
+        "endLine": 417,
+        "endChar": 37
+      },
+      "revId": "2b44274657cedbfa9d05f8f3f8e2cdc648658fa9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0242d6e3_5d716d35",
+        "filename": "src/ve.utils.parsing.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2023-02-22T14:06:44Z",
+      "side": 1,
+      "message": "Also if you look at the modelRegistry use case, we need to collect all the types as that\u0027s how matchRdfaTypes works.",
+      "parentUuid": "4e3cf387_409e3b69",
       "range": {
         "startLine": 417,
         "startChar": 13,
