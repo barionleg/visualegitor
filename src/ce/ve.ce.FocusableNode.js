@@ -247,6 +247,13 @@ ve.ce.FocusableNode.prototype.onFocusableSetup = function () {
 		return;
 	}
 
+	if ( this.getModel().isContent() && this.$element.text().slice( -1 ) !== '\u200B' ) {
+		// Support: Chrome (Android, Gboard)
+		// T330284: End inline FocusableNodes with zero-width space, to prevent IMEs
+		// reinterpreting transcluded text as editable candidate text when Backspacing
+		this.$element.append( this.getElementDocument().createTextNode( '\u200B' ) );
+	}
+
 	this.focusableSurface = this.root.getSurface();
 
 	// DOM changes (duplicated from constructor in case this.$element is replaced)
