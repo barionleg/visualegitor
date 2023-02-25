@@ -16,6 +16,23 @@
       "message": "check experimental",
       "revId": "c2c6a3c1964af44a342579655f3a9402f4afa0d9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a59a556_5d93cafb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 161
+      },
+      "writtenOn": "2023-02-25T22:32:06Z",
+      "side": 1,
+      "message": "It seems the both tests never running \"npm test\", but libup fails when doing it. Log at https://libup.wmcloud.org/logs2/920169",
+      "revId": "c2c6a3c1964af44a342579655f3a9402f4afa0d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
