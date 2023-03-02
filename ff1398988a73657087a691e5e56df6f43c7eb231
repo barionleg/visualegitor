@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b8d04b0_e5a029ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2023-03-02T18:00:50Z",
+      "side": 1,
+      "message": "Oh, good catch. I think I recall that the header was initially faked as not-actually-an-item, so this logic must not have been updated when that changed.",
+      "revId": "ff1398988a73657087a691e5e56df6f43c7eb231",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
