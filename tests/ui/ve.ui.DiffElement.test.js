@@ -10,6 +10,7 @@ QUnit.module( 've.ui.DiffElement' );
 
 QUnit.test( 'Diffing', function ( assert ) {
 	var spacer = '<div class="ve-ui-diffElement-spacer">⋮</div>',
+		listSpacer = '<li data-diff-list-spacer><p data-diff-action="none">…</p></li>',
 		noChanges = '<div class="ve-ui-diffElement-no-changes">' + ve.msg( 'visualeditor-diff-no-changes' ) + '</div>',
 		comment = ve.dm.example.commentNodePreview,
 		cases = [
@@ -947,8 +948,7 @@ QUnit.test( 'Diffing', function ( assert ) {
 					'<ol>' +
 						'<li value="1"><p data-diff-action="none" data-diff-move="up" data-diff-id="0">baz</p></li>' +
 						'<li value="2"><p data-diff-action="none">foo</p></li>' +
-						'<li value="3"><p data-diff-action="none">bar</p></li>' +
-						'<li value="4"><p data-diff-action="none">quux</p></li>' +
+						listSpacer +
 					'</ol>',
 				expectedDescriptions: [
 					'<div>visualeditor-diff-moved-up</div>'
@@ -960,8 +960,7 @@ QUnit.test( 'Diffing', function ( assert ) {
 				newDoc: '<ol><li>foo</li><li>baz</li><li>quux</li><li>bar</li></ol>',
 				expected:
 					'<ol>' +
-						'<li value="1"><p data-diff-action="none">foo</p></li>' +
-						'<li value="2"><p data-diff-action="none">baz</p></li>' +
+						listSpacer +
 						'<li value="3"><p data-diff-action="none">quux</p></li>' +
 						'<li value="4"><p data-diff-action="none" data-diff-move="down" data-diff-id="0">bar</p></li>' +
 					'</ol>',
@@ -977,8 +976,7 @@ QUnit.test( 'Diffing', function ( assert ) {
 					'<ol>' +
 						'<li value="1"><p data-diff-move="up" data-diff-id="0">baz <del data-diff-action="remove">baz</del><ins data-diff-action="insert">bat</ins></p></li>' +
 						'<li value="2"><p data-diff-action="none">foo</p></li>' +
-						'<li value="3"><p data-diff-action="none">bar</p></li>' +
-						'<li value="4"><p data-diff-action="none">quux</p></li>' +
+						listSpacer +
 					'</ol>',
 				expectedDescriptions: [
 					'<div>visualeditor-diff-moved-up</div>'
@@ -1032,7 +1030,8 @@ QUnit.test( 'Diffing', function ( assert ) {
 				newDoc: '<ul><li>Foo<ol><li>Bar</li></ol></li><li>Baz</li></ul>',
 				expected:
 					'<ul>' +
-						'<li><p data-diff-action="none">Foo</p>' +
+						// Remove end tag from listSpacer
+						listSpacer.slice( 0, -5 ) +
 							'<ol>' +
 								'<li value="1"><p data-diff-action="none">Bar</p></li>' +
 							'</ol>' +
@@ -1174,7 +1173,7 @@ QUnit.test( 'Diffing', function ( assert ) {
 					'</ul>',
 				expected:
 					'<ul>' +
-						'<li><p data-diff-action="none">foo</p></li>' +
+						listSpacer +
 						'<li><p data-diff-action="none">bar baz quux whee one</p>' +
 							'<ul><li><p data-diff-action="insert">bar baz quux whee won</p></li></ul>' +
 						'</li>' +

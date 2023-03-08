@@ -846,12 +846,54 @@ ve.ui.DiffElement.prototype.getChangedListNodeData = function ( newListNode, dif
 		}
 	} );
 
+	var processedListDiffItems = [];
+
+	var lastItemSpacer = false;
+	var lastDepth = 0;
+	listDiffItems.forEach( function ( item, i ) {
+		function isUnchanged( queueItem ) {
+			return !queueItem || ( queueItem.action === 'none' && !queueItem.move );
+		}
+
+		if ( item.metadata.depth !== lastDepth ) {
+			lastItemSpacer = false;
+		}
+
+		if (
+			isUnchanged( item ) &&
+			isUnchanged( listDiffItems[ i - 1 ] ) &&
+			isUnchanged( listDiffItems[ i + 1 ] )
+		) {
+			if ( !lastItemSpacer ) {
+				processedListDiffItems.push( {
+					node: null,
+					metadata: item.metadata,
+					action: 'none'
+				} );
+				lastItemSpacer = true;
+			}
+		} else {
+			processedListDiffItems.push( item );
+			lastItemSpacer = false;
+		}
+
+		lastDepth = item.metadata.depth;
+	} );
+
 	// Splice in each item with its diff annotations
-	listDiffItems.forEach( function ( item ) {
+	processedListDiffItems.forEach( function ( item ) {
 		var contentData;
+		var isSpacer = false;
+
 		if ( !item.diff ) {
-			// Get the linear data for the list item's content
-			contentData = diffElement.getNodeData( item.node, item.action, item.move || null );
+			if ( !item.node ) {
+				contentData = [ { type: 'paragraph' }, '…', { type: '/paragraph' } ];
+				isSpacer = true;
+				diffElement.addAttributesToElement( contentData, 0, { 'data-diff-action': 'none' } );
+			} else {
+				// Get the linear data for the list item's content
+				contentData = diffElement.getNodeData( item.node, item.action, item.move || null );
+			}
 		} else {
 			// Item is changed. Get the linear data for the diff
 			contentData = diffElement.getChangedNodeData(
@@ -877,12 +919,16 @@ ve.ui.DiffElement.prototype.getChangedListNodeData = function ( newListNode, dif
 		var listItemNode = item.metadata.listItem;
 		// Get linear data of list item
 		var listItemData = diffElement.constructor.static.getDataFromNode( listItemNode );
-		// TODO: Make this a node property, instead of a magic attribute
-		if ( listNode.getAttribute( 'style' ) === 'number' ) {
-			// Manually number list items for <ol>'s which contain removals
-			// TODO: Consider if the <ol> contains a `start` attribute (not currently handled by DM)
-			var indexInOwnList = listNode.children.indexOf( listItemNode );
-			diffElement.addAttributesToElement( listItemData, 0, { value: indexInOwnList + 1 } );
+		if ( isSpacer ) {
+			diffElement.addAttributesToElement( listItemData, 0, { 'data-diff-list-spacer': '' } );
+		} else {
+			// TODO: Make this a node property, instead of a magic attribute
+			if ( listNode.getAttribute( 'style' ) === 'number' ) {
+				// Manually number list items for <ol>'s which contain removals
+				// TODO: Consider if the <ol> contains a `start` attribute (not currently handled by DM)
+				var indexInOwnList = listNode.children.indexOf( listItemNode );
+				diffElement.addAttributesToElement( listItemData, 0, { value: indexInOwnList + 1 } );
+			}
 		}
 
 		// e.g. AlienBlockNode, content node is same as 'listItem', so don't duplicate content
