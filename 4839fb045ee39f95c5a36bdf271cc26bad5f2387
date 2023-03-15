@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4521db36_f30769a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2023-03-15T20:27:24Z",
+      "side": 1,
+      "message": "I don\u0027t think this API fits our use cases well.\n\nOut of all the places changed in https://gerrit.wikimedia.org/r/c/VisualEditor/VisualEditor/+/890836 and https://gerrit.wikimedia.org/r/c/mediawiki/extensions/VisualEditor/+/890867, only two actually benefit from the complexity needed to handle multiple attributes on a node (ve.dm.MWExternalLinkAnnotation.js and ve.dm.ModelRegistry.js). Everywhere else we\u0027d be better off with a simpler API that just takes a string (possibly from a .getAttribute() call) and returns an array of tokens split by whitespace per the HTML5 spec.\n\nIn those two files, we can just join the strings from each attribute with spaces. Or maybe let the API take an array of strings as an option. But I think this just makes it more difficult to understand what is going on.",
+      "revId": "4839fb045ee39f95c5a36bdf271cc26bad5f2387",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
