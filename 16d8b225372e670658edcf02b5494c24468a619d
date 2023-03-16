@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62e3fb2a_44eada02",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2023-03-16T13:33:33Z",
+      "side": 1,
+      "message": "We can refine this ... if you bullet a group of selected paragraphs, the transaction\u0027s getModifiedRange will cover the entire text, even though it\u0027s only been reformatted.\n\nI think we only want to highlight the ranges inserted during the document\u0027s completeHistory.",
+      "revId": "16d8b225372e670658edcf02b5494c24468a619d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
