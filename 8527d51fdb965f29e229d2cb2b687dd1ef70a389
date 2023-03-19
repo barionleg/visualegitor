@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e138c2e8_1f296d08",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2023-03-19T16:35:28Z",
+      "side": 1,
+      "message": "Patchset 17 includes our js-binarypack crash fix incorporated upstream (see https://github.com/peers/js-binarypack/issues/11 )",
+      "revId": "8527d51fdb965f29e229d2cb2b687dd1ef70a389",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
