@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9637d906_2eadde7f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2023-03-20T19:59:52Z",
+      "side": 1,
+      "message": "This is for templates in VE-MW. Example affected diff: https://wikitech.wikimedia.org/w/index.php?title\u003dDeployments\u0026diff\u003dprev\u0026oldid\u003d2054148\u0026diffmode\u003dvisual\u0026visualdiff\u003d1",
+      "revId": "b9ccfc3461cb613681a3135b6da02820d45645dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
