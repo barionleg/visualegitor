@@ -314,7 +314,6 @@ ve.extendObject = $.extend;
  */
 ve.supportsIntl = !!(
 	// TODO: Drop support for browsers which don't have Intl.Collator
-	// eslint-disable-next-line compat/compat
 	window.Intl && typeof Intl.Collator === 'function'
 );
 
@@ -1001,7 +1000,6 @@ ve.normalizeNode = function ( node ) {
 		p.appendChild( document.createTextNode( 'Foo' ) );
 		p.appendChild( document.createTextNode( 'Bar' ) );
 		p.appendChild( document.createTextNode( '' ) );
-		// eslint-disable-next-line es-x/no-string-prototype-normalize
 		p.normalize();
 		ve.isNormalizeBroken = p.childNodes.length !== 1;
 	}
@@ -1029,7 +1027,6 @@ ve.normalizeNode = function ( node ) {
 		}
 	} else {
 		// Use native implementation
-		// eslint-disable-next-line es-x/no-string-prototype-normalize
 		node.normalize();
 	}
 };
