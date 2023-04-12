@@ -128,25 +128,218 @@ ve.ce.Surface.prototype.connectModelSynchronizer = function () {
 	} );
 };
 
-ve.collab = function () {
-	OO.ui.prompt(
-		'Enter collab session to join (blank to start a new one)',
-		{
-			textInput: { placeholder: '[session-id-goes-here]' },
-			size: 'medium'
-		}
-	).then( function ( id ) {
-		if ( id === null ) {
-			return;
-		}
-		if ( id !== '' ) {
-			ve.init.target.surface.initPeerClient( id );
-			return;
-		} else {
-			ve.init.target.surface.initPeerServer();
-			ve.dm.peerServer.peer.on( 'open', function ( newId ) {
-				OO.ui.alert( 'Share this session ID: ' + newId, { size: 'medium' } );
-			} );
-		}
+ve.ui.CollabProcessDialog = function VeUiCollabProcessDialog( config ) {
+	ve.ui.CollabProcessDialog.super.call( this, config );
+};
+
+OO.inheritClass( ve.ui.CollabProcessDialog, OO.ui.ProcessDialog );
+
+ve.ui.CollabProcessDialog.static.name = 'collabDialog';
+ve.ui.CollabProcessDialog.static.title = 've.collab: real-time collaborative editing';
+ve.ui.CollabProcessDialog.static.actions = [
+	{
+		label: 'Close',
+		flags: 'safe'
+	}
+];
+
+ve.ui.CollabProcessDialog.prototype.initialize = function () {
+	ve.ui.CollabProcessDialog.super.prototype.initialize.apply( this, arguments );
+
+	this.content = new OO.ui.PanelLayout( {
+		padded: true,
+		expanded: false
 	} );
+	this.hostButton = new OO.ui.ButtonWidget( {
+		label: 'Host a new session',
+		icon: 'userAdd',
+		title: 'Host'
+	} );
+	this.hostButton.$element[ 0 ].firstElementChild.style.minWidth = '100%';
+	this.hostLabel = new OO.ui.LabelWidget( { label: 'The session is hosted in your browser, and ends when you publish (or close your tab).' } );
+
+	this.joinButton = new OO.ui.ButtonWidget( {
+		label: 'Join someone else’s session',
+		icon: 'userGroup',
+		title: 'Join'
+	} );
+	this.joinButton.$element[ 0 ].firstElementChild.style.minWidth = '100%';
+	this.joinLabel = new OO.ui.LabelWidget( { label: 'They are responsible for publishing changes.' } );
+	this.legalLabel = new OO.ui.LabelWidget( { label: $( '<span><b>Warning</b>: ve.collab uses WebRTC. Collaborators, and their internet service providers, may see your IP address and other de-anonymizing information. By collaborating, you agree to the <a href="https://foundation.wikimedia.org/wiki/Terms_of_Use">Terms of Use</a>, and you irrevocably agree to release your changes under the <a href="https://en.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License">CC BY-SA 3.0 License</a> and the <a href="https://en.wikipedia.org/wiki/Wikipedia:Text_of_the_GNU_Free_Documentation_License">GFDL</a>. You agree that a hyperlink or URL is sufficient attribution under the Creative Commons license.</span>' ) } );
+	this.legalLabel.$element[ 0 ].style.gridColumn = '1 / 3';
+	this.content.$element.append(
+		$( '<div>' ).css( { display: 'grid', 'grid-template-columns': '1fr 10fr', gap: '1em' } ).append(
+			this.hostButton.$element,
+			this.hostLabel.$element,
+			this.joinButton.$element,
+			this.joinLabel.$element,
+			this.legalLabel.$element
+		)
+	);
+	this.$body.append( this.content.$element );
+	this.hostButton.on( 'click', this.close.bind( this, 'host' ) );
+	this.joinButton.on( 'click', this.close.bind( this, 'join' ) );
+};
+
+ve.ui.CollabProcessDialog.prototype.getBodyHeight = function () {
+	return this.content.$element.outerHeight( true );
+};
+
+ve.ui.windowFactory.register( ve.ui.CollabProcessDialog );
+
+ve.collab = function () {
+	ve.init.target.surface.dialogs.openWindow( 'collabDialog' ).closing.then( function ( val ) {
+		if ( !val ) {
+			return;
+		}
+		if ( val === 'join' ) {
+			OO.ui.prompt(
+				'Enter session URL to join',
+				{
+					textInput: {
+						placeholder: '[session-url-goes-here]',
+						value: location.hash.match( /^#collabSession=/ ) ?
+							location.toString() :
+							''
+					},
+					size: 'medium'
+				}
+			).then( function ( sessionUrlText ) {
+				var sessionUrl = new URL( sessionUrlText );
+				debugger;
+				var m = sessionUrl.hash.match( /^#collabSession=(.*)/ );
+				if (
+					!m ||
+					sessionUrl.protocol !== location.protocol ||
+					sessionUrl.host !== location.host ||
+					sessionUrl.pathname !== location.pathname
+				) {
+					OO.ui.alert( 'Session URL does not match this page' );
+					return;
+				}
+				var sessionId = m[ 1 ];
+				ve.init.target.surface.initPeerClient( sessionId );
+			} );
+			return;
+		}
+		// else val is 'host'
+		ve.init.target.surface.initPeerServer();
+		var url = location.protocol + '//' + location.host + location.pathname;
+		ve.dm.peerServer.peer.on( 'open', function ( newId ) {
+			var copyTextLayout = new ve.ui.CopyTextLayout( {
+				copyText: url + '#collabSession=' + newId
+			} );
+			OO.ui.alert( copyTextLayout.$element, {
+				title: 'Share this session URL',
+				size: 'medium'
+			} );
+		} );
+	} );
+};
+
+/**
+ * TODO: Remove this code once OO.ui.CopyTextLayout is merged
+ *
+ * CopyTextLayout is an action field layout containing some readonly text and a button to copy
+ * it to the clipboard.
+ *
+ * @class
+ * @extends OO.ui.ActionFieldLayout
+ *
+ * @constructor
+ * @param {Object} [config] Configuration options
+ * @cfg {string} copyText Text to copy, can also be provided as textInput.value
+ * @cfg {Object} textInput Config for text input
+ * @cfg {Object} button Config for button
+ */
+ve.ui.CopyTextLayout = function VeUiCopyTextLayout( config ) {
+	var TextClass;
+	config = config || {};
+
+	// Properties
+	TextClass = config.multiline ? OO.ui.MultilineTextInputWidget : OO.ui.TextInputWidget;
+	this.textInput = new TextClass( $.extend( {
+		value: config.copyText,
+		readOnly: true
+	}, config.textInput ) );
+	this.button = new OO.ui.ButtonWidget( $.extend( {
+		label: 'Copy',
+		icon: 'articles'
+	}, config.button ) );
+
+	// Parent constructor
+	ve.ui.CopyTextLayout.super.call( this, this.textInput, this.button, config );
+
+	// HACK: When using a multiline text input, remove classes which connect widgets
+	if ( config.multiline ) {
+		this.$input.removeClass( 'oo-ui-actionFieldLayout-input' );
+		this.$button
+			.removeClass( 'oo-ui-actionFieldLayout-button' )
+			.addClass( 'oo-ui-copyTextLayout-multiline-button' );
+	}
+
+	// Events
+	this.button.connect( this, { click: 'onButtonClick' } );
+	this.textInput.$input.on( 'focus', this.onInputFocus.bind( this ) );
+
+	this.$element.addClass( 'oo-ui-copyTextLayout' );
+};
+
+/* Inheritance */
+
+OO.inheritClass( ve.ui.CopyTextLayout, OO.ui.ActionFieldLayout );
+
+/* Events */
+
+/**
+ * When the user has executed a copy command
+ *
+ * @event copy
+ * @param {boolean} Whether the copy command succeeded
+ */
+
+/* Methods */
+
+/**
+ * Handle button click events
+ *
+ * @fires copy
+ */
+ve.ui.CopyTextLayout.prototype.onButtonClick = function () {
+	var copied;
+
+	this.selectText();
+
+	try {
+		copied = document.execCommand( 'copy' );
+	} catch ( e ) {
+		copied = false;
+	}
+	this.emit( 'copy', copied );
+};
+
+/**
+ * Handle text widget focus events
+ */
+ve.ui.CopyTextLayout.prototype.onInputFocus = function () {
+	if ( !this.selecting ) {
+		this.selectText();
+	}
+};
+
+/**
+ * Select the text to copy
+ */
+ve.ui.CopyTextLayout.prototype.selectText = function () {
+	var input = this.textInput.$input[ 0 ],
+		scrollTop = input.scrollTop,
+		scrollLeft = input.scrollLeft;
+
+	this.selecting = true;
+	this.textInput.select();
+	this.selecting = false;
+
+	// Restore scroll position
+	input.scrollTop = scrollTop;
+	input.scrollLeft = scrollLeft;
 };
