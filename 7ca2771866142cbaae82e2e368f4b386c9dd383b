@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d5b8b57_e555684c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2023-04-12T13:34:02Z",
+      "side": 1,
+      "message": "Patch set 1 fixes the \"Unexpected prior attribute value\" errors only.",
+      "revId": "7ca2771866142cbaae82e2e368f4b386c9dd383b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "995e591b_7d554b80",
+        "filename": "src/dm/ve.dm.TransactionSquasher.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2023-04-12T13:34:02Z",
+      "side": 1,
+      "message": "I suspect we need more conditions like this to fix the \"Remove does not match insert\" errors — could someone with logstash access provide me with an example change where this happened?",
+      "revId": "7ca2771866142cbaae82e2e368f4b386c9dd383b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
