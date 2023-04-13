@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7943bab8_7ee4c09f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2023-04-13T14:41:23Z",
+      "side": 1,
+      "message": "Ok, I now think this patch set fixes all the observed error cases that are actually due to the TransactionSquasher. See https://phabricator.wikimedia.org/T334677 for the rest",
+      "revId": "1a006f700f0025ddc2a7e0b3cf5abf72c7df85a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
