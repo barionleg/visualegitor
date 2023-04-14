@@ -173,6 +173,9 @@ ve.test.utils.runSurfacePasteTest = function ( assert, item ) {
 		doc = model.getDocument(),
 		done = assert.async();
 
+	if ( item.debug ) {
+		debugger;
+	}
 	var testEvent;
 	// Paste sequence
 	if ( item.internalSourceRangeOrSelection ) {
@@ -1171,6 +1174,33 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 					]
 				],
 				msg: 'Corrupted paste target ignored'
+			},
+			{
+				rangeOrSelection: new ve.Range( 3 ),
+				internalSourceRangeOrSelection: new ve.Range( 3 ),
+				documentHtml: '<h1>AB</h1><p>C</p>',
+				pasteHtml: 'D</h1><p>E',
+				expectedRangeOrSelection: new ve.Range( 10 ),
+				expectedOps: [
+					[
+						{ type: 'retain', length: 4 },
+						{
+							type: 'replace',
+							insert: [
+								{ type: 'paragraph', internal: { generated: 'wrapper' } },
+								'D',
+								{ type: '/heading' },
+								{ type: 'paragraph' },
+								'E',
+								{ type: '/paragraph' }
+							],
+							remove: []
+						},
+						{ type: 'retain', length: 5 }
+					]
+				],
+				debug: true,
+				msg: 'Unbalanced HTML at end of heading'
 			},
 			{
 				rangeOrSelection: new ve.Range( 6 ),
