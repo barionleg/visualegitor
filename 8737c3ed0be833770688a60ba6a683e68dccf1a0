@@ -16,6 +16,24 @@
       "message": "Looks good. Let\u0027s add the test case described in the task to ve.ce.Surface.test.js \u0027s \"beforePaste/afterPaste\" test list.",
       "revId": "8737c3ed0be833770688a60ba6a683e68dccf1a0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc09e2e5_1167822b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2023-04-22T03:10:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "217ec8c5_83a796ff",
+      "revId": "8737c3ed0be833770688a60ba6a683e68dccf1a0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
