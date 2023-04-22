@@ -33,6 +33,24 @@
       "message": "I suspect we need more conditions like this to fix the \"Remove does not match insert\" errors — could someone with logstash access provide me with an example change where this happened?",
       "revId": "7ca2771866142cbaae82e2e368f4b386c9dd383b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88f7225d_6e5a646c",
+        "filename": "src/dm/ve.dm.TransactionSquasher.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2023-04-22T08:07:47Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "995e591b_7d554b80",
+      "revId": "7ca2771866142cbaae82e2e368f4b386c9dd383b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
