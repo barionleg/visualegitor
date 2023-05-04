@@ -753,6 +753,7 @@ ve.init.Target.prototype.teardownToolbar = function () {
 	if ( this.toolbar ) {
 		this.toolbar.destroy();
 		this.toolbar = null;
+		delete this.actionsToolbar;
 	}
 	return ve.createDeferred().resolve().promise();
 };
