@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2d48ccc_4c0c4405",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2023-05-04T14:56:50Z",
+      "side": 1,
+      "message": "Patch already pending at https://gerrit.wikimedia.org/r/c/VisualEditor/VisualEditor/+/912860",
+      "revId": "0dfe8c2a0b0632d684e8f5515978fa65c7befa27",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
