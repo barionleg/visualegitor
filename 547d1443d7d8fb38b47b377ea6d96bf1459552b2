@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd7c0855_cef41b3c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2023-05-09T17:05:49Z",
+      "side": 1,
+      "message": "Not sure these dialogs need to be disable-able, but we can do this with CSS these days.",
+      "revId": "547d1443d7d8fb38b47b377ea6d96bf1459552b2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
