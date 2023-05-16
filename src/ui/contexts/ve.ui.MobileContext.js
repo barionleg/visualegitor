@@ -32,7 +32,9 @@ ve.ui.MobileContext = function VeUiMobileContext() {
 	this.closeButton.connect( this, { click: 'onCloseButtonClick' } );
 	this.inspectors.connect( this, {
 		setup: [ 'toggle', true ],
-		teardown: [ 'toggle', false ]
+		teardown: [ 'toggle', false ],
+		// Inspector could resize to a 'context' dialog
+		resize: [ 'emit', 'resize' ]
 	} );
 
 	// Initialization
@@ -190,5 +192,11 @@ ve.ui.MobileContext.prototype.isInspectable = function () {
  * @inheritdoc
  */
 ve.ui.MobileContext.prototype.getSurfacePadding = function () {
-	return { bottom: this.$element[ 0 ].clientHeight };
+	var currentWindow = this.inspectors.getCurrentWindow();
+	if ( currentWindow && currentWindow.getSize() === 'context' ) {
+		// Full screen dialog, no need to update
+		return { bottom: currentWindow.$frame[ 0 ].clientHeight };
+	} else {
+		return { bottom: this.$element[ 0 ].clientHeight };
+	}
 };

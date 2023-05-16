@@ -1,0 +1,13 @@
+.ve-ui-mobileWindowManager.oo-ui-windowManager-size-context > .oo-ui-dialog > .oo-ui-window-frame {
+	top: auto;
+	bottom: 0;
+	border-radius: 0;
+	border: 0;
+	/* Match toolbar border & shadow */
+	border-top: 1px solid #c8ccd1;
+	box-shadow: 0 -1px 1px 0 rgba( 0, 0, 0, 0.1 );
+}
+
+.ve-ui-mobileWindowManager.oo-ui-windowManager-modal > .oo-ui-dialog {
+	background-color: rgba( 255, 255, 255, 0.3 );
+}
