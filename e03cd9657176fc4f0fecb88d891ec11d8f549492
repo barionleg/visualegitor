@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9c600a6_3ab2fcc6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2023-05-19T13:47:25Z",
+      "side": 1,
+      "message": "It seems like there\u0027s never going to be a case where you want to run a completion *and* you\u0027re hitting space as the first character of the input string. As such this makes it much smoother-looking to abandon the completion.\n\nArguably this should go into the action\u0027s shouldAbandon method instead, but I\u0027d need to update DiscussionTools\u0027 because it \u0026\u0026s on having multiple spaces detected. I can do that if preferred.",
+      "revId": "e03cd9657176fc4f0fecb88d891ec11d8f549492",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
