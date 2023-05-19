@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b7a4ad4_ba83ccdf",
+        "filename": "src/ui/actions/ve.ui.HelpCompletionAction.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2023-05-19T13:10:38Z",
+      "side": 1,
+      "message": "Using this rather than the sequence results in it deleting one character when you choose an item. Either the behavior of triggerLength needs to change to not apply when a completion is triggered from not-a-sequence, or we need to make a very specialized subclass for this command.",
+      "revId": "5074ddc79a30ae36d42117cd0190a00b6feae146",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
