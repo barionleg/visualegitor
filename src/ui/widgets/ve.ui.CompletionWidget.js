@@ -176,7 +176,8 @@ ve.ui.CompletionWidget.prototype.onModelSelect = function () {
 		return matches;
 	}
 
-	if ( !range || range.isBackwards() || this.action.shouldAbandon( this.surfaceModel.getDocument().data.getText( false, range ), countMatches() ) ) {
+	var input = this.surfaceModel.getDocument().data.getText( false, range );
+	if ( !range || range.isBackwards() || input === ' ' || this.action.shouldAbandon( input, countMatches() ) ) {
 		this.teardown();
 	} else {
 		this.update();
