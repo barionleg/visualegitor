@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c027f750_c4061d78",
+        "filename": "src/ui/actions/ve.ui.HelpCompletionAction.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2023-05-20T13:48:44Z",
+      "side": 1,
+      "message": "Turns out we already a static property on tools for conceptual grouping (tool.constructor.static.group). Unfortunately this doesn\u0027t have a label, but that could be fixed later with a mapping. For this hack let\u0027s at least use tool.constructor.static.group \u003d\u003d\u003d \u0027textStyle\u0027 instead of listing bold and italic.",
+      "revId": "8cac1dae98d52e7eb1f6a228834f0bae262c3177",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
