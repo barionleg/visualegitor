@@ -21,7 +21,8 @@
 		// Parent constructor
 		ve.ui.HelpCompletionAction.super.call( this, surface );
 
-		this.tools = ve.init.target.getToolbar().tools;
+		this.toolbar = surface.target.getToolbar();
+		this.tools = this.toolbar.tools;
 		this.toolNames = Object.keys( this.tools ).filter( function ( toolName ) {
 			var tool = action.tools[ toolName ];
 			return tool &&
@@ -150,22 +151,23 @@
 		var lastGroup = null;
 		for ( var i = 0; i < menuItems.length; i++ ) {
 			var tool = menuItems[ i ].getData();
-			if ( tool.elementGroup instanceof OO.ui.PopupToolGroup && tool.elementGroup !== lastGroup ) {
+			var group = tool.elementGroup;
+			if ( this.tools.moreTextStyle && ( tool.getName() === 'bold' || tool.getName() === 'italic' ) ) {
+				// push these tools into the "style text" group, if it exists
+				group = this.tools.moreTextStyle.innerToolGroup;
+			}
+			if ( group instanceof OO.ui.PopupToolGroup && group !== lastGroup ) {
 				menuItems.splice(
 					i, 0,
 					new OO.ui.MenuSectionOptionWidget( {
-						label: tool.elementGroup.getTitle()
+						label: group.getTitle()
 					} )
 				);
-				lastGroup = tool.elementGroup;
+				lastGroup = group;
 				i++;
 			}
 		}
 		return menuItems;
-	};
-
-	ve.ui.HelpCompletionAction.prototype.getHeaderLabel = function () {
-		return ve.msg( 'visualeditor-dialog-command-help-title' );
 	};
 
 	ve.ui.HelpCompletionAction.prototype.chooseItem = function ( item, range ) {
