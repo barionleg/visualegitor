@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99a19dab_97d0e0df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2023-05-20T09:08:00Z",
+      "side": 1,
+      "message": "TODO: Add an entry to the help dialog",
+      "revId": "616a6458ff06a1b9465c99707d11fe6b954f4c3d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
