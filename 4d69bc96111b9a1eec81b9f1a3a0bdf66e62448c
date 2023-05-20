@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16c78104_8bcb2356",
+        "filename": "src/ui/actions/ve.ui.CompletionAction.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2023-05-20T06:56:48Z",
+      "side": 1,
+      "message": "doc says input is a string. if it isn\u0027t sometimes that should be updated or fixed",
+      "revId": "4d69bc96111b9a1eec81b9f1a3a0bdf66e62448c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
