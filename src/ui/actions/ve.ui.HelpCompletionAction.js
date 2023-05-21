@@ -82,10 +82,6 @@
 		object: {
 			alias: 'insert'
 		},
-		// TODO: Move to MW or Cite/Citoid
-		cite: {
-			alias: 'insert'
-		},
 		format: {
 			title: OO.ui.deferMsg( 'visualeditor-shortcuts-formatting' ),
 			weight: -2
