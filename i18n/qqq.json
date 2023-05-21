@@ -89,6 +89,7 @@
 	"visualeditor-command-dialog-cancel": "Label for the command to close a window and discard its changes",
 	"visualeditor-command-dialog-confirm": "Label for the command to close a window and make its changes",
 	"visualeditor-command-dialog-focus-context": "Label for the command to move focus to the contextual popup",
+	"visualeditor-command-help-label": "Label for command completion in help dialog",
 	"visualeditor-commentannotationcontextitem-comment": "Label for the comment button in the comment annotation inspector",
 	"visualeditor-commentinspector-title": "Label for the title in the comment inspector.\nSee [https://i.imgur.com/OFQvrZo.png screenshot].\n{{Identical|Comment}}",
 	"visualeditor-commentinspector-tooltip": "Tooltip text for comment button.\n{{Related|Visualeditor-annotationbutton}}\n{{Identical|Comment}}",
