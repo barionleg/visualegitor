@@ -63,11 +63,10 @@ ve.ui.CompletionAction.static.methods = [ 'open' ];
 /**
  * Show the completions
  *
- * @param {number} [triggerLength] Override the default length of the trigger if provided
  * @return {boolean} Action was executed
  */
-ve.ui.CompletionAction.prototype.open = function ( triggerLength ) {
-	this.surface.completion.setup( this, triggerLength );
+ve.ui.CompletionAction.prototype.open = function () {
+	this.surface.completion.setup( this );
 
 	return true;
 };
