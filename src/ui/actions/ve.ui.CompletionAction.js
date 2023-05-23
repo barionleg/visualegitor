@@ -63,11 +63,10 @@ ve.ui.CompletionAction.static.methods = [ 'open' ];
 /**
  * Show the completions
  *
- * @param {number} [sequenceLength] Override the default length of the sequence if provided
  * @return {boolean} Action was executed
  */
-ve.ui.CompletionAction.prototype.open = function ( sequenceLength ) {
-	this.surface.completion.setup( this, sequenceLength );
+ve.ui.CompletionAction.prototype.open = function () {
+	this.surface.completion.setup( this );
 
 	return true;
 };
