@@ -82,7 +82,7 @@ ve.ui.CompletionWidget.prototype.setup = function ( action, fromTrigger ) {
 		return;
 	}
 	this.action = action;
-	this.sequenceLength = sequenceLength === undefined ? this.action.constructor.static.sequenceLength : 0;
+	this.sequenceLength = fromTrigger ? 0 : this.action.constructor.static.sequenceLength;
 	this.initialOffset = range.end - this.sequenceLength;
 
 	this.update();
