@@ -37,7 +37,7 @@ OO.inheritClass( ve.ui.CompletionAction, ve.ui.Action );
 ve.ui.CompletionAction.static.defaultLimit = 8;
 
 /**
- * Length of the trigger sequence for the action
+ * Length of the sequence which triggers the action
  *
  * This many characters will be stripped from the start of the current input by
  * CompletionWidget.
@@ -45,7 +45,7 @@ ve.ui.CompletionAction.static.defaultLimit = 8;
  * @static
  * @property {number}
  */
-ve.ui.CompletionAction.static.triggerLength = 1;
+ve.ui.CompletionAction.static.sequenceLength = 1;
 
 /**
  * Whether the current input should be included as a completion automatically
