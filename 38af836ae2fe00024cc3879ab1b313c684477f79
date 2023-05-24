@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c2f7d12_de1acb58",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2023-05-24T14:53:27Z",
+      "side": 1,
+      "message": "(Needed by https://gerrit.wikimedia.org/r/c/mediawiki/extensions/Citoid/+/920323 , but that\u0027s still WIP, we should probably review and merge them together when ready)",
+      "revId": "38af836ae2fe00024cc3879ab1b313c684477f79",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
