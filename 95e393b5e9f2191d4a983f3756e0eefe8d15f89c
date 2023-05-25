@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbe2c331_5d7f0807",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2023-05-25T20:15:01Z",
+      "side": 1,
+      "message": "I tested this now and I don\u0027t think it works with DiscussionTools. When the mention tool is initiated by clicking the toolbar icon, it no longer cleans up the automatically inserted \"@\" character.",
+      "revId": "95e393b5e9f2191d4a983f3756e0eefe8d15f89c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
