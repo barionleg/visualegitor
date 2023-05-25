@@ -40,6 +40,7 @@ ve.ce.LinearEnterKeyDownHandler.static.execute = function ( surface, e ) {
 		cursor = range.from,
 		documentModel = surface.model.getDocument(),
 		emptyParagraph = [ { type: 'paragraph' }, { type: '/paragraph' } ],
+		emptyBreakLine = [ { type: 'break' }, { type: '/break' } ],
 		advanceCursor = true,
 		outermostNode = null,
 		nodeModel = null,
@@ -90,7 +91,10 @@ ve.ce.LinearEnterKeyDownHandler.static.execute = function ( surface, e ) {
 	// Handle insertion
 	if ( node === null ) {
 		throw new Error( 'node === null' );
-	} else if ( e.shiftKey && nodeModel.hasSignificantWhitespace() ) {
+	} else if ( !documentModel.sourceMode && e.shiftKey && nodeModel.getType() === 'paragraph' ) {
+		// Insert break node
+		txInsert = ve.dm.TransactionBuilder.static.newFromInsertion( documentModel, range.from, emptyBreakLine );
+	} else if ( !documentModel.sourceMode && e.shiftKey && nodeModel.hasSignificantWhitespace() ) {
 		// Insert newline
 		txInsert = ve.dm.TransactionBuilder.static.newFromInsertion( documentModel, range.from, '\n' );
 	} else if (
