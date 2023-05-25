@@ -24,6 +24,30 @@
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e64e05cb_b6227d4c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2023-05-25T15:31:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01479d32_5942110e",
+      "range": {
+        "startLine": 10,
+        "startChar": 34,
+        "endLine": 10,
+        "endChar": 41
+      },
+      "revId": "c0763a352c1f6e73a8550b7ac274d0002379d919",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "99e078b3_b847ce2a",
@@ -72,6 +96,30 @@
       "writtenOn": "2023-05-24T18:50:37Z",
       "side": 1,
       "message": "Include",
+      "range": {
+        "startLine": 223,
+        "startChar": 35,
+        "endLine": 223,
+        "endChar": 43
+      },
+      "revId": "c0763a352c1f6e73a8550b7ac274d0002379d919",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "274971e2_b04c4bc6",
+        "filename": "src/ui/widgets/ve.ui.CompletionWidget.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2023-05-25T15:31:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e0c2d94_6099ca76",
       "range": {
         "startLine": 223,
         "startChar": 35,
