@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b23c4215_41b86a06",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2023-05-29T14:30:00Z",
+      "side": 1,
+      "message": "Do not merge yet, I\u0027m just setting this up already as a reminder.",
+      "revId": "b303bdcf54eb9ebde6bbc0f0b48d609748c58030",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
