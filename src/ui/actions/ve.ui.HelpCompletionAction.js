@@ -29,6 +29,8 @@ ve.ui.HelpCompletionAction = function ( surface ) {
 			// Ignore tool groups
 			!( tool instanceof OO.ui.ToolGroupTool ) &&
 			!( tool instanceof OO.ui.PopupTool ) &&
+			// No point in going in circles
+			!( tool instanceof ve.ui.HelpCompletionTool ) &&
 			// TODO: One would need to completely ignore the history
 			// stack since before the action was triggered to use
 			// undo/redo from here. Might not be worth the effort.
