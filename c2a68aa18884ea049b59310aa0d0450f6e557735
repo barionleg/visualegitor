@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "afdd8439_22ab70f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2023-06-09T12:07:12Z",
+      "side": 1,
+      "message": "Just curious: Does this icon even appear anywhere? The one I can see in VisualEditor is already the keyboard.",
+      "revId": "c2a68aa18884ea049b59310aa0d0450f6e557735",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
