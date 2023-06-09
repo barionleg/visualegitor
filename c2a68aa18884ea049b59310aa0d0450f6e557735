@@ -16,6 +16,24 @@
       "message": "Just curious: Does this icon even appear anywhere? The one I can see in VisualEditor is already the keyboard.",
       "revId": "c2a68aa18884ea049b59310aa0d0450f6e557735",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6609f3ff_1a8cb8a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2023-06-09T15:20:28Z",
+      "side": 1,
+      "message": "Not in VE-on-mediawiki -- you can see it in the standalone VisualEditor, if you go to e.g. https://en.wikipedia.org/w/extensions/VisualEditor/lib/ve/demos/ve/desktop.html#!simple and click the hamburger-menu in the top-right of the surface.",
+      "parentUuid": "afdd8439_22ab70f3",
+      "revId": "c2a68aa18884ea049b59310aa0d0450f6e557735",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
