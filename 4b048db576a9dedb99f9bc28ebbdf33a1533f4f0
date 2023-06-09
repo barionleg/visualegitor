@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e497815_03fb1b41",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2023-06-09T15:23:08Z",
+      "side": 1,
+      "message": "The tool existing in the menu does increase the odds that the existing behavior of silently-doing-nothing when there\u0027s a text selection made will be noticed... but that can be improved separately.",
+      "revId": "4b048db576a9dedb99f9bc28ebbdf33a1533f4f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
