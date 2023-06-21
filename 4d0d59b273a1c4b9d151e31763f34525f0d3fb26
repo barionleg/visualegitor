@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39bf533f_4e8df79f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2023-06-21T16:37:59Z",
+      "side": 1,
+      "message": "So how many gadgets does this break?",
+      "revId": "4d0d59b273a1c4b9d151e31763f34525f0d3fb26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
