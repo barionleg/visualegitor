@@ -16,6 +16,23 @@
       "message": "So how many gadgets does this break?",
       "revId": "4d0d59b273a1c4b9d151e31763f34525f0d3fb26",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5422e14_e6f087ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2023-06-22T21:06:31Z",
+      "side": 1,
+      "message": "See T339317. I\u0027ve fixed all the ones that use numerical offsets in actionGroups, but this commit doesn\u0027t change the offset.\n\nThe gadget would have to be iterating through \"includes\" looking for a named tool, rather than a group, to break.\n\nAlso if there are any tools in the groups listed here that weren\u0027t being added to the toolbar before, they might get added automatically now, but at least that\u0027s not a fatal error.",
+      "revId": "4d0d59b273a1c4b9d151e31763f34525f0d3fb26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
