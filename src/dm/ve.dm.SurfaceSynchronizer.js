@@ -202,7 +202,7 @@ ve.dm.SurfaceSynchronizer.prototype.submitChange = function () {
 ve.dm.SurfaceSynchronizer.prototype.sendChange = function ( backtrack, change ) {
 	this.conn.send( 'submitChange', {
 		backtrack: this.backtrack,
-		change: change
+		change: change.serialize()
 	} );
 };
 
