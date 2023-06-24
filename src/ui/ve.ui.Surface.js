@@ -47,6 +47,10 @@ ve.ui.Surface = function VeUiSurface( target, dataOrDocOrSurface, config ) {
 	this.inDialog = config.inDialog || '';
 	this.inTargetWidget = !!config.inTargetWidget;
 	this.mode = config.mode;
+	this.collab = !!config.collab;
+	if ( ve.debug ) {
+		this.collab = true;
+	}
 
 	// The following classes are used here:
 	// * ve-ui-overlay-global-mobile
@@ -250,6 +254,13 @@ ve.ui.Surface.prototype.initialize = function () {
 
 	this.getView().initialize();
 	this.getModel().initialize();
+
+	if ( this.collab ) {
+		setTimeout( function () {
+			ve.ui.setupCollab();
+		} );
+	}
+
 	this.emit( 'ready' );
 	return this;
 };
