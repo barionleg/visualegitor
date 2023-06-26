@@ -541,6 +541,24 @@ ve.ce.Surface.prototype.isReadOnly = function () {
 	return this.readOnly;
 };
 
+ve.ce.Surface.prototype.setReviewMode = function ( reviewMode, highlightNodes ) {
+	this.reviewMode = !!reviewMode;
+	this.$element.toggleClass( 've-ce-surface-reviewMode', this.reviewMode );
+	this.$element.toggleClass( 've-ce-surface-reviewMode-highlightNodes', this.reviewMode && !!highlightNodes );
+	if ( reviewMode && highlightNodes ) {
+		highlightNodes.forEach( function ( node ) {
+			node.$element
+				.addClass( 've-ce-surface-reviewMode-highlightNode' )
+				.parentsUntil( '.ve-ce-attachedRootNode' )
+				.addClass( 've-ce-surface-reviewMode-highlightNode' );
+
+		} );
+	} else {
+		this.$element.find( '.ve-ce-surface-reviewMode-highlightNode' )
+			.removeClass( 've-ce-surface-reviewMode-highlightNode' );
+	}
+};
+
 /**
  * Give focus to the surface, reapplying the model selection, or selecting the first visible offset
  * if the model selection is null.
