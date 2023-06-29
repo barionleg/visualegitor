@@ -33,6 +33,24 @@
       "message": "See T339317. I\u0027ve fixed all the ones that use numerical offsets in actionGroups, but this commit doesn\u0027t change the offset.\n\nThe gadget would have to be iterating through \"includes\" looking for a named tool, rather than a group, to break.\n\nAlso if there are any tools in the groups listed here that weren\u0027t being added to the toolbar before, they might get added automatically now, but at least that\u0027s not a fatal error.",
       "revId": "4d0d59b273a1c4b9d151e31763f34525f0d3fb26",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "800cdc2c_94d44cd1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2023-06-29T16:51:17Z",
+      "side": 1,
+      "message": "\u003e The gadget would have to be iterating through [include] looking for a named tool, rather than a group, to break.\n\nI wouldn\u0027t be surprised to find that… But I tried: https://global-search.toolforge.org/?q\u003d\\.include[^s(]\u0026regex\u003d1\u0026namespaces\u003d2%2C4%2C8\u0026title\u003d(Gadgets-definition|.*\\.(js|css|json)) and it looks like the only affected gadget would be https://de.wikipedia.org/wiki/Benutzer:Schnark/js/veHint.js , which handles this case already.",
+      "parentUuid": "f5422e14_e6f087ae",
+      "revId": "4d0d59b273a1c4b9d151e31763f34525f0d3fb26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
