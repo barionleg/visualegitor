@@ -201,7 +201,9 @@ ve.ui.DesktopContext.prototype.updateDimensions = function () {
 	var focusedNode = surface.getFocusedNode();
 	// Selection when the inspector was opened. Used to stop the context from
 	// jumping when an inline selection expands, e.g. to cover a long word
-	var startingSelection;
+	var startingSelection = this.surface.getModel().getSelection();
+
+	// Use an inspector's initialfragment if present
 	if (
 		!focusedNode && this.inspector && this.inspector.initialFragment &&
 		// Don't use initial selection if it comes from another document,
@@ -210,9 +212,19 @@ ve.ui.DesktopContext.prototype.updateDimensions = function () {
 		this.inspector.getFragment().getDocument() === surface.getModel().getDocument()
 	) {
 		startingSelection = this.inspector.initialFragment.getSelection();
+	} else {
+		// Allow a contextItem to override the selection. Only one context at a time can do
+		// this but this is usually done when triggering a single custom context.
+		this.items.some( function ( contextItem ) {
+			if ( contextItem.data && contextItem.data.fragment ) {
+				startingSelection = contextItem.data.fragment.getSelection();
+				return true;
+			}
+			return false;
+		} );
 	}
-	var currentSelection = this.surface.getModel().getSelection();
-	var isTableSelection = ( startingSelection || currentSelection ) instanceof ve.dm.TableSelection;
+
+	var isTableSelection = startingSelection instanceof ve.dm.TableSelection;
 
 	var boundingRect = isTableSelection ?
 		surface.getSelection( startingSelection ).getTableBoundingRect() :
