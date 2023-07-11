@@ -132,7 +132,7 @@ ve.ui.PreviewElement.prototype.updatePreview = function () {
 			// if you generating a lot of previews, e.g. in a list
 			if ( !element.useView ) {
 				// Verify that the PreviewElement hasn't been destroyed.
-				if ( element.view ) {
+				if ( element.view && element.model.getRoot() ) {
 					element.replaceWithModelDom();
 				}
 			} else {
