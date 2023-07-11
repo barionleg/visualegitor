@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61f19635_31d255f2",
+        "filename": "src/ui/actions/ve.ui.HelpCompletionAction.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2023-07-11T20:35:48Z",
+      "side": 1,
+      "message": "This does make the help dialog a bit crowded -- could we only register the alt trigger in Firefox?",
+      "revId": "44f347a6b2adf36afc80e777b167635b6535a26a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
