@@ -16,6 +16,23 @@
       "message": "Why not an SVG?",
       "revId": "979e449a12a9dfb712fb1290bef2c7a53c1e4fa5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d160f2d_da8c0711",
+        "filename": "collab/ve.ui.CollabTool.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2023-07-20T14:14:26Z",
+      "side": 1,
+      "message": "This button should be disabled when a session is active (or at least when you are a client).",
+      "revId": "979e449a12a9dfb712fb1290bef2c7a53c1e4fa5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
