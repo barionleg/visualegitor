@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1986c34e_274cdb45",
+        "filename": "rebaser/src/dm/ve.dm.ProtocolServer.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2023-07-20T12:54:37Z",
+      "side": 1,
+      "message": "Why height? Don\u0027t we usually describe history stack\u0027s length?",
+      "revId": "60b39f9b96b878d14d9aa58b8d3a57593aacf6fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
