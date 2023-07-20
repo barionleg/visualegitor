@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9661c7c5_a4832600",
+        "filename": "demos/ve/ve-peerRebaser-sideLoad.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 2706,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2023-07-20T13:47:34Z",
+      "side": 1,
+      "message": "Add position:\u0027after\u0027",
+      "revId": "f0f34e85335fc4be03af9388867ff377ba78f293",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
