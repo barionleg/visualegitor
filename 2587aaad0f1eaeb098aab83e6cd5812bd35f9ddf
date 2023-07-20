@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "965fdd85_011fa467",
+        "filename": "src/ve.FakePeer.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2023-07-20T12:53:57Z",
+      "side": 1,
+      "message": "we can use .find now, which is ES6",
+      "revId": "2587aaad0f1eaeb098aab83e6cd5812bd35f9ddf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
