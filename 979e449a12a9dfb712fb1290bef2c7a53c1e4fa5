@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9e6c752_a38bf98c",
+        "filename": "collab/ve.ui.CollabProcessDialog.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2023-07-20T14:10:55Z",
+      "side": 1,
+      "message": "Why not an SVG?",
+      "revId": "979e449a12a9dfb712fb1290bef2c7a53c1e4fa5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
