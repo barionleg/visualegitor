@@ -16,6 +16,24 @@
       "message": "position:\u0027after\u0027",
       "revId": "d73f0cdf9e9ca25ff8c6f44fcb6ed71244a9f5b1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5878c7d0_92dd4822",
+        "filename": "collab/ve.collab.js",
+        "patchSetId": 26
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2023-07-27T08:19:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ece301a7_4f3b5e89",
+      "revId": "d73f0cdf9e9ca25ff8c6f44fcb6ed71244a9f5b1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
