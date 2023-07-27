@@ -16,6 +16,24 @@
       "message": "Why height? Don\u0027t we usually describe history stack\u0027s length?",
       "revId": "60b39f9b96b878d14d9aa58b8d3a57593aacf6fd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76fa556d_45bb09a7",
+        "filename": "rebaser/src/dm/ve.dm.ProtocolServer.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2023-07-27T08:19:19Z",
+      "side": 1,
+      "message": "Done (I think this was a relic from a very old blackboard diagram)",
+      "parentUuid": "1986c34e_274cdb45",
+      "revId": "60b39f9b96b878d14d9aa58b8d3a57593aacf6fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
