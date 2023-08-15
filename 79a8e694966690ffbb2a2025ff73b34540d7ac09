@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e52d4bd_aad58c11",
+        "filename": "src/dm/ve.dm.Surface.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 1106,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2023-08-15T08:56:08Z",
+      "side": 1,
+      "message": "Until we are 100% sure squash will not throw an exception, we should try/catch this and fall back to the individual transactions, and log the error.",
+      "revId": "79a8e694966690ffbb2a2025ff73b34540d7ac09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
