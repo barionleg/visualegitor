@@ -141,6 +141,24 @@
       "parentUuid": "47a26dfa_50ea6d04",
       "revId": "b1a02d7043e1605277f426e783297fd86fe76386",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24278a3a_3de4f976",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2023-08-15T09:09:26Z",
+      "side": 1,
+      "message": "Pasting around bold is not changed by this patch (in both FF \u0026 Chrome you get continuation at the end, but not the start, even when pasting templates). This patch uses #annotationsAtFocus which inspects the annotations at nativeSelection.focusNode.\n\nAFAICT this only changes the behaviour around nailed annotations.",
+      "parentUuid": "7e4f9be0_b8fa7dd0",
+      "revId": "b1a02d7043e1605277f426e783297fd86fe76386",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
