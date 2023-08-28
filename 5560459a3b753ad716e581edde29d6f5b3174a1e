@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fad7079f_eaf18cb6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2023-08-28T16:03:43Z",
+      "side": 1,
+      "message": "It\u0027s possible that the more-correct thing to do here would be to track down all the extra-setups that persistent context items are going through. (There\u0027s another one which happens when I think it\u0027s rendering it *behind* the citoid inspector, for instance...)",
+      "revId": "5560459a3b753ad716e581edde29d6f5b3174a1e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
