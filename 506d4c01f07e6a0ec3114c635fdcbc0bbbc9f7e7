@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "591b7ae6_73f2c887",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6729
+      },
+      "writtenOn": "2023-09-20T05:27:43Z",
+      "side": 1,
+      "message": "LGTM but no +2 for this repo",
+      "revId": "506d4c01f07e6a0ec3114c635fdcbc0bbbc9f7e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
