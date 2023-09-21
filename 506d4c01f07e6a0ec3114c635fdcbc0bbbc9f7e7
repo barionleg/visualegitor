@@ -16,6 +16,23 @@
       "message": "LGTM but no +2 for this repo",
       "revId": "506d4c01f07e6a0ec3114c635fdcbc0bbbc9f7e7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50e50c29_115bfa0e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2023-09-21T15:23:35Z",
+      "side": 1,
+      "message": "Technically ve.repeatString is a public method, but there are no uses elsewhere:\n* https://codesearch.wmcloud.org/search/?q\u003dve.repeatString\u0026files\u003d\u0026excludeFiles\u003d\u0026repos\u003d\n* https://global-search.toolforge.org/?q\u003dve\\.repeatString\u0026regex\u003d1\u0026namespaces\u003d2%2C4%2C8\u0026title\u003d(Gadgets-definition|.*\\.(js|css|json))",
+      "revId": "506d4c01f07e6a0ec3114c635fdcbc0bbbc9f7e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
