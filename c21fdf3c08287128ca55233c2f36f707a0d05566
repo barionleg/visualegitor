@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "382915a1_2551938d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2023-09-26T10:33:32Z",
+      "side": 1,
+      "message": "This is probably no good for CI and messy even for local development. Maybe we need to fix the upstream bug (see Phabricator).",
+      "revId": "c21fdf3c08287128ca55233c2f36f707a0d05566",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
