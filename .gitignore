@@ -15,6 +15,7 @@ npm-debug.log
 rebaser/config.yaml
 rebaser/rebaser.log
 .eslintcache
+.tmp-FirefoxHeadless
 
 # OS
 .DS_Store

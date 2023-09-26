@@ -380,6 +380,13 @@ module.exports = function ( grunt ) {
 						base: 'ChromeHeadless',
 						// Chrome requires --no-sandbox in Docker/CI.
 						flags: ( process.env.CHROMIUM_FLAGS || '' ).split( ' ' )
+					},
+					FirefoxCustom: {
+						base: 'FirefoxHeadless',
+						// Firefox snap cannot access a karma profile in /tmp
+						// TODO: Sadly this fix forces you to pre-create the temp
+						// dir, but at least you get a relevant error message.
+						profile: './.tmp-FirefoxHeadless'
 					}
 				},
 				autoWatch: false
@@ -477,7 +484,7 @@ module.exports = function ( grunt ) {
 			},
 			// Separate job for Firefox as we don't want a second coverage report.
 			firefox: {
-				browsers: [ 'FirefoxHeadless' ]
+				browsers: [ 'FirefoxCustom' ]
 			},
 			bg: {
 				browsers: [ 'Chrome', 'Firefox' ],
