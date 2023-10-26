@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15a276f5_5d36fbd0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2023-10-26T13:45:35Z",
+      "side": 1,
+      "message": "Dupe of https://gerrit.wikimedia.org/r/c/VisualEditor/VisualEditor/+/968359",
+      "revId": "f9b2d2baf2691cf15bda964457803e5dd0dc7933",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
