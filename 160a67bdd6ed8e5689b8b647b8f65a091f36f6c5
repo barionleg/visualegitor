@@ -18,6 +18,24 @@
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "28713995_08a6c2f5",
+        "filename": "src/dm/ve.dm.Document.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 957,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2023-10-30T17:25:33Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "98665092_98cd88cb",
+      "revId": "160a67bdd6ed8e5689b8b647b8f65a091f36f6c5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "da702ade_d6e73c34",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-10-30T17:16:13Z",
       "side": 1,
       "message": "Any reason to pass index to test?",
+      "revId": "160a67bdd6ed8e5689b8b647b8f65a091f36f6c5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48761e7a_5c7a00fa",
+        "filename": "src/dm/ve.dm.Document.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 977,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2023-10-30T17:25:33Z",
+      "side": 1,
+      "message": "Mostly futureproofing for hypothetical other uses. I figured that it was at least possible that someone might want to use it to check the data-store to see more things about the item at that position.",
+      "parentUuid": "da702ade_d6e73c34",
       "revId": "160a67bdd6ed8e5689b8b647b8f65a091f36f6c5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     },
