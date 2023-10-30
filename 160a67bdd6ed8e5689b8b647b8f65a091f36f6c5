@@ -16,6 +16,24 @@
       "message": "As we know there will only be one argument we can just pass ve.dm.nodeFactory.isNodeFocusable statically.",
       "revId": "160a67bdd6ed8e5689b8b647b8f65a091f36f6c5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3f1e032_5bb5ac3b",
+        "filename": "src/dm/ve.dm.Document.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 1008,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2023-10-30T17:14:19Z",
+      "side": 1,
+      "message": "ah, it would need to be bound. Maybe makes no difference then...",
+      "parentUuid": "944f3de5_0e7f23ee",
+      "revId": "160a67bdd6ed8e5689b8b647b8f65a091f36f6c5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
