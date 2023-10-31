@@ -89,6 +89,24 @@
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf5c911e_3cc1feb1",
+        "filename": "src/dm/ve.dm.Document.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 977,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2023-10-31T15:44:52Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3663e276_6ea2a3e3",
+      "revId": "160a67bdd6ed8e5689b8b647b8f65a091f36f6c5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "944f3de5_0e7f23ee",
