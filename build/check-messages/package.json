@@ -1,0 +1,11 @@
+{
+	"name": "Check messages",
+	"version": "0.1.0",
+	"devDependencies": {
+		"chalk": "^4.1.2",
+		"eslint-config-wikimedia": "^0.25.1",
+		"glob": "^10.3.10",
+		"less": "^4.2.0",
+		"minimist": "^1.2.8"
+	}
+}
