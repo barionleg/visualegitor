@@ -1,0 +1,9 @@
+{
+	"name": "Check messages",
+	"version": "0.1.0",
+	"devDependencies": {
+		"chalk": "^4.1.2",
+		"glob": "^10.3.10",
+		"minimist": "^1.2.8"
+	}
+}
