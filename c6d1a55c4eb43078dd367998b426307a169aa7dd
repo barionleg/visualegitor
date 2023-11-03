@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5a9509a_55f18ee4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2023-11-03T14:42:16Z",
+      "side": 1,
+      "message": "00:01:22.277 /src/build/check-messages/check-messages.js\n00:01:22.277   110:33  error  \u0027reject\u0027 is defined but never used                                  no-unused-vars\n00:01:22.277   127:11  error  \u0027files\u0027 is already declared in the upper scope on line 73 column 7  no-shadow\n00:01:22.277   148:10  error  \u0027checkMissingKey\u0027 is defined but never used                         no-unused-vars\n00:01:22.277   149:2   error  \u0027findKeyInGitHistoryAndContentsWithPickaxe\u0027 is not defined          no-undef\n\nBeyond that, this is very neat. Want to submit it as a banana-checker patch?",
+      "revId": "c6d1a55c4eb43078dd367998b426307a169aa7dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
