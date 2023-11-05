@@ -16,6 +16,24 @@
       "message": "This also fixes T332791? (In fact, the new test case matches that task better than this one, so I\u0027m a little confused.)",
       "revId": "8ace0eae1d428313995de180ae3183690f18b2ea",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c0860a9_17d2cd19",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2023-11-05T13:21:10Z",
+      "side": 1,
+      "message": "Yes- I\u0027d forgotten about it.",
+      "parentUuid": "4cbce285_2de10614",
+      "revId": "8ace0eae1d428313995de180ae3183690f18b2ea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
