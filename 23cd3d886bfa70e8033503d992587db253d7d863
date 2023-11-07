@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d2fb35c_60c404b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2023-11-07T20:33:34Z",
+      "side": 1,
+      "message": "I haven\u0027t been able to find a case where this method changes anything. We can always restore and investigate if we notice worse diffs.",
+      "revId": "23cd3d886bfa70e8033503d992587db253d7d863",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
