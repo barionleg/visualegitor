@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f52e7ff_6c6acb1e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6729
+      },
+      "writtenOn": "2023-11-08T20:27:48Z",
+      "side": 1,
+      "message": "LGTM but no +2 T284360",
+      "revId": "b7b108819ce2ebd7d44b3ed5f6575ed4a133ff1e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ce2889d_7bba5d3d",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 857,
+      "author": {
+        "id": 6729
+      },
+      "writtenOn": "2023-11-08T20:27:48Z",
+      "side": 1,
+      "message": "styles are under `-collapsed` - https://gerrit.wikimedia.org/g/VisualEditor/VisualEditor/+/160dd441dc7873b656bfe712a9bc4fb9a13e3731/src/ce/styles/ve.ce.Surface.css#76",
+      "range": {
+        "startLine": 857,
+        "startChar": 55,
+        "endLine": 857,
+        "endChar": 64
+      },
+      "revId": "b7b108819ce2ebd7d44b3ed5f6575ed4a133ff1e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
