@@ -69,6 +69,24 @@
       "parentUuid": "8d160f2d_da8c0711",
       "revId": "979e449a12a9dfb712fb1290bef2c7a53c1e4fa5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "214009a1_abd478c5",
+        "filename": "collab/ve.ui.CollabTool.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2023-11-08T16:39:51Z",
+      "side": 1,
+      "message": "If I paste the generated link from clickinh the button, I get another instance that has the button.",
+      "parentUuid": "bdb88ae4_7b85cc5f",
+      "revId": "979e449a12a9dfb712fb1290bef2c7a53c1e4fa5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
