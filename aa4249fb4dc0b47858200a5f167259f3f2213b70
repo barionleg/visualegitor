@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c16e02c_b5fc0238",
+        "filename": "src/dm/ve.dm.SurfaceSynchronizer.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2023-11-08T16:42:35Z",
+      "side": 1,
+      "message": "Still not sure this explains why, but at least we know it\u0027s deliberate now...",
+      "revId": "aa4249fb4dc0b47858200a5f167259f3f2213b70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
