@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f825a16c_90304f96",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2023-11-10T18:02:55Z",
+      "side": 1,
+      "message": "The accompanying patch in Cite is I143fa0d45572677d09320fff88076a53253ad714",
+      "revId": "4ed104936d91b39670205cc7df70b2877139b89d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
