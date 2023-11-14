@@ -16,6 +16,24 @@
       "message": "Congratulations.",
       "revId": "06b8eeb8051055c38dad4842e641813ca1dce650",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ed1d935_aff2e57d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2023-11-14T11:49:30Z",
+      "side": 1,
+      "message": ":o",
+      "parentUuid": "84e07d60_8e4bd4b9",
+      "revId": "06b8eeb8051055c38dad4842e641813ca1dce650",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
