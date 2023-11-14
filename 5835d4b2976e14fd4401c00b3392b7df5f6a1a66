@@ -16,6 +16,24 @@
       "message": "Coverage of DefinitionListNode has dropped",
       "revId": "5835d4b2976e14fd4401c00b3392b7df5f6a1a66",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e85ccd70_8c4dd453",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2023-11-14T12:09:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e5dba57b_4c852fde",
+      "revId": "5835d4b2976e14fd4401c00b3392b7df5f6a1a66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
