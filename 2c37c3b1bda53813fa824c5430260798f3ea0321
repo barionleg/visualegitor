@@ -16,6 +16,24 @@
       "message": "Duplicate of https://gerrit.wikimedia.org/r/975332 but your message is better",
       "revId": "2c37c3b1bda53813fa824c5430260798f3ea0321",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb76684c_78a099ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2023-11-17T18:56:26Z",
+      "side": 1,
+      "message": "Oops, I didn\u0027t see yours was already up when I pushed this.",
+      "parentUuid": "e101be9d_27436341",
+      "revId": "2c37c3b1bda53813fa824c5430260798f3ea0321",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
