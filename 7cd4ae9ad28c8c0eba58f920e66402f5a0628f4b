@@ -16,6 +16,23 @@
       "message": "Bah.",
       "revId": "7cd4ae9ad28c8c0eba58f920e66402f5a0628f4b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f27a99cc_f2e07218",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2023-11-27T17:56:56Z",
+      "side": 1,
+      "message": "00:01:35.024 /src/build/tasks/buildloader.js\n00:01:35.024   104:21  warning  Found non-literal argument to RegExp Constructor  security/detect-non-literal-regexp\n00:01:35.024 \n00:01:35.024 /src/rebaser/src/logToTestCase.js\n00:01:35.024    3:1   error    Definition for rule \u0027node/no-missing-require\u0027 was not found            node/no-missing-require\n00:01:35.024    4:21  error    \"../dist/ve-rebaser.js\" is not found                                   n/no-missing-require\n00:01:35.024   82:1   warning  Found readFile from package \"fs\" with non literal argument at index 0  security/detect-non-literal-fs-filename\n00:01:35.024 \n00:01:35.024 /src/src/init/sa/ve.init.sa.SafeStorage.js\n00:01:35.024   16:28  error  requestIdleCallback is not supported in Safari 11  compat/compat\n00:01:35.024   18:3   error  requestIdleCallback is not supported in Safari 11  compat/compat\n",
+      "revId": "7cd4ae9ad28c8c0eba58f920e66402f5a0628f4b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
