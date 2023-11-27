@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8167ef41_f9ea669f",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 5476,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2023-11-27T13:16:22Z",
+      "side": 1,
+      "message": "We do inline vars these days.",
+      "revId": "3f8247ff02f1b60199c5b4ae3fa2245d5d594563",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "053b8941_014b32ca",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 5478,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2023-11-27T13:16:22Z",
+      "side": 1,
+      "message": "And without IE support, .forEach loops are just fast (and always were for non-massive loops).",
+      "revId": "3f8247ff02f1b60199c5b4ae3fa2245d5d594563",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "152074d8_3a127c4b",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 5481,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2023-11-27T13:16:22Z",
+      "side": 1,
+      "message": "\"return\", if you switch to a .forEach",
+      "revId": "3f8247ff02f1b60199c5b4ae3fa2245d5d594563",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66635fd2_bef6d8a5",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 5497,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2023-11-27T13:16:22Z",
+      "side": 1,
+      "message": "(I guess this one is still a bit clearer as a vanilla for loop)",
+      "revId": "3f8247ff02f1b60199c5b4ae3fa2245d5d594563",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
