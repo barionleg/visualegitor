@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38f96259_bc148e44",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2023-12-01T15:59:09Z",
+      "side": 1,
+      "message": "It loses the line separating the sidebar, which I could see being maybe confusing in some situations. That said, it\u0027s definitely a better experience for anyone with a huge phone.",
+      "revId": "de810d61477f64e529d8ce1a8ee8c3d5cd487134",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
