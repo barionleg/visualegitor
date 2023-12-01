@@ -18,6 +18,11 @@ ve.ui.SumCellsContextItem = function VeUiSumCellsContextItem( context, model, co
 	// Parent constructor
 	ve.ui.SumCellsContextItem.super.call( this, context, model, config );
 
+	this.dimensions = new OO.ui.LabelWidget( {
+		classes: [ 've-ui-sumCellsContextItem-dimensions' ]
+	} );
+	this.$title.append( this.dimensions.$element );
+
 	// Initialization
 	this.$element.addClass( 've-ui-sumCellsContextItem' );
 };
@@ -89,6 +94,12 @@ ve.ui.SumCellsContextItem.prototype.setup = function () {
 			ve.msg( 'visualeditor-table-sum',
 				ve.init.platform.formatNumber( sum ),
 				ve.init.platform.formatNumber( sum / count )
+			)
+		);
+		this.dimensions.setLabel(
+			ve.msg( 'visualeditor-table-selection-dimensions',
+				selection.getColCount(),
+				selection.getRowCount()
 			)
 		);
 	} else {

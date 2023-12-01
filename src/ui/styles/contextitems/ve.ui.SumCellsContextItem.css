@@ -1,0 +1,9 @@
+/*!
+ * VisualEditor UserInterface SumCellsContextItem styles.
+ *
+ * @copyright See AUTHORS.txt
+ */
+
+.ve-ui-sumCellsContextItem-dimensions {
+	float: right;
+}
