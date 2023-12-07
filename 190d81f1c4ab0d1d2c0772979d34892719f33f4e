@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b20df9d2_87cad35f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2023-12-07T16:36:54Z",
+      "side": 1,
+      "message": "I couldn\u0027t actually persuade the original bug to happen in practice, but the change seems reasonable.",
+      "revId": "190d81f1c4ab0d1d2c0772979d34892719f33f4e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
