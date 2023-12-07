@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4251915_d3eaea4a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2023-12-07T18:52:36Z",
+      "side": 1,
+      "message": "For DavidL to review now.",
+      "revId": "37c482ee4c744cdf508cff909ac4d37332d9b7af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
