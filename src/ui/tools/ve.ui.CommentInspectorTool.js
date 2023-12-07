@@ -24,5 +24,4 @@ ve.ui.CommentInspectorTool.static.title =
 	OO.ui.deferMsg( 'visualeditor-commentinspector-tooltip' );
 ve.ui.CommentInspectorTool.static.modelClasses = [ ve.dm.CommentNode ];
 ve.ui.CommentInspectorTool.static.commandName = 'comment';
-ve.ui.CommentInspectorTool.static.deactivateOnSelect = true;
 ve.ui.toolFactory.register( ve.ui.CommentInspectorTool );

@@ -41,8 +41,6 @@ ve.ui.ChangeDirectionalityTool.static.autoAddToCatchall = false;
 
 ve.ui.ChangeDirectionalityTool.static.commandName = 'changeDirectionality';
 
-ve.ui.ChangeDirectionalityTool.static.deactivateOnSelect = false;
-
 /* Methods */
 
 /**

@@ -23,10 +23,6 @@ ve.ui.ToolbarDialogTool = function VeUiToolbarDialogTool() {
 
 OO.inheritClass( ve.ui.ToolbarDialogTool, ve.ui.WindowTool );
 
-/* Static Properties */
-
-ve.ui.ToolbarDialogTool.static.deactivateOnSelect = false;
-
 /**
  * Find and replace tool.
  *

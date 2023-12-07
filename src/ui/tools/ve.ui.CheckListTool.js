@@ -25,10 +25,6 @@ ve.ui.CheckListTool = function VeUiCheckListTool() {
 
 OO.inheritClass( ve.ui.CheckListTool, ve.ui.Tool );
 
-/* Static Properties */
-
-ve.ui.CheckListTool.static.deactivateOnSelect = false;
-
 /* Methods */
 
 /**
