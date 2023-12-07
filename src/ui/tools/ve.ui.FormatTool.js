@@ -23,10 +23,6 @@ ve.ui.FormatTool = function VeUiFormatTool() {
 
 OO.inheritClass( ve.ui.FormatTool, ve.ui.Tool );
 
-/* Static Properties */
-
-ve.ui.FormatTool.static.deactivateOnSelect = false;
-
 /**
  * Format the tool applies.
  *
