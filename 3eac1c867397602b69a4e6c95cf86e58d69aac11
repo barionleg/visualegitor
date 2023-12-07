@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e54f12f3_718681e2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2023-12-07T16:29:31Z",
+      "side": 1,
+      "message": "To confirm before those test-results are deleted, this still fails with (5, 5) on that test.",
+      "revId": "3eac1c867397602b69a4e6c95cf86e58d69aac11",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
