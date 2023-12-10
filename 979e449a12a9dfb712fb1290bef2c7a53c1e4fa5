@@ -54,6 +54,24 @@
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4873371a_1c066b5f",
+        "filename": "collab/ve.ui.CollabProcessDialog.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2023-12-10T09:27:12Z",
+      "side": 1,
+      "message": "No, the SVG is here already: https://gerrit.wikimedia.org/r/c/VisualEditor/VisualEditor/+/921769/15/collab/ve.ui.CollabProcessDialog.js#16",
+      "parentUuid": "a0878837_5eb94711",
+      "revId": "979e449a12a9dfb712fb1290bef2c7a53c1e4fa5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8d160f2d_da8c0711",
@@ -103,6 +121,24 @@
       "side": 1,
       "message": "If I paste the generated link from clickinh the button, I get another instance that has the button.",
       "parentUuid": "bdb88ae4_7b85cc5f",
+      "revId": "979e449a12a9dfb712fb1290bef2c7a53c1e4fa5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55712f7b_67b7a8bf",
+        "filename": "collab/ve.ui.CollabTool.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2023-12-10T09:27:12Z",
+      "side": 1,
+      "message": "Oh, you mean in the standalone demo? There, URL hashes are changed to specify pages, and on first load this replaces the URL hash used by ve.collab. If you reinstate the correct URL after loading then it works correctly.",
+      "parentUuid": "214009a1_abd478c5",
       "revId": "979e449a12a9dfb712fb1290bef2c7a53c1e4fa5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
