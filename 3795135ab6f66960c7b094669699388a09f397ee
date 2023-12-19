@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12c9bbf7_39432464",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2023-12-19T18:10:17Z",
+      "side": 1,
+      "message": "This or the other patch in this stack caused T353578",
+      "revId": "3795135ab6f66960c7b094669699388a09f397ee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
