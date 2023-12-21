@@ -695,7 +695,8 @@
 			"src/ui/inspectors/ve.ui.LinkAnnotationInspector.js",
 			"src/ui/inspectors/ve.ui.CommentInspector.js",
 			"src/ui/inspectors/ve.ui.LanguageInspector.js",
-			"src/ui/pages/ve.ui.SpecialCharacterPage.js"
+			"src/ui/layouts/ve.ui.SymbolListBookletLayout.js",
+			"src/ui/pages/ve.ui.SymbolListPage.js"
 		],
 		"styles": [
 			"src/ui/styles/dialogs/ve.ui.ToolbarDialog.css",
@@ -715,6 +716,7 @@
 			"src/ui/styles/inspectors/ve.ui.CommentInspector.css",
 			"src/ui/styles/inspectors/ve.ui.FragmentInspector.css",
 			"src/ui/styles/inspectors/ve.ui.LanguageInspector.css",
+			"src/ui/styles/layouts/ve.ui.SymbolListBookletLayout.css",
 			"src/ui/styles/ve.ui.Context.css",
 			"src/ui/styles/ve.ui.ContextItem.css",
 			"src/ui/styles/contextitems/ve.ui.LinearContextItem.css",
