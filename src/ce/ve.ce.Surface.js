@@ -3010,10 +3010,8 @@ ve.ce.Surface.prototype.afterPasteFromExternalContextRange = function ( pastedDo
 ve.ce.Surface.prototype.afterPasteSanitizeExternal = function ( $element ) {
 	var metadataIdRegExp = ve.init.platform.getMetadataIdRegExp();
 
-	// Remove the clipboard key
-	$element.find( 'span[data-ve-clipboard-key]' ).remove();
 	// Remove style tags (T185532)
-	$element.find( 'style' ).remove();
+	$element.find( 'style, span[data-ve-clipboard-key]' ).remove();
 	// If this is from external, run extra sanitization:
 
 	// Do some simple transforms to catch content that is using
