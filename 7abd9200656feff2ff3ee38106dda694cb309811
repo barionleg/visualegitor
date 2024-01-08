@@ -52,6 +52,24 @@
       "parentUuid": "379cb294_9345bfa9",
       "revId": "7abd9200656feff2ff3ee38106dda694cb309811",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e60ca6a7_437a80c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2024-01-08T15:13:33Z",
+      "side": 1,
+      "message": "Stating that one string says \"remove the clipboard key\" and the other \"clipboard key remove\" is not an opinion. That\u0027s literally the same words.\n\nWe have a place for such duplication: tests.\n\nI don\u0027t recall \"multiple people\" asking me \"not to do such things\". More the contrary. Can you provide links?",
+      "parentUuid": "44f91a73_0666a6a9",
+      "revId": "7abd9200656feff2ff3ee38106dda694cb309811",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
