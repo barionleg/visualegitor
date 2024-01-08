@@ -16,6 +16,24 @@
       "message": "Please preserve the justification comments when merging different lines of code.",
       "revId": "7abd9200656feff2ff3ee38106dda694cb309811",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "379cb294_9345bfa9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2024-01-08T14:30:34Z",
+      "side": 1,
+      "message": "There was no justification. The comment said \"Remove the clipboard key\". That\u0027s literally what the code itself says.",
+      "parentUuid": "a9bc5e2d_a66f39ae",
+      "revId": "7abd9200656feff2ff3ee38106dda694cb309811",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
