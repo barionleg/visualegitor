@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1671e8aa_112ea30f",
+        "filename": "src/dm/ve.dm.Converter.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 1196,
+      "author": {
+        "id": 143
+      },
+      "writtenOn": "2024-01-09T10:25:42Z",
+      "side": 1,
+      "message": "I don\u0027t understand what this variable does—it\u0027s still not used anywhere else, so are we relying on some sort of side-effect like reference counting?",
+      "range": {
+        "startLine": 1196,
+        "startChar": 6,
+        "endLine": 1196,
+        "endChar": 29
+      },
+      "revId": "d5461cb709a6d8a95bf53bf97989fd9144556520",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
