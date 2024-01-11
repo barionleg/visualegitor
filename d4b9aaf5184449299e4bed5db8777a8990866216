@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5cfd75f_bc70f1b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2024-01-11T14:04:09Z",
+      "side": 1,
+      "message": "Cross referencing James\u0027 comment from https://phabricator.wikimedia.org/T354549#9453087\n\nFor some of the known prefixes (`right-`, `action-`, `grant-` etc), it might be worth including a comment about those being used magically by MW, so direct usages in code isn\u0027t necessarily expected",
+      "revId": "d4b9aaf5184449299e4bed5db8777a8990866216",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
