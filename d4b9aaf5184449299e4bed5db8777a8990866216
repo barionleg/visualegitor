@@ -34,6 +34,24 @@
       "parentUuid": "d5cfd75f_bc70f1b5",
       "revId": "d4b9aaf5184449299e4bed5db8777a8990866216",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c908071_fdd18dbf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2024-01-15T18:46:16Z",
+      "side": 1,
+      "message": "Yeah - although ideally a comment mentioning the generated keys near where those rights/actions are defined would be helpful, as if those rights/actions are deleted, the messages would become orphaned.",
+      "parentUuid": "d5cfd75f_bc70f1b5",
+      "revId": "d4b9aaf5184449299e4bed5db8777a8990866216",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
