@@ -52,6 +52,24 @@
       "parentUuid": "d5cfd75f_bc70f1b5",
       "revId": "d4b9aaf5184449299e4bed5db8777a8990866216",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db7288a7_eb8f6758",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2024-01-16T14:07:15Z",
+      "side": 1,
+      "message": "Unfortunately they\u0027re defined in extension.json and used inside core, so there\u0027s no opportunity to add a comment for some of them.",
+      "parentUuid": "2c908071_fdd18dbf",
+      "revId": "d4b9aaf5184449299e4bed5db8777a8990866216",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
