@@ -44,6 +44,7 @@ ve.dm.CheckListItemNode.static.toDomElements = function ( dataElement, doc ) {
 	if ( dataElement.attributes.checked ) {
 		listItem.setAttribute( 'checked', 'checked' );
 	}
+	listItem.appendChild( document.createTextNode( dataElement.attributes.checked ? '☑' : '☐' ) );
 	return [ listItem ];
 };
 
