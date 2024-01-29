@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94cb8f7a_9940ad99",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2915
+      },
+      "writtenOn": "2024-01-29T17:54:58Z",
+      "side": 1,
+      "message": "The patch that caused this issue was reverted. I think this change is probably still worth making, for general faking-a-textarea purposes, but there\u0027s no rush on it now.",
+      "revId": "585844b9c5413c7a41ab1e3f28d9a47f8579ce88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
