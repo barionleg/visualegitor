@@ -114,14 +114,16 @@ ve.ui.TargetWidget.prototype.createTarget = function () {
  * This replaces the entire surface in the target.
  *
  * @param {ve.dm.Document} doc
+ * @param {ve.dm.BranchNode} [attachedRoot] Node to surface; default is document node
  */
-ve.ui.TargetWidget.prototype.setDocument = function ( doc ) {
+ve.ui.TargetWidget.prototype.setDocument = function ( doc, attachedRoot ) {
 	// Destroy the previous surface
 	this.clear();
 	var surface = this.target.addSurface( doc, {
 		inTargetWidget: true,
 		includeCommands: this.includeCommands,
 		excludeCommands: this.excludeCommands,
+		attachedRoot: attachedRoot,
 		importRules: this.importRules,
 		multiline: this.multiline,
 		placeholder: this.placeholder,
