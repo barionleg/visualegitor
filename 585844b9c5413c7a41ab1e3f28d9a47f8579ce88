@@ -16,6 +16,23 @@
       "message": "The patch that caused this issue was reverted. I think this change is probably still worth making, for general faking-a-textarea purposes, but there\u0027s no rush on it now.",
       "revId": "585844b9c5413c7a41ab1e3f28d9a47f8579ce88",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccd7fd81_cad5058f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2950
+      },
+      "writtenOn": "2024-01-30T15:11:30Z",
+      "side": 1,
+      "message": "We\u0027d still like to go ahead with I1f08681c8145bd95781752cb5728ebc9e84dd218 (or something similar) so I would recommend merging this just to be safe.\n\nAs a side note though @bernard, I think we should see if we can achieve the desired spacing without mixing margin and padding on \u003cp\u003e\u0027s.",
+      "revId": "585844b9c5413c7a41ab1e3f28d9a47f8579ce88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
