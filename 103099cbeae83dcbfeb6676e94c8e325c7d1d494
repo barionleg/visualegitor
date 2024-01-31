@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": true,
       "key": {
         "uuid": "d3148d24_00be94f3",
         "filename": "src/ui/contexts/ve.ui.DesktopContext.js",
@@ -14,8 +15,8 @@
       "side": 1,
       "message": "I don\u0027t remember what this is about.",
       "revId": "103099cbeae83dcbfeb6676e94c8e325c7d1d494",
-      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
-      "unresolved": true
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
-  ]
+  ],
+  "submitRequirementResults": []
 }
