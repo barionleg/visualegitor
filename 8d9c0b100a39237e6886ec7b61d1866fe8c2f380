@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02c8b47c_5590f1ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2024-01-31T18:52:07Z",
+      "side": 1,
+      "message": "This was just a demo for https://gerrit.wikimedia.org/r/c/mediawiki/extensions/VisualEditor/+/993810 , but it seems potentially useful, no?",
+      "revId": "8d9c0b100a39237e6886ec7b61d1866fe8c2f380",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
