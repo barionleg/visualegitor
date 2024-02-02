@@ -34,6 +34,24 @@
       "parentUuid": "02c8b47c_5590f1ca",
       "revId": "8d9c0b100a39237e6886ec7b61d1866fe8c2f380",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e87cba77_ef8f5d92",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2024-02-02T15:12:13Z",
+      "side": 1,
+      "message": "They only come into play if you attach multiple surfaces to one document – the attachedRoot feature itself works just fine, and we use it ourselves for mobile section editing.",
+      "parentUuid": "fba91b70_c2abd8c4",
+      "revId": "8d9c0b100a39237e6886ec7b61d1866fe8c2f380",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
