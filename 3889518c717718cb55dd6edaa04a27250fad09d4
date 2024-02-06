@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fb786c7_c17a0076",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2024-02-06T18:27:21Z",
+      "side": 1,
+      "message": "Indeed looks useful, I\u0027m surprised we didn\u0027t have it. I\u0027d be happy to merge this.",
+      "revId": "3889518c717718cb55dd6edaa04a27250fad09d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
