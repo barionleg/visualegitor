@@ -209,21 +209,8 @@ ve.dm.InternalList.prototype.convertToData = function ( converter, doc ) {
 
 	list.push( { type: 'internalList' } );
 	for ( var i = 0, length = itemHtmlQueue.length; i < length; i++ ) {
-		if ( itemHtmlQueue[ i ] !== '' ) {
-			var div = doc.createElement( 'div' );
-			div.innerHTML = itemHtmlQueue[ i ];
-			var itemData = [].concat(
-				[ { type: 'internalItem' } ],
-				converter.getDataFromDomSubtree( div ),
-				[ { type: '/internalItem' } ]
-			);
-			if ( !converter.isFromClipboard() ) {
-				itemData[ 0 ].attributes = { originalHtml: itemHtmlQueue[ i ] };
-			}
-			list = list.concat( itemData );
-		} else {
-			list = list.concat( [ { type: 'internalItem' }, { type: '/internalItem' } ] );
-		}
+		// DNM: Suppressing content for an investigation into T336417
+		list = list.concat( [ { type: 'internalItem' }, { type: '/internalItem' } ] );
 	}
 	list.push( { type: '/internalList' } );
 	// After conversion we no longer need the HTML
