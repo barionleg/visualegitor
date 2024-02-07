@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "353d1892_cb14de8b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2024-02-07T19:22:02Z",
+      "side": 1,
+      "message": "The failure is JSDuck unable to parse ES6 syntax, not a real failure. I think you can ignore this for now, and we can figure out how to silence it later.",
+      "revId": "780d54a5ba406a650070344513130f4fd666f366",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
