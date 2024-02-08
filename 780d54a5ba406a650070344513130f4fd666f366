@@ -34,6 +34,24 @@
       "parentUuid": "353d1892_cb14de8b",
       "revId": "780d54a5ba406a650070344513130f4fd666f366",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34505ac4_8bf7b06f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2024-02-08T17:35:44Z",
+      "side": 1,
+      "message": "No, they would need to ignore it, force-merge this patch, and require all future patches to also be force-merged. You could just add the OOUI files to the jsduck ignore list and instead list its classes as external, or I guess we could try to emergency-port VE\u0027s code to jsdoc too?",
+      "parentUuid": "35a40b22_4bb9d1f4",
+      "revId": "780d54a5ba406a650070344513130f4fd666f366",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
