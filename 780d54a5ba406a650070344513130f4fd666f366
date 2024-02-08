@@ -52,6 +52,24 @@
       "parentUuid": "35a40b22_4bb9d1f4",
       "revId": "780d54a5ba406a650070344513130f4fd666f366",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eeea0482_5b049b56",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2024-02-08T17:59:19Z",
+      "side": 1,
+      "message": "\u003e You could just add the OOUI files to the jsduck ignore list and instead list its classes as external\n\nYeah, I was going to do that.",
+      "parentUuid": "34505ac4_8bf7b06f",
+      "revId": "780d54a5ba406a650070344513130f4fd666f366",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
