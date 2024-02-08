@@ -286,6 +286,10 @@ ve.ce.FocusableNode.prototype.onFocusableSetup = function () {
 		this.updateInvisibleIcon();
 	}
 
+	// A node may be re-setup when focused. redrawHighlights will only do
+	// something if the node is currently focused.
+	this.redrawHighlightsDebounced();
+
 	this.isFocusableSetup = true;
 };
 
