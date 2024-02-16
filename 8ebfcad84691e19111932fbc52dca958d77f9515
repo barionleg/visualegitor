@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94cd17f9_bf68b709",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2024-02-16T14:51:06Z",
+      "side": 1,
+      "message": "Some labels in MW no longer display correctly, e.g. for the \"zwnj\" character in two sections – compare https://patchdemo.wmflabs.org/wikis/a34ad01815/ to https://patchdemo.wmflabs.org/wikis/9b26e950eb/ . \n\nThe left pane is much narrower, and it cuts off some of the labels. That doesn\u0027t seem like a good change.\n\nApart from that looks good (the VE-MW and Math changes too). In particular, the first opening of the list feels better (building the list is slow, and previously it stuttered upon clicking the tool, and now it slides open nicely and then appears).",
+      "revId": "8ebfcad84691e19111932fbc52dca958d77f9515",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
