@@ -138,28 +138,8 @@ ve.dm.TransactionBuilder.static.newFromDocumentInsertion = function ( doc, offse
 	data.remapInternalListIndexes( listMerge.mapping, doc.internalList );
 	// Get data for the new internal list
 	var linearData, listData;
-	if ( newDoc.origInternalListLength !== null ) {
-		// newDoc is a document slice based on doc, so all the internal list items present in doc
-		// when it was cloned are also in newDoc. We need to get the newDoc version of these items
-		// so that changes made in newDoc are reflected.
-		var oldEndOffset, newEndOffset;
-		if ( newDoc.origInternalListLength > 0 ) {
-			oldEndOffset = doc.internalList.getItemNode( newDoc.origInternalListLength - 1 ).getOuterRange().end;
-			newEndOffset = newDoc.internalList.getItemNode( newDoc.origInternalListLength - 1 ).getOuterRange().end;
-		} else {
-			oldEndOffset = listNodeRange.start;
-			newEndOffset = newListNodeRange.start;
-		}
-		linearData = new ve.dm.ElementLinearData(
-			doc.getStore(),
-			newDoc.getData( new ve.Range( newListNodeRange.start, newEndOffset ), true )
-		);
-		listData = linearData.data
-			.concat( doc.getData( new ve.Range( oldEndOffset, listNodeRange.end ), true ) );
-	} else {
-		// newDoc is brand new, so use doc's internal list as a base
-		listData = doc.getData( listNodeRange, true );
-	}
+	// Use doc's internal list as a base
+	listData = doc.getData( listNodeRange, true );
 	var i, len;
 	for ( i = 0, len = listMerge.newItemRanges.length; i < len; i++ ) {
 		linearData = new ve.dm.ElementLinearData(
@@ -213,14 +193,8 @@ ve.dm.TransactionBuilder.static.newFromDocumentInsertion = function ( doc, offse
 		}
 
 		var spliceListNodeRange;
-		if ( newDoc.origInternalListLength !== null ) {
-			// Get spliceItemRange from newDoc
-			spliceItemRange = newDoc.internalList.getItemNode( i ).getRange();
-			spliceListNodeRange = newListNodeRange;
-		} else {
-			// Get spliceItemRange from doc; the while loop has already set it
-			spliceListNodeRange = listNodeRange;
-		}
+		// Get spliceItemRange from doc; the while loop has already set it
+		spliceListNodeRange = listNodeRange;
 		ve.batchSplice( listData, spliceItemRange.start - spliceListNodeRange.start,
 			spliceItemRange.end - spliceItemRange.start, data.data );
 
