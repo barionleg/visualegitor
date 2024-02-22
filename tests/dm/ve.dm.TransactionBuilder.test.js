@@ -1017,6 +1017,29 @@ QUnit.test( 'newFromDocumentInsertion', function ( assert ) {
 	} );
 } );
 
+QUnit.test( 'insert from unrelated cloned doc', function ( assert ) {
+	const origDoc = ve.dm.example.createExampleDocument( 'internalData' );
+	const clonedInternalItem = origDoc.cloneFromRange( new ve.Range( 7, 12 ) );
+	const freshDoc = ve.dm.Document.static.newBlankDocument();
+
+	const expectedOps = [
+		{
+			type: 'replace',
+			remove: [],
+			insert: [
+				{ type: 'paragraph', internal: { generated: 'wrapper' } },
+				'B', 'a', 'r', { type: '/paragraph' }
+			]
+		},
+		{
+			type: 'retain',
+			length: 4
+		}
+	];
+	var tx = ve.dm.TransactionBuilder.static.newFromDocumentInsertion( freshDoc, 0, clonedInternalItem );
+	assert.deepEqualWithDomElements( tx.getOperations(), expectedOps );
+} );
+
 QUnit.test( 'newFromAttributeChanges', function ( assert ) {
 	var doc = ve.dm.example.createExampleDocument(),
 		cases = {
