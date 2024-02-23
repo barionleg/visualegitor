@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c4bce4b_1b6598c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 143
+      },
+      "writtenOn": "2024-02-23T09:42:39Z",
+      "side": 1,
+      "message": "Do you understand why this doesn\u0027t seem to cause a problem during normal operations?  From what I can tell, a fragment of a ref-having document will always have origInternalListLength \u003e 0, but since internalList isn\u0027t cloned, trying to get the \"last\" node from the fragment should fail.",
+      "revId": "87dd8f5adf32ddcae022ff952ce1c363d10147f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
