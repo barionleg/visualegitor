@@ -16,6 +16,23 @@
       "message": "Do you understand why this doesn\u0027t seem to cause a problem during normal operations?  From what I can tell, a fragment of a ref-having document will always have origInternalListLength \u003e 0, but since internalList isn\u0027t cloned, trying to get the \"last\" node from the fragment should fail.",
       "revId": "87dd8f5adf32ddcae022ff952ce1c363d10147f0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ae705a6_a9cb8a8a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 143
+      },
+      "writtenOn": "2024-02-26T11:35:51Z",
+      "side": 1,
+      "message": "I see what\u0027s happening here: the use case of copying an internalItem from a fragment/cloned doc into an unrelated fresh doc is something that we haven\u0027t had to support yet.  I\u0027ll restore the code removed in my patch, and try to adapt it to this new case, including a test.",
+      "revId": "87dd8f5adf32ddcae022ff952ce1c363d10147f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
