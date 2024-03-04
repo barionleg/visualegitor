@@ -890,6 +890,7 @@ ve.ce.Surface.prototype.hasNativeCursorSelection = function () {
  * @param {string} options.wrapperClass Additional CSS class string to add to the $selections wrapper.
  *  mapped to the same index.
  * @param {string} options.label Label shown above each selection
+ * @param {function} options.click Callback if the selection is clicked. 
  */
 ve.ce.Surface.prototype.drawSelections = function ( name, selections, options ) {
 	var surface = this;
@@ -927,6 +928,9 @@ ve.ce.Surface.prototype.drawSelections = function ( name, selections, options ) 
 			}
 			rects = ve.minimizeRects( rects );
 			$selection = $( '<div>' ).addClass( 've-ce-surface-selection' );
+			if ( options.click ) {
+				$selection.on( 'click', { selection: selection }, options.click );
+			}
 			rects.forEach( function ( rect ) {
 				var $rect = $( '<div>' ).css( {
 					top: rect.top,
