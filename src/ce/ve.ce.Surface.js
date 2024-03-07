@@ -3886,7 +3886,8 @@ ve.ce.Surface.prototype.handleObservedChanges = function ( oldState, newState ) 
 ve.ce.Surface.prototype.createSlug = function ( element ) {
 	var surface = this,
 		offset = ve.ce.getOffsetOfSlug( element ),
-		documentModel = this.getModel().getDocument();
+		documentModel = this.getModel().getDocument(),
+		slugHeight = element.scrollHeight;
 
 	this.changeModel( ve.dm.TransactionBuilder.static.newFromInsertion(
 		documentModel, offset, [
@@ -3897,13 +3898,23 @@ ve.ce.Surface.prototype.createSlug = function ( element ) {
 
 	// Animate the slug open
 	var $slug = this.getDocument().getDocumentNode().getNodeFromOffset( offset + 1 ).$element;
-	$slug.addClass( 've-ce-branchNode-newSlug' );
-	// setTimeout: postpone until after animation is complete
-	setTimeout( function () {
-		$slug.addClass( 've-ce-branchNode-newSlug-open' );
-		setTimeout( function () {
+	var verticalPadding = $slug.innerHeight() - $slug.height();
+	var targetMargin = $slug.css( 'margin' );
+	var targetPadding = $slug.css( 'padding' );
+	$slug.addClass( 've-ce-branchNode-newSlug' ).css( 'min-height', slugHeight - verticalPadding );
+	requestAnimationFrame( function () {
+		$slug.addClass( 've-ce-branchNode-newSlug-open' ).css( {
+			margin: targetMargin,
+			padding: targetPadding,
+			'min-height': $slug.css( 'line-height' )
+		} );
+		$slug.one( 'transitionend', function () {
 			surface.emit( 'position' );
-		}, 200 );
+			// Animation finished, cleanup
+			$slug
+				.removeClass( 've-ce-branchNode-newSlug ve-ce-branchNode-newSlug-open' )
+				.css( { margin: '', padding: '', 'min-height': '' } );
+		} );
 	} );
 
 	this.onModelSelect();

@@ -61,7 +61,8 @@
 
 	/* stylelint-disable-next-line no-descending-specificity */
 	&-blockSlug,
-	&-newSlug {
+	/* Increased specificity to override possible skin styles */
+	html body p&-newSlug {
 		margin: -0.3em 0 -0.1em 0;
 		outline: 1px dashed #c8ccd1;
 		/* rgba( #f1f7fb, 0.75 ) */
@@ -69,10 +70,7 @@
 	}
 
 	&-newSlug {
-		margin: 5px 0 6px 0;
-
 		&-open {
-			margin: 1em 0;
 			background-color: transparent;
 			outline-color: transparent;
 			outline-offset: 1em;
