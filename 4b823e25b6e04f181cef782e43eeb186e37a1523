@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "055d5cf7_5ed83c97",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2024-03-08T16:12:34Z",
+      "side": 1,
+      "message": "Sorry, I don\u0027t have time to review this carefully, and it looks complex enough that I don\u0027t want to merge it just like that.",
+      "revId": "4b823e25b6e04f181cef782e43eeb186e37a1523",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
