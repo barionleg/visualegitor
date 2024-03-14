@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bfdf68c_67aa775a",
+        "filename": "lib/less/less.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2024-03-14T23:58:12Z",
+      "side": 1,
+      "message": "(a) Should we use the same version as MediaWiki (not 4.x)\n(b) We should add this to the authors/credits list.",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 27
+      },
+      "revId": "a5c3484dccb3c4a481ae8a0f0d58912611a4fa31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
