@@ -22,6 +22,30 @@
       },
       "revId": "a5c3484dccb3c4a481ae8a0f0d58912611a4fa31",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eae437e4_f141ea77",
+        "filename": "lib/less/less.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2024-03-18T15:47:38Z",
+      "side": 1,
+      "message": "(a) \"Officially\" less.php is compatible with less.js 2.5.3, which is nearly 10 years old. The package.json lists supported Node engines as \"\u003e\u003d0.10.0\". We\u0027d have to downgrade grunt-contrib-less (if that even goes back that far), and it may just not work.\n\nAs we test pretty regularly in ve-mw, and don\u0027t use very advanced LESS features, I\u0027m not too worried.\n\n(b) It\u0027s only a dev dependency which we don\u0027t credit. We include it for standalone demos, but you can use any LESS compiler (e.g. less.php in MW)...",
+      "parentUuid": "2bfdf68c_67aa775a",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 27
+      },
+      "revId": "a5c3484dccb3c4a481ae8a0f0d58912611a4fa31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
