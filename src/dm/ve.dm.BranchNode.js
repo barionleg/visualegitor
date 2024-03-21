@@ -200,3 +200,41 @@ ve.dm.BranchNode.prototype.hasSlugAtOffset = function ( offset ) {
 	}
 	return false;
 };
+
+/**
+ * Find all ranges containing a specific annotation
+ *
+ * @param {string} name The annotation name, e.g. textStyle/bold or link/mwInternal
+ * @return {ve.Range[]} Every range to which that annotation applies
+ */
+ve.dm.BranchNode.prototype.findAnnotations = function ( name ) {
+	const contentBranchNodes = [];
+	this.traverse( ( node ) => {
+		if ( node.canContainContent() ) {
+			contentBranchNodes.push( node );
+		}
+	} );
+	const ranges = [];
+	let nextStart = null;
+	contentBranchNodes.forEach( ( node ) => {
+		const range = node.getRange();
+		let i;
+		for ( i = range.start; i < range.end; i++ ) {
+			const annotationSet = node.getDocument().data.getAnnotationsFromOffset( i );
+			if ( annotationSet.hasAnnotationWithName( name ) ) {
+				if ( nextStart === null ) {
+					nextStart = i;
+				}
+			} else {
+				if ( nextStart !== null ) {
+					ranges.push( new ve.Range( nextStart, i ) );
+					nextStart = null;
+				}
+			}
+		}
+		if ( nextStart !== null ) {
+			ranges.push( new ve.Range( nextStart, i ) );
+		}
+	} );
+	return ranges;
+};
