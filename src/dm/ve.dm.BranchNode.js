@@ -217,3 +217,41 @@ ve.dm.BranchNode.prototype.hasSlugAtOffset = function ( offset ) {
 	}
 	return false;
 };
+
+/**
+ * Naive (unoptimized) function to find all offsets with a particular annotation
+ *
+ * @param {string} name The annotation name, e.g. textStyle/bold or link/mwInternal
+ * @return {ve.Range[]} Every range to which that annotation applies
+ */
+ve.dm.BranchNode.prototype.findAnnotations = function ( name ) {
+	var contentBranchNodes = [];
+	this.traverse( function ( node ) {
+		if ( node.canContainContent() ) {
+			contentBranchNodes.push( node );
+		}
+	} );
+	var ranges = [];
+	var nextStart = null;
+	contentBranchNodes.forEach( function ( node ) {
+		var range = node.getRange();
+		var i;
+		for ( i = range.start; i < range.end; i++ ) {
+			var annotationSet = node.getDocument().data.getAnnotationsFromOffset( i );
+			if ( annotationSet.hasAnnotationWithName( name ) ) {
+				if ( nextStart === null ) {
+					nextStart = i;
+				}
+			} else {
+				if ( nextStart !== null ) {
+					ranges.push( new ve.Range( nextStart, i ) );
+					nextStart = null;
+				}
+			}
+		}
+		if ( nextStart !== null ) {
+			ranges.push( new ve.Range( nextStart, i ) );
+		}
+	} );
+	return ranges;
+};
