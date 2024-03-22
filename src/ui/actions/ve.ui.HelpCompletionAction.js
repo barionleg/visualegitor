@@ -145,8 +145,20 @@ ve.ui.HelpCompletionAction.prototype.getSuggestions = function ( input ) {
 ve.ui.HelpCompletionAction.prototype.compareSuggestionToInput = function ( suggestion, normalizedInput ) {
 	var normalizedSuggestion = this.getToolIndex( suggestion ).toLowerCase();
 
+	var matchedIndex = 0;
+	for ( var i = 0, l = normalizedInput.length; i < l; i++ ) {
+		matchedIndex = normalizedSuggestion.indexOf( normalizedInput[ i ], matchedIndex );
+		if ( matchedIndex === -1 ) {
+			return {
+				isMatch: false,
+				isExact: false
+			};
+		}
+		matchedIndex++;
+	}
+
 	return {
-		isMatch: normalizedSuggestion.indexOf( normalizedInput ) !== -1,
+		isMatch: true,
 		// isExact is only used when 'alwaysIncludeInput' is set
 		isExact: false
 	};
