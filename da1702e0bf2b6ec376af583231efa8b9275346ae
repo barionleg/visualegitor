@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b7cfe07_02cbecca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2024-03-25T12:25:52Z",
+      "side": 1,
+      "message": "Nice ... I think we should separate out the ve.ce.Surface change, though, and merge it on its own, as it\u0027s is the only one in this changeset that could potentially have some subtle side effects to do with event sequencing (the others are save +2s).",
+      "revId": "da1702e0bf2b6ec376af583231efa8b9275346ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
