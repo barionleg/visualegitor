@@ -22,6 +22,9 @@
 	DummyPlatform.prototype.getUserLanguages = function () {
 		return [ 'en' ];
 	};
+	DummyPlatform.prototype.getLanguageCodes = function () {
+		return [ 'en' ];
+	};
 	DummyPlatform.prototype.getMessage = function () {
 		return Array.prototype.join.call( arguments, ',' );
 	};
