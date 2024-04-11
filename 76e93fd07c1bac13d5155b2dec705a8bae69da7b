@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32d27a86_4a884a53",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 11575
+      },
+      "writtenOn": "2024-04-11T15:04:26Z",
+      "side": 1,
+      "message": "LGTM; Pairing with divec",
+      "revId": "76e93fd07c1bac13d5155b2dec705a8bae69da7b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
