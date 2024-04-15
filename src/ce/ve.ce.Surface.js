@@ -2640,6 +2640,21 @@ ve.ce.Surface.prototype.afterPasteAddToFragmentFromInternal = function ( slice, 
 		targetFragment.removeContent();
 	}
 
+	// Temporary tracking for T362358
+	var pastedRefs = slice.getNodesByType( 'mwReference' );
+	if ( pastedRefs.length > 0 ) {
+		var documentRefKeys = fragment.getDocument().getNodesByType( 'mwReference' ).map(
+			( ref ) => ref.registeredListGroup + '\n' + ref.registeredListKey
+		);
+		if ( pastedRefs.some(
+			( ref ) => documentRefKeys.indexOf( ref.registeredListGroup + '\n' + ref.registeredListKey ) !== -1
+		) ) {
+			ve.track( 'activity.clipboard', { action: 'paste-ref-internal-reuse' } );
+		} else {
+			ve.track( 'activity.clipboard', { action: 'paste-ref-internal-new' } );
+		}
+	}
+
 	// Only try original data in multiline contexts, for single line we must use balanced data
 
 	var linearData, insertionPromise;
@@ -2907,6 +2922,11 @@ ve.ce.Surface.prototype.afterPasteAddToFragmentFromExternal = function ( clipboa
  * @return {jQuery.Promise} Promise which resolves when the content has been inserted
  */
 ve.ce.Surface.prototype.afterPasteInsertExternalData = function ( targetFragment, pastedDocumentModel, contextRange ) {
+	// Temporary tracking for T362358
+	if ( pastedDocumentModel.getInternalList().getItemNodeCount() > 0 ) {
+		ve.track( 'activity.clipboard', { action: 'paste-ref-external' } );
+	}
+
 	var handled;
 	// If the external HTML turned out to be plain text after sanitization
 	// then run it as a plain text transfer item. In core this will never
