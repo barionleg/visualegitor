@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2214e325_8f7794a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 143
+      },
+      "writtenOn": "2024-04-15T12:42:54Z",
+      "side": 1,
+      "message": "This version of the patch is incorrect, internal paste always includes the same internalList as the parent.",
+      "revId": "42cd2d087ce6dbba8e27076369207afce0c081a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
