@@ -317,9 +317,14 @@ ve.ce.Surface.static.unsafeAttributes = [
  *
  * See https://w3c.github.io/input-events/
  *
- * Values of null will perform no action and preventDefault.
+ * Functions are passed this surface view, and the return
+ * value is used as the command.
  *
- * @type {Object.<string,string|null>}
+ * Values of `null` (or functions returning it) will perform
+ * no action and preventDefault. A value of `undefined` does
+ * nothing and lets the event continue.
+ *
+ * @type {Object.<string,string|null|Function>}
  */
 ve.ce.Surface.static.inputTypeCommands = {
 	historyUndo: 'undo',
@@ -341,7 +346,15 @@ ve.ce.Surface.static.inputTypeCommands = {
 	formatSetInlineTextDirection: null,
 	formatBackColor: null,
 	formatFontColor: null,
-	formatFontName: null
+	formatFontName: null,
+	// Support: Firefox
+	// Delete content via context menu in Firefox. (T220629)
+	// If there is a non-collapsed selection, a delete content event can only ever just remove
+	// the selected content. The only time we know this event is fired is in Firefox, where
+	// no other change events are fired.
+	// If any other browsers fire this event with a selection this is harmless, as removing
+	// the content without moving the cursor is always the correct things to do.
+	deleteContentBackward: ( surfaceView ) => !surfaceView.getSelection().getModel().isCollapsed() ? 'backspace' : undefined
 };
 
 /**
@@ -3422,12 +3435,20 @@ ve.ce.Surface.prototype.onDocumentInput = function ( e ) {
 		inputType &&
 		Object.prototype.hasOwnProperty.call( inputTypeCommands, inputType )
 	) {
-		// Value can be null, in which case we still want to preventDefault.
-		if ( inputTypeCommands[ inputType ] ) {
-			this.getSurface().executeCommand( this.constructor.static.inputTypeCommands[ inputType ] );
+		let command;
+		if ( typeof inputTypeCommands[ inputType ] === 'function' ) {
+			command = inputTypeCommands[ inputType ]( this );
+		} else {
+			command = inputTypeCommands[ inputType ];
 		}
-		e.preventDefault();
-		return;
+		if ( command !== undefined ) {
+			// Value can be null, in which case we still want to preventDefault.
+			if ( command !== null ) {
+				this.getSurface().executeCommand( command );
+			}
+			e.preventDefault();
+			return;
+		}
 	}
 	this.incRenderLock();
 	try {
