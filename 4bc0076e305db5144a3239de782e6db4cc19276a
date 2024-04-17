@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14a84124_4375e9b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2024-04-17T20:25:06Z",
+      "side": 1,
+      "message": "@esanders@wikimedia.org I see you rebased away the dependent commit, do you still want to merge this?",
+      "revId": "4bc0076e305db5144a3239de782e6db4cc19276a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}

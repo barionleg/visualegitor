@@ -16,6 +16,24 @@
       "message": "Failure is \"TypeError: ve.normalizeNode is not a function\" (removed in If6b8331b78c34ce7bcb3c5fb8fe7bf935b2730b8)",
       "revId": "68d52d5ce995cd83f373e1d7f94c19c5975484bb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8724ab88_d8d2bd7b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2024-04-17T20:25:06Z",
+      "side": 1,
+      "message": "Fixed",
+      "parentUuid": "5ecd1e42_67f67d53",
+      "revId": "68d52d5ce995cd83f373e1d7f94c19c5975484bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
