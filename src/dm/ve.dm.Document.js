@@ -143,7 +143,7 @@ ve.dm.Document.static.addAnnotationsToData = function ( data, annotationSet, rep
 			continue;
 		}
 		// eslint-disable-next-line no-loop-func
-		var allowedAnnotations = annotationSet.filter( function ( ann ) {
+		var allowedAnnotations = annotationSet.filter( ( ann ) => {
 			return data.canTakeAnnotationAtOffset( i, ann, true );
 		} );
 		var existingAnnotations = data.getAnnotationsFromOffset( i, true );
@@ -352,7 +352,7 @@ ve.dm.Document.prototype.setReadOnly = function ( readOnly ) {
 	this.readOnly = !!readOnly;
 	if ( !this.readOnly ) {
 		// Clear offset cache when leaving read-only mode
-		this.getDocumentNode().traverse( function ( node ) {
+		this.getDocumentNode().traverse( ( node ) => {
 			node.offset = null;
 		} );
 	}
@@ -416,7 +416,7 @@ ve.dm.Document.prototype.getMetadata = function ( range ) {
 		range = new ve.Range( 0, documentNode.length );
 	}
 	var data = [];
-	documentNode.traverse( function ( node ) {
+	documentNode.traverse( ( node ) => {
 		var offset;
 		if ( node instanceof ve.dm.MetaItem ) {
 			offset = node.getOffset();
@@ -788,7 +788,7 @@ ve.dm.Document.prototype.getFullData = function ( range, mode ) {
 		) {
 			if ( !internal.changesSinceLoad ) {
 				// eslint-disable-next-line no-loop-func, no-shadow
-				this.data.modifyData( i, function ( item ) {
+				this.data.modifyData( i, ( item ) => {
 					// Re-fetch unfrozen metaItems.
 					metaItems = item.internal.metaItems;
 					// No changes, so restore meta item offsets
@@ -1005,7 +1005,7 @@ ve.dm.Document.prototype.getNearestNodeMatching = function ( test, offset, direc
  * @return {ve.dm.Node|null} Nearest focusable node, or null if not found
  */
 ve.dm.Document.prototype.getNearestFocusableNode = function ( offset, direction, limit ) {
-	return this.getNearestNodeMatching( function ( nodeType ) {
+	return this.getNearestNodeMatching( ( nodeType ) => {
 		return ve.dm.nodeFactory.isNodeFocusable( nodeType );
 	}, offset, direction, limit );
 };
@@ -1167,7 +1167,7 @@ ve.dm.Document.prototype.updateNodesByType = function ( addedNodes, removedNodes
 	}
 
 	function traverse( nodes, action ) {
-		nodes.forEach( function ( node ) {
+		nodes.forEach( ( node ) => {
 			if ( node.hasChildren() ) {
 				node.traverse( action );
 			}
@@ -1208,7 +1208,7 @@ ve.dm.Document.prototype.getNodesByType = function ( type, sort ) {
 	}
 
 	if ( sort ) {
-		nodes.sort( function ( a, b ) {
+		nodes.sort( ( a, b ) => {
 			return a.getOffset() - b.getOffset();
 		} );
 	}
@@ -1618,7 +1618,7 @@ ve.dm.Document.prototype.findText = function ( query, options ) {
 
 	if ( query instanceof RegExp ) {
 		// Avoid multi-line matching by only matching within content (text or content elements)
-		data.forEachRunOfContent( documentRange, function ( off, line ) {
+		data.forEachRunOfContent( documentRange, ( off, line ) => {
 			query.lastIndex = 0;
 			var match;
 			while ( ( match = query.exec( line ) ) !== null ) {
@@ -1699,7 +1699,7 @@ ve.dm.Document.prototype.findText = function ( query, options ) {
 
 	if ( options.wholeWord ) {
 		var dataString = new ve.dm.DataString( this.getData() );
-		ranges = ranges.filter( function ( range ) {
+		ranges = ranges.filter( ( range ) => {
 			return unicodeJS.wordbreak.isBreak( dataString, range.start ) &&
 				unicodeJS.wordbreak.isBreak( dataString, range.end );
 		} );

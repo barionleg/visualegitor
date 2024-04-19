@@ -212,7 +212,7 @@ ve.promiseAll = function ( promises ) {
  * @return {HTMLElement[]} Copy of domElements with copies of each element
  */
 ve.copyDomElements = function ( domElements, doc ) {
-	return domElements.map( function ( domElement ) {
+	return domElements.map( ( domElement ) => {
 		return doc ? doc.importNode( domElement, true ) : domElement.cloneNode( true );
 	} );
 };
@@ -382,7 +382,7 @@ ve.sparseSplice = function ( arr, offset, remove, data ) {
 		data = data.slice();
 	}
 	// Remove content without adjusting length
-	arr.slice( offset, endOffset ).forEach( function ( item, j ) {
+	arr.slice( offset, endOffset ).forEach( ( item, j ) => {
 		removed[ j ] = item;
 		delete arr[ offset + j ];
 	} );
@@ -400,7 +400,7 @@ ve.sparseSplice = function ( arr, offset, remove, data ) {
 		arr.splice( offset, -diff );
 	}
 	// Insert new content
-	data.forEach( function ( item, j ) {
+	data.forEach( ( item, j ) => {
 		arr[ offset + j ] = item;
 	} );
 	// Set removed.length in case there are holes at the end
@@ -790,7 +790,7 @@ ve.filterMetaElements = function ( contents ) {
 	// As of jQuery 3 we can't use $.not( 'tagName' ) as that doesn't
 	// match text nodes. Also we can't $.remove these elements as they
 	// aren't attached to anything.
-	contents = contents.filter( function ( node ) {
+	contents = contents.filter( ( node ) => {
 		return node.tagName !== 'LINK' && node.tagName !== 'STYLE';
 	} );
 	// Also remove link and style tags nested inside other tags
@@ -853,7 +853,7 @@ ve.resolveAttributes = function ( elementsOrJQuery, doc, attrs ) {
  */
 ve.targetLinksToNewWindow = function ( container ) {
 	// Make all links open in a new window
-	Array.prototype.forEach.call( container.querySelectorAll( 'a[href]' ), function ( el ) {
+	Array.prototype.forEach.call( container.querySelectorAll( 'a[href]' ), ( el ) => {
 		ve.appendToRel( el, 'noopener' );
 		el.setAttribute( 'target', '_blank' );
 	} );

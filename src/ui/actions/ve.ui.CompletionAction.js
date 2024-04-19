@@ -192,7 +192,7 @@ ve.ui.CompletionAction.prototype.filterSuggestionsForInput = function ( suggesti
 	var normalizedInput = input.toLowerCase().trim();
 
 	var exact = false;
-	suggestions = suggestions.filter( function ( suggestion ) {
+	suggestions = suggestions.filter( ( suggestion ) => {
 		var result = action.compareSuggestionToInput( suggestion, normalizedInput );
 		exact = exact || result.isExact;
 		return result.isMatch;
