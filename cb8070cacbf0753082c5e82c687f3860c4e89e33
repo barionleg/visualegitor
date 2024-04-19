@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a1f4425_de2c4c40",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2024-04-19T20:14:37Z",
+      "side": 1,
+      "message": "This makes jsduck sad (unsurprisingly); I think you\u0027re going to need to move to JSDoc first. :-(",
+      "revId": "cb8070cacbf0753082c5e82c687f3860c4e89e33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
