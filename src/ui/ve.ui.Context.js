@@ -32,7 +32,7 @@ ve.ui.Context = function VeUiContext( surface, config ) {
 
 	this.$focusTrapBefore = $( '<div>' ).prop( 'tabIndex', 0 );
 	this.$focusTrapAfter = $( '<div>' ).prop( 'tabIndex', 0 );
-	this.$focusTrapBefore.add( this.$focusTrapAfter ).on( 'focus', function () {
+	this.$focusTrapBefore.add( this.$focusTrapAfter ).on( 'focus', () => {
 		surface.getView().activate();
 	} );
 
@@ -126,7 +126,7 @@ ve.ui.Context.prototype.hide = function () {
 	this.toggle( false );
 	// Desktop: Ensure the next cursor movement re-evaluates the context,
 	// e.g. if moving within a link, the context is re-shown.
-	surfaceModel.once( 'select', function () {
+	surfaceModel.once( 'select', () => {
 		surfaceModel.emitContextChange();
 	} );
 	// Mobile: Clear last-known contexedAnnotations so that clicking the annotation
@@ -186,7 +186,7 @@ ve.ui.Context.prototype.setupMenuItems = function () {
 		}
 	}
 
-	items.sort( function ( a, b ) {
+	items.sort( ( a, b ) => {
 		return a.constructor.static.sortOrder - b.constructor.static.sortOrder;
 	} );
 
