@@ -1437,15 +1437,14 @@ ve.dm.Surface.prototype.stopStoringChanges = function () {
  * @throws {Error} Failed to restore auto-saved session
  */
 ve.dm.Surface.prototype.restoreChanges = function () {
-	var surface = this,
-		restored = false,
+	var restored = false,
 		changes = this.storage.getObject( this.autosavePrefix + 've-changes' ) || [];
 
 	try {
 		changes.forEach( ( data ) => {
 			var change = ve.dm.Change.static.unsafeDeserialize( data );
-			change.applyTo( surface, true );
-			surface.breakpoint();
+			change.applyTo( this, true );
+			this.breakpoint();
 		} );
 		restored = !!changes.length;
 
@@ -1464,7 +1463,7 @@ ve.dm.Surface.prototype.restoreChanges = function () {
 		if ( selection ) {
 			// Wait for surface to observe selection change
 			setTimeout( () => {
-				surface.setSelection( selection );
+				this.setSelection( selection );
 			} );
 		}
 	} catch ( e ) {
@@ -1537,11 +1536,10 @@ ve.dm.Surface.prototype.updateExpiry = function ( skipKeys ) {
 	if ( !this.storageExpiry ) {
 		return;
 	}
-	var surface = this;
 	skipKeys = skipKeys || [];
 	[ 've-docstate', 've-dochtml', 've-selection', 've-changes' ].forEach( ( key ) => {
 		if ( skipKeys.indexOf( key ) === -1 ) {
-			surface.storage.setExpires( surface.autosavePrefix + key, surface.storageExpiry );
+			this.storage.setExpires( this.autosavePrefix + key, this.storageExpiry );
 		}
 	} );
 };

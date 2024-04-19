@@ -188,7 +188,6 @@ ve.ce.GeneratedContentNode.prototype.filterRenderedDomElements = function ( domE
  * @fires teardown
  */
 ve.ce.GeneratedContentNode.prototype.render = function ( generatedContents, staged ) {
-	var node = this;
 	if ( this.live ) {
 		this.emit( 'teardown' );
 	}
@@ -208,8 +207,8 @@ ve.ce.GeneratedContentNode.prototype.render = function ( generatedContents, stag
 				// Changing the DOM node count can move the cursor, so re-apply
 				// the cursor position from the model (T231094).
 				setTimeout( () => {
-					if ( node.getRoot() && node.getRoot().getSurface() ) {
-						node.getRoot().getSurface().showModelSelection();
+					if ( this.getRoot() && this.getRoot().getSurface() ) {
+						this.getRoot().getSurface().showModelSelection();
 					}
 				} );
 			}
@@ -319,19 +318,18 @@ ve.ce.GeneratedContentNode.prototype.forceUpdate = function ( config, staged ) {
 		this.startGenerating();
 	}
 
-	var node = this;
 	// Create a new promise
 	var promise = this.generatingPromise = this.generateContents( config );
 	promise
 		// If this promise is no longer the currently pending one, ignore it completely
 		.done( ( generatedContents ) => {
-			if ( node.generatingPromise === promise ) {
-				node.doneGenerating( generatedContents, config, staged );
+			if ( this.generatingPromise === promise ) {
+				this.doneGenerating( generatedContents, config, staged );
 			}
 		} )
 		.fail( () => {
-			if ( node.generatingPromise === promise ) {
-				node.failGenerating();
+			if ( this.generatingPromise === promise ) {
+				this.failGenerating();
 			}
 		} );
 };
