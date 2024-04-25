@@ -14,7 +14,7 @@
  *
  * @constructor
  * @param {ve.dm.Document} doc Document model to create surface for
- * @param {ve.dm.BranchNode} [attachedRoot] Node to surface; default is document node
+ * @param {ve.dm.BranchNode} [attachedRoot] Branch node which is editable; default is document node
  * @param {Object} [config] Configuration options
  * @param {boolean} [config.sourceMode=false] Source editing mode
  */
@@ -26,18 +26,20 @@ ve.dm.Surface = function VeDmSurface( doc, attachedRoot, config ) {
 		attachedRoot = undefined;
 	}
 
-	attachedRoot = attachedRoot || doc.getDocumentNode();
 	config = config || {};
 
+	attachedRoot = attachedRoot || doc.getDocumentNode();
 	if ( !( attachedRoot instanceof ve.dm.BranchNode ) ) {
 		throw new Error( 'Expected ve.dm.BranchNode for attachedRoot' );
 	}
+	doc.setAttachedRoot( attachedRoot );
 
 	// Mixin constructors
 	OO.EventEmitter.call( this );
 
 	// Properties
 	this.documentModel = doc;
+	// Deprecated: Use getDocument().getAttachedRoot()
 	this.attachedRoot = attachedRoot;
 	this.sourceMode = !!config.sourceMode;
 	this.selection = new ve.dm.NullSelection();
@@ -67,9 +69,6 @@ ve.dm.Surface = function VeDmSurface( doc, attachedRoot, config ) {
 	this.synchronizer = null;
 	this.storing = false;
 	this.setStorage( ve.init.platform.sessionStorage );
-
-	// Let document know about the attachedRoot
-	this.documentModel.attachedRoot = this.attachedRoot;
 
 	// Events
 	this.getDocument().connect( this, {
@@ -573,15 +572,6 @@ ve.dm.Surface.prototype.hasBeenModified = function () {
  */
 ve.dm.Surface.prototype.getDocument = function () {
 	return this.documentModel;
-};
-
-/**
- * Get the surfaced node
- *
- * @return {ve.dm.BranchNode} The surfaced node
- */
-ve.dm.Surface.prototype.getAttachedRoot = function () {
-	return this.attachedRoot;
 };
 
 /**
