@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0aafe584_77c54ada",
+        "filename": "Gruntfile.js",
+        "patchSetId": 12
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2024-04-26T18:51:33Z",
+      "side": 0,
+      "message": "Farewell cool tool.",
+      "range": {
+        "startLine": 178,
+        "startChar": 0,
+        "endLine": 192,
+        "endChar": 0
+      },
+      "revId": "f428c59fadb27b0cdd79830eb3db79ccd30b2d82",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
