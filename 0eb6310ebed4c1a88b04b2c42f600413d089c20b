@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbf1dae5_e10f066c",
+        "filename": ".jsdoc.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2024-04-29T14:38:18Z",
+      "side": 1,
+      "message": "jsdoc-externals",
+      "range": {
+        "startLine": 19,
+        "startChar": 9,
+        "endLine": 19,
+        "endChar": 18
+      },
+      "revId": "0eb6310ebed4c1a88b04b2c42f600413d089c20b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
