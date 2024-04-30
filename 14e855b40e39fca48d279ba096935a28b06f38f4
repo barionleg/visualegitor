@@ -1,4 +1,22 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2091046c_04bfb131",
+        "filename": "README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2024-04-30T11:51:43Z",
+      "side": 1,
+      "message": "This should be \"Code coverage\", or above should be \"Coverage\"",
+      "revId": "14e855b40e39fca48d279ba096935a28b06f38f4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ],
   "submitRequirementResults": []
 }
