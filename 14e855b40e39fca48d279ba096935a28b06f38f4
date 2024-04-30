@@ -16,6 +16,24 @@
       "message": "This should be \"Code coverage\", or above should be \"Coverage\"",
       "revId": "14e855b40e39fca48d279ba096935a28b06f38f4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "124621e1_216c63b2",
+        "filename": "README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2024-04-30T11:58:58Z",
+      "side": 1,
+      "message": "Bleh, yes.https://gerrit.wikimedia.org/r/c/VisualEditor/VisualEditor/+/1025735",
+      "parentUuid": "2091046c_04bfb131",
+      "revId": "14e855b40e39fca48d279ba096935a28b06f38f4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ],
   "submitRequirementResults": []
