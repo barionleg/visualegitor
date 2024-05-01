@@ -52,7 +52,7 @@
 	 * @private
 	 * @param {Object} obj Object the array resides in
 	 * @param {...string} keys
-	 * @param {Mixed} value
+	 * @param {any} value
 	 */
 	function addType( obj ) {
 		var keys = Array.prototype.slice.call( arguments, 1, -1 ),
@@ -78,7 +78,7 @@
 	 * @private
 	 * @param {Object} obj Object the array resides in
 	 * @param {...string} keys
-	 * @param {Mixed} value to remove
+	 * @param {any} value to remove
 	 */
 	function removeType( obj ) {
 		var keys = Array.prototype.slice.call( arguments, 1, -1 ),
