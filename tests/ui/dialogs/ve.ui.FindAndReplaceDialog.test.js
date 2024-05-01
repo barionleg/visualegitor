@@ -74,7 +74,7 @@ QUnit.test( 'find fragments', function ( assert ) {
 			}
 		];
 
-	surface.getToolbarDialogs().getWindow( 'findAndReplace' ).then( function ( dialog ) {
+	surface.getToolbarDialogs( 'above' ).getWindow( 'findAndReplace' ).then( function ( dialog ) {
 		dialog.open( {
 			surface: surface,
 			fragment: surface.getModel().getFragment()
@@ -120,7 +120,7 @@ QUnit.test( 'replace all', function ( assert ) {
 			}
 		];
 
-	surface.getToolbarDialogs().getWindow( 'findAndReplace' ).done( function ( dialog ) {
+	surface.getToolbarDialogs( 'above' ).getWindow( 'findAndReplace' ).done( function ( dialog ) {
 		dialog.open( {
 			surface: surface,
 			fragment: surface.getModel().getFragment()
