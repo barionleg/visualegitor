@@ -48,19 +48,21 @@ OO.inheritClass( ve.ui.PositionedTargetToolbar, ve.ui.TargetToolbar );
  * @inheritdoc
  */
 ve.ui.PositionedTargetToolbar.prototype.setup = function ( groups, surface ) {
-	var toolbarDialogs = surface.getToolbarDialogs();
 
 	// Parent method
 	ve.ui.PositionedTargetToolbar.super.prototype.setup.apply( this, arguments );
 
-	if ( this.position === 'bottom' ) {
-		this.$bar.prepend( toolbarDialogs.$element );
-	} else {
-		this.$bar.append( toolbarDialogs.$element );
-	}
-	toolbarDialogs.connect( this, {
-		opening: 'onToolbarDialogsOpeningOrClosing',
-		closing: 'onToolbarDialogsOpeningOrClosing'
+	[ 'above', 'below', 'side', 'inline' ].forEach( ( dialogPosition ) => {
+		var toolbarDialogs = surface.getToolbarDialogs( dialogPosition );
+		if ( this.position === 'bottom' ) {
+			this.$bar.prepend( toolbarDialogs.$element );
+		} else {
+			this.$bar.append( toolbarDialogs.$element );
+		}
+		toolbarDialogs.connect( this, {
+			opening: 'onToolbarDialogsOpeningOrClosing',
+			closing: 'onToolbarDialogsOpeningOrClosing'
+		} );
 	} );
 	if ( this.isFloatable() ) {
 		this.target.$scrollListener[ 0 ].addEventListener( 'scroll', this.onWindowScrollThrottled, { passive: true } );
@@ -73,8 +75,8 @@ ve.ui.PositionedTargetToolbar.prototype.setup = function ( groups, surface ) {
 ve.ui.PositionedTargetToolbar.prototype.detach = function () {
 	// Events
 	if ( this.getSurface() ) {
-		this.getSurface().getToolbarDialogs().disconnect( this );
-		this.getSurface().getToolbarDialogs().clearWindows();
+		this.getSurface().getToolbarDialogs( 'above' ).disconnect( this );
+		this.getSurface().getToolbarDialogs( 'above' ).clearWindows();
 	}
 	this.target.$scrollListener[ 0 ].removeEventListener( 'scroll', this.onWindowScrollThrottled );
 
@@ -259,7 +261,7 @@ ve.ui.PositionedTargetToolbar.prototype.onViewportResize = function () {
 		return;
 	}
 
-	var toolbarDialogs = surface.getToolbarDialogs();
+	var toolbarDialogs = surface.getToolbarDialogs( 'side' );
 	var win = toolbarDialogs.getCurrentWindow();
 
 	if ( win && win.constructor.static.position === 'side' ) {
