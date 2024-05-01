@@ -120,11 +120,11 @@ ve.dm.LinearData.prototype.modifyData = function ( offset, modify ) {
 /**
  * Push data to the end of the array
  *
- * @param {...Object} [value] Values to store
+ * @param {...Object} [values] Values to store
  * @return {number} The new length of the linear data
  */
-ve.dm.LinearData.prototype.push = function () {
-	return Array.prototype.push.apply( this.data, arguments );
+ve.dm.LinearData.prototype.push = function ( ...values ) {
+	return Array.prototype.push.apply( this.data, values );
 };
 
 /**
@@ -171,24 +171,24 @@ ve.dm.LinearData.prototype.sliceObject = function () {
  * Splice linear data
  *
  * @param {number} index Splice from
- * @param {number} howmany Items to be removed
- * @param {...Object} [element] Items to be inserted
+ * @param {number} deleteCount Items to be removed
+ * @param {...Object} [elements] Items to be inserted
  * @return {Array} Elements removed
  */
-ve.dm.LinearData.prototype.splice = function () {
-	return Array.prototype.splice.apply( this.data, arguments );
+ve.dm.LinearData.prototype.splice = function ( index, deleteCount, ...elements ) {
+	return this.data.splice( index, deleteCount, ...elements );
 };
 
 /**
  * Splice linear data and return new LinearData object containing result
  *
  * @param {number} index Splice from
- * @param {number} howmany Items to be removed
- * @param {...Object} [element] Items to be inserted
+ * @param {number} deleteCount Items to be removed
+ * @param {...Object} [elements] Items to be inserted
  * @return {ve.dm.LinearData} LinearData object containing elements removed
  */
-ve.dm.LinearData.prototype.spliceObject = function () {
-	return new this.constructor( this.getStore(), this.splice.apply( this, arguments ) );
+ve.dm.LinearData.prototype.spliceObject = function ( index, deleteCount, ...elements ) {
+	return new this.constructor( this.getStore(), this.splice( index, deleteCount, ...elements ) );
 };
 
 /**
