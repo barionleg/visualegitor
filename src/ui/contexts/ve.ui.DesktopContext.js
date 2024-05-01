@@ -370,7 +370,7 @@ ve.ui.DesktopContext.prototype.setPopupSizeAndPosition = function ( repositionOn
 				} else {
 					this.$element.css( {
 						left: this.position.x + viewport.left,
-						top: this.surface.padding.top + margin,
+						top: this.surface.getPadding().top + margin,
 						bottom: ''
 					} );
 				}
@@ -412,7 +412,7 @@ ve.ui.DesktopContext.prototype.setPopupSizeAndPosition = function ( repositionOn
 		// of the popup. Limiting it to the window height would ignore toolbars
 		// and the find-replace dialog and suchlike. We can't use getViewportDimensions
 		// as that doesn't account for the surface height "growing" when we scroll (T304847).
-		var maxSurfaceHeight = this.surface.$scrollContainer.height() - this.surface.padding.top;
+		var maxSurfaceHeight = this.surface.$scrollContainer.height() - this.surface.getPadding().top;
 		// Allow room for callout and cursor above the context
 		maxSurfaceHeight -= 30;
 		this.popup.setSize( this.dimensions.width, Math.min( this.dimensions.height, maxSurfaceHeight ) );
