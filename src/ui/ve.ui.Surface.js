@@ -51,7 +51,10 @@ ve.ui.Surface = function VeUiSurface( target, dataOrDocOrSurface, config ) {
 	// The following classes are used here:
 	// * ve-ui-overlay-global-mobile
 	// * ve-ui-overlay-global-desktop
-	this.globalOverlay = new ve.ui.Overlay( { classes: [ 've-ui-overlay-global', 've-ui-overlay-global-' + ( OO.ui.isMobile() ? 'mobile' : 'desktop' ) ] } );
+	// * Temorarly add 'notheme' class to global overlay on desktop to avoid
+	// the theme being applied to the overlaym until oo-ui is updated to use
+	// Codex variables and CSS properties (T363861)
+	this.globalOverlay = new ve.ui.Overlay( { classes: [ 've-ui-overlay-global', 've-ui-overlay-global-' + ( OO.ui.isMobile() ? 'mobile' : 'desktop' ), ( OO.ui.isMobile() ? '' : 'notheme' ) ] } );
 	this.localOverlay = new ve.ui.Overlay( { classes: [ 've-ui-overlay-local' ] } );
 	this.$selections = $( '<div>' ).addClass( 've-ui-surface-selections' );
 	this.$blockers = $( '<div>' );
