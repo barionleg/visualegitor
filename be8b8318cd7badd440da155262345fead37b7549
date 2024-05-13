@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6698a178_b543abc2",
+        "filename": "src/ui/ve.ui.Surface.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 94
+      },
+      "writtenOn": "2024-05-13T21:12:42Z",
+      "side": 1,
+      "message": "[please fix] not needed. The notheme class should be present on both.",
+      "range": {
+        "startLine": 57,
+        "startChar": 151,
+        "endLine": 57,
+        "endChar": 174
+      },
+      "revId": "be8b8318cd7badd440da155262345fead37b7549",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
