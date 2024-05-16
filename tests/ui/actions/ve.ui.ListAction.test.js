@@ -53,7 +53,24 @@ QUnit.test( '(un)wrap', function ( assert ) {
 			},
 			undo: true,
 			msg: 'unwrapping two double listed paragraphs'
-		},
+		}
+	];
+
+	cases.forEach( function ( caseItem ) {
+		ve.test.utils.runActionTest(
+			'list', assert, caseItem.html, true, caseItem.method, [ caseItem.style ], caseItem.rangeOrSelection, caseItem.msg,
+			{
+				expectedData: caseItem.expectedData,
+				expectedOriginalData: caseItem.expectedOriginalData,
+				expectedRangeOrSelection: caseItem.expectedRangeOrSelection,
+				undo: caseItem.undo
+			}
+		);
+	} );
+} );
+
+QUnit.test( 'toggle', function ( assert ) {
+	var cases = [
 		{
 			html: '<ul><li>One<ul><li>Two</li></ul></li></ul>',
 			rangeOrSelection: new ve.Range( 11 ),
@@ -82,7 +99,7 @@ QUnit.test( '(un)wrap', function ( assert ) {
 
 	cases.forEach( function ( caseItem ) {
 		ve.test.utils.runActionTest(
-			'list', assert, caseItem.html, false, caseItem.method, [ caseItem.style ], caseItem.rangeOrSelection, caseItem.msg,
+			'list', assert, caseItem.html, true, caseItem.method, [ caseItem.style ], caseItem.rangeOrSelection, caseItem.msg,
 			{
 				expectedData: caseItem.expectedData,
 				expectedOriginalData: caseItem.expectedOriginalData,
