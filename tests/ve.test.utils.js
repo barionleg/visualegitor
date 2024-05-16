@@ -330,26 +330,41 @@
 		surface.getModel().setSelection( selection );
 		action[ method ].apply( action, args || [] );
 
-		var actualData = getSerializableData( surface.getModel().getDocument() );
-		ve.dm.example.postprocessAnnotations( actualData, surface.getModel().getDocument().getStore() );
-		assert.equalLinearData( actualData, data, msg + ': data models match' );
-		if ( expectedSelection ) {
-			assert.equalHash( surface.getModel().getSelection(), expectedSelection, msg + ': selections match' );
-		}
-
-		if ( options.undo ) {
-			if ( options.expectedOriginalData ) {
-				options.expectedOriginalData( originalData, action );
-			}
-
-			surface.getModel().undo();
-
-			assert.equalLinearData( getSerializableData( surface.getModel().getDocument() ), originalData, msg + ' (undo): data models match' );
+		var afterApply = () => {
+			var actualData = getSerializableData( surface.getModel().getDocument() );
+			ve.dm.example.postprocessAnnotations( actualData, surface.getModel().getDocument().getStore() );
+			assert.equalLinearData( actualData, data, msg + ': data models match' );
 			if ( expectedSelection ) {
-				var expectedOriginalRangeOrSelection = options.expectedOriginalRangeOrSelection &&
-					ve.test.utils.selectionFromRangeOrSelection( documentModel, options.expectedOriginalRangeOrSelection );
-				assert.equalHash( surface.getModel().getSelection(), expectedOriginalRangeOrSelection || selection, msg + ' (undo): selections match' );
+				assert.equalHash( surface.getModel().getSelection(), expectedSelection, msg + ': selections match' );
 			}
+
+			if ( options.undo ) {
+				if ( options.expectedOriginalData ) {
+					options.expectedOriginalData( originalData, action );
+				}
+
+				surface.getModel().undo();
+
+				assert.equalLinearData( getSerializableData( surface.getModel().getDocument() ), originalData, msg + ' (undo): data models match' );
+				if ( expectedSelection ) {
+					var expectedOriginalRangeOrSelection = options.expectedOriginalRangeOrSelection &&
+						ve.test.utils.selectionFromRangeOrSelection( documentModel, options.expectedOriginalRangeOrSelection );
+					assert.equalHash( surface.getModel().getSelection(), expectedOriginalRangeOrSelection || selection, msg + ' (undo): selections match' );
+				}
+			}
+		};
+
+		if ( createView ) {
+			// When rendering a view, wait for MutationObserver events to fire
+			// before checking document state.
+			var done = assert.async();
+			setTimeout( () => {
+				afterApply();
+				done();
+			} );
+		} else {
+			// In model-only mode test synchronously
+			afterApply();
 		}
 	};
 
