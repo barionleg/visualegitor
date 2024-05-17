@@ -2804,7 +2804,7 @@ QUnit.test( 'getViewportRange', ( assert ) => {
 } );
 
 /* eslint-disable qunit/resolve-async */
-QUnit.skip( 'afterMutations', ( assert ) => {
+QUnit.test( 'afterMutations', ( assert ) => {
 	var cases, done;
 	function getDescendant( node, path ) {
 		var i, len;
