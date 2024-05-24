@@ -124,7 +124,7 @@ ve.dm.LinearData.prototype.modifyData = function ( offset, modify ) {
  * @return {number} The new length of the linear data
  */
 ve.dm.LinearData.prototype.push = function ( ...values ) {
-	return this.data.push( ...values );
+	return ve.batchPush( this.data, values );
 };
 
 /**
