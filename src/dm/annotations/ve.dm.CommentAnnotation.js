@@ -59,12 +59,13 @@ ve.dm.CommentAnnotation.static.toDomElements = function ( dataElement, doc, conv
 ve.dm.CommentAnnotation.prototype.getAttribute = function ( key ) {
 	// Support old documents with text attributes
 	if ( key === 'comments' && this.getAttribute( 'text' ) ) {
-		return [ {
-			author: '',
-			text: this.getAttribute( 'text' )
-		} ].concat(
-			ve.dm.CommentAnnotation.super.prototype.getAttribute.call( this, 'comments' ) || []
-		);
+		return [
+			{
+				author: '',
+				text: this.getAttribute( 'text' )
+			},
+			...ve.dm.CommentAnnotation.super.prototype.getAttribute.call( this, 'comments' ) || []
+		];
 	}
 	// Parent method
 	return ve.dm.CommentAnnotation.super.prototype.getAttribute.call( this, key );

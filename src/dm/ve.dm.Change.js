@@ -701,8 +701,8 @@ ve.dm.Change.prototype.concat = function ( other ) {
 	}
 	return new ve.dm.Change(
 		this.start,
-		this.transactions.concat( other.transactions ),
-		this.getStores().concat( other.getStores() ),
+		[ ...this.transactions, ...other.transactions ],
+		[ ...this.getStores(), ...other.getStores() ],
 		other.selections
 	);
 };
