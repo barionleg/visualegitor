@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11bb1d18_80174ac7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1883
+      },
+      "writtenOn": "2024-05-24T11:28:34Z",
+      "side": 1,
+      "message": "PS6: Trivial re-base",
+      "revId": "d5157fe727d16881d4d8acbd33009456762ecce0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
