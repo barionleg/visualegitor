@@ -2439,7 +2439,7 @@ QUnit.test( 'onDocumentDragStart/onDocumentDrop', ( assert ) => {
 				},
 				expectedData: function ( data ) {
 					const removed = data.splice( 1, 3 );
-					data.splice.apply( data, [ 7, 0 ].concat( removed ) );
+					data.splice( 7, 0, ...removed );
 				},
 				expectedSelection: new ve.dm.LinearSelection( new ve.Range( 7, 10 ) )
 			},
@@ -2638,42 +2638,36 @@ QUnit.test( 'selectFirstSelectableContentOffset/selectLastSelectableContentOffse
 	const cases = [
 		{
 			msg: 'Block images around paragraph',
-			htmlOrDoc: ve.dm.example.createExampleDocumentFromData( [].concat(
-				ve.dm.example.blockImage.data,
+			htmlOrDoc: ve.dm.example.createExampleDocumentFromData( [
+				...ve.dm.example.blockImage.data,
 				{ type: 'paragraph' }, 'F', 'o', 'o', { type: '/paragraph' },
-				ve.dm.example.blockImage.data,
-				[
-					{ type: 'internalList' },
-					{ type: '/internalList' }
-				]
-			), null, ve.dm.example.baseUri ),
+				...ve.dm.example.blockImage.data,
+				{ type: 'internalList' },
+				{ type: '/internalList' }
+			], null, ve.dm.example.baseUri ),
 			firstRange: new ve.Range( 14 ),
 			lastRange: new ve.Range( 17 )
 		},
 		{
 			msg: 'Tables around paragraph',
-			htmlOrDoc: ve.dm.example.createExampleDocumentFromData( [].concat(
-				ve.dm.example.complexTable.slice( 0, -2 ),
+			htmlOrDoc: ve.dm.example.createExampleDocumentFromData( [
+				...ve.dm.example.complexTable.slice( 0, -2 ),
 				{ type: 'paragraph' }, 'F', 'o', 'o', { type: '/paragraph' },
-				ve.dm.example.complexTable.slice( 0, -2 ),
-				[
-					{ type: 'internalList' },
-					{ type: '/internalList' }
-				]
-			), null, ve.dm.example.baseUri ),
+				...ve.dm.example.complexTable.slice( 0, -2 ),
+				{ type: 'internalList' },
+				{ type: '/internalList' }
+			], null, ve.dm.example.baseUri ),
 			firstRange: new ve.Range( 52 ),
 			lastRange: new ve.Range( 55 )
 		},
 		{
 			msg: 'Only block images (no suitable position)',
-			htmlOrDoc: ve.dm.example.createExampleDocumentFromData( [].concat(
-				ve.dm.example.blockImage.data,
-				ve.dm.example.blockImage.data,
-				[
-					{ type: 'internalList' },
-					{ type: '/internalList' }
-				]
-			), null, ve.dm.example.baseUri ),
+			htmlOrDoc: ve.dm.example.createExampleDocumentFromData( [
+				...ve.dm.example.blockImage.data,
+				...ve.dm.example.blockImage.data,
+				{ type: 'internalList' },
+				{ type: '/internalList' }
+			], null, ve.dm.example.baseUri ),
 			firstRange: null,
 			lastRange: null
 		},
@@ -2712,7 +2706,7 @@ QUnit.test( 'selectFirstSelectableContentOffset/selectLastSelectableContentOffse
 } );
 
 QUnit.test( 'getViewportRange', ( assert ) => {
-	const doc = ve.dm.example.createExampleDocumentFromData( [].concat(
+	const doc = ve.dm.example.createExampleDocumentFromData( [
 		{ type: 'paragraph' },
 		// 1
 		'F', 'o', 'o',
@@ -2741,18 +2735,16 @@ QUnit.test( 'getViewportRange', ( assert ) => {
 		{ type: '/paragraph' },
 		{ type: 'internalList' },
 		{ type: '/internalList' }
-	) );
+	] );
 	const cases = [
 		{
 			msg: 'Document with only an alien returns whole range',
-			htmlOrDoc: ve.dm.example.createExampleDocumentFromData( [].concat(
+			htmlOrDoc: ve.dm.example.createExampleDocumentFromData( [
 				{ type: 'alienBlock' },
 				{ type: '/alienBlock' },
-				[
-					{ type: 'internalList' },
-					{ type: '/internalList' }
-				]
-			) ),
+				{ type: 'internalList' },
+				{ type: '/internalList' }
+			] ),
 			expectedContains: new ve.Range( 0, 2 ),
 			expectedCovering: new ve.Range( 0, 2 )
 		},
