@@ -16,6 +16,23 @@
       "message": "PS6: Trivial re-base",
       "revId": "d5157fe727d16881d4d8acbd33009456762ecce0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1af9ab5d_7d33b38f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1883
+      },
+      "writtenOn": "2024-05-24T11:38:54Z",
+      "side": 1,
+      "message": "Works like a charm.",
+      "revId": "d5157fe727d16881d4d8acbd33009456762ecce0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
