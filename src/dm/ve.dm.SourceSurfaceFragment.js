@@ -82,7 +82,7 @@ ve.dm.SourceSurfaceFragment.prototype.insertContent = function ( content, annota
 		const data = new ve.dm.ElementLinearData( new ve.dm.HashValueStore(), content );
 		// Pass `annotate` as `ignoreCoveringAnnotations`. If matching the target annotation (plain text) strip covering annotations.
 		if ( !data.isPlainText( null, false, [ 'paragraph' ], annotate ) ) {
-			this.insertDocument( new ve.dm.Document( content.concat( [ { type: 'internalList' }, { type: '/internalList' } ] ) ) );
+			this.insertDocument( new ve.dm.Document( [ ...content, { type: 'internalList' }, { type: '/internalList' } ] ) );
 			return this;
 		}
 	} else {
@@ -155,7 +155,6 @@ ve.dm.SourceSurfaceFragment.prototype.insertDocument = function ( doc, newDocRan
  */
 ve.dm.SourceSurfaceFragment.prototype.wrapAllNodes = function ( wrapOuter, wrapEach ) {
 	const range = this.getSelection().getCoveringRange();
-	let content;
 
 	if ( !range ) {
 		return this;
@@ -184,15 +183,16 @@ ve.dm.SourceSurfaceFragment.prototype.wrapAllNodes = function ( wrapOuter, wrapE
 
 	const nodes = this.getSelectedLeafNodes();
 
-	content = wrapOuter.map( getOpening );
+	const content = wrapOuter.map( getOpening );
 	for ( let i = 0; i < nodes.length; i++ ) {
 		const node = nodes[ i ];
-		content = content
-			.concat( wrapEach.map( getOpening ) )
-			.concat( this.getSurface().getLinearFragment( node.getRange() ).getText().split( '' ) )
-			.concat( wrapEach.reverse().map( getClosing ) );
+		content.push(
+			...wrapEach.map( getOpening ),
+			...this.getSurface().getLinearFragment( node.getRange() ).getText().split( '' ),
+			...wrapEach.reverse().map( getClosing )
+		);
 	}
-	content = content.concat( wrapOuter.reverse().map( getClosing ) );
+	content.push( ...wrapOuter.reverse().map( getClosing ) );
 
 	this.insertContent( content );
 
