@@ -761,7 +761,7 @@ QUnit.test( 'newFromDocumentInsertion', ( assert ) => {
 	const doc = ve.dm.example.createExampleDocument( 'internalData' ),
 		bold = ve.dm.example.createAnnotation( ve.dm.example.bold ),
 		whee = [ { type: 'paragraph' }, 'W', 'h', 'e', 'e', { type: '/paragraph' } ],
-		wheeItem = [ { type: 'internalItem' } ].concat( whee ).concat( [ { type: '/internalItem' } ] ),
+		wheeItem = [ { type: 'internalItem' }, ...whee, { type: '/internalItem' } ],
 		cases = [
 			{
 				msg: 'simple insertion',
@@ -787,11 +787,15 @@ QUnit.test( 'newFromDocumentInsertion', ( assert ) => {
 					{ type: 'retain', length: 6 },
 					{
 						type: 'replace',
-						remove: doc.getData( new ve.Range( 6, 7 ) )
-							.concat( doc.getData( new ve.Range( 12, 20 ) ) ),
-						insert: doc.getData( new ve.Range( 6, 10 ) )
-							.concat( [ 'z', 'a', 'a' ] )
-							.concat( doc.getData( new ve.Range( 10, 20 ) ) )
+						remove: [
+							...doc.getData( new ve.Range( 6, 7 ) ),
+							...doc.getData( new ve.Range( 12, 20 ) )
+						],
+						insert: [
+							...doc.getData( new ve.Range( 6, 10 ) ),
+							'z', 'a', 'a',
+							...doc.getData( new ve.Range( 10, 20 ) )
+						]
 					},
 					{ type: 'retain', length: 7 }
 				]
@@ -820,12 +824,16 @@ QUnit.test( 'newFromDocumentInsertion', ( assert ) => {
 					{ type: 'retain', length: 6 },
 					{
 						type: 'replace',
-						remove: doc.getData( new ve.Range( 6, 14 ) )
-							.concat( doc.getData( new ve.Range( 19, 20 ) ) ),
-						insert: doc.getData( new ve.Range( 6, 15 ) )
-							.concat( [ [ doc.data.getData( 15 ), [ ve.dm.example.boldHash ] ] ] )
-							.concat( [ [ doc.data.getData( 16 ), [ ve.dm.example.boldHash ] ] ] )
-							.concat( doc.getData( new ve.Range( 17, 20 ) ) )
+						remove: [
+							...doc.getData( new ve.Range( 6, 14 ) ),
+							...doc.getData( new ve.Range( 19, 20 ) )
+						],
+						insert: [
+							...doc.getData( new ve.Range( 6, 15 ) ),
+							[ doc.data.getData( 15 ), [ ve.dm.example.boldHash ] ],
+							[ doc.data.getData( 16 ), [ ve.dm.example.boldHash ] ],
+							...doc.getData( new ve.Range( 17, 20 ) )
+						]
 					},
 					{ type: 'retain', length: 7 }
 				],
@@ -855,7 +863,10 @@ QUnit.test( 'newFromDocumentInsertion', ( assert ) => {
 					{
 						type: 'replace',
 						remove: doc.getData( new ve.Range( 6, 20 ) ),
-						insert: doc.getData( new ve.Range( 6, 20 ) ).concat( wheeItem )
+						insert: [
+							...doc.getData( new ve.Range( 6, 20 ) ),
+							...wheeItem
+						]
 					},
 					{ type: 'retain', length: 1 },
 					{
@@ -888,9 +899,11 @@ QUnit.test( 'newFromDocumentInsertion', ( assert ) => {
 					{
 						type: 'replace',
 						remove: doc.getData( new ve.Range( 6, 20 ) ),
-						insert: doc.getData( new ve.Range( 6, 11 ) )
-							.concat( [ '!', '!', '!' ] )
-							.concat( doc.getData( new ve.Range( 11, 20 ) ) )
+						insert: [
+							...doc.getData( new ve.Range( 6, 11 ) ),
+							'!', '!', '!',
+							...doc.getData( new ve.Range( 11, 20 ) )
+						]
 					},
 					{ type: 'retain', length: 1 },
 					{
@@ -922,9 +935,14 @@ QUnit.test( 'newFromDocumentInsertion', ( assert ) => {
 					{ type: 'retain', length: 6 },
 					{
 						type: 'replace',
-						remove: doc.getData( new ve.Range( 6, 7 ) )
-							.concat( doc.getData( new ve.Range( 12, 20 ) ) ),
-						insert: doc.getData( new ve.Range( 6, 20 ) ).concat( wheeItem )
+						remove: [
+							...doc.getData( new ve.Range( 6, 7 ) ),
+							...doc.getData( new ve.Range( 12, 20 ) )
+						],
+						insert: [
+							...doc.getData( new ve.Range( 6, 20 ) ),
+							...wheeItem
+						]
 					},
 					{ type: 'retain', length: 7 }
 				]
@@ -1994,7 +2012,7 @@ QUnit.test( 'newFromRemoval preserving metadata', ( assert ) => {
 				return op;
 			}
 			op = ve.copy( op );
-			[].concat( op.insert, op.remove ).forEach( ( item ) => {
+			[ ...op.insert, ...op.remove ].forEach( ( item ) => {
 				delete item.originalDomElementsHash;
 				delete item.internal;
 			} );

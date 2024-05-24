@@ -90,9 +90,11 @@ ve.dm.BlockImageNode.static.toDataElement = function ( domElements, converter ) 
 			{ type: '/' + this.name }
 		];
 	} else {
-		return [ dataElement ]
-			.concat( converter.getDataFromDomClean( caption, { type: 'imageCaption' } ) )
-			.concat( [ { type: '/' + this.name } ] );
+		return [
+			dataElement,
+			...converter.getDataFromDomClean( caption, { type: 'imageCaption' } ),
+			{ type: '/' + this.name }
+		];
 	}
 };
 

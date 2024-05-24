@@ -245,7 +245,7 @@ ve.DiffMatchPatch.prototype.getCleanDiff = function ( oldData, newData, options 
 		for ( let i = 0; i < diff.length; i++ ) {
 			const action = diff[ i ][ 0 ];
 			if ( action === previousAction ) {
-				diff[ i - 1 ][ 1 ] = diff[ i - 1 ][ 1 ].concat( diff[ i ][ 1 ] );
+				diff[ i - 1 ][ 1 ].push( ...diff[ i ][ 1 ] );
 				diff.splice( i, 1 );
 				i--;
 			} else if ( diff[ i ][ 1 ].length === 0 ) {
@@ -317,13 +317,13 @@ ve.DiffMatchPatch.prototype.getCleanDiff = function ( oldData, newData, options 
 			const action = diff[ i ][ 0 ];
 			const data = diff[ i ][ 1 ];
 			if ( action === DIFF_DELETE ) {
-				remove = remove.concat( data );
+				remove.push( ...data );
 			} else if ( action === DIFF_INSERT ) {
-				insert = insert.concat( data );
+				insert.push( ...data );
 			} else if ( action === DIFF_EQUAL && data.length > 0 ) {
 				if ( data.every( isWhitespace ) ) {
-					remove = remove.concat( data );
-					insert = insert.concat( data );
+					remove.push( ...data );
+					insert.push( ...data );
 				} else {
 					if ( remove.length > 0 ) {
 						cleanDiff.push( [ DIFF_DELETE, remove ] );
