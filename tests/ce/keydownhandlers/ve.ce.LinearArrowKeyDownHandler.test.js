@@ -22,13 +22,13 @@ QUnit.test( 'special key down: linear arrow keys', ( assert ) => {
 			{ type: 'internalList' }, { type: '/internalList' }
 		] ),
 		inlineFocusableDoc = ve.dm.example.createExampleDocumentFromData( [
-			{ type: 'paragraph' }, 'F', 'o', 'o', ' ', { type: 'alienInline' }, { type: '/alienInline' }, ' ', 'b', 'a', 'r', { type: '/paragraph' },
+			{ type: 'paragraph' }, ...'Foo ', { type: 'alienInline' }, { type: '/alienInline' }, ...' Bar', { type: '/paragraph' },
 			{ type: 'internalList' }, { type: '/internalList' }
 		] ),
 		blockImageDoc = ve.dm.example.createExampleDocumentFromData( [
-			{ type: 'paragraph' }, 'F', 'o', 'o', { type: '/paragraph' },
+			{ type: 'paragraph' }, ...'Foo', { type: '/paragraph' },
 			...ve.dm.example.blockImage.data,
-			{ type: 'paragraph' }, 'B', 'a', 'r', { type: '/paragraph' },
+			{ type: 'paragraph' }, ...'Bar', { type: '/paragraph' },
 			{ type: 'internalList' }, { type: '/internalList' }
 		] ),
 		cases = [
