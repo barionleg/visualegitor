@@ -16,6 +16,23 @@
       "message": "Trivial mapping from one syntax to the other. 👍",
       "revId": "c82195c52e23406461ab6161d25b931731e8fabd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b10d872_01bbed9c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2024-05-28T14:58:30Z",
+      "side": 1,
+      "message": "\"org.jenkinsci.plugins.postbuildscript.PostBuildScriptException: hudson.AbortException: castor-save-workspace-cache aborted.\"",
+      "revId": "c82195c52e23406461ab6161d25b931731e8fabd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
