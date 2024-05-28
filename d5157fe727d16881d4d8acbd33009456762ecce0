@@ -33,6 +33,24 @@
       "message": "Works like a charm.",
       "revId": "d5157fe727d16881d4d8acbd33009456762ecce0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58e4d0b7_5759625d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2024-05-28T14:14:00Z",
+      "side": 1,
+      "message": "We talked about this for the past days and collected possible concerns. Still we think this is a reasonable approach. For example:\n* This patch encodes knowledge about the Cite extension in the VE library. While this is technically \"the wrong way around\", it\u0027s a soft dependency. We made sure nothing bad can happen even in a worst-case scenario other than that we start tracking nonsense. We will fix or just remove the tracking in this case.\n* While it would be lovely to be able to do this kind of tracking in extensions/VisualEditor or ideally even Cite, it appears like the information we need (e.g. if the user pressed Ctrl+V) isn\u0027t available at these spots any more. Setting up extra instrumentation for this isn\u0027t worth it, in our opinion.\n* Before we invest more resources into this, we would like to start with this reasonably cheap experiment first.",
+      "parentUuid": "1af9ab5d_7d33b38f",
+      "revId": "d5157fe727d16881d4d8acbd33009456762ecce0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
