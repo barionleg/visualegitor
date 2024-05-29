@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66297938_5a52e606",
+        "filename": "src/dm/ve.dm.Document.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 651,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2024-05-29T15:53:27Z",
+      "side": 1,
+      "message": "The array constructor doesn\u0027t appear to have the same limits as \n\n`[ \u0027y\u0027, ...( \u0027x\u0027.repeat(10000000).split(\u0027\u0027) ) ]`\n \n...that said it does appear to be slower than\n\n`[\u0027y\u0027].concat( \u0027x\u0027.repeat(10000000).split(\u0027\u0027) )`",
+      "revId": "d8726fe51f24bd5873c1bf07441747a2adfe74e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
