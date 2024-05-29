@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee343432_1d7fa8e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2024-05-29T09:03:22Z",
+      "side": 1,
+      "message": "I rebased this over I9d8aaf61be124a48a3fbe22d93fce875e1778077 . Looking closer, I see a few instances of arr.push( ...foo ) where I\u0027m not sure foo is guaranteed to be smallish — so I think ve.batchPush( arr, foo ) would be safer.",
+      "revId": "807fcb1d07639d907cb075de24261090864c4de1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7faa766d_50f774dc",
+        "filename": "src/dm/ve.dm.Document.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2024-05-29T09:03:22Z",
+      "side": 1,
+      "message": "Examples like this, where the data size could be large, should use ve.batchPush I think.",
+      "revId": "807fcb1d07639d907cb075de24261090864c4de1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
