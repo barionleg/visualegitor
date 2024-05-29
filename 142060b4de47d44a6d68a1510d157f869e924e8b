@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0444412a_197eb252",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2024-05-29T08:14:07Z",
+      "side": 1,
+      "message": "Good idea in general. But I\u0027m uncomfortable with a few of these, because there\u0027s an implementation-dependent limit to the call stack size, which the spread could potentially breach. This is what I see on Chromium 124:\n```\n \u003e (function(){console.log(arguments.length)})(...(\u0027x\u0027.repeat(130000)))\nUncaught RangeError: Maximum call stack size exceeded\n     at \u003canonymous\u003e:1:44\n```\nWhereas without the spread:\n```\n(function(x){console.log(x.length)})(\u0027x\u0027.repeat(130000).split(\u0027\u0027))\n130000\n```\n\nIt seems possible some of these changes (e.g. the one in\nve.ce.ContentBranchNode) could breach this limit on some browsers.\n\nOthers are safe, e.g. every time we just hand the array to .apply, we\u0027re already subject to this limit.",
+      "revId": "142060b4de47d44a6d68a1510d157f869e924e8b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
