@@ -2058,7 +2058,7 @@ QUnit.test( 'newFromRemoval preserving metadata', ( assert ) => {
 			]
 		},
 		{
-			msg: 'Removal across meta',
+			msg: 'Full removal across meta',
 			html: '<p>foo</p><meta><p>bar</p><p>baz</p>',
 			range: new ve.Range( 0, 12 ),
 			ops: [
@@ -2076,6 +2076,53 @@ QUnit.test( 'newFromRemoval preserving metadata', ( assert ) => {
 					{ type: '/paragraph' }
 				] },
 				{ type: 'retain', length: 7 }
+			]
+		},
+		{
+			msg: 'Partial removal across meta (p -> p)',
+			html: '<p>foo</p><meta><p>bar</p>',
+			range: new ve.Range( 3, 9 ),
+			ops: [
+				{ type: 'replace', insert: [
+					{ type: 'alienMeta' },
+					{ type: '/alienMeta' }
+				], remove: [] },
+				{ type: 'retain', length: 3 },
+				{ type: 'replace', insert: [], remove: [
+					'o',
+					{ type: '/paragraph' },
+					{ type: 'alienMeta' },
+					{ type: '/alienMeta' },
+					{ type: 'paragraph' },
+					'b'
+				] },
+				{ type: 'retain', length: 5 }
+			]
+		},
+		{
+			msg: 'Partial removal across meta (p -> h2)',
+			html: '<p>foo</p><meta><h2>bar</h2>',
+			range: new ve.Range( 3, 9 ),
+			ops: [
+				{ type: 'replace', insert: [
+					{ type: 'alienMeta' },
+					{ type: '/alienMeta' }
+				], remove: [] },
+				{ type: 'retain', length: 3 },
+				{ type: 'replace', insert: [], remove: [
+					'o',
+					{ type: '/paragraph' },
+					{ type: 'alienMeta' },
+					{ type: '/alienMeta' },
+					{ type: 'heading', attributes: { level: 2 } },
+					'b'
+				] },
+				{ type: 'retain', length: 2 },
+				{ type: 'replace', insert: [
+					{ type: '/paragraph' }
+				], remove: [
+					{ type: '/heading' }
+				] }
 			]
 		},
 		{
