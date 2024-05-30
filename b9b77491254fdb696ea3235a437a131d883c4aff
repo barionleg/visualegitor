@@ -16,6 +16,57 @@
       "message": "Should also have a \u0027Depends-On:\u0027 according to your comment on task",
       "revId": "b9b77491254fdb696ea3235a437a131d883c4aff",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b97c8da_2dd18b48",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2604
+      },
+      "writtenOn": "2024-05-30T00:37:22Z",
+      "side": 1,
+      "message": "Sorry, ignore my last comment, that can be achieved without dependency. \nIt\u0027s fine to use Codex tokens here, even though dark mode patches aren\u0027t merged yet. \nNonetheless two amendments would be useful.",
+      "revId": "b9b77491254fdb696ea3235a437a131d883c4aff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b820828_b1036940",
+        "filename": "src/themes/wikimediaui.less",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 2604
+      },
+      "writtenOn": "2024-05-30T00:37:22Z",
+      "side": 1,
+      "message": "the 250ms can and should be replaced with tokens too.",
+      "revId": "b9b77491254fdb696ea3235a437a131d883c4aff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b04a2c1_a6137f87",
+        "filename": "src/themes/wikimediaui.less",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 2604
+      },
+      "writtenOn": "2024-05-30T00:37:22Z",
+      "side": 1,
+      "message": "This should be \nbox-shadow: @box-shadow-inset-small @box-shadow-color-progressive--focus;",
+      "revId": "b9b77491254fdb696ea3235a437a131d883c4aff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
