@@ -160,6 +160,7 @@ ve.ui.ContextItem.prototype.isReadOnly = function () {
 /**
  * Setup the item.
  *
+ * @param {boolean} refreshing If this is a reconstruction/refresh of a context
  * @return {ve.ui.ContextItem}
  * @chainable
  */

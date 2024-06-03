@@ -96,8 +96,9 @@ ve.ui.LinearContext.prototype.afterContextChange = function () {
 		if ( !this.isEmpty() ) {
 			if ( this.isInspectable() ) {
 				// Change state: menu -> menu
+				const previousItems = this.items.map( ( item ) => item.constructor.static.name );
 				this.teardownMenuItems();
-				this.setupMenuItems();
+				this.setupMenuItems( previousItems );
 				this.updateDimensionsDebounced();
 			} else {
 				// Change state: menu -> closed
