@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e783e7f_3fc9ce02",
+        "filename": "package.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2024-06-03T17:39:23Z",
+      "side": 1,
+      "message": "You should upgrade grunt-stylelint to 0.20.0 (which bundles stylelint 16) if you\u0027re bumping stylelint-config-wikimedia.",
+      "range": {
+        "startLine": 53,
+        "startChar": 33,
+        "endLine": 53,
+        "endChar": 39
+      },
+      "revId": "e11108b3b3fa0d24843bdaf942c697e0fb1ea865",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
