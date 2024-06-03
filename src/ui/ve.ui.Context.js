@@ -160,10 +160,12 @@ ve.ui.Context.prototype.toggleMenu = function ( show ) {
  * Setup menu items.
  *
  * @protected
+ * @param {Array} [previousItems] if a context is being refreshed, this will
+ *  be the previously-open items for comparison
  * @return {ve.ui.Context}
  * @chainable
  */
-ve.ui.Context.prototype.setupMenuItems = function () {
+ve.ui.Context.prototype.setupMenuItems = function ( previousItems ) {
 	const sources = this.getRelatedSources(),
 		items = [];
 
@@ -189,8 +191,18 @@ ve.ui.Context.prototype.setupMenuItems = function () {
 
 	this.addItems( items );
 	for ( i = 0, len = items.length; i < len; i++ ) {
+		let isRefreshing = false;
+		if ( previousItems ) {
+			// This is a nested loop, but it's almost-always going to be for 1-2 items
+			for ( let j = previousItems.length - 1; j >= 0; j-- ) {
+				if ( previousItems[ j ].equals( items[ j ] ) ) {
+					isRefreshing = true;
+					break;
+				}
+			}
+		}
 		items[ i ].connect( this, { command: 'onContextItemCommand' } );
-		items[ i ].setup();
+		items[ i ].setup( isRefreshing );
 	}
 
 	return this;
