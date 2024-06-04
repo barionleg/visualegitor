@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0572af99_46ae2497",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2024-06-04T14:38:14Z",
+      "side": 1,
+      "message": "If an item exists in previousItems, can we just splice it into the new array and re-use it without calling setup at all, or has it already been destroyed?",
+      "revId": "e3707d97080ebdfdd9b7388024ef5eac12f1ef5d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c7560609_0e1f90dd",
