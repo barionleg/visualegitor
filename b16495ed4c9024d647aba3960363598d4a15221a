@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7d0b3eb_b6cb1f64",
+        "filename": "package.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2024-06-04T14:45:05Z",
+      "side": 1,
+      "message": "This would be a dependency, not a dev dependency, but as in my other comment we don\u0027t rely on npm for the standalone demos.",
+      "revId": "b16495ed4c9024d647aba3960363598d4a15221a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03363780_c4712414",
+        "filename": "src/themes/wikimediaui.less",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2024-06-04T14:45:05Z",
+      "side": 1,
+      "message": "This works in MediaWiki, but the standalone demo, less.js can\u0027t import this.\n\nCore VE libs are usually just stored in the lib folder.",
+      "revId": "b16495ed4c9024d647aba3960363598d4a15221a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
