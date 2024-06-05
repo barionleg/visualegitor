@@ -33,6 +33,23 @@
       "message": "Would be great if you could give it a go.",
       "revId": "d783770769e4a7f1df0e6274816d36521c2154d7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8566e482_64a7f39a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2024-06-05T14:32:42Z",
+      "side": 1,
+      "message": "From my comment in Slack:\n\n\u003e If this is actually temporary, then there should be a timeline and a patch to remove. I don\u0027t mind it being semi-permanent though, we have lots of other feature use tracking that is, but if we do that the code should be moved to ve-mw. In which case we\u0027d need to emit some events from ve.ce.Surface.",
+      "revId": "d783770769e4a7f1df0e6274816d36521c2154d7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
