@@ -50,6 +50,24 @@
       "message": "From my comment in Slack:\n\n\u003e If this is actually temporary, then there should be a timeline and a patch to remove. I don\u0027t mind it being semi-permanent though, we have lots of other feature use tracking that is, but if we do that the code should be moved to ve-mw. In which case we\u0027d need to emit some events from ve.ce.Surface.",
       "revId": "d783770769e4a7f1df0e6274816d36521c2154d7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70016b64_2362fd49",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 143
+      },
+      "writtenOn": "2024-06-06T06:39:46Z",
+      "side": 1,
+      "message": "I agree.  Our timeline is roughly 3-6 months, depending on the rate of data collection and how long it takes us to set up and finish our analysis.  We can remove the tracking as soon as enough data is available (eg. 2,000 samples) and we have validated that it can be analyzed to estimate the answers we\u0027re looking for.\n\nHere\u0027s a revert patch now attached to the task: I7f38e06948289558a7127305e84f3610e7fc06d5",
+      "parentUuid": "8566e482_64a7f39a",
+      "revId": "d783770769e4a7f1df0e6274816d36521c2154d7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
