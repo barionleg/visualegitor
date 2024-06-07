@@ -16,6 +16,23 @@
       "message": "@Esanders I\u0027m not sure if this is the right place to make these changes, or whether they should be made in the Extension:VisualEditor repo (or both)?",
       "revId": "5ec7625bb164699b073162dbf567aeebcad1ad20",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea298331_e03073ac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2950
+      },
+      "writtenOn": "2024-06-07T18:42:00Z",
+      "side": 1,
+      "message": "I set this to WIP since I\u0027m not even sure if this is the right place to put this dependency, but in the meantime I\u0027ve create\nhttps://gerrit.wikimedia.org/r/c/mediawiki/extensions/VisualEditor/+/1040235\nWhich converts colors to token in Extension:VisualEditor instead of here.",
+      "revId": "5ec7625bb164699b073162dbf567aeebcad1ad20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
