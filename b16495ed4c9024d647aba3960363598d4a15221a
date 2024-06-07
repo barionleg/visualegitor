@@ -18,6 +18,24 @@
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "525376de_ef8ad04d",
+        "filename": "package.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 2950
+      },
+      "writtenOn": "2024-06-07T17:09:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7d0b3eb_b6cb1f64",
+      "revId": "b16495ed4c9024d647aba3960363598d4a15221a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "03363780_c4712414",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-06-04T14:45:05Z",
       "side": 1,
       "message": "This works in MediaWiki, but the standalone demo, less.js can\u0027t import this.\n\nCore VE libs are usually just stored in the lib folder.",
+      "revId": "b16495ed4c9024d647aba3960363598d4a15221a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2d40bbd_67db38f3",
+        "filename": "src/themes/wikimediaui.less",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 2950
+      },
+      "writtenOn": "2024-06-07T17:09:57Z",
+      "side": 1,
+      "message": "I see what you mean, I removed this from package.json and added an update script. \nHowever, I\u0027m still getting a Less import error in the demos due to the path being different in the demos folder vs. the src folder :/",
+      "parentUuid": "03363780_c4712414",
       "revId": "b16495ed4c9024d647aba3960363598d4a15221a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }

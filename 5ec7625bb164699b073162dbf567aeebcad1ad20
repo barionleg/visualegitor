@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ded635c_a463d63b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2950
+      },
+      "writtenOn": "2024-06-07T17:09:57Z",
+      "side": 1,
+      "message": "@Esanders I\u0027m not sure if this is the right place to make these changes, or whether they should be made in the Extension:VisualEditor repo (or both)?",
+      "revId": "5ec7625bb164699b073162dbf567aeebcad1ad20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
