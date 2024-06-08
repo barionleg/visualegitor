@@ -29,6 +29,16 @@ ve.dm.TableCellableNode.static.isCellable = true;
 
 /* Static Methods */
 
+ve.dm.TableCellableNode.static.areNodesCellable = function ( domNodes ) {
+	// We can handle a DM node consisting of multiple table cell DOM elements with identical rowspan
+	// as a table element. Give up on anything else.
+	const cellElems = new Set( [ 'td', 'th' ] );
+	return domNodes.every(
+		( node ) => cellElems.has( node.nodeName.toLowerCase() ) &&
+			node.rowspan === domNodes[ 0 ].rowspan
+	);
+};
+
 ve.dm.TableCellableNode.static.setAttributes = function ( attributes, domElements ) {
 	const style = domElements[ 0 ].nodeName.toLowerCase() === 'th' ? 'header' : 'data',
 		colspan = domElements[ 0 ].getAttribute( 'colspan' ),
@@ -40,6 +50,19 @@ ve.dm.TableCellableNode.static.setAttributes = function ( attributes, domElement
 		attributes.originalColspan = colspan;
 		if ( colspan !== '' && !isNaN( Number( colspan ) ) ) {
 			attributes.colspan = Number( colspan );
+		}
+	}
+	attributes.computedColspan = attributes.colspan || 1;
+
+	// Alien nodes can be composed of multiple DOM elements.
+	// Calculate how many table cells the entire group spans.
+	for ( let i = 1; i < domElements.length; i++ ) {
+		const domElem = domElements[ i ];
+		const extraColspan = domElem.getAttribute( 'colspan' );
+		if ( extraColspan !== null && extraColspan !== '' && !isNaN( Number( extraColspan ) ) ) {
+			attributes.computedColspan += Number( extraColspan );
+		} else {
+			attributes.computedColspan += 1;
 		}
 	}
 
@@ -95,7 +118,7 @@ ve.dm.TableCellableNode.prototype.getRowspan = function () {
  * @return {number} Columns spanned
  */
 ve.dm.TableCellableNode.prototype.getColspan = function () {
-	return this.element.attributes.colspan || 1;
+	return this.element.attributes.computedColspan || this.element.attributes.colspan || 1;
 };
 
 /**
