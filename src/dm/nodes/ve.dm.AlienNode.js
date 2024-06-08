@@ -48,7 +48,7 @@ ve.dm.AlienNode.static.toDataElement = function ( domElements, converter ) {
 
 	if ( this.name !== 'alien' ) {
 		element = { type: this.name };
-	} else if ( domElements.length === 1 && [ 'td', 'th' ].indexOf( domElements[ 0 ].nodeName.toLowerCase() ) !== -1 ) {
+	} else if ( ve.dm.TableCellableNode.static.areNodesCellable( domElements ) ) {
 		const attributes = {};
 		ve.dm.TableCellableNode.static.setAttributes( attributes, domElements );
 		element = {
