@@ -46,11 +46,34 @@ ve.dm.AlienNode.static.matchFunction = function () {
 ve.dm.AlienNode.static.toDataElement = function ( domElements, converter ) {
 	let element;
 
+	const isCell = ( node ) => {
+		const nodeName = node.nodeName.toLowerCase();
+		return nodeName === 'td' || nodeName === 'th';
+	};
+
 	if ( this.name !== 'alien' ) {
 		element = { type: this.name };
-	} else if ( domElements.length === 1 && [ 'td', 'th' ].indexOf( domElements[ 0 ].nodeName.toLowerCase() ) !== -1 ) {
+	} else if ( Array.prototype.every.call( domElements, ( node ) => isCell( node ) ) ) {
+		let colspan = 0, rowspan = 0;
+		let style;
+		// Handle consecutive table cell aliens (T366984)
+		Array.prototype.forEach.call( domElements, ( node ) => {
+			const attrs = {};
+			ve.dm.TableCellableNode.static.setAttributes( attrs, [ node ] );
+			colspan += attrs.colspan || 1;
+			// TODO: Support a non-rectangular alien group
+			rowspan = Math.max( rowspan, attrs.rowspan || 1 );
+			// The style attribute is expected to exist but isn't used for an alien
+			style = attrs.style;
+		} );
 		const attributes = {};
-		ve.dm.TableCellableNode.static.setAttributes( attributes, domElements );
+		if ( colspan !== 1 ) {
+			attributes.colspan = colspan;
+		}
+		if ( rowspan !== 1 ) {
+			attributes.rowspan = rowspan;
+		}
+		attributes.style = style;
 		element = {
 			type: 'alienTableCell',
 			attributes: attributes
