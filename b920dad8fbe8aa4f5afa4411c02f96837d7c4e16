@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8f0b95c_801f82de",
+        "filename": "demos/ve/pages/tables.html",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2024-06-10T14:27:22Z",
+      "side": 1,
+      "message": "We should keep this when merging the patches. And some actual test cases?",
+      "revId": "b920dad8fbe8aa4f5afa4411c02f96837d7c4e16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "169d5ef4_3fa71e78",
+        "filename": "src/ce/selections/ve.ce.TableSelection.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2024-06-10T14:27:22Z",
+      "side": 1,
+      "message": "This fix is also necessary if you cursor onto a multi-cell alien.",
+      "revId": "b920dad8fbe8aa4f5afa4411c02f96837d7c4e16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e757f23_f92b22e2",
+        "filename": "src/dm/nodes/ve.dm.AlienNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2024-06-10T14:27:22Z",
+      "side": 1,
+      "message": "I see this method needs to be exposed for the MW implementation...",
+      "revId": "b920dad8fbe8aa4f5afa4411c02f96837d7c4e16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11f16a4c_5c388351",
+        "filename": "src/dm/nodes/ve.dm.AlienNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2024-06-10T14:27:22Z",
+      "side": 1,
+      "message": "I also considered modifying setAttributes, but as the alien doesn\u0027t use all the other attributes (originalRowspan etc.) I didn\u0027t bother, but I don\u0027t mind which approach we take.",
+      "revId": "b920dad8fbe8aa4f5afa4411c02f96837d7c4e16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b0288de_e9d87505",
+        "filename": "src/dm/nodes/ve.dm.AlienNode.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2024-06-10T14:27:22Z",
+      "side": 1,
+      "message": "Your approach of validating the rowspans are all equal is also fine.",
+      "revId": "b920dad8fbe8aa4f5afa4411c02f96837d7c4e16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
