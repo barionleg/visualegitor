@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97c07408_3519a65b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2024-06-11T14:09:55Z",
+      "side": 1,
+      "message": "I\u0027ve merged my patch into this one.",
+      "revId": "d42086d50476a1bc92c82304b0af8bcbe6c35311",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
