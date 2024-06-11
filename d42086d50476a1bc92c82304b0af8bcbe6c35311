@@ -16,6 +16,40 @@
       "message": "I\u0027ve merged my patch into this one.",
       "revId": "d42086d50476a1bc92c82304b0af8bcbe6c35311",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45a4822c_a7ec2237",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2024-06-11T23:25:18Z",
+      "side": 1,
+      "message": "Thanks for taking over, the changes look good to me. I updated https://gerrit.wikimedia.org/r/c/mediawiki/extensions/VisualEditor/+/1039601 to match.",
+      "revId": "d42086d50476a1bc92c82304b0af8bcbe6c35311",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9cbcce28_198e43c7",
+        "filename": "src/dm/ve.dm.TableCellableNode.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2024-06-11T23:25:18Z",
+      "side": 1,
+      "message": "Not really needed if we only support equal rowspans, doesn\u0027t hurt though.",
+      "revId": "d42086d50476a1bc92c82304b0af8bcbe6c35311",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
