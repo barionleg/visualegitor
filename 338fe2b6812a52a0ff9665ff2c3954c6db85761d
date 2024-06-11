@@ -33,6 +33,24 @@
       "message": "why do we need to introduce a new attribute?",
       "revId": "338fe2b6812a52a0ff9665ff2c3954c6db85761d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ef271de_46f05e0f",
+        "filename": "src/dm/ve.dm.TableCellableNode.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 417
+      },
+      "writtenOn": "2024-06-11T22:34:41Z",
+      "side": 1,
+      "message": "We probably don\u0027t, I wasn\u0027t sure what `colspan` was used for and that it\u0027d be okay for it not to match the DOM attribute.",
+      "parentUuid": "b2e3b382_fe6276fe",
+      "revId": "338fe2b6812a52a0ff9665ff2c3954c6db85761d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
