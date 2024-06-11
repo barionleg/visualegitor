@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2e3b382_fe6276fe",
+        "filename": "src/dm/ve.dm.TableCellableNode.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2024-06-11T13:22:08Z",
+      "side": 1,
+      "message": "why do we need to introduce a new attribute?",
+      "revId": "338fe2b6812a52a0ff9665ff2c3954c6db85761d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
