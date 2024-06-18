@@ -69,6 +69,24 @@
       "parentUuid": "03363780_c4712414",
       "revId": "b16495ed4c9024d647aba3960363598d4a15221a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03bab208_25bbb442",
+        "filename": "src/themes/wikimediaui.less",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2024-06-18T17:52:43Z",
+      "side": 1,
+      "message": "Shouldn\u0027t the path be relative to this file, i.e. \u0027../../lib/...\u0027. That works locally in standalone. Does RL not use relative to the current file as well?\n\n(Also use single quotes.)",
+      "parentUuid": "c2d40bbd_67db38f3",
+      "revId": "b16495ed4c9024d647aba3960363598d4a15221a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
