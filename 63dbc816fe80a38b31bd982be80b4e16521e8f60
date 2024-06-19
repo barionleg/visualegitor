@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95ae7ebf_f31b040e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2950
+      },
+      "writtenOn": "2024-06-19T15:35:47Z",
+      "side": 1,
+      "message": "I have an alternative patch up that uses the raw CSS vars instead of going through Less. Personally I prefer this approach since it\u0027s much simpler. It maintains standalone functionality because the vars have a fallback, and a few color changes go pretty far in terms of resolving most dark-mode issues: \n\nhttps://gerrit.wikimedia.org/r/c/VisualEditor/VisualEditor/+/1047547",
+      "revId": "63dbc816fe80a38b31bd982be80b4e16521e8f60",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
