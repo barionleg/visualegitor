@@ -33,6 +33,23 @@
       "message": "I set this to WIP since I\u0027m not even sure if this is the right place to put this dependency, but in the meantime I\u0027ve create\nhttps://gerrit.wikimedia.org/r/c/mediawiki/extensions/VisualEditor/+/1040235\nWhich converts colors to token in Extension:VisualEditor instead of here.",
       "revId": "5ec7625bb164699b073162dbf567aeebcad1ad20",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ca33959_423bf67b",
+        "filename": "package-lock.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2024-06-19T07:40:01Z",
+      "side": 1,
+      "message": "undo these changes...",
+      "revId": "5ec7625bb164699b073162dbf567aeebcad1ad20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
