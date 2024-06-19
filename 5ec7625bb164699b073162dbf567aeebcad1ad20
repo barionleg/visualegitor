@@ -35,6 +35,23 @@
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b808468_ce23b9b6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2950
+      },
+      "writtenOn": "2024-06-19T14:34:21Z",
+      "side": 1,
+      "message": "Hi Ed, Steph and I were trying to get this to work yesterday, but we ran into a pretty big issue when trying to get the new `@import` statement working in both mediawiki and the demos. \n\nThe issues is that the Less @import path is relative to the file path. This works in the mediawiki context where each Less file is specified individually. \n\nHowever, as part of the build step, all the less files get concatenated into a single file, placed in the dist folder, then compiled with Less. This means that the concatenated file contains imports with different paths, e.g. \n\n`@import \"../../lib/codex-design-tokens/theme-wikimedia-ui.less\";`\n`@import \"../../../../lib/codex-design-tokens/theme-wikimedia-ui.less\";`\n\nWhich fails the build.\n\nThe Less Grunt plugin has an option to pre-define import paths, which can help with this, but right one I\u0027m in a situation where I can get either the build passing or the demos working, but not both :/ \n \nhttps://www.npmjs.com/package/grunt-contrib-less#paths",
+      "revId": "5ec7625bb164699b073162dbf567aeebcad1ad20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2ca33959_423bf67b",
