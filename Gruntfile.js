@@ -14,6 +14,7 @@
 module.exports = function ( grunt ) {
 	const modules = grunt.file.readJSON( 'build/modules.json' ),
 		moduleUtils = require( './build/moduleUtils' ),
+		path = require( 'path' ),
 		fg = require( 'fast-glob' ),
 		rebaserBuildFiles = moduleUtils.makeBuildList( modules, [ 'rebaser.build' ] ),
 		veRebaseFiles = moduleUtils.makeBuildList( modules, [ 'visualEditor.rebase.build' ] ),
@@ -64,6 +65,15 @@ module.exports = function ( grunt ) {
 		};
 	}
 
+	function makeImportRelative( src, filepath ) {
+		return src.replace( /@import ["'](.*)["']/g, ( ...args ) => {
+			const currentDir = path.dirname( path.resolve( filepath ) );
+			const importAbsolute = path.resolve( currentDir, args[ 1 ] );
+			const importRelative = path.relative( 'dist', importAbsolute );
+			return `@import '${ importRelative }'`;
+		} );
+	}
+
 	grunt.initConfig( {
 		pkg: grunt.file.readJSON( 'package.json' ),
 		clean: {
@@ -89,7 +99,8 @@ module.exports = function ( grunt ) {
 			},
 			'visualEditor.rebase.styles': {
 				options: {
-					banner: grunt.file.read( 'build/banner.txt' )
+					banner: grunt.file.read( 'build/banner.txt' ),
+					process: makeImportRelative
 				},
 				dest: 'dist/visualEditor-rebase.less',
 				src: veRebaseFiles.styles
@@ -104,14 +115,16 @@ module.exports = function ( grunt ) {
 			},
 			'css-apex': {
 				options: {
-					banner: grunt.file.read( 'build/banner.txt' )
+					banner: grunt.file.read( 'build/banner.txt' ),
+					process: makeImportRelative
 				},
 				dest: 'dist/visualEditor-apex.less',
 				src: coreBuildFilesApex.styles
 			},
 			'css-wikimediaui': {
 				options: {
-					banner: grunt.file.read( 'build/banner.txt' )
+					banner: grunt.file.read( 'build/banner.txt' ),
+					process: makeImportRelative
 				},
 				dest: 'dist/visualEditor-wikimediaui.less',
 				src: coreBuildFilesWikimediaUI.styles
