@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5543edd1_aade6b5e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2950
+      },
+      "writtenOn": "2024-06-19T14:47:28Z",
+      "side": 1,
+      "message": "In order to avoid the path issue, I\u0027m considering hard coding the token values. Currently The codex design tokens look something like this:\n\n    @background-color-base:var( --background-color-base, #fff );\n    \nSo instead of importing the codex-design-tokens package and using variables like `@background-color-base`, we could just use the raw values:\n\n.ve-ui-toolbarDialog {\n    background-color: var( --background-color-base, #fff );\n}\n\nThis could still (technically) be considered library/Mediawiki agnostic because the fallback provides a static value when the variable is undefined.\n\nWhat do you think?",
+      "parentUuid": "4469c8ff_bb2da647",
+      "revId": "5ec7625bb164699b073162dbf567aeebcad1ad20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2ca33959_423bf67b",
         "filename": "package-lock.json",
         "patchSetId": 3
