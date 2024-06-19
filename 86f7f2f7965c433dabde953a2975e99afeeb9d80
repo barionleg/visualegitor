@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0ad0430_0424db87",
+        "filename": "collab/ve.collab.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2024-06-19T16:24:18Z",
+      "side": 1,
+      "message": "This needs to be passed to the server.",
+      "revId": "86f7f2f7965c433dabde953a2975e99afeeb9d80",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b84e5237_d5855717",
+        "filename": "collab/ve.collab.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2024-06-19T16:24:18Z",
+      "side": 1,
+      "message": "This needs to be passed to the server.",
+      "revId": "86f7f2f7965c433dabde953a2975e99afeeb9d80",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
