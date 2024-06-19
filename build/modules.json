@@ -59,6 +59,11 @@
 			"lib/color-picker/color-picker.css"
 		]
 	},
+	"codex-design-tokens": {
+		"styles": [
+			"lib/codex-design-tokens/theme-wikimedia-ui.less"
+		]
+	},
 	"oojs": {
 		"scripts": [
 			"lib/oojs/oojs.js"
