@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "751fd9c9_995c10fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2024-06-19T17:10:29Z",
+      "side": 1,
+      "message": "I\u0027d be happy to merge in the current state and fix the /dist build later.",
+      "revId": "6fdf5ce5fc0b8b1f9d69e45bbcd780b7dc4e49ee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
