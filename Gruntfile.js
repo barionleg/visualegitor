@@ -124,6 +124,10 @@ module.exports = function ( grunt ) {
 			'jquery.uls.data': {
 				dest: 'dist/lib/jquery.uls.data.js',
 				src: modules[ 'jquery.uls.data' ].scripts
+			},
+			'codex-design-tokens': {
+				dest: 'dist/lib/codex-design-tokens/theme-wikimedia-ui.less',
+				src: modules[ 'codex-design-tokens' ].styles
 			}
 		},
 		less: {
@@ -132,7 +136,8 @@ module.exports = function ( grunt ) {
 				strictUnits: true,
 				// Force LESS v3.0.0+ to let us use mixins before we later upgrade to @plugin
 				// architecture.
-				javascriptEnabled: true
+				javascriptEnabled: true,
+				paths: [ 'lib/codex-design-tokens' ]
 			},
 			dist: {
 				files: distLessFiles
