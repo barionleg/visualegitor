@@ -44,7 +44,7 @@ ve.collab.newPeer = function () {
 	// return new ve.FakePeer();
 };
 
-ve.collab.initPeerServer = function () {
+ve.collab.initPeerServer = function ( userName ) {
 	const surface = ve.init.target.surface,
 		completeHistory = surface.model.documentModel.completeHistory;
 
@@ -71,7 +71,7 @@ ve.collab.initPeerServer = function () {
 	} );
 };
 
-ve.collab.initPeerClient = function ( serverId, isMain ) {
+ve.collab.initPeerClient = function ( serverId, isMain, userName ) {
 	const surface = ve.init.target.surface,
 		completeHistory = surface.model.documentModel.completeHistory,
 		peerClient = ve.collab.newPeer();
@@ -154,11 +154,11 @@ ve.collab.join = function () {
 ve.collab.start = function ( serverId ) {
 	if ( serverId ) {
 		// Join an existing session
-		ve.init.target.surface.dialogs.openWindow( 'joinCollabDialog' ).closing.then( ( val ) => {
-			if ( val !== 'accept' ) {
+		ve.init.target.surface.dialogs.openWindow( 'joinCollabDialog' ).closing.then( ( data ) => {
+			if ( !( data && data.action === 'accept' ) ) {
 				return;
 			}
-			ve.collab.initPeerClient( serverId );
+			ve.collab.initPeerClient( serverId, false, data.userName );
 		} );
 		return;
 	}
