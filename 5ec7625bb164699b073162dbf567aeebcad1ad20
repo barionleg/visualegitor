@@ -88,6 +88,24 @@
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "95892d7b_dd62a777",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2950
+      },
+      "writtenOn": "2024-06-19T18:32:59Z",
+      "side": 1,
+      "message": "These path issues were resolved with https://gerrit.wikimedia.org/r/c/VisualEditor/VisualEditor/+/1047564/3",
+      "parentUuid": "5543edd1_aade6b5e",
+      "revId": "5ec7625bb164699b073162dbf567aeebcad1ad20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2ca33959_423bf67b",
@@ -101,6 +119,24 @@
       "writtenOn": "2024-06-19T07:40:01Z",
       "side": 1,
       "message": "undo these changes...",
+      "revId": "5ec7625bb164699b073162dbf567aeebcad1ad20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5de8a4a_f37ceead",
+        "filename": "package-lock.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2950
+      },
+      "writtenOn": "2024-06-19T18:32:59Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "2ca33959_423bf67b",
       "revId": "5ec7625bb164699b073162dbf567aeebcad1ad20",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
