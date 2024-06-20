@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a769224_c2eb75b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2024-06-20T01:37:09Z",
+      "side": 1,
+      "message": "Merged Ic1224ddf0e994b1f977b027601fd14404af933f0 into this change",
+      "revId": "38a71df5502fa5bd5c36a16e6cf0e40663d8e0d8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}

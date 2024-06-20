@@ -16,6 +16,24 @@
       "message": "can you add an inline comment. is authorId 1 \"magic\"?",
       "revId": "952078dbd701a11c899c75561761cccc02b0a84c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9ca8a26_03706b54",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2024-06-20T01:37:09Z",
+      "side": 1,
+      "message": "Yes, it is the host user\u0027s authorId. But now this call is obsoleted by reading the username into ve.ui.CollabProcessDialog as you demonstrated.",
+      "parentUuid": "d8179e58_1f2224ec",
+      "revId": "952078dbd701a11c899c75561761cccc02b0a84c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
