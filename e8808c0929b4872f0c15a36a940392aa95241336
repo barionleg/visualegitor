@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b732890a_319b2f48",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2024-06-21T11:46:31Z",
+      "side": 1,
+      "message": "Rebase on I81501938202f8bd2ec5e74953cad43b56c6940fa",
+      "revId": "e8808c0929b4872f0c15a36a940392aa95241336",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
