@@ -33,14 +33,14 @@ ve.ce.LinearDeleteKeyDownHandler.static.supportedSelections = [ 'linear' ];
 /* Static methods */
 
 /**
- * @inheritdoc
- *
  * The handler just schedules a poll to observe the native content removal, unless
  * one of the following is true:
  * - The ctrlKey is down; or
  * - The selection is expanded; or
  * - We are directly adjacent to an element node in the deletion direction.
  * In these cases, it will perform the content removal itself.
+ *
+ * @inheritdoc
  */
 ve.ce.LinearDeleteKeyDownHandler.static.execute = function ( surface, e ) {
 	const direction = e.keyCode === OO.ui.Keys.DELETE ? 1 : -1,
