@@ -16,6 +16,40 @@
       "message": "I changed the inputTypeCommands interface to be a bit more intuitive.\n+2 to the parts I didn\u0027t write.",
       "revId": "ddb46e753b099c2a78a6b23ec1611b5f2d1e2de3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc52e6ee_b6d61ed3",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 3434,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2024-06-22T09:38:04Z",
+      "side": 1,
+      "message": "Stick with the hasOwnProperty.call stuff as that is the only safe way to use an object as a dictionary.",
+      "revId": "ddb46e753b099c2a78a6b23ec1611b5f2d1e2de3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de0dc60e_31e19e59",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 3452,
+      "author": {
+        "id": 658
+      },
+      "writtenOn": "2024-06-22T09:38:04Z",
+      "side": 1,
+      "message": "I don\u0027t think we need to typecheck for string. This silently discards non-null non-string values. I prefer the previous approach of just checking for !\u003d\u003d null. executeCommand might throw something helpful if a bad input is passed, or support a non-string argument in the future...",
+      "revId": "ddb46e753b099c2a78a6b23ec1611b5f2d1e2de3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
