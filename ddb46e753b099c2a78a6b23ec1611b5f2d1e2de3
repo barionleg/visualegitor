@@ -35,6 +35,24 @@
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0d02a30_37a10828",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 3434,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2024-06-22T12:01:33Z",
+      "side": 1,
+      "message": "Ok, let\u0027s use an actual Map instead. (I think raw access was safe in this case, but yes it\u0027s fair to say it\u0027s an antipattern)",
+      "parentUuid": "dc52e6ee_b6d61ed3",
+      "revId": "ddb46e753b099c2a78a6b23ec1611b5f2d1e2de3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "de0dc60e_31e19e59",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-06-22T09:38:04Z",
       "side": 1,
       "message": "I don\u0027t think we need to typecheck for string. This silently discards non-null non-string values. I prefer the previous approach of just checking for !\u003d\u003d null. executeCommand might throw something helpful if a bad input is passed, or support a non-string argument in the future...",
+      "revId": "ddb46e753b099c2a78a6b23ec1611b5f2d1e2de3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f738107_d5e31924",
+        "filename": "src/ce/ve.ce.Surface.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 3452,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2024-06-22T12:01:33Z",
+      "side": 1,
+      "message": "Yes, good point",
+      "parentUuid": "de0dc60e_31e19e59",
       "revId": "ddb46e753b099c2a78a6b23ec1611b5f2d1e2de3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
