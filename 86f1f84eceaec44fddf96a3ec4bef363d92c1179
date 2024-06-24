@@ -16,6 +16,23 @@
       "message": "There was a merge conflict and I rebased. Probably needs a +2 again",
       "revId": "86f1f84eceaec44fddf96a3ec4bef363d92c1179",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ea32dab_d6977aca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2024-06-24T16:15:08Z",
+      "side": 1,
+      "message": "…",
+      "revId": "86f1f84eceaec44fddf96a3ec4bef363d92c1179",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
