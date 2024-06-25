@@ -1102,7 +1102,7 @@ ve.dm.Surface.prototype.undo = function () {
 				item.transactions,
 				// Undo cannot add store items, so we don't need to worry here
 				item.transactions.map( () => new ve.dm.HashValueStore() ),
-				{}
+				Object.create( null )
 			);
 			const result = ve.dm.Change.static.rebaseUncommittedChange( history, done.reversed() );
 			if ( result.rejected ) {

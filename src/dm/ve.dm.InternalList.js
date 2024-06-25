@@ -21,9 +21,9 @@ ve.dm.InternalList = function VeDmInternalList( doc ) {
 	this.document = doc;
 	this.itemHtmlQueue = [];
 	this.listNode = null;
-	this.nodes = {};
+	this.nodes = Object.create( null );
 	this.groupsChanged = [];
-	this.keyIndexes = {};
+	this.keyIndexes = Object.create( null );
 	this.keys = [];
 
 	// Event handlers
@@ -299,11 +299,11 @@ ve.dm.InternalList.prototype.addNode = function ( groupName, key, index, node ) 
 	// The group may not exist yet
 	if ( group === undefined ) {
 		group = this.nodes[ groupName ] = {
-			keyedNodes: {},
+			keyedNodes: Object.create( null ),
 			firstNodes: [],
 			indexOrder: [],
-			uniqueListKeys: {},
-			uniqueListKeysInUse: {}
+			uniqueListKeys: Object.create( null ),
+			uniqueListKeysInUse: Object.create( null )
 		};
 	}
 	let keyedNodes = group.keyedNodes[ key ];

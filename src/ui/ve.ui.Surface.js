@@ -109,7 +109,7 @@ ve.ui.Surface = function VeUiSurface( target, dataOrDocOrSurface, config ) {
 		left: 0
 	};
 	// Intiailised on first use
-	this.toolbarDialogs = {};
+	this.toolbarDialogs = Object.create( null );
 
 	// Events
 	this.getModel().connect( this, {

@@ -30,7 +30,7 @@ OO.initClass( ve.dm.ClassAttributeNode );
  *
  * @type {Object}
  */
-ve.dm.ClassAttributeNode.static.classAttributes = {};
+ve.dm.ClassAttributeNode.static.classAttributes = Object.create( null );
 
 ve.dm.ClassAttributeNode.static.preserveHtmlAttributes = function ( attribute ) {
 	return attribute !== 'class';
@@ -72,7 +72,7 @@ ve.dm.ClassAttributeNode.static.setClassAttributes = function ( attributes, clas
  * @return {string|null} Class name, or null if no classes to set
  */
 ve.dm.ClassAttributeNode.static.getClassAttrFromAttributes = function ( attributes ) {
-	attributes = attributes || {};
+	attributes = attributes || Object.create( null );
 
 	let classNames = [];
 	for ( const className in this.classAttributes ) {

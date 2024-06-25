@@ -124,7 +124,7 @@ ve.ui.Sequence.prototype.execute = function ( surface, range ) {
 	// to un-strip the sequence if it is closed without action. See ve.ui.WindowAction.
 	if ( command.getAction() === 'window' && command.getMethod() === 'open' ) {
 		args = ve.copy( command.args );
-		args[ 1 ] = args[ 1 ] || {};
+		args[ 1 ] = args[ 1 ] || Object.create( null );
 		args[ 1 ].strippedSequence = !!this.strip;
 	}
 

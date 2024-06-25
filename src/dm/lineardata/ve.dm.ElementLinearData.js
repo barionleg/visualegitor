@@ -523,7 +523,7 @@ ve.dm.ElementLinearData.prototype.setAttributeAtOffset = function ( offset, key,
 		} else {
 			// Automatically initialize attributes object
 			if ( !item.attributes ) {
-				item.attributes = {};
+				item.attributes = Object.create( null );
 			}
 			// Set
 			item.attributes[ key ] = value;
@@ -1105,7 +1105,7 @@ ve.dm.ElementLinearData.prototype.getWordRange = function ( offset ) {
  */
 ve.dm.ElementLinearData.prototype.getUsedStoreValues = function ( range ) {
 	const store = this.getStore(),
-		valueStore = {};
+		valueStore = Object.create( null );
 
 	range = range || new ve.Range( 0, this.data.length );
 

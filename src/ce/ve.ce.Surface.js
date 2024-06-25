@@ -68,9 +68,9 @@ ve.ce.Surface = function VeCeSurface( model, ui, config ) {
 	this.showAsActivated = false;
 	this.hideSelection = false;
 	this.$deactivatedSelection = $( '<div>' );
-	this.userSelectionDeactivate = {};
-	this.drawnSelections = {};
-	this.drawnSelectionCache = {};
+	this.userSelectionDeactivate = Object.create( null );
+	this.drawnSelections = Object.create( null );
+	this.drawnSelectionCache = Object.create( null );
 	this.activeNode = null;
 	this.contentBranchNodeChanged = false;
 	this.selectionLink = null;
@@ -1037,7 +1037,7 @@ ve.ce.Surface.prototype.redrawSelections = function () {
 		drawnSelection.$selections.empty();
 	} );
 
-	this.drawnSelectionCache = {};
+	this.drawnSelectionCache = Object.create( null );
 	Object.keys( this.drawnSelections ).forEach( ( name ) => {
 		const drawnSelection = this.drawnSelections[ name ];
 		this.drawSelections( name, drawnSelection.selections, drawnSelection.options );
@@ -2203,7 +2203,7 @@ ve.ce.Surface.prototype.onCopy = function ( e, selection ) {
 	// Some attributes (e.g RDFa attributes in Firefox) aren't preserved by copy
 	const unsafeSelector = '[' + ve.ce.Surface.static.unsafeAttributes.join( '],[' ) + ']';
 	this.$pasteTarget.find( unsafeSelector ).each( ( n, element ) => {
-		const attrs = {},
+		const attrs = Object.create( null ),
 			ua = ve.ce.Surface.static.unsafeAttributes;
 
 		let i = ua.length;
@@ -4041,7 +4041,7 @@ ve.ce.Surface.prototype.findAndExecuteDelayedSequences = function () {
 	} else {
 		matchingSequences = this.findMatchingSequences();
 	}
-	const matchingByName = {};
+	const matchingByName = Object.create( null );
 	let i;
 	for ( i = 0; i < matchingSequences.length; i++ ) {
 		matchingByName[ matchingSequences[ i ].sequence.getName() ] = matchingSequences[ i ];
