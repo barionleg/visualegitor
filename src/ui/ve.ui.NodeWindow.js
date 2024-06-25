@@ -73,14 +73,14 @@ ve.ui.NodeWindow.prototype.getSelectedNode = function () {
 };
 
 ve.ui.NodeWindow.prototype.getSetupProcess = function ( data, process ) {
-	data = data || {};
+	data = data || Object.create( null );
 	return process.next( () => {
 		this.selectedNode = this.getSelectedNode( data );
 	} );
 };
 
 ve.ui.NodeWindow.prototype.getTeardownProcess = function ( data, process ) {
-	data = data || {};
+	data = data || Object.create( null );
 	return process.next( () => {
 		this.selectedNode = null;
 	} );

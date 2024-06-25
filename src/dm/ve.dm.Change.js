@@ -83,7 +83,7 @@ ve.dm.Change = function VeDmChange( start, transactions, stores, selections ) {
 			this.storeLengthAtTransaction.push( this.store.getLength() );
 		} );
 	}
-	this.selections = selections || {};
+	this.selections = selections || Object.create( null );
 };
 
 /* Static methods */
@@ -105,7 +105,7 @@ ve.dm.Change.static.deserialize = function ( data, preserveStoreValues, unsafe )
 	const hasOwn = Object.prototype.hasOwnProperty,
 		getTransactionInfo = this.getTransactionInfo,
 		deserializeValue = this.deserializeValue,
-		selections = {},
+		selections = Object.create( null ),
 		transactions = [],
 		// If stores is undefined, create an array of nulls
 		stores = data.stores || data.transactions.map( () => null );
@@ -404,7 +404,7 @@ ve.dm.Change.static.rebaseUncommittedChange = function ( history, uncommitted ) 
 				rejected = uncommitted.mostRecent( uncommitted.start + i );
 				transactionsB.length = i;
 				storesB.length = i;
-				selectionsB = {};
+				selectionsB = Object.create( null );
 				break bLoop;
 			}
 			rebasedTransactionsA[ j ] = rebases[ 0 ];
@@ -423,13 +423,13 @@ ve.dm.Change.static.rebaseUncommittedChange = function ( history, uncommitted ) 
 		uncommitted.start + transactionsA.length,
 		transactionsB,
 		storesB,
-		{}
+		Object.create( null )
 	);
 	const transposedHistory = new ve.dm.Change(
 		history.start + transactionsB.length,
 		transactionsA,
 		storesA,
-		{}
+		Object.create( null )
 	);
 	let authorId;
 	for ( authorId in selectionsB ) {
@@ -671,7 +671,7 @@ ve.dm.Change.prototype.reversed = function () {
 		this.transactions.map( ( tx ) => ve.dm.Transaction.prototype.reversed.call( tx ) ).reverse(),
 		// Empty store for each transaction (reverting cannot possibly add new annotations)
 		this.transactions.map( () => new ve.dm.HashValueStore() ),
-		{}
+		Object.create( null )
 	);
 };
 
@@ -787,7 +787,7 @@ ve.dm.Change.prototype.truncate = function ( length ) {
 		this.start,
 		this.transactions.slice( 0, length ),
 		this.getStores().slice( 0, length ),
-		{}
+		Object.create( null )
 	);
 };
 
@@ -883,7 +883,7 @@ ve.dm.Change.prototype.removeFromHistory = function ( doc ) {
  */
 ve.dm.Change.prototype.serialize = function ( preserveStoreValues ) {
 	const getTransactionInfo = this.constructor.static.getTransactionInfo,
-		selections = {},
+		selections = Object.create( null ),
 		transactions = [];
 
 	// Recursively serialize, so this method is the inverse of deserialize

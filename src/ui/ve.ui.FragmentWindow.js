@@ -55,7 +55,7 @@ ve.ui.FragmentWindow.prototype.getActionWidgetConfig = function ( config ) {
  * @throws {Error} If fragment was not provided through data parameter
  */
 ve.ui.FragmentWindow.prototype.getSetupProcess = function ( data, process ) {
-	data = data || {};
+	data = data || Object.create( null );
 	return process.first( () => {
 		if ( !( data.fragment instanceof ve.dm.SurfaceFragment ) ) {
 			throw new Error( 'Cannot open dialog: opening data must contain a fragment' );

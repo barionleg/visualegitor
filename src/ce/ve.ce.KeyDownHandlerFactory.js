@@ -16,7 +16,7 @@ ve.ce.KeyDownHandlerFactory = function VeCeKeyDownHandlerFactory() {
 	ve.ce.KeyDownHandlerFactory.super.apply( this, arguments );
 
 	// Handlers which match all kinds and a specific type
-	this.handlerNamesByKeys = {};
+	this.handlerNamesByKeys = Object.create( null );
 };
 
 /* Inheritance */

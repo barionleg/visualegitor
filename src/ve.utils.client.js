@@ -44,7 +44,7 @@ ve.supportsSelectionExtend = !!window.getSelection().extend;
  * @return {Object} Translated rect
  */
 ve.translateRect = function ( rect, x, y ) {
-	const translatedRect = {};
+	const translatedRect = Object.create( null );
 	if ( rect.top !== undefined ) {
 		translatedRect.top = rect.top + y;
 	}
@@ -82,7 +82,7 @@ ve.getStartAndEndRects = function ( rects ) {
 	for ( let i = 0, l = rects.length; i < l; i++ ) {
 		if ( !startRect || rects[ i ].top < startRect.top ) {
 			// Use ve.extendObject as ve.copy copies non-plain objects by reference
-			startRect = ve.extendObject( {}, rects[ i ] );
+			startRect = ve.extendObject( Object.create( null ), rects[ i ] );
 		} else if ( rects[ i ].top === startRect.top ) {
 			// Merge rects with the same top coordinate
 			startRect.left = Math.min( startRect.left, rects[ i ].left );
@@ -91,7 +91,7 @@ ve.getStartAndEndRects = function ( rects ) {
 		}
 		if ( !endRect || rects[ i ].bottom > endRect.bottom ) {
 			// Use ve.extendObject as ve.copy copies non-plain objects by reference
-			endRect = ve.extendObject( {}, rects[ i ] );
+			endRect = ve.extendObject( Object.create( null ), rects[ i ] );
 		} else if ( rects[ i ].bottom === endRect.bottom ) {
 			// Merge rects with the same bottom coordinate
 			endRect.left = Math.min( endRect.left, rects[ i ].left );

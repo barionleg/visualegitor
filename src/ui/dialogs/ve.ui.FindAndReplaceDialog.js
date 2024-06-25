@@ -204,7 +204,7 @@ ve.ui.FindAndReplaceDialog.prototype.initialize = function () {
  * @inheritdoc
  */
 ve.ui.FindAndReplaceDialog.prototype.getSetupProcess = function ( data ) {
-	data = data || {};
+	data = data || Object.create( null );
 	return ve.ui.FindAndReplaceDialog.super.prototype.getSetupProcess.call( this, data )
 		.first( () => {
 			this.surface = data.surface;

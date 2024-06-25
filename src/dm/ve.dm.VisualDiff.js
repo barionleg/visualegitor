@@ -917,13 +917,13 @@ ve.dm.VisualDiff.prototype.underDiffThreshold = function ( changeRecord ) {
  * @return {ve.dm.VisualDiff.MetaListDiff}
  */
 ve.dm.VisualDiff.prototype.getMetaListDiff = function ( oldMetaList, newMetaList ) {
-	const oldItemsByGroup = {};
+	const oldItemsByGroup = Object.create( null );
 	oldMetaList.items.forEach( ( metaItem ) => {
 		const group = metaItem.getGroup();
 		oldItemsByGroup[ group ] = oldItemsByGroup[ group ] || [];
 		oldItemsByGroup[ group ].push( metaItem );
 	} );
-	const newItemsByGroup = {};
+	const newItemsByGroup = Object.create( null );
 	newMetaList.items.forEach( ( metaItem ) => {
 		const group = metaItem.getGroup();
 		newItemsByGroup[ group ] = newItemsByGroup[ group ] || [];
@@ -933,7 +933,7 @@ ve.dm.VisualDiff.prototype.getMetaListDiff = function ( oldMetaList, newMetaList
 		Object.keys( oldItemsByGroup ),
 		Object.keys( newItemsByGroup )
 	);
-	const groupDiffs = {};
+	const groupDiffs = Object.create( null );
 	groups.forEach( ( group ) => {
 		groupDiffs[ group ] = this.diffList(
 			oldItemsByGroup[ group ] || [],
@@ -967,7 +967,7 @@ ve.dm.VisualDiff.prototype.getInternalListDiff = function ( oldInternalList, new
 		oldDocInternalListNode = oldInternalList.getListNode(),
 		newDocInternalListNode = newInternalList.getListNode(),
 		groups = [],
-		groupDiffs = {};
+		groupDiffs = Object.create( null );
 	let oldDocInternalListItems,
 		newDocInternalListItems;
 

@@ -117,7 +117,7 @@ ve.ui.CommentInspector.prototype.getReadyProcess = function ( data ) {
  * @inheritdoc
  */
 ve.ui.CommentInspector.prototype.getTeardownProcess = function ( data ) {
-	data = data || {};
+	data = data || Object.create( null );
 	return ve.ui.CommentInspector.super.prototype.getTeardownProcess.call( this, data )
 		.first( () => {
 			const surfaceModel = this.getFragment().getSurface();
