@@ -50,7 +50,7 @@
 ve.EventSequencer = function VeEventSequencer( eventNames ) {
 	this.$node = null;
 	this.eventNames = eventNames;
-	this.eventHandlers = {};
+	this.eventHandlers = Object.create( null );
 
 	/**
 	 * Generate an event handler for a specific event
@@ -73,17 +73,17 @@ ve.EventSequencer = function VeEventSequencer( eventNames ) {
 	/**
 	 * @property {Object.<string,Function[]>}
 	 */
-	this.onListenersForEvent = {};
+	this.onListenersForEvent = Object.create( null );
 
 	/**
 	 * @property {Object.<string,Function[]>}
 	 */
-	this.afterListenersForEvent = {};
+	this.afterListenersForEvent = Object.create( null );
 
 	/**
 	 * @property {Object.<string,Function[]>}
 	 */
-	this.afterOneListenersForEvent = {};
+	this.afterOneListenersForEvent = Object.create( null );
 
 	for ( let i = 0, len = eventNames.length; i < len; i++ ) {
 		const eventName = eventNames[ i ];

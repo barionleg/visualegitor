@@ -52,7 +52,7 @@ ve.dm.Document = function VeDmDocument( data, htmlDocument, parentDocument, inte
 	// Properties
 	this.parentDocument = parentDocument || null;
 	this.originalDocument = originalDocument || null;
-	this.nodesByType = {};
+	this.nodesByType = Object.create( null );
 	this.origInternalListLength = null;
 	this.readOnly = false;
 
@@ -82,7 +82,7 @@ ve.dm.Document = function VeDmDocument( data, htmlDocument, parentDocument, inte
 		this.completeHistory.storeLengthAtTransaction.push( this.store.getLength() );
 	}
 	this.htmlDocument = htmlDocument || ve.createDocumentFromHtml( '' );
-	this.persistentStorage = persistentStorage || {};
+	this.persistentStorage = persistentStorage || Object.create( null );
 };
 
 /* Inheritance */
@@ -744,7 +744,7 @@ ve.dm.Document.prototype.cloneWithData = function ( data, copyInternalList, deta
  */
 ve.dm.Document.prototype.getFullData = function ( range, mode ) {
 	const insertedMetaItems = [],
-		insertions = {},
+		insertions = Object.create( null ),
 		iLen = range ? range.end : this.data.getLength(),
 		result = [];
 
@@ -1567,8 +1567,8 @@ ve.dm.Document.prototype.newFromHtml = function ( html, importRules ) {
 		data = doc.data;
 
 	if ( importRules ) {
-		data.sanitize( importRules.external || {} );
-		data.sanitize( importRules.all || {} );
+		data.sanitize( importRules.external || Object.create( null ) );
+		data.sanitize( importRules.all || Object.create( null ) );
 	}
 
 	data.remapInternalListKeys( this.getInternalList() );
@@ -1596,7 +1596,7 @@ ve.dm.Document.prototype.findText = function ( query, options ) {
 		documentRange = this.getDocumentRange();
 	let ranges = [];
 
-	options = options || {};
+	options = options || Object.create( null );
 
 	if ( query instanceof RegExp ) {
 		// Avoid multi-line matching by only matching within content (text or content elements)
@@ -1716,7 +1716,7 @@ ve.dm.Document.prototype.getCompleteHistorySince = function ( start ) {
 ve.dm.Document.prototype.getChangeSince = function ( start ) {
 	const change = this.completeHistory.mostRecent( start );
 	// Remove any selections that might have been added by e.g. ve.dm.Change#addToHistory
-	change.selections = {};
+	change.selections = Object.create( null );
 	return change;
 };
 

@@ -434,9 +434,9 @@ ve.dm.Model.prototype.getAttribute = function ( key ) {
  * @return {Object} Attributes
  */
 ve.dm.Model.prototype.getAttributes = function ( prefix ) {
-	const attributes = this.element && this.element.attributes ? this.element.attributes : {};
+	const attributes = this.element && this.element.attributes ? this.element.attributes : Object.create( null );
 	if ( prefix ) {
-		const filtered = {};
+		const filtered = Object.create( null );
 		for ( const key in attributes ) {
 			if ( key.indexOf( prefix ) === 0 ) {
 				filtered[ key.slice( prefix.length ) ] = attributes[ key ];
@@ -444,7 +444,7 @@ ve.dm.Model.prototype.getAttributes = function ( prefix ) {
 		}
 		return filtered;
 	}
-	return ve.extendObject( {}, attributes );
+	return ve.extendObject( Object.create( null ), attributes );
 };
 
 /**

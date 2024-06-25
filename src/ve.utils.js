@@ -81,7 +81,7 @@ ve.deleteProp = OO.deleteProp;
  *
  *     var foo = new Person( mom, dad );
  *     foo.setAge( 21 );
- *     var foo2 = OO.cloneObject( foo );
+ *     var foo2 = ve.cloneObject( foo );
  *     foo.setAge( 22 );
  *
  *     // Then
@@ -96,7 +96,18 @@ ve.deleteProp = OO.deleteProp;
  * @param {Object} origin
  * @return {Object} Clone of origin
  */
-ve.cloneObject = OO.cloneObject;
+ve.cloneObject = function ( origin ) {
+	// TODO: upstream this fixed version to OOJS
+	const r = Object.create( Object.getPrototypeOf( origin ) );
+
+	for ( const key in origin ) {
+		if ( Object.prototype.hasOwnProperty.call( origin, key ) ) {
+			r[ key ] = origin[ key ];
+		}
+	}
+
+	return r;
+};
 
 /**
  * Get an array of all property values in an object.

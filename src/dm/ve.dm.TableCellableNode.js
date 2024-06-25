@@ -45,7 +45,7 @@ ve.dm.TableCellableNode.static.setAttributes = function ( attributes, domElement
 		// may need to be summed over an about-group (T366984).
 		let colspan = 0, rowspan = 0;
 		Array.prototype.forEach.call( domElements, ( node ) => {
-			const attrs = {};
+			const attrs = Object.create( null );
 			this.setAttributes( attrs, [ node ], false );
 			colspan += attrs.colspan || 1;
 			// TODO: Support a non-rectangular alien group

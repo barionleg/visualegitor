@@ -692,7 +692,7 @@ ve.dm.Converter.prototype.getDataFromDomSubtree = function ( domElement, wrapper
 			return;
 		}
 		if ( !element.internal ) {
-			element.internal = {};
+			element.internal = Object.create( null );
 		}
 		// whitespace = [ outerPre, innerPre, innerPost, outerPost ]
 		//         <tag>        text         </tag>         <nextTag>
@@ -1712,7 +1712,7 @@ ve.dm.Converter.prototype.getDomSubtreeFromData = function ( data, container, in
 					// we modify .veInternal.whitespace[1] in some cases
 					childDomElements[ 0 ].veInternal = ve.extendObject(
 						{ childDomElements: childDomElements },
-						dataElement.internal ? ve.copy( dataElement.internal ) : {}
+						dataElement.internal ? ve.copy( dataElement.internal ) : Object.create( null )
 					);
 					// Add elements
 					for ( let j = 0; j < childDomElements.length; j++ ) {

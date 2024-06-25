@@ -128,7 +128,7 @@ ve.ui.LanguageInputWidget.prototype.onFindLanguageButtonClick = function () {
 		availableLanguages: this.availableLanguages,
 		$returnFocusTo: null
 	} ).closing.then( ( data ) => {
-		data = data || {};
+		data = data || Object.create( null );
 		if ( data.action === 'done' ) {
 			this.setLangAndDir( data.lang, data.dir );
 		}

@@ -29,7 +29,7 @@ ve.init.sa.Platform = function VeInitSaPlatform( messagePaths ) {
 	this.externalLinkUrlProtocolsRegExp = /^https?:\/\//i;
 	this.unanchoredExternalLinkUrlProtocolsRegExp = /https?:\/\//i;
 	this.messagePaths = messagePaths || [];
-	this.parsedMessages = {};
+	this.parsedMessages = Object.create( null );
 	this.userLanguages = [ 'en' ];
 };
 
@@ -179,7 +179,7 @@ ve.init.sa.Platform.prototype.getConfig = function () {
  */
 ve.init.sa.Platform.prototype.getUserConfig = function ( keys ) {
 	if ( Array.isArray( keys ) ) {
-		const values = {};
+		const values = Object.create( null );
 		for ( let i = 0, l = keys.length; i < l; i++ ) {
 			values[ keys[ i ] ] = this.getUserConfig( keys[ i ] );
 		}
@@ -286,7 +286,7 @@ ve.init.sa.Platform.prototype.initialize = function () {
 	const messagePaths = this.getMessagePaths(),
 		locale = $.i18n().locale,
 		languages = [ locale, 'en' ], // Always use 'en' as the final fallback
-		languagesCovered = {},
+		languagesCovered = Object.create( null ),
 		promises = [];
 	let fallbacks = $.i18n.fallbacks[ locale ];
 

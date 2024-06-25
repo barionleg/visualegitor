@@ -39,7 +39,7 @@ ve.ui.WindowAction.static.methods = [ 'open', 'close', 'toggle' ];
  * @return {boolean|jQuery.Promise} Action was executed; if a Promise, it'll resolve once the action is finished executing
  */
 ve.ui.WindowAction.prototype.open = function ( name, data, action ) {
-	data = data || {};
+	data = data || Object.create( null );
 	const windowType = this.getWindowType( name ),
 		windowManager = this.getWindowManager( windowType ),
 		currentWindow = windowManager.getCurrentWindow(),

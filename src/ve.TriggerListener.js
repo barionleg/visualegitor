@@ -16,8 +16,8 @@
 ve.TriggerListener = function VeTriggerListener( commands, commandRegistry ) {
 	// Properties
 	this.commands = commands;
-	this.commandsByTrigger = {};
-	this.triggers = {};
+	this.commandsByTrigger = Object.create( null );
+	this.triggers = Object.create( null );
 
 	for ( let i = this.commands.length - 1; i >= 0; i-- ) {
 		const command = this.commands[ i ];
