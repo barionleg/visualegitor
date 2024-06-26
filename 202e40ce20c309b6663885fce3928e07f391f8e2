@@ -16,6 +16,24 @@
       "message": "1. You\u0027ve replaced all instances where we instantiate empty objects, but maps are also created non-empty, e.g. `const dict \u003d { initKey: \u0027initVal\u0027, ... }`\n2. I think this is probably excessive (especially if we fix all the cases in (1)). A lot of the objects are used in tightly scoped ways, e.g. as a config object with a documented list of available keys, or a value object like `dimensions`, which can only have `.width` and `.height`. But for registries and other open-ended dictionaries we can switch to Object.create. I think anything that has `hasOwnProperty` called on it is a good place to start.",
       "revId": "202e40ce20c309b6663885fce3928e07f391f8e2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7224e6f_241a8d7b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2024-06-26T12:56:39Z",
+      "side": 1,
+      "message": "I tried to exclude any config/restricted value objects — are there specific ones I mistakenly included?\n\nI agree non-empty cases need handling too — I was thinking a separate commit but do you want them to be in the same commit?",
+      "parentUuid": "e4fe125d_e3e46347",
+      "revId": "202e40ce20c309b6663885fce3928e07f391f8e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
