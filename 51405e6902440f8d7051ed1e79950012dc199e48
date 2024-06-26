@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa72becd_e8677d81",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 11575
+      },
+      "writtenOn": "2024-06-26T17:33:41Z",
+      "side": 1,
+      "message": "Which browsers don\u0027t have Object.entries? I\u0027ve had a look for browser coverage on MDN (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries) and it should be in anything that hits our minimum browser requirements (https://www.mediawiki.org/wiki/Compatibility#Browsers).\n\nCould you clarify in a code comment what the need for this is?",
+      "revId": "51405e6902440f8d7051ed1e79950012dc199e48",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
