@@ -498,6 +498,16 @@ ve.msg = function () {
 };
 
 /**
+ * Format a number to localized form.
+ *
+ * @param {number} number
+ * @return {string} Formatted number
+ */
+ve.formatNumber = function ( number ) {
+	return ve.init.platform.formatNumber( number );
+};
+
+/**
  * Get an HTML localized message with HTML or DOM arguments.
  *
  * @param {string} key Message key

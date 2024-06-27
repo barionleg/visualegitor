@@ -459,7 +459,10 @@ ve.ui.FindAndReplaceDialog.prototype.highlightFocused = function ( scrollIntoVie
 
 	if ( this.results ) {
 		this.findText.setLabel(
-			ve.msg( 'visualeditor-find-and-replace-results', this.focusedIndex + 1, this.results )
+			ve.msg( 'visualeditor-find-and-replace-results',
+				ve.formatNumber( this.focusedIndex + 1 ),
+				ve.formatNumber( this.results )
+			)
 		);
 	} else {
 		this.findText.setLabel(
