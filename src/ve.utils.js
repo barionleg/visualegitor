@@ -485,6 +485,16 @@ ve.deepFreeze = ve.deepFreeze || function ( obj ) {
 };
 
 /**
+ * Format a number to localized form.
+ *
+ * @param {number} number
+ * @return {string} Formatted number
+ */
+ve.formatNumber = function ( number ) {
+	return ve.init.platform.formatNumber( number );
+};
+
+/**
  * Get a localized message.
  *
  * @param {string} key Message key
