@@ -235,11 +235,12 @@ ve.init.Platform.prototype.parseNumber = null;
 /**
  * For a number as a string
  *
- * @abstract
  * @param {number} number Number to be formatted
  * @return {string} Formatted number
  */
-ve.init.Platform.prototype.formatNumber = null;
+ve.init.Platform.prototype.formatNumber = function ( number ) {
+	return number.toLocaleString();
+};
 
 /**
  * Get an HTML message from the localization system, with HTML or DOM arguments
