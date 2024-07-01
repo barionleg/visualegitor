@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b27b7f0_fbb527af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2024-07-01T21:04:33Z",
+      "side": 1,
+      "message": "PS2: Also commit the updated build files due to the new i18n languages.",
+      "revId": "3edaeb30e37a0dcf72bdc14521a87f85f768878d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
