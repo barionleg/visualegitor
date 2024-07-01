@@ -51,6 +51,24 @@
       "parentUuid": "36a9019b_2ef52053",
       "revId": "e33df9663858bd6a962056ae462f878d959dee29",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37fec1df_33897c26",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 449
+      },
+      "writtenOn": "2024-07-01T22:23:19Z",
+      "side": 1,
+      "message": "Thank you so much for the help, while investigating the object you said found something that provides the similar functionality that is already in use in https://github.com/wikimedia/VisualEditor/blob/3edaeb30e37a0dcf72bdc14521a87f85f768878d/src/ui/contextitems/ve.ui.SumCellsContextItem.js#L89 so this can be done with very small amount of change and much lower risk. Feel free to have a look. Thanks 😊",
+      "parentUuid": "1dcf268c_4070ccbc",
+      "revId": "e33df9663858bd6a962056ae462f878d959dee29",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
