@@ -33,6 +33,24 @@
       "message": "So there isn\u0027t mw in the testing environment? That\u0027s weird :/",
       "revId": "e33df9663858bd6a962056ae462f878d959dee29",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1dcf268c_4070ccbc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2024-07-01T21:18:21Z",
+      "side": 1,
+      "message": "This is stand-alone VE, not VE-MW. This definitely does not have MW around. If you want to add a new interface to the platform specs with a basic implementation, and have MW able to be spliced in in VE-MW, you can do that – see ve.init.mw.Platform for how this is done for other things.",
+      "parentUuid": "36a9019b_2ef52053",
+      "revId": "e33df9663858bd6a962056ae462f878d959dee29",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
