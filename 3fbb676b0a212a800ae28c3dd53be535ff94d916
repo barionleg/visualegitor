@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0d9147d_28cc5e6f",
+        "filename": "src/init/ve.init.Platform.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2024-07-02T11:44:57Z",
+      "side": 1,
+      "message": "Do you need to make this change? Why? src/init/sa/ve.init.sa.Platform.js already returns the value (as used in the stand alone experience).",
+      "range": {
+        "startLine": 243,
+        "startChar": 8,
+        "endLine": 243,
+        "endChar": 12
+      },
+      "revId": "3fbb676b0a212a800ae28c3dd53be535ff94d916",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
