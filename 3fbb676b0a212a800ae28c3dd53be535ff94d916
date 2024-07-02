@@ -70,6 +70,30 @@
       },
       "revId": "3fbb676b0a212a800ae28c3dd53be535ff94d916",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ced2c15_c5518862",
+        "filename": "src/init/ve.init.Platform.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 449
+      },
+      "writtenOn": "2024-07-02T20:48:38Z",
+      "side": 1,
+      "message": "This is why I was changing the stub implementation \n\nhttps://integration.wikimedia.org/ci/job/generic-node18-browser/1620/console\n\nWhat solution do you advise? Mine were Patchset 8 and Patchiest 9. Thanks",
+      "parentUuid": "9df17176_d07066c5",
+      "range": {
+        "startLine": 243,
+        "startChar": 8,
+        "endLine": 243,
+        "endChar": 12
+      },
+      "revId": "3fbb676b0a212a800ae28c3dd53be535ff94d916",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
