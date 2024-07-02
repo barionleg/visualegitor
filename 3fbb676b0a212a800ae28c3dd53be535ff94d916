@@ -46,6 +46,30 @@
       },
       "revId": "3fbb676b0a212a800ae28c3dd53be535ff94d916",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9df17176_d07066c5",
+        "filename": "src/init/ve.init.Platform.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 449
+      },
+      "writtenOn": "2024-07-02T17:02:02Z",
+      "side": 1,
+      "message": "\u003e Do you need to make this change? Why? src/init/sa/ve.init.sa.Platform.js already returns the value (as used in the stand alone experience).\n\nTests will call the null function, just like the other issue you advised to add a stub implementation.\n\n\u003e I\u0027m not averse to a default implementation, but it shouldn\u0027t be one that violates the docs.\n\nIsn\u0027t @abstract says this isn\u0027t a correct implementation but since you want that I will use toLocaleString here instead, it\u0027s already vastly available browser feature and is good enough to use.",
+      "parentUuid": "fe44b47d_b8c249f7",
+      "range": {
+        "startLine": 243,
+        "startChar": 8,
+        "endLine": 243,
+        "endChar": 12
+      },
+      "revId": "3fbb676b0a212a800ae28c3dd53be535ff94d916",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
