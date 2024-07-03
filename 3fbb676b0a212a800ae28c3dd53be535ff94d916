@@ -118,6 +118,30 @@
       },
       "revId": "3fbb676b0a212a800ae28c3dd53be535ff94d916",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "240bdf93_0ef164e4",
+        "filename": "src/init/ve.init.Platform.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 449
+      },
+      "writtenOn": "2024-07-03T10:48:44Z",
+      "side": 1,
+      "message": "I didn\u0027t know that exists, sorry, thanks for the fix and merging this 😊",
+      "parentUuid": "386ab8f2_7d72eba9",
+      "range": {
+        "startLine": 243,
+        "startChar": 8,
+        "endLine": 243,
+        "endChar": 12
+      },
+      "revId": "3fbb676b0a212a800ae28c3dd53be535ff94d916",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
