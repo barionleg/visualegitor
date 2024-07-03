@@ -94,6 +94,30 @@
       },
       "revId": "3fbb676b0a212a800ae28c3dd53be535ff94d916",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "386ab8f2_7d72eba9",
+        "filename": "src/init/ve.init.Platform.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 839
+      },
+      "writtenOn": "2024-07-03T08:41:41Z",
+      "side": 1,
+      "message": "Thanks for this contribution Ebrahim. I moved your implementation of formatNumber into DummyPlatform in ve.test.utils.js, to ensure an author of a new ve.init.Platform must consider carefully what the correct implementation is. Yours would certainly be correct in many cases.",
+      "parentUuid": "5ced2c15_c5518862",
+      "range": {
+        "startLine": 243,
+        "startChar": 8,
+        "endLine": 243,
+        "endChar": 12
+      },
+      "revId": "3fbb676b0a212a800ae28c3dd53be535ff94d916",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
