@@ -33,6 +33,24 @@
       "message": "See T304804",
       "revId": "34a4931c315d84bf6df9aeb1987a1b81ad6eb7da",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ddd82e0_5f9cecc6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2024-09-09T13:01:05Z",
+      "side": 1,
+      "message": "Bah. Can we have a system to disable it on Catalan somehow?",
+      "parentUuid": "91853fd7_c8d7fca9",
+      "revId": "34a4931c315d84bf6df9aeb1987a1b81ad6eb7da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ]
 }
