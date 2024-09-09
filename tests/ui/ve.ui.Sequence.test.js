@@ -47,6 +47,19 @@ QUnit.test( 'findAndExecuteSequences', ( assert ) => {
 				],
 				expectedRangeOrSelection: new ve.Range( 3 ),
 				msg: 'Horizontal rule'
+			},
+			{
+				content: '`Test',
+				expectedData: [
+					{ type: 'paragraph' },
+					[ 'T', [ { type: 'textStyle/code' } ] ],
+					[ 'e', [ { type: 'textStyle/code' } ] ],
+					[ 's', [ { type: 'textStyle/code' } ] ],
+					[ 't', [ { type: 'textStyle/code' } ] ],
+					{ type: '/paragraph' }
+				],
+				expectedRangeOrSelection: new ve.Range( 1 ),
+				msg: 'Code style'
 			}
 		];
 

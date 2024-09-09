@@ -118,3 +118,6 @@ ve.ui.sequenceRegistry.register(
 ve.ui.sequenceRegistry.register(
 	new ve.ui.Sequence( 'horizontalRule', 'insertHorizontalRule', [ { type: 'paragraph' }, '-', '-', '-', '-' ], 4 )
 );
+ve.ui.sequenceRegistry.register(
+	new ve.ui.Sequence( 'codeStyle', 'code', '`', 1 )
+);
