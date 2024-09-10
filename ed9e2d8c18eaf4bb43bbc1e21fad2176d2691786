@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e8d2bfb_7b5a3157",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 366
+      },
+      "writtenOn": "2024-09-10T15:28:26Z",
+      "side": 1,
+      "message": "Good spot; leaving to David.",
+      "revId": "ed9e2d8c18eaf4bb43bbc1e21fad2176d2691786",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
