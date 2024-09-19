@@ -16,6 +16,24 @@
       "message": "Should this patch be abandoned in favor of an update to OOUI 0.51.1?",
       "revId": "48d9b8daa94059d11358eadb2729dda3af5cc293",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97c6ae4c_13cb9a92",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 10840
+      },
+      "writtenOn": "2024-09-19T17:59:33Z",
+      "side": 1,
+      "message": "Thanks for abandoning the patches for the previous release.",
+      "parentUuid": "3e5d3913_0291afb5",
+      "revId": "48d9b8daa94059d11358eadb2729dda3af5cc293",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
     }
   ],
   "submitRequirementResults": []
