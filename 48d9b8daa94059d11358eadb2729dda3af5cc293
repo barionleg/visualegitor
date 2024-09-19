@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e5d3913_0291afb5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6754
+      },
+      "writtenOn": "2024-09-19T17:11:24Z",
+      "side": 1,
+      "message": "Should this patch be abandoned in favor of an update to OOUI 0.51.1?",
+      "revId": "48d9b8daa94059d11358eadb2729dda3af5cc293",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951"
+    }
+  ]
+}
