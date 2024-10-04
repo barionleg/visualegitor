@@ -366,6 +366,26 @@ ve.ce.Surface.static.inputTypeCommands = {
 };
 
 /**
+ * Paste source detectors examine a clipboardData DataTransfer object
+ * and identify the source of the copied data.
+ *
+ * @type {Object}
+ */
+ve.ce.Surface.static.pasteSourceDetectors = {
+	GoogleDocs: ( clipboardData ) => clipboardData.types.some( ( type ) => type.startsWith( 'application/x-vnd.google-docs' ) ) ||
+		clipboardData.getData( 'text/html' ).match( /id=['"]?docs-internal-guid/i ),
+	LibreOffice: ( clipboardData ) => clipboardData.getData( 'text/html' ).match( /content=['"]?LibreOffice/i ),
+	MicrosoftOffice: ( clipboardData ) => {
+		const html = clipboardData.getData( 'text/html' );
+		// Word365 (Desktop)
+		return html.match( /content=Word.Document/i ) ||
+			// Word365 (web)
+			// eslint-disable-next-line es-x/no-array-prototype-includes
+			( html.match( /data-contrast=["']/i ) && html.includes( 'TextRun' ) );
+	}
+};
+
+/**
  * Cursor holder template
  *
  * @static
@@ -2387,6 +2407,18 @@ ve.ce.Surface.prototype.beforePaste = function ( e ) {
 				.replace( /<!-- *EndFragment *-->[\s\S]*$/, '' );
 		}
 	}
+
+	let source = null;
+	if ( !this.beforePasteData.clipboardKey ) {
+		const pasteSourceDetectors = this.constructor.static.pasteSourceDetectors;
+		for ( const s in pasteSourceDetectors ) {
+			if ( pasteSourceDetectors[ s ]( clipboardData ) ) {
+				source = s;
+				break;
+			}
+		}
+	}
+	this.beforePasteData.source = source;
 
 	// Save scroll position before changing focus to "offscreen" paste target
 	this.beforePasteData.scrollTop = this.surface.$scrollContainer.scrollTop();
