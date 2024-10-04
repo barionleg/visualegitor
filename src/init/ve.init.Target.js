@@ -17,6 +17,7 @@
  * @param {Object} [config.toolbarConfig={}] Configuration options for the toolbar
  * @param {Object} [config.toolbarGroups] Toolbar groups, defaults to this.constructor.static.toolbarGroups
  * @param {Object} [config.actionGroups] Toolbar groups, defaults to this.constructor.static.actionGroups
+ * @param {Object} [config.allowTabFocusChange] See this.constructor.static.allowTabFocusChange
  * @param {string[]} [config.modes] Available editing modes. Defaults to static.modes
  * @param {string} [config.defaultMode] Default mode for new surfaces. Must be in this.modes and defaults to first item.
  * @param {boolean} [register=true] Register the target at ve.init.target
@@ -42,6 +43,7 @@ ve.init.Target = function VeInitTarget( config ) {
 	this.toolbarConfig = config.toolbarConfig || {};
 	this.toolbarGroups = config.toolbarGroups || this.constructor.static.toolbarGroups;
 	this.actionGroups = config.actionGroups || this.constructor.static.actionGroups;
+	this.allowTabFocusChange = config.allowTabFocusChange || this.constructor.static.allowTabFocusChange;
 	this.$scrollContainer = this.getScrollContainer();
 	this.$scrollListener = this.$scrollContainer.is( 'html, body' ) ?
 		$( OO.ui.Element.static.getWindow( this.$scrollContainer[ 0 ] ) ) :
@@ -210,6 +212,15 @@ ve.init.Target.static.includeCommands = null;
  * @type {string[]}
  */
 ve.init.Target.static.excludeCommands = [];
+
+/**
+ * Allow changing focus from target surfaces with tab/shift+tab
+ *
+ * Prevents any ve.ui.Trigger's using these shortcuts from running.
+ *
+ * @type {boolean}
+ */
+ve.init.Target.static.allowTabFocusChange = false;
 
 /**
  * Surface import rules
