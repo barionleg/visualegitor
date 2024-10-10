@@ -144,6 +144,8 @@ ve.ui.Surface = function VeUiSurface( target, dataOrDocOrSurface, config ) {
 			.addClass( 've-ui-surface-source-font' );
 	}
 	this.view.$element.after( this.localOverlay.$element );
+	// TODO: Render selections within the surface view?
+	this.$selections.append( this.view.selectionManager.$element );
 	this.localOverlay.$element.append( this.$selections, this.$blockers, this.$controls, this.$menus );
 	this.globalOverlay.$element.append( this.dialogs.$element );
 };
