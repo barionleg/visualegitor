@@ -62,7 +62,6 @@ ve.ce.Surface = function VeCeSurface( model, ui, config ) {
 	this.deactivated = false;
 	this.showAsActivated = false;
 	this.hideSelection = false;
-	this.$deactivatedSelection = $( '<div>' );
 	this.userSelectionDeactivate = {};
 	this.drawnSelections = {};
 	this.drawnSelectionCache = {};
@@ -197,13 +196,11 @@ ve.ce.Surface = function VeCeSurface( model, ui, config ) {
 	this.$highlights.addClass( 've-ce-surface-highlights' );
 	this.$highlightsFocused.addClass( 've-ce-surface-highlights-focused' );
 	this.$highlightsBlurred.addClass( 've-ce-surface-highlights-blurred' );
-	this.$deactivatedSelection.addClass( 've-ce-surface-deactivatedSelection' );
 
 	// Add elements to the DOM
 	this.$highlights.append( this.$dropMarker );
 	this.$element.append( this.$attachedRootNode, this.pasteHandler.$element );
 	this.surface.$blockers.append( this.$highlights );
-	this.surface.$selections.append( this.$deactivatedSelection );
 };
 
 /* Inheritance */
