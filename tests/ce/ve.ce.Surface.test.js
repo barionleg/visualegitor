@@ -185,16 +185,16 @@ ve.test.utils.runSurfacePasteTest = function ( assert, item ) {
 				return false;
 			};
 		}
-		view.onCopy( testEvent );
+		view.clipboardHandler.onCopy( testEvent );
 		if ( item.noClipboardData ) {
 			ve.isClipboardDataFormatsSupported = isClipboardDataFormatsSupported;
 		}
 		testEvent = ve.test.utils.createTestEvent( { type: 'paste', clipboardData: clipboardData } );
 	} else {
 		if ( item.useClipboardData ) {
-			clipboardData.setData( view.constructor.static.clipboardKeyMimeType, 'useClipboardData-0' );
+			clipboardData.setData( view.clipboardHandler.constructor.static.clipboardKeyMimeType, 'useClipboardData-0' );
 		} else if ( item.fromVe ) {
-			clipboardData.setData( view.constructor.static.clipboardKeyMimeType, '0.123-0' );
+			clipboardData.setData( view.clipboardHandler.constructor.static.clipboardKeyMimeType, '0.123-0' );
 		}
 		testEvent = ve.test.utils.createTestEvent( { type: 'paste', clipboardData: clipboardData } );
 	}
@@ -213,19 +213,21 @@ ve.test.utils.runSurfacePasteTest = function ( assert, item ) {
 	} else {
 		model.setSelection( ve.test.utils.selectionFromRangeOrSelection( doc, item.rangeOrSelection ) );
 	}
-	view.pasteSpecial = item.pasteSpecial;
+	if ( item.pasteSpecial ) {
+		view.clipboardHandler.prepareForPasteSpecial();
+	}
 
 	// Replicate the sequencing of ce.Surface.onPaste, without any setTimeouts:
-	view.beforePaste( testEvent );
+	view.clipboardHandler.beforePaste( testEvent );
 	if ( !testEvent.isDefaultPrevented() ) {
-		if ( item.pasteTargetHtml ) {
-			view.$pasteTarget.html( item.pasteTargetHtml );
+		if ( item.clipboardHandlerHtml ) {
+			view.clipboardHandler.$element.html( item.clipboardHandlerHtml );
 		} else if ( clipboardData.getData( 'text/html' ) ) {
 			document.execCommand( 'insertHTML', false, clipboardData.getData( 'text/html' ) );
 		} else if ( clipboardData.getData( 'text/plain' ) ) {
 			document.execCommand( 'insertText', false, clipboardData.getData( 'text/plain' ) );
 		}
-		afterPastePromise = view.afterPaste( testEvent );
+		afterPastePromise = view.clipboardHandler.afterPaste( testEvent );
 	}
 
 	// Use #done to run immediately after paste promise
@@ -645,7 +647,7 @@ QUnit.test( 'handleDataTransfer/handleDataTransferItems', ( assert ) => {
 
 QUnit.test( 'getClipboardHash', ( assert ) => {
 	assert.strictEqual(
-		ve.ce.Surface.static.getClipboardHash(
+		ve.ce.ClipboardHandler.static.getClipboardHash(
 			$( '  <p class="foo"> B<b>a</b>r </p>\n\t<span class="baz"></span> Quux <h1><span></span>Whee</h1>' )
 		),
 		'BarQuuxWhee',
@@ -718,14 +720,14 @@ QUnit.test( 'onCopy', ( assert ) => {
 
 		// Paste sequence
 		model.setSelection( ve.test.utils.selectionFromRangeOrSelection( model.getDocument(), rangeOrSelection ) );
-		view.onCopy( testEvent );
+		view.clipboardHandler.onCopy( testEvent );
 
 		if ( noClipboardData ) {
 			ve.isClipboardDataFormatsSupported = isClipboardDataFormatsSupported;
 		}
 
-		const slice = view.clipboard.slice;
-		const clipboardKey = view.clipboardId + '-' + view.clipboardIndex;
+		const slice = view.clipboardHandler.clipboard.slice;
+		const clipboardKey = view.clipboardHandler.clipboardId + '-' + view.clipboardHandler.clipboardIndex;
 
 		assert.equalRange( slice.originalRange, expectedOriginalRange || rangeOrSelection, msg + ': originalRange' );
 		assert.equalRange( slice.balancedRange, expectedBalancedRange || rangeOrSelection, msg + ': balancedRange' );
@@ -747,7 +749,7 @@ QUnit.test( 'onCopy', ( assert ) => {
 			assert.strictEqual( clipboardData.getData( 'text/plain' ).trim(), expectedText, msg + ': text' );
 		}
 		if ( !noClipboardData ) {
-			assert.strictEqual( clipboardData.getData( view.constructor.static.clipboardKeyMimeType ), clipboardKey, msg + ': clipboardId set' );
+			assert.strictEqual( clipboardData.getData( view.clipboardHandler.constructor.static.clipboardKeyMimeType ), clipboardKey, msg + ': clipboardId set' );
 		}
 
 		view.destroy();
@@ -1293,7 +1295,7 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 			},
 			{
 				rangeOrSelection: new ve.Range( 4 ),
-				pasteTargetHtml: '☀foo☂',
+				clipboardHandlerHtml: '☀foo☂',
 				expectedRangeOrSelection: new ve.Range( 7 ),
 				expectedOps: [
 					[
@@ -1311,7 +1313,7 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 			{
 				rangeOrSelection: new ve.Range( 4 ),
 				pasteHtml: 'foo',
-				pasteTargetHtml: '☀☂foo',
+				clipboardHandlerHtml: '☀☂foo',
 				expectedRangeOrSelection: new ve.Range( 7 ),
 				expectedOps: [
 					[
@@ -1637,7 +1639,7 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 			{
 				rangeOrSelection: new ve.Range( 1 ),
 				pasteHtml: '<b>Foo</b>',
-				pasteTargetHtml: '<p>Foo</p>',
+				clipboardHandlerHtml: '<p>Foo</p>',
 				fromVe: true,
 				expectedOps: [
 					[
@@ -1658,7 +1660,7 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 			{
 				rangeOrSelection: new ve.Range( 0 ),
 				pasteHtml: ve.dm.example.blockImage.html,
-				pasteTargetHtml: $( ve.dm.example.blockImage.html ).unwrap().html(),
+				clipboardHandlerHtml: $( ve.dm.example.blockImage.html ).unwrap().html(),
 				expectedOps: [
 					[
 						{
@@ -1680,7 +1682,7 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 			{
 				rangeOrSelection: new ve.Range( 1 ),
 				pasteHtml: '<span data-ve-clipboard-key="0.13811087369534492-4">&nbsp;</span><s rel="ve:Alien">Alien</s>',
-				pasteTargetHtml: '<span data-ve-clipboard-key="0.13811087369534492-4">&nbsp;</span><s>Alien</s>',
+				clipboardHandlerHtml: '<span data-ve-clipboard-key="0.13811087369534492-4">&nbsp;</span><s>Alien</s>',
 				fromVe: true,
 				expectedOps: [
 					[
@@ -1941,7 +1943,7 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 				},
 				documentHtml: '<table><tbody><tr><td></td></tr></tbody></table>',
 				// Firefox doesn't like using execCommand for this test for some reason
-				pasteTargetHtml: '<table><tbody><tr><td>X</td><td>Y</td><td>Z</td></tr></tbody></table>',
+				clipboardHandlerHtml: '<table><tbody><tr><td>X</td><td>Y</td><td>Z</td></tr></tbody></table>',
 				fromVe: true,
 				expectedRangeOrSelection: {
 					type: 'table',
@@ -2079,7 +2081,7 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 			{
 				rangeOrSelection: new ve.Range( 0 ),
 				// Firefox doesn't like using execCommand for this test for some reason
-				pasteTargetHtml: '<ul><li>A</li><ul><li>B</li></ul></ul>',
+				clipboardHandlerHtml: '<ul><li>A</li><ul><li>B</li></ul></ul>',
 				expectedRangeOrSelection: new ve.Range( 14 ),
 				expectedOps: [
 					[
@@ -2111,7 +2113,7 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 			{
 				rangeOrSelection: new ve.Range( 0 ),
 				// Write directly to paste target because using execCommand kills one of the <ul>s
-				pasteTargetHtml: 'A<ul><ul><li>B</li></ul></ul>C',
+				clipboardHandlerHtml: 'A<ul><ul><li>B</li></ul></ul>C',
 				expectedRangeOrSelection: new ve.Range( 17 ),
 				expectedOps: [
 					[
@@ -2146,7 +2148,7 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 			{
 				rangeOrSelection: new ve.Range( 0 ),
 				// Nested list copied from macOS Notes has newline before ul element
-				pasteTargetHtml: '<ul><li>A</li>\n<ul><li>B</li></ul></ul>',
+				clipboardHandlerHtml: '<ul><li>A</li>\n<ul><li>B</li></ul></ul>',
 				expectedRangeOrSelection: new ve.Range( 14 ),
 				expectedOps: [
 					[
@@ -2177,7 +2179,7 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 			},
 			{
 				rangeOrSelection: new ve.Range( 0 ),
-				pasteTargetHtml: '<li>B</li><li>C</li>',
+				clipboardHandlerHtml: '<li>B</li><li>C</li>',
 				expectedRangeOrSelection: new ve.Range( 12 ),
 				expectedOps: [
 					[
@@ -2206,7 +2208,7 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 			},
 			{
 				rangeOrSelection: new ve.Range( 0 ),
-				pasteTargetHtml: '<p>A</p><p></p><p>B</p>',
+				clipboardHandlerHtml: '<p>A</p><p></p><p>B</p>',
 				expectedOps: [
 					[
 						{
@@ -2254,7 +2256,7 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 			},
 			{
 				rangeOrSelection: new ve.Range( 0 ),
-				pasteTargetHtml: '<h3>A</h3>',
+				clipboardHandlerHtml: '<h3>A</h3>',
 				expectedOps: [
 					[
 						{
@@ -2311,7 +2313,7 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 			},
 			{
 				rangeOrSelection: new ve.Range( 1 ),
-				pasteTargetHtml: '<img src="' + ve.ce.minImgDataUri + '" width="10" height="20" />',
+				clipboardHandlerHtml: '<img src="' + ve.ce.minImgDataUri + '" width="10" height="20" />',
 				expectedOps: [
 					[
 						{
@@ -2326,7 +2328,7 @@ QUnit.test( 'beforePaste/afterPaste', function ( assert ) {
 						{ type: 'retain', length: docLen - 1 }
 					]
 				],
-				msg: 'Image with data URI handled by dummy image paste handler'
+				msg: 'Image with data URI handled by dummy image clipboard handler'
 			},
 			{
 				rangeOrSelection: { type: 'null' },
