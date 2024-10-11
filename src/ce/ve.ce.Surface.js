@@ -2959,7 +2959,9 @@ ve.ce.Surface.prototype.afterPasteInsertExternalData = function ( targetFragment
 		}
 	}
 	if ( !handled ) {
-		targetFragment.insertDocument( pastedDocumentModel, contextRange, this.getBeforePasteAnnotationSet() );
+		const annotations = this.getBeforePasteAnnotationSet();
+		annotations.push( ve.dm.annotationFactory.createFromElement( { type: 'meta/paste' } ) );
+		targetFragment.insertDocument( pastedDocumentModel, contextRange, annotations );
 	}
 	return targetFragment.getPending();
 };
